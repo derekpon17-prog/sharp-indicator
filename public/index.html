@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sharp.idx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.26.0/dist/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090f;--s1:#0d1220;--s2:#111829;--s3:#16203a;
+  --b1:rgba(120,160,220,.08);--b2:rgba(120,160,220,.15);--b3:rgba(120,160,220,.25);
+  --t1:#eef2ff;--t2:#7b96c4;--t3:#3d5578;--t4:#1e3050;
+  --green:#00e090;--ga:rgba(0,224,144,.1);--gb:rgba(0,224,144,.2);
+  --amber:#ffb830;--aa:rgba(255,184,48,.1);--ab:rgba(255,184,48,.2);
+  --red:#ff4d6a;--ra:rgba(255,77,106,.1);--rb:rgba(255,77,106,.2);
+  --blue:#4d9fff;--ba2:rgba(77,159,255,.12);--bb2:rgba(77,159,255,.25);
+  --violet:#9d7cff;--va:rgba(157,124,255,.12);--vb:rgba(157,124,255,.3);
+  --sans:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono','Courier New',monospace;
+  --r:10px;--rl:16px;--rxl:24px;
+}
+html,body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100vh;font-size:14px;-webkit-font-smoothing:antialiased}
+button,input{font-family:inherit;outline:none}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px}
+
+/* ══ NAV ══ */
+.nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;gap:0;
+  height:56px;padding:0 20px;
+  background:rgba(7,9,15,.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--b1);
+}
+.logo{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:14px;font-weight:700;
+  letter-spacing:.08em;color:var(--t1);
+  padding-right:28px;flex-shrink:0;
+}
+.logo-ring{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#00e090,#4d9fff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:900;color:#07090f;letter-spacing:0;
+}
+.sport-tabs{display:flex;gap:2px;flex:1}
+.stab{
+  padding:6px 14px;border-radius:var(--r);border:none;
+  background:transparent;color:var(--t3);
+  font-size:12px;font-weight:600;letter-spacing:.04em;
+  cursor:pointer;transition:all .2s;
+}
+.stab:hover{color:var(--t2);background:var(--s2)}
+.stab.on{color:var(--t1);background:var(--s3);border:1px solid var(--b2)}
+.nav-right{display:flex;align-items:center;gap:8px;margin-left:auto}
+.pill-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:100px;
+  border:1px solid var(--b2);background:transparent;
+  color:var(--t3);font-size:11px;font-weight:600;
+  font-family:var(--mono);letter-spacing:.04em;cursor:pointer;
+  transition:all .2s;
+}
+.pill-btn:hover{background:var(--s2);color:var(--t2)}
+.pill-btn:disabled{opacity:.35;cursor:not-allowed}
+.nav-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3);font-family:var(--mono)}
+.ns-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.ns-dot.live{background:var(--green);box-shadow:0 0 6px var(--green);animation:glow 2s ease infinite}
+.ns-dot.scanning{background:var(--amber);animation:throb .6s ease infinite}
+.ns-dot.err{background:var(--red)}
+
+/* ══ PAGE ══ */
+.page{max-width:1200px;margin:0 auto;padding:24px 16px 100px}
+.view{display:none}.view.on{display:block}
+.vtabs{display:flex;gap:6px;margin-bottom:24px}
+.vtab{
+  padding:7px 18px;border-radius:100px;border:1px solid var(--b1);
+  background:transparent;color:var(--t3);
+  font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.vtab:hover{color:var(--t2);border-color:var(--b2)}
+.vtab.on{background:var(--s2);border-color:var(--b3);color:var(--t1)}
+
+/* ══ SHARP FLOW FEED ══ */
+.feed-wrap{margin-bottom:24px}
+.feed-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
+}
+.feed-title{
+  display:flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--t2);
+}
+.feed-title .fi{
+  width:20px;height:20px;border-radius:6px;
+  background:linear-gradient(135deg,var(--ga),var(--ba2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--green);
+}
+.feed-time{font-size:11px;font-family:var(--mono);color:var(--t4)}
+.feed-list{
+  background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);
+  overflow:hidden;
+}
+.feed-row{
+  display:flex;align-items:center;gap:14px;
+  padding:13px 16px;border-bottom:1px solid var(--b1);
+  transition:background .15s;cursor:default;
+}
+.feed-row:last-child{border-bottom:none}
+.feed-row:hover{background:var(--s2)}
+.feed-sig{
+  display:flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:100px;border:1px solid;
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  letter-spacing:.04em;white-space:nowrap;flex-shrink:0;
+  min-width:138px;justify-content:center;
+}
+.feed-info{flex:1;min-width:0}
+.fi-top{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.fi-matchup{font-size:13px;font-weight:700;color:var(--t1)}
+.fi-time{font-size:11px;color:var(--t3);font-family:var(--mono)}
+.fi-side{font-size:12px;font-family:var(--mono);font-weight:500;margin-bottom:2px}
+.fi-detail{font-size:10px;color:var(--t3);font-family:var(--mono)}
+.feed-score{text-align:right;flex-shrink:0}
+.fs-num{font-size:26px;font-weight:900;font-family:var(--mono);line-height:1}
+.fs-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--t3);margin-top:1px}
+.feed-empty{padding:32px;text-align:center;color:var(--t3);font-size:13px}
+
+/* ══ CONTROLS ══ */
+.controls{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;flex-wrap:wrap;
+}
+.thr-wrap{
+  display:flex;align-items:center;gap:10px;
+  background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);
+  padding:8px 14px;flex:1;min-width:200px;max-width:400px;
+}
+.thr-wrap label{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.06em;color:var(--t3);white-space:nowrap}
+.thr-wrap input{flex:1;accent-color:var(--blue)}
+.thr-val{font-size:12px;font-family:var(--mono);font-weight:700;color:var(--t1);min-width:30px;text-align:right}
+.quota-chip{
+  display:flex;align-items:center;gap:5px;
+  background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);
+  padding:8px 13px;font-size:11px;font-family:var(--mono);color:var(--t3);
+}
+.qn-ok{color:var(--green);font-weight:700}
+.qn-warn{color:var(--amber);font-weight:700}
+.qn-crit{color:var(--red);font-weight:700}
+
+/* ══ STATUS BAR ══ */
+.status-bar{
+  display:none;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:var(--r);margin-bottom:16px;
+  font-size:12px;font-family:var(--mono);
+}
+.status-bar.scanning{
+  display:flex;background:var(--aa);border:1px solid var(--ab);color:var(--amber);
+}
+.status-bar.err{
+  display:flex;background:var(--ra);border:1px solid var(--rb);color:var(--red);
+}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:currentColor;animation:throb .6s ease infinite}
+.ssteps span{opacity:.2;transition:opacity .15s}
+.ssteps span.done{opacity:1;color:var(--green)}
+.ssteps span.cur{opacity:1;color:var(--amber)}
+.ssp{opacity:.2;padding:0 5px}
+
+/* ══ SETUP BANNER ══ */
+.setup-banner{
+  background:var(--s1);border:1px solid var(--b2);border-radius:var(--rl);
+  padding:28px;text-align:center;margin-bottom:24px;
+}
+.setup-banner h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.setup-banner p{font-size:13px;color:var(--t2);line-height:1.7;max-width:500px;margin:0 auto 16px}
+.setup-steps{display:flex;flex-direction:column;gap:8px;max-width:440px;margin:0 auto;text-align:left}
+.setup-step{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--s2);border-radius:var(--r);padding:10px 14px;
+}
+.ss-num{
+  width:22px;height:22px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--blue));
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:#07090f;flex-shrink:0;
+}
+.ss-body{font-size:12px;color:var(--t2);line-height:1.5}
+.ss-body strong{color:var(--t1)}
+
+/* ══ SECTION HEADER ══ */
+.sec-hdr{
+  display:flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--t3);
+  margin-bottom:14px;
+}
+.sec-count{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:100px;padding:1px 8px;
+  font-size:10px;font-family:var(--mono);color:var(--t2);
+}
+
+/* ══ GAME GRID ══ */
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:14px;margin-bottom:32px;
+}
+
+/* ══ GAME CARD ══ */
+.gcard{
+  background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);
+  overflow:hidden;animation:fadein .35s ease both;
+  transition:border-color .2s,transform .15s,box-shadow .2s;
+  cursor:default;
+}
+.gcard:hover{border-color:var(--b2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.gcard.sharp{border-color:rgba(0,224,144,.2)}
+.gcard.dual{
+  border-color:rgba(157,124,255,.3);
+  box-shadow:0 0 0 1px rgba(157,124,255,.1),0 4px 20px rgba(157,124,255,.08);
+}
+.gc-body{padding:18px}
+
+/* Card header */
+.gc-head{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:12px;margin-bottom:16px;
+}
+.gc-info{flex:1;min-width:0}
+.gc-teams{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:3px;line-height:1.3}
+.gc-time{font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:10px}
+.gc-sig{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 10px;border-radius:100px;border:1px solid;
+  font-size:10px;font-family:var(--mono);font-weight:700;
+  letter-spacing:.04em;margin-bottom:8px;
+}
+.gc-side{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:var(--r);border:1px solid;
+  font-size:12px;font-family:var(--mono);font-weight:700;
+  flex-wrap:wrap;
+}
+.gc-novig{
+  display:flex;align-items:center;gap:4px;margin-top:6px;
+  font-size:10px;font-family:var(--mono);color:var(--violet);
+}
+
+/* SI Score badge */
+.si-badge{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;width:68px;height:68px;border-radius:var(--rl);
+  border:1px solid;flex-shrink:0;
+  transition:box-shadow .2s;
+}
+.si-num{font-size:28px;font-weight:900;font-family:var(--mono);line-height:1}
+.si-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;opacity:.6;margin-top:1px}
+
+/* Pillar bars */
+.pillars{margin:14px 0 0}
+.pillar-row{margin-bottom:9px}
+.pillar-head{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:4px;
+}
+.pillar-name{
+  display:flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--t3);
+}
+.pillar-name i{font-size:12px}
+.pillar-score{font-size:11px;font-family:var(--mono);font-weight:700}
+.pillar-track{
+  height:4px;background:rgba(255,255,255,.04);
+  border-radius:2px;overflow:hidden;
+}
+.pillar-fill{height:100%;border-radius:2px;width:0;transition:width .9s cubic-bezier(.4,0,.2,1)}
+
+/* Odds row */
+.gc-odds{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:5px;margin-top:14px;
+}
+.odd-cell{background:var(--s2);border-radius:var(--r);padding:7px 10px}
+.odd-lbl{font-size:8px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t4);text-transform:uppercase;display:block;margin-bottom:2px}
+.odd-val{font-size:13px;font-family:var(--mono);font-weight:700;color:var(--t1)}
+.odd-val.pin{color:var(--blue)}
+.odd-val.nov{color:var(--violet)}
+
+/* Gap bar */
+.gc-gap{
+  display:flex;align-items:center;gap:8px;margin-top:10px;
+}
+.gap-track{flex:1;height:3px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden}
+.gap-fill{height:100%;border-radius:2px;width:0;transition:width .9s cubic-bezier(.4,0,.2,1)}
+.gap-label{font-size:11px;font-family:var(--mono);font-weight:600;white-space:nowrap}
+
+/* Expand */
+.gc-toggle{
+  width:100%;background:transparent;border:none;
+  border-top:1px solid var(--b1);padding:8px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  color:var(--t3);font-family:var(--mono);font-size:10px;
+  font-weight:700;letter-spacing:.06em;cursor:pointer;
+  transition:background .15s;
+}
+.gc-toggle:hover{background:var(--s2)}
+.gc-expand{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;padding:0 18px}
+.gc-expand.open{max-height:200px;padding:14px 18px 16px}
+.expand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.exp-cell{background:var(--s2);border-radius:var(--r);padding:8px 10px}
+.exp-lbl{font-size:9px;font-family:var(--mono);color:var(--t4);letter-spacing:.06em;display:block;margin-bottom:2px}
+.exp-val{font-size:12px;font-family:var(--mono);font-weight:600;color:var(--t1)}
+.exp-note{
+  grid-column:1/-1;padding:8px 10px;background:var(--s2);
+  border-radius:var(--r);font-size:10px;color:var(--t2);
+  font-family:var(--mono);line-height:1.6;border-left:2px solid;
+}
+
+/* Skeleton */
+.skel{background:var(--s2);border-radius:var(--r);animation:pulse 1.5s ease infinite}
+
+/* Empty */
+.empty-state{
+  grid-column:1/-1;
+  display:flex;flex-direction:column;align-items:center;
+  padding:60px 20px;text-align:center;
+}
+.empty-icon{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--s2);display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:14px;color:var(--t3);
+}
+.empty-state h3{font-size:15px;font-weight:600;color:var(--t2);margin-bottom:6px}
+.empty-state p{font-size:12px;color:var(--t3);max-width:320px;line-height:1.6}
+
+/* ══ TRACKED ══ */
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.metric-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
+.mc-label{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t3);text-transform:uppercase;margin-bottom:8px}
+.mc-val{font-size:24px;font-family:var(--mono);font-weight:900;color:var(--t1)}
+.mc-sub{font-size:11px;color:var(--t3);margin-top:3px}
+.breakdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.bd-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
+.bd-title{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t2);text-transform:uppercase;margin-bottom:12px}
+.bd-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.bdr-lbl{font-size:11px;font-family:var(--mono);color:var(--t1);min-width:92px}
+.bdr-track{flex:1;height:4px;background:var(--s2);border-radius:2px}
+.bdr-fill{height:100%;border-radius:2px;width:0;transition:width .7s ease}
+.bdr-stat{font-size:10px;font-family:var(--mono);color:var(--t2);min-width:54px;text-align:right}
+.plays-header{
+  display:flex;align-items:center;gap:8px;margin-bottom:12px;
+  font-size:11px;font-family:var(--mono);font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--t2);
+}
+.play-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 14px;background:var(--s1);border:1px solid var(--b1);
+  border-radius:var(--r);margin-bottom:6px;transition:border-color .15s;
+}
+.play-item:hover{border-color:var(--b2)}
+.pi-left{display:flex;gap:10px;align-items:center;flex:1;min-width:0}
+.pi-score-pill{
+  border:1px solid;border-radius:var(--r);
+  padding:3px 9px;font-size:11px;font-family:var(--mono);
+  font-weight:700;flex-shrink:0;
+}
+.pi-info .pi-match{font-size:12px;font-weight:700;color:var(--t1)}
+.pi-info .pi-detail{font-size:10px;color:var(--t2);font-family:var(--mono);margin-top:1px}
+.pi-right{display:flex;gap:4px}
+.o-btn{
+  padding:4px 10px;border:1px solid var(--b2);border-radius:var(--r);
+  background:transparent;font-size:10px;font-family:var(--mono);
+  font-weight:700;color:var(--t3);cursor:pointer;transition:all .15s;
+}
+.o-btn:hover{background:var(--s3)}
+.o-btn.sW{background:var(--ga);border-color:var(--gb);color:var(--green)}
+.o-btn.sL{background:var(--ra);border-color:var(--rb);color:var(--red)}
+.o-btn.sP{background:var(--s2);border-color:var(--b2);color:var(--t2)}
+
+/* ══ Animations ══ */
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes glow{0%,100%{opacity:1;box-shadow:0 0 6px var(--green)}50%{opacity:.5;box-shadow:none}}
+@keyframes throb{0%,100%{transform:scale(1)}50%{transform:scale(.4)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+@media(max-width:680px){
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .breakdown-grid{grid-template-columns:1fr}
+  .gc-odds{grid-template-columns:repeat(2,1fr)}
+  .sport-tabs .stab:not(.on){display:none}
+  .feed-sig{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo">
+    <div class="logo-ring">S</div>
+    SHARP.IDX
+  </div>
+  <div class="sport-tabs" id="sport-tabs">
+    <button class="stab on" onclick="switchSport('MLB',this)">MLB</button>
+    <button class="stab"    onclick="switchSport('NFL',this)">NFL</button>
+    <button class="stab"    onclick="switchSport('NBA',this)">NBA</button>
+    <button class="stab"    onclick="switchSport('NHL',this)">NHL</button>
+  </div>
+  <div class="nav-right">
+    <div class="nav-status">
+      <div class="ns-dot live" id="ndot"></div>
+      <span id="nstatus">Initializing</span>
+    </div>
+    <button class="pill-btn" id="rbtn" onclick="doRefresh()">
+      <i class="ti ti-refresh" id="ricon" style="font-size:13px"></i>
+      <span id="cd">—</span>
+    </button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="vtabs">
+    <button class="vtab on" id="vt-live"  onclick="switchView('live',this)">Live Slate</button>
+    <button class="vtab"    id="vt-track" onclick="switchView('track',this)">Tracked&nbsp;<span id="tc">0</span></button>
+  </div>
+
+  <!-- ── LIVE VIEW ── -->
+  <div id="v-live" class="view on">
+
+    <!-- Sharp Flow Feed -->
+    <div class="feed-wrap">
+      <div class="feed-header">
+        <div class="feed-title">
+          <div class="fi"><i class="ti ti-bolt" style="font-size:11px"></i></div>
+          Sharp Money Flow
+        </div>
+        <span class="feed-time" id="feed-upd"></span>
+      </div>
+      <div class="feed-list" id="feed-list">
+        <div class="feed-empty">Scanning for sharp signals…</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="thr-wrap">
+        <label for="thresh">Min SI Score</label>
+        <input type="range" id="thresh" min="0" max="90" value="0" step="5" oninput="onThresh(this.value)">
+        <span class="thr-val" id="thrval">0</span>
+      </div>
+      <div class="quota-chip" id="quota" style="display:none">
+        <i class="ti ti-database" style="font-size:12px"></i>
+        <span id="qtxt">—</span>
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div class="status-bar" id="sbar">
+      <div class="sb-dot"></div>
+      <div class="ssteps">
+        <span id="ss1">Pinnacle + Novig</span><span class="ssp">·</span>
+        <span id="ss2">Soft Books</span><span class="ssp">·</span>
+        <span id="ss3">RLM Analysis</span><span class="ssp">·</span>
+        <span id="ss4">SI Scoring</span>
+      </div>
+    </div>
+    <div class="status-bar err" id="ebar" style="display:none">
+      <i class="ti ti-alert-circle" style="flex-shrink:0"></i>
+      <span id="emsg">—</span>
+      <button class="pill-btn" style="margin-left:auto;border-color:var(--rb);color:var(--red)" onclick="doRefresh()">Retry</button>
+    </div>
+
+    <!-- Setup guidance if needed -->
+    <div id="setup-guide" style="display:none" class="setup-banner">
+      <h3>Connect Your Data</h3>
+      <p>Sharp.idx needs your free Odds API key to fetch live Pinnacle lines and calculate sharp scores.</p>
+      <div class="setup-steps">
+        <div class="setup-step">
+          <div class="ss-num">1</div>
+          <div class="ss-body">Get a free key at <strong>the-odds-api.com</strong> — just enter your email, no credit card</div>
+        </div>
+        <div class="setup-step">
+          <div class="ss-num">2</div>
+          <div class="ss-body">In Vercel → your project → <strong>Settings → Environment Variables</strong> → add <strong>ODDS_API_KEY</strong></div>
+        </div>
+        <div class="setup-step">
+          <div class="ss-num">3</div>
+          <div class="ss-body">Redeploy from the Vercel dashboard — data loads automatically</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game grid -->
+    <div class="sec-hdr" id="sec-hdr" style="display:none">
+      <i class="ti ti-layout-grid" style="font-size:13px"></i>
+      All Games
+      <span class="sec-count" id="sec-count">0</span>
+    </div>
+    <div class="game-grid" id="ggrid" role="list"></div>
+
+  </div>
+
+  <!-- ── TRACKED VIEW ── -->
+  <div id="v-track" class="view">
+    <div class="metrics-grid" id="metrics"></div>
+    <div class="breakdown-grid">
+      <div class="bd-card"><div class="bd-title">By SI Score Range</div><div id="score-bd"></div></div>
+      <div class="bd-card"><div class="bd-title">By Signal Type</div><div id="sig-bd"></div></div>
+    </div>
+    <div class="plays-header">
+      <i class="ti ti-database" style="font-size:13px"></i>
+      Tracked Plays — tap W / L / P to log outcome
+    </div>
+    <div id="plist"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   SHARP.IDX — Three-Pillar SI Score Model
+   RLM (28%) + Pinnacle (40%) + Money (32%)
+═══════════════════════════════════════════ */
+const REFRESH = 15*60*1000, SHARP_MIN = 70;
+
+/* ── Color helpers ── */
+const sc  = s => s>=70?'#00e090':s>=50?'#ffb830':'#ff4d6a';
+const sbg = s => s>=70?'rgba(0,224,144,.1)':s>=50?'rgba(255,184,48,.1)':'rgba(255,77,106,.1)';
+const sbd = s => s>=70?'rgba(0,224,144,.25)':s>=50?'rgba(255,184,48,.25)':'rgba(255,77,106,.25)';
+
+/* ── Signal config ── */
+const SIGS = {
+  DUAL_CONSENSUS:  {label:'DUAL CONSENSUS',  color:'#9d7cff',bg:'rgba(157,124,255,.12)',bdr:'rgba(157,124,255,.3)',  icon:'ti-bolt'},
+  SHARP_RLM:       {label:'SHARP + RLM',     color:'#00e090',bg:'rgba(0,224,144,.1)',   bdr:'rgba(0,224,144,.25)',   icon:'ti-trending-up'},
+  PINNACLE_EDGE:   {label:'PINNACLE EDGE',   color:'#4d9fff',bg:'rgba(77,159,255,.12)', bdr:'rgba(77,159,255,.3)',   icon:'ti-chart-bar'},
+  EXCHANGE_SIGNAL: {label:'EXCHANGE SIGNAL', color:'#9d7cff',bg:'rgba(157,124,255,.1)', bdr:'rgba(157,124,255,.25)', icon:'ti-arrows-exchange'},
+  RLM_ONLY:        {label:'REVERSE LM',      color:'#ffb830',bg:'rgba(255,184,48,.1)',  bdr:'rgba(255,184,48,.25)',  icon:'ti-arrow-back-up'},
+  MODERATE_EDGE:   {label:'MODERATE EDGE',   color:'#7b96c4',bg:'rgba(123,150,196,.08)',bdr:'rgba(123,150,196,.2)',  icon:'ti-minus'},
+  WEAK:            {label:'WEAK SIGNAL',     color:'#3d5578',bg:'rgba(61,85,120,.08)',  bdr:'rgba(61,85,120,.2)',    icon:'ti-minus'},
+};
+
+/* ── Pillar display config ── */
+const PILLARS = [
+  {key:'rlm',      label:'RLM',        icon:'ti-arrow-back-up',  color:'#ffb830', tip:'Reverse line movement vs public lean'},
+  {key:'pinnacle', label:'PINNACLE',   icon:'ti-chart-bar',      color:'#4d9fff', tip:'Sharp book price gap vs soft market'},
+  {key:'money',    label:'MONEY LAYER',icon:'ti-arrows-exchange', color:'#9d7cff', tip:'Exchange + velocity + divergence'},
+];
+
+/* ── State ── */
+let sport='MLB', thresh=0, cd=0;
+let cache={}, cacheTs={};
+let fetching={};
+let tracked=[], outcomes={};
+let cdTimer, notified=new Set();
+
+/* ── Storage ── */
+const lsg = k => { try{return localStorage.getItem(k)}catch{return null} };
+const lss = (k,v) => { try{localStorage.setItem(k,v)}catch{} };
+function loadState(){
+  try{
+    const t=lsg('si:t'); if(t)tracked=JSON.parse(t);
+    const o=lsg('si:o'); if(o){ outcomes=JSON.parse(o); tracked.forEach(p=>{if(outcomes[p.id])p.outcome=outcomes[p.id]}) }
+    el('tc').textContent=tracked.length;
+  }catch{}
+}
+function saveTk(){ lss('si:t',JSON.stringify(tracked)) }
+function saveOc(){ lss('si:o',JSON.stringify(outcomes)) }
+function loadCache(s){
+  try{
+    const d=lsg(`si:d:${s}`),ts=lsg(`si:ts:${s}`);
+    if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){
+      cache[s]=JSON.parse(d);cacheTs[s]=parseInt(ts);
+      render(cache[s],s);return true;
+    }
+  }catch{}return false;
+}
+function saveCache(s,d){ lss(`si:d:${s}`,JSON.stringify(d));lss(`si:ts:${s}`,String(Date.now())) }
+
+/* ── Helpers ── */
+function el(id){ return document.getElementById(id) }
+
+/* ── Fetch ── */
+async function fetchPlays(s){
+  if(fetching[s]) return;
+  fetching[s]=true; setScanning(true,s);
+  try{
+    const r=await fetch(`/api/odds?sport=${s}`);
+    const rem=r.headers.get('x-requests-remaining');
+    const used=r.headers.get('x-requests-used');
+    updateQuota(used,rem);
+    if(!r.ok) throw new Error(`Server error ${r.status}`);
+    const data=await r.json();
+
+    if(data.error){
+      const isSetup = data.error.includes('ODDS_API_KEY') || data.error.includes('Invalid');
+      if(isSetup){ showSetup(); hideErr(); return; }
+      throw new Error(data.error);
+    }
+    hideSetup(); hideErr();
+
+    const plays=data.plays||[];
+    cache[s]=plays; cacheTs[s]=Date.now();
+    saveCache(s,plays);
+    autoTrack(plays,s);
+    render(plays,s);
+    cd=REFRESH;
+
+  }catch(e){
+    showErr(e.message||'Fetch failed');
+    if(cache[s]) render(cache[s],s); else renderEmpty(s,'error');
+  }finally{
+    fetching[s]=false; setScanning(false,s);
+  }
+}
+
+/* ── Auto track ── */
+function autoTrack(plays,s){
+  plays.filter(p=>p.siScore>=SHARP_MIN).forEach(p=>{
+    if(!tracked.find(t=>t.id===p.id&&t.sport===s)){
+      tracked.unshift({
+        id:p.id,away:p.away,home:p.home,side:p.sharpSide,
+        score:p.siScore,sport:s,signalType:p.signalType,
+        dt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),
+        outcome:'PENDING',
+      });
+    }
+  });
+  tracked=tracked.slice(0,100);saveTk();
+  el('tc').textContent=tracked.length;
+}
+
+/* ── Main render ── */
+function render(plays,s){
+  if(s!==sport) return;
+  const filtered=(plays||[]).filter(p=>p.siScore>=thresh).sort((a,b)=>b.siScore-a.siScore);
+  renderFeed(filtered.slice(0,5));
+  renderGrid(filtered);
+  el('feed-upd').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  const sh=el('sec-hdr'),sc2=el('sec-count');
+  if(filtered.length){ sh.style.display='flex'; sc2.textContent=filtered.length; }
+  else sh.style.display='none';
+}
+
+/* ── Feed ── */
+function renderFeed(plays){
+  const list=el('feed-list');
+  if(!plays.length){ list.innerHTML='<div class="feed-empty">No sharp plays detected above threshold</div>'; return; }
+  list.innerHTML=plays.map(p=>{
+    const sig=SIGS[p.signalType]||SIGS.WEAK;
+    const col=sc(p.siScore);
+    const t=fmtTime(p.commenceTime);
+    const novTag=p.novigConfirm?'<span style="color:#9d7cff;margin-left:5px">+ Novig ✓</span>':'';
+    return`<div class="feed-row">
+      <span class="feed-sig" style="border-color:${sig.bdr};color:${sig.color};background:${sig.bg}">
+        <i class="ti ${sig.icon}" style="font-size:10px"></i>${sig.label}
+      </span>
+      <div class="feed-info">
+        <div class="fi-top">
+          <span class="fi-matchup">${p.away} @ ${p.home}</span>
+          <span class="fi-time">${t}</span>
+        </div>
+        <div class="fi-side" style="color:${col}">▶ ${p.sharpSide}${novTag}</div>
+        <div class="fi-detail">PIN ${p.lines.pinnacle}${p.lines.novig?` · NOV ${p.lines.novig}`:''} · Soft ${p.lines.softAvg} · ${p.gapPP}pp gap</div>
+      </div>
+      <div class="feed-score">
+        <div class="fs-num" style="color:${col}">${p.siScore}</div>
+        <div class="fs-lbl">SI SCORE</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── Grid ── */
+function renderGrid(plays){
+  const g=el('ggrid');
+  if(!plays.length){ g.innerHTML=`<div class="empty-state"><div class="empty-icon"><i class="ti ti-chart-bar"></i></div><h3>No ${sport} plays above ${thresh} SI score</h3><p>Games show here up to 24 hours before start. Try lowering the minimum score threshold.</p></div>`; return; }
+  g.innerHTML=plays.map((p,i)=>buildCard(p,i)).join('');
+  setTimeout(()=>{
+    document.querySelectorAll('[data-fill]').forEach(el=>{el.style.width=el.dataset.fill+'%'});
+    document.querySelectorAll('.sring').forEach(c=>{c.style.strokeDashoffset=c.dataset.off});
+  },80);
+}
+
+function renderSkeletons(){
+  el('ggrid').innerHTML=[1,2,3,4,5,6].map(()=>`<div class="gcard"><div class="gc-body">
+    <div class="skel" style="height:15px;width:58%;margin-bottom:8px"></div>
+    <div class="skel" style="height:10px;width:28%;margin-bottom:16px"></div>
+    <div style="display:flex;gap:12px">
+      <div style="flex:1"><div class="skel" style="height:62px;border-radius:10px"></div></div>
+      <div class="skel" style="width:68px;height:68px;border-radius:12px"></div>
+    </div>
+  </div></div>`).join('');
+  el('feed-list').innerHTML='<div class="feed-empty">Scanning for sharp signals…</div>';
+}
+
+function renderEmpty(s,reason){
+  el('ggrid').innerHTML=`<div class="empty-state">
+    <div class="empty-icon"><i class="ti ti-calendar-off"></i></div>
+    <h3>No upcoming ${s} games</h3>
+    <p>${reason==='error'?'Check your API key in Vercel environment variables.':s+' may be in the off-season, or no games start in the next 24 hours.'}</p>
+  </div>`;
+}
+
+/* ── Card builder ── */
+function buildCard(p,idx){
+  const sig=SIGS[p.signalType]||SIGS.WEAK;
+  const isDual=p.signalType==='DUAL_CONSENSUS';
+  const col=sc(p.siScore);
+  const t=fmtTime(p.commenceTime);
+  const gapW=Math.min(100,(parseFloat(p.gapPP)/7*100)).toFixed(0);
+
+  const siBg  = p.siScore>=80?'linear-gradient(135deg,rgba(0,224,144,.15),rgba(77,159,255,.1))':sbg(p.siScore);
+  const siBdr = p.siScore>=80?'rgba(0,224,144,.3)':sbd(p.siScore);
+
+  return`<div class="gcard${p.siScore>=SHARP_MIN?' sharp':''}${isDual?' dual':''}" style="animation-delay:${idx*.05}s" role="listitem">
+  <div class="gc-body">
+    <div class="gc-head">
+      <div class="gc-info">
+        <div class="gc-teams">${p.away}<br><span style="color:var(--t2)">@ </span>${p.home}</div>
+        <div class="gc-time">${t}</div>
+        <span class="gc-sig" style="border-color:${sig.bdr};color:${sig.color};background:${sig.bg}">
+          <i class="ti ${sig.icon}" style="font-size:10px"></i>${sig.label}
+        </span><br>
+        <span class="gc-side" style="border-color:${siBdr};color:${col};background:${sbg(p.siScore)}">
+          ${p.siScore>=SHARP_MIN?`<i class="ti ti-bolt" style="font-size:11px"></i>`:''}${p.sharpSide}
+        </span>
+        ${p.novigConfirm?`<div class="gc-novig"><i class="ti ti-check" style="font-size:10px"></i>Novig confirms ${p.lines.novig||''}</div>`:''}
+      </div>
+      <div class="si-badge" style="background:${siBg};border-color:${siBdr}">
+        <span class="si-num" style="color:${col}">${p.siScore}</span>
+        <span class="si-lbl" style="color:${col}">SI SCORE</span>
+      </div>
+    </div>
+
+    <div class="pillars">
+      ${PILLARS.map(pl=>`
+      <div class="pillar-row">
+        <div class="pillar-head">
+          <span class="pillar-name" style="color:${pl.color}">
+            <i class="ti ${pl.icon}"></i>${pl.label}
+          </span>
+          <span class="pillar-score" style="color:${pl.color}">${p.pillars[pl.key]}</span>
+        </div>
+        <div class="pillar-track">
+          <div class="pillar-fill" style="background:${pl.color}" data-fill="${p.pillars[pl.key]}"></div>
+        </div>
+      </div>`).join('')}
+    </div>
+
+    <div class="gc-odds">
+      <div class="odd-cell"><span class="odd-lbl">Pinnacle</span><span class="odd-val pin">${p.lines.pinnacle}</span></div>
+      <div class="odd-cell"><span class="odd-lbl">${p.lines.novig?'Novig':'Soft Avg'}</span><span class="odd-val ${p.lines.novig?'nov':''}">${p.lines.novig||p.lines.softAvg}</span></div>
+      <div class="odd-cell"><span class="odd-lbl">Market Avg</span><span class="odd-val">${p.lines.softAvg}</span></div>
+    </div>
+
+    <div class="gc-gap">
+      <div class="gap-track"><div class="gap-fill" style="background:${col}" data-fill="${gapW}"></div></div>
+      <span class="gap-label" style="color:${col}">${p.gapPP}pp edge</span>
+    </div>
+  </div>
+
+  <button class="gc-toggle" onclick="toggleCard('${p.id}')" id="gbt-${p.id}">
+    Details <i class="ti ti-chevron-down" id="gbc-${p.id}" style="font-size:11px"></i>
+  </button>
+  <div class="gc-expand" id="gbx-${p.id}">
+    <div class="expand-grid">
+      <div class="exp-cell"><span class="exp-lbl">SOFT RANGE</span><span class="exp-val">${p.lines.softRange}</span></div>
+      <div class="exp-cell"><span class="exp-lbl">BOOKS SAMPLED</span><span class="exp-val">${p.numBooks}</span></div>
+      <div class="exp-cell"><span class="exp-lbl">PUBLIC LEAN</span><span class="exp-val" style="color:${p.publicLean?'#ff4d6a':'#00e090'}">${p.publicLean?'Public side':'Counter-public'}</span></div>
+      <div class="exp-cell"><span class="exp-lbl">MARKET</span><span class="exp-val" style="text-transform:uppercase">${p.market}</span></div>
+      <div class="exp-note" style="border-color:${sig.bdr}">
+        ${p.pillars.rlm>=60?`RLM detected — line moved ${p.publicLean?'against public lean':'toward sharp side'}. `:``}${p.pillars.pinnacle>=60?`Pinnacle gap of ${p.gapPP}pp vs ${p.numBooks}-book soft average. `:''}${p.novigConfirm?'Novig exchange confirms the sharp side.':''}
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+/* ── Interactions ── */
+function toggleCard(id){
+  const x=el('gbx-'+id),c=el('gbc-'+id);
+  if(!x)return;
+  const open=x.classList.toggle('open');
+  if(c)c.className=open?'ti ti-chevron-up':'ti ti-chevron-down';
+  if(open)setTimeout(()=>x.querySelectorAll('[data-fill]').forEach(e=>e.style.width=e.dataset.fill+'%'),50);
+}
+function onThresh(v){
+  thresh=parseInt(v);el('thrval').textContent=v;
+  if(cache[sport])render(cache[sport],sport);
+}
+async function switchSport(s,btn){
+  sport=s;
+  document.querySelectorAll('#sport-tabs .stab').forEach(t=>t.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderSkeletons(); hideSetup();
+  if(!loadCache(s))fetchPlays(s);
+}
+function switchView(v,btn){
+  document.querySelectorAll('.vtab').forEach(t=>t.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));
+  el('v-'+v).classList.add('on');
+  if(v==='track')renderTracked();
+}
+function doRefresh(){
+  delete cache[sport];delete cacheTs[sport];
+  lss(`si:d:${sport}`,'');lss(`si:ts:${sport}`,'');
+  renderSkeletons();fetchPlays(sport);
+}
+
+/* ── Status UI ── */
+function setScanning(on,s){
+  const bar=el('sbar'),dot=el('ndot'),rbtn=el('rbtn'),ri=el('ricon');
+  const steps=['ss1','ss2','ss3','ss4'];
+  if(on){
+    bar.className='status-bar scanning';bar.style.display='flex';
+    rbtn.disabled=true;ri.style.animation='spin .7s linear infinite';
+    dot.className='ns-dot scanning';
+    el('nstatus').textContent='Scanning '+s;
+    steps.forEach(id=>{const e=el(id);if(e)e.className=''});
+    clearInterval(window._st);let i=0;
+    window._st=setInterval(()=>{
+      if(i>0){const p=el(steps[i-1]);if(p)p.classList.add('done')}
+      if(i<steps.length){const c=el(steps[i]);if(c)c.classList.add('cur');i++}
+      else clearInterval(window._st);
+    },2200);
+  }else{
+    clearInterval(window._st);
+    bar.style.display='none';rbtn.disabled=false;ri.style.animation='';
+    dot.className='ns-dot live';
+    el('nstatus').textContent='Live';
+    steps.forEach(id=>{const e=el(id);if(e)e.className=''});
+  }
+}
+function showErr(m){el('ebar').style.display='flex';el('emsg').textContent=m;}
+function hideErr(){el('ebar').style.display='none';}
+function showSetup(){el('setup-guide').style.display='block';el('ggrid').innerHTML='';}
+function hideSetup(){el('setup-guide').style.display='none';}
+function updateQuota(used,rem){
+  const q=el('quota');
+  if(!rem&&!used){q.style.display='none';return;}
+  q.style.display='flex';
+  const n=parseInt(rem)||0;
+  const cls=n>150?'qn-ok':n>50?'qn-warn':'qn-crit';
+  el('qtxt').innerHTML=`<span class="${cls}">${rem||'?'}</span>&nbsp;req left`;
+}
+
+/* ── Format time ── */
+function fmtTime(iso){
+  try{return new Date(iso).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'})}
+  catch{return iso||'—'}
+}
+
+/* ── Tracked tab ── */
+function setOutcome(id,val){
+  const t=tracked.find(p=>p.id===id);
+  if(t){t.outcome=val;outcomes[id]=val;}
+  saveTk();saveOc();renderTracked();
+}
+function renderTracked(){
+  const pl=tracked.filter(t=>t.outcome!=='PENDING');
+  const W=pl.filter(t=>t.outcome==='WIN').length,
+        L=pl.filter(t=>t.outcome==='LOSS').length,
+        P=pl.filter(t=>t.outcome==='PUSH').length,tot=W+L;
+  const wr=tot?Math.round(W/tot*100):0;
+  const roi=tot?Math.round(((W*90.9-L*100)/(tot*100))*100):0;
+  const roiCol=roi>=0?'#00e090':'#ff4d6a';
+
+  el('metrics').innerHTML=`
+    <div class="metric-card"><div class="mc-label">Record</div><div class="mc-val" style="font-size:20px">${W}–${L}–${P}</div><div class="mc-sub">${tracked.length} total tracked</div></div>
+    <div class="metric-card"><div class="mc-label">Win Rate</div><div class="mc-val" style="color:${sc(wr)}">${wr}%</div><div class="mc-sub">excl. pushes</div></div>
+    <div class="metric-card"><div class="mc-label">Est. ROI</div><div class="mc-val" style="color:${roiCol}">${roi>=0?'+':''}${roi}%</div><div class="mc-sub">–110 standard</div></div>
+    <div class="metric-card"><div class="mc-label">Pending</div><div class="mc-val">${tracked.filter(t=>t.outcome==='PENDING').length}</div><div class="mc-sub">awaiting result</div></div>`;
+
+  const ranges=[{l:'80–100',mn:80,mx:100},{l:'70–79',mn:70,mx:79},{l:'50–69',mn:50,mx:69}];
+  el('score-bd').innerHTML=ranges.map(r=>{
+    const ps=tracked.filter(t=>t.score>=r.mn&&t.score<=r.mx&&t.outcome!=='PENDING');
+    const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;
+    if(!tot2)return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><span style="font-size:10px;color:var(--t3)">no data yet</span></div>`;
+    const pct=Math.round(W2/tot2*100);
+    return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sc(pct)}" data-fill="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;
+  }).join('');
+
+  const sigRows=Object.keys(SIGS).map(k=>{
+    const ps=tracked.filter(t=>t.signalType===k&&t.outcome!=='PENDING');
+    if(!ps.length)return null;
+    const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;
+    return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0};
+  }).filter(Boolean).sort((a,b)=>b.pct-a.pct);
+  el('sig-bd').innerHTML=sigRows.length?sigRows.map(({k,W:W2,L:L2,pct})=>{
+    const sig=SIGS[k];
+    return`<div class="bd-row"><span class="bdr-lbl" style="font-size:10px;color:${sig.color}">${sig.label}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sig.color}" data-fill="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;
+  }).join(''):`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see signal performance</div>`;
+
+  el('plist').innerHTML=tracked.length?tracked.map(t=>{
+    const col=sc(t.score),sig=SIGS[t.signalType]||SIGS.WEAK;
+    return`<div class="play-item">
+      <div class="pi-left">
+        <span class="pi-score-pill" style="border-color:${sbd(t.score)};color:${col};background:${sbg(t.score)}">${t.score}</span>
+        <div class="pi-info">
+          <div class="pi-match">${t.away} @ ${t.home} <span style="font-size:10px;color:var(--t3);margin-left:6px">${t.sport} · ${t.dt}</span></div>
+          <div class="pi-detail">${t.side} · <span style="color:${sig.color}">${sig.label}</span></div>
+        </div>
+      </div>
+      <div class="pi-right">
+        <button class="o-btn${t.outcome==='WIN'?' sW':''}" onclick="setOutcome('${t.id}','WIN')">W</button>
+        <button class="o-btn${t.outcome==='LOSS'?' sL':''}" onclick="setOutcome('${t.id}','LOSS')">L</button>
+        <button class="o-btn${t.outcome==='PUSH'?' sP':''}" onclick="setOutcome('${t.id}','PUSH')">P</button>
+      </div>
+    </div>`;
+  }).join(''):`<div style="text-align:center;padding:52px;color:var(--t3);font-size:13px">Plays ≥${SHARP_MIN} SI auto-log here when detected</div>`;
+
+  setTimeout(()=>document.querySelectorAll('.bdr-fill').forEach(e=>e.style.width=e.dataset.fill+'%'),80);
+}
+
+/* ── Countdown ── */
+function startCd(){
+  clearInterval(cdTimer);
+  cdTimer=setInterval(()=>{
+    if(cd>0)cd-=1000;else{cd=REFRESH;doRefresh();}
+    const m=Math.floor(cd/60000),s=Math.floor((cd%60000)/1000);
+    const e=el('cd');if(e)e.textContent=m+':'+s.toString().padStart(2,'0');
+  },1000);
+}
+
+/* ── Init ── */
+window.addEventListener('load',()=>{
+  loadState();
+  renderSkeletons();
+  if(!loadCache('MLB'))fetchPlays('MLB');
+  cd=REFRESH; startCd();
+});
+</script>
+</body>
+</html>
