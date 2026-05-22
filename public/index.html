@@ -24,11 +24,9 @@
 html,body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100vh;font-size:14px;-webkit-font-smoothing:antialiased}
 button,input{font-family:inherit;outline:none}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px}
-
-/* NAV */
 .nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;height:56px;padding:0 20px;background:rgba(7,9,15,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);gap:0}
 .logo{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--t1);padding-right:28px;flex-shrink:0}
-.logo-ring{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#00e090,#4d9fff);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#07090f;letter-spacing:0}
+.logo-ring{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#00e090,#4d9fff);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#07090f}
 .sport-tabs{display:flex;gap:2px;flex:1}
 .stab{padding:6px 14px;border-radius:var(--r);border:none;background:transparent;color:var(--t3);font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:all .2s}
 .stab:hover{color:var(--t2);background:var(--s2)}
@@ -41,8 +39,6 @@ button,input{font-family:inherit;outline:none}
 .ns-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .ns-dot.live{background:var(--green);box-shadow:0 0 6px var(--green);animation:glow 2s ease infinite}
 .ns-dot.scanning{background:var(--amber);animation:throb .6s ease infinite}
-
-/* PAGE */
 .page{max-width:1200px;margin:0 auto;padding:24px 16px 100px}
 .view{display:none}.view.on{display:block}
 .vtabs{display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap}
@@ -50,15 +46,13 @@ button,input{font-family:inherit;outline:none}
 .vtab:hover{color:var(--t2);border-color:var(--b2)}
 .vtab.on{background:var(--s2);border-color:var(--b3);color:var(--t1)}
 .vtab .badge{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#07090f;border-radius:100px;font-size:10px;font-weight:800;padding:1px 6px;margin-left:4px;min-width:18px}
-
-/* FEED */
 .feed-wrap{margin-bottom:24px}
 .feed-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .feed-title{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t2)}
 .feed-icon{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--ga),var(--ba));display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--green)}
 .feed-upd{font-size:11px;font-family:var(--mono);color:var(--t4)}
 .feed-list{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);overflow:hidden}
-.feed-row{display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid var(--b1);transition:background .15s;cursor:default}
+.feed-row{display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid var(--b1);transition:background .15s}
 .feed-row:last-child{border-bottom:none}
 .feed-row:hover{background:var(--s2)}
 .feed-sig{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;border:1px solid;font-size:10px;font-weight:700;font-family:var(--mono);letter-spacing:.04em;white-space:nowrap;flex-shrink:0;min-width:138px;justify-content:center}
@@ -72,49 +66,41 @@ button,input{font-family:inherit;outline:none}
 .fs-num{font-size:26px;font-weight:900;font-family:var(--mono);line-height:1}
 .fs-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--t3);margin-top:1px}
 .feed-empty{padding:32px;text-align:center;color:var(--t3);font-size:13px}
-
-/* CONTROLS */
 .controls{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
 .thr-wrap{display:flex;align-items:center;gap:10px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:8px 14px;flex:1;min-width:200px;max-width:400px}
 .thr-wrap label{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.06em;color:var(--t3);white-space:nowrap}
 .thr-wrap input{flex:1;accent-color:var(--blue)}
 .thr-val{font-size:12px;font-family:var(--mono);font-weight:700;color:var(--t1);min-width:30px;text-align:right}
 .quota-chip{display:flex;align-items:center;gap:5px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:8px 13px;font-size:11px;font-family:var(--mono);color:var(--t3)}
-.qn-ok{color:var(--green);font-weight:700}
-.qn-warn{color:var(--amber);font-weight:700}
-.qn-crit{color:var(--red);font-weight:700}
-
-/* STATUS */
+.qn-ok{color:var(--green);font-weight:700}.qn-warn{color:var(--amber);font-weight:700}.qn-crit{color:var(--red);font-weight:700}
 .status-bar{display:none;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r);margin-bottom:16px;font-size:12px;font-family:var(--mono)}
 .status-bar.scanning{display:flex;background:var(--aa);border:1px solid var(--ab);color:var(--amber)}
 .status-bar.err{display:flex;background:var(--ra);border:1px solid var(--rb);color:var(--red)}
 .sb-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:throb .6s ease infinite;flex-shrink:0}
-.ssteps span{opacity:.2;transition:opacity .15s}
-.ssteps span.done{opacity:1;color:var(--green)}
-.ssteps span.cur{opacity:1;color:var(--amber)}
-.ssp{opacity:.2;padding:0 5px}
+.ssteps span{opacity:.2;transition:opacity .15s}.ssteps span.done{opacity:1;color:var(--green)}.ssteps span.cur{opacity:1;color:var(--amber)}.ssp{opacity:.2;padding:0 5px}
 .setup-banner{background:var(--s1);border:1px solid var(--b2);border-radius:var(--rl);padding:28px;text-align:center;margin-bottom:24px}
 .setup-banner h3{font-size:18px;font-weight:700;margin-bottom:8px}
 .setup-banner p{font-size:13px;color:var(--t2);line-height:1.7;max-width:500px;margin:0 auto 16px}
 .setup-steps{display:flex;flex-direction:column;gap:8px;max-width:440px;margin:0 auto;text-align:left}
 .setup-step{display:flex;gap:12px;align-items:flex-start;background:var(--s2);border-radius:var(--r);padding:10px 14px}
 .ss-num{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--blue));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#07090f;flex-shrink:0}
-.ss-body{font-size:12px;color:var(--t2);line-height:1.5}
-.ss-body strong{color:var(--t1)}
-
-/* SECTION HDR */
+.ss-body{font-size:12px;color:var(--t2);line-height:1.5}.ss-body strong{color:var(--t1)}
 .sec-hdr{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
 .sec-count{background:var(--s2);border:1px solid var(--b1);border-radius:100px;padding:1px 8px;font-size:10px;font-family:var(--mono);color:var(--t2)}
-
-/* GAME GRID */
 .game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:32px}
-
-/* GAME CARD */
 .gcard{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);overflow:hidden;animation:fadein .35s ease both;transition:border-color .2s,transform .15s,box-shadow .2s}
 .gcard:hover{border-color:var(--b2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
 .gcard.sharp{border-color:rgba(0,224,144,.2)}
 .gcard.dual{border-color:rgba(157,124,255,.3);box-shadow:0 0 0 1px rgba(157,124,255,.1)}
-.gc-body{padding:18px}
+.gc-body{padding:16px}
+.mkt-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px}
+.mkt-tab{padding:8px 6px;border-radius:var(--r);border:1px solid var(--b1);background:transparent;color:var(--t3);cursor:pointer;transition:all .2s;text-align:center}
+.mkt-tab:hover{border-color:var(--b2);background:var(--s2)}
+.mkt-tab.on{background:var(--s3);border-color:var(--b3)}
+.mkt-tab.unavail{opacity:.3;cursor:not-allowed}
+.mkt-tab-label{display:block;font-size:10px;font-weight:700;font-family:var(--mono);letter-spacing:.05em;margin-bottom:3px}
+.mkt-tab-score{display:block;font-size:17px;font-weight:900;font-family:var(--mono);line-height:1}
+.mkt-tab-sub{display:block;font-size:9px;font-family:var(--mono);opacity:.6;margin-top:1px}
 .gc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
 .gc-info{flex:1;min-width:0}
 .gc-teams{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:3px;line-height:1.3}
@@ -136,34 +122,25 @@ button,input{font-family:inherit;outline:none}
 .odd-cell{background:var(--s2);border-radius:var(--r);padding:7px 10px}
 .odd-lbl{font-size:8px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t4);text-transform:uppercase;display:block;margin-bottom:2px}
 .odd-val{font-size:13px;font-family:var(--mono);font-weight:700;color:var(--t1)}
-.odd-val.pine{color:var(--blue)}
-.odd-val.nov{color:var(--violet)}
+.odd-val.pine{color:var(--blue)}.odd-val.nov{color:var(--violet)}
 .gc-gap{display:flex;align-items:center;gap:8px;margin-top:10px}
 .gap-track{flex:1;height:3px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden}
 .gap-fill{height:100%;border-radius:2px;width:0;transition:width .9s cubic-bezier(.4,0,.2,1)}
 .gap-label{font-size:11px;font-family:var(--mono);font-weight:600;white-space:nowrap}
-
-/* ADD TO MY PLAYS button */
-.gc-actions{padding:0 18px 14px;display:flex;justify-content:flex-end}
+.gc-actions{padding:0 16px 14px;display:flex;justify-content:flex-end}
 .add-play-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:100px;border:1px solid var(--b2);background:transparent;color:var(--t2);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s}
 .add-play-btn:hover{background:var(--ga);border-color:var(--gb);color:var(--green)}
 .add-play-btn.added{background:var(--ga);border-color:var(--gb);color:var(--green)}
-
-/* EXPAND */
 .gc-toggle{width:100%;background:transparent;border:none;border-top:1px solid var(--b1);padding:8px 18px;display:flex;align-items:center;justify-content:space-between;color:var(--t3);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:background .15s}
 .gc-toggle:hover{background:var(--s2)}
 .gc-expand{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;padding:0 18px}
-.gc-expand.open{max-height:220px;padding:14px 18px 16px}
+.gc-expand.open{max-height:180px;padding:12px 18px 14px}
 .expand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 .exp-cell{background:var(--s2);border-radius:var(--r);padding:8px 10px}
 .exp-lbl{font-size:9px;font-family:var(--mono);color:var(--t4);letter-spacing:.06em;display:block;margin-bottom:2px}
 .exp-val{font-size:12px;font-family:var(--mono);font-weight:600;color:var(--t1)}
 .exp-note{grid-column:1/-1;padding:8px 10px;background:var(--s2);border-radius:var(--r);font-size:10px;color:var(--t2);font-family:var(--mono);line-height:1.6;border-left:2px solid}
-
-/* SKELETON */
 .skel{background:var(--s2);border-radius:var(--r);animation:pulse 1.5s ease infinite}
-
-/* EMPTY */
 .empty-state{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;padding:60px 20px;text-align:center}
 .empty-icon{width:48px;height:48px;border-radius:50%;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;color:var(--t3)}
 .empty-state h3{font-size:15px;font-weight:600;color:var(--t2);margin-bottom:6px}
@@ -181,6 +158,30 @@ button,input{font-family:inherit;outline:none}
 .mp-stat-lbl{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t3);text-transform:uppercase;margin-bottom:8px}
 .mp-stat-val{font-size:24px;font-family:var(--mono);font-weight:900;color:var(--t1)}
 .mp-stat-sub{font-size:11px;color:var(--t3);margin-top:3px}
+
+/* Lead signal + threshold tables */
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.analysis-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px;overflow:hidden}
+.analysis-title{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);margin-bottom:4px}
+.analysis-sub{font-size:10px;color:var(--t3);margin-bottom:14px;line-height:1.4}
+.lead-table{width:100%;border-collapse:collapse}
+.lead-table th{font-size:9px;font-family:var(--mono);font-weight:700;letter-spacing:.06em;color:var(--t4);text-transform:uppercase;padding:0 0 8px;text-align:left;border-bottom:1px solid var(--b1)}
+.lead-table th:not(:first-child){text-align:right}
+.lead-table td{font-size:11px;font-family:var(--mono);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle}
+.lead-table td:not(:first-child){text-align:right}
+.lead-table tr:last-child td{border-bottom:none}
+.lead-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;border:1px solid}
+.thresh-table{width:100%;border-collapse:collapse}
+.thresh-table th{font-size:9px;font-family:var(--mono);font-weight:700;letter-spacing:.06em;color:var(--t4);text-transform:uppercase;padding:0 0 8px;text-align:center;border-bottom:1px solid var(--b1)}
+.thresh-table th:first-child{text-align:left}
+.thresh-table td{font-size:11px;font-family:var(--mono);padding:7px 4px;border-bottom:1px solid rgba(255,255,255,.03);text-align:center;vertical-align:middle}
+.thresh-table td:first-child{text-align:left;font-weight:700}
+.thresh-table tr:last-child td{border-bottom:none}
+.thresh-cell{display:flex;flex-direction:column;align-items:center;gap:1px}
+.thresh-record{font-size:11px;font-weight:700}
+.thresh-pct{font-size:9px;opacity:.6}
+.no-data-msg{font-size:11px;color:var(--t3);text-align:center;padding:16px 0}
+
 .mp-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
 .mp-bd-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
 .mp-bd-title{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t2);text-transform:uppercase;margin-bottom:12px}
@@ -238,13 +239,12 @@ button,input{font-family:inherit;outline:none}
 .pi-detail{font-size:10px;color:var(--t2);font-family:var(--mono);margin-top:1px}
 .pi-right{display:flex;gap:5px}
 
-/* ANIMATIONS */
 @keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 @keyframes glow{0%,100%{opacity:1;box-shadow:0 0 6px var(--green)}50%{opacity:.4;box-shadow:none}}
 @keyframes throb{0%,100%{transform:scale(1)}50%{transform:scale(.4)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@media(max-width:680px){.metrics-grid,.mp-stats{grid-template-columns:repeat(2,1fr)}.breakdown-grid,.mp-breakdown{grid-template-columns:1fr}.sport-tabs .stab:not(.on){display:none}}
+@media(max-width:680px){.metrics-grid,.mp-stats{grid-template-columns:repeat(2,1fr)}.breakdown-grid,.mp-breakdown,.analysis-grid{grid-template-columns:1fr}.sport-tabs .stab:not(.on){display:none}}
 </style>
 </head>
 <body>
@@ -261,7 +261,6 @@ button,input{font-family:inherit;outline:none}
     <button class="pill-btn" id="rbtn" onclick="doRefresh()"><i class="ti ti-refresh" id="ricon" style="font-size:13px"></i><span id="cd">—</span></button>
   </div>
 </nav>
-
 <div class="page">
   <div class="vtabs">
     <button class="vtab on" id="vt-live" onclick="switchView('live',this)">Live Slate</button>
@@ -286,22 +285,15 @@ button,input{font-family:inherit;outline:none}
       </div>
       <div class="quota-chip" id="quota" style="display:none"><i class="ti ti-database" style="font-size:12px"></i><span id="qtxt">—</span></div>
     </div>
-    <div class="status-bar" id="sbar">
-      <div class="sb-dot"></div>
-      <div class="ssteps"><span id="ss1">Pinnacle + Novig</span><span class="ssp">·</span><span id="ss2">Soft Books</span><span class="ssp">·</span><span id="ss3">RLM Analysis</span><span class="ssp">·</span><span id="ss4">SI Scoring</span></div>
-    </div>
-    <div class="status-bar err" id="ebar" style="display:none">
-      <i class="ti ti-alert-circle" style="flex-shrink:0"></i>
-      <span id="emsg">—</span>
-      <button class="pill-btn" style="margin-left:auto;border-color:var(--rb);color:var(--red)" onclick="doRefresh()">Retry</button>
-    </div>
+    <div class="status-bar" id="sbar"><div class="sb-dot"></div><div class="ssteps"><span id="ss1">Pinnacle + Novig</span><span class="ssp">·</span><span id="ss2">Soft Books</span><span class="ssp">·</span><span id="ss3">RLM Analysis</span><span class="ssp">·</span><span id="ss4">SI Scoring</span></div></div>
+    <div class="status-bar err" id="ebar" style="display:none"><i class="ti ti-alert-circle" style="flex-shrink:0"></i><span id="emsg">—</span><button class="pill-btn" style="margin-left:auto;border-color:var(--rb);color:var(--red)" onclick="doRefresh()">Retry</button></div>
     <div id="setup-guide" style="display:none" class="setup-banner">
       <h3>Connect Your Data</h3>
       <p>Sharp.idx needs your free Odds API key to fetch live Pinnacle lines and calculate sharp scores.</p>
       <div class="setup-steps">
-        <div class="setup-step"><div class="ss-num">1</div><div class="ss-body">Get a free key at <strong>the-odds-api.com</strong> — just enter your email</div></div>
-        <div class="setup-step"><div class="ss-num">2</div><div class="ss-body">In Vercel → <strong>Settings → Environment Variables</strong> → add <strong>ODDS_API_KEY</strong></div></div>
-        <div class="setup-step"><div class="ss-num">3</div><div class="ss-body">Redeploy from Vercel dashboard — data loads automatically</div></div>
+        <div class="setup-step"><div class="ss-num">1</div><div class="ss-body">Get a free key at <strong>the-odds-api.com</strong></div></div>
+        <div class="setup-step"><div class="ss-num">2</div><div class="ss-body">Vercel → <strong>Settings → Environment Variables</strong> → add <strong>ODDS_API_KEY</strong></div></div>
+        <div class="setup-step"><div class="ss-num">3</div><div class="ss-body">Redeploy — data loads automatically</div></div>
       </div>
     </div>
     <div class="sec-hdr" id="sec-hdr" style="display:none"><i class="ti ti-layout-grid" style="font-size:13px"></i>All Games<span class="sec-count" id="sec-count">0</span></div>
@@ -312,18 +304,37 @@ button,input{font-family:inherit;outline:none}
   <div id="v-plays" class="view">
     <div class="mp-top">
       <div class="mp-title">My Plays</div>
-      <div class="mp-filter" id="mp-filter">
+      <div class="mp-filter">
         <button class="mp-filt-btn on" onclick="setMPFilter(0,this)">All</button>
         <button class="mp-filt-btn" onclick="setMPFilter(60,this)">60+ SI</button>
         <button class="mp-filt-btn" onclick="setMPFilter(70,this)">70+ SI</button>
         <button class="mp-filt-btn" onclick="setMPFilter(80,this)">80+ SI</button>
       </div>
     </div>
+
+    <!-- Summary stats -->
     <div class="mp-stats" id="mp-stats"></div>
-    <div class="mp-breakdown" id="mp-breakdown-wrap">
-      <div class="mp-bd-card"><div class="mp-bd-title">Performance by SI Score</div><div id="mp-score-bd"></div></div>
-      <div class="mp-bd-card"><div class="mp-bd-title">Performance by Signal Type</div><div id="mp-sig-bd"></div></div>
+
+    <!-- NEW: Lead signal + threshold analysis -->
+    <div class="analysis-grid">
+      <div class="analysis-card">
+        <div class="analysis-title">Lead Signal Performance</div>
+        <div class="analysis-sub">Which pillar was highest on each play. Fills in as you log results.</div>
+        <div id="lead-signal-table"></div>
+      </div>
+      <div class="analysis-card">
+        <div class="analysis-title">Pillar Threshold Grid</div>
+        <div class="analysis-sub">Win rate when each pillar exceeded a score threshold.</div>
+        <div id="threshold-grid"></div>
+      </div>
     </div>
+
+    <!-- Score + signal breakdown -->
+    <div class="mp-breakdown">
+      <div class="mp-bd-card"><div class="mp-bd-title">By SI Score Range</div><div id="mp-score-bd"></div></div>
+      <div class="mp-bd-card"><div class="mp-bd-title">By Signal Type</div><div id="mp-sig-bd"></div></div>
+    </div>
+
     <div class="mp-plays-hdr">
       <div class="mp-plays-title"><i class="ti ti-list-check" style="font-size:13px"></i>Your Plays — tap W / L / P to log</div>
       <button class="mp-clear-btn" onclick="confirmClear()">Clear all</button>
@@ -344,34 +355,41 @@ button,input{font-family:inherit;outline:none}
 </div>
 
 <script>
-const REFRESH=15*60*1000, SHARP_MIN=70;
-const sc  = s=>s>=70?'#00e090':s>=50?'#ffb830':'#ff4d6a';
-const sbg = s=>s>=70?'rgba(0,224,144,.1)':s>=50?'rgba(255,184,48,.1)':'rgba(255,77,106,.1)';
-const sbd = s=>s>=70?'rgba(0,224,144,.25)':s>=50?'rgba(255,184,48,.25)':'rgba(255,77,106,.25)';
-
+const REFRESH=15*60*1000,SHARP_MIN=70;
+const sc  =s=>s>=70?'#00e090':s>=50?'#ffb830':'#ff4d6a';
+const sbg =s=>s>=70?'rgba(0,224,144,.1)':s>=50?'rgba(255,184,48,.1)':'rgba(255,77,106,.1)';
+const sbd =s=>s>=70?'rgba(0,224,144,.25)':s>=50?'rgba(255,184,48,.25)':'rgba(255,77,106,.25)';
 const SIGS={
-  DUAL_CONSENSUS: {label:'DUAL CONSENSUS', color:'#9d7cff',bg:'rgba(157,124,255,.12)',bdr:'rgba(157,124,255,.3)',  icon:'ti-bolt'},
-  SHARP_RLM:      {label:'SHARP + RLM',    color:'#00e090',bg:'rgba(0,224,144,.1)',   bdr:'rgba(0,224,144,.25)',   icon:'ti-trending-up'},
-  PINNACLE_EDGE:  {label:'PINNACLE EDGE',  color:'#4d9fff',bg:'rgba(77,159,255,.12)', bdr:'rgba(77,159,255,.3)',   icon:'ti-chart-bar'},
-  EXCHANGE_SIGNAL:{label:'EXCHANGE',       color:'#9d7cff',bg:'rgba(157,124,255,.1)', bdr:'rgba(157,124,255,.25)', icon:'ti-arrows-exchange'},
-  RLM_ONLY:       {label:'REVERSE LM',     color:'#ffb830',bg:'rgba(255,184,48,.1)',  bdr:'rgba(255,184,48,.25)',  icon:'ti-arrow-back-up'},
-  MODERATE_EDGE:  {label:'MODERATE EDGE',  color:'#7b96c4',bg:'rgba(123,150,196,.08)',bdr:'rgba(123,150,196,.2)',  icon:'ti-minus'},
-  WEAK:           {label:'WEAK SIGNAL',    color:'#3d5578',bg:'rgba(61,85,120,.08)',  bdr:'rgba(61,85,120,.2)',    icon:'ti-minus'},
+  DUAL_CONSENSUS:{label:'DUAL CONSENSUS',color:'#9d7cff',bg:'rgba(157,124,255,.12)',bdr:'rgba(157,124,255,.3)',icon:'ti-bolt'},
+  SHARP_RLM:     {label:'SHARP + RLM',  color:'#00e090',bg:'rgba(0,224,144,.1)',   bdr:'rgba(0,224,144,.25)', icon:'ti-trending-up'},
+  PINNACLE_EDGE: {label:'PINNACLE EDGE',color:'#4d9fff',bg:'rgba(77,159,255,.12)', bdr:'rgba(77,159,255,.3)', icon:'ti-chart-bar'},
+  EXCHANGE_SIGNAL:{label:'EXCHANGE',    color:'#9d7cff',bg:'rgba(157,124,255,.1)', bdr:'rgba(157,124,255,.25)',icon:'ti-arrows-exchange'},
+  RLM_ONLY:      {label:'REVERSE LM',  color:'#ffb830',bg:'rgba(255,184,48,.1)',  bdr:'rgba(255,184,48,.25)',icon:'ti-arrow-back-up'},
+  MODERATE_EDGE: {label:'MODERATE EDGE',color:'#7b96c4',bg:'rgba(123,150,196,.08)',bdr:'rgba(123,150,196,.2)',icon:'ti-minus'},
+  WEAK:          {label:'WEAK SIGNAL', color:'#3d5578',bg:'rgba(61,85,120,.08)', bdr:'rgba(61,85,120,.2)',  icon:'ti-minus'},
 };
 const PILLARS=[
   {key:'rlm',     label:'RLM',         icon:'ti-arrow-back-up',  color:'#ffb830'},
   {key:'pinnacle',label:'PINNACLE',    icon:'ti-chart-bar',      color:'#4d9fff'},
   {key:'money',   label:'MONEY LAYER', icon:'ti-arrows-exchange', color:'#9d7cff'},
 ];
+const MKT_LABELS={h2h:'ML',spreads:'SPREAD',totals:'O/U'};
+
+// Lead signal config
+const LEAD_CFG={
+  PINNACLE:{label:'Pinnacle-led', color:'#4d9fff',bdr:'rgba(77,159,255,.3)',  tip:'Pinnacle score was highest'},
+  RLM:     {label:'RLM-led',      color:'#ffb830',bdr:'rgba(255,184,48,.3)',   tip:'Reverse line movement led'},
+  MONEY:   {label:'Money-led',    color:'#9d7cff',bdr:'rgba(157,124,255,.3)',  tip:'Exchange/velocity led'},
+  MULTI:   {label:'Multi-signal', color:'#00e090',bdr:'rgba(0,224,144,.3)',    tip:'Two or more pillars aligned'},
+};
 
 let sport='MLB',thresh=0,cd=0;
 let cache={},cacheTs={},fetching={};
 let tracked=[],outcomes={};
 let myPlays=[],mpOutcomes={};
-let mpFilter=0;
+let mpFilter=0,activeMarket={};
 let cdTimer;
 
-/* Storage */
 const lsg=k=>{try{return localStorage.getItem(k)}catch{return null}};
 const lss=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
 const el=id=>document.getElementById(id);
@@ -390,76 +408,157 @@ function saveTk(){lss('si:t',JSON.stringify(tracked))}
 function saveOc(){lss('si:o',JSON.stringify(outcomes))}
 function saveMP(){lss('si:mp',JSON.stringify(myPlays));updateMPBadge()}
 function saveMO(){lss('si:mo',JSON.stringify(mpOutcomes))}
+function updateMPBadge(){const b=el('mp-badge');if(myPlays.length){b.style.display='';b.textContent=myPlays.length;}else b.style.display='none';}
 
-function updateMPBadge(){
-  const pending=myPlays.filter(p=>p.outcome==='PENDING').length;
-  const badge=el('mp-badge');
-  if(myPlays.length){badge.style.display='';badge.textContent=myPlays.length;}
-  else badge.style.display='none';
+/* ── Lead signal helper ── */
+function leadPillar(pillars){
+  if(!pillars)return'PINNACLE';
+  const{rlm=0,pinnacle=0,money=0}=pillars;
+  const max=Math.max(rlm,pinnacle,money);
+  if(max===0)return'PINNACLE';
+  const close=[{k:'PINNACLE',v:pinnacle},{k:'RLM',v:rlm},{k:'MONEY',v:money}]
+    .filter(x=>x.v>=max-8&&x.v>=50);
+  if(close.length>=2)return'MULTI';
+  if(pinnacle===max)return'PINNACLE';
+  if(money===max)return'MONEY';
+  return'RLM';
 }
 
-/* Add to My Plays */
-function addToMyPlays(gameId){
+/* ── Lead signal table ── */
+function renderLeadSignal(plays){
+  const settled=plays.filter(p=>p.outcome!=='PENDING');
+  const groups={PINNACLE:[],RLM:[],MONEY:[],MULTI:[]};
+  settled.forEach(p=>{ const key=leadPillar(p.pillars); if(groups[key])groups[key].push(p); });
+
+  const hasAny=Object.values(groups).some(g=>g.length>0);
+  if(!hasAny){
+    el('lead-signal-table').innerHTML=`<div class="no-data-msg">Starts filling in once you log W/L/P on plays</div>`;
+    return;
+  }
+
+  el('lead-signal-table').innerHTML=`
+    <table class="lead-table">
+      <thead><tr>
+        <th>Signal</th><th>Record</th><th>Win %</th><th>ROI</th>
+      </tr></thead>
+      <tbody>
+        ${Object.entries(LEAD_CFG).map(([key,cfg])=>{
+          const ps=groups[key]||[];
+          if(!ps.length)return`<tr><td><span class="lead-pill" style="border-color:${cfg.bdr};color:${cfg.color}">${cfg.label}</span></td><td colspan="3" style="color:var(--t4);font-size:10px">no data</td></tr>`;
+          const W=ps.filter(p=>p.outcome==='WIN').length,L=ps.filter(p=>p.outcome==='LOSS').length,P=ps.filter(p=>p.outcome==='PUSH').length,tot=W+L;
+          const wr=tot?Math.round(W/tot*100):0;
+          let profit=0,risked=0;
+          ps.forEach(p=>{const odds=parseInt(p.pinnacleOdds)||(-110);risked+=100;if(p.outcome==='WIN'){profit+=odds>0?odds:(100/Math.abs(odds)*100);}else if(p.outcome==='LOSS'){profit-=100;}});
+          const roi=risked>0?Math.round((profit/risked)*100):0;
+          const roiCol=roi>=0?'#00e090':'#ff4d6a';
+          return`<tr>
+            <td><span class="lead-pill" style="border-color:${cfg.bdr};color:${cfg.color}">${cfg.label}</span></td>
+            <td style="color:var(--t1);font-weight:700">${W}-${L}${P?'-'+P:''}</td>
+            <td style="color:${sc(wr)};font-weight:700">${wr}%</td>
+            <td style="color:${roiCol};font-weight:700">${roi>=0?'+':''}${roi}%</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
+}
+
+/* ── Threshold grid ── */
+function renderThresholdGrid(plays){
+  const settled=plays.filter(p=>p.outcome!=='PENDING');
+  if(!settled.length){
+    el('threshold-grid').innerHTML=`<div class="no-data-msg">Fills in after you log results</div>`;
+    return;
+  }
+
+  const thresholds=[50,60,70,80];
+  const pillars=['rlm','pinnacle','money'];
+  const pillarLabels={rlm:'RLM',pinnacle:'PIN',money:'MON'};
+  const pillarColors={rlm:'#ffb830',pinnacle:'#4d9fff',money:'#9d7cff'};
+
+  function cell(ps){
+    if(!ps.length)return`<div class="thresh-cell"><span class="thresh-record" style="color:var(--t4)">—</span></div>`;
+    const W=ps.filter(p=>p.outcome==='WIN').length,L=ps.filter(p=>p.outcome==='LOSS').length,tot=W+L;
+    const wr=tot?Math.round(W/tot*100):0;
+    return`<div class="thresh-cell"><span class="thresh-record" style="color:${sc(wr)}">${W}-${L}</span><span class="thresh-pct">${wr}%</span></div>`;
+  }
+
+  el('threshold-grid').innerHTML=`
+    <table class="thresh-table">
+      <thead><tr>
+        <th>Pillar</th>
+        ${thresholds.map(t=>`<th>${t}+</th>`).join('')}
+      </tr></thead>
+      <tbody>
+        ${pillars.map(p=>`<tr>
+          <td style="color:${pillarColors[p]}">${pillarLabels[p]}</td>
+          ${thresholds.map(t=>`<td>${cell(settled.filter(s=>(s.pillars?.[p]||0)>=t))}</td>`).join('')}
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+/* ── Market switching ── */
+function switchMarket(gameId,mkey,btnEl){
+  activeMarket[gameId]=mkey;
+  document.querySelectorAll('.mkt-tab[data-game="'+gameId+'"]').forEach(t=>t.classList.toggle('on',t.dataset.mkt===mkey));
   const plays=cache[sport]||[];
   const game=plays.find(p=>p.id===gameId);
   if(!game)return;
-  const uid=gameId+'-'+Date.now();
-  const already=myPlays.find(p=>p.id===gameId&&p.sport===sport);
-  if(already){
-    // Flash button
-    const btn=el('add-btn-'+gameId);
-    if(btn){btn.textContent='Already added';setTimeout(()=>{btn.innerHTML='<i class="ti ti-check"></i> Added';},1000);}
-    return;
-  }
-  myPlays.unshift({
-    uid,id:gameId,away:game.away,home:game.home,side:game.sharpSide,
-    siScore:game.siScore,signalType:game.signalType,pillars:game.pillars,
-    sport,dt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),
-    gameTime:game.commenceTime,outcome:'PENDING',
-    pinnacleOdds:game.lines.pinnacle,novigOdds:game.lines.novig,softAvg:game.lines.softAvg,
-    gapPP:game.gapPP,
+  const mdata=game.markets&&game.markets[mkey];
+  if(!mdata)return;
+  updateCardContent(gameId,mdata);
+}
+function updateCardContent(gameId,mdata){
+  const col=sc(mdata.siScore),sig=SIGS[mdata.signalType]||SIGS.WEAK;
+  const badge=el('si-badge-'+gameId);
+  if(badge){badge.style.borderColor=sbd(mdata.siScore);badge.style.background=mdata.siScore>=80?'linear-gradient(135deg,rgba(0,224,144,.15),rgba(77,159,255,.1))':sbg(mdata.siScore);badge.innerHTML=`<span class="si-num" style="color:${col}">${mdata.siScore}</span><span class="si-lbl" style="color:${col}">SI SCORE</span>`;}
+  const sigBadge=el('sig-badge-'+gameId);
+  if(sigBadge){sigBadge.style.cssText=`border-color:${sig.bdr};color:${sig.color};background:${sig.bg}`;sigBadge.innerHTML=`<i class="ti ${sig.icon}" style="font-size:10px"></i>${sig.label}`;}
+  const side=el('gc-side-'+gameId);
+  if(side){side.style.cssText=`border-color:${sbd(mdata.siScore)};color:${col};background:${sbg(mdata.siScore)}`;side.innerHTML=`${mdata.siScore>=SHARP_MIN?'<i class="ti ti-bolt" style="font-size:10px"></i>':''}${mdata.sharpSide}`;}
+  const nov=el('gc-novig-'+gameId);
+  if(nov){nov.style.display=mdata.novigConfirm?'flex':'none';nov.innerHTML=mdata.novigConfirm?`<i class="ti ti-check" style="font-size:10px"></i>Novig confirms ${mdata.lines.novig||''}`:''}
+  PILLARS.forEach(pl=>{
+    const fill=el('pf-'+gameId+'-'+pl.key),score=el('ps-'+gameId+'-'+pl.key);
+    if(fill)fill.style.width=mdata.pillars[pl.key]+'%';
+    if(score)score.textContent=mdata.pillars[pl.key];
   });
-  myPlays=myPlays.slice(0,200);
-  saveMP();
-  // Update button
-  const btn=el('add-btn-'+gameId);
-  if(btn){btn.className='add-play-btn added';btn.innerHTML='<i class="ti ti-check"></i> Added to My Plays';}
+  const pin=el('odd-pin-'+gameId),nov2=el('odd-nov-'+gameId),soft=el('odd-soft-'+gameId);
+  if(pin)pin.textContent=mdata.lines.pinnacle;
+  if(nov2)nov2.textContent=mdata.lines.novig||mdata.lines.softAvg;
+  if(soft)soft.textContent=mdata.lines.softAvg;
+  const gapFill=el('gap-fill-'+gameId),gapLbl=el('gap-lbl-'+gameId);
+  if(gapFill){const gw=Math.min(100,(parseFloat(mdata.gapPP||0)/7*100)).toFixed(0);gapFill.style.width=gw+'%';gapFill.style.background=col;}
+  if(gapLbl){gapLbl.style.color=col;gapLbl.textContent=mdata.gapPP+'pp edge';}
+  const addBtn=el('add-btn-'+gameId);
+  if(addBtn){const mkey=activeMarket[gameId];const already=myPlays.some(p=>p.id===gameId&&p.sport===sport&&p.market===mkey);addBtn.className='add-play-btn'+(already?' added':'');addBtn.innerHTML=`<i class="ti ${already?'ti-check':'ti-plus'}" style="font-size:11px"></i>${already?'Added':'Add to My Plays'}`;}
 }
 
-function setMPOutcome(uid,val){
-  const p=myPlays.find(x=>x.uid===uid);
-  if(p){p.outcome=val;mpOutcomes[uid]=val;}
-  saveMO();saveMP();renderMyPlays();
+/* ── My Plays CRUD ── */
+function addToMyPlays(gameId){
+  const plays=cache[sport]||[];
+  const game=plays.find(p=>p.id===gameId);if(!game)return;
+  const mkey=activeMarket[gameId]||game.activeMarket||'h2h';
+  const mdata=game.markets&&game.markets[mkey];if(!mdata)return;
+  if(myPlays.find(p=>p.id===gameId&&p.sport===sport&&p.market===mkey)){
+    const btn=el('add-btn-'+gameId);if(btn){btn.innerHTML='<i class="ti ti-check"></i> Already added';setTimeout(()=>updateCardContent(gameId,mdata),1200);}return;
+  }
+  const uid=gameId+'-'+mkey+'-'+Date.now();
+  myPlays.unshift({uid,id:gameId,away:game.away,home:game.home,side:mdata.sharpSide,market:mkey,siScore:mdata.siScore,signalType:mdata.signalType,pillars:mdata.pillars,sport,dt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),gameTime:game.commenceTime,outcome:'PENDING',pinnacleOdds:mdata.lines.pinnacle,novigOdds:mdata.lines.novig,softAvg:mdata.lines.softAvg,gapPP:mdata.gapPP,});
+  myPlays=myPlays.slice(0,200);saveMP();
+  const btn=el('add-btn-'+gameId);if(btn){btn.className='add-play-btn added';btn.innerHTML='<i class="ti ti-check"></i> Added to My Plays';}
 }
-
-function setMPFilter(val,btn){
-  mpFilter=val;
-  document.querySelectorAll('.mp-filt-btn').forEach(b=>b.classList.remove('on'));
-  if(btn)btn.classList.add('on');
-  renderMyPlays();
-}
-
-function confirmClear(){
-  if(confirm('Clear all plays from My Plays?')){myPlays=[];mpOutcomes={};saveMP();saveMO();renderMyPlays();}
-}
+function setMPOutcome(uid,val){const p=myPlays.find(x=>x.uid===uid);if(p){p.outcome=val;mpOutcomes[uid]=val;}saveMO();saveMP();renderMyPlays();}
+function setMPFilter(val,btn){mpFilter=val;document.querySelectorAll('.mp-filt-btn').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');renderMyPlays();}
+function confirmClear(){if(confirm('Clear all plays from My Plays?')){myPlays=[];mpOutcomes={};saveMP();saveMO();renderMyPlays();}}
 
 function calcMPStats(plays){
   const settled=plays.filter(p=>p.outcome!=='PENDING');
-  const W=settled.filter(p=>p.outcome==='WIN').length;
-  const L=settled.filter(p=>p.outcome==='LOSS').length;
-  const P=settled.filter(p=>p.outcome==='PUSH').length;
-  const tot=W+L;
+  const W=settled.filter(p=>p.outcome==='WIN').length,L=settled.filter(p=>p.outcome==='LOSS').length,P=settled.filter(p=>p.outcome==='PUSH').length,tot=W+L;
   const wr=tot?Math.round(W/tot*100):0;
-  // ROI using Pinnacle odds
   let profit=0,risked=0;
-  settled.forEach(p=>{
-    const odds=parseInt(p.pinnacleOdds)||(-110);
-    risked+=100;
-    if(p.outcome==='WIN'){profit+=odds>0?odds:(100/Math.abs(odds)*100);}
-    else if(p.outcome==='LOSS'){profit-=100;}
-  });
-  const roi=risked>0?Math.round((profit/risked)*100):0;
-  return{W,L,P,tot,wr,roi,all:plays.length,pending:plays.filter(p=>p.outcome==='PENDING').length};
+  settled.forEach(p=>{const odds=parseInt(p.pinnacleOdds)||(-110);risked+=100;if(p.outcome==='WIN'){profit+=odds>0?odds:(100/Math.abs(odds)*100);}else if(p.outcome==='LOSS'){profit-=100;}});
+  return{W,L,P,tot,wr,roi:risked>0?Math.round((profit/risked)*100):0,all:plays.length,pending:plays.filter(p=>p.outcome==='PENDING').length};
 }
 
 function renderMyPlays(){
@@ -473,7 +572,9 @@ function renderMyPlays(){
     <div class="mp-stat"><div class="mp-stat-lbl">Est. ROI</div><div class="mp-stat-val" style="color:${roiCol}">${s.roi>=0?'+':''}${s.roi}%</div><div class="mp-stat-sub">Pinnacle odds flat bet</div></div>
     <div class="mp-stat"><div class="mp-stat-lbl">Pending</div><div class="mp-stat-val">${s.pending}</div><div class="mp-stat-sub">awaiting result</div></div>`;
 
-  // Score breakdown
+  renderLeadSignal(filtered);
+  renderThresholdGrid(filtered);
+
   const ranges=[{l:'80–100 SI',mn:80,mx:100},{l:'70–79 SI',mn:70,mx:79},{l:'60–69 SI',mn:60,mx:69},{l:'Below 60',mn:0,mx:59}];
   el('mp-score-bd').innerHTML=ranges.map(r=>{
     const ps=filtered.filter(p=>p.siScore>=r.mn&&p.siScore<=r.mx&&p.outcome!=='PENDING');
@@ -483,309 +584,142 @@ function renderMyPlays(){
     return`<div class="mp-brow"><span class="mp-brow-lbl">${r.l}</span><div class="mp-brow-track"><div class="mp-brow-fill" style="background:${sc(pct)}" data-w="${pct}"></div></div><span class="mp-brow-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;
   }).join('');
 
-  // Signal type breakdown
-  const sigRows=Object.keys(SIGS).map(k=>{
-    const ps=filtered.filter(p=>p.signalType===k&&p.outcome!=='PENDING');
-    if(!ps.length)return null;
-    const W2=ps.filter(p=>p.outcome==='WIN').length,L2=ps.filter(p=>p.outcome==='LOSS').length,tot2=W2+L2;
-    return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0};
-  }).filter(Boolean).sort((a,b)=>b.pct-a.pct);
-  el('mp-sig-bd').innerHTML=sigRows.length?sigRows.map(({k,W:W2,L:L2,pct})=>{
-    const sig=SIGS[k];
-    return`<div class="mp-brow"><span class="mp-brow-lbl" style="font-size:10px;color:${sig.color}">${sig.label}</span><div class="mp-brow-track"><div class="mp-brow-fill" style="background:${sig.color}" data-w="${pct}"></div></div><span class="mp-brow-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;
-  }).join(''):`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see signal breakdown</div>`;
+  const sigRows=Object.keys(SIGS).map(k=>{const ps=filtered.filter(p=>p.signalType===k&&p.outcome!=='PENDING');if(!ps.length)return null;const W2=ps.filter(p=>p.outcome==='WIN').length,L2=ps.filter(p=>p.outcome==='LOSS').length,tot2=W2+L2;return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0};}).filter(Boolean).sort((a,b)=>b.pct-a.pct);
+  el('mp-sig-bd').innerHTML=sigRows.length?sigRows.map(({k,W:W2,L:L2,pct})=>{const sig=SIGS[k];return`<div class="mp-brow"><span class="mp-brow-lbl" style="font-size:10px;color:${sig.color}">${sig.label}</span><div class="mp-brow-track"><div class="mp-brow-fill" style="background:${sig.color}" data-w="${pct}"></div></div><span class="mp-brow-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join(''):`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see breakdown</div>`;
 
-  // Play list
-  if(!filtered.length){
-    el('mp-list').innerHTML=`<div class="mp-empty">
-      <div class="mp-arrow">🎯</div>
-      <h3>No plays added yet</h3>
-      <p>Go to <strong>Live Slate</strong> and click <strong>"+ Add to My Plays"</strong> on any game card to start tracking your bets.</p>
+  if(!filtered.length){el('mp-list').innerHTML=`<div class="mp-empty"><div class="mp-arrow">🎯</div><h3>No plays added yet</h3><p>Go to <strong>Live Slate</strong>, pick your market (ML / Spread / O/U) on any card, then click <strong>"Add to My Plays"</strong>.</p></div>`);}
+  else{el('mp-list').innerHTML=filtered.map(p=>{
+    const col=sc(p.siScore),sig=SIGS[p.signalType]||SIGS.WEAK,lead=LEAD_CFG[leadPillar(p.pillars)];
+    const time=p.gameTime?new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'';
+    const mktLbl=MKT_LABELS[p.market]||p.market;
+    return`<div class="mp-play-item">
+      <div class="mp-play-top">
+        <div class="mp-play-left">
+          <span class="mp-score-pill" style="border-color:${sbd(p.siScore)};color:${col};background:${sbg(p.siScore)}">${p.siScore}</span>
+          <div class="mp-play-info">
+            <div class="mp-match">${p.away} @ ${p.home}</div>
+            <div class="mp-detail">${p.side} <span style="background:var(--s2);border-radius:4px;padding:1px 5px;font-size:9px;margin-left:4px">${mktLbl}</span> · <span style="color:${sig.color}">${sig.label}</span></div>
+            <div class="mp-meta">${p.sport} · ${time} · Lead: <span style="color:${lead.color}">${lead.label}</span></div>
+          </div>
+        </div>
+        <div class="mp-play-right">
+          <button class="o-btn${p.outcome==='WIN'?' sW':''}" onclick="setMPOutcome('${p.uid}','WIN')">W</button>
+          <button class="o-btn${p.outcome==='LOSS'?' sL':''}" onclick="setMPOutcome('${p.uid}','LOSS')">L</button>
+          <button class="o-btn${p.outcome==='PUSH'?' sP':''}" onclick="setMPOutcome('${p.uid}','PUSH')">P</button>
+        </div>
+      </div>
+      <div class="mp-play-odds">
+        <div class="mp-odds-chip">PIN <span>${p.pinnacleOdds||'—'}</span></div>
+        ${p.novigOdds?`<div class="mp-odds-chip">NOV <span>${p.novigOdds}</span></div>`:''}
+        <div class="mp-odds-chip">SOFT <span>${p.softAvg||'—'}</span></div>
+        <div class="mp-odds-chip">GAP <span>${p.gapPP}pp</span></div>
+        <div class="mp-odds-chip">RLM <span>${p.pillars?.rlm||0}</span> · PIN <span>${p.pillars?.pinnacle||0}</span> · MON <span>${p.pillars?.money||0}</span></div>
+      </div>
     </div>`;
-  }else{
-    el('mp-list').innerHTML=filtered.map(p=>{
-      const col=sc(p.siScore),sig=SIGS[p.signalType]||SIGS.WEAK;
-      const time=p.gameTime?new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'';
-      return`<div class="mp-play-item">
-        <div class="mp-play-top">
-          <div class="mp-play-left">
-            <span class="mp-score-pill" style="border-color:${sbd(p.siScore)};color:${col};background:${sbg(p.siScore)}">${p.siScore}</span>
-            <div class="mp-play-info">
-              <div class="mp-match">${p.away} @ ${p.home}</div>
-              <div class="mp-detail">${p.side} · <span style="color:${sig.color}">${sig.label}</span></div>
-              <div class="mp-meta">${p.sport} · ${time} · Added ${p.dt}</div>
-            </div>
-          </div>
-          <div class="mp-play-right">
-            <button class="o-btn${p.outcome==='WIN'?' sW':''}" onclick="setMPOutcome('${p.uid}','WIN')">W</button>
-            <button class="o-btn${p.outcome==='LOSS'?' sL':''}" onclick="setMPOutcome('${p.uid}','LOSS')">L</button>
-            <button class="o-btn${p.outcome==='PUSH'?' sP':''}" onclick="setMPOutcome('${p.uid}','PUSH')">P</button>
-          </div>
-        </div>
-        <div class="mp-play-odds">
-          <div class="mp-odds-chip">PIN <span>${p.pinnacleOdds||'—'}</span></div>
-          ${p.novigOdds?`<div class="mp-odds-chip">NOV <span>${p.novigOdds}</span></div>`:''}
-          <div class="mp-odds-chip">SOFT <span>${p.softAvg||'—'}</span></div>
-          <div class="mp-odds-chip">GAP <span>${p.gapPP}pp</span></div>
-          <div class="mp-odds-chip">RLM <span>${p.pillars?.rlm||0}</span> · PIN <span>${p.pillars?.pinnacle||0}</span> · MON <span>${p.pillars?.money||0}</span></div>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
+  }).join('');}
   setTimeout(()=>document.querySelectorAll('.mp-brow-fill').forEach(e=>e.style.width=e.dataset.w+'%'),80);
 }
 
-/* Fetch */
+/* Fetch + render */
 async function fetchPlays(s){
-  if(fetching[s])return;
-  fetching[s]=true;setScanning(true,s);
+  if(fetching[s])return;fetching[s]=true;setScanning(true,s);
   try{
     const r=await fetch(`/api/odds?sport=${s}`);
-    const rem=r.headers.get('x-requests-remaining');
-    const used=r.headers.get('x-requests-used');
+    const rem=r.headers.get('x-requests-remaining'),used=r.headers.get('x-requests-used');
     updateQuota(used,rem);
     if(!r.ok)throw new Error(`Server error ${r.status}`);
     const data=await r.json();
-    if(data.error){
-      const isSetup=data.error.includes('ODDS_API_KEY')||data.error.includes('Invalid');
-      if(isSetup){showSetup();hideErr();return;}
-      throw new Error(data.error);
-    }
+    if(data.error){if(data.error.includes('ODDS_API_KEY')||data.error.includes('Invalid')){showSetup();hideErr();return;}throw new Error(data.error);}
     hideSetup();hideErr();
     const plays=data.plays||[];
-    cache[s]=plays;cacheTs[s]=Date.now();
-    lss(`si:d:${s}`,JSON.stringify(plays));lss(`si:ts:${s}`,String(Date.now()));
-    autoTrack(plays,s);
-    render(plays,s);
-    cd=REFRESH;
-  }catch(e){
-    showErr(e.message||'Fetch failed');
-    const c=cache[s];if(c)render(c,s);else renderEmpty(s,'error');
-  }finally{
-    fetching[s]=false;setScanning(false,s);
-  }
+    cache[s]=plays;cacheTs[s]=Date.now();lss(`si:d:${s}`,JSON.stringify(plays));lss(`si:ts:${s}`,String(Date.now()));
+    autoTrack(plays,s);render(plays,s);cd=REFRESH;
+  }catch(e){showErr(e.message||'Fetch failed');const c=cache[s];if(c)render(c,s);else renderEmpty(s,'error');}
+  finally{fetching[s]=false;setScanning(false,s);}
 }
-
-function updateQuota(used,rem){
-  const q=el('quota');
-  if(!rem&&!used){q.style.display='none';return;}
-  q.style.display='flex';
-  const n=parseInt(rem)||0;
-  const cls=n>150?'qn-ok':n>50?'qn-warn':'qn-crit';
-  el('qtxt').innerHTML=`<span class="${cls}">${rem||'?'}</span>&nbsp;req left`;
-}
-
-function autoTrack(plays,s){
-  plays.filter(p=>p.siScore>=SHARP_MIN).forEach(p=>{
-    if(!tracked.find(t=>t.id===p.id&&t.sport===s)){
-      tracked.unshift({id:p.id,away:p.away,home:p.home,side:p.sharpSide,score:p.siScore,sport:s,signalType:p.signalType,dt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),outcome:'PENDING'});
-    }
-  });
-  tracked=tracked.slice(0,100);saveTk();
-  el('tc').textContent=tracked.length?'('+tracked.length+')':'';
-}
-
+function updateQuota(used,rem){const q=el('quota');if(!rem&&!used){q.style.display='none';return;}q.style.display='flex';const n=parseInt(rem)||0;const cls=n>150?'qn-ok':n>50?'qn-warn':'qn-crit';el('qtxt').innerHTML=`<span class="${cls}">${rem||'?'}</span>&nbsp;req left`;}
+function autoTrack(plays,s){plays.filter(p=>p.siScore>=SHARP_MIN).forEach(p=>{if(!tracked.find(t=>t.id===p.id&&t.sport===s)){tracked.unshift({id:p.id,away:p.away,home:p.home,side:p.sharpSide,score:p.siScore,sport:s,signalType:p.signalType,dt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),outcome:'PENDING'});}});tracked=tracked.slice(0,100);saveTk();el('tc').textContent=tracked.length?'('+tracked.length+')':'';}
 function render(plays,s){
   if(s!==sport)return;
   const filtered=(plays||[]).filter(p=>p.siScore>=thresh).sort((a,b)=>b.siScore-a.siScore);
-  renderFeed(filtered.slice(0,5));
-  renderGrid(filtered);
+  renderFeed(filtered.slice(0,5));renderGrid(filtered);
   el('feed-upd').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-  const sh=el('sec-hdr');
-  if(filtered.length){sh.style.display='flex';el('sec-count').textContent=filtered.length;}
-  else sh.style.display='none';
+  const sh=el('sec-hdr');if(filtered.length){sh.style.display='flex';el('sec-count').textContent=filtered.length;}else sh.style.display='none';
 }
-
 function renderFeed(plays){
   const list=el('feed-list');
   if(!plays.length){list.innerHTML='<div class="feed-empty">No sharp plays detected above threshold</div>';return;}
-  list.innerHTML=plays.map(p=>{
-    const sig=SIGS[p.signalType]||SIGS.WEAK;
-    const col=sc(p.siScore);
-    const t=fmtTime(p.commenceTime);
-    const novTag=p.novigConfirm?'<span style="color:#9d7cff;margin-left:5px">+ Novig ✓</span>':'';
-    return`<div class="feed-row">
-      <span class="feed-sig" style="border-color:${sig.bdr};color:${sig.color};background:${sig.bg}"><i class="ti ${sig.icon}" style="font-size:10px"></i>${sig.label}</span>
-      <div class="feed-info">
-        <div class="fi-top"><span class="fi-matchup">${p.away} @ ${p.home}</span><span class="fi-time">${t}</span></div>
-        <div class="fi-side" style="color:${col}">▶ ${p.sharpSide}${novTag}</div>
-        <div class="fi-detail">PIN ${p.lines.pinnacle}${p.lines.novig?` · NOV ${p.lines.novig}`:''} · Soft ${p.lines.softAvg} · ${p.gapPP}pp gap</div>
-      </div>
-      <div class="feed-score"><div class="fs-num" style="color:${col}">${p.siScore}</div><div class="fs-lbl">SI SCORE</div></div>
-    </div>`;
-  }).join('');
+  list.innerHTML=plays.map(p=>{const sig=SIGS[p.signalType]||SIGS.WEAK,col=sc(p.siScore),t=fmtTime(p.commenceTime);const novTag=p.novigConfirm?'<span style="color:#9d7cff;margin-left:5px">+ Novig ✓</span>':'';return`<div class="feed-row"><span class="feed-sig" style="border-color:${sig.bdr};color:${sig.color};background:${sig.bg}"><i class="ti ${sig.icon}" style="font-size:10px"></i>${sig.label}</span><div class="feed-info"><div class="fi-top"><span class="fi-matchup">${p.away} @ ${p.home}</span><span class="fi-time">${t}</span></div><div class="fi-side" style="color:${col}">▶ ${p.sharpSide}${novTag}</div><div class="fi-detail">PIN ${p.lines.pinnacle}${p.lines.novig?` · NOV ${p.lines.novig}`:''} · Soft ${p.lines.softAvg} · ${p.gapPP}pp gap</div></div><div class="feed-score"><div class="fs-num" style="color:${col}">${p.siScore}</div><div class="fs-lbl">SI SCORE</div></div></div>`;}).join('');
 }
-
 function renderGrid(plays){
   const g=el('ggrid');
-  if(!plays.length){g.innerHTML=`<div class="empty-state"><div class="empty-icon"><i class="ti ti-chart-bar"></i></div><h3>No ${sport} plays above ${thresh} SI score</h3><p>Games appear here up to 24 hours before start. Try lowering the threshold.</p></div>`;return;}
+  if(!plays.length){g.innerHTML=`<div class="empty-state"><div class="empty-icon"><i class="ti ti-chart-bar"></i></div><h3>No ${sport} plays above ${thresh} SI score</h3><p>Games appear here up to 24 hours before start.</p></div>`;return;}
   g.innerHTML=plays.map((p,i)=>buildCard(p,i)).join('');
   setTimeout(()=>document.querySelectorAll('[data-fill]').forEach(e=>e.style.width=e.dataset.fill+'%'),80);
 }
-
-function renderSkeletons(){
-  el('ggrid').innerHTML=[1,2,3,4,5,6].map(()=>`<div class="gcard"><div class="gc-body"><div class="skel" style="height:15px;width:58%;margin-bottom:8px"></div><div class="skel" style="height:10px;width:28%;margin-bottom:16px"></div><div style="display:flex;gap:12px"><div style="flex:1"><div class="skel" style="height:62px;border-radius:10px"></div></div><div class="skel" style="width:68px;height:68px;border-radius:12px"></div></div></div></div>`).join('');
-  el('feed-list').innerHTML='<div class="feed-empty">Scanning for sharp signals…</div>';
-}
-function renderEmpty(s,r){
-  el('ggrid').innerHTML=`<div class="empty-state"><div class="empty-icon"><i class="ti ti-calendar-off"></i></div><h3>No upcoming ${s} games</h3><p>${r==='error'?'Check your API key in Vercel environment variables.':s+' may be in the off-season.'}</p></div>`;
-}
+function renderSkeletons(){el('ggrid').innerHTML=[1,2,3,4,5,6].map(()=>`<div class="gcard"><div class="gc-body"><div class="skel" style="height:40px;border-radius:10px;margin-bottom:14px"></div><div class="skel" style="height:15px;width:58%;margin-bottom:8px"></div><div style="display:flex;gap:12px"><div style="flex:1"><div class="skel" style="height:62px;border-radius:10px"></div></div><div class="skel" style="width:68px;height:68px;border-radius:12px"></div></div></div></div>`).join('');el('feed-list').innerHTML='<div class="feed-empty">Scanning for sharp signals…</div>';}
+function renderEmpty(s,r){el('ggrid').innerHTML=`<div class="empty-state"><div class="empty-icon"><i class="ti ti-calendar-off"></i></div><h3>No upcoming ${s} games</h3><p>${r==='error'?'Check your API key in Vercel environment variables.':s+' may be in the off-season.'}</p></div>`;}
 
 function buildCard(p,idx){
-  const sig=SIGS[p.signalType]||SIGS.WEAK;
-  const isDual=p.signalType==='DUAL_CONSENSUS';
-  const col=sc(p.siScore);
-  const t=fmtTime(p.commenceTime);
-  const gapW=Math.min(100,(parseFloat(p.gapPP)/7*100)).toFixed(0);
-  const siBg=p.siScore>=80?'linear-gradient(135deg,rgba(0,224,144,.15),rgba(77,159,255,.1))':sbg(p.siScore);
-  const isAdded=myPlays.some(mp=>mp.id===p.id&&mp.sport===sport);
-  return`<div class="gcard${p.siScore>=SHARP_MIN?' sharp':''}${isDual?' dual':''}" style="animation-delay:${idx*.05}s" role="listitem">
-    <div class="gc-body">
-      <div class="gc-head">
-        <div class="gc-info">
-          <div class="gc-teams">${p.away}<br><span style="color:var(--t2)">@ </span>${p.home}</div>
-          <div class="gc-time">${t}</div>
-          <span class="gc-sig" style="border-color:${sig.bdr};color:${sig.color};background:${sig.bg}"><i class="ti ${sig.icon}" style="font-size:10px"></i>${sig.label}</span><br>
-          <span class="gc-side" style="border-color:${sbd(p.siScore)};color:${col};background:${sbg(p.siScore)}">
-            ${p.siScore>=SHARP_MIN?`<i class="ti ti-bolt" style="font-size:10px"></i>`:''}${p.sharpSide}
-          </span>
-          ${p.novigConfirm?`<div class="gc-novig"><i class="ti ti-check" style="font-size:10px"></i>Novig confirms ${p.lines.novig||''}</div>`:''}
-        </div>
-        <div class="si-badge" style="background:${siBg};border-color:${sbd(p.siScore)}">
-          <span class="si-num" style="color:${col}">${p.siScore}</span>
-          <span class="si-lbl" style="color:${col}">SI SCORE</span>
-        </div>
+  const markets=p.markets||{};
+  const activeMkt=activeMarket[p.id]||p.activeMarket||'h2h';
+  if(!activeMarket[p.id])activeMarket[p.id]=activeMkt;
+  const mdata=markets[activeMkt]||Object.values(markets).find(Boolean)||{siScore:p.siScore,sharpSide:p.sharpSide,signalType:p.signalType,lines:p.lines,gapPP:p.gapPP,pillars:p.pillars||{rlm:0,pinnacle:0,money:0},novigConfirm:p.novigConfirm,numBooks:p.numBooks,publicLean:p.publicLean};
+  const sig=SIGS[mdata.signalType]||SIGS.WEAK,col=sc(mdata.siScore),t=fmtTime(p.commenceTime);
+  const gapW=Math.min(100,(parseFloat(mdata.gapPP||0)/7*100)).toFixed(0);
+  const siBg=mdata.siScore>=80?'linear-gradient(135deg,rgba(0,224,144,.15),rgba(77,159,255,.1))':sbg(mdata.siScore);
+  const isAdded=myPlays.some(mp=>mp.id===p.id&&mp.sport===sport&&mp.market===activeMkt);
+  const isDual=mdata.signalType==='DUAL_CONSENSUS';
+  const mktTabs=['h2h','spreads','totals'].map(mkey=>{const md=markets[mkey],isOn=mkey===activeMkt,unavail=!md;return`<button class="mkt-tab${isOn?' on':''}${unavail?' unavail':''}" data-game="${p.id}" data-mkt="${mkey}" onclick="${unavail?'':'switchMarket(\''+p.id+'\',\''+mkey+'\',this)'}"><span class="mkt-tab-label" style="color:${isOn?col:''}">${MKT_LABELS[mkey]}</span><span class="mkt-tab-score" style="color:${md?sc(md.siScore):'var(--t4)'}">${md?md.siScore:'—'}</span><span class="mkt-tab-sub" style="color:${isOn?col:''}">SI</span></button>`;}).join('');
+  return`<div class="gcard${mdata.siScore>=SHARP_MIN?' sharp':''}${isDual?' dual':''}" style="animation-delay:${idx*.05}s" role="listitem">
+  <div class="gc-body">
+    <div class="gc-teams">${p.away} <span style="color:var(--t2)">@</span> ${p.home}</div>
+    <div class="gc-time" style="margin-top:3px;margin-bottom:12px">${t}</div>
+    <div class="mkt-tabs">${mktTabs}</div>
+    <div class="gc-head">
+      <div class="gc-info">
+        <span class="gc-sig" id="sig-badge-${p.id}" style="border-color:${sig.bdr};color:${sig.color};background:${sig.bg}"><i class="ti ${sig.icon}" style="font-size:10px"></i>${sig.label}</span><br>
+        <span class="gc-side" id="gc-side-${p.id}" style="border-color:${sbd(mdata.siScore)};color:${col};background:${sbg(mdata.siScore)}">${mdata.siScore>=SHARP_MIN?`<i class="ti ti-bolt" style="font-size:10px"></i>`:''}${mdata.sharpSide}</span>
+        <div class="gc-novig" id="gc-novig-${p.id}" style="display:${mdata.novigConfirm?'flex':'none'}"><i class="ti ti-check" style="font-size:10px"></i>Novig confirms ${mdata.lines.novig||''}</div>
       </div>
-      <div class="pillars">
-        ${PILLARS.map(pl=>`<div class="pillar-row"><div class="pillar-head"><span class="pillar-name" style="color:${pl.color}"><i class="ti ${pl.icon}"></i>${pl.label}</span><span class="pillar-score" style="color:${pl.color}">${p.pillars[pl.key]}</span></div><div class="pillar-track"><div class="pillar-fill" style="background:${pl.color}" data-fill="${p.pillars[pl.key]}"></div></div></div>`).join('')}
-      </div>
-      <div class="gc-odds">
-        <div class="odd-cell"><span class="odd-lbl">Pinnacle</span><span class="odd-val pine">${p.lines.pinnacle}</span></div>
-        <div class="odd-cell"><span class="odd-lbl">${p.lines.novig?'Novig':'Soft Avg'}</span><span class="odd-val ${p.lines.novig?'nov':''}">${p.lines.novig||p.lines.softAvg}</span></div>
-        <div class="odd-cell"><span class="odd-lbl">Market Avg</span><span class="odd-val">${p.lines.softAvg}</span></div>
-      </div>
-      <div class="gc-gap">
-        <div class="gap-track"><div class="gap-fill" style="background:${col}" data-fill="${gapW}"></div></div>
-        <span class="gap-label" style="color:${col}">${p.gapPP}pp edge</span>
-      </div>
+      <div class="si-badge" id="si-badge-${p.id}" style="background:${siBg};border-color:${sbd(mdata.siScore)}"><span class="si-num" style="color:${col}">${mdata.siScore}</span><span class="si-lbl" style="color:${col}">SI SCORE</span></div>
     </div>
-    <div class="gc-actions">
-      <button class="add-play-btn${isAdded?' added':''}" id="add-btn-${p.id}" onclick="addToMyPlays('${p.id}')">
-        <i class="ti ${isAdded?'ti-check':'ti-plus'}" style="font-size:11px"></i>
-        ${isAdded?'Added to My Plays':'Add to My Plays'}
-      </button>
+    <div class="pillars">${PILLARS.map(pl=>`<div class="pillar-row"><div class="pillar-head"><span class="pillar-name" style="color:${pl.color}"><i class="ti ${pl.icon}"></i>${pl.label}</span><span class="pillar-score" id="ps-${p.id}-${pl.key}" style="color:${pl.color}">${(mdata.pillars||{})[pl.key]||0}</span></div><div class="pillar-track"><div class="pillar-fill" id="pf-${p.id}-${pl.key}" style="background:${pl.color};width:${(mdata.pillars||{})[pl.key]||0}%"></div></div></div>`).join('')}</div>
+    <div class="gc-odds">
+      <div class="odd-cell"><span class="odd-lbl">Pinnacle</span><span class="odd-val pine" id="odd-pin-${p.id}">${mdata.lines.pinnacle}</span></div>
+      <div class="odd-cell"><span class="odd-lbl">${mdata.lines.novig?'Novig':'Soft Avg'}</span><span class="odd-val ${mdata.lines.novig?'nov':''}" id="odd-nov-${p.id}">${mdata.lines.novig||mdata.lines.softAvg}</span></div>
+      <div class="odd-cell"><span class="odd-lbl">Market Avg</span><span class="odd-val" id="odd-soft-${p.id}">${mdata.lines.softAvg}</span></div>
     </div>
-    <button class="gc-toggle" onclick="toggleCard('${p.id}')" id="gbt-${p.id}">
-      Details <i class="ti ti-chevron-down" id="gbc-${p.id}" style="font-size:11px"></i>
-    </button>
-    <div class="gc-expand" id="gbx-${p.id}">
-      <div class="expand-grid">
-        <div class="exp-cell"><span class="exp-lbl">SOFT RANGE</span><span class="exp-val">${p.lines.softRange}</span></div>
-        <div class="exp-cell"><span class="exp-lbl">BOOKS</span><span class="exp-val">${p.numBooks} compared</span></div>
-        <div class="exp-cell"><span class="exp-lbl">PUBLIC LEAN</span><span class="exp-val" style="color:${p.publicLean?'#ff4d6a':'#00e090'}">${p.publicLean?'Public side':'Counter-public'}</span></div>
-        <div class="exp-cell"><span class="exp-lbl">MARKET</span><span class="exp-val" style="text-transform:uppercase">${p.market}</span></div>
-        <div class="exp-note" style="border-color:${sig.bdr}">${p.pillars.rlm>=60?`RLM detected. `:''}Pinnacle gap of ${p.gapPP}pp vs ${p.numBooks}-book average.${p.novigConfirm?' Novig confirms.':''}</div>
-      </div>
-    </div>
+    <div class="gc-gap"><div class="gap-track"><div class="gap-fill" id="gap-fill-${p.id}" style="background:${col};width:${gapW}%"></div></div><span class="gap-label" id="gap-lbl-${p.id}" style="color:${col}">${mdata.gapPP}pp edge</span></div>
+  </div>
+  <div class="gc-actions"><button class="add-play-btn${isAdded?' added':''}" id="add-btn-${p.id}" onclick="addToMyPlays('${p.id}')"><i class="ti ${isAdded?'ti-check':'ti-plus'}" style="font-size:11px"></i>${isAdded?'Added to My Plays':'Add to My Plays'}</button></div>
+  <button class="gc-toggle" onclick="toggleCard('${p.id}')" id="gbt-${p.id}">Details <i class="ti ti-chevron-down" id="gbc-${p.id}" style="font-size:11px"></i></button>
+  <div class="gc-expand" id="gbx-${p.id}"><div class="expand-grid">
+    <div class="exp-cell"><span class="exp-lbl">SOFT RANGE</span><span class="exp-val">${mdata.lines.softRange||'—'}</span></div>
+    <div class="exp-cell"><span class="exp-lbl">BOOKS</span><span class="exp-val">${mdata.numBooks||'—'}</span></div>
+    <div class="exp-cell"><span class="exp-lbl">PUBLIC LEAN</span><span class="exp-val" style="color:${mdata.publicLean?'#ff4d6a':'#00e090'}">${mdata.publicLean?'Public side':'Counter-public'}</span></div>
+    <div class="exp-cell"><span class="exp-lbl">MARKET</span><span class="exp-val">${MKT_LABELS[activeMkt]||activeMkt}</span></div>
+    <div class="exp-note" style="border-color:${sig.bdr}">${(mdata.pillars?.rlm||0)>=60?'RLM detected. ':''}Pinnacle gap of ${mdata.gapPP}pp vs ${mdata.numBooks||'?'}-book average.${mdata.novigConfirm?' Novig confirms.':''}</div>
+  </div></div>
   </div>`;
 }
 
 /* Tracked tab */
-function setOutcome(id,val){
-  const t=tracked.find(p=>p.id===id);
-  if(t){t.outcome=val;outcomes[id]=val;}
-  saveTk();saveOc();renderTracked();
-}
-function renderTracked(){
-  const pl=tracked.filter(t=>t.outcome!=='PENDING');
-  const W=pl.filter(t=>t.outcome==='WIN').length,L=pl.filter(t=>t.outcome==='LOSS').length,P=pl.filter(t=>t.outcome==='PUSH').length,tot=W+L;
-  const wr=tot?Math.round(W/tot*100):0,roi=tot?Math.round(((W*90.9-L*100)/(tot*100))*100):0;
-  el('metrics').innerHTML=`
-    <div class="metric-card"><div class="mc-label">Record</div><div class="mc-val" style="font-size:20px">${W}–${L}–${P}</div><div class="mc-sub">${tracked.length} auto-tracked</div></div>
-    <div class="metric-card"><div class="mc-label">Win Rate</div><div class="mc-val" style="color:${sc(wr)}">${wr}%</div><div class="mc-sub">excl. pushes</div></div>
-    <div class="metric-card"><div class="mc-label">Est. ROI</div><div class="mc-val" style="color:${roi>=0?'#00e090':'#ff4d6a'}">${roi>=0?'+':''}${roi}%</div><div class="mc-sub">–110 standard</div></div>
-    <div class="metric-card"><div class="mc-label">Pending</div><div class="mc-val">${tracked.filter(t=>t.outcome==='PENDING').length}</div><div class="mc-sub">awaiting result</div></div>`;
-  const ranges=[{l:'80–100 SI',mn:80,mx:100},{l:'70–79 SI',mn:70,mx:79},{l:'60–69 SI',mn:60,mx:69}];
-  el('score-bd').innerHTML=ranges.map(r=>{
-    const ps=tracked.filter(t=>t.score>=r.mn&&t.score<=r.mx&&t.outcome!=='PENDING');
-    const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;
-    if(!tot2)return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><span style="font-size:10px;color:var(--t3)">no data yet</span></div>`;
-    const pct=Math.round(W2/tot2*100);
-    return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sc(pct)}" data-w="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;
-  }).join('');
-  const sigRows=Object.keys(SIGS).map(k=>{
-    const ps=tracked.filter(t=>t.signalType===k&&t.outcome!=='PENDING');
-    if(!ps.length)return null;
-    const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;
-    return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0};
-  }).filter(Boolean).sort((a,b)=>b.pct-a.pct);
-  el('sig-bd').innerHTML=sigRows.length?sigRows.map(({k,W:W2,L:L2,pct})=>{const sig=SIGS[k];return`<div class="bd-row"><span class="bdr-lbl" style="font-size:10px;color:${sig.color}">${sig.label}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sig.color}" data-w="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join(''):`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see breakdown</div>`;
-  el('plist').innerHTML=tracked.length?tracked.map(t=>{const col=sc(t.score),sig=SIGS[t.signalType]||SIGS.WEAK;return`<div class="play-item"><div class="pi-left"><span class="pi-score-pill" style="border-color:${sbd(t.score)};color:${col};background:${sbg(t.score)}">${t.score}</span><div><div class="pi-match">${t.away} @ ${t.home} <span style="font-size:10px;color:var(--t3);margin-left:6px">${t.sport} · ${t.dt}</span></div><div class="pi-detail">${t.side} · <span style="color:${sig.color}">${sig.label}</span></div></div></div><div class="pi-right"><button class="o-btn${t.outcome==='WIN'?' sW':''}" onclick="setOutcome('${t.id}','WIN')">W</button><button class="o-btn${t.outcome==='LOSS'?' sL':''}" onclick="setOutcome('${t.id}','LOSS')">L</button><button class="o-btn${t.outcome==='PUSH'?' sP':''}" onclick="setOutcome('${t.id}','PUSH')">P</button></div></div>`;}).join(''):`<div style="text-align:center;padding:48px;color:var(--t3);font-size:13px">Plays ≥${SHARP_MIN} SI auto-log here</div>`;
-  setTimeout(()=>document.querySelectorAll('.bdr-fill').forEach(e=>e.style.width=e.dataset.w+'%'),80);
-}
+function setOutcome(id,val){const t=tracked.find(p=>p.id===id);if(t){t.outcome=val;outcomes[id]=val;}saveTk();saveOc();renderTracked();}
+function renderTracked(){const pl=tracked.filter(t=>t.outcome!=='PENDING');const W=pl.filter(t=>t.outcome==='WIN').length,L=pl.filter(t=>t.outcome==='LOSS').length,P=pl.filter(t=>t.outcome==='PUSH').length,tot=W+L;const wr=tot?Math.round(W/tot*100):0,roi=tot?Math.round(((W*90.9-L*100)/(tot*100))*100):0;el('metrics').innerHTML=`<div class="metric-card"><div class="mc-label">Record</div><div class="mc-val" style="font-size:20px">${W}–${L}–${P}</div><div class="mc-sub">${tracked.length} auto-tracked</div></div><div class="metric-card"><div class="mc-label">Win Rate</div><div class="mc-val" style="color:${sc(wr)}">${wr}%</div><div class="mc-sub">excl. pushes</div></div><div class="metric-card"><div class="mc-label">Est. ROI</div><div class="mc-val" style="color:${roi>=0?'#00e090':'#ff4d6a'}">${roi>=0?'+':''}${roi}%</div><div class="mc-sub">–110 standard</div></div><div class="metric-card"><div class="mc-label">Pending</div><div class="mc-val">${tracked.filter(t=>t.outcome==='PENDING').length}</div><div class="mc-sub">awaiting result</div></div>`;const ranges=[{l:'80–100 SI',mn:80,mx:100},{l:'70–79 SI',mn:70,mx:79},{l:'60–69 SI',mn:60,mx:69}];el('score-bd').innerHTML=ranges.map(r=>{const ps=tracked.filter(t=>t.score>=r.mn&&t.score<=r.mx&&t.outcome!=='PENDING');const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;if(!tot2)return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><span style="font-size:10px;color:var(--t3)">no data yet</span></div>`;const pct=Math.round(W2/tot2*100);return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sc(pct)}" data-w="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join('');const sigRows=Object.keys(SIGS).map(k=>{const ps=tracked.filter(t=>t.signalType===k&&t.outcome!=='PENDING');if(!ps.length)return null;const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0};}).filter(Boolean).sort((a,b)=>b.pct-a.pct);el('sig-bd').innerHTML=sigRows.length?sigRows.map(({k,W:W2,L:L2,pct})=>{const sig=SIGS[k];return`<div class="bd-row"><span class="bdr-lbl" style="font-size:10px;color:${sig.color}">${sig.label}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sig.color}" data-w="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join(''):`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see breakdown</div>`;el('plist').innerHTML=tracked.length?tracked.map(t=>{const col=sc(t.score),sig=SIGS[t.signalType]||SIGS.WEAK;return`<div class="play-item"><div class="pi-left"><span class="pi-score-pill" style="border-color:${sbd(t.score)};color:${col};background:${sbg(t.score)}">${t.score}</span><div><div class="pi-match">${t.away} @ ${t.home} <span style="font-size:10px;color:var(--t3);margin-left:6px">${t.sport} · ${t.dt}</span></div><div class="pi-detail">${t.side} · <span style="color:${sig.color}">${sig.label}</span></div></div></div><div class="pi-right"><button class="o-btn${t.outcome==='WIN'?' sW':''}" onclick="setOutcome('${t.id}','WIN')">W</button><button class="o-btn${t.outcome==='LOSS'?' sL':''}" onclick="setOutcome('${t.id}','LOSS')">L</button><button class="o-btn${t.outcome==='PUSH'?' sP':''}" onclick="setOutcome('${t.id}','PUSH')">P</button></div></div>`;}).join(''):`<div style="text-align:center;padding:48px;color:var(--t3);font-size:13px">Plays ≥${SHARP_MIN} SI auto-log here</div>`;setTimeout(()=>document.querySelectorAll('.bdr-fill').forEach(e=>e.style.width=e.dataset.w+'%'),80);}
 
-/* UI helpers */
-function toggleCard(id){
-  const x=el('gbx-'+id),c=el('gbc-'+id);if(!x)return;
-  const open=x.classList.toggle('open');
-  if(c)c.className=open?'ti ti-chevron-up':'ti ti-chevron-down';
-  if(open)setTimeout(()=>x.querySelectorAll('[data-fill]').forEach(e=>e.style.width=e.dataset.fill+'%'),50);
-}
+function toggleCard(id){const x=el('gbx-'+id),c=el('gbc-'+id);if(!x)return;const open=x.classList.toggle('open');if(c)c.className=open?'ti ti-chevron-up':'ti ti-chevron-down';}
 function onThresh(v){thresh=parseInt(v);el('thrval').textContent=v;if(cache[sport])render(cache[sport],sport);}
-async function switchSport(s,btn){
-  sport=s;
-  document.querySelectorAll('#sport-tabs .stab').forEach(t=>t.classList.remove('on'));
-  if(btn)btn.classList.add('on');
-  renderSkeletons();hideSetup();
-  try{const d=lsg(`si:d:${s}`),ts=lsg(`si:ts:${s}`);if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache[s]=JSON.parse(d);cacheTs[s]=parseInt(ts);render(cache[s],s);return;}}catch{}
-  fetchPlays(s);
-}
-function switchView(v,btn){
-  document.querySelectorAll('.vtab').forEach(t=>t.classList.remove('on'));
-  if(btn)btn.classList.add('on');
-  document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));
-  el('v-'+v).classList.add('on');
-  if(v==='track')renderTracked();
-  if(v==='plays')renderMyPlays();
-}
-function doRefresh(){
-  delete cache[sport];
-  lss(`si:d:${sport}`,'');lss(`si:ts:${sport}`,'');
-  renderSkeletons();fetchPlays(sport);
-}
-function setScanning(on,s){
-  const bar=el('sbar'),dot=el('ndot'),rbtn=el('rbtn'),ri=el('ricon'),steps=['ss1','ss2','ss3','ss4'];
-  if(on){
-    bar.className='status-bar scanning';bar.style.display='flex';rbtn.disabled=true;
-    ri.style.animation='spin .7s linear infinite';dot.className='ns-dot scanning';
-    el('nstatus').textContent='Scanning '+s;
-    steps.forEach(id=>{const e=el(id);if(e)e.className=''});
-    clearInterval(window._st);let i=0;
-    window._st=setInterval(()=>{
-      if(i>0){const p=el(steps[i-1]);if(p)p.classList.add('done')}
-      if(i<steps.length){const c=el(steps[i]);if(c)c.classList.add('cur');i++}
-      else clearInterval(window._st);
-    },2200);
-  }else{
-    clearInterval(window._st);bar.style.display='none';rbtn.disabled=false;ri.style.animation='';
-    dot.className='ns-dot live';el('nstatus').textContent='Live';
-    steps.forEach(id=>{const e=el(id);if(e)e.className=''});
-  }
-}
+async function switchSport(s,btn){sport=s;document.querySelectorAll('#sport-tabs .stab').forEach(t=>t.classList.remove('on'));if(btn)btn.classList.add('on');renderSkeletons();hideSetup();try{const d=lsg(`si:d:${s}`),ts=lsg(`si:ts:${s}`);if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache[s]=JSON.parse(d);cacheTs[s]=parseInt(ts);render(cache[s],s);return;}}catch{}fetchPlays(s);}
+function switchView(v,btn){document.querySelectorAll('.vtab').forEach(t=>t.classList.remove('on'));if(btn)btn.classList.add('on');document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));el('v-'+v).classList.add('on');if(v==='track')renderTracked();if(v==='plays')renderMyPlays();}
+function doRefresh(){delete cache[sport];lss(`si:d:${sport}`,'');lss(`si:ts:${sport}`,'');renderSkeletons();fetchPlays(sport);}
+function setScanning(on,s){const bar=el('sbar'),dot=el('ndot'),rbtn=el('rbtn'),ri=el('ricon'),steps=['ss1','ss2','ss3','ss4'];if(on){bar.className='status-bar scanning';bar.style.display='flex';rbtn.disabled=true;ri.style.animation='spin .7s linear infinite';dot.className='ns-dot scanning';el('nstatus').textContent='Scanning '+s;steps.forEach(id=>{const e=el(id);if(e)e.className=''});clearInterval(window._st);let i=0;window._st=setInterval(()=>{if(i>0){const p=el(steps[i-1]);if(p)p.classList.add('done')}if(i<steps.length){const c=el(steps[i]);if(c)c.classList.add('cur');i++}else clearInterval(window._st);},2200);}else{clearInterval(window._st);bar.style.display='none';rbtn.disabled=false;ri.style.animation='';dot.className='ns-dot live';el('nstatus').textContent='Live';steps.forEach(id=>{const e=el(id);if(e)e.className='';});}}
 function showErr(m){el('ebar').style.display='flex';el('emsg').textContent=m;}
 function hideErr(){el('ebar').style.display='none';}
 function showSetup(){el('setup-guide').style.display='block';el('ggrid').innerHTML='';}
 function hideSetup(){el('setup-guide').style.display='none';}
 function fmtTime(iso){try{return new Date(iso).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'})}catch{return iso||'—'}}
-function startCd(){
-  clearInterval(cdTimer);
-  cdTimer=setInterval(()=>{
-    if(cd>0)cd-=1000;else{cd=REFRESH;doRefresh();}
-    const m=Math.floor(cd/60000),s2=Math.floor((cd%60000)/1000);
-    const e=el('cd');if(e)e.textContent=m+':'+s2.toString().padStart(2,'0');
-  },1000);
-}
+function startCd(){clearInterval(cdTimer);cdTimer=setInterval(()=>{if(cd>0)cd-=1000;else{cd=REFRESH;doRefresh();}const m=Math.floor(cd/60000),s2=Math.floor((cd%60000)/1000);const e=el('cd');if(e)e.textContent=m+':'+s2.toString().padStart(2,'0');},1000);}
 
 window.addEventListener('load',()=>{
   loadState();renderSkeletons();
