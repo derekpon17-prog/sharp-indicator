@@ -258,6 +258,13 @@ button,input{font-family:inherit;outline:none}
 .mp-empty h3{font-size:15px;font-weight:600;color:var(--t2);margin-bottom:8px}
 .mp-empty p{font-size:12px;line-height:1.7;max-width:300px;margin:0 auto}
 
+
+/* Steam + Line Freeze badges */
+.signal-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.04em;margin-right:5px;margin-bottom:5px}
+.sb-steam{background:rgba(255,140,0,.12);border:1px solid rgba(255,140,0,.35);color:#ff8c00}
+.sb-freeze{background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);color:#60a5fa}
+.gc-badges{padding:0 16px 10px;display:flex;flex-wrap:wrap;gap:0}
+
 /* TRACKED */
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .metric-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
@@ -478,29 +485,87 @@ function calcRLMWithOpen(name,mkey,price,openPrice){
   return 28;
 }
 
+/* ─── Previous-price storage (steam detection) ─── */
+function getPrevPx(gid,mkey,name){
+  try{
+    const s=localStorage.getItem('pv:'+gid+':'+mkey+':'+name);
+    if(!s)return null;
+    const d=JSON.parse(s);
+    const age=Date.now()-d.t;
+    // Only use if 4–90 min old (genuine velocity window)
+    if(age<4*60*1000||age>90*60*1000)return null;
+    return d.p;
+  }catch{return null;}
+}
+function setPrevPx(gid,mkey,name,price){
+  try{localStorage.setItem('pv:'+gid+':'+mkey+':'+name,JSON.stringify({p:price,t:Date.now()}));}catch{}
+}
+
 function processOpeningsAndRLM(plays){
   plays.forEach(p=>{
     if(!p.markets)return;
     Object.entries(p.markets).forEach(([mkey,mdata])=>{
       if(!mdata||!mdata.rawPrices)return;
-      // Store openings for each outcome
+
+      // ── Step 1: read previous prices BEFORE overwriting ──
+      const prevMap={};
+      mdata.rawPrices.forEach(out=>{
+        const prev=getPrevPx(p.id,mkey,out.name);
+        if(prev!==null)prevMap[out.name]=prev;
+      });
+
+      // ── Step 2: store opening (first time only) + update previous ──
       mdata.rawPrices.forEach(out=>{
         setOL(p.id,mkey,out.name,out.price);
+        setPrevPx(p.id,mkey,out.name,out.price);
       });
-      // Recalculate RLM using stored opening
-      const openPrice=getOL(p.id,mkey,mdata.sharpOutcome||mdata.sharpSide);
+
+      const sharp=mdata.sharpOutcome||mdata.sharpSide;
+      const openPrice=getOL(p.id,mkey,sharp);
+      const prevPrice=prevMap[sharp]||null;
+      const curPrice=mdata.currentPinPrice||0;
+
+      // ── Step 3: RLM with real opening ──
       if(openPrice!==null){
-        const newRLM=calcRLMWithOpen(mdata.sharpOutcome||mdata.sharpSide,mkey,mdata.currentPinPrice||0,openPrice);
-        const oldRLM=mdata.pillars.rlm;
-        mdata.pillars.rlm=newRLM;
-        // Recalculate SI score
-        const newSI=Math.round(newRLM*0.28+mdata.pillars.pinnacle*0.40+mdata.pillars.money*0.32);
-        mdata.siScore=newSI;
-        // Update movement data
-        mdata.movement={open:openPrice,current:mdata.currentPinPrice,movement:mdata.currentPinPrice-openPrice,abs:Math.abs(mdata.currentPinPrice-openPrice)};
+        mdata.pillars.rlm=calcRLMWithOpen(sharp,mkey,curPrice,openPrice);
+        mdata.movement={open:openPrice,current:curPrice,
+          movement:curPrice-openPrice,abs:Math.abs(curPrice-openPrice)};
       }
+
+      // ── Step 4: Steam detection ──
+      mdata.velocity=0;mdata.isSteam=false;
+      if(prevPrice!==null){
+        mdata.velocity=Math.abs(curPrice-prevPrice);
+        mdata.velocityDir=curPrice-prevPrice; // negative = shorter (more juice on sharp side)
+        if(mdata.velocity>=5){
+          mdata.isSteam=true;
+          const steamBoost=mdata.velocity>=12?22:mdata.velocity>=8?16:10;
+          mdata.pillars.money=Math.min(100,(mdata.pillars.money||0)+steamBoost);
+        }
+      }
+
+      // ── Step 5: Line freeze detection ──
+      // Public-heavy side, game within 24h, line barely moved from opening
+      mdata.isLineFrozen=false;
+      if(mdata.publicLean&&openPrice!==null&&mdata.movement){
+        const hoursToGame=(new Date(p.commenceTime).getTime()-Date.now())/3600000;
+        const frozen=mdata.movement.abs<2&&hoursToGame<24&&hoursToGame>0;
+        if(frozen){
+          mdata.isLineFrozen=true;
+          // Books protecting the counter-public (sharp) side = boost money layer
+          mdata.pillars.money=Math.min(100,(mdata.pillars.money||0)+18);
+        }
+      }
+
+      // ── Step 6: Recalculate SI with new pillar values ──
+      mdata.siScore=Math.round(
+        (mdata.pillars.rlm||0)*0.10+
+        (mdata.pillars.pinnacle||0)*0.52+
+        (mdata.pillars.money||0)*0.38
+      );
     });
-    // Update top-level siScore from best market
+
+    // Update top-level from best market
     const best=Object.values(p.markets).filter(Boolean).sort((a,b)=>b.siScore-a.siScore)[0];
     if(best){p.siScore=best.siScore;p.pillars=best.pillars;p.signalType=best.signalType;}
   });
@@ -598,7 +663,9 @@ function renderFeed(plays){
           </div>
           <div class="feed-play-line" style="margin-top:4px">
             ${p.sharpSide} · <span style="font-family:var(--mono);color:${col}">${p.lines.pinnacle}</span>
-            ${mov&&mov.abs>=2?`<span style="font-size:10px;font-family:var(--mono);color:${mov.movement<0===isPublicLean(p.sharpSide,p.activeMarket,0)?'var(--red)':'var(--green)'};margin-left:6px">${mov.movement>0?'+':''}${mov.movement} from open</span>`:''}
+            ${mov&&mov.abs>=2?`<span style="font-size:10px;font-family:var(--mono);color:var(--green);margin-left:6px">${mov.movement>0?'+':''}${mov.movement} from open</span>`:''}
+            ${mdata&&mdata.isSteam?`<span style="font-size:9px;font-family:var(--mono);color:#ff8c00;margin-left:6px;background:rgba(255,140,0,.1);padding:1px 5px;border-radius:4px">⚡ +${mdata.velocity}pts</span>`:''}
+            ${mdata&&mdata.isLineFrozen?`<span style="font-size:9px;font-family:var(--mono);color:#60a5fa;margin-left:6px;background:rgba(96,165,250,.1);padding:1px 5px;border-radius:4px">🔒 freeze</span>`:''}
           </div>
         </div>
         <div class="feed-score-wrap">
@@ -701,6 +768,10 @@ function buildCard(p,idx){
 
   <div class="gc-actions"><button class="add-play-btn${isAdded?' added':''}" id="add-btn-${p.id}" onclick="addToMyPlays('${p.id}')"><i class="ti ${isAdded?'ti-check':'ti-plus'}" style="font-size:11px"></i>${isAdded?'Added to My Plays':'Add to My Plays'}</button></div>
 
+  <div class="gc-badges" id="gc-badges-${p.id}" style="display:${(mdata.isSteam||mdata.isLineFrozen)?'flex':'none'}">
+    ${mdata.isSteam?`<span class="signal-badge sb-steam"><i class="ti ti-bolt" style="font-size:10px"></i>Steam +${mdata.velocity}pts / 15min</span>`:''}
+    ${mdata.isLineFrozen?`<span class="signal-badge sb-freeze"><i class="ti ti-lock" style="font-size:10px"></i>Line Freeze · public not moving it</span>`:''}
+  </div>
   <button class="gc-toggle" onclick="toggleCard('${p.id}')" id="gbt-${p.id}">Details <i class="ti ti-chevron-down" id="gbc-${p.id}" style="font-size:11px"></i></button>
   <div class="gc-expand" id="gbx-${p.id}"><div class="expand-grid">
     <div class="exp-cell"><span class="exp-lbl">SOFT RANGE</span><span class="exp-val">${mdata.lines.softRange||'—'}</span></div>
