@@ -485,6 +485,20 @@ function calcRLMWithOpen(name,mkey,price,openPrice){
   return 28;
 }
 
+
+/* CLV helper */
+function clvDisplay(p){
+  if(!p.clvEntry||!p.clvOpen)return'';
+  // Positive CLV = you got better price than opening
+  // For underdogs (+): higher is better — entry > open = positive
+  // For favorites (-): lower absolute is better — entry > open (less negative) = positive
+  const betterThanOpen = p.clvEntry > p.clvOpen;
+  const pts = p.clvEntry - p.clvOpen;
+  const col = betterThanOpen ? 'var(--green)' : 'var(--red)';
+  const arrow = betterThanOpen ? '▲' : '▼';
+  return ` · <span style="color:${col};font-size:10px">${arrow} CLV ${pts>0?'+':''}${pts}pts</span>`;
+}
+
 /* ─── Previous-price storage (steam detection) ─── */
 function getPrevPx(gid,mkey,name){
   try{
@@ -513,12 +527,16 @@ function processOpeningsAndRLM(plays){
         const prev=getPrevPx(p.id,mkey,out.name);
         if(prev!==null)prevMap[out.name]=prev;
       });
+      // Also read previous softAvg for multi-book steam
+      const prevSoftAvg=getPrevPx(p.id,mkey,'_softAvg_'+mkey);
 
       // ── Step 2: store opening (first time only) + update previous ──
       mdata.rawPrices.forEach(out=>{
         setOL(p.id,mkey,out.name,out.price);
         setPrevPx(p.id,mkey,out.name,out.price);
       });
+      // Store current softAvg as previous for next fetch
+      if(mdata.currentSoftAvg)setPrevPx(p.id,mkey,'_softAvg_'+mkey,mdata.currentSoftAvg);
 
       const sharp=mdata.sharpOutcome||mdata.sharpSide;
       const openPrice=getOL(p.id,mkey,sharp);
@@ -532,14 +550,24 @@ function processOpeningsAndRLM(plays){
           movement:curPrice-openPrice,abs:Math.abs(curPrice-openPrice)};
       }
 
-      // ── Step 4: Steam detection ──
-      mdata.velocity=0;mdata.isSteam=false;
+      // ── Step 4: Steam detection (Pinnacle + multi-book confirmation) ──
+      mdata.velocity=0;mdata.isSteam=false;mdata.steamConfirmed=false;
       if(prevPrice!==null){
         mdata.velocity=Math.abs(curPrice-prevPrice);
-        mdata.velocityDir=curPrice-prevPrice; // negative = shorter (more juice on sharp side)
+        mdata.velocityDir=curPrice-prevPrice;
         if(mdata.velocity>=5){
           mdata.isSteam=true;
-          const steamBoost=mdata.velocity>=12?22:mdata.velocity>=8?16:10;
+          // Multi-book confirmation: did soft avg also move same direction?
+          if(prevSoftAvg!==null&&mdata.currentSoftAvg){
+            const softMove=mdata.currentSoftAvg-prevSoftAvg;
+            // Same direction as Pinnacle AND meaningful move = confirmed steam
+            const sameDir=(mdata.velocityDir<0&&softMove<0)||(mdata.velocityDir>0&&softMove>0);
+            if(sameDir&&Math.abs(softMove)>=3){
+              mdata.steamConfirmed=true;
+            }
+          }
+          const base=mdata.steamConfirmed?30:10; // Confirmed steam = much bigger boost
+          const steamBoost=mdata.velocity>=12?base+14:mdata.velocity>=8?base+8:base;
           mdata.pillars.money=Math.min(100,(mdata.pillars.money||0)+steamBoost);
         }
       }
@@ -769,7 +797,7 @@ function buildCard(p,idx){
   <div class="gc-actions"><button class="add-play-btn${isAdded?' added':''}" id="add-btn-${p.id}" onclick="addToMyPlays('${p.id}')"><i class="ti ${isAdded?'ti-check':'ti-plus'}" style="font-size:11px"></i>${isAdded?'Added to My Plays':'Add to My Plays'}</button></div>
 
   <div class="gc-badges" id="gc-badges-${p.id}" style="display:${(mdata.isSteam||mdata.isLineFrozen)?'flex':'none'}">
-    ${mdata.isSteam?`<span class="signal-badge sb-steam"><i class="ti ti-bolt" style="font-size:10px"></i>Steam +${mdata.velocity}pts / 15min</span>`:''}
+    ${mdata.isSteam?`<span class="signal-badge sb-steam"><i class="ti ti-bolt" style="font-size:10px"></i>${mdata.steamConfirmed?'Confirmed Steam':'Steam'} +${mdata.velocity}pts</span>`:''}
     ${mdata.isLineFrozen?`<span class="signal-badge sb-freeze"><i class="ti ti-lock" style="font-size:10px"></i>Line Freeze · public not moving it</span>`:''}
   </div>
   <button class="gc-toggle" onclick="toggleCard('${p.id}')" id="gbt-${p.id}">Details <i class="ti ti-chevron-down" id="gbc-${p.id}" style="font-size:11px"></i></button>
@@ -811,7 +839,9 @@ function addToMyPlays(gameId){
   const mdata=game.markets&&game.markets[mkey];if(!mdata)return;
   if(myPlays.find(p=>p.id===gameId&&p.sport===sport&&p.market===mkey)){const btn=el('add-btn-'+gameId);if(btn){btn.innerHTML='<i class="ti ti-check"></i> Already added';setTimeout(()=>updateCardContent(gameId,mdata,mkey),1200);}return;}
   const uid=gameId+'-'+mkey+'-'+Date.now();
-  myPlays.unshift({uid,id:gameId,away:game.away,home:game.home,side:mdata.sharpSide,market:mkey,siScore:mdata.siScore,signalType:mdata.signalType,pillars:mdata.pillars,sport,dt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),gameTime:game.commenceTime,outcome:'PENDING',pinnacleOdds:mdata.lines.pinnacle,novigOdds:mdata.lines.novig,softAvg:mdata.lines.softAvg,gapPP:mdata.gapPP,openLine:mdata.movement?mdata.movement.open:null,movement:mdata.movement?mdata.movement.movement:null,});
+  const openLine=mdata.movement?mdata.movement.open:null;
+  const clvEntry=parseInt(mdata.lines.pinnacle)||null;
+  myPlays.unshift({uid,id:gameId,away:game.away,home:game.home,side:mdata.sharpSide,market:mkey,siScore:mdata.siScore,signalType:mdata.signalType,pillars:mdata.pillars,sport,dt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),gameTime:game.commenceTime,outcome:'PENDING',pinnacleOdds:mdata.lines.pinnacle,novigOdds:mdata.lines.novig,softAvg:mdata.lines.softAvg,gapPP:mdata.gapPP,openLine,movement:mdata.movement?mdata.movement.movement:null,clvEntry,clvOpen:openLine,});
   myPlays=myPlays.slice(0,200);saveMP();
   const btn=el('add-btn-'+gameId);if(btn){btn.className='add-play-btn added';btn.innerHTML='<i class="ti ti-check"></i> Added to My Plays';}
 }
@@ -850,7 +880,7 @@ function renderMyPlays(){
   const sigRows=Object.keys(SIGS).map(k=>{const ps=filtered.filter(p=>p.signalType===k&&p.outcome!=='PENDING');if(!ps.length)return null;const W2=ps.filter(p=>p.outcome==='WIN').length,L2=ps.filter(p=>p.outcome==='LOSS').length,tot2=W2+L2;return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0};}).filter(Boolean).sort((a,b)=>b.pct-a.pct);
   el('mp-sig-bd').innerHTML=sigRows.length?sigRows.map(({k,W:W2,L:L2,pct})=>{const sig=SIGS[k];return`<div class="mp-brow"><span class="mp-brow-lbl" style="font-size:10px;color:${sig.color}">${sig.label}</span><div class="mp-brow-track"><div class="mp-brow-fill" style="background:${sig.color}" data-w="${pct}"></div></div><span class="mp-brow-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join(''):`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see breakdown</div>`;
   if(!filtered.length){el('mp-list').innerHTML=`<div class="mp-empty"><div style="font-size:24px;margin-bottom:12px">🎯</div><h3>No plays added yet</h3><p>Go to <strong>Live Slate</strong>, pick your market (ML / Spread / O/U) and click <strong>"Add to My Plays"</strong>.</p></div>`;}
-  else{el('mp-list').innerHTML=filtered.map(p=>{const col=sc(p.siScore),sig=SIGS[p.signalType]||SIGS.WEAK,lead=LEAD_CFG[leadPillar(p.pillars)];const time=p.gameTime?new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'';const mktLbl=MKT_LABELS[p.market]||p.market;return`<div class="mp-play-item"><div class="mp-play-top"><div class="mp-play-left"><span class="mp-score-pill" style="border-color:${sbd(p.siScore)};color:${col};background:${sbg(p.siScore)}">${p.siScore}</span><div class="mp-play-info"><div class="mp-match">${p.away} @ ${p.home}</div><div class="mp-detail">${p.side} <span style="background:var(--s2);border-radius:4px;padding:1px 5px;font-size:9px;margin-left:4px">${mktLbl}</span> · <span style="color:${sig.color}">${sig.label}</span></div><div class="mp-meta">${p.sport} · ${time} · Lead: <span style="color:${lead.color}">${lead.label}</span>${p.openLine&&p.movement?` · Opened ${p.openLine>0?'+':''}${p.openLine} (${p.movement>0?'+':''}${p.movement} pts)`:''}</div></div></div><div class="mp-play-right"><button class="o-btn${p.outcome==='WIN'?' sW':''}" onclick="setMPOutcome('${p.uid}','WIN')">W</button><button class="o-btn${p.outcome==='LOSS'?' sL':''}" onclick="setMPOutcome('${p.uid}','LOSS')">L</button><button class="o-btn${p.outcome==='PUSH'?' sP':''}" onclick="setMPOutcome('${p.uid}','PUSH')">P</button></div></div><div class="mp-play-odds"><div class="mp-odds-chip">PIN <span>${p.pinnacleOdds||'—'}</span></div>${p.novigOdds?`<div class="mp-odds-chip">NOV <span>${p.novigOdds}</span></div>`:''}<div class="mp-odds-chip">SOFT <span>${p.softAvg||'—'}</span></div><div class="mp-odds-chip">GAP <span>${p.gapPP}pp</span></div></div></div>`;}).join('');}
+  else{el('mp-list').innerHTML=filtered.map(p=>{const col=sc(p.siScore),sig=SIGS[p.signalType]||SIGS.WEAK,lead=LEAD_CFG[leadPillar(p.pillars)];const time=p.gameTime?new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'';const mktLbl=MKT_LABELS[p.market]||p.market;return`<div class="mp-play-item"><div class="mp-play-top"><div class="mp-play-left"><span class="mp-score-pill" style="border-color:${sbd(p.siScore)};color:${col};background:${sbg(p.siScore)}">${p.siScore}</span><div class="mp-play-info"><div class="mp-match">${p.away} @ ${p.home}</div><div class="mp-detail">${p.side} <span style="background:var(--s2);border-radius:4px;padding:1px 5px;font-size:9px;margin-left:4px">${mktLbl}</span> · <span style="color:${sig.color}">${sig.label}</span></div><div class="mp-meta">${p.sport} · ${time} · Lead: <span style="color:${lead.color}">${lead.label}</span>${clvDisplay(p)}</div></div></div><div class="mp-play-right"><button class="o-btn${p.outcome==='WIN'?' sW':''}" onclick="setMPOutcome('${p.uid}','WIN')">W</button><button class="o-btn${p.outcome==='LOSS'?' sL':''}" onclick="setMPOutcome('${p.uid}','LOSS')">L</button><button class="o-btn${p.outcome==='PUSH'?' sP':''}" onclick="setMPOutcome('${p.uid}','PUSH')">P</button></div></div><div class="mp-play-odds"><div class="mp-odds-chip">PIN <span>${p.pinnacleOdds||'—'}</span></div>${p.novigOdds?`<div class="mp-odds-chip">NOV <span>${p.novigOdds}</span></div>`:''}<div class="mp-odds-chip">SOFT <span>${p.softAvg||'—'}</span></div><div class="mp-odds-chip">GAP <span>${p.gapPP}pp</span></div></div></div>`;}).join('');}
   setTimeout(()=>document.querySelectorAll('.mp-brow-fill').forEach(e=>e.style.width=e.dataset.w+'%'),80);
 }
 
