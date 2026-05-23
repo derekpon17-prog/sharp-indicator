@@ -283,7 +283,8 @@ button,input{font-family:inherit;outline:none}
 @keyframes glow{0%,100%{opacity:1;box-shadow:0 0 6px var(--green)}50%{opacity:.4;box-shadow:none}}
 @keyframes throb{0%,100%{transform:scale(1)}50%{transform:scale(.4)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@media(max-width:680px){.metrics-grid,.mp-stats{grid-template-columns:repeat(2,1fr)}.breakdown-grid,.mp-breakdown,.analysis-grid{grid-template-columns:1fr}.sport-tabs .stab:not(.on){display:none}}
+@media(max-width:680px){.metrics-grid,.mp-stats{grid-template-columns:repeat(2,1fr)}.breakdown-grid,.mp-breakdown,.analysis-grid{grid-template-columns:1fr}.sport-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap}
+.sport-tabs .stab{flex-shrink:0}}
 </style>
 </head>
 <body>
@@ -318,8 +319,8 @@ button,input{font-family:inherit;outline:none}
     <div class="controls">
       <div class="thr-wrap">
         <label for="thresh">Min SI Score</label>
-        <input type="range" id="thresh" min="0" max="90" value="50" step="5" oninput="onThresh(this.value)">
-        <span class="thr-val" id="thrval">0</span>
+        <input type="range" id="thresh" min="0" max="90" value="55" step="5" oninput="onThresh(this.value)">
+        <span class="thr-val" id="thrval">55</span>
       </div>
       <div class="quota-chip" id="quota" style="display:none"><i class="ti ti-database" style="font-size:12px"></i><span id="qtxt">—</span></div>
     </div>
@@ -551,6 +552,7 @@ async function fetchPlays(s){
     cache[s]=plays;cacheTs[s]=Date.now();
     lss(`si:d:${s}`,JSON.stringify(plays));lss(`si:ts:${s}`,String(Date.now()));
     autoTrack(plays,s);render(plays,s);cd=REFRESH;
+    autoGrade();
   }catch(e){showErr(e.message||'Fetch failed');const c=cache[s];if(c)render(c,s);else renderEmpty(s,'error');}
   finally{fetching[s]=false;setScanning(false,s);}
 }
@@ -808,10 +810,127 @@ function fmtTime(iso){
 }
 function startCd(){clearInterval(cdTimer);cdTimer=setInterval(()=>{if(cd>0)cd-=1000;else{cd=REFRESH;doRefresh();}const m=Math.floor(cd/60000),s2=Math.floor((cd%60000)/1000);const e=el('cd');if(e)e.textContent=m+':'+s2.toString().padStart(2,'0');},1000);}
 
+/* ══════════════════════════════
+   AUTO-GRADER
+   Runs on load + every refresh.
+   Costs 1 API request per sport
+   with pending plays (max 4/day).
+══════════════════════════════ */
+
+function gradeBet(play, game){
+  if(!game.completed||!game.scores||game.scores.length<2)return null;
+  const gs=name=>{ const s=game.scores.find(s=>s.name===name); return s?parseFloat(s.score):null; };
+  const homeScore=gs(game.home_team);
+  const awayScore=gs(game.away_team);
+  if(homeScore===null||awayScore===null)return null;
+
+  const {market,side,home,away}=play;
+  const total=homeScore+awayScore;
+
+  if(market==='totals'){
+    const line=parseFloat(side.replace('Over ','').replace('Under ',''));
+    if(isNaN(line))return null;
+    if(side.startsWith('Over')){
+      if(total>line)return'WIN';if(total<line)return'LOSS';return'PUSH';
+    }else{
+      if(total<line)return'WIN';if(total>line)return'LOSS';return'PUSH';
+    }
+  }
+  if(market==='h2h'){
+    const isHome=side===home||side===game.home_team;
+    const isAway=side===away||side===game.away_team;
+    if(!isHome&&!isAway)return null;
+    if(homeScore>awayScore)return isHome?'WIN':'LOSS';
+    if(awayScore>homeScore)return isAway?'WIN':'LOSS';
+    return'PUSH';
+  }
+  if(market==='spreads'){
+    const isHome=side.startsWith(home)||side.startsWith(game.home_team);
+    const isAway=side.startsWith(away)||side.startsWith(game.away_team);
+    if(!isHome&&!isAway)return null;
+    const m=side.match(/([+-]\d+\.?\d*)$/);
+    if(!m)return null;
+    const spread=parseFloat(m[1]);
+    const ts=isHome?homeScore:awayScore;
+    const os=isHome?awayScore:homeScore;
+    const cov=ts+spread;
+    if(cov>os)return'WIN';if(cov<os)return'LOSS';return'PUSH';
+  }
+  return null;
+}
+
+function showGradeBanner(count){
+  const d=document.createElement('div');
+  d.style.cssText='position:fixed;bottom:24px;right:24px;background:var(--s1);border:1px solid var(--gb);color:var(--green);padding:12px 20px;border-radius:var(--rl);font-size:12px;font-family:var(--mono);font-weight:600;z-index:9999;animation:fadein .3s ease;box-shadow:0 4px 20px rgba(0,0,0,.4)';
+  d.innerHTML='<i class="ti ti-check" style="margin-right:6px"></i>Auto-graded '+count+' play'+(count>1?'s':'');
+  document.body.appendChild(d);
+  setTimeout(()=>d.style.opacity='0',2500);
+  setTimeout(()=>d.remove(),3000);
+}
+
+async function autoGrade(){
+  // Throttle: don't grade more than once every 20 min
+  const lastGrade=parseInt(lsg('si:lg')||'0');
+  if(Date.now()-lastGrade<20*60*1000)return;
+
+  const pendMP=myPlays.filter(p=>p.outcome==='PENDING');
+  const pendTk=tracked.filter(p=>p.outcome==='PENDING');
+  if(!pendMP.length&&!pendTk.length)return;
+
+  lss('si:lg',String(Date.now()));
+
+  // Group by sport to minimize API calls
+  const sports=[...new Set([...pendMP.map(p=>p.sport),...pendTk.map(p=>p.sport)])].filter(Boolean);
+  let graded=0;
+
+  for(const sp of sports){
+    try{
+      const r=await fetch('/api/results?sport='+sp);
+      if(!r.ok)continue;
+      const data=await r.json();
+      const scores=data.scores||[];
+      if(!scores.length)continue;
+
+      // Grade My Plays
+      pendMP.filter(p=>p.sport===sp).forEach(play=>{
+        const game=scores.find(g=>g.id===play.id);
+        if(!game)return;
+        const result=gradeBet({...play,market:play.market||'h2h'},game);
+        if(!result)return;
+        play.outcome=result;mpOutcomes[play.uid]=result;graded++;
+      });
+
+      // Grade Auto-Tracked
+      pendTk.filter(p=>p.sport===sp).forEach(play=>{
+        const game=scores.find(g=>g.id===play.id);
+        if(!game)return;
+        // Detect market from side string
+        let mkt='h2h';
+        if(/Over |Under /.test(play.side))mkt='totals';
+        else if(/[+-]\d+\.5/.test(play.side))mkt='spreads';
+        const result=gradeBet({...play,market:mkt,home:play.home,away:play.away},game);
+        if(!result)return;
+        play.outcome=result;outcomes[play.id]=result;graded++;
+      });
+    }catch(err){console.error('autoGrade error:',sp,err.message);}
+  }
+
+  if(graded>0){
+    saveMP();saveMO();saveTk();saveOc();
+    el('tc').textContent=tracked.length?'('+tracked.length+')':'';
+    updateMPBadge();
+    showGradeBanner(graded);
+    const av=document.querySelector('.view.on')?.id;
+    if(av==='v-plays')renderMyPlays();
+    if(av==='v-track')renderTracked();
+  }
+}
+
 window.addEventListener('load',()=>{
   loadState();renderSkeletons();
   try{const d=lsg('si:d:MLB'),ts=lsg('si:ts:MLB');if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache['MLB']=JSON.parse(d);cacheTs['MLB']=parseInt(ts);processOpeningsAndRLM(cache['MLB']);render(cache['MLB'],'MLB');fetching['MLB']=false;setScanning(false,'MLB');cd=REFRESH;startCd();return;}}catch{}
   fetchPlays('MLB');cd=REFRESH;startCd();
+  autoGrade();
 });
 </script>
 </body>
