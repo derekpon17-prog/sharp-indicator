@@ -19,9 +19,11 @@ const SOFT_BOOKS = [
   // Tier 4 — semi-sharp reference
   'lowvig',
 ];
-const MIN_SOFT_BOOKS = 5;     // Minimum books required for a valid signal
-const PIN_GAP_FLOOR  = 2.0;   // pp — below this is noise
-const EX_CONFIRM_GAP = 1.5;   // pp — Novig/ProphetX must beat soft avg by this much
+const MIN_SOFT_BOOKS  = 5;    // Minimum books required (spread/totals)
+const MIN_SOFT_ML    = 4;    // ML needs fewer books (not all price every game)
+const PIN_GAP_ML     = 1.5;  // ML floor — inherently smaller gaps, still meaningful
+const PIN_GAP_STD    = 2.0;  // Spread/totals floor
+const EX_CONFIRM_GAP = 1.5;  // Novig/ProphetX confirmation threshold
 
 const SPORT_KEYS = {
   MLB:'baseball_mlb',NFL:'americanfootball_nfl',
@@ -113,11 +115,19 @@ function sigType(rlm,pin,mon,exConfirms){
 function analyzeMarket(game,mkey,pin,exBooks,soft){
   const pm=pin.markets&&pin.markets.find(m=>m.key===mkey);
   const sms=soft.map(b=>b.markets&&b.markets.find(m=>m.key===mkey)).filter(Boolean);
-  if(!pm||pm.outcomes.length<2||sms.length<MIN_SOFT_BOOKS)return null;
+  const minBooks=mkey==='h2h'?MIN_SOFT_ML:MIN_SOFT_BOOKS;
+  const gapFloor=mkey==='h2h'?PIN_GAP_ML:PIN_GAP_STD;
+  if(!pm||pm.outcomes.length<2||sms.length<minBooks)return null;
 
   const[pf0,pf1]=dv(toImp(pm.outcomes[0].price),toImp(pm.outcomes[1].price));
   const pf=[pf0,pf1];
   const rawPrices=pm.outcomes.map(o=>({name:o.name,price:o.price,point:o.point}));
+  // SoftAvg per outcome for multi-book steam detection
+  const softAvgMap={};
+  pm.outcomes.forEach((out,oi)=>{
+    const si2=sms.map(sm=>{const oo=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);return oo?toImp(oo.price):null;}).filter(x=>x!==null);
+    if(si2.length)softAvgMap[out.name]=Math.round(toAm(si2.reduce((a,b)=>a+b,0)/si2.length));
+  });
 
   let best=null,bestSI=-1;
 
@@ -131,7 +141,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
 
     const avgSoftFair=(simps.reduce((a,b)=>a+b,0)/simps.length)/1.048;
     const gapPP=(pf[i]-avgSoftFair)*100;
-    if(gapPP<PIN_GAP_FLOOR)continue; // Hard floor
+    if(gapPP<gapFloor)continue; // Hard floor
 
     // Gather exchange data
     const exchanges=exBooks.map(eb=>{
@@ -170,6 +180,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
           softAvg:fmt(Math.round(toAm(asr))),softRange:sr,
         },
         currentPinPrice:out.price,
+        currentSoftAvg:softAvgMap[out.name]||null,
         gapPP:gapPP.toFixed(2),
         numBooks:simps.length,
         publicLean:isPublicLean(out.name,mkey,out.price),
