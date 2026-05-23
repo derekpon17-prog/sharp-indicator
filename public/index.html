@@ -282,6 +282,12 @@ button,input{font-family:inherit;outline:none}
 .def-desc{font-size:12px;color:var(--t2);line-height:1.6}
 .def-badge{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:100px;border:1px solid;font-size:10px;font-family:var(--mono);font-weight:700;margin-bottom:4px;display:block;width:fit-content}
 
+
+/* No-signal game card */
+.gcard.no-signal{opacity:.65;border-color:var(--b1)}
+.gcard.no-signal:hover{opacity:.85;border-color:var(--b2);transform:none}
+.nosig-label{font-size:11px;color:var(--t3);font-family:var(--mono);padding:10px 0 6px;text-align:center;font-style:italic}
+
 /* TRACKED */
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .metric-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
@@ -778,10 +784,16 @@ function autoTrack(plays,s){plays.filter(p=>p.siScore>=SHARP_MIN).forEach(p=>{if
 
 function render(plays,s){
   if(s!==sport)return;
-  const filtered=(plays||[]).filter(p=>p.siScore>=thresh).sort((a,b)=>b.siScore-a.siScore);
-  renderFeed(filtered.slice(0,6));renderGrid(filtered);
+  // Feed: only plays above threshold
+  const feedPlays=(plays||[]).filter(p=>p.siScore>=Math.max(thresh,1));
+  // Grid: ALL games — signal plays above threshold + all no-signal games
+  const gridPlays=[
+    ...(plays||[]).filter(p=>p.siScore>=thresh&&p.siScore>0),
+    ...(plays||[]).filter(p=>p.siScore===0||p.noSignal),
+  ];
+  renderFeed(feedPlays.slice(0,6));renderGrid(gridPlays);
   el('feed-upd').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-  const sh=el('sec-hdr');if(filtered.length){sh.style.display='flex';el('sec-count').textContent=filtered.length;}else sh.style.display='none';
+  const sh=el('sec-hdr');if(gridPlays.length){sh.style.display='flex';el('sec-count').textContent=gridPlays.length+' games'+(feedPlays.length?' · '+feedPlays.length+' with signal':'');}else sh.style.display='none';
 }
 
 /* Feed — Betting Insider style */
@@ -831,8 +843,15 @@ function renderFeed(plays){
 
 function renderGrid(plays){
   const g=el('ggrid');
-  if(!plays.length){g.innerHTML=`<div class="empty-state"><div class="empty-icon"><i class="ti ti-chart-bar"></i></div><h3>No ${sport} plays above ${thresh} SI score</h3><p>Games appear here up to 24 hours before start.</p></div>`;return;}
-  g.innerHTML=plays.map((p,i)=>buildCard(p,i)).join('');
+  if(!plays.length){g.innerHTML=`<div class="empty-state"><div class="empty-icon"><i class="ti ti-chart-bar"></i></div><h3>No ${sport} games found</h3><p>Games appear here up to 24 hours before start. Note: postponed games are removed from the odds feed.</p></div>`;return;}
+  const signalPlays=plays.filter(p=>p.siScore>0);
+  const noSigPlays=plays.filter(p=>p.siScore===0||p.noSignal);
+  let html2=signalPlays.map((p,i)=>buildCard(p,i)).join('');
+  if(noSigPlays.length){
+    html2+=`<div style="grid-column:1/-1;padding:16px 0 8px;border-top:1px solid var(--b1);margin-top:8px"><span style="font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t4)">On the slate — no sharp signal detected</span></div>`;
+    html2+=noSigPlays.map((p,i)=>buildCard(p,signalPlays.length+i)).join('');
+  }
+  g.innerHTML=html2;
   setTimeout(()=>document.querySelectorAll('[data-fill]').forEach(e=>e.style.width=e.dataset.fill+'%'),80);
 }
 function renderSkeletons(){el('ggrid').innerHTML=[1,2,3,4,5,6].map(()=>`<div class="gcard"><div class="gc-body"><div class="skel" style="height:36px;border-radius:10px;margin-bottom:12px"></div><div class="skel" style="height:40px;border-radius:8px;margin-bottom:12px"></div><div style="display:flex;gap:12px"><div style="flex:1"><div class="skel" style="height:56px;border-radius:8px"></div></div><div class="skel" style="width:64px;height:64px;border-radius:12px"></div></div></div></div>`).join('');el('feed-list').innerHTML='<div class="feed-empty">Scanning for sharp signals…</div>';}
@@ -872,7 +891,7 @@ function buildCard(p,idx){
       </span>
     </div>`:'';
 
-  return`<div class="gcard${mdata.siScore>=SHARP_MIN?' sharp':''}${isDual?' dual':''}" style="animation-delay:${idx*.05}s" role="listitem">
+  return`<div class="gcard${p.noSignal?' no-signal':mdata.siScore>=SHARP_MIN?' sharp':''}${isDual?' dual':''}" style="animation-delay:${idx*.05}s" role="listitem">
   <div class="gc-body">
 
     <div class="gc-header">
