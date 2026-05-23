@@ -13,12 +13,13 @@ const SOFT_BOOKS = [
   // Tier 1 — major US regulated (slow followers)
   'draftkings','fanduel','betmgm','betrivers','caesars','williamhill_us',
   // Tier 2 — large US regulated
-  'espnbet','betparx',
-  // Tier 3 — offshore (most independent pricing)
-  'betonlineag','bovada','mybookieag',
+  'espnbet','betparx','hardrockbet',
+  // Tier 3 — offshore (independent pricing, good MLB coverage)
+  'betonlineag','bovada','mybookieag','betus',
   // Tier 4 — semi-sharp reference
   'lowvig',
 ];
+// Total: 14 soft + 1 sharp + 2 exchanges = 17 books (under 20 = 2x API cost)
 const MIN_SOFT_BOOKS  = 5;    // Minimum books required (spread/totals)
 const MIN_SOFT_ML    = 4;    // ML needs fewer books (not all price every game)
 const PIN_GAP_ML     = 1.5;  // ML floor — inherently smaller gaps, still meaningful
@@ -124,7 +125,11 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
   const sms=soft.map(b=>b.markets&&b.markets.find(m=>m.key===mkey)).filter(Boolean);
   const minBooks=mkey==='h2h'?MIN_SOFT_ML:MIN_SOFT_BOOKS;
   const gapFloor=mkey==='h2h'?PIN_GAP_ML:PIN_GAP_STD;
-  if(!pm||pm.outcomes.length<2||sms.length<minBooks)return null;
+  // Always need Pinnacle + at least 2 soft books to show anything
+  if(!pm||pm.outcomes.length<2)return null;
+  // If not enough books for a qualified signal, return display-only
+  if(sms.length<2){return null;}
+  const enoughForSignal=sms.length>=minBooks;
 
   const[pf0,pf1]=dv(toImp(pm.outcomes[0].price),toImp(pm.outcomes[1].price));
   const pf=[pf0,pf1];
@@ -152,7 +157,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
       const o=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);
       return o?toImp(o.price):null;
     }).filter(x=>x!==null);
-    if(simps.length<MIN_SOFT_BOOKS)continue;
+    if(!enoughForSignal||simps.length<minBooks)continue;
 
     const avgSoftFair=(simps.reduce((a,b)=>a+b,0)/simps.length)/1.048;
     const gapPP=(pf[i]-avgSoftFair)*100;
@@ -221,23 +226,35 @@ function analyzeAll(game){
   const pin =game.bookmakers.find(b=>b.key==='pinnacle');
   const exBks=game.bookmakers.filter(b=>EXCHANGE_BOOKS.includes(b.key));
   const soft =game.bookmakers.filter(b=>SOFT_BOOKS.includes(b.key));
-  if(!pin||soft.length<MIN_SOFT_BOOKS)return null;
 
   const markets={};
-  for(const mkey of['h2h','spreads','totals']){
-    markets[mkey]=analyzeMarket(game,mkey,pin,exBks,soft);
+  if(pin&&soft.length>=2){
+    for(const mkey of['h2h','spreads','totals']){
+      markets[mkey]=analyzeMarket(game,mkey,pin,exBks,soft);
+    }
   }
   const all=Object.values(markets).filter(Boolean);
-  if(!all.length)return null;
-  // Best = highest scoring market with actual signal (siScore > 0)
+
+  // Always return the game — even with no signal
   const withSignal=all.filter(m=>m.siScore>0);
   const best=(withSignal.length?withSignal:all).sort((a,b)=>b.siScore-a.siScore)[0];
+  const noSignal=!best||best.siScore===0;
+  if(noSignal){
+    return{
+      id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,
+      siScore:0,sharpSide:'—',signalType:'NONE',novigConfirm:false,exConfirms:0,
+      exLines:{},lines:{pinnacle:'—',novig:null,softAvg:'—',softRange:'—'},
+      gapPP:'0.00',pillars:{rlm:0,pinnacle:0,money:0},numBooks:0,
+      publicLean:false,activeMarket:'h2h',markets,noSignal:true,
+    };
+  }
   return{
     id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,
     siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,
     novigConfirm:best.novigConfirm,exConfirms:best.exConfirms,exLines:best.exLines,
     lines:best.lines,gapPP:best.gapPP,pillars:best.pillars,
     numBooks:best.numBooks,publicLean:best.publicLean,activeMarket:best.market,markets,
+    noSignal:false,
   };
 }
 
@@ -281,7 +298,12 @@ module.exports=async function handler(req,res){
       const ct=new Date(g.commence_time).getTime();
       return ct>now&&ct<now+86400000;
     });
-    const plays=upcoming.map(analyzeAll).filter(p=>p!==null&&p.siScore>0).sort((a,b)=>b.siScore-a.siScore);
+    const rawPlays=upcoming.map(analyzeAll).filter(Boolean);
+    // Sort: signal plays first (by score), then no-signal games alphabetically
+    const plays=[
+      ...rawPlays.filter(p=>p.siScore>0).sort((a,b)=>b.siScore-a.siScore),
+      ...rawPlays.filter(p=>p.siScore===0).sort((a,b)=>a.away.localeCompare(b.away)),
+    ];
     res.status(200).json({plays,total:upcoming.length,quota:{remaining:rem,used}});
   }catch(err){
     console.error('odds error:',err.message);
