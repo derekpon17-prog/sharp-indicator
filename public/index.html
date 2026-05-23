@@ -793,7 +793,19 @@ function doRefresh(){delete cache[sport];lss(`si:d:${sport}`,'');lss(`si:ts:${sp
 function setScanning(on,s){const bar=el('sbar'),dot=el('ndot'),rbtn=el('rbtn'),ri=el('ricon'),steps=['ss1','ss2','ss3','ss4'];if(on){bar.className='status-bar scanning';bar.style.display='flex';rbtn.disabled=true;ri.style.animation='spin .7s linear infinite';dot.className='ns-dot scanning';el('nstatus').textContent='Scanning '+s;steps.forEach(id=>{const e=el(id);if(e)e.className=''});clearInterval(window._st);let i=0;window._st=setInterval(()=>{if(i>0){const p=el(steps[i-1]);if(p)p.classList.add('done')}if(i<steps.length){const c=el(steps[i]);if(c)c.classList.add('cur');i++}else clearInterval(window._st);},2200);}else{clearInterval(window._st);bar.style.display='none';rbtn.disabled=false;ri.style.animation='';dot.className='ns-dot live';el('nstatus').textContent='Live';steps.forEach(id=>{const e=el(id);if(e)e.className='';});}}
 function showErr(m){el('ebar').style.display='flex';el('emsg').textContent=m;}function hideErr(){el('ebar').style.display='none';}
 function showSetup(){el('setup-guide').style.display='block';el('ggrid').innerHTML='';}function hideSetup(){el('setup-guide').style.display='none';}
-function fmtTime(iso){try{return new Date(iso).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'})}catch{return iso||'—'}}
+function fmtTime(iso){
+  try{
+    const d=new Date(iso);
+    const now=new Date();
+    const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    const tom=new Date(today.getTime()+86400000);
+    const gday=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+    const t=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
+    if(gday.getTime()===today.getTime())return'Today · '+t;
+    if(gday.getTime()===tom.getTime())return'Tomorrow · '+t;
+    return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' · '+t;
+  }catch{return iso||'—'}
+}
 function startCd(){clearInterval(cdTimer);cdTimer=setInterval(()=>{if(cd>0)cd-=1000;else{cd=REFRESH;doRefresh();}const m=Math.floor(cd/60000),s2=Math.floor((cd%60000)/1000);const e=el('cd');if(e)e.textContent=m+':'+s2.toString().padStart(2,'0');},1000);}
 
 window.addEventListener('load',()=>{
