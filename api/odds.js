@@ -1,72 +1,155 @@
-const SHARP_BOOKS=['pinnacle','novig'];
-const SOFT_BOOKS=['draftkings','fanduel','betmgm','betrivers','caesars','pointsbetus','williamhill_us'];
-const SPORT_KEYS={MLB:'baseball_mlb',NFL:'americanfootball_nfl',NBA:'basketball_nba',NHL:'icehockey_nhl'};
+/* ════════════════════════════════════════════
+   Sharp.idx — Hardened signal model
+   Pinnacle floor: 2.0pp
+   Min books: 5
+   Novig + ProphetX: 1.5pp threshold each
+   RLM: capped at 35 without opening line
+   Soft books: 13 total
+════════════════════════════════════════════ */
+
+const SHARP_BOOKS = ['pinnacle'];
+const EXCHANGE_BOOKS = ['novig','prophetx'];  // Both treated as exchange signals
+const SOFT_BOOKS = [
+  // Tier 1 — major US regulated (slow followers)
+  'draftkings','fanduel','betmgm','betrivers','caesars','williamhill_us',
+  // Tier 2 — large US regulated
+  'espnbet','betparx',
+  // Tier 3 — offshore (most independent pricing)
+  'betonlineag','bovada','mybookieag',
+  // Tier 4 — semi-sharp reference
+  'lowvig',
+];
+const MIN_SOFT_BOOKS = 5;     // Minimum books required for a valid signal
+const PIN_GAP_FLOOR  = 2.0;   // pp — below this is noise
+const EX_CONFIRM_GAP = 1.5;   // pp — Novig/ProphetX must beat soft avg by this much
+
+const SPORT_KEYS = {
+  MLB:'baseball_mlb',NFL:'americanfootball_nfl',
+  NBA:'basketball_nba',NHL:'icehockey_nhl',
+};
 
 function toImp(a){return a>=0?100/(100+a):Math.abs(a)/(Math.abs(a)+100);}
 function toAm(p){if(p<=0||p>=1)return 0;return p>=0.5?-Math.round(p/(1-p)*100):Math.round((1-p)/p*100);}
 function fmt(n){return n>0?'+'+n:String(n);}
 function dv(p1,p2){const t=p1+p2;return[p1/t,p2/t];}
-function isPublicLean(name,mkey,price){if(mkey==='totals')return name==='Over';return price<-105;}
+function isPublicLean(name,mkey,price){
+  if(mkey==='totals')return name==='Over';
+  return price<-105;
+}
 
+/* RLM — capped at 35 without opening line, full range with it */
 function calcRLM(name,mkey,price,open){
   const pub=isPublicLean(name,mkey,price);
-  if(open===null||open===undefined)return pub?18:42;
+  if(open===null||open===undefined){
+    // No opening line — conservative estimate only
+    return pub?15:35;
+  }
   const abs=Math.abs(price-open);
-  if(abs<1)return pub?22:38;
+  if(abs<1)return pub?20:36;
   const harder=price<open;
-  if(pub&&harder){const b=abs>=15?52:abs>=8?42:abs>=4?28:abs>=2?16:8;return Math.min(100,30+b);}
-  if(!pub&&!harder){const b=abs>=15?44:abs>=8?34:abs>=4?22:abs>=2?12:6;return Math.min(100,42+b);}
-  if(pub&&!harder)return Math.max(0,22-Math.min(12,abs));
-  return 28;
+  // Public side + line got harder (moved against them) = strong RLM
+  if(pub&&harder){const b=abs>=20?55:abs>=12?46:abs>=7?36:abs>=4?26:abs>=2?15:8;return Math.min(100,28+b);}
+  // Counter-public side + line improved = sharp money confirming
+  if(!pub&&!harder){const b=abs>=20?48:abs>=12?38:abs>=7?28:abs>=4?18:abs>=2?10:5;return Math.min(100,42+b);}
+  // Line moving WITH public = square action
+  if(pub&&!harder)return Math.max(0,18-Math.min(12,abs));
+  return 25;
 }
+
+/* Pinnacle score — hard floor at PIN_GAP_FLOOR */
 function calcPin(fairProb,simps){
   if(!simps.length)return 0;
   const avg=simps.reduce((a,b)=>a+b,0)/simps.length;
   const gap=(fairProb-avg/1.048)*100;
-  if(gap<=0)return 0;
-  return Math.min(100,gap>=7?92:gap>=5?80+(gap-5)*6:gap>=3?60+(gap-3)*10:gap>=2?42+(gap-2)*18:gap>=1?24+(gap-1)*18:gap>=0.5?10+(gap-0.5)*28:gap*20);
+  if(gap<PIN_GAP_FLOOR)return 0; // Hard floor — below this is noise
+  // Score from 0 at floor, ramping up
+  const adj=gap-PIN_GAP_FLOOR;
+  return Math.min(100,
+    adj>=5?90+Math.min(10,adj*1.5):
+    adj>=3?74+(adj-3)*8:
+    adj>=2?58+(adj-2)*16:
+    adj>=1?38+(adj-1)*20:
+    adj*38
+  );
 }
-function calcMoney(novOk,open,current,simps){
-  let s=0;if(novOk)s+=42;
-  if(open!==null&&open!==undefined){const v=Math.abs(current-open);s+=v>=20?32:v>=12?26:v>=7?18:v>=3?10:v>=1?4:0;}
-  if(simps.length>1){const sp=Math.max(...simps)-Math.min(...simps);s+=sp>=0.08?26:sp>=0.05?20:sp>=0.03?12:sp>=0.015?6:0;}
+
+/* Money layer — Novig AND ProphetX now both counted */
+function calcMoney(exchanges,open,current,simps){
+  let s=0;
+  const avgSoftFair=(simps.reduce((a,b)=>a+b,0)/simps.length)/1.048;
+
+  // Count exchange confirmations (Novig + ProphetX)
+  let exConfirms=0;
+  exchanges.forEach(ex=>{
+    if(ex&&(ex.fairProb-avgSoftFair)*100>EX_CONFIRM_GAP)exConfirms++;
+  });
+  if(exConfirms>=2)s+=55; // Both confirm = strongest signal
+  else if(exConfirms===1)s+=36; // One confirms = solid
+
+  // Line velocity (requires opening)
+  if(open!==null&&open!==undefined){
+    const v=Math.abs(current-open);
+    s+=v>=20?32:v>=12?26:v>=7?18:v>=3?10:v>=1?4:0;
+  }
+
+  // Soft book divergence (books disagreeing = steam chasing)
+  if(simps.length>1){
+    const sp=Math.max(...simps)-Math.min(...simps);
+    s+=sp>=0.09?28:sp>=0.06?22:sp>=0.03?13:sp>=0.015?6:0;
+  }
   return Math.min(100,s);
 }
-function sigType(rlm,pin,mon,nov){
-  if(nov&&pin>=65&&rlm>=55)return'DUAL_CONSENSUS';
-  if(rlm>=72&&pin>=60)return'SHARP_RLM';
-  if(pin>=78)return'PINNACLE_EDGE';
-  if(mon>=75&&nov)return'EXCHANGE_SIGNAL';
-  if(rlm>=65)return'RLM_ONLY';
-  if(pin>=58)return'MODERATE_EDGE';
+
+function sigType(rlm,pin,mon,exConfirms){
+  if(exConfirms>=2&&pin>=60&&rlm>=50)return'DUAL_CONSENSUS';
+  if(rlm>=72&&pin>=62)return"SHARP_RLM";;
+  if(pin>=72)return'PINNACLE_EDGE';
+  if(mon>=65&&exConfirms>=1)return'EXCHANGE_SIGNAL';
+  if(rlm>=62)return'RLM_ONLY';
+  if(pin>=45)return'MODERATE_EDGE';
   return'WEAK';
 }
 
-function analyzeMarket(game,mkey,pin,nov,soft){
+function analyzeMarket(game,mkey,pin,exBooks,soft){
   const pm=pin.markets&&pin.markets.find(m=>m.key===mkey);
-  const nm=nov&&nov.markets&&nov.markets.find(m=>m.key===mkey);
   const sms=soft.map(b=>b.markets&&b.markets.find(m=>m.key===mkey)).filter(Boolean);
-  if(!pm||pm.outcomes.length<2||!sms.length)return null;
+  if(!pm||pm.outcomes.length<2||sms.length<MIN_SOFT_BOOKS)return null;
 
   const[pf0,pf1]=dv(toImp(pm.outcomes[0].price),toImp(pm.outcomes[1].price));
   const pf=[pf0,pf1];
-  let best=null,bestSI=-1;
-
-  // Store raw Pinnacle prices for opening line tracking
   const rawPrices=pm.outcomes.map(o=>({name:o.name,price:o.price,point:o.point}));
+
+  let best=null,bestSI=-1;
 
   for(let i=0;i<pm.outcomes.length;i++){
     const out=pm.outcomes[i];
-    const simps=sms.map(sm=>{const o=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);return o?toImp(o.price):null;}).filter(x=>x!==null);
-    if(!simps.length)continue;
+    const simps=sms.map(sm=>{
+      const o=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);
+      return o?toImp(o.price):null;
+    }).filter(x=>x!==null);
+    if(simps.length<MIN_SOFT_BOOKS)continue;
 
-    let novOk=false,novLine=null;
-    if(nm){const no=nm.outcomes&&nm.outcomes.find(o=>o.name===out.name);if(no){const[nf0,nf1]=dv(toImp(nm.outcomes[0].price),toImp(nm.outcomes[1].price));const nf=i===0?nf0:nf1;const as=simps.reduce((a,b)=>a+b,0)/simps.length/1.048;novOk=(nf-as)*100>0.3;novLine=fmt(no.price);}}
+    const avgSoftFair=(simps.reduce((a,b)=>a+b,0)/simps.length)/1.048;
+    const gapPP=(pf[i]-avgSoftFair)*100;
+    if(gapPP<PIN_GAP_FLOOR)continue; // Hard floor
 
-    const rlm=calcRLM(out.name,mkey,out.price,null); // client overrides with real opening
-    const ps=calcPin(pf[i],simps);
-    const ms=calcMoney(novOk,null,out.price,simps);
-    const si=Math.round(rlm*0.28+ps*0.40+ms*0.32);
+    // Gather exchange data
+    const exchanges=exBooks.map(eb=>{
+      const em=eb.markets&&eb.markets.find(m=>m.key===mkey);
+      if(!em)return null;
+      const eo=em.outcomes&&em.outcomes.find(o=>o.name===out.name);
+      if(!eo)return null;
+      const[ef0,ef1]=dv(toImp(em.outcomes[0].price),toImp(em.outcomes[1].price));
+      return{key:eb.key,price:eo.price,fairProb:i===0?ef0:ef1};
+    }).filter(Boolean);
+
+    const exConfirms=exchanges.filter(ex=>(ex.fairProb-avgSoftFair)*100>EX_CONFIRM_GAP).length;
+    const exLines=exchanges.reduce((acc,ex)=>{acc[ex.key]=fmt(ex.price);return acc;},{});
+
+    const rlm=calcRLM(out.name,mkey,out.price,null); // client overrides with real open
+    const ps =calcPin(pf[i],simps);
+    const ms =calcMoney(exchanges,null,out.price,simps);
+    const si =Math.round(rlm*0.10+ps*0.52+ms*0.38);
 
     if(si>bestSI&&ps>0){
       bestSI=si;
@@ -78,13 +161,19 @@ function analyzeMarket(game,mkey,pin,nov,soft){
       best={
         market:mkey,sharpSide:side,siScore:si,sharpOutcome:out.name,
         pillars:{rlm,pinnacle:Math.round(ps),money:Math.round(ms)},
-        signalType:sigType(rlm,ps,ms,novOk),novigConfirm:novOk,
-        lines:{pinnacle:fmt(out.price),novig:novLine,softAvg:fmt(Math.round(toAm(asr))),softRange:sr},
+        signalType:sigType(rlm,ps,ms,exConfirms),
+        exConfirms,exLines,
+        novigConfirm:exConfirms>=1,
+        lines:{
+          pinnacle:fmt(out.price),
+          novig:exLines['novig']||exLines['prophetx']||null,
+          softAvg:fmt(Math.round(toAm(asr))),softRange:sr,
+        },
         currentPinPrice:out.price,
-        gapPP:((pf[i]-asr/1.048)*100).toFixed(2),
+        gapPP:gapPP.toFixed(2),
         numBooks:simps.length,
         publicLean:isPublicLean(out.name,mkey,out.price),
-        rawPrices, // ← raw Pinnacle prices for opening line storage
+        rawPrices,
       };
     }
   }
@@ -92,21 +181,24 @@ function analyzeMarket(game,mkey,pin,nov,soft){
 }
 
 function analyzeAll(game){
-  const pin=game.bookmakers.find(b=>b.key==='pinnacle');
-  const nov=game.bookmakers.find(b=>b.key==='novig');
-  const soft=game.bookmakers.filter(b=>SOFT_BOOKS.includes(b.key));
-  if(!pin||!soft.length)return null;
+  const pin =game.bookmakers.find(b=>b.key==='pinnacle');
+  const exBks=game.bookmakers.filter(b=>EXCHANGE_BOOKS.includes(b.key));
+  const soft =game.bookmakers.filter(b=>SOFT_BOOKS.includes(b.key));
+  if(!pin||soft.length<MIN_SOFT_BOOKS)return null;
+
   const markets={};
-  for(const mkey of['h2h','spreads','totals']){markets[mkey]=analyzeMarket(game,mkey,pin,nov,soft);}
+  for(const mkey of['h2h','spreads','totals']){
+    markets[mkey]=analyzeMarket(game,mkey,pin,exBks,soft);
+  }
   const all=Object.values(markets).filter(Boolean);
   if(!all.length)return null;
   const best=all.sort((a,b)=>b.siScore-a.siScore)[0];
   return{
     id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,
     siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,
-    novigConfirm:best.novigConfirm,lines:best.lines,gapPP:best.gapPP,
-    pillars:best.pillars,numBooks:best.numBooks,publicLean:best.publicLean,
-    activeMarket:best.market,markets,
+    novigConfirm:best.novigConfirm,exConfirms:best.exConfirms,exLines:best.exLines,
+    lines:best.lines,gapPP:best.gapPP,pillars:best.pillars,
+    numBooks:best.numBooks,publicLean:best.publicLean,activeMarket:best.market,markets,
   };
 }
 
@@ -114,24 +206,42 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Origin','*');
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
+
   const sport=((req.query&&req.query.sport)||'MLB').toUpperCase();
   const sportKey=SPORT_KEYS[sport];
   if(!sportKey)return res.status(400).json({error:'Unknown sport: '+sport});
+
   const apiKey=process.env.ODDS_API_KEY;
   if(!apiKey)return res.status(200).json({plays:[],error:'ODDS_API_KEY not set',quota:{remaining:null,used:null}});
-  const books=[...SHARP_BOOKS,...SOFT_BOOKS].join(',');
-  const url='https://api.the-odds-api.com/v4/sports/'+sportKey+'/odds?apiKey='+apiKey+'&regions=us&markets=h2h,spreads,totals&bookmakers='+books+'&oddsFormat=american';
+
+  // Request both us and us_ex regions to get exchanges
+  const softKeys=SOFT_BOOKS.join(',');
+  const exKeys=EXCHANGE_BOOKS.join(',');
+  const allBooks='pinnacle,'+exKeys+','+softKeys;
+
+  const url='https://api.the-odds-api.com/v4/sports/'+sportKey+'/odds'+
+    '?apiKey='+apiKey+
+    '&regions=us,us_ex'+
+    '&markets=h2h,spreads,totals'+
+    '&bookmakers='+allBooks+
+    '&oddsFormat=american';
+
   try{
     const up=await fetch(url);
-    const rem=up.headers.get('x-requests-remaining'),used=up.headers.get('x-requests-used');
+    const rem=up.headers.get('x-requests-remaining');
+    const used=up.headers.get('x-requests-used');
     if(rem)res.setHeader('x-requests-remaining',rem);
     if(used)res.setHeader('x-requests-used',used);
     if(up.status===401)return res.status(200).json({plays:[],error:'Invalid API key',quota:{remaining:null,used:null}});
     if(up.status===422)return res.status(200).json({plays:[],message:sport+' not in season',quota:{remaining:rem,used}});
     if(!up.ok)return res.status(200).json({plays:[],error:'Odds API error '+up.status,quota:{remaining:rem,used}});
+
     const games=await up.json();
     const now=Date.now();
-    const upcoming=(Array.isArray(games)?games:[]).filter(g=>{const ct=new Date(g.commence_time).getTime();return ct>now&&ct<now+86400000;});
+    const upcoming=(Array.isArray(games)?games:[]).filter(g=>{
+      const ct=new Date(g.commence_time).getTime();
+      return ct>now&&ct<now+86400000;
+    });
     const plays=upcoming.map(analyzeAll).filter(p=>p!==null&&p.siScore>0).sort((a,b)=>b.siScore-a.siScore);
     res.status(200).json({plays,total:upcoming.length,quota:{remaining:rem,used}});
   }catch(err){
