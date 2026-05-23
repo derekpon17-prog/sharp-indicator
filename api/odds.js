@@ -21,8 +21,8 @@ const SOFT_BOOKS = [
 ];
 // Total: 14 soft + 1 sharp + 2 exchanges = 17 books (under 20 = 2x API cost)
 const MIN_SOFT_BOOKS  = 5;    // Minimum books required (spread/totals)
-const MIN_SOFT_ML    = 4;    // ML needs fewer books (not all price every game)
-const PIN_GAP_ML     = 1.5;  // ML floor — inherently smaller gaps, still meaningful
+const MIN_SOFT_ML    = 3;    // ML needs fewer books (not all price every game)
+const PIN_GAP_ML     = 1.0;  // ML floor — inherently smaller gaps, still meaningful
 const PIN_GAP_STD    = 2.0;  // Spread/totals floor
 const EX_CONFIRM_GAP = 1.5;  // Novig/ProphetX confirmation threshold
 
@@ -58,10 +58,14 @@ function calcRLM(name,mkey,price,open,point){
   if(abs<1)return pub?20:36;
   const harder=price<open;
   // Public side + line got harder (moved against them) = strong RLM
+  // Public side + line harder (more juice on public) = sharp books pushing back = strong RLM
   if(pub&&harder){const b=abs>=20?55:abs>=12?46:abs>=7?36:abs>=4?26:abs>=2?15:8;return Math.min(100,28+b);}
-  // Counter-public side + line improved = sharp money confirming
-  if(!pub&&!harder){const b=abs>=20?48:abs>=12?38:abs>=7?28:abs>=4?18:abs>=2?10:5;return Math.min(100,42+b);}
-  // Line moving WITH public = square action
+  // Counter-public + line SHORTER (odds worsened for bettors) = sharp money bet this side = STRONGEST signal
+  // e.g. WSH goes +167 -> +144: books shortened because sharps bet Washington
+  if(!pub&&harder){const b=abs>=20?58:abs>=12?48:abs>=7?38:abs>=4?28:abs>=2?16:8;return Math.min(100,44+b);}
+  // Counter-public + line got longer (better odds) = moderate signal (books fading public)
+  if(!pub&&!harder){const b=abs>=20?42:abs>=12?32:abs>=7?22:abs>=4?14:abs>=2?8:4;return Math.min(100,36+b);}
+  // Public side + line got easier = public money moving it = square action, no sharp signal
   if(pub&&!harder)return Math.max(0,18-Math.min(12,abs));
   return 25;
 }
