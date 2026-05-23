@@ -129,6 +129,14 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     if(si2.length)softAvgMap[out.name]=Math.round(toAm(si2.reduce((a,b)=>a+b,0)/si2.length));
   });
 
+  // Pre-build fallback display data (used when no outcome meets gap floor)
+  const fallbackLines=()=>{
+    const o0=pm.outcomes[0],o1=pm.outcomes[1];
+    const s0=sms.map(sm=>{const oo=sm.outcomes&&sm.outcomes.find(o=>o.name===o0.name);return oo?toImp(oo.price):null;}).filter(x=>x!==null);
+    const avgAm=s0.length?Math.round(toAm(s0.reduce((a,b)=>a+b,0)/s0.length)):0;
+    return{pinnacle:fmt(o0.price),novig:null,softAvg:fmt(avgAm),softRange:'—'};
+  };
+
   let best=null,bestSI=-1;
 
   for(let i=0;i<pm.outcomes.length;i++){
@@ -188,6 +196,17 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
       };
     }
   }
+  // If no sharp signal found, still return display data so the tab isn't locked
+  if(!best){
+    return{
+      market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,
+      pillars:{rlm:0,pinnacle:0,money:0},
+      signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,
+      lines:fallbackLines(),currentPinPrice:pm.outcomes[0].price,
+      currentSoftAvg:null,gapPP:'0.00',numBooks:sms.length,
+      publicLean:false,rawPrices,
+    };
+  }
   return best;
 }
 
@@ -203,7 +222,9 @@ function analyzeAll(game){
   }
   const all=Object.values(markets).filter(Boolean);
   if(!all.length)return null;
-  const best=all.sort((a,b)=>b.siScore-a.siScore)[0];
+  // Best = highest scoring market with actual signal (siScore > 0)
+  const withSignal=all.filter(m=>m.siScore>0);
+  const best=(withSignal.length?withSignal:all).sort((a,b)=>b.siScore-a.siScore)[0];
   return{
     id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,
     siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,
