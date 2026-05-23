@@ -472,9 +472,16 @@ function getMovement(gameId,mkey,outcomeName,currentPrice){
 }
 
 /* ── Client-side RLM recalc with opening lines ── */
-function isPublicLean(name,mkey,price){if(mkey==='totals')return name==='Over';return price<-105;}
-function calcRLMWithOpen(name,mkey,price,openPrice){
-  const pub=isPublicLean(name,mkey,price);
+function isPublicLean(name,mkey,price,point){
+  if(mkey==='totals')return name==='Over';
+  if(mkey==='spreads'){
+    if(point!==undefined&&point!==null)return point<0;
+    return price<-105;
+  }
+  return price<-105;
+}
+function calcRLMWithOpen(name,mkey,price,openPrice,point){
+  const pub=isPublicLean(name,mkey,price,point);
   if(openPrice===null||openPrice===undefined)return pub?18:42;
   const abs=Math.abs(price-openPrice);
   if(abs<1)return pub?22:38;
@@ -542,10 +549,13 @@ function processOpeningsAndRLM(plays){
       const openPrice=getOL(p.id,mkey,sharp);
       const prevPrice=prevMap[sharp]||null;
       const curPrice=mdata.currentPinPrice||0;
+      // Get point for this outcome from rawPrices for public lean accuracy
+      const sharpRaw=mdata.rawPrices&&mdata.rawPrices.find(r=>r.name===sharp);
+      const sharpPoint=sharpRaw?sharpRaw.point:undefined;
 
       // ── Step 3: RLM with real opening ──
       if(openPrice!==null){
-        mdata.pillars.rlm=calcRLMWithOpen(sharp,mkey,curPrice,openPrice);
+        mdata.pillars.rlm=calcRLMWithOpen(sharp,mkey,curPrice,openPrice,sharpPoint);
         mdata.movement={open:openPrice,current:curPrice,
           movement:curPrice-openPrice,abs:Math.abs(curPrice-openPrice)};
       }
@@ -573,14 +583,16 @@ function processOpeningsAndRLM(plays){
       }
 
       // ── Step 5: Line freeze detection ──
-      // Public-heavy side, game within 24h, line barely moved from opening
+      // Requires: true public lean (fixed for run lines), game within 24h,
+      // line barely moved from opening, and movement data exists
       mdata.isLineFrozen=false;
-      if(mdata.publicLean&&openPrice!==null&&mdata.movement){
+      const isRunLine=mkey==='spreads'&&sharpPoint!==undefined&&Math.abs(sharpPoint)===1.5;
+      const trulyPublic=isRunLine?sharpPoint<0:mdata.publicLean; // run line: only -1.5 is public
+      if(trulyPublic&&openPrice!==null&&mdata.movement){
         const hoursToGame=(new Date(p.commenceTime).getTime()-Date.now())/3600000;
         const frozen=mdata.movement.abs<2&&hoursToGame<24&&hoursToGame>0;
         if(frozen){
           mdata.isLineFrozen=true;
-          // Books protecting the counter-public (sharp) side = boost money layer
           mdata.pillars.money=Math.min(100,(mdata.pillars.money||0)+18);
         }
       }
