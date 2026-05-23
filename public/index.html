@@ -265,6 +265,23 @@ button,input{font-family:inherit;outline:none}
 .sb-freeze{background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);color:#60a5fa}
 .gc-badges{padding:0 16px 10px;display:flex;flex-wrap:wrap;gap:0}
 
+
+/* ─── Definitions Modal ─── */
+.defs-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:999;display:none;align-items:center;justify-content:center;padding:16px}
+.defs-overlay.open{display:flex}
+.defs-modal{background:var(--s1);border:1px solid var(--b2);border-radius:var(--rxl,20px);width:100%;max-width:560px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;animation:fadein .2s ease}
+.defs-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0}
+.defs-header h2{font-size:17px;font-weight:800;color:var(--t1)}
+.defs-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--b2);background:transparent;color:var(--t2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.defs-close:hover{background:var(--s3);color:var(--t1)}
+.defs-body{overflow-y:auto;padding:16px 24px 24px}
+.defs-section{margin-top:18px}
+.defs-section-title{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--b1)}
+.def-row{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.def-term{font-size:11px;font-family:var(--mono);font-weight:700;color:var(--t1);min-width:130px;flex-shrink:0;padding-top:1px}
+.def-desc{font-size:12px;color:var(--t2);line-height:1.6}
+.def-badge{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:100px;border:1px solid;font-size:10px;font-family:var(--mono);font-weight:700;margin-bottom:4px;display:block;width:fit-content}
+
 /* TRACKED */
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .metric-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
@@ -303,7 +320,7 @@ button,input{font-family:inherit;outline:none}
     <button class="stab" onclick="switchSport('NBA',this)">NBA</button>
     <button class="stab" onclick="switchSport('NHL',this)">NHL</button>
   </div>
-  <div class="nav-right">
+  <div class="nav-right"><button class="pill-btn" onclick="openDefs()" title="Glossary" style="border-radius:50%;width:28px;height:28px;padding:0;justify-content:center;font-weight:700;font-size:13px">?</button>
     <div class="nav-status"><div class="ns-dot live" id="ndot"></div><span id="nstatus">Initializing</span></div>
     <button class="pill-btn" id="rbtn" onclick="doRefresh()"><i class="ti ti-refresh" id="ricon" style="font-size:13px"></i><span id="cd">—</span></button>
   </div>
@@ -381,6 +398,100 @@ button,input{font-family:inherit;outline:none}
     <div class="plays-hdr"><i class="ti ti-database" style="font-size:13px"></i>Auto-logged plays ≥70 SI</div>
     <div id="plist"></div>
   </div>
+
+<!-- ─── Definitions Modal ─── -->
+<div class="defs-overlay" id="defs-overlay" onclick="if(event.target===this)closeDefs()">
+  <div class="defs-modal">
+    <div class="defs-header">
+      <h2>Sharp.idx Glossary</h2>
+      <button class="defs-close" onclick="closeDefs()">×</button>
+    </div>
+    <div class="defs-body">
+
+      <div class="defs-section">
+        <div class="defs-section-title">Scores</div>
+        <div class="def-row">
+          <span class="def-term">SI Score</span>
+          <span class="def-desc">Sharp Index score (0–100). Combines three signals into one number. 70+ = worth watching, 80+ = strong signal.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">RLM (10%)</span>
+          <span class="def-desc">Reverse Line Movement. Line moved <em>against</em> where public money is going — a sign sharp bettors pushed it the other way. Weighted lower because it requires opening line history to be accurate.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">PINNACLE (52%)</span>
+          <span class="def-desc">The gap between Pinnacle's devigged price and the average soft book price. Pinnacle accepts sharp bettors and prices more accurately — a large gap means they see the side differently from recreational books. Highest weight because it's pure price data.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">MONEY LAYER (38%)</span>
+          <span class="def-desc">Exchange and velocity signals. Gets boosted by Novig/ProphetX exchange confirmation, line velocity (how fast it moved recently), and soft book divergence (how much books disagree with each other).</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">pp (gap)</span>
+          <span class="def-desc">Percentage points — the gap between Pinnacle's fair implied probability and the soft book average. A 3pp gap means Pinnacle prices this side 3% more likely than the market average.</span>
+        </div>
+      </div>
+
+      <div class="defs-section">
+        <div class="defs-section-title">Signal Types</div>
+        <div class="def-row">
+          <span class="def-term">Vegas Backed</span>
+          <span class="def-desc">Pinnacle (and/or exchanges) pricing this side meaningfully higher than recreational books. The sharpest, most reliable signal.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">Dual Consensus</span>
+          <span class="def-desc">Both Pinnacle AND an exchange (Novig or ProphetX) confirm the sharp side at 1.5pp+. Two independent markets agreeing — strongest possible signal.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">Pressure Move</span>
+          <span class="def-desc">Line moved against where the public is betting (Reverse Line Movement detected). Books are accepting sharp action on the unpopular side.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">Exchange Signal</span>
+          <span class="def-desc">Novig or ProphetX (zero-vig exchanges) pricing this side away from the soft book market. Exchange prices reflect pure market consensus.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">Counter-Public</span>
+          <span class="def-desc">The sharp signal is on the side the public is NOT betting. Public typically backs favorites, overs, and home teams — going the other way with sharp backing is a strong combination.</span>
+        </div>
+      </div>
+
+      <div class="defs-section">
+        <div class="defs-section-title">Badges</div>
+        <div class="def-row">
+          <span class="def-term">🔒 Line Freeze</span>
+          <span class="def-desc">The line hasn't moved from opening despite heavy public pressure on the other side. Books are comfortable letting sharp money ride — they don't need to move the line because they want action on the non-public side.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">⚡ Steam</span>
+          <span class="def-desc">Pinnacle's line moved 5+ points in the last ~15 minutes — possible large sharp bet or syndicate action.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">⚡ Confirmed Steam</span>
+          <span class="def-desc">Both Pinnacle AND the soft book average moved the same direction simultaneously. Much stronger signal — multiple books reacting to the same sharp action.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">Novig ✓</span>
+          <span class="def-desc">Novig exchange (zero-vig, pure market pricing) confirms the Pinnacle side. When both agree, it's two independent sharp markets pointing the same direction.</span>
+        </div>
+      </div>
+
+      <div class="defs-section">
+        <div class="defs-section-title">My Plays</div>
+        <div class="def-row">
+          <span class="def-term">CLV ▲/▼</span>
+          <span class="def-desc">Closing Line Value. ▲ = you entered at a better price than opening (positive CLV — you were ahead of the market). ▼ = you entered worse than opening (negative CLV — market had already moved). Positive CLV over time = good signal identification.</span>
+        </div>
+        <div class="def-row">
+          <span class="def-term">Lead Signal</span>
+          <span class="def-desc">Which pillar drove the SI score on this play — Pinnacle-led, RLM-led, Money-led, or Multi-signal (two or more aligned). Over time this shows which signal types are actually predictive for your bets.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -1042,6 +1153,11 @@ async function autoGrade(){
     if(av==='v-track')renderTracked();
   }
 }
+
+
+function openDefs(){document.getElementById('defs-overlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeDefs(){document.getElementById('defs-overlay').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDefs();});
 
 window.addEventListener('load',()=>{
   loadState();renderSkeletons();
