@@ -34,14 +34,21 @@ function toImp(a){return a>=0?100/(100+a):Math.abs(a)/(Math.abs(a)+100);}
 function toAm(p){if(p<=0||p>=1)return 0;return p>=0.5?-Math.round(p/(1-p)*100):Math.round((1-p)/p*100);}
 function fmt(n){return n>0?'+'+n:String(n);}
 function dv(p1,p2){const t=p1+p2;return[p1/t,p2/t];}
-function isPublicLean(name,mkey,price){
+function isPublicLean(name,mkey,price,point){
   if(mkey==='totals')return name==='Over';
+  if(mkey==='spreads'){
+    // Public bets the FAVORITE laying points (point < 0 = -1.5 side)
+    // NOT the underdog run line even if priced at heavy juice (e.g. -191 on +1.5)
+    if(point!==undefined&&point!==null)return point<0;
+    return price<-105; // fallback if no point data
+  }
+  // h2h (ML): favorite is public lean
   return price<-105;
 }
 
 /* RLM — capped at 35 without opening line, full range with it */
-function calcRLM(name,mkey,price,open){
-  const pub=isPublicLean(name,mkey,price);
+function calcRLM(name,mkey,price,open,point){
+  const pub=isPublicLean(name,mkey,price,point);
   if(open===null||open===undefined){
     // No opening line — conservative estimate only
     return pub?15:35;
@@ -164,7 +171,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     const exConfirms=exchanges.filter(ex=>(ex.fairProb-avgSoftFair)*100>EX_CONFIRM_GAP).length;
     const exLines=exchanges.reduce((acc,ex)=>{acc[ex.key]=fmt(ex.price);return acc;},{});
 
-    const rlm=calcRLM(out.name,mkey,out.price,null); // client overrides with real open
+    const rlm=calcRLM(out.name,mkey,out.price,null,out.point); // client overrides with real open
     const ps =calcPin(pf[i],simps,gapFloor);
     const ms =calcMoney(exchanges,null,out.price,simps);
     const si =Math.round(rlm*0.10+ps*0.52+ms*0.38);
@@ -191,7 +198,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
         currentSoftAvg:softAvgMap[out.name]||null,
         gapPP:gapPP.toFixed(2),
         numBooks:simps.length,
-        publicLean:isPublicLean(out.name,mkey,out.price),
+        publicLean:isPublicLean(out.name,mkey,out.price,out.point),
         rawPrices,
       };
     }
