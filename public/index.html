@@ -599,14 +599,16 @@ function isPublicLean(name,mkey,price,point){
 }
 function calcRLMWithOpen(name,mkey,price,openPrice,point){
   const pub=isPublicLean(name,mkey,price,point);
-  if(openPrice===null||openPrice===undefined)return pub?18:42;
+  if(openPrice===null||openPrice===undefined)return pub?15:35;
   const abs=Math.abs(price-openPrice);
-  if(abs<1)return pub?22:38;
+  if(abs<1)return pub?20:36;
   const harder=price<openPrice;
-  if(pub&&harder){const b=abs>=15?52:abs>=8?42:abs>=4?28:abs>=2?16:8;return Math.min(100,30+b);}
-  if(!pub&&!harder){const b=abs>=15?44:abs>=8?34:abs>=4?22:abs>=2?12:6;return Math.min(100,42+b);}
-  if(pub&&!harder)return Math.max(0,22-Math.min(12,abs));
-  return 28;
+  if(pub&&harder){const b=abs>=20?55:abs>=12?46:abs>=7?36:abs>=4?26:abs>=2?15:8;return Math.min(100,28+b);}
+  // Counter-public + line shorter = sharp money came in = STRONGEST signal
+  if(!pub&&harder){const b=abs>=20?58:abs>=12?48:abs>=7?38:abs>=4?28:abs>=2?16:8;return Math.min(100,44+b);}
+  if(!pub&&!harder){const b=abs>=20?42:abs>=12?32:abs>=7?22:abs>=4?14:abs>=2?8:4;return Math.min(100,36+b);}
+  if(pub&&!harder)return Math.max(0,18-Math.min(12,abs));
+  return 25;
 }
 
 
