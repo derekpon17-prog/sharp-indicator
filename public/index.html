@@ -730,9 +730,13 @@ function buildCard(p,idx){
   const mov=mdata.movement;
 
   const mktTabs=['h2h','spreads','totals'].map(mkey=>{
-    const md=markets[mkey],isOn=mkey===activeMkt,unavail=!md;
-    return`<button class="mkt-tab${isOn?' on':''}${unavail?' unavail':''}" data-game="${p.id}" data-mkt="${mkey}" onclick="${unavail?'':'switchMarket(\''+p.id+'\',\''+mkey+'\',this)'}"><span class="mkt-tab-label" style="color:${isOn?col:''}">${MKT_LABELS[mkey]}</span><span class="mkt-tab-score" style="color:${md?sc(md.siScore):'var(--t4)'}">${md?md.siScore:'—'}</span><span class="mkt-tab-sub">SI</span></button>`;
-  }).join('');
+    const md=markets[mkey],isOn=mkey===activeMkt;
+    const unavail=!md;
+    const hasSignal=md&&md.siScore>0&&md.signalType!=='NONE';
+    const scoreDisplay=hasSignal?md.siScore:'—';
+    const scoreColor=hasSignal?sc(md.siScore):'var(--t4)';
+    return`<button class="mkt-tab${isOn?' on':''}${unavail?' unavail':''}" data-game="${p.id}" data-mkt="${mkey}" onclick="${unavail?'':'switchMarket(\''+p.id+'\',\''+mkey+'\',this)'}"><span class="mkt-tab-label" style="color:${isOn&&hasSignal?col:''}">${MKT_LABELS[mkey]}</span><span class="mkt-tab-score" style="color:${scoreColor}">${scoreDisplay}</span><span class="mkt-tab-sub">SI</span></button>`;
+  }).join('');;
 
   const movHtml=mov&&mov.abs>=1?`
     <div class="gc-movement">
