@@ -58,14 +58,14 @@ function calcRLM(name,mkey,price,open){
   return 25;
 }
 
-/* Pinnacle score — hard floor at PIN_GAP_FLOOR */
-function calcPin(fairProb,simps){
+/* Pinnacle score — hard floor passed per market */
+function calcPin(fairProb,simps,floor){
   if(!simps.length)return 0;
   const avg=simps.reduce((a,b)=>a+b,0)/simps.length;
   const gap=(fairProb-avg/1.048)*100;
-  if(gap<PIN_GAP_FLOOR)return 0; // Hard floor — below this is noise
+  if(gap<floor)return 0; // Hard floor — below this is noise
   // Score from 0 at floor, ramping up
-  const adj=gap-PIN_GAP_FLOOR;
+  const adj=gap-floor;
   return Math.min(100,
     adj>=5?90+Math.min(10,adj*1.5):
     adj>=3?74+(adj-3)*8:
@@ -157,7 +157,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     const exLines=exchanges.reduce((acc,ex)=>{acc[ex.key]=fmt(ex.price);return acc;},{});
 
     const rlm=calcRLM(out.name,mkey,out.price,null); // client overrides with real open
-    const ps =calcPin(pf[i],simps);
+    const ps =calcPin(pf[i],simps,gapFloor);
     const ms =calcMoney(exchanges,null,out.price,simps);
     const si =Math.round(rlm*0.10+ps*0.52+ms*0.38);
 
