@@ -405,10 +405,16 @@ button,input{font-family:inherit;outline:none}
       <div class="mp-bd-card"><div class="mp-bd-title">By SI Score Range</div><div id="mp-score-bd"></div></div>
       <div class="mp-bd-card"><div class="mp-bd-title">By Signal Type</div><div id="mp-sig-bd"></div></div>
     </div>
+    <div class="analysis-card" style="margin-bottom:20px">
+      <div class="analysis-title">Tag Performance</div>
+      <div class="analysis-sub">Win rate by situational context. Add tags to plays as you log them.</div>
+      <div id="tag-perf-table"></div>
+    </div>
     <div class="mp-plays-hdr">
       <div class="mp-plays-title"><i class="ti ti-list-check" style="font-size:13px"></i>Your Plays — tap W / L / P to log</div>
       <button class="mp-clear-btn" onclick="confirmClear()">Clear all</button>
     </div>
+    <div class="tag-filter-row" id="tag-filter-row"></div>
     <div id="mp-list"></div>
   </div>
 
@@ -767,6 +773,7 @@ function loadState(){
     const mo=lsg('si:mo');if(mo){mpOutcomes=JSON.parse(mo);myPlays.forEach(p=>{if(mpOutcomes[p.uid])p.outcome=mpOutcomes[p.uid];})}
     el('tc').textContent=tracked.length?'('+tracked.length+')':'';
     updateMPBadge();
+  updateNotifNavBtn();
   }catch{}
 }
 function saveTk(){lss('si:t',JSON.stringify(tracked))}
@@ -794,6 +801,7 @@ async function fetchPlays(s){
     lss(`si:d:${s}`,JSON.stringify(plays));lss(`si:ts:${s}`,String(Date.now()));
     autoTrack(plays,s);render(plays,s);cd=REFRESH;
     autoGrade();
+    checkAndNotify(plays);
   }catch(e){showErr(e.message||'Fetch failed');const c=cache[s];if(c)render(c,s);else renderEmpty(s,'error');}
   finally{fetching[s]=false;setScanning(false,s);}
 }
@@ -1145,8 +1153,15 @@ function renderMyPlays(){
   el('mp-score-bd').innerHTML=ranges.map(r=>{const ps=filtered.filter(p=>p.siScore>=r.mn&&p.siScore<=r.mx&&p.outcome!=='PENDING');const W2=ps.filter(p=>p.outcome==='WIN').length,L2=ps.filter(p=>p.outcome==='LOSS').length,tot2=W2+L2;if(!tot2)return`<div class="mp-brow"><span class="mp-brow-lbl">${r.l}</span><span style="font-size:10px;color:var(--t3)">no results yet</span></div>`;const pct=Math.round(W2/tot2*100);return`<div class="mp-brow"><span class="mp-brow-lbl">${r.l}</span><div class="mp-brow-track"><div class="mp-brow-fill" style="background:${sc(pct)}" data-w="${pct}"></div></div><span class="mp-brow-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join('');
   const sigRows=Object.keys(SIGS).map(k=>{const ps=filtered.filter(p=>p.signalType===k&&p.outcome!=='PENDING');if(!ps.length)return null;const W2=ps.filter(p=>p.outcome==='WIN').length,L2=ps.filter(p=>p.outcome==='LOSS').length,tot2=W2+L2;return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0};}).filter(Boolean).sort((a,b)=>b.pct-a.pct);
   el('mp-sig-bd').innerHTML=sigRows.length?sigRows.map(({k,W:W2,L:L2,pct})=>{const sig=SIGS[k];return`<div class="mp-brow"><span class="mp-brow-lbl" style="font-size:10px;color:${sig.color}">${sig.label}</span><div class="mp-brow-track"><div class="mp-brow-fill" style="background:${sig.color}" data-w="${pct}"></div></div><span class="mp-brow-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join(''):`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see breakdown</div>`;
-  if(!filtered.length){el('mp-list').innerHTML=`<div class="mp-empty"><div style="font-size:24px;margin-bottom:12px">🎯</div><h3>No plays added yet</h3><p>Go to <strong>Live Slate</strong>, pick your market (ML / Spread / O/U) and click <strong>"Add to My Plays"</strong>.</p></div>`;}
-  else{el('mp-list').innerHTML=filtered.map(p=>{const col=sc(p.siScore),sig=SIGS[p.signalType]||SIGS.WEAK,lead=LEAD_CFG[leadPillar(p.pillars)];const time=p.gameTime?new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'';const mktLbl=MKT_LABELS[p.market]||p.market;return`<div class="mp-play-item"><div class="mp-play-top"><div class="mp-play-left"><span class="mp-score-pill" style="border-color:${sbd(p.siScore)};color:${col};background:${sbg(p.siScore)}">${p.siScore}</span><div class="mp-play-info"><div class="mp-match">${p.away} @ ${p.home}</div><div class="mp-detail">${p.side} <span style="background:var(--s2);border-radius:4px;padding:1px 5px;font-size:9px;margin-left:4px">${mktLbl}</span> · <span style="color:${sig.color}">${sig.label}</span></div><div class="mp-meta">${p.sport} · ${time} · Lead: <span style="color:${lead.color}">${lead.label}</span>${clvDisplay(p)}</div></div></div><div class="mp-play-right"><button class="o-btn${p.outcome==='WIN'?' sW':''}" onclick="setMPOutcome('${p.uid}','WIN')">W</button><button class="o-btn${p.outcome==='LOSS'?' sL':''}" onclick="setMPOutcome('${p.uid}','LOSS')">L</button><button class="o-btn${p.outcome==='PUSH'?' sP':''}" onclick="setMPOutcome('${p.uid}','PUSH')">P</button></div></div><div class="mp-play-odds"><div class="mp-odds-chip">PIN <span>${p.pinnacleOdds||'—'}</span></div>${p.novigOdds?`<div class="mp-odds-chip">NOV <span>${p.novigOdds}</span></div>`:''}<div class="mp-odds-chip">SOFT <span>${p.softAvg||'—'}</span></div><div class="mp-odds-chip">GAP <span>${p.gapPP}pp</span></div></div></div>`;}).join('');}
+  // Tag filter
+  const tagFiltered=activeTagFilter
+    ? filtered.filter(p=>(p.tags||[]).includes(activeTagFilter))
+    : filtered;
+  renderTagFilter();renderTagPerf();
+  if(!tagFiltered.length){el('mp-list').innerHTML=`<div class="mp-empty"><div style="font-size:24px;margin-bottom:12px">${activeTagFilter?'🏷️':'🎯'}</div><h3>${activeTagFilter?'No plays with this tag yet':'No plays added yet'}</h3><p>${activeTagFilter?'Add this tag to plays to see them here.':'Go to <strong>Live Slate</strong>, pick your market and click <strong>"Add to My Plays"</strong>.'}</p></div>`;}
+  else{el('mp-list').innerHTML=tagFiltered.map(p=>{const col=sc(p.siScore),sig=SIGS[p.signalType]||SIGS.WEAK,lead=LEAD_CFG[leadPillar(p.pillars)];const time=p.gameTime?new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'';const mktLbl=MKT_LABELS[p.market]||p.market;return`<div class="mp-play-item"><div class="mp-play-top"><div class="mp-play-left"><span class="mp-score-pill" style="border-color:${sbd(p.siScore)};color:${col};background:${sbg(p.siScore)}">${p.siScore}</span><div class="mp-play-info"><div class="mp-match">${p.away} @ ${p.home}</div><div class="mp-detail">${p.side} <span style="background:var(--s2);border-radius:4px;padding:1px 5px;font-size:9px;margin-left:4px">${mktLbl}</span> · <span style="color:${sig.color}">${sig.label}</span></div><div class="mp-meta">${p.sport} · ${time} · Lead: <span style="color:${lead.color}">${lead.label}</span>${clvDisplay(p)}</div></div></div><div class="mp-play-right"><button class="o-btn${p.outcome==='WIN'?' sW':''}" onclick="setMPOutcome('${p.uid}','WIN')">W</button><button class="o-btn${p.outcome==='LOSS'?' sL':''}" onclick="setMPOutcome('${p.uid}','LOSS')">L</button><button class="o-btn${p.outcome==='PUSH'?' sP':''}" onclick="setMPOutcome('${p.uid}','PUSH')">P</button></div></div><div class="mp-play-odds"><div class="mp-odds-chip">PIN <span>${p.pinnacleOdds||'—'}</span></div>${p.novigOdds?`<div class="mp-odds-chip">NOV <span>${p.novigOdds}</span></div>`:''}<div class="mp-odds-chip">SOFT <span>${p.softAvg||'—'}</span></div><div class="mp-odds-chip">GAP <span>${p.gapPP}pp</span></div></div>
+    <div class="tag-section"><div class="tag-row" id="tags-${p.uid}">${renderTagPills(p)}</div></div>
+  </div>`;}).join('');}
   setTimeout(()=>document.querySelectorAll('.mp-brow-fill').forEach(e=>e.style.width=e.dataset.w+'%'),80);
 }
 
@@ -1295,9 +1310,194 @@ async function autoGrade(){
 }
 
 
+
+/* ════════════════════════════════
+   NOTIFICATIONS (ntfy.sh)
+════════════════════════════════ */
+const NOTIF_THRESH_DEFAULT=90;
+
+function openNotif(){
+  const t=lsg('si:ntfy-topic')||'';
+  const th=lsg('si:ntfy-thresh')||'90';
+  const ml=lsg('si:ntfy-ml')==='1';
+  const en=lsg('si:ntfy-on')!=='0';
+  el('notif-topic').value=t;
+  el('notif-thresh').value=th;
+  el('notif-thresh-val').textContent=th;
+  el('notif-ml-only').checked=ml;
+  el('notif-enabled').checked=en;
+  el('notif-status').textContent='';
+  el('notif-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  updateNotifNavBtn();
+}
+function closeNotif(){
+  el('notif-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function saveNotif(){
+  const topic=el('notif-topic').value.trim();
+  lss('si:ntfy-topic',topic);
+  lss('si:ntfy-thresh',el('notif-thresh').value);
+  lss('si:ntfy-ml',el('notif-ml-only').checked?'1':'0');
+  lss('si:ntfy-on',el('notif-enabled').checked?'1':'0');
+  el('notif-status').style.color='var(--green)';
+  el('notif-status').textContent=topic?'✓ Saved — notifications active':'Saved (no topic set — notifications paused)';
+  updateNotifNavBtn();
+  setTimeout(closeNotif,1200);
+}
+function updateNotifNavBtn(){
+  const btn=el('notif-nav-btn');if(!btn)return;
+  const active=lsg('si:ntfy-topic')&&lsg('si:ntfy-on')!=='0';
+  btn.style.background=active?'var(--ga)':'transparent';
+  btn.style.borderColor=active?'var(--gb)':'';
+  btn.style.color=active?'var(--green)':'';
+}
+async function testNotif(){
+  const topic=el('notif-topic').value.trim();
+  if(!topic){el('notif-status').style.color='var(--red)';el('notif-status').textContent='Enter a topic first';return;}
+  el('notif-status').style.color='var(--amber)';el('notif-status').textContent='Sending test…';
+  try{
+    const r=await fetch('https://ntfy.sh/'+topic,{
+      method:'POST',
+      headers:{'Title':'⚡ Sharp.idx Test','Priority':'default','Tags':'white_check_mark'},
+      body:'Sharp.idx notifications are working! You will receive alerts when new plays exceed your SI threshold.',
+    });
+    if(r.ok){el('notif-status').style.color='var(--green)';el('notif-status').textContent='✓ Test sent — check your ntfy app';}
+    else{el('notif-status').style.color='var(--red)';el('notif-status').textContent='Error '+r.status+' — check topic name';}
+  }catch(e){el('notif-status').style.color='var(--red)';el('notif-status').textContent='Network error — check connection';}
+}
+
+function getNotifiedSet(){try{return new Set(JSON.parse(lsg('si:notified')||'[]'));}catch{return new Set();}}
+function markNotified(keys){
+  const s=getNotifiedSet();keys.forEach(k=>s.add(k));
+  const arr=Array.from(s).slice(-300);lss('si:notified',JSON.stringify(arr));
+}
+
+async function checkAndNotify(plays){
+  const topic=lsg('si:ntfy-topic');
+  if(!topic||lsg('si:ntfy-on')==='0')return;
+  const thresh=parseInt(lsg('si:ntfy-thresh')||'90');
+  const mlOnly=lsg('si:ntfy-ml')==='1';
+  const notified=getNotifiedSet();
+  const toNotify=[];
+
+  plays.forEach(p=>{
+    const mlScore=p.mlScore||0;
+    const score=mlOnly?mlScore:Math.max(p.siScore,mlScore);
+    if(score<thresh)return;
+    // Use ml market if available and scoring high, else best market
+    const mkt=mlScore>=thresh?'h2h':p.activeMarket;
+    const key=p.id+'-'+mkt;
+    if(!notified.has(key))toNotify.push({p,mkt,score,key});
+  });
+
+  for(const {p,mkt,score,key} of toNotify){
+    const md=p.markets&&p.markets[mkt];
+    const mktLabel=mkt==='h2h'?'ML':mkt==='spreads'?'Spread':'O/U';
+    const side=md?md.sharpSide:p.sharpSide;
+    const line=md?md.lines.pinnacle:p.lines.pinnacle;
+    const sig=md?md.signalType:p.signalType;
+    const body=`${p.away} @ ${p.home}\n${side} · ${mktLabel} ${line}\n${(SIGS[sig]||{label:sig}).label} · ${score} SI Score`;
+    try{
+      await fetch('https://ntfy.sh/'+topic,{
+        method:'POST',
+        headers:{
+          'Title':'⚡ Sharp Signal: '+score+' SI — '+(mkt==='h2h'?'ML':'Run Line'),
+          'Priority':score>=90?'urgent':'high',
+          'Tags':'baseball,chart_with_upwards_trend',
+        },
+        body,
+      });
+      markNotified([key]);
+    }catch(e){console.error('ntfy error:',e.message);}
+  }
+}
+
+/* ════════════════════════════════
+   BET JOURNAL TAGS
+════════════════════════════════ */
+const PRESET_TAGS=[
+  {id:'counter-public',label:'Counter-Public',color:'#ffb830'},
+  {id:'steam',         label:'Steam Move',    color:'#ff8c00'},
+  {id:'line-freeze',   label:'Line Freeze',   color:'#60a5fa'},
+  {id:'public-fade',   label:'Public Fade',   color:'#9d7cff'},
+  {id:'sp-scratch',    label:'SP Scratch',    color:'#ff4d6a'},
+  {id:'weather',       label:'Weather Move',  color:'#4d9fff'},
+  {id:'late-move',     label:'Late Move',     color:'#00e090'},
+  {id:'sharp-reversal',label:'Sharp Reversal',color:'#e879f9'},
+];
+let activeTagFilter=null;
+
+function getPlayTags(uid){const p=myPlays.find(x=>x.uid===uid);return p?p.tags||[]:[]; }
+function toggleTag(uid,tagId){
+  const p=myPlays.find(x=>x.uid===uid);if(!p)return;
+  if(!p.tags)p.tags=[];
+  const idx=p.tags.indexOf(tagId);
+  if(idx>=0)p.tags.splice(idx,1);else p.tags.push(tagId);
+  saveMP();
+  // Re-render just this tag row
+  const row=el('tags-'+uid);
+  if(row)row.innerHTML=renderTagPills(p);
+  renderTagFilter();renderTagPerf();
+}
+function addCustomTag(uid){
+  const inp=el('tag-custom-'+uid);if(!inp)return;
+  const val=inp.value.trim().toLowerCase().replace(/\s+/g,'-');
+  if(!val)return;
+  const p=myPlays.find(x=>x.uid===uid);if(!p)return;
+  if(!p.tags)p.tags=[];
+  if(!p.tags.includes(val))p.tags.push(val);
+  saveMP();
+  const row=el('tags-'+uid);if(row)row.innerHTML=renderTagPills(p);
+  renderTagFilter();renderTagPerf();
+}
+function renderTagPills(p){
+  const tags=p.tags||[];
+  const presetPills=PRESET_TAGS.map(t=>{
+    const on=tags.includes(t.id);
+    return`<span class="tag-pill${on?' active':''}" style="border-color:${on?t.color:'rgba(120,160,220,.2)'};color:${on?t.color:'var(--t3)'};background:${on?t.color+'18':''}" onclick="toggleTag('${p.uid}','${t.id}')">${t.label}${on?'<span class="tag-x">×</span>':''}</span>`;
+  }).join('');
+  const customTags=tags.filter(t=>!PRESET_TAGS.find(pt=>pt.id===t));
+  const customPills=customTags.map(t=>`<span class="tag-pill active" style="border-color:var(--t3);color:var(--t2);background:var(--s3)" onclick="toggleTag('${p.uid}','${t}')">${t}<span class="tag-x">×</span></span>`).join('');
+  return presetPills+customPills+`<input class="tag-custom-input" id="tag-custom-${p.uid}" placeholder="+ custom" onkeydown="if(event.key==='Enter')addCustomTag('${p.uid}')">`;
+}
+function renderTagFilter(){
+  const row=el('tag-filter-row');if(!row)return;
+  // Collect all tags in use
+  const inUse=new Set();
+  myPlays.forEach(p=>(p.tags||[]).forEach(t=>inUse.add(t)));
+  if(!inUse.size){row.innerHTML='';return;}
+  const allTags=[{id:null,label:'All'},...PRESET_TAGS.filter(t=>inUse.has(t.id)),...Array.from(inUse).filter(t=>!PRESET_TAGS.find(pt=>pt.id===t)).map(t=>({id:t,label:t}))];
+  row.innerHTML=allTags.map(t=>`<button class="tag-filter-pill${activeTagFilter===t.id?' on':''}" onclick="setTagFilter('${t.id}')">${t.label}</button>`).join('');
+}
+function setTagFilter(tagId){
+  activeTagFilter=tagId==='null'?null:tagId;
+  renderTagFilter();renderMyPlays();
+}
+function renderTagPerf(){
+  const container=el('tag-perf-table');if(!container)return;
+  const settled=myPlays.filter(p=>p.outcome!=='PENDING');
+  if(!settled.length){container.innerHTML='<div class="no-data-msg">Log outcomes to see tag performance</div>';return;}
+  const tagMap={};
+  settled.forEach(p=>{
+    (p.tags||[]).forEach(tagId=>{
+      if(!tagMap[tagId])tagMap[tagId]={W:0,L:0,P:0};
+      tagMap[tagId][p.outcome]=(tagMap[tagId][p.outcome]||0)+1;
+    });
+  });
+  const rows=Object.entries(tagMap).map(([id,rec])=>{
+    const tot=rec.W+rec.L;const wr=tot?Math.round(rec.W/tot*100):0;
+    const cfg=PRESET_TAGS.find(t=>t.id===id)||{label:id,color:'var(--t2)'};
+    return{id,label:cfg.label,color:cfg.color,...rec,tot,wr};
+  }).sort((a,b)=>b.wr-a.wr);
+  if(!rows.length){container.innerHTML='<div class="no-data-msg">Tag plays to see breakdown</div>';return;}
+  container.innerHTML=`<table class="tag-perf-table"><thead><tr><th>Tag</th><th>Record</th><th>Win%</th><th>Plays</th></tr></thead><tbody>${rows.map(r=>`<tr><td><span style="color:${r.color};font-weight:700">${r.label}</span></td><td style="color:${sc(r.wr)};font-weight:700">${r.W}-${r.L}${r.P?'-'+r.P:''}</td><td style="color:${sc(r.wr)};font-weight:700">${r.wr}%</td><td style="color:var(--t3)">${r.W+r.L+r.P}</td></tr>`).join('')}</tbody></table>`;
+}
+
 function openDefs(){document.getElementById('defs-overlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeDefs(){document.getElementById('defs-overlay').classList.remove('open');document.body.style.overflow='';}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDefs();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDefs();closeNotif();}});
 
 window.addEventListener('load',()=>{
   loadState();renderSkeletons();
