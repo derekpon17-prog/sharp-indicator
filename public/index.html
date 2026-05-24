@@ -434,6 +434,12 @@ button,input{font-family:inherit;outline:none}
   </div>
 
   <div id="v-track" class="view">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+      <div style="font-size:11px;color:var(--t3);font-family:var(--mono)">Plays auto-logged when SI ≥ 70 before game time</div>
+      <button onclick="confirmClearTracked()" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:100px;border:1px solid var(--rb);background:transparent;color:var(--red);font-size:11px;font-family:var(--mono);font-weight:600;cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--ra)'" onmouseout="this.style.background='transparent'">
+        <i class="ti ti-trash" style="font-size:12px"></i> Clear &amp; Reset
+      </button>
+    </div>
     <div class="metrics-grid" id="metrics"></div>
     <div class="breakdown-grid">
       <div class="bd-card"><div class="bd-title">By SI Score Range</div><div id="score-bd"></div></div>
@@ -1289,6 +1295,23 @@ function renderMyPlays(){
 }
 
 /* Tracked tab */
+
+function confirmClearTracked(){
+  if(!confirm('Clear all auto-tracked plays and reset? This cannot be undone.'))return;
+  tracked=[];outcomes={};
+  lss('si:t','[]');lss('si:o','{}');
+  lss('si:notified','[]'); // reset notifications so tomorrow's plays get alerted
+  el('tc').textContent='';
+  renderTracked();
+}
+function deleteTracked(gameId){
+  tracked=tracked.filter(t=>t.id!==gameId);
+  delete outcomes[gameId];
+  saveTk();saveOc();
+  renderTracked();
+  el('tc').textContent=tracked.length?'('+tracked.length+')':'';
+}
+
 function setOutcome(id,val){const t=tracked.find(p=>p.id===id);if(t){t.outcome=val;outcomes[id]=val;}saveTk();saveOc();renderTracked();}
 function renderTracked(){const pl=tracked.filter(t=>t.outcome!=='PENDING');const W=pl.filter(t=>t.outcome==='WIN').length,L=pl.filter(t=>t.outcome==='LOSS').length,P=pl.filter(t=>t.outcome==='PUSH').length,tot=W+L;const wr=tot?Math.round(W/tot*100):0,roi=tot?Math.round(((W*90.9-L*100)/(tot*100))*100):0;el('metrics').innerHTML=`<div class="metric-card"><div class="mc-label">Record</div><div class="mc-val" style="font-size:20px">${W}–${L}–${P}</div><div class="mc-sub">${tracked.length} auto-tracked</div></div><div class="metric-card"><div class="mc-label">Win Rate</div><div class="mc-val" style="color:${sc(wr)}">${wr}%</div><div class="mc-sub">excl. pushes</div></div><div class="metric-card"><div class="mc-label">Est. ROI</div><div class="mc-val" style="color:${roi>=0?'#00e090':'#ff4d6a'}">${roi>=0?'+':''}${roi}%</div><div class="mc-sub">–110 standard</div></div><div class="metric-card"><div class="mc-label">Pending</div><div class="mc-val">${tracked.filter(t=>t.outcome==='PENDING').length}</div><div class="mc-sub">awaiting result</div></div>`;const ranges=[{l:'80–100 SI',mn:80,mx:100},{l:'70–79 SI',mn:70,mx:79},{l:'60–69 SI',mn:60,mx:69}];el('score-bd').innerHTML=ranges.map(r=>{const ps=tracked.filter(t=>t.score>=r.mn&&t.score<=r.mx&&t.outcome!=='PENDING');const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;if(!tot2)return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><span style="font-size:10px;color:var(--t3)">no data yet</span></div>`;const pct=Math.round(W2/tot2*100);return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sc(pct)}" data-w="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join('');const sigRows=Object.keys(SIGS).map(k=>{
     const ps=tracked.filter(t=>t.signalType===k&&t.outcome!=='PENDING');
@@ -1317,7 +1340,7 @@ function renderTracked(){const pl=tracked.filter(t=>t.outcome!=='PENDING');const
     const subRows=mktBreak.map(({mkey,W:mW,L:mL,pct:mp})=>`<tr><td style="font-size:10px;font-family:var(--mono);padding:2px 0 2px 10px;color:${mktColor[mkey]};border-bottom:1px solid rgba(255,255,255,.03)">↳ ${mktLabel[mkey]}</td><td style="font-size:10px;font-family:var(--mono);padding:2px 0;text-align:right;color:var(--t2);border-bottom:1px solid rgba(255,255,255,.03)">${mW}-${mL}</td><td style="font-size:10px;font-family:var(--mono);padding:2px 0;text-align:right;color:${sc(mp)};border-bottom:1px solid rgba(255,255,255,.03)">${mp}%</td><td style="font-size:10px;font-family:var(--mono);padding:2px 0;text-align:right;color:var(--t3);border-bottom:1px solid rgba(255,255,255,.03)">—</td></tr>`).join('');
     return mainRow+subRows;
   }).join('')+`</tbody></table>`:`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see signal breakdown</div>`;const visibleTracked=tracked.filter(t=>t.score>=SHARP_MIN||t.outcome!=='PENDING');
-  el('plist').innerHTML=visibleTracked.length?visibleTracked.map(t=>{const col=sc(t.score),sig=SIGS[t.signalType]||SIGS.WEAK;return`<div class="play-item"><div class="pi-left"><span class="pi-score-pill" style="border-color:${sbd(t.score)};color:${col};background:${sbg(t.score)}">${t.score}</span><div><div class="pi-match">${t.away} @ ${t.home} <span style="font-size:10px;color:var(--t3);margin-left:6px">${t.sport} · ${t.dt}</span></div><div class="pi-detail">${t.side} · <span style="color:${sig.color}">${sig.label}</span></div></div></div><div class="pi-right"><button class="o-btn${t.outcome==='WIN'?' sW':''}" onclick="setOutcome('${t.id}','WIN')">W</button><button class="o-btn${t.outcome==='LOSS'?' sL':''}" onclick="setOutcome('${t.id}','LOSS')">L</button><button class="o-btn${t.outcome==='PUSH'?' sP':''}" onclick="setOutcome('${t.id}','PUSH')">P</button></div></div>`;}).join(''):`<div style="text-align:center;padding:48px;color:var(--t3);font-size:13px">Plays ≥${SHARP_MIN} SI auto-log here</div>`;setTimeout(()=>document.querySelectorAll('.bdr-fill').forEach(e=>e.style.width=e.dataset.w+'%'),80);}
+  el('plist').innerHTML=visibleTracked.length?visibleTracked.map(t=>{const col=sc(t.score),sig=SIGS[t.signalType]||SIGS.WEAK;return`<div class="play-item"><div class="pi-left"><span class="pi-score-pill" style="border-color:${sbd(t.score)};color:${col};background:${sbg(t.score)}">${t.score}</span><div><div class="pi-match">${t.away} @ ${t.home} <span style="font-size:10px;color:var(--t3);margin-left:6px">${t.sport} · ${t.dt}</span></div><div class="pi-detail">${t.side} · <span style="color:${sig.color}">${sig.label}</span></div></div></div><div class="pi-right"><button class="o-btn${t.outcome==='WIN'?' sW':''}" onclick="setOutcome('${t.id}','WIN')">W</button><button class="o-btn${t.outcome==='LOSS'?' sL':''}" onclick="setOutcome('${t.id}','LOSS')">L</button><button class="o-btn${t.outcome==='PUSH'?' sP':''}" onclick="setOutcome('${t.id}','PUSH')">P</button><button class="o-btn" onclick="deleteTracked('${t.id}')" title="Remove this play" style="color:var(--t4);border-color:rgba(255,77,106,.15)" onmouseover="this.style.color='var(--red)';this.style.borderColor='var(--rb)'" onmouseout="this.style.color='var(--t4)';this.style.borderColor='rgba(255,77,106,.15)'"><i class="ti ti-trash" style="font-size:11px"></i></button></div></div>`;}).join(''):`<div style="text-align:center;padding:48px;color:var(--t3);font-size:13px">Plays ≥${SHARP_MIN} SI auto-log here</div>`;setTimeout(()=>document.querySelectorAll('.bdr-fill').forEach(e=>e.style.width=e.dataset.w+'%'),80);}
 
 function toggleCard(id){const x=el('gbx-'+id),c=el('gbc-'+id);if(!x)return;const open=x.classList.toggle('open');if(c)c.className=open?'ti ti-chevron-up':'ti ti-chevron-down';}
 function onThresh(v){thresh=parseInt(v);el('thrval').textContent=v;if(cache[sport])render(cache[sport],sport);}
