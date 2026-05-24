@@ -305,9 +305,9 @@ module.exports=async function handler(req,res){
   const exKeys=EXCHANGE_BOOKS.join(',');
   const allBooks='pinnacle,'+exKeys+','+softKeys;
 
+  // Only use bookmakers param — avoids regions double-counting credits
   const url='https://api.the-odds-api.com/v4/sports/'+sportKey+'/odds'+
     '?apiKey='+apiKey+
-    '&regions=us,us_ex'+
     '&markets=h2h,spreads,totals'+
     '&bookmakers='+allBooks+
     '&oddsFormat=american';
