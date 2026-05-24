@@ -318,7 +318,12 @@ module.exports=async function handler(req,res){
     const used=up.headers.get('x-requests-used');
     if(rem)res.setHeader('x-requests-remaining',rem);
     if(used)res.setHeader('x-requests-used',used);
-    if(up.status===401)return res.status(200).json({plays:[],error:'Invalid API key',quota:{remaining:null,used:null}});
+    if(up.status===401){
+      let body='';try{const j=await up.clone().json();body=j.message||'';}catch{}
+      const exhausted=body.toLowerCase().includes('exceed')||body.toLowerCase().includes('limit');
+      const errMsg=exhausted?'API quota exhausted — update key or upgrade plan':'Invalid API key';
+      return res.status(200).json({plays:[],error:errMsg,quota:{remaining:0,used}});
+    }
     if(up.status===422)return res.status(200).json({plays:[],message:sport+' not in season',quota:{remaining:rem,used}});
     if(!up.ok)return res.status(200).json({plays:[],error:'Odds API error '+up.status,quota:{remaining:rem,used}});
 
