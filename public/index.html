@@ -288,6 +288,16 @@ button,input{font-family:inherit;outline:none}
 .gcard.no-signal:hover{opacity:.85;border-color:var(--b2);transform:none}
 .nosig-label{font-size:11px;color:var(--t3);font-family:var(--mono);padding:10px 0 6px;text-align:center;font-style:italic}
 
+
+/* ML-focused feed */
+.ml-feed-section{margin-bottom:28px}
+.ml-feed-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.ml-section-title{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.ml-feed-icon{width:20px;height:20px;border-radius:6px;background:var(--ba);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--blue)}
+.spread-qual-badge{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:4px;font-size:9px;font-family:var(--mono);font-weight:700;background:rgba(255,184,48,.08);border:1px solid rgba(255,184,48,.25);color:var(--amber)}
+.spread-warn{font-size:9px;font-family:var(--mono);color:var(--t4);padding:2px 0}
+.ml-score-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:6px;font-size:10px;font-family:var(--mono);font-weight:700;margin-left:6px}
+
 /* TRACKED */
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .metric-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
@@ -339,9 +349,16 @@ button,input{font-family:inherit;outline:none}
   </div>
 
   <div id="v-live" class="view on">
+    <div class="ml-feed-section">
+      <div class="ml-feed-hdr">
+        <div class="ml-section-title"><div class="ml-feed-icon"><i class="ti ti-trending-up" style="font-size:11px"></i></div>Sharp ML Signals</div>
+        <span class="feed-upd" id="ml-feed-upd"></span>
+      </div>
+      <div class="feed-list" id="ml-feed-list"><div class="feed-empty" style="font-size:12px;color:var(--t3)">No qualifying ML signals above threshold</div></div>
+    </div>
     <div class="feed-wrap">
       <div class="feed-header">
-        <div class="feed-title"><div class="feed-icon"><i class="ti ti-bolt" style="font-size:11px"></i></div>Sharp Money Flow</div>
+        <div class="feed-title"><div class="feed-icon"><i class="ti ti-bolt" style="font-size:11px"></i></div>All Sharp Signals</div>
         <span class="feed-upd" id="feed-upd"></span>
       </div>
       <div class="feed-list" id="feed-list"><div class="feed-empty">Scanning for sharp signals…</div></div>
@@ -807,19 +824,79 @@ function autoTrack(plays,s){
 
 function render(plays,s){
   if(s!==sport)return;
-  // Feed: only plays above threshold
-  const feedPlays=(plays||[]).filter(p=>p.siScore>=Math.max(thresh,1));
-  // Grid: ALL games — signal plays above threshold + all no-signal games
+  // ML feed: games with ML signal above threshold
+  const mlPlays=(plays||[]).filter(p=>p.mlScore>=Math.max(thresh,1)&&p.mlScore>0)
+    .sort((a,b)=>b.mlScore-a.mlScore);
+  // Main sharp feed: ML plays + qualified spreads
+  const feedPlays=(plays||[]).filter(p=>{
+    if(p.mlScore>0&&p.mlScore>=Math.max(thresh,1))return true; // ML signal
+    if(p.siScore>=Math.max(thresh,1)&&p.spreadQualified)return true; // qualified spread
+    return false;
+  }).sort((a,b)=>b.siScore-a.siScore);
+  // Grid: ALL games
   const gridPlays=[
     ...(plays||[]).filter(p=>p.siScore>=thresh&&p.siScore>0),
     ...(plays||[]).filter(p=>p.siScore===0||p.noSignal),
   ];
-  renderFeed(feedPlays.slice(0,6));renderGrid(gridPlays);
+  renderMLFeed(mlPlays);
+  renderFeed(feedPlays.slice(0,6));
+  renderGrid(gridPlays);
   el('feed-upd').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
   const sh=el('sec-hdr');if(gridPlays.length){sh.style.display='flex';el('sec-count').textContent=gridPlays.length+' games'+(feedPlays.length?' · '+feedPlays.length+' with signal':'');}else sh.style.display='none';
 }
 
 /* Feed — Betting Insider style */
+
+function renderMLFeed(plays){
+  const list=el('ml-feed-list');
+  if(!list)return;
+  el('ml-feed-upd').textContent=plays.length?plays.length+' ML signal'+(plays.length>1?'s':''):'';
+  if(!plays.length){
+    list.innerHTML='<div class="feed-empty" style="font-size:12px;color:var(--t3)">No qualifying ML signals above threshold — lines move closer to first pitch</div>';
+    return;
+  }
+  list.innerHTML=plays.map(p=>{
+    const mdata=p.markets&&p.markets['h2h'];
+    if(!mdata||!mdata.siScore)return'';
+    const sig=SIG_DISPLAY[mdata.signalType]||SIG_DISPLAY.WEAK;
+    const mcol=sc(p.mlScore);
+    const t=fmtTime(p.commenceTime);
+    const isLive=new Date(p.commenceTime).getTime()<Date.now();
+    const mov=mdata.movement;
+    return`<div class="feed-row">
+      <div class="feed-row-top">
+        <div class="feed-logos">${logoEl(p.away,'feed-logo')}<span class="feed-logo-sep">@</span>${logoEl(p.home,'feed-logo')}</div>
+        <span class="feed-matchup">${p.away} @ ${p.home}</span>
+        <span class="feed-time-chip" style="color:${isLive?'var(--amber)':''}">${isLive?'🔴 Live':t}</span>
+      </div>
+      <div class="feed-row-mid">
+        <div>
+          <div class="feed-signal-labels">
+            <span class="feed-label-primary" style="color:${sig.color}">${sig.primary}</span>
+            <span class="feed-label-sep">·</span>
+            <span class="feed-label-secondary" style="color:${sig.color}88">${sig.secondary}</span>
+            ${mdata.publicLean===false?'<span style="font-size:9px;color:var(--amber);background:var(--aa);border:1px solid var(--ab);border-radius:4px;padding:1px 6px;font-weight:700;margin-left:4px">Counter-Public</span>':''}
+          </div>
+          <div class="feed-play-line" style="margin-top:4px">
+            <span style="font-family:var(--mono);color:var(--t1)">${mdata.sharpSide}</span>
+            <span style="font-family:var(--mono);color:${mcol};margin-left:6px">ML ${mdata.lines.pinnacle}</span>
+            ${mov&&mov.abs>=2?`<span style="font-size:10px;font-family:var(--mono);color:var(--green);margin-left:6px">${mov.movement>0?'+':''}${mov.movement} from open</span>`:''}
+          </div>
+          <div style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-top:3px">
+            Soft avg ${mdata.lines.softAvg} · ${mdata.gapPP}pp gap · ${mdata.numBooks} books
+            ${mdata.novigConfirm?`<span style="color:var(--violet);margin-left:6px">Novig ✓</span>`:''}
+          </div>
+        </div>
+        <div class="feed-score-wrap">
+          <div class="feed-score-pct" style="color:${mcol}">${p.mlScore}</div>
+          <div class="feed-score-lbl">ML SI</div>
+        </div>
+      </div>
+      <div class="feed-bar-wrap"><div class="feed-bar" style="width:${p.mlScore}%;background:${mcol}"></div></div>
+    </div>`;
+  }).filter(Boolean).join('');
+}
+
 function renderFeed(plays){
   const list=el('feed-list');
   if(!plays.length){list.innerHTML='<div class="feed-empty">No sharp plays detected above threshold</div>';return;}
@@ -950,6 +1027,7 @@ function buildCard(p,idx){
 
     <div class="mkt-tabs">${mktTabs}</div>
 
+    ${spreadWarn&&activeMkt==='spreads'?`<div class="spread-warn" style="padding:6px 0 4px">⚠ Run line odds above -150 — only consider with steam confirmation</div>`:''}
     ${movHtml}
 
     <div class="gc-play-row">
