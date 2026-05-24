@@ -616,7 +616,7 @@ button,input{font-family:inherit;outline:none}
 </div>
 
 <script>
-const REFRESH=15*60*1000,SHARP_MIN=70;
+const REFRESH=30*60*1000,SHARP_MIN=70;
 const sc  =s=>s>=70?'#00e090':s>=50?'#ffb830':'#ff4d6a';
 const sbg =s=>s>=70?'rgba(0,224,144,.1)':s>=50?'rgba(255,184,48,.1)':'rgba(255,77,106,.1)';
 const sbd =s=>s>=70?'rgba(0,224,144,.25)':s>=50?'rgba(255,184,48,.25)':'rgba(255,77,106,.25)';
@@ -1390,7 +1390,7 @@ async function switchSport(s,btn){
   document.querySelectorAll('#sport-tabs .stab').forEach(t=>{t.classList.remove('on');t.classList.remove('multi-on');});
   if(btn)btn.classList.add('on');
   renderSkeletons();hideSetup();
-  try{const d=lsg('si:d:'+s),ts=lsg('si:ts:'+s);if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache[s]=JSON.parse(d);cacheTs[s]=parseInt(ts);render(cache[s],s);return;}}catch{}
+  try{const d=lsg('si:d:'+s),ts=lsg('si:ts:'+s);if(d&&ts&&Date.now()-parseInt(ts)<28*60*1000){cache[s]=JSON.parse(d);cacheTs[s]=parseInt(ts);render(cache[s],s);return;}}catch{}
   fetchPlays(s);
 }
 function switchView(v,btn){document.querySelectorAll('.vtab').forEach(t=>t.classList.remove('on'));if(btn)btn.classList.add('on');document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));el('v-'+v).classList.add('on');if(v==='track')renderTracked();if(v==='plays')renderMyPlays();}
@@ -1411,7 +1411,21 @@ function fmtTime(iso){
     return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' · '+t;
   }catch{return iso||'—'}
 }
-function startCd(){clearInterval(cdTimer);cdTimer=setInterval(()=>{if(cd>0)cd-=1000;else{cd=REFRESH;doRefresh();}const m=Math.floor(cd/60000),s2=Math.floor((cd%60000)/1000);const e=el('cd');if(e)e.textContent=m+':'+s2.toString().padStart(2,'0');},1000);}
+function startCd(){
+  clearInterval(cdTimer);
+  cdTimer=setInterval(()=>{
+    // Don't burn API credits when tab is hidden or in background
+    if(document.hidden){return;}
+    if(cd>0)cd-=1000;
+    else{cd=REFRESH;doRefresh();}
+    const m=Math.floor(cd/60000),s2=Math.floor((cd%60000)/1000);
+    const e=el('cd');if(e)e.textContent=m+':'+s2.toString().padStart(2,'0');
+  },1000);
+}
+// Resume countdown when tab becomes visible again
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden&&cd<=0){cd=REFRESH;doRefresh();}
+});
 
 /* ══════════════════════════════
    AUTO-GRADER
@@ -1799,7 +1813,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDefs();closeNo
 
 window.addEventListener('load',()=>{
   loadState();renderSkeletons();
-  try{const d=lsg('si:d:MLB'),ts=lsg('si:ts:MLB');if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache['MLB']=JSON.parse(d);cacheTs['MLB']=parseInt(ts);processOpeningsAndRLM(cache['MLB']);processOpeningsAndRLM(cache['MLB']);renderAllSports();fetching['MLB']=false;setScanning(false,'MLB');cd=REFRESH;startCd();return;}}catch{}
+  try{const d=lsg('si:d:MLB'),ts=lsg('si:ts:MLB');if(d&&ts&&Date.now()-parseInt(ts)<28*60*1000){cache['MLB']=JSON.parse(d);cacheTs['MLB']=parseInt(ts);processOpeningsAndRLM(cache['MLB']);processOpeningsAndRLM(cache['MLB']);renderAllSports();fetching['MLB']=false;setScanning(false,'MLB');cd=REFRESH;startCd();return;}}catch{}
   fetchPlays('MLB');cd=REFRESH;startCd();
   autoGrade();
 });
