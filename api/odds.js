@@ -29,6 +29,8 @@ const EX_CONFIRM_GAP = 1.5;  // Novig/ProphetX confirmation threshold
 const SPORT_KEYS = {
   MLB:'baseball_mlb',NFL:'americanfootball_nfl',
   NBA:'basketball_nba',NHL:'icehockey_nhl',
+  NCAAFB:'americanfootball_ncaaf',
+  NCAAB:'basketball_ncaab',
 };
 
 function toImp(a){return a>=0?100/(100+a):Math.abs(a)/(Math.abs(a)+100);}
