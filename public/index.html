@@ -306,6 +306,21 @@ button,input{font-family:inherit;outline:none}
 .sort-bar-wrap{display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap}
 .sort-label{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t4);text-transform:uppercase;flex-shrink:0}
 
+
+/* Multi-select sport tabs */
+.stab.multi-on{background:var(--s3);border:1px solid var(--b3);color:var(--t1)}
+.stab.multi-on::after{content:'✓';font-size:9px;margin-left:4px;color:var(--green)}
+.sport-badge{display:inline-flex;align-items:center;padding:1px 7px;border-radius:100px;font-size:9px;font-family:var(--mono);font-weight:800;letter-spacing:.06em;margin-right:5px}
+
+/* Market filter bar */
+.filter-bar{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.filter-group{display:flex;align-items:center;gap:5px}
+.filter-label{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t4);text-transform:uppercase;flex-shrink:0}
+.filter-btn{padding:4px 11px;border-radius:var(--r);border:1px solid var(--b1);background:var(--s1);color:var(--t3);font-size:11px;font-family:var(--mono);font-weight:600;cursor:pointer;transition:all .2s}
+.filter-btn:hover{border-color:var(--b2);color:var(--t2);background:var(--s2)}
+.filter-btn.on{background:var(--s3);border-color:var(--b3);color:var(--t1);font-weight:700}
+.filter-divider{width:1px;height:20px;background:var(--b1);flex-shrink:0}
+
 /* TRACKED */
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .metric-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
@@ -339,10 +354,12 @@ button,input{font-family:inherit;outline:none}
 <nav class="nav">
   <div class="logo"><div class="logo-ring">S</div>SHARP.IDX</div>
   <div class="sport-tabs" id="sport-tabs">
-    <button class="stab on" onclick="switchSport('MLB',this)">MLB</button>
-    <button class="stab" onclick="switchSport('NFL',this)">NFL</button>
-    <button class="stab" onclick="switchSport('NBA',this)">NBA</button>
-    <button class="stab" onclick="switchSport('NHL',this)">NHL</button>
+    <button class="stab on" id="stab-MLB" onclick="toggleSport('MLB',this)">MLB</button>
+    <button class="stab" id="stab-NFL" onclick="toggleSport('NFL',this)">NFL</button>
+    <button class="stab" id="stab-NBA" onclick="toggleSport('NBA',this)">NBA</button>
+    <button class="stab" id="stab-NHL" onclick="toggleSport('NHL',this)">NHL</button>
+    <button class="stab" id="stab-NCAAFB" onclick="toggleSport('NCAAFB',this)">NCAAFB</button>
+    <button class="stab" id="stab-NCAAB" onclick="toggleSport('NCAAB',this)">NCAAB</button>
   </div>
   <div class="nav-right"><button class="pill-btn" id="notif-nav-btn" onclick="openNotif()" title="Notifications" style="border-radius:50%;width:28px;height:28px;padding:0;justify-content:center"><i class="ti ti-bell" style="font-size:14px"></i></button><button class="pill-btn" onclick="openDefs()" title="Glossary" style="border-radius:50%;width:28px;height:28px;padding:0;justify-content:center;font-weight:700;font-size:13px">?</button>
     <div class="nav-status"><div class="ns-dot live" id="ndot"></div><span id="nstatus">Initializing</span></div>
@@ -357,12 +374,22 @@ button,input{font-family:inherit;outline:none}
   </div>
 
   <div id="v-live" class="view on">
-    <div class="sort-bar-wrap" id="sort-bar">
-      <span class="sort-label">Sort</span>
-      <button class="sort-btn on" id="sort-si" onclick="setSort('si',this)">SI Score</button>
-      <button class="sort-btn" id="sort-sig" onclick="setSort('signal',this)">Signal Type</button>
-      <button class="sort-btn" id="sort-gap" onclick="setSort('gap',this)">Pinnacle Gap</button>
-      <button class="sort-btn" id="sort-time" onclick="setSort('time',this)">Game Time</button>
+    <div class="filter-bar">
+      <div class="filter-group">
+        <span class="filter-label">Market</span>
+        <button class="filter-btn on" id="mkt-all" onclick="setMktFilter('all',this)">All</button>
+        <button class="filter-btn" id="mkt-h2h" onclick="setMktFilter('h2h',this)">ML</button>
+        <button class="filter-btn" id="mkt-spreads" onclick="setMktFilter('spreads',this)">Spread</button>
+        <button class="filter-btn" id="mkt-totals" onclick="setMktFilter('totals',this)">O/U</button>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group">
+        <span class="filter-label">Sort</span>
+        <button class="sort-btn on" id="sort-si" onclick="setSort('si',this)">SI Score</button>
+        <button class="sort-btn" id="sort-sig" onclick="setSort('signal',this)">Signal</button>
+        <button class="sort-btn" id="sort-gap" onclick="setSort('gap',this)">Gap</button>
+        <button class="sort-btn" id="sort-time" onclick="setSort('time',this)">Time</button>
+      </div>
     </div>
     <div class="ml-feed-section">
       <div class="ml-feed-hdr">
@@ -952,25 +979,30 @@ function autoTrack(plays,s){
 }
 
 function render(plays,s){
-  if(s!==sport)return;
-  // ML feed: games with ML signal above threshold
-  // ML feed: upcoming games only (can't bet live games)
-  const mlPlays=(plays||[]).filter(p=>p.mlScore>=Math.max(thresh,1)&&p.mlScore>0&&!p.hasStarted)
-    .sort((a,b)=>b.mlScore-a.mlScore);
-  // Main sharp feed: ML plays + qualified spreads
-  const feedPlays=(plays||[]).filter(p=>{
-    if(p.mlScore>0&&p.mlScore>=Math.max(thresh,1))return true; // ML signal
-    if(p.siScore>=Math.max(thresh,1)&&p.spreadQualified)return true; // qualified spread
+  if(s!==sport&&s!=='MULTI')return;
+  const allPlays=plays||[];
+
+  // Market filter
+  const mktFiltered=applyMktFilter(allPlays);
+
+  // ML feed: only when All or ML filter active, no live games
+  const mlPlays=(mktFilter==='all'||mktFilter==='h2h')
+    ? allPlays.filter(p=>p.mlScore>=Math.max(thresh,1)&&p.mlScore>0&&!p.hasStarted).sort((a,b)=>b.mlScore-a.mlScore)
+    : [];
+
+  // Sharp feed
+  const feedPlays=mktFiltered.filter(p=>{
+    if(p.mlScore>0&&p.mlScore>=Math.max(thresh,1)&&!p.hasStarted)return true;
+    if(p.siScore>=Math.max(thresh,1)&&(p.spreadQualified||mktFilter==='spreads'))return true;
     return false;
   }).sort((a,b)=>b.siScore-a.siScore);
-  // Grid: ALL games — apply current sort to signal plays
-  const signalOnly=sortPlays((plays||[]).filter(p=>p.siScore>=thresh&&p.siScore>0));
-  const gridPlays=[
-    ...signalOnly,
-    ...(plays||[]).filter(p=>p.siScore===0||p.noSignal),
-  ];
-  renderMLFeed(mlPlays);
-  renderFeed(feedPlays.slice(0,6));
+
+  // Grid: filtered + no-signal
+  const signalOnly=sortPlays(mktFiltered.filter(p=>p.siScore>=thresh&&p.siScore>0));
+  const noSigPlays=mktFilter==='all'?allPlays.filter(p=>p.siScore===0||p.noSignal):[];
+  const gridPlays=[...signalOnly,...noSigPlays];
+
+  renderMLFeed(mlPlays);nderFeed(feedPlays.slice(0,6));
   renderGrid(gridPlays);
   el('feed-upd').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
   const sh=el('sec-hdr');if(gridPlays.length){sh.style.display='flex';el('sec-count').textContent=gridPlays.length+' games'+(feedPlays.length?' · '+feedPlays.length+' with signal':'');}else sh.style.display='none';
@@ -997,7 +1029,7 @@ function renderMLFeed(plays){
     return`<div class="feed-row">
       <div class="feed-row-top">
         <div class="feed-logos">${logoEl(p.away,'feed-logo')}<span class="feed-logo-sep">@</span>${logoEl(p.home,'feed-logo')}</div>
-        <span class="feed-matchup">${p.away} @ ${p.home}</span>
+        <span class="feed-matchup">${sportBadge(p)}${p.away} @ ${p.home}</span>
         <span class="feed-time-chip">${t}</span>
       </div>
       <div class="feed-row-mid">
@@ -1044,7 +1076,7 @@ function renderFeed(plays){
           <span class="feed-logo-sep">@</span>
           ${logoEl(p.home,'feed-logo')}
         </div>
-        <span class="feed-matchup">${p.away} @ ${p.home}</span>
+        <span class="feed-matchup">${sportBadge(p)}${p.away} @ ${p.home}</span>
         <span class="feed-time-chip" style="color:${p.hasStarted?'var(--t4)':''}">${p.hasStarted?'🔒 Score frozen':t}</span>
       </div>
       <div class="feed-row-mid">
@@ -1344,7 +1376,16 @@ function renderTracked(){const pl=tracked.filter(t=>t.outcome!=='PENDING');const
 
 function toggleCard(id){const x=el('gbx-'+id),c=el('gbc-'+id);if(!x)return;const open=x.classList.toggle('open');if(c)c.className=open?'ti ti-chevron-up':'ti ti-chevron-down';}
 function onThresh(v){thresh=parseInt(v);el('thrval').textContent=v;if(cache[sport])render(cache[sport],sport);}
-async function switchSport(s,btn){sport=s;document.querySelectorAll('#sport-tabs .stab').forEach(t=>t.classList.remove('on'));if(btn)btn.classList.add('on');renderSkeletons();hideSetup();try{const d=lsg(`si:d:${s}`),ts=lsg(`si:ts:${s}`);if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache[s]=JSON.parse(d);cacheTs[s]=parseInt(ts);render(cache[s],s);return;}}catch{}fetchPlays(s);}
+async function switchSport(s,btn){
+  // Legacy single-sport switch — now delegates to toggleSport
+  sport=s;
+  selectedSports=new Set([s]);
+  document.querySelectorAll('#sport-tabs .stab').forEach(t=>{t.classList.remove('on');t.classList.remove('multi-on');});
+  if(btn)btn.classList.add('on');
+  renderSkeletons();hideSetup();
+  try{const d=lsg('si:d:'+s),ts=lsg('si:ts:'+s);if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache[s]=JSON.parse(d);cacheTs[s]=parseInt(ts);render(cache[s],s);return;}}catch{}
+  fetchPlays(s);
+}
 function switchView(v,btn){document.querySelectorAll('.vtab').forEach(t=>t.classList.remove('on'));if(btn)btn.classList.add('on');document.querySelectorAll('.view').forEach(e=>e.classList.remove('on'));el('v-'+v).classList.add('on');if(v==='track')renderTracked();if(v==='plays')renderMyPlays();}
 function doRefresh(){delete cache[sport];lss(`si:d:${sport}`,'');lss(`si:ts:${sport}`,'');renderSkeletons();fetchPlays(sport);}
 function setScanning(on,s){const bar=el('sbar'),dot=el('ndot'),rbtn=el('rbtn'),ri=el('ricon'),steps=['ss1','ss2','ss3','ss4'];if(on){bar.className='status-bar scanning';bar.style.display='flex';rbtn.disabled=true;ri.style.animation='spin .7s linear infinite';dot.className='ns-dot scanning';el('nstatus').textContent='Scanning '+s;steps.forEach(id=>{const e=el(id);if(e)e.className=''});clearInterval(window._st);let i=0;window._st=setInterval(()=>{if(i>0){const p=el(steps[i-1]);if(p)p.classList.add('done')}if(i<steps.length){const c=el(steps[i]);if(c)c.classList.add('cur');i++}else clearInterval(window._st);},2200);}else{clearInterval(window._st);bar.style.display='none';rbtn.disabled=false;ri.style.animation='';dot.className='ns-dot live';el('nstatus').textContent='Live';steps.forEach(id=>{const e=el(id);if(e)e.className='';});}}
@@ -1483,6 +1524,66 @@ async function autoGrade(){
 
 
 
+
+
+/* ── Multi-select sports ── */
+let selectedSports=new Set(['MLB']);
+
+function toggleSport(s,btn){
+  // At least one sport must stay selected
+  if(selectedSports.has(s)&&selectedSports.size===1)return;
+  if(selectedSports.has(s)){
+    selectedSports.delete(s);
+    if(btn){btn.classList.remove('on');btn.classList.remove('multi-on');}
+  }else{
+    selectedSports.add(s);
+    if(btn){btn.classList.add('on');}
+    if(!cache[s])fetchPlays(s);
+  }
+  // Show multi-on checkmarks when >1 sport selected
+  document.querySelectorAll('#sport-tabs .stab').forEach(b=>{
+    const sp=b.id.replace('stab-','');
+    b.classList.toggle('multi-on',selectedSports.size>1&&selectedSports.has(sp));
+  });
+  renderAllSports();
+}
+
+function renderAllSports(){
+  // Merge plays from all selected sports, tag each with sport name
+  const allPlays=[];
+  selectedSports.forEach(s=>{
+    (cache[s]||[]).forEach(p=>{
+      allPlays.push({...p,_sport:s});
+    });
+  });
+  render(allPlays,'MULTI');
+}
+
+/* ── Market filter ── */
+let mktFilter='all';
+function setMktFilter(mkt,btn){
+  mktFilter=mkt;
+  document.querySelectorAll('.filter-btn[id^="mkt-"]').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderAllSports();
+}
+
+function applyMktFilter(plays){
+  if(mktFilter==='all')return plays;
+  return plays.filter(p=>{
+    const md=p.markets&&p.markets[mktFilter];
+    return md&&md.siScore>0&&md.signalType!=='NONE';
+  }).map(p=>({...p,activeMarket:mktFilter})); // force that market tab on cards
+}
+
+
+const SPORT_COLORS={MLB:'#4d9fff',NFL:'#ff8c00',NBA:'#ff4d6a',NHL:'#00e090',NCAAFB:'#9d7cff',NCAAB:'#ffb830'};
+function sportBadge(p){
+  const s=p._sport||sport;
+  if(selectedSports.size<=1)return'';
+  const col=SPORT_COLORS[s]||'var(--t2)';
+  return`<span class="sport-badge" style="background:${col}18;border:1px solid ${col}44;color:${col}">${s}</span>`;
+}
 
 /* Sort */
 let currentSort='si';
@@ -1691,7 +1792,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDefs();closeNo
 
 window.addEventListener('load',()=>{
   loadState();renderSkeletons();
-  try{const d=lsg('si:d:MLB'),ts=lsg('si:ts:MLB');if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache['MLB']=JSON.parse(d);cacheTs['MLB']=parseInt(ts);processOpeningsAndRLM(cache['MLB']);render(cache['MLB'],'MLB');fetching['MLB']=false;setScanning(false,'MLB');cd=REFRESH;startCd();return;}}catch{}
+  try{const d=lsg('si:d:MLB'),ts=lsg('si:ts:MLB');if(d&&ts&&Date.now()-parseInt(ts)<14*60*1000){cache['MLB']=JSON.parse(d);cacheTs['MLB']=parseInt(ts);processOpeningsAndRLM(cache['MLB']);processOpeningsAndRLM(cache['MLB']);renderAllSports();fetching['MLB']=false;setScanning(false,'MLB');cd=REFRESH;startCd();return;}}catch{}
   fetchPlays('MLB');cd=REFRESH;startCd();
   autoGrade();
 });
