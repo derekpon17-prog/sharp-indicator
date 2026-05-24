@@ -667,6 +667,37 @@ function clvDisplay(p){
 }
 
 /* ─── Previous-price storage (steam detection) ─── */
+
+/* ── Score Lock: freeze SI scores at game time ── */
+function lockKey(gameId){return'si:lk:'+gameId;}
+function saveLock(p){
+  try{
+    const snapshot={
+      siScore:p.siScore,pillars:p.pillars,signalType:p.signalType,
+      sharpSide:p.sharpSide,lines:p.lines,gapPP:p.gapPP,mlScore:p.mlScore,
+      markets:Object.fromEntries(Object.entries(p.markets||{}).filter(([,m])=>m).map(([k,m])=>[k,{
+        siScore:m.siScore,pillars:m.pillars,signalType:m.signalType,
+        sharpSide:m.sharpSide,lines:m.lines,gapPP:m.gapPP,
+        movement:m.movement,publicLean:m.publicLean,novigConfirm:m.novigConfirm,
+        numBooks:m.numBooks,currentPinPrice:m.currentPinPrice,
+      }])),
+    };
+    lss(lockKey(p.id),JSON.stringify(snapshot));
+  }catch{}
+}
+function loadLock(gameId){
+  try{const s=lsg(lockKey(gameId));return s?JSON.parse(s):null;}catch{return null;}
+}
+function applyLock(p,lock){
+  p.siScore=lock.siScore;p.pillars=lock.pillars;p.signalType=lock.signalType;
+  p.sharpSide=lock.sharpSide;p.lines=lock.lines;p.gapPP=lock.gapPP;
+  p.mlScore=lock.mlScore||0;
+  Object.entries(lock.markets||{}).forEach(([mkey,mdata])=>{
+    if(p.markets[mkey])Object.assign(p.markets[mkey],mdata);
+  });
+  p.scoreLocked=true;
+}
+
 function getPrevPx(gid,mkey,name){
   try{
     const s=localStorage.getItem('pv:'+gid+':'+mkey+':'+name);
@@ -684,6 +715,16 @@ function setPrevPx(gid,mkey,name,price){
 
 function processOpeningsAndRLM(plays){
   plays.forEach(p=>{
+    const hasStarted=p.commenceTime&&new Date(p.commenceTime).getTime()<Date.now();
+    if(hasStarted){
+      // Game in progress — apply frozen pre-game score, don't recalculate
+      const lock=loadLock(p.id);
+      if(lock)applyLock(p,lock);
+      p.hasStarted=true;
+      return; // skip all recalculation
+    }
+    // Game upcoming — save current snapshot as the lock (updated each fetch until game starts)
+    saveLock(p);
     if(!p.markets)return;
     Object.entries(p.markets).forEach(([mkey,mdata])=>{
       if(!mdata||!mdata.rawPrices)return;
@@ -828,12 +869,16 @@ function updateQuota(used,rem){const q=el('quota');if(!rem&&!used){q.style.displ
 function autoTrack(plays,s){
   plays.forEach(p=>{
     const existing=tracked.find(t=>t.id===p.id&&t.sport===s);
+    const hasStarted=p.commenceTime&&new Date(p.commenceTime).getTime()<Date.now();
     if(existing){
-      // Update to current score — prevents stale scores in auto-tracked
-      existing.score=p.siScore;
-      existing.signalType=p.signalType;
-      existing.side=p.sharpSide;
-    } else if(p.siScore>=SHARP_MIN){
+      // Only update score while game is still upcoming
+      if(!hasStarted){
+        existing.score=p.siScore;
+        existing.signalType=p.signalType;
+        existing.side=p.sharpSide;
+      }
+    } else if(p.siScore>=SHARP_MIN&&!hasStarted){
+      // Only auto-track games that haven't started yet
       tracked.unshift({
         id:p.id,away:p.away,home:p.home,side:p.sharpSide,
         score:p.siScore,sport:s,signalType:p.signalType,
@@ -851,7 +896,8 @@ function autoTrack(plays,s){
 function render(plays,s){
   if(s!==sport)return;
   // ML feed: games with ML signal above threshold
-  const mlPlays=(plays||[]).filter(p=>p.mlScore>=Math.max(thresh,1)&&p.mlScore>0)
+  // ML feed: upcoming games only (can't bet live games)
+  const mlPlays=(plays||[]).filter(p=>p.mlScore>=Math.max(thresh,1)&&p.mlScore>0&&!p.hasStarted)
     .sort((a,b)=>b.mlScore-a.mlScore);
   // Main sharp feed: ML plays + qualified spreads
   const feedPlays=(plays||[]).filter(p=>{
@@ -894,7 +940,7 @@ function renderMLFeed(plays){
       <div class="feed-row-top">
         <div class="feed-logos">${logoEl(p.away,'feed-logo')}<span class="feed-logo-sep">@</span>${logoEl(p.home,'feed-logo')}</div>
         <span class="feed-matchup">${p.away} @ ${p.home}</span>
-        <span class="feed-time-chip" style="color:${isLive?'var(--amber)':''}">${isLive?'🔴 Live':t}</span>
+        <span class="feed-time-chip">${t}</span>
       </div>
       <div class="feed-row-mid">
         <div>
@@ -941,7 +987,7 @@ function renderFeed(plays){
           ${logoEl(p.home,'feed-logo')}
         </div>
         <span class="feed-matchup">${p.away} @ ${p.home}</span>
-        <span class="feed-time-chip" style="color:${new Date(p.commenceTime).getTime()<Date.now()?'var(--amber)':''}">${new Date(p.commenceTime).getTime()<Date.now()?'🔴 In Progress':t}</span>
+        <span class="feed-time-chip" style="color:${p.hasStarted?'var(--t4)':''}">${p.hasStarted?'🔒 Score frozen':t}</span>
       </div>
       <div class="feed-row-mid">
         <div>
@@ -1043,7 +1089,7 @@ function buildCard(p,idx){
         </div>
         <div class="gc-header-info">
           <div class="gc-matchup">${p.away} @ ${p.home}</div>
-          <div class="gc-time" style="color:${new Date(p.commenceTime).getTime()<Date.now()?'var(--amber)':'var(--t3)'}">${new Date(p.commenceTime).getTime()<Date.now()?'🔴 In Progress':''+t}</div>
+          <div class="gc-time" style="color:${p.hasStarted?'var(--t4)':'var(--t3)'}">${p.hasStarted?'🔒 Score locked at '+fmtTime(p.commenceTime):t}</div>
         </div>
       </div>
     </div>
