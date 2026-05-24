@@ -443,6 +443,50 @@ button,input{font-family:inherit;outline:none}
     <div id="plist"></div>
   </div>
 
+<!-- Notifications Modal -->
+<div class="notif-overlay" id="notif-overlay" onclick="if(event.target===this)closeNotif()">
+  <div class="notif-modal">
+    <div class="notif-modal-hdr">
+      <h2><i class="ti ti-bell" style="font-size:15px;margin-right:6px;color:var(--green)"></i>Push Notifications</h2>
+      <button class="defs-close" onclick="closeNotif()">×</button>
+    </div>
+    <div class="notif-modal-body">
+      <div class="notif-hint" style="background:var(--s2);border-radius:var(--r);padding:12px;line-height:1.6">
+        <strong style="color:var(--t1)">Setup:</strong> Download the free <a href="https://ntfy.sh" target="_blank" style="color:var(--blue)">ntfy app</a> on your phone → tap <strong style="color:var(--t1)">+</strong> → enter a unique topic name → Subscribe. Then paste that same topic name below.
+      </div>
+      <div class="notif-field">
+        <span class="notif-label">Your ntfy.sh Topic Name</span>
+        <input class="notif-input" id="notif-topic" placeholder="e.g. sharpidx-derek-kc2026" type="text">
+        <span class="notif-hint">Must match exactly what you entered in the ntfy app</span>
+      </div>
+      <div class="notif-field">
+        <div class="notif-toggle-row">
+          <span class="notif-label">Min SI Score to Alert</span>
+          <span id="notif-thresh-val" style="font-size:14px;font-family:var(--mono);font-weight:800;color:var(--green)">90</span>
+        </div>
+        <input type="range" min="60" max="100" value="90" step="5" id="notif-thresh" oninput="el('notif-thresh-val').textContent=this.value" style="accent-color:var(--green);width:100%;margin-top:4px">
+      </div>
+      <div class="notif-field">
+        <div class="notif-toggle-row">
+          <span class="notif-label">ML Plays Only (no run lines)</span>
+          <label class="ntoggle"><input type="checkbox" id="notif-ml-only"><span class="ntoggle-slider"></span></label>
+        </div>
+      </div>
+      <div class="notif-field">
+        <div class="notif-toggle-row">
+          <span class="notif-label">Notifications Active</span>
+          <label class="ntoggle"><input type="checkbox" id="notif-enabled" checked><span class="ntoggle-slider"></span></label>
+        </div>
+      </div>
+      <div class="notif-actions">
+        <button class="notif-test" onclick="testNotif()"><i class="ti ti-send" style="font-size:11px"></i> Send Test</button>
+        <button class="notif-save" onclick="saveNotif()">Save &amp; Enable</button>
+      </div>
+      <div class="notif-status" id="notif-status"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ─── Definitions Modal ─── -->
 <div class="defs-overlay" id="defs-overlay" onclick="if(event.target===this)closeDefs()">
   <div class="defs-modal">
