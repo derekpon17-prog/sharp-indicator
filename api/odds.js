@@ -300,7 +300,8 @@ module.exports=async function handler(req,res){
     const now=Date.now();
     const upcoming=(Array.isArray(games)?games:[]).filter(g=>{
       const ct=new Date(g.commence_time).getTime();
-      return ct>now&&ct<now+86400000;
+      // Include games started up to 4 hours ago + all upcoming today
+      return ct>now-4*3600000&&ct<now+86400000;
     });
     const rawPlays=upcoming.map(analyzeAll).filter(Boolean);
     // Sort: signal plays first (by score), then no-signal games alphabetically
