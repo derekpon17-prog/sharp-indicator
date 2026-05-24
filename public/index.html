@@ -336,7 +336,7 @@ button,input{font-family:inherit;outline:none}
     <button class="stab" onclick="switchSport('NBA',this)">NBA</button>
     <button class="stab" onclick="switchSport('NHL',this)">NHL</button>
   </div>
-  <div class="nav-right"><button class="pill-btn" onclick="openDefs()" title="Glossary" style="border-radius:50%;width:28px;height:28px;padding:0;justify-content:center;font-weight:700;font-size:13px">?</button>
+  <div class="nav-right"><button class="pill-btn" id="notif-nav-btn" onclick="openNotif()" title="Notifications" style="border-radius:50%;width:28px;height:28px;padding:0;justify-content:center"><i class="ti ti-bell" style="font-size:14px"></i></button><button class="pill-btn" onclick="openDefs()" title="Glossary" style="border-radius:50%;width:28px;height:28px;padding:0;justify-content:center;font-weight:700;font-size:13px">?</button>
     <div class="nav-status"><div class="ns-dot live" id="ndot"></div><span id="nstatus">Initializing</span></div>
     <button class="pill-btn" id="rbtn" onclick="doRefresh()"><i class="ti ti-refresh" id="ricon" style="font-size:13px"></i><span id="cd">—</span></button>
   </div>
@@ -1006,6 +1006,9 @@ function buildCard(p,idx){
   const siBg=mdata.siScore>=80?'linear-gradient(135deg,rgba(0,224,144,.15),rgba(77,159,255,.1))':sbg(mdata.siScore);
   const isAdded=myPlays.some(mp=>mp.id===p.id&&mp.sport===sport&&mp.market===activeMkt);
   const isDual=bestSigType2==='DUAL_CONSENSUS';
+  const spreadMktData=markets['spreads'];
+  const spreadOk=p.spreadQualified||(spreadMktData&&(spreadMktData.isSteam||spreadMktData.steamConfirmed));
+  const spreadWarn=!!(spreadMktData&&spreadMktData.siScore>0&&!spreadOk);
   const mov=mdata.movement;
 
   const mktTabs=['h2h','spreads','totals'].map(mkey=>{
