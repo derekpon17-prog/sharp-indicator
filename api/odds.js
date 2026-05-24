@@ -241,7 +241,28 @@ function analyzeAll(game){
 
   // Always return the game — even with no signal
   const withSignal=all.filter(m=>m.siScore>0);
-  const best=(withSignal.length?withSignal:all).sort((a,b)=>b.siScore-a.siScore)[0];
+  const mlMkt=markets['h2h'];
+  const spreadMkt=markets['spreads'];
+
+  // Prefer ML when it has any qualifying signal
+  // Only fall back to spread/totals if ML has no signal at all
+  const mlHasSignal=mlMkt&&mlMkt.siScore>0&&mlMkt.signalType!=='NONE';
+  const best=mlHasSignal
+    ? mlMkt
+    : (withSignal.length?withSignal:all).sort((a,b)=>b.siScore-a.siScore)[0];
+
+  // Spread quality: only worth surfacing if cheap juice underdog OR steam on favorite
+  let spreadQualified=false;
+  if(spreadMkt&&spreadMkt.siScore>0){
+    const sr=spreadMkt.rawPrices&&spreadMkt.rawPrices.find(r=>r.name===spreadMkt.sharpOutcome);
+    const pt=sr?sr.point:null;
+    const px=sr?sr.price:0;
+    // +1.5 at -150 or better (cheap underdog juice) — value run line
+    if(pt!==null&&pt>0&&px<=-150)spreadQualified=true;
+    // -1.5 side: only qualified if confirmed steam (detected client-side, mark tentative)
+    if(pt!==null&&pt<0)spreadMkt.needsSteam=true;
+  }
+
   const noSignal=!best||best.siScore===0;
   if(noSignal){
     return{
@@ -250,6 +271,7 @@ function analyzeAll(game){
       exLines:{},lines:{pinnacle:'—',novig:null,softAvg:'—',softRange:'—'},
       gapPP:'0.00',pillars:{rlm:0,pinnacle:0,money:0},numBooks:0,
       publicLean:false,activeMarket:'h2h',markets,noSignal:true,
+      mlScore:mlMkt?mlMkt.siScore:0,spreadQualified:false,
     };
   }
   return{
@@ -257,8 +279,10 @@ function analyzeAll(game){
     siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,
     novigConfirm:best.novigConfirm,exConfirms:best.exConfirms,exLines:best.exLines,
     lines:best.lines,gapPP:best.gapPP,pillars:best.pillars,
-    numBooks:best.numBooks,publicLean:best.publicLean,activeMarket:best.market,markets,
-    noSignal:false,
+    numBooks:best.numBooks,publicLean:best.publicLean,
+    activeMarket:best.market,markets,noSignal:false,
+    mlScore:mlMkt?mlMkt.siScore:0,
+    spreadQualified,
   };
 }
 
