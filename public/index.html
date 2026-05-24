@@ -837,7 +837,7 @@ function renderFeed(plays){
           ${logoEl(p.home,'feed-logo')}
         </div>
         <span class="feed-matchup">${p.away} @ ${p.home}</span>
-        <span class="feed-time-chip">${t}</span>
+        <span class="feed-time-chip" style="color:${new Date(p.commenceTime).getTime()<Date.now()?'var(--amber)':''}">${new Date(p.commenceTime).getTime()<Date.now()?'🔴 In Progress':t}</span>
       </div>
       <div class="feed-row-mid">
         <div>
@@ -882,16 +882,26 @@ function renderEmpty(s,r){el('ggrid').innerHTML=`<div class="empty-state"><div c
 
 function buildCard(p,idx){
   const markets=p.markets||{};
-  const activeMkt=activeMarket[p.id]||p.activeMarket||'h2h';
+  // Default to best-scoring market, not always h2h
+  const bestMkt=(()=>{
+    if(activeMarket[p.id])return activeMarket[p.id];
+    const mkeys=['spreads','h2h','totals'];
+    let best='h2h',bestScore=-1;
+    mkeys.forEach(mk=>{const md=markets[mk];if(md&&md.siScore>bestScore){bestScore=md.siScore;best=mk;}});
+    return best;
+  })();
+  const activeMkt=bestMkt;
   if(!activeMarket[p.id])activeMarket[p.id]=activeMkt;
   const mdata=markets[activeMkt]||Object.values(markets).find(Boolean)||{siScore:p.siScore,sharpSide:p.sharpSide,signalType:p.signalType,lines:p.lines,gapPP:p.gapPP,pillars:p.pillars||{rlm:0,pinnacle:0,money:0},novigConfirm:p.novigConfirm,numBooks:p.numBooks,publicLean:p.publicLean};
-  const sig=SIG_DISPLAY[mdata.signalType]||SIG_DISPLAY.WEAK;
-  const col=sc(mdata.siScore);
+  const bestSigType2=p.signalType&&p.signalType!=='NONE'?p.signalType:(mdata.signalType||'WEAK');
+  const sig=SIG_DISPLAY[bestSigType2]||SIG_DISPLAY.WEAK;
+  // Use best (p-level) score for colors, active market for content
+  const col=sc(p.siScore||mdata.siScore);
   const t=fmtTime(p.commenceTime);
   const gapW=Math.min(100,(parseFloat(mdata.gapPP||0)/7*100)).toFixed(0);
   const siBg=mdata.siScore>=80?'linear-gradient(135deg,rgba(0,224,144,.15),rgba(77,159,255,.1))':sbg(mdata.siScore);
   const isAdded=myPlays.some(mp=>mp.id===p.id&&mp.sport===sport&&mp.market===activeMkt);
-  const isDual=mdata.signalType==='DUAL_CONSENSUS';
+  const isDual=bestSigType==='DUAL_CONSENSUS';
   const mov=mdata.movement;
 
   const mktTabs=['h2h','spreads','totals'].map(mkey=>{
@@ -926,16 +936,16 @@ function buildCard(p,idx){
         </div>
         <div class="gc-header-info">
           <div class="gc-matchup">${p.away} @ ${p.home}</div>
-          <div class="gc-time">${t}</div>
+          <div class="gc-time" style="color:${new Date(p.commenceTime).getTime()<Date.now()?'var(--amber)':'var(--t3)'}">${new Date(p.commenceTime).getTime()<Date.now()?'🔴 In Progress':''+t}</div>
         </div>
       </div>
     </div>
 
-    <div class="gc-signal-row">
-      <span class="gc-sig-primary" style="color:${sig.color}">${sig.primary}</span>
+    <div class="gc-signal-row" id="gc-sigrow-${p.id}">
+      <span class="gc-sig-primary" id="gc-sigprimary-${p.id}" style="color:${sig.color}">${sig.primary}</span>
       <span class="gc-sig-sep">·</span>
-      <span class="gc-sig-secondary">${sig.secondary}</span>
-      ${mdata.publicLean===false?'<span class="gc-counter-tag">Counter-Public</span>':''}
+      <span class="gc-sig-secondary" id="gc-sigsecond-${p.id}">${sig.secondary}</span>
+      <span id="gc-sigcounterpub-${p.id}">${mdata.publicLean===false?'<span class="gc-counter-tag">Counter-Public</span>':''}</span>
     </div>
 
     <div class="mkt-tabs">${mktTabs}</div>
@@ -947,9 +957,9 @@ function buildCard(p,idx){
         <span class="gc-side" id="gc-side-${p.id}" style="border-color:${sbd(mdata.siScore)};color:${col};background:${sbg(mdata.siScore)}">${mdata.siScore>=SHARP_MIN?`<i class="ti ti-bolt" style="font-size:10px"></i>`:''}${mdata.sharpSide}</span>
         <div class="gc-novig" id="gc-novig-${p.id}" style="display:${mdata.novigConfirm?'flex':'none'}"><i class="ti ti-check" style="font-size:10px"></i>Novig confirms ${mdata.lines.novig||''}</div>
       </div>
-      <div class="si-badge" id="si-badge-${p.id}" style="background:${siBg};border-color:${sbd(mdata.siScore)}">
-        <span class="si-num" style="color:${col}">${mdata.siScore}</span>
-        <span class="si-lbl" style="color:${col}">SI SCORE</span>
+      <div class="si-badge" id="si-badge-${p.id}" style="background:${p.siScore>=80?'linear-gradient(135deg,rgba(0,224,144,.15),rgba(77,159,255,.1))':sbg(p.siScore)};border-color:${sbd(p.siScore)}">
+        <span class="si-num" style="color:${sc(p.siScore)}">${p.siScore||'—'}</span>
+        <span class="si-lbl" style="color:${sc(p.siScore)}">SI SCORE</span>
       </div>
     </div>
 
@@ -990,6 +1000,15 @@ function switchMarket(gameId,mkey){
 }
 function updateCardContent(gameId,mdata,mkey){
   const col=sc(mdata.siScore),sig=SIG_DISPLAY[mdata.signalType]||SIG_DISPLAY.WEAK;
+
+  // Update signal labels
+  const sp=el('gc-sigprimary-'+gameId);
+  const ss=el('gc-sigsecond-'+gameId);
+  const sc2=el('gc-sigcounterpub-'+gameId);
+  if(sp){sp.textContent=sig.primary;sp.style.color=sig.color;}
+  if(ss)ss.textContent=sig.secondary;
+  if(sc2)sc2.innerHTML=mdata.publicLean===false?'<span class="gc-counter-tag">Counter-Public</span>':'';
+
   const badge=el('si-badge-'+gameId);
   if(badge){badge.style.borderColor=sbd(mdata.siScore);badge.style.background=mdata.siScore>=80?'linear-gradient(135deg,rgba(0,224,144,.15),rgba(77,159,255,.1))':sbg(mdata.siScore);badge.innerHTML=`<span class="si-num" style="color:${col}">${mdata.siScore}</span><span class="si-lbl" style="color:${col}">SI SCORE</span>`;}
   const side=el('gc-side-'+gameId);if(side){side.style.cssText=`border-color:${sbd(mdata.siScore)};color:${col};background:${sbg(mdata.siScore)}`;side.innerHTML=`${mdata.siScore>=SHARP_MIN?'<i class="ti ti-bolt" style="font-size:10px"></i>':''}${mdata.sharpSide}`;}
