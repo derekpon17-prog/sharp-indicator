@@ -1522,16 +1522,20 @@ function updateNotifNavBtn(){
 async function testNotif(){
   const topic=el('notif-topic').value.trim();
   if(!topic){el('notif-status').style.color='var(--red)';el('notif-status').textContent='Enter a topic first';return;}
-  el('notif-status').style.color='var(--amber)';el('notif-status').textContent='Sending test…';
+  el('notif-status').style.color='var(--amber)';el('notif-status').textContent='Sending…';
   try{
-    const r=await fetch('https://ntfy.sh/'+topic,{
+    // no-cors bypasses CORS preflight — notification delivers but response is opaque
+    await fetch('https://ntfy.sh/'+topic,{
       method:'POST',
-      headers:{'Title':'⚡ Sharp.idx Test','Priority':'default','Tags':'white_check_mark'},
-      body:'Sharp.idx notifications are working! You will receive alerts when new plays exceed your SI threshold.',
+      mode:'no-cors',
+      body:'Test from Sharp.idx — notifications are working! You will receive alerts when plays hit your SI threshold.',
     });
-    if(r.ok){el('notif-status').style.color='var(--green)';el('notif-status').textContent='✓ Test sent — check your ntfy app';}
-    else{el('notif-status').style.color='var(--red)';el('notif-status').textContent='Error '+r.status+' — check topic name';}
-  }catch(e){el('notif-status').style.color='var(--red)';el('notif-status').textContent='Network error — check connection';}
+    el('notif-status').style.color='var(--green)';
+    el('notif-status').textContent='✓ Sent — check your ntfy app now (may take 5–10 sec)';
+  }catch(e){
+    el('notif-status').style.color='var(--red)';
+    el('notif-status').textContent='Failed: '+e.message;
+  }
 }
 
 function getNotifiedSet(){try{return new Set(JSON.parse(lsg('si:notified')||'[]'));}catch{return new Set();}}
@@ -1566,14 +1570,11 @@ async function checkAndNotify(plays){
     const sig=md?md.signalType:p.signalType;
     const body=`${p.away} @ ${p.home}\n${side} · ${mktLabel} ${line}\n${(SIGS[sig]||{label:sig}).label} · ${score} SI Score`;
     try{
+      // no-cors: bypasses CORS, notification delivers but response is opaque
       await fetch('https://ntfy.sh/'+topic,{
         method:'POST',
-        headers:{
-          'Title':'⚡ Sharp Signal: '+score+' SI — '+(mkt==='h2h'?'ML':'Run Line'),
-          'Priority':score>=90?'urgent':'high',
-          'Tags':'baseball,chart_with_upwards_trend',
-        },
-        body,
+        mode:'no-cors',
+        body:'⚡ '+score+' SI — '+(mkt==='h2h'?'ML':'Spread')+'\n'+body,
       });
       markNotified([key]);
     }catch(e){console.error('ntfy error:',e.message);}
