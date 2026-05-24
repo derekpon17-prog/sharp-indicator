@@ -298,6 +298,14 @@ button,input{font-family:inherit;outline:none}
 .spread-warn{font-size:9px;font-family:var(--mono);color:var(--t4);padding:2px 0}
 .ml-score-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:6px;font-size:10px;font-family:var(--mono);font-weight:700;margin-left:6px}
 
+
+/* Sort buttons */
+.sort-btn{padding:4px 11px;border-radius:var(--r);border:1px solid var(--b1);background:var(--s1);color:var(--t3);font-size:11px;font-family:var(--mono);font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.sort-btn:hover{border-color:var(--b2);color:var(--t2);background:var(--s2)}
+.sort-btn.on{background:var(--s3);border-color:var(--b3);color:var(--t1);font-weight:700}
+.sort-bar-wrap{display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.sort-label{font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.07em;color:var(--t4);text-transform:uppercase;flex-shrink:0}
+
 /* TRACKED */
 .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .metric-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl);padding:16px}
@@ -349,12 +357,12 @@ button,input{font-family:inherit;outline:none}
   </div>
 
   <div id="v-live" class="view on">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap" id="sort-bar">
-      <span style="font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:.06em;color:var(--t3);text-transform:uppercase">Sort</span>
-      <button class="tag-filter-pill on" id="sort-si" onclick="setSort('si',this)">SI Score</button>
-      <button class="tag-filter-pill" id="sort-sig" onclick="setSort('signal',this)">Signal Type</button>
-      <button class="tag-filter-pill" id="sort-gap" onclick="setSort('gap',this)">Pinnacle Gap</button>
-      <button class="tag-filter-pill" id="sort-time" onclick="setSort('time',this)">Game Time</button>
+    <div class="sort-bar-wrap" id="sort-bar">
+      <span class="sort-label">Sort</span>
+      <button class="sort-btn on" id="sort-si" onclick="setSort('si',this)">SI Score</button>
+      <button class="sort-btn" id="sort-sig" onclick="setSort('signal',this)">Signal Type</button>
+      <button class="sort-btn" id="sort-gap" onclick="setSort('gap',this)">Pinnacle Gap</button>
+      <button class="sort-btn" id="sort-time" onclick="setSort('time',this)">Game Time</button>
     </div>
     <div class="ml-feed-section">
       <div class="ml-feed-hdr">
@@ -1238,15 +1246,32 @@ function renderMyPlays(){
 
 /* Tracked tab */
 function setOutcome(id,val){const t=tracked.find(p=>p.id===id);if(t){t.outcome=val;outcomes[id]=val;}saveTk();saveOc();renderTracked();}
-function renderTracked(){const pl=tracked.filter(t=>t.outcome!=='PENDING');const W=pl.filter(t=>t.outcome==='WIN').length,L=pl.filter(t=>t.outcome==='LOSS').length,P=pl.filter(t=>t.outcome==='PUSH').length,tot=W+L;const wr=tot?Math.round(W/tot*100):0,roi=tot?Math.round(((W*90.9-L*100)/(tot*100))*100):0;el('metrics').innerHTML=`<div class="metric-card"><div class="mc-label">Record</div><div class="mc-val" style="font-size:20px">${W}–${L}–${P}</div><div class="mc-sub">${tracked.length} auto-tracked</div></div><div class="metric-card"><div class="mc-label">Win Rate</div><div class="mc-val" style="color:${sc(wr)}">${wr}%</div><div class="mc-sub">excl. pushes</div></div><div class="metric-card"><div class="mc-label">Est. ROI</div><div class="mc-val" style="color:${roi>=0?'#00e090':'#ff4d6a'}">${roi>=0?'+':''}${roi}%</div><div class="mc-sub">–110 standard</div></div><div class="metric-card"><div class="mc-label">Pending</div><div class="mc-val">${tracked.filter(t=>t.outcome==='PENDING').length}</div><div class="mc-sub">awaiting result</div></div>`;const ranges=[{l:'80–100 SI',mn:80,mx:100},{l:'70–79 SI',mn:70,mx:79},{l:'60–69 SI',mn:60,mx:69}];el('score-bd').innerHTML=ranges.map(r=>{const ps=tracked.filter(t=>t.score>=r.mn&&t.score<=r.mx&&t.outcome!=='PENDING');const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;if(!tot2)return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><span style="font-size:10px;color:var(--t3)">no data yet</span></div>`;const pct=Math.round(W2/tot2*100);return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sc(pct)}" data-w="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join('');const sigRows=Object.keys(SIGS).map(k=>{const ps=tracked.filter(t=>t.signalType===k&&t.outcome!=='PENDING');if(!ps.length)return null;const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0};}).filter(Boolean).sort((a,b)=>b.pct-a.pct);el('sig-bd').innerHTML=sigRows.length?`<table style="width:100%;border-collapse:collapse">`+
-  `<thead><tr>${['Signal','W-L','Win%','ROI'].map(h=>`<th style="font-size:9px;font-family:var(--mono);font-weight:700;letter-spacing:.06em;color:var(--t4);text-transform:uppercase;padding:0 0 8px;text-align:${h==='Signal'?'left':'right'};border-bottom:1px solid var(--b1)">${h}</th>`).join('')}</tr></thead>`+
-  `<tbody>`+sigRows.map(({k,W:W2,L:L2,pct})=>{
+function renderTracked(){const pl=tracked.filter(t=>t.outcome!=='PENDING');const W=pl.filter(t=>t.outcome==='WIN').length,L=pl.filter(t=>t.outcome==='LOSS').length,P=pl.filter(t=>t.outcome==='PUSH').length,tot=W+L;const wr=tot?Math.round(W/tot*100):0,roi=tot?Math.round(((W*90.9-L*100)/(tot*100))*100):0;el('metrics').innerHTML=`<div class="metric-card"><div class="mc-label">Record</div><div class="mc-val" style="font-size:20px">${W}–${L}–${P}</div><div class="mc-sub">${tracked.length} auto-tracked</div></div><div class="metric-card"><div class="mc-label">Win Rate</div><div class="mc-val" style="color:${sc(wr)}">${wr}%</div><div class="mc-sub">excl. pushes</div></div><div class="metric-card"><div class="mc-label">Est. ROI</div><div class="mc-val" style="color:${roi>=0?'#00e090':'#ff4d6a'}">${roi>=0?'+':''}${roi}%</div><div class="mc-sub">–110 standard</div></div><div class="metric-card"><div class="mc-label">Pending</div><div class="mc-val">${tracked.filter(t=>t.outcome==='PENDING').length}</div><div class="mc-sub">awaiting result</div></div>`;const ranges=[{l:'80–100 SI',mn:80,mx:100},{l:'70–79 SI',mn:70,mx:79},{l:'60–69 SI',mn:60,mx:69}];el('score-bd').innerHTML=ranges.map(r=>{const ps=tracked.filter(t=>t.score>=r.mn&&t.score<=r.mx&&t.outcome!=='PENDING');const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;if(!tot2)return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><span style="font-size:10px;color:var(--t3)">no data yet</span></div>`;const pct=Math.round(W2/tot2*100);return`<div class="bd-row"><span class="bdr-lbl">${r.l}</span><div class="bdr-track"><div class="bdr-fill" style="background:${sc(pct)}" data-w="${pct}"></div></div><span class="bdr-stat">${W2}-${L2} <span style="color:${sc(pct)}">${pct}%</span></span></div>`;}).join('');const sigRows=Object.keys(SIGS).map(k=>{
+    const ps=tracked.filter(t=>t.signalType===k&&t.outcome!=='PENDING');
+    if(!ps.length)return null;
+    const W2=ps.filter(t=>t.outcome==='WIN').length,L2=ps.filter(t=>t.outcome==='LOSS').length,tot2=W2+L2;
+    // Market breakdown per signal
+    const mkts=['h2h','spreads','totals'];
+    const mktBreak=mkts.map(mkey=>{
+      const mp=ps.filter(t=>(t.market||'h2h')===mkey);
+      if(!mp.length)return null;
+      const mW=mp.filter(t=>t.outcome==='WIN').length,mL=mp.filter(t=>t.outcome==='LOSS').length,mT=mW+mL;
+      return{mkey,W:mW,L:mL,pct:mT?Math.round(mW/mT*100):0,n:mp.length};
+    }).filter(Boolean);
+    return{k,W:W2,L:L2,pct:tot2?Math.round(W2/tot2*100):0,mktBreak};
+  }).filter(Boolean).sort((a,b)=>b.pct-a.pct);const mktLabel={h2h:'ML',spreads:'Spread',totals:'O/U'};
+  const mktColor={h2h:'var(--blue)',spreads:'var(--amber)',totals:'var(--violet)'};
+  el('sig-bd').innerHTML=sigRows.length?`<table style="width:100%;border-collapse:collapse">`+
+  `<thead><tr>${['Signal / Market','W-L','Win%','ROI'].map(h=>`<th style="font-size:9px;font-family:var(--mono);font-weight:700;letter-spacing:.06em;color:var(--t4);text-transform:uppercase;padding:0 0 8px;text-align:${h==='Signal / Market'?'left':'right'};border-bottom:1px solid var(--b1)">${h}</th>`).join('')}</tr></thead>`+
+  `<tbody>`+sigRows.map(({k,W:W2,L:L2,pct,mktBreak})=>{
     const sig=SIGS[k];
     const ps=tracked.filter(t=>t.signalType===k&&t.outcome!=='PENDING');
     let profit=0,risked=0;
     ps.forEach(p=>{risked+=100;if(p.outcome==='WIN'){profit+=90.9;}else if(p.outcome==='LOSS'){profit-=100;}});
     const roi=risked>0?Math.round((profit/risked)*100):0;
-    return`<tr><td style="font-size:11px;font-family:var(--mono);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.03);color:${sig.color};font-weight:700">${sig.label}</td><td style="font-size:11px;font-family:var(--mono);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.03);text-align:right;color:var(--t1)">${W2}-${L2}</td><td style="font-size:11px;font-family:var(--mono);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.03);text-align:right;color:${sc(pct)};font-weight:700">${pct}%</td><td style="font-size:11px;font-family:var(--mono);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.03);text-align:right;color:${roi>=0?'var(--green)':'var(--red)'};font-weight:700">${roi>=0?'+':''}${roi}%</td></tr>`;
+    const mainRow=`<tr><td style="font-size:11px;font-family:var(--mono);padding:7px 0 3px;color:${sig.color};font-weight:800">${sig.label}</td><td style="font-size:11px;font-family:var(--mono);padding:7px 0 3px;text-align:right;color:var(--t1);font-weight:700">${W2}-${L2}</td><td style="font-size:11px;font-family:var(--mono);padding:7px 0 3px;text-align:right;color:${sc(pct)};font-weight:700">${pct}%</td><td style="font-size:11px;font-family:var(--mono);padding:7px 0 3px;text-align:right;color:${roi>=0?'var(--green)':'var(--red)'};font-weight:700">${roi>=0?'+':''}${roi}%</td></tr>`;
+    const subRows=mktBreak.map(({mkey,W:mW,L:mL,pct:mp})=>`<tr><td style="font-size:10px;font-family:var(--mono);padding:2px 0 2px 10px;color:${mktColor[mkey]};border-bottom:1px solid rgba(255,255,255,.03)">↳ ${mktLabel[mkey]}</td><td style="font-size:10px;font-family:var(--mono);padding:2px 0;text-align:right;color:var(--t2);border-bottom:1px solid rgba(255,255,255,.03)">${mW}-${mL}</td><td style="font-size:10px;font-family:var(--mono);padding:2px 0;text-align:right;color:${sc(mp)};border-bottom:1px solid rgba(255,255,255,.03)">${mp}%</td><td style="font-size:10px;font-family:var(--mono);padding:2px 0;text-align:right;color:var(--t3);border-bottom:1px solid rgba(255,255,255,.03)">—</td></tr>`).join('');
+    return mainRow+subRows;
   }).join('')+`</tbody></table>`:`<div style="font-size:11px;color:var(--t3);padding:6px 0">Log outcomes to see signal breakdown</div>`;const visibleTracked=tracked.filter(t=>t.score>=SHARP_MIN||t.outcome!=='PENDING');
   el('plist').innerHTML=visibleTracked.length?visibleTracked.map(t=>{const col=sc(t.score),sig=SIGS[t.signalType]||SIGS.WEAK;return`<div class="play-item"><div class="pi-left"><span class="pi-score-pill" style="border-color:${sbd(t.score)};color:${col};background:${sbg(t.score)}">${t.score}</span><div><div class="pi-match">${t.away} @ ${t.home} <span style="font-size:10px;color:var(--t3);margin-left:6px">${t.sport} · ${t.dt}</span></div><div class="pi-detail">${t.side} · <span style="color:${sig.color}">${sig.label}</span></div></div></div><div class="pi-right"><button class="o-btn${t.outcome==='WIN'?' sW':''}" onclick="setOutcome('${t.id}','WIN')">W</button><button class="o-btn${t.outcome==='LOSS'?' sL':''}" onclick="setOutcome('${t.id}','LOSS')">L</button><button class="o-btn${t.outcome==='PUSH'?' sP':''}" onclick="setOutcome('${t.id}','PUSH')">P</button></div></div>`;}).join(''):`<div style="text-align:center;padding:48px;color:var(--t3);font-size:13px">Plays ≥${SHARP_MIN} SI auto-log here</div>`;setTimeout(()=>document.querySelectorAll('.bdr-fill').forEach(e=>e.style.width=e.dataset.w+'%'),80);}
 
@@ -1397,7 +1422,7 @@ let currentSort='si';
 const SIG_ORDER={DUAL_CONSENSUS:0,SHARP_RLM:1,PINNACLE_EDGE:2,EXCHANGE_SIGNAL:3,RLM_ONLY:4,MODERATE_EDGE:5,WEAK:6,NONE:7};
 function setSort(mode,btn){
   currentSort=mode;
-  document.querySelectorAll('#sort-bar .tag-filter-pill').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('#sort-bar .sort-btn').forEach(b=>b.classList.remove('on'));
   if(btn)btn.classList.add('on');
   if(cache[sport])render(cache[sport],sport);
 }
