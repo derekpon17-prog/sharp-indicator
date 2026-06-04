@@ -1009,7 +1009,8 @@ function render(plays,s){
   const noSigPlays=mktFilter==='all'?allPlays.filter(p=>p.siScore===0||p.noSignal):[];
   const gridPlays=[...signalOnly,...noSigPlays];
 
-  renderMLFeed(mlPlays);nderFeed(feedPlays.slice(0,6));
+  renderMLFeed(mlPlays);
+  renderFeed(feedPlays.slice(0,6));
   renderGrid(gridPlays);
   el('feed-upd').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
   const sh=el('sec-hdr');if(gridPlays.length){sh.style.display='flex';el('sec-count').textContent=gridPlays.length+' games'+(feedPlays.length?' · '+feedPlays.length+' with signal':'');}else sh.style.display='none';
