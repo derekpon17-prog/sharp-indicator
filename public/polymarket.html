@@ -163,4 +163,132 @@ button,input,select{font-family:inherit;outline:none}
       <div class="field">
         <div class="toggle-row">
           <span class="field-label">Alert Threshold</span>
-          <span id="cfg-thresh-val"
+          <span id="cfg-thresh-val" style="font-size:13px;font-family:var(--mono);font-weight:700;color:var(--violet)">$5,000</span>
+        </div>
+        <input type="range" min="1000" max="25000" value="5000" step="1000" id="cfg-thresh"
+          oninput="document.getElementById('cfg-thresh-val').textContent='$'+parseInt(this.value).toLocaleString()" style="accent-color:var(--violet)">
+      </div>
+      <div class="field">
+        <div class="toggle-row">
+          <span class="field-label">Trader Pool</span>
+          <select id="cfg-cat">
+            <option value="all">All Tracked Traders</option>
+            <option value="OVERALL">Overall PnL Leaders</option>
+            <option value="SPORTS">Sports PnL Leaders</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <div class="toggle-row">
+          <span class="field-label">Alerts Active</span>
+          <label class="ntoggle"><input type="checkbox" id="cfg-on" checked><span class="ntoggle-slider"></span></label>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="sendTest()"><i class="ti ti-send" style="font-size:11px"></i> Test</button>
+        <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
+      </div>
+      <div class="save-status" id="save-status"></div>
+    </div>
+  </div>
+</div>
+<script>
+const lsg=k=>{try{return localStorage.getItem(k)}catch{return null}};
+const lss=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
+let allBuys=[];
+let thresh=parseInt(lsg('pm:thresh')||'1000');
+let catFilter=lsg('pm:cat')||'all';
+let cd=0,cdTimer;
+const REFRESH=10*60*1000;
+document.getElementById('thresh').value=thresh;
+document.getElementById('thresh-val').textContent='$'+thresh.toLocaleString()+'+';
+const activeCatBtn=document.getElementById('f-'+catFilter);
+if(activeCatBtn){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));activeCatBtn.classList.add('on');}
+function sizeColor(u){return u>=25000?'size-25k':u>=10000?'size-10k':u>=5000?'size-5k':'size-1k';}
+function timeAgo(ts){const s=Math.floor(Date.now()/1000)-ts;if(s<60)return s+'s ago';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
+function applyFilters(){return allBuys.filter(b=>{if(b.usdValue<thresh)return false;if(catFilter==='all')return true;return b.categories&&b.categories.some(c=>c.category===catFilter);});}
+function render(){
+  const f=applyFilters();
+  const vol=f.reduce((a,b)=>a+b.usdValue,0);
+  const top=f.length?Math.max(...f.map(b=>b.usdValue)):0;
+  document.getElementById('s-count').textContent=f.length;
+  document.getElementById('s-vol').textContent='$'+Math.round(vol).toLocaleString();
+  document.getElementById('feed-count').textContent=f.length+' buys';
+  document.getElementById('s-top').textContent=top?'$'+Math.round(top).toLocaleString():'—';
+  const feed=document.getElementById('feed');
+  if(!f.length){feed.innerHTML='<div class="empty">No buys above $'+thresh.toLocaleString()+'.<br>Try lowering the threshold.</div>';return;}
+  feed.innerHTML=f.map(b=>{
+    const badges=(b.categories||[]).map(c=>`<span class="rank-badge ${c.category==='OVERALL'?'overall':'sports'}">${c.category==='OVERALL'?'Overall':'Sports'} #${c.rank}</span>`).join('');
+    const link=b.eventSlug?`https://polymarket.com/event/${b.eventSlug}`:'#';
+    const oc=(b.outcome||'').toLowerCase();
+    const ocCls=oc==='yes'?'outcome-yes':oc==='no'?'outcome-no':'';
+    const price=(parseFloat(b.price||0)*100).toFixed(1);
+    const av=b.profileImage?`<img class="avatar" src="${b.profileImage}" onerror="this.outerHTML='<div class=&quot;avatar-fallback&quot;>${(b.traderName||'?').slice(0,2).toUpperCase()}</div>'">`:`<div class="avatar-fallback">${(b.traderName||'?').slice(0,2).toUpperCase()}</div>`;
+    return`<div class="feed-row">${av}<div class="row-main"><div class="trader-line"><span class="trader-name">${b.traderName||'Anon'}</span>${badges}</div><div class="market-title" title="${b.title||''}">${b.title||'Unknown market'}</div><div class="outcome-line">Bought <span class="${ocCls}">${b.outcome||'—'}</span> @ <span style="color:var(--t2)">${price}¢</span> &nbsp;·&nbsp;<a class="mkt-link" href="${link}" target="_blank">View →</a></div></div><div class="row-right"><div class="buy-size ${sizeColor(b.usdValue)}">$${Math.round(b.usdValue).toLocaleString()}</div><div class="buy-time">${timeAgo(b.timestamp)}</div></div></div>`;
+  }).join('');
+}
+async function fetchData(){
+  document.getElementById('dot').className='dot scanning';
+  document.getElementById('status-txt').textContent='Scanning';
+  try{
+    const r=await fetch('/api/polymarket');
+    const d=await r.json();
+    allBuys=d.buys||[];
+    document.getElementById('s-traders').textContent=d.walletsTracked||'—';
+    document.getElementById('last-upd').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    render();
+    document.getElementById('dot').className='dot';
+    document.getElementById('status-txt').textContent='Live';
+  }catch(e){
+    document.getElementById('dot').style.background='var(--red)';
+    document.getElementById('status-txt').textContent='Error';
+  }
+  cd=REFRESH;
+}
+function doRefresh(){fetchData();}
+function onThresh(v){thresh=parseInt(v);lss('pm:thresh',v);document.getElementById('thresh-val').textContent='$'+thresh.toLocaleString()+'+';render();}
+function setFilter(f,btn){catFilter=f;lss('pm:cat',f);document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');render();}
+function openSettings(){
+  document.getElementById('cfg-topic').value=lsg('pm:ntfy-topic')||'';
+  const t=lsg('pm:ntfy-thresh')||'5000';
+  document.getElementById('cfg-thresh').value=t;
+  document.getElementById('cfg-thresh-val').textContent='$'+parseInt(t).toLocaleString();
+  document.getElementById('cfg-cat').value=lsg('pm:ntfy-cat')||'all';
+  document.getElementById('cfg-on').checked=lsg('pm:ntfy-on')!=='0';
+  document.getElementById('save-status').textContent='';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSettings(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+function saveSettings(){
+  lss('pm:ntfy-topic',document.getElementById('cfg-topic').value.trim());
+  lss('pm:ntfy-thresh',document.getElementById('cfg-thresh').value);
+  lss('pm:ntfy-cat',document.getElementById('cfg-cat').value);
+  lss('pm:ntfy-on',document.getElementById('cfg-on').checked?'1':'0');
+  document.getElementById('save-status').style.color='var(--green)';
+  document.getElementById('save-status').textContent='✓ Saved';
+  setTimeout(closeSettings,900);
+}
+async function sendTest(){
+  const topic=document.getElementById('cfg-topic').value.trim();
+  if(!topic){document.getElementById('save-status').style.color='var(--red)';document.getElementById('save-status').textContent='Enter a topic first';return;}
+  document.getElementById('save-status').style.color='var(--amber)';document.getElementById('save-status').textContent='Sending…';
+  try{
+    await fetch('https://ntfy.sh/'+topic,{method:'POST',mode:'no-cors',body:'💰 Sharp Money tracker is live! Alerts are working.'});
+    document.getElementById('save-status').style.color='var(--green)';document.getElementById('save-status').textContent='✓ Sent — check your ntfy app';
+  }catch(e){document.getElementById('save-status').style.color='var(--red)';document.getElementById('save-status').textContent='Failed: '+e.message;}
+}
+function startCd(){
+  clearInterval(cdTimer);
+  cdTimer=setInterval(()=>{
+    if(document.hidden)return;
+    if(cd>0)cd-=1000;else{cd=REFRESH;fetchData();}
+    const m=Math.floor(cd/60000),s=Math.floor((cd%60000)/1000);
+    document.getElementById('cd-txt').textContent=m+':'+s.toString().padStart(2,'0');
+  },1000);
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSettings();});
+fetchData();cd=REFRESH;startCd();
+</script>
+</body>
+</html>
