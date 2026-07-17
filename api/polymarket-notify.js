@@ -45,12 +45,24 @@ async function fetchRecentTrades(limit = 200) {
 
 /* ── Sports filter ── */
 const SPORT_KEYWORDS = [
-  'nba','wnba','mlb','nfl','nhl',
-  'ncaa','college football','college basketball',
-  'basketball','baseball','football','hockey',
-  'nba finals','world series','super bowl',
-  'stanley cup','march madness','cfp','championship',
-  'playoffs','world cup',
+  // Leagues
+  'nba','wnba','mlb','nfl','nhl','mls','ufc','pga',
+  // Sports names
+  'basketball','baseball','football','hockey','soccer',
+  'tennis','golf','boxing','mma','wrestling',
+  // College
+  'ncaa','college football','college basketball','march madness','cfp',
+  // Events
+  'nba finals','world series','super bowl','stanley cup',
+  'championship','playoffs','world cup','draft',
+  // Teams (MLB active season — common Polymarket phrasing)
+  'yankees','red sox','dodgers','cubs','mets','astros',
+  'braves','phillies','padres','giants','cardinals','brewers',
+  'guardians','royals','twins','orioles','rays','blue jays',
+  'mariners','rangers','angels','athletics','tigers','white sox',
+  'reds','pirates','rockies','marlins','nationals','diamondbacks',
+  // Will [team] win
+  'win the game','win tonight','cover','over/under',
 ];
 function isSportsMarket(title) {
   if (!title) return false;
@@ -83,7 +95,7 @@ async function sendAlert(topic, buy) {
 
   // Push to phone
   try {
-    await fetch(`https://ntfy.sh/${topic}`, {
+    const ntfyRes = await fetch(`https://ntfy.sh/${topic}`, {
       method:  'POST',
       headers: {
         'Title':        `💰 $${usd} Smart Money Buy`,
@@ -93,8 +105,15 @@ async function sendAlert(topic, buy) {
       },
       body,
     });
+    if (!ntfyRes.ok) {
+      console.error('ntfy failed:', ntfyRes.status, await ntfyRes.text());
+      return false;
+    }
     return true;
-  } catch { return false; }
+  } catch (e) {
+    console.error('ntfy error:', e.message);
+    return false;
+  }
 }
 
 /* ── Main handler ── */
@@ -207,13 +226,20 @@ module.exports = async function handler(req, res) {
 
     // Count how many trades failed each filter
     let failedTimestamp=0, failedThreshold=0, failedSports=0, passedAll=0;
+    const passedTrades=[];
+    const failedSportsTitles=[];
     recentTrades.forEach(t => {
       const ts  = parseInt(t.timestamp) || 0;
       const usd = (parseFloat(t.size)||0) * (parseFloat(t.price)||0);
       if(ts < winMin || ts > winMax){ failedTimestamp++; return; }
       if(usd < threshold){ failedThreshold++; return; }
-      if(!isSportsMarket(t.title)){ failedSports++; return; }
+      if(!isSportsMarket(t.title)){
+        failedSports++;
+        if(failedSportsTitles.length<5) failedSportsTitles.push({title:t.title,usd:Math.round(usd)});
+        return;
+      }
       passedAll++;
+      passedTrades.push({title:t.title,usd:Math.round(usd),outcome:t.outcome});
     });
 
     // Sample of what the first trade looks like
@@ -239,12 +265,14 @@ module.exports = async function handler(req, res) {
         to:   new Date(winMax * 1000).toISOString(),
       },
       debug: {
-        newestTradeTime:  newestTrade ? new Date(newestTrade * 1000).toISOString() : 'none',
-        oldestTradeTime:  oldestTrade ? new Date(oldestTrade * 1000).toISOString() : 'none',
+        newestTradeTime:   newestTrade ? new Date(newestTrade * 1000).toISOString() : 'none',
+        oldestTradeTime:   oldestTrade ? new Date(oldestTrade * 1000).toISOString() : 'none',
         failedTimestamp,
         failedThreshold,
         failedSports,
         passedAll,
+        passedTrades,
+        failedSportsTitles,
         sampleTrade,
       },
     });
