@@ -17,7 +17,7 @@
 
 const DATA_API   = 'https://data-api.polymarket.com';
 const VERCEL_URL = 'https://sharp-indicator-a34j.vercel.app';
-const LB_SIZE    = 20;
+const LB_SIZE    = 50;
 
 /* ── Leaderboard ── */
 async function fetchLeaderboard(category) {
@@ -62,8 +62,12 @@ function isSportsMarket(title) {
 async function sendAlert(topic, buy) {
   const usd   = Math.round(buy.usdValue).toLocaleString();
   const price = (parseFloat(buy.price || 0) * 100).toFixed(1);
+  const topTraderLine = buy.isTopTrader
+    ? `⭐ Top Trader: ${(buy.categories||[]).map(c=>c.category==='OVERALL'?'Overall #'+c.rank:'Sports #'+c.rank).join(' · ')}\n`
+    : '';
   const body  =
     `💰 $${usd} BUY — ${buy.traderName}\n` +
+    topTraderLine +
     `Market: ${buy.title || 'Unknown'}\n` +
     `Outcome: ${buy.outcome || '—'} @ ${price}¢\n` +
     `${buy.eventSlug ? 'polymarket.com/event/' + buy.eventSlug : ''}`;
@@ -119,7 +123,7 @@ module.exports = async function handler(req, res) {
     const [overallLB, sportsLB, recentTrades] = await Promise.all([
       fetchLeaderboard('OVERALL'),
       fetchLeaderboard('SPORTS'),
-      fetchRecentTrades(200),
+      fetchRecentTrades(500),
     ]);
 
     // Build tracked wallet map
@@ -143,29 +147,33 @@ module.exports = async function handler(req, res) {
 
     const walletsTracked = Object.keys(walletMap).length;
 
-    // Filter global trades — tracked wallet + window + threshold + sports
+    // Option 3: Scan ALL sports buys above threshold — no wallet filter needed
+    // Tag known traders with their leaderboard rank for extra context
     const toAlert = [];
     recentTrades.forEach(t => {
-      const wallet = t.maker || t.transactor;
-      if (!wallet || !walletMap[wallet]) return; // not a tracked trader
-
-      const traderInfo = walletMap[wallet];
-
-      // Apply category filter
-      if (category !== 'ALL' && !traderInfo.categories.some(c => c.category === category)) return;
-
-      const ts  = parseInt(t.timestamp) || 0;
-      const usd = (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0);
+      const wallet     = t.maker || t.transactor || t.proxyWallet;
+      const ts         = parseInt(t.timestamp) || 0;
+      const usd        = (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0);
 
       if (ts < winMin || ts > winMax) return;   // outside 15-min window
-      if (usd < threshold)            return;   // below threshold
+      if (usd < threshold)            return;   // below dollar threshold
       if (!isSportsMarket(t.title))   return;   // not a sports market
 
+      // Check if this is a known top trader (adds rank badges in alert)
+      const traderInfo  = wallet ? walletMap[wallet] : null;
+      const isTopTrader = !!traderInfo;
+
+      // Apply category filter — only restrict if category set AND trader is known
+      if (category !== 'ALL' && isTopTrader) {
+        if (!traderInfo.categories.some(c => c.category === category)) return;
+      }
+
       toAlert.push({
-        wallet,
-        traderName:      t.name || t.pseudonym || traderInfo.name || wallet.slice(0, 8),
-        profileImage:    t.profileImageOptimized || t.profileImage || traderInfo.image || null,
-        categories:      traderInfo.categories,
+        wallet:          wallet || 'unknown',
+        traderName:      t.name || t.pseudonym || (traderInfo && traderInfo.name) || (wallet ? wallet.slice(0,6)+'…'+wallet.slice(-4) : 'Anon'),
+        profileImage:    t.profileImageOptimized || t.profileImage || (traderInfo && traderInfo.image) || null,
+        categories:      traderInfo ? traderInfo.categories : [],
+        isTopTrader,     // flagged in alert if known leaderboard trader
         title:           t.title,
         slug:            t.slug,
         eventSlug:       t.eventSlug,
@@ -189,6 +197,35 @@ module.exports = async function handler(req, res) {
       if (toAlert.length > 1) await new Promise(r => setTimeout(r, 300));
     }
 
+    // Debug: find timestamp range of returned trades
+    const timestamps = recentTrades
+      .map(t => parseInt(t.timestamp) || 0)
+      .filter(Boolean)
+      .sort((a,b) => b-a);
+    const newestTrade = timestamps[0] || 0;
+    const oldestTrade = timestamps[timestamps.length-1] || 0;
+
+    // Count how many trades failed each filter
+    let failedTimestamp=0, failedThreshold=0, failedSports=0, passedAll=0;
+    recentTrades.forEach(t => {
+      const ts  = parseInt(t.timestamp) || 0;
+      const usd = (parseFloat(t.size)||0) * (parseFloat(t.price)||0);
+      if(ts < winMin || ts > winMax){ failedTimestamp++; return; }
+      if(usd < threshold){ failedThreshold++; return; }
+      if(!isSportsMarket(t.title)){ failedSports++; return; }
+      passedAll++;
+    });
+
+    // Sample of what the first trade looks like
+    const sampleTrade = recentTrades[0] ? {
+      keys: Object.keys(recentTrades[0]).join(', '),
+      timestamp: recentTrades[0].timestamp,
+      title: recentTrades[0].title,
+      size: recentTrades[0].size,
+      price: recentTrades[0].price,
+      proxyWallet: recentTrades[0].proxyWallet,
+    } : null;
+
     return res.status(200).json({
       ok:             true,
       walletsTracked,
@@ -200,6 +237,15 @@ module.exports = async function handler(req, res) {
       window: {
         from: new Date(winMin * 1000).toISOString(),
         to:   new Date(winMax * 1000).toISOString(),
+      },
+      debug: {
+        newestTradeTime:  newestTrade ? new Date(newestTrade * 1000).toISOString() : 'none',
+        oldestTradeTime:  oldestTrade ? new Date(oldestTrade * 1000).toISOString() : 'none',
+        failedTimestamp,
+        failedThreshold,
+        failedSports,
+        passedAll,
+        sampleTrade,
       },
     });
 
