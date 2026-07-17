@@ -225,6 +225,42 @@ button,input,select,textarea{font-family:inherit;outline:none}
   .perf-grid{grid-template-columns:1fr 1fr}
   .trader-grid{grid-template-columns:1fr}
 }
+
+/* HOT section */
+.hot-section{background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border:1px solid #FDE68A;border-radius:var(--rl);padding:16px 18px;margin-bottom:20px}
+.hot-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.hot-title{font-size:13px;font-weight:800;color:#92400E}
+.hot-sub{font-size:11px;color:#B45309;margin-left:auto;font-family:var(--mono)}
+.hot-row{display:flex;align-items:center;gap:10px;padding:8px 10px;background:#fff;border-radius:var(--r);margin-bottom:6px;border:1px solid #FDE68A;transition:box-shadow .15s}
+.hot-row:last-child{margin-bottom:0}
+.hot-row:hover{box-shadow:0 2px 8px rgba(217,119,6,.15)}
+.hot-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--purple-l);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--purple);flex-shrink:0;border:2px solid #FDE68A}
+.hot-name{font-size:12px;font-weight:700;color:var(--t1)}
+.hot-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:1px}
+.hot-buy{font-size:11px;color:var(--t2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hot-size{font-size:15px;font-weight:800;font-family:var(--mono);color:var(--amber);flex-shrink:0}
+.hot-time{font-size:10px;color:var(--t3);font-family:var(--mono);flex-shrink:0}
+.hot-empty{font-size:12px;color:#B45309;text-align:center;padding:8px}
+
+/* Leaderboard tabs */
+.lb-tabs{display:flex;gap:4px;margin-bottom:14px;background:var(--bg);border-radius:var(--r);padding:3px}
+.lb-tab{flex:1;padding:6px 12px;border-radius:7px;border:none;background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;text-align:center}
+.lb-tab.on{background:var(--card);color:var(--t1);box-shadow:var(--shadow);font-weight:700}
+.lb-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border);transition:background .1s}
+.lb-row:last-child{border-bottom:none}
+.lb-row:hover{background:var(--bg)}
+.lb-rank{width:28px;font-size:13px;font-weight:800;font-family:var(--mono);color:var(--t3);text-align:center;flex-shrink:0}
+.lb-rank.top3{color:var(--purple)}
+.lb-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
+.lb-avatar-fb{width:34px;height:34px;border-radius:50%;background:var(--purple-l);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0}
+.lb-main{flex:1;min-width:0}
+.lb-name{font-size:13px;font-weight:700;color:var(--t1)}
+.lb-stats{font-size:11px;color:var(--t3);font-family:var(--mono);margin-top:1px;display:flex;gap:10px}
+.lb-pnl{font-size:14px;font-weight:800;font-family:var(--mono);color:var(--green);flex-shrink:0}
+.lb-add-btn{padding:4px 10px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--t2);font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;flex-shrink:0}
+.lb-add-btn:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-l)}
+.lb-add-btn.watching{border-color:var(--green-m);color:var(--green);background:var(--green-l);cursor:default}
+
 </style>
 </head>
 <body>
@@ -309,12 +345,36 @@ button,input,select,textarea{font-family:inherit;outline:none}
 
   <!-- ══════════════════ TRADER WATCH ══════════════════ -->
   <div id="v-traders" class="view">
+
+    <!-- HOT RIGHT NOW -->
+    <div class="hot-section" id="hot-section">
+      <div class="hot-header">
+        <span style="font-size:18px">🔥</span>
+        <span class="hot-title">Hot Right Now</span>
+        <span class="hot-sub" id="hot-sub">Top traders active in last 24h</span>
+      </div>
+      <div id="hot-list"><div class="hot-empty">Loading…</div></div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div class="section-hdr" style="margin-bottom:10px">
+      <div class="section-title"><i class="ti ti-trophy"></i>Leaderboard</div>
+    </div>
+    <div class="lb-tabs">
+      <button class="lb-tab on" id="lb-tab-sports" onclick="setLbTab('sports',this)">🏆 Sports PnL</button>
+      <button class="lb-tab" id="lb-tab-overall" onclick="setLbTab('overall',this)">💰 Overall PnL</button>
+    </div>
+    <div class="card" id="lb-list"><div class="empty"><div class="empty-icon">🏆</div><h3>Loading leaderboard…</h3></div></div>
+
+    <div class="divider"></div>
+
+    <!-- TRACKED WALLETS -->
     <div class="section-hdr">
-      <div class="section-title"><i class="ti ti-users"></i>Tracked Wallets</div>
-      <button class="btn btn-outline btn-sm" onclick="openAddTrader()"><i class="ti ti-plus" style="font-size:13px"></i>Add Trader</button>
+      <div class="section-title"><i class="ti ti-eye"></i>Your Watched Wallets</div>
+      <button class="btn btn-outline btn-sm" onclick="openAddTrader()"><i class="ti ti-plus" style="font-size:13px"></i>Add Wallet</button>
     </div>
     <div class="trader-grid" id="trader-grid"></div>
-    <div id="trader-empty" class="empty" style="display:none"><div class="empty-icon">👁</div><h3>No traders tracked yet</h3><p>Add a wallet address from Polymarket to monitor their activity and get dedicated alerts</p></div>
+    <div id="trader-empty" class="empty" style="display:none"><div class="empty-icon">👁</div><h3>No wallets tracked yet</h3><p>Add a Polymarket wallet or click Watch on a leaderboard trader</p></div>
   </div>
 
 </div>
@@ -450,6 +510,111 @@ function showView(v,btn){
   if(v==='traders')renderTraders();
 }
 
+
+/* ════════ LEADERBOARD + HOT ════════ */
+let leaderboardData = { overall: [], sports: [] };
+let lbTab = 'sports';
+
+function setLbTab(tab, btn) {
+  lbTab = tab;
+  document.querySelectorAll('.lb-tab').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  renderLeaderboard();
+}
+
+function fmtPnl(n) {
+  if (!n) return '$0';
+  if (Math.abs(n) >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (Math.abs(n) >= 1000) return '$' + (n/1000).toFixed(1) + 'K';
+  return '$' + Math.round(n).toLocaleString();
+}
+
+function renderLeaderboard() {
+  const list = leaderboardData[lbTab] || [];
+  if (!list.length) {
+    el('lb-list').innerHTML = '<div class="empty"><div class="empty-icon">🏆</div><h3>Loading…</h3></div>';
+    return;
+  }
+  el('lb-list').innerHTML = list.map(t => {
+    const isWatching = watchedTraders.some(w => w.wallet === t.wallet);
+    const av = t.image
+      ? `<img class="lb-avatar" src="${t.image}" onerror="this.outerHTML='<div class=\"lb-avatar-fb\">${(t.name||'?').slice(0,2).toUpperCase()}</div>'">`
+      : `<div class="lb-avatar-fb">${(t.name||'?').slice(0,2).toUpperCase()}</div>`;
+    const addBtn = isWatching
+      ? `<button class="lb-add-btn watching"><i class="ti ti-eye" style="font-size:11px"></i> Watching</button>`
+      : `<button class="lb-add-btn" onclick="quickAddTrader('${t.wallet}','${(t.name||'').replace(/'/g,"\'")}')"><i class="ti ti-plus" style="font-size:11px"></i> Watch</button>`;
+    // Check if this trader has been HOT (recent alerts)
+    const recentAlerts = alertLog.filter(a => a.wallet === t.wallet && (Date.now() - (a.loggedAt || a.timestamp * 1000)) < 86400000);
+    const hotFlag = recentAlerts.length > 0 ? `<span style="font-size:10px">🔥</span>` : '';
+    return `<div class="lb-row">
+      <div class="lb-rank ${t.rank <= 3 ? 'top3' : ''}">#${t.rank}</div>
+      ${av}
+      <div class="lb-main">
+        <div class="lb-name">${hotFlag} ${t.name || t.wallet.slice(0,8)+'…'}</div>
+        <div class="lb-stats">
+          <span>Vol: ${fmtPnl(t.vol)}</span>
+          ${recentAlerts.length ? `<span style="color:var(--amber)">${recentAlerts.length} alert${recentAlerts.length>1?'s':''} today</span>` : ''}
+        </div>
+      </div>
+      <div class="lb-pnl">${fmtPnl(t.pnl)}</div>
+      ${addBtn}
+    </div>`;
+  }).join('');
+}
+
+function renderHot() {
+  // HOT = trader in leaderboard who had a large buy in the last 24h
+  const cutoff = Date.now() - 86400000;
+  const hotMap = {};
+  alertLog.forEach(a => {
+    const ts = a.loggedAt || (a.timestamp * 1000);
+    if (ts < cutoff) return;
+    if ((a.usdValue || 0) < 2000) return;
+    if (!hotMap[a.wallet] || a.usdValue > hotMap[a.wallet].usdValue) {
+      hotMap[a.wallet] = a;
+    }
+  });
+
+  const hotTraders = Object.values(hotMap)
+    .filter(a => a.categories && a.categories.length > 0)
+    .sort((a, b) => (b.usdValue || 0) - (a.usdValue || 0))
+    .slice(0, 5);
+
+  el('hot-sub').textContent = `${hotTraders.length} trader${hotTraders.length !== 1 ? 's' : ''} active in last 24h`;
+
+  if (!hotTraders.length) {
+    el('hot-list').innerHTML = '<div class="hot-empty">No large buys from top traders in the last 24h — check back later</div>';
+    return;
+  }
+
+  el('hot-list').innerHTML = hotTraders.map(b => {
+    const av = b.profileImage
+      ? `<img class="hot-avatar" src="${b.profileImage}" onerror="this.outerHTML='<div class=\"hot-avatar\">${(b.traderName||'?').slice(0,2).toUpperCase()}</div>'">`
+      : `<div class="hot-avatar">${(b.traderName||'?').slice(0,2).toUpperCase()}</div>`;
+    const ts = b.loggedAt || (b.timestamp * 1000);
+    return `<div class="hot-row">
+      ${av}
+      <div style="flex:1;min-width:0">
+        <div class="hot-name">${b.traderName || 'Anon'}</div>
+        <div class="hot-badges">${rankBadges(b.categories)}</div>
+        <div class="hot-buy">${b.title || 'Unknown market'} — ${outcomeSpan(b.outcome)}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div class="hot-size">${fmtUsd(b.usdValue)}</div>
+        <div class="hot-time">${timeAgo(ts)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function quickAddTrader(wallet, name) {
+  if (watchedTraders.find(t => t.wallet === wallet)) return;
+  watchedTraders.push({ wallet, name: name || null, categories: [], addedAt: Date.now() });
+  lsSet('pm:traders', watchedTraders);
+  renderLeaderboard(); // refresh to show "Watching" state
+  renderTraders();
+}
+
 /* ════════ FETCH ════════ */
 async function fetchData(){
   el('dot').style.animation='none';el('dot').style.background='#F59E0B';
@@ -461,7 +626,10 @@ async function fetchData(){
     ]);
     allBuys=buyRes.buys||[];
 
-    // Merge server log with local — server may have newer alerts from cron
+    // Store leaderboard data
+    if(buyRes.leaderboard){leaderboardData=buyRes.leaderboard;}
+
+    // Merge server log with local
     const serverAlerts=logRes.alerts||[];
     const existingHashes=new Set(alertLog.map(a=>a.transactionHash));
     serverAlerts.forEach(a=>{if(!existingHashes.has(a.transactionHash))alertLog.unshift(a);});
