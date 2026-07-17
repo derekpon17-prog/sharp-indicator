@@ -552,11 +552,14 @@ function renderLeaderboard() {
       <div class="lb-main">
         <div class="lb-name">${hotFlag} ${t.name || t.wallet.slice(0,8)+'…'}</div>
         <div class="lb-stats">
-          <span>Vol: ${fmtPnl(t.vol)}</span>
-          ${recentAlerts.length ? `<span style="color:var(--amber)">${recentAlerts.length} alert${recentAlerts.length>1?'s':''} today</span>` : ''}
+          <span style="color:var(--t3)">Vol: ${fmtPnl(t.vol)}</span>
+          ${recentAlerts.length ? `<span style="color:var(--amber);font-weight:600">🔥 ${recentAlerts.length} alert${recentAlerts.length>1?'s':''} today</span>` : ''}
         </div>
       </div>
-      <div class="lb-pnl">${fmtPnl(t.pnl)}</div>
+      <div style="text-align:right;flex-shrink:0;margin-right:8px">
+        <div class="lb-pnl">${fmtPnl(t.pnl)}</div>
+        <div style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-top:1px">${t.category==='OVERALL'?'All-Time':'Sports'} PnL</div>
+      </div>
       ${addBtn}
     </div>`;
   }).join('');
@@ -879,6 +882,11 @@ function traderCardHtml(t,buys){
 function traderBodyHtml(t,buys){
   const myAlerts=alertLog.filter(a=>a.wallet===t.wallet);
   const vol=myAlerts.reduce((a,b)=>a+(b.usdValue||0),0);
+
+  // Find this trader's PnL records from leaderboard data
+  const overallEntry=leaderboardData.overall.find(x=>x.wallet===t.wallet);
+  const sportsEntry=leaderboardData.sports.find(x=>x.wallet===t.wallet);
+
   let recentHtml='<div style="font-size:12px;color:var(--t3);padding:8px 0">Loading recent buys…</div>';
   if(Array.isArray(buys)&&buys.length){
     recentHtml=`<div class="trader-recent" style="margin-top:10px">Recent Buys</div>`+buys.map(b=>{
@@ -886,12 +894,35 @@ function traderBodyHtml(t,buys){
       return`<div class="trader-buy-row"><span class="trader-buy-market">${b.title||'Unknown'}</span><span class="trader-buy-size">${fmtUsd(usd)}</span></div>`;
     }).join('');
   }
-  return`<div class="trader-stat-row">
+
+  // PnL record rows
+  const pnlRows=[
+    overallEntry?`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:11px;color:var(--t2);font-weight:600">All-Time PnL</span>
+      <span style="font-size:14px;font-weight:800;font-family:var(--mono);color:${overallEntry.pnl>=0?'var(--green)':'var(--red)'}">${fmtPnl(overallEntry.pnl)}</span>
+    </div>`:null,
+    sportsEntry?`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:11px;color:var(--t2);font-weight:600">Sports PnL</span>
+      <span style="font-size:14px;font-weight:800;font-family:var(--mono);color:${sportsEntry.pnl>=0?'var(--green)':'var(--red)'}">${fmtPnl(sportsEntry.pnl)}</span>
+    </div>`:null,
+    overallEntry?`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:11px;color:var(--t2);font-weight:600">All-Time Rank</span>
+      <span style="font-size:13px;font-weight:700;font-family:var(--mono);color:var(--purple)">#${overallEntry.rank}</span>
+    </div>`:null,
+    sportsEntry?`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0">
+      <span style="font-size:11px;color:var(--t2);font-weight:600">Sports Rank</span>
+      <span style="font-size:13px;font-weight:700;font-family:var(--mono);color:var(--green)">#${sportsEntry.rank}</span>
+    </div>`:null,
+  ].filter(Boolean).join('');
+
+  return`<div style="margin-bottom:10px">${pnlRows||'<div style="font-size:11px;color:var(--t3);padding:4px 0">Not in top 50 leaderboard</div>'}</div>
+  <div class="trader-stat-row">
     <div class="trader-stat"><div class="ts-val">${myAlerts.length}</div><div class="ts-lbl">Alerts</div></div>
-    <div class="trader-stat"><div class="ts-val">${vol>0?fmtUsd(vol):'$0'}</div><div class="ts-lbl">Vol Alerted</div></div>
+    <div class="trader-stat"><div class="ts-val">${vol>0?fmtPnl(vol):'$0'}</div><div class="ts-lbl">Vol Alerted</div></div>
     <div class="trader-stat"><div class="ts-val">${t.addedAt?timeAgo(t.addedAt):'—'}</div><div class="ts-lbl">Tracking</div></div>
   </div>${recentHtml}`;
 }
+
 
 function openAddTrader(){el('at-wallet').value='';el('at-name').value='';el('at-msg').textContent='';el('trader-overlay').classList.add('open');}
 function closeAddTrader(){el('trader-overlay').classList.remove('open');}
