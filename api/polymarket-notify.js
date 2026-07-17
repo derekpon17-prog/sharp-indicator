@@ -45,6 +45,8 @@ async function fetchWalletBuys(wallet) {
   } catch { return []; }
 }
 
+const VERCEL_URL = 'https://sharp-indicator-a34j.vercel.app';
+
 async function sendAlert(topic, buy) {
   const usd = Math.round(buy.usdValue).toLocaleString();
   const price = (buy.price * 100).toFixed(1);
@@ -54,134 +56,18 @@ async function sendAlert(topic, buy) {
     `Outcome: ${buy.outcome} @ ${price}¢\n` +
     `${buy.eventSlug ? 'polymarket.com/event/' + buy.eventSlug : ''}`;
 
+  // Log to alert history
   try {
-    await fetch(`https://ntfy.sh/${topic}`, {
+    await fetch(`${VERCEL_URL}/api/polymarket-alerts`, {
       method: 'POST',
-      mode: 'no-cors',
-      body,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(buy),
     });
+  } catch (e) { console.error('alert log error:', e.message); }
+
+  // Send ntfy push
+  try {
+    await fetch(`https://ntfy.sh/${topic}`, { method: 'POST', body });
     return true;
   } catch { return false; }
 }
-
-
-/* ── Sports filter — only alert on these markets ── */
-const ALLOWED_SPORTS = [
-  'nba','wnba','mlb','nfl','nhl',
-  'ncaa','college football','college basketball',
-  'basketball','baseball','football','hockey',
-  // Common Polymarket title patterns
-  'nba finals','world series','super bowl','stanley cup',
-  'march madness','cfp','championship',
-];
-
-function isSportsMarket(title) {
-  if (!title) return false;
-  const t = title.toLowerCase();
-  return ALLOWED_SPORTS.some(s => t.includes(s));
-}
-
-module.exports = async function handler(req, res) {
-  // Validate cron secret if set (optional but recommended)
-  const secret = process.env.CRON_SECRET;
-  if (secret && req.headers['x-cron-secret'] !== secret) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
-  const topic     = process.env.NTFY_TOPIC;
-  const threshold = parseInt(process.env.PM_THRESHOLD || '5000');
-  const category  = (process.env.PM_CATEGORY || 'all').toUpperCase();
-
-  if (!topic) {
-    return res.status(200).json({
-      ok: false,
-      message: 'NTFY_TOPIC not set — add it in Vercel environment variables',
-    });
-  }
-
-  const now     = Math.floor(Date.now() / 1000);
-  const winMin  = now - 900; // 15 minutes ago (matches cron interval)
-  const winMax  = now - 30;  // 30 sec buffer for confirmation
-
-  try {
-    // ── Pull both leaderboards in parallel ──
-    const [overallLB, sportsLB] = await Promise.all([
-      fetchLeaderboard('OVERALL'),
-      fetchLeaderboard('SPORTS'),
-    ]);
-
-    // Merge + dedupe wallets
-    const walletMap = {};
-    overallLB.forEach(t => {
-      walletMap[t.proxyWallet] = walletMap[t.proxyWallet] ||
-        { wallet: t.proxyWallet, name: t.userName || t.pseudonym, categories: [] };
-      walletMap[t.proxyWallet].categories.push({ cat: 'OVERALL', rank: t.rank, pnl: t.pnl });
-    });
-    sportsLB.forEach(t => {
-      walletMap[t.proxyWallet] = walletMap[t.proxyWallet] ||
-        { wallet: t.proxyWallet, name: t.userName || t.pseudonym, categories: [] };
-      walletMap[t.proxyWallet].categories.push({ cat: 'SPORTS', rank: t.rank, pnl: t.pnl });
-    });
-
-    const wallets = Object.values(walletMap).filter(w => {
-      if (category === 'ALL') return true;
-      return w.categories.some(c => c.cat === category);
-    });
-
-    // ── Fetch recent buys for all wallets in parallel ──
-    const results = await Promise.all(wallets.map(w => fetchWalletBuys(w.wallet)));
-
-    // ── Filter to this cron window + threshold ──
-    const toAlert = [];
-    wallets.forEach((w, i) => {
-      (results[i] || []).forEach(t => {
-        const ts  = parseInt(t.timestamp) || 0;
-        const usd = (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0);
-        if (ts < winMin || ts > winMax) return; // outside this cron window
-        if (usd < threshold) return;             // below dollar threshold
-        // Only alert on allowed sports markets
-        if (!isSportsMarket(t.title)) return;
-
-        toAlert.push({
-          wallet: w.wallet,
-          traderName: t.name || t.pseudonym || w.name || w.wallet.slice(0, 8),
-          categories: w.categories,
-          title: t.title,
-          slug: t.slug,
-          eventSlug: t.eventSlug,
-          outcome: t.outcome,
-          price: t.price,
-          usdValue: usd,
-          timestamp: ts,
-          transactionHash: t.transactionHash,
-        });
-      });
-    });
-
-    // Sort by size descending — alert biggest buys first
-    toAlert.sort((a, b) => b.usdValue - a.usdValue);
-
-    // ── Fire alerts ──
-    let sent = 0;
-    for (const buy of toAlert) {
-      const ok = await sendAlert(topic, buy);
-      if (ok) sent++;
-      // Small delay to avoid ntfy rate limiting
-      if (toAlert.length > 1) await new Promise(r => setTimeout(r, 300));
-    }
-
-    return res.status(200).json({
-      ok: true,
-      walletsChecked: wallets.length,
-      buysInWindow: toAlert.length,
-      alertsSent: sent,
-      window: { from: new Date(winMin * 1000).toISOString(), to: new Date(winMax * 1000).toISOString() },
-      threshold,
-      category,
-    });
-
-  } catch (err) {
-    console.error('polymarket-notify error:', err.message);
-    return res.status(200).json({ ok: false, error: err.message });
-  }
-};
