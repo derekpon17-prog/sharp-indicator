@@ -366,6 +366,19 @@ async function fetchTraderStats(wallet){
   }catch(e){_sc[wallet]={pnl:null,trades:0,sp:{}};return _sc[wallet];}
 }
 
+// Get trader's top sports from current buy feed
+function getTraderSports(wallet) {
+  const sportVol = {};
+  allBuys.filter(function(b){return b.wallet===wallet;}).forEach(function(b){
+    const sp = detectSport(b.title||'');
+    if(sp) sportVol[sp]=(sportVol[sp]||0)+(b.usdValue||0);
+  });
+  return Object.entries(sportVol)
+    .sort(function(a,b){return b[1]-a[1];})
+    .slice(0,3)
+    .map(function(e){return e[0];});
+}
+
 // Build stat block HTML
 function buildSB(oe,se,fetched,sport){
   const rows=[];
@@ -506,20 +519,18 @@ function posterHTML(t){
   const hot=alerts.some(function(a){return a.wallet===t.wallet&&(Date.now()-(a.loggedAt||a.timestamp*1000))<86400000;});
   const init=(t.name||"?").slice(0,2).toUpperCase();
   const isSp=t.category==="SPORTS"||t.category==="sports";
-  const avPart=t.image
-    ?('<img class="p-av" src="'+t.image+'" alt="'+init+'">')
-    :('<div class="p-av-fb">'+init+'</div>');
+  const avPart=t.image?('<img class="p-av" src="'+t.image+'" alt="'+init+'">'):('<div class="p-av-fb">'+init+'</div>');
   const other=isSp?lbData.overall.find(function(x){return x.wallet===t.wallet;}):lbData.sports.find(function(x){return x.wallet===t.wallet;});
-  const otherRow=other
-    ?('<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;color:rgba(245,246,250,.35);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em">'+(isSp?"All-Time":"Sports")+' PnL</div><div style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+(other.pnl>=0?"#00C896":"#FF3D5A")+';margin-top:1px">'+fp(other.pnl)+'</div></div>')
-    :"";
+  const otherRow=other?('<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;color:rgba(245,246,250,.35);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em">'+(isSp?"All-Time":"Sports")+' PnL</div><div style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+(other.pnl>=0?"#00C896":"#FF3D5A")+';margin-top:1px">'+fp(other.pnl)+'</div></div>'):"";
+  const topSports=getTraderSports(t.wallet);
+  const sportsRow=topSports.length?('<div style="margin-top:6px;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;color:rgba(245,246,250,.35);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Active In</div><div style="display:flex;gap:3px;flex-wrap:wrap">'+topSports.map(function(s){return'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono)">'+s+'</span>';}).join('')+'</div></div>'):"";
   return '<div class="poster'+(hot?" hot":"")+'">'
     +'<div class="poster-img">'+avPart+(hot?'<div class="p-live">LIVE</div>':"")+'</div>'
     +'<div class="poster-body">'
     +'<span class="p-rank '+(isSp?"sports":"overall")+'">#'+t.rank+' '+(isSp?"Sports":"Overall")+'</span>'+(hot?'<span class="p-rank hot-tag">&#x1F525;</span>':"")
-    +'<div class="p-name">'+(t.name||t.wallet.slice(0,8)+"\u2026")+'</div>'
+    +'<div class="p-name">'+(t.name||t.wallet.slice(0,8)+"…")+'</div>'
     +'<div style="margin-top:5px"><div style="font-size:9px;color:rgba(245,246,250,.35);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em">'+(isSp?"Sports":"Overall")+' PnL</div><div class="p-pnl" style="font-size:15px;margin-top:1px">'+fp(t.pnl)+'</div></div>'
-    +otherRow
+    +otherRow+sportsRow
     +'</div></div>';
 }
 
