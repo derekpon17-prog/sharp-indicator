@@ -236,7 +236,21 @@ select.finput option{background:var(--s2)}
 .tl-row.open{border-left:3px solid var(--purple)}.tl-row.win{border-left:3px solid var(--green)}.tl-row.loss{border-left:3px solid var(--red)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 @keyframes slidein{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
-@media(max-width:700px){.strip{grid-template-columns:1fr 1fr}.ntab span{display:none}.hero-size{font-size:38px}.hero-stats{display:none}.perf{gap:8px}}
+@media(max-width:700px){
+  .strip{grid-template-columns:1fr 1fr}
+  .ntab span{display:none}
+  .hero-size{font-size:38px}
+  .hero-stats{display:none}
+  .perf{gap:8px}
+  .trend-card{flex:0 0 240px;width:240px}
+  .row-scr{gap:10px;padding-left:2px;padding-right:2px}
+  .page{padding:0 14px 80px}
+  .hero{padding:20px 20px;min-height:180px}
+  .hero-size{font-size:32px}
+  .strip{gap:8px}
+  .strip .sc{padding:12px 14px}
+  .sc-val{font-size:20px}
+}
 
 
 /* Trending plays */
@@ -293,7 +307,7 @@ select.finput option{background:var(--s2)}
     </div>
     <div class="row-s" id="trending-row" style="display:none">
       <div class="row-hdr">
-        <div class="row-ttl"><em>&#x1F4A1;</em>Converging Plays</div>
+        <div class="row-ttl"><em>&#x1F4A1;</em>Signal Strength</div>
         <div style="font-size:11px;color:var(--t3);font-family:var(--mono)">Multiple traders same side</div>
       </div>
       <div class="row-scr" id="d-trend"></div>
@@ -516,9 +530,9 @@ function buildTrending() {
     if (ts > groups[key].latestTs) groups[key].latestTs = ts;
   });
 
-  // Only show groups with 2+ buys
+  // Show groups with 2+ buys OR single large buy ($10K+)
   return Object.values(groups)
-    .filter(function(g) { return g.buys.length >= 2; })
+    .filter(function(g) { return g.buys.length >= 2 || g.totalVol >= 10000; })
     .sort(function(a, b) {
       // Score = buyers² × total vol (penalise single buyer heavily)
       const sa = a.buys.length * a.buys.length * a.totalVol;
@@ -824,7 +838,7 @@ async function testNotif(){const t=el("cfg-tp").value.trim();if(!t){el("cfg-msg"
 
 function startCd(){clearInterval(cdT);cdT=setInterval(function(){if(document.hidden)return;if(cd>0)cd-=1000;else{cd=REFRESH;fetchData();}const m=Math.floor(cd/60000),s=Math.floor((cd%60000)/1000);el("cdt").textContent=m+":"+s.toString().padStart(2,"0");},1000);}
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeTM();closeAT();closeCfg();}});
-renderDash();fetchData();cd=REFRESH;startCd();
+renderDash();fetchData();cd=REFRESH;startCd();setTimeout(renderTrending,200);
 
 </script>
 </body>
