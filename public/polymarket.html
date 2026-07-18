@@ -494,7 +494,7 @@ function renderHero(){
   const rec=alerts.filter(a=>(a.loggedAt||a.timestamp*1000)>Date.now()-86400000).sort((a,b)=>b.usdValue-a.usdValue);
   const t=rec[0];if(!t)return;
   const pr=(parseFloat(t.price||0)*100).toFixed(1);
-  el("hero").innerHTML=`<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(229,160,13,.1) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(64,180,255,.07) 0%,transparent 45%);pointer-events:none"></div>
+  el("hero").innerHTML=`<div style='position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(229,160,13,.1) 0%,transparent 55%),radial-gradient(ellipse at 85% 20%,rgba(64,180,255,.07) 0%,transparent 45%);pointer-events:none'></div>
     <div style="position:relative">
       <div class="hero-badge">🔥 Biggest Buy Today</div>
       <div class="hero-size">${fu(t.usdValue)}</div>
@@ -534,7 +534,7 @@ function acardHTML(b){
   const pr=(parseFloat(b.price||0)*100).toFixed(1),big=(b.usdValue||0)>=5000;
   const avEl=b.profileImage?`<img class="acard-av" src="${b.profileImage}" onerror="this.outerHTML='<div class=\"acard-av-fb\">${(b.traderName||"?").slice(0,2).toUpperCase()}</div>'">`:`<div class="acard-av-fb">${(b.traderName||"?").slice(0,2).toUpperCase()}</div>`;
   return`<div class="acard${big?" big":""}">
-    <div class="acard-trader">${avEl}<div style="min-width:0"><div class="acard-tname">${b.traderName||"Anon"}</div><div style="display:flex;gap:3px;margin-top:1px">${bdg(b.categories)}</div></div></div>
+    <div class="acard-trader">${avEl}<div style='min-width:0'><div class="acard-tname">${b.traderName||"Anon"}</div><div style='display:flex;gap:3px;margin-top:1px'>${bdg(b.categories)}</div></div></div>
     <div class="acard-mkt">${b.title||"Unknown market"}</div>
     <div class="acard-oc">Bought ${oc(b.outcome)} @ ${pr}¢</div>
     <div class="acard-ft"><div><div class="acard-size">${fu(b.usdValue||0)}</div><div class="acard-time">${timeAgo(b.loggedAt||b.timestamp*1000)}</div></div>
@@ -596,7 +596,7 @@ function renderTrades(){
     const p=calcP(t);
     const btns=t.status==="OPEN"?`<button onclick="setSt('${t.id}','WIN')" style="padding:5px 11px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button><button onclick="setSt('${t.id}','LOSS')" style="padding:5px 11px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer;margin-left:4px">L</button><button onclick="setSt('${t.id}','PUSH')" style="padding:5px 11px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer;margin-left:4px">P</button>`:"";
     return`<div class="tl-row ${t.status.toLowerCase()}">
-      <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.market}</div><div style="font-size:11px;color:var(--t3);font-family:var(--mono)">${t.outcome} @ ${t.price}¢ · ${fu(parseFloat(t.amount)||0)} · ${t.trader||"Manual"}</div></div>
+      <div style="flex:1;min-width:0"><div style='font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'>${t.market}</div><div style="font-size:11px;color:var(--t3);font-family:var(--mono)">${t.outcome} @ ${t.price}¢ · ${fu(parseFloat(t.amount)||0)} · ${t.trader||"Manual"}</div></div>
       <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">${btns}<span style="font-size:16px;font-weight:900;font-family:var(--mono);color:${p>0?"var(--green)":p<0?"var(--red)":"var(--t4)"}">${t.status==="OPEN"?"Open":(p>=0?"+":"")+fu(p)}</span><button onclick="delTrade('${t.id}')" style="background:transparent;border:none;color:var(--t4);cursor:pointer;font-size:15px;padding:4px;transition:color .15s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--t4)'"><i class="ti ti-trash"></i></button></div>
     </div>`;
   }).join("");
@@ -610,7 +610,7 @@ function renderHot(){
   alerts.forEach(a=>{const ts=a.loggedAt||(a.timestamp*1000);if(ts<cutoff||(a.usdValue||0)<1000)return;if(!hm[a.wallet]||a.usdValue>hm[a.wallet].usdValue)hm[a.wallet]=a;});
   const hot=Object.values(hm).sort((a,b)=>b.usdValue-a.usdValue).slice(0,5);
   el("hot-sub").textContent=hot.length?hot.length+" trader"+(hot.length>1?"s":"")+" active today":"None today";
-  el("hot-list").innerHTML=hot.length?hot.map(b=>`<div class="hot-row"><div class="hot-av">${(b.traderName||"?").slice(0,2).toUpperCase()}</div><div class="hot-info"><div class="hot-name">${b.traderName||"Anon"} ${bdg(b.categories)}</div><div class="hot-mkt">${b.title||"Unknown"} · ${oc(b.outcome)}</div></div><div class="hot-sz">${fu(b.usdValue)}</div></div>`).join(""):"<div style="font-size:12px;color:var(--t4);text-align:center;padding:8px">No qualifying buys from top traders in the last 24h</div>";
+  el("hot-list").innerHTML=hot.length?hot.map(b=>`<div class="hot-row"><div class="hot-av">${(b.traderName||"?").slice(0,2).toUpperCase()}</div><div class="hot-info"><div class="hot-name">${b.traderName||"Anon"} ${bdg(b.categories)}</div><div class="hot-mkt">${b.title||"Unknown"} · ${oc(b.outcome)}</div></div><div class="hot-sz">${fu(b.usdValue)}</div></div>`).join(""):"<div style='font-size:12px;color:var(--t4);text-align:center;padding:8px'>No qualifying buys from top traders in the last 24h</div>";
 }
 
 function setLT(tab,btn){lbTab=tab;document.querySelectorAll(".lb-tab").forEach(b=>b.classList.remove("on"));if(btn)btn.classList.add("on");renderLB();}
@@ -659,7 +659,7 @@ function wbodyHTML(w,buys){
     se?`<div class="wpnl-row"><span class="wpnl-lbl">Sports PnL</span><span class="wpnl-val" style="color:${se.pnl>=0?"var(--green)":"var(--red)"}">${fp(se.pnl)}</span></div>`:null,
     `<div class="wpnl-row" style="border-bottom:none"><span class="wpnl-lbl">Alerts Triggered</span><span class="wpnl-val" style="color:var(--gold)">${myA.length}</span></div>`,
   ].filter(Boolean).join("");
-  const rec=Array.isArray(buys)&&buys.length?buys.slice(0,3).map(b=>{const u=(parseFloat(b.size)||0)*(parseFloat(b.price)||0);return`<div class="wrec-row"><span class="wrec-mkt">${b.title||"Unknown"}</span><span class="wrec-sz">${fu(u)}</span></div>`;}).join(""):"<div style="font-size:11px;color:var(--t4);padding:4px 0">Loading…</div>";
+  const rec=Array.isArray(buys)&&buys.length?buys.slice(0,3).map(b=>{const u=(parseFloat(b.size)||0)*(parseFloat(b.price)||0);return`<div class="wrec-row"><span class="wrec-mkt">${b.title||"Unknown"}</span><span class="wrec-sz">${fu(u)}</span></div>`;}).join(""):"<div style='font-size:11px;color:var(--t4);padding:4px 0'>Loading…</div>";
   return`<div style="margin-bottom:10px">${pnlRows}</div><div class="wrec-lbl">Recent Buys</div>${rec}`;
 }
 function qAdd(wallet,name){if(wallets.find(w=>w.wallet===wallet))return;wallets.push({wallet,name:name||null,addedAt:Date.now()});ss("pm:traders",wallets);renderLB();renderWallets();}
