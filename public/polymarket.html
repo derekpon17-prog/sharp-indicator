@@ -525,9 +525,9 @@ function renderDash(){
   el("d-wr").textContent=wr!==null?wr+"%":"—";el("d-wr").style.color=wr===null?"var(--t4)":wr>=55?"var(--green)":wr>=50?"var(--gold)":"var(--red)";
   el("d-ws").textContent=W+L>0?W+"W–"+L+"L":"no trades yet";
   el("d-pl").textContent=pnl!==0?(pnl>0?"+":"")+fu(pnl):"—";el("d-pl").style.color=pnl>0?"var(--green)":pnl<0?"var(--red)":"var(--t4)";
-  el("d-ar").innerHTML=alerts.slice(0,8).map(acardHTML).join("")||"<div style="color:var(--t4);font-size:13px;padding:20px 4px">No alerts yet</div>";
-  el("d-tr").innerHTML=trades.filter(t=>t.status==="OPEN").slice(0,6).map(tcardHTML).join("")||"<div style="color:var(--t4);font-size:13px;padding:20px 4px">No open trades</div>";
-  el("d-tp").innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join("")||"<div style="color:var(--t4);font-size:13px;padding:20px 4px">Loading…</div>";
+  el("d-ar").innerHTML=alerts.slice(0,8).map(acardHTML).join("")||"<div style='color:var(--t4);font-size:13px;padding:20px 4px'>No alerts yet</div>";
+  el("d-tr").innerHTML=trades.filter(t=>t.status==="OPEN").slice(0,6).map(tcardHTML).join("")||"<div style='color:var(--t4);font-size:13px;padding:20px 4px'>No open trades</div>";
+  el("d-tp").innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join("")||"<div style='color:var(--t4);font-size:13px;padding:20px 4px'>Loading…</div>";
 }
 
 function acardHTML(b){
