@@ -435,6 +435,21 @@ select.finput option{background:var(--s2)}
 
 <script>
 
+
+// Detect sport from market title
+const MLB_TEAMS=["yankees","red sox","dodgers","cubs","mets","astros","braves","phillies","padres","giants","cardinals","brewers","guardians","royals","twins","orioles","rays","blue jays","mariners","rangers","angels","athletics","tigers","white sox","reds","pirates","rockies","marlins","nationals","diamondbacks","pirates"];
+function detectSport(title){
+  const t=(title||"").toLowerCase();
+  if(t.includes("mlb")||MLB_TEAMS.some(team=>t.includes(team)))return"MLB";
+  if(t.includes("nba")||t.includes("basketball"))return"NBA";
+  if(t.includes("nfl")||t.includes("football")||t.includes("super bowl"))return"NFL";
+  if(t.includes("nhl")||t.includes("hockey")||t.includes("stanley cup"))return"NHL";
+  if(t.includes("wnba"))return"WNBA";
+  if(t.includes("ncaa")||t.includes("college"))return"College";
+  if(t.includes("world cup")||t.includes("soccer")||t.includes("mls"))return"Soccer";
+  return null;
+}
+
 // Migration: carry over any alerts from old key names
 (function(){
   const migrate=[["pm:al","pm:alert-log"],["pm:wallets","pm:traders"],["pm:tp","pm:ntfy-topic"],["pm:th","pm:ntfy-thresh"],["pm:cat","pm:ntfy-cat"]];
@@ -457,7 +472,7 @@ function timeAgo(ts){const s=Math.floor((Date.now()-(ts>1e12?ts:ts*1000))/1000);
 function fu(n){return"$"+Math.round(n).toLocaleString();}
 function fp(n){if(!n)return"$0";if(Math.abs(n)>=1e6)return"$"+(n/1e6).toFixed(1)+"M";if(Math.abs(n)>=1e3)return"$"+(n/1e3).toFixed(1)+"K";return"$"+Math.round(n).toLocaleString();}
 function av(b,c){return b.profileImage?`<img class="${c}" src="${b.profileImage}" onerror="this.outerHTML='<div class=\"${c}-fb\">${(b.traderName||"?").slice(0,2).toUpperCase()}</div>'">`:`<div class="${c}-fb">${(b.traderName||"?").slice(0,2).toUpperCase()}</div>`;}
-function bdg(cats){return(cats||[]).map(c=>`<span class="badge badge-${c.category==="OVERALL"?"o":"s"}">${c.category==="OVERALL"?"Overall":"Sports"} #${c.rank}</span>`).join("");}
+function bdg(cats){return(cats||[]).map(c=>{const ct=c.category||c.cat||"";return`<span class="badge badge-${ct==="OVERALL"?"o":"s"}">${ct==="OVERALL"?"Overall":"Sports"} #${c.rank}</span>`;}).join("");}
 function oc(o){const l=(o||"").toLowerCase();return l==="yes"?`<span class="oc-y">YES</span>`:l==="no"?`<span class="oc-n">NO</span>`:`<span>${o||"—"}</span>`;}
 function calcP(t){const a=parseFloat(t.amount)||0,p=parseFloat(t.price)||50;if(t.status==="WIN")return Math.round(a*(100/p-1)*100)/100;if(t.status==="LOSS")return-a;return 0;}
 
@@ -532,13 +547,28 @@ function renderDash(){
 
 function acardHTML(b){
   const pr=(parseFloat(b.price||0)*100).toFixed(1),big=(b.usdValue||0)>=5000;
-  const avEl=b.profileImage?`<img class="acard-av" src="${b.profileImage}" onerror="this.outerHTML='<div class=\"acard-av-fb\">${(b.traderName||"?").slice(0,2).toUpperCase()}</div>'">`:`<div class="acard-av-fb">${(b.traderName||"?").slice(0,2).toUpperCase()}</div>`;
+  const initials=(b.traderName||"?").slice(0,2).toUpperCase();
+  // Store alert in global map for onclick access
+  const key="al_"+b.transactionHash;
+  window._alerts=window._alerts||{};window._alerts[key]=b;
+  const avEl=b.profileImage
+    ?`<img class="acard-av" src="${b.profileImage}" onerror="this.innerHTML='${initials}';this.className='acard-av-fb'">`
+    :`<div class="acard-av-fb">${initials}</div>`;
+  const oe=lbData.overall.find(x=>x.wallet===b.wallet);
+  const se=lbData.sports.find(x=>x.wallet===b.wallet);
+  const sport=detectSport(b.title);
+  const rows=[];
+  if(oe)rows.push(`<div style='display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)'><span style='font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)'>All-Time PnL</span><span style='font-size:11px;font-family:var(--mono);font-weight:800;color:${oe.pnl>=0?"#00C896":"#FF3D5A"}'>${fp(oe.pnl)} <span style='color:rgba(245,246,250,.2);font-size:9px'>#${oe.rank}</span></span></div>`);
+  if(se)rows.push(`<div style='display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)'><span style='font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)'>Sports PnL</span><span style='font-size:11px;font-family:var(--mono);font-weight:800;color:${se.pnl>=0?"#00C896":"#FF3D5A"}'>${fp(se.pnl)} <span style='color:rgba(245,246,250,.2);font-size:9px'>#${se.rank}</span></span></div>`);
+  if(sport)rows.push(`<div style='display:flex;justify-content:space-between;padding:4px 0'><span style='font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)'>Sport</span><span style='font-size:10px;font-family:var(--mono);font-weight:700;padding:1px 7px;background:rgba(64,180,255,.1);color:#40B4FF;border-radius:4px'>${sport}</span></div>`);
+  const recBlock=rows.length?`<div style='background:var(--s2);border-radius:7px;padding:6px 9px;margin:8px 0'>${rows.join("")}</div>`:"";
   return`<div class="acard${big?" big":""}">
-    <div class="acard-trader">${avEl}<div style='min-width:0'><div class="acard-tname">${b.traderName||"Anon"}</div><div style='display:flex;gap:3px;margin-top:1px'>${bdg(b.categories)}</div></div></div>
+    <div class="acard-trader">${avEl}<div style="min-width:0"><div class="acard-tname">${b.traderName||"Anon"}</div><div style="display:flex;gap:3px;margin-top:2px">${bdg(b.categories)}</div></div></div>
     <div class="acard-mkt">${b.title||"Unknown market"}</div>
     <div class="acard-oc">Bought ${oc(b.outcome)} @ ${pr}¢</div>
+    ${recBlock}
     <div class="acard-ft"><div><div class="acard-size">${fu(b.usdValue||0)}</div><div class="acard-time">${timeAgo(b.loggedAt||b.timestamp*1000)}</div></div>
-    <button class="acard-btn" onclick="followAlert(${JSON.stringify(b).replace(/'/g,"&#39;")})">Follow</button></div>
+    <button class="acard-btn" onclick="followAlert(window._alerts['${key}'])">Follow</button></div>
   </div>`;
 }
 
