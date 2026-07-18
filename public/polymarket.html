@@ -554,13 +554,21 @@ function tcardHTML(t){
 
 function posterHTML(t){
   const hot=alerts.some(a=>a.wallet===t.wallet&&(Date.now()-(a.loggedAt||a.timestamp*1000))<86400000);
-  const avEl=t.image?`<img class="p-av" src="${t.image}" onerror="this.outerHTML='<div class=\"p-av-fb\">${(t.name||"?").slice(0,2).toUpperCase()}</div>'">`:`<div class="p-av-fb">${(t.name||"?").slice(0,2).toUpperCase()}</div>`;
+  const initials=(t.name||"?").slice(0,2).toUpperCase();
+  const avEl=t.image
+    ?`<img class="p-av" src="${t.image}" onerror="this.outerHTML='<div class=\"p-av-fb\">${initials}</div>'">`
+    :`<div class="p-av-fb">${initials}</div>`;
+  // Cross-reference other leaderboard for dual record
+  const isSports=t.category==="SPORTS"||t.category==="sports";
+  const other=isSports?lbData.overall.find(x=>x.wallet===t.wallet):lbData.sports.find(x=>x.wallet===t.wallet);
+  const otherRow=other?`<div style="font-size:10px;font-family:var(--mono);margin-top:3px;color:var(--t3)">${isSports?"All-Time":"Sports"}: <span style="color:var(--t2);font-weight:600">${fp(other.pnl)}</span></div>`:"";
   return`<div class="poster${hot?" hot":""}">
-    <div class="poster-img">${avEl}${hot?"<div class=\"p-live\">LIVE</div>":""}</div>
+    <div class="poster-img">${avEl}${hot?'<div class="p-live">LIVE</div>':""}</div>
     <div class="poster-body">
-      <span class="p-rank ${t.category==="OVERALL"?"overall":"sports"}">#${t.rank} ${t.category==="OVERALL"?"Overall":"Sports"}</span>${hot?"<span class=\"p-rank hot-tag\">🔥</span>":""}
+      <span class="p-rank ${isSports?"sports":"overall"}">#${t.rank} ${isSports?"Sports":"Overall"}</span>${hot?'<span class="p-rank hot-tag">🔥</span>':""}
       <div class="p-name">${t.name||t.wallet.slice(0,8)+"…"}</div>
       <div class="p-pnl">${fp(t.pnl)}</div>
+      ${otherRow}
     </div>
   </div>`;
 }
