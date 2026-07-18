@@ -364,7 +364,41 @@ select.finput option{background:var(--s2)}
 </div>
 <div class="overlay" id="tm-ov" onclick="if(event.target===this)closeTM()">
   <div class="modal"><div class="mhdr"><span class="mttl" id="tm-ttl">Log a Trade</span><button class="mx" onclick="closeTM()">&#xD7;</button></div>
-  <div class="mbody"><div class="fg"><label class="flbl">Market</label><input class="finput" id="tm-mkt" placeholder="e.g. NBA Finals 2026"></div><div class="frow2"><div class="fg"><label class="flbl">Outcome</label><select class="finput" id="tm-oc"><option>YES</option><option>NO</option></select></div><div class="fg"><label class="flbl">Entry Price (&#xa2;)</label><input class="finput" id="tm-pr" type="number" min="0" max="100" placeholder="65"></div></div><div class="frow2"><div class="fg"><label class="flbl">Amount (USDC)</label><input class="finput" id="tm-am" type="number" placeholder="500"></div><div class="fg"><label class="flbl">Trader</label><input class="finput" id="tm-tr" placeholder="Optional"></div></div><div class="mft"><button class="btn-x" onclick="closeTM()">Cancel</button><button class="btn-p" onclick="saveTrade()">Save Trade</button></div></div></div>
+  <div class="mbody">
+  <div class="fg"><label class="flbl">Market / Team</label><input class="finput" id="tm-mkt" placeholder="e.g. Milwaukee Brewers ML"></div>
+  <div class="frow2">
+    <div class="fg">
+      <label class="flbl">American Odds</label>
+      <input class="finput" id="tm-pr" placeholder="-110 or +150" oninput="updateOddsPreview()">
+      <span id="tm-odds-preview" style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-top:3px;display:block"></span>
+    </div>
+    <div class="fg"><label class="flbl">Bet Amount ($)</label><input class="finput" id="tm-am" type="number" min="0" placeholder="100"></div>
+  </div>
+  <div class="frow2">
+    <div class="fg"><label class="flbl">Book</label>
+      <select class="finput" id="tm-book">
+        <option value="Novig">Novig</option>
+        <option value="ProphetX">ProphetX</option>
+        <option value="DraftKings">DraftKings</option>
+        <option value="FanDuel">FanDuel</option>
+        <option value="BetMGM">BetMGM</option>
+        <option value="Caesars">Caesars</option>
+        <option value="Pinnacle">Pinnacle</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="fg"><label class="flbl">Bet Type</label>
+      <select class="finput" id="tm-type">
+        <option value="ML">Moneyline</option>
+        <option value="Spread">Spread</option>
+        <option value="Total">Total (O/U)</option>
+        <option value="Prop">Prop</option>
+      </select>
+    </div>
+  </div>
+  <div class="fg"><label class="flbl">Source / Notes</label><input class="finput" id="tm-tr" placeholder="e.g. Sharp alert, Polymarket signal, manual pick"></div>
+  <div class="mft"><button class="btn-x" onclick="closeTM()">Cancel</button><button class="btn-p" onclick="saveTrade()">Save Trade</button></div>
+</div></div>
 </div>
 <div class="overlay" id="at-ov" onclick="if(event.target===this)closeAT()">
   <div class="modal"><div class="mhdr"><span class="mttl">Watch a Wallet</span><button class="mx" onclick="closeAT()">&#xD7;</button></div>
@@ -467,7 +501,25 @@ function fu(n){return"$"+Math.round(n).toLocaleString();}
 function fp(n){if(!n&&n!==0)return"$0";const abs=Math.abs(n);const v=abs>=1e6?"$"+(n/1e6).toFixed(1)+"M":abs>=1e3?"$"+(n/1e3).toFixed(1)+"K":"$"+Math.round(n).toLocaleString();return v;}
 function bdg(cats){return(cats||[]).map(function(c){const ct=c.category||c.cat||"";return'<span class="badge badge-'+(ct==="OVERALL"?"o":"s")+'">'+(ct==="OVERALL"?"Overall":"Sports")+" #"+c.rank+"</span>";}).join("");}
 function oc(o){const l=(o||"").toLowerCase();return l==="yes"?'<span class="oc-y">YES</span>':l==="no"?'<span class="oc-n">NO</span>':"<span>"+(o||"&#8212;")+"</span>";}
-function calcP(t){const a=parseFloat(t.amount)||0,p=parseFloat(t.price)||50;if(t.status==="WIN")return Math.round(a*(100/p-1)*100)/100;if(t.status==="LOSS")return-a;return 0;}
+function calcP(t){
+  const amt=parseFloat(t.amount)||0;
+  // Support both new American odds and legacy Polymarket price format
+  if(t.odds){
+    const odds=parseInt(t.odds)||0;
+    if(t.status==="WIN"){
+      return odds<0
+        ?Math.round(amt*(100/Math.abs(odds))*100)/100
+        :Math.round(amt*(odds/100)*100)/100;
+    }
+    if(t.status==="LOSS")return -amt;
+    return 0;
+  }
+  // Legacy Polymarket format (price in cents)
+  const price=parseFloat(t.price)||50;
+  if(t.status==="WIN")return Math.round(amt*(100/price-1)*100)/100;
+  if(t.status==="LOSS")return -amt;
+  return 0;
+}
 
 function showV(v,btn){view=v;document.querySelectorAll(".view").forEach(function(e){e.classList.remove("on");});document.querySelectorAll(".ntab").forEach(function(b){b.classList.remove("on");});el("v-"+v).classList.add("on");if(btn)btn.classList.add("on");if(v==="dashboard")renderDash();if(v==="alerts")renderAlerts();if(v==="trades")renderTrades();if(v==="traders"){renderHot();renderLB();renderWallets();}}
 
@@ -532,7 +584,7 @@ function buildTrending() {
 
   // Show groups with 2+ buys OR single large buy ($10K+)
   return Object.values(groups)
-    .filter(function(g) { return g.buys.length >= 2 || g.totalVol >= 10000; })
+    .filter(function(g) { return g.buys.length >= 2 || g.totalVol >= 1000; })
     .sort(function(a, b) {
       // Score = buyers² × total vol (penalise single buyer heavily)
       const sa = a.buys.length * a.buys.length * a.totalVol;
@@ -642,7 +694,7 @@ function tcardHTML(t){
   const p=calcP(t);const pc=p>0?"pos":p<0?"neg":"neu";
   return '<div class="tcard '+(t.status.toLowerCase())+'">'
     +'<div class="tc-mkt">'+t.market+'</div>'
-    +'<div class="tc-det">'+t.outcome+' @ '+t.price+'&#xa2; &middot; '+fu(parseFloat(t.amount)||0)+'</div>'
+    +'<div class="tc-det">'+(t.odds||t.price+'&#xa2;')+' · '+fu(parseFloat(t.amount)||0)+' · '+(t.book||'')+(t.notes?' · '+t.notes:'')+
     +'<div class="tc-ft"><span class="tc-status '+(t.status.toLowerCase())+'">'+t.status+'</span><span class="tc-pnl '+pc+'">'+(t.status==="OPEN"?"Open":(p>=0?"+":"")+fu(p))+'</span></div>'
     +(t.status==="OPEN"?'<div class="tc-btns"><button class="tc-btn" onclick="setSt(\''+t.id+'\',\'WIN\')">W</button><button class="tc-btn" onclick="setSt(\''+t.id+'\',\'LOSS\')">L</button><button class="tc-btn" onclick="setSt(\''+t.id+'\',\'PUSH\')">P</button></div>':"")
     +'</div>';
@@ -818,14 +870,26 @@ function rmW(wallet){wallets=wallets.filter(function(w){return w.wallet!==wallet
 
 function openTM(pre){pre=pre||{};el("tm-ttl").textContent=pre.market?"Follow This Trade":"Log a Trade";el("tm-mkt").value=pre.market||"";el("tm-oc").value=pre.outcome||"YES";el("tm-pr").value=pre.price||"";el("tm-am").value="";el("tm-tr").value=pre.trader||"";el("tm-ov").classList.add("open");}
 function closeTM(){el("tm-ov").classList.remove("open");}
-function saveTrade(){const m=el("tm-mkt").value.trim();if(!m){el("tm-mkt").style.borderColor="var(--red)";return;}trades.unshift({id:Date.now().toString(),market:m,outcome:el("tm-oc").value,price:el("tm-pr").value||"50",amount:el("tm-am").value||"0",trader:el("tm-tr").value.trim(),status:"OPEN",createdAt:Date.now()});ss("pm:trades",trades);closeTM();renderTrades();renderDash();}
-function followAlert(b){if(!b)return;openTM({market:b.title||"",outcome:b.outcome||"YES",price:(parseFloat(b.price||0)*100).toFixed(1),trader:b.traderName||""});showV("trades",document.querySelectorAll(".ntab")[2]);}
-
-// Event delegation for follow buttons in alert list
-document.addEventListener("click",function(e){
-  const btn=e.target.closest(".al-follow");
-  if(btn&&btn.dataset.key)followAlert(window._al[btn.dataset.key]);
-});
+function saveTrade(){
+  const m=el("tm-mkt").value.trim();
+  if(!m){el("tm-mkt").style.borderColor="var(--red)";return;}
+  const oddsRaw=el("tm-pr").value.trim();
+  const odds=parseInt(oddsRaw)||0;
+  if(!odds||isNaN(odds)){el("tm-pr").style.borderColor="var(--red)";el("tm-pr").placeholder="-110 or +150";return;}
+  trades.unshift({
+    id:       Date.now().toString(),
+    market:   m,
+    odds:     oddsRaw,
+    amount:   el("tm-am").value||"0",
+    book:     el("tm-book")?el("tm-book").value:"Novig",
+    betType:  el("tm-type")?el("tm-type").value:"ML",
+    notes:    el("tm-tr").value.trim(),
+    status:   "OPEN",
+    createdAt:Date.now(),
+  });
+  ss("pm:trades",trades);closeTM();renderTrades();renderDash();
+}
+function followAlert(b){if(!b)return;openTM({market:b.title||'',odds:'',trader:b.traderName||'',betType:'ML'});showV('trades',document.querySelectorAll('.ntab')[2]);}
 
 function openAT(){el("at-w").value="";el("at-n").value="";el("at-msg").textContent="";el("at-ov").classList.add("open");}
 function closeAT(){el("at-ov").classList.remove("open");}
