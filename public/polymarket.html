@@ -425,7 +425,34 @@ const REFRESH=10*60*1000;
 
 // Sport detection
 const MLB_TEAMS=["yankees","red sox","dodgers","cubs","mets","astros","braves","phillies","padres","giants","cardinals","brewers","guardians","royals","twins","orioles","rays","blue jays","mariners","rangers","angels","athletics","tigers","white sox","reds","pirates","rockies","marlins","nationals","diamondbacks"];
-function detectSport(t){const s=(t||"").toLowerCase();if(s.includes("mlb")||MLB_TEAMS.some(x=>s.includes(x)))return"MLB";if(s.includes("nba")||s.includes("basketball"))return"NBA";if(s.includes("nfl")||s.includes("super bowl"))return"NFL";if(s.includes("nhl")||s.includes("stanley cup")||s.includes("hockey"))return"NHL";if(s.includes("wnba"))return"WNBA";if(s.includes("ncaa")||s.includes("college"))return"College";if(s.includes("world cup")||s.includes("soccer")||s.includes("mls"))return"Soccer";return null;}
+const ESPORTS_KW=["dota","valorant","cs2","counter-strike","league of legends","lol:","esports world cup","starcraft","overwatch","fortnite","pubg","apex legends","rainbow six","rocket league"];
+const SOCCER_INTL=["premier league","la liga","serie a","bundesliga","champions league","copa america","eredivisie","ligue 1","fa cup","euro 20","nations league","world cup qualifier","man city","man united","manchester","liverpool","chelsea","arsenal","barcelona","real madrid","france vs","england vs","brazil vs","germany vs","spain vs","portugal vs","argentina vs","italy vs","netherlands vs","belgium vs","croatia vs","mexico vs","usmnt","uswnt","england:","france:"];
+function detectSport(title){
+  var t=(title||"").toLowerCase();
+  // Exclude esports before any other check
+  if(ESPORTS_KW.some(function(x){return t.includes(x);}))return null;
+  // MLB
+  if(t.includes("mlb")||t.includes("baseball")||MLB_TEAMS.some(function(x){return t.includes(x);}))return"MLB";
+  // NBA
+  if(t.includes("nba")||t.includes("basketball"))return"NBA";
+  // NFL
+  if(t.includes("nfl")||t.includes("super bowl"))return"NFL";
+  // NHL
+  if(t.includes("nhl")||t.includes("stanley cup")||t.includes("hockey"))return"NHL";
+  // WNBA
+  if(t.includes("wnba"))return"WNBA";
+  // College
+  if(t.includes("ncaa")||t.includes("college football")||t.includes("college basketball"))return"College";
+  // Tennis — before Soccer to avoid false soccer matches
+  if(t.includes("tennis")||t.includes("wimbledon")||t.includes("us open tennis")||t.includes("french open")||t.includes("australian open")||t.includes(" atp ")||t.includes(" wta "))return"Tennis";
+  // Golf
+  if(t.includes("golf")||t.includes("pga")||t.includes("masters ")||t.includes("ryder cup")||t.includes("open championship"))return"Golf";
+  // Soccer — must be AFTER tennis (avoid "open" false matches)
+  if(t.includes("soccer")||t.includes("mls")||t.includes("fifa world cup")||SOCCER_INTL.some(function(x){return t.includes(x);}))return"Soccer";
+  // MMA/Boxing
+  if(t.includes("ufc")||t.includes("boxing")||t.includes("mma"))return"MMA";
+  return null;
+}
 
 // Async trader stats fetcher
 const _sc={};
@@ -461,19 +488,28 @@ function getTraderSports(wallet) {
 
 // Build stat block HTML
 function buildSB(oe,se,fetched,sport){
-  const rows=[];
-  const atp=oe!=null?oe.pnl:(fetched!=null?fetched.pnl:undefined);
-  const G="#00C896",R="#FF3D5A";
-  function row(lbl,val){return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)">'+lbl+'</span><span style="font-size:12px;font-family:var(--mono);font-weight:800;color:'+(val>=0?G:R)+'">'+fp(val)+'</span></div>';}
-  function sportTag(s){return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0"><span style="font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)">Market</span><span style="font-size:10px;font-family:var(--mono);font-weight:700;padding:2px 8px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:4px">'+s+'</span></div>';}
-  if(atp!=null)rows.push(row("All-Time PnL"+(oe?" \xb7 #"+oe.rank:""),atp));
-  if(se&&se.pnl!=null)rows.push(row("Sports PnL \xb7 #"+se.rank,se.pnl));
-  if(sport&&fetched&&fetched.sp&&fetched.sp[sport]!=null)rows.push(row(sport+" PnL",fetched.sp[sport]));
+  var rows=[];
+  var G="#00C896",R="#FF3D5A";
+  function row(lbl,val,forceShow){
+    if(!forceShow&&(val===0||val===null||val===undefined))return null;
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)">'+lbl+'</span><span style="font-size:12px;font-family:var(--mono);font-weight:800;color:'+(val>=0?G:R)+'">'+fp(val)+'</span></div>';
+  }
+  function sportTag(s){
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0"><span style="font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)">Market</span><span style="font-size:10px;font-family:var(--mono);font-weight:700;padding:2px 8px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:4px">'+s+'</span></div>';
+  }
+  // All-time PnL — leaderboard takes priority, only show fetched if non-zero
+  if(oe&&oe.pnl!=null)rows.push(row("All-Time PnL · #"+oe.rank,oe.pnl,true));
+  else if(fetched&&fetched.pnl!=null&&fetched.pnl!==0)rows.push(row("All-Time PnL",fetched.pnl,true));
+  // Sports PnL from leaderboard
+  if(se&&se.pnl!=null)rows.push(row("Sports PnL · #"+se.rank,se.pnl,true));
+  // Sport-specific PnL — only show if non-zero
+  if(sport&&fetched&&fetched.sp&&fetched.sp[sport]&&fetched.sp[sport]!==0)rows.push(row(sport+" PnL",fetched.sp[sport],true));
+  // Always show sport tag when we know the sport
   if(sport)rows.push(sportTag(sport));
-  return rows.length?'<div style="background:var(--s2);border-radius:8px;padding:8px 11px;margin:8px 0">'+rows.join("")+'</div>':"";
+  var valid=rows.filter(Boolean);
+  return valid.length?'<div style="background:var(--s2);border-radius:8px;padding:8px 11px;margin:8px 0">'+valid.join("")+'</div>':"";
 }
 
-// Enrich alert cards with async stats
 async function enrichCards(){
   const cards=document.querySelectorAll("[data-wallet]");
   const seen=new Set();
@@ -637,7 +673,11 @@ function renderTrending() {
       +'<div class="trend-market">'+g.title+sportTag+'</div>'
       +'<div class="trend-outcome">Buying <span style="'+ocStyle+'">'+(g.outcome||'—')+'</span></div>'
       +'<div class="trend-bar-wrap"><div class="trend-bar '+sc+'" style="width:'+barPct+'%"></div></div>'
-      +'<div class="trend-traders">'+uniqueTraders.map(function(n){return'<span class="trend-trader-chip">'+n+'</span>';}).join('')+'</div>'
+      +'<div class="trend-traders">'+uniqueTraders.map(function(n){
+      // Truncate hex wallet addresses for display
+      const display=n&&n.startsWith('0x')?(n.slice(0,6)+'...'+n.slice(-4)):n;
+      return'<span class="trend-trader-chip">'+display+'</span>';
+    }).join('')+'</div>'
       +'<a href="'+(g.eventSlug?'https://polymarket.com/event/'+g.eventSlug:'#')+'" target="_blank" class="trend-follow" style="display:block;text-align:center;text-decoration:none">View on Polymarket →</a>'
       +'</div>';
   }).join('');
@@ -657,6 +697,16 @@ function renderDash(){
   el("d-ar").innerHTML=alerts.slice(0,8).map(acardHTML).join("")||'<div style="color:var(--t4);font-size:13px;padding:20px 4px">No alerts yet</div>';
   el("d-tr").innerHTML=trades.filter(function(t){return t.status==="OPEN";}).slice(0,6).map(tcardHTML).join("")||'<div style="color:var(--t4);font-size:13px;padding:20px 4px">No open trades</div>';
   el("d-tp").innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join("")||'<div style="color:var(--t4);font-size:13px;padding:20px 4px">Loading&#x2026;</div>'; renderTrending();
+  // Fetch closed positions for top traders to show sport PnL breakdown
+  (lbData.sports||[]).slice(0,10).forEach(function(t){
+    if(!_sc[t.wallet]){
+      fetchTraderStats(t.wallet).then(function(){
+        // Re-render just this poster if still visible
+        const tp=el("d-tp");
+        if(tp&&tp.children.length)tp.innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join("");
+      });
+    }
+  });
   setTimeout(enrichCards,50);
 }
 
@@ -708,7 +758,12 @@ function posterHTML(t){
   const other=isSp?lbData.overall.find(function(x){return x.wallet===t.wallet;}):lbData.sports.find(function(x){return x.wallet===t.wallet;});
   const otherRow=other?('<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;color:rgba(245,246,250,.35);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em">'+(isSp?"All-Time":"Sports")+' PnL</div><div style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+(other.pnl>=0?"#00C896":"#FF3D5A")+';margin-top:1px">'+fp(other.pnl)+'</div></div>'):"";
   const topSports=getTraderSports(t.wallet);
-  const sportsRow=topSports.length?('<div style="margin-top:6px;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;color:rgba(245,246,250,.35);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Active In</div><div style="display:flex;gap:3px;flex-wrap:wrap">'+topSports.map(function(s){return'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono)">'+s+'</span>';}).join('')+'</div></div>'):"";
+  // Sport PnL breakdown from closed positions cache
+  const cached=_sc[t.wallet];
+  const sportPnlRows=cached&&cached.sp&&Object.keys(cached.sp).length
+    ?Object.entries(cached.sp).filter(function(e){return e[1]!==0;}).sort(function(a,b){return Math.abs(b[1])-Math.abs(a[1]);}).slice(0,3).map(function(e){return'<div style="display:flex;justify-content:space-between;padding:2px 0"><span style="font-size:9px;color:rgba(245,246,250,.4);font-family:var(--mono)">'+e[0]+'</span><span style="font-size:9px;font-weight:700;font-family:var(--mono);color:'+(e[1]>=0?'#00C896':'#FF3D5A')+'">'+fp(e[1])+'</span></div>';}).join('')
+    :(topSports.length?('<div style="display:flex;gap:3px;flex-wrap:wrap">'+topSports.map(function(s){return'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono)">'+s+'</span>';}).join('')+'</div>'):'');
+  const sportsRow=sportPnlRows?('<div style="margin-top:6px;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;color:rgba(245,246,250,.35);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Sport Breakdown</div>'+sportPnlRows+'</div>'):"";
   return '<div class="poster'+(hot?" hot":"")+'">'
     +'<div class="poster-img">'+avPart+(hot?'<div class="p-live">LIVE</div>':"")+'</div>'
     +'<div class="poster-body">'
