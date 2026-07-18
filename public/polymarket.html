@@ -434,10 +434,22 @@ select.finput option{background:var(--s2)}
 </div>
 
 <script>
+
+// Migration: carry over any alerts from old key names
+(function(){
+  const migrate=[["pm:al","pm:alert-log"],["pm:wallets","pm:traders"],["pm:tp","pm:ntfy-topic"],["pm:th","pm:ntfy-thresh"],["pm:cat","pm:ntfy-cat"]];
+  migrate.forEach(([old,nw])=>{
+    if(localStorage.getItem(old)!==null&&localStorage.getItem(nw)===null){
+      localStorage.setItem(nw,localStorage.getItem(old));
+      localStorage.removeItem(old);
+    }
+  });
+})();
+
 const ls=(k,d)=>{try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch{return d;}};
 const ss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}};
 const el=id=>document.getElementById(id);
-let allBuys=[],alerts=ls("pm:al",[]),trades=ls("pm:trades",[]),wallets=ls("pm:wallets",[]);
+let allBuys=[],alerts=ls("pm:alert-log",[]),trades=ls("pm:trades",[]),wallets=ls("pm:traders",[]);
 let af="all",lbTab="sports",view="dashboard",lbData={overall:[],sports:[]};
 let cd=0,cdT;const REFRESH=10*60*1000;
 
@@ -468,7 +480,7 @@ async function fetchData(){
     if(br.leaderboard)lbData=br.leaderboard;
     const sa=lr.alerts||[],eh=new Set(alerts.map(a=>a.transactionHash));
     sa.forEach(a=>{if(!eh.has(a.transactionHash))alerts.unshift(a);});
-    alerts=alerts.slice(0,200);ss("pm:al",alerts);
+    alerts=alerts.slice(0,200);ss("pm:alert-log",alerts);
     const cnt=alerts.length;
     if(cnt){el("acnt").style.display="";el("acnt").textContent=cnt>99?"99+":cnt;}
     if(view==="dashboard")renderDash();if(view==="alerts")renderAlerts();
@@ -650,8 +662,8 @@ function wbodyHTML(w,buys){
   const rec=Array.isArray(buys)&&buys.length?buys.slice(0,3).map(b=>{const u=(parseFloat(b.size)||0)*(parseFloat(b.price)||0);return`<div class="wrec-row"><span class="wrec-mkt">${b.title||"Unknown"}</span><span class="wrec-sz">${fu(u)}</span></div>`;}).join(""):"<div style="font-size:11px;color:var(--t4);padding:4px 0">Loading…</div>";
   return`<div style="margin-bottom:10px">${pnlRows}</div><div class="wrec-lbl">Recent Buys</div>${rec}`;
 }
-function qAdd(wallet,name){if(wallets.find(w=>w.wallet===wallet))return;wallets.push({wallet,name:name||null,addedAt:Date.now()});ss("pm:wallets",wallets);renderLB();renderWallets();}
-function rmWallet(wallet){wallets=wallets.filter(w=>w.wallet!==wallet);ss("pm:wallets",wallets);renderWallets();}
+function qAdd(wallet,name){if(wallets.find(w=>w.wallet===wallet))return;wallets.push({wallet,name:name||null,addedAt:Date.now()});ss("pm:traders",wallets);renderLB();renderWallets();}
+function rmWallet(wallet){wallets=wallets.filter(w=>w.wallet!==wallet);ss("pm:traders",wallets);renderWallets();}
 
 let prefill={};
 function openTM(pre={}){prefill=pre;el("tm-ttl").textContent=pre.market?"Follow This Trade":"Log a Trade";el("tm-mkt").value=pre.market||"";el("tm-oc").value=pre.outcome||"YES";el("tm-pr").value=pre.price||"";el("tm-am").value="";el("tm-tr").value=pre.trader||"";el("tm-ov").classList.add("open");}
@@ -661,11 +673,11 @@ function followAlert(b){openTM({market:b.title||"",outcome:b.outcome||"YES",pric
 
 function openAT(){el("at-w").value="";el("at-n").value="";el("at-msg").textContent="";el("at-ov").classList.add("open");}
 function closeAT(){el("at-ov").classList.remove("open");}
-function saveTrader(){const w=el("at-w").value.trim();if(!w||!w.startsWith("0x")){el("at-msg").style.color="var(--red)";el("at-msg").textContent="Enter a wallet starting with 0x";return;}if(wallets.find(t=>t.wallet===w)){el("at-msg").style.color="var(--gold)";el("at-msg").textContent="Already watching";return;}wallets.push({wallet:w,name:el("at-n").value.trim()||null,addedAt:Date.now()});ss("pm:wallets",wallets);closeAT();renderWallets();}
+function saveTrader(){const w=el("at-w").value.trim();if(!w||!w.startsWith("0x")){el("at-msg").style.color="var(--red)";el("at-msg").textContent="Enter a wallet starting with 0x";return;}if(wallets.find(t=>t.wallet===w)){el("at-msg").style.color="var(--gold)";el("at-msg").textContent="Already watching";return;}wallets.push({wallet:w,name:el("at-n").value.trim()||null,addedAt:Date.now()});ss("pm:traders",wallets);closeAT();renderWallets();}
 
-function openCfg(){el("cfg-tp").value=ls("pm:tp","")||"";const t=ls("pm:th","5000")||"5000";el("cfg-th").value=t;el("cfg-tv").textContent="$"+parseInt(t).toLocaleString();el("cfg-cat").value=ls("pm:cat","all")||"all";el("cfg-msg").textContent="";el("cfg-ov").classList.add("open");}
+function openCfg(){el("cfg-tp").value=ls("pm:ntfy-topic","")||"";const t=ls("pm:ntfy-thresh","5000")||"5000";el("cfg-th").value=t;el("cfg-tv").textContent="$"+parseInt(t).toLocaleString();el("cfg-cat").value=ls("pm:ntfy-cat","all")||"all";el("cfg-msg").textContent="";el("cfg-ov").classList.add("open");}
 function closeCfg(){el("cfg-ov").classList.remove("open");}
-function saveCfg(){ss("pm:tp",el("cfg-tp").value.trim());ss("pm:th",el("cfg-th").value);ss("pm:cat",el("cfg-cat").value);el("cfg-msg").style.color="var(--green)";el("cfg-msg").textContent="✓ Saved";setTimeout(closeCfg,800);}
+function saveCfg(){ss("pm:ntfy-topic",el("cfg-tp").value.trim());ss("pm:ntfy-thresh",el("cfg-th").value);ss("pm:ntfy-cat",el("cfg-cat").value);el("cfg-msg").style.color="var(--green)";el("cfg-msg").textContent="✓ Saved";setTimeout(closeCfg,800);}
 async function testNotif(){const t=el("cfg-tp").value.trim();if(!t){el("cfg-msg").style.color="var(--red)";el("cfg-msg").textContent="Enter a topic";return;}el("cfg-msg").style.color="var(--gold)";el("cfg-msg").textContent="Sending…";try{await fetch("https://ntfy.sh/"+t,{method:"POST",mode:"no-cors",body:"💰 Sharp Money is live!"});el("cfg-msg").style.color="var(--green)";el("cfg-msg").textContent="✓ Sent — check phone";}catch(e){el("cfg-msg").style.color="var(--red)";el("cfg-msg").textContent="Error: "+e.message;}}
 
 function startCd(){clearInterval(cdT);cdT=setInterval(()=>{if(document.hidden)return;if(cd>0)cd-=1000;else{cd=REFRESH;fetchData();}const m=Math.floor(cd/60000),s=Math.floor((cd%60000)/1000);el("cdt").textContent=m+":"+s.toString().padStart(2,"0");},1000);}
