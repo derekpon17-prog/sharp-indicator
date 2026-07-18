@@ -238,6 +238,31 @@ select.finput option{background:var(--s2)}
 @keyframes slidein{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
 @media(max-width:700px){.strip{grid-template-columns:1fr 1fr}.ntab span{display:none}.hero-size{font-size:38px}.hero-stats{display:none}.perf{gap:8px}}
 
+
+/* Trending plays */
+.trend-card{flex:0 0 280px;width:280px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:15px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.trend-card:hover{transform:translateY(-3px);border-color:var(--b3)}
+.trend-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.trend-card.sig-1{border-color:rgba(229,160,13,.2)}.trend-card.sig-1::before{background:linear-gradient(90deg,var(--gold),transparent)}
+.trend-card.sig-2{border-color:rgba(0,200,150,.25)}.trend-card.sig-2::before{background:linear-gradient(90deg,var(--green),transparent)}
+.trend-card.sig-3{border-color:rgba(155,109,255,.35);box-shadow:0 0 20px rgba(155,109,255,.1)}.trend-card.sig-3::before{background:linear-gradient(90deg,var(--purple),var(--green))}
+.trend-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.trend-buyers{font-size:10px;font-weight:700;font-family:var(--mono);letter-spacing:.05em}
+.trend-buyers.sig-1{color:var(--gold)}.trend-buyers.sig-2{color:var(--green)}.trend-buyers.sig-3{color:var(--purple)}
+.trend-age{font-size:10px;color:var(--t4);font-family:var(--mono)}
+.trend-market{font-size:13px;font-weight:700;color:var(--t1);line-height:1.4;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.trend-outcome{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px}
+.trend-vol{font-size:22px;font-weight:900;font-family:var(--mono);color:var(--gold);margin-bottom:8px}
+.trend-bar-wrap{background:rgba(255,255,255,.06);border-radius:100px;height:4px;margin-bottom:10px;overflow:hidden}
+.trend-bar{height:100%;border-radius:100px;transition:width .4s ease}
+.trend-bar.sig-1{background:var(--gold)}.trend-bar.sig-2{background:var(--green)}.trend-bar.sig-3{background:linear-gradient(90deg,var(--purple),var(--green))}
+.trend-traders{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
+.trend-trader-chip{font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:var(--t3)}
+.trend-follow{width:100%;padding:8px;border-radius:var(--r);background:var(--gold);color:#0B0C10;border:none;font-size:12px;font-weight:800;cursor:pointer;transition:all .15s}
+.trend-follow:hover{background:#F5B820}
+.trend-signal-lbl{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.trend-signal-lbl.sig-1{color:var(--gold)}.trend-signal-lbl.sig-2{color:var(--green)}.trend-signal-lbl.sig-3{color:var(--purple)}
+
 </style>
 </head>
 <body>
@@ -265,6 +290,13 @@ select.finput option{background:var(--s2)}
       <div class="sc blue"><div class="sc-lbl"><i class="ti ti-coin" style="font-size:12px"></i>Volume</div><div class="sc-val" id="d-vo">$0</div><div class="sc-sub">in logged alerts</div></div>
       <div class="sc green"><div class="sc-lbl"><i class="ti ti-trophy" style="font-size:12px"></i>Win Rate</div><div class="sc-val" id="d-wr">&#8212;</div><div class="sc-sub" id="d-ws">no trades yet</div></div>
       <div class="sc purple"><div class="sc-lbl"><i class="ti ti-cash" style="font-size:12px"></i>P&amp;L</div><div class="sc-val" id="d-pl">&#8212;</div><div class="sc-sub">USDC est.</div></div>
+    </div>
+    <div class="row-s" id="trending-row" style="display:none">
+      <div class="row-hdr">
+        <div class="row-ttl"><em>&#x1F4A1;</em>Converging Plays</div>
+        <div style="font-size:11px;color:var(--t3);font-family:var(--mono)">Multiple traders same side</div>
+      </div>
+      <div class="row-scr" id="d-trend"></div>
     </div>
     <div class="row-s"><div class="row-hdr"><div class="row-ttl"><em>&#x1F514;</em>Recent Alerts</div><div class="row-all" onclick="showV('alerts',document.querySelectorAll('.ntab')[1])">See all <i class="ti ti-chevron-right" style="font-size:12px"></i></div></div><div class="row-scr" id="d-ar"><div style="color:var(--t4);font-size:13px;padding:20px 4px">Waiting for alerts&#x2026;</div></div></div>
     <div class="row-s"><div class="row-hdr"><div class="row-ttl"><em>&#x1F4C8;</em>Open Trades</div><div class="row-all" onclick="showV('trades',document.querySelectorAll('.ntab')[2])">See all <i class="ti ti-chevron-right" style="font-size:12px"></i></div></div><div class="row-scr" id="d-tr"><div style="color:var(--t4);font-size:13px;padding:20px 4px">No open trades yet</div></div></div>
@@ -458,6 +490,93 @@ function renderHero(){
   document.getElementById("hero-follow-btn").onclick=function(){followAlert(t);};
 }
 
+
+// Build converging plays from alert log
+function buildTrending() {
+  const cutoff = Date.now() - 24 * 60 * 60 * 1000; // last 24h
+  const groups = {};
+
+  alerts.forEach(function(a) {
+    const ts = a.loggedAt || (a.timestamp * 1000);
+    if (ts < cutoff) return;
+    const key = (a.title || '') + '||' + (a.outcome || '');
+    if (!key || key === '||') return;
+    if (!groups[key]) {
+      groups[key] = {
+        title:    a.title || 'Unknown',
+        outcome:  a.outcome || '—',
+        eventSlug: a.eventSlug,
+        buys:     [],
+        totalVol: 0,
+        latestTs: 0,
+      };
+    }
+    groups[key].buys.push(a);
+    groups[key].totalVol += (a.usdValue || 0);
+    if (ts > groups[key].latestTs) groups[key].latestTs = ts;
+  });
+
+  // Only show groups with 2+ buys
+  return Object.values(groups)
+    .filter(function(g) { return g.buys.length >= 2; })
+    .sort(function(a, b) {
+      // Score = buyers² × total vol (penalise single buyer heavily)
+      const sa = a.buys.length * a.buys.length * a.totalVol;
+      const sb = b.buys.length * b.buys.length * b.totalVol;
+      return sb - sa;
+    })
+    .slice(0, 8);
+}
+
+function sigClass(buyCount, vol) {
+  if (buyCount >= 5 || vol >= 15000) return 'sig-3';
+  if (buyCount >= 3 || vol >= 5000)  return 'sig-2';
+  return 'sig-1';
+}
+
+function sigLabel(buyCount, vol) {
+  if (buyCount >= 5 || vol >= 15000) return '&#x1F525; Very Strong';
+  if (buyCount >= 3 || vol >= 5000)  return '&#x26A1; Strong';
+  return '&#x26A0;&#xFE0F; Moderate';
+}
+
+function renderTrending() {
+  const trends = buildTrending();
+  const row = document.getElementById('trending-row');
+  const cont = document.getElementById('d-trend');
+  if (!trends.length) { if(row) row.style.display = 'none'; return; }
+  if(row) row.style.display = '';
+
+  // Max vol for bar scaling
+  const maxVol = Math.max.apply(null, trends.map(function(t){return t.totalVol;}));
+
+  cont.innerHTML = trends.map(function(g) {
+    const sc = sigClass(g.buys.length, g.totalVol);
+    const barPct = Math.round((g.totalVol / maxVol) * 100);
+    const uniqueTraders = g.buys
+      .map(function(b){return b.traderName||'Anon';})
+      .filter(function(v,i,a){return a.indexOf(v)===i;})
+      .slice(0, 4);
+    const link = g.eventSlug ? 'https://polymarket.com/event/'+g.eventSlug : '#';
+    const ocStyle = (g.outcome||'').toLowerCase()==='yes'?'color:#00C896;font-weight:800':'color:#FF3D5A;font-weight:800';
+    const sport = detectSport(g.title);
+    const sportTag = sport ? ('<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>') : '';
+
+    return '<div class="trend-card '+sc+'">'
+      +'<div class="trend-header">'
+      +'<div><div class="trend-signal-lbl '+sc+'">'+sigLabel(g.buys.length,g.totalVol)+'</div>'
+      +'<span class="trend-buyers '+sc+'">'+g.buys.length+' buyer'+(g.buys.length>1?'s':'')+' &middot; '+fu(g.totalVol)+' total</span></div>'
+      +'<span class="trend-age">'+timeAgo(g.latestTs)+'</span>'
+      +'</div>'
+      +'<div class="trend-market">'+g.title+sportTag+'</div>'
+      +'<div class="trend-outcome">Buying <span style="'+ocStyle+'">'+(g.outcome||'—')+'</span></div>'
+      +'<div class="trend-bar-wrap"><div class="trend-bar '+sc+'" style="width:'+barPct+'%"></div></div>'
+      +'<div class="trend-traders">'+uniqueTraders.map(function(n){return'<span class="trend-trader-chip">'+n+'</span>';}).join('')+'</div>'
+      +'<a href="'+(g.eventSlug?'https://polymarket.com/event/'+g.eventSlug:'#')+'" target="_blank" class="trend-follow" style="display:block;text-align:center;text-decoration:none">View on Polymarket →</a>'
+      +'</div>';
+  }).join('');
+}
+
 function renderDash(){
   renderHero();
   const set=trades.filter(function(t){return t.status!=="OPEN";});
@@ -471,7 +590,7 @@ function renderDash(){
   el("d-pl").textContent=pnl!==0?(pnl>0?"+":"")+fu(pnl):"&#8212;";el("d-pl").style.color=pnl>0?"var(--green)":pnl<0?"var(--red)":"var(--t4)";
   el("d-ar").innerHTML=alerts.slice(0,8).map(acardHTML).join("")||'<div style="color:var(--t4);font-size:13px;padding:20px 4px">No alerts yet</div>';
   el("d-tr").innerHTML=trades.filter(function(t){return t.status==="OPEN";}).slice(0,6).map(tcardHTML).join("")||'<div style="color:var(--t4);font-size:13px;padding:20px 4px">No open trades</div>';
-  el("d-tp").innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join("")||'<div style="color:var(--t4);font-size:13px;padding:20px 4px">Loading&#x2026;</div>';
+  el("d-tp").innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join("")||'<div style="color:var(--t4);font-size:13px;padding:20px 4px">Loading&#x2026;</div>'; renderTrending();
   setTimeout(enrichCards,50);
 }
 
