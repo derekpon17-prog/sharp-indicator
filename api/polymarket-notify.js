@@ -11,6 +11,8 @@
    ========================================================= */
 
 const DATA_API   = 'https://data-api.polymarket.com';
+// In-memory set of position alerts already sent this session (resets on cold start)
+const posAlertedKeys = new Set();
 const VERCEL_URL = 'https://sharp-indicator-a34j.vercel.app';
 const LB_SIZE    = 50;
 
@@ -26,6 +28,26 @@ async function fetchLeaderboard(category) {
 async function fetchRecentTrades(limit = 500) {
   try {
     const r = await fetch(`${DATA_API}/trades?side=BUY&takerOnly=true&limit=${limit}`);
+    if (!r.ok) return [];
+    const d = await r.json();
+    return Array.isArray(d) ? d : [];
+  } catch { return []; }
+}
+
+// Fetch active sports markets from Polymarket
+async function fetchActiveSportsMarkets() {
+  try {
+    const r = await fetch(`${DATA_API}/markets?active=true&closed=false&limit=100&order=volume&ascending=false&tag=sports`);
+    if (!r.ok) return [];
+    const d = await r.json();
+    return Array.isArray(d) ? d : (d.data ? d.data : []);
+  } catch { return []; }
+}
+
+// Fetch top position holders for a specific market
+async function fetchTopHolders(conditionId, threshold = 500) {
+  try {
+    const r = await fetch(`${DATA_API}/positions?conditionId=${conditionId}&sizeThreshold=${threshold}&limit=20`);
     if (!r.ok) return [];
     const d = await r.json();
     return Array.isArray(d) ? d : [];
@@ -195,6 +217,50 @@ module.exports = async function handler(req, res) {
     });
 
     toAlert.sort((a, b) => b.usdValue - a.usdValue);
+
+    // ── POSITION SCAN: Check top holders on active MLB/NFL/NBA markets ──
+    // This catches large existing positions, not just real-time buys
+    try {
+      const activeMarkets = await fetchActiveSportsMarkets();
+      const sportMarkets = activeMarkets
+        .filter(m => m.question && isSportsMarket(m.question))
+        .slice(0, 15); // Check top 15 by volume
+
+      for (const market of sportMarkets) {
+        if (!market.conditionId) continue;
+        const holders = await fetchTopHolders(market.conditionId, threshold);
+        for (const h of holders) {
+          const wallet = h.proxyWallet || h.user;
+          const posSize = parseFloat(h.size || h.currentValue || 0);
+          if (posSize < threshold) continue;
+          // Check if this position was recently established (avoid re-alerting)
+          const posKey = `pos_${wallet}_${market.conditionId}`;
+          const seen = posAlertedKeys.has(posKey);
+          if (seen) continue;
+          posAlertedKeys.add(posKey);
+          const traderInfo = wallet ? walletMap[wallet] : null;
+          toAlert.push({
+            wallet:          wallet || 'unknown',
+            traderName:      h.name || h.pseudonym || (traderInfo && traderInfo.name) || (wallet ? wallet.slice(0,6)+'...'+wallet.slice(-4) : 'Holder'),
+            profileImage:    h.profileImage || null,
+            categories:      traderInfo ? traderInfo.categories : [],
+            isTopTrader:     !!traderInfo,
+            title:           market.question || market.title,
+            slug:            market.slug,
+            eventSlug:       market.eventSlug || market.slug,
+            outcome:         h.outcome || h.side,
+            price:           h.averagePrice || h.price,
+            usdValue:        posSize,
+            timestamp:       Math.floor(Date.now()/1000),
+            loggedAt:        Date.now(),
+            transactionHash: posKey, // use as dedup key
+            isPositionScan:  true,
+          });
+        }
+      }
+    } catch (e) {
+      console.error('Position scan error:', e.message);
+    }
 
     // Send alerts and collect results
     let sent = 0;
