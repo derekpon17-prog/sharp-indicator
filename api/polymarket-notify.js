@@ -35,7 +35,7 @@ async function fetchRecentTrades(limit = 500) {
 const SPORT_KEYWORDS = [
   'nba','wnba','mlb','nfl','nhl','mls','ufc','pga',
   'basketball','baseball','football','hockey','soccer',
-  'tennis','golf','boxing','mma','esports','dota','cs2','lol','valorant',
+  'tennis','golf','boxing','mma',
   // Tennis specifics
   'wimbledon','us open','french open','australian open','atp','wta','grand slam',
   'vs','game winner','set winner','match winner',
