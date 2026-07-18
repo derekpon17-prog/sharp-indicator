@@ -35,7 +35,13 @@ async function fetchRecentTrades(limit = 500) {
 const SPORT_KEYWORDS = [
   'nba','wnba','mlb','nfl','nhl','mls','ufc','pga',
   'basketball','baseball','football','hockey','soccer',
-  'tennis','golf','boxing','mma',
+  'tennis','golf','boxing','mma','esports','dota','cs2','lol','valorant',
+  // Tennis specifics
+  'wimbledon','us open','french open','australian open','atp','wta','grand slam',
+  'vs','game winner','set winner','match winner',
+  // Soccer specifics
+  'premier league','la liga','serie a','bundesliga','champions league',
+  'copa','eredivisie','ligue 1','mls cup','fifa',
   'ncaa','college football','college basketball','march madness','cfp',
   'nba finals','world series','super bowl','stanley cup',
   'championship','playoffs','world cup','draft',
