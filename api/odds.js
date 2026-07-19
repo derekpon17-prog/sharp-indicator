@@ -260,7 +260,8 @@ function analyzeAll(game){
   if(spreadMkt&&spreadMkt.siScore>0){
     const sr=spreadMkt.rawPrices&&spreadMkt.rawPrices.find(r=>r.name===spreadMkt.sharpOutcome);
     const pt=sr?sr.point:null,px=sr?sr.price:0;
-    if(pt!==null&&pt>0&&px<=-150)spreadQualified=true;
+    // +1.5 run line: only qualify at -150 or better odds (not -151 to -900 chalk juice)
+    if(pt!==null&&pt>0&&px>=-150)spreadQualified=true;
     if(pt!==null&&pt<0)spreadMkt.needsSteam=true;
   }
   const noSignal=!best||best.siScore===0;
