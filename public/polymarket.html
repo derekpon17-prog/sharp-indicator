@@ -258,17 +258,17 @@ select.finput option{background:var(--s2)}
       <div class="sc purple" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-coin"></i>P&amp;L Est.</div><div id="d-pl" style="font-size:20px;font-weight:900;font-family:var(--mono);color:var(--t4)">$0</div></div>
       <div class="sc" style="flex:1;min-width:100px;padding:12px 14px;border-top-color:var(--red)"><div class="sc-lbl"><i class="ti ti-bell"></i>Alerts</div><div style="font-size:20px;font-weight:900;font-family:var(--mono)" id="d-ws">0&ndash;0</div></div>
     </div>
-    <!-- 1. Final Sharp Score (combined — only shows when both signals agree) -->
-    <div class="row-s" id="sharp-score-row" style="display:none">
-      <div class="row-hdr">
-        <div class="row-ttl"><em>&#x1F3AF;</em>Final Sharp Score
-          <span style="font-size:11px;font-weight:700;margin-left:8px;padding:2px 8px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.15),rgba(229,160,13,.15));color:var(--t2)">Line + Poly Combined</span>
+    <!-- 1. Sharp Score — Best active plays from all signals -->
+    <div id="sharp-score-row" style="margin-bottom:24px;display:none">
+      <div class="row-hdr" style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="row-ttl"><em>&#x1F3AF;</em>Sharp Score</div>
+          <div id="ss-source-tag" style="font-size:10px;font-weight:700;padding:2px 9px;border-radius:4px;background:rgba(229,160,13,.12);color:var(--gold)">LOADING</div>
         </div>
-        <div style="font-size:11px;color:var(--t3)">Both signals agree &middot; highest conviction</div>
+        <button onclick="showV('tracking',document.querySelectorAll('.ntab')[2])" style="font-size:12px;color:var(--t3);background:transparent;border:none;cursor:pointer;display:flex;align-items:center;gap:3px">Track plays &rsaquo;</button>
       </div>
-      <div class="hscr" id="sharp-score-cont"></div>
-      <!-- If no scroll cards, show stacked play cards like tracking -->
-      <div id="sharp-score-list" style="display:flex;flex-direction:column;gap:8px;margin-top:8px"></div>
+      <!-- Play cards — stacked, not scrollable, max 3 -->
+      <div id="sharp-score-list" style="display:flex;flex-direction:column;gap:9px"></div>
     </div>
 
     <!-- 2. Polymarket Signal -->
@@ -775,717 +775,159 @@ function renderSharpLines(){
 }
 
 function renderSharpScore(){
-  const row=el('sharp-score-row'),cont=el('sharp-score-cont');
-  if(!cont)return;
-  const recentAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>Date.now()-43200000);
-  const combined=[];
-  sharpLines.forEach(g=>{
-    const lineScore=parseInt(g.siScore||g.mlSiScore||0);
-    if(lineScore<50)return;
+  const row=el('sharp-score-row');
+  const list=el('sharp-score-list');
+  const tag=el('ss-source-tag');
+  if(!list||!row)return;
+
+  // Collect best plays from ALL signals, deduplicate by game
+  const now=Date.now();
+  const cutoff=now-24*60*60*1000;
+  const seen=new Set();
+  const plays=[];
+
+  // 1. Combined Sharp Score plays (highest conviction — both signals agree)
+  const recentAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>cutoff);
+  sharpLines.filter(g=>!g.noSignal&&parseInt(g.siScore||0)>=50).forEach(g=>{
     const match=matchLineToAlert(g,recentAlerts);
     if(!match)return;
     const{score:polyScore}=signalScore({buys:[match],totalVol:match.usdValue});
-    const ss2=calcSharpScore(lineScore,polyScore);
-    if(ss2<60)return;
-    combined.push({g,match,lineScore,polyScore,ss:ss2});
-  });
-  combined.sort((a,b)=>b.ss-a.ss);
-  if(!combined.length){if(row)row.style.display='none';return;}
-  if(row)row.style.display='';
-  const listEl=el('sharp-score-list');
-
-  // Stacked play cards (like tracking tab) for the dashboard
-  if(listEl){
-    listEl.innerHTML=combined.slice(0,5).map(function(item){
-      const{g,match,lineScore,polyScore,ss}=item;
-      const cls=ss>=85?'sig-3':ss>=70?'sig-2':'sig-1';
-      const sport=detectSportFromTeams(g.away,g.home);
-      const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
-      const gt=g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
-      return '<div style="background:var(--s1);border:1px solid rgba(229,160,13,.2);border-left:3px solid var(--gold);border-radius:var(--rl2);padding:13px 16px">'
-        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">'
-        +'<div style="display:flex;align-items:center;gap:8px">'
-        +'<div style="font-size:28px;font-weight:900;font-family:var(--mono);background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">'+ss+'</div>'
-        +'<div><div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.05em">Final Sharp Score</div>'
-        +'<div style="font-size:10px;font-family:var(--mono);color:var(--t4)">Line: <span style="color:var(--blue)">'+lineScore+'</span> &bull; Poly: <span style="color:var(--gold)">'+polyScore+'</span></div>'
-        +'</div></div>'
-        +(gt?'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">&#x23F0; '+gt+'</span>':'')
-        +'</div>'
-        +'<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:6px">'+(g.away||'')+(g.home?' vs '+g.home:'')+sportTag+'</div>'
-        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">'
-        +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 9px">'
-        +'<div style="font-size:9px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">&#x1F4CA; Sharp Line</div>'
-        +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+(g.sharpSide||'')+'</div>'
-        +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+parseFloat(g.gapPP||0).toFixed(1)+'pp &bull; '+(g.signalType||'')+'</div>'
-        +'</div>'
-        +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 9px">'
-        +'<div style="font-size:9px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">&#x26A1; Poly Signal</div>'
-        +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+match.outcome+'</div>'
-        +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+fu(match.usdValue)+' &bull; '+(match.traderName||'')+'</div>'
-        +'</div></div>'
-        +'</div>';
-    }).join('');
-  }
-
-  cont.innerHTML=combined.slice(0,5).map(function({g,match,lineScore,polyScore,ss}){
-    const cls=ss>=85?'sig-3':ss>=70?'sig-2':'sig-1';
-    const sport=detectSportFromTeams(g.away,g.home);
-    return '<div class="trend-card '+cls+'" style="min-width:300px">'
-      +'<div style="display:flex;justify-content:space-between;margin-bottom:8px">'
-      +'<div><div class="t-slbl '+cls+'">'+(ss>=85?'&#x1F3AF; Elite Sharp Score':ss>=70?'&#x26A1; Strong Sharp Score':'&#x26A0;&#xFE0F; Moderate Sharp Score')+'</div>'
-      +'<div style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-top:2px">'
-      +'Line: <span style="color:var(--blue)">'+lineScore+'</span> &bull; Poly: <span style="color:var(--gold)">'+polyScore+'</span> &bull; Score: <span style="font-weight:800;color:var(--green)">'+ss+'</span>'
-      +'</div></div>'
-      +(sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono)">'+sport+'</span>':'')
-      +'</div>'
-      +'<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:9px">'
-      +(g.away||'')+(g.home?' vs '+g.home:'')+'</div>'
-      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">'
-      +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:7px 9px">'
-      +'<div style="font-size:9px;font-weight:700;color:var(--blue);letter-spacing:.05em;margin-bottom:3px">&#x1F4CA; SHARP LINE</div>'
-      +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+(g.sharpSide||'')+'</div>'
-      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+parseFloat(g.gapPP||0).toFixed(1)+'pp</div>'
-      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+(g.signalType||'')+'</div>'
-      +'</div>'
-      +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:7px 9px">'
-      +'<div style="font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.05em;margin-bottom:3px">&#x26A1; POLY SIGNAL</div>'
-      +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+match.outcome+'</div>'
-      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+fu(match.usdValue)+' &bull; '+(match.traderName||'')+'</div>'
-      +'</div></div>'
-      +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+ss+'%"></div></div>'
-      +'</div>';
-  }).join('');
-}
-
-/* === SIGNAL STRENGTH (POLYMARKET) === */
-function buildTrending(){
-  const cutoff=Date.now()-18*60*60*1000,groups={}; // 18h window — plays expire before next day's slate
-  alerts.forEach(a=>{
-    const ts=a.loggedAt||(a.timestamp*1000);
-    if(ts<cutoff)return;
-    if(!detectSport(a.title))return;
-    if(isLosingTrader(a.wallet))return;
-    const cached=_sc[a.wallet];
-    const lbLoaded=lbData.overall.length>0||lbData.sports.length>0;
-    const inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
-    // Only filter by LB when data is actually loaded — avoids blank state on first render
-    if(lbLoaded){
-      if(!inLB){
-        if(cached===null||cached===undefined)return; // unverified + no cached stats = skip
-        if(cached.pnl===null||cached.pnl<=0)return; // unverified + negative = skip
-      }
-    }
-    // Always block known losers regardless of LB status
-    if(cached&&cached.pnl!==null&&cached.pnl<0)return;
-    const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
-    if(dismissed.has(key))return; // manually dismissed
-    if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,buys:[],totalVol:0,latestTs:0};
-    groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
-    if(ts>groups[key].latestTs)groups[key].latestTs=ts;
-  });
-  return Object.values(groups).filter(g=>{const {score}=signalScore(g);return score>=40;})
-    .sort((a,b)=>signalScore(b).score-signalScore(a).score).slice(0,8);
-}
-function autoTrackPlays(groups){
-  let changed=false;
-  groups.forEach(g=>{
-    const {score,bestRank}=signalScore(g);
-    const threshold=bestRank<999?65:75;
-    if(score<threshold)return;
-    const key=(g.title||'')+'||'+(g.outcome||'');
-    if(sigPlays.some(p=>p.key===key))return;
-    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,buyers:g.buys.length,totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
-    changed=true;
-  });
-  if(changed)ss('pm:sig-plays',sigPlays);
-}
-function renderTrending(){
-  const trends=buildTrending();
-  const row=el('trending-row'),cont=el('d-trend'),dotsEl=el('trend-dots');
-  if(!trends.length){if(row)row.style.display='none';return;}
-  if(row)row.style.display='';
-  autoTrackPlays(trends);
-  const maxVol=Math.max(...trends.map(t=>t.totalVol));
-  cont.innerHTML=trends.map(g=>{
-    const {score,bestRank}=signalScore(g);
-    const {lbl,cls}=sigLabel(score);
-    const barPct=Math.round((g.totalVol/maxVol)*100);
-    const traders=g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,4);
-    const link=g.eventSlug?'https://polymarket.com/event/'+g.eventSlug:'#';
-    const sport=detectSport(g.title);
-    const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
-    const ocLower=(g.outcome||'').toLowerCase();
-    const ocColor=ocLower==='yes'?'#00C896':ocLower==='no'?'#FF3D5A':'var(--t1)';
-    const rankBadge=bestRank<999?('<small style="color:var(--t3);font-family:var(--mono);margin-right:4px">&#x1F3C5;#'+bestRank+'</small>'):'';
-    const cardKey=(g.title||'')+'||'+(g.outcome||'');
-    const gameDate=new Date(g.latestTs).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
-    return '<div class="trend-card '+cls+'">'
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px">'
-      +'<div><div class="t-slbl '+cls+'">'+lbl+'</div>'
-      +'<span class="t-buyers '+cls+'">'+rankBadge+g.buys.length+' buyer'+(g.buys.length>1?'s':'')+' &middot; '+fu(g.totalVol)+' &middot; '+score+'pts</span></div>'
-      +'<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:8px">'
-      +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+gameDate+'</span>'
-      +'<button class="tdismiss" data-dkey="'+cardKey+'" title="Remove this play" style="width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:var(--t3);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">&times;</button>'
-      +'</div>'
-      +'</div>'
-      +'<div style="font-size:13px;font-weight:700;color:var(--t1);line-height:1.4;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+g.title+sportTag+'</div>'
-      +'<div style="margin-bottom:7px">Buying <span style="font-weight:800;color:'+ocColor+'">'+g.outcome+'</span></div>'
-      +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+barPct+'%"></div></div>'
-      +'<div class="t-chips">'+traders.map(n=>{const d=n&&n.startsWith('0x')?n.slice(0,6)+'...'+n.slice(-4):n;return'<span class="t-chip">'+d+'</span>';}).join('')+'</div>'
-      +'<a href="'+link+'" target="_blank" class="t-link">View on Polymarket \u2192</a>'
-      +'</div>';
-  }).join('');
-  // Dots
-  if(dotsEl&&trends.length>1){
-    dotsEl.innerHTML='';
-    trends.forEach((_,i)=>{const d=document.createElement('div');d.className='sdot'+(i===0?' on':'');d.onclick=()=>cont.scrollTo({left:i*278,behavior:'smooth'});dotsEl.appendChild(d);});
-    cont.onscroll=()=>{const i=Math.min(Math.round(cont.scrollLeft/278),trends.length-1);Array.from(dotsEl.children).forEach((d,j)=>{d.className='sdot'+(j===i?' on':'');});};
-  } else if(dotsEl)dotsEl.innerHTML='';
-}
-
-/* === HERO === */
-function renderHero(){
-  const todayMidnight=new Date();todayMidnight.setHours(0,0,0,0);
-  const rec=alerts.filter(a=>{
-    const ts=a.loggedAt||(a.timestamp*1000);
-    if(ts<todayMidnight.getTime())return false;
-    if(!detectSport(a.title))return false;
-    if(isLosingTrader(a.wallet))return false;
-    const inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
-    if(!inLB)return false;
-    return true;
-  }).sort((a,b)=>b.usdValue-a.usdValue);
-  const t=rec[0];
-  // Update command center title with biggest buy context
-  const ccT=el('cc-title');
-  if(t&&ccT&&ccT.textContent.includes('Loading')){
-    // Will be overridden by renderCommandCenter — just unblock loading state
-  }
-  if(!t){return;} // no hero — command center handles empty state
-  const pr=(parseFloat(t.price||0)*100).toFixed(1);
-  el('hero').innerHTML='<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(229,160,13,.1),transparent 55%);pointer-events:none"></div>'
-    +'<div style="position:relative"><div class="hero-badge">&#x1F525; Biggest Buy Today</div>'
-    +'<div class="hero-size">'+fu(t.usdValue)+'</div>'
-    +'<div class="hero-market">'+(t.title||'Unknown')+'</div>'
-    +'<div class="hero-meta"><strong>'+(t.traderName||'Anon')+'</strong><span style="width:1px;height:14px;background:var(--b2)"></span><span>Bought '+(t.outcome||'').toUpperCase()+' @ '+pr+'&#xa2;</span><span style="width:1px;height:14px;background:var(--b2)"></span><span>'+timeAgo(t.loggedAt||t.timestamp*1000)+'</span></div>'
-    +'<button class="hero-cta" id="hero-btn"><i class="ti ti-chart-line" style="font-size:13px"></i>Follow This Trade</button>'
-    +'</div>'
-    +'<div class="hero-stats"><div><div class="hs-val">'+alerts.length+'</div><div class="hs-lbl">Total Alerts</div></div>'
-    +'<div><div class="hs-val">'+fu(rec.reduce((a,b)=>a+b.usdValue,0))+'</div><div class="hs-lbl">Today\'s Vol</div></div></div>';
-  window._heroAlert=t;
-  const hbtn=el('hero-btn');if(hbtn)hbtn.onclick=()=>followAlert(t);
-}
-
-/* === DASHBOARD === */
-function renderDash(){
-  renderHero();
-  const set=trades.filter(t=>t.status!=='OPEN');
-  const W=set.filter(t=>t.status==='WIN').length,L=set.filter(t=>t.status==='LOSS').length;
-  const wr=W+L>0?Math.round(W/(W+L)*100):null;
-  let pnl=0;set.forEach(t=>pnl+=calcP(t));
-  const midnight=new Date();midnight.setHours(0,0,0,0);
-  const vol=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>=midnight.getTime()).reduce((a,b)=>a+(b.usdValue||0),0);
-  el('d-al').textContent=alerts.length;el('d-vo').textContent=fp(vol);
-  el('d-wr').textContent=wr!==null?wr+'%':'&mdash;';el('d-wr').style.color=wr===null?'var(--t4)':wr>=55?'var(--green)':wr>=50?'var(--gold)':'var(--red)';
-  el('d-ws').innerHTML=W+L>0?W+'W&ndash;'+L+'L':'no trades yet';
-  el('d-pl').textContent=pnl!==0?(pnl>0?'+':'')+fu(pnl):'&mdash;';el('d-pl').style.color=pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--t4)';
-  renderTrending();
-  // Alert row
-  window._al={};
-  const arEl=el('d-ar');
-  if(alerts.length){alerts.slice(0,8).forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});arEl.innerHTML=alerts.slice(0,8).map(acardHTML).join('');}
-  else arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No alerts yet</div>';
-  // Trades row
-  const trEl=el('d-tr');
-  const open=trades.filter(t=>t.status==='OPEN').slice(0,6);
-  trEl.innerHTML=open.length?open.map(tcardHTML).join(''):'<div style="color:var(--t4);font-size:13px;padding:16px">No open trades</div>';
-  // Top traders
-  const tpEl=el('d-tp');
-  const lb=(lbData.sports||[]).slice(0,10);
-  tpEl.innerHTML=lb.length?lb.map(posterHTML).join(''):'<div style="color:var(--t4);font-size:13px;padding:16px">Loading&hellip;</div>';
-  setTimeout(enrichCards,50);
-  renderSharpLines();
-  renderSharpScore();
-  renderCommandCenter();
-  // Enrich top traders poster cards async
-  lb.forEach(t=>{if(!_sc[t.wallet]){fetchTraderStats(t.wallet).then(()=>{if(view==='dashboard')tpEl.innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join('');});}});
-}
-
-/* === ALERT CARD === */
-function acardHTML(b){
-  const pr=(parseFloat(b.price||0)*100).toFixed(1),big=(b.usdValue||0)>=5000;
-  const init=(b.traderName||'?').slice(0,2).toUpperCase();
-  const key=b.transactionHash||(b.wallet+(b.timestamp||''));
-  window._al=window._al||{};window._al[key]=b;
-  const sport=detectSport(b.title);
-  const oe=lbData.overall.find(x=>x.wallet===b.wallet);
-  const se=lbData.sports.find(x=>x.wallet===b.wallet);
-  const sbInner=(oe||se)?buildSB(oe,se,null,sport)||'<div style="font-size:10px;color:var(--t4);padding:3px">No data</div>':'<div style="font-size:10px;color:var(--t4);padding:3px;text-align:center">Loading stats&hellip;</div>';
-  const avPart=b.profileImage?'<img class="acard-av" src="'+b.profileImage+'" alt="'+init+'" onerror="this.style.display=\'none\'">':'';
-  return '<div class="acard'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
-    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">'+(avPart||'<div class="acard-av-fb">'+init+'</div>')
-    +'<div style="min-width:0"><div class="acard-tname">'+(b.traderName||'Anon')+'</div><div style="display:flex;gap:3px;margin-top:2px">'+bdg(b.categories)+'</div></div></div>'
-    +'<div class="acard-mkt">'+(b.title||'Unknown')+'</div>'
-    +'<div class="acard-oc">Bought '+oc(b.outcome)+' @ '+pr+'&#xa2;</div>'
-    +'<div class="sb">'+sbInner+'</div>'
-    +'<div class="acard-ft"><div><div class="acard-size">'+fu(b.usdValue||0)+'</div><div class="acard-time">'+timeAgo(b.loggedAt||b.timestamp*1000)+'</div></div>'
-    +'<button class="acard-btn" data-akey="'+key+'">Follow</button></div>'
-    +'</div>';
-}
-/* === TRADE CARD === */
-function tcardHTML(t){
-  const p=calcP(t),pc=p>0?'#00C896':p<0?'#FF3D5A':'var(--t3)';
-  return '<div class="tcard '+t.status.toLowerCase()+'">'
-    +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:5px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+t.market+'</div>'
-    +'<div style="font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:10px">'+(t.odds||t.price+'&#xa2;')+' &middot; '+fu(parseFloat(t.amount)||0)+'</div>'
-    +'<div style="display:flex;align-items:center;justify-content:space-between">'
-    +'<span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;background:'+(t.status==='WIN'?'var(--grl)':t.status==='LOSS'?'var(--rl)':'var(--pl)')+';color:'+(t.status==='WIN'?'var(--green)':t.status==='LOSS'?'var(--red)':'var(--purple)')+'">'+t.status+'</span>'
-    +'<span style="font-size:15px;font-weight:900;font-family:var(--mono);color:'+pc+'">'+(t.status==='OPEN'?'Open':(p>=0?'+':'')+fu(p))+'</span>'
-    +'</div></div>';
-}
-/* === POSTER CARD === */
-function posterHTML(t){
-  const hot=alerts.some(a=>a.wallet===t.wallet&&(Date.now()-(a.loggedAt||a.timestamp*1000))<86400000);
-  const init=(t.name||'?').slice(0,2).toUpperCase();
-  const isSp=t.category==='SPORTS'||t.category==='sports';
-  const avPart=t.image?'<img class="p-av" src="'+t.image+'" alt="'+init+'">':'<div class="p-av-fb">'+init+'</div>';
-  const other=isSp?lbData.overall.find(x=>x.wallet===t.wallet):lbData.sports.find(x=>x.wallet===t.wallet);
-  const cached=_sc[t.wallet];
-  const sportPnl=cached&&cached.sp?Object.entries(cached.sp).filter(e=>e[1]!==0).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,3):[];
-  const sportsRow=sportPnl.length?'<div style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;color:var(--t4);font-family:var(--mono);text-transform:uppercase;margin-bottom:3px">Sport Breakdown</div>'+sportPnl.map(e=>'<div style="display:flex;justify-content:space-between"><span style="font-size:9px;color:var(--t3);font-family:var(--mono)">'+e[0]+'</span><span style="font-size:9px;font-weight:700;font-family:var(--mono);color:'+(e[1]>=0?'var(--green)':'var(--red)')+'">'+fp(e[1])+'</span></div>').join('')+'</div>':'';
-  const otherRow=other&&!sportsRow?'<div style="margin-top:4px;font-size:10px;font-family:var(--mono);color:var(--t3)">'+(isSp?'All-Time':'Sports')+': <span style="color:'+(other.pnl>=0?'var(--green)':'var(--red)')+'">'+fp(other.pnl)+'</span></div>':'';
-  return '<div class="poster'+(hot?' hot':'')+'">'
-    +'<div class="poster-img">'+avPart+(hot?'<div class="p-live">LIVE</div>':'')+'</div>'
-    +'<div class="poster-body">'
-    +'<span class="p-rank '+(isSp?'sports':'overall')+'">#'+t.rank+' '+(isSp?'Sports':'Overall')+'</span>'+(hot?'<span class="p-rank hot-tag">&#x1F525;</span>':'')
-    +'<div class="p-name">'+(t.name||t.wallet.slice(0,8)+'\u2026')+'</div>'
-    +'<div style="margin-top:4px"><div style="font-size:9px;color:var(--t4);font-family:var(--mono);text-transform:uppercase">'+(isSp?'Sports':'Overall')+' PnL</div><div class="p-pnl" style="font-size:13px">'+fp(t.pnl)+'</div></div>'
-    +otherRow+sportsRow
-    +'</div></div>';
-}
-
-/* === ALERTS VIEW === */
-function setAF(f,btn){af=f;document.querySelectorAll('.fp').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');renderAlerts();}
-function renderAlerts(){
-  const q=(el('asearch')?.value||'').toLowerCase();
-  const minMap={all:0,'1k':1000,'5k':5000,'10k':10000,'25k':25000};
-  const fil=alerts.filter(b=>{if((b.usdValue||0)<(minMap[af]||0))return false;if(q&&!(b.title||'').toLowerCase().includes(q)&&!(b.traderName||'').toLowerCase().includes(q))return false;return true;});
-  fil.forEach(b=>{window._al=window._al||{};window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
-  const list=el('al-list');
-  if(!fil.length){list.innerHTML='<div class="empty"><div class="empty-ico">&#x1F514;</div><h3>No alerts match</h3><p>Try a different filter</p></div>';return;}
-  list.innerHTML=fil.map(b=>{
-    const pr=(parseFloat(b.price||0)*100).toFixed(1),big=(b.usdValue||0)>=5000;
-    const init=(b.traderName||'?').slice(0,2).toUpperCase();
-    const key=b.transactionHash||(b.wallet+(b.timestamp||''));
-    const sport=detectSport(b.title);
-    const sportTag=sport?'<span style="font-size:10px;font-weight:700;padding:1px 7px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:4px">'+sport+'</span>':'';
-    return '<div class="al-row'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
-      +'<div class="al-av-fb">'+init+'</div>'
-      +'<div class="al-main"><div class="al-trader">'+(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+'</div>'
-      +'<div class="sb" style="margin:5px 0"></div>'
-      +'<div class="al-meta">Bought '+(b.outcome||'').toUpperCase()+' @ '+pr+'&#xa2;</div></div>'
-      +'<div class="al-r"><div class="al-size">'+fu(b.usdValue||0)+'</div><div class="al-time">'+timeAgo(b.loggedAt||b.timestamp*1000)+'</div><button class="al-follow" data-akey="'+key+'">Follow Trade</button></div>'
-      +'</div>';
-  }).join('');
-  setTimeout(enrichCards,50);
-}
-async function purgeLosers(){
-  if(!confirm('Remove all alerts from accounts with negative all-time PnL?'))return;
-  const unique=[...new Set(alerts.map(a=>a.wallet).filter(Boolean))];
-  let purged=0;
-  for(const w of unique){const f=await fetchTraderStats(w);if(f&&f.pnl!==null&&f.pnl<0){const before=alerts.length;alerts=alerts.filter(a=>a.wallet!==w);purged+=before-alerts.length;}}
-  ss('pm:alert-log',alerts);renderAlerts();renderDash();alert('Removed '+purged+' alerts from losing accounts.');
-}
-
-/* === TRACKING === */
-function setSigStatus(i,s){if(sigPlays[i]){sigPlays[i].status=s;sigPlays[i].gradedAt=Date.now();}ss('pm:sig-plays',sigPlays);renderTracking();}
-function delSigPlay(i){sigPlays.splice(i,1);ss('pm:sig-plays',sigPlays);renderTracking();}
-async function gradeOpenPlays(){
-  let changed=false;
-  for(const play of sigPlays){
-    if(play.status!=='OPEN'||!play.eventSlug)continue;
-    try{
-      const r=await fetch('https://data-api.polymarket.com/markets?eventSlug='+play.eventSlug+'&limit=10');
-      const data=await r.json();const markets=Array.isArray(data)?data:(data.data||[]);
-      for(const m of markets){
-        if(!m.question||!m.question.toLowerCase().includes((play.title||'').toLowerCase().slice(0,15)))continue;
-        if(m.resolution!==null&&m.resolution!==undefined){
-          const res=String(m.resolution).toLowerCase(),our=(play.outcome||'').toLowerCase();
-          if(res==='yes'||res==='1'){play.status=our==='yes'?'WIN':'LOSS';play.gradedAt=Date.now();changed=true;break;}
-          if(res==='no'||res==='0'){play.status=our==='no'?'WIN':'LOSS';play.gradedAt=Date.now();changed=true;break;}
-        }
-      }
-    }catch{}
-  }
-  if(changed){ss('pm:sig-plays',sigPlays);renderTracking();}
-}
-
-/* === ESPN AUTO-GRADE === */
-const ESPN_SPORTS = {
-  MLB:'baseball/mlb', NBA:'basketball/nba',
-  NFL:'football/nfl', NHL:'hockey/nhl',
-  NCAAF:'football/college-football', NCAAB:'basketball/mens-college-basketball',
-  Tennis:'tennis', Golf:'golf',
-};
-
-function normTeamName(s){
-  return (s||'').toLowerCase().replace(/(new york|los angeles|san francisco|san diego|kansas city|st\.?\s*louis|tampa bay|chicago)/gi,'').replace(/[^a-z]/g,'').trim();
-}
-
-function gameMatchesPlay(homeName,awayName,playTitle){
-  const t=(playTitle||'').toLowerCase();
-  const hN=normTeamName(homeName), aN=normTeamName(awayName);
-  return (hN.length>2&&t.includes(hN))||(aN.length>2&&t.includes(aN));
-}
-
-function gradePlay(play,homeTeam,awayTeam,homeScore,awayScore){
-  const side=(play.sharpSide||play.side||play.outcome||'').toLowerCase();
-  const total=homeScore+awayScore;
-  const hN=normTeamName(homeTeam), aN=normTeamName(awayTeam);
-  const score=awayTeam+' '+awayScore+' - '+homeScore+' '+homeTeam;
-
-  // Over/Under totals
-  if(side.includes('over')||side.includes('under')){
-    const m=(play.sharpSide||play.title||'').match(/(\d+\.?\d*)/);
-    const line=m?parseFloat(m[1]):0;
-    if(!line)return null;
-    const result=side.includes('over')?(total>line?'WIN':total===line?'PUSH':'LOSS'):(total<line?'WIN':total===line?'PUSH':'LOSS');
-    return{status:result,espnScore:score};
-  }
-  // Spread +1.5 / -1.5
-  if((play.sharpSide||'').includes('1.5')){
-    const isPlus=(play.sharpSide||'').includes('+1.5');
-    const teamPart=(play.sharpSide||'').replace(/[+-]1\.5.*/,'').trim().toLowerCase();
-    const sharpNorm=normTeamName(teamPart);
-    const sharpIsHome=hN.includes(sharpNorm)||sharpNorm.includes(hN);
-    const sharpScore=sharpIsHome?homeScore:awayScore;
-    const otherScore=sharpIsHome?awayScore:homeScore;
-    const margin=sharpScore-otherScore;
-    const result=isPlus?(margin>=-1?'WIN':'LOSS'):(margin>=2?'WIN':'LOSS');
-    return{status:result,espnScore:score};
-  }
-  // Moneyline — team win
-  const sideNorm=normTeamName(side.split(' ').slice(-1)[0]||side);
-  const sharpIsHome=hN.includes(sideNorm)||sideNorm.includes(hN);
-  const sharpIsAway=aN.includes(sideNorm)||sideNorm.includes(aN);
-  if(!sharpIsHome&&!sharpIsAway)return null;
-  const won=sharpIsHome?homeScore>awayScore:awayScore>homeScore;
-  return{status:won?'WIN':'LOSS',espnScore:score};
-}
-
-async function gradeFromESPN(){
-  const sportsNeeded=new Set();
-  [...linePlays,...sharpScorePlays,...sigPlays].forEach(p=>{if(p.status==='OPEN')sportsNeeded.add(p.sport||'MLB');});
-  if(!sportsNeeded.size)return;
-
-  const results={};
-  await Promise.all([...sportsNeeded].map(async sport=>{
-    const path=ESPN_SPORTS[sport];
-    if(!path||path==='tennis'||path==='golf')return;
-    try{
-      const r=await fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard');
-      const d=await r.json();
-      results[sport]=d.events||[];
-    }catch{}
-  }));
-
-  let changed=false;
-
-  function tryGrade(plays,storeKey){
-    plays.forEach(play=>{
-      if(play.status!=='OPEN')return;
-      const events=results[play.sport||'MLB']||[];
-      for(const ev of events){
-        const comp=ev.competitions?.[0];
-        if(!comp?.status?.type?.completed)continue;
-        const home=comp.competitors.find(c=>c.homeAway==='home');
-        const away=comp.competitors.find(c=>c.homeAway==='away');
-        if(!home||!away)continue;
-        const hName=home.team?.displayName||home.team?.name||'';
-        const aN2=away.team?.displayName||away.team?.name||'';
-        const hScore=parseFloat(home.score||0);
-        const aScore=parseFloat(away.score||0);
-        if(!gameMatchesPlay(hName,aN2,play.title))continue;
-        const result=gradePlay(play,hName,aN2,hScore,aScore);
-        if(result){
-          play.status=result.status;
-          play.gradedAt=Date.now();
-          play.espnScore=result.espnScore;
-          play.gradedBy='ESPN';
-          changed=true;
-        }
-        break;
-      }
-    });
-    if(changed)ss(storeKey,plays);
-  }
-
-  tryGrade(linePlays,'pm:line-plays');
-  tryGrade(sharpScorePlays,'pm:ss-plays');
-  // sigPlays: try ESPN as fallback after Polymarket API
-  tryGrade(sigPlays,'pm:sig-plays');
-  if(changed)renderTracking();
-}
-
-function renderTracking(){
-  gradeOpenPlays();
-  gradeFromESPN(); // ESPN fallback for line/spread/total plays
-
-  // ── Sharp Line Signal plays section ──
-  const lW=linePlays.filter(p=>p.status==='WIN').length,lL=linePlays.filter(p=>p.status==='LOSS').length;
-  const lWR=lW+lL>0?Math.round(lW/(lW+lL)*100):null;
-  const lrEl=el('line-record');
-  if(lrEl){lrEl.textContent=(lW+lL>0?lW+'W-'+lL+'L'+(lWR!==null?' ('+lWR+'%)':''):'0W-0L')+(linePlays.length?' on '+linePlays.length+' plays':'');if(lWR!==null)lrEl.style.color=lWR>=55?'var(--green)':lWR>=50?'var(--gold)':'var(--red)';}
-  const lpEl=el('line-plays'),lpEmpty=el('line-empty');
-  if(lpEl){
-    if(!linePlays.length){if(lpEmpty)lpEmpty.style.display='';lpEl.innerHTML='';}
-    else{
-      if(lpEmpty)lpEmpty.style.display='none';
-      lpEl.innerHTML=linePlays.map((p,i)=>{
-        const{lbl,cls}=lineLabel(p.score||0);
-        const sc=p.status==='WIN'?'var(--green)':p.status==='LOSS'?'var(--red)':'var(--purple)';
-        const statusLbl=p.status==='OPEN'?'&#x23F3; Open':p.status==='WIN'?'&#x2705; WIN':'&#x274C; '+p.status;
-        const btns=p.status==='OPEN'
-          ?'<div style="display:flex;gap:5px;margin-top:8px">'
-            +'<button data-lsi="'+i+'" data-st="WIN" class="lgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button>'
-            +'<button data-lsi="'+i+'" data-st="LOSS" class="lgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer">L</button>'
-            +'<button data-lsi="'+i+'" data-st="PUSH" class="lgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer">P</button>'
-            +'<button data-lsi="'+i+'" class="ldb" style="padding:5px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button>'
-            +'</div>'
-          :'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-size:12px;font-weight:700;color:'+sc+'">'+statusLbl+'</span><button data-lsi="'+i+'" class="ldb" style="padding:3px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button></div>';
-        return '<div class="sig-play '+p.status.toLowerCase()+'">'
-          +'<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
-          +'<div><span class="t-slbl '+cls+'" style="font-size:10px">'+lbl+'</span>'
-          +'<span style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-left:6px">'+p.score+'pts</span>'
-          +(p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+p.sport+'</span>':'')+'</div>'
-          +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+timeAgo(p.loggedAt)+'</span>'
-          +'</div>'
-          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+p.title+'</div>'
-          +'<div style="font-size:12px;color:var(--t3);margin-bottom:3px">Sharp side: <strong style="color:var(--green)">'+p.sharpSide+'</strong> &middot; '+p.signalType+'</div>'
-          +'<div style="font-size:11px;color:var(--t4);font-family:var(--mono);margin-bottom:3px">Pinnacle +'+p.pinnacleGap+'pp'+(p.exchangeConfirmed?' &middot; &#x1F501; Exchange':'')+( p.steamDetected?' &middot; &#x1F4A8; Steam':'')+'</div>'
-          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-bottom:5px">Game: '+p.gameTime+'</div>':'')
-          +btns+'</div>';
-      }).join('');
-    }
-  }
-
-  // ── Sharp Score plays section ──
-  const ssW=sharpScorePlays.filter(p=>p.status==='WIN').length,ssL=sharpScorePlays.filter(p=>p.status==='LOSS').length;
-  const ssWR=ssW+ssL>0?Math.round(ssW/(ssW+ssL)*100):null;
-  const ssrEl=el('ss-record');
-  if(ssrEl){ssrEl.textContent=(ssW+ssL>0?ssW+'W-'+ssL+'L'+(ssWR!==null?' ('+ssWR+'%)':''):'0W-0L')+(sharpScorePlays.length?' on '+sharpScorePlays.length+' plays':'');if(ssWR!==null)ssrEl.style.color=ssWR>=55?'var(--green)':ssWR>=50?'var(--gold)':'var(--red)';}
-  const ssEl=el('ss-plays'),ssEmpty=el('ss-empty');
-  if(ssEl){
-    if(!sharpScorePlays.length){if(ssEmpty)ssEmpty.style.display='';ssEl.innerHTML='';}
-    else{
-      if(ssEmpty)ssEmpty.style.display='none';
-      ssEl.innerHTML=sharpScorePlays.map((p,i)=>{
-        const cls=p.combined>=85?'sig-3':p.combined>=70?'sig-2':'sig-1';
-        const sc=p.status==='WIN'?'var(--green)':p.status==='LOSS'?'var(--red)':'var(--purple)';
-        const statusLbl=p.status==='OPEN'?'&#x23F3; Open':p.status==='WIN'?'&#x2705; WIN':'&#x274C; '+p.status;
-        const btns=p.status==='OPEN'
-          ?'<div style="display:flex;gap:5px;margin-top:8px">'
-            +'<button data-ssi="'+i+'" data-st="WIN" class="ssgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button>'
-            +'<button data-ssi="'+i+'" data-st="LOSS" class="ssgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer">L</button>'
-            +'<button data-ssi="'+i+'" data-st="PUSH" class="ssgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer">P</button>'
-            +'<button data-ssi="'+i+'" class="ssdb" style="padding:5px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button>'
-            +'</div>'
-          :'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-size:12px;font-weight:700;color:'+sc+'">'+statusLbl+'</span><button data-ssi="'+i+'" class="ssdb" style="padding:3px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button></div>';
-        return '<div class="sig-play '+p.status.toLowerCase()+'" style="border-left-color:var(--gold)">'
-          +'<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
-          +'<div style="font-size:10px;font-weight:800;background:linear-gradient(90deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">&#x1F3AF; SHARP SCORE</div>'
-          +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+timeAgo(p.loggedAt)+'</span>'
-          +'</div>'
-          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:6px">'+p.title+'</div>'
-          +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px">'
-          +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 8px">'
-          +'<div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">LINE '+p.lineScore+'pts</div>'
-          +'<div style="font-size:11px;font-weight:700;color:var(--t1)">'+p.sharpSide+'</div>'
-          +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+p.pinnacleGap+'pp &middot; '+p.signalType+'</div>'
-          +'</div>'
-          +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 8px">'
-          +'<div style="font-size:9px;font-weight:700;color:var(--gold);margin-bottom:2px">POLY '+p.polyScore+'pts</div>'
-          +'<div style="font-size:11px;font-weight:700;color:var(--t1)">'+p.polyOutcome+'</div>'
-          +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+p.polyTrader+'</div>'
-          +'</div></div>'
-          +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">'
-          +'<span style="font-size:11px;color:var(--t3)">Combined:</span>'
-          +'<span style="font-size:18px;font-weight:900;font-family:var(--mono);color:'+(p.combined>=80?'var(--green)':p.combined>=70?'var(--gold)':'var(--t2)')+'">'+p.combined+'</span>'
-          +'</div>'
-          +btns+'</div>';
-      }).join('');
-    }
-  }
-
-  // Sig plays record
-  const sW=sigPlays.filter(p=>p.status==='WIN').length,sL=sigPlays.filter(p=>p.status==='LOSS').length;
-  const sWR=sW+sL>0?Math.round(sW/(sW+sL)*100):null;
-  const srEl=el('sig-record');
-  if(srEl){srEl.textContent=(sW+sL>0?sW+'W-'+sL+'L'+(sWR!==null?' ('+sWR+'%)':''):'0W-0L')+(sigPlays.length?' on '+sigPlays.length+' plays':'');if(sWR!==null)srEl.style.color=sWR>=55?'var(--green)':sWR>=50?'var(--gold)':'var(--red)';}
-  const spEl=el('sig-plays'),spEmpty=el('sig-empty');
-  if(spEl){
-    if(!sigPlays.length){if(spEmpty)spEmpty.style.display='';spEl.innerHTML='';}
-    else{
-      if(spEmpty)spEmpty.style.display='none';
-      spEl.innerHTML=sigPlays.map((p,i)=>{
-        const {lbl,cls}=sigLabel(p.score||0);
-        const sport=p.sport||'';const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
-        const sc=p.status==='WIN'?'var(--green)':p.status==='LOSS'?'var(--red)':'var(--purple)';
-        const statusLbl=p.status==='OPEN'?'&#x23F3; Open':p.status==='WIN'?'&#x2705; WIN':'&#x274C; '+p.status;
-        const btns=p.status==='OPEN'
-          ?'<div style="display:flex;gap:5px;margin-top:8px">'
-            +'<button data-si="'+i+'" data-st="WIN" class="sgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button>'
-            +'<button data-si="'+i+'" data-st="LOSS" class="sgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer">L</button>'
-            +'<button data-si="'+i+'" data-st="PUSH" class="sgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer">P</button>'
-            +'<button data-si="'+i+'" class="sdb" style="padding:5px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button>'
-            +'</div>'
-          :'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-size:12px;font-weight:700;color:'+sc+'">'+statusLbl+'</span><button data-si="'+i+'" class="sdb" style="padding:3px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button></div>';
-        return '<div class="sig-play '+p.status.toLowerCase()+'">'
-          +'<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
-          +'<div><span style="font-size:10px;font-weight:800;color:'+(p.score>=80?'var(--purple)':'var(--green)')+'">'+lbl+'</span><span style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-left:6px">'+p.score+'pts</span>'+sportTag+'</div>'
-          +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+timeAgo(p.loggedAt)+'</span>'
-          +'</div>'
-          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+(p.title||'')+'</div>'
-          +'<div style="font-size:12px;color:var(--t3);margin-bottom:5px">Buying <strong style="color:var(--t1)">'+(p.outcome||'')+'</strong> &middot; '+p.buyers+' buyer'+(p.buyers>1?'s':'')+' &middot; '+fu(p.totalVol)+'</div>'
-          +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:5px">'+((p.traders||[]).map(n=>'<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--t3);font-family:var(--mono)">'+n+'</span>').join(''))+'</div>'
-          +btns+'</div>';
-      }).join('');
-    }
-  }
-  // Manual picks
-  const W2=trades.filter(t=>t.status==='WIN').length,L2=trades.filter(t=>t.status==='LOSS').length;
-  const wr2=W2+L2>0?Math.round(W2/(W2+L2)*100):null;let pnl2=0;trades.filter(t=>t.status!=='OPEN').forEach(t=>pnl2+=calcP(t));
-  el('tp-r').innerHTML=W2+'&ndash;'+L2;
-  el('tp-w').textContent=wr2!==null?wr2+'%':'&mdash;';el('tp-w').style.color=wr2===null?'var(--t4)':wr2>=55?'var(--green)':wr2>=50?'var(--gold)':'var(--red)';
-  el('tp-p').textContent=(pnl2>=0?'+':'')+fu(pnl2);el('tp-p').style.color=pnl2>0?'var(--green)':pnl2<0?'var(--red)':'var(--t4)';
-  if(!trades.length){el('tl').innerHTML='';el('tl-empty').style.display='';return;}
-  el('tl-empty').style.display='none';
-  el('tl').innerHTML=trades.map((t,i)=>{
-    const p=calcP(t);
-    return '<div class="tl-row '+t.status.toLowerCase()+'">'
-      +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+t.market+'</div>'
-      +'<div style="font-size:11px;color:var(--t3);font-family:var(--mono)">'+(t.odds||t.price+'&#xa2;')+' &middot; '+fu(parseFloat(t.amount)||0)+(t.book?' &middot; '+t.book:'')+(t.notes?' &middot; '+t.notes:'')+'</div></div>'
-      +'<div style="display:flex;align-items:center;gap:7px;flex-shrink:0">'
-      +(t.status==='OPEN'?'<button data-ti="'+i+'" data-st="WIN" class="tgb" style="padding:5px 10px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button><button data-ti="'+i+'" data-st="LOSS" class="tgb" style="padding:5px 10px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer;margin-left:3px">L</button><button data-ti="'+i+'" data-st="PUSH" class="tgb" style="padding:5px 10px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer;margin-left:3px">P</button>':'')
-      +'<span style="font-size:15px;font-weight:900;font-family:var(--mono);color:'+(p>0?'var(--green)':p<0?'var(--red)':'var(--t4)')+'">'+(t.status==='OPEN'?'Open':(p>=0?'+':'')+fu(p))+'</span>'
-      +'<button data-ti="'+i+'" class="tdb" style="background:transparent;border:none;color:var(--t4);cursor:pointer;font-size:15px;padding:4px"><i class="ti ti-trash"></i></button>'
-      +'</div></div>';
-  }).join('');
-}
-
-
-/* === COMMAND CENTER — Today's ranked plays === */
-function renderCommandCenter(){
-  const grid=el('play-grid');
-  const empty=el('play-grid-empty');
-  const ccTitle=el('cc-title');
-  if(!grid)return;
-
-  // Collect all active plays across all signal types
-  const now=Date.now();
-  const ccMidnight=new Date();ccMidnight.setHours(0,0,0,0);
-  const allPlays=[];
-
-  // Sharp Line Signal plays (from /api/odds)
-  sharpLines.filter(g=>!g.noSignal&&parseInt(g.siScore||0)>=50&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now-4*3600000)).forEach(g=>{
-    const score=parseInt(g.siScore||0);
-    // Check for Poly confirmation
-    const recentAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>now-43200000);
-    const polyMatch=matchLineToAlert(g,recentAlerts);
-    const{score:polyScore}=polyMatch?signalScore({buys:[polyMatch],totalVol:polyMatch.usdValue}):{score:0};
-    const combined=polyScore>0?calcSharpScore(score,polyScore):0;
-    allPlays.push({
-      type: combined>=60?'sharp-score':'line',
+    const combined=calcSharpScore(parseInt(g.siScore||0),polyScore);
+    if(combined<60)return;
+    const key=(g.away||'')+'_'+(g.home||'');
+    if(seen.has(key))return;
+    seen.add(key);
+    plays.push({
+      type:'combined',score:combined,
       title:(g.away||'')+(g.home?' vs '+g.home:''),
       side:g.sharpSide||'',
-      score:combined>=60?combined:score,
-      lineScore:score,polyScore,combined,
-      signalType:g.signalType,
-      gapPP:parseFloat(g.gapPP||0),
+      lineScore:parseInt(g.siScore||0),polyScore,
+      gapPP:parseFloat(g.gapPP||0).toFixed(1),
+      signalType:g.signalType||'',
       exConfirms:g.exConfirms||0,
-      novigConfirm:g.novigConfirm,
-      gameTime:g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'',
+      polyOutcome:match.outcome,polyTrader:match.traderName||'',
+      polyVol:match.usdValue,
       sport:detectSportFromTeams(g.away,g.home),
-      pillars:g.pillars||{},
-      polyMatch,
+      gameTime:g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'',
     });
   });
 
-  // Polymarket Signal plays (from Poly Signal)
-  const trends=buildTrending();
-  trends.forEach(g=>{
-    const{score}=signalScore(g);
-    if(score<65)return;
-    // Only add if not already represented as sharp-score
-    const alreadyIn=allPlays.some(p=>p.polyMatch&&(p.polyMatch.title||'')===(g.title||''));
-    if(alreadyIn)return;
-    allPlays.push({
-      type:'poly',
-      title:g.title,
-      side:g.outcome||'',
-      score,
-      signalType:'Poly Signal',
-      buyers:g.buys.length,
-      totalVol:g.totalVol,
-      gameTime:'',
-      sport:detectSport(g.title)||'',
+  // 2. Top Poly Signal plays (if no combined plays or fewer than 3)
+  if(plays.length<3){
+    const trends=buildTrending();
+    trends.forEach(function(g){
+      const{score}=signalScore(g);
+      if(score<60)return;
+      const key=g.title+'_'+g.outcome;
+      if(seen.has(key))return;
+      seen.add(key);
+      plays.push({
+        type:'poly',score,
+        title:g.title,side:g.outcome||'',
+        buyers:g.buys.length,polyVol:g.totalVol,
+        traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),
+        sport:detectSport(g.title)||'',
+        gameTime:'',
+      });
     });
-  });
+  }
 
-  // Sort: Sharp Score first, then by score desc
-  allPlays.sort((a,b)=>{
-    const typeOrder={oo_sharp_score:0,sharpx_score:0,'sharp-score':0,line:1,poly:2};
-    const ta=typeOrder[a.type]||1,tb=typeOrder[b.type]||1;
-    if(ta!==tb)return ta-tb;
-    return b.score-a.score;
-  });
+  // 3. Top Sharp Line plays (if still fewer than 3)
+  if(plays.length<3){
+    sharpLines.filter(function(g){return !g.noSignal&&parseInt(g.siScore||0)>=65;}).slice(0,3-plays.length).forEach(function(g){
+      const key=(g.away||'')+'_'+(g.home||'');
+      if(seen.has(key))return;
+      seen.add(key);
+      plays.push({
+        type:'line',score:parseInt(g.siScore||0),
+        title:(g.away||'')+(g.home?' vs '+g.home:''),
+        side:g.sharpSide||'',
+        gapPP:parseFloat(g.gapPP||0).toFixed(1),
+        signalType:g.signalType||'',
+        exConfirms:g.exConfirms||0,
+        sport:detectSportFromTeams(g.away,g.home),
+        gameTime:g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'',
+      });
+    });
+  }
 
-  // Update counters
-  const lc=el('cc-line-cnt'),pc=el('cc-poly-cnt'),sc2=el('cc-ss-cnt');
-  if(lc)lc.textContent=allPlays.filter(p=>p.type==='line').length;
-  if(pc)pc.textContent=allPlays.filter(p=>p.type==='poly').length;
-  if(sc2)sc2.textContent=allPlays.filter(p=>p.type==='sharp-score').length;
+  plays.sort(function(a,b){return b.score-a.score;});
 
-  if(!allPlays.length){
-    if(empty)empty.style.display='';
-    if(empty)empty.textContent='No qualifying plays above threshold — signals shown in sections below';
-    grid.innerHTML='';
-    if(ccTitle){
-      const ccMid=new Date();ccMid.setHours(0,0,0,0);const totalAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>=ccMid.getTime()).length;
-      ccTitle.textContent=totalAlerts>0?totalAlerts+' alert'+(totalAlerts===1?'':'s')+' today — review sections below':'No active signals';
-    }
+  if(!plays.length){
+    row.style.display='none';
     return;
   }
-  if(empty)empty.style.display='none';
-  const best=allPlays[0];
-  if(ccTitle)ccTitle.textContent=allPlays.length+' active play'+(allPlays.length===1?'':'s')+' · Best: '+best.title;
+  row.style.display='';
 
-  grid.innerHTML=allPlays.slice(0,6).map(p=>{
-    const isSS=p.type==='sharp-score';
-    const isPoly=p.type==='poly';
-    const bg=isSS?'linear-gradient(135deg,rgba(64,180,255,.07),rgba(229,160,13,.07))':isPoly?'rgba(229,160,13,.05)':'rgba(64,180,255,.05)';
-    const border=isSS?'rgba(229,160,13,.3)':isPoly?'rgba(229,160,13,.15)':'rgba(64,180,255,.15)';
+  // Update source tag
+  const hasCombined=plays.some(function(p){return p.type==='combined';});
+  const hasPoly=plays.some(function(p){return p.type==='poly';});
+  const hasLine=plays.some(function(p){return p.type==='line';});
+  if(tag){
+    if(hasCombined)       {tag.textContent='LINE + POLY COMBINED';tag.style.background='linear-gradient(90deg,rgba(64,180,255,.15),rgba(229,160,13,.15))';tag.style.color='var(--t1)';}
+    else if(hasPoly&&hasLine){tag.textContent='POLY + LINE';tag.style.background='rgba(155,109,255,.12)';tag.style.color='var(--purple)';}
+    else if(hasPoly)      {tag.textContent='POLY SIGNAL';tag.style.background='rgba(229,160,13,.12)';tag.style.color='var(--gold)';}
+    else                  {tag.textContent='SHARP LINE';tag.style.background='rgba(64,180,255,.12)';tag.style.color='var(--blue)';}
+  }
+
+  list.innerHTML=plays.slice(0,3).map(function(p){
+    // Score color and badge
     const scoreColor=p.score>=80?'var(--green)':p.score>=65?'var(--gold)':'var(--t2)';
-    const tag=isSS?'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.2),rgba(229,160,13,.2));color:var(--t1)">&#x1F3AF; SHARP SCORE</span>':isPoly?'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(229,160,13,.12);color:var(--gold)">&#x26A1; POLY SIGNAL</span>':'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(64,180,255,.12);color:var(--blue)">&#x1F4CA; LINE SIGNAL</span>';
-    const sport=p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.08);color:#40B4FF;border-radius:3px;margin-left:4px">'+p.sport+'</span>':'';
-    const details=isSS?('<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">Line: '+p.lineScore+' &bull; Poly: '+p.polyScore+'</div>'+
-      '<div style="font-size:10px;color:var(--t4)">+'+p.gapPP.toFixed(1)+'pp gap &bull; '+(p.exConfirms>0?p.exConfirms+' exchange confirm':'no exchange')+'</div>'):
-    isPoly?('<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+(p.buyers||1)+' profitable buyer'+(p.buyers>1?'s':'')+' &bull; '+fu(p.totalVol||0)+'</div>'):
-    ('<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+p.gapPP.toFixed(1)+'pp Pinnacle gap &bull; '+(p.exConfirms>0?p.exConfirms+' exchange':'no exchange')+'</div>'+
-    '<div style="font-size:10px;color:var(--t4)">'+p.signalType+'</div>');
-    return '<div style="background:'+bg+';border:1px solid '+border+';border-radius:var(--rl2);padding:13px 15px;position:relative;overflow:hidden">'
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'+tag+sport
-      +'<div style="font-size:28px;font-weight:900;font-family:var(--mono);color:'+scoreColor+'">'+p.score+'</div>'
+    const typeBadge=p.type==='combined'
+      ?'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.2),rgba(229,160,13,.2));color:var(--t1)">&#x1F3AF; COMBINED</span>'
+      :p.type==='poly'
+      ?'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:rgba(229,160,13,.12);color:var(--gold)">&#x26A1; POLY</span>'
+      :'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:rgba(64,180,255,.12);color:var(--blue)">&#x1F4CA; LINE</span>';
+    const sportTag=p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.08);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+p.sport+'</span>':'';
+
+    // Signal detail row
+    var detail='';
+    if(p.type==='combined'){
+      detail='<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px">'
+        +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 9px">'
+        +'<div style="font-size:9px;font-weight:700;color:var(--blue);text-transform:uppercase;margin-bottom:2px">Sharp Line</div>'
+        +'<div style="font-size:11px;font-weight:700;color:var(--t1)">'+p.side+'</div>'
+        +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+p.gapPP+'pp &bull; Line: '+p.lineScore+'</div>'
+        +'</div>'
+        +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 9px">'
+        +'<div style="font-size:9px;font-weight:700;color:var(--gold);text-transform:uppercase;margin-bottom:2px">Poly Signal</div>'
+        +'<div style="font-size:11px;font-weight:700;color:var(--t1)">'+p.polyOutcome+'</div>'
+        +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+fu(p.polyVol)+' &bull; '+p.polyTrader+'</div>'
+        +'</div></div>';
+    }else if(p.type==='poly'){
+      detail='<div style="font-size:11px;color:var(--t3);margin-bottom:6px">'
+        +p.buyers+' profitable buyer'+(p.buyers>1?'s':'')+' &bull; '+fu(p.polyVol)
+        +'</div>'
+        +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px">'
+        +(p.traders||[]).map(function(n){return'<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.06);color:var(--t3);font-family:var(--mono)">'+n+'</span>';}).join('')
+        +'</div>';
+    }else{
+      detail='<div style="font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:6px">'
+        +'Pinnacle +'+p.gapPP+'pp &bull; '+p.signalType+(p.exConfirms>0?' &bull; &#x1F501; '+p.exConfirms+' exchange':'')
+        +'</div>';
+    }
+
+    return '<div style="background:var(--s1);border:1px solid rgba(229,160,13,.18);border-left:3px solid '
+      +(p.type==='combined'?'var(--gold)':p.type==='poly'?'rgba(229,160,13,.5)':'rgba(64,180,255,.5)')
+      +';border-radius:var(--rl2);padding:14px 16px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
+      +'<div style="display:flex;align-items:center;gap:8px">'
+      +'<div style="font-size:36px;font-weight:900;font-family:var(--mono);color:'+scoreColor+';line-height:1">'+p.score+'</div>'
+      +'<div>'+typeBadge+'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">'+(p.gameTime?'&#x23F0; '+p.gameTime:'')+'</div></div>'
       +'</div>'
-      +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px;line-height:1.3">'+p.title+'</div>'
-      +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:5px">&#x25B6; '+p.side+'</div>'
-      +details
-      +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:4px">&#x23F0; '+p.gameTime+'</div>':'')
+      +(p.sport?'<span style="font-size:10px;font-weight:700;padding:2px 8px;background:rgba(64,180,255,.1);color:#40B4FF;border-radius:4px;font-family:var(--mono)">'+p.sport+'</span>':'')
+      +'</div>'
+      +'<div style="font-size:15px;font-weight:800;color:var(--t1);margin-bottom:5px">'+p.title+'</div>'
+      +'<div style="font-size:13px;color:var(--green);font-weight:700;margin-bottom:8px">&#x25B6; '+p.side+'</div>'
+      +detail
+      +'<div style="display:flex;gap:6px;margin-top:4px">'
+      +'<button class="ss-log-btn" data-title="'+p.title.replace(/"/g,"'")+'" style="flex:1;padding:7px;border-radius:var(--r);background:var(--gold);color:#0B0C10;border:none;font-size:12px;font-weight:800;cursor:pointer">+ Log This Play</button>'
+      +'<button class="ss-track-btn" style="padding:7px 12px;border-radius:var(--r);border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:12px;cursor:pointer">Tracking</button>'
+      +'</div>'
       +'</div>';
   }).join('');
 }
 
-/* === HOT === */
 function renderHot(){
   const cutoff=Date.now()-86400000,hm={};
   alerts.forEach(a=>{const ts=a.loggedAt||(a.timestamp*1000);if(ts<cutoff||(a.usdValue||0)<1000||!detectSport(a.title))return;if(!hm[a.wallet]||a.usdValue>hm[a.wallet].usdValue)hm[a.wallet]=a;});
@@ -1570,6 +1012,10 @@ async function testNotif(){const t=el('cfg-tp').value.trim();if(!t){el('cfg-msg'
 
 /* === EVENT DELEGATION === */
 document.addEventListener('click',e=>{
+  const slb=e.target.closest('.ss-log-btn');
+  if(slb){openTM({market:slb.dataset.title||'',odds:'',betType:'ML'});showV('tracking',document.querySelectorAll('.ntab')[2]);}
+  const stb=e.target.closest('.ss-track-btn');
+  if(stb){showV('tracking',document.querySelectorAll('.ntab')[2]);}
   // Sharp Line Signal grade/delete
   const lgb=e.target.closest('.lgb');
   if(lgb){const i=parseInt(lgb.dataset.lsi);if(!isNaN(i)&&linePlays[i]){linePlays[i].status=lgb.dataset.st;linePlays[i].gradedAt=Date.now();ss('pm:line-plays',linePlays);renderTracking();}}
