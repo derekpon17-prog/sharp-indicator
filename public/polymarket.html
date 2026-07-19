@@ -607,7 +607,8 @@ async function fetchSharpLines(){
     const r=await fetch('/api/odds');
     if(!r.ok)return[];
     const d=await r.json();
-    sharpLines=Array.isArray(d)?d:(d.games||d.data||[]);
+    // API returns {plays:[...], total:N, quota:{...}}
+    sharpLines=d.plays||d.data||d.games||(Array.isArray(d)?d:[]);
     return sharpLines;
   }catch(e){console.warn('Sharp lines:',e.message);sharpLines=[];return[];}
 }
@@ -618,8 +619,8 @@ function normTeam(s){
 
 function matchLineToAlert(line,alertList){
   const sh=normTeam(line.sharpSide||'');
-  const aw=normTeam(line.away_team||'');
-  const hm=normTeam(line.home_team||'');
+  const aw=normTeam(line.away||'');
+  const hm=normTeam(line.home||'');
   return alertList.find(a=>{
     const t=(a.title||'').toLowerCase().replace(/[^a-z]/g,'');
     return(sh&&sh.length>2&&t.includes(sh))||(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));
@@ -634,6 +635,14 @@ function lineLabel(score){
 
 function calcSharpScore(ls2,ps){return Math.min(Math.round(ls2*0.60+ps*0.40),100);}
 
+function detectSportFromTeams(away,home){
+  const t=((away||'')+(home||'')).toLowerCase();
+  if(MLB_TEAMS.some(x=>t.includes(x))||t.includes('sox')||t.includes('jays'))return'MLB';
+  if(t.includes('lakers')||t.includes('celtics')||t.includes('warriors')||t.includes('bulls'))return'NBA';
+  if(t.includes('chiefs')||t.includes('patriots')||t.includes('eagles')||t.includes('cowboys'))return'NFL';
+  if(t.includes('maple leafs')||t.includes('bruins')||t.includes('rangers')||t.includes('penguins'))return'NHL';
+  return'';
+}
 function sportFromKey(k){
   return (k||'').replace('americanfootball_','').replace('basketball_','').replace('baseball_','').replace('icehockey_','').replace('_h2h','').replace('_spreads','').replace('_totals','').toUpperCase();
 }
@@ -643,15 +652,15 @@ function autoTrackLinePlays(lines){
   lines.forEach(g=>{
     const score=parseInt(g.siScore||g.mlSiScore||0);
     if(score<65)return;
-    const key=(g.away_team||'')+'vs'+(g.home_team||'')+'||'+(g.sharpSide||'');
+    const key=(g.away||'')+'vs'+(g.home||'')+'||'+(g.sharpSide||'');
     if(linePlays.some(p=>p.key===key))return;
-    const gt=g.commence_time?new Date(g.commence_time).toLocaleString():'';
+    const gt=g.commenceTime?new Date(g.commenceTime).toLocaleString():'';
     linePlays.unshift({key,score,
-      title:(g.away_team||'')+(g.home_team?' vs '+g.home_team:''),
+      title:(g.away||'')+(g.home?' vs '+g.home:''),
       sharpSide:g.sharpSide||'',signalType:g.signalType||'Sharp Signal',
-      pinnacleGap:parseFloat(g.pinnacleGap||0).toFixed(1),
-      exchangeConfirmed:!!g.exchangeConfirmed,steamDetected:!!g.steamDetected,
-      sport:sportFromKey(g.sport_key),gameTime:gt,
+      pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),
+      exchangeConfirmed:!!(g.novigConfirm||g.exConfirms>0),steamDetected:!!(g.signalType==="STEAM"||false),
+      sport:detectSportFromTeams(g.away,g.home),gameTime:gt,
       loggedAt:Date.now(),status:'OPEN'});
     changed=true;
   });
@@ -669,16 +678,16 @@ function autoTrackSharpScorePlays(lines,alertList){
     const{score:polyScore}=signalScore({buys:[match],totalVol:match.usdValue});
     const combined=calcSharpScore(lineScore,polyScore);
     if(combined<70)return;
-    const key='ss_'+(g.away_team||'')+'vs'+(g.home_team||'');
+    const key='ss_'+(g.away||'')+'vs'+(g.home||'');
     if(sharpScorePlays.some(p=>p.key===key))return;
     sharpScorePlays.unshift({key,combined,lineScore,polyScore,
-      title:(g.away_team||'')+(g.home_team?' vs '+g.home_team:''),
+      title:(g.away||'')+(g.home?' vs '+g.home:''),
       sharpSide:g.sharpSide||'',signalType:g.signalType||'',
       polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',
-      pinnacleGap:parseFloat(g.pinnacleGap||0).toFixed(1),
-      exchangeConfirmed:!!g.exchangeConfirmed,
-      sport:sportFromKey(g.sport_key),
-      gameTime:g.commence_time?new Date(g.commence_time).toLocaleString():'',
+      pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),
+      exchangeConfirmed:!!(g.novigConfirm||g.exConfirms>0),
+      sport:detectSportFromTeams(g.away,g.home),
+      gameTime:g.commenceTime?new Date(g.commenceTime).toLocaleString():'',
       loggedAt:Date.now(),status:'OPEN'});
     changed=true;
   });
@@ -688,7 +697,14 @@ function autoTrackSharpScorePlays(lines,alertList){
 function renderSharpLines(){
   const row=el('sharp-line-row'),cont=el('sharp-line-cont'),dotsEl=el('sharp-line-dots');
   if(!cont)return;
-  const plays=sharpLines.filter(g=>parseInt(g.siScore||g.mlSiScore||0)>=50).slice(0,8);
+  // Filter: no signal flagged, min 50 siScore, not started yet
+  const now2=Date.now();
+  const plays=sharpLines.filter(g=>{
+    if(g.noSignal)return false;
+    if(parseInt(g.siScore||0)<50)return false;
+    if(g.commenceTime&&new Date(g.commenceTime).getTime()<now2)return false; // game already started
+    return true;
+  }).slice(0,8);
   if(!plays.length){if(row)row.style.display='none';return;}
   if(row)row.style.display='';
   autoTrackLinePlays(plays);
@@ -698,15 +714,15 @@ function renderSharpLines(){
   cont.innerHTML=plays.map(g=>{
     const score=parseInt(g.siScore||g.mlSiScore||0);
     const{lbl,cls}=lineLabel(score);
-    const gap=parseFloat(g.pinnacleGap||0).toFixed(1);
-    const sport=sportFromKey(g.sport_key);
+    const gap=parseFloat(g.gapPP||0).toFixed(1);
+    const sport=detectSportFromTeams(g.away,g.home);
     const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
-    const exBadge=g.exchangeConfirmed?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(0,200,150,.12);color:#00C896;border-radius:3px;font-family:var(--mono)">&#x1F501; EXCHANGE</span>':'';
-    const stBadge=g.steamDetected?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(155,109,255,.12);color:#9B6DFF;border-radius:3px;font-family:var(--mono)">&#x1F4A8; STEAM</span>':'';
+    const exBadge=(g.novigConfirm||g.exConfirms>0)?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(0,200,150,.12);color:#00C896;border-radius:3px;font-family:var(--mono)">&#x1F501; EXCHANGE</span>':'';
+    const stBadge=(g.signalType==="STEAM"||false)?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(155,109,255,.12);color:#9B6DFF;border-radius:3px;font-family:var(--mono)">&#x1F4A8; STEAM</span>':'';
     const match=matchLineToAlert(g,recentAlerts);
     const polyBadge=match?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(229,160,13,.15);color:var(--gold);border-radius:3px;font-family:var(--mono)">&#x26A1; POLY CONFIRM</span>':'';
     const barPct=Math.round(score/maxScore*100);
-    const gt=g.commence_time?new Date(g.commence_time).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+    const gt=g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
     return '<div class="trend-card '+cls+'">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px">'
       +'<div><div class="t-slbl '+cls+'">'+lbl+'</div>'
@@ -714,9 +730,14 @@ function renderSharpLines(){
       +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono);flex-shrink:0">'+gt+'</span>'
       +'</div>'
       +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:5px">'
-      +(g.away_team||'Unknown')+(g.home_team?' vs '+g.home_team:'')+sportTag+'</div>'
+      +(g.away||'Unknown')+(g.home?' vs '+g.home:'')+sportTag+'</div>'
       +'<div style="margin-bottom:5px">Sharp side: <strong style="color:var(--green)">'+(g.sharpSide||'TBD')+'</strong></div>'
-      +'<div style="font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:6px">'+(g.signalType||'Sharp Signal')+'</div>'
+      +'<div style="font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:5px">'+(g.signalType||'Sharp Signal')+'</div>'
+      +'<div style="display:flex;gap:8px;margin-bottom:6px">'
+      +'<div style="font-size:10px;font-family:var(--mono);color:var(--t4)">Pin: <span style="color:var(--blue)">'+(g.pillars?g.pillars.pinnacle:0)+'</span></div>'
+      +'<div style="font-size:10px;font-family:var(--mono);color:var(--t4)">Money: <span style="color:var(--gold)">'+(g.pillars?g.pillars.money:0)+'</span></div>'
+      +'<div style="font-size:10px;font-family:var(--mono);color:rgba(245,246,250,.2)">RLM: <span style="color:rgba(245,246,250,.25)">'+(g.pillars?g.pillars.rlm:0)+'*</span></div>'
+      +'</div>'
       +'<div style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:7px">'+exBadge+stBadge+polyBadge+'</div>'
       +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+barPct+'%"></div></div>'
       +'<a href="https://sharp-indicator-a34j.vercel.app" target="_blank" class="t-link" style="margin-top:8px;display:block">View on Sharp.idx →</a>'
@@ -749,7 +770,7 @@ function renderSharpScore(){
   if(row)row.style.display='';
   cont.innerHTML=combined.slice(0,5).map(({g,match,lineScore,polyScore,ss})=>{
     const cls=ss>=85?'sig-3':ss>=70?'sig-2':'sig-1';
-    const sport=sportFromKey(g.sport_key);
+    const sport=detectSportFromTeams(g.away,g.home);
     return '<div class="trend-card '+cls+'" style="min-width:300px">'
       +'<div style="display:flex;justify-content:space-between;margin-bottom:8px">'
       +'<div><div class="t-slbl '+cls+'">'+(ss>=85?'&#x1F3AF; Elite Sharp Score':ss>=70?'&#x26A1; Strong Sharp Score':'&#x26A0;&#xFE0F; Moderate Sharp Score')+'</div>'
@@ -759,12 +780,12 @@ function renderSharpScore(){
       +(sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono)">'+sport+'</span>':'')
       +'</div>'
       +'<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:9px">'
-      +(g.away_team||'')+(g.home_team?' vs '+g.home_team:'')+'</div>'
+      +(g.away||'')+(g.home?' vs '+g.home:'')+'</div>'
       +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">'
       +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:7px 9px">'
       +'<div style="font-size:9px;font-weight:700;color:var(--blue);letter-spacing:.05em;margin-bottom:3px">&#x1F4CA; SHARP LINE</div>'
       +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+(g.sharpSide||'')+'</div>'
-      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+parseFloat(g.pinnacleGap||0).toFixed(1)+'pp</div>'
+      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+parseFloat(g.gapPP||0).toFixed(1)+'pp</div>'
       +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+(g.signalType||'')+'</div>'
       +'</div>'
       +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:7px 9px">'
