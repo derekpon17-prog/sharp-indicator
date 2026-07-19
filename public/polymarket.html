@@ -631,7 +631,18 @@ function renderTrending(){
 
 /* === HERO === */
 function renderHero(){
-  const rec=alerts.filter(a=>{const ts=a.loggedAt||(a.timestamp*1000);return ts>Date.now()-86400000&&detectSport(a.title)&&!isLosingTrader(a.wallet);}).sort((a,b)=>b.usdValue-a.usdValue);
+  // "Today" = calendar midnight of current day, not rolling 24h
+  const todayMidnight=new Date();todayMidnight.setHours(0,0,0,0);
+  const rec=alerts.filter(a=>{
+    const ts=a.loggedAt||(a.timestamp*1000);
+    if(ts<todayMidnight.getTime())return false;   // must be today
+    if(!detectSport(a.title))return false;         // approved sport only
+    if(isLosingTrader(a.wallet))return false;      // known loser — skip
+    // Hero requires verified leaderboard wallet — no unverified accounts headlining
+    const inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
+    if(!inLB)return false;
+    return true;
+  }).sort((a,b)=>b.usdValue-a.usdValue);
   const t=rec[0];if(!t)return;
   const pr=(parseFloat(t.price||0)*100).toFixed(1);
   el('hero').innerHTML='<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(229,160,13,.1),transparent 55%);pointer-events:none"></div>'
@@ -654,7 +665,8 @@ function renderDash(){
   const W=set.filter(t=>t.status==='WIN').length,L=set.filter(t=>t.status==='LOSS').length;
   const wr=W+L>0?Math.round(W/(W+L)*100):null;
   let pnl=0;set.forEach(t=>pnl+=calcP(t));
-  const vol=alerts.reduce((a,b)=>a+(b.usdValue||0),0);
+  const volToday=new Date();volToday.setHours(0,0,0,0);
+  const vol=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>=volToday.getTime()).reduce((a,b)=>a+(b.usdValue||0),0);
   el('d-al').textContent=alerts.length;el('d-vo').textContent=fp(vol);
   el('d-wr').textContent=wr!==null?wr+'%':'&mdash;';el('d-wr').style.color=wr===null?'var(--t4)':wr>=55?'var(--green)':wr>=50?'var(--gold)':'var(--red)';
   el('d-ws').textContent=W+L>0?W+'W&ndash;'+L+'L':'no trades yet';
