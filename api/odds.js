@@ -213,6 +213,10 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     }).filter(Boolean);
     const exConfirms=exchanges.filter(ex=>(ex.fairProb-avgSoftFair)*100>EX_CONFIRM_GAP).length;
     const exLines=exchanges.reduce((acc,ex)=>{acc[ex.key]=fmt(ex.price);return acc;},{});
+    // MLB spread filter: reject any spread outcome with juice worse than -150
+    // e.g. +1.5 at -225 or -1.5 at -175 — not worth the juice
+    if(mkey==='spreads'&&out.price<-150)continue;
+
     const rlm=calcRLM(out.name,mkey,out.price,null,out.point);
     const ps=calcPin(pf[i],simps,gapFloor);
     const ms=calcMoney(exchanges,null,out.price,simps);
@@ -260,8 +264,8 @@ function analyzeAll(game){
   if(spreadMkt&&spreadMkt.siScore>0){
     const sr=spreadMkt.rawPrices&&spreadMkt.rawPrices.find(r=>r.name===spreadMkt.sharpOutcome);
     const pt=sr?sr.point:null,px=sr?sr.price:0;
-    // +1.5 run line: only qualify at -150 or better odds (not -151 to -900 chalk juice)
-    if(pt!==null&&pt>0&&px>=-150)spreadQualified=true;
+    // Spread: only qualify at -150 or better odds on either side (-151 to -900 = too much juice)
+    if(pt!==null&&px>=-150)spreadQualified=true;
     if(pt!==null&&pt<0)spreadMkt.needsSteam=true;
   }
   const noSignal=!best||best.siScore===0;
