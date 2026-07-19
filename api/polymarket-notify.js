@@ -176,10 +176,10 @@ module.exports = async function handler(req, res) {
 
   if (!topic) return res.status(200).json({ ok: false, message: 'NTFY_TOPIC not set' });
 
-  const now       = Math.floor(Date.now() / 1000);
-  const winMin    = now - 900;      // 15 min — for global stream trades
-  const winMinWallet = now - 43200; // 12 hours — for per-wallet trades (catches earlier plays)
-  const winMax    = now - 30;
+  const now          = Math.floor(Date.now() / 1000);
+  const winMin       = now - 900;      // 15 min — for stream trades
+  const winMinWallet = now - 72000;    // 20 hours — covers full game day for wallet scans
+  const winMax       = now - 30;
 
   try {
     // ── Step 1: Fetch leaderboards (SPORTS + OVERALL only — what the API supports) ──
@@ -211,11 +211,12 @@ module.exports = async function handler(req, res) {
     const { trades: streamTrades, tried: streamMethods } = await fetchSportsTrades();
     const walletTrades = profitableWallets > 0 ? await fetchWalletTrades(walletList) : [];
 
-    // Deduplicate — tag each trade with source so we can apply different time windows
+    // Deduplicate — wallet trades FIRST so they win dedup and get 12hr window
+    // If stream version wins, it gets filtered by 15-min window and misses same-day plays
     const seenHash = new Set();
     const allTrades = [
-      ...streamTrades.map(t => ({ ...t, _source: 'stream' })),
-      ...walletTrades.map(t => ({ ...t, _source: 'wallet' })),
+      ...walletTrades.map(t => ({ ...t, _source: 'wallet' })),   // wallet first
+      ...streamTrades.map(t => ({ ...t, _source: 'stream' })),   // stream fills gaps
     ].filter(t => {
       const key = t.transactionHash || ((t.proxyWallet||'')+(t.timestamp||'')+(t.title||''));
       if (seenHash.has(key)) return false;
@@ -235,6 +236,9 @@ module.exports = async function handler(req, res) {
     const baseballBuys = [];   // ALL MLB buys for diagnosis
     const toAlert = [];
     const alertedKeys = new Set();
+    // Per-wallet per-market dedup: if same wallet buys same market multiple times today,
+    // track the LARGEST buy only (don't spam multiple alerts for same position)
+    const walletMarketSeen = new Map(); // key: wallet+market → largest usd seen
 
     allTrades.forEach(t => {
       const wallet = t.proxyWallet || t.maker || t.transactor;
@@ -267,7 +271,7 @@ module.exports = async function handler(req, res) {
       }
 
       // Sport-specific threshold: MLB runs smaller than other sports
-      const sportThreshold = sport === 'MLB' ? Math.min(threshold, 400) : threshold;
+      const sportThreshold = sport === 'MLB' ? Math.min(threshold, 300) : threshold; // MLB buys run smaller
       if (usd < sportThreshold) { failedThresh++; return; }
 
       const alertKey = t.transactionHash || ((wallet||'') + (t.title||'') + ts);
@@ -303,6 +307,7 @@ module.exports = async function handler(req, res) {
     let sent = 0;
     const ntfyResults = [];
     for (const buy of toAlert) {
+      delete buy._wmKey; // remove internal dedup key before sending
       const result = await sendAlert(topic, buy);
       if (result?.ok) sent++;
       ntfyResults.push({ trader: buy.traderName, sport: buy.sport, usd: Math.round(buy.usdValue), result });
