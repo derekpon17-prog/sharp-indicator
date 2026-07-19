@@ -331,10 +331,11 @@ select.finput option{background:var(--s2)}
     </div>
     <div class="row-s" id="trending-row" style="display:none">
       <div class="row-hdr">
-        <div class="row-ttl"><em>&#x1F4A1;</em>Signal Strength</div>
-        <div style="font-size:11px;color:var(--t3);font-family:var(--mono)">Multiple traders same side</div>
+        <div class="row-ttl"><em>&#x26A1;</em>Polymarket Signal</div>
+        <div class="row-all" onclick="showV('alerts',document.querySelectorAll('.ntab')[1])" style="font-size:11px;color:var(--t3)">profitable traders · same side</div>
       </div>
-      <div class="row-scr" id="d-trend"></div>
+      <div id="d-trend" style="display:flex;gap:13px;overflow-x:auto;padding-bottom:12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scroll-snap-type:x mandatory"></div>
+      <div id="trend-dots" style="display:flex;justify-content:center;gap:5px;margin-top:8px"></div>
     </div>
     <div class="row-s"><div class="row-hdr"><div class="row-ttl"><em>&#x1F514;</em>Recent Alerts</div><div class="row-all" onclick="showV('alerts',document.querySelectorAll('.ntab')[1])">See all <i class="ti ti-chevron-right" style="font-size:12px"></i></div></div><div class="row-scr" id="d-ar"><div style="color:var(--t4);font-size:13px;padding:20px 4px">Waiting for alerts&#x2026;</div></div></div>
     <div class="row-s"><div class="row-hdr"><div class="row-ttl"><em>&#x1F4C8;</em>Open Trades</div><div class="row-all" onclick="showV('tracking',document.querySelectorAll('.ntab')[2])">See all <i class="ti ti-chevron-right" style="font-size:12px"></i></div></div><div class="row-scr" id="d-tr"><div style="color:var(--t4);font-size:13px;padding:20px 4px">No open trades yet</div></div></div>
@@ -750,15 +751,15 @@ function renderTrending() {
     const sport = detectSport(g.title);
     const sportTag = sport ? ('<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>') : '';
 
-    return '<div class="trend-card '+sc+'">'
+    return '<div class="trend-card '+sc.cls+'" style="scroll-snap-align:start">'
       +'<div class="trend-header">'
-      +'<div><div class="trend-signal-lbl '+sc+'">'+sigLabel(g.buys.length,g.totalVol)+'</div>'
-      +'<span class="trend-buyers '+sc+'">'+g.buys.length+' buyer'+(g.buys.length>1?'s':'')+' &middot; '+fu(g.totalVol)+' total</span></div>'
+      +'<div><div class="trend-signal-lbl '+sc.cls+'">'+sc.lbl+' &middot; '+cscore+'</div>'
+      +'<span class="trend-buyers '+sc.cls+'">'+g.buys.length+' buyer'+(g.buys.length>1?'s':'')+' &middot; '+fu(g.totalVol)+' total</span></div>'
       +'<span class="trend-age">'+timeAgo(g.latestTs)+'</span>'
       +'</div>'
       +'<div class="trend-market">'+g.title+sportTag+'</div>'
       +'<div class="trend-outcome">Buying <span style="'+ocStyle+'">'+(g.outcome||'—')+'</span></div>'
-      +'<div class="trend-bar-wrap"><div class="trend-bar '+sc+'" style="width:'+barPct+'%"></div></div>'
+      +'<div class="trend-bar-wrap"><div class="trend-bar '+sc.cls+'" style="width:'+barPct+'%"></div></div>'
       +'<div class="trend-traders">'+uniqueTraders.map(function(n){
       // Truncate hex wallet addresses for display
       const display=n&&n.startsWith('0x')?(n.slice(0,6)+'...'+n.slice(-4)):n;
@@ -952,6 +953,22 @@ function renderTracking() {
           +btns
           +"</div>";
       }).join("");
+  // Scroll dots — simple clean version
+  var dotsEl2=document.getElementById('trend-dots');
+  var contEl=document.getElementById('d-trend');
+  if(dotsEl2&&trends.length>1){
+    dotsEl2.innerHTML='';
+    trends.forEach(function(_,i){
+      var d=document.createElement('div');
+      d.dataset.di=i;d.className='tdot';
+      d.style.cssText='width:6px;height:6px;border-radius:50%;background:'+(i===0?'var(--gold)':'rgba(255,255,255,.15)')+';cursor:pointer;transition:background .2s;flex-shrink:0';
+      dotsEl2.appendChild(d);
+    });
+    if(contEl)contEl.onscroll=function(){
+      var i=Math.min(Math.round(contEl.scrollLeft/282),trends.length-1);
+      Array.from(dotsEl2.children).forEach(function(d,j){d.style.background=j===i?'var(--gold)':'rgba(255,255,255,.15)';});
+    };
+  } else if(dotsEl2){dotsEl2.innerHTML='';}
     }
   }
 
