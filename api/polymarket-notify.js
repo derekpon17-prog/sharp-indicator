@@ -28,6 +28,8 @@ const LB_CONFIG = [
 ];
 
 const posAlertedKeys = new Set();
+// Persists across warm invocations — prevents re-alerting same trade in next cron cycle
+const globalAlertedTxns = new Set();
 
 async function fetchLeaderboard(category, limit) {
   try {
@@ -72,12 +74,12 @@ async function fetchSportsTrades() {
 
 // Per-wallet scan: fetch recent buys for each tracked wallet
 // Catches plays that happened outside our global scan window
-async function fetchWalletTrades(wallets, limit = 20) {
+async function fetchWalletTrades(wallets, limit = 30) {
   const results = [];
   // Only scan top 50 by rank to limit API calls
   const top50 = wallets
     .sort((a, b) => Math.min(...(a.categories||[]).map(c=>c.rank)) - Math.min(...(b.categories||[]).map(c=>c.rank)))
-    .slice(0, 50);
+    .slice(0, 75); // top 75 profitable wallets by rank
 
   await Promise.all(top50.map(async w => {
     try {
@@ -174,9 +176,10 @@ module.exports = async function handler(req, res) {
 
   if (!topic) return res.status(200).json({ ok: false, message: 'NTFY_TOPIC not set' });
 
-  const now    = Math.floor(Date.now() / 1000);
-  const winMin = now - 900;   // 15 min window
-  const winMax = now - 30;
+  const now       = Math.floor(Date.now() / 1000);
+  const winMin    = now - 900;      // 15 min — for global stream trades
+  const winMinWallet = now - 43200; // 12 hours — for per-wallet trades (catches earlier plays)
+  const winMax    = now - 30;
 
   try {
     // ── Step 1: Fetch leaderboards (SPORTS + OVERALL only — what the API supports) ──
@@ -208,9 +211,12 @@ module.exports = async function handler(req, res) {
     const { trades: streamTrades, tried: streamMethods } = await fetchSportsTrades();
     const walletTrades = profitableWallets > 0 ? await fetchWalletTrades(walletList) : [];
 
-    // Deduplicate all trades
+    // Deduplicate — tag each trade with source so we can apply different time windows
     const seenHash = new Set();
-    const allTrades = [...streamTrades, ...walletTrades].filter(t => {
+    const allTrades = [
+      ...streamTrades.map(t => ({ ...t, _source: 'stream' })),
+      ...walletTrades.map(t => ({ ...t, _source: 'wallet' })),
+    ].filter(t => {
       const key = t.transactionHash || ((t.proxyWallet||'')+(t.timestamp||'')+(t.title||''));
       if (seenHash.has(key)) return false;
       seenHash.add(key);
@@ -247,7 +253,9 @@ module.exports = async function handler(req, res) {
         });
       }
 
-      if (ts < winMin || ts > winMax) { failedTs++; return; }
+      // Apply window based on source: stream=15min, wallet scan=12hr
+      const effectiveWinMin = t._source === 'wallet' ? winMinWallet : winMin;
+      if (ts < effectiveWinMin || ts > winMax) { failedTs++; return; }
 
       const traderInfo = wallet ? walletMap[wallet] : null;
       if (!traderInfo) { failedNotProfitable++; return; }
@@ -262,9 +270,11 @@ module.exports = async function handler(req, res) {
       const sportThreshold = sport === 'MLB' ? Math.min(threshold, 400) : threshold;
       if (usd < sportThreshold) { failedThresh++; return; }
 
-      const alertKey = (wallet||'') + (t.transactionHash || t.title || '') + ts;
+      const alertKey = t.transactionHash || ((wallet||'') + (t.title||'') + ts);
       if (alertedKeys.has(alertKey)) return;
+      if (globalAlertedTxns.has(alertKey)) return; // already alerted in a prior cron cycle
       alertedKeys.add(alertKey);
+      globalAlertedTxns.add(alertKey);
 
       if (catFilter !== 'ALL' && !traderInfo.categories.some(c => (c.category||c.cat) === catFilter)) return;
 
@@ -324,6 +334,7 @@ module.exports = async function handler(req, res) {
         streamTrades:        streamTrades.length,
         walletTrades:        walletTrades.length,
         failedTs,
+        failedTs_detail: `${failedTs} trades outside window (stream=15min, wallet=12hr)`,
         failedThresh,
         failedSports,
         failedNotProfitable,
