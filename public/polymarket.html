@@ -507,6 +507,9 @@ const el=id=>document.getElementById(id);
 
 /* === STATE === */
 let alerts=ls('pm:alert-log',[]),trades=ls('pm:trades',[]),wallets=ls('pm:traders',[]),sigPlays=ls('pm:sig-plays',[]);
+let linePlays=ls('pm:line-plays',[]);
+let sharpScorePlays=ls('pm:ss-plays',[]);
+let sharpLines=[];
 const dismissed=new Set(ls('pm:dismissed',[]));
 function dismiss(key){dismissed.add(key);ss('pm:dismissed',[...dismissed]);renderTrending();}
 let af='all',lbTab='sports',lbData={overall:[],sports:[]},allBuys=[],view='dashboard';
