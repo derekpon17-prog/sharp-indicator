@@ -241,6 +241,25 @@ select.finput option{background:var(--s2)}
       <div class="sc green"><div class="sc-lbl"><i class="ti ti-target"></i>Win Rate</div><div class="sc-val" id="d-wr" style="color:var(--t4)">&mdash;</div><div class="sc-sub" id="d-ws">0W&ndash;0L</div></div>
       <div class="sc purple"><div class="sc-lbl"><i class="ti ti-coin"></i>P&amp;L</div><div class="sc-val" id="d-pl" style="color:var(--t4)">$0</div><div class="sc-sub">USDC est.</div></div>
     </div>
+    <!-- Sharp Score (combined — only shows when both signals agree) -->
+    <div class="row-s" id="sharp-score-row" style="display:none">
+      <div class="row-hdr">
+        <div class="row-ttl"><em>&#x1F3AF;</em>Sharp Score <span style="font-size:11px;background:linear-gradient(90deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-left:6px">Line + Poly Combined</span></div>
+        <div style="font-size:11px;color:var(--t3)">Both signals pointing same direction</div>
+      </div>
+      <div class="hscr" id="sharp-score-cont"></div>
+    </div>
+
+    <!-- Sharp Line Signal (from Sharp.idx) -->
+    <div class="row-s" id="sharp-line-row" style="display:none">
+      <div class="row-hdr">
+        <div class="row-ttl"><em>&#x1F4CA;</em>Sharp Line Signal</div>
+        <div class="row-all" onclick="window.open('https://sharp-indicator-a34j.vercel.app','_blank')" style="font-size:11px;color:var(--t3)">Pinnacle &middot; Exchange &middot; RLM</div>
+      </div>
+      <div class="trend-row" id="sharp-line-cont"></div>
+      <div class="sdots" id="sharp-line-dots"></div>
+    </div>
+
     <!-- Polymarket Signal -->
     <div class="row-s" id="trending-row" style="display:none">
       <div class="row-hdr">
@@ -307,6 +326,34 @@ select.finput option{background:var(--s2)}
         <p>Signal Strength plays scoring 65+ are logged here automatically</p>
       </div>
     </div>
+    <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
+
+    <!-- Sharp Line Signal Auto-Plays -->
+    <div style="margin-bottom:28px">
+      <div class="row-hdr" style="margin-bottom:12px">
+        <div class="row-ttl" style="font-size:16px"><em>&#x1F4CA;</em>Sharp Line Signal Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at 65+ SI Score</span></div>
+        <div id="line-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
+      </div>
+      <div id="line-plays" style="display:flex;flex-direction:column;gap:8px"></div>
+      <div id="line-empty" class="empty" style="padding:22px">
+        <div class="empty-ico">&#x1F4CA;</div><h3>No Sharp Line plays yet</h3>
+        <p>Sharp.idx plays scoring 65+ SI are logged here automatically</p>
+      </div>
+    </div>
+
+    <!-- Sharp Score Auto-Plays (combined) -->
+    <div style="margin-bottom:28px">
+      <div class="row-hdr" style="margin-bottom:12px">
+        <div class="row-ttl" style="font-size:16px"><em>&#x1F3AF;</em>Sharp Score Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">both signals agree &middot; 70+ combined</span></div>
+        <div id="ss-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
+      </div>
+      <div id="ss-plays" style="display:flex;flex-direction:column;gap:8px"></div>
+      <div id="ss-empty" class="empty" style="padding:22px">
+        <div class="empty-ico">&#x1F3AF;</div><h3>No Sharp Score plays yet</h3>
+        <p>Appears when Sharp Line Signal + Polymarket Signal agree on the same game</p>
+      </div>
+    </div>
+
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <div class="perf">
       <div class="pc"><div class="pc-val" id="tp-r">0&ndash;0</div><div class="pc-lbl">My Picks Record</div></div>
@@ -420,6 +467,9 @@ const el=id=>document.getElementById(id);
 
 /* === STATE === */
 let alerts=ls('pm:alert-log',[]),trades=ls('pm:trades',[]),wallets=ls('pm:traders',[]),sigPlays=ls('pm:sig-plays',[]);
+let linePlays=ls('pm:line-plays',[]); // Sharp Line Signal auto-tracked plays
+let sharpScorePlays=ls('pm:ss-plays',[]); // Combined Sharp Score auto-tracked plays
+let sharpLines=[]; // live data from /api/odds
 const dismissed=new Set(ls('pm:dismissed',[]));
 function dismiss(key){dismissed.add(key);ss('pm:dismissed',[...dismissed]);renderTrending();}
 let af='all',lbTab='sports',lbData={overall:[],sports:[]},allBuys=[],view='dashboard';
@@ -543,10 +593,189 @@ async function fetchData(){
     if(view==='dashboard')renderDash();
     if(view==='alerts')renderAlerts();
     if(view==='traders'){renderHot();renderLB();}
+    // Fetch Sharp.idx data in parallel
+    fetchSharpLines().then(()=>{renderSharpLines();renderSharpScore();});
     el('ldot').style.background='#00C896';el('ltxt').textContent='Live';cd=REFRESH;
   }catch{el('ldot').style.background='var(--red)';el('ltxt').textContent='Error';}
 }
 function doRef(){fetchData();}
+
+
+/* === SHARP LINE SIGNAL (from Sharp.idx /api/odds) === */
+async function fetchSharpLines(){
+  try{
+    const r=await fetch('/api/odds');
+    if(!r.ok)return[];
+    const d=await r.json();
+    sharpLines=Array.isArray(d)?d:(d.games||d.data||[]);
+    return sharpLines;
+  }catch(e){console.warn('Sharp lines:',e.message);sharpLines=[];return[];}
+}
+
+function normTeam(s){
+  return (s||'').toLowerCase().replace(/new york|los angeles|san francisco|san diego|kansas city|st\.?\s*louis|tampa bay|chicago|boston|houston|atlanta|philadelphia|miami|minnesota|cleveland|detroit|seattle|texas|colorado|arizona|pittsburgh|cincinnati|washington|baltimore|oakland|toronto|milwaukee/gi,'').replace(/[^a-z]/g,'').trim();
+}
+
+function matchLineToAlert(line,alertList){
+  const sh=normTeam(line.sharpSide||'');
+  const aw=normTeam(line.away_team||'');
+  const hm=normTeam(line.home_team||'');
+  return alertList.find(a=>{
+    const t=(a.title||'').toLowerCase().replace(/[^a-z]/g,'');
+    return(sh&&sh.length>2&&t.includes(sh))||(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));
+  })||null;
+}
+
+function lineLabel(score){
+  if(score>=80)return{lbl:'&#x1F525; Elite Line Signal',cls:'sig-3'};
+  if(score>=65)return{lbl:'&#x26A1; Strong Line Signal',cls:'sig-2'};
+  return{lbl:'&#x26A0;&#xFE0F; Moderate Line Signal',cls:'sig-1'};
+}
+
+function calcSharpScore(ls2,ps){return Math.min(Math.round(ls2*0.60+ps*0.40),100);}
+
+function sportFromKey(k){
+  return (k||'').replace('americanfootball_','').replace('basketball_','').replace('baseball_','').replace('icehockey_','').replace('_h2h','').replace('_spreads','').replace('_totals','').toUpperCase();
+}
+
+function autoTrackLinePlays(lines){
+  let changed=false;
+  lines.forEach(g=>{
+    const score=parseInt(g.siScore||g.mlSiScore||0);
+    if(score<65)return;
+    const key=(g.away_team||'')+'vs'+(g.home_team||'')+'||'+(g.sharpSide||'');
+    if(linePlays.some(p=>p.key===key))return;
+    const gt=g.commence_time?new Date(g.commence_time).toLocaleString():'';
+    linePlays.unshift({key,score,
+      title:(g.away_team||'')+(g.home_team?' vs '+g.home_team:''),
+      sharpSide:g.sharpSide||'',signalType:g.signalType||'Sharp Signal',
+      pinnacleGap:parseFloat(g.pinnacleGap||0).toFixed(1),
+      exchangeConfirmed:!!g.exchangeConfirmed,steamDetected:!!g.steamDetected,
+      sport:sportFromKey(g.sport_key),gameTime:gt,
+      loggedAt:Date.now(),status:'OPEN'});
+    changed=true;
+  });
+  if(changed)ss('pm:line-plays',linePlays);
+}
+
+function autoTrackSharpScorePlays(lines,alertList){
+  let changed=false;
+  const recentAlerts=alertList.filter(a=>(a.loggedAt||(a.timestamp*1000))>Date.now()-43200000);
+  lines.forEach(g=>{
+    const lineScore=parseInt(g.siScore||g.mlSiScore||0);
+    if(lineScore<50)return;
+    const match=matchLineToAlert(g,recentAlerts);
+    if(!match)return;
+    const{score:polyScore}=signalScore({buys:[match],totalVol:match.usdValue});
+    const combined=calcSharpScore(lineScore,polyScore);
+    if(combined<70)return;
+    const key='ss_'+(g.away_team||'')+'vs'+(g.home_team||'');
+    if(sharpScorePlays.some(p=>p.key===key))return;
+    sharpScorePlays.unshift({key,combined,lineScore,polyScore,
+      title:(g.away_team||'')+(g.home_team?' vs '+g.home_team:''),
+      sharpSide:g.sharpSide||'',signalType:g.signalType||'',
+      polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',
+      pinnacleGap:parseFloat(g.pinnacleGap||0).toFixed(1),
+      exchangeConfirmed:!!g.exchangeConfirmed,
+      sport:sportFromKey(g.sport_key),
+      gameTime:g.commence_time?new Date(g.commence_time).toLocaleString():'',
+      loggedAt:Date.now(),status:'OPEN'});
+    changed=true;
+  });
+  if(changed)ss('pm:ss-plays',sharpScorePlays);
+}
+
+function renderSharpLines(){
+  const row=el('sharp-line-row'),cont=el('sharp-line-cont'),dotsEl=el('sharp-line-dots');
+  if(!cont)return;
+  const plays=sharpLines.filter(g=>parseInt(g.siScore||g.mlSiScore||0)>=50).slice(0,8);
+  if(!plays.length){if(row)row.style.display='none';return;}
+  if(row)row.style.display='';
+  autoTrackLinePlays(plays);
+  autoTrackSharpScorePlays(plays,alerts);
+  const maxScore=Math.max(...plays.map(g=>parseInt(g.siScore||g.mlSiScore||0)));
+  const recentAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>Date.now()-43200000);
+  cont.innerHTML=plays.map(g=>{
+    const score=parseInt(g.siScore||g.mlSiScore||0);
+    const{lbl,cls}=lineLabel(score);
+    const gap=parseFloat(g.pinnacleGap||0).toFixed(1);
+    const sport=sportFromKey(g.sport_key);
+    const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
+    const exBadge=g.exchangeConfirmed?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(0,200,150,.12);color:#00C896;border-radius:3px;font-family:var(--mono)">&#x1F501; EXCHANGE</span>':'';
+    const stBadge=g.steamDetected?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(155,109,255,.12);color:#9B6DFF;border-radius:3px;font-family:var(--mono)">&#x1F4A8; STEAM</span>':'';
+    const match=matchLineToAlert(g,recentAlerts);
+    const polyBadge=match?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(229,160,13,.15);color:var(--gold);border-radius:3px;font-family:var(--mono)">&#x26A1; POLY CONFIRM</span>':'';
+    const barPct=Math.round(score/maxScore*100);
+    const gt=g.commence_time?new Date(g.commence_time).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+    return '<div class="trend-card '+cls+'">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px">'
+      +'<div><div class="t-slbl '+cls+'">'+lbl+'</div>'
+      +'<span class="t-buyers '+cls+'">Pinnacle +'+gap+'pp &middot; '+score+'pts</span></div>'
+      +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono);flex-shrink:0">'+gt+'</span>'
+      +'</div>'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:5px">'
+      +(g.away_team||'Unknown')+(g.home_team?' vs '+g.home_team:'')+sportTag+'</div>'
+      +'<div style="margin-bottom:5px">Sharp side: <strong style="color:var(--green)">'+(g.sharpSide||'TBD')+'</strong></div>'
+      +'<div style="font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:6px">'+(g.signalType||'Sharp Signal')+'</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:7px">'+exBadge+stBadge+polyBadge+'</div>'
+      +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+barPct+'%"></div></div>'
+      +'<a href="https://sharp-indicator-a34j.vercel.app" target="_blank" class="t-link" style="margin-top:8px;display:block">View on Sharp.idx →</a>'
+      +'</div>';
+  }).join('');
+  if(dotsEl&&plays.length>1){
+    dotsEl.innerHTML='';
+    plays.forEach((_,i)=>{const d=document.createElement('div');d.className='sdot'+(i===0?' on':'');d.onclick=()=>cont.scrollTo({left:i*278,behavior:'smooth'});dotsEl.appendChild(d);});
+    cont.onscroll=()=>{const i=Math.min(Math.round(cont.scrollLeft/278),plays.length-1);Array.from(dotsEl.children).forEach((d,j)=>{d.className='sdot'+(j===i?' on':'');});};
+  }
+}
+
+function renderSharpScore(){
+  const row=el('sharp-score-row'),cont=el('sharp-score-cont');
+  if(!cont)return;
+  const recentAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>Date.now()-43200000);
+  const combined=[];
+  sharpLines.forEach(g=>{
+    const lineScore=parseInt(g.siScore||g.mlSiScore||0);
+    if(lineScore<50)return;
+    const match=matchLineToAlert(g,recentAlerts);
+    if(!match)return;
+    const{score:polyScore}=signalScore({buys:[match],totalVol:match.usdValue});
+    const ss2=calcSharpScore(lineScore,polyScore);
+    if(ss2<60)return;
+    combined.push({g,match,lineScore,polyScore,ss:ss2});
+  });
+  combined.sort((a,b)=>b.ss-a.ss);
+  if(!combined.length){if(row)row.style.display='none';return;}
+  if(row)row.style.display='';
+  cont.innerHTML=combined.slice(0,5).map(({g,match,lineScore,polyScore,ss})=>{
+    const cls=ss>=85?'sig-3':ss>=70?'sig-2':'sig-1';
+    const sport=sportFromKey(g.sport_key);
+    return '<div class="trend-card '+cls+'" style="min-width:300px">'
+      +'<div style="display:flex;justify-content:space-between;margin-bottom:8px">'
+      +'<div><div class="t-slbl '+cls+'">'+(ss>=85?'&#x1F3AF; Elite Sharp Score':ss>=70?'&#x26A1; Strong Sharp Score':'&#x26A0;&#xFE0F; Moderate Sharp Score')+'</div>'
+      +'<div style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-top:2px">'
+      +'Line: <span style="color:var(--blue)">'+lineScore+'</span> &bull; Poly: <span style="color:var(--gold)">'+polyScore+'</span> &bull; Score: <span style="font-weight:800;color:var(--green)">'+ss+'</span>'
+      +'</div></div>'
+      +(sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono)">'+sport+'</span>':'')
+      +'</div>'
+      +'<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:9px">'
+      +(g.away_team||'')+(g.home_team?' vs '+g.home_team:'')+'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">'
+      +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:7px 9px">'
+      +'<div style="font-size:9px;font-weight:700;color:var(--blue);letter-spacing:.05em;margin-bottom:3px">&#x1F4CA; SHARP LINE</div>'
+      +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+(g.sharpSide||'')+'</div>'
+      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+parseFloat(g.pinnacleGap||0).toFixed(1)+'pp</div>'
+      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+(g.signalType||'')+'</div>'
+      +'</div>'
+      +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:7px 9px">'
+      +'<div style="font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.05em;margin-bottom:3px">&#x26A1; POLY SIGNAL</div>'
+      +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+match.outcome+'</div>'
+      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+fu(match.usdValue)+' &bull; '+(match.traderName||'')+'</div>'
+      +'</div></div>'
+      +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+ss+'%"></div></div>'
+      +'</div>';
+  }).join('');
+}
 
 /* === SIGNAL STRENGTH (POLYMARKET) === */
 function buildTrending(){
@@ -686,6 +915,8 @@ function renderDash(){
   const lb=(lbData.sports||[]).slice(0,10);
   tpEl.innerHTML=lb.length?lb.map(posterHTML).join(''):'<div style="color:var(--t4);font-size:13px;padding:16px">Loading&hellip;</div>';
   setTimeout(enrichCards,50);
+  renderSharpLines();
+  renderSharpScore();
   // Enrich top traders poster cards async
   lb.forEach(t=>{if(!_sc[t.wallet]){fetchTraderStats(t.wallet).then(()=>{if(view==='dashboard')tpEl.innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join('');});}});
 }
@@ -800,6 +1031,93 @@ async function gradeOpenPlays(){
 }
 function renderTracking(){
   gradeOpenPlays();
+
+  // ── Sharp Line Signal plays section ──
+  const lW=linePlays.filter(p=>p.status==='WIN').length,lL=linePlays.filter(p=>p.status==='LOSS').length;
+  const lWR=lW+lL>0?Math.round(lW/(lW+lL)*100):null;
+  const lrEl=el('line-record');
+  if(lrEl){lrEl.textContent=(lW+lL>0?lW+'W-'+lL+'L'+(lWR!==null?' ('+lWR+'%)':''):'0W-0L')+(linePlays.length?' on '+linePlays.length+' plays':'');if(lWR!==null)lrEl.style.color=lWR>=55?'var(--green)':lWR>=50?'var(--gold)':'var(--red)';}
+  const lpEl=el('line-plays'),lpEmpty=el('line-empty');
+  if(lpEl){
+    if(!linePlays.length){if(lpEmpty)lpEmpty.style.display='';lpEl.innerHTML='';}
+    else{
+      if(lpEmpty)lpEmpty.style.display='none';
+      lpEl.innerHTML=linePlays.map((p,i)=>{
+        const{lbl,cls}=lineLabel(p.score||0);
+        const sc=p.status==='WIN'?'var(--green)':p.status==='LOSS'?'var(--red)':'var(--purple)';
+        const statusLbl=p.status==='OPEN'?'&#x23F3; Open':p.status==='WIN'?'&#x2705; WIN':'&#x274C; '+p.status;
+        const btns=p.status==='OPEN'
+          ?'<div style="display:flex;gap:5px;margin-top:8px">'
+            +'<button data-lsi="'+i+'" data-st="WIN" class="lgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button>'
+            +'<button data-lsi="'+i+'" data-st="LOSS" class="lgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer">L</button>'
+            +'<button data-lsi="'+i+'" data-st="PUSH" class="lgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer">P</button>'
+            +'<button data-lsi="'+i+'" class="ldb" style="padding:5px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button>'
+            +'</div>'
+          :'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-size:12px;font-weight:700;color:'+sc+'">'+statusLbl+'</span><button data-lsi="'+i+'" class="ldb" style="padding:3px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button></div>';
+        return '<div class="sig-play '+p.status.toLowerCase()+'">'
+          +'<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+          +'<div><span class="t-slbl '+cls+'" style="font-size:10px">'+lbl+'</span>'
+          +'<span style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-left:6px">'+p.score+'pts</span>'
+          +(p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+p.sport+'</span>':'')+'</div>'
+          +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+timeAgo(p.loggedAt)+'</span>'
+          +'</div>'
+          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+p.title+'</div>'
+          +'<div style="font-size:12px;color:var(--t3);margin-bottom:3px">Sharp side: <strong style="color:var(--green)">'+p.sharpSide+'</strong> &middot; '+p.signalType+'</div>'
+          +'<div style="font-size:11px;color:var(--t4);font-family:var(--mono);margin-bottom:3px">Pinnacle +'+p.pinnacleGap+'pp'+(p.exchangeConfirmed?' &middot; &#x1F501; Exchange':'')+( p.steamDetected?' &middot; &#x1F4A8; Steam':'')+'</div>'
+          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-bottom:5px">Game: '+p.gameTime+'</div>':'')
+          +btns+'</div>';
+      }).join('');
+    }
+  }
+
+  // ── Sharp Score plays section ──
+  const ssW=sharpScorePlays.filter(p=>p.status==='WIN').length,ssL=sharpScorePlays.filter(p=>p.status==='LOSS').length;
+  const ssWR=ssW+ssL>0?Math.round(ssW/(ssW+ssL)*100):null;
+  const ssrEl=el('ss-record');
+  if(ssrEl){ssrEl.textContent=(ssW+ssL>0?ssW+'W-'+ssL+'L'+(ssWR!==null?' ('+ssWR+'%)':''):'0W-0L')+(sharpScorePlays.length?' on '+sharpScorePlays.length+' plays':'');if(ssWR!==null)ssrEl.style.color=ssWR>=55?'var(--green)':ssWR>=50?'var(--gold)':'var(--red)';}
+  const ssEl=el('ss-plays'),ssEmpty=el('ss-empty');
+  if(ssEl){
+    if(!sharpScorePlays.length){if(ssEmpty)ssEmpty.style.display='';ssEl.innerHTML='';}
+    else{
+      if(ssEmpty)ssEmpty.style.display='none';
+      ssEl.innerHTML=sharpScorePlays.map((p,i)=>{
+        const cls=p.combined>=85?'sig-3':p.combined>=70?'sig-2':'sig-1';
+        const sc=p.status==='WIN'?'var(--green)':p.status==='LOSS'?'var(--red)':'var(--purple)';
+        const statusLbl=p.status==='OPEN'?'&#x23F3; Open':p.status==='WIN'?'&#x2705; WIN':'&#x274C; '+p.status;
+        const btns=p.status==='OPEN'
+          ?'<div style="display:flex;gap:5px;margin-top:8px">'
+            +'<button data-ssi="'+i+'" data-st="WIN" class="ssgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button>'
+            +'<button data-ssi="'+i+'" data-st="LOSS" class="ssgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer">L</button>'
+            +'<button data-ssi="'+i+'" data-st="PUSH" class="ssgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer">P</button>'
+            +'<button data-ssi="'+i+'" class="ssdb" style="padding:5px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button>'
+            +'</div>'
+          :'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-size:12px;font-weight:700;color:'+sc+'">'+statusLbl+'</span><button data-ssi="'+i+'" class="ssdb" style="padding:3px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button></div>';
+        return '<div class="sig-play '+p.status.toLowerCase()+'" style="border-left-color:var(--gold)">'
+          +'<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+          +'<div style="font-size:10px;font-weight:800;background:linear-gradient(90deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">&#x1F3AF; SHARP SCORE</div>'
+          +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+timeAgo(p.loggedAt)+'</span>'
+          +'</div>'
+          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:6px">'+p.title+'</div>'
+          +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px">'
+          +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 8px">'
+          +'<div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">LINE '+p.lineScore+'pts</div>'
+          +'<div style="font-size:11px;font-weight:700;color:var(--t1)">'+p.sharpSide+'</div>'
+          +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+p.pinnacleGap+'pp &middot; '+p.signalType+'</div>'
+          +'</div>'
+          +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 8px">'
+          +'<div style="font-size:9px;font-weight:700;color:var(--gold);margin-bottom:2px">POLY '+p.polyScore+'pts</div>'
+          +'<div style="font-size:11px;font-weight:700;color:var(--t1)">'+p.polyOutcome+'</div>'
+          +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+p.polyTrader+'</div>'
+          +'</div></div>'
+          +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">'
+          +'<span style="font-size:11px;color:var(--t3)">Combined:</span>'
+          +'<span style="font-size:18px;font-weight:900;font-family:var(--mono);color:'+(p.combined>=80?'var(--green)':p.combined>=70?'var(--gold)':'var(--t2)')+'">'+p.combined+'</span>'
+          +'</div>'
+          +btns+'</div>';
+      }).join('');
+    }
+  }
+
   // Sig plays record
   const sW=sigPlays.filter(p=>p.status==='WIN').length,sL=sigPlays.filter(p=>p.status==='LOSS').length;
   const sWR=sW+sL>0?Math.round(sW/(sW+sL)*100):null;
@@ -941,6 +1259,16 @@ async function testNotif(){const t=el('cfg-tp').value.trim();if(!t){el('cfg-msg'
 
 /* === EVENT DELEGATION === */
 document.addEventListener('click',e=>{
+  // Sharp Line Signal grade/delete
+  const lgb=e.target.closest('.lgb');
+  if(lgb){const i=parseInt(lgb.dataset.lsi);if(!isNaN(i)&&linePlays[i]){linePlays[i].status=lgb.dataset.st;linePlays[i].gradedAt=Date.now();ss('pm:line-plays',linePlays);renderTracking();}}
+  const ldb=e.target.closest('.ldb');
+  if(ldb){const i=parseInt(ldb.dataset.lsi);if(!isNaN(i)){linePlays.splice(i,1);ss('pm:line-plays',linePlays);renderTracking();}}
+  // Sharp Score grade/delete
+  const ssgb=e.target.closest('.ssgb');
+  if(ssgb){const i=parseInt(ssgb.dataset.ssi);if(!isNaN(i)&&sharpScorePlays[i]){sharpScorePlays[i].status=ssgb.dataset.st;sharpScorePlays[i].gradedAt=Date.now();ss('pm:ss-plays',sharpScorePlays);renderTracking();}}
+  const ssdb=e.target.closest('.ssdb');
+  if(ssdb){const i=parseInt(ssdb.dataset.ssi);if(!isNaN(i)){sharpScorePlays.splice(i,1);ss('pm:ss-plays',sharpScorePlays);renderTracking();}}
   // Trend card dismiss
   const td=e.target.closest('.tdismiss');
   if(td&&td.dataset.dkey){dismiss(td.dataset.dkey);return;}
