@@ -220,6 +220,7 @@ select.finput option{background:var(--s2)}
   <div class="nav-r">
     <div class="live-pill"><div class="ldot" id="ldot"></div><span id="ltxt">Live</span></div>
     <div class="cd" id="cdt">10:00</div>
+    <button class="ibtn" onclick="openSignalLab()" title="Signal Lab — see all assessed plays"><i class="ti ti-microscope"></i></button>
     <button class="ibtn" onclick="doRef()" title="Refresh"><i class="ti ti-refresh"></i></button>
     <button class="ibtn" onclick="openCfg()" title="Settings"><i class="ti ti-settings"></i></button>
   </div>
@@ -428,6 +429,22 @@ select.finput option{background:var(--s2)}
 </div>
 
 <!-- MODALS -->
+<!-- SIGNAL LAB OVERLAY -->
+<div class="overlay" id="lab-ov" style="align-items:flex-start;padding:0;overflow-y:auto">
+  <div style="background:var(--s1);width:100%;max-width:900px;margin:auto;border-radius:0 0 var(--rxl) var(--rxl);box-shadow:0 24px 64px rgba(0,0,0,.7);min-height:100vh">
+    <div style="position:sticky;top:0;background:var(--s1);border-bottom:1px solid var(--b1);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;z-index:10">
+      <div>
+        <div style="font-size:18px;font-weight:800;color:var(--t1)">&#x1F52C; Signal Lab</div>
+        <div style="font-size:11px;color:var(--t3);margin-top:2px">Every play assessed &middot; component scores &middot; qualification breakdown</div>
+      </div>
+      <button class="mx" onclick="closeSignalLab()" style="width:34px;height:34px">&times;</button>
+    </div>
+    <div style="padding:20px 24px" id="lab-body">
+      <div style="color:var(--t4);text-align:center;padding:40px">Loading signal assessment&hellip;</div>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="tm-ov">
   <div class="modal">
     <div class="mhdr"><span class="mttl" id="tm-ttl">Log a Pick</span><button class="mx" onclick="closeTM()">&times;</button></div>
@@ -1005,6 +1022,294 @@ function followAlert(b){if(!b)return;openTM({market:b.title||'',odds:'',book:'No
 function openAT(){el('at-w').value='';el('at-n').value='';el('at-msg').textContent='';el('at-ov').classList.add('open');}
 function closeAT(){el('at-ov').classList.remove('open');}
 function saveTrader(){const w=el('at-w').value.trim();if(!w||!w.startsWith('0x')){el('at-msg').style.color='var(--red)';el('at-msg').textContent='Enter wallet starting with 0x';return;}if(wallets.find(t=>t.wallet===w)){el('at-msg').style.color='var(--gold)';el('at-msg').textContent='Already watching';return;}wallets.push({wallet:w,name:el('at-n').value.trim()||null,addedAt:Date.now()});ss('pm:traders',wallets);closeAT();renderWallets();}
+
+/* === SIGNAL LAB — Full transparency on every assessed play === */
+function openSignalLab(){
+  el('lab-ov').classList.add('open');
+  renderSignalLab();
+}
+function closeSignalLab(){el('lab-ov').classList.remove('open');}
+
+function scoreBar(score, max100, color){
+  const pct = Math.min(Math.round((score/Math.max(max100,1))*100),100);
+  const w = Math.round(score/100*100);
+  return '<div style="display:flex;align-items:center;gap:8px">'
+    +'<div style="flex:1;background:rgba(255,255,255,.06);border-radius:100px;height:6px;overflow:hidden">'
+    +'<div style="width:'+w+'%;height:100%;background:'+color+';border-radius:100px;transition:width .3s"></div></div>'
+    +'<span style="font-size:11px;font-family:var(--mono);font-weight:700;color:'+color+';width:28px;text-align:right">'+score+'</span>'
+    +'</div>';
+}
+
+function qualBadge(score, threshold, label){
+  const ok = score >= threshold;
+  return '<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:'
+    +(ok?'rgba(0,200,150,.12)':'rgba(255,255,255,.05)')+';color:'
+    +(ok?'var(--green)':'var(--t4)')+'">'
+    +(ok?'&#x2713; ':'')+(label||score)+'</span>';
+}
+
+function renderSignalLab(){
+  const body = el('lab-body');
+  if(!body) return;
+
+  // Gather ALL data sources
+  const now = Date.now();
+  const cutoff = now - 24*3600000;
+  const recentAlerts = alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>cutoff);
+  const trends = buildTrending();
+
+  let html2 = '';
+
+  /* ─── SECTION 1: SHARP LINE SIGNAL (from Sharp.idx) ─── */
+  html2 += '<div style="margin-bottom:28px">';
+  html2 += '<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:4px">&#x1F4CA; Sharp Line Signal Assessment</div>';
+  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">Every game from Sharp.idx /api/odds &middot; Threshold: SI Score &ge;65 to qualify</div>';
+  html2 += '<div style="font-size:10px;font-family:var(--mono);color:var(--t4);margin-bottom:10px">Weights: Pinnacle 52% &bull; Money 38% &bull; RLM 10%'+(sharpLines.length?' &middot; '+sharpLines.length+' games loaded':' &middot; No data — Sharp.idx may not be returning data')+'</div>';
+
+  if(!sharpLines.length){
+    html2 += '<div style="background:rgba(255,61,90,.08);border:1px solid rgba(255,61,90,.15);border-radius:var(--r);padding:14px;font-size:12px;color:var(--red)">&#x26A0; No Sharp.idx data loaded. Hit Refresh to retry, or check that /api/odds is returning games.</div>';
+  } else {
+    // Sort: qualifying first, then by siScore desc
+    const sorted = [...sharpLines].sort((a,b)=>{
+      const aq=parseInt(a.siScore||0)>=65, bq=parseInt(b.siScore||0)>=65;
+      if(aq&&!bq)return -1; if(!aq&&bq)return 1;
+      return parseInt(b.siScore||0)-parseInt(a.siScore||0);
+    });
+
+    sorted.forEach(g=>{
+      const si = parseInt(g.siScore||0);
+      const pin = g.pillars?g.pillars.pinnacle:0;
+      const rlm = g.pillars?g.pillars.rlm:0;
+      const mon = g.pillars?g.pillars.money:0;
+      const rlmReal = g.pillars&&g.pillars.rlmIsReal;
+      const qualifies = si>=65 && !g.noSignal;
+      const nearMiss = si>=45 && si<65 && !g.noSignal;
+      const noSig = g.noSignal || si===0;
+
+      // Find Poly match
+      const polyMatch = matchLineToAlert(g, recentAlerts);
+      const polyScore = polyMatch ? signalScore({buys:[polyMatch],totalVol:polyMatch.usdValue}).score : 0;
+      const combined = polyMatch ? calcSharpScore(si, polyScore) : 0;
+
+      const borderColor = qualifies?'rgba(0,200,150,.25)':nearMiss?'rgba(229,160,13,.2)':'rgba(255,255,255,.06)';
+      const bgColor = qualifies?'rgba(0,200,150,.04)':nearMiss?'rgba(229,160,13,.03)':'transparent';
+      const sport = detectSportFromTeams(g.away,g.home);
+      const gt = g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+
+      html2 += '<div style="background:var(--s2);border:1px solid '+borderColor+';border-radius:var(--rl2);padding:14px 16px;margin-bottom:10px;background:'+bgColor+'">';
+
+      // Header row
+      html2 += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
+      html2 += '<div>';
+      html2 += '<div style="font-size:13px;font-weight:700;color:var(--t1)">'+(g.away||'?')+' vs '+(g.home||'?')+'</div>';
+      html2 += '<div style="font-size:11px;color:var(--t3);margin-top:2px">'
+        +(g.sharpSide&&g.sharpSide!=='—'?'Sharp side: <strong style="color:var(--green)">'+g.sharpSide+'</strong>':'<span style="color:var(--t4)">No sharp side identified</span>')
+        +(sport?' &middot; <span style="color:var(--blue)">'+sport+'</span>':'')
+        +(gt?' &middot; &#x23F0; '+gt:'')
+        +'</div>';
+      html2 += '</div>';
+      html2 += '<div style="text-align:right">';
+      html2 += '<div style="font-size:28px;font-weight:900;font-family:var(--mono);color:'+(qualifies?'var(--green)':nearMiss?'var(--gold)':'var(--t4)')+'">'+si+'</div>';
+      html2 += '<div style="font-size:9px;color:var(--t4);font-family:var(--mono)">SI SCORE</div>';
+      html2 += '</div>';
+      html2 += '</div>';
+
+      if(!noSig){
+        // Component bars
+        html2 += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">';
+
+        html2 += '<div>';
+        html2 += '<div style="font-size:9px;font-weight:700;color:var(--blue);text-transform:uppercase;margin-bottom:4px">Pinnacle Gap</div>';
+        html2 += scoreBar(pin, 100, 'var(--blue)');
+        html2 += '<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">+'+parseFloat(g.gapPP||0).toFixed(2)+'pp vs soft avg</div>';
+        html2 += '</div>';
+
+        html2 += '<div>';
+        html2 += '<div style="font-size:9px;font-weight:700;color:var(--purple);text-transform:uppercase;margin-bottom:4px">Money / Exchange</div>';
+        html2 += scoreBar(mon, 100, 'var(--purple)');
+        html2 += '<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">'+(g.exConfirms>0?g.exConfirms+' exchange confirm':'no exchange confirm')+'</div>';
+        html2 += '</div>';
+
+        html2 += '<div>';
+        html2 += '<div style="font-size:9px;font-weight:700;color:'+(rlmReal?'var(--gold)':'var(--t4)')+';text-transform:uppercase;margin-bottom:4px">RLM'+(rlmReal?' &#x2713;':' *inferred')+'</div>';
+        html2 += scoreBar(rlm, 100, rlmReal?'var(--gold)':'rgba(255,255,255,.15)');
+        html2 += '<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">'+(rlmReal?'Real ticket data (AN)':'Estimated — no ticket data')+'</div>';
+        html2 += '</div>';
+        html2 += '</div>';
+
+        // Signal type + qualification
+        html2 += '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">';
+        html2 += '<span style="font-size:10px;font-family:var(--mono);padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.05);color:var(--t3)">'+(g.signalType||'NONE')+'</span>';
+        if(qualifies) html2 += '<span style="font-size:10px;font-weight:800;color:var(--green)">&#x2713; QUALIFIES ('+si+' &ge;65)</span>';
+        else if(nearMiss){
+          const gap = 65-si;
+          html2 += '<span style="font-size:10px;font-weight:700;color:var(--gold)">NEAR MISS — '+gap+' pts below threshold</span>';
+          // What would push it over
+          if(pin<60) html2 += '<span style="font-size:10px;color:var(--t4)">Needs stronger Pinnacle gap</span>';
+          if(!polyMatch) html2 += '<span style="font-size:10px;color:var(--t4)">+ Poly confirm would add '+(Math.round(calcSharpScore(si,50)-si))+' pts combined</span>';
+        } else {
+          html2 += '<span style="font-size:10px;color:var(--t4)">Below threshold ('+si+' &lt;65)</span>';
+        }
+        if(polyMatch){
+          html2 += '<span style="font-size:10px;font-weight:700;color:var(--gold)">&#x26A1; POLY MATCH: '+(polyMatch.traderName||'')+'bought '+polyMatch.outcome+' @ '+fu(polyMatch.usdValue)+' &rarr; Combined: '+combined+'</span>';
+        }
+        html2 += '</div>';
+      } else {
+        html2 += '<div style="font-size:11px;color:var(--t4)">No signal — Pinnacle price unavailable or gap below floor</div>';
+      }
+
+      html2 += '</div>'; // end card
+    });
+  }
+  html2 += '</div>'; // end section 1
+
+  /* ─── SECTION 2: POLYMARKET SIGNAL ASSESSMENT ─── */
+  html2 += '<div style="height:1px;background:var(--b1);margin-bottom:24px"></div>';
+  html2 += '<div style="margin-bottom:28px">';
+  html2 += '<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:4px">&#x26A1; Polymarket Signal Assessment</div>';
+  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">All convergence groups in last 24h &middot; Threshold: Score &ge;65 (with rank) or &ge;75 (without) to qualify</div>';
+
+  if(!trends.length && !recentAlerts.length){
+    html2 += '<div style="background:rgba(255,255,255,.04);border:1px solid var(--b1);border-radius:var(--r);padding:14px;font-size:12px;color:var(--t4)">No Polymarket alerts in last 24h.</div>';
+  }
+
+  // Show ALL groups including below-threshold
+  const cutoffExt = now - 24*3600000;
+  const allGroups = {};
+  recentAlerts.forEach(a=>{
+    const ts=a.loggedAt||(a.timestamp*1000);
+    if(ts<cutoffExt)return;
+    const key=(a.title||'')+'||'+(a.outcome||'');
+    if(!key||key==='||')return;
+    if(!allGroups[key])allGroups[key]={title:a.title,outcome:a.outcome,eventSlug:a.eventSlug,buys:[],totalVol:0,latestTs:0};
+    allGroups[key].buys.push(a);
+    allGroups[key].totalVol+=(a.usdValue||0);
+    if(ts>allGroups[key].latestTs)allGroups[key].latestTs=ts;
+  });
+
+  const allGroupArr = Object.values(allGroups).sort((a,b)=>{
+    const sa=signalScore(a).score, sb=signalScore(b).score;
+    return sb-sa;
+  });
+
+  if(!allGroupArr.length){
+    html2 += '<div style="background:rgba(255,255,255,.04);border:1px solid var(--b1);border-radius:var(--r);padding:14px;font-size:12px;color:var(--t4)">No grouped alerts yet.</div>';
+  }
+
+  allGroupArr.forEach(g=>{
+    const{score,bestRank}=signalScore(g);
+    const threshold=bestRank<999?65:75;
+    const qualifies=score>=threshold&&!isLosingTrader(g.buys[0]&&g.buys[0].wallet);
+    const nearMiss=score>=40&&score<threshold;
+    const sport=detectSport(g.title)||'';
+    const traders=[...new Set(g.buys.map(b=>b.traderName||'Anon'))];
+    const topCats=g.buys.flatMap(b=>b.categories||[]).sort((a,b)=>a.rank-b.rank).slice(0,2);
+
+    const borderColor=qualifies?'rgba(0,200,150,.25)':nearMiss?'rgba(229,160,13,.2)':'rgba(255,255,255,.06)';
+
+    html2 += '<div style="background:var(--s2);border:1px solid '+borderColor+';border-radius:var(--rl2);padding:13px 15px;margin-bottom:9px">';
+    html2 += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">';
+    html2 += '<div style="flex:1;min-width:0">';
+    html2 += '<div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px">'+g.title+'</div>';
+    html2 += '<div style="font-size:11px;color:var(--t3)">Buying <strong style="color:var(--t1)">'+g.outcome+'</strong>'+(sport?' &middot; <span style="color:var(--blue)">'+sport+'</span>':'')+'</div>';
+    html2 += '</div>';
+    html2 += '<div style="text-align:right;flex-shrink:0;margin-left:12px">';
+    html2 += '<div style="font-size:24px;font-weight:900;font-family:var(--mono);color:'+(qualifies?'var(--green)':nearMiss?'var(--gold)':'var(--t4)')+'">'+score+'</div>';
+    html2 += '<div style="font-size:9px;color:var(--t4);font-family:var(--mono)">/ 100</div>';
+    html2 += '</div>';
+    html2 += '</div>';
+
+    // Score breakdown
+    html2 += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px">';
+    const buyers=g.buys.length;
+    const buyerScore=buyers<=1?0:Math.min(10+(buyers-2)*12,60);
+    const volScore=Math.min(Math.max(0,Math.log10(Math.max(g.totalVol,1000)/1000)*20),40);
+    const rankMult=bestRank<=5?1.6:bestRank<=15?1.4:bestRank<=30?1.2:bestRank<=75?1.0:0.85;
+
+    html2 += '<div><div style="font-size:9px;font-weight:700;color:var(--gold);text-transform:uppercase;margin-bottom:3px">Buyer Score</div>';
+    html2 += scoreBar(Math.round(buyerScore),60,'var(--gold)');
+    html2 += '<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:2px">'+buyers+' buyer'+(buyers>1?'s':'')+' &middot; '+fu(g.totalVol)+'</div></div>';
+
+    html2 += '<div><div style="font-size:9px;font-weight:700;color:var(--purple);text-transform:uppercase;margin-bottom:3px">Volume Score</div>';
+    html2 += scoreBar(Math.round(volScore),40,'var(--purple)');
+    html2 += '<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:2px">'+fu(g.totalVol)+' total</div></div>';
+
+    html2 += '<div><div style="font-size:9px;font-weight:700;color:var(--blue);text-transform:uppercase;margin-bottom:3px">Rank Mult</div>';
+    html2 += '<div style="font-size:18px;font-weight:900;font-family:var(--mono);color:var(--blue)">&#xd7;'+rankMult.toFixed(1)+'</div>';
+    html2 += '<div style="font-size:10px;color:var(--t4);font-family:var(--mono)">Best rank: '+(bestRank<999?'#'+bestRank:'unknown')+'</div></div>';
+    html2 += '</div>';
+
+    // Traders
+    html2 += '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px">';
+    traders.forEach(function(n){
+      html2 += '<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:var(--t3);font-family:var(--mono)">'+n+'</span>';
+    });
+    html2 += '</div>';
+
+    // Qualification verdict
+    html2 += '<div style="font-size:11px;'+(qualifies?'color:var(--green)':nearMiss?'color:var(--gold)':'color:var(--t4)')+'">';
+    if(qualifies){
+      html2 += '&#x2713; QUALIFIES &mdash; appears in Polymarket Signal';
+    } else if(nearMiss){
+      const gap=threshold-score;
+      html2 += '&#x26A0; NEAR MISS &mdash; '+gap+' pts below threshold ('+threshold+' needed'+(bestRank<999?' for rank #'+bestRank:' — no rank data')+')';
+      if(buyers===1) html2 += ' &bull; 1 more buyer would add 12pts';
+      if(g.totalVol<5000) html2 += ' &bull; More volume needed';
+      if(bestRank>=75) html2 += ' &bull; Higher-ranked buyer would boost multiplier';
+    } else {
+      html2 += 'Below threshold &mdash; score '+score+' &lt; '+threshold;
+      if(isLosingTrader(g.buys[0]&&g.buys[0].wallet)) html2 += ' (losing trader filtered)';
+    }
+    html2 += '</div>';
+    html2 += '</div>';
+  });
+
+  html2 += '</div>'; // end section 2
+
+  /* ─── SECTION 3: COMBINED SHARP SCORE POTENTIAL ─── */
+  html2 += '<div style="height:1px;background:var(--b1);margin-bottom:24px"></div>';
+  html2 += '<div style="margin-bottom:24px">';
+  html2 += '<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:4px">&#x1F3AF; Combined Sharp Score Status</div>';
+  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">Games where Sharp Line Signal + Polymarket Signal can be combined &middot; Formula: Line &times;60% + Poly &times;40%</div>';
+
+  let foundCombined=false;
+  sharpLines.filter(g=>!g.noSignal&&parseInt(g.siScore||0)>0).forEach(g=>{
+    const match=matchLineToAlert(g,recentAlerts);
+    const si=parseInt(g.siScore||0);
+    const polyScore=match?signalScore({buys:[match],totalVol:match.usdValue}).score:0;
+    const combined=match?calcSharpScore(si,polyScore):0;
+    if(si===0&&!match)return;
+    foundCombined=true;
+    const wouldCombine=match&&combined>=60;
+    html2 += '<div style="background:var(--s2);border:1px solid '+(wouldCombine?'rgba(229,160,13,.3)':'rgba(255,255,255,.06)')+';border-radius:var(--rl2);padding:12px 15px;margin-bottom:9px">';
+    html2 += '<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
+    html2 += '<div style="font-size:12px;font-weight:700;color:var(--t1)">'+(g.away||'')+(g.home?' vs '+g.home:'')+'</div>';
+    if(wouldCombine) html2 += '<span style="font-size:11px;font-weight:800;color:var(--gold)">&#x1F3AF; COMBINED: '+combined+'</span>';
+    html2 += '</div>';
+    html2 += '<div style="display:flex;gap:20px">';
+    html2 += '<div style="font-size:11px;color:var(--t3)">Line SI: <span style="color:var(--blue);font-weight:700">'+si+'</span></div>';
+    html2 += '<div style="font-size:11px;color:var(--t3)">Poly: <span style="color:var(--gold);font-weight:700">'+(polyScore>0?polyScore:'no match')+'</span></div>';
+    if(match) html2 += '<div style="font-size:11px;color:var(--t3)">Combined: <span style="color:'+(combined>=70?'var(--green)':combined>=60?'var(--gold)':'var(--t4)')+';font-weight:700">'+combined+'</span></div>';
+    html2 += '</div>';
+    if(!match) html2 += '<div style="font-size:10px;color:var(--t4);margin-top:4px">No Polymarket alert found for this game — cannot combine</div>';
+    html2 += '</div>';
+  });
+
+  if(!foundCombined){
+    html2 += '<div style="background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:var(--r);padding:14px;font-size:12px;color:var(--t4)">No overlapping plays found. This requires games to appear in both Sharp.idx AND Polymarket alerts simultaneously.</div>';
+  }
+  html2 += '</div>';
+
+  // Footer
+  html2 += '<div style="border-top:1px solid var(--b1);padding-top:16px;font-size:11px;color:var(--t4);line-height:1.7">';
+  html2 += '<strong style="color:var(--t3)">Threshold guide:</strong> Sharp Line qualifies at SI &ge;65 &bull; Poly Signal qualifies at score &ge;65 (ranked) / &ge;75 (unranked) &bull; Combined Sharp Score requires both &ge;50 SI + poly match with combined &ge;60<br>';
+  html2 += '<strong style="color:var(--t3)">RLM note:</strong> * = Inferred (no Action Network match). Real RLM shows when AN returns ticket % for that game.<br>';
+  html2 += '<strong style="color:var(--t3)">Last refreshed:</strong> '+new Date().toLocaleTimeString();
+  html2 += '</div>';
+
+  body.innerHTML = html2;
+}
+
 function openCfg(){el('cfg-tp').value=ls('pm:ntfy-topic','')||'';const t=ls('pm:ntfy-thresh','749')||'749';el('cfg-th').value=t;el('cfg-tv').textContent='$'+parseInt(t).toLocaleString();el('cfg-cat').value=ls('pm:ntfy-cat','all')||'all';el('cfg-msg').textContent='';el('cfg-ov').classList.add('open');}
 function closeCfg(){el('cfg-ov').classList.remove('open');}
 function saveCfg(){ss('pm:ntfy-topic',el('cfg-tp').value.trim());ss('pm:ntfy-thresh',el('cfg-th').value);ss('pm:ntfy-cat',el('cfg-cat').value);el('cfg-msg').style.color='var(--green)';el('cfg-msg').textContent='\u2713 Saved';setTimeout(closeCfg,800);}
@@ -1051,7 +1356,7 @@ document.addEventListener('click',e=>{
   const lwb=e.target.closest('.lb-add:not(.w)');
   if(lwb&&lwb.dataset.ww){const ww=lwb.dataset.ww,wn=lwb.dataset.wn||null;if(!wallets.find(w=>w.wallet===ww)){wallets.push({wallet:ww,name:wn,addedAt:Date.now()});ss('pm:traders',wallets);renderLB();}}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeTM();closeAT();closeCfg();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeTM();closeAT();closeCfg();closeSignalLab();}});
 
 /* === COUNTDOWN === */
 function startCd(){
