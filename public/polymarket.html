@@ -486,15 +486,23 @@ async function fetchTraderStats(wallet){
   try{
     const r=await fetch("https://data-api.polymarket.com/closed-positions?user="+wallet+"&limit=500");
     const pos=await r.json();
-    if(!Array.isArray(pos)||!pos.length){_sc[wallet]={pnl:0,trades:0,sp:{}};return _sc[wallet];}
-    let pnl=0;const sp={};
+    if(!Array.isArray(pos)||!pos.length){_sc[wallet]={pnl:0,trades:0,wins:0,losses:0,sp:{},spW:{},spL:{}};return _sc[wallet];}
+    let pnl=0,wins=0,losses=0;
+    const sp={},spW={},spL={};
     pos.forEach(function(p){
-      const v=parseFloat(p.cashPnl||p.pnl||0);pnl+=v;
+      const v=parseFloat(p.cashPnl||p.pnl||0);
+      pnl+=v;
+      if(v>0)wins++;else if(v<0)losses++;
       const s=detectSport(p.title||p.question||"");
-      if(s)sp[s]=(sp[s]||0)+v;
+      if(s){
+        sp[s]=(sp[s]||0)+v;
+        if(v>0)spW[s]=(spW[s]||0)+1;
+        else if(v<0)spL[s]=(spL[s]||0)+1;
+      }
     });
-    _sc[wallet]={pnl,trades:pos.length,sp};return _sc[wallet];
-  }catch(e){_sc[wallet]={pnl:null,trades:0,sp:{}};return _sc[wallet];}
+    _sc[wallet]={pnl,trades:pos.length,wins,losses,sp,spW,spL};
+    return _sc[wallet];
+  }catch(e){_sc[wallet]={pnl:null,trades:0,wins:0,losses:0,sp:{},spW:{},spL:{}};return _sc[wallet];}
 }
 
 // Get trader's top sports from current buy feed
@@ -511,24 +519,30 @@ function getTraderSports(wallet) {
 }
 
 // Build stat block HTML
+function winPct(w,l){var t=w+l;return t===0?null:Math.round(w/t*100);}
 function buildSB(oe,se,fetched,sport){
-  var rows=[];
-  var G="#00C896",R="#FF3D5A";
-  function row(lbl,val,forceShow){
-    if(!forceShow&&(val===0||val===null||val===undefined))return null;
-    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)">'+lbl+'</span><span style="font-size:12px;font-family:var(--mono);font-weight:800;color:'+(val>=0?G:R)+'">'+fp(val)+'</span></div>';
+  var rows=[],G="#00C896",R="#FF3D5A",T="rgba(245,246,250,.42)";
+  function pnlRow(lbl,val){
+    if(!val||val===0)return null;
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:10px;color:'+T+';font-family:var(--mono)">'+lbl+'</span><span style="font-size:11px;font-family:var(--mono);font-weight:800;color:'+(val>=0?G:R)+'">'+fp(val)+'</span></div>';
   }
-  function sportTag(s){
-    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0"><span style="font-size:10px;color:rgba(245,246,250,.42);font-family:var(--mono)">Market</span><span style="font-size:10px;font-family:var(--mono);font-weight:700;padding:2px 8px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:4px">'+s+'</span></div>';
+  function recRow(lbl,w,l){
+    var tot=w+l;if(!tot)return null;
+    var p=Math.round(w/tot*100);var c=p>=55?G:p>=50?"#E5A00D":R;
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:10px;color:'+T+';font-family:var(--mono)">'+lbl+'</span><span style="font-size:11px;font-family:var(--mono);font-weight:800;color:'+c+'">'+p+'% ('+w+'W-'+l+'L)</span></div>';
   }
-  // All-time PnL — leaderboard takes priority, only show fetched if non-zero
-  if(oe&&oe.pnl!=null)rows.push(row("All-Time PnL · #"+oe.rank,oe.pnl,true));
-  else if(fetched&&fetched.pnl!=null&&fetched.pnl!==0)rows.push(row("All-Time PnL",fetched.pnl,true));
-  // Sports PnL from leaderboard
-  if(se&&se.pnl!=null)rows.push(row("Sports PnL · #"+se.rank,se.pnl,true));
-  // Sport-specific PnL — only show if non-zero
-  if(sport&&fetched&&fetched.sp&&fetched.sp[sport]&&fetched.sp[sport]!==0)rows.push(row(sport+" PnL",fetched.sp[sport],true));
-  // Always show sport tag when we know the sport
+  function sportTag(s){return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="font-size:10px;color:'+T+';font-family:var(--mono)">Market</span><span style="font-size:10px;font-family:var(--mono);font-weight:700;padding:2px 8px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:4px">'+s+'</span></div>';}
+  if(oe&&oe.pnl)rows.push(pnlRow("All-Time PnL · #"+oe.rank,oe.pnl));
+  else if(fetched&&fetched.pnl&&fetched.pnl!==0)rows.push(pnlRow("All-Time PnL",fetched.pnl));
+  if(fetched&&(fetched.wins||fetched.losses))rows.push(recRow("All-Time Record",fetched.wins||0,fetched.losses||0));
+  if(se&&se.pnl)rows.push(pnlRow("Sports PnL · #"+se.rank,se.pnl));
+  if(sport&&fetched){
+    var spPnl=fetched.sp?fetched.sp[sport]:null;
+    var spW=fetched.spW?fetched.spW[sport]||0:0;
+    var spL=fetched.spL?fetched.spL[sport]||0:0;
+    if(spPnl)rows.push(pnlRow(sport+" PnL",spPnl));
+    if(spW||spL)rows.push(recRow(sport+" Record",spW,spL));
+  }
   if(sport)rows.push(sportTag(sport));
   var valid=rows.filter(Boolean);
   return valid.length?'<div style="background:var(--s2);border-radius:8px;padding:8px 11px;margin:8px 0">'+valid.join("")+'</div>':"";
@@ -548,8 +562,14 @@ async function enrichCards(){
       fetchTraderStats(w).then(function(f){
         const e=card.querySelector(".sb");
         if(!e)return;
+        // Dim losing traders, skip their stats
+        if(f&&f.pnl!==null&&f.pnl<0){
+          e.innerHTML='<div style="font-size:10px;color:#FF3D5A;text-align:center;padding:4px;font-family:var(--mono)">&#x26A0; Losing trader</div>';
+          var c2=e.closest("[data-wallet]");if(c2)c2.style.opacity="0.4";
+          return;
+        }
         const b=buildSB(null,null,f,sp);
-        e.innerHTML=b||'<div style="font-size:10px;color:rgba(245,246,250,.25);text-align:center;padding:4px;font-family:var(--mono)">No history available</div>';
+        e.innerHTML=b||'<div style="font-size:10px;color:rgba(245,246,250,.25);text-align:center;padding:4px;font-family:var(--mono)">No history</div>';
       });
     }
   }
@@ -900,7 +920,9 @@ function buildSportLB(sportKey) {
 function renderLB(){
   // Sport-specific tabs use trade data
   const sportTabs = {mlb:1,nba:1,nfl:1,nhl:1};
-  const list = sportTabs[lbTab] ? buildSportLB(lbTab) : (lbData[lbTab]||[]);
+  // Filter to positive PnL winners only
+  const rawList = sportTabs[lbTab] ? buildSportLB(lbTab) : (lbData[lbTab]||[]);
+  const list = rawList.filter(function(t){return t.pnl>0;});
   const isSportTab = !!sportTabs[lbTab];
   if(!list.length){el("lb-list").innerHTML='<div class="empty"><div class="empty-ico">&#x1F3C6;</div><h3>'+(isSportTab?'No '+lbTab.toUpperCase()+' trades in current data':'Loading&#x2026;')+'</h3><p>'+(isSportTab?'Trades populate as alerts fire':'')+'</p></div>';return;}
   el("lb-list").innerHTML=list.map(function(t){
