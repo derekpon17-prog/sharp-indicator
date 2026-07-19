@@ -54,31 +54,41 @@ async function fetchTopHolders(conditionId, threshold = 500) {
   } catch { return []; }
 }
 
-const SPORT_KEYWORDS = [
-  'nba','wnba','mlb','nfl','nhl','mls','ufc','pga',
-  'basketball','baseball','football','hockey','soccer',
-  'tennis','golf','boxing','mma',
-  // Tennis specifics
-  'wimbledon','us open','french open','australian open','atp','wta','grand slam',
-  'vs','game winner','set winner','match winner',
-  // Soccer specifics
-  'premier league','la liga','serie a','bundesliga','champions league',
-  'copa','eredivisie','ligue 1','mls cup','fifa',
-  'ncaa','college football','college basketball','march madness','cfp',
-  'nba finals','world series','super bowl','stanley cup',
-  'championship','playoffs','world cup','draft',
-  'yankees','red sox','dodgers','cubs','mets','astros',
-  'braves','phillies','padres','giants','cardinals','brewers',
-  'guardians','royals','twins','orioles','rays','blue jays',
-  'mariners','rangers','angels','athletics','tigers','white sox',
-  'reds','pirates','rockies','marlins','nationals','diamondbacks',
-  'run scored','first inning','innings','pitcher','batting',
-];
+// ── APPROVED SPORTS WHITELIST (matches site's detectSport) ──
+const MLB_TEAMS_N=['yankees','red sox','dodgers','cubs','mets','astros','braves','phillies','padres','giants','cardinals','brewers','guardians','royals','twins','orioles','rays','blue jays','mariners','rangers','angels','athletics','tigers','white sox','reds','pirates','rockies','marlins','nationals','diamondbacks'];
+
+const BLOCKED_NOTIFY=['dota','valorant','cs2','counter-strike','league of legends','lol:','esports','starcraft','overwatch','fortnite','pubg','apex legends','rainbow six','rocket league','bitcoin','ethereum','crypto','trump','biden','president','prime minister','politics','election','stock market','s&p','nasdaq','inflation','fed rate','premier league','la liga','serie a','bundesliga','champions league','eredivisie','ligue 1','ufc','boxing','mma','wnba','nrl','afl','rugby','cricket'];
 
 function isSportsMarket(title) {
   if (!title) return false;
   const t = title.toLowerCase();
-  return SPORT_KEYWORDS.some(k => t.includes(k));
+
+  // Hard block first
+  if (BLOCKED_NOTIFY.some(k => t.includes(k))) return false;
+
+  // MLB / World Baseball Classic
+  if (t.includes('mlb') || t.includes('world baseball classic') || t.includes('wbc') || MLB_TEAMS_N.some(x => t.includes(x))) return true;
+  // NBA
+  if (t.includes('nba') || t.includes('nba finals')) return true;
+  // NFL
+  if (t.includes('nfl') || t.includes('super bowl') || t.includes('afc championship') || t.includes('nfc championship')) return true;
+  // NHL
+  if (t.includes('nhl') || t.includes('stanley cup')) return true;
+  // College Football
+  if (t.includes('ncaaf') || t.includes('college football playoff') || t.includes('cfp') || t.includes('rose bowl') || t.includes('sugar bowl') || t.includes('orange bowl') || t.includes('cotton bowl') || t.includes('fiesta bowl')) return true;
+  // College Basketball
+  if (t.includes('ncaab') || t.includes('march madness') || t.includes('ncaa tournament') || t.includes('ncaa basketball') || t.includes('final four')) return true;
+  // PGA Golf
+  if (t.includes('pga') || t.includes('masters ') || t.includes('ryder cup') || t.includes('the open championship') || t.includes('us open golf') || t.includes('pga championship') || t.includes('liv golf')) return true;
+  // FIFA World Cup only (not club leagues)
+  if (t.includes('fifa world cup') || t.includes('world cup winner') || t.includes('gold cup') || t.includes('copa america') || t.includes('concacaf')) return true;
+  // Olympics
+  if (t.includes('olympic') || t.includes('summer games') || t.includes('winter games')) return true;
+  // Professional Tennis — Grand Slams + ATP/WTA only
+  if (t.includes('wimbledon') || t.includes('us open tennis') || t.includes('french open') || t.includes('australian open') || t.includes('roland garros') || (t.includes('atp ') && !t.includes('esport')) || t.includes('wta ') || t.includes('grand slam')) return true;
+
+  // Reject everything else
+  return false;
 }
 
 async function sendAlert(topic, buy) {
