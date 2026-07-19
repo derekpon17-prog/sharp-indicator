@@ -348,6 +348,7 @@ select.finput option{background:var(--s2)}
       <button class="fp" onclick="setAF('5k',this)">$5K+</button>
       <button class="fp" onclick="setAF('10k',this)">$10K+</button>
       <button class="fp" onclick="setAF('25k',this)">$25K+</button>
+      <button onclick="purgeLosers()" style="padding:6px 12px;border-radius:100px;border:1px solid rgba(255,61,90,.3);background:rgba(255,61,90,.08);color:#FF3D5A;font-size:11px;font-weight:700;cursor:pointer;margin-left:auto" title="Remove alerts from losing traders">&#x1F5D1; Purge Losers</button>
     </div>
     <div class="al-list" id="al-list"></div>
   </div>
@@ -564,8 +565,15 @@ async function enrichCards(){
         if(!e)return;
         // Dim losing traders, skip their stats
         if(f&&f.pnl!==null&&f.pnl<0){
-          e.innerHTML='<div style="font-size:10px;color:#FF3D5A;text-align:center;padding:4px;font-family:var(--mono)">&#x26A0; Losing trader</div>';
-          var c2=e.closest("[data-wallet]");if(c2)c2.style.opacity="0.4";
+          // Aggressively mark and dim losing traders
+          var lossStr=fp(Math.abs(f.pnl));
+          var wr=f.wins+f.losses>0?Math.round(f.wins/(f.wins+f.losses)*100):null;
+          e.innerHTML='<div style="background:rgba(255,61,90,.08);border:1px solid rgba(255,61,90,.2);border-radius:6px;padding:6px 8px;text-align:center">'
+            +'<div style="font-size:11px;font-weight:800;color:#FF3D5A;margin-bottom:2px">&#x26A0; LOSING ACCOUNT</div>'
+            +'<div style="font-size:10px;color:rgba(245,246,250,.5);font-family:var(--mono)">-'+lossStr+' all-time'+(wr!==null?' · '+wr+'% win rate':'')+'</div>'
+            +'</div>';
+          var c2=e.closest("[data-wallet]");
+          if(c2){c2.style.opacity="0.3";c2.style.filter="grayscale(0.6)";}
           return;
         }
         const b=buildSB(null,null,f,sp);
@@ -637,41 +645,37 @@ function renderHero(){
 }
 
 
-// Build converging plays from alert log
-function buildTrending() {
-  const cutoff = Date.now() - 24 * 60 * 60 * 1000; // last 24h
-  const groups = {};
+// Check if wallet is a known loser from our stat cache
+function isLosingTrader(wallet){
+  if(!wallet)return false;
+  var c=_sc[wallet];
+  return c&&c.pnl!==null&&c.pnl<0;
+}
 
-  alerts.forEach(function(a) {
-    const ts = a.loggedAt || (a.timestamp * 1000);
-    if (ts < cutoff) return;
-    const key = (a.title || '') + '||' + (a.outcome || '');
-    if (!key || key === '||') return;
-    if (!groups[key]) {
-      groups[key] = {
-        title:    a.title || 'Unknown',
-        outcome:  a.outcome || '—',
-        eventSlug: a.eventSlug,
-        buys:     [],
-        totalVol: 0,
-        latestTs: 0,
-      };
-    }
+// Build converging plays — ONLY from verified profitable traders
+function buildTrending(){
+  var cutoff=Date.now()-24*60*60*1000;
+  var groups={};
+  alerts.forEach(function(a){
+    var ts=a.loggedAt||(a.timestamp*1000);
+    if(ts<cutoff)return;
+    // Skip known losing traders
+    if(isLosingTrader(a.wallet))return;
+    // Skip if stats fetched and PnL is zero or negative (non-leaderboard loser)
+    var inLB=lbData.overall.some(function(x){return x.wallet===a.wallet;})||lbData.sports.some(function(x){return x.wallet===a.wallet;});
+    var cached=_sc[a.wallet];
+    if(!inLB&&cached!==undefined&&cached!==null&&(cached.pnl===null||cached.pnl<=0))return;
+    var key=(a.title||"")+"||"+(a.outcome||"");
+    if(!key||key==="||")return;
+    if(!groups[key]){groups[key]={title:a.title||"Unknown",outcome:a.outcome||"—",eventSlug:a.eventSlug,buys:[],totalVol:0,latestTs:0};}
     groups[key].buys.push(a);
-    groups[key].totalVol += (a.usdValue || 0);
-    if (ts > groups[key].latestTs) groups[key].latestTs = ts;
+    groups[key].totalVol+=(a.usdValue||0);
+    if(ts>groups[key].latestTs)groups[key].latestTs=ts;
   });
-
-  // Show groups with 2+ buys OR single large buy ($10K+)
   return Object.values(groups)
-    .filter(function(g) { return g.buys.length >= 2 || g.totalVol >= 1000; })
-    .sort(function(a, b) {
-      // Score = buyers² × total vol (penalise single buyer heavily)
-      const sa = a.buys.length * a.buys.length * a.totalVol;
-      const sb = b.buys.length * b.buys.length * b.totalVol;
-      return sb - sa;
-    })
-    .slice(0, 8);
+    .filter(function(g){return g.buys.length>=2||g.totalVol>=1000;})
+    .sort(function(a,b){return(b.buys.length*b.buys.length*b.totalVol)-(a.buys.length*a.buys.length*a.totalVol);})
+    .slice(0,8);
 }
 
 function sigClass(buyCount, vol) {
@@ -816,6 +820,24 @@ function posterHTML(t){
     +'<div style="margin-top:5px"><div style="font-size:9px;color:rgba(245,246,250,.35);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em">'+(isSp?"Sports":"Overall")+' PnL</div><div class="p-pnl" style="font-size:15px;margin-top:1px">'+fp(t.pnl)+'</div></div>'
     +otherRow+sportsRow
     +'</div></div>';
+}
+
+async function purgeLosers(){
+  if(!confirm("This will remove all alerts from accounts with negative all-time PnL. Continue?"))return;
+  // Fetch stats for all unique wallets in alert log, then remove losers
+  const uniqueWallets=[...new Set(alerts.map(function(a){return a.wallet;}).filter(Boolean))];
+  let purged=0;
+  for(const w of uniqueWallets){
+    const f=await fetchTraderStats(w);
+    if(f&&f.pnl!==null&&f.pnl<0){
+      const before=alerts.length;
+      alerts=alerts.filter(function(a){return a.wallet!==w;});
+      purged+=before-alerts.length;
+    }
+  }
+  ss("pm:alert-log",alerts);
+  renderAlerts();renderDash();
+  alert("Removed "+purged+" alerts from losing accounts.");
 }
 
 function setAF(f,btn){af=f;document.querySelectorAll(".fp").forEach(function(b){b.classList.remove("on");});if(btn)btn.classList.add("on");renderAlerts();}
