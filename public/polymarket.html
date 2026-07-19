@@ -230,6 +230,8 @@ select.finput option{background:var(--s2)}
   <div class="page">
     <!-- COMMAND CENTER — Today's Play Recommendations -->
     <div id="command-center" style="background:linear-gradient(140deg,#0F1624,#162040,#0D0F1A);border-radius:var(--rxl);padding:22px 26px;margin-bottom:20px;position:relative;overflow:hidden">
+      <!-- hero anchor — renderHero writes here -->
+      <div id="hero" style="display:none"></div>
       <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(229,160,13,.07),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(64,180,255,.05),transparent 50%);pointer-events:none"></div>
       <div style="position:relative">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
@@ -943,19 +945,23 @@ function renderTrending(){
 
 /* === HERO === */
 function renderHero(){
-  // "Today" = calendar midnight of current day, not rolling 24h
   const todayMidnight=new Date();todayMidnight.setHours(0,0,0,0);
   const rec=alerts.filter(a=>{
     const ts=a.loggedAt||(a.timestamp*1000);
-    if(ts<todayMidnight.getTime())return false;   // must be today
-    if(!detectSport(a.title))return false;         // approved sport only
-    if(isLosingTrader(a.wallet))return false;      // known loser — skip
-    // Hero requires verified leaderboard wallet — no unverified accounts headlining
+    if(ts<todayMidnight.getTime())return false;
+    if(!detectSport(a.title))return false;
+    if(isLosingTrader(a.wallet))return false;
     const inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
     if(!inLB)return false;
     return true;
   }).sort((a,b)=>b.usdValue-a.usdValue);
-  const t=rec[0];if(!t)return;
+  const t=rec[0];
+  // Update command center title with biggest buy context
+  const ccT=el('cc-title');
+  if(t&&ccT&&ccT.textContent.includes('Loading')){
+    // Will be overridden by renderCommandCenter — just unblock loading state
+  }
+  if(!t){return;} // no hero — command center handles empty state
   const pr=(parseFloat(t.price||0)*100).toFixed(1);
   el('hero').innerHTML='<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(229,160,13,.1),transparent 55%);pointer-events:none"></div>'
     +'<div style="position:relative"><div class="hero-badge">&#x1F525; Biggest Buy Today</div>'
@@ -981,7 +987,7 @@ function renderDash(){
   const vol=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>=midnight.getTime()).reduce((a,b)=>a+(b.usdValue||0),0);
   el('d-al').textContent=alerts.length;el('d-vo').textContent=fp(vol);
   el('d-wr').textContent=wr!==null?wr+'%':'&mdash;';el('d-wr').style.color=wr===null?'var(--t4)':wr>=55?'var(--green)':wr>=50?'var(--gold)':'var(--red)';
-  el('d-ws').textContent=W+L>0?W+'W&ndash;'+L+'L':'no trades yet';
+  el('d-ws').innerHTML=W+L>0?W+'W&ndash;'+L+'L':'no trades yet';
   el('d-pl').textContent=pnl!==0?(pnl>0?'+':'')+fu(pnl):'&mdash;';el('d-pl').style.color=pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--t4)';
   renderTrending();
   // Alert row
