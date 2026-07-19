@@ -14,7 +14,7 @@ const DATA_API   = 'https://data-api.polymarket.com';
 // In-memory set of position alerts already sent this session (resets on cold start)
 const posAlertedKeys = new Set();
 const VERCEL_URL = 'https://sharp-indicator-a34j.vercel.app';
-const LB_SIZE    = 50;
+const LB_SIZE    = 500;
 
 async function fetchLeaderboard(category) {
   try {
@@ -152,16 +152,29 @@ module.exports = async function handler(req, res) {
       fetchRecentTrades(500),
     ]);
 
-    // Build wallet map for tagging top traders
+    // Build wallet map — ONLY include profitable traders (positive PnL)
     const walletMap = {};
     overallLB.forEach(t => {
-      walletMap[t.proxyWallet] = walletMap[t.proxyWallet] || { name: t.userName || t.pseudonym, categories: [] };
-      walletMap[t.proxyWallet].categories.push({ category: 'OVERALL', rank: t.rank });
+      const pnl = parseFloat(t.pnl || 0);
+      if (pnl <= 0) return; // Skip losing/breakeven traders
+      walletMap[t.proxyWallet] = walletMap[t.proxyWallet] || {
+        name:        t.userName || t.pseudonym,
+        overallPnl:  pnl,
+        categories:  [],
+      };
+      walletMap[t.proxyWallet].categories.push({ category: 'OVERALL', rank: t.rank, pnl });
     });
     sportsLB.forEach(t => {
-      walletMap[t.proxyWallet] = walletMap[t.proxyWallet] || { name: t.userName || t.pseudonym, categories: [] };
-      walletMap[t.proxyWallet].categories.push({ category: 'SPORTS', rank: t.rank });
+      const pnl = parseFloat(t.pnl || 0);
+      if (pnl <= 0) return; // Skip losing traders
+      walletMap[t.proxyWallet] = walletMap[t.proxyWallet] || {
+        name:        t.userName || t.pseudonym,
+        overallPnl:  pnl,
+        categories:  [],
+      };
+      walletMap[t.proxyWallet].categories.push({ category: 'SPORTS', rank: t.rank, pnl });
     });
+    const profitableWallets = Object.keys(walletMap).length;
 
     // Debug: show what the trades look like
     const sampleTrade = recentTrades[0] ? {
@@ -173,8 +186,8 @@ module.exports = async function handler(req, res) {
       price: recentTrades[0].price,
     } : null;
 
-    // Filter trades
-    let failedTs = 0, failedThresh = 0, failedSports = 0;
+    // Filter trades — only alert on PROFITABLE tracked wallets
+    let failedTs = 0, failedThresh = 0, failedSports = 0, failedNotProfitable = 0;
     const failedSportsTitles = [];
     const toAlert = [];
 
@@ -185,16 +198,20 @@ module.exports = async function handler(req, res) {
 
       if (ts < winMin || ts > winMax) { failedTs++; return; }
       if (usd < threshold)            { failedThresh++; return; }
-      if (!isSportsMarket(t.title))   {
+
+      const traderInfo = wallet ? walletMap[wallet] : null;
+
+      // ONLY alert on verified profitable wallets in top 500
+      if (!traderInfo) { failedNotProfitable++; return; }
+
+      if (!isSportsMarket(t.title)) {
         failedSports++;
         if (failedSportsTitles.length < 5) failedSportsTitles.push({ title: t.title, usd: Math.round(usd) });
         return;
       }
 
-      const traderInfo = wallet ? walletMap[wallet] : null;
-
-      // Category filter (only restrict if known trader)
-      if (category !== 'ALL' && traderInfo) {
+      // Category filter
+      if (category !== 'ALL') {
         if (!traderInfo.categories.some(c => c.category === category)) return;
       }
 
@@ -293,6 +310,8 @@ module.exports = async function handler(req, res) {
         failedTs,
         failedThresh,
         failedSports,
+        failedNotProfitable,
+        profitableWallets,
         failedSportsTitles,
         ntfyResults,
         sampleTrade,
