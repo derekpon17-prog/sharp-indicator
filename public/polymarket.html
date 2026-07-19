@@ -228,39 +228,48 @@ select.finput option{background:var(--s2)}
 <!-- DASHBOARD -->
 <div id="v-dashboard" class="view on">
   <div class="page">
-    <div class="hero" id="hero">
-      <div class="hero-empty">
-        <div style="font-size:36px;margin-bottom:10px">&#x1F4B0;</div>
-        <h2>Watching Smart Money</h2>
-        <p>Tracking top profitable Polymarket traders for large sports buys. Your first alert fires automatically when a qualifying trade happens.</p>
+    <!-- COMMAND CENTER — Today's Play Recommendations -->
+    <div id="command-center" style="background:linear-gradient(140deg,#0F1624,#162040,#0D0F1A);border-radius:var(--rxl);padding:22px 26px;margin-bottom:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(229,160,13,.07),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(64,180,255,.05),transparent 50%);pointer-events:none"></div>
+      <div style="position:relative">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Sharp Score &mdash; Decision Center</div>
+            <div style="font-size:22px;font-weight:900;color:var(--t1)" id="cc-title">Loading today&rsquo;s plays&hellip;</div>
+          </div>
+          <div style="display:flex;gap:20px;text-align:center">
+            <div><div style="font-size:20px;font-weight:900;font-family:var(--mono);color:var(--t1)" id="d-al">0</div><div style="font-size:9px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.06em">Alerts</div></div>
+            <div><div style="font-size:20px;font-weight:900;font-family:var(--mono);color:var(--t1)" id="d-vo">$0</div><div style="font-size:9px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.06em">Today&rsquo;s Vol</div></div>
+            <div><div style="font-size:20px;font-weight:900;font-family:var(--mono)" id="d-wr" style="color:var(--t4)">&mdash;</div><div style="font-size:9px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.06em">Win Rate</div></div>
+          </div>
+        </div>
+        <!-- Today's ranked plays grid -->
+        <div id="play-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px"></div>
+        <div id="play-grid-empty" style="text-align:center;padding:24px 0;color:var(--t4);font-size:13px">&#x1F550; Loading signal data&hellip;</div>
       </div>
     </div>
-    <div class="strip">
-      <div class="sc gold"><div class="sc-lbl"><i class="ti ti-bell"></i>Total Alerts</div><div class="sc-val" id="d-al">0</div><div class="sc-sub">all time</div></div>
-      <div class="sc blue"><div class="sc-lbl"><i class="ti ti-currency-dollar"></i>Volume Tracked</div><div class="sc-val" id="d-vo">$0</div><div class="sc-sub">in logged alerts</div></div>
-      <div class="sc green"><div class="sc-lbl"><i class="ti ti-target"></i>Win Rate</div><div class="sc-val" id="d-wr" style="color:var(--t4)">&mdash;</div><div class="sc-sub" id="d-ws">0W&ndash;0L</div></div>
-      <div class="sc purple"><div class="sc-lbl"><i class="ti ti-coin"></i>P&amp;L</div><div class="sc-val" id="d-pl" style="color:var(--t4)">$0</div><div class="sc-sub">USDC est.</div></div>
+    <!-- Compact stat strip -->
+    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
+      <div class="sc gold" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-chart-bar"></i>Line Plays</div><div id="cc-line-cnt" style="font-size:20px;font-weight:900;font-family:var(--mono)">0</div></div>
+      <div class="sc blue" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-bolt"></i>Poly Plays</div><div id="cc-poly-cnt" style="font-size:20px;font-weight:900;font-family:var(--mono)">0</div></div>
+      <div class="sc green" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-target"></i>Sharp Score</div><div id="cc-ss-cnt" style="font-size:20px;font-weight:900;font-family:var(--mono)">0</div></div>
+      <div class="sc purple" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-coin"></i>P&amp;L Est.</div><div id="d-pl" style="font-size:20px;font-weight:900;font-family:var(--mono);color:var(--t4)">$0</div></div>
+      <div class="sc" style="flex:1;min-width:100px;padding:12px 14px;border-top-color:var(--red)"><div class="sc-lbl"><i class="ti ti-bell"></i>Alerts</div><div style="font-size:20px;font-weight:900;font-family:var(--mono)" id="d-ws">0&ndash;0</div></div>
     </div>
-    <!-- Sharp Score (combined — only shows when both signals agree) -->
+    <!-- 1. Final Sharp Score (combined — only shows when both signals agree) -->
     <div class="row-s" id="sharp-score-row" style="display:none">
       <div class="row-hdr">
-        <div class="row-ttl"><em>&#x1F3AF;</em>Sharp Score <span style="font-size:11px;background:linear-gradient(90deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-left:6px">Line + Poly Combined</span></div>
-        <div style="font-size:11px;color:var(--t3)">Both signals pointing same direction</div>
+        <div class="row-ttl"><em>&#x1F3AF;</em>Final Sharp Score
+          <span style="font-size:11px;font-weight:700;margin-left:8px;padding:2px 8px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.15),rgba(229,160,13,.15));color:var(--t2)">Line + Poly Combined</span>
+        </div>
+        <div style="font-size:11px;color:var(--t3)">Both signals agree &middot; highest conviction</div>
       </div>
       <div class="hscr" id="sharp-score-cont"></div>
+      <!-- If no scroll cards, show stacked play cards like tracking -->
+      <div id="sharp-score-list" style="display:flex;flex-direction:column;gap:8px;margin-top:8px"></div>
     </div>
 
-    <!-- Sharp Line Signal (from Sharp.idx) -->
-    <div class="row-s" id="sharp-line-row" style="display:none">
-      <div class="row-hdr">
-        <div class="row-ttl"><em>&#x1F4CA;</em>Sharp Line Signal</div>
-        <div class="row-all" onclick="window.open('https://sharp-indicator-a34j.vercel.app','_blank')" style="font-size:11px;color:var(--t3)">Pinnacle &middot; Exchange &middot; RLM</div>
-      </div>
-      <div class="trend-row" id="sharp-line-cont"></div>
-      <div class="sdots" id="sharp-line-dots"></div>
-    </div>
-
-    <!-- Polymarket Signal -->
+    <!-- 2. Polymarket Signal -->
     <div class="row-s" id="trending-row" style="display:none">
       <div class="row-hdr">
         <div class="row-ttl"><em>&#x26A1;</em>Polymarket Signal</div>
@@ -268,6 +277,16 @@ select.finput option{background:var(--s2)}
       </div>
       <div class="trend-row" id="d-trend"></div>
       <div class="sdots" id="trend-dots"></div>
+    </div>
+
+    <!-- 3. Sharp Line Signal (from Sharp.idx) -->
+    <div class="row-s" id="sharp-line-row" style="display:none">
+      <div class="row-hdr">
+        <div class="row-ttl"><em>&#x1F4CA;</em>Sharp Line Signal</div>
+        <div class="row-all" onclick="window.open('https://sharp-indicator-a34j.vercel.app','_blank')" style="font-size:11px;color:var(--t3)">Pinnacle &middot; Exchange &middot; RLM</div>
+      </div>
+      <div class="trend-row" id="sharp-line-cont"></div>
+      <div class="sdots" id="sharp-line-dots"></div>
     </div>
     <!-- Recent Alerts -->
     <div class="row-s">
@@ -594,7 +613,7 @@ async function fetchData(){
     if(view==='alerts')renderAlerts();
     if(view==='traders'){renderHot();renderLB();}
     // Fetch Sharp.idx data in parallel
-    fetchSharpLines().then(()=>{renderSharpLines();renderSharpScore();});
+    fetchSharpLines().then(()=>{renderSharpLines();renderSharpScore();renderCommandCenter();});
     el('ldot').style.background='#00C896';el('ltxt').textContent='Live';cd=REFRESH;
   }catch{el('ldot').style.background='var(--red)';el('ltxt').textContent='Error';}
 }
@@ -768,7 +787,42 @@ function renderSharpScore(){
   combined.sort((a,b)=>b.ss-a.ss);
   if(!combined.length){if(row)row.style.display='none';return;}
   if(row)row.style.display='';
-  cont.innerHTML=combined.slice(0,5).map(({g,match,lineScore,polyScore,ss})=>{
+  const listEl=el('sharp-score-list');
+
+  // Stacked play cards (like tracking tab) for the dashboard
+  if(listEl){
+    listEl.innerHTML=combined.slice(0,5).map(function(item){
+      const{g,match,lineScore,polyScore,ss}=item;
+      const cls=ss>=85?'sig-3':ss>=70?'sig-2':'sig-1';
+      const sport=detectSportFromTeams(g.away,g.home);
+      const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
+      const gt=g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+      return '<div style="background:var(--s1);border:1px solid rgba(229,160,13,.2);border-left:3px solid var(--gold);border-radius:var(--rl2);padding:13px 16px">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">'
+        +'<div style="display:flex;align-items:center;gap:8px">'
+        +'<div style="font-size:28px;font-weight:900;font-family:var(--mono);background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent">'+ss+'</div>'
+        +'<div><div style="font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.05em">Final Sharp Score</div>'
+        +'<div style="font-size:10px;font-family:var(--mono);color:var(--t4)">Line: <span style="color:var(--blue)">'+lineScore+'</span> &bull; Poly: <span style="color:var(--gold)">'+polyScore+'</span></div>'
+        +'</div></div>'
+        +(gt?'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">&#x23F0; '+gt+'</span>':'')
+        +'</div>'
+        +'<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:6px">'+(g.away||'')+(g.home?' vs '+g.home:'')+sportTag+'</div>'
+        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">'
+        +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 9px">'
+        +'<div style="font-size:9px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">&#x1F4CA; Sharp Line</div>'
+        +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+(g.sharpSide||'')+'</div>'
+        +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+parseFloat(g.gapPP||0).toFixed(1)+'pp &bull; '+(g.signalType||'')+'</div>'
+        +'</div>'
+        +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 9px">'
+        +'<div style="font-size:9px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">&#x26A1; Poly Signal</div>'
+        +'<div style="font-size:12px;font-weight:800;color:var(--t1)">'+match.outcome+'</div>'
+        +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+fu(match.usdValue)+' &bull; '+(match.traderName||'')+'</div>'
+        +'</div></div>'
+        +'</div>';
+    }).join('');
+  }
+
+  cont.innerHTML=combined.slice(0,5).map(function({g,match,lineScore,polyScore,ss}){
     const cls=ss>=85?'sig-3':ss>=70?'sig-2':'sig-1';
     const sport=detectSportFromTeams(g.away,g.home);
     return '<div class="trend-card '+cls+'" style="min-width:300px">'
@@ -938,6 +992,7 @@ function renderDash(){
   setTimeout(enrichCards,50);
   renderSharpLines();
   renderSharpScore();
+  renderCommandCenter();
   // Enrich top traders poster cards async
   lb.forEach(t=>{if(!_sc[t.wallet]){fetchTraderStats(t.wallet).then(()=>{if(view==='dashboard')tpEl.innerHTML=(lbData.sports||[]).slice(0,10).map(posterHTML).join('');});}});
 }
@@ -1050,8 +1105,117 @@ async function gradeOpenPlays(){
   }
   if(changed){ss('pm:sig-plays',sigPlays);renderTracking();}
 }
+
+/* === ESPN AUTO-GRADE === */
+const ESPN_SPORTS = {
+  MLB:'baseball/mlb', NBA:'basketball/nba',
+  NFL:'football/nfl', NHL:'hockey/nhl',
+  NCAAF:'football/college-football', NCAAB:'basketball/mens-college-basketball',
+  Tennis:'tennis', Golf:'golf',
+};
+
+function normTeamName(s){
+  return (s||'').toLowerCase().replace(/(new york|los angeles|san francisco|san diego|kansas city|st\.?\s*louis|tampa bay|chicago)/gi,'').replace(/[^a-z]/g,'').trim();
+}
+
+function gameMatchesPlay(homeName,awayName,playTitle){
+  const t=(playTitle||'').toLowerCase();
+  const hN=normTeamName(homeName), aN=normTeamName(awayName);
+  return (hN.length>2&&t.includes(hN))||(aN.length>2&&t.includes(aN));
+}
+
+function gradePlay(play,homeTeam,awayTeam,homeScore,awayScore){
+  const side=(play.sharpSide||play.side||play.outcome||'').toLowerCase();
+  const total=homeScore+awayScore;
+  const hN=normTeamName(homeTeam), aN=normTeamName(awayTeam);
+  const score=awayTeam+' '+awayScore+' - '+homeScore+' '+homeTeam;
+
+  // Over/Under totals
+  if(side.includes('over')||side.includes('under')){
+    const m=(play.sharpSide||play.title||'').match(/(\d+\.?\d*)/);
+    const line=m?parseFloat(m[1]):0;
+    if(!line)return null;
+    const result=side.includes('over')?(total>line?'WIN':total===line?'PUSH':'LOSS'):(total<line?'WIN':total===line?'PUSH':'LOSS');
+    return{status:result,espnScore:score};
+  }
+  // Spread +1.5 / -1.5
+  if((play.sharpSide||'').includes('1.5')){
+    const isPlus=(play.sharpSide||'').includes('+1.5');
+    const teamPart=(play.sharpSide||'').replace(/[+-]1\.5.*/,'').trim().toLowerCase();
+    const sharpNorm=normTeamName(teamPart);
+    const sharpIsHome=hN.includes(sharpNorm)||sharpNorm.includes(hN);
+    const sharpScore=sharpIsHome?homeScore:awayScore;
+    const otherScore=sharpIsHome?awayScore:homeScore;
+    const margin=sharpScore-otherScore;
+    const result=isPlus?(margin>=-1?'WIN':'LOSS'):(margin>=2?'WIN':'LOSS');
+    return{status:result,espnScore:score};
+  }
+  // Moneyline — team win
+  const sideNorm=normTeamName(side.split(' ').slice(-1)[0]||side);
+  const sharpIsHome=hN.includes(sideNorm)||sideNorm.includes(hN);
+  const sharpIsAway=aN.includes(sideNorm)||sideNorm.includes(aN);
+  if(!sharpIsHome&&!sharpIsAway)return null;
+  const won=sharpIsHome?homeScore>awayScore:awayScore>homeScore;
+  return{status:won?'WIN':'LOSS',espnScore:score};
+}
+
+async function gradeFromESPN(){
+  const sportsNeeded=new Set();
+  [...linePlays,...sharpScorePlays,...sigPlays].forEach(p=>{if(p.status==='OPEN')sportsNeeded.add(p.sport||'MLB');});
+  if(!sportsNeeded.size)return;
+
+  const results={};
+  await Promise.all([...sportsNeeded].map(async sport=>{
+    const path=ESPN_SPORTS[sport];
+    if(!path||path==='tennis'||path==='golf')return;
+    try{
+      const r=await fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard');
+      const d=await r.json();
+      results[sport]=d.events||[];
+    }catch{}
+  }));
+
+  let changed=false;
+
+  function tryGrade(plays,storeKey){
+    plays.forEach(play=>{
+      if(play.status!=='OPEN')return;
+      const events=results[play.sport||'MLB']||[];
+      for(const ev of events){
+        const comp=ev.competitions?.[0];
+        if(!comp?.status?.type?.completed)continue;
+        const home=comp.competitors.find(c=>c.homeAway==='home');
+        const away=comp.competitors.find(c=>c.homeAway==='away');
+        if(!home||!away)continue;
+        const hName=home.team?.displayName||home.team?.name||'';
+        const aN2=away.team?.displayName||away.team?.name||'';
+        const hScore=parseFloat(home.score||0);
+        const aScore=parseFloat(away.score||0);
+        if(!gameMatchesPlay(hName,aN2,play.title))continue;
+        const result=gradePlay(play,hName,aN2,hScore,aScore);
+        if(result){
+          play.status=result.status;
+          play.gradedAt=Date.now();
+          play.espnScore=result.espnScore;
+          play.gradedBy='ESPN';
+          changed=true;
+        }
+        break;
+      }
+    });
+    if(changed)ss(storeKey,plays);
+  }
+
+  tryGrade(linePlays,'pm:line-plays');
+  tryGrade(sharpScorePlays,'pm:ss-plays');
+  // sigPlays: try ESPN as fallback after Polymarket API
+  tryGrade(sigPlays,'pm:sig-plays');
+  if(changed)renderTracking();
+}
+
 function renderTracking(){
   gradeOpenPlays();
+  gradeFromESPN(); // ESPN fallback for line/spread/total plays
 
   // ── Sharp Line Signal plays section ──
   const lW=linePlays.filter(p=>p.status==='WIN').length,lL=linePlays.filter(p=>p.status==='LOSS').length;
@@ -1195,6 +1359,115 @@ function renderTracking(){
   }).join('');
 }
 
+
+/* === COMMAND CENTER — Today's ranked plays === */
+function renderCommandCenter(){
+  const grid=el('play-grid');
+  const empty=el('play-grid-empty');
+  const ccTitle=el('cc-title');
+  if(!grid)return;
+
+  // Collect all active plays across all signal types
+  const now=Date.now();
+  const allPlays=[];
+
+  // Sharp Line Signal plays (from /api/odds)
+  const now2=now;
+  sharpLines.filter(g=>!g.noSignal&&parseInt(g.siScore||0)>=50&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now2)).forEach(g=>{
+    const score=parseInt(g.siScore||0);
+    // Check for Poly confirmation
+    const recentAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>now-43200000);
+    const polyMatch=matchLineToAlert(g,recentAlerts);
+    const{score:polyScore}=polyMatch?signalScore({buys:[polyMatch],totalVol:polyMatch.usdValue}):{score:0};
+    const combined=polyScore>0?calcSharpScore(score,polyScore):0;
+    allPlays.push({
+      type: combined>=60?'sharp-score':'line',
+      title:(g.away||'')+(g.home?' vs '+g.home:''),
+      side:g.sharpSide||'',
+      score:combined>=60?combined:score,
+      lineScore:score,polyScore,combined,
+      signalType:g.signalType,
+      gapPP:parseFloat(g.gapPP||0),
+      exConfirms:g.exConfirms||0,
+      novigConfirm:g.novigConfirm,
+      gameTime:g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'',
+      sport:detectSportFromTeams(g.away,g.home),
+      pillars:g.pillars||{},
+      polyMatch,
+    });
+  });
+
+  // Polymarket Signal plays (from Poly Signal)
+  const trends=buildTrending();
+  trends.forEach(g=>{
+    const{score}=signalScore(g);
+    if(score<65)return;
+    // Only add if not already represented as sharp-score
+    const alreadyIn=allPlays.some(p=>p.polyMatch&&(p.polyMatch.title||'')===(g.title||''));
+    if(alreadyIn)return;
+    allPlays.push({
+      type:'poly',
+      title:g.title,
+      side:g.outcome||'',
+      score,
+      signalType:'Poly Signal',
+      buyers:g.buys.length,
+      totalVol:g.totalVol,
+      gameTime:'',
+      sport:detectSport(g.title)||'',
+    });
+  });
+
+  // Sort: Sharp Score first, then by score desc
+  allPlays.sort((a,b)=>{
+    const typeOrder={oo_sharp_score:0,sharpx_score:0,'sharp-score':0,line:1,poly:2};
+    const ta=typeOrder[a.type]||1,tb=typeOrder[b.type]||1;
+    if(ta!==tb)return ta-tb;
+    return b.score-a.score;
+  });
+
+  // Update counters
+  const lc=el('cc-line-cnt'),pc=el('cc-poly-cnt'),sc2=el('cc-ss-cnt');
+  if(lc)lc.textContent=allPlays.filter(p=>p.type==='line').length;
+  if(pc)pc.textContent=allPlays.filter(p=>p.type==='poly').length;
+  if(sc2)sc2.textContent=allPlays.filter(p=>p.type==='sharp-score').length;
+
+  if(!allPlays.length){
+    if(empty)empty.style.display='';
+    if(empty)empty.textContent='No qualifying plays right now — check back closer to game time';
+    grid.innerHTML='';
+    if(ccTitle)ccTitle.textContent="No active signals";
+    return;
+  }
+  if(empty)empty.style.display='none';
+  const best=allPlays[0];
+  if(ccTitle)ccTitle.textContent=allPlays.length+' active play'+(allPlays.length===1?'':'s')+' · Best: '+best.title;
+
+  grid.innerHTML=allPlays.slice(0,6).map(p=>{
+    const isSS=p.type==='sharp-score';
+    const isPoly=p.type==='poly';
+    const bg=isSS?'linear-gradient(135deg,rgba(64,180,255,.07),rgba(229,160,13,.07))':isPoly?'rgba(229,160,13,.05)':'rgba(64,180,255,.05)';
+    const border=isSS?'rgba(229,160,13,.3)':isPoly?'rgba(229,160,13,.15)':'rgba(64,180,255,.15)';
+    const scoreColor=p.score>=80?'var(--green)':p.score>=65?'var(--gold)':'var(--t2)';
+    const tag=isSS?'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.2),rgba(229,160,13,.2));color:var(--t1)">&#x1F3AF; SHARP SCORE</span>':isPoly?'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(229,160,13,.12);color:var(--gold)">&#x26A1; POLY SIGNAL</span>':'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(64,180,255,.12);color:var(--blue)">&#x1F4CA; LINE SIGNAL</span>';
+    const sport=p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.08);color:#40B4FF;border-radius:3px;margin-left:4px">'+p.sport+'</span>':'';
+    const details=isSS?('<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">Line: '+p.lineScore+' &bull; Poly: '+p.polyScore+'</div>'+
+      '<div style="font-size:10px;color:var(--t4)">+'+p.gapPP.toFixed(1)+'pp gap &bull; '+(p.exConfirms>0?p.exConfirms+' exchange confirm':'no exchange')+'</div>'):
+    isPoly?('<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+(p.buyers||1)+' profitable buyer'+(p.buyers>1?'s':'')+' &bull; '+fu(p.totalVol||0)+'</div>'):
+    ('<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+p.gapPP.toFixed(1)+'pp Pinnacle gap &bull; '+(p.exConfirms>0?p.exConfirms+' exchange':'no exchange')+'</div>'+
+    '<div style="font-size:10px;color:var(--t4)">'+p.signalType+'</div>');
+    return '<div style="background:'+bg+';border:1px solid '+border+';border-radius:var(--rl2);padding:13px 15px;position:relative;overflow:hidden">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'+tag+sport
+      +'<div style="font-size:28px;font-weight:900;font-family:var(--mono);color:'+scoreColor+'">'+p.score+'</div>'
+      +'</div>'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px;line-height:1.3">'+p.title+'</div>'
+      +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:5px">&#x25B6; '+p.side+'</div>'
+      +details
+      +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:4px">&#x23F0; '+p.gameTime+'</div>':'')
+      +'</div>';
+  }).join('');
+}
+
 /* === HOT === */
 function renderHot(){
   const cutoff=Date.now()-86400000,hm={};
@@ -1330,6 +1603,8 @@ function startCd(){
 
 /* === INIT === */
 renderDash();fetchData();cd=REFRESH;startCd();
+// Auto-grade every 15 minutes in background
+setInterval(function(){gradeFromESPN();gradeOpenPlays();},15*60*1000);
 
 </script>
 </body>
