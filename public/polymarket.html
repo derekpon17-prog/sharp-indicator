@@ -449,33 +449,54 @@ let cd=0,cdT,view="dashboard";
 const REFRESH=10*60*1000;
 
 // Sport detection
+// ── APPROVED SPORTS WHITELIST ──
+// ONLY these sports will show alerts, Signal Strength, or leaderboard entries.
+// Everything else returns null and is silently excluded.
+
 const MLB_TEAMS=["yankees","red sox","dodgers","cubs","mets","astros","braves","phillies","padres","giants","cardinals","brewers","guardians","royals","twins","orioles","rays","blue jays","mariners","rangers","angels","athletics","tigers","white sox","reds","pirates","rockies","marlins","nationals","diamondbacks"];
-const ESPORTS_KW=["dota","valorant","cs2","counter-strike","league of legends","lol:","esports world cup","starcraft","overwatch","fortnite","pubg","apex legends","rainbow six","rocket league"];
-const SOCCER_INTL=["premier league","la liga","serie a","bundesliga","champions league","copa america","eredivisie","ligue 1","fa cup","euro 20","nations league","world cup qualifier","man city","man united","manchester","liverpool","chelsea","arsenal","barcelona","real madrid","france vs","england vs","brazil vs","germany vs","spain vs","portugal vs","argentina vs","italy vs","netherlands vs","belgium vs","croatia vs","mexico vs","usmnt","uswnt","england:","france:"];
+
+// Hard block list — checked FIRST, return null immediately
+const BLOCKED_KW=["dota","valorant","cs2","counter-strike","league of legends","lol:","esports","starcraft","overwatch","fortnite","pubg","apex legends","rainbow six","rocket league","dota 2","hearthstone","call of duty","warzone","fifa esport","rl:","rl champ","esport","gaming","chess","poker","politics","election","crypto","bitcoin","ethereum","trump","biden","president","prime minister","economy","inflation","fed rate","will the fed","stock","s&p","nasdaq"];
+
 function detectSport(title){
   var t=(title||"").toLowerCase();
-  // Exclude esports before any other check
-  if(ESPORTS_KW.some(function(x){return t.includes(x);}))return null;
-  // MLB
-  if(t.includes("mlb")||t.includes("baseball")||MLB_TEAMS.some(function(x){return t.includes(x);}))return"MLB";
+
+  // 1. Hard block — esports, crypto, politics, etc.
+  if(BLOCKED_KW.some(function(x){return t.includes(x);}))return null;
+
+  // 2. WHITELIST — only these return a value. Everything else → null.
+
+  // MLB / World Baseball Classic
+  if(t.includes("mlb")||t.includes("world baseball classic")||t.includes("wbc")||MLB_TEAMS.some(function(x){return t.includes(x);}))return"MLB";
+
   // NBA
-  if(t.includes("nba")||t.includes("basketball"))return"NBA";
+  if(t.includes("nba")||t.includes("nba finals")||t.includes("nba championship"))return"NBA";
+
   // NFL
-  if(t.includes("nfl")||t.includes("super bowl"))return"NFL";
+  if(t.includes("nfl")||t.includes("super bowl")||t.includes("afc championship")||t.includes("nfc championship"))return"NFL";
+
   // NHL
-  if(t.includes("nhl")||t.includes("stanley cup")||t.includes("hockey"))return"NHL";
-  // WNBA
-  if(t.includes("wnba"))return"WNBA";
-  // College
-  if(t.includes("ncaa")||t.includes("college football")||t.includes("college basketball"))return"College";
-  // Tennis — before Soccer to avoid false soccer matches
-  if(t.includes("tennis")||t.includes("wimbledon")||t.includes("us open tennis")||t.includes("french open")||t.includes("australian open")||t.includes(" atp ")||t.includes(" wta "))return"Tennis";
-  // Golf
-  if(t.includes("golf")||t.includes("pga")||t.includes("masters ")||t.includes("ryder cup")||t.includes("open championship"))return"Golf";
-  // Soccer — must be AFTER tennis (avoid "open" false matches)
-  if(t.includes("soccer")||t.includes("mls")||t.includes("fifa world cup")||SOCCER_INTL.some(function(x){return t.includes(x);}))return"Soccer";
-  // MMA/Boxing
-  if(t.includes("ufc")||t.includes("boxing")||t.includes("mma"))return"MMA";
+  if(t.includes("nhl")||t.includes("stanley cup"))return"NHL";
+
+  // College Football
+  if(t.includes("ncaaf")||t.includes("college football playoff")||t.includes("cfp")||t.includes("cfb")||t.includes("rose bowl")||t.includes("orange bowl")||t.includes("sugar bowl")||t.includes("cotton bowl")||t.includes("fiesta bowl"))return"NCAAF";
+
+  // College Basketball
+  if(t.includes("ncaab")||t.includes("march madness")||t.includes("ncaa tournament")||t.includes("ncaa basketball")||t.includes("final four"))return"NCAAB";
+
+  // PGA Golf
+  if(t.includes("pga")||t.includes("masters ")||t.includes("ryder cup")||t.includes("the open championship")||t.includes("us open golf")||t.includes("pga championship")||t.includes("liv golf")||t.includes("jon rahm")||t.includes("rory mcilroy")||t.includes("tiger woods")||t.includes("scottie scheffler"))return"Golf";
+
+  // FIFA World Cup (soccer) — ONLY World Cup, not club leagues
+  if(t.includes("fifa world cup")||t.includes("world cup winner")||t.includes("world cup champion")||t.includes("gold cup")||t.includes("copa america")||t.includes("concacaf"))return"Soccer";
+
+  // Olympics
+  if(t.includes("olympic")||t.includes("olympics")||t.includes("paris 2024")||t.includes("la 2028")||t.includes("summer games")||t.includes("winter games"))return"Olympics";
+
+  // Professional Tennis — Grand Slams + ATP/WTA only
+  if(t.includes("wimbledon")||t.includes("us open tennis")||t.includes("french open")||t.includes("australian open")||t.includes("roland garros")||t.includes("atp ")||t.includes("wta ")||t.includes("grand slam")||(t.includes("tennis")&&!t.includes("table tennis")))return"Tennis";
+
+  // Everything else is rejected
   return null;
 }
 
@@ -659,6 +680,8 @@ function buildTrending(){
   alerts.forEach(function(a){
     var ts=a.loggedAt||(a.timestamp*1000);
     if(ts<cutoff)return;
+    // ── WHITELIST: skip if not an approved sport ──
+    if(!detectSport(a.title))return;
     // Skip known losing traders
     if(isLosingTrader(a.wallet))return;
     // Skip if stats fetched and PnL is zero or negative (non-leaderboard loser)
