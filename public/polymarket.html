@@ -273,7 +273,10 @@ select.finput option{background:var(--s2)}
     <div class="row-s" id="trending-row" style="display:none">
       <div class="row-hdr">
         <div class="row-ttl"><em>&#x26A1;</em>Polymarket Signal</div>
-        <div class="row-all" onclick="showV('alerts',document.querySelectorAll('.ntab')[1])">profitable traders &middot; same side</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <button onclick="dismissed.clear();ss('pm:dismissed',[]);renderTrending();" style="font-size:10px;color:var(--t4);background:transparent;border:none;cursor:pointer;font-family:var(--mono);padding:0" title="Show dismissed plays again">&#x1F504; Reset</button>
+          <div class="row-all" onclick="showV('alerts',document.querySelectorAll('.ntab')[1])">profitable traders &middot; same side</div>
+        </div>
       </div>
       <div class="trend-row" id="d-trend"></div>
       <div class="sdots" id="trend-dots"></div>
@@ -609,7 +612,7 @@ async function fetchData(){
     alerts=alerts.slice(0,200);ss('pm:alert-log',alerts);
     const cnt=alerts.length;
     if(cnt){el('acnt').style.display='';el('acnt').textContent=cnt>99?'99+':cnt;}
-    if(view==='dashboard')renderDash();
+    if(view==='dashboard'){renderDash();setTimeout(renderTrending,100);} // re-render after lbData loads
     if(view==='alerts')renderAlerts();
     if(view==='traders'){renderHot();renderLB();}
     // Fetch Sharp.idx data in parallel
@@ -860,13 +863,18 @@ function buildTrending(){
     if(ts<cutoff)return;
     if(!detectSport(a.title))return;
     if(isLosingTrader(a.wallet))return;
-    const cached=_sc[a.wallet],inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
-    // Require wallet to be in profitable leaderboard OR have verified positive fetched stats
-    // If neither, skip — don't show unverified accounts in Signal Strength
-    if(!inLB){
-      if(cached===null||cached===undefined)return; // stats not fetched yet — skip
-      if(cached.pnl===null||cached.pnl<=0)return; // fetched and losing — skip
+    const cached=_sc[a.wallet];
+    const lbLoaded=lbData.overall.length>0||lbData.sports.length>0;
+    const inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
+    // Only filter by LB when data is actually loaded — avoids blank state on first render
+    if(lbLoaded){
+      if(!inLB){
+        if(cached===null||cached===undefined)return; // unverified + no cached stats = skip
+        if(cached.pnl===null||cached.pnl<=0)return; // unverified + negative = skip
+      }
     }
+    // Always block known losers regardless of LB status
+    if(cached&&cached.pnl!==null&&cached.pnl<0)return;
     const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
     if(dismissed.has(key))return; // manually dismissed
     if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,buys:[],totalVol:0,latestTs:0};
@@ -969,7 +977,6 @@ function renderDash(){
   const W=set.filter(t=>t.status==='WIN').length,L=set.filter(t=>t.status==='LOSS').length;
   const wr=W+L>0?Math.round(W/(W+L)*100):null;
   let pnl=0;set.forEach(t=>pnl+=calcP(t));
-  const volToday=new Date();volToday.setHours(0,0,0,0);
   const vol=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>=volToday.getTime()).reduce((a,b)=>a+(b.usdValue||0),0);
   el('d-al').textContent=alerts.length;el('d-vo').textContent=fp(vol);
   el('d-wr').textContent=wr!==null?wr+'%':'&mdash;';el('d-wr').style.color=wr===null?'var(--t4)':wr>=55?'var(--green)':wr>=50?'var(--gold)':'var(--red)';
@@ -1341,7 +1348,7 @@ function renderTracking(){
   // Manual picks
   const W2=trades.filter(t=>t.status==='WIN').length,L2=trades.filter(t=>t.status==='LOSS').length;
   const wr2=W2+L2>0?Math.round(W2/(W2+L2)*100):null;let pnl2=0;trades.filter(t=>t.status!=='OPEN').forEach(t=>pnl2+=calcP(t));
-  el('tp-r').textContent=W2+'\u2013'+L2;
+  el('tp-r').innerHTML=W2+'&ndash;'+L2;
   el('tp-w').textContent=wr2!==null?wr2+'%':'&mdash;';el('tp-w').style.color=wr2===null?'var(--t4)':wr2>=55?'var(--green)':wr2>=50?'var(--gold)':'var(--red)';
   el('tp-p').textContent=(pnl2>=0?'+':'')+fu(pnl2);el('tp-p').style.color=pnl2>0?'var(--green)':pnl2<0?'var(--red)':'var(--t4)';
   if(!trades.length){el('tl').innerHTML='';el('tl-empty').style.display='';return;}
@@ -1369,11 +1376,11 @@ function renderCommandCenter(){
 
   // Collect all active plays across all signal types
   const now=Date.now();
+  const ccMidnight=new Date();ccMidnight.setHours(0,0,0,0);
   const allPlays=[];
 
   // Sharp Line Signal plays (from /api/odds)
-  const now2=now;
-  sharpLines.filter(g=>!g.noSignal&&parseInt(g.siScore||0)>=50&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now2)).forEach(g=>{
+  sharpLines.filter(g=>!g.noSignal&&parseInt(g.siScore||0)>=50&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now-4*3600000)).forEach(g=>{
     const score=parseInt(g.siScore||0);
     // Check for Poly confirmation
     const recentAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>now-43200000);
@@ -1434,9 +1441,12 @@ function renderCommandCenter(){
 
   if(!allPlays.length){
     if(empty)empty.style.display='';
-    if(empty)empty.textContent='No qualifying plays right now — check back closer to game time';
+    if(empty)empty.textContent='No qualifying plays above threshold — signals shown in sections below';
     grid.innerHTML='';
-    if(ccTitle)ccTitle.textContent="No active signals";
+    if(ccTitle){
+      const totalAlerts=alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>todayMidnight2.getTime()).length;
+      ccTitle.textContent=totalAlerts>0?totalAlerts+' alert'+(totalAlerts===1?'':'s')+' today — review sections below':'No active signals';
+    }
     return;
   }
   if(empty)empty.style.display='none';
