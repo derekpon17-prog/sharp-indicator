@@ -622,9 +622,17 @@ async function fetchData(){
     ]);
     allBuys=br.buys||[];
     if(br.leaderboard)lbData=br.leaderboard;
-    const sa=lr.alerts||[],eh=new Set(alerts.map(a=>a.transactionHash));
-    sa.forEach(a=>{if(!eh.has(a.transactionHash))alerts.unshift(a);});
-    alerts=alerts.slice(0,200);ss('pm:alert-log',alerts);
+    // Merge server alerts with localStorage — server is source of truth
+    const serverAlerts=lr.alerts||[];
+    const localAlerts=ls('pm:alert-log',[]);
+    const seen=new Set(serverAlerts.map(a=>a.transactionHash||(a.wallet+(a.timestamp||''))));
+    // Add any local alerts not yet in server (from older sessions)
+    localAlerts.forEach(a=>{
+      const k=a.transactionHash||(a.wallet+(a.timestamp||''));
+      if(!seen.has(k)){serverAlerts.push(a);seen.add(k);}
+    });
+    alerts=serverAlerts.sort((a,b)=>(b.loggedAt||(b.timestamp*1000))-(a.loggedAt||(a.timestamp*1000))).slice(0,200);
+    ss('pm:alert-log',alerts); // keep localStorage in sync
     const cnt=alerts.length;
     if(cnt){el('acnt').style.display='';el('acnt').textContent=cnt>99?'99+':cnt;}
     if(view==='dashboard'){renderDash();setTimeout(renderTrending,200);}
@@ -1155,7 +1163,7 @@ function renderCommandCenter(){
     if(empty)empty.style.display='';grid.innerHTML='';
     var ccMid=new Date();ccMid.setHours(0,0,0,0);
     var todayAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>=ccMid.getTime();}).length;
-    if(ccTitle)ccTitle.textContent=todayAlerts>0?todayAlerts+' alert'+(todayAlerts===1?'':'s')+' today -- review sections below':'Loading plays...';
+    if(ccTitle)ccTitle.textContent=todayAlerts>0?todayAlerts+' alert'+(todayAlerts===1?'':'s')+' today -- review sections below':'Fetching signal data -- alerts will appear shortly...';
     return;
   }
   if(empty)empty.style.display='none';
