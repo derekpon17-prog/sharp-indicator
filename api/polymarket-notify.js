@@ -43,22 +43,26 @@ const SPORT_LB_CONFIG = [
 const posAlertedKeys = new Set();
 
 async function fetchLeaderboard(category, limit) {
-  try {
-    const url = `${DATA_API}/v1/leaderboard?category=${category}&timePeriod=ALL&orderBy=PNL&limit=${limit}`;
-    const r = await fetch(url);
-    if (!r.ok) {
-      console.warn(`LB fetch failed for ${category}: ${r.status}`);
-      return [];
-    }
-    const d = await r.json();
-    return Array.isArray(d) ? d : [];
-  } catch (e) {
-    console.error(`LB error for ${category}:`, e.message);
-    return [];
+  // Try multiple URL formats — Polymarket API may use different endpoint structures
+  const urls = [
+    `${DATA_API}/v1/leaderboard?category=${category}&timePeriod=ALL&orderBy=PNL&limit=${limit}`,
+    `${DATA_API}/leaderboard?category=${category}&timePeriod=ALL&orderBy=PNL&limit=${limit}`,
+    `${DATA_API}/leaderboard?tagSlug=${category.toLowerCase()}&timePeriod=ALL&limit=${limit}`,
+  ];
+  for (const url of urls) {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) continue;
+      const d = await r.json();
+      const arr = Array.isArray(d) ? d : (d.data || d.leaderboard || []);
+      if (arr.length > 0) return arr;
+    } catch {}
   }
+  console.warn(`LB fetch returned 0 for ${category} — category may not exist`);
+  return [];
 }
 
-async function fetchRecentTrades(limit = 500) {
+async function fetchRecentTrades(limit = 1000) {
   try {
     const r = await fetch(`${DATA_API}/trades?side=BUY&takerOnly=true&limit=${limit}`);
     if (!r.ok) return [];
@@ -144,9 +148,10 @@ async function sendAlert(topic, buy) {
     return `${ct} #${c.rank}`;
   }).join(' / ');
 
+  const verifiedTag = buy.verified === false ? ' [UNVERIFIED]' : '';
   const body = [
-    `$${usd} BUY [${sport}] - ${buy.traderName || 'Anon'}`,
-    rankInfo ? `Rank: ${rankInfo}` : '',
+    `$${usd} BUY [${sport}]${verifiedTag} - ${buy.traderName || 'Anon'}`,
+    rankInfo ? `Rank: ${rankInfo}` : (buy.verified === false ? 'Not in profitable leaderboard — large buy only' : ''),
     `Market: ${(buy.title || 'Unknown').slice(0, 80)}`,
     `Side: ${buy.outcome || '-'} @ ${price}c`,
     buy.eventSlug ? `polymarket.com/event/${buy.eventSlug}` : '',
@@ -223,7 +228,7 @@ module.exports = async function handler(req, res) {
           walletMap[wallet] = {
             name:       t.userName || t.pseudonym,
             categories: [],
-            sports:     [], // which sports this trader is top-ranked in
+            sports:     [],
           };
         }
         walletMap[wallet].categories.push({ category: cfg.category, rank: t.rank, pnl });
@@ -231,10 +236,20 @@ module.exports = async function handler(req, res) {
       });
     });
 
+    // If sport-specific categories returned nothing (API may not support them),
+    // fall back to SPORTS leaderboard — accept all sports traders
+    const mlbCoverage = lbCoverage['MLB'] || 0;
+    if (mlbCoverage === 0) {
+      console.warn('MLB-specific leaderboard returned 0 — sport categories may not exist on this API version.');
+      console.warn('All sport-specific bettors will come from SPORTS leaderboard instead.');
+      // Mark that we are in fallback mode in debug output
+      lbCoverage['_fallback'] = 'sport-specific categories unavailable';
+    }
+
     const profitableWallets = Object.keys(walletMap).length;
 
     // ── Fetch global recent trades ──
-    const recentTrades = await fetchRecentTrades(500);
+    const recentTrades = await fetchRecentTrades(1000); // wider window catches more MLB
 
     // Debug: sample first trade structure
     const sampleTrade = recentTrades[0] ? {
@@ -251,29 +266,39 @@ module.exports = async function handler(req, res) {
     const newestTrade = timestamps[0] ? new Date(timestamps[0] * 1000).toISOString() : null;
     const oldestTrade = timestamps[timestamps.length-1] ? new Date(timestamps[timestamps.length-1] * 1000).toISOString() : null;
 
-    // ── Filter trades ──
+    // ── ALERT FILTER — PROFITABLE VERIFIED WALLETS ONLY ──
+    // Standard: verified profitable wallets at standard threshold
+    // MLB exception: lower threshold to $400 (MLB Poly buys are smaller than other sports)
+    // No tier 2 / no unverified accounts — maintaining signal quality
+
     let failedTs = 0, failedThresh = 0, failedSports = 0, failedNotProfitable = 0;
     const failedSportsTitles = [];
-    const baseballBuys = []; // debug: all baseball buys regardless of wallet
+    const baseballBuys = []; // full debug: ALL MLB buys in the window
     const toAlert = [];
+    const seenKeys = new Set();
 
     recentTrades.forEach(t => {
       const wallet = t.proxyWallet || t.maker || t.transactor;
       const ts     = parseInt(t.timestamp) || 0;
       const usd    = (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0);
       const sport  = marketSport(t.title);
+      const dkey   = (wallet || '') + (t.transactionHash || t.title || '') + ts;
 
-      // Debug: collect all baseball buys to understand coverage
-      if (sport === 'MLB' && usd > 0) {
-        baseballBuys.push({ title: t.title, usd: Math.round(usd), wallet: wallet?.slice(0,10), inMap: !!walletMap[wallet], ts });
+      // Debug: log EVERY MLB buy to diagnose coverage gap
+      if (sport === 'MLB' && usd >= 50) {
+        baseballBuys.push({
+          title:       (t.title || '').slice(0, 60),
+          usd:         Math.round(usd),
+          wallet:      wallet ? wallet.slice(0, 10) : 'unknown',
+          inWalletMap: !!walletMap[wallet],
+          trackedSports: walletMap[wallet] ? walletMap[wallet].sports : [],
+          ts,
+        });
       }
 
       if (ts < winMin || ts > winMax) { failedTs++; return; }
-      if (usd < threshold)            { failedThresh++; return; }
 
       const traderInfo = wallet ? walletMap[wallet] : null;
-
-      // Only alert on verified profitable sport-specific wallets
       if (!traderInfo) { failedNotProfitable++; return; }
 
       if (!isSportsMarket(t.title)) {
@@ -282,30 +307,34 @@ module.exports = async function handler(req, res) {
         return;
       }
 
-      // Category filter
-      if (catFilter !== 'ALL') {
-        if (!traderInfo.categories.some(c => (c.category || c.cat) === catFilter)) return;
-      }
+      // Sport-specific threshold — MLB buys are typically smaller
+      const sportThreshold = sport === 'MLB' ? Math.min(threshold, 400) : threshold;
+      if (usd < sportThreshold) { failedThresh++; return; }
+
+      if (seenKeys.has(dkey)) return;
+      seenKeys.add(dkey);
+
+      if (catFilter !== 'ALL' && !traderInfo.categories.some(c => (c.category || c.cat) === catFilter)) return;
 
       toAlert.push({
-        wallet:          wallet || 'unknown',
-        traderName:      t.name || t.pseudonym || traderInfo.name || (wallet ? wallet.slice(0,6)+'...'+wallet.slice(-4) : 'Anon'),
-        profileImage:    t.profileImageOptimized || t.profileImage || null,
-        categories:      traderInfo.categories,
-        sports:          traderInfo.sports,
-        sport:           sport,
-        title:           t.title,
-        slug:            t.slug,
-        eventSlug:       t.eventSlug,
-        outcome:         t.outcome,
-        price:           t.price,
-        usdValue:        usd,
-        timestamp:       ts,
-        loggedAt:        Date.now(),
+        wallet,
+        traderName:   t.name || t.pseudonym || traderInfo.name || (wallet ? wallet.slice(0,6)+'...'+wallet.slice(-4) : 'Anon'),
+        profileImage: t.profileImageOptimized || t.profileImage || null,
+        categories:   traderInfo.categories,
+        sports:       traderInfo.sports,
+        sport,
+        title:        t.title,
+        slug:         t.slug,
+        eventSlug:    t.eventSlug,
+        outcome:      t.outcome,
+        price:        t.price,
+        usdValue:     usd,
+        timestamp:    ts,
+        loggedAt:     Date.now(),
         transactionHash: t.transactionHash,
+        verified:     true,
       });
     });
-
     toAlert.sort((a, b) => b.usdValue - a.usdValue);
 
     // ── Send alerts ──
