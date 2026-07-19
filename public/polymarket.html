@@ -521,6 +521,33 @@ function renderHero(){
 }
 
 
+
+function autoTrackSignalPlays(groups){
+  var changed=false;
+  groups.forEach(function(g){
+    var vol=g.totalVol;
+    var base=vol<=500?5:Math.min(Math.round(Math.log10(vol/500)*38)+15,90);
+    var bestRank=999;
+    g.buys.forEach(function(b){(b.categories||[]).forEach(function(c){var r=parseInt(c.rank)||999;if(r<bestRank)bestRank=r;});});
+    var rm=bestRank<=5?1.6:bestRank<=15?1.4:bestRank<=30?1.2:bestRank<=75?1.0:0.85;
+    var conv=g.buys.length>=4?28:g.buys.length>=3?20:g.buys.length>=2?12:0;
+    var score=Math.min(Math.round(base*rm)+conv,100);
+    var threshold=bestRank<999?65:75;
+    if(score<threshold)return;
+    var key=(g.title||'')+'||'+(g.outcome||'');
+    if(sigPlays.some(function(p){return p.key===key;}))return;
+    sigPlays.unshift({
+      key:key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,
+      score:score,buyers:g.buys.length,totalVol:g.totalVol,
+      traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,5),
+      sport:detectSport(g.title),bestRank:bestRank,
+      loggedAt:Date.now(),status:'OPEN',resolution:null,
+    });
+    changed=true;
+  });
+  if(changed)ss('pm:sig-plays',sigPlays);
+}
+
 function buildTrending(){
   var cutoff=Date.now()-24*60*60*1000;
   var groups={};
@@ -539,7 +566,7 @@ function buildTrending(){
     groups[key].totalVol+=(a.usdValue||0);
     if(ts>groups[key].latestTs)groups[key].latestTs=ts;
   });
-  return Object.values(groups).filter(function(g){return g.buys.length>=2||g.totalVol>=1000;})
+  return Object.values(groups).filter(function(g){var s=g.totalVol;var base=s<=500?5:Math.min(Math.round(Math.log10(s/500)*38)+15,90);var br=999;g.buys.forEach(function(b){(b.categories||[]).forEach(function(c){var r=parseInt(c.rank)||999;if(r<br)br=r;});});var rm=br<=5?1.6:br<=15?1.4:br<=30?1.2:br<=75?1.0:0.85;var sc=Math.min(Math.round(base*rm)+(g.buys.length>=2?12:0),100);return sc>=40;})
     .sort(function(a,b){return(b.buys.length*b.buys.length*b.totalVol)-(a.buys.length*a.buys.length*a.totalVol);}).slice(0,8);
 }
 
@@ -553,11 +580,24 @@ function renderTrending(){
   autoTrackSignalPlays(trends);
   cont.innerHTML=trends.map(function(g){
     var buyers=g.buys.length,vol=g.totalVol;
-    var bs=buyers<=1?0:Math.min(10+(buyers-2)*12,60);
-    var vs=Math.min(Math.max(0,Math.log10(Math.max(vol,1000)/1000)*20),40);
-    var score=Math.round(bs+vs);
-    var sigCls=score>=85?'sig-3':score>=70?'sig-2':'sig-1';
-    var sigLbl=score>=85?'&#x1F525; Elite':score>=70?'&#x26A1; Strong':'&#x26A0;&#xFE0F; Moderate';
+    // Base score from buy size (log scale)
+    var baseScore=vol<=500?5:Math.min(Math.round(Math.log10(vol/500)*38)+15,90);
+    // Rank multiplier — find highest-ranked buyer in this group
+    var bestRank=999,bestCat='';
+    g.buys.forEach(function(b){
+      (b.categories||[]).forEach(function(c){
+        var r=parseInt(c.rank)||999;
+        if(r<bestRank){bestRank=r;bestCat=c.category||c.cat||'';}
+      });
+    });
+    var rankMult=bestRank<=5?1.6:bestRank<=15?1.4:bestRank<=30?1.2:bestRank<=75?1.0:0.85;
+    // Convergence bonus
+    var convBonus=buyers>=4?28:buyers>=3?20:buyers>=2?12:0;
+    var score=Math.min(Math.round(baseScore*rankMult)+convBonus,100);
+    var sigCls=score>=80?'sig-3':score>=60?'sig-2':'sig-1';
+    var sigLbl=score>=80?'&#x1F525; Elite':score>=60?'&#x26A1; Strong':'&#x26A0;&#xFE0F; Moderate';
+    // Rank badge for display
+    var rankBadge=bestRank<999?('&#x1F3C5;#'+bestRank+(bestCat?'&nbsp;'+bestCat:'')+' &middot; '):'';
     var barPct=Math.round((vol/maxVol)*100);
     var traders=g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,4);
     var link=g.eventSlug?'https://polymarket.com/event/'+g.eventSlug:'#';
@@ -567,7 +607,7 @@ function renderTrending(){
     var ocColor=ocLower==='yes'?'#00C896':ocLower==='no'?'#FF3D5A':'var(--t1)';
     return '<div class="trend-card '+sigCls+'" style="scroll-snap-align:start">'
       +'<div class="trend-header"><div><div class="trend-signal-lbl '+sigCls+'">'+sigLbl+'</div>'
-      +'<span class="trend-buyers '+sigCls+'">'+buyers+' buyer'+(buyers>1?'s':'')+' &middot; '+fu(vol)+' &middot; '+score+'pts</span></div>'
+      +'<span class="trend-buyers '+sigCls+'">'+rankBadge+buyers+' buyer'+(buyers>1?'s':'')+' &middot; '+fu(vol)+' &middot; '+score+'pts</span></div>'
       +'<span class="trend-age">'+timeAgo(g.latestTs)+'</span></div>'
       +'<div class="trend-market">'+g.title+sportTag+'</div>'
       +'<div style="margin-bottom:8px">Buying <span style="font-weight:800;color:'+ocColor+'">'+g.outcome+'</span></div>'
