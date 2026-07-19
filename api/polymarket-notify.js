@@ -11,6 +11,7 @@
    ========================================================= */
 
 const DATA_API = 'https://data-api.polymarket.com';
+const sentThisSession = new Set(); // persists across warm cron invocations
 
 /* ── LEADERBOARD: SPORTS + OVERALL (only categories that work) ── */
 async function fetchLeaderboard(category, limit) {
@@ -236,9 +237,16 @@ module.exports = async function handler(req, res) {
     // ── Step 6: Send alerts ──
     let sent = 0;
     const ntfyResults = [];
+    // Module-level set persists across warm invocations — prevents repeat ntfy pushes
+    // (resets on cold start — cold starts are rare on active Vercel functions)
     for (const buy of toAlert) {
+      const alertKey = buy.transactionHash || `${buy.wallet}|${buy.title}|${buy.outcome}`;
+      if (sentThisSession.has(alertKey)) {
+        ntfyResults.push({ trader: buy.traderName, sport: buy.sport, usd: Math.round(buy.usdValue), result: { ok: false, reason: 'already sent this session' } });
+        continue;
+      }
       const result = await sendAlert(topic, buy);
-      if (result?.ok) sent++;
+      if (result?.ok) { sent++; sentThisSession.add(alertKey); }
       ntfyResults.push({ trader: buy.traderName, sport: buy.sport, usd: Math.round(buy.usdValue), result });
       if (toAlert.length > 1) await new Promise(r => setTimeout(r, 300));
     }
