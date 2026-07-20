@@ -29,94 +29,67 @@ const SPORT_KEYS = {
   NCAAB:'basketball_ncaab',
 };
 
-/* ── ACTION NETWORK — Real ticket % for RLM (POC) ──────────────
-   Calls the same endpoint AN's website uses. No auth required.
-   Rate: once per odds refresh cycle — same cadence as Odds API.
+/* ── LINE VELOCITY — Self-generated RLM via Vercel KV ──────────
+   Store Pinnacle price on every odds call.
+   Next call: compare current vs stored → real line movement.
+   No external scraping. No rate limits. No IP blocks.
+   Requires Vercel KV (same setup as polymarket-alerts).
 ──────────────────────────────────────────────────────────────── */
-async function fetchActionNetworkPct(sport = 'mlb') {
-  const sportSlug = ({ mlb:'mlb', nfl:'nfl', nba:'nba', nhl:'nhl' })[sport.toLowerCase()] || 'mlb';
-  const today = new Date().toISOString().split('T')[0];
+let _kv = null;
+async function getKV() {
+  if (_kv) return _kv;
+  try { _kv = (await import('@vercel/kv')).kv; return _kv; } catch { return null; }
+}
+
+async function loadPrevLines(sport) {
   try {
-    const res = await fetch(
-      `https://api.actionnetwork.com/web/v1/games?sport=${sportSlug}&date=${today}`,
-      { headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-        'Accept':     'application/json',
-        'Referer':    'https://www.actionnetwork.com/',
-        'Origin':     'https://www.actionnetwork.com',
-      }}
-    );
-    if (!res.ok) return { games: {}, status: res.status };
-    const data = await res.json();
-    const games = {};
-    (data.games || []).forEach(g => {
-      const teams = g.teams || [];
-      if (teams.length < 2) return;
-      const awayName = (teams[0].full_name || teams[0].display_name || teams[0].abbr || '').toLowerCase();
-      const homeName = (teams[1].full_name || teams[1].display_name || teams[1].abbr || '').toLowerCase();
-      const bets = g.consensus || g.betting_percentages || g.public_betting || {};
-      const record = {
-        anGameId:    g.id,
-        awayTeam:    awayName,
-        homeTeam:    homeName,
-        awayBetPct:  parseFloat(bets.away_bets  || bets.away_bet_pct  || bets.away || 0),
-        homeBetPct:  parseFloat(bets.home_bets  || bets.home_bet_pct  || bets.home || 0),
-        awayMonPct:  parseFloat(bets.away_money || bets.away_money_pct || 0),
-        homeMonPct:  parseFloat(bets.home_money || bets.home_money_pct || 0),
-        totalBets:   parseFloat(bets.total_bets || 0),
-        sharpBadge:  !!(g.sharp_action || bets.sharp || g.is_sharp),
-        commenceTime: g.start_time || g.scheduled,
-      };
-      games[`${awayName}_${homeName}`] = record;
-      games[`${homeName}_${awayName}`] = record;
-      if (teams[0].abbr) games[teams[0].abbr.toLowerCase()] = record;
-      if (teams[1].abbr) games[teams[1].abbr.toLowerCase()] = record;
-    });
-    return { games, status: 'ok', count: Object.keys(games).length / 2 };
-  } catch (e) {
-    console.warn('[AN] fetch failed:', e.message);
-    return { games: {}, status: 'error', error: e.message };
-  }
+    const kv = await getKV();
+    if (!kv) return {};
+    const data = await kv.get(`lines:${sport}:prev`);
+    return data || {};
+  } catch { return {}; }
 }
 
-function matchToAN(awayTeam, homeTeam, anGames) {
-  const norm = s => (s||'').toLowerCase()
-    .replace(/\b(new york|los angeles|san francisco|san diego|kansas city|st\.?\s*louis|tampa bay)\b/gi,'')
-    .replace(/[^a-z]/g,'').trim();
-  const aN = norm(awayTeam), hN = norm(homeTeam);
-  if (anGames[`${awayTeam.toLowerCase()}_${homeTeam.toLowerCase()}`])
-    return anGames[`${awayTeam.toLowerCase()}_${homeTeam.toLowerCase()}`];
-  for (const [key, rec] of Object.entries(anGames)) {
-    const kN = norm(key);
-    if (kN.includes(aN) || kN.includes(hN)) return rec;
-    if ((aN && norm(rec.awayTeam||'').includes(aN)) || (hN && norm(rec.homeTeam||'').includes(hN))) return rec;
-  }
-  return null;
+async function saveCurrentLines(sport, lines) {
+  try {
+    const kv = await getKV();
+    if (!kv) return;
+    await kv.set(`lines:${sport}:prev`, lines, { ex: 86400 }); // 24hr TTL
+  } catch {}
 }
 
-function calcRLMWithAN(sharpSide, awayTeam, anRecord, currentRLM) {
-  // If no AN data available, keep the existing inferred RLM value
-  if (!anRecord || (!anRecord.awayBetPct && !anRecord.homeBetPct)) {
-    return { score: currentRLM, isReal: false, label: 'Inferred (no ticket data)' };
+function calcLineVelocity(gameId, sharpSide, sharpOutcome, currentPrice, prevLines) {
+  const prev = prevLines[gameId];
+  if (!prev || !prev[sharpOutcome]) {
+    return { score: 35, isReal: false, label: 'No previous line stored yet', movement: 0 };
   }
-  const sharpIsAway = (sharpSide||'').toLowerCase().includes(
-    (awayTeam||'').toLowerCase().split(' ').pop()
-  );
-  const sharpBetPct  = sharpIsAway ? anRecord.awayBetPct : anRecord.homeBetPct;
-  const sharpMonPct  = sharpIsAway ? anRecord.awayMonPct : anRecord.homeMonPct;
-  const publicBetPct = 100 - sharpBetPct;
-  const div = publicBetPct - 50; // positive = public leaning against sharp
+  const prevPrice = prev[sharpOutcome];
+  const movement  = currentPrice - prevPrice; // positive = line got longer (better for bettor)
+  const absMove   = Math.abs(movement);
+
+  // Sharp hammer: line moved AGAINST public (shortening on sharp side = books adjusting to sharp)
+  // e.g. Dodgers were +200, now +167 → books shortened because sharps bet Dodgers
+  const sharpenedToSharp = movement < 0; // price got more negative = shorter odds = more likely
+
   let score, label;
-  if      (div > 25) { score = Math.min(60 + Math.round(div*1.2), 100); label = `Strong RLM (${publicBetPct.toFixed(0)}% public vs sharp)`; }
-  else if (div > 10) { score = Math.round(35 + div*1.5);                label = `Moderate RLM (${publicBetPct.toFixed(0)}% public vs sharp)`; }
-  else if (div >  0) { score = Math.round(20 + div);                    label = 'Mild divergence'; }
-  else               { score = Math.round(Math.max(10, 20+div));         label = 'No RLM (public agrees with sharp)'; }
-  if (sharpMonPct > 0 && sharpMonPct > sharpBetPct + 10) { score = Math.min(score+10, 100); label += ' + money divergence'; }
-  return {
-    score, isReal: true, label,
-    sharpBetPct, publicBetPct, sharpMonPct,
-    sharpBadgeAN: anRecord.sharpBadge,
-  };
+  if (sharpenedToSharp && absMove >= 15) {
+    score = Math.min(90, 55 + absMove * 1.5);
+    label = `Strong sharp move: ${prevPrice > 0 ? '+' : ''}${prevPrice} → ${currentPrice > 0 ? '+' : ''}${currentPrice} (${absMove}pt hammer)`;
+  } else if (sharpenedToSharp && absMove >= 7) {
+    score = Math.min(75, 40 + absMove * 2);
+    label = `Moderate sharp move: ${absMove}pt shortening`;
+  } else if (sharpenedToSharp && absMove >= 3) {
+    score = Math.round(30 + absMove * 2);
+    label = `Mild line movement: ${absMove}pts toward sharp side`;
+  } else if (!sharpenedToSharp && absMove >= 5) {
+    score = Math.max(10, 25 - absMove);
+    label = `Line drifted away: public money moving it ${absMove}pts`;
+  } else {
+    score = 35;
+    label = `Stable line (${absMove}pt move)`;
+  }
+
+  return { score: Math.min(100, Math.max(0, score)), isReal: true, label, movement, prevPrice };
 }
 
 /* ── Original signal math (unchanged) ─────────────────────── */
@@ -297,10 +270,10 @@ module.exports=async function handler(req,res){
     +'&oddsFormat=american';
 
   try{
-    // Fetch odds + Action Network in parallel — no added latency
-    const [up, anData] = await Promise.all([
+    // Fetch odds + previous lines from KV in parallel
+    const [up, prevLines] = await Promise.all([
       fetch(url),
-      fetchActionNetworkPct(sport.toLowerCase()),
+      loadPrevLines(sport),
     ]);
 
     const rem=up.headers.get('x-requests-remaining');
@@ -325,40 +298,46 @@ module.exports=async function handler(req,res){
 
     const rawPlays=upcoming.map(analyzeAll).filter(Boolean);
 
-    // Enrich each play with real RLM from Action Network
+    // Build current line snapshot for storage
+    const currentLines = {};
+    rawPlays.forEach(play => {
+      if (!play.id || play.noSignal) return;
+      currentLines[play.id] = {};
+      if (play.markets) {
+        Object.values(play.markets).forEach(mkt => {
+          if (!mkt || !mkt.rawPrices) return;
+          mkt.rawPrices.forEach(rp => { currentLines[play.id][rp.name] = rp.price; });
+        });
+      }
+    });
+
+    // Enrich with line velocity (self-generated RLM)
     const enrichedPlays = rawPlays.map(play => {
       if (play.noSignal || !play.sharpSide || play.sharpSide === '—') return play;
-      const anRecord = matchToAN(play.away, play.home, anData.games || {});
-      if (!anRecord) return play;
-      const rlmResult = calcRLMWithAN(play.sharpSide, play.away, anRecord, play.pillars.rlm);
-
-      // Recalculate siScore with real RLM (same weights: Pinnacle 52% / Money 38% / RLM 10%)
+      const rlmResult = calcLineVelocity(
+        play.id, play.sharpSide, play.sharpOutcome || play.sharpSide.split(' ')[0],
+        play.currentPinPrice || play.lines?.pinnacle, prevLines
+      );
       const newSI = Math.round(
         play.pillars.pinnacle * 0.52 +
         play.pillars.money    * 0.38 +
         rlmResult.score       * 0.10
       );
-
       return {
         ...play,
         siScore: newSI,
         pillars: { ...play.pillars, rlm: rlmResult.score, rlmIsReal: rlmResult.isReal },
         rlmDetail: {
-          label:        rlmResult.label,
-          sharpBetPct:  rlmResult.sharpBetPct,
-          publicBetPct: rlmResult.publicBetPct,
-          sharpMonPct:  rlmResult.sharpMonPct,
-          sharpBadgeAN: rlmResult.sharpBadgeAN,
-          isReal:       rlmResult.isReal,
-        },
-        publicBettingPct: {
-          awayBets:  anRecord.awayBetPct,
-          homeBets:  anRecord.homeBetPct,
-          awayMoney: anRecord.awayMonPct,
-          homeMoney: anRecord.homeMonPct,
+          label:     rlmResult.label,
+          movement:  rlmResult.movement,
+          prevPrice: rlmResult.prevPrice,
+          isReal:    rlmResult.isReal,
         },
       };
     });
+
+    // Save current lines for next call (async, don't await — no latency hit)
+    saveCurrentLines(sport, currentLines);
 
     // Re-sort after enrichment (RLM may change scores)
     const plays=[
@@ -368,10 +347,10 @@ module.exports=async function handler(req,res){
 
     res.status(200).json({
       plays,
-      total: upcoming.length,
-      quota: { remaining: rem, used },
-      anStatus:     anData.status,
-      anGamesFound: anData.count || 0,
+      total:       upcoming.length,
+      quota:       { remaining: rem, used },
+      rlmSource:   Object.keys(prevLines).length > 0 ? 'line_velocity' : 'inferred_first_run',
+      gamesTracked: Object.keys(prevLines).length,
     });
 
   }catch(err){
