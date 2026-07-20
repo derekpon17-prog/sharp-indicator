@@ -886,14 +886,11 @@ function renderDash(){
   // Alert row
   window._al={};
   const arEl=el('d-ar');
-  // Dashboard recent alerts: last 24h rolling window
-  const arCutoff=Date.now()-24*60*60*1000;
-  const recentDashAlerts=alerts.filter(function(a){
-    return (a.loggedAt||(a.timestamp*1000)||0)>=arCutoff;
-  });
+  // Dashboard recent alerts: always show 8 most recent — card timestamp shows age
+  const recentDashAlerts=alerts.slice(0,8);
   if(recentDashAlerts.length){
-    recentDashAlerts.slice(0,8).forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
-    arEl.innerHTML=recentDashAlerts.slice(0,8).map(acardHTML).join('');
+    recentDashAlerts.forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
+    arEl.innerHTML=recentDashAlerts.map(acardHTML).join('');
   }
   else arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No alerts yet</div>';
   // Trades row
@@ -1340,7 +1337,7 @@ function renderCommandCenter(){
   if(!allPlays.length){
     if(empty)empty.style.display='';grid.innerHTML='';
     var ccMid=new Date();ccMid.setHours(0,0,0,0);
-    var totAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>=(Date.now()-86400000);}).length;
+    var totAlerts=alerts.length; // total alert count
     if(ccTitle)ccTitle.textContent=totAlerts>0?totAlerts+' alert'+(totAlerts===1?'':'s')+' today -- review sections below':'Check sections below for signals';
     return;
   }
