@@ -730,7 +730,13 @@ function renderSharpLines(){
   if(!cont)return;
   const now2=Date.now();
   const plays=sharpLines.filter(function(g){return !g.noSignal&&parseInt(g.siScore||0)>=50&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now2-4*3600000);}).slice(0,8);
-  if(!plays.length){if(row)row.style.display='none';return;}
+  if(!plays.length){
+    if(row){
+      row.style.display='';
+      if(cont)cont.innerHTML='<div style="padding:16px 8px;text-align:center;color:var(--t4);font-size:12px">No Sharp Line signals at 50+ SI right now — check back closer to game time</div>';
+    }
+    return;
+  }
   if(row)row.style.display='';
   autoTrackLinePlays(plays);
   autoTrackSharpScorePlays(plays,alerts);
@@ -874,13 +880,22 @@ function renderDash(){
   const vol=alerts.reduce((a,b)=>a+(b.usdValue||0),0);
   el('d-al').textContent=alerts.length;el('d-vo').textContent=fp(vol);
   el('d-wr').textContent=wr!==null?wr+'%':'&mdash;';el('d-wr').style.color=wr===null?'var(--t4)':wr>=55?'var(--green)':wr>=50?'var(--gold)':'var(--red)';
-  el('d-ws').textContent=W+L>0?W+'W&ndash;'+L+'L':'no trades yet';
+  el('d-ws').innerHTML=W+L>0?W+'W&ndash;'+L+'L':'no trades yet';
   el('d-pl').textContent=pnl!==0?(pnl>0?'+':'')+fu(pnl):'&mdash;';el('d-pl').style.color=pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--t4)';
   renderTrending();
   // Alert row
   window._al={};
   const arEl=el('d-ar');
-  if(alerts.length){alerts.slice(0,8).forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});arEl.innerHTML=alerts.slice(0,8).map(acardHTML).join('');}
+  // Dashboard recent alerts: today only (since midnight), exclude completed soccer/old markets
+  const arMid=new Date();arMid.setHours(0,0,0,0);
+  const todayAlerts=alerts.filter(function(a){
+    const ts=a.loggedAt||(a.timestamp*1000)||0;
+    return ts>=arMid.getTime(); // today only
+  });
+  if(todayAlerts.length){
+    todayAlerts.slice(0,8).forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
+    arEl.innerHTML=todayAlerts.slice(0,8).map(acardHTML).join('');
+  }
   else arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No alerts yet</div>';
   // Trades row
   const trEl=el('d-tr');
@@ -1266,7 +1281,12 @@ function renderSharpScore(){
     });
   }
   plays.sort(function(a,b){var o={combined:0,line:1,poly:2};return(o[a.type]||1)-(o[b.type]||1)||b.score-a.score;});
-  if(!plays.length){row.style.display='none';return;}
+  if(!plays.length){
+    row.style.display='';
+    if(list)list.innerHTML='<div style="padding:16px 8px;text-align:center;color:var(--t4);font-size:12px">No combined Sharp Score plays yet — requires Line + Poly signals on the same game</div>';
+    if(tag)tag.textContent='NO SIGNAL';
+    return;
+  }
   row.style.display='';
   if(tag){
     const hC=plays.some(function(p){return p.type==='combined';});
@@ -1321,7 +1341,7 @@ function renderCommandCenter(){
   if(!allPlays.length){
     if(empty)empty.style.display='';grid.innerHTML='';
     var ccMid=new Date();ccMid.setHours(0,0,0,0);
-    var todayAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>=ccMid.getTime();}).length;
+    var totAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>=ccMid.getTime();}).length;
     if(ccTitle)ccTitle.textContent=todayAlerts>0?todayAlerts+' alert'+(todayAlerts===1?'':'s')+' today -- review sections below':'Fetching signal data -- alerts will appear shortly...';
     return;
   }
