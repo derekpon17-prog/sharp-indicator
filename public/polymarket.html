@@ -896,8 +896,11 @@ function renderDash(){
   // Alert row
   window._al={};
   const arEl=el('d-ar');
-  // Dashboard recent alerts: always show 8 most recent — card timestamp shows age
-  const recentDashAlerts=alerts.slice(0,8);
+  // Dashboard recent alerts: 20h window — last night's games through tonight
+  const dashCutoff=Date.now()-20*3600000;
+  const recentDashAlerts=alerts.filter(function(a){
+    return(a.loggedAt||(a.timestamp*1000)||0)>=dashCutoff;
+  }).slice(0,8);
   if(recentDashAlerts.length){
     recentDashAlerts.forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
     arEl.innerHTML=recentDashAlerts.map(acardHTML).join('');
@@ -1347,7 +1350,7 @@ function renderCommandCenter(){
   if(!allPlays.length){
     if(empty)empty.style.display='';grid.innerHTML='';
     var ccMid=new Date();ccMid.setHours(0,0,0,0);
-    var totAlerts=alerts.length; // total alert count
+    var totAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000)||0)>=(Date.now()-20*3600000);}).length;
     if(ccTitle)ccTitle.textContent=totAlerts>0?totAlerts+' alert'+(totAlerts===1?'':'s')+' today -- review sections below':'Check sections below for signals';
     return;
   }
