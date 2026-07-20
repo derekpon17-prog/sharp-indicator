@@ -897,7 +897,7 @@ function renderDash(){
   window._al={};
   const arEl=el('d-ar');
   // Dashboard recent alerts: 20h window — last night's games through tonight
-  const dashCutoff=Date.now()-20*3600000;
+  const dashCutoff=Date.now()-30*3600000; // 30h — catches last night's plays
   const recentDashAlerts=alerts.filter(function(a){
     return(a.loggedAt||(a.timestamp*1000)||0)>=dashCutoff;
   }).slice(0,8);
@@ -1350,7 +1350,7 @@ function renderCommandCenter(){
   if(!allPlays.length){
     if(empty)empty.style.display='';grid.innerHTML='';
     var ccMid=new Date();ccMid.setHours(0,0,0,0);
-    var totAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000)||0)>=(Date.now()-20*3600000);}).length;
+    var totAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000)||0)>=(Date.now()-30*3600000);}).length;
     if(ccTitle)ccTitle.textContent=totAlerts>0?totAlerts+' alert'+(totAlerts===1?'':'s')+' today -- review sections below':'Check sections below for signals';
     return;
   }
@@ -1607,6 +1607,7 @@ function renderSignalLab(){
   recentAlerts.forEach(a=>{
     const ts=a.loggedAt||(a.timestamp*1000);
     if(ts<cutoffExt)return;
+    if(!detectSport(a.title||''))return; // apply whitelist — skip esports/blocked
     const key=(a.title||'')+'||'+(a.outcome||'');
     if(!key||key==='||')return;
     if(!allGroups[key])allGroups[key]={title:a.title,outcome:a.outcome,eventSlug:a.eventSlug,buys:[],totalVol:0,latestTs:0};
