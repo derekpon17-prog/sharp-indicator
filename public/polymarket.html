@@ -342,8 +342,13 @@ select.finput option{background:var(--s2)}
   <div class="page" style="padding-top:20px">
     <div style="margin-bottom:28px">
       <div class="row-hdr" style="margin-bottom:12px">
-        <div class="row-ttl" style="font-size:16px"><em>&#x26A1;</em>Signal Strength Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at 65+ score</span></div>
+        <div class="row-ttl" style="font-size:16px"><em>&#x26A1;</em>Polymarket Signal Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at 65+ score</span></div>
         <div id="sig-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
+      </div>
+      <div class="perf" style="margin-bottom:16px">
+        <div class="pc"><div class="pc-val" id="sig-rec">0&ndash;0</div><div class="pc-lbl">Record</div></div>
+        <div class="pc"><div class="pc-val" id="sig-wr" style="color:var(--t4)">&mdash;</div><div class="pc-lbl">Win Rate</div></div>
+        <div class="pc"><div class="pc-val" id="sig-units" style="color:var(--t4)">0.00u</div><div class="pc-lbl">Unit P&amp;L</div></div>
       </div>
       <div id="sig-plays" style="display:flex;flex-direction:column;gap:8px"></div>
       <div id="sig-empty" class="empty" style="padding:28px">
@@ -359,6 +364,11 @@ select.finput option{background:var(--s2)}
         <div class="row-ttl" style="font-size:16px"><em>&#x1F4CA;</em>Sharp Line Signal Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at 65+ SI Score</span></div>
         <div id="line-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
       </div>
+      <div class="perf" style="margin-bottom:16px">
+        <div class="pc"><div class="pc-val" id="line-rec">0&ndash;0</div><div class="pc-lbl">Record</div></div>
+        <div class="pc"><div class="pc-val" id="line-wr" style="color:var(--t4)">&mdash;</div><div class="pc-lbl">Win Rate</div></div>
+        <div class="pc"><div class="pc-val" id="line-units" style="color:var(--t4)">0.00u</div><div class="pc-lbl">Unit P&amp;L</div></div>
+      </div>
       <div id="line-plays" style="display:flex;flex-direction:column;gap:8px"></div>
       <div id="line-empty" class="empty" style="padding:22px">
         <div class="empty-ico">&#x1F4CA;</div><h3>No Sharp Line plays yet</h3>
@@ -371,6 +381,11 @@ select.finput option{background:var(--s2)}
       <div class="row-hdr" style="margin-bottom:12px">
         <div class="row-ttl" style="font-size:16px"><em>&#x1F3AF;</em>Sharp Score Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">both signals agree &middot; 70+ combined</span></div>
         <div id="ss-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
+      </div>
+      <div class="perf" style="margin-bottom:16px">
+        <div class="pc"><div class="pc-val" id="ss-rec">0&ndash;0</div><div class="pc-lbl">Record</div></div>
+        <div class="pc"><div class="pc-val" id="ss-wr" style="color:var(--t4)">&mdash;</div><div class="pc-lbl">Win Rate</div></div>
+        <div class="pc"><div class="pc-val" id="ss-units" style="color:var(--t4)">0.00u</div><div class="pc-lbl">Unit P&amp;L</div></div>
       </div>
       <div id="ss-plays" style="display:flex;flex-direction:column;gap:8px"></div>
       <div id="ss-empty" class="empty" style="padding:22px">
@@ -1033,57 +1048,182 @@ async function gradeFromESPN(){
 function renderTracking(){
   gradeOpenPlays();
   gradeFromESPN();
-  // Sig plays record
-  const sW=sigPlays.filter(p=>p.status==='WIN').length,sL=sigPlays.filter(p=>p.status==='LOSS').length;
-  const sWR=sW+sL>0?Math.round(sW/(sW+sL)*100):null;
-  const srEl=el('sig-record');
-  if(srEl){srEl.textContent=(sW+sL>0?sW+'W-'+sL+'L'+(sWR!==null?' ('+sWR+'%)':''):'0W-0L')+(sigPlays.length?' on '+sigPlays.length+' plays':'');if(sWR!==null)srEl.style.color=sWR>=55?'var(--green)':sWR>=50?'var(--gold)':'var(--red)';}
-  const spEl=el('sig-plays'),spEmpty=el('sig-empty');
+
+  /* ── UNIT CALC ──────────────────────────────────────────────
+     Minus money (favorites): risk enough TO WIN 1 unit
+       At -127: risk 1.27u, win 1.00u
+     Plus money (underdogs):  risk 1 unit TO WIN X units
+       At +167: risk 1.00u, win 1.67u
+  ───────────────────────────────────────────────────────────── */
+  function unitPnL(plays){
+    var W=0,L=0,P=0,units=0;
+    plays.forEach(function(p){
+      if(p.status==='OPEN')return;
+      var odds=parseInt(p.odds||p.siScore||0);
+      // For auto-tracked plays, use stored odds or estimate from signal
+      // linePlays store odds from Pinnacle price
+      var price=parseInt(p.pinnaclePrice||p.odds||p.lines&&p.lines.pinnacle&&p.lines.pinnacle.replace('+','')||0);
+      var risk,win;
+      if(price<=-100){
+        // Favorite: risk (price/100) to win 1u
+        risk=Math.abs(price)/100;
+        win=1.0;
+      }else if(price>=100){
+        // Underdog: risk 1u to win (price/100)
+        risk=1.0;
+        win=price/100;
+      }else{
+        // Unknown odds: use 1u risk, 1u win (even money default)
+        risk=1.0; win=1.0;
+      }
+      if(p.status==='WIN'){units=Math.round((units+win)*100)/100;W++;}
+      else if(p.status==='LOSS'){units=Math.round((units-risk)*100)/100;L++;}
+      else if(p.status==='PUSH'){P++;}
+    });
+    var wr=W+L>0?Math.round(W/(W+L)*100):null;
+    return{W,L,P,units,wr};
+  }
+
+  function setStats(recId,wrId,unitsId,stat){
+    var re=el(recId),we=el(wrId),ue=el(unitsId);
+    if(re)re.textContent=stat.W+'-'+stat.L+(stat.P>0?' ('+stat.P+'P)':'');
+    if(we){we.innerHTML=stat.wr!==null?stat.wr+'%':'&mdash;';we.style.color=stat.wr===null?'var(--t4)':stat.wr>=55?'var(--green)':stat.wr>=50?'var(--gold)':'var(--red)';}
+    if(ue){var u=stat.units;ue.textContent=(u>=0?'+':'')+u.toFixed(2)+'u';ue.style.color=u>0?'var(--green)':u<0?'var(--red)':'var(--t4)';}
+  }
+
+  function playBtns(arr,storeKey,i,p){
+    if(p.status!=='OPEN')return '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px">'
+      +'<span style="font-size:12px;font-weight:700;color:'+(p.status==='WIN'?'var(--green)':'var(--red)')+'"><em>'+(p.status==='WIN'?'✅ WIN':'❌ LOSS')+'</em>'+(p.espnScore?' &middot; <span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+p.espnScore+'</span>':'')+'</span>'
+      +'<button data-arr="'+storeKey+'" data-i="'+i+'" class="atp-del" style="background:transparent;border:none;color:var(--t4);cursor:pointer;font-size:15px;padding:4px"><i class="ti ti-trash"></i></button>'
+      +'</div>';
+    return '<div style="display:flex;gap:5px;margin-top:8px">'
+      +'<button data-arr="'+storeKey+'" data-i="'+i+'" data-st="WIN" class="atp-btn" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button>'
+      +'<button data-arr="'+storeKey+'" data-i="'+i+'" data-st="LOSS" class="atp-btn" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer">L</button>'
+      +'<button data-arr="'+storeKey+'" data-i="'+i+'" data-st="PUSH" class="atp-btn" style="flex:1;padding:5px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer">P</button>'
+      +'<button data-arr="'+storeKey+'" data-i="'+i+'" class="atp-del" style="padding:5px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">🗑</button>'
+      +'</div>';
+  }
+
+  /* ── POLY SIGNAL PLAYS ── */
+  var sigStat=unitPnL(sigPlays);
+  setStats('sig-rec','sig-wr','sig-units',sigStat);
+  el('sig-record').textContent=sigStat.W+'W-'+sigStat.L+'L'+(sigPlays.length?' on '+sigPlays.length+' plays':'');
+  var spEl=el('sig-plays'),spEm=el('sig-empty');
   if(spEl){
-    if(!sigPlays.length){if(spEmpty)spEmpty.style.display='';spEl.innerHTML='';}
+    if(!sigPlays.length){if(spEm)spEm.style.display='';spEl.innerHTML='';}
     else{
-      if(spEmpty)spEmpty.style.display='none';
-      spEl.innerHTML=sigPlays.map((p,i)=>{
-        const {lbl,cls}=sigLabel(p.score||0);
-        const sport=p.sport||'';const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
-        const sc=p.status==='WIN'?'var(--green)':p.status==='LOSS'?'var(--red)':'var(--purple)';
-        const statusLbl=p.status==='OPEN'?'&#x23F3; Open':p.status==='WIN'?'&#x2705; WIN':'&#x274C; '+p.status;
-        const btns=p.status==='OPEN'
-          ?'<div style="display:flex;gap:5px;margin-top:8px">'
-            +'<button data-si="'+i+'" data-st="WIN" class="sgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button>'
-            +'<button data-si="'+i+'" data-st="LOSS" class="sgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer">L</button>'
-            +'<button data-si="'+i+'" data-st="PUSH" class="sgb" style="flex:1;padding:5px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer">P</button>'
-            +'<button data-si="'+i+'" class="sdb" style="padding:5px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button>'
-            +'</div>'
-          :'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-size:12px;font-weight:700;color:'+sc+'">'+statusLbl+'</span><button data-si="'+i+'" class="sdb" style="padding:3px 8px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t4);font-size:11px;cursor:pointer">&#x1F5D1;</button></div>';
-        return '<div class="sig-play '+p.status.toLowerCase()+'">'
+      if(spEm)spEm.style.display='none';
+      spEl.innerHTML=sigPlays.map(function(p,i){
+        var {lbl,cls}=sigLabel(p.score||0);
+        var sport=p.sport||'';
+        var sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
+        return '<div class="sig-play '+(p.status||'open').toLowerCase()+'">'
           +'<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
           +'<div><span style="font-size:10px;font-weight:800;color:'+(p.score>=80?'var(--purple)':'var(--green)')+'">'+lbl+'</span><span style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-left:6px">'+p.score+'pts</span>'+sportTag+'</div>'
           +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+timeAgo(p.loggedAt)+'</span>'
           +'</div>'
           +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+(p.title||'')+'</div>'
-          +'<div style="font-size:12px;color:var(--t3);margin-bottom:5px">Buying <strong style="color:var(--t1)">'+(p.outcome||'')+'</strong> &middot; '+p.buyers+' buyer'+(p.buyers>1?'s':'')+' &middot; '+fu(p.totalVol)+'</div>'
-          +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:5px">'+((p.traders||[]).map(n=>'<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--t3);font-family:var(--mono)">'+n+'</span>').join(''))+'</div>'
-          +btns+'</div>';
+          +'<div style="font-size:12px;color:var(--t3);margin-bottom:5px">Buying <strong style="color:var(--t1)">'+(p.outcome||'')+'</strong> &middot; '+(p.buyers||1)+' buyer'+(p.buyers>1?'s':'')+' &middot; '+fu(p.totalVol||0)+'</div>'
+          +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:5px">'+((p.traders||[]).map(function(n){return'<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--t3);font-family:var(--mono)">'+n+'</span>';}).join(''))+'</div>'
+          +playBtns(sigPlays,'pm:sig-plays',i,p)
+          +'</div>';
       }).join('');
     }
   }
-  // Manual picks
-  const W2=trades.filter(t=>t.status==='WIN').length,L2=trades.filter(t=>t.status==='LOSS').length;
-  const wr2=W2+L2>0?Math.round(W2/(W2+L2)*100):null;let pnl2=0;trades.filter(t=>t.status!=='OPEN').forEach(t=>pnl2+=calcP(t));
-  el('tp-r').textContent=W2+'\u2013'+L2;
-  el('tp-w').textContent=wr2!==null?wr2+'%':'&mdash;';el('tp-w').style.color=wr2===null?'var(--t4)':wr2>=55?'var(--green)':wr2>=50?'var(--gold)':'var(--red)';
+
+  /* ── SHARP LINE SIGNAL PLAYS ── */
+  var lineStat=unitPnL(linePlays);
+  setStats('line-rec','line-wr','line-units',lineStat);
+  el('line-record').textContent=lineStat.W+'W-'+lineStat.L+'L'+(linePlays.length?' on '+linePlays.length+' plays':'');
+  var lpEl=el('line-plays'),lpEm=el('line-empty');
+  if(lpEl){
+    if(!linePlays.length){if(lpEm)lpEm.style.display='';lpEl.innerHTML='';}
+    else{
+      if(lpEm)lpEm.style.display='none';
+      lpEl.innerHTML=linePlays.map(function(p,i){
+        var si=p.score||p.siScore||0;
+        var sport=p.sport||'MLB';
+        var sportTag='<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>';
+        var sigBadge=si>=80?'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(155,109,255,.15);color:var(--purple)">🔥 STRONG</span>':'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(64,180,255,.12);color:var(--blue)">📊 LINE</span>';
+        var exBadge=(p.exchangeConfirmed||p.exConfirms>0)?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(0,200,150,.1);color:var(--green);border-radius:3px;font-family:var(--mono)">✓ EXCHANGE</span>':'';
+        var pinLine=p.lines&&p.lines.pinnacle?'Pin: <strong>'+p.lines.pinnacle+'</strong>':'SI: '+si;
+        return '<div class="sig-play '+(p.status||'open').toLowerCase()+'">'
+          +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
+          +'<div style="display:flex;gap:5px;flex-wrap:wrap">'+sigBadge+exBadge+'</div>'
+          +'<div style="text-align:right"><div style="font-size:20px;font-weight:900;font-family:var(--mono);color:var(--blue);line-height:1">'+si+'</div><div style="font-size:9px;color:var(--t4);font-family:var(--mono)">SI</div></div>'
+          +'</div>'
+          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+(p.title||p.market||'')+'</div>'
+          +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:5px">▶ '+(p.sharpSide||p.side||'—')+'</div>'
+          +'<div style="display:flex;gap:10px;font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:5px">'
+          +'<span>'+pinLine+'</span>'
+          +(p.gapPP||p.pinnacleGap?'<span>Gap: +'+(p.gapPP||p.pinnacleGap)+'pp</span>':'')
+          +(p.signalType?'<span>'+p.signalType+'</span>':'')
+          +'</div>'
+          +sportTag
+          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">⏰ '+new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+'</div>':'')
+          +playBtns(linePlays,'pm:line-plays',i,p)
+          +'</div>';
+      }).join('');
+    }
+  }
+
+  /* ── SHARP SCORE PLAYS (combined) ── */
+  var ssStat=unitPnL(sharpScorePlays);
+  setStats('ss-rec','ss-wr','ss-units',ssStat);
+  el('ss-record').textContent=ssStat.W+'W-'+ssStat.L+'L'+(sharpScorePlays.length?' on '+sharpScorePlays.length+' plays':'');
+  var ssEl=el('ss-plays'),ssEm=el('ss-empty');
+  if(ssEl){
+    if(!sharpScorePlays.length){if(ssEm)ssEm.style.display='';ssEl.innerHTML='';}
+    else{
+      if(ssEm)ssEm.style.display='none';
+      ssEl.innerHTML=sharpScorePlays.map(function(p,i){
+        var combined=p.combined||p.score||0;
+        var sc=combined>=80?'var(--green)':combined>=70?'var(--gold)':'var(--t2)';
+        return '<div class="sig-play '+(p.status||'open').toLowerCase()+'">'
+          +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
+          +'<div>'
+          +'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.2),rgba(229,160,13,.2));color:var(--t1)">🎯 SHARP SCORE</span>'
+          +(p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+p.sport+'</span>':'')
+          +'</div>'
+          +'<div style="text-align:right"><div style="font-size:24px;font-weight:900;font-family:var(--mono);color:'+sc+';line-height:1">'+combined+'</div><div style="font-size:9px;color:var(--t4);font-family:var(--mono)">COMBINED</div></div>'
+          +'</div>'
+          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:5px">'+(p.title||'')+'</div>'
+          +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px">'
+          +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 9px">'
+          +'<div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">SHARP LINE '+(p.lineScore||0)+'</div>'
+          +'<div style="font-size:12px;font-weight:700;color:var(--t1)">'+(p.sharpSide||'—')+'</div>'
+          +(p.gapPP||p.pinnacleGap?'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+(p.gapPP||p.pinnacleGap)+'pp</div>':'')
+          +'</div>'
+          +'<div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 9px">'
+          +'<div style="font-size:9px;font-weight:700;color:var(--gold);margin-bottom:2px">POLY SIGNAL '+(p.polyScore||0)+'</div>'
+          +'<div style="font-size:12px;font-weight:700;color:var(--t1)">'+(p.polyOutcome||'—')+'</div>'
+          +(p.polyTrader?'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+p.polyTrader+'</div>':'')
+          +'</div>'
+          +'</div>'
+          +playBtns(sharpScorePlays,'pm:ss-plays',i,p)
+          +'</div>';
+      }).join('');
+    }
+  }
+
+  /* ── MY PICKS (manual) ── */
+  var W2=trades.filter(function(t){return t.status==='WIN';}).length;
+  var L2=trades.filter(function(t){return t.status==='LOSS';}).length;
+  var wr2=W2+L2>0?Math.round(W2/(W2+L2)*100):null;
+  var pnl2=0;trades.filter(function(t){return t.status!=='OPEN';}).forEach(function(t){pnl2+=calcP(t);});
+  el('tp-r').innerHTML=W2+'\u2013'+L2;
+  el('tp-w').innerHTML=wr2!==null?wr2+'%':'&mdash;';el('tp-w').style.color=wr2===null?'var(--t4)':wr2>=55?'var(--green)':wr2>=50?'var(--gold)':'var(--red)';
   el('tp-p').textContent=(pnl2>=0?'+':'')+fu(pnl2);el('tp-p').style.color=pnl2>0?'var(--green)':pnl2<0?'var(--red)':'var(--t4)';
   if(!trades.length){el('tl').innerHTML='';el('tl-empty').style.display='';return;}
   el('tl-empty').style.display='none';
-  el('tl').innerHTML=trades.map((t,i)=>{
-    const p=calcP(t);
-    return '<div class="tl-row '+t.status.toLowerCase()+'">'
+  el('tl').innerHTML=trades.map(function(t,i){
+    var p=calcP(t);
+    return '<div class="tl-row '+(t.status||'open').toLowerCase()+'">'
       +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+t.market+'</div>'
       +'<div style="font-size:11px;color:var(--t3);font-family:var(--mono)">'+(t.odds||t.price+'&#xa2;')+' &middot; '+fu(parseFloat(t.amount)||0)+(t.book?' &middot; '+t.book:'')+(t.notes?' &middot; '+t.notes:'')+'</div></div>'
       +'<div style="display:flex;align-items:center;gap:7px;flex-shrink:0">'
       +(t.status==='OPEN'?'<button data-ti="'+i+'" data-st="WIN" class="tgb" style="padding:5px 10px;border-radius:6px;border:1px solid rgba(0,200,150,.25);background:var(--grl);color:var(--green);font-size:11px;font-weight:700;cursor:pointer">W</button><button data-ti="'+i+'" data-st="LOSS" class="tgb" style="padding:5px 10px;border-radius:6px;border:1px solid rgba(255,61,90,.25);background:var(--rl);color:var(--red);font-size:11px;font-weight:700;cursor:pointer;margin-left:3px">L</button><button data-ti="'+i+'" data-st="PUSH" class="tgb" style="padding:5px 10px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:11px;font-weight:700;cursor:pointer;margin-left:3px">P</button>':'')
-      +'<span style="font-size:15px;font-weight:900;font-family:var(--mono);color:'+(p>0?'var(--green)':p<0?'var(--red)':'var(--t4)')+'">'+(t.status==='OPEN'?'Open':(p>=0?'+':'')+fu(p))+'</span>'
+      +'<span style="font-size:15px;font-weight:900;font-family:var(--mono);color:'+(p>0?'var(--green)':p<0?'var(--red)':'var(--t4)')+'\">'+(t.status==='OPEN'?'Open':(p>=0?'+':'')+fu(p))+'</span>'
       +'<button data-ti="'+i+'" class="tdb" style="background:transparent;border:none;color:var(--t4);cursor:pointer;font-size:15px;padding:4px"><i class="ti ti-trash"></i></button>'
       +'</div></div>';
   }).join('');
@@ -1565,6 +1705,22 @@ async function testNotif(){const t=el('cfg-tp').value.trim();if(!t){el('cfg-msg'
 
 /* === EVENT DELEGATION === */
 document.addEventListener('click',e=>{
+  // Auto-tracked play W/L/P buttons
+  const atpBtn=e.target.closest('.atp-btn');
+  if(atpBtn){
+    const arr=atpBtn.dataset.arr,i=parseInt(atpBtn.dataset.i),st=atpBtn.dataset.st;
+    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:sharpScorePlays;
+    if(plays[i]){plays[i].status=st;plays[i].gradedAt=Date.now();ss(arr,plays);renderTracking();}
+    return;
+  }
+  // Auto-tracked play delete
+  const atpDel=e.target.closest('.atp-del');
+  if(atpDel&&atpDel.dataset.arr){
+    const arr=atpDel.dataset.arr,i=parseInt(atpDel.dataset.i);
+    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:sharpScorePlays;
+    plays.splice(i,1);ss(arr,plays);renderTracking();
+    return;
+  }
   var slb=e.target.closest('.ss-log-btn');if(slb){openTM({market:slb.dataset.title||'',odds:'',betType:'ML'});showV('tracking',document.querySelectorAll('.ntab')[2]);return;}
   var stb=e.target.closest('.ss-track-btn');if(stb){showV('tracking',document.querySelectorAll('.ntab')[2]);return;}
   // Alert card Follow button
