@@ -362,7 +362,10 @@ select.finput option{background:var(--s2)}
     <div style="margin-bottom:28px">
       <div class="row-hdr" style="margin-bottom:12px">
         <div class="row-ttl" style="font-size:16px"><em>&#x1F4CA;</em>Sharp Line Signal Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at 65+ SI Score</span></div>
-        <div id="line-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <button onclick="gradeFromESPN().then(function(){renderTracking();})" style="font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);cursor:pointer;font-family:var(--mono)">&#x1F3C6; Grade Now</button>
+          <div id="line-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
+        </div>
       </div>
       <div class="perf" style="margin-bottom:16px">
         <div class="pc"><div class="pc-val" id="line-rec">0&ndash;0</div><div class="pc-lbl">Record</div></div>
@@ -694,8 +697,11 @@ function detectSportFromTeams(away,home){
 function sportFromKey(k){return(k||'').replace('americanfootball_','').replace('basketball_','').replace('baseball_','').replace('icehockey_','').replace('_h2h','').replace('_spreads','').replace('_totals','').toUpperCase();}
 function autoTrackLinePlays(lines){
   let changed=false;
+  const nowMs=Date.now();
   lines.forEach(function(g){
     const score=parseInt(g.siScore||0);if(score<65)return;
+    // Never auto-track live games — only pre-game signals
+    if(g.commenceTime&&new Date(g.commenceTime).getTime()<nowMs)return;
     const key=(g.away||'')+'vs'+(g.home||'')+'||'+(g.sharpSide||'');
     if(linePlays.some(function(p){return p.key===key;}))return;
     const gt=g.commenceTime?new Date(g.commenceTime).toLocaleString():'';
@@ -1019,9 +1025,19 @@ async function gradeFromESPN(){
   var sN=new Set();[...linePlays,...sharpScorePlays,...sigPlays].forEach(function(p){if(p.status==='OPEN')sN.add(p.sport||'MLB');});
   if(!sN.size)return;
   var results={};
+  // Fetch today AND yesterday — covers games that started yesterday (late starts, west coast)
+  var todayStr=new Date().toISOString().slice(0,10).replace(/-/g,'');
+  var yday=new Date(Date.now()-86400000).toISOString().slice(0,10).replace(/-/g,'');
   await Promise.all([...sN].map(async function(sp){
     var path=ESPN_SPORTS[sp];if(!path)return;
-    try{var r=await fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard');var d=await r.json();results[sp]=d.events||[];}catch{}
+    try{
+      var [r1,r2]=await Promise.all([
+        fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard?dates='+todayStr),
+        fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard?dates='+yday),
+      ]);
+      var [d1,d2]=await Promise.all([r1.json(),r2.json()]);
+      results[sp]=[...(d1.events||[]),...(d2.events||[])];
+    }catch{}
   }));
   var changed=false;
   function tryGrade(plays,key){
@@ -1760,6 +1776,8 @@ function startCd(){
 
 /* === INIT === */
 renderDash();fetchData();cd=REFRESH;startCd();
+// Grade on load + every 15 min
+setTimeout(function(){gradeFromESPN();gradeOpenPlays();},3000); // 3s delay lets page settle
 setInterval(function(){gradeFromESPN();gradeOpenPlays();},15*60*1000);
 
 </script>
