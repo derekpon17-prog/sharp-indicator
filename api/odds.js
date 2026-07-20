@@ -300,10 +300,12 @@ module.exports=async function handler(req,res){
     const now=Date.now();
     const upcoming=(Array.isArray(games)?games:[]).filter(g=>{
       const ct=new Date(g.commence_time).getTime();
-      return ct>now-4*3600000&&ct<now+86400000;
+      return ct>now&&ct<now+86400000; // pre-game only — live lines are misleading
     });
 
     const rawPlays=upcoming.map(analyzeAll).filter(Boolean);
+    // Tag each play with pre-game status for the site to use
+    rawPlays.forEach(p=>{p.isLive=new Date(p.commenceTime).getTime()<now;});
 
     // Build current line snapshot for storage
     const currentLines = {};
