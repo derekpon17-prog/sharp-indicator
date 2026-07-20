@@ -1350,7 +1350,7 @@ function renderCommandCenter(){
   if(!allPlays.length){
     if(empty)empty.style.display='';grid.innerHTML='';
     var ccMid=new Date();ccMid.setHours(0,0,0,0);
-    var totAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000)||0)>=(Date.now()-30*3600000);}).length;
+    var totAlerts=alerts.length;
     if(ccTitle)ccTitle.textContent=totAlerts>0?totAlerts+' alert'+(totAlerts===1?'':'s')+' today -- review sections below':'Check sections below for signals';
     return;
   }
