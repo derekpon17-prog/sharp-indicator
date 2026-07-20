@@ -925,20 +925,75 @@ function acardHTML(b){
   const init=(b.traderName||'?').slice(0,2).toUpperCase();
   const key=b.transactionHash||(b.wallet+(b.timestamp||''));
   window._al=window._al||{};window._al[key]=b;
-  const sport=detectSport(b.title);
-  const oe=lbData.overall.find(x=>x.wallet===b.wallet);
-  const se=lbData.sports.find(x=>x.wallet===b.wallet);
-  const sbInner=(oe||se)?buildSB(oe,se,null,sport)||'<div style="font-size:10px;color:var(--t4);padding:3px">No data</div>':'<div style="font-size:10px;color:var(--t4);padding:3px;text-align:center">Loading stats&hellip;</div>';
-  const avPart=b.profileImage?'<img class="acard-av" src="'+b.profileImage+'" alt="'+init+'" onerror="this.style.display=\'none\'">':'';
-  return '<div class="acard'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
-    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">'+(avPart||'<div class="acard-av-fb">'+init+'</div>')
-    +'<div style="min-width:0"><div class="acard-tname">'+(b.traderName||'Anon')+'</div><div style="display:flex;gap:3px;margin-top:2px">'+bdg(b.categories)+'</div></div></div>'
-    +'<div class="acard-mkt">'+(b.title||'Unknown')+'</div>'
-    +'<div class="acard-oc">Bought '+oc(b.outcome)+' @ '+pr+'&#xa2;</div>'
-    +'<div class="sb">'+sbInner+'</div>'
-    +'<div class="acard-ft"><div><div class="acard-size">'+fu(b.usdValue||0)+'</div><div class="acard-time">'+timeAgo(b.loggedAt||b.timestamp*1000)+'</div></div>'
-    +'<button class="acard-btn" data-akey="'+key+'">Follow</button></div>'
-    +'</div>';
+  const sport=detectSport(b.title||b.market||'');
+  const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono)">'+sport+'</span>':'';
+  const ago=timeAgo(b.loggedAt||(b.timestamp*1000));
+
+  // Signal type determines color theme and badge
+  const t=b.type||'POLY';
+  let borderColor,accentColor,typeBadge,icon;
+  if(t==='SHARP_SCORE'){
+    borderColor='linear-gradient(180deg,rgba(229,160,13,.6),rgba(64,180,255,.6))';
+    accentColor='var(--gold)';
+    typeBadge='<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.2),rgba(229,160,13,.2));color:var(--t1)">&#x1F3AF; SHARP SCORE</span>';
+    icon='&#x1F3AF;';
+  } else if(t==='LINE'){
+    borderColor='rgba(64,180,255,.5)';
+    accentColor='var(--blue)';
+    typeBadge='<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(64,180,255,.15);color:var(--blue)">&#x1F4CA; SHARP LINE</span>';
+    icon='&#x1F4CA;';
+  } else {
+    // POLY — default
+    borderColor=big?'rgba(229,160,13,.5)':'rgba(255,255,255,.08)';
+    accentColor='var(--gold)';
+    typeBadge='<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(229,160,13,.12);color:var(--gold)">&#x26A1; POLY SIGNAL</span>';
+    icon='&#x26A1;';
+  }
+
+  // Rank badges
+  const cats=b.categories||[];
+  const rankBadges=cats.map(function(c){
+    const col=c.rank<=5?'var(--gold)':c.rank<=15?'#9B6DFF':c.rank<=30?'var(--blue)':'var(--t4)';
+    return'<span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.06);color:'+col+';font-family:var(--mono)">'+c.category+' #'+c.rank+'</span>';
+  }).join('');
+
+  // Signal-specific detail row
+  let detailRow='';
+  if(t==='LINE'){
+    detailRow='<div style="display:flex;gap:8px;font-size:10px;color:var(--t3);font-family:var(--mono);margin:5px 0">'
+      +(b.gapPP||b.pinnacleGap?'<span>Pinnacle +'+( b.gapPP||b.pinnacleGap)+'pp</span>':'')
+      +(b.signalType?'<span style="color:var(--blue)">'+b.signalType+'</span>':'')
+      +(b.exConfirms>0?'<span style="color:var(--green)">&#x2713; '+b.exConfirms+' exchange</span>':'')
+      +'</div>';
+  } else if(t==='SHARP_SCORE'){
+    detailRow='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:5px 0">'
+      +'<div style="background:rgba(64,180,255,.06);border-radius:5px;padding:4px 7px"><div style="font-size:9px;color:var(--blue);font-weight:700;margin-bottom:1px">LINE '+(b.lineScore||b.siScore||'')+'</div><div style="font-size:10px;color:var(--t2)">'+(b.sharpSide||'')+'</div></div>'
+      +'<div style="background:rgba(229,160,13,.06);border-radius:5px;padding:4px 7px"><div style="font-size:9px;color:var(--gold);font-weight:700;margin-bottom:1px">POLY '+(b.polyScore||'')+'</div><div style="font-size:10px;color:var(--t2)">'+(b.polyOutcome||b.outcome||'')+'</div></div>'
+      +'</div>';
+  } else {
+    detailRow='<div style="font-size:11px;color:var(--t3);margin:4px 0">Bought <strong style="color:var(--t1)">'+(b.outcome||'')+'</strong>'+(pr&&pr!=='0.0'?' @ '+pr+'&#xa2;':'')+'</div>';
+  }
+
+  return '<div class="ac '+(big?'big':'')+'" style="border-left:3px solid '+borderColor+';position:relative">'
+    +'<div style="display:flex;align-items:flex-start;gap:10px">'
+    +'<div class="ac-av" style="background:'+(t==='LINE'?'rgba(64,180,255,.15)':t==='SHARP_SCORE'?'linear-gradient(135deg,rgba(64,180,255,.2),rgba(229,160,13,.2))':'rgba(229,160,13,.1)')+'">'
+    +'<span style="font-size:11px;font-weight:800;color:'+accentColor+'">'+icon+'</span>'
+    +'</div>'
+    +'<div style="flex:1;min-width:0">'
+    +'<div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:4px">'+typeBadge+sportTag+'</div>'
+    +'<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">'+rankBadges+'</div>'
+    +'<div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(b.title||b.market||'Unknown market')+'</div>'
+    +detailRow
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px">'
+    +'<div style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+(b.traderName||b.wallet||'')+'</div>'
+    +'<div style="font-size:11px;color:var(--t4)">'+ago+'</div>'
+    +'</div></div>'
+    +'<div style="flex-shrink:0;text-align:right">'
+    +'<div style="font-size:20px;font-weight:900;color:'+accentColor+';font-family:var(--mono)">'+(b.usdValue?(b.usdValue>=1000?'$'+(b.usdValue/1000).toFixed(1)+'K':'$'+Math.round(b.usdValue)):'')+'</div>'
+    +(t==='SHARP_SCORE'?'<div style="font-size:11px;font-weight:800;color:var(--gold);font-family:var(--mono)">'+(b.combined||'')+'</div>':'')
+    +(t==='POLY'?'<button class="fol-btn" data-key="'+key+'" style="font-size:11px;padding:4px 10px;border-radius:6px;background:var(--gold);color:#0B0C10;border:none;font-weight:700;cursor:pointer;margin-top:5px;white-space:nowrap">Follow</button>':'')
+    +'</div>'
+    +'</div></div>';
 }
 /* === TRADE CARD === */
 function tcardHTML(t){
@@ -1595,7 +1650,7 @@ function renderSignalLab(){
   html2 += '<div style="height:1px;background:var(--b1);margin-bottom:24px"></div>';
   html2 += '<div style="margin-bottom:28px">';
   html2 += '<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:4px">&#x26A1; Polymarket Signal Assessment</div>';
-  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">All convergence groups in last 24h &middot; Threshold: Score &ge;65 (with rank) or &ge;75 (without) to qualify</div>';
+  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">All convergence groups in last 72h &middot; Threshold: Score &ge;65 (with rank) or &ge;75 (without) to qualify</div>';
 
   if(!trends.length && !recentAlerts.length){
     html2 += '<div style="background:rgba(255,255,255,.04);border:1px solid var(--b1);border-radius:var(--r);padding:14px;font-size:12px;color:var(--t4)">No Polymarket alerts in last 24h.</div>';
