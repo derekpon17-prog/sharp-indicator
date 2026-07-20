@@ -699,7 +699,7 @@ function autoTrackLinePlays(lines){
   let changed=false;
   const nowMs=Date.now();
   lines.forEach(function(g){
-    const score=parseInt(g.siScore||0);if(score<65)return;
+    const score=parseInt(g.siScore||0);if(score<70)return; // Raised to 70 for quality
     // Never auto-track live games — only pre-game signals
     if(g.commenceTime&&new Date(g.commenceTime).getTime()<nowMs)return;
     const key=(g.away||'')+'vs'+(g.home||'')+'||'+(g.sharpSide||'');
@@ -714,7 +714,7 @@ function autoTrackSharpScorePlays(lines,alertList){
   let changed=false;
   const recentAlerts=alertList.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>Date.now()-43200000;});
   lines.forEach(function(g){
-    const lineScore=parseInt(g.siScore||0);if(lineScore<50)return;
+    const lineScore=parseInt(g.siScore||0);if(lineScore<55)return; // Raised for quality
     const match=matchLineToAlert(g,recentAlerts);if(!match)return;
     const polyScore=signalScore({buys:[match],totalVol:match.usdValue}).score;
     const combined=calcSharpScore(lineScore,polyScore);if(combined<70)return;
@@ -1501,8 +1501,8 @@ function renderSignalLab(){
       const rlm = g.pillars?g.pillars.rlm:0;
       const mon = g.pillars?g.pillars.money:0;
       const rlmReal = g.pillars&&g.pillars.rlmIsReal;
-      const qualifies = si>=65 && !g.noSignal;
-      const nearMiss = si>=45 && si<65 && !g.noSignal;
+      const qualifies = si>=70 && !g.noSignal; // Auto-track threshold
+      const nearMiss = si>=50 && si<70 && !g.noSignal;
       const noSig = g.noSignal || si===0;
 
       // Find Poly match
@@ -1559,9 +1559,9 @@ function renderSignalLab(){
         // Signal type + qualification
         html2 += '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">';
         html2 += '<span style="font-size:10px;font-family:var(--mono);padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.05);color:var(--t3)">'+(g.signalType||'NONE')+'</span>';
-        if(qualifies) html2 += '<span style="font-size:10px;font-weight:800;color:var(--green)">&#x2713; QUALIFIES ('+si+' &ge;65)</span>';
+        if(qualifies) html2 += '<span style="font-size:10px;font-weight:800;color:var(--green)">&#x2713; QUALIFIES ('+si+' &ge;70)</span>';
         else if(nearMiss){
-          const gap = 65-si;
+          const gap = 70-si;
           html2 += '<span style="font-size:10px;font-weight:700;color:var(--gold)">NEAR MISS — '+gap+' pts below threshold</span>';
           // What would push it over
           if(pin<60) html2 += '<span style="font-size:10px;color:var(--t4)">Needs stronger Pinnacle gap</span>';
