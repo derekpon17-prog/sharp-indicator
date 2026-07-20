@@ -881,20 +881,19 @@ function renderDash(){
   el('d-al').textContent=alerts.length;el('d-vo').textContent=fp(vol);
   el('d-wr').textContent=wr!==null?wr+'%':'&mdash;';el('d-wr').style.color=wr===null?'var(--t4)':wr>=55?'var(--green)':wr>=50?'var(--gold)':'var(--red)';
   el('d-ws').innerHTML=W+L>0?W+'W&ndash;'+L+'L':'no trades yet';
-  el('d-pl').textContent=pnl!==0?(pnl>0?'+':'')+fu(pnl):'&mdash;';el('d-pl').style.color=pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--t4)';
+  el('d-pl').innerHTML=pnl!==0?(pnl>0?'+':'')+fu(pnl):'&mdash;';el('d-pl').style.color=pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--t4)';
   renderTrending();
   // Alert row
   window._al={};
   const arEl=el('d-ar');
-  // Dashboard recent alerts: today only (since midnight), exclude completed soccer/old markets
-  const arMid=new Date();arMid.setHours(0,0,0,0);
-  const todayAlerts=alerts.filter(function(a){
-    const ts=a.loggedAt||(a.timestamp*1000)||0;
-    return ts>=arMid.getTime(); // today only
+  // Dashboard recent alerts: last 24h rolling window
+  const arCutoff=Date.now()-24*60*60*1000;
+  const recentDashAlerts=alerts.filter(function(a){
+    return (a.loggedAt||(a.timestamp*1000)||0)>=arCutoff;
   });
-  if(todayAlerts.length){
-    todayAlerts.slice(0,8).forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
-    arEl.innerHTML=todayAlerts.slice(0,8).map(acardHTML).join('');
+  if(recentDashAlerts.length){
+    recentDashAlerts.slice(0,8).forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
+    arEl.innerHTML=recentDashAlerts.slice(0,8).map(acardHTML).join('');
   }
   else arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No alerts yet</div>';
   // Trades row
@@ -1341,7 +1340,7 @@ function renderCommandCenter(){
   if(!allPlays.length){
     if(empty)empty.style.display='';grid.innerHTML='';
     var ccMid=new Date();ccMid.setHours(0,0,0,0);
-    var totAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>=ccMid.getTime();}).length;
+    var totAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>=(Date.now()-86400000);}).length;
     if(ccTitle)ccTitle.textContent=totAlerts>0?totAlerts+' alert'+(totAlerts===1?'':'s')+' today -- review sections below':'Fetching signal data -- alerts will appear shortly...';
     return;
   }
