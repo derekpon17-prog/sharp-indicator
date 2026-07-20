@@ -532,7 +532,7 @@ const dismissed=new Set(ls('pm:dismissed',[]));
 function dismiss(key){dismissed.add(key);ss('pm:dismissed',[...dismissed]);renderTrending();}
 let af='all',lbTab='sports',lbData={overall:[],sports:[]},allBuys=[],view='dashboard';
 let cd=0,cdT;
-const REFRESH=10*60*1000;
+const REFRESH=30*60*1000; // 30min — saves quota (was 10min)
 const _sc={};
 
 /* === SPORT DETECTION (WHITELIST ONLY) === */
@@ -672,6 +672,16 @@ async function fetchSharpLines(){
     const r=await fetch('/api/odds');
     if(!r.ok)return[];
     const d=await r.json();
+    if(d.error){
+      console.warn('[Sharp.idx]',d.error);
+      // Show quota error in Signal Lab
+      if(d.error.includes('quota')||d.error.includes('key')){
+        const labBody=el('lab-body');
+        if(labBody&&labBody.innerHTML.includes('Loading'))
+          labBody.innerHTML='<div style="background:rgba(255,61,90,.08);border:1px solid rgba(255,61,90,.2);border-radius:var(--r);padding:16px;color:var(--red);font-size:13px">&#x26A0; Sharp.idx quota exhausted ('+d.quota?.remaining+' remaining). Get a new API key at <a href="https://the-odds-api.com" target="_blank" style="color:var(--red)">the-odds-api.com</a> then update ODDS_API_KEY in Vercel env vars.</div>';
+      }
+      sharpLines=[];return[];
+    }
     sharpLines=d.plays||d.data||d.games||(Array.isArray(d)?d:[]);
     return sharpLines;
   }catch(e){console.warn('Sharp lines:',e.message);sharpLines=[];return[];}
@@ -1469,7 +1479,7 @@ function renderSignalLab(){
 
   // Gather ALL data sources
   const now = Date.now();
-  const cutoff = now - 24*3600000;
+  const cutoff = now - 72*3600000; // 72h — shows recent alerts even if 40+ hours old
   const recentAlerts = alerts.filter(a=>(a.loggedAt||(a.timestamp*1000))>cutoff);
   const trends = buildTrending();
 
@@ -1589,7 +1599,7 @@ function renderSignalLab(){
   }
 
   // Show ALL groups including below-threshold
-  const cutoffExt = now - 24*3600000;
+  const cutoffExt = now - 72*3600000; // 72hr so older alerts still show
   const allGroups = {};
   recentAlerts.forEach(a=>{
     const ts=a.loggedAt||(a.timestamp*1000);
