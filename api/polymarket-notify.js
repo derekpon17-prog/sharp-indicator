@@ -84,7 +84,7 @@ async function fetchSharpLinePlays(sport = 'MLB') {
     const r = await fetch(`${SITE_URL}/api/odds?sport=${sport}`);
     if (!r.ok) return [];
     const d = await r.json();
-    return (d.plays || []).filter(p => !p.noSignal && parseInt(p.siScore || 0) >= 65);
+    return (d.plays || []).filter(p => !p.noSignal && parseInt(p.siScore || 0) >= 70); // Quality threshold
   } catch (e) {
     console.warn('[LINE] fetch failed:', e.message);
     return [];
@@ -264,7 +264,7 @@ module.exports = async function handler(req, res) {
     }
 
     /* ── STEP 2: Sharp Line Signal — from /api/odds ── */
-    const linePlays = await fetchSharpLinePlays('MLB');
+    const linePlays = await fetchSharpLinePlays('MLB'); // Only SI >= 70 returned (raised from 65)
     results.line.scanned = linePlays.length;
 
     for (const play of linePlays) {
