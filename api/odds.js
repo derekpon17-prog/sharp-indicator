@@ -35,26 +35,33 @@ const SPORT_KEYS = {
    No external scraping. No rate limits. No IP blocks.
    Requires Vercel KV (same setup as polymarket-alerts).
 ──────────────────────────────────────────────────────────────── */
-let _kv = null;
-async function getKV() {
-  if (_kv) return _kv;
-  try { _kv = (await import('@vercel/kv')).kv; return _kv; } catch { return null; }
+// Upstash Redis REST client (no npm package required)
+async function upstashPost(body) {
+  const url   = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  try {
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const d = await r.json();
+    return d.result ?? null;
+  } catch { return null; }
 }
 
 async function loadPrevLines(sport) {
   try {
-    const kv = await getKV();
-    if (!kv) return {};
-    const data = await kv.get(`lines:${sport}:prev`);
-    return data || {};
+    const raw = await upstashPost(['GET', `lines:${sport}:prev`]);
+    if (!raw) return {};
+    return typeof raw === 'string' ? JSON.parse(raw) : raw;
   } catch { return {}; }
 }
 
 async function saveCurrentLines(sport, lines) {
   try {
-    const kv = await getKV();
-    if (!kv) return;
-    await kv.set(`lines:${sport}:prev`, lines, { ex: 86400 }); // 24hr TTL
+    await upstashPost(['SET', `lines:${sport}:prev`, JSON.stringify(lines), 'EX', '86400']);
   } catch {}
 }
 
