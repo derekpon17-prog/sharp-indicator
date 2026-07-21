@@ -531,6 +531,7 @@ let sharpLines=[];
 const dismissed=new Set(ls('pm:dismissed',[]));
 function dismiss(key){dismissed.add(key);ss('pm:dismissed',[...dismissed]);renderTrending();}
 let af='all',lbTab='sports',lbData={overall:[],sports:[]},allBuys=[],view='dashboard';
+try{if(!window._sA)window._sA=[];}catch(e){}
 let cd=0,cdT;
 const REFRESH=30*60*1000; // 30min — saves quota (was 10min)
 const _sc={};
@@ -643,17 +644,18 @@ async function fetchData(){
     ]);
     allBuys=br.buys||[];
     if(br.leaderboard)lbData=br.leaderboard;
-    // Merge server alerts with localStorage — server is source of truth
-    const serverAlerts=lr.alerts||[];
+    // _sA = server alerts (today from Upstash) for dashboard
+    // alerts = full merge for Alerts tab
+    window._sA=lr.alerts||[];
+    const serverAlerts=(lr.alerts||[]).slice();
     const localAlerts=ls('pm:alert-log',[]);
-    const seen=new Set(serverAlerts.map(a=>a.transactionHash||(a.wallet+(a.timestamp||''))));
-    // Add any local alerts not yet in server (from older sessions)
-    localAlerts.forEach(a=>{
-      const k=a.transactionHash||(a.wallet+(a.timestamp||''));
+    const seen=new Set(serverAlerts.map(function(a){return a.transactionHash||(a.wallet+(a.timestamp||''));}));
+    localAlerts.forEach(function(a){
+      var k=a.transactionHash||(a.wallet+(a.timestamp||''));
       if(!seen.has(k)){serverAlerts.push(a);seen.add(k);}
     });
-    alerts=serverAlerts.sort((a,b)=>(b.loggedAt||(b.timestamp*1000))-(a.loggedAt||(a.timestamp*1000))).slice(0,200);
-    ss('pm:alert-log',alerts); // keep localStorage in sync
+    alerts=serverAlerts.sort(function(a,b){return(b.loggedAt||(b.timestamp*1000))-(a.loggedAt||(a.timestamp*1000));}).slice(0,200);
+    ss('pm:alert-log',alerts);
     const cnt=alerts.length;
     if(cnt){el('acnt').style.display='';el('acnt').textContent=cnt>99?'99+':cnt;}
     if(view==='dashboard'){renderDash();setTimeout(renderTrending,200);}
@@ -911,12 +913,14 @@ function renderDash(){
   // Alert row
   window._al={};
   const arEl=el('d-ar');
-  const recentDashAlerts=alerts.slice(0,8); // no time filter
-    if(recentDashAlerts.length){
-    recentDashAlerts.forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
-    arEl.innerHTML=recentDashAlerts.map(acardHTML).join('');
+  // Dashboard: today's alerts from Upstash only
+  var sA=window._sA||[];
+  if(sA.length){
+    sA.slice(0,8).forEach(function(b){window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
+    arEl.innerHTML=sA.slice(0,8).map(acardHTML).join('');
+  }else{
+    arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No signals today yet</div>';
   }
-  else arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No alerts yet</div>';
   // Trades row
   const trEl=el('d-tr');
   const open=trades.filter(t=>t.status==='OPEN').slice(0,6);
