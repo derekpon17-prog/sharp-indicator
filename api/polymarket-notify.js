@@ -130,10 +130,12 @@ async function storeAlert(payload) {
 
 /* ─── SEND NTFY ───────────────────────────────────────── */
 async function sendNtfy(topic, title, body, priority = 'high') {
+  // Strip non-ASCII from headers — ntfy requires ASCII only
+  const asciiTitle = title.replace(/[^\x00-\x7F]/g, '').trim();
   try {
     const r = await fetch(`https://ntfy.sh/${topic}`, {
       method: 'POST',
-      headers: { 'Title': title, 'Priority': priority, 'Tags': 'money_bag' },
+      headers: { 'Title': asciiTitle, 'Priority': priority, 'Tags': 'money_bag' },
       body,
     });
     return { ok: r.ok, status: r.status };
@@ -154,7 +156,7 @@ module.exports = async function handler(req, res) {
   if (!topic) return res.status(200).json({ ok: false, message: 'NTFY_TOPIC not set' });
 
   const now    = Math.floor(Date.now() / 1000);
-  const cutoff = now - 72000;  // 20 hours
+  const cutoff = now - 93600;  // 26 hours — catches same-day buys
   const winMax = now - 30;
 
   const results = {
