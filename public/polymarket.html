@@ -772,10 +772,25 @@ function renderSharpLines(){
       +'<div style="margin-bottom:5px">Sharp side: <strong style="color:var(--green)">'+(g.sharpSide||'--')+'</strong></div>'
       +'<div style="font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:6px">'+(g.signalType||'')+'</div>'
       +'<div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:7px">'+exBadge+polyBadge+'</div>'
-      +'<div style="display:flex;gap:8px;margin-bottom:7px">'
-      +'<div style="font-size:10px;font-family:var(--mono);color:var(--t4)">Pin: <span style="color:var(--blue)">'+(g.pillars?g.pillars.pinnacle:0)+'</span></div>'
-      +'<div style="font-size:10px;font-family:var(--mono);color:var(--t4)">Money: <span style="color:var(--gold)">'+(g.pillars?g.pillars.money:0)+'</span></div>'
-      +'<div style="font-size:10px;font-family:var(--mono);color:var(--t4)">RLM: <span style="color:rgba(245,246,250,.3)">'+(g.pillars?g.pillars.rlm:0)+'*</span></div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:7px">'
+      // Pinnacle pillar
+      +'<div style="background:rgba(64,180,255,.06);border-radius:5px;padding:5px 7px;text-align:center">'
+      +'<div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">PINNACLE</div>'
+      +'<div style="font-size:16px;font-weight:900;font-family:var(--mono);color:'+(g.pillars&&g.pillars.pinnacle>=70?'var(--green)':g.pillars&&g.pillars.pinnacle>=50?'var(--blue)':'var(--t3)')+'">'+( g.pillars?g.pillars.pinnacle:0)+'</div>'
+      +'<div style="font-size:9px;color:var(--t4);font-family:var(--mono)">+'+(parseFloat(g.gapPP||0).toFixed(1))+'pp</div>'
+      +'</div>'
+      // Money/Exchange pillar
+      +'<div style="background:rgba(229,160,13,.06);border-radius:5px;padding:5px 7px;text-align:center">'
+      +'<div style="font-size:9px;font-weight:700;color:var(--gold);margin-bottom:2px">MONEY</div>'
+      +'<div style="font-size:16px;font-weight:900;font-family:var(--mono);color:'+(g.pillars&&g.pillars.money>=70?'var(--green)':g.pillars&&g.pillars.money>=50?'var(--gold)':'var(--t3)')+'">'+( g.pillars?g.pillars.money:0)+'</div>'
+      +'<div style="font-size:9px;color:var(--t4);font-family:var(--mono)">'+(g.exConfirms>0?g.exConfirms+' exchange':'no exchange')+'</div>'
+      +'</div>'
+      // RLM pillar
+      +'<div style="background:rgba(155,109,255,.06);border-radius:5px;padding:5px 7px;text-align:center">'
+      +'<div style="font-size:9px;font-weight:700;color:'+(g.pillars&&g.pillars.rlmIsReal?'var(--purple)':'var(--t4)')+';margin-bottom:2px">RLM'+(g.pillars&&g.pillars.rlmIsReal?' ✓':'*')+'</div>'
+      +'<div style="font-size:16px;font-weight:900;font-family:var(--mono);color:'+(g.pillars&&g.pillars.rlmIsReal?(g.pillars.rlm>=70?'var(--green)':g.pillars.rlm>=50?'var(--purple)':'var(--t3)'):'var(--t4)')+'">'+( g.pillars?g.pillars.rlm:35)+'</div>'
+      +'<div style="font-size:9px;color:var(--t4);font-family:var(--mono)">'+(g.pillars&&g.pillars.rlmIsReal?'real data':'inferred')+'</div>'
+      +'</div>'
       +'</div>'
       +'<div class="t-bar-wrap"><div class="t-bar '+sl.cls+'" style="width:'+score+'%"></div></div>'
       +'<a href="https://sharp-indicator-a34j.vercel.app" target="_blank" class="t-link" style="margin-top:8px;display:block">View on Sharp.idx &#x2192;</a>'
@@ -1249,11 +1264,27 @@ function renderTracking(){
           +'</div>'
           +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+(p.title||p.market||'')+'</div>'
           +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:5px">▶ '+(p.sharpSide||p.side||'—')+'</div>'
-          +'<div style="display:flex;gap:10px;font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:5px">'
-          +'<span>'+pinLine+'</span>'
-          +(p.gapPP||p.pinnacleGap?'<span>Gap: +'+(p.gapPP||p.pinnacleGap)+'pp</span>':'')
-          +(p.signalType?'<span>'+p.signalType+'</span>':'')
+          +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:8px">'
+          // Pinnacle
+          +'<div style="background:rgba(64,180,255,.06);border-radius:5px;padding:5px 7px;text-align:center">'
+          +'<div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:1px">PINNACLE</div>'
+          +'<div style="font-size:18px;font-weight:900;font-family:var(--mono);color:'+(p.pillars&&p.pillars.pinnacle>=70?'var(--green)':p.pillars&&p.pillars.pinnacle>=50?'var(--blue)':'var(--t3)')+'">'+( p.pillars?p.pillars.pinnacle:p.siScore||0)+'</div>'
+          +(p.gapPP||p.pinnacleGap?'<div style="font-size:9px;color:var(--t4)">+'+(p.gapPP||p.pinnacleGap)+'pp</div>':'')
           +'</div>'
+          // Money
+          +'<div style="background:rgba(229,160,13,.06);border-radius:5px;padding:5px 7px;text-align:center">'
+          +'<div style="font-size:9px;font-weight:700;color:var(--gold);margin-bottom:1px">MONEY</div>'
+          +'<div style="font-size:18px;font-weight:900;font-family:var(--mono);color:'+(p.pillars&&p.pillars.money>=70?'var(--green)':p.pillars&&p.pillars.money>=50?'var(--gold)':'var(--t3)')+'">'+( p.pillars?p.pillars.money:0)+'</div>'
+          +(p.exConfirms>0?'<div style="font-size:9px;color:var(--green)">'+p.exConfirms+' exchange</div>':'<div style="font-size:9px;color:var(--t4)">no exchange</div>')
+          +'</div>'
+          // RLM
+          +'<div style="background:rgba(155,109,255,.06);border-radius:5px;padding:5px 7px;text-align:center">'
+          +'<div style="font-size:9px;font-weight:700;color:'+(p.pillars&&p.pillars.rlmIsReal?'var(--purple)':'var(--t4)')+';margin-bottom:1px">RLM'+(p.pillars&&p.pillars.rlmIsReal?' ✓':'*')+'</div>'
+          +'<div style="font-size:18px;font-weight:900;font-family:var(--mono);color:'+(p.pillars&&p.pillars.rlmIsReal?(p.pillars.rlm>=70?'var(--green)':p.pillars.rlm>=50?'var(--purple)':'var(--t3)'):'var(--t4)')+'">'+( p.pillars?p.pillars.rlm:35)+'</div>'
+          +(p.pillars&&p.pillars.rlmIsReal?'<div style="font-size:9px;color:var(--purple)">real data</div>':'<div style="font-size:9px;color:var(--t4)">inferred</div>')
+          +'</div>'
+          +'</div>'
+          +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-bottom:5px">'+p.signalType+'</div>'
           +sportTag
           +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">⏰ '+new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+'</div>':'')
           +playBtns(linePlays,'pm:line-plays',i,p)
