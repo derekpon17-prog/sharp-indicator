@@ -913,13 +913,16 @@ function renderDash(){
   // Alert row
   window._al={};
   const arEl=el('d-ar');
-  // Dashboard: today's alerts from Upstash only
-  var sA=window._sA||[];
-  if(sA.length){
-    sA.slice(0,8).forEach(function(b){window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
-    arEl.innerHTML=sA.slice(0,8).map(acardHTML).join('');
+  // Recent Alerts: last 24 hours from merged alerts array
+  var cutoff24=Date.now()-24*60*60*1000;
+  var recent=alerts.filter(function(a){
+    return (a.loggedAt||(a.timestamp*1000)||0) >= cutoff24;
+  }).slice(0,8);
+  if(recent.length){
+    recent.forEach(function(b){window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
+    arEl.innerHTML=recent.map(acardHTML).join('');
   }else{
-    arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No signals today yet</div>';
+    arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No alerts in last 24h — signals appear here when profitable wallets are active</div>';
   }
   // Trades row
   const trEl=el('d-tr');
