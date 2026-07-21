@@ -1679,6 +1679,12 @@ function renderSignalLab(){
       const qualifies = si>=70 && !g.noSignal; // Auto-track threshold
       const nearMiss = si>=50 && si<70 && !g.noSignal;
       const noSig = g.noSignal || si===0;
+      // BUGFIX: previously ANY siScore:0 game fell straight to a generic "no signal" text,
+      // discarding the real pillars/gapPP the backend now computes even for sub-floor games.
+      // hasData distinguishes "we assessed this and it just didn't clear the floor" (numBooks>0,
+      // show the real breakdown) from "genuinely no book coverage for this game" (numBooks===0,
+      // keep the generic message — there's truly nothing to show).
+      const hasData = (g.numBooks||0) > 0;
 
       // Find Poly match
       const polyMatch = matchLineToAlert(g, recentAlerts);
@@ -1708,7 +1714,7 @@ function renderSignalLab(){
       html2 += '</div>';
       html2 += '</div>';
 
-      if(!noSig){
+      if(!noSig || hasData){
         // Component bars
         html2 += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">';
 
@@ -1749,7 +1755,7 @@ function renderSignalLab(){
         }
         html2 += '</div>';
       } else {
-        html2 += '<div style="font-size:11px;color:var(--t4)">No signal — Pinnacle price unavailable or gap below floor</div>';
+        html2 += '<div style="font-size:11px;color:var(--t4)">No signal — no Pinnacle/soft-book coverage yet for this game</div>';
       }
 
       html2 += '</div>'; // end card
