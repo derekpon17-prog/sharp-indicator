@@ -272,6 +272,18 @@ select.finput option{background:var(--s2)}
       <div id="sharp-score-list" style="display:flex;flex-direction:column;gap:9px"></div>
     </div>
 
+    <!-- 1b. ProphetX / Novig Money Score -->
+    <div class="row-s" id="money-score-row" style="display:none">
+      <div class="row-hdr">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="row-ttl"><em>&#x1F501;</em>ProphetX / Novig Money Score</div>
+          <div style="font-size:10px;font-weight:700;padding:2px 9px;border-radius:4px;background:rgba(0,200,150,.12);color:#00C896">EXCHANGE</div>
+        </div>
+        <div class="row-all" style="font-size:11px;color:var(--t3)">Novig &amp; ProphetX vs. Pinnacle &amp; soft books</div>
+      </div>
+      <div id="money-score-list" style="display:flex;flex-direction:column;gap:9px"></div>
+    </div>
+
     <!-- 2. Polymarket Signal -->
     <div class="row-s" id="trending-row" style="display:none">
       <div class="row-hdr">
@@ -558,6 +570,9 @@ function detectSport(title){
 
 /* === HELPERS === */
 function timeAgo(ts){const s=Math.floor((Date.now()-(ts>1e12?ts:ts*1000))/1000);if(s<60)return s+'s ago';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
+function gdt(iso){if(!iso)return '';var d=new Date(iso);if(isNaN(d.getTime()))return '';var now=new Date();var opts={month:'short',day:'numeric'};if(d.getFullYear()!==now.getFullYear())opts.year='numeric';return d.toLocaleDateString('en-US',opts)+' \u00b7 '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
+function findGameDateForTitle(title){var t=normTeam(title||'');if(!t||t.length<3)return '';var m=(sharpLines||[]).find(function(g){var aw=normTeam(g.away||''),hm=normTeam(g.home||'');return(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));});return m?(m.commenceTime||''):'';}
+function moneyTier(score){if(score>=85)return{lbl:'\u{1F525} Elite Discrepancy',cls:'var(--purple)'};if(score>=70)return{lbl:'\u26A1 Strong Discrepancy',cls:'var(--green)'};return{lbl:'\u26A0\uFE0F Moderate Discrepancy',cls:'var(--gold)'};}
 function fu(n){return '$'+Math.round(n||0).toLocaleString();}
 function fp(n){if(!n&&n!==0)return '$0';const abs=Math.abs(n);const v=abs>=1e6?'$'+(n/1e6).toFixed(1)+'M':abs>=1e3?'$'+(n/1e3).toFixed(1)+'K':'$'+Math.round(n).toLocaleString();return v;}
 function bdg(cats){return (cats||[]).map(c=>{const ct=c.category||c.cat||'';return '<span class="badge badge-'+(ct==='OVERALL'?'o':'s')+'">'+(ct==='OVERALL'?'Overall':'Sports')+' #'+c.rank+'</span>';}).join('');}
@@ -661,7 +676,7 @@ async function fetchData(){
     if(view==='dashboard'){renderDash();setTimeout(renderTrending,200);}
     if(view==='alerts')renderAlerts();
     if(view==='traders'){renderHot();renderLB();}
-    fetchSharpLines().then(function(){renderSharpLines();renderSharpScore();renderCommandCenter();renderTrending();});
+    fetchSharpLines().then(function(){renderSharpLines();renderSharpScore();renderMoneyScore();renderCommandCenter();renderTrending();});
     el('ldot').style.background='#00C896';el('ltxt').textContent='Live';cd=REFRESH;
   }catch{el('ldot').style.background='var(--red)';el('ltxt').textContent='Error';}
 }
@@ -717,7 +732,7 @@ function autoTrackLinePlays(lines){
     const key=(g.away||'')+'vs'+(g.home||'')+'||'+(g.sharpSide||'');
     if(linePlays.some(function(p){return p.key===key;}))return;
     const gt=g.commenceTime?new Date(g.commenceTime).toLocaleString():'';
-    linePlays.unshift({key,score,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:g.sharpSide||'',signalType:g.signalType||'Sharp Signal',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,exConfirms:g.exConfirms||0,sport:detectSportFromTeams(g.away,g.home),gameTime:gt,loggedAt:Date.now(),status:'OPEN'});
+    linePlays.unshift({key,score,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:g.sharpSide||'',signalType:g.signalType||'Sharp Signal',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,exConfirms:g.exConfirms||0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
     changed=true;
   });
   if(changed)ss('pm:line-plays',linePlays);
@@ -732,7 +747,7 @@ function autoTrackSharpScorePlays(lines,alertList){
     const combined=calcSharpScore(lineScore,polyScore);if(combined<70)return;
     const key='ss_'+(g.away||'')+'vs'+(g.home||'');
     if(sharpScorePlays.some(function(p){return p.key===key;}))return;
-    sharpScorePlays.unshift({key,combined,lineScore,polyScore,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:g.sharpSide||'',signalType:g.signalType||'',polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime?new Date(g.commenceTime).toLocaleString():'',loggedAt:Date.now(),status:'OPEN'});
+    sharpScorePlays.unshift({key,combined,lineScore,polyScore,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:g.sharpSide||'',signalType:g.signalType||'',polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
     changed=true;
   });
   if(changed)ss('pm:ss-plays',sharpScorePlays);
@@ -763,7 +778,7 @@ function renderSharpLines(){
     const exBadge=(g.novigConfirm||g.exConfirms>0)?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(0,200,150,.12);color:#00C896;border-radius:3px;font-family:var(--mono)">&#x1F501; '+(g.exConfirms||1)+' EXCHANGE</span>':'';
     const match=matchLineToAlert(g,recentAlerts);
     const polyBadge=match?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(229,160,13,.15);color:var(--gold);border-radius:3px;font-family:var(--mono)">&#x26A1; POLY CONFIRM</span>':'';
-    const gt=g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+    const gt=g.commenceTime?gdt(g.commenceTime):'';
     return '<div class="trend-card '+sl.cls+'">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px">'
       +'<div><div class="t-slbl '+sl.cls+'">'+sl.lbl+'</div>'
@@ -832,7 +847,7 @@ function autoTrackPlays(groups){
     if(score<threshold)return;
     const key=(g.title||'')+'||'+(g.outcome||'');
     if(sigPlays.some(p=>p.key===key))return;
-    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,buyers:g.buys.length,totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
+    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,buyers:g.buys.length,totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
     changed=true;
   });
   if(changed)ss('pm:sig-plays',sigPlays);
@@ -865,6 +880,7 @@ function renderTrending(){
       +'<div style="margin-bottom:7px">Buying <span style="font-weight:800;color:'+ocColor+'">'+g.outcome+'</span></div>'
       +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+barPct+'%"></div></div>'
       +'<div class="t-chips">'+traders.map(n=>{const d=n&&n.startsWith('0x')?n.slice(0,6)+'...'+n.slice(-4):n;return'<span class="t-chip">'+d+'</span>';}).join('')+'</div>'
+      +(function(){var gdv=findGameDateForTitle(g.title);return gdv?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:4px">\u23F0 Game: '+gdt(gdv)+'</div>':'';})()
       +'<a href="'+link+'" target="_blank" class="t-link">View on Polymarket \u2192</a>'
       +'</div>';
   }).join('');
@@ -1237,6 +1253,7 @@ function renderTracking(){
           +'</div>'
           +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+(p.title||'')+'</div>'
           +'<div style="font-size:12px;color:var(--t3);margin-bottom:5px">Buying <strong style="color:var(--t1)">'+(p.outcome||'')+'</strong> &middot; '+(p.buyers||1)+' buyer'+(p.buyers>1?'s':'')+' &middot; '+fu(p.totalVol||0)+'</div>'
+          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-bottom:5px">\u23F0 Game: '+gdt(p.gameTime)+'</div>':'')
           +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:5px">'+((p.traders||[]).map(function(n){return'<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--t3);font-family:var(--mono)">'+n+'</span>';}).join(''))+'</div>'
           +playBtns(sigPlays,'pm:sig-plays',i,p)
           +'</div>';
@@ -1289,7 +1306,7 @@ function renderTracking(){
           +'</div>'
           +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-bottom:5px">'+p.signalType+'</div>'
           +sportTag
-          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">⏰ '+new Date(p.gameTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+'</div>':'')
+          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">⏰ Game: '+gdt(p.gameTime)+'</div>':'')
           +playBtns(linePlays,'pm:line-plays',i,p)
           +'</div>';
       }).join('');
@@ -1317,6 +1334,7 @@ function renderTracking(){
           +'<div style="text-align:right"><div style="font-size:24px;font-weight:900;font-family:var(--mono);color:'+sc+';line-height:1">'+combined+'</div><div style="font-size:9px;color:var(--t4);font-family:var(--mono)">COMBINED</div></div>'
           +'</div>'
           +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:5px">'+(p.title||'')+'</div>'
+          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-bottom:6px">\u23F0 Game: '+gdt(p.gameTime)+'</div>':'')
           +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px">'
           +'<div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 9px">'
           +'<div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">SHARP LINE '+(p.lineScore||0)+'</div>'
@@ -1369,13 +1387,13 @@ function renderSharpScore(){
     const polyScore=match?signalScore({buys:[match],totalVol:match.usdValue}).score:0;
     const combined=match?calcSharpScore(si,polyScore):0;
     const key=(g.away||'')+'_'+(g.home||'');if(seen.has(key))return;seen.add(key);
-    plays.push({type:combined>=60?'combined':'line',score:combined>=60?combined:si,title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',lineScore:si,polyScore,combined,gapPP:parseFloat(g.gapPP||0).toFixed(1),signalType:g.signalType||'',exConfirms:g.exConfirms||0,polyOutcome:match?match.outcome:'',polyTrader:match?match.traderName||'':'',polyVol:match?match.usdValue:0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):''});
+    plays.push({type:combined>=60?'combined':'line',score:combined>=60?combined:si,title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',lineScore:si,polyScore,combined,gapPP:parseFloat(g.gapPP||0).toFixed(1),signalType:g.signalType||'',exConfirms:g.exConfirms||0,polyOutcome:match?match.outcome:'',polyTrader:match?match.traderName||'':'',polyVol:match?match.usdValue:0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||''});
   });
   if(plays.length<3){
     buildTrending().forEach(function(g){
       const sc=signalScore(g).score;if(sc<60)return;
       const key=g.title+'_'+g.outcome;if(seen.has(key))return;seen.add(key);
-      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),sport:detectSport(g.title)||''});
+      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});
     });
   }
   plays.sort(function(a,b){var o={combined:0,line:1,poly:2};return(o[a.type]||1)-(o[b.type]||1)||b.score-a.score;});
@@ -1404,7 +1422,7 @@ function renderSharpScore(){
     return '<div style="background:var(--s1);border:1px solid rgba(229,160,13,.18);border-left:3px solid '+(p.type==='combined'?'var(--gold)':p.type==='poly'?'rgba(229,160,13,.5)':'rgba(64,180,255,.5)')+';border-radius:var(--rl2);padding:14px 16px">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
       +'<div style="display:flex;align-items:center;gap:8px"><div style="font-size:36px;font-weight:900;font-family:var(--mono);color:'+sc+';line-height:1">'+p.score+'</div>'
-      +'<div>'+typeBadge+'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">'+(p.gameTime?'&#x23F0; '+p.gameTime:'')+'</div></div></div>'
+      +'<div>'+typeBadge+'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">'+(p.gameTime?'&#x23F0; '+gdt(p.gameTime):'')+'</div></div></div>'
       +(p.sport?'<span style="font-size:10px;font-weight:700;padding:2px 8px;background:rgba(64,180,255,.1);color:#40B4FF;border-radius:4px;font-family:var(--mono)">'+p.sport+'</span>':'')
       +'</div>'
       +'<div style="font-size:15px;font-weight:800;color:var(--t1);margin-bottom:5px">'+p.title+'</div>'
@@ -1418,6 +1436,54 @@ function renderSharpScore(){
 }
 
 
+/* === PROPHETX / NOVIG MONEY SCORE === */
+function renderMoneyScore(){
+  const row=el('money-score-row'),list=el('money-score-list');
+  if(!row||!list)return;
+  const now3=Date.now();
+  const plays=(sharpLines||[]).filter(function(g){
+    return !g.noSignal && g.pillars && parseInt(g.pillars.money||0)>=65 && (g.exConfirms||0)>=1 &&
+      (!g.commenceTime||new Date(g.commenceTime).getTime()>now3-4*3600000);
+  }).sort(function(a,b){return (b.pillars.money||0)-(a.pillars.money||0);}).slice(0,5);
+  if(!plays.length){
+    row.style.display='';
+    list.innerHTML='<div style="padding:16px 8px;text-align:center;color:var(--t4);font-size:12px">No exchange money discrepancies at 65+ right now &mdash; Novig/ProphetX are lined up with the soft books</div>';
+    return;
+  }
+  row.style.display='';
+  list.innerHTML=plays.map(function(g){
+    const mon=parseInt(g.pillars.money||0);
+    const tier=moneyTier(mon);
+    const sport=detectSportFromTeams(g.away,g.home);
+    const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
+    const novig=(g.exLines&&g.exLines.novig)||null;
+    const prophetx=(g.exLines&&g.exLines.prophetx)||null;
+    const pin=(g.lines&&g.lines.pinnacle)||'\u2014';
+    const softAvg=(g.lines&&g.lines.softAvg)||'\u2014';
+    const gt=g.commenceTime?gdt(g.commenceTime):'';
+    const titleTxt=(g.away||'?')+' vs '+(g.home||'?');
+    return '<div class="sig-play open" style="border-left:3px solid '+tier.cls+'">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px">'
+      +'<div><span style="font-size:10px;font-weight:800;color:'+tier.cls+'">'+tier.lbl+'</span>'+sportTag
+      +(gt?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">&#x23F0; Game: '+gt+'</div>':'')
+      +'</div>'
+      +'<div style="text-align:right"><div style="font-size:26px;font-weight:900;font-family:var(--mono);color:'+tier.cls+';line-height:1">'+mon+'</div><div style="font-size:9px;color:var(--t4);font-family:var(--mono)">MONEY</div></div>'
+      +'</div>'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+titleTxt+'</div>'
+      +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:8px">&#x25B6; '+(g.sharpSide||'\u2014')+'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:7px">'
+      +'<div style="background:rgba(64,180,255,.06);border-radius:5px;padding:5px 7px;text-align:center"><div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">PINNACLE</div><div style="font-size:14px;font-weight:900;font-family:var(--mono);color:var(--t1)">'+pin+'</div><div style="font-size:9px;color:var(--t4);font-family:var(--mono)">soft avg '+softAvg+'</div></div>'
+      +'<div style="background:rgba(0,200,150,.06);border-radius:5px;padding:5px 7px;text-align:center"><div style="font-size:9px;font-weight:700;color:#00C896;margin-bottom:2px">NOVIG</div><div style="font-size:14px;font-weight:900;font-family:var(--mono);color:'+(novig?'var(--t1)':'var(--t4)')+'">'+(novig||'no line')+'</div></div>'
+      +'<div style="background:rgba(0,200,150,.06);border-radius:5px;padding:5px 7px;text-align:center"><div style="font-size:9px;font-weight:700;color:#00C896;margin-bottom:2px">PROPHETX</div><div style="font-size:14px;font-weight:900;font-family:var(--mono);color:'+(prophetx?'var(--t1)':'var(--t4)')+'">'+(prophetx||'no line')+'</div></div>'
+      +'</div>'
+      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-bottom:8px">'+(g.exConfirms||0)+' of 2 exchanges confirming &bull; '+(g.signalType||'')+'</div>'
+      +'<div style="display:flex;gap:6px">'
+      +'<button class="ss-log-btn" data-title="'+titleTxt.replace(/"/g,"'")+'" style="flex:1;padding:7px;border-radius:var(--r);background:var(--gold);color:#0B0C10;border:none;font-size:12px;font-weight:800;cursor:pointer">+ Log This Play</button>'
+      +'<button class="ss-track-btn" style="padding:7px 12px;border-radius:var(--r);border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:12px;cursor:pointer">Tracking</button>'
+      +'</div></div>';
+  }).join('');
+}
+
 /* === COMMAND CENTER === */
 function renderCommandCenter(){
   const grid=el('play-grid'),empty=el('play-grid-empty'),ccTitle=el('cc-title');
@@ -1428,9 +1494,9 @@ function renderCommandCenter(){
     const si=parseInt(g.siScore||0),match=matchLineToAlert(g,recentAlerts);
     const ps=match?signalScore({buys:[match],totalVol:match.usdValue}).score:0;
     const combined=ps>0?calcSharpScore(si,ps):0;
-    allPlays.push({type:combined>=60?'sharp-score':'line',title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',score:combined>=60?combined:si,gapPP:parseFloat(g.gapPP||0),exConfirms:g.exConfirms||0,gameTime:g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'',sport:detectSportFromTeams(g.away,g.home)});
+    allPlays.push({type:combined>=60?'sharp-score':'line',title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',score:combined>=60?combined:si,gapPP:parseFloat(g.gapPP||0),exConfirms:g.exConfirms||0,gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home)});
   });
-  buildTrending().forEach(function(g){var sc=signalScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,sport:detectSport(g.title)||''});});
+  buildTrending().forEach(function(g){var sc=signalScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});});
   allPlays.sort(function(a,b){var to={'sharp-score':0,line:1,poly:2};return(to[a.type]||1)-(to[b.type]||1)||b.score-a.score;});
   var lc=el('cc-line-cnt'),pc=el('cc-poly-cnt'),sc2=el('cc-ss-cnt');
   if(lc)lc.textContent=allPlays.filter(function(p){return p.type==='line';}).length;
@@ -1457,7 +1523,7 @@ function renderCommandCenter(){
       +'<div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px">'+p.title+'</div>'
       +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:4px">&#x25B6; '+p.side+'</div>'
       +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+detail+'</div>'
-      +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">&#x23F0; '+p.gameTime+'</div>':'')
+      +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">&#x23F0; '+gdt(p.gameTime)+'</div>':'')
       +'</div>';
   }).join('');
 }
@@ -1611,7 +1677,7 @@ function renderSignalLab(){
       const borderColor = qualifies?'rgba(0,200,150,.25)':nearMiss?'rgba(229,160,13,.2)':'rgba(255,255,255,.06)';
       const bgColor = qualifies?'rgba(0,200,150,.04)':nearMiss?'rgba(229,160,13,.03)':'transparent';
       const sport = detectSportFromTeams(g.away,g.home);
-      const gt = g.commenceTime?new Date(g.commenceTime).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+      const gt = g.commenceTime?gdt(g.commenceTime):'';
 
       html2 += '<div style="background:var(--s2);border:1px solid '+borderColor+';border-radius:var(--rl2);padding:14px 16px;margin-bottom:10px;background:'+bgColor+'">';
 
