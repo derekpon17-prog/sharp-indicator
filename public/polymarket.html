@@ -589,7 +589,18 @@ function signalScore(group){
   group.buys.forEach(b=>(b.categories||[]).forEach(c=>{const r=parseInt(c.rank||c.rank)||999;if(r<bestRank)bestRank=r;}));
   const rm=bestRank<=5?1.6:bestRank<=15?1.4:bestRank<=30?1.2:bestRank<=75?1.0:0.85;
   const conv=buyers>=4?28:buyers>=3?20:buyers>=2?12:0;
-  return {score:Math.min(Math.round(base*rm)+conv,100),bestRank};
+  const rawScore=Math.round(base*rm)+conv; // uncapped — kept for validation/backtesting, not for display
+  return {score:Math.min(rawScore,100),bestRank,rawScore};
+}
+// Poly Signal display/auto-track score — a single unconfirmed buyer can never reach
+// Elite territory (85-100) purely on rank/volume. 2+ buyers = real convergence, allowed
+// to score up to 100 same as before. A single buyer caps at 84 regardless of rank or size.
+// (Sharp Line + Poly matches are unaffected — they go through calcSharpScore() as their
+// own combined-score path and were never gated by buyer count in the first place.)
+function polyDisplayScore(group){
+  const r=signalScore(group);
+  const capped=group.buys.length<2?Math.min(r.score,84):r.score;
+  return {score:capped,bestRank:r.bestRank,rawScore:r.rawScore};
 }
 function sigLabel(score){
   if(score>=80)return {lbl:'&#x1F525; Elite',cls:'sig-3'};
@@ -843,11 +854,11 @@ function buildTrending(){
 function autoTrackPlays(groups){
   let changed=false;
   groups.forEach(g=>{
-    const {score,bestRank}=signalScore(g);
+    const {score,bestRank,rawScore}=polyDisplayScore(g);
     if(score<POLY_AUTOTRACK_THRESHOLD)return; // flat threshold — matches Sharp Score display floor, no rank gating
     const key=(g.title||'')+'||'+(g.outcome||'');
     if(sigPlays.some(p=>p.key===key))return;
-    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,buyers:g.buys.length,totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
+    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:g.buys.length,totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
     changed=true;
   });
   if(changed)ss('pm:sig-plays',sigPlays);
@@ -860,7 +871,7 @@ function renderTrending(){
   autoTrackPlays(trends);
   const maxVol=Math.max(...trends.map(t=>t.totalVol));
   cont.innerHTML=trends.map(g=>{
-    const {score,bestRank}=signalScore(g);
+    const {score,bestRank}=polyDisplayScore(g);
     const {lbl,cls}=sigLabel(score);
     const barPct=Math.round((g.totalVol/maxVol)*100);
     const traders=g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,4);
@@ -1391,7 +1402,7 @@ function renderSharpScore(){
   });
   if(plays.length<3){
     buildTrending().forEach(function(g){
-      const sc=signalScore(g).score;if(sc<POLY_AUTOTRACK_THRESHOLD)return;
+      const sc=polyDisplayScore(g).score;if(sc<POLY_AUTOTRACK_THRESHOLD)return;
       const key=g.title+'_'+g.outcome;if(seen.has(key))return;seen.add(key);
       plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});
     });
@@ -1496,7 +1507,7 @@ function renderCommandCenter(){
     const combined=ps>0?calcSharpScore(si,ps):0;
     allPlays.push({type:combined>=60?'sharp-score':'line',title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',score:combined>=60?combined:si,gapPP:parseFloat(g.gapPP||0),exConfirms:g.exConfirms||0,gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home)});
   });
-  buildTrending().forEach(function(g){var sc=signalScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});});
+  buildTrending().forEach(function(g){var sc=polyDisplayScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});});
   allPlays.sort(function(a,b){var to={'sharp-score':0,line:1,poly:2};return(to[a.type]||1)-(to[b.type]||1)||b.score-a.score;});
   var lc=el('cc-line-cnt'),pc=el('cc-poly-cnt'),sc2=el('cc-ss-cnt');
   if(lc)lc.textContent=allPlays.filter(function(p){return p.type==='line';}).length;
@@ -1781,7 +1792,7 @@ function renderSignalLab(){
   }
 
   allGroupArr.forEach(g=>{
-    const{score,bestRank}=signalScore(g);
+    const{score,bestRank}=polyDisplayScore(g);
     const threshold=POLY_AUTOTRACK_THRESHOLD;
     const qualifies=score>=threshold&&!isLosingTrader(g.buys[0]&&g.buys[0].wallet);
     const nearMiss=score>=40&&score<threshold;
@@ -1887,6 +1898,7 @@ function renderSignalLab(){
   // Footer
   html2 += '<div style="border-top:1px solid var(--b1);padding-top:16px;font-size:11px;color:var(--t4);line-height:1.7">';
   html2 += '<strong style="color:var(--t3)">Threshold guide:</strong> Sharp Line qualifies at SI &ge;65 &bull; Poly Signal qualifies at score &ge;60 (flat) &bull; Combined Sharp Score requires both &ge;50 SI + poly match with combined &ge;60<br>';
+  html2 += '<strong style="color:var(--t3)">Single-buyer cap:</strong> A Poly Signal play with only 1 buyer caps at 84, no matter how large the buy or how highly ranked the wallet &mdash; 85+ requires 2+ buyers converging, or a genuine Sharp Line match (which scores through its own combined-score path instead).<br>';
   html2 += '<strong style="color:var(--t3)">RLM note:</strong> * = Inferred (no Action Network match). Real RLM shows when AN returns ticket % for that game.<br>';
   html2 += '<strong style="color:var(--t3)">Last refreshed:</strong> '+new Date().toLocaleTimeString();
   html2 += '</div>';
