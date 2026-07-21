@@ -911,12 +911,8 @@ function renderDash(){
   // Alert row
   window._al={};
   const arEl=el('d-ar');
-  // Dashboard recent alerts: 20h window — last night's games through tonight
-  const dashCutoff=Date.now()-30*3600000; // 30h — catches last night's plays
-  const recentDashAlerts=alerts.filter(function(a){
-    return(a.loggedAt||(a.timestamp*1000)||0)>=dashCutoff;
-  }).slice(0,8);
-  if(recentDashAlerts.length){
+  const recentDashAlerts=alerts.slice(0,8); // no time filter
+    if(recentDashAlerts.length){
     recentDashAlerts.forEach(b=>{window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
     arEl.innerHTML=recentDashAlerts.map(acardHTML).join('');
   }
