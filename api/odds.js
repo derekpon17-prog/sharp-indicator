@@ -172,8 +172,13 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
   const fallbackLines=()=>{
     const o0=pm.outcomes[0];
     const s0=sms.map(sm=>{const oo=sm.outcomes&&sm.outcomes.find(o=>o.name===o0.name);return oo?toImp(oo.price):null;}).filter(x=>x!==null);
-    const avgAm=s0.length?Math.round(toAm(s0.reduce((a,b)=>a+b,0)/s0.length)):0;
-    return{pinnacle:fmt(o0.price),novig:null,softAvg:fmt(avgAm),softRange:'—'};
+    const hasSoft=s0.length>0;
+    const avgAm=hasSoft?Math.round(toAm(s0.reduce((a,b)=>a+b,0)/s0.length)):0;
+    // BUGFIX: avgAmNum/avgFairProb expose the real computed numbers so the caller can
+    // populate currentSoftAvg/gapPP correctly instead of hardcoding null/0.00 even when
+    // real soft-book data was available (it was already being shown as a display string).
+    const avgFairProb=hasSoft?(s0.reduce((a,b)=>a+b,0)/s0.length)/1.048:null;
+    return{pinnacle:fmt(o0.price),novig:null,softAvg:hasSoft?fmt(avgAm):'—',softRange:'—',avgAmNum:hasSoft?avgAm:null,avgFairProb};
   };
   let best=null,bestSI=-1;
   for(let i=0;i<pm.outcomes.length;i++){
@@ -221,7 +226,13 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     }
   }
   if(!best){
-    return{market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,pillars:{rlm:0,pinnacle:0,money:0},signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,lines:fallbackLines(),currentPinPrice:pm.outcomes[0].price,currentSoftAvg:null,gapPP:'0.00',numBooks:sms.length,publicLean:false,rawPrices};
+    const fb=fallbackLines();
+    const pf0=pf[0];
+    // BUGFIX: gapPP used to be hardcoded '0.00' here even when a real (sub-floor) gap
+    // was computed — indistinguishable from "no divergence at all" in Signal Lab.
+    // Now shows the real gap whenever soft-book data exists, still gated at siScore:0.
+    const realGapPP=fb.avgFairProb!==null?((pf0-fb.avgFairProb)*100):0;
+    return{market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,pillars:{rlm:0,pinnacle:0,money:0},signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,lines:{pinnacle:fb.pinnacle,novig:fb.novig,softAvg:fb.softAvg,softRange:fb.softRange},currentPinPrice:pm.outcomes[0].price,currentSoftAvg:fb.avgAmNum,gapPP:realGapPP.toFixed(2),numBooks:sms.length,publicLean:false,rawPrices};
   }
   return best;
 }
@@ -250,7 +261,14 @@ function analyzeAll(game){
   }
   const noSignal=!best||best.siScore===0;
   if(noSignal){
-    return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:0,sharpSide:'—',signalType:'NONE',novigConfirm:false,exConfirms:0,exLines:{},lines:{pinnacle:'—',novig:null,softAvg:'—',softRange:'—'},gapPP:'0.00',pillars:{rlm:0,pinnacle:0,money:0},numBooks:0,publicLean:false,activeMarket:'h2h',markets,noSignal:true,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified:false};
+    // BUGFIX: previously hardcoded numBooks:0/gapPP:'0.00'/pillars all-zero here even
+    // though `best` (computed above) already holds the real Pinnacle price, soft-book
+    // average, book count, and gap for whichever market got furthest — just with a
+    // score of 0 because nothing cleared its threshold. Signal Lab reads these exact
+    // top-level fields, so it was showing "0 books, no data" for games that were fully
+    // assessed and simply didn't qualify. siScore/signalType/sharpSide remain explicitly
+    // zero/none — this only restores the diagnostic numbers, not the qualification.
+    return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:0,sharpSide:'—',signalType:'NONE',novigConfirm:best?best.novigConfirm:false,exConfirms:best?best.exConfirms:0,exLines:best?best.exLines:{},lines:best?best.lines:{pinnacle:'—',novig:null,softAvg:'—',softRange:'—'},gapPP:best?best.gapPP:'0.00',pillars:best?best.pillars:{rlm:0,pinnacle:0,money:0},numBooks:best?best.numBooks:0,publicLean:best?best.publicLean:false,activeMarket:best?best.market:'h2h',markets,noSignal:true,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified:false};
   }
   return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,novigConfirm:best.novigConfirm,exConfirms:best.exConfirms,exLines:best.exLines,lines:best.lines,gapPP:best.gapPP,pillars:best.pillars,numBooks:best.numBooks,publicLean:best.publicLean,activeMarket:best.market,markets,noSignal:false,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified};
 }
