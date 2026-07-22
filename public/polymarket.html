@@ -1138,15 +1138,39 @@ async function gradeOpenPlays(){
   for(const play of sigPlays){
     if(play.status!=='OPEN'||!play.eventSlug)continue;
     try{
-      const r=await fetch('https://data-api.polymarket.com/markets?eventSlug='+play.eventSlug+'&limit=10');
-      const data=await r.json();const markets=Array.isArray(data)?data:(data.data||[]);
-      for(const m of markets){
-        if(!m.question||!m.question.toLowerCase().includes((play.title||'').toLowerCase().slice(0,15)))continue;
-        if(m.resolution!==null&&m.resolution!==undefined){
-          const res=String(m.resolution).toLowerCase(),our=(play.outcome||'').toLowerCase();
-          if(res==='yes'||res==='1'){play.status=our==='yes'?'WIN':'LOSS';play.gradedAt=Date.now();changed=true;break;}
-          if(res==='no'||res==='0'){play.status=our==='no'?'WIN':'LOSS';play.gradedAt=Date.now();changed=true;break;}
-        }
+      // BUGFIX: was hitting data-api.polymarket.com/markets?eventSlug=... which doesn't
+      // exist (404 on every call, confirmed against Polymarket's own docs) — market/event
+      // lookup by slug lives on gamma-api.polymarket.com, and the query param is `slug`.
+      const r=await fetch('https://gamma-api.polymarket.com/events?slug='+encodeURIComponent(play.eventSlug));
+      const data=await r.json();
+      const events=Array.isArray(data)?data:(data.data||[]);
+      const markets=events.flatMap(function(ev){return ev.markets||[];});
+      // BUGFIX: matching on just the first 15 chars of the title can't tell a moneyline
+      // market apart from a totals market for the same two teams (same prefix, different
+      // suffix) — every MLB event normally has both, so this isn't an edge case. Prefer an
+      // exact normalized title match; fall back to substring only if nothing exact is found.
+      const wantedT=(play.title||'').toLowerCase().trim();
+      let m=markets.find(function(mm){return(mm.question||'').toLowerCase().trim()===wantedT;});
+      if(!m)m=markets.find(function(mm){const qT=(mm.question||'').toLowerCase().trim();return qT&&wantedT&&(qT.includes(wantedT)||wantedT.includes(qT));});
+      if(m){
+        // BUGFIX: there is no `.resolution` field on a Polymarket market object — this
+        // check was silently a no-op even before the URL bug (would never have graded
+        // anything). Real resolution signal: outcomePrices (a JSON-encoded string array)
+        // settles to a decisive extreme (near 0 / near 1) once the market resolves.
+        // Not gating on `.closed` — Polymarket has documented cases where closed stays
+        // false on already-decided sports markets, so price is the more reliable signal.
+        let prices=null,outcomes=null;
+        try{prices=typeof m.outcomePrices==='string'?JSON.parse(m.outcomePrices):m.outcomePrices;}catch{prices=null;}
+        try{outcomes=typeof m.outcomes==='string'?JSON.parse(m.outcomes):m.outcomes;}catch{outcomes=null;}
+        if(!Array.isArray(prices)||prices.length<2)continue;
+        const nums=prices.map(function(p){return parseFloat(p)||0;});
+        const maxP=Math.max.apply(null,nums),minP=Math.min.apply(null,nums);
+        if(maxP<0.98||minP>0.02)continue; // not decisively resolved yet — still trading
+        const idx=nums.indexOf(maxP);
+        const winName=(Array.isArray(outcomes)&&outcomes[idx]!=null)?String(outcomes[idx]).toLowerCase():'';
+        const ourOutcome=(play.outcome||'').toLowerCase();
+        const won=!!winName&&!!ourOutcome&&(winName===ourOutcome||winName.includes(ourOutcome)||ourOutcome.includes(winName));
+        play.status=won?'WIN':'LOSS';play.gradedAt=Date.now();changed=true;
       }
     }catch{}
   }
