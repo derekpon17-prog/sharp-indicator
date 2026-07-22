@@ -716,9 +716,34 @@ async function fetchSharpLines(){
   }catch(e){console.warn('Sharp lines:',e.message);sharpLines=[];return[];}
 }
 function normTeam(s){return(s||'').toLowerCase().replace(/\b(new york|los angeles|san francisco|san diego|kansas city|st\.?\s*louis|tampa bay|chicago)\b/gi,'').replace(/[^a-z]/g,'').trim();}
+// BUGFIX: extract the game date Polymarket itself embeds in eventSlug/slug (e.g.
+// "mlb-bal-bos-2026-07-20") — this is the vendor's own canonical identifier for which
+// calendar date a market belongs to. Previously ignored entirely in favor of pure
+// name-substring matching, which happily attached yesterday's already-settled alert to
+// tonight's card for any team playing a back-to-back series (proven: BAL/BOS, Reds/
+// Mariners, Tigers/Cubs all showed July 20 alerts on July 21 game cards).
+function extractSlugDate(a){
+  const s=(a&&(a.eventSlug||a.slug))||'';
+  const m=s.match(/(\d{4}-\d{2}-\d{2})/);
+  return m?m[1]:null;
+}
+function gameEasternDate(line){
+  if(!line||!line.commenceTime)return null;
+  try{return new Date(line.commenceTime).toLocaleDateString('en-CA',{timeZone:'America/New_York'});}catch{return null;}
+}
 function matchLineToAlert(line,alertList){
   const sh=normTeam(line.sharpSide||'');const aw=normTeam(line.away||'');const hm=normTeam(line.home||'');
-  return alertList.find(function(a){const t=(a.title||'').toLowerCase().replace(/[^a-z]/g,'');return(sh&&sh.length>2&&t.includes(sh))||(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));})||null;
+  const gameDate=gameEasternDate(line);
+  return alertList.find(function(a){
+    const t=(a.title||'').toLowerCase().replace(/[^a-z]/g,'');
+    const nameMatch=(sh&&sh.length>2&&t.includes(sh))||(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));
+    if(!nameMatch)return false;
+    // Deterministic gate: if both dates are knowable, they must agree. Falls back to
+    // name-only only when a date can't be determined (missing commenceTime or slug).
+    const alertDate=extractSlugDate(a);
+    if(gameDate&&alertDate&&alertDate!==gameDate)return false;
+    return true;
+  })||null;
 }
 function lineLabel(score){
   if(score>=80)return{lbl:'&#x1F525; Elite Line Signal',cls:'sig-3'};
