@@ -582,8 +582,16 @@ function calcP(t){const amt=parseFloat(t.amount)||0;if(t.odds){const odds=parseI
 function isLosingTrader(wallet){if(!wallet)return false;const c=_sc[wallet];return c&&c.pnl!==null&&c.pnl<0;}
 
 /* === RANK-WEIGHTED SIGNAL SCORE === */
+// BUGFIX: buyer count must be UNIQUE wallets, not raw alert/transaction rows — a single
+// wallet buying the same outcome twice (e.g. averaging into a position) was being counted
+// as 2 independent "buyers" for both the convergence bonus and the single-buyer cap,
+// letting one whale's repeat purchases masquerade as multi-trader consensus. Confirmed
+// with real data: a play showing "2 buyers" was the same wallet (RN1) buying twice.
+function uniqueBuyerCount(group){
+  return new Set(group.buys.map(function(b){return (b.wallet||b.traderName||'').toLowerCase();})).size;
+}
 function signalScore(group){
-  const vol=group.totalVol,buyers=group.buys.length;
+  const vol=group.totalVol,buyers=uniqueBuyerCount(group);
   const base=vol<=500?5:Math.min(Math.round(Math.log10(vol/500)*38)+15,90);
   let bestRank=999;
   group.buys.forEach(b=>(b.categories||[]).forEach(c=>{const r=parseInt(c.rank||c.rank)||999;if(r<bestRank)bestRank=r;}));
@@ -593,13 +601,14 @@ function signalScore(group){
   return {score:Math.min(rawScore,100),bestRank,rawScore};
 }
 // Poly Signal display/auto-track score — a single unconfirmed buyer can never reach
-// Elite territory (85-100) purely on rank/volume. 2+ buyers = real convergence, allowed
-// to score up to 100 same as before. A single buyer caps at 84 regardless of rank or size.
+// Elite territory (85-100) purely on rank/volume. 2+ UNIQUE buyers = real convergence,
+// allowed to score up to 100 same as before. A single buyer (by unique wallet) caps at
+// 84 regardless of rank, size, or how many times that one wallet bought in.
 // (Sharp Line + Poly matches are unaffected — they go through calcSharpScore() as their
 // own combined-score path and were never gated by buyer count in the first place.)
 function polyDisplayScore(group){
   const r=signalScore(group);
-  const capped=group.buys.length<2?Math.min(r.score,84):r.score;
+  const capped=uniqueBuyerCount(group)<2?Math.min(r.score,84):r.score;
   return {score:capped,bestRank:r.bestRank,rawScore:r.rawScore};
 }
 function sigLabel(score){
@@ -883,7 +892,7 @@ function autoTrackPlays(groups){
     if(score<POLY_AUTOTRACK_THRESHOLD)return; // flat threshold — matches Sharp Score display floor, no rank gating
     const key=(g.title||'')+'||'+(g.outcome||'');
     if(sigPlays.some(p=>p.key===key))return;
-    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:g.buys.length,totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
+    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
     changed=true;
   });
   if(changed)ss('pm:sig-plays',sigPlays);
@@ -909,7 +918,7 @@ function renderTrending(){
     return '<div class="trend-card '+cls+'">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px">'
       +'<div><div class="t-slbl '+cls+'">'+lbl+'</div>'
-      +'<span class="t-buyers '+cls+'">'+rankBadge+g.buys.length+' buyer'+(g.buys.length>1?'s':'')+' &middot; '+fu(g.totalVol)+' &middot; '+score+'pts</span></div>'
+      +'<span class="t-buyers '+cls+'">'+rankBadge+uniqueBuyerCount(g)+' buyer'+(uniqueBuyerCount(g)>1?'s':'')+' &middot; '+fu(g.totalVol)+' &middot; '+score+'pts</span></div>'
       +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono);flex-shrink:0;margin-left:8px">'+timeAgo(g.latestTs)+'</span>'
       +'</div>'
       +'<div style="font-size:13px;font-weight:700;color:var(--t1);line-height:1.4;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+g.title+sportTag+'</div>'
@@ -1453,7 +1462,7 @@ function renderSharpScore(){
     buildTrending().forEach(function(g){
       const sc=polyDisplayScore(g).score;if(sc<POLY_AUTOTRACK_THRESHOLD)return;
       const key=g.title+'_'+g.outcome;if(seen.has(key))return;seen.add(key);
-      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});
+      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});
     });
   }
   plays.sort(function(a,b){var o={combined:0,line:1,poly:2};return(o[a.type]||1)-(o[b.type]||1)||b.score-a.score;});
@@ -1556,7 +1565,7 @@ function renderCommandCenter(){
     const combined=ps>0?calcSharpScore(si,ps):0;
     allPlays.push({type:combined>=60?'sharp-score':'line',title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',score:combined>=60?combined:si,gapPP:parseFloat(g.gapPP||0),exConfirms:g.exConfirms||0,gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home)});
   });
-  buildTrending().forEach(function(g){var sc=polyDisplayScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:g.buys.length,polyVol:g.totalVol,gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});});
+  buildTrending().forEach(function(g){var sc=polyDisplayScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});});
   allPlays.sort(function(a,b){var to={'sharp-score':0,line:1,poly:2};return(to[a.type]||1)-(to[b.type]||1)||b.score-a.score;});
   var lc=el('cc-line-cnt'),pc=el('cc-poly-cnt'),sc2=el('cc-ss-cnt');
   if(lc)lc.textContent=allPlays.filter(function(p){return p.type==='line';}).length;
@@ -1871,7 +1880,7 @@ function renderSignalLab(){
 
     // Score breakdown
     html2 += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px">';
-    const buyers=g.buys.length;
+    const buyers=uniqueBuyerCount(g);
     const buyerScore=buyers<=1?0:Math.min(10+(buyers-2)*12,60);
     const volScore=Math.min(Math.max(0,Math.log10(Math.max(g.totalVol,1000)/1000)*20),40);
     const rankMult=bestRank<=5?1.6:bestRank<=15?1.4:bestRank<=30?1.2:bestRank<=75?1.0:0.85;
