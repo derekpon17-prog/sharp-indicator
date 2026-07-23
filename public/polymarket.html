@@ -968,6 +968,7 @@ function renderTrending(){
       +'</div>'
       +'<div class="t-buyers '+cls+'" style="display:block;margin-bottom:7px">'+rankBadge+uniqueBuyerCount(g)+' buyer'+(uniqueBuyerCount(g)>1?'s':'')+' &middot; '+fu(g.totalVol)+'</div>'
       +'<div style="font-size:13px;font-weight:700;color:var(--t1);line-height:1.4;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+g.title+sportTag+'</div>'
+      +(function(){var b=statusBadgeHTML(g.title);return b?'<div style="margin-bottom:6px">'+b+'</div>':'';})()
       +'<div style="margin-bottom:7px">Buying <span style="font-weight:800;color:'+ocColor+'">'+g.outcome+'</span></div>'
       +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+barPct+'%"></div></div>'
       +'<div class="t-chips">'+traders.map(n=>{const d=n&&n.startsWith('0x')?n.slice(0,6)+'...'+n.slice(-4):n;return'<span class="t-chip">'+d+'</span>';}).join('')+'</div>'
@@ -1235,7 +1236,54 @@ async function gradeOpenPlays(){
 /* === ESPN AUTO-GRADE === */
 const ESPN_SPORTS={MLB:'baseball/mlb',NBA:'basketball/nba',NFL:'football/nfl',NHL:'hockey/nhl'};
 function normTN(s){return(s||'').toLowerCase().replace(/[^a-z]/g,'').trim();}
-function gMatch(hN,aN,title){var t=(title||'').toLowerCase();return(normTN(hN).length>2&&t.includes(normTN(hN)))||(normTN(aN).length>2&&t.includes(normTN(aN)));}
+function gMatch(hN,aN,title){
+  var t=(title||'').toLowerCase();
+  var normPhrase=function(s){return(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();};
+  var nh=normPhrase(hN),na=normPhrase(aN);
+  return(nh.length>2&&t.includes(nh))||(na.length>2&&t.includes(na));
+}
+/* === GAME STATUS (LIVE/FINAL) — reuses the same ESPN feed as grading ===
+   BUGFIX-driven feature: the odds feed silently drops a game the moment it goes live
+   (pregame markets disappear from The Odds API), with nothing distinguishing "too early,
+   no signal yet" from "game is live right now" from "game already finished" — all three
+   looked identical: nothing. This gives cards a real LIVE/FINAL badge instead of silence. */
+let gameStatuses=[];
+async function fetchGameStatuses(){
+  var sports=new Set();
+  (sharpLines||[]).forEach(function(g){var s=detectSportFromTeams(g.away,g.home);if(s)sports.add(s);});
+  (alerts||[]).forEach(function(a){var s=detectSport(a.title);if(s)sports.add(s);});
+  if(!sports.size)sports.add('MLB');
+  var todayStr=new Date().toISOString().slice(0,10).replace(/-/g,'');
+  var results=[];
+  await Promise.all([...sports].map(async function(sp){
+    var path=ESPN_SPORTS[sp];if(!path)return;
+    try{
+      var r=await fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard?dates='+todayStr);
+      var d=await r.json();
+      (d.events||[]).forEach(function(ev){
+        var comp=ev.competitions&&ev.competitions[0];if(!comp)return;
+        var home=comp.competitors&&comp.competitors.find(function(c){return c.homeAway==='home';});
+        var away=comp.competitors&&comp.competitors.find(function(c){return c.homeAway==='away';});
+        if(!home||!away)return;
+        var hN=home.team&&(home.team.displayName||home.team.name)||'';
+        var aN=away.team&&(away.team.displayName||away.team.name)||'';
+        var st=(comp.status&&comp.status.type)||{};
+        results.push({homeName:hN,awayName:aN,state:st.state,completed:!!st.completed,detail:st.shortDetail||st.detail||'',homeScore:home.score,awayScore:away.score});
+      });
+    }catch{}
+  }));
+  gameStatuses=results;
+}
+function getGameStatus(title){
+  for(var i=0;i<gameStatuses.length;i++){var st=gameStatuses[i];if(gMatch(st.homeName,st.awayName,title))return st;}
+  return null;
+}
+function statusBadgeHTML(title){
+  var st=getGameStatus(title);if(!st)return '';
+  if(st.state==='in')return '<span style="font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;background:rgba(255,61,90,.15);color:var(--red);font-family:var(--mono)">&#x1F534; LIVE '+st.awayScore+'-'+st.homeScore+'</span>';
+  if(st.completed||st.state==='post')return '<span style="font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t3);font-family:var(--mono)">FINAL '+st.awayScore+'-'+st.homeScore+'</span>';
+  return '';
+}
 function gGrade(play,hN,aN,hS,aS){
   var side=(play.sharpSide||play.side||play.outcome||'').toLowerCase();
   var total=hS+aS;var scoreStr=aN+' '+aS+' - '+hS+' '+hN;
@@ -1543,6 +1591,7 @@ function renderSharpScore(){
       +(p.sport?'<span style="font-size:10px;font-weight:700;padding:2px 8px;background:rgba(64,180,255,.1);color:#40B4FF;border-radius:4px;font-family:var(--mono)">'+p.sport+'</span>':'')
       +'</div>'
       +'<div style="font-size:15px;font-weight:800;color:var(--t1);margin-bottom:5px">'+p.title+'</div>'
+      +(function(){var b=statusBadgeHTML(p.title);return b?'<div style="margin-bottom:6px">'+b+'</div>':'';})()
       +'<div style="font-size:13px;color:var(--green);font-weight:700;margin-bottom:8px">&#x25B6; '+p.side+'</div>'
       +detail
       +'<div style="display:flex;gap:6px;margin-top:4px">'
@@ -1650,6 +1699,7 @@ function renderCommandCenter(){
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'+tag+sport
       +'<div style="font-size:26px;font-weight:900;font-family:var(--mono);color:'+sc3+'">'+p.score+'</div></div>'
       +'<div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px">'+p.title+'</div>'
+      +(function(){var b=statusBadgeHTML(p.title);return b?'<div style="margin-bottom:3px">'+b+'</div>':'';})()
       +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:4px">&#x25B6; '+p.side+'</div>'
       +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+detail+'</div>'
       +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">&#x23F0; '+gdt(p.gameTime)+'</div>':'')
@@ -2104,9 +2154,10 @@ function startCd(){
 /* === INIT === */
 renderDash();fetchData();cd=REFRESH;startCd();
 // Grade on load + every 15 min
-setTimeout(function(){gradeFromESPN();gradeOpenPlays();},3000); // 3s delay lets page settle
-setInterval(function(){gradeFromESPN();gradeOpenPlays();},15*60*1000);
+setTimeout(function(){gradeFromESPN();gradeOpenPlays();fetchGameStatuses().then(function(){if(view==='dashboard')renderDash();});},3000); // 3s delay lets page settle
+setInterval(function(){gradeFromESPN();gradeOpenPlays();fetchGameStatuses().then(function(){if(view==='dashboard')renderDash();});},15*60*1000);
 
 </script>
 </body>
 </html>
+
