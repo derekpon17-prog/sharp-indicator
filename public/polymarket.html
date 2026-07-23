@@ -1554,6 +1554,15 @@ function renderMoneyScore(){
     const softAvg=(g.lines&&g.lines.softAvg)||'\u2014';
     const gt=g.commenceTime?gdt(g.commenceTime):'';
     const titleTxt=(g.away||'?')+' vs '+(g.home||'?');
+    const lean=g.exchangeLean;
+    let leanHtml='';
+    if(lean&&lean.detail){
+      const leanText=function(key,d){return key.toUpperCase()+(d&&d.favors?' &rarr; <strong style="color:var(--t1)">'+d.favors+'</strong> (+'+d.gapPP+'pp)':': no confirm');};
+      leanHtml='<div style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-bottom:6px">'+leanText('novig',lean.detail.novig)+' &bull; '+leanText('prophetx',lean.detail.prophetx)+'</div>';
+      if(lean.disagreement){
+        leanHtml+='<div style="font-size:10px;font-weight:700;color:var(--gold);background:rgba(229,160,13,.1);border-radius:5px;padding:4px 8px;margin-bottom:7px">&#x26A0; Exchanges disagree on side &mdash; thin-market noise, not a clean signal</div>';
+      }
+    }
     return '<div class="sig-play open" style="border-left:3px solid '+tier.cls+'">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px">'
       +'<div><span style="font-size:10px;font-weight:800;color:'+tier.cls+'">'+tier.lbl+'</span>'+sportTag
@@ -1568,7 +1577,8 @@ function renderMoneyScore(){
       +'<div style="background:rgba(0,200,150,.06);border-radius:5px;padding:5px 7px;text-align:center"><div style="font-size:9px;font-weight:700;color:#00C896;margin-bottom:2px">NOVIG</div><div style="font-size:14px;font-weight:900;font-family:var(--mono);color:'+(novig?'var(--t1)':'var(--t4)')+'">'+(novig||'no line')+'</div></div>'
       +'<div style="background:rgba(0,200,150,.06);border-radius:5px;padding:5px 7px;text-align:center"><div style="font-size:9px;font-weight:700;color:#00C896;margin-bottom:2px">PROPHETX</div><div style="font-size:14px;font-weight:900;font-family:var(--mono);color:'+(prophetx?'var(--t1)':'var(--t4)')+'">'+(prophetx||'no line')+'</div></div>'
       +'</div>'
-      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-bottom:8px">'+(g.exConfirms||0)+' of 2 exchanges confirming &bull; '+(g.signalType||'')+'</div>'
+      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-bottom:6px">'+(g.exConfirms||0)+' of 2 exchanges confirming &bull; '+(g.signalType||'')+'</div>'
+      +leanHtml
       +'<div style="display:flex;gap:6px">'
       +'<button class="ss-log-btn" data-title="'+titleTxt.replace(/"/g,"'")+'" style="flex:1;padding:7px;border-radius:var(--r);background:var(--gold);color:#0B0C10;border:none;font-size:12px;font-weight:800;cursor:pointer">+ Log This Play</button>'
       +'<button class="ss-track-btn" style="padding:7px 12px;border-radius:var(--r);border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:12px;cursor:pointer">Tracking</button>'
@@ -1812,6 +1822,10 @@ function renderSignalLab(){
         html2 += '<div style="font-size:9px;font-weight:700;color:var(--purple);text-transform:uppercase;margin-bottom:4px">Money / Exchange</div>';
         html2 += scoreBar(mon, 100, 'var(--purple)');
         html2 += '<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">'+(g.exConfirms>0?g.exConfirms+' exchange confirm':'no exchange confirm')+'</div>';
+        if(g.exchangeLean&&g.exchangeLean.detail){
+          const nl=g.exchangeLean.detail.novig,pl=g.exchangeLean.detail.prophetx;
+          html2 += '<div style="font-size:9px;color:var(--t4);font-family:var(--mono);margin-top:2px">N: '+(nl&&nl.favors?nl.favors+' +'+nl.gapPP+'pp':'&mdash;')+' &bull; PX: '+(pl&&pl.favors?pl.favors+' +'+pl.gapPP+'pp':'&mdash;')+(g.exchangeLean.disagreement?' <span style="color:var(--gold)">&#x26A0; disagree</span>':'')+'</div>';
+        }
         html2 += '</div>';
 
         html2 += '<div>';
