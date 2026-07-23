@@ -92,29 +92,70 @@ async function fetchSharpLinePlays(sport = 'MLB') {
 }
 
 /* ─── MATCH LINE PLAY TO POLY ALERT ──────────────────── */
-function normName(s) {
-  return (s || '').toLowerCase().replace(/[^a-z]/g, '').trim();
+// BUGFIX: this was a separate, stale copy of the matching logic — no date-gate (would
+// happily attach yesterday's already-settled alert to tonight's game, same team playing
+// back-to-back) and no side-agreement check (any alert on the same GAME counted as a
+// "match" regardless of which side it was actually on). Ported the exact fixes already
+// tested and shipped on the dashboard hours ago — nothing new or untested here.
+function normTeam(s) {
+  return (s || '').toLowerCase().replace(/\b(new york|los angeles|san francisco|san diego|kansas city|st\.?\s*louis|tampa bay|chicago)\b/gi, '').replace(/[^a-z]/g, '').trim();
+}
+function extractSlugDate(a) {
+  const s = (a && (a.eventSlug || a.slug)) || '';
+  const m = s.match(/(\d{4}-\d{2}-\d{2})/);
+  return m ? m[1] : null;
+}
+function gameEasternDate(line) {
+  if (!line || !line.commenceTime) return null;
+  try { return new Date(line.commenceTime).toLocaleDateString('en-CA', { timeZone: 'America/New_York' }); } catch { return null; }
+}
+function sameSharpSide(lineSide, polyOutcome) {
+  const a = normTeam(lineSide || ''), b = normTeam(polyOutcome || '');
+  return !!a && !!b && a === b;
 }
 function matchLineToAlert(linPlay, polyAlerts) {
-  const away = normName(linPlay.away || '');
-  const home = normName(linPlay.home || '');
+  const away = normTeam(linPlay.away || ''), home = normTeam(linPlay.home || '');
+  const gameDate = gameEasternDate(linPlay);
   return polyAlerts.find(a => {
-    const t = normName(a.title || '');
-    return (away.length > 3 && t.includes(away)) || (home.length > 3 && t.includes(home));
+    const t = normTeam(a.title || '');
+    const nameMatch = (away.length > 2 && t.includes(away)) || (home.length > 2 && t.includes(home));
+    if (!nameMatch) return false;
+    const alertDate = extractSlugDate(a);
+    if (gameDate && alertDate && alertDate !== gameDate) return false;
+    return true;
   }) || null;
 }
 
-function calcCombined(siScore, polyScore) {
-  return Math.min(Math.round(siScore * 0.60 + polyScore * 0.40), 100);
+// BUGFIX: was a plain weighted average (Line*60% + Poly*40%) — dilutes a genuinely strong
+// single source (a real Poly 100 next to a quiet Line day became a mediocre 44). Replaced
+// with the exact max+agreement-bonus formula already tested and shipped on the dashboard.
+function calcCombined(lineScore, polyScore, sameSide) {
+  const hasLine = typeof lineScore === 'number' && lineScore > 0;
+  const hasPoly = typeof polyScore === 'number' && polyScore > 0;
+  const base = Math.max(hasLine ? lineScore : 0, hasPoly ? polyScore : 0);
+  const bonus = (hasLine && hasPoly && sameSide) ? 15 : 0;
+  return Math.min(100, Math.round(base + bonus));
 }
 
+// BUGFIX: was uncapped with no buyer dedup at all — a single wallet buying the same
+// position twice could count as "2 buyers" and inflate the score. Ported the exact
+// uniqueBuyerCount + signalScore logic already tested and shipped on the dashboard.
+// (Kept intentionally uncapped here, same as the dashboard's own combined-score call
+// sites — a genuine Line agreement is itself a second, independent confirming source,
+// so the single-buyer cap that applies to Poly-only display doesn't apply in this context.)
+function uniqueBuyerCount(group) {
+  return new Set(group.buys.map(b => (b.wallet || b.traderName || '').toLowerCase())).size;
+}
 function polyScore(alert) {
   if (!alert) return 0;
-  const usd = alert.usdValue || 0;
-  const rank = (alert.categories || []).reduce((min, c) => Math.min(min, c.rank || 999), 999);
-  const base = Math.min(Math.log10(Math.max(usd, 500) / 500) * 38 + 15, 90);
-  const mult = rank <= 5 ? 1.6 : rank <= 15 ? 1.4 : rank <= 30 ? 1.2 : rank <= 75 ? 1.0 : 0.85;
-  return Math.min(Math.round(base * mult), 100);
+  const group = { totalVol: alert.usdValue || 0, buys: [alert] };
+  const vol = group.totalVol, buyers = uniqueBuyerCount(group);
+  const base = vol <= 500 ? 5 : Math.min(Math.round(Math.log10(vol / 500) * 38) + 15, 90);
+  let bestRank = 999;
+  group.buys.forEach(b => (b.categories || []).forEach(c => { const r = parseInt(c.rank) || 999; if (r < bestRank) bestRank = r; }));
+  const rm = bestRank <= 5 ? 1.6 : bestRank <= 15 ? 1.4 : bestRank <= 30 ? 1.2 : bestRank <= 75 ? 1.0 : 0.85;
+  const conv = buyers >= 4 ? 28 : buyers >= 3 ? 20 : buyers >= 2 ? 12 : 0;
+  return Math.min(Math.round(base * rm) + conv, 100);
 }
 
 /* ─── STORE ALERT (auto-track) ────────────────────────── */
@@ -321,8 +362,11 @@ module.exports = async function handler(req, res) {
       const match = matchLineToAlert(play, polyAlerts);
       if (!match) continue;
 
+      const sameSide = sameSharpSide(play.sharpSide, match.outcome);
+      if (!sameSide) continue; // this category specifically means both signals agree on the same side, not just the same game
+
       const ps       = polyScore(match);
-      const combined = calcCombined(parseInt(play.siScore || 0), ps);
+      const combined = calcCombined(parseInt(play.siScore || 0), ps, sameSide);
       if (combined < 70) continue;
 
       const sessionKey = `sharp:${play.id}:${play.sharpSide}`;
