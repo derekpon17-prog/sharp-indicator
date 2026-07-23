@@ -759,7 +759,25 @@ function lineLabel(score){
   if(score>=65)return{lbl:'&#x26A1; Strong Line Signal',cls:'sig-2'};
   return{lbl:'&#x26A0;&#xFE0F; Moderate Line Signal',cls:'sig-1'};
 }
-function calcSharpScore(ls2,ps){return Math.min(Math.round(ls2*0.60+ps*0.40),100);}
+// BUGFIX/REDESIGN: previously a weighted average (Line*60% + Poly*40%), which had the exact
+// same flaw already fixed elsewhere tonight for soft-book averaging — it dilutes the
+// strongest signal. A genuine Poly 100 next to a quiet Line 20 became a mediocre 44,
+// burying real signal. Now: take the strongest single source, plus a flat bonus only when
+// both sources exist AND independently agree on the same side. Provisional +15 bonus —
+// not yet validated against real outcomes, revisit once enough graded plays exist.
+function calcSharpScore(lineScore,polyScore,sameSide){
+  const hasLine=typeof lineScore==='number'&&lineScore>0;
+  const hasPoly=typeof polyScore==='number'&&polyScore>0;
+  const base=Math.max(hasLine?lineScore:0,hasPoly?polyScore:0);
+  const bonus=(hasLine&&hasPoly&&sameSide)?15:0;
+  return Math.min(100,Math.round(base+bonus));
+}
+// Determines whether Sharp Line's pick and Poly Signal's pick genuinely point to the same
+// side, not just the same game — required before granting the agreement bonus above.
+function sameSharpSide(lineSide,polyOutcome){
+  const a=normTeam(lineSide||''),b=normTeam(polyOutcome||'');
+  return !!a&&!!b&&a===b;
+}
 function detectSportFromTeams(away,home){
   const t=((away||'')+(home||'')).toLowerCase();
   if(MLB_TEAMS.some(function(x){return t.includes(x);})||t.includes('sox')||t.includes('jays'))return'MLB';
@@ -789,11 +807,13 @@ function autoTrackSharpScorePlays(lines,alertList){
   lines.forEach(function(g){
     const lineScore=parseInt(g.siScore||0);if(lineScore<55)return; // Raised for quality
     const match=matchLineToAlert(g,recentAlerts);if(!match)return;
+    const sameSide=sameSharpSide(g.sharpSide,match.outcome);
+    if(!sameSide)return; // this category specifically means both signals agree on the same side, not just the same game
     const polyScore=signalScore({buys:[match],totalVol:match.usdValue}).score;
-    const combined=calcSharpScore(lineScore,polyScore);if(combined<70)return;
+    const combined=calcSharpScore(lineScore,polyScore,sameSide);if(combined<70)return;
     const key='ss_'+(g.away||'')+'vs'+(g.home||'');
     if(sharpScorePlays.some(function(p){return p.key===key;}))return;
-    sharpScorePlays.unshift({key,combined,lineScore,polyScore,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:g.sharpSide||'',signalType:g.signalType||'',polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
+    sharpScorePlays.unshift({key,combined,lineScore,polyScore,agree:sameSide,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:g.sharpSide||'',signalType:g.signalType||'',polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
     changed=true;
   });
   if(changed)ss('pm:ss-plays',sharpScorePlays);
@@ -1455,9 +1475,11 @@ function renderSharpScore(){
   sharpLines.filter(function(g){return !g.noSignal&&parseInt(g.siScore||0)>=50;}).forEach(function(g){
     const si=parseInt(g.siScore||0);const match=matchLineToAlert(g,recentAlerts);
     const polyScore=match?signalScore({buys:[match],totalVol:match.usdValue}).score:0;
-    const combined=match?calcSharpScore(si,polyScore):0;
+    const agree=match?sameSharpSide(g.sharpSide,match.outcome):false;
+    const combined=calcSharpScore(si,polyScore,agree);
+    const type=agree?'combined':(polyScore>si?'poly':'line');
     const key=(g.away||'')+'_'+(g.home||'');if(seen.has(key))return;seen.add(key);
-    plays.push({type:combined>=60?'combined':'line',score:combined>=60?combined:si,title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',lineScore:si,polyScore,combined,gapPP:parseFloat(g.gapPP||0).toFixed(1),signalType:g.signalType||'',exConfirms:g.exConfirms||0,polyOutcome:match?match.outcome:'',polyTrader:match?match.traderName||'':'',polyVol:match?match.usdValue:0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||''});
+    plays.push({type,score:combined,title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',lineScore:si,polyScore,combined,agree,gapPP:parseFloat(g.gapPP||0).toFixed(1),signalType:g.signalType||'',exConfirms:g.exConfirms||0,polyOutcome:match?match.outcome:'',polyTrader:match?match.traderName||'':'',polyVol:match?match.usdValue:0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||''});
   });
   if(plays.length<3){
     buildTrending().forEach(function(g){
@@ -1466,7 +1488,7 @@ function renderSharpScore(){
       plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});
     });
   }
-  plays.sort(function(a,b){var o={combined:0,line:1,poly:2};return(o[a.type]||1)-(o[b.type]||1)||b.score-a.score;});
+  plays.sort(function(a,b){return b.score-a.score||(a.type==='combined'?-1:b.type==='combined'?1:0);});
   if(!plays.length){
     row.style.display='';
     if(list)list.innerHTML='<div style="padding:16px 8px;text-align:center;color:var(--t4);font-size:12px">No combined Sharp Score plays yet — requires Line + Poly signals on the same game</div>';
@@ -1563,11 +1585,13 @@ function renderCommandCenter(){
   sharpLines.filter(function(g){return !g.noSignal&&parseInt(g.siScore||0)>=50&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now-4*3600000);}).forEach(function(g){
     const si=parseInt(g.siScore||0),match=matchLineToAlert(g,recentAlerts);
     const ps=match?signalScore({buys:[match],totalVol:match.usdValue}).score:0;
-    const combined=ps>0?calcSharpScore(si,ps):0;
-    allPlays.push({type:combined>=60?'sharp-score':'line',title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',score:combined>=60?combined:si,gapPP:parseFloat(g.gapPP||0),exConfirms:g.exConfirms||0,gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home)});
+    const agree=match?sameSharpSide(g.sharpSide,match.outcome):false;
+    const combined=calcSharpScore(si,ps,agree);
+    const type=agree?'sharp-score':(ps>si?'poly':'line');
+    allPlays.push({type,title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',score:combined,gapPP:parseFloat(g.gapPP||0),exConfirms:g.exConfirms||0,gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home)});
   });
   buildTrending().forEach(function(g){var sc=polyDisplayScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});});
-  allPlays.sort(function(a,b){var to={'sharp-score':0,line:1,poly:2};return(to[a.type]||1)-(to[b.type]||1)||b.score-a.score;});
+  allPlays.sort(function(a,b){return b.score-a.score||(a.type==='sharp-score'?-1:b.type==='sharp-score'?1:0);});
   var lc=el('cc-line-cnt'),pc=el('cc-poly-cnt'),sc2=el('cc-ss-cnt');
   if(lc)lc.textContent=allPlays.filter(function(p){return p.type==='line';}).length;
   if(pc)pc.textContent=allPlays.filter(function(p){return p.type==='poly';}).length;
@@ -1748,7 +1772,8 @@ function renderSignalLab(){
       // Find Poly match
       const polyMatch = matchLineToAlert(g, recentAlerts);
       const polyScore = polyMatch ? signalScore({buys:[polyMatch],totalVol:polyMatch.usdValue}).score : 0;
-      const combined = polyMatch ? calcSharpScore(si, polyScore) : 0;
+      const agreeSide = polyMatch ? sameSharpSide(g.sharpSide, polyMatch.outcome) : false;
+      const combined = polyMatch ? calcSharpScore(si, polyScore, agreeSide) : 0;
 
       const borderColor = qualifies?'rgba(0,200,150,.25)':nearMiss?'rgba(229,160,13,.2)':'rgba(255,255,255,.06)';
       const bgColor = qualifies?'rgba(0,200,150,.04)':nearMiss?'rgba(229,160,13,.03)':'transparent';
@@ -1805,12 +1830,12 @@ function renderSignalLab(){
           html2 += '<span style="font-size:10px;font-weight:700;color:var(--gold)">NEAR MISS — '+gap+' pts below threshold</span>';
           // What would push it over
           if(pin<60) html2 += '<span style="font-size:10px;color:var(--t4)">Needs stronger Pinnacle gap</span>';
-          if(!polyMatch) html2 += '<span style="font-size:10px;color:var(--t4)">+ Poly confirm would add '+(Math.round(calcSharpScore(si,50)-si))+' pts combined</span>';
+          if(!polyMatch) html2 += '<span style="font-size:10px;color:var(--t4)">+ Agreeing Poly confirm would add '+(Math.round(calcSharpScore(si,50,true)-si))+' pts (confirmation bonus)</span>';
         } else {
           html2 += '<span style="font-size:10px;color:var(--t4)">Below threshold ('+si+' &lt;65)</span>';
         }
         if(polyMatch){
-          html2 += '<span style="font-size:10px;font-weight:700;color:var(--gold)">&#x26A1; POLY MATCH: '+(polyMatch.traderName||'')+'bought '+polyMatch.outcome+' @ '+fu(polyMatch.usdValue)+' &rarr; Combined: '+combined+'</span>';
+          html2 += '<span style="font-size:10px;font-weight:700;color:var(--gold)">&#x26A1; POLY MATCH: '+(polyMatch.traderName||'')+'bought '+polyMatch.outcome+' @ '+fu(polyMatch.usdValue)+(agreeSide?' &middot; agrees &rarr; Combined: '+combined:' &middot; different side (not counted as agreement)')+'</span>';
         }
         html2 += '</div>';
       } else {
@@ -1930,26 +1955,27 @@ function renderSignalLab(){
   html2 += '<div style="height:1px;background:var(--b1);margin-bottom:24px"></div>';
   html2 += '<div style="margin-bottom:24px">';
   html2 += '<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:4px">&#x1F3AF; Combined Sharp Score Status</div>';
-  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">Games where Sharp Line Signal + Polymarket Signal can be combined &middot; Formula: Line &times;60% + Poly &times;40%</div>';
+  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">Games where Sharp Line Signal + Polymarket Signal can be combined &middot; Formula: max(Line, Poly) + 15pt bonus if both agree on the same side</div>';
 
   let foundCombined=false;
   sharpLines.filter(g=>!g.noSignal&&parseInt(g.siScore||0)>0).forEach(g=>{
     const match=matchLineToAlert(g,recentAlerts);
     const si=parseInt(g.siScore||0);
     const polyScore=match?signalScore({buys:[match],totalVol:match.usdValue}).score:0;
-    const combined=match?calcSharpScore(si,polyScore):0;
+    const agree=match?sameSharpSide(g.sharpSide,match.outcome):false;
+    const combined=match?calcSharpScore(si,polyScore,agree):0;
     if(si===0&&!match)return;
     foundCombined=true;
-    const wouldCombine=match&&combined>=60;
+    const wouldCombine=match&&agree;
     html2 += '<div style="background:var(--s2);border:1px solid '+(wouldCombine?'rgba(229,160,13,.3)':'rgba(255,255,255,.06)')+';border-radius:var(--rl2);padding:12px 15px;margin-bottom:9px">';
     html2 += '<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
     html2 += '<div style="font-size:12px;font-weight:700;color:var(--t1)">'+(g.away||'')+(g.home?' vs '+g.home:'')+'</div>';
-    if(wouldCombine) html2 += '<span style="font-size:11px;font-weight:800;color:var(--gold)">&#x1F3AF; COMBINED: '+combined+'</span>';
+    if(wouldCombine) html2 += '<span style="font-size:11px;font-weight:800;color:var(--gold)">&#x1F3AF; CONFIRMED: '+combined+'</span>';
     html2 += '</div>';
     html2 += '<div style="display:flex;gap:20px">';
     html2 += '<div style="font-size:11px;color:var(--t3)">Line SI: <span style="color:var(--blue);font-weight:700">'+si+'</span></div>';
     html2 += '<div style="font-size:11px;color:var(--t3)">Poly: <span style="color:var(--gold);font-weight:700">'+(polyScore>0?polyScore:'no match')+'</span></div>';
-    if(match) html2 += '<div style="font-size:11px;color:var(--t3)">Combined: <span style="color:'+(combined>=70?'var(--green)':combined>=60?'var(--gold)':'var(--t4)')+';font-weight:700">'+combined+'</span></div>';
+    if(match) html2 += '<div style="font-size:11px;color:var(--t3)">Overall: <span style="color:'+(combined>=70?'var(--green)':combined>=60?'var(--gold)':'var(--t4)')+';font-weight:700">'+combined+'</span>'+(match&&!agree?' <span style="color:var(--t4)">(different side, no bonus)</span>':'')+'</div>';
     html2 += '</div>';
     if(!match) html2 += '<div style="font-size:10px;color:var(--t4);margin-top:4px">No Polymarket alert found for this game — cannot combine</div>';
     html2 += '</div>';
@@ -1962,7 +1988,7 @@ function renderSignalLab(){
 
   // Footer
   html2 += '<div style="border-top:1px solid var(--b1);padding-top:16px;font-size:11px;color:var(--t4);line-height:1.7">';
-  html2 += '<strong style="color:var(--t3)">Threshold guide:</strong> Sharp Line qualifies at SI &ge;65 &bull; Poly Signal qualifies at score &ge;60 (flat) &bull; Combined Sharp Score requires both &ge;50 SI + poly match with combined &ge;60<br>';
+  html2 += '<strong style="color:var(--t3)">Threshold guide:</strong> Sharp Line qualifies at SI &ge;65 &bull; Poly Signal qualifies at score &ge;60 (flat) &bull; Overall Score = max(Line, Poly) + 15pt bonus if both agree on the same side &bull; Sharp Score Plays requires genuine agreement + combined &ge;70<br>';
   html2 += '<strong style="color:var(--t3)">Single-buyer cap:</strong> A Poly Signal play with only 1 buyer caps at 84, no matter how large the buy or how highly ranked the wallet &mdash; 85+ requires 2+ buyers converging, or a genuine Sharp Line match (which scores through its own combined-score path instead).<br>';
   html2 += '<strong style="color:var(--t3)">RLM note:</strong> * = Inferred (no Action Network match). Real RLM shows when AN returns ticket % for that game.<br>';
   html2 += '<strong style="color:var(--t3)">Last refreshed:</strong> '+new Date().toLocaleTimeString();
