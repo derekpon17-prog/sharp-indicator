@@ -157,6 +157,41 @@ function sigType(rlm,pin,mon,exConfirms){
   return'WEAK';
 }
 
+// Independently determines which side EACH exchange favors, separate from which side
+// wins the overall SI score. Previously this was computed internally per-outcome but only
+// the WINNING side's aggregate exConfirms count (0/1/2) survived to output — you could
+// never tell whether it was Novig or ProphetX confirming, or whether they disagreed
+// entirely. This surfaces the real per-book breakdown that already existed in the math.
+function detectExchangeLean(pm,sms,exBooks,mkey){
+  const result={};
+  EXCHANGE_BOOKS.forEach(key=>{result[key]={favors:null,gapPP:null}});
+  for(let i=0;i<pm.outcomes.length;i++){
+    const out=pm.outcomes[i];
+    const simps=sms.map(sm=>{const o=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);return o?toImp(o.price):null;}).filter(x=>x!==null);
+    if(simps.length<2)continue; // need at least 2 soft books for a meaningful baseline here
+    const avgSoftFair=(simps.reduce((a,b)=>a+b,0)/simps.length)/1.048;
+    let side=out.name;
+    if(mkey==='spreads'&&out.point!==undefined)side=out.name+' '+(out.point>0?'+':'')+out.point;
+    if(mkey==='totals'&&out.point!==undefined)side=out.name+' '+out.point;
+    exBooks.forEach(eb=>{
+      const em=eb.markets&&eb.markets.find(m=>m.key===mkey);
+      if(!em)return;
+      const eo=em.outcomes&&em.outcomes.find(o=>o.name===out.name);
+      if(!eo)return;
+      const[ef0,ef1]=dv(toImp(em.outcomes[0].price),toImp(em.outcomes[1].price));
+      const fairProb=i===0?ef0:ef1;
+      const gapPP=(fairProb-avgSoftFair)*100;
+      if(gapPP>EX_CONFIRM_GAP&&(result[eb.key].gapPP===null||gapPP>result[eb.key].gapPP)){
+        result[eb.key]={favors:side,gapPP:Math.round(gapPP*10)/10};
+      }
+    });
+  }
+  const keys=Object.keys(result);
+  const bothLean=keys.length===2&&result[keys[0]].favors&&result[keys[1]].favors;
+  const disagreement=!!(bothLean&&result[keys[0]].favors!==result[keys[1]].favors);
+  return{detail:result,disagreement};
+}
+
 function analyzeMarket(game,mkey,pin,exBooks,soft){
   const pm=pin.markets&&pin.markets.find(m=>m.key===mkey);
   const sms=soft.map(b=>b.markets&&b.markets.find(m=>m.key===mkey)).filter(Boolean);
@@ -185,6 +220,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     return{pinnacle:fmt(o0.price),novig:null,softAvg:hasSoft?fmt(avgAm):'—',softRange:'—',avgAmNum:hasSoft?avgAm:null,avgFairProb};
   };
   let best=null,bestSI=-1;
+  const exchangeLean=detectExchangeLean(pm,sms,exBooks,mkey);
   for(let i=0;i<pm.outcomes.length;i++){
     const out=pm.outcomes[i];
     const simps=sms.map(sm=>{const o=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);return o?toImp(o.price):null;}).filter(x=>x!==null);
@@ -225,7 +261,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
         lines:{pinnacle:fmt(out.price),novig:exLines['novig']||exLines['prophetx']||null,softAvg:fmt(Math.round(toAm(asr))),softRange:sr},
         currentPinPrice:out.price,currentSoftAvg:softAvgMap[out.name]||null,
         gapPP:gapPP.toFixed(2),numBooks:simps.length,
-        publicLean:isPublicLean(out.name,mkey,out.price,out.point),rawPrices,
+        publicLean:isPublicLean(out.name,mkey,out.price,out.point),rawPrices,exchangeLean,
       };
     }
   }
@@ -236,7 +272,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     // was computed — indistinguishable from "no divergence at all" in Signal Lab.
     // Now shows the real gap whenever soft-book data exists, still gated at siScore:0.
     const realGapPP=fb.avgFairProb!==null?((pf0-fb.avgFairProb)*100):0;
-    return{market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,pillars:{rlm:0,pinnacle:0,money:0},signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,lines:{pinnacle:fb.pinnacle,novig:fb.novig,softAvg:fb.softAvg,softRange:fb.softRange},currentPinPrice:pm.outcomes[0].price,currentSoftAvg:fb.avgAmNum,gapPP:realGapPP.toFixed(2),numBooks:sms.length,publicLean:false,rawPrices};
+    return{market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,pillars:{rlm:0,pinnacle:0,money:0},signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,lines:{pinnacle:fb.pinnacle,novig:fb.novig,softAvg:fb.softAvg,softRange:fb.softRange},currentPinPrice:pm.outcomes[0].price,currentSoftAvg:fb.avgAmNum,gapPP:realGapPP.toFixed(2),numBooks:sms.length,publicLean:false,rawPrices,exchangeLean};
   }
   return best;
 }
@@ -272,9 +308,9 @@ function analyzeAll(game){
     // top-level fields, so it was showing "0 books, no data" for games that were fully
     // assessed and simply didn't qualify. siScore/signalType/sharpSide remain explicitly
     // zero/none — this only restores the diagnostic numbers, not the qualification.
-    return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:0,sharpSide:'—',signalType:'NONE',novigConfirm:best?best.novigConfirm:false,exConfirms:best?best.exConfirms:0,exLines:best?best.exLines:{},lines:best?best.lines:{pinnacle:'—',novig:null,softAvg:'—',softRange:'—'},gapPP:best?best.gapPP:'0.00',pillars:best?best.pillars:{rlm:0,pinnacle:0,money:0},numBooks:best?best.numBooks:0,publicLean:best?best.publicLean:false,activeMarket:best?best.market:'h2h',markets,noSignal:true,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified:false};
+    return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:0,sharpSide:'—',signalType:'NONE',novigConfirm:best?best.novigConfirm:false,exConfirms:best?best.exConfirms:0,exLines:best?best.exLines:{},exchangeLean:best?best.exchangeLean:null,lines:best?best.lines:{pinnacle:'—',novig:null,softAvg:'—',softRange:'—'},gapPP:best?best.gapPP:'0.00',pillars:best?best.pillars:{rlm:0,pinnacle:0,money:0},numBooks:best?best.numBooks:0,publicLean:best?best.publicLean:false,activeMarket:best?best.market:'h2h',markets,noSignal:true,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified:false};
   }
-  return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,novigConfirm:best.novigConfirm,exConfirms:best.exConfirms,exLines:best.exLines,lines:best.lines,gapPP:best.gapPP,pillars:best.pillars,numBooks:best.numBooks,publicLean:best.publicLean,activeMarket:best.market,markets,noSignal:false,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified};
+  return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,novigConfirm:best.novigConfirm,exConfirms:best.exConfirms,exLines:best.exLines,exchangeLean:best.exchangeLean,lines:best.lines,gapPP:best.gapPP,pillars:best.pillars,numBooks:best.numBooks,publicLean:best.publicLean,activeMarket:best.market,markets,noSignal:false,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified};
 }
 
 module.exports=async function handler(req,res){
