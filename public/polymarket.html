@@ -571,8 +571,33 @@ function detectSport(title){
 
 /* === HELPERS === */
 function timeAgo(ts){const s=Math.floor((Date.now()-(ts>1e12?ts:ts*1000))/1000);if(s<60)return s+'s ago';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
-function gdt(iso){if(!iso)return '';var d=new Date(iso);if(isNaN(d.getTime()))return '';var now=new Date();var opts={month:'short',day:'numeric'};if(d.getFullYear()!==now.getFullYear())opts.year='numeric';return d.toLocaleDateString('en-US',opts)+' \u00b7 '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
-function findGameDateForTitle(title){var t=normTeam(title||'');if(!t||t.length<3)return '';var m=(sharpLines||[]).find(function(g){var aw=normTeam(g.away||''),hm=normTeam(g.home||'');return(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));});return m?(m.commenceTime||''):'';}
+function gdt(iso){
+  if(!iso)return '';
+  var dateOnly=/^\d{4}-\d{2}-\d{2}$/.test(iso);
+  var d=new Date(iso);if(isNaN(d.getTime()))return '';
+  var now=new Date();
+  if(dateOnly){
+    // BUGFIX: a bare YYYY-MM-DD parses as UTC midnight — formatting it in the viewer's
+    // local timezone can roll it back a calendar day for anyone west of UTC. Force UTC
+    // for display, and never show a fake "12:00 AM" time for a date we don't actually know.
+    var opts={month:'short',day:'numeric',timeZone:'UTC'};
+    if(d.getUTCFullYear()!==now.getFullYear())opts.year='numeric';
+    return d.toLocaleDateString('en-US',opts);
+  }
+  var opts={month:'short',day:'numeric'};if(d.getFullYear()!==now.getFullYear())opts.year='numeric';
+  return d.toLocaleDateString('en-US',opts)+' \u00b7 '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+}
+function findGameDateForTitle(title,eventSlug){
+  // BUGFIX: previously only worked if this game ALSO happened to be in the currently-
+  // fetched Sharp Line list (a separate, independently-refreshing data source that can be
+  // thin at any given moment) — causing some plays to show a date and others not, purely
+  // by chance of timing, unrelated to whether the play itself is valid. eventSlug is always
+  // present on every alert and reliably gives the real calendar date.
+  if(eventSlug){var d=extractSlugDate({eventSlug:eventSlug});if(d)return d;}
+  var t=normTeam(title||'');if(!t||t.length<3)return '';
+  var m=(sharpLines||[]).find(function(g){var aw=normTeam(g.away||''),hm=normTeam(g.home||'');return(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));});
+  return m?(m.commenceTime||''):'';
+}
 function moneyTier(score){if(score>=85)return{lbl:'\u{1F525} Elite Discrepancy',cls:'var(--purple)'};if(score>=70)return{lbl:'\u26A1 Strong Discrepancy',cls:'var(--green)'};return{lbl:'\u26A0\uFE0F Moderate Discrepancy',cls:'var(--gold)'};}
 function fu(n){return '$'+Math.round(n||0).toLocaleString();}
 function fp(n){if(!n&&n!==0)return '$0';const abs=Math.abs(n);const v=abs>=1e6?'$'+(n/1e6).toFixed(1)+'M':abs>=1e3?'$'+(n/1e3).toFixed(1)+'K':'$'+Math.round(n).toLocaleString();return v;}
@@ -912,7 +937,7 @@ function autoTrackPlays(groups){
     if(score<POLY_AUTOTRACK_THRESHOLD)return; // flat threshold — matches Sharp Score display floor, no rank gating
     const key=(g.title||'')+'||'+(g.outcome||'');
     if(sigPlays.some(p=>p.key===key))return;
-    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
+    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title,g.eventSlug),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
     changed=true;
   });
   if(changed)ss('pm:sig-plays',sigPlays);
@@ -946,7 +971,7 @@ function renderTrending(){
       +'<div style="margin-bottom:7px">Buying <span style="font-weight:800;color:'+ocColor+'">'+g.outcome+'</span></div>'
       +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+barPct+'%"></div></div>'
       +'<div class="t-chips">'+traders.map(n=>{const d=n&&n.startsWith('0x')?n.slice(0,6)+'...'+n.slice(-4):n;return'<span class="t-chip">'+d+'</span>';}).join('')+'</div>'
-      +(function(){var gdv=findGameDateForTitle(g.title);return gdv?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:4px">\u23F0 Game: '+gdt(gdv)+'</div>':'';})()
+      +(function(){var gdv=findGameDateForTitle(g.title,g.eventSlug);return gdv?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:4px">\u23F0 Game: '+gdt(gdv)+'</div>':'';})()
       +'<a href="'+link+'" target="_blank" class="t-link">View on Polymarket \u2192</a>'
       +'</div>';
   }).join('');
@@ -1485,7 +1510,7 @@ function renderSharpScore(){
     buildTrending().forEach(function(g){
       const sc=polyDisplayScore(g).score;if(sc<POLY_AUTOTRACK_THRESHOLD)return;
       const key=g.title+'_'+g.outcome;if(seen.has(key))return;seen.add(key);
-      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});
+      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:detectSport(g.title)||''});
     });
   }
   plays.sort(function(a,b){return b.score-a.score||(a.type==='combined'?-1:b.type==='combined'?1:0);});
@@ -1600,7 +1625,7 @@ function renderCommandCenter(){
     const type=agree?'sharp-score':(ps>si?'poly':'line');
     allPlays.push({type,title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',score:combined,gapPP:parseFloat(g.gapPP||0),exConfirms:g.exConfirms||0,gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home)});
   });
-  buildTrending().forEach(function(g){var sc=polyDisplayScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,gameTime:findGameDateForTitle(g.title),sport:detectSport(g.title)||''});});
+  buildTrending().forEach(function(g){var sc=polyDisplayScore(g).score;if(sc<65)return;allPlays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:detectSport(g.title)||''});});
   allPlays.sort(function(a,b){return b.score-a.score||(a.type==='sharp-score'?-1:b.type==='sharp-score'?1:0);});
   var lc=el('cc-line-cnt'),pc=el('cc-poly-cnt'),sc2=el('cc-ss-cnt');
   if(lc)lc.textContent=allPlays.filter(function(p){return p.type==='line';}).length;
