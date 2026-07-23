@@ -36,9 +36,13 @@ const SPORT_KEYS = {
    Requires Vercel KV (same setup as polymarket-alerts).
 ──────────────────────────────────────────────────────────────── */
 // Upstash Redis REST client (no npm package required)
+// BUGFIX: was reading UPSTASH_REDIS_REST_URL/TOKEN, which don't exist in this project's
+// Vercel environment — the alerts system (confirmed working) uses KV_REST_API_URL/TOKEN
+// instead. This silently made every KV call a no-op forever, regardless of how many times
+// the endpoint ran — "gamesTracked: 0" was the permanent, guaranteed result.
 async function upstashPost(body) {
-  const url   = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const url   = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
   if (!url || !token) return null;
   try {
     const r = await fetch(url, {
