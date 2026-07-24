@@ -52,13 +52,25 @@ function marketSport(title) {
 }
 
 /* ─── LEADERBOARD ─────────────────────────────────────── */
-async function fetchLeaderboard(category, limit) {
-  try {
-    const r = await fetch(`${DATA_API}/v1/leaderboard?category=${category}&timePeriod=ALL&orderBy=PNL&limit=${limit}`);
-    if (!r.ok) return [];
-    const d = await r.json();
-    return Array.isArray(d) ? d : [];
-  } catch { return []; }
+/* OUTAGE FIX 2026-07-24: this was hardcoded to limit=500. Polymarket capped the
+   leaderboard limit and now returns an EMPTY array for oversized requests instead of
+   clamping it — so every fetch came back with 0 rows, the wallet list was empty, and the
+   bot scanned nothing for ~19.5h while still reporting ok:true. (api/polymarket.js kept
+   working purely because it happened to ask for 20.)
+   Ladder down until the API answers, so a future cap change degrades instead of blacking
+   out. limitUsed is surfaced in the debug payload to make a silent regression visible. */
+const LB_LIMITS = [100, 50, 20];
+const lbDiag = { limitUsed: null };
+async function fetchLeaderboard(category) {
+  for (const limit of LB_LIMITS) {
+    try {
+      const r = await fetch(`${DATA_API}/v1/leaderboard?category=${category}&timePeriod=ALL&orderBy=PNL&limit=${limit}`);
+      if (!r.ok) continue;
+      const d = await r.json();
+      if (Array.isArray(d) && d.length) { lbDiag.limitUsed = limit; return d; }
+    } catch {}
+  }
+  return [];
 }
 
 /* ─── WALLET TRADES ───────────────────────────────────── */
@@ -217,8 +229,8 @@ module.exports = async function handler(req, res) {
   try {
     /* ── STEP 1: Polymarket — profitable wallet scan ── */
     const [sportsLB, overallLB] = await Promise.all([
-      fetchLeaderboard('SPORTS', 500),
-      fetchLeaderboard('OVERALL', 500),
+      fetchLeaderboard('SPORTS'),
+      fetchLeaderboard('OVERALL'),
     ]);
 
     const walletMap = {};
@@ -440,6 +452,7 @@ module.exports = async function handler(req, res) {
         sharp: { scanned: results.sharp.scanned, sent: results.sharp.sent, alerts: results.sharp.alerts },
       },
       debug: {
+        lbLimitUsed: lbDiag.limitUsed,
         lbCoverage:  { overall: overallLB.length, sports: sportsLB.length, profitable: walletList.length },
         baseballBuys: baseballBuys.slice(0, 10),
       },
