@@ -105,6 +105,14 @@ function extractSlugDate(a) {
   const m = s.match(/(\d{4}-\d{2}-\d{2})/);
   return m ? m[1] : null;
 }
+// STALE-MARKET FILTER: "today" in ET with a 3-hour grace past midnight, so a late
+// West-coast game still in progress at 1 AM ET isn't treated as yesterday's game.
+// Mirrors the same constant/logic in polymarket.html — keep the two in sync.
+const STALE_GRACE_HOURS = 3;
+function effectiveTodayET() {
+  try { return new Date(Date.now() - STALE_GRACE_HOURS * 3600000).toLocaleDateString('en-CA', { timeZone: 'America/New_York' }); }
+  catch { return ''; }
+}
 function gameEasternDate(line) {
   if (!line || !line.commenceTime) return null;
   try { return new Date(line.commenceTime).toLocaleDateString('en-CA', { timeZone: 'America/New_York' }); } catch { return null; }
@@ -261,6 +269,13 @@ module.exports = async function handler(req, res) {
 
       if (ts < cutoff || ts > winMax) return;
       if (!isSportsMarket(t.title)) return;
+      // STALE-MARKET FILTER: skip buys on markets whose slug-dated game is already in
+      // the past (ET) — e.g. late trading / position-dumping on an old unresolved market
+      // (proven: a Jun 25 ARI/STL market took an $18.9K buy on Jul 23 and alerted).
+      // Undated slugs (futures) can't be judged and pass through unchanged.
+      const slugDate = extractSlugDate(t);
+      const todayET = effectiveTodayET();
+      if (slugDate && todayET && slugDate < todayET) return;
       const sportThresh = sport === 'MLB' ? Math.min(threshold, 300) : threshold;
       if (usd < sportThresh) return;
       if (!walletMap[wallet]) return;
