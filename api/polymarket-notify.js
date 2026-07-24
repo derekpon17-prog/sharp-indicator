@@ -14,42 +14,53 @@ const DATA_API    = 'https://data-api.polymarket.com';
 const SITE_URL    = 'https://sharp-indicator-a34j.vercel.app';
 const sentThisSession = new Set(); // persists across warm invocations
 
-/* ─── SPORT WHITELIST ─────────────────────────────────── */
+/* ─── SPORT WHITELIST ─────────────────────────────────
+   Restricted 2026-07-24 per directive to: MLB, NFL, NHL, NBA, WNBA, NCAAF,
+   NCAAB. Dropped golf, tennis, soccer (incl. World Cup / Olympics). WNBA moved
+   off the BLOCKED denylist, where it had been actively suppressed.
+
+   Slug prefix is now the PRIMARY signal, replacing title keyword matching.
+   Slugs are structured and unambiguous ("mlb-col-mil-2026-07-24" vs
+   "arg-rac-gim-...", "atp-...", "cs2-..."); titles are not. MLB_TEAMS contains
+   'rangers' and 'giants', which also match Glasgow Rangers and the Yomiuri
+   Giants — a Scottish soccer match would have been tagged MLB and alerted.
+   Title matching survives only as a fallback for entries carrying no slug.
+   The BLOCKED denylist is gone: with a closed allowlist it is redundant, and a
+   denylist can only ever block what someone remembered to enumerate. */
+const LEAGUE_BY_SLUG = {
+  mlb:'MLB', nfl:'NFL', nhl:'NHL', nba:'NBA', wnba:'WNBA',
+  ncaaf:'NCAAF', ncaafb:'NCAAF', cfb:'NCAAF',
+  ncaab:'NCAAB', ncaamb:'NCAAB', ncaawb:'NCAAB', cbb:'NCAAB',
+};
 const MLB_TEAMS = ['yankees','red sox','dodgers','cubs','mets','astros','braves','phillies',
   'padres','giants','cardinals','brewers','guardians','royals','twins','orioles','rays',
   'blue jays','mariners','rangers','angels','athletics','tigers','white sox','reds',
   'pirates','rockies','marlins','nationals','diamondbacks'];
-const BLOCKED = ['dota','valorant','cs2','counter-strike','league of legends','lol:',
-  'esports','starcraft','overwatch','fortnite','bitcoin','ethereum','crypto','trump',
-  'biden','president','prime minister','politics','election','premier league','la liga',
-  'serie a','bundesliga','champions league','ufc','boxing','mma','wnba','rugby','cricket'];
 
-function isSportsMarket(title) {
-  if (!title) return false;
-  const t = title.toLowerCase();
-  if (BLOCKED.some(k => t.includes(k))) return false;
-  if (t.includes('mlb') || MLB_TEAMS.some(x => t.includes(x))) return true;
-  if (t.includes('nba') || t.includes('nfl') || t.includes('nhl')) return true;
-  if (t.includes('ncaaf') || t.includes('ncaab') || t.includes('march madness')) return true;
-  if (t.includes('pga') || t.includes('masters ') || t.includes('ryder cup')) return true;
-  if (t.includes('fifa world cup') || t.includes('copa america') || t.includes('gold cup')) return true;
-  if (t.includes('wimbledon') || t.includes('us open tennis') || t.includes('grand slam')) return true;
-  if (t.includes('olympic')) return true;
-  return false;
-}
-
-function marketSport(title) {
+function titleLeague(title) {
   const t = (title || '').toLowerCase();
+  if (!t) return null;
+  if (t.includes(' and ')) return null;   // parlay combo — spans several games, not gradable as one play
+  if (t.includes('wnba')) return 'WNBA';  // must precede NBA: the string 'wnba' contains 'nba'
+  if (t.includes('ncaaf') || t.includes('college football')) return 'NCAAF';
+  if (t.includes('ncaab') || t.includes('march madness')) return 'NCAAB';
+  if (t.includes('nfl')  || t.includes('super bowl')) return 'NFL';
+  if (t.includes('nhl')) return 'NHL';
+  if (t.includes('nba')) return 'NBA';
   if (t.includes('mlb') || MLB_TEAMS.some(x => t.includes(x))) return 'MLB';
-  if (t.includes('nba') || t.includes('basketball')) return 'NBA';
-  if (t.includes('nfl') || t.includes('super bowl')) return 'NFL';
-  if (t.includes('nhl') || t.includes('hockey')) return 'NHL';
-  if (t.includes('pga') || t.includes('golf')) return 'GOLF';
-  if (t.includes('wimbledon') || t.includes('tennis') || t.includes('grand slam')) return 'TENNIS';
-  if (t.includes('world cup') || t.includes('copa america')) return 'SOCCER';
-  if (t.includes('olympic')) return 'OLYMPICS';
-  return 'SPORTS';
+  return null;
 }
+
+/* Returns the league for an allowed market, or null to reject it. */
+function marketLeague(tr) {
+  const slug   = ((tr && (tr.slug || tr.eventSlug)) || '').toLowerCase();
+  const prefix = slug.split('-')[0];
+  if (prefix) return LEAGUE_BY_SLUG[prefix] || null;  // slug present: authoritative, no title guessing
+  return titleLeague(tr && tr.title);                 // no slug: fall back to the title
+}
+
+function isSportsMarket(tr) { return marketLeague(tr) !== null; }
+function marketSport(tr)    { return marketLeague(tr) || 'OTHER'; }
 
 /* ─── LEADERBOARD ─────────────────────────────────────── */
 /* OUTAGE FIX 2026-07-24: this was hardcoded to limit=500. Polymarket capped the
@@ -267,7 +278,7 @@ module.exports = async function handler(req, res) {
       const wallet = t.proxyWallet || t._wallet || t.maker;
       const ts     = parseInt(t.timestamp) || 0;
       const usd    = (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0);
-      const sport  = marketSport(t.title);
+      const sport  = marketSport(t);
 
       if (sport === 'MLB' && usd >= 50) {
         baseballBuys.push({
@@ -280,7 +291,7 @@ module.exports = async function handler(req, res) {
       }
 
       if (ts < cutoff || ts > winMax) return;
-      if (!isSportsMarket(t.title)) return;
+      if (!isSportsMarket(t)) return;
       // STALE-MARKET FILTER: skip buys on markets whose slug-dated game is already in
       // the past (ET) — e.g. late trading / position-dumping on an old unresolved market
       // (proven: a Jun 25 ARI/STL market took an $18.9K buy on Jul 23 and alerted).
