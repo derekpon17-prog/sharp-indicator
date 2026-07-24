@@ -191,6 +191,19 @@ function detectExchangeLean(pm,sms,exBooks,mkey){
   const disagreement=!!(bothLean&&result[keys[0]].favors!==result[keys[1]].favors);
   return{detail:result,disagreement};
 }
+// Derives a standalone "exchange confirms, Pinnacle doesn't" signal directly from the
+// already-computed exchangeLean data — no restructuring of the Pinnacle-gated scoring
+// loop needed. Kept explicitly separate from the main Money Score per council review:
+// an exchange-only signal is real information (Novig/ProphetX diverging from soft books)
+// but inherently thinner than a Pinnacle-confirmed one — lower liquidity, easier for a
+// single trader to move — so it must never be silently merged in at equal weight.
+function exchangeOnlySignal(lean){
+  const cands=Object.entries(lean.detail).filter(([k,v])=>v.favors&&v.gapPP!==null);
+  if(!cands.length)return null;
+  cands.sort((a,b)=>b[1].gapPP-a[1].gapPP);
+  const[book,d]=cands[0];
+  return{book,favors:d.favors,gapPP:d.gapPP,disagreement:lean.disagreement};
+}
 
 function analyzeMarket(game,mkey,pin,exBooks,soft){
   const pm=pin.markets&&pin.markets.find(m=>m.key===mkey);
@@ -238,12 +251,10 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     }).filter(Boolean);
     const exConfirms=exchanges.filter(ex=>(ex.fairProb-avgSoftFair)*100>EX_CONFIRM_GAP).length;
     const exLines=exchanges.reduce((acc,ex)=>{acc[ex.key]=fmt(ex.price);return acc;},{});
-    // MLB spread filter: reject only truly extreme juice (worse than -250) — e.g. a
-    // -1.5 favorite at -400+. Previously cut off at -150, which is a completely normal
-    // price for an ordinary MLB run-line favorite and was discarding real, sometimes very
-    // large gaps before the signal math ever ran (confirmed live: a 14.72pp gap on Braves
-    // -1.5 at -198 was being thrown out purely on price level, not signal weakness).
-    if(mkey==='spreads'&&out.price<-250)continue;
+    // MLB spread filter: reject any spread outcome with juice worse than -150 —
+    // confirmed as intentional design, not a leftover default. Do not change without
+    // explicit request.
+    if(mkey==='spreads'&&out.price<-150)continue;
 
     const rlm=calcRLM(out.name,mkey,out.price,null,out.point);
     const ps=calcPin(pf[i],simps,gapFloor);
@@ -264,7 +275,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
         lines:{pinnacle:fmt(out.price),novig:exLines['novig']||exLines['prophetx']||null,softAvg:fmt(Math.round(toAm(asr))),softRange:sr},
         currentPinPrice:out.price,currentSoftAvg:softAvgMap[out.name]||null,
         gapPP:gapPP.toFixed(2),numBooks:simps.length,
-        publicLean:isPublicLean(out.name,mkey,out.price,out.point),rawPrices,exchangeLean,
+        publicLean:isPublicLean(out.name,mkey,out.price,out.point),rawPrices,exchangeLean,exchangeOnly:exchangeOnlySignal(exchangeLean),
       };
     }
   }
@@ -311,9 +322,9 @@ function analyzeAll(game){
     // top-level fields, so it was showing "0 books, no data" for games that were fully
     // assessed and simply didn't qualify. siScore/signalType/sharpSide remain explicitly
     // zero/none — this only restores the diagnostic numbers, not the qualification.
-    return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:0,sharpSide:'—',signalType:'NONE',novigConfirm:best?best.novigConfirm:false,exConfirms:best?best.exConfirms:0,exLines:best?best.exLines:{},exchangeLean:best?best.exchangeLean:null,lines:best?best.lines:{pinnacle:'—',novig:null,softAvg:'—',softRange:'—'},gapPP:best?best.gapPP:'0.00',pillars:best?best.pillars:{rlm:0,pinnacle:0,money:0},numBooks:best?best.numBooks:0,publicLean:best?best.publicLean:false,activeMarket:best?best.market:'h2h',markets,noSignal:true,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified:false};
+    return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:0,sharpSide:'—',signalType:'NONE',novigConfirm:best?best.novigConfirm:false,exConfirms:best?best.exConfirms:0,exLines:best?best.exLines:{},exchangeLean:best?best.exchangeLean:null,exchangeOnly:best?best.exchangeOnly:null,lines:best?best.lines:{pinnacle:'—',novig:null,softAvg:'—',softRange:'—'},gapPP:best?best.gapPP:'0.00',pillars:best?best.pillars:{rlm:0,pinnacle:0,money:0},numBooks:best?best.numBooks:0,publicLean:best?best.publicLean:false,activeMarket:best?best.market:'h2h',markets,noSignal:true,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified:false};
   }
-  return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,novigConfirm:best.novigConfirm,exConfirms:best.exConfirms,exLines:best.exLines,exchangeLean:best.exchangeLean,lines:best.lines,gapPP:best.gapPP,pillars:best.pillars,numBooks:best.numBooks,publicLean:best.publicLean,activeMarket:best.market,markets,noSignal:false,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified};
+  return{id:game.id,away:game.away_team,home:game.home_team,commenceTime:game.commence_time,siScore:best.siScore,sharpSide:best.sharpSide,signalType:best.signalType,novigConfirm:best.novigConfirm,exConfirms:best.exConfirms,exLines:best.exLines,exchangeLean:best.exchangeLean,exchangeOnly:best.exchangeOnly,lines:best.lines,gapPP:best.gapPP,pillars:best.pillars,numBooks:best.numBooks,publicLean:best.publicLean,activeMarket:best.market,markets,noSignal:false,mlScore:mlMkt?mlMkt.siScore:0,spreadQualified};
 }
 
 module.exports=async function handler(req,res){
