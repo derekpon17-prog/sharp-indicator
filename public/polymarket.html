@@ -622,6 +622,25 @@ function oc(o){const l=(o||'').toLowerCase();return l==='yes'?'<span class="oc-y
 function calcP(t){const amt=parseFloat(t.amount)||0;if(t.odds){const odds=parseInt(t.odds)||0;if(t.status==='WIN')return odds<0?Math.round(amt*(100/Math.abs(odds))*100)/100:Math.round(amt*(odds/100)*100)/100;if(t.status==='LOSS')return -amt;return 0;}const price=parseFloat(t.price)||50;if(t.status==='WIN')return Math.round(amt*(100/price-1)*100)/100;if(t.status==='LOSS')return -amt;return 0;}
 function isLosingTrader(wallet){if(!wallet)return false;const c=_sc[wallet];return c&&c.pnl!==null&&c.pnl<0;}
 
+/* === STALE-MARKET / GAME-DAY FILTER === */
+// Dashboard views only. A play whose game date (from Polymarket's own eventSlug, e.g.
+// "mlb-ari-stl-2026-06-25") is before "today" drops off all active views — Poly Signal
+// row, Sharp Score cards, Decision Center, Hero, Recent Alerts. Already-tracked plays
+// in sigPlays/Tracking are untouched and stay gradable in the background.
+// "Today" rolls over at 3 AM ET rather than midnight so a late West-coast game
+// (10:40 PM ET first pitch, ends ~1:30 AM ET) isn't hidden while still live.
+// Undated slugs (futures, e.g. "world-series-winner") can't be judged and pass through.
+const STALE_GRACE_HOURS=3; // set to 0 for a strict midnight-ET cutoff
+function easternDateStr(ms){try{return new Date(ms).toLocaleDateString('en-CA',{timeZone:'America/New_York'});}catch(e){return '';}}
+function effectiveTodayET(){return easternDateStr(Date.now()-STALE_GRACE_HOURS*3600000);}
+function isStaleGameDate(dateStr){
+  if(!dateStr)return false;
+  var m=String(dateStr).match(/^(\d{4}-\d{2}-\d{2})/);
+  if(!m)return false;
+  return m[1]<effectiveTodayET(); // ISO date strings compare correctly as strings
+}
+function isStaleAlert(a){return isStaleGameDate(extractSlugDate(a));}
+
 /* === RANK-WEIGHTED SIGNAL SCORE === */
 // BUGFIX: buyer count must be UNIQUE wallets, not raw alert/transaction rows — a single
 // wallet buying the same outcome twice (e.g. averaging into a position) was being counted
@@ -934,6 +953,7 @@ function buildTrending(){
     const ts=a.loggedAt||(a.timestamp*1000);
     if(ts<cutoff)return;
     if(!detectSport(a.title))return;
+    if(isStaleAlert(a))return; // STALE-MARKET FILTER: game date already passed (ET) — off active views, tracking unaffected
     if(isLosingTrader(a.wallet))return;
     const cached=_sc[a.wallet],inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
     if(!inLB&&cached!==null&&cached!==undefined&&(cached.pnl===null||cached.pnl<=0))return;
@@ -1002,7 +1022,7 @@ function renderTrending(){
 
 /* === HERO === */
 function renderHero(){
-  const rec=alerts.filter(a=>{const ts=a.loggedAt||(a.timestamp*1000);return ts>Date.now()-86400000&&detectSport(a.title)&&!isLosingTrader(a.wallet);}).sort((a,b)=>b.usdValue-a.usdValue);
+  const rec=alerts.filter(a=>{const ts=a.loggedAt||(a.timestamp*1000);return ts>Date.now()-86400000&&detectSport(a.title)&&!isStaleAlert(a)&&!isLosingTrader(a.wallet);}).sort((a,b)=>b.usdValue-a.usdValue);
   const t=rec[0];if(!t)return;
   const pr=(parseFloat(t.price||0)*100).toFixed(1);
   el('hero').innerHTML='<div style="position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(229,160,13,.1),transparent 55%);pointer-events:none"></div>'
@@ -1040,6 +1060,7 @@ function renderDash(){
   // Recent Alerts: last 24 hours from merged alerts array
   var cutoff24=Date.now()-24*60*60*1000;
   var recent=alerts.filter(function(a){
+    if(isStaleAlert(a))return false; // STALE-MARKET FILTER
     return (a.loggedAt||(a.timestamp*1000)||0) >= cutoff24;
   }).slice(0,8);
   if(recent.length){
