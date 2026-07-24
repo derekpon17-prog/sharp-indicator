@@ -238,9 +238,12 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     }).filter(Boolean);
     const exConfirms=exchanges.filter(ex=>(ex.fairProb-avgSoftFair)*100>EX_CONFIRM_GAP).length;
     const exLines=exchanges.reduce((acc,ex)=>{acc[ex.key]=fmt(ex.price);return acc;},{});
-    // MLB spread filter: reject any spread outcome with juice worse than -150
-    // e.g. +1.5 at -225 or -1.5 at -175 — not worth the juice
-    if(mkey==='spreads'&&out.price<-150)continue;
+    // MLB spread filter: reject only truly extreme juice (worse than -250) — e.g. a
+    // -1.5 favorite at -400+. Previously cut off at -150, which is a completely normal
+    // price for an ordinary MLB run-line favorite and was discarding real, sometimes very
+    // large gaps before the signal math ever ran (confirmed live: a 14.72pp gap on Braves
+    // -1.5 at -198 was being thrown out purely on price level, not signal weakness).
+    if(mkey==='spreads'&&out.price<-250)continue;
 
     const rlm=calcRLM(out.name,mkey,out.price,null,out.point);
     const ps=calcPin(pf[i],simps,gapFloor);
