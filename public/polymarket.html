@@ -180,6 +180,8 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .flag-card.f-line{border-top-color:var(--blue)}
 .flag-card.f-ss{border-top-color:var(--green)}
 .flag-card.f-picks{border-top-color:var(--purple)}
+.flag-card.f-mlv{border-top-color:var(--purple);border-style:solid;background:linear-gradient(180deg,rgba(155,109,255,.05),var(--s1))}
+.minisrc.on-vel{background:rgba(155,109,255,.16);color:var(--purple)}
 .fc-name{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
 .fc-rec{font-family:var(--disp);font-size:21px;font-weight:700;line-height:1}
 .fc-sub{font-size:11px;font-family:var(--mono);color:var(--t3);margin-top:5px}
@@ -455,6 +457,7 @@ select.finput option{background:var(--s2)}
       <div class="flag-card f-line"><div class="fc-name">Sharp Line</div><div class="fc-rec" id="fs-line">&mdash;</div><div class="fc-sub" id="fs-line-sub">no graded plays</div></div>
       <div class="flag-card f-ss"><div class="fc-name">Sharp Score</div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div></div>
       <div class="flag-card f-picks"><div class="fc-name">My Picks</div><div class="fc-rec" id="fs-picks">&mdash;</div><div class="fc-sub" id="fs-picks-sub">no graded picks</div></div>
+      <div class="flag-card f-mlv"><div class="fc-name">ML Velocity <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:3px">SHADOW</span></div><div class="fc-rec" id="fs-mlv">&mdash;</div><div class="fc-sub" id="fs-mlv-sub">validating &mdash; not in real record</div></div>
     </div>
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <div style="margin-bottom:28px">
@@ -514,6 +517,23 @@ select.finput option{background:var(--s2)}
       </div>
     </div>
 
+    <!-- ML Velocity shadow plays — validation sample, separate from real record -->
+    <div style="margin-bottom:28px">
+      <div class="row-hdr" style="margin-bottom:12px">
+        <div class="row-ttl" style="font-size:16px"><i class="ti ti-trending-up" style="color:var(--purple)"></i>ML Velocity Plays <span style="font-size:10px;font-weight:800;padding:2px 8px;border-radius:4px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:6px">SHADOW MODE</span> <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">movement-based ML signal under validation &mdash; grades itself, never touches the real record</span></div>
+        <div id="mlv-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
+      </div>
+      <div class="perf" style="margin-bottom:16px">
+        <div class="pc"><div class="pc-val" id="mlv-rec">0&ndash;0</div><div class="pc-lbl">Record</div></div>
+        <div class="pc"><div class="pc-val" id="mlv-wr" style="color:var(--t4)">&mdash;</div><div class="pc-lbl">Win Rate</div></div>
+        <div class="pc"><div class="pc-val" id="mlv-units" style="color:var(--t4)">0.00u</div><div class="pc-lbl">Unit P&amp;L</div></div>
+      </div>
+      <div id="mlv-plays" style="display:flex;flex-direction:column;gap:8px"></div>
+      <div id="mlv-empty" class="empty" style="padding:22px">
+        <div class="empty-ico"><i class="ti ti-trending-up"></i></div><h3>No velocity plays captured yet</h3>
+        <p>When a moneyline moves 1.5pp+ from its opening price, it lands here for validation &mdash; the sample that decides whether movement earns a spot in the real score</p>
+      </div>
+    </div>
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <div class="perf">
       <div class="pc"><div class="pc-val" id="tp-r">0&ndash;0</div><div class="pc-lbl">My Picks Record</div></div>
@@ -644,6 +664,7 @@ const el=id=>document.getElementById(id);
 let alerts=ls('pm:alert-log',[]),trades=ls('pm:trades',[]),wallets=ls('pm:traders',[]),sigPlays=ls('pm:sig-plays',[]);
 let linePlays=ls('pm:line-plays',[]);
 let sharpScorePlays=ls('pm:ss-plays',[]);
+let mlvPlays=ls('pm:mlv-plays',[]); // ML Velocity SHADOW plays — validation only, never mixed into real records
 let sharpLines=[];
 const dismissed=new Set(ls('pm:dismissed',[]));
 function dismiss(key){dismissed.add(key);ss('pm:dismissed',[...dismissed]);renderTrending();}
@@ -911,6 +932,7 @@ async function fetchSharpLines(){
       sharpLines=[];return[];
     }
     sharpLines=d.plays||d.data||d.games||(Array.isArray(d)?d:[]);
+    captureVelocityShadow(sharpLines);
     return sharpLines;
   }catch(e){console.warn('Sharp lines:',e.message);sharpLines=[];return[];}
 }
@@ -1151,9 +1173,33 @@ function renderTrending(){
 }
 
 /* === HERO === */
+/* === ML VELOCITY (SHADOW) — capture qualifying plays for grading only === */
+// Provisional threshold mirrors the server's MLV_QUALIFY. These plays grade through the
+// same ESPN path as everything else but live in their own store + Tracking flag, clearly
+// labeled SHADOW: they never touch the real record, SI scores, or auto-track thresholds.
+var MLV_SHADOW_QUALIFY=60;
+function captureVelocityShadow(lines){
+  var changed=false;
+  (lines||[]).forEach(function(g){
+    var v=g.mlVelocity;
+    if(!v||(v.state!=='MID_MOVE'&&v.state!=='MOVE_COMPLETE')||(v.score||0)<MLV_SHADOW_QUALIFY)return;
+    var key=(g.id||((g.away||'')+(g.home||'')))+'|'+v.state;
+    if(mlvPlays.some(function(p){return p.key===key;}))return;
+    mlvPlays.unshift({
+      key:key,title:(g.away||'')+' vs '+(g.home||''),sharpSide:v.side||'',state:v.state,
+      score:v.score,movementPP:v.movementPP,steamWidth:v.steamWidth,laggingBooks:v.laggingBooks||0,
+      bestLag:v.bestLag||0,openPin:v.openPin,pinnaclePrice:v.nowPin,label:v.label,
+      sport:detectSportFromTeams(g.away,g.home)||'MLB',gameTime:g.commenceTime||'',
+      loggedAt:Date.now(),status:'OPEN'
+    });
+    changed=true;
+  });
+  if(changed){ss('pm:mlv-plays',mlvPlays);if(view==='tracking')renderTracking();}
+}
+
 /* === THE BOARD — one canonical play per game, merged across sources === */
 var boardFilter='all',boardExpand=false;
-var trackExpand={sig:false,line:false,ss:false,picks:false};
+var trackExpand={sig:false,line:false,ss:false,picks:false,mlv:false};
 var TRACK_CAP=8; // last 5-10 visible; rest behind Show all
 function toggleTrack(k){trackExpand[k]=!trackExpand[k];renderTracking();}
 function trkMoreBtn(k,total){
@@ -1183,13 +1229,16 @@ function buildBoard(){
     var agree=match?sameSharpSide(g.sharpSide,match.outcome):false;
     var combined=calcSharpScore(si,ps,agree);
     if(match)usedAlertKeys[(match.title||'')+'||'+(match.outcome||'')]=true;
-    var why=agree?'Books and Poly money agree'
+    var vel=g.mlVelocity||null;
+    var why=(vel&&vel.state==='MID_MOVE')?('ML moving \u2014 '+(vel.laggingBooks||0)+' books still lagging')
+      :agree?'Books and Poly money agree'
       :match?'Books moved; Poly active on this game'
       :(g.exConfirms||0)>0?'Books + exchange confirm'
       :'Sharp books moved '+parseFloat(g.gapPP||0).toFixed(1)+'pp';
     rows.push({
       title:(g.away||'')+(g.home?' @ '+g.home:''),side:g.sharpSide||'',score:combined,
       srcLine:si,srcPoly:agree?ps:0,srcExch:g.exConfirms||0,combined:agree,
+      velState:vel?vel.state:'NONE',
       gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home),why:why
     });
   });
@@ -1604,7 +1653,7 @@ async function gradeFromESPN(){
     });
     if(changed)ss(key,plays);
   }
-  tryGrade(linePlays,'pm:line-plays');tryGrade(sharpScorePlays,'pm:ss-plays');tryGrade(sigPlays,'pm:sig-plays');
+  tryGrade(linePlays,'pm:line-plays');tryGrade(sharpScorePlays,'pm:ss-plays');tryGrade(sigPlays,'pm:sig-plays');tryGrade(mlvPlays,'pm:mlv-plays');
   if(changed)renderTracking();
 }
 
@@ -1760,6 +1809,38 @@ function renderTracking(){
     }
   }
   fillFlagCard('fs-ss',ssStat,sharpScorePlays.length);
+
+  /* ── ML VELOCITY SHADOW PLAYS ── */
+  var mlvStat=unitPnL(mlvPlays);
+  setStats('mlv-rec','mlv-wr','mlv-units',mlvStat);
+  var mre=el('mlv-record');if(mre)mre.textContent=mlvStat.W+'W-'+mlvStat.L+'L'+(mlvPlays.length?' on '+mlvPlays.length+' plays':'');
+  var mvEl=el('mlv-plays'),mvEm=el('mlv-empty');
+  if(mvEl){
+    if(!mlvPlays.length){if(mvEm)mvEm.style.display='';mvEl.innerHTML='';}
+    else{
+      if(mvEm)mvEm.style.display='none';
+      var mlvShow=trackExpand.mlv?mlvPlays:mlvPlays.slice(0,TRACK_CAP);
+      mvEl.innerHTML=mlvShow.map(function(p,i){
+        var stBadge=p.state==='MID_MOVE'
+          ?'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(155,109,255,.15);color:var(--purple)">MID-MOVE</span>'
+          :'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.07);color:var(--t3)">MOVE COMPLETE</span>';
+        return '<div class="sig-play '+(p.status||'open').toLowerCase()+'" style="border-left:3px solid rgba(155,109,255,.5)">'
+          +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
+          +'<div style="display:flex;gap:5px;align-items:center">'+stBadge
+          +(p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono)">'+p.sport+'</span>':'')
+          +'</div>'
+          +'<div style="text-align:right"><div style="font-size:20px;font-weight:900;font-family:var(--mono);color:var(--purple);line-height:1">'+(p.score||0)+'</div><div style="font-size:9px;color:var(--t4);font-family:var(--mono)">VELOCITY</div></div>'
+          +'</div>'
+          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+(p.title||'')+'</div>'
+          +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:5px">&#x25B6; '+(p.sharpSide||'&mdash;')+' ML</div>'
+          +'<div style="font-size:10.5px;color:var(--t3);font-family:var(--mono);margin-bottom:5px">'+(p.label||'')+'</div>'
+          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-bottom:5px">\u23F0 Game: '+gdt(p.gameTime)+'</div>':'')
+          +playBtns(mlvPlays,'pm:mlv-plays',i,p)
+          +'</div>';
+      }).join('')+trkMoreBtn('mlv',mlvPlays.length);
+    }
+  }
+  fillFlagCard('fs-mlv',mlvStat,mlvPlays.length);
 
   /* ── MY PICKS (manual) ── */
   var W2=trades.filter(function(t){return t.status==='WIN';}).length;
@@ -1992,6 +2073,7 @@ function renderCommandCenter(){
       +'<span class="minisrc'+(r.srcLine>0?' on-line':'')+'">LINE</span>'
       +'<span class="minisrc'+(r.srcPoly>0?' on-poly':'')+'">POLY</span>'
       +'<span class="minisrc'+(r.srcExch>0?' on-exch':'')+'">EXCH</span>'
+      +(r.velState==='MID_MOVE'?'<span class="minisrc on-vel" title="ML moving, books lagging \u2014 shadow signal">VEL</span>':'')
       +'</div>'
       +'<div class="br-meta">'+(r.gameTime?'<div class="tm">'+gdt(r.gameTime)+'</div>':'')+'<div class="why">'+(r.why||'')+'</div></div>'
       +'</div>';
@@ -2399,7 +2481,7 @@ document.addEventListener('click',e=>{
   const atpBtn=e.target.closest('.atp-btn');
   if(atpBtn){
     const arr=atpBtn.dataset.arr,i=parseInt(atpBtn.dataset.i),st=atpBtn.dataset.st;
-    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:sharpScorePlays;
+    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:sharpScorePlays;
     if(plays[i]){plays[i].status=st;plays[i].gradedAt=Date.now();ss(arr,plays);renderTracking();}
     return;
   }
@@ -2407,7 +2489,7 @@ document.addEventListener('click',e=>{
   const atpDel=e.target.closest('.atp-del');
   if(atpDel&&atpDel.dataset.arr){
     const arr=atpDel.dataset.arr,i=parseInt(atpDel.dataset.i);
-    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:sharpScorePlays;
+    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:sharpScorePlays;
     plays.splice(i,1);ss(arr,plays);renderTracking();
     return;
   }
