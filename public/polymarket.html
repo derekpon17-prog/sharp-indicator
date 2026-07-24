@@ -284,6 +284,22 @@ select.finput option{background:var(--s2)}
       <div id="money-score-list" style="display:flex;flex-direction:column;gap:9px"></div>
     </div>
 
+    <!-- Exchange-Only Signals — deliberately separate from Money Score above. This fires
+         when Novig/ProphetX show real divergence but Pinnacle's own price on that exact
+         side didn't independently confirm — real information, but thinner than a full
+         Money Score confirm (lower liquidity, easier for one trader to move), so it must
+         never be presented at the same weight/confidence as the row above. -->
+    <div class="row-s" id="exchange-only-row" style="display:none">
+      <div class="row-hdr">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="row-ttl"><em>&#x1F501;</em>Exchange-Only Signals</div>
+          <div style="font-size:10px;font-weight:700;padding:2px 9px;border-radius:4px;background:rgba(155,109,255,.12);color:var(--purple)">UNCONFIRMED BY PINNACLE</div>
+        </div>
+        <div class="row-all" style="font-size:11px;color:var(--t3)">Novig/ProphetX diverge, Pinnacle doesn't back it &mdash; weaker signal</div>
+      </div>
+      <div id="exchange-only-list" style="display:flex;flex-direction:column;gap:9px"></div>
+    </div>
+
     <!-- 2. Polymarket Signal -->
     <div class="row-s" id="trending-row" style="display:none">
       <div class="row-hdr">
@@ -722,7 +738,7 @@ async function fetchData(){
     if(view==='dashboard'){renderDash();setTimeout(renderTrending,200);}
     if(view==='alerts')renderAlerts();
     if(view==='traders'){renderHot();renderLB();}
-    fetchSharpLines().then(function(){renderSharpLines();renderSharpScore();renderMoneyScore();renderCommandCenter();renderTrending();});
+    fetchSharpLines().then(function(){renderSharpLines();renderSharpScore();renderMoneyScore();renderExchangeOnly();renderCommandCenter();renderTrending();});
     el('ldot').style.background='#00C896';el('ltxt').textContent='Live';cd=REFRESH;
   }catch{el('ldot').style.background='var(--red)';el('ltxt').textContent='Error';}
 }
@@ -1660,7 +1676,51 @@ function renderMoneyScore(){
   }).join('');
 }
 
-/* === COMMAND CENTER === */
+/* === EXCHANGE-ONLY SIGNALS ===
+   Deliberately separate from Money Score above (see council review). Fires when
+   Novig/ProphetX show real divergence but Pinnacle's own price on that exact side didn't
+   independently confirm — checks all 3 markets per game directly (not just the top-level
+   game object, which only ever surfaces one market's result via tie-breaking) since the
+   real signal is often on a different market than whichever one 'won' overall. */
+function renderExchangeOnly(){
+  const row=el('exchange-only-row'),list=el('exchange-only-list');
+  if(!row||!list)return;
+  const now4=Date.now();
+  const candidates=[];
+  (sharpLines||[]).forEach(function(g){
+    if(g.commenceTime&&new Date(g.commenceTime).getTime()<=now4-4*3600000)return;
+    ['h2h','spreads','totals'].forEach(function(mk){
+      const m=g.markets&&g.markets[mk];
+      if(!m||!m.exchangeOnly)return;
+      candidates.push({title:(g.away||'?')+' vs '+(g.home||'?'),market:mk,sig:m.exchangeOnly,gameTime:g.commenceTime,sport:detectSportFromTeams(g.away,g.home)});
+    });
+  });
+  candidates.sort(function(a,b){return b.sig.gapPP-a.sig.gapPP;});
+  const top=candidates.slice(0,5);
+  if(!top.length){
+    row.style.display='';
+    list.innerHTML='<div style="padding:16px 8px;text-align:center;color:var(--t4);font-size:12px">No exchange-only signals right now &mdash; shows here when Pinnacle doesn\'t confirm but Novig/ProphetX show real divergence</div>';
+    return;
+  }
+  row.style.display='';
+  list.innerHTML=top.map(function(c){
+    const mkLabel=c.market==='h2h'?'ML':c.market==='spreads'?'SPREAD':'TOTAL';
+    const sportTag=c.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+c.sport+'</span>':'';
+    const warn=c.sig.disagreement?'<div style="font-size:10px;font-weight:700;color:var(--gold);background:rgba(229,160,13,.1);border-radius:5px;padding:4px 8px;margin-top:6px">&#x26A0; The other exchange disagrees &mdash; treat as mixed, not a clean signal</div>':'';
+    return '<div class="sig-play open" style="border-left:3px solid var(--purple)">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px">'
+      +'<div><span style="font-size:10px;font-weight:800;color:var(--purple)">&#x1F501; EXCHANGE ONLY</span><span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(155,109,255,.12);color:var(--purple);border-radius:3px;font-family:var(--mono);margin-left:5px">'+mkLabel+'</span>'+sportTag
+      +(c.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">&#x23F0; Game: '+gdt(c.gameTime)+'</div>':'')
+      +'</div>'
+      +'<div style="text-align:right"><div style="font-size:22px;font-weight:900;font-family:var(--mono);color:var(--purple);line-height:1">+'+c.sig.gapPP+'pp</div><div style="font-size:9px;color:var(--t4);font-family:var(--mono)">'+c.sig.book.toUpperCase()+'</div></div>'
+      +'</div>'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+c.title+'</div>'
+      +'<div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:4px">&#x25B6; '+c.sig.favors+'</div>'
+      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono)">Pinnacle did NOT independently confirm this side &mdash; weaker than a full Money Score confirm</div>'
+      +warn
+      +'</div>';
+  }).join('');
+}
 function renderCommandCenter(){
   const grid=el('play-grid'),empty=el('play-grid-empty'),ccTitle=el('cc-title');
   if(!grid)return;
@@ -2160,4 +2220,3 @@ setInterval(function(){gradeFromESPN();gradeOpenPlays();fetchGameStatuses().then
 </script>
 </body>
 </html>
-
