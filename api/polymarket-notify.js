@@ -84,19 +84,68 @@ async function fetchLeaderboard(category) {
   return [];
 }
 
-/* ─── WALLET TRADES ───────────────────────────────────── */
-async function fetchWalletTrades(wallets, limit = 30) {
+/* ─── WALLET TRADES ───────────────────────────────────
+   DEPTH FIX 2026-07-24: this used to grab a flat last-30 buys per wallet. For
+   normal-paced wallets 30 buys reaches back ~22h, which is why 0x2c33's plays
+   always landed. For hyperactive wallets it is nearly blind: swisstony posted
+   100 buys in 152 SECONDS, so 30 buys covered ~45s of his timeline and roughly
+   95% of his MLB bets were never seen.
+
+   The insight that makes this cheap: lookback does not need to reach the 26h
+   window, it only needs to exceed the CRON INTERVAL. At 15-minute cron cadence,
+   ~20 minutes of reach gives continuous coverage with overlap, and the existing
+   transactionHash dedup absorbs the overlap. 8 pages x 100 = 800 buys, which is
+   ~20 min even at swisstony's peak burst rate and days for everyone else.
+
+   Pagination is ADAPTIVE: almost every wallet exits after page 1 because its
+   oldest row is already past the cutoff, so this costs ~66 calls, not 528. Only
+   the hyperactive few page deep.
+
+   Two things are deliberately instrumented rather than assumed, because today's
+   outage was a silent one: offset support is probed (if page 2 repeats page 1,
+   pagination is unsupported and we degrade to single-page instead of looping),
+   and any wallet still truncated at MAX_PAGES is reported in the debug payload
+   with the minutes it actually covered — so a blind spot is visible, not silent. */
+const TRADE_PAGE = 100;   // rows per request
+const MAX_PAGES  = 8;     // hard cap -> 800 buys/wallet (~20 min at peak burst)
+const trDiag = { offsetSupported: null, truncated: [], pages: 0 };
+
+async function fetchWalletTrades(wallets, cutoff) {
   const results = [];
+  trDiag.truncated = []; trDiag.pages = 0;
   await Promise.all(wallets.map(async w => {
-    try {
-      const r = await fetch(`${DATA_API}/trades?user=${w.wallet}&side=BUY&takerOnly=true&limit=${limit}`);
-      if (!r.ok) return;
-      const d = await r.json();
-      if (Array.isArray(d)) {
-        d.forEach(t => { t._wallet = w.wallet; t._walletName = w.name; });
-        results.push(...d);
+    let firstHash = null, oldest = null, page = 0;
+    for (; page < MAX_PAGES; page++) {
+      let d;
+      try {
+        const r = await fetch(`${DATA_API}/trades?user=${w.wallet}&side=BUY&takerOnly=true&limit=${TRADE_PAGE}&offset=${page * TRADE_PAGE}`);
+        if (!r.ok) break;
+        d = await r.json();
+      } catch { break; }
+      if (!Array.isArray(d) || !d.length) break;
+      trDiag.pages++;
+
+      if (page === 0) {
+        firstHash = d[0] && d[0].transactionHash;
+      } else if (d[0] && d[0].transactionHash === firstHash) {
+        trDiag.offsetSupported = false;  // offset ignored by API — stop, keep page 1 only
+        break;
+      } else if (page === 1) {
+        trDiag.offsetSupported = true;
       }
-    } catch {}
+
+      d.forEach(t => { t._wallet = w.wallet; t._walletName = w.name; });
+      results.push(...d);
+      oldest = parseInt(d[d.length - 1].timestamp) || 0;
+      if (d.length < TRADE_PAGE) break;  // wallet history exhausted
+      if (oldest <= cutoff) break;       // reached the far edge of the window
+    }
+    if (page >= MAX_PAGES && oldest && oldest > cutoff) {
+      trDiag.truncated.push({
+        wallet: w.wallet.slice(0, 10), name: w.name || null,
+        coveredMin: Math.round((Math.floor(Date.now() / 1000) - oldest) / 60),
+      });
+    }
   }));
   return results;
 }
@@ -259,7 +308,7 @@ module.exports = async function handler(req, res) {
       walletMap[w].categories.push({ category: 'SPORTS', rank: t.rank, pnl: parseFloat(t.pnl) });
     });
 
-    const rawTrades = await fetchWalletTrades(walletList, 30);
+    const rawTrades = await fetchWalletTrades(walletList, cutoff);
 
     // Dedup
     const seen = new Set();
@@ -464,6 +513,8 @@ module.exports = async function handler(req, res) {
       },
       debug: {
         lbLimitUsed: lbDiag.limitUsed,
+        tradeDepth:  { pagesFetched: trDiag.pages, offsetSupported: trDiag.offsetSupported,
+                       truncatedWallets: trDiag.truncated },
         lbCoverage:  { overall: overallLB.length, sports: sportsLB.length, profitable: walletList.length },
         baseballBuys: baseballBuys.slice(0, 10),
       },
