@@ -366,9 +366,13 @@ module.exports=async function handler(req,res){
     rawPlays.forEach(p=>{p.isLive=new Date(p.commenceTime).getTime()<now;});
 
     // Build current line snapshot for storage
+    // BUGFIX: previously skipped every noSignal:true game — but that's backwards. We need
+    // a saved baseline price for a game BEFORE it has a signal, so future calls can detect
+    // it moving INTO one. Gating this on noSignal meant only already-qualifying games ever
+    // got snapshotted, so nothing new could ever start accumulating real RLM history.
     const currentLines = {};
     rawPlays.forEach(play => {
-      if (!play.id || play.noSignal) return;
+      if (!play.id) return;
       currentLines[play.id] = {};
       if (play.markets) {
         Object.values(play.markets).forEach(mkt => {
@@ -425,4 +429,3 @@ module.exports=async function handler(req,res){
     res.status(200).json({plays:[],error:err.message,quota:{remaining:null,used:null}});
   }
 };
-
