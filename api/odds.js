@@ -885,15 +885,15 @@ module.exports=async function handler(req,res){
       // NOTE: `now` in this file is Date.now() — MILLISECONDS. (api/polymarket-notify.js
       // uses seconds; mixing the two conventions is what broke this on first deploy:
       // now*1000 made every game look already-started, so no close was ever captured.)
-      const started=now>=startTs;
-      const ex=closeMap[play.id];
-      if(started){
-        if(ex&&!ex.frozen){ex.frozen=true;closeChanged=true;}  // seal it
-        return;
-      }
+      // NOTE: the slate is filtered to ct>now upstream, so a started game never reaches
+      // this loop at all — which is exactly why the entry can't be corrupted after first
+      // pitch, and why an explicit "seal" branch here would be dead code. Frozen state is
+      // therefore DERIVED from the stored commenceTime at read time (see closeFrozen),
+      // not stored as a flag that nothing would ever set.
+      if(now>=startTs)return;
       const pinH2h=play.bookH2h&&play.bookH2h.pinnacle;
       if(!pinH2h)return;
-      closeMap[play.id]={ts:now,frozen:false,commenceTime:play.commenceTime,
+      closeMap[play.id]={ts:now,commenceTime:play.commenceTime,
         away:play.away,home:play.home,h2h:pinH2h,
         markets:Object.keys(play.markets||{}).reduce((a,mk)=>{
           const m=play.markets[mk];
@@ -924,8 +924,26 @@ module.exports=async function handler(req,res){
       relSignal:computeRelSignal(p,boardStats),
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
-      closeLine:closeMap[p.id]?{pinnacle:(closeMap[p.id].h2h||{})[p.sharpSide]||null,
-        capturedAt:closeMap[p.id].ts,frozen:!!closeMap[p.id].frozen}:null,
+      /* BUGFIX: this exposed only closeMap[id].h2h[p.sharpSide], but sharpSide is the
+         literal string '—' on every no-signal game — which is the overwhelming majority
+         of the board — so the lookup always missed and closeLine.pinnacle came back null
+         on all 14 games while the stored data was perfectly fine. CLV needs a price for
+         BOTH sides regardless of whether a signal exists (you grade the side you bet,
+         not the side the engine liked), so away/home are always exposed and sharpSide is
+         resolved only when it names a real team. */
+      closeLine:closeMap[p.id]?(function(){
+        const h=closeMap[p.id].h2h||{};
+        const ct=closeMap[p.id].commenceTime?new Date(closeMap[p.id].commenceTime).getTime():0;
+        const validSide=p.sharpSide&&p.sharpSide!=='—'&&h[p.sharpSide]!==undefined;
+        return{
+          away:h[p.away]!==undefined?h[p.away]:null,
+          home:h[p.home]!==undefined?h[p.home]:null,
+          sharpSide:validSide?p.sharpSide:null,
+          pinnacle:validSide?h[p.sharpSide]:null,
+          capturedAt:closeMap[p.id].ts,
+          frozen:!!(ct&&now>=ct),   // derived, not a stored flag
+        };
+      })():null,
     }));
 
     // Shadow log: first time a game enters a qualifying state, append to KV (server-side,
@@ -966,7 +984,10 @@ module.exports=async function handler(req,res){
       relStandouts: finalPlays.filter(p=>p.relSignal&&p.relSignal.state==='STANDOUT').length,
       exConfirmed:  finalPlays.filter(p=>p.exSignal&&p.exSignal.state==='CONFIRMED').length,
       closesStored: Object.keys(closeMap).length,
-      closesFrozen: Object.keys(closeMap).filter(k=>closeMap[k].frozen).length,
+      closesFrozen: Object.keys(closeMap).filter(k=>{
+                      const ct=closeMap[k].commenceTime?new Date(closeMap[k].commenceTime).getTime():0;
+                      return !!(ct&&now>=ct);
+                    }).length,
       wxFetched:    Object.keys(wxMap).length,
     });
 
