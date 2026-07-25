@@ -94,6 +94,30 @@ async function saveOpenLines(sport, map) {
   } catch {}
 }
 
+/* ── CLOSING-LINE CAPTURE (council rec #1) ────────────────────────────
+   CLV against the Pinnacle close is the gold standard listed in the project
+   doc, and it was the one thing never actually captured. It matters because it
+   converges: CLV tells you whether a signal is real in ~50 plays, where raw
+   W/L needs 300+. Without it every pillar we add is unfalsifiable.
+
+   Mechanic: while a game is still PREGAME each fetch overwrites its entry, so
+   the stored price is always the most recent pregame quote. Once commenceTime
+   passes we stop writing — whatever sits there is, by construction, the last
+   price before first pitch: the close. No extra API calls, no new dependency,
+   it rides the fetch the cron already performs. */
+async function loadCloseLines(sport) {
+  try {
+    const raw = await upstashPost(['GET', `lines:${sport}:close`]);
+    if (!raw) return {};
+    return typeof raw === 'string' ? JSON.parse(raw) : raw;
+  } catch { return {}; }
+}
+async function saveCloseLines(sport, map) {
+  try {
+    await upstashPost(['SET', `lines:${sport}:close`, JSON.stringify(map), 'EX', '604800']);
+  } catch {}
+}
+
 function calcLineVelocity(gameId, sharpSide, sharpOutcome, currentPrice, prevLines) {
   const prev = prevLines[gameId];
   if (!prev || !prev[sharpOutcome]) {
@@ -126,6 +150,110 @@ function calcLineVelocity(gameId, sharpSide, sharpOutcome, currentPrice, prevLin
   }
 
   return { score: Math.min(100, Math.max(0, score)), isReal: true, label, movement, prevPrice };
+}
+
+/* ── WEATHER FOR TOTALS (council rec #3) ──────────────────────────────
+   Totals are where the edge actually is on this board — h2h sd 0.14 vs totals
+   sd 0.52, and every meaningful exchange lean today was a total. Wind and
+   temperature move baseball totals more than any other environmental factor.
+   OpenWeatherMap's free tier covers this at zero cost.
+
+   Two honesty constraints baked in:
+   1. ROOFED PARKS ARE EXCLUDED. Eight MLB venues are domed or retractable;
+      reporting a wind lean for a game under a closed roof is worse than
+      reporting nothing. Those return {roof:true} and score 0.
+   2. NO WIND-DIRECTION LEAN. Whether wind helps or suppresses scoring depends
+      on its bearing relative to the park's orientation, and I do not have
+      verified center-field bearings for all 30 parks. Inventing them would
+      manufacture exactly the kind of false precision this project just spent a
+      week removing. v1 therefore scores wind SPEED and temperature only, both
+      of which are directionally unambiguous: high wind raises variance, heat
+      helps the ball carry, cold suppresses it. Direction-aware scoring is a
+      follow-up once park bearings are sourced and verified.
+
+   Requires OPENWEATHER_API_KEY. Absent the key this degrades to state:'NONE'
+   and changes nothing. Cached in KV for 2h per game, so ~15 games x 12
+   refreshes/day is well inside the 1,000/day free limit (an uncached fetch on
+   every 15-minute cron run would be ~1,440/day and would blow it). */
+const MLB_PARKS={
+  'Arizona Diamondbacks':{lat:33.445,lon:-112.067,roof:true},
+  'Atlanta Braves':{lat:33.891,lon:-84.468},
+  'Baltimore Orioles':{lat:39.284,lon:-76.622},
+  'Boston Red Sox':{lat:42.346,lon:-71.098},
+  'Chicago Cubs':{lat:41.948,lon:-87.656},
+  'Chicago White Sox':{lat:41.830,lon:-87.634},
+  'Cincinnati Reds':{lat:39.097,lon:-84.507},
+  'Cleveland Guardians':{lat:41.496,lon:-81.685},
+  'Colorado Rockies':{lat:39.756,lon:-104.994},
+  'Detroit Tigers':{lat:42.339,lon:-83.049},
+  'Houston Astros':{lat:29.757,lon:-95.355,roof:true},
+  'Kansas City Royals':{lat:39.051,lon:-94.480},
+  'Los Angeles Angels':{lat:33.800,lon:-117.883},
+  'Los Angeles Dodgers':{lat:34.074,lon:-118.240},
+  'Miami Marlins':{lat:25.778,lon:-80.220,roof:true},
+  'Milwaukee Brewers':{lat:43.028,lon:-87.971,roof:true},
+  'Minnesota Twins':{lat:44.982,lon:-93.278},
+  'New York Mets':{lat:40.757,lon:-73.846},
+  'New York Yankees':{lat:40.829,lon:-73.926},
+  'Athletics':{lat:38.581,lon:-121.514},
+  'Philadelphia Phillies':{lat:39.906,lon:-75.166},
+  'Pittsburgh Pirates':{lat:40.447,lon:-80.006},
+  'San Diego Padres':{lat:32.707,lon:-117.157},
+  'San Francisco Giants':{lat:37.778,lon:-122.389},
+  'Seattle Mariners':{lat:47.591,lon:-122.332,roof:true},
+  'St. Louis Cardinals':{lat:38.623,lon:-90.193},
+  'Tampa Bay Rays':{lat:27.768,lon:-82.653,roof:true},
+  'Texas Rangers':{lat:32.747,lon:-97.084,roof:true},
+  'Toronto Blue Jays':{lat:43.641,lon:-79.389,roof:true},
+  'Washington Nationals':{lat:38.873,lon:-77.007},
+};
+const WX_WIND_STRONG=15;  // mph — PROVISIONAL
+const WX_HOT=85, WX_COLD=50;  // deg F — PROVISIONAL
+
+async function fetchWeather(play){
+  const key=process.env.OPENWEATHER_API_KEY;
+  if(!key)return{state:'NONE',score:0,label:'OPENWEATHER_API_KEY not set',shadow:true};
+  const park=MLB_PARKS[play.home];
+  if(!park)return{state:'NONE',score:0,label:'No park coordinates for '+(play.home||'?'),shadow:true};
+  if(park.roof)return{state:'ROOF',score:0,roof:true,label:'Roofed venue — weather not a factor',shadow:true};
+  const cacheKey='wx:'+play.id;
+  try{
+    const cached=await upstashPost(['GET',cacheKey]);
+    if(cached)return typeof cached==='string'?JSON.parse(cached):cached;
+  }catch{}
+  try{
+    const r=await fetch('https://api.openweathermap.org/data/2.5/weather?lat='+park.lat+'&lon='+park.lon+'&units=imperial&appid='+key);
+    if(!r.ok)return{state:'NONE',score:0,label:'Weather fetch failed ('+r.status+')',shadow:true};
+    const d=await r.json();
+    const temp=d.main&&d.main.temp, wind=d.wind&&d.wind.speed, deg=d.wind&&d.wind.deg;
+    const cond=d.weather&&d.weather[0]&&d.weather[0].main;
+    let score=0;const notes=[];
+    if(typeof wind==='number'&&wind>=WX_WIND_STRONG){
+      score+=Math.min(40,Math.round((wind-WX_WIND_STRONG)*4)+20);
+      notes.push(Math.round(wind)+' mph wind');
+    }
+    if(typeof temp==='number'){
+      if(temp>=WX_HOT){score+=20;notes.push(Math.round(temp)+'\u00b0F (ball carries)');}
+      else if(temp<=WX_COLD){score+=20;notes.push(Math.round(temp)+'\u00b0F (suppresses)');}
+    }
+    if(cond==='Rain'||cond==='Thunderstorm'){score+=10;notes.push(cond.toLowerCase());}
+    const wx={
+      state:score>0?'NOTABLE':'NORMAL',
+      score:Math.min(100,score),
+      tempF:typeof temp==='number'?Math.round(temp):null,
+      windMph:typeof wind==='number'?Math.round(wind):null,
+      windDeg:typeof deg==='number'?deg:null,
+      conditions:cond||null,roof:false,
+      // deliberately NOT a totals lean — see the header note on park bearings
+      label:notes.length?notes.join(' \u00b7 ')+' \u2014 raises totals variance, direction not modelled'
+                        :'No notable weather factors',
+      shadow:true,
+    };
+    try{await upstashPost(['SET',cacheKey,JSON.stringify(wx),'EX','7200']);}catch{}
+    return wx;
+  }catch(e){
+    return{state:'NONE',score:0,label:'Weather error: '+e.message,shadow:true};
+  }
 }
 
 /* ── P1 SHADOW: RELATIVE BOARD SCORING ────────────────────────────────
@@ -499,6 +627,28 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     if(!enoughForSignal||simps.length<minBooks)continue;
     const mFair=i===0?mainPair.f0:mainPair.f1;
     const avgSoftFair=mFair.length>=2?meanArr(mFair):(simps.reduce((a,b)=>a+b,0)/simps.length)/1.048;
+    const booksOnNumber=simps.length, booksDropped=mainPair.dropped||0;
+    /* BOOK DISPERSION (council rec #2). We average the soft books and discard the
+       spread, but the spread IS the signal: 13 books inside 3 cents is consensus;
+       13 books spanning 15 cents means someone is mispriced, and Pinnacle's position
+       within that range says who. pinPctile is the other half — a wide range only
+       matters if Pinnacle sits at an extreme of it. Computed from the devigged
+       per-book probabilities, so it is vig-free and directly comparable. This data
+       was already being fetched and thrown away; it costs nothing to keep. */
+    let dispersion=null;
+    if(mFair.length>=3){
+      const dm=meanArr(mFair);
+      const sd=Math.sqrt(mFair.reduce((t,x)=>t+(x-dm)*(x-dm),0)/mFair.length);
+      const lo=Math.min.apply(null,mFair), hi=Math.max.apply(null,mFair);
+      const below=mFair.filter(x=>x<pf[i]).length;
+      dispersion={
+        n:mFair.length,
+        sdPP:Math.round(sd*10000)/100,
+        rangePP:Math.round((hi-lo)*10000)/100,
+        pinPctile:Math.round((below/mFair.length)*100),
+        pinOutsideRange:pf[i]>hi||pf[i]<lo,
+      };
+    }
     const gapPP=(pf[i]-avgSoftFair)*100;
     if(gapPP<gapFloor)continue;
     const exchanges=exBooks.map(eb=>{
@@ -536,7 +686,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
         signalType:sigType(rlm,ps,ms,exConfirms),
         exConfirms,exLines,novigConfirm:exConfirms>=1,
         lines:{pinnacle:fmt(out.price),novig:exLines['novig']||exLines['prophetx']||null,softAvg:fmt(Math.round(toAm(asr))),softRange:sr},
-        booksOnNumber,booksDropped,
+        booksOnNumber,booksDropped,dispersion,
         currentPinPrice:out.price,currentSoftAvg:softAvgMap[out.name]||null,
         gapPP:gapPP.toFixed(2),numBooks:simps.length,
         publicLean:isPublicLean(out.name,mkey,out.price,out.point),rawPrices,exchangeLean,exchangeOnly:exchangeOnlySignal(exchangeLean),
@@ -550,7 +700,24 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     // was computed — indistinguishable from "no divergence at all" in Signal Lab.
     // Now shows the real gap whenever soft-book data exists, still gated at siScore:0.
     const realGapPP=fb.avgFairProb!==null?((pf0-fb.avgFairProb)*100):0;
-    return{market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,pillars:{rlm:0,pinnacle:0,money:0},signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,lines:{pinnacle:fb.pinnacle,novig:fb.novig,softAvg:fb.softAvg,softRange:fb.softRange},currentPinPrice:pm.outcomes[0].price,currentSoftAvg:fb.avgAmNum,gapPP:realGapPP.toFixed(2),numBooks:sms.length,publicLean:false,rawPrices,exchangeLean};
+    /* The no-signal path must carry the SAME diagnostics as a qualifying play.
+       P1 scores each game against the whole board, and on a quiet slate every
+       game exits here — if booksOnNumber/dispersion were only attached to plays
+       clearing the absolute floor, computeBoardStats would see an empty board
+       and relative scoring would never fire on exactly the days it exists for.
+       (Caught by executing this path rather than trusting a syntax check.) */
+    const fbFair=mainPair.f0;
+    let fbDisp=null;
+    if(fbFair.length>=3){
+      const dm=meanArr(fbFair);
+      const sd=Math.sqrt(fbFair.reduce((t,x)=>t+(x-dm)*(x-dm),0)/fbFair.length);
+      const lo=Math.min.apply(null,fbFair), hi=Math.max.apply(null,fbFair);
+      fbDisp={n:fbFair.length,sdPP:Math.round(sd*10000)/100,
+        rangePP:Math.round((hi-lo)*10000)/100,
+        pinPctile:Math.round((fbFair.filter(x=>x<pf0).length/fbFair.length)*100),
+        pinOutsideRange:pf0>hi||pf0<lo};
+    }
+    return{market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,pillars:{rlm:0,pinnacle:0,money:0},signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,lines:{pinnacle:fb.pinnacle,novig:fb.novig,softAvg:fb.softAvg,softRange:fb.softRange},booksOnNumber:fbFair.length,booksDropped:mainPair.dropped||0,dispersion:fbDisp,currentPinPrice:pm.outcomes[0].price,currentSoftAvg:fb.avgAmNum,gapPP:realGapPP.toFixed(2),numBooks:sms.length,publicLean:false,rawPrices,exchangeLean};
   }
   return best;
 }
@@ -623,10 +790,11 @@ module.exports=async function handler(req,res){
 
   try{
     // Fetch odds + previous lines from KV in parallel
-    const [up, prevLines, openMap] = await Promise.all([
+    const [up, prevLines, openMap, closeMap] = await Promise.all([
       fetch(url),
       loadPrevLines(sport),
       loadOpenLines(sport),
+      loadCloseLines(sport),
     ]);
 
     const rem=up.headers.get('x-requests-remaining');
@@ -706,15 +874,55 @@ module.exports=async function handler(req,res){
     });
     if(openChanged)saveOpenLines(sport,openMap);
 
+    /* CLOSING-LINE CAPTURE: refresh the stored price for every game still PREGAME,
+       and never touch it once first pitch has passed. The entry left behind is by
+       construction the last quote before the game started — the close. */
+    let closeChanged=false;
+    rawPlays.forEach(play=>{
+      if(!play.id||!play.commenceTime)return;
+      const startTs=new Date(play.commenceTime).getTime();
+      if(!isFinite(startTs))return;
+      const started=now*1000>=startTs;
+      const ex=closeMap[play.id];
+      if(started){
+        if(ex&&!ex.frozen){ex.frozen=true;closeChanged=true;}  // seal it
+        return;
+      }
+      const pinH2h=play.bookH2h&&play.bookH2h.pinnacle;
+      if(!pinH2h)return;
+      closeMap[play.id]={ts:now,frozen:false,commenceTime:play.commenceTime,
+        away:play.away,home:play.home,h2h:pinH2h,
+        markets:Object.keys(play.markets||{}).reduce((a,mk)=>{
+          const m=play.markets[mk];
+          if(m&&m.currentPinPrice!==undefined)a[mk]={price:m.currentPinPrice,rawPrices:m.rawPrices||null};
+          return a;},{})};
+      closeChanged=true;
+    });
+    if(closeChanged)saveCloseLines(sport,closeMap);
+
     // ML Velocity (shadow) — computed for ALL plays, gap signal or not
     const velPlays=enrichedPlays.map(p=>({...p,mlVelocity:computeMLVelocity(p,openMap[p.id],prevLines[p.id])}));
 
     // P1/P2 shadow — board stats need the WHOLE slate, so this runs after the map above.
     // Both are observation-only: siScore, signalType and auto-track are untouched.
     const boardStats=computeBoardStats(velPlays);
+    // Weather only for games starting within 12h — no point costing an API call on
+    // a game two days out whose forecast will be stale long before first pitch.
+    const wxMap={};
+    if(sport==='MLB'&&process.env.OPENWEATHER_API_KEY){
+      const soon=velPlays.filter(p=>{
+        const t=p.commenceTime?new Date(p.commenceTime).getTime():0;
+        return isFinite(t)&&t>Date.now()&&t-Date.now()<=12*3600000;
+      });
+      const wxres=await Promise.all(soon.map(p=>fetchWeather(p)));
+      soon.forEach((p,i)=>{wxMap[p.id]=wxres[i];});
+    }
     const finalPlays=velPlays.map(p=>({...p,
       relSignal:computeRelSignal(p,boardStats),
       exSignal:computeExchangeSignal(p),
+      weather:wxMap[p.id]||null,
+      closeLine:closeMap[p.id]?{pinnacle:(closeMap[p.id].h2h||{})[p.sharpSide]||null,
+        capturedAt:closeMap[p.id].ts,frozen:!!closeMap[p.id].frozen}:null,
     }));
 
     // Shadow log: first time a game enters a qualifying state, append to KV (server-side,
@@ -754,6 +962,9 @@ module.exports=async function handler(req,res){
                       return a;},{}),
       relStandouts: finalPlays.filter(p=>p.relSignal&&p.relSignal.state==='STANDOUT').length,
       exConfirmed:  finalPlays.filter(p=>p.exSignal&&p.exSignal.state==='CONFIRMED').length,
+      closesStored: Object.keys(closeMap).length,
+      closesFrozen: Object.keys(closeMap).filter(k=>closeMap[k].frozen).length,
+      wxFetched:    Object.keys(wxMap).length,
     });
 
   }catch(err){
