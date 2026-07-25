@@ -150,17 +150,58 @@ async function fetchWalletTrades(wallets, cutoff) {
   return results;
 }
 
-/* ─── SHARP LINE SIGNAL from /api/odds ───────────────── */
-async function fetchSharpLinePlays(sport = 'MLB') {
+/* ─── SHARP LINE SIGNAL + GAME SCHEDULE from /api/odds ─
+   LIVE-GAME FILTER 2026-07-24: the notify bot had no idea when a game actually
+   started, so an in-game buy (e.g. RN1 middling Under 9.5 / Over 8.5 minutes
+   apart, live, on COL/MIL) alerted identically to a pregame conviction bet.
+   Directive: no live plays on the dashboard or as phone pushes.
+
+   /api/odds already returns commenceTime for every game on the slate — real
+   data from The Odds API, the same source the dashboard itself trusts. Fetch
+   it ONCE per sport per run and cache it in oddsRawCache, so this reuses the
+   exact network call fetchSharpLinePlays('MLB') already made every 15 minutes
+   — zero added Odds-API quota for MLB, the only sport actually in season.
+   A sport is only ever fetched if a candidate trade in that sport shows up
+   this run, so WNBA/NFL/etc. cost nothing on a quiet day either. */
+const oddsRawCache = {};
+async function fetchOddsRaw(sport) {
+  if (oddsRawCache[sport]) return oddsRawCache[sport];
   try {
     const r = await fetch(`${SITE_URL}/api/odds?sport=${sport}`);
-    if (!r.ok) return [];
+    if (!r.ok) return (oddsRawCache[sport] = []);
     const d = await r.json();
-    return (d.plays || []).filter(p => !p.noSignal && parseInt(p.siScore || 0) >= 70); // Quality threshold
+    return (oddsRawCache[sport] = d.plays || []);
   } catch (e) {
-    console.warn('[LINE] fetch failed:', e.message);
-    return [];
+    console.warn('[ODDS] fetch failed:', sport, e.message);
+    return (oddsRawCache[sport] = []);
   }
+}
+async function fetchSharpLinePlays(sport = 'MLB') {
+  const raw = await fetchOddsRaw(sport);
+  return raw.filter(p => !p.noSignal && parseInt(p.siScore || 0) >= 70); // Quality threshold, unchanged
+}
+async function getSchedule(sport) {
+  const raw = await fetchOddsRaw(sport);
+  return raw.filter(p => p.commenceTime).map(p => ({ away: p.away, home: p.home, commenceTime: p.commenceTime }));
+}
+// Reuses the exact team-substring + date-gate pattern already shipped in matchLineToAlert.
+// Requires BOTH teams (stricter than matchLineToAlert's either/or) since here we're
+// identifying which specific game a bet belongs to, not just detecting any overlap.
+function findGameForTrade(trade, games) {
+  const t = normTeam(trade.title || '');
+  const tradeDate = extractSlugDate(trade);
+  return games.find(g => {
+    const away = normTeam(g.away || ''), home = normTeam(g.home || '');
+    // OR, not AND: single-team market titles are common in the live feed —
+    // "Will Colorado Rockies win on 2026-07-24?" names only one side. Same
+    // either/or pattern already proven in matchLineToAlert; the date gate
+    // below is what keeps this from cross-matching a doubleheader's other game.
+    const nameMatch = (away.length > 2 && t.includes(away)) || (home.length > 2 && t.includes(home));
+    if (!nameMatch) return false;
+    const gDate = gameEasternDate(g);
+    if (tradeDate && gDate && tradeDate !== gDate) return false;
+    return true;
+  }) || null;
 }
 
 /* ─── MATCH LINE PLAY TO POLY ALERT ──────────────────── */
@@ -281,7 +322,7 @@ module.exports = async function handler(req, res) {
   const winMax = now - 30;
 
   const results = {
-    poly:  { scanned: 0, sent: 0, alerts: [] },
+    poly:  { scanned: 0, sent: 0, alerts: [], liveSkipped: 0 },
     line:  { scanned: 0, sent: 0, alerts: [] },
     sharp: { scanned: 0, sent: 0, alerts: [] },
   };
@@ -322,6 +363,7 @@ module.exports = async function handler(req, res) {
     // Filter and best-per-wallet-market
     const walletMarketBest = new Map();
     const baseballBuys = [];
+    const liveGameChecks = [];  // candidates that passed every cheap filter; resolved below
 
     trades.forEach(t => {
       const wallet = t.proxyWallet || t._wallet || t.maker;
@@ -352,9 +394,33 @@ module.exports = async function handler(req, res) {
       if (usd < sportThresh) return;
       if (!walletMap[wallet]) return;
 
+      liveGameChecks.push({ wallet, usd, sport, t, traderInfo: walletMap[wallet] });
+      return; // deferred — schedule lookup happens after the loop, see below
+
       const key = `${wallet}||${t.title}`;
       const ex  = walletMarketBest.get(key);
       if (!ex || usd > ex.usd) walletMarketBest.set(key, { wallet, usd, sport, t, traderInfo: walletMap[wallet] });
+    });
+
+    // Resolve live-game status in one schedule fetch per distinct sport present this run
+    // (not per trade — getSchedule() is itself cached per sport via oddsRawCache, so this
+    // is at most a handful of calls regardless of how many candidates there are).
+    const sportsToCheck = [...new Set(liveGameChecks.map(c => c.sport))];
+    const schedules = {};
+    for (const sp of sportsToCheck) schedules[sp] = await getSchedule(sp);
+
+    liveGameChecks.forEach(({ wallet, usd, sport, t, traderInfo }) => {
+      const game = findGameForTrade(t, schedules[sport] || []);
+      if (game && game.commenceTime) {
+        const commenceTs = Math.floor(new Date(game.commenceTime).getTime() / 1000);
+        const ts = parseInt(t.timestamp) || 0;
+        if (ts > commenceTs) { results.poly.liveSkipped++; return; }  // in-game — per directive, suppressed entirely
+      }
+      // No matching game found (e.g. schedule fetch failed, or a market our
+      // matcher can't parse): fail OPEN rather than silently dropping a real signal.
+      const key = `${wallet}||${t.title}`;
+      const ex  = walletMarketBest.get(key);
+      if (!ex || usd > ex.usd) walletMarketBest.set(key, { wallet, usd, sport, t, traderInfo });
     });
 
     const polyAlerts = [...walletMarketBest.values()].map(({ wallet, usd, sport, t, traderInfo }) => ({
@@ -507,7 +573,7 @@ module.exports = async function handler(req, res) {
       ntfyTopic: topic,
       window: { from: new Date(cutoff*1000).toISOString(), to: new Date(winMax*1000).toISOString(), hours: 20 },
       results: {
-        poly:  { scanned: results.poly.scanned,  sent: results.poly.sent,  alerts: results.poly.alerts },
+        poly:  { scanned: results.poly.scanned,  sent: results.poly.sent,  alerts: results.poly.alerts, liveSkipped: results.poly.liveSkipped },
         line:  { scanned: results.line.scanned,  sent: results.line.sent,  alerts: results.line.alerts },
         sharp: { scanned: results.sharp.scanned, sent: results.sharp.sent, alerts: results.sharp.alerts },
       },
