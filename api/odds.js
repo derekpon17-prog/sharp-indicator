@@ -128,6 +128,123 @@ function calcLineVelocity(gameId, sharpSide, sharpOutcome, currentPrice, prevLin
   return { score: Math.min(100, Math.max(0, score)), isReal: true, label, movement, prevPrice };
 }
 
+/* ── P1 SHADOW: RELATIVE BOARD SCORING ────────────────────────────────
+   The model has always asked "is this gap large in absolute pp?". Post-devig
+   that question has no useful answer in MLB h2h: today's board ran median
+   0.39pp, sd 0.14, max 0.47 — every absolute floor from 0.5 to 2.5 either
+   passes nothing or would pass everything. The better question is "is this
+   game unusual RELATIVE to today's board?" LAA/SF totals at 1.98pp against a
+   median of 0.73 and sd of 0.52 is a +2.1 sigma standout that no fixed floor
+   can see.
+
+   VP of Trading's objection is built in: relative scoring alone ALWAYS crowns
+   a top play, even on a dead slate — the exact failure mode we are trying to
+   avoid. So a game must clear BOTH a relative bar and an absolute floor. The
+   floors below are PROVISIONAL PLACEHOLDERS for observation only; the whole
+   point of shadow mode is to derive the real ones from the distribution this
+   code records. Do not read them as validated. SHADOW: never touches siScore. */
+const REL_MIN_SAMPLE = 6;    // games needed before a distribution means anything
+const REL_MIN_BOOKS  = 4;    // books on the same number, else the gap isn't trustworthy
+const REL_ABS_FLOOR  = { h2h: 0.5, spreads: 1.0, totals: 1.0 };  // PROVISIONAL — recalibrate
+
+function computeBoardStats(plays){
+  const byMarket={};
+  ['h2h','spreads','totals'].forEach(mk=>{
+    const gaps=[];
+    plays.forEach(p=>{
+      const m=p.markets&&p.markets[mk];
+      if(!m)return;
+      const g=Math.abs(parseFloat(m.gapPP));
+      if(!isFinite(g))return;
+      if((m.booksOnNumber||0)<REL_MIN_BOOKS)return; // thin base — excluded from the norm
+      gaps.push(g);
+    });
+    if(gaps.length<REL_MIN_SAMPLE){byMarket[mk]=null;return;}
+    const sorted=[...gaps].sort((a,b)=>a-b);
+    const mean=gaps.reduce((a,b)=>a+b,0)/gaps.length;
+    const sd=Math.sqrt(gaps.reduce((t,x)=>t+(x-mean)*(x-mean),0)/gaps.length);
+    byMarket[mk]={n:gaps.length,median:sorted[Math.floor(sorted.length/2)],
+      mean:Math.round(mean*100)/100,sd:Math.round(sd*100)/100,
+      max:sorted[sorted.length-1],sorted};
+  });
+  return byMarket;
+}
+
+function computeRelSignal(play,stats){
+  let best=null;
+  ['h2h','spreads','totals'].forEach(mk=>{
+    const st=stats[mk],m=play.markets&&play.markets[mk];
+    if(!st||!m)return;
+    const gap=Math.abs(parseFloat(m.gapPP));
+    if(!isFinite(gap))return;
+    if((m.booksOnNumber||0)<REL_MIN_BOOKS)return;
+    const z=st.sd>0?(gap-st.mean)/st.sd:0;
+    const below=st.sorted.filter(x=>x<gap).length;
+    const pct=Math.round((below/st.sorted.length)*100);
+    const absOK=gap>=(REL_ABS_FLOOR[mk]||1.0);
+    // z of +2 is the reference standout; scaled to 0-100 for comparability only
+    const score=Math.max(0,Math.min(100,Math.round(z*25+50)));
+    const cand={market:mk,gapPP:Math.round(gap*100)/100,z:Math.round(z*100)/100,
+      percentile:pct,absFloorMet:absOK,score,
+      qualifies:absOK&&z>=1.5,   // PROVISIONAL both-bars rule
+      side:m.sharpSide&&m.sharpSide!=='—'?m.sharpSide:(m.sharpOutcome||null)};
+    if(!best||cand.z>best.z)best=cand;
+  });
+  if(!best)return{state:'NONE',score:0,label:'No market with a sufficient same-number base',shadow:true};
+  best.label=best.qualifies
+    ? best.market+' gap '+best.gapPP+'pp is +'+best.z+' sigma vs today\u2019s board (p'+best.percentile+')'
+    : (!best.absFloorMet
+        ? best.market+' gap '+best.gapPP+'pp ranks p'+best.percentile+' but is below the provisional absolute floor'
+        : best.market+' gap '+best.gapPP+'pp is only +'+best.z+' sigma \u2014 not a standout');
+  best.state=best.qualifies?'STANDOUT':'NORMAL';
+  best.shadow=true;
+  return best;
+}
+
+/* ── P2 SHADOW: EXCHANGE LEAN AS A SCORED PILLAR ──────────────────────
+   Novig and ProphetX carry no vig and run thinner books, so their gaps run
+   5-15x the soft-book gaps — on today's board both exchanges agreed on Under 9
+   (3.8/3.7), Under 8 (4.0/4.7) and Under 7 (6.3) while every book gap sat under
+   2pp. That is the largest untapped signal we have, and it is currently a badge
+   rather than a scored input. This measures it so we can see whether it earns a
+   place in the 52/38/10 split. Two independent exchanges agreeing is the real
+   signal; one exchange alone is a thin book, not a market view.
+   SHADOW: never touches siScore. Promotion is a council decision. */
+const EXS_MIN_GAP = 2.0;   // PROVISIONAL — below this an exchange gap is noise
+
+function computeExchangeSignal(play){
+  let best=null;
+  ['h2h','spreads','totals'].forEach(mk=>{
+    const m=play.markets&&play.markets[mk];
+    const det=m&&m.exchangeLean&&m.exchangeLean.detail;
+    if(!det)return;
+    const legs=Object.keys(det).map(k=>({book:k,favors:det[k].favors,gapPP:det[k].gapPP}))
+      .filter(x=>x.favors&&typeof x.gapPP==='number'&&x.gapPP>=EXS_MIN_GAP);
+    if(!legs.length)return;
+    // group by the side each exchange favours; agreement across books is the signal
+    const bySide={};
+    legs.forEach(l=>{(bySide[l.favors]=bySide[l.favors]||[]).push(l);});
+    Object.keys(bySide).forEach(side=>{
+      const grp=bySide[side];
+      const avgGap=grp.reduce((t,x)=>t+x.gapPP,0)/grp.length;
+      const agree=grp.length>=2;
+      const score=Math.min(100,Math.round(avgGap*8)+(agree?30:0));
+      const cand={market:mk,side,books:grp.map(x=>x.book),bookCount:grp.length,
+        avgGapPP:Math.round(avgGap*10)/10,agreement:agree,score,
+        disagreement:!!(m.exchangeLean&&m.exchangeLean.disagreement),
+        qualifies:agree&&avgGap>=EXS_MIN_GAP};   // PROVISIONAL
+      if(!best||cand.score>best.score)best=cand;
+    });
+  });
+  if(!best)return{state:'NONE',score:0,label:'No exchange lean above the provisional noise floor',shadow:true};
+  best.state=best.qualifies?'CONFIRMED':'SINGLE';
+  best.label=best.agreement
+    ? 'Both exchanges favour '+best.side+' by '+best.avgGapPP+'pp avg'
+    : best.books[0]+' alone favours '+best.side+' by '+best.avgGapPP+'pp (unconfirmed)';
+  best.shadow=true;
+  return best;
+}
+
 /* ── ML VELOCITY (SHADOW) — state-ladder scoring on cumulative open→now movement ──
    Computed for EVERY game including noSignal ones (killing the circular exclusion where
    completed moves erased the gap and thus escaped measurement). h2h only by design.
@@ -204,20 +321,40 @@ function toImp(a){return a>=0?100/(100+a):Math.abs(a)/(Math.abs(a)+100);}
 function toAm(p){if(p<=0||p>=1)return 0;return p>=0.5?-Math.round(p/(1-p)*100):Math.round((1-p)/p*100);}
 function fmt(n){return n>0?'+'+n:String(n);}
 function dv(p1,p2){const t=p1+p2;return[p1/t,p2/t];}
+/* P0 POINT-MATCH FIX (council build 2026-07-25): every soft-book and exchange
+   comparison below used to match outcomes on NAME ALONE, ignoring the line value.
+   On h2h that is harmless (one outcome per team). On spreads and totals it compares
+   different bets: Pinnacle quoting Braves +1.5 at -211 against a soft book quoting
+   Braves -1.5 at +187 was reported as an 18pp edge. Four of today's fourteen games
+   showed 11.6-19.6pp "gaps" from exactly this; the real spread median is 0.45pp.
+   Totals were contaminated the same way wherever books sat on different numbers.
+   A book that isn't on Pinnacle's number is now excluded from the average rather
+   than silently mispriced into it. pointDrops counts the exclusions so a thin
+   comparison base is visible instead of invisible. */
+function samePoint(a,b){
+  const an=(a===undefined||a===null), bn=(b===undefined||b===null);
+  if(an&&bn)return true;          // h2h: neither side carries a point
+  if(an||bn)return false;
+  return Math.abs(a-b)<1e-9;
+}
+function findOut(outcomes,name,point){
+  if(!outcomes)return null;
+  return outcomes.find(o=>o.name===name&&samePoint(o.point,point))||null;
+}
 /* DEVIG FIX (council build): soft-book fair probs via proper per-book two-way devig,
    replacing the flat /1.048 vig approximation that created a ~1-1.4pp phantom gap —
    noise the same size as a real ML move. Books listing only one side fall back to the
    legacy approximation so qualification counts don't silently change. */
-function softFairPair(sms,name0,name1){
-  const f0=[],f1=[];
+function softFairPair(sms,name0,name1,point0,point1){
+  const f0=[],f1=[];let dropped=0;
   sms.forEach(sm=>{
-    const o0=sm.outcomes&&sm.outcomes.find(o=>o.name===name0);
-    const o1=sm.outcomes&&sm.outcomes.find(o=>o.name===name1);
-    if(!o0||!o1)return;
+    const o0=findOut(sm.outcomes,name0,point0);
+    const o1=findOut(sm.outcomes,name1,point1);
+    if(!o0||!o1){dropped++;return;}   // book is on a different number — not comparable
     const[a,b]=dv(toImp(o0.price),toImp(o1.price));
     f0.push(a);f1.push(b);
   });
-  return{f0,f1};
+  return{f0,f1,dropped};
 }
 function meanArr(a){return a.reduce((x,y)=>x+y,0)/a.length;}
 function isPublicLean(name,mkey,price,point){
@@ -278,9 +415,9 @@ function detectExchangeLean(pm,sms,exBooks,mkey){
   EXCHANGE_BOOKS.forEach(key=>{result[key]={favors:null,gapPP:null}});
   for(let i=0;i<pm.outcomes.length;i++){
     const out=pm.outcomes[i];
-    const simps=sms.map(sm=>{const o=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);return o?toImp(o.price):null;}).filter(x=>x!==null);
-    if(simps.length<2)continue; // need at least 2 soft books for a meaningful baseline here
-    const lp=softFairPair(sms,pm.outcomes[0].name,pm.outcomes[1].name);
+    const simps=sms.map(sm=>{const o=findOut(sm.outcomes,out.name,out.point);return o?toImp(o.price):null;}).filter(x=>x!==null);
+    if(simps.length<2)continue; // need at least 2 soft books ON THIS NUMBER for a baseline
+    const lp=softFairPair(sms,pm.outcomes[0].name,pm.outcomes[1].name,pm.outcomes[0].point,pm.outcomes[1].point);
     const lf=i===0?lp.f0:lp.f1;
     const avgSoftFair=lf.length>=2?meanArr(lf):(simps.reduce((a,b)=>a+b,0)/simps.length)/1.048;
     let side=out.name;
@@ -289,9 +426,14 @@ function detectExchangeLean(pm,sms,exBooks,mkey){
     exBooks.forEach(eb=>{
       const em=eb.markets&&eb.markets.find(m=>m.key===mkey);
       if(!em)return;
-      const eo=em.outcomes&&em.outcomes.find(o=>o.name===out.name);
+      const eo=findOut(em.outcomes,out.name,out.point);
       if(!eo)return;
-      const[ef0,ef1]=dv(toImp(em.outcomes[0].price),toImp(em.outcomes[1].price));
+      // Devig the exchange against ITS OWN matching pair at Pinnacle's numbers —
+      // em.outcomes[0]/[1] may be a different line entirely.
+      const ex0=findOut(em.outcomes,pm.outcomes[0].name,pm.outcomes[0].point);
+      const ex1=findOut(em.outcomes,pm.outcomes[1].name,pm.outcomes[1].point);
+      if(!ex0||!ex1)return;
+      const[ef0,ef1]=dv(toImp(ex0.price),toImp(ex1.price));
       const fairProb=i===0?ef0:ef1;
       const gapPP=(fairProb-avgSoftFair)*100;
       if(gapPP>EX_CONFIRM_GAP&&(result[eb.key].gapPP===null||gapPP>result[eb.key].gapPP)){
@@ -331,27 +473,29 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
   const rawPrices=pm.outcomes.map(o=>({name:o.name,price:o.price,point:o.point}));
   const softAvgMap={};
   pm.outcomes.forEach((out,oi)=>{
-    const si2=sms.map(sm=>{const oo=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);return oo?toImp(oo.price):null;}).filter(x=>x!==null);
+    const si2=sms.map(sm=>{const oo=findOut(sm.outcomes,out.name,out.point);return oo?toImp(oo.price):null;}).filter(x=>x!==null);
     if(si2.length)softAvgMap[out.name]=Math.round(toAm(si2.reduce((a,b)=>a+b,0)/si2.length));
   });
   const fallbackLines=()=>{
     const o0=pm.outcomes[0];
-    const s0=sms.map(sm=>{const oo=sm.outcomes&&sm.outcomes.find(o=>o.name===o0.name);return oo?toImp(oo.price):null;}).filter(x=>x!==null);
+    const s0=sms.map(sm=>{const oo=findOut(sm.outcomes,o0.name,o0.point);return oo?toImp(oo.price):null;}).filter(x=>x!==null);
     const hasSoft=s0.length>0;
     const avgAm=hasSoft?Math.round(toAm(s0.reduce((a,b)=>a+b,0)/s0.length)):0;
     // BUGFIX: avgAmNum/avgFairProb expose the real computed numbers so the caller can
     // populate currentSoftAvg/gapPP correctly instead of hardcoding null/0.00 even when
     // real soft-book data was available (it was already being shown as a display string).
-    const fbPair=softFairPair(sms,pm.outcomes[0].name,pm.outcomes[1].name);
+    const fbPair=softFairPair(sms,pm.outcomes[0].name,pm.outcomes[1].name,pm.outcomes[0].point,pm.outcomes[1].point);
     const avgFairProb=fbPair.f0.length>=2?meanArr(fbPair.f0):(hasSoft?(s0.reduce((a,b)=>a+b,0)/s0.length)/1.048:null);
     return{pinnacle:fmt(o0.price),novig:null,softAvg:hasSoft?fmt(avgAm):'—',softRange:'—',avgAmNum:hasSoft?avgAm:null,avgFairProb};
   };
   let best=null,bestSI=-1;
-  const mainPair=softFairPair(sms,pm.outcomes[0].name,pm.outcomes[1].name);
+  const mainPair=softFairPair(sms,pm.outcomes[0].name,pm.outcomes[1].name,pm.outcomes[0].point,pm.outcomes[1].point);
   const exchangeLean=detectExchangeLean(pm,sms,exBooks,mkey);
   for(let i=0;i<pm.outcomes.length;i++){
     const out=pm.outcomes[i];
-    const simps=sms.map(sm=>{const o=sm.outcomes&&sm.outcomes.find(o=>o.name===out.name);return o?toImp(o.price):null;}).filter(x=>x!==null);
+    const simps=sms.map(sm=>{const o=findOut(sm.outcomes,out.name,out.point);return o?toImp(o.price):null;}).filter(x=>x!==null);
+    // minBooks now counts books ACTUALLY ON THIS NUMBER, not books on the game.
+    // A thin same-number base is a real reason to withhold a signal, not to invent one.
     if(!enoughForSignal||simps.length<minBooks)continue;
     const mFair=i===0?mainPair.f0:mainPair.f1;
     const avgSoftFair=mFair.length>=2?meanArr(mFair):(simps.reduce((a,b)=>a+b,0)/simps.length)/1.048;
@@ -360,9 +504,12 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
     const exchanges=exBooks.map(eb=>{
       const em=eb.markets&&eb.markets.find(m=>m.key===mkey);
       if(!em)return null;
-      const eo=em.outcomes&&em.outcomes.find(o=>o.name===out.name);
+      const eo=findOut(em.outcomes,out.name,out.point);
       if(!eo)return null;
-      const[ef0,ef1]=dv(toImp(em.outcomes[0].price),toImp(em.outcomes[1].price));
+      const ex0=findOut(em.outcomes,pm.outcomes[0].name,pm.outcomes[0].point);
+      const ex1=findOut(em.outcomes,pm.outcomes[1].name,pm.outcomes[1].point);
+      if(!ex0||!ex1)return null;
+      const[ef0,ef1]=dv(toImp(ex0.price),toImp(ex1.price));
       return{key:eb.key,price:eo.price,fairProb:i===0?ef0:ef1};
     }).filter(Boolean);
     const exConfirms=exchanges.filter(ex=>(ex.fairProb-avgSoftFair)*100>EX_CONFIRM_GAP).length;
@@ -389,6 +536,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
         signalType:sigType(rlm,ps,ms,exConfirms),
         exConfirms,exLines,novigConfirm:exConfirms>=1,
         lines:{pinnacle:fmt(out.price),novig:exLines['novig']||exLines['prophetx']||null,softAvg:fmt(Math.round(toAm(asr))),softRange:sr},
+        booksOnNumber,booksDropped,
         currentPinPrice:out.price,currentSoftAvg:softAvgMap[out.name]||null,
         gapPP:gapPP.toFixed(2),numBooks:simps.length,
         publicLean:isPublicLean(out.name,mkey,out.price,out.point),rawPrices,exchangeLean,exchangeOnly:exchangeOnlySignal(exchangeLean),
@@ -559,7 +707,15 @@ module.exports=async function handler(req,res){
     if(openChanged)saveOpenLines(sport,openMap);
 
     // ML Velocity (shadow) — computed for ALL plays, gap signal or not
-    const finalPlays=enrichedPlays.map(p=>({...p,mlVelocity:computeMLVelocity(p,openMap[p.id],prevLines[p.id])}));
+    const velPlays=enrichedPlays.map(p=>({...p,mlVelocity:computeMLVelocity(p,openMap[p.id],prevLines[p.id])}));
+
+    // P1/P2 shadow — board stats need the WHOLE slate, so this runs after the map above.
+    // Both are observation-only: siScore, signalType and auto-track are untouched.
+    const boardStats=computeBoardStats(velPlays);
+    const finalPlays=velPlays.map(p=>({...p,
+      relSignal:computeRelSignal(p,boardStats),
+      exSignal:computeExchangeSignal(p),
+    }));
 
     // Shadow log: first time a game enters a qualifying state, append to KV (server-side,
     // device-independent). NX seen-key dedupes across cron runs. Never touches SI/auto-track.
@@ -590,6 +746,14 @@ module.exports=async function handler(req,res){
       gamesTracked: Object.keys(prevLines).length,
       mlvBaselines: Object.keys(openMap).length,
       mlvActive:    finalPlays.filter(p=>p.mlVelocity&&p.mlVelocity.state!=='NONE').length,
+      // P1/P2 shadow observability — this distribution is exactly what the council
+      // needs to set real thresholds instead of inventing them.
+      boardStats:   Object.keys(boardStats).reduce((a,k)=>{
+                      const v=boardStats[k];
+                      a[k]=v?{n:v.n,median:v.median,mean:v.mean,sd:v.sd,max:v.max}:null;
+                      return a;},{}),
+      relStandouts: finalPlays.filter(p=>p.relSignal&&p.relSignal.state==='STANDOUT').length,
+      exConfirmed:  finalPlays.filter(p=>p.exSignal&&p.exSignal.state==='CONFIRMED').length,
     });
 
   }catch(err){
