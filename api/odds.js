@@ -882,7 +882,10 @@ module.exports=async function handler(req,res){
       if(!play.id||!play.commenceTime)return;
       const startTs=new Date(play.commenceTime).getTime();
       if(!isFinite(startTs))return;
-      const started=now*1000>=startTs;
+      // NOTE: `now` in this file is Date.now() — MILLISECONDS. (api/polymarket-notify.js
+      // uses seconds; mixing the two conventions is what broke this on first deploy:
+      // now*1000 made every game look already-started, so no close was ever captured.)
+      const started=now>=startTs;
       const ex=closeMap[play.id];
       if(started){
         if(ex&&!ex.frozen){ex.frozen=true;closeChanged=true;}  // seal it
