@@ -178,9 +178,15 @@ function bucket(positions) {
 }
 
 /* PROVIDER INTERFACE. Returns per-sport PnL for one wallet, KV-cached daily. */
-async function getTraderStats(wallet) {
+async function getTraderStats(wallet, opts) {
+  const fresh = !!(opts && opts.fresh);
   const key = 'tstats:' + wallet;
-  const cached = await kv(['GET', key]);
+  /* A 24h TTL is right for production — per-sport PnL barely moves day to day — but it
+     also means a deployed fix is invisible until tomorrow. That bit us immediately: the
+     PnL-field and depth fixes shipped and the endpoint kept serving yesterday's object,
+     which reads as "the fix didn't work" when in fact it never ran. ?fresh=1 forces a
+     re-fetch and rewrites the entry. */
+  const cached = fresh ? { ok: false, result: null } : await kv(['GET', key]);
   if (cached.ok && cached.result) {
     try {
       const d = typeof cached.result === 'string' ? JSON.parse(cached.result) : cached.result;
@@ -228,7 +234,8 @@ module.exports = async function handler(req, res) {
   const sport = String((req.query && req.query.sport) || '').toUpperCase();
   if (!wallet) return res.status(200).json({ ok: false, error: 'wallet query param required' });
   try {
-    const stats = await getTraderStats(String(wallet));
+    const fresh = String((req.query && req.query.fresh) || '') === '1';
+    const stats = await getTraderStats(String(wallet), { fresh });
     const out = { ...stats };
     if (sport) out.gate = qualifiesForSport(stats, sport);
     return res.status(200).json(out);
