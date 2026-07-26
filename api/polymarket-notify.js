@@ -12,6 +12,10 @@
 
 const DATA_API    = 'https://data-api.polymarket.com';
 const SITE_URL    = 'https://sharp-indicator-a34j.vercel.app';
+// Per-sport trader PnL gate. Lives in its own module so it is testable in isolation
+// and reusable by the dashboard's trader panels.
+const traderStats = require('./trader-stats.js');
+
 const sentThisSession = new Set(); // fast in-process check; survives WARM invocations only
 
 /* ── DURABLE ALERT DEDUP (bugfix 2026-07-26) ──────────────────────────
@@ -383,7 +387,7 @@ module.exports = async function handler(req, res) {
   const winMax = now - 30;
 
   const results = {
-    poly:  { scanned: 0, sent: 0, alerts: [], liveSkipped: 0 },
+    poly:  { scanned: 0, sent: 0, alerts: [], liveSkipped: 0, sportPnlSkipped: 0, sportPnlUnknown: 0, walletsEvaluated: 0 },
     line:  { scanned: 0, sent: 0, alerts: [] },
     sharp: { scanned: 0, sent: 0, alerts: [] },
   };
@@ -488,7 +492,37 @@ module.exports = async function handler(req, res) {
       if (!ex || usd > ex.usd) walletMarketBest.set(key, { wallet, usd, sport, t, traderInfo });
     });
 
-    const polyAlerts = [...walletMarketBest.values()].map(({ wallet, usd, sport, t, traderInfo }) => ({
+    /* SPORT-SPECIFIC PnL GATE.
+       Leaderboard presence only proves a wallet made money SOMEWHERE — that board ranks
+       all-time PnL across politics, crypto and sports alike, so a wallet up $5M on
+       elections and down $40K on baseball passed every MLB alert. This asks the question
+       that actually matters: net-positive in the sport it is betting right now, over a
+       sample large enough to be evidence rather than variance.
+       Fails OPEN on unknown or thin records. A gate that silently suppressed everything
+       the moment closed-positions changed shape would be the same invisible blackout that
+       cost 19 hours this week — unknowns are counted separately so coverage is visible. */
+    const candidates = [...walletMarketBest.values()];
+    // Resolve DISTINCT wallets in PARALLEL. Sequential awaits here would be a timeout
+    // waiting to happen: one wallet routinely produces several candidates, and a cache
+    // miss costs a KV read plus up to four paginated Polymarket fetches. Deduping first
+    // means a wallet with five qualifying markets is fetched once, not five times.
+    const distinctWallets = [...new Set(candidates.map(c => c.wallet))];
+    const statsByWallet = {};
+    await Promise.all(distinctWallets.map(async w => {
+      try { statsByWallet[w] = await traderStats.getTraderStats(w); }
+      catch (e) { statsByWallet[w] = { ok: false, error: e.message }; }
+    }));
+    results.poly.walletsEvaluated = distinctWallets.length;
+
+    const gated = [];
+    candidates.forEach(cand => {
+      const gate = traderStats.qualifiesForSport(statsByWallet[cand.wallet], cand.sport);
+      if (!gate.pass) { results.poly.sportPnlSkipped++; return; }
+      if (!gate.known) results.poly.sportPnlUnknown++;
+      gated.push({ ...cand, gate });
+    });
+
+    const polyAlerts = gated.map(({ wallet, usd, sport, t, traderInfo, gate }) => ({
       type:       'POLY',
       wallet,
       traderName: t.name || t.pseudonym || traderInfo.name || wallet.slice(0,6)+'...'+wallet.slice(-4),
@@ -498,6 +532,7 @@ module.exports = async function handler(req, res) {
       outcome: t.outcome, price: t.price, usdValue: usd,
       timestamp: parseInt(t.timestamp), loggedAt: Date.now(),
       transactionHash: t.transactionHash,
+      sportRecord: gate && gate.known ? gate.reason : null,   // e.g. "MLB +$12,400 over 84 positions (58.3%)"
     })).sort((a, b) => b.usdValue - a.usdValue);
 
     results.poly.scanned = rawTrades.length;
@@ -513,6 +548,7 @@ module.exports = async function handler(req, res) {
       const body     = [
         `$${usd} BUY [${alert.sport}] — ${alert.traderName}`,
         rankInfo ? `Rank: ${rankInfo}` : null,
+        alert.sportRecord ? `Record: ${alert.sportRecord}` : null,
         `Market: ${(alert.title || '').slice(0, 80)}`,
         `Side: ${alert.outcome || '—'} @ ${price}¢`,
       ].filter(Boolean).join('\n');
@@ -638,7 +674,9 @@ module.exports = async function handler(req, res) {
       ntfyTopic: topic,
       window: { from: new Date(cutoff*1000).toISOString(), to: new Date(winMax*1000).toISOString(), hours: 20 },
       results: {
-        poly:  { scanned: results.poly.scanned,  sent: results.poly.sent,  alerts: results.poly.alerts, liveSkipped: results.poly.liveSkipped },
+        poly:  { scanned: results.poly.scanned,  sent: results.poly.sent,  alerts: results.poly.alerts, liveSkipped: results.poly.liveSkipped,
+                 sportPnlSkipped: results.poly.sportPnlSkipped, sportPnlUnknown: results.poly.sportPnlUnknown,
+                 walletsEvaluated: results.poly.walletsEvaluated },
         line:  { scanned: results.line.scanned,  sent: results.line.sent,  alerts: results.line.alerts },
         sharp: { scanned: results.sharp.scanned, sent: results.sharp.sent, alerts: results.sharp.alerts },
       },
