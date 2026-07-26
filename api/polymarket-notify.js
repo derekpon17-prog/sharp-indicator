@@ -686,7 +686,18 @@ module.exports = async function handler(req, res) {
         tradeDepth:  { pagesFetched: trDiag.pages, offsetSupported: trDiag.offsetSupported,
                        truncatedWallets: trDiag.truncated },
         lbCoverage:  { overall: overallLB.length, sports: sportsLB.length, profitable: walletList.length },
-        baseballBuys: baseballBuys.slice(0, 10),
+        /* Sorted NEWEST FIRST. In insertion order this showed ten 52-day-old trades while
+           hiding every recent buy, which made it useless for the one question it exists to
+           answer: was the slate genuinely quiet, or is a filter over-rejecting? Counts are
+           reported alongside so the slice can't hide the shape of the data. */
+        baseballBuys: baseballBuys.slice().sort((a, b) => b.ts - a.ts).slice(0, 10),
+        baseballBuyCounts: {
+          total: baseballBuys.length,
+          inWindow: baseballBuys.filter(b => b.passWindow).length,
+          inWindowTracked: baseballBuys.filter(b => b.passWindow && b.inWalletMap).length,
+          newestAgeH: baseballBuys.length
+            ? Math.round((Math.min(...baseballBuys.map(b => now - b.ts))) / 3600) : null,
+        },
       },
     });
 
