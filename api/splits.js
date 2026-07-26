@@ -88,10 +88,18 @@ function num(s) {
 function parseVsin(html, teamPath) {
   const rows = String(html || '').match(/<tr[\s\S]*?<\/tr>/gi) || [];
   const parsed = [];
-  let rowsSeen = 0, rowsWithTeam = 0;
+  let rowsSeen = 0, rowsWithTeam = 0, curDate = null, dateHeaders = 0;
 
   rows.forEach(row => {
     rowsSeen++;
+    /* DATE SCOPING (fix 2026-07-26): the page lists today AND future slates, so a naive
+       pair-the-rows walk returned 30 "games" for a 15-game board — the same matchup twice
+       at different prices (KC/DET at +141 and again at +157). Joining that to the board
+       risks applying TOMORROW's splits to TODAY's game, which would be silently wrong in
+       the worst way: plausible numbers, wrong game. Section headers carry the slate date
+       as ?gamedate=YYYY-MM-DD, so track it and stamp every game that follows. */
+    const dm = row.match(/gamedate=(\d{4}-\d{2}-\d{2})/);
+    if (dm) { curDate = dm[1]; dateHeaders++; return; }
     if (row.indexOf(teamPath) < 0) return;      // not a team row for this league
     const cells = (row.match(/<t[dh][\s\S]*?<\/t[dh]>/gi) || []).map(stripTags);
     if (cells.length < 8) return;
@@ -109,22 +117,48 @@ function parseVsin(html, teamPath) {
     if (tail.length < 9) return;
 
     parsed.push({
-      team,
+      team, date: curDate,
       spread: { line: num(tail[0]), handle: pct(tail[1]), bets: pct(tail[2]) },
       total:  { line: num(tail[3]), handle: pct(tail[4]), bets: pct(tail[5]) },
       ml:     { line: num(tail[6]), handle: pct(tail[7]), bets: pct(tail[8]) },
     });
   });
 
-  // Pair consecutive rows into games (away listed first).
+  // Pair consecutive rows into games (away listed first). Only pair rows from the SAME
+  // slate date — a mismatch means the walk fell out of step and the pairing is unsafe.
   const games = [];
+  let unpaired = 0;
   for (let i = 0; i + 1 < parsed.length; i += 2) {
     const a = parsed[i], h = parsed[i + 1];
     if (!a || !h) continue;
-    games.push({ away: a.team, home: h.team, awaySplits: a, homeSplits: h });
+    if (a.date !== h.date) { unpaired++; continue; }
+    games.push({ away: a.team, home: h.team, date: a.date, awaySplits: a, homeSplits: h });
   }
 
-  return { games, parse: { rowsSeen, rowsWithTeam, teamRows: parsed.length, games: games.length } };
+  /* A market where handle and bets are BOTH exactly 50/50, or both exactly 100/0, is VSIN
+     showing essentially no logged action rather than a real split. Flagged PER MARKET, not
+     per game: a game routinely has real moneyline action and none on the spread, and a
+     game-level flag would either hide the good market or admit the empty one. Flagged
+     rather than dropped — dropping silently would hide coverage gaps. */
+  const flatMkt = (s) => (s.handle === 50 && s.bets === 50) ||
+                         ((s.handle === 100 || s.handle === 0) && s.handle === s.bets);
+  games.forEach(g => {
+    g.lowAction = {
+      spread: flatMkt(g.awaySplits.spread),
+      total:  flatMkt(g.awaySplits.total),
+      ml:     flatMkt(g.awaySplits.ml),
+    };
+    g.anyAction = !(g.lowAction.spread && g.lowAction.total && g.lowAction.ml);
+  });
+
+  const dates = {};
+  games.forEach(g => { dates[g.date || 'unknown'] = (dates[g.date || 'unknown'] || 0) + 1; });
+
+  return { games, parse: {
+    rowsSeen, rowsWithTeam, teamRows: parsed.length, games: games.length,
+    dateHeaders, unpaired, byDate: dates,
+    noActionGames: games.filter(g => !g.anyAction).length,
+  } };
 }
 
 /* Divergence = handle% - bets%. Positive means money is running ahead of tickets
@@ -138,7 +172,8 @@ function withDivergence(game) {
     divergence: (s.handle !== null && s.bets !== null) ? Math.round((s.handle - s.bets) * 10) / 10 : null,
   });
   return {
-    away: game.away, home: game.home,
+    away: game.away, home: game.home, date: game.date || null,
+    lowAction: game.lowAction || null, anyAction: game.anyAction !== false,
     markets: {
       spread: { away: side(game.awaySplits.spread), home: side(game.homeSplits.spread) },
       total:  { over: side(game.awaySplits.total),  under: side(game.homeSplits.total) },
@@ -200,8 +235,20 @@ async function getSplits(sport) {
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   const sport = String((req.query && req.query.sport) || 'MLB').toUpperCase();
+  const date = req.query && req.query.date;   // YYYY-MM-DD, or 'today' for ET today
   try {
     const data = await getSplits(sport);
+    if (date) {
+      const want = date === 'today'
+        ? new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' })
+        : String(date);
+      ['dk', 'circa'].forEach(k => {
+        if (data[k] && Array.isArray(data[k].games)) {
+          data[k].games = data[k].games.filter(g => g.date === want);
+        }
+      });
+      data.filteredTo = want;
+    }
     return res.status(200).json(data);
   } catch (err) {
     return res.status(200).json({ ok: false, error: err.message, sport, dk: null, circa: null });
