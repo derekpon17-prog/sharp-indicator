@@ -226,7 +226,12 @@ function computeIndication(play) {
     Math.min(15, Math.round((exs.avgGapPP || 0) * 3)) +
     Math.min(15, Math.round((mlv.movementPP || 0) * 5)));
 
-  const side = rel.side || exs.side || mlv.side || (play.sharpSide !== '\u2014' ? play.sharpSide : null) || null;
+  let side = rel.side || exs.side || mlv.side || (play.sharpSide !== '\u2014' ? play.sharpSide : null) || null;
+  // Last resort: a source fired but named no side — derive it from the market that fired.
+  if (!side) {
+    const mk = rel.market || exs.market || (outside && outside.mk) || 'h2h';
+    side = deriveSide(play.markets && play.markets[mk]);
+  }
 
   /* Name the book and the number, the way every reference report does. Prefer the market
      the strongest source actually fired on, so the quoted price matches the reasoning. */
@@ -398,6 +403,30 @@ function computeBoardStats(plays){
   return byMarket;
 }
 
+/* SIDE DERIVATION.
+   On the no-signal path sharpSide is a literal em-dash and sharpOutcome is null, so a
+   WATCHLIST row driven purely by relative scoring or dispersion carried no team — the
+   report announced a standout without naming the side to take, which is useless as an
+   instruction. The sign of gapPP resolves it: gapPP is computed for outcome[0], so a
+   positive gap means Pinnacle prices outcome[0] above the market and that is the sharp
+   side; negative points to outcome[1]. Totals and spreads carry the number too, because
+   "Over" or a team name alone is not a bet. */
+function deriveSide(m){
+  if(!m)return null;
+  if(m.sharpSide&&m.sharpSide!=='\u2014')return m.sharpSide;
+  if(m.sharpOutcome)return m.sharpOutcome;
+  const rp=m.rawPrices;
+  if(!rp||rp.length<2)return null;
+  const g=parseFloat(m.gapPP);
+  if(!isFinite(g)||g===0)return null;
+  const pick=g>0?rp[0]:rp[1];
+  if(!pick||!pick.name)return null;
+  if(pick.point===undefined||pick.point===null)return pick.name;
+  // Totals read "Over 8.5"; spreads need the sign, "Angels +1.5".
+  const isTotal=/^(over|under)$/i.test(pick.name);
+  return pick.name+' '+(!isTotal&&pick.point>0?'+':'')+pick.point;
+}
+
 function computeRelSignal(play,stats){
   let best=null;
   ['h2h','spreads','totals'].forEach(mk=>{
@@ -415,7 +444,7 @@ function computeRelSignal(play,stats){
     const cand={market:mk,gapPP:Math.round(gap*100)/100,z:Math.round(z*100)/100,
       percentile:pct,absFloorMet:absOK,score,
       qualifies:absOK&&z>=1.5,   // PROVISIONAL both-bars rule
-      side:m.sharpSide&&m.sharpSide!=='—'?m.sharpSide:(m.sharpOutcome||null)};
+      side:deriveSide(m)};
     if(!best||cand.z>best.z)best=cand;
   });
   if(!best)return{state:'NONE',score:0,label:'No market with a sufficient same-number base',shadow:true};
