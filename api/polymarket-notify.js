@@ -232,9 +232,16 @@ async function fetchOddsRaw(sport) {
   const d = await fetchOddsPayload(sport);
   return (d && d.plays) || [];
 }
+/* GATE CHANGE 2026-07-26 (council). Was `!noSignal && siScore >= 70`. Post-devig the
+   board's max siScore is 0, so this returned nothing and the LINE alert path was dead.
+   `indication` composes all five pillars and tiers honestly.
+   DELIBERATELY STRICTER THAN THE DASHBOARD: the dashboard shows tier A and B, but a PUSH
+   only fires on tier A — genuine multi-source convergence. Notification volume has been a
+   repeated complaint, and the fix for a silent board is not a loud phone. Tier B lands on
+   the board and in the daily report; only convergence is worth an interruption. */
 async function fetchSharpLinePlays(sport = 'MLB') {
   const raw = await fetchOddsRaw(sport);
-  return raw.filter(p => !p.noSignal && parseInt(p.siScore || 0) >= 70); // Quality threshold, unchanged
+  return raw.filter(p => p.indication && p.indication.tier === 'A');
 }
 /* Reads the dedicated `schedule` array, NOT `plays`. This is the whole bug: /api/odds
    filters plays to ct>now, so an in-progress game is absent from it entirely — the live
