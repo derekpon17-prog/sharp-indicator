@@ -118,6 +118,35 @@ async function saveCloseLines(sport, map) {
   } catch {}
 }
 
+/* ── DAILY REPORT STORE ───────────────────────────────────────────────
+   The engine already recomputes the whole board every 15 minutes (the cron hits the
+   notify bot, which fetches this endpoint). It found this morning's signals and discarded
+   every one of them, because the report only ever rendered games that were pregame at the
+   moment the page loaded. By mid-afternoon on a Sunday — 1:05 first pitches, 26 of 29
+   games underway — there was nothing left to render and it looked like the engine had
+   found nothing all day.
+
+   So: snapshot each qualifying signal the first time it fires and keep it for the day.
+   firstSeen is preserved on update because WHEN a signal appeared is the interesting part
+   — a line flagged at 10am and confirmed at 1pm is a different animal from one that only
+   appeared at 1pm. Costs no extra Odds API quota; it rides the fetch already happening. */
+async function loadDayReport(sport, dayET) {
+  try {
+    const raw = await upstashPost(['GET', `report:${sport}:${dayET}`]);
+    if (!raw) return {};
+    return typeof raw === 'string' ? JSON.parse(raw) : raw;
+  } catch { return {}; }
+}
+async function saveDayReport(sport, dayET, map) {
+  try {
+    await upstashPost(['SET', `report:${sport}:${dayET}`, JSON.stringify(map), 'EX', '172800']);
+  } catch {}
+}
+function easternDay(ts) {
+  try { return new Date(ts).toLocaleDateString('en-CA', { timeZone: 'America/New_York' }); }
+  catch { return null; }
+}
+
 function calcLineVelocity(gameId, sharpSide, sharpOutcome, currentPrice, prevLines) {
   const prev = prevLines[gameId];
   if (!prev || !prev[sharpOutcome]) {
@@ -941,11 +970,13 @@ module.exports=async function handler(req,res){
 
   try{
     // Fetch odds + previous lines from KV in parallel
-    const [up, prevLines, openMap, closeMap] = await Promise.all([
+    const dayET = easternDay(Date.now());
+    const [up, prevLines, openMap, closeMap, dayReport] = await Promise.all([
       fetch(url),
       loadPrevLines(sport),
       loadOpenLines(sport),
       loadCloseLines(sport),
+      loadDayReport(sport, dayET),
     ]);
 
     const rem=up.headers.get('x-requests-remaining');
@@ -1105,6 +1136,36 @@ module.exports=async function handler(req,res){
     // Indication needs every shadow field populated, so it runs as a second pass.
     const finalPlays=withShadow.map(p=>({...p,indication:computeIndication(p)}));
 
+    /* Persist every qualifying signal for the day. Upsert semantics: firstSeen is never
+       overwritten, peak score is kept, and the current state replaces the old one so a
+       signal that strengthens is reflected. Games only enter while still PREGAME — a
+       signal is a pregame call or it is nothing — but the entry SURVIVES first pitch so
+       the day's record stays readable after the slate has gone. */
+    let reportChanged=false;
+    finalPlays.forEach(p=>{
+      const ind=p.indication;
+      if(!ind||ind.tier==='N'||!p.id)return;
+      const startTs=p.commenceTime?new Date(p.commenceTime).getTime():0;
+      if(startTs&&now>=startTs)return;             // never create an entry for a live game
+      const prev=dayReport[p.id];
+      dayReport[p.id]={
+        id:p.id, away:p.away, home:p.home, commenceTime:p.commenceTime,
+        tier:ind.tier, label:ind.label, score:ind.score,
+        peakScore:Math.max(ind.score||0, prev?prev.peakScore||0:0),
+        side:ind.side, bestBook:ind.bestBook, sources:ind.sources, reasons:ind.reasons,
+        firstSeen:prev?prev.firstSeen:now, lastSeen:now,
+      };
+      reportChanged=true;
+    });
+    if(reportChanged)saveDayReport(sport,dayET,dayReport);
+
+    // Sorted strongest-first, with a started flag so the UI can mark what has already run.
+    const todayReport=Object.keys(dayReport).map(k=>{
+      const e=dayReport[k];
+      const st=e.commenceTime?new Date(e.commenceTime).getTime():0;
+      return {...e, started: !!(st&&now>=st)};
+    }).sort((a,b)=>(b.peakScore||0)-(a.peakScore||0));
+
     // Shadow log: first time a game enters a qualifying state, append to KV (server-side,
     // device-independent). NX seen-key dedupes across cron runs. Never touches SI/auto-track.
     const mlvCands=finalPlays.filter(p=>p.mlVelocity&&(p.mlVelocity.state==='MID_MOVE'||p.mlVelocity.state==='MOVE_COMPLETE')&&p.mlVelocity.score>=MLV_QUALIFY).slice(0,5);
@@ -1144,6 +1205,8 @@ module.exports=async function handler(req,res){
     res.status(200).json({
       plays,
       schedule,
+      todayReport,
+      reportDay: dayET,
       total:       upcoming.length,
       quota:       { remaining: rem, used },
       rlmSource:   Object.keys(prevLines).length > 0 ? 'line_velocity' : 'inferred_first_run',
@@ -1161,6 +1224,8 @@ module.exports=async function handler(req,res){
                       B: finalPlays.filter(p=>p.indication&&p.indication.tier==='B').length,
                       C: finalPlays.filter(p=>p.indication&&p.indication.tier==='C').length },
       exConfirmed:  finalPlays.filter(p=>p.exSignal&&p.exSignal.state==='CONFIRMED').length,
+      reportCount:  todayReport.length,
+      reportPending: todayReport.filter(r=>!r.started).length,
       closesStored: Object.keys(closeMap).filter(k=>closeMap[k].h2h).length,
       scheduleKnown: Object.keys(closeMap).length,
       closesFrozen: Object.keys(closeMap).filter(k=>{
