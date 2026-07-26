@@ -31,6 +31,23 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--gold),#B87800);display:flex;align-items:center;justify-content:center;font-size:13px}
 .nav-tabs{display:flex;gap:3px;flex:1;justify-content:center}
 .ntab.ntab-action{color:var(--t3)}
+.rep{border:1px solid var(--b1);border-radius:var(--rl2);background:linear-gradient(160deg,rgba(255,255,255,.03),rgba(255,255,255,.01));padding:18px 20px}
+.rep-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.rep-ttl{font-family:var(--disp);font-size:17px;font-weight:700;color:var(--t1)}
+.rep-sub{font-size:11px;color:var(--t3)}
+.rep-row{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--b1)}
+.rep-tier{flex:0 0 74px;font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:4px 7px;border-radius:5px;height:fit-content;text-align:center}
+.rep-tier.tA{background:rgba(0,200,150,.15);color:var(--green)}
+.rep-tier.tB{background:rgba(229,160,13,.15);color:var(--gold)}
+.rep-tier.tC{background:rgba(255,255,255,.06);color:var(--t3)}
+.rep-body{flex:1;min-width:0}
+.rep-play{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:2px}
+.rep-price{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--green)}
+.rep-price .bk{color:var(--t3);font-weight:500;font-size:11px}
+.rep-why{font-size:11.5px;color:var(--t3);line-height:1.55;margin-top:5px}
+.rep-why li{margin-left:14px}
+.rep-empty{font-size:12.5px;color:var(--t4);padding:10px 0}
+@media(max-width:700px){.rep-row{flex-direction:column;gap:6px}.rep-tier{flex:none;align-self:flex-start}}
 .ntab.ntab-action:hover{color:var(--gold)}
 .ntab{display:flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;border:none;background:transparent;color:var(--t3);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
 .ntab:hover{color:var(--t2);background:var(--b1)}.ntab.on{background:var(--s3);color:var(--t1);font-weight:700;border:1px solid var(--b2)}.ntab i{font-size:15px}
@@ -309,6 +326,11 @@ select.finput option{background:var(--s2)}
     <div id="command-center" style="background:linear-gradient(140deg,#0F1624,#162040,#0D0F1A);border-radius:var(--rxl);padding:22px 26px;margin-bottom:20px;position:relative;overflow:hidden">
       <!-- hero anchor — renderHero writes here -->
       <div id="hero" style="display:none"></div>
+      <!-- DAILY REPORT — always renders a ranked read on the board, tiered honestly.
+           Modelled on how sharp reports actually publish: every day has an output, and
+           the tier says how much to trust it, rather than a binary alarm that goes
+           silent on an efficient board. -->
+      <div id="report-wrap" style="display:none;margin-bottom:18px"></div>
       <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(229,160,13,.07),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(64,180,255,.05),transparent 50%);pointer-events:none"></div>
       <div style="position:relative">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
@@ -791,6 +813,13 @@ function isLiveAlert(a){
 /* === REDESIGN HELPERS (council pass) === */
 // Truncate 0x wallet hashes anywhere a trader name renders. Handles the
 // "0xADDR-TIMESTAMP" composite ids seen in alert data too.
+// Minimal HTML escape. The codebase interpolates API strings directly elsewhere; team
+// names are low-risk, but the report renders engine-supplied `reasons` text, so escape it.
+function esc(x){
+  return String(x==null?'':x)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
 function shortWallet(n){
   n=String(n||'');
   var m=n.match(/^(0x[a-fA-F0-9]{6,})/);
@@ -1238,6 +1267,55 @@ function captureVelocityShadow(lines){
   if(changed){ss('pm:mlv-plays',mlvPlays);if(view==='tracking')renderTracking();}
 }
 
+/* === DAILY REPORT ===
+   Renders a ranked read on today's board every day, tiered rather than binary.
+   Sourced from the engine's `indication` field. Live games are excluded (directive),
+   and the tier label carries the honesty: CONVERGENCE only when independent sources
+   agree, WATCHLIST when a game is merely notable relative to today's distribution. */
+var REPORT_MAX=6;
+function fmtAm(p){return (p>0?'+':'')+p;}
+function buildReport(){
+  var now=Date.now();
+  return (sharpLines||[]).filter(function(g){
+    var ind=g.indication;
+    if(!ind||ind.tier==='N')return false;
+    if(g.commenceTime&&new Date(g.commenceTime).getTime()<=now)return false; // no live plays
+    return true;
+  }).sort(function(a,b){return (b.indication.score||0)-(a.indication.score||0);})
+    .slice(0,REPORT_MAX);
+}
+function renderReport(){
+  var wrap=el('report-wrap');if(!wrap)return;
+  var rows=buildReport();
+  var tiers={A:0,B:0,C:0};
+  rows.forEach(function(r){tiers[r.indication.tier]=(tiers[r.indication.tier]||0)+1;});
+  var head='<div class="rep"><div class="rep-hd"><div>'
+    +'<div class="rep-ttl">Today\u2019s Sharp Report</div>'
+    +'<div class="rep-sub">'+(rows.length
+        ?tiers.A+' convergence \u00b7 '+tiers.B+' signal \u00b7 '+tiers.C+' watchlist'
+        :'No qualifying reads on the board')
+      +' \u00b7 shadow scoring, not yet validated</div>'
+    +'</div></div>';
+  if(!rows.length){
+    wrap.innerHTML=head+'<div class="rep-empty">Nothing on today\u2019s board clears even the watchlist bar. On an efficient slate that is the honest answer \u2014 no play is a result.</div></div>';
+    wrap.style.display='';return;
+  }
+  wrap.innerHTML=head+rows.map(function(g){
+    var i=g.indication,bb=i.bestBook;
+    return '<div class="rep-row">'
+      +'<div class="rep-tier t'+i.tier+'">'+i.label+'</div>'
+      +'<div class="rep-body">'
+      +'<div class="rep-play">'+esc((g.away||'')+' @ '+(g.home||''))+'</div>'
+      +(i.side?'<div class="rep-price">'+esc(i.side)
+          +(bb?' '+fmtAm(bb.price)+' <span class="bk">\u2014 '+esc(String(bb.book).toUpperCase())+'</span>':'')
+          +'</div>':'')
+      +'<ul class="rep-why">'+(i.reasons||[]).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>'
+      +(g.commenceTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:5px">'+gdt(g.commenceTime)+'</div>':'')
+      +'</div></div>';
+  }).join('')+'</div>';
+  wrap.style.display='';
+}
+
 /* === THE BOARD — one canonical play per game, merged across sources === */
 var boardFilter='all',boardExpand=false;
 var trackExpand={sig:false,line:false,ss:false,picks:false,mlv:false};
@@ -1306,6 +1384,7 @@ function setBoardFilter(f){boardFilter=f;boardExpand=false;
 
 function renderHero(){
   var h=el('hero');if(!h)return;
+  renderReport();
   var board=buildBoard();
   var top=board[0]||null;
   var rec=overallRecord();
