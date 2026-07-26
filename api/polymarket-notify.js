@@ -436,35 +436,40 @@ module.exports = async function handler(req, res) {
       const usd    = (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0);
       const sport  = marketSport(t);
 
+      /* Diagnostic row is created BEFORE the filters so its rejection reason can be
+         recorded as they run. Without this, "94 buys in window but 0 evaluated" required
+         inferring which filter ate them by reading timestamps and totals by hand — the
+         answer was the stale filter working correctly on yesterday's slate, but the
+         payload never said so. Now it does. */
+      let dbg = null;
       if (sport === 'MLB' && usd >= 50) {
-        baseballBuys.push({
+        dbg = {
           title: (t.title || '').slice(0, 60), usd: Math.round(usd),
           wallet: wallet ? wallet.slice(0, 10) : 'unknown',
           inWalletMap: !!walletMap[wallet], ts,
           tsAge: `${Math.round((now - ts) / 3600)}h ago`,
           passWindow: ts >= cutoff && ts <= winMax,
-        });
+          reject: null,
+        };
+        baseballBuys.push(dbg);
       }
+      const rej = (why) => { if (dbg) dbg.reject = why; };
 
-      if (ts < cutoff || ts > winMax) return;
-      if (!isSportsMarket(t)) return;
+      if (ts < cutoff || ts > winMax) { rej(ts < cutoff ? 'older than window' : 'too recent (settling)'); return; }
+      if (!isSportsMarket(t)) { rej('sport not whitelisted'); return; }
       // STALE-MARKET FILTER: skip buys on markets whose slug-dated game is already in
       // the past (ET) — e.g. late trading / position-dumping on an old unresolved market
       // (proven: a Jun 25 ARI/STL market took an $18.9K buy on Jul 23 and alerted).
       // Undated slugs (futures) can't be judged and pass through unchanged.
       const slugDate = extractSlugDate(t);
       const todayET = effectiveTodayET();
-      if (slugDate && todayET && slugDate < todayET) return;
+      if (slugDate && todayET && slugDate < todayET) { rej(`stale: game ${slugDate} < today ${todayET}`); return; }
       const sportThresh = sport === 'MLB' ? Math.min(threshold, 300) : threshold;
-      if (usd < sportThresh) return;
-      if (!walletMap[wallet]) return;
+      if (usd < sportThresh) { rej(`under $${sportThresh} threshold`); return; }
+      if (!walletMap[wallet]) { rej('wallet not tracked'); return; }
 
-      liveGameChecks.push({ wallet, usd, sport, t, traderInfo: walletMap[wallet] });
-      return; // deferred — schedule lookup happens after the loop, see below
-
-      const key = `${wallet}||${t.title}`;
-      const ex  = walletMarketBest.get(key);
-      if (!ex || usd > ex.usd) walletMarketBest.set(key, { wallet, usd, sport, t, traderInfo: walletMap[wallet] });
+      rej(null);   // survived every in-loop filter
+      liveGameChecks.push({ wallet, usd, sport, t, traderInfo: walletMap[wallet], dbg });
     });
 
     // Resolve live-game status in one schedule fetch per distinct sport present this run
@@ -474,7 +479,8 @@ module.exports = async function handler(req, res) {
     const schedules = {};
     for (const sp of sportsToCheck) schedules[sp] = await getSchedule(sp);
 
-    liveGameChecks.forEach(({ wallet, usd, sport, t, traderInfo }) => {
+    liveGameChecks.forEach((cand) => {
+      const { wallet, usd, sport, t, traderInfo } = cand;
       const game = findGameForTrade(t, schedules[sport] || []);
       if (game && game.commenceTime) {
         const commenceTs = Math.floor(new Date(game.commenceTime).getTime() / 1000);
@@ -483,13 +489,17 @@ module.exports = async function handler(req, res) {
         //  - game.started: the API's own verdict, immune to trade-timestamp clock skew
         //  - ts > commenceTs: the bet itself was placed after first pitch
         // Either one is enough. Live plays are suppressed entirely, per directive.
-        if (game.started === true || ts > commenceTs) { results.poly.liveSkipped++; return; }
+        if (game.started === true || ts > commenceTs) {
+          results.poly.liveSkipped++;
+          if (cand.dbg) cand.dbg.reject = 'live: game already started';
+          return;
+        }
       }
       // No matching game found (e.g. schedule fetch failed, or a market our
       // matcher can't parse): fail OPEN rather than silently dropping a real signal.
       const key = `${wallet}||${t.title}`;
       const ex  = walletMarketBest.get(key);
-      if (!ex || usd > ex.usd) walletMarketBest.set(key, { wallet, usd, sport, t, traderInfo });
+      if (!ex || usd > ex.usd) walletMarketBest.set(key, { wallet, usd, sport, t, traderInfo, dbg: cand.dbg });
     });
 
     /* SPORT-SPECIFIC PnL GATE.
@@ -517,7 +527,11 @@ module.exports = async function handler(req, res) {
     const gated = [];
     candidates.forEach(cand => {
       const gate = traderStats.qualifiesForSport(statsByWallet[cand.wallet], cand.sport);
-      if (!gate.pass) { results.poly.sportPnlSkipped++; return; }
+      if (!gate.pass) {
+        results.poly.sportPnlSkipped++;
+        if (cand.dbg) cand.dbg.reject = 'sport PnL gate: ' + gate.reason;
+        return;
+      }
       if (!gate.known) results.poly.sportPnlUnknown++;
       gated.push({ ...cand, gate });
     });
@@ -691,10 +705,15 @@ module.exports = async function handler(req, res) {
            answer: was the slate genuinely quiet, or is a filter over-rejecting? Counts are
            reported alongside so the slice can't hide the shape of the data. */
         baseballBuys: baseballBuys.slice().sort((a, b) => b.ts - a.ts).slice(0, 10),
+        rejectCounts: baseballBuys.reduce((a, b) => {
+          const k = b.reject || 'passed all filters';
+          a[k] = (a[k] || 0) + 1; return a;
+        }, {}),
         baseballBuyCounts: {
           total: baseballBuys.length,
           inWindow: baseballBuys.filter(b => b.passWindow).length,
           inWindowTracked: baseballBuys.filter(b => b.passWindow && b.inWalletMap).length,
+          survived: baseballBuys.filter(b => !b.reject).length,
           newestAgeH: baseballBuys.length
             ? Math.round((Math.min(...baseballBuys.map(b => now - b.ts))) / 3600) : null,
         },
