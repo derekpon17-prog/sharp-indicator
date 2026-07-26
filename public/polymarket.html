@@ -40,6 +40,7 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .rep-tier.tA{background:rgba(0,200,150,.15);color:var(--green)}
 .rep-tier.tB{background:rgba(229,160,13,.15);color:var(--gold)}
 .rep-tier.tC{background:rgba(255,255,255,.06);color:var(--t3)}
+.rep-score{font-family:var(--mono);font-size:15px;font-weight:800;line-height:1.1;margin-top:3px;opacity:.9}
 .rep-body{flex:1;min-width:0}
 .rep-play{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:2px}
 .rep-price{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--green)}
@@ -1303,12 +1304,13 @@ function renderReport(){
   wrap.innerHTML=head+rows.map(function(g){
     var i=g.indication,bb=i.bestBook;
     return '<div class="rep-row">'
-      +'<div class="rep-tier t'+i.tier+'">'+i.label+'</div>'
+      +'<div class="rep-tier t'+i.tier+'">'+i.label+'<div class="rep-score">'+(i.score||0)+'</div></div>'
       +'<div class="rep-body">'
       +'<div class="rep-play">'+esc((g.away||'')+' @ '+(g.home||''))+'</div>'
-      +(i.side?'<div class="rep-price">'+esc(i.side)
-          +(bb?' '+fmtAm(bb.price)+' <span class="bk">\u2014 '+esc(String(bb.book).toUpperCase())+'</span>':'')
-          +'</div>':'')
+      +'<div class="rep-price">'+(i.side
+          ? esc(i.side)+(bb?' '+fmtAm(bb.price)+' <span class="bk">\u2014 '+esc(String(bb.book).toUpperCase())+'</span>':'')
+          : '<span class="bk">side not resolved \u2014 see reasons</span>')
+        +'</div>'
       +'<ul class="rep-why">'+(i.reasons||[]).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>'
       +(g.commenceTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:5px">'+gdt(g.commenceTime)+'</div>':'')
       +'</div></div>';
