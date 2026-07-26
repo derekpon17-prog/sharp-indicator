@@ -891,8 +891,14 @@ module.exports=async function handler(req,res){
       // therefore DERIVED from the stored commenceTime at read time (see closeFrozen),
       // not stored as a flag that nothing would ever set.
       if(now>=startTs)return;
-      const pinH2h=play.bookH2h&&play.bookH2h.pinnacle;
-      if(!pinH2h)return;
+      /* SCHEDULE GAP FIX: this used to bail when Pinnacle had no h2h line, which meant
+         such a game never entered the store and therefore never appeared in `schedule` —
+         so the notify bot could not tell it had started and every in-game bet on it
+         failed open and alerted. (Observed live: 65 plays correctly suppressed, but 5
+         on KC/DET slipped through for exactly this reason — no Pinnacle h2h.)
+         The entry is now always written for scheduling purposes; h2h is simply null when
+         Pinnacle isn't pricing it, and CLV consumers already handle a null close. */
+      const pinH2h=(play.bookH2h&&play.bookH2h.pinnacle)||null;
       closeMap[play.id]={ts:now,commenceTime:play.commenceTime,
         away:play.away,home:play.home,h2h:pinH2h,
         markets:Object.keys(play.markets||{}).reduce((a,mk)=>{
@@ -999,7 +1005,8 @@ module.exports=async function handler(req,res){
                       return a;},{}),
       relStandouts: finalPlays.filter(p=>p.relSignal&&p.relSignal.state==='STANDOUT').length,
       exConfirmed:  finalPlays.filter(p=>p.exSignal&&p.exSignal.state==='CONFIRMED').length,
-      closesStored: Object.keys(closeMap).length,
+      closesStored: Object.keys(closeMap).filter(k=>closeMap[k].h2h).length,
+      scheduleKnown: Object.keys(closeMap).length,
       closesFrozen: Object.keys(closeMap).filter(k=>{
                       const ct=closeMap[k].commenceTime?new Date(closeMap[k].commenceTime).getTime():0;
                       return !!(ct&&now>=ct);
