@@ -30,6 +30,8 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:15px;flex-shrink:0}
 .logo-mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--gold),#B87800);display:flex;align-items:center;justify-content:center;font-size:13px}
 .nav-tabs{display:flex;gap:3px;flex:1;justify-content:center}
+.ntab.ntab-action{color:var(--t3)}
+.ntab.ntab-action:hover{color:var(--gold)}
 .ntab{display:flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;border:none;background:transparent;color:var(--t3);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
 .ntab:hover{color:var(--t2);background:var(--b1)}.ntab.on{background:var(--s3);color:var(--t1);font-weight:700;border:1px solid var(--b2)}.ntab i{font-size:15px}
 .nav-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
@@ -278,7 +280,7 @@ select.finput option{background:var(--s2)}
 .empty h3{font-size:15px;font-weight:700;color:var(--t2);margin-bottom:6px}.empty p{font-size:13px;color:var(--t4);max-width:280px;margin:0 auto;line-height:1.7}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 @keyframes slidein{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
-@media(max-width:700px){.strip{grid-template-columns:1fr 1fr}.ntab span{display:none}.hero-size{font-size:34px}.hero-stats{display:none}.page{padding:0 14px 80px}}</style>
+@media(max-width:700px){.strip{grid-template-columns:1fr 1fr}.ntab span{display:none}.hero-size{font-size:34px}.hero-stats{display:none}.page{padding:0 14px 80px}.nav-r .cd,.nav-r .live-pill{display:none}.nav-r .ibtn[title^='Signal Lab']{display:none}.nav-tabs{gap:2px}.ntab{padding:8px 10px}}</style>
 </head>
 <body>
 
@@ -289,6 +291,7 @@ select.finput option{background:var(--s2)}
     <button class="ntab" onclick="showV('alerts',this)"><i class="ti ti-bell"></i><span>Alerts</span><span id="acnt" style="display:none;background:var(--red);color:#fff;font-size:9px;font-weight:900;padding:1px 5px;border-radius:100px;margin-left:2px"></span></button>
     <button class="ntab" onclick="showV('tracking',this)"><i class="ti ti-chart-bar"></i><span>Tracking</span></button>
     <button class="ntab" onclick="showV('traders',this)"><i class="ti ti-users"></i><span>Traders</span></button>
+    <button class="ntab ntab-action" onclick="openSignalLab()" title="Signal Lab — every assessed play"><i class="ti ti-microscope"></i><span>Signals</span></button>
   </div>
   <div class="nav-r">
     <div class="live-pill"><div class="ldot" id="ldot"></div><span id="ltxt">Live</span></div>
@@ -751,6 +754,40 @@ function isStaleGameDate(dateStr){
 }
 function isStaleAlert(a){return isStaleGameDate(extractSlugDate(a));}
 
+/* === LIVE-GAME FILTER ===
+   Directive: no in-progress plays on active views. The engine's `plays` array drops a
+   game the moment it starts, so it cannot answer "is this live?" — the separate
+   `schedule` array (built from the closing-line store) retains games past first pitch
+   and carries a `started` flag. Matching mirrors the proven matchLineToAlert pattern:
+   either team name may appear in the market title, with the slug date as the gate that
+   stops a doubleheader or a same-matchup game on another day from cross-matching. */
+var gameSchedule=[];
+function normTeamFE(s){return String(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();}
+function findScheduledGame(a){
+  var t=normTeamFE(a&&(a.title||a.market||''));
+  if(!t||!gameSchedule.length)return null;
+  var d=extractSlugDate(a);
+  for(var i=0;i<gameSchedule.length;i++){
+    var g=gameSchedule[i],aw=normTeamFE(g.away),hm=normTeamFE(g.home);
+    if(!((aw.length>2&&t.indexOf(aw)>=0)||(hm.length>2&&t.indexOf(hm)>=0)))continue;
+    if(d&&g.commenceTime){
+      var gd=null;try{gd=new Date(g.commenceTime).toLocaleDateString('en-CA',{timeZone:'America/New_York'});}catch(e){}
+      if(gd&&gd!==d)continue;
+    }
+    return g;
+  }
+  return null;
+}
+function isLiveAlert(a){
+  var g=findScheduledGame(a);
+  if(!g)return false;                      // unknown game — fail open, same as the bot
+  if(g.started===true)return true;         // API's own verdict
+  var ct=g.commenceTime?new Date(g.commenceTime).getTime():0;
+  if(!ct)return false;
+  var ts=a.loggedAt||(a.timestamp?a.timestamp*1000:0);
+  return !!(ts&&ts>ct);                    // bet placed after first pitch
+}
+
 /* === REDESIGN HELPERS (council pass) === */
 // Truncate 0x wallet hashes anywhere a trader name renders. Handles the
 // "0xADDR-TIMESTAMP" composite ids seen in alert data too.
@@ -932,6 +969,9 @@ async function fetchSharpLines(){
       sharpLines=[];return[];
     }
     sharpLines=d.plays||d.data||d.games||(Array.isArray(d)?d:[]);
+    // Schedule INCLUDES games already underway; sharpLines does not (API filters to
+    // ct>now), which is precisely why a live play could never be identified here before.
+    gameSchedule=Array.isArray(d.schedule)?d.schedule:gameSchedule;
     captureVelocityShadow(sharpLines);
     return sharpLines;
   }catch(e){console.warn('Sharp lines:',e.message);sharpLines=[];return[];}
@@ -1106,6 +1146,7 @@ function buildTrending(){
     if(ts<cutoff)return;
     if(!detectSport(a.title))return;
     if(isStaleAlert(a))return; // STALE-MARKET FILTER: game date already passed (ET) — off active views, tracking unaffected
+    if(isLiveAlert(a))return;  // LIVE-GAME FILTER: game already underway
     if(isLosingTrader(a.wallet))return;
     const cached=_sc[a.wallet],inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
     if(!inLB&&cached!==null&&cached!==undefined&&(cached.pnl===null||cached.pnl<=0))return;
@@ -1218,7 +1259,7 @@ function fillFlagCard(id,stat,total){
 function buildBoard(){
   var now=Date.now(),rows=[],usedAlertKeys={};
   var recentAlerts=alerts.filter(function(a){
-    return (a.loggedAt||(a.timestamp*1000))>now-24*3600000 && !isStaleAlert(a);
+    return (a.loggedAt||(a.timestamp*1000))>now-24*3600000 && !isStaleAlert(a) && !isLiveAlert(a);
   });
   (sharpLines||[]).forEach(function(g){
     if(g.noSignal)return;
@@ -1317,7 +1358,7 @@ function renderHero(){
   h.style.display='';
   h.innerHTML='<div class="h2-wrap">'+main+trust+'</div>';
   // biggest-buy stats still feed the header numbers
-  var rec24=alerts.filter(function(a){var ts=a.loggedAt||(a.timestamp*1000);return ts>Date.now()-86400000&&detectSport(a.title)&&!isStaleAlert(a)&&!isLosingTrader(a.wallet);});
+  var rec24=alerts.filter(function(a){var ts=a.loggedAt||(a.timestamp*1000);return ts>Date.now()-86400000&&detectSport(a.title)&&!isStaleAlert(a)&&!isLiveAlert(a)&&!isLosingTrader(a.wallet);});
   window._heroAlert=rec24.sort(function(a,b){return b.usdValue-a.usdValue;})[0]||null;
 }
 
@@ -1344,6 +1385,7 @@ function renderDash(){
   var cutoff24=Date.now()-24*60*60*1000;
   var recent=alerts.filter(function(a){
     if(isStaleAlert(a))return false; // STALE-MARKET FILTER
+    if(isLiveAlert(a))return false;  // LIVE-GAME FILTER
     return (a.loggedAt||(a.timestamp*1000)||0) >= cutoff24;
   }).slice(0,8);
   if(recent.length){
