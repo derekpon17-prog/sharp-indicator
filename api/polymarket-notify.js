@@ -163,26 +163,38 @@ async function fetchWalletTrades(wallets, cutoff) {
    — zero added Odds-API quota for MLB, the only sport actually in season.
    A sport is only ever fetched if a candidate trade in that sport shows up
    this run, so WNBA/NFL/etc. cost nothing on a quiet day either. */
-const oddsRawCache = {};
-async function fetchOddsRaw(sport) {
-  if (oddsRawCache[sport]) return oddsRawCache[sport];
+const oddsPayloadCache = {};
+async function fetchOddsPayload(sport) {
+  if (oddsPayloadCache[sport]) return oddsPayloadCache[sport];
   try {
     const r = await fetch(`${SITE_URL}/api/odds?sport=${sport}`);
-    if (!r.ok) return (oddsRawCache[sport] = []);
-    const d = await r.json();
-    return (oddsRawCache[sport] = d.plays || []);
+    if (!r.ok) return (oddsPayloadCache[sport] = {});
+    return (oddsPayloadCache[sport] = await r.json());
   } catch (e) {
     console.warn('[ODDS] fetch failed:', sport, e.message);
-    return (oddsRawCache[sport] = []);
+    return (oddsPayloadCache[sport] = {});
   }
+}
+async function fetchOddsRaw(sport) {
+  const d = await fetchOddsPayload(sport);
+  return (d && d.plays) || [];
 }
 async function fetchSharpLinePlays(sport = 'MLB') {
   const raw = await fetchOddsRaw(sport);
   return raw.filter(p => !p.noSignal && parseInt(p.siScore || 0) >= 70); // Quality threshold, unchanged
 }
+/* Reads the dedicated `schedule` array, NOT `plays`. This is the whole bug: /api/odds
+   filters plays to ct>now, so an in-progress game is absent from it entirely — the live
+   check could never match one, always failed open, and suppressed exactly nothing.
+   `schedule` is built from the closing-line store and retains games past first pitch. */
 async function getSchedule(sport) {
-  const raw = await fetchOddsRaw(sport);
-  return raw.filter(p => p.commenceTime).map(p => ({ away: p.away, home: p.home, commenceTime: p.commenceTime }));
+  const d = await fetchOddsPayload(sport);
+  const sched = (d && d.schedule) || [];
+  if (sched.length) return sched;
+  // Fallback for a deploy skew where the API predates `schedule`: pregame games only,
+  // which restores the old (non-functional) behaviour rather than throwing.
+  return ((d && d.plays) || []).filter(p => p.commenceTime)
+    .map(p => ({ away: p.away, home: p.home, commenceTime: p.commenceTime, started: false }));
 }
 // Reuses the exact team-substring + date-gate pattern already shipped in matchLineToAlert.
 // Requires BOTH teams (stricter than matchLineToAlert's either/or) since here we're
@@ -414,7 +426,11 @@ module.exports = async function handler(req, res) {
       if (game && game.commenceTime) {
         const commenceTs = Math.floor(new Date(game.commenceTime).getTime() / 1000);
         const ts = parseInt(t.timestamp) || 0;
-        if (ts > commenceTs) { results.poly.liveSkipped++; return; }  // in-game — per directive, suppressed entirely
+        // Two independent grounds for suppression:
+        //  - game.started: the API's own verdict, immune to trade-timestamp clock skew
+        //  - ts > commenceTs: the bet itself was placed after first pitch
+        // Either one is enough. Live plays are suppressed entirely, per directive.
+        if (game.started === true || ts > commenceTs) { results.poly.liveSkipped++; return; }
       }
       // No matching game found (e.g. schedule fetch failed, or a market our
       // matcher can't parse): fail OPEN rather than silently dropping a real signal.
