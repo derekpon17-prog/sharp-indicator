@@ -35,7 +35,11 @@ const MLB_TEAMS = ['yankees','red sox','dodgers','cubs','mets','astros','braves'
   'pirates','rockies','marlins','nationals','diamondbacks'];
 
 const POS_LIMITS = [500, 200, 100, 50];  // ladder, never assume
-const MAX_PAGES  = 4;                     // cap total work per wallet
+/* 4 pages x 50 = 200 positions was far too shallow: a wallet that bets several sports
+   showed only 1 MLB position, so nobody could ever reach the 20-position minimum and the
+   gate permanently failed open — present but inert. Pages are sequential per wallet but
+   wallets resolve in parallel, and results are cached for a day, so the cost lands once. */
+const MAX_PAGES  = 16;                    // up to 800 positions per wallet
 const CACHE_TTL  = 86400;                 // PnL moves slowly; refresh daily
 
 async function kv(body) {
@@ -100,7 +104,11 @@ async function fetchClosedPositions(wallet) {
 
   // Page deeper only if the first page came back full.
   if (all.length === limit) {
-    firstHash = JSON.stringify(all[0] && (all[0].conditionId || all[0].title));
+    /* Compare the WHOLE first row, not a guessed identity field. The earlier probe used
+       `conditionId || title`; on a payload carrying neither, both sides evaluated to
+       undefined, the probe concluded offset was unsupported, and pagination stopped dead
+       after one page — depth silently capped at 50. Schema-independent is the point. */
+    firstHash = JSON.stringify(all[0]);
     for (let page = 1; page < MAX_PAGES; page++) {
       let d;
       try {
@@ -109,7 +117,7 @@ async function fetchClosedPositions(wallet) {
         d = await r.json();
       } catch { break; }
       if (!Array.isArray(d) || !d.length) break;
-      if (JSON.stringify(d[0] && (d[0].conditionId || d[0].title)) === firstHash) {
+      if (JSON.stringify(d[0]) === firstHash) {
         diag.offsetSupported = false;   // offset ignored — stop rather than duplicate
         break;
       }
@@ -122,13 +130,32 @@ async function fetchClosedPositions(wallet) {
   return { positions: all, ok: true, error: null, truncated };
 }
 
+/* PnL FIELD RESOLUTION.
+   The live payload carried neither `cashPnl` nor `pnl`, so every bucket computed 0 while
+   looking perfectly healthy — 200 positions parsed, slugs mapped, totals silently zero.
+   That is the worst failure shape: plausible output, no signal. Rather than guess again,
+   try the known candidates in order, report WHICH field resolved, and expose the raw key
+   list of a sample row so an unknown schema is diagnosable in one call instead of three. */
+const PNL_FIELDS = ['realizedPnl', 'cashPnl', 'realized_pnl', 'pnl', 'profit', 'totalPnl', 'cash_pnl'];
+
+function resolvePnlField(positions) {
+  for (const f of PNL_FIELDS) {
+    const hit = positions.find(p => p && p[f] !== undefined && p[f] !== null);
+    if (hit) return f;
+  }
+  return null;
+}
+
 function bucket(positions) {
   const bySport = {};
   let total = 0, unmapped = 0;
   const via = { slug: 0, title: 0, none: 0 };
+  const pnlField = resolvePnlField(positions);
+  const sampleKeys = positions.length ? Object.keys(positions[0]).slice(0, 40) : [];
 
   positions.forEach(p => {
-    const v = parseFloat((p && (p.cashPnl !== undefined ? p.cashPnl : p.pnl)) || 0);
+    const raw = pnlField ? p[pnlField] : undefined;
+    const v = parseFloat(raw);
     const pnl = isFinite(v) ? v : 0;
     total += pnl;
     const { sport, via: how } = sportOf(p);
@@ -146,7 +173,8 @@ function bucket(positions) {
     b.winRate = graded ? Math.round((b.wins / graded) * 1000) / 10 : null;
   });
 
-  return { bySport, totalPnl: Math.round(total * 100) / 100, positions: positions.length, unmapped, via };
+  return { bySport, totalPnl: Math.round(total * 100) / 100, positions: positions.length,
+           unmapped, via, pnlField, sampleKeys };
 }
 
 /* PROVIDER INTERFACE. Returns per-sport PnL for one wallet, KV-cached daily. */
@@ -166,6 +194,8 @@ async function getTraderStats(wallet) {
     wallet, ok, error, truncated, cached: false, fetchedAt: Date.now(),
     limitUsed: diag.limitUsed, offsetSupported: diag.offsetSupported,
     ...b,
+    // A resolved pnlField with an all-zero total means the schema changed again.
+    pnlHealthy: !!(b.pnlField && b.positions > 0),
   };
   if (ok) await kv(['SET', key, JSON.stringify(out), 'EX', String(CACHE_TTL)]);
   return out;
