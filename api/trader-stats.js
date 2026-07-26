@@ -89,7 +89,7 @@ async function fetchClosedPositions(wallet) {
   let sawEmpty = false;
   for (const L of POS_LIMITS) {
     try {
-      const r = await fetch(`${DATA_API}/closed-positions?user=${wallet}&limit=${L}`);
+      const r = await fetch(`${DATA_API}/closed-positions?user=${wallet}&limit=${L}&sortBy=TIMESTAMP`);
       if (!r.ok) continue;
       const d = await r.json();
       if (!Array.isArray(d)) continue;
@@ -112,7 +112,7 @@ async function fetchClosedPositions(wallet) {
     for (let page = 1; page < MAX_PAGES; page++) {
       let d;
       try {
-        const r = await fetch(`${DATA_API}/closed-positions?user=${wallet}&limit=${limit}&offset=${page * limit}`);
+        const r = await fetch(`${DATA_API}/closed-positions?user=${wallet}&limit=${limit}&offset=${page * limit}&sortBy=TIMESTAMP`);
         if (!r.ok) break;
         d = await r.json();
       } catch { break; }
@@ -173,15 +173,38 @@ function positionPnl(p, pnlField, mode) {
   return mode === 'raw' ? g : (g - c);
 }
 
-function bucket(positions) {
+/* NET BY MARKET.
+   Live data shows this wallet holding BOTH sides of the same conditionId — ex-RUBY at
+   -$992 and CYBERSHOKE at +$1,041 on one CS2 match. Counted as two positions that is
+   permanently one win and one loss, pinning every win rate near 50% and making the gate
+   uninformative. Netting by conditionId scores the market once, on the trader's actual
+   net outcome. It also reflects reality: taking both sides is market-making, not a
+   directional read, and nets to roughly zero as it should. */
+function netByMarket(positions, pnlField) {
+  const byCond = new Map();
+  const loose = [];
+  positions.forEach(p => {
+    const cid = p && p.conditionId;
+    if (!cid) { loose.push(p); return; }
+    const cur = byCond.get(cid);
+    const pnl = positionPnl(p, pnlField, PNL_MODE);   // compute here; bucket() reads _netPnl
+    if (!cur) byCond.set(cid, { ...p, _netPnl: pnl, _legs: 1 });
+    else { cur._netPnl += pnl; cur._legs++; }
+  });
+  return [...byCond.values(), ...loose.map(p => ({ ...p, _netPnl: positionPnl(p, pnlField, PNL_MODE), _legs: 1 }))];
+}
+
+function bucket(rawPositions) {
   const bySport = {};
   let total = 0, unmapped = 0;
   const via = { slug: 0, title: 0, none: 0 };
-  const pnlField = resolvePnlField(positions);
-  const sampleKeys = positions.length ? Object.keys(positions[0]).slice(0, 40) : [];
+  const pnlField = resolvePnlField(rawPositions);
+  const positions = netByMarket(rawPositions, pnlField);
+  const hedged = positions.filter(p => p._legs > 1).length;
+  const sampleKeys = rawPositions.length ? Object.keys(rawPositions[0]).slice(0, 40) : [];
   // Real rows, trimmed of bulky/identifying fields, so field SEMANTICS are inspectable
   // rather than inferred. This is the diagnostic that ends the guessing.
-  const sampleRows = positions.slice(0, 3).map(p => {
+  const sampleRows = rawPositions.slice(0, 3).map(p => {
     const r = {};
     ['avgPrice', 'totalBought', 'realizedPnl', 'curPrice', 'outcome', 'slug', 'endDate']
       .forEach(k => { if (p[k] !== undefined) r[k] = p[k]; });
@@ -190,7 +213,7 @@ function bucket(positions) {
   // Both interpretations, so the choice is evidence-based.
   const compare = { raw: 0, net: 0, rawWins: 0, netWins: 0, rawLosses: 0, netLosses: 0 };
   positions.forEach(p => {
-    const rv = positionPnl(p, pnlField, 'raw');
+    const rv = p._netPnl;
     const nv = positionPnl(p, pnlField, 'net');
     compare.raw += rv; compare.net += nv;
     if (rv > 0) compare.rawWins++; else if (rv < 0) compare.rawLosses++;
@@ -206,7 +229,7 @@ function bucket(positions) {
      tells: a monotonically non-increasing PnL sequence, and zero losses over a large
      sample. When either fires the record is not evidence and must not gate anything. */
   let sampleBiased = false, biasReason = null;
-  const vals = positions.map(p => positionPnl(p, pnlField, PNL_MODE));
+  const vals = positions.map(p => p._netPnl);
   if (vals.length >= 20) {
     let descending = true;
     for (let i = 1; i < vals.length; i++) if (vals[i] > vals[i - 1] + 1e-6) { descending = false; break; }
@@ -218,7 +241,7 @@ function bucket(positions) {
   }
 
   positions.forEach(p => {
-    const pnl = positionPnl(p, pnlField, PNL_MODE);
+    const pnl = p._netPnl;
     total += pnl;
     const { sport, via: how } = sportOf(p);
     via[how] = (via[how] || 0) + 1;
@@ -236,8 +259,9 @@ function bucket(positions) {
   });
 
   return { bySport, totalPnl: Math.round(total * 100) / 100, positions: positions.length,
-           unmapped, via, pnlField, pnlMode: PNL_MODE, sampleKeys, sampleRows,
-           pnlCompare: compare, sampleBiased, biasReason };
+           rawPositions: rawPositions.length, hedgedMarkets: hedged,
+           unmapped, via, pnlField, pnlMode: PNL_MODE, sortedBy: 'TIMESTAMP',
+           sampleKeys, sampleRows, pnlCompare: compare, sampleBiased, biasReason };
 }
 
 /* PROVIDER INTERFACE. Returns per-sport PnL for one wallet, KV-cached daily. */
