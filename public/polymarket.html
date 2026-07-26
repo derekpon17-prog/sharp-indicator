@@ -1075,13 +1075,25 @@ function autoTrackLinePlays(lines){
   let changed=false;
   const nowMs=Date.now();
   lines.forEach(function(g){
-    const score=parseInt(g.siScore||0);if(score<70)return; // Raised to 70 for quality
+    /* GATE CHANGE 2026-07-26 (council). This was siScore >= 70. That bar was calibrated
+       when every gap carried a ~1.0-1.4pp phantom from the devig mismatch; removing the
+       phantom was right, leaving the bar in the old currency was not. Post-fix, h2h gaps
+       run median 0.39pp / sd 0.20, so a 70 composite is arithmetically unreachable and
+       this flag logged 2 plays ever. Meanwhile the engine WAS finding real moves — NYY/PHI
+       went -155 to -186 with 9 books following and 3 lagging, and scored siScore 0,
+       because velocity, dispersion, relative and exchange are all shadow and none feed
+       siScore. `indication` composes all five pillars and tiered that game B. So gate on
+       the composite, not on the one pathway that post-devig cannot fire.
+       siScore is retained below purely as a display value. */
+    const ind=g.indication;
+    if(!ind||(ind.tier!=='A'&&ind.tier!=='B'))return;
+    const score=parseInt(ind.score||g.siScore||0);
     // Never auto-track live games — only pre-game signals
     if(g.commenceTime&&new Date(g.commenceTime).getTime()<nowMs)return;
-    const key=(g.away||'')+'vs'+(g.home||'')+'||'+(g.sharpSide||'');
+    const key=(g.away||'')+'vs'+(g.home||'')+'||'+(ind.side||g.sharpSide||'');
     if(linePlays.some(function(p){return p.key===key;}))return;
     const gt=g.commenceTime?new Date(g.commenceTime).toLocaleString():'';
-    linePlays.unshift({key,score,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:g.sharpSide||'',signalType:g.signalType||'Sharp Signal',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,exConfirms:g.exConfirms||0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
+    linePlays.unshift({key,score,tier:ind.tier,tierLabel:ind.label,sources:ind.sources||[],reasons:ind.reasons||[],bestBook:ind.bestBook||null,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:ind.side||g.sharpSide||'',signalType:ind.label||g.signalType||'Sharp Signal',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,exConfirms:g.exConfirms||0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
     changed=true;
   });
   if(changed)ss('pm:line-plays',linePlays);
@@ -1090,15 +1102,23 @@ function autoTrackSharpScorePlays(lines,alertList){
   let changed=false;
   const recentAlerts=alertList.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>Date.now()-43200000;});
   lines.forEach(function(g){
-    const lineScore=parseInt(g.siScore||0);if(lineScore<55)return; // Raised for quality
+    /* GATE CHANGE 2026-07-26 (council). Required siScore >= 55 AND a combined >= 70.
+       Both halves depended on siScore, which post-devig sits at 0 across the board, so
+       this flag has logged ZERO plays and structurally could not fire. Sharp Score is
+       meant to mean "independent sources agree" — which is exactly what indication tier A
+       already encodes. Gate on that, and keep requiring genuine Poly agreement on the
+       same side so the category keeps its meaning. */
+    const ind=g.indication;
+    if(!ind||ind.tier!=='A')return;
+    const lineScore=parseInt(ind.score||0);
     const match=matchLineToAlert(g,recentAlerts);if(!match)return;
-    const sameSide=sameSharpSide(g.sharpSide,match.outcome);
-    if(!sameSide)return; // this category specifically means both signals agree on the same side, not just the same game
+    const sameSide=sameSharpSide(ind.side||g.sharpSide,match.outcome);
+    if(!sameSide)return; // the category means both signals agree on the SAME SIDE, not merely the same game
     const polyScore=signalScore({buys:[match],totalVol:match.usdValue}).score;
-    const combined=calcSharpScore(lineScore,polyScore,sameSide);if(combined<70)return;
+    const combined=Math.max(lineScore,calcSharpScore(lineScore,polyScore,sameSide));
     const key='ss_'+(g.away||'')+'vs'+(g.home||'');
     if(sharpScorePlays.some(function(p){return p.key===key;}))return;
-    sharpScorePlays.unshift({key,combined,lineScore,polyScore,agree:sameSide,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:g.sharpSide||'',signalType:g.signalType||'',polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
+    sharpScorePlays.unshift({key,combined,lineScore,polyScore,agree:sameSide,tier:ind.tier,tierLabel:ind.label,sources:ind.sources||[],reasons:ind.reasons||[],bestBook:ind.bestBook||null,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:ind.side||g.sharpSide||'',signalType:ind.label||g.signalType||'',polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
     changed=true;
   });
   if(changed)ss('pm:ss-plays',sharpScorePlays);
