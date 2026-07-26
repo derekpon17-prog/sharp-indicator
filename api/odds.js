@@ -152,6 +152,106 @@ function calcLineVelocity(gameId, sharpSide, sharpOutcome, currentPrice, prevLin
   return { score: Math.min(100, Math.max(0, score)), isReal: true, label, movement, prevPrice };
 }
 
+/* ── DAILY INDICATION REPORT (council build 2026-07-26) ───────────────
+   WHY THIS EXISTS. The engine went silent: siScore >= 70 never fires because that bar
+   was calibrated against pre-devig numbers that carried a ~1-1.4pp phantom gap. Removing
+   the phantom was correct; leaving the bar denominated in the old currency was not. The
+   board today runs h2h median 0.39pp / sd 0.20 — no absolute cutoff from 0.5 to 2.5 can
+   separate signal from noise on that distribution.
+
+   The deeper error was architectural. Industry sharp reports are not binary alarms.
+   Action Network publishes a Pro Report on EVERY game with graded components (Sharp
+   Action, Big Money, Systems, Model Projections); Bet Labs grades everything against
+   CLOSING LINES. We were trying to build an alarm out of what is really a ranking
+   problem, so on a quiet board we showed nothing at all rather than "here is today's
+   best, and it is thin."
+
+   So: rank the whole board every day, tier it honestly, and keep the NOTIFICATION bar
+   high so the dashboard can be informative without the phone being noisy. Composition is
+   deliberately multi-source, because a single pillar on an efficient market is noise:
+     A CONVERGENCE  - two or more independent sources agree (the only tier worth a push)
+     B SIGNAL       - one strong, well-supported source
+     C WATCHLIST    - notable only relative to today's board; explicitly not a play
+   Every input except siScore is still shadow-derived and unvalidated; the tier label says
+   so, and nothing here feeds siScore, signalType or auto-track. */
+const IND_TIER = { A: 'CONVERGENCE', B: 'SIGNAL', C: 'WATCHLIST', N: 'NONE' };
+
+function computeIndication(play) {
+  const src = [], reasons = [];
+  const si  = parseInt(play.siScore || 0);
+  const rel = play.relSignal || {};
+  const exs = play.exSignal || {};
+  const mlv = play.mlVelocity || {};
+
+  if (si >= 50) { src.push('LINE'); reasons.push('SI score ' + si); }
+
+  if (rel.state === 'STANDOUT') {
+    src.push('REL');
+    reasons.push(rel.market + ' gap ' + rel.gapPP + 'pp, +' + rel.z + '\u03c3 vs today\u2019s board (p' + rel.percentile + ')');
+  }
+  if (exs.state === 'CONFIRMED') {
+    src.push('EXCH');
+    reasons.push('both exchanges favour ' + exs.side + ' by ' + exs.avgGapPP + 'pp');
+  }
+  if (mlv.state === 'MID_MOVE') {
+    src.push('VEL');
+    reasons.push('ML moved ' + mlv.movementPP + 'pp, ' + (mlv.laggingBooks || 0) + ' books still lagging');
+  }
+
+  // Pinnacle priced outside the entire soft-book range is a genuinely distinct read from
+  // "the average is off" — it means no book agrees with the sharpest one.
+  let outside = null;
+  ['h2h', 'spreads', 'totals'].forEach(mk => {
+    const d = play.markets && play.markets[mk] && play.markets[mk].dispersion;
+    if (d && d.pinOutsideRange && d.n >= 6 && !outside) outside = { mk, d };
+  });
+  if (outside) {
+    src.push('DISP');
+    reasons.push('Pinnacle outside all ' + outside.d.n + ' books on ' + outside.mk + ' (range ' + outside.d.rangePP + 'pp)');
+  }
+
+  const uniq = src.filter((x, i) => src.indexOf(x) === i);
+  let tier;
+  if (uniq.length >= 2) tier = 'A';
+  else if (uniq.length === 1 && (si >= 50 || exs.state === 'CONFIRMED' || mlv.state === 'MID_MOVE')) tier = 'B';
+  else if (uniq.length === 1) tier = 'C';
+  else tier = 'N';
+
+  // Ranking score — for ORDERING the daily report, not for betting. Weighted toward
+  // agreement because breadth beats magnitude on an efficient board.
+  const score = Math.min(100,
+    (uniq.length >= 2 ? 40 : uniq.length === 1 ? 15 : 0) +
+    Math.min(25, si) +
+    Math.min(20, Math.round((rel.z || 0) * 8)) +
+    Math.min(15, Math.round((exs.avgGapPP || 0) * 3)) +
+    Math.min(15, Math.round((mlv.movementPP || 0) * 5)));
+
+  const side = rel.side || exs.side || mlv.side || (play.sharpSide !== '\u2014' ? play.sharpSide : null) || null;
+
+  /* Name the book and the number, the way every reference report does. Prefer the market
+     the strongest source actually fired on, so the quoted price matches the reasoning. */
+  let bestBook = null;
+  if (side) {
+    const order = [rel.market, exs.market, 'h2h', 'spreads', 'totals'].filter(Boolean);
+    for (const mk of order) {
+      const m = play.markets && play.markets[mk];
+      if (!m) continue;
+      const bp = (m.bestPrice && m.bestPrice.book && m.sharpSide === side) ? m.bestPrice
+               : (m.bestPrices && m.bestPrices[side]) || null;
+      if (bp && bp.book) { bestBook = { market: mk, book: bp.book, price: bp.price, edgeVsPin: bp.edgeVsPin }; break; }
+    }
+  }
+  if (bestBook) {
+    reasons.push('best number ' + (bestBook.price > 0 ? '+' : '') + bestBook.price + ' at ' + bestBook.book
+      + (bestBook.edgeVsPin > 0 ? ' (' + bestBook.edgeVsPin + 'pp better than Pinnacle)' : ''));
+  }
+
+  return {
+    tier, label: IND_TIER[tier], score, sources: uniq, reasons, side, bestBook,
+    shadow: true,   // ranking aid under validation — not a validated play signal
+  };
+}
+
 /* ── WEATHER FOR TOTALS (council rec #3) ──────────────────────────────
    Totals are where the edge actually is on this board — h2h sd 0.14 vs totals
    sd 0.52, and every meaningful exchange lean today was a total. Wind and
@@ -599,6 +699,28 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
   const[pf0,pf1]=dv(toImp(pm.outcomes[0].price),toImp(pm.outcomes[1].price));
   const pf=[pf0,pf1];
   const rawPrices=pm.outcomes.map(o=>({name:o.name,price:o.price,point:o.point}));
+  /* BEST AVAILABLE PRICE per outcome, across soft books AND exchanges.
+     Every industry sharp report names the book — "LA DODGERS ML (+108) — NOVIG" — because
+     the edge lives at the best number, not the average. Two independent sources said the
+     same thing: splits tell you where the money is but you still need the best price, and
+     OddsJam's method is literally read the exchange, then buy it cheaper elsewhere.
+     Best for a BETTOR = lowest implied probability (biggest payout), so compare on toImp.
+     Exchanges are included because Novig/ProphetX are frequently the best number and are
+     exactly what the reference reports quote. */
+  const keyedSoft=(soft||[]).map(b=>({key:b.key,m:b.markets&&b.markets.find(mm=>mm.key===mkey)})).filter(x=>x.m);
+  const keyedEx=(exBooks||[]).map(b=>({key:b.key,m:b.markets&&b.markets.find(mm=>mm.key===mkey)})).filter(x=>x.m);
+  const bestByOutcome={};
+  pm.outcomes.forEach(out=>{
+    let best={book:'pinnacle',price:out.price,imp:toImp(out.price)};
+    [...keyedSoft,...keyedEx].forEach(({key,m})=>{
+      const o=findOut(m.outcomes,out.name,out.point);
+      if(!o)return;
+      const imp=toImp(o.price);
+      if(imp<best.imp)best={book:key,price:o.price,imp};
+    });
+    bestByOutcome[out.name]={book:best.book,price:best.price,
+      edgeVsPin:Math.round((toImp(out.price)-best.imp)*10000)/100};
+  });
   const softAvgMap={};
   pm.outcomes.forEach((out,oi)=>{
     const si2=sms.map(sm=>{const oo=findOut(sm.outcomes,out.name,out.point);return oo?toImp(oo.price):null;}).filter(x=>x!==null);
@@ -686,7 +808,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
         signalType:sigType(rlm,ps,ms,exConfirms),
         exConfirms,exLines,novigConfirm:exConfirms>=1,
         lines:{pinnacle:fmt(out.price),novig:exLines['novig']||exLines['prophetx']||null,softAvg:fmt(Math.round(toAm(asr))),softRange:sr},
-        booksOnNumber,booksDropped,dispersion,
+        booksOnNumber,booksDropped,dispersion,bestPrice:bestByOutcome[out.name]||null,
         currentPinPrice:out.price,currentSoftAvg:softAvgMap[out.name]||null,
         gapPP:gapPP.toFixed(2),numBooks:simps.length,
         publicLean:isPublicLean(out.name,mkey,out.price,out.point),rawPrices,exchangeLean,exchangeOnly:exchangeOnlySignal(exchangeLean),
@@ -717,7 +839,7 @@ function analyzeMarket(game,mkey,pin,exBooks,soft){
         pinPctile:Math.round((fbFair.filter(x=>x<pf0).length/fbFair.length)*100),
         pinOutsideRange:pf0>hi||pf0<lo};
     }
-    return{market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,pillars:{rlm:0,pinnacle:0,money:0},signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,lines:{pinnacle:fb.pinnacle,novig:fb.novig,softAvg:fb.softAvg,softRange:fb.softRange},booksOnNumber:fbFair.length,booksDropped:mainPair.dropped||0,dispersion:fbDisp,currentPinPrice:pm.outcomes[0].price,currentSoftAvg:fb.avgAmNum,gapPP:realGapPP.toFixed(2),numBooks:sms.length,publicLean:false,rawPrices,exchangeLean};
+    return{market:mkey,sharpSide:'—',siScore:0,sharpOutcome:null,pillars:{rlm:0,pinnacle:0,money:0},signalType:'NONE',exConfirms:0,exLines:{},novigConfirm:false,lines:{pinnacle:fb.pinnacle,novig:fb.novig,softAvg:fb.softAvg,softRange:fb.softRange},booksOnNumber:fbFair.length,booksDropped:mainPair.dropped||0,dispersion:fbDisp,bestPrices:bestByOutcome,currentPinPrice:pm.outcomes[0].price,currentSoftAvg:fb.avgAmNum,gapPP:realGapPP.toFixed(2),numBooks:sms.length,publicLean:false,rawPrices,exchangeLean};
   }
   return best;
 }
@@ -926,7 +1048,7 @@ module.exports=async function handler(req,res){
       const wxres=await Promise.all(soon.map(p=>fetchWeather(p)));
       soon.forEach((p,i)=>{wxMap[p.id]=wxres[i];});
     }
-    const finalPlays=velPlays.map(p=>({...p,
+    const withShadow=velPlays.map(p=>({...p,
       relSignal:computeRelSignal(p,boardStats),
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
@@ -951,6 +1073,8 @@ module.exports=async function handler(req,res){
         };
       })():null,
     }));
+    // Indication needs every shadow field populated, so it runs as a second pass.
+    const finalPlays=withShadow.map(p=>({...p,indication:computeIndication(p)}));
 
     // Shadow log: first time a game enters a qualifying state, append to KV (server-side,
     // device-independent). NX seen-key dedupes across cron runs. Never touches SI/auto-track.
@@ -1004,6 +1128,9 @@ module.exports=async function handler(req,res){
                       a[k]=v?{n:v.n,median:v.median,mean:v.mean,sd:v.sd,max:v.max}:null;
                       return a;},{}),
       relStandouts: finalPlays.filter(p=>p.relSignal&&p.relSignal.state==='STANDOUT').length,
+      indication:   { A: finalPlays.filter(p=>p.indication&&p.indication.tier==='A').length,
+                      B: finalPlays.filter(p=>p.indication&&p.indication.tier==='B').length,
+                      C: finalPlays.filter(p=>p.indication&&p.indication.tier==='C').length },
       exConfirmed:  finalPlays.filter(p=>p.exSignal&&p.exSignal.state==='CONFIRMED').length,
       closesStored: Object.keys(closeMap).filter(k=>closeMap[k].h2h).length,
       scheduleKnown: Object.keys(closeMap).length,
