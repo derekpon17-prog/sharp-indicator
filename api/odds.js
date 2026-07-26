@@ -967,8 +967,24 @@ module.exports=async function handler(req,res){
       ...finalPlays.filter(p=>p.siScore===0).sort((a,b)=>a.away.localeCompare(b.away)),
     ];
 
+    /* SCHEDULE (live-filter support). `plays` is filtered upstream to ct>now, so a game
+       vanishes from it the instant it starts — which silently turned the notify bot's
+       live filter into dead code: an in-progress game was never in the schedule, so it
+       never matched, so it always failed open and alerted anyway. closeMap retains every
+       game first seen pregame for 7 days INCLUDING after first pitch, so it can answer
+       "has this started?" for exactly the games `plays` can no longer see. Costs zero
+       extra Odds API quota — derived from data already stored. */
+    const schedule = Object.keys(closeMap).map(k => ({
+      id: k,
+      away: closeMap[k].away || null,
+      home: closeMap[k].home || null,
+      commenceTime: closeMap[k].commenceTime || null,
+      started: !!(closeMap[k].commenceTime && now >= new Date(closeMap[k].commenceTime).getTime()),
+    })).filter(g => g.away && g.home && g.commenceTime);
+
     res.status(200).json({
       plays,
+      schedule,
       total:       upcoming.length,
       quota:       { remaining: rem, used },
       rlmSource:   Object.keys(prevLines).length > 0 ? 'line_velocity' : 'inferred_first_run',
