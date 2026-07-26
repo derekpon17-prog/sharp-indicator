@@ -15,6 +15,8 @@ const SITE_URL    = 'https://sharp-indicator-a34j.vercel.app';
 // Per-sport trader PnL gate. Lives in its own module so it is testable in isolation
 // and reusable by the dashboard's trader panels.
 const traderStats = require('./trader-stats.js');
+// Bottom-up discovered wallets — profitable IN A SPORT, not merely rich overall.
+const discover = require('./discover.js');
 
 const sentThisSession = new Set(); // fast in-process check; survives WARM invocations only
 
@@ -394,7 +396,7 @@ module.exports = async function handler(req, res) {
   const winMax = now - 30;
 
   const results = {
-    poly:  { scanned: 0, sent: 0, alerts: [], liveSkipped: 0, sportPnlSkipped: 0, sportPnlUnknown: 0, walletsEvaluated: 0 },
+    poly:  { scanned: 0, sent: 0, alerts: [], liveSkipped: 0, sportPnlSkipped: 0, sportPnlUnknown: 0, walletsEvaluated: 0, specialistWallets: 0, specSent: 0 },
     line:  { scanned: 0, sent: 0, alerts: [] },
     sharp: { scanned: 0, sent: 0, alerts: [] },
   };
@@ -420,6 +422,27 @@ module.exports = async function handler(req, res) {
       if (!walletMap[w]) { walletMap[w] = { wallet: w, name: t.userName || t.pseudonym, categories: [] }; walletList.push(walletMap[w]); }
       walletMap[w].categories.push({ category: 'SPORTS', rank: t.rank, pnl: parseFloat(t.pnl) });
     });
+
+    /* POLY SPECIALIST roster merged in alongside the leaderboard whales.
+       Two populations, deliberately kept distinguishable: WHALE wallets are selected by
+       all-time PnL across every market Polymarket runs, SPECIALIST wallets by demonstrated
+       profit in the specific sport they are betting. They are scanned together (one pass,
+       no extra trade fetches for overlaps) but TAGGED separately, because the existing
+       Poly record — 27-11 over 38 plays — is the only validated evidence in this system
+       and blending an untested cohort into it would destroy the ability to tell which
+       population is working. */
+    const rosterEntries = await discover.getRoster(null);
+    const specialistMap = {};
+    rosterEntries.forEach(e => {
+      specialistMap[e.wallet] = specialistMap[e.wallet] || { sports: {}, name: e.name };
+      specialistMap[e.wallet].sports[e.sport] = e;
+      if (!walletMap[e.wallet]) {
+        walletMap[e.wallet] = { wallet: e.wallet, name: e.name || e.wallet.slice(0, 6), categories: [] };
+        walletList.push(walletMap[e.wallet]);
+      }
+      walletMap[e.wallet].categories.push({ category: 'SPECIALIST:' + e.sport, rank: null, pnl: e.pnl });
+    });
+    results.poly.specialistWallets = Object.keys(specialistMap).length;
 
     const rawTrades = await fetchWalletTrades(walletList, cutoff);
 
@@ -544,7 +567,14 @@ module.exports = async function handler(req, res) {
     });
 
     const polyAlerts = gated.map(({ wallet, usd, sport, t, traderInfo, gate }) => ({
-      type:       'POLY',
+      /* WHALE if the wallet earned its place on the leaderboard; SPECIALIST only if it
+         got here purely through discovery. Overlap resolves to WHALE so the validated
+         record keeps its meaning and the new cohort's record stays clean. */
+      type:       (specialistMap[wallet] && specialistMap[wallet].sports[sport]
+                   && !(traderInfo.categories || []).some(c => c.category === 'OVERALL' || c.category === 'SPORTS'))
+                  ? 'SPEC' : 'POLY',
+      specialistRecord: specialistMap[wallet] && specialistMap[wallet].sports[sport]
+                        ? specialistMap[wallet].sports[sport].reason : null,
       wallet,
       traderName: t.name || t.pseudonym || traderInfo.name || wallet.slice(0,6)+'...'+wallet.slice(-4),
       profileImage: t.profileImageOptimized || t.profileImage || null,
@@ -569,13 +599,17 @@ module.exports = async function handler(req, res) {
       const body     = [
         `$${usd} BUY [${alert.sport}] — ${alert.traderName}`,
         rankInfo ? `Rank: ${rankInfo}` : null,
+        // Specialists earned their place on an in-sport record — lead with it.
+        alert.specialistRecord ? `Specialist: ${alert.specialistRecord}` : null,
         alert.sportRecord ? `Record: ${alert.sportRecord}` : null,
         `Market: ${(alert.title || '').slice(0, 80)}`,
         `Side: ${alert.outcome || '—'} @ ${price}¢`,
       ].filter(Boolean).join('\n');
 
-      const r = await sendNtfy(topic, `⚡ $${usd} ${alert.sport} Smart Money`, body);
-      if (r.ok) results.poly.sent++;   // claim already recorded above
+      // Title names the population so the phone tells you which cohort fired at a glance.
+      const tag = alert.type === 'SPEC' ? 'Specialist' : 'Whale';
+      const r = await sendNtfy(topic, `⚡ $${usd} ${alert.sport} Poly ${tag}`, body);
+      if (r.ok) { results.poly.sent++; if (alert.type === 'SPEC') results.poly.specSent++; }
       results.poly.alerts.push({ title: alert.title, usd: Math.round(alert.usdValue), result: r });
       await storeAlert(alert);
       if (polyAlerts.length > 1) await new Promise(r => setTimeout(r, 300));
@@ -697,7 +731,8 @@ module.exports = async function handler(req, res) {
       results: {
         poly:  { scanned: results.poly.scanned,  sent: results.poly.sent,  alerts: results.poly.alerts, liveSkipped: results.poly.liveSkipped,
                  sportPnlSkipped: results.poly.sportPnlSkipped, sportPnlUnknown: results.poly.sportPnlUnknown,
-                 walletsEvaluated: results.poly.walletsEvaluated },
+                 walletsEvaluated: results.poly.walletsEvaluated,
+                 specialistWallets: results.poly.specialistWallets, specSent: results.poly.specSent },
         line:  { scanned: results.line.scanned,  sent: results.line.sent,  alerts: results.line.alerts },
         sharp: { scanned: results.sharp.scanned, sent: results.sharp.sent, alerts: results.sharp.alerts },
       },
