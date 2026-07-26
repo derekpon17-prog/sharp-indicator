@@ -12,7 +12,56 @@
 
 const DATA_API    = 'https://data-api.polymarket.com';
 const SITE_URL    = 'https://sharp-indicator-a34j.vercel.app';
-const sentThisSession = new Set(); // persists across warm invocations
+const sentThisSession = new Set(); // fast in-process check; survives WARM invocations only
+
+/* ── DURABLE ALERT DEDUP (bugfix 2026-07-26) ──────────────────────────
+   sentThisSession is a module-level Set, so it is wiped on every COLD start. Vercel
+   recycles instances routinely between 15-minute cron runs, which meant the same alert
+   re-pushed to ntfy on each new instance — observed live: three consecutive invocations
+   landed on three different instances (x-vercel-id differed) and all three re-sent the
+   identical five KC/DET pushes. Over a 20-hour window that is dozens of duplicate
+   notifications for a single play, and it is the larger half of the "too many
+   notifications" problem — bigger than the live-play leak.
+
+   Fix: claim each alert in KV with SET NX before sending, exactly as odds.js already
+   does for mlv:seen. First claim wins; every later instance sees the key and skips.
+   On KV failure we fall back to in-memory rather than going silent, because a total
+   notification blackout is a worse failure than an occasional duplicate — and
+   dedupSource in the debug payload makes the degraded mode visible. */
+const KV_ON = !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+const dedupDiag = { source: KV_ON ? 'kv' : 'memory', kvErrors: 0, kvSkips: 0 };
+
+async function upstashPost(body) {
+  const url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
+  if (!url || !token) return { ok: false, result: null };
+  try {
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!r.ok) return { ok: false, result: null };
+    const d = await r.json();
+    return { ok: true, result: d.result ?? null };
+  } catch { return { ok: false, result: null }; }
+}
+
+// Returns true if THIS invocation may send the alert. 48h TTL comfortably outstrips the
+// 20h scan window, so an alert cannot re-fire as it ages out.
+async function claimAlert(key) {
+  if (sentThisSession.has(key)) return false;
+  if (KV_ON) {
+    const res = await upstashPost(['SET', 'ntfy:sent:' + key, '1', 'NX', 'EX', '172800']);
+    if (res.ok) {
+      if (res.result !== 'OK') { dedupDiag.kvSkips++; return false; } // another run already claimed it
+    } else {
+      dedupDiag.kvErrors++;
+      dedupDiag.source = 'memory-fallback';
+    }
+  }
+  sentThisSession.add(key);
+  return true;
+}
 
 /* ─── SPORT WHITELIST ─────────────────────────────────
    Restricted 2026-07-24 per directive to: MLB, NFL, NHL, NBA, WNBA, NCAAF,
@@ -456,7 +505,7 @@ module.exports = async function handler(req, res) {
     // Send Poly alerts
     for (const alert of polyAlerts) {
       const sessionKey = `poly:${alert.transactionHash || alert.wallet + alert.title}`;
-      if (sentThisSession.has(sessionKey)) continue;
+      if (!(await claimAlert(sessionKey))) continue;   // durable dedup — survives cold starts
 
       const usd      = Math.round(alert.usdValue).toLocaleString();
       const price    = (parseFloat(alert.price || 0) * 100).toFixed(1);
@@ -469,7 +518,7 @@ module.exports = async function handler(req, res) {
       ].filter(Boolean).join('\n');
 
       const r = await sendNtfy(topic, `⚡ $${usd} ${alert.sport} Smart Money`, body);
-      if (r.ok) { sentThisSession.add(sessionKey); results.poly.sent++; }
+      if (r.ok) results.poly.sent++;   // claim already recorded above
       results.poly.alerts.push({ title: alert.title, usd: Math.round(alert.usdValue), result: r });
       await storeAlert(alert);
       if (polyAlerts.length > 1) await new Promise(r => setTimeout(r, 300));
@@ -481,7 +530,7 @@ module.exports = async function handler(req, res) {
 
     for (const play of linePlays) {
       const sessionKey = `line:${play.id}:${play.sharpSide}`;
-      if (sentThisSession.has(sessionKey)) continue;
+      if (!(await claimAlert(sessionKey))) continue;   // durable dedup — survives cold starts
 
       const si   = parseInt(play.siScore || 0);
       const gap  = parseFloat(play.gapPP || 0).toFixed(1);
@@ -501,7 +550,7 @@ module.exports = async function handler(req, res) {
 
       const priority = si >= 80 ? 'urgent' : 'high';
       const r = await sendNtfy(topic, title, body, priority);
-      if (r.ok) { sentThisSession.add(sessionKey); results.line.sent++; }
+      if (r.ok) results.line.sent++;
       results.line.alerts.push({ game: `${play.away} vs ${play.home}`, si, side: play.sharpSide, result: r });
 
       // Auto-track: store as line play
@@ -539,7 +588,7 @@ module.exports = async function handler(req, res) {
       if (combined < 70) continue;
 
       const sessionKey = `sharp:${play.id}:${play.sharpSide}`;
-      if (sentThisSession.has(sessionKey)) continue;
+      if (!(await claimAlert(sessionKey))) continue;   // durable dedup — survives cold starts
 
       results.sharp.scanned++;
 
@@ -556,7 +605,7 @@ module.exports = async function handler(req, res) {
       ].join('\n');
 
       const r = await sendNtfy(topic, title, body, 'urgent');
-      if (r.ok) { sentThisSession.add(sessionKey); results.sharp.sent++; }
+      if (r.ok) results.sharp.sent++;
       results.sharp.alerts.push({
         game: `${play.away} vs ${play.home}`, combined,
         lineSI: play.siScore, polyScore: ps, result: r
@@ -595,6 +644,7 @@ module.exports = async function handler(req, res) {
       },
       debug: {
         lbLimitUsed: lbDiag.limitUsed,
+        dedup:       { source: dedupDiag.source, kvSkips: dedupDiag.kvSkips, kvErrors: dedupDiag.kvErrors },
         tradeDepth:  { pagesFetched: trDiag.pages, offsetSupported: trDiag.offsetSupported,
                        truncatedWallets: trDiag.truncated },
         lbCoverage:  { overall: overallLB.length, sports: sportsLB.length, profitable: walletList.length },
