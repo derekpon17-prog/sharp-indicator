@@ -157,7 +157,13 @@ function resolvePnlField(positions) {
    both, and expose real sample rows so the correct one is decidable from one call.
    PNL_MODE selects which drives the gate; 'net' is the default because a metric that can
    never produce a loss cannot gate anything. */
-const PNL_MODE = 'net';   // 'net' = realizedPnl - totalBought | 'raw' = realizedPnl
+/* CORRECTED after reading real rows: `totalBought` is a SHARE COUNT, not a dollar cost.
+   Row 1 of live data: 383,004.69 shares at avgPrice 0.36633 = $140,297 cost; sold at $1
+   = $383,005 proceeds; profit $242,708. Reported realizedPnl: $242,697 — a 0.004% match.
+   So realizedPnl IS net profit, correctly signed, and subtracting totalBought was
+   subtracting a share count from dollars, which flipped all 800 positions to losses and
+   turned the gate from inert into actively blocking everything. */
+const PNL_MODE = 'raw';   // realizedPnl is already net profit
 
 function positionPnl(p, pnlField, mode) {
   const gross = parseFloat(pnlField ? p[pnlField] : undefined);
@@ -193,6 +199,24 @@ function bucket(positions) {
   compare.raw = Math.round(compare.raw * 100) / 100;
   compare.net = Math.round(compare.net * 100) / 100;
 
+  /* SAMPLE BIAS DETECTION.
+     Live rows arrive in DESCENDING realizedPnl order (242,697 -> 224,114 -> 208,139), so
+     fetching the first N positions returns the N biggest WINNERS of possibly thousands.
+     Every wallet then reads as flawless and per-sport PnL is meaningless. Two independent
+     tells: a monotonically non-increasing PnL sequence, and zero losses over a large
+     sample. When either fires the record is not evidence and must not gate anything. */
+  let sampleBiased = false, biasReason = null;
+  const vals = positions.map(p => positionPnl(p, pnlField, PNL_MODE));
+  if (vals.length >= 20) {
+    let descending = true;
+    for (let i = 1; i < vals.length; i++) if (vals[i] > vals[i - 1] + 1e-6) { descending = false; break; }
+    if (descending) { sampleBiased = true; biasReason = 'results sorted by PnL — sample is top-N winners, not representative'; }
+  }
+  const losses = PNL_MODE === 'raw' ? compare.rawLosses : compare.netLosses;
+  if (!sampleBiased && positions.length >= 50 && losses === 0) {
+    sampleBiased = true; biasReason = 'zero losses over ' + positions.length + ' positions — sample cannot be representative';
+  }
+
   positions.forEach(p => {
     const pnl = positionPnl(p, pnlField, PNL_MODE);
     total += pnl;
@@ -213,7 +237,7 @@ function bucket(positions) {
 
   return { bySport, totalPnl: Math.round(total * 100) / 100, positions: positions.length,
            unmapped, via, pnlField, pnlMode: PNL_MODE, sampleKeys, sampleRows,
-           pnlCompare: compare };
+           pnlCompare: compare, sampleBiased, biasReason };
 }
 
 /* PROVIDER INTERFACE. Returns per-sport PnL for one wallet, KV-cached daily. */
@@ -240,10 +264,9 @@ async function getTraderStats(wallet, opts) {
     limitUsed: diag.limitUsed, offsetSupported: diag.offsetSupported,
     ...b,
     // A resolved pnlField with an all-zero total means the schema changed again.
-    /* A wallet with hundreds of graded positions and ZERO losses means the metric is
-       measuring proceeds, not profit. Flag it instead of reporting a flawless record. */
-    pnlHealthy: !!(b.pnlField && b.positions > 0 &&
-                   !(b.pnlCompare && b.pnlCompare.netLosses === 0 && b.positions >= 50)),
+    pnlHealthy: !!(b.pnlField && b.positions > 0 && !b.sampleBiased),
+    sampleBiased: b.sampleBiased,
+    biasReason: b.biasReason,
   };
   if (ok) await kv(['SET', key, JSON.stringify(out), 'EX', String(CACHE_TTL)]);
   return out;
@@ -256,6 +279,11 @@ const MIN_SAMPLE = 20;
 function qualifiesForSport(stats, sport, minSample) {
   const min = minSample === undefined ? MIN_SAMPLE : minSample;
   if (!stats || !stats.ok) return { pass: true, reason: 'stats unavailable — failing open', known: false };
+  /* A biased sample is worse than no sample: it looks authoritative and is wrong in a
+     consistent direction. Refuse to gate on it rather than block or pass on noise. */
+  if (stats.sampleBiased) {
+    return { pass: true, known: false, reason: 'sample not representative (' + (stats.biasReason || 'biased') + ') — failing open' };
+  }
   const b = stats.bySport && stats.bySport[sport];
   if (!b) return { pass: true, reason: 'no closed positions in ' + sport + ' — failing open', known: false };
   if (b.positions < min) {
