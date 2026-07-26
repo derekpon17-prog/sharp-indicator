@@ -146,17 +146,55 @@ function resolvePnlField(positions) {
   return null;
 }
 
+/* PnL INTERPRETATION.
+   `realizedPnl` resolved correctly but produced a 100% win rate with zero losses across
+   800 positions in every sport — impossible, and worse, it made the gate look healthy
+   while passing everyone. That field is evidently gross proceeds, not net profit: a
+   losing position returns 0 rather than a negative number, so nothing is ever counted as
+   a loss and every wallet reads as flawless.
+   `totalBought` sits alongside it in the payload, so net is most likely
+   proceeds - cost. Rather than guess a third time, compute BOTH interpretations, report
+   both, and expose real sample rows so the correct one is decidable from one call.
+   PNL_MODE selects which drives the gate; 'net' is the default because a metric that can
+   never produce a loss cannot gate anything. */
+const PNL_MODE = 'net';   // 'net' = realizedPnl - totalBought | 'raw' = realizedPnl
+
+function positionPnl(p, pnlField, mode) {
+  const gross = parseFloat(pnlField ? p[pnlField] : undefined);
+  const cost  = parseFloat(p && p.totalBought);
+  const g = isFinite(gross) ? gross : 0;
+  const c = isFinite(cost) ? cost : 0;
+  return mode === 'raw' ? g : (g - c);
+}
+
 function bucket(positions) {
   const bySport = {};
   let total = 0, unmapped = 0;
   const via = { slug: 0, title: 0, none: 0 };
   const pnlField = resolvePnlField(positions);
   const sampleKeys = positions.length ? Object.keys(positions[0]).slice(0, 40) : [];
+  // Real rows, trimmed of bulky/identifying fields, so field SEMANTICS are inspectable
+  // rather than inferred. This is the diagnostic that ends the guessing.
+  const sampleRows = positions.slice(0, 3).map(p => {
+    const r = {};
+    ['avgPrice', 'totalBought', 'realizedPnl', 'curPrice', 'outcome', 'slug', 'endDate']
+      .forEach(k => { if (p[k] !== undefined) r[k] = p[k]; });
+    return r;
+  });
+  // Both interpretations, so the choice is evidence-based.
+  const compare = { raw: 0, net: 0, rawWins: 0, netWins: 0, rawLosses: 0, netLosses: 0 };
+  positions.forEach(p => {
+    const rv = positionPnl(p, pnlField, 'raw');
+    const nv = positionPnl(p, pnlField, 'net');
+    compare.raw += rv; compare.net += nv;
+    if (rv > 0) compare.rawWins++; else if (rv < 0) compare.rawLosses++;
+    if (nv > 0) compare.netWins++; else if (nv < 0) compare.netLosses++;
+  });
+  compare.raw = Math.round(compare.raw * 100) / 100;
+  compare.net = Math.round(compare.net * 100) / 100;
 
   positions.forEach(p => {
-    const raw = pnlField ? p[pnlField] : undefined;
-    const v = parseFloat(raw);
-    const pnl = isFinite(v) ? v : 0;
+    const pnl = positionPnl(p, pnlField, PNL_MODE);
     total += pnl;
     const { sport, via: how } = sportOf(p);
     via[how] = (via[how] || 0) + 1;
@@ -174,7 +212,8 @@ function bucket(positions) {
   });
 
   return { bySport, totalPnl: Math.round(total * 100) / 100, positions: positions.length,
-           unmapped, via, pnlField, sampleKeys };
+           unmapped, via, pnlField, pnlMode: PNL_MODE, sampleKeys, sampleRows,
+           pnlCompare: compare };
 }
 
 /* PROVIDER INTERFACE. Returns per-sport PnL for one wallet, KV-cached daily. */
@@ -201,7 +240,10 @@ async function getTraderStats(wallet, opts) {
     limitUsed: diag.limitUsed, offsetSupported: diag.offsetSupported,
     ...b,
     // A resolved pnlField with an all-zero total means the schema changed again.
-    pnlHealthy: !!(b.pnlField && b.positions > 0),
+    /* A wallet with hundreds of graded positions and ZERO losses means the metric is
+       measuring proceeds, not profit. Flag it instead of reporting a flawless record. */
+    pnlHealthy: !!(b.pnlField && b.positions > 0 &&
+                   !(b.pnlCompare && b.pnlCompare.netLosses === 0 && b.positions >= 50)),
   };
   if (ok) await kv(['SET', key, JSON.stringify(out), 'EX', String(CACHE_TTL)]);
   return out;
