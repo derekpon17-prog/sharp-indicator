@@ -48,6 +48,8 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .rep-why{font-size:11.5px;color:var(--t3);line-height:1.55;margin-top:5px}
 .rep-why li{margin-left:14px}
 .rep-empty{font-size:12.5px;color:var(--t4);padding:10px 0}
+.rep-row.rep-done{opacity:.45}
+.rep-row.rep-done .rep-price{color:var(--t3)}
 @media(max-width:700px){.rep-row{flex-direction:column;gap:6px}.rep-tier{flex:none;align-self:flex-start}}
 .ntab.ntab-action:hover{color:var(--gold)}
 .ntab{display:flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;border:none;background:transparent;color:var(--t3);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
@@ -1002,6 +1004,7 @@ async function fetchSharpLines(){
     // Schedule INCLUDES games already underway; sharpLines does not (API filters to
     // ct>now), which is precisely why a live play could never be identified here before.
     gameSchedule=Array.isArray(d.schedule)?d.schedule:gameSchedule;
+    todayReport=Array.isArray(d.todayReport)?d.todayReport:todayReport;
     captureVelocityShadow(sharpLines);
     return sharpLines;
   }catch(e){console.warn('Sharp lines:',e.message);sharpLines=[];return[];}
@@ -1275,25 +1278,42 @@ function captureVelocityShadow(lines){
    agree, WATCHLIST when a game is merely notable relative to today's distribution. */
 var REPORT_MAX=6;
 function fmtAm(p){return (p>0?'+':'')+p;}
+/* Reads the SERVER-PERSISTED day report when available. Previously this filtered the
+   live board, so a signal vanished the moment its game started — on a Sunday with 1:05
+   first pitches the whole morning's work was invisible by mid-afternoon. The stored
+   report keeps the day's calls, marked started/pending, so the record survives the slate.
+   Falls back to the live board if the API predates the store. */
+var todayReport=[];
 function buildReport(){
   var now=Date.now();
+  if(todayReport&&todayReport.length){
+    return todayReport.slice().sort(function(a,b){
+      if(a.started!==b.started)return a.started?1:-1;      // actionable first
+      return (b.peakScore||b.score||0)-(a.peakScore||a.score||0);
+    }).slice(0,REPORT_MAX).map(function(r){
+      return {away:r.away,home:r.home,commenceTime:r.commenceTime,started:r.started,
+              indication:{tier:r.tier,label:r.label,score:r.peakScore||r.score,
+                          side:r.side,bestBook:r.bestBook,reasons:r.reasons||[]}};
+    });
+  }
   return (sharpLines||[]).filter(function(g){
     var ind=g.indication;
     if(!ind||ind.tier==='N')return false;
-    if(g.commenceTime&&new Date(g.commenceTime).getTime()<=now)return false; // no live plays
+    if(g.commenceTime&&new Date(g.commenceTime).getTime()<=now)return false;
     return true;
   }).sort(function(a,b){return (b.indication.score||0)-(a.indication.score||0);})
-    .slice(0,REPORT_MAX);
+    .slice(0,REPORT_MAX).map(function(g){return {away:g.away,home:g.home,
+      commenceTime:g.commenceTime,started:false,indication:g.indication};});
 }
 function renderReport(){
   var wrap=el('report-wrap');if(!wrap)return;
   var rows=buildReport();
-  var tiers={A:0,B:0,C:0};
-  rows.forEach(function(r){tiers[r.indication.tier]=(tiers[r.indication.tier]||0)+1;});
+  var tiers={A:0,B:0,C:0},pending=0;
+  rows.forEach(function(r){tiers[r.indication.tier]=(tiers[r.indication.tier]||0)+1;if(!r.started)pending++;});
   var head='<div class="rep"><div class="rep-hd"><div>'
     +'<div class="rep-ttl">Today\u2019s Sharp Report</div>'
     +'<div class="rep-sub">'+(rows.length
-        ?tiers.A+' convergence \u00b7 '+tiers.B+' signal \u00b7 '+tiers.C+' watchlist'
+        ?tiers.A+' convergence \u00b7 '+tiers.B+' signal \u00b7 '+tiers.C+' watchlist \u00b7 '+pending+' still pregame'
         :'No qualifying reads on the board')
       +' \u00b7 shadow scoring, not yet validated</div>'
     +'</div></div>';
@@ -1303,7 +1323,7 @@ function renderReport(){
   }
   wrap.innerHTML=head+rows.map(function(g){
     var i=g.indication,bb=i.bestBook;
-    return '<div class="rep-row">'
+    return '<div class="rep-row'+(g.started?' rep-done':'')+'">'
       +'<div class="rep-tier t'+i.tier+'">'+i.label+'<div class="rep-score">'+(i.score||0)+'</div></div>'
       +'<div class="rep-body">'
       +'<div class="rep-play">'+esc((g.away||'')+' @ '+(g.home||''))+'</div>'
@@ -1312,7 +1332,7 @@ function renderReport(){
           : '<span class="bk">side not resolved \u2014 see reasons</span>')
         +'</div>'
       +'<ul class="rep-why">'+(i.reasons||[]).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>'
-      +(g.commenceTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:5px">'+gdt(g.commenceTime)+'</div>':'')
+      +(g.commenceTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:5px">'+gdt(g.commenceTime)+(g.started?' \u00b7 STARTED':'')+'</div>':'')
       +'</div></div>';
   }).join('')+'</div>';
   wrap.style.display='';
