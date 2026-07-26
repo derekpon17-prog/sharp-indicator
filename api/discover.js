@@ -39,6 +39,18 @@ const MIN_SIGHTINGS  = 3;     // repeat appearances before we spend an evaluatio
 const EVALS_PER_RUN  = 5;     // cap work per invocation; Vercel timeout is the constraint
 const MIN_SAMPLE     = 20;    // graded markets in-sport before a verdict means anything
 const MAX_HEDGE_PCT  = 60;    // above this the wallet is market-making, not handicapping
+/* PRICE-SELECTION GUARDS (provisional — calibrate at the Aug 1 review).
+   Discovery's first roster surfaced `comon119` at a 99.1% win rate over 109 markets. That
+   is not skill, it is buying near-certainties at 0.97-0.99, where the price already
+   guarantees the win rate. Such a wallet passes every other test — profitable, big sample,
+   1% hedged — while carrying no information about which side is right, and following it
+   means 1-3% returns against catastrophic tail risk.
+   Two guards. A hard cap on average entry price catches favourite-scalping outright. And
+   the real measure: EDGE OVER IMPLIED. The price is the market's probability, so beating
+   it is the only thing that constitutes a read. Counterintuitively this ranks a 54% wallet
+   above a 99% one — which is correct, and is why the guard is needed. */
+const MAX_AVG_ENTRY  = 0.80;  // above this the wallet is buying favourites, not handicapping
+const MIN_EDGE_PP    = 2.0;   // win rate must beat its own average entry price by this much
 const CAND_TTL       = 604800;   // 7d — candidates decay if they stop appearing
 const ROSTER_TTL     = 2592000;  // 30d — roster is re-confirmed by ongoing evaluation
 
@@ -139,10 +151,24 @@ async function evaluateCandidate(c) {
     return { verdict: 'reject', reason: c.sport + ' $' + Math.round(b.pnl).toLocaleString()
              + ' over ' + b.positions + ' markets', sample: b.positions, pnl: b.pnl, hedgePct };
   }
+  // Price selection. Carried on every verdict so the numbers are visible even when passing.
+  const px = { avgEntry: b.avgEntry, impliedWinRate: b.impliedWinRate, edgePP: b.edgePP };
+  const hasPx = (v) => typeof v === 'number' && isFinite(v);
+  if (hasPx(b.avgEntry) && b.avgEntry > MAX_AVG_ENTRY) {
+    return { verdict: 'reject', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct, ...px,
+      reason: 'avg entry ' + b.avgEntry + ' — buying favourites, not handicapping'
+              + (hasPx(b.winRate) ? ' (' + b.winRate + '% wins vs ' + b.impliedWinRate + '% implied)' : '') };
+  }
+  if (hasPx(b.edgePP) && b.edgePP < MIN_EDGE_PP) {
+    return { verdict: 'reject', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct, ...px,
+      reason: 'no edge over price — ' + b.winRate + '% wins vs ' + b.impliedWinRate
+              + '% implied (' + (b.edgePP >= 0 ? '+' : '') + b.edgePP + 'pp)' };
+  }
   return {
-    verdict: 'promote', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct,
+    verdict: 'promote', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct, ...px,
     reason: c.sport + ' +$' + Math.round(b.pnl).toLocaleString() + ' over ' + b.positions
-            + ' markets' + (b.winRate !== null ? ' (' + b.winRate + '%)' : ''),
+            + ' markets' + (hasPx(b.winRate) ? ' (' + b.winRate + '%' +
+              (hasPx(b.edgePP) ? ', ' + (b.edgePP >= 0 ? '+' : '') + b.edgePP + 'pp vs price' : '') + ')' : ''),
   };
 }
 
@@ -181,6 +207,7 @@ async function runDiscovery(opts) {
       const prev = roster[rk];
       roster[rk] = { wallet: c.wallet, sport: c.sport, name: c.name || null,
                      pnl: v.pnl, sample: v.sample, winRate: v.winRate, hedgePct: v.hedgePct,
+                     avgEntry: v.avgEntry, impliedWinRate: v.impliedWinRate, edgePP: v.edgePP,
                      reason: v.reason, addedAt: prev ? prev.addedAt : now, confirmedAt: now };
     } else if (v.verdict === 'reject' && roster[rk]) {
       delete roster[rk];   // demote — the roster must be able to shrink
@@ -196,7 +223,8 @@ async function runDiscovery(opts) {
     const e = roster[k];
     (bySport[e.sport] = bySport[e.sport] || []).push(e);
   });
-  Object.keys(bySport).forEach(s => bySport[s].sort((a, b) => (b.pnl || 0) - (a.pnl || 0)));
+  // Ranked by EDGE, not profit: raw PnL rewards bankroll size, edge rewards being right.
+  Object.keys(bySport).forEach(s => bySport[s].sort((a, b) => (b.edgePP || 0) - (a.edgePP || 0)));
 
   return {
     ok: h.ok, harvestError: h.error,
@@ -242,3 +270,5 @@ module.exports.evaluateCandidate = evaluateCandidate;
 module.exports.sportOfTrade = sportOfTrade;
 module.exports.MIN_SIGHTINGS = MIN_SIGHTINGS;
 module.exports.MIN_SAMPLE = MIN_SAMPLE;
+module.exports.MAX_AVG_ENTRY = MAX_AVG_ENTRY;
+module.exports.MIN_EDGE_PP = MIN_EDGE_PP;
