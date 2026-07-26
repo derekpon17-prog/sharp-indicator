@@ -202,6 +202,7 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .flag-card.f-line{border-top-color:var(--blue)}
 .flag-card.f-ss{border-top-color:var(--green)}
 .flag-card.f-picks{border-top-color:var(--purple)}
+.flag-card.f-spec{border-top-color:#40B4FF}
 .flag-card.f-mlv{border-top-color:var(--purple);border-style:solid;background:linear-gradient(180deg,rgba(155,109,255,.05),var(--s1))}
 .minisrc.on-vel{background:rgba(155,109,255,.16);color:var(--purple)}
 .fc-name{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
@@ -481,7 +482,8 @@ select.finput option{background:var(--s2)}
       <div style="font-size:12px;color:var(--t3);margin-bottom:14px">Which flags are earning their spot &mdash; updates as plays grade</div>
     </div>
     <div class="flag-grid">
-      <div class="flag-card f-poly"><div class="fc-name">Poly Signal</div><div class="fc-rec" id="fs-sig">&mdash;</div><div class="fc-sub" id="fs-sig-sub">no graded plays</div></div>
+      <div class="flag-card f-poly"><div class="fc-name">Poly Whale</div><div class="fc-rec" id="fs-sig">&mdash;</div><div class="fc-sub" id="fs-sig-sub">no graded plays</div></div>
+      <div class="flag-card f-spec"><div class="fc-name">Poly Specialist <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(64,180,255,.15);color:#40B4FF;margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-spec">&mdash;</div><div class="fc-sub" id="fs-spec-sub">no graded plays</div></div>
       <div class="flag-card f-line"><div class="fc-name">Sharp Line</div><div class="fc-rec" id="fs-line">&mdash;</div><div class="fc-sub" id="fs-line-sub">no graded plays</div></div>
       <div class="flag-card f-ss"><div class="fc-name">Sharp Score</div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div></div>
       <div class="flag-card f-picks"><div class="fc-name">My Picks</div><div class="fc-rec" id="fs-picks">&mdash;</div><div class="fc-sub" id="fs-picks-sub">no graded picks</div></div>
@@ -490,7 +492,7 @@ select.finput option{background:var(--s2)}
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <div style="margin-bottom:28px">
       <div class="row-hdr" style="margin-bottom:12px">
-        <div class="row-ttl" style="font-size:16px"><i class="ti ti-bolt" style="color:var(--gold)"></i>Poly Signal Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at 60+ score</span></div>
+        <div class="row-ttl" style="font-size:16px"><i class="ti ti-bolt" style="color:var(--gold)"></i>Poly Whale Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">leaderboard wallets &middot; auto-tracked at 60+ score</span></div>
         <div id="sig-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
       </div>
       <div class="perf" style="margin-bottom:16px">
@@ -502,6 +504,25 @@ select.finput option{background:var(--s2)}
       <div id="sig-empty" class="empty" style="padding:28px">
         <div class="empty-ico">&#x26A1;</div><h3>No auto-tracked plays yet</h3>
         <p>Plays scoring 60+ land here automatically and grade themselves after the game</p>
+      </div>
+    </div>
+    <!-- POLY SPECIALIST — discovered wallets, kept on a SEPARATE record. The whale record
+         (27-11 over 38 plays) is the only validated evidence in this system; blending an
+         untested cohort into it would make both unreadable. -->
+    <div style="margin-bottom:28px">
+      <div class="row-hdr" style="margin-bottom:12px">
+        <div class="row-ttl" style="font-size:16px"><i class="ti ti-target-arrow" style="color:#40B4FF"></i>Poly Specialist Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">wallets profitable in this sport &middot; new, no record yet</span></div>
+        <div id="spec-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
+      </div>
+      <div class="perf" style="margin-bottom:16px">
+        <div class="pc"><div class="pc-val" id="spec-rec">0&ndash;0</div><div class="pc-lbl">Record</div></div>
+        <div class="pc"><div class="pc-val" id="spec-wr" style="color:var(--t4)">&mdash;</div><div class="pc-lbl">Win Rate</div></div>
+        <div class="pc"><div class="pc-val" id="spec-units" style="color:var(--t4)">0.00u</div><div class="pc-lbl">Unit P&amp;L</div></div>
+      </div>
+      <div id="spec-plays" style="display:flex;flex-direction:column;gap:8px"></div>
+      <div id="spec-empty" class="empty" style="padding:24px">
+        <div class="empty-ico"><i class="ti ti-target-arrow"></i></div><h3>No specialist plays yet</h3>
+        <p>Wallets found in the live feed and proven net-positive in a sport over 20+ graded markets land here &mdash; separate from the whale record so each can be judged on its own</p>
       </div>
     </div>
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
@@ -692,6 +713,7 @@ const el=id=>document.getElementById(id);
 let alerts=ls('pm:alert-log',[]),trades=ls('pm:trades',[]),wallets=ls('pm:traders',[]),sigPlays=ls('pm:sig-plays',[]);
 let linePlays=ls('pm:line-plays',[]);
 let sharpScorePlays=ls('pm:ss-plays',[]);
+let specPlays=ls('pm:spec-plays',[]); // POLY SPECIALIST — discovered wallets, own record
 let mlvPlays=ls('pm:mlv-plays',[]); // ML Velocity SHADOW plays — validation only, never mixed into real records
 let sharpLines=[];
 const dismissed=new Set(ls('pm:dismissed',[]));
@@ -1218,11 +1240,18 @@ function autoTrackPlays(groups){
     const {score,bestRank,rawScore}=polyDisplayScore(g);
     if(score<POLY_AUTOTRACK_THRESHOLD)return; // flat threshold — matches Sharp Score display floor, no rank gating
     const key=(g.title||'')+'||'+(g.outcome||'');
-    if(sigPlays.some(p=>p.key===key))return;
-    sigPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title,g.eventSlug),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
+    /* Route by population. A group is SPECIALIST only if EVERY buy came from a discovered
+       wallet; any leaderboard participation makes it a whale play. Overlap resolves to
+       whale so the validated 38-play record keeps its meaning and the new cohort's record
+       stays clean. */
+    const isSpec=(g.buys||[]).length>0&&(g.buys||[]).every(function(b){return b.type==='SPEC';});
+    const store=isSpec?specPlays:sigPlays;
+    const storeKey=isSpec?'pm:spec-plays':'pm:sig-plays';
+    if(store.some(p=>p.key===key))return;
+    store.unshift({key,population:isSpec?'SPECIALIST':'WHALE',title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title,g.eventSlug),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
     changed=true;
   });
-  if(changed)ss('pm:sig-plays',sigPlays);
+  if(changed){ss('pm:sig-plays',sigPlays);ss('pm:spec-plays',specPlays);}
 }
 function renderTrending(){
   const trends=buildTrending();
@@ -1360,7 +1389,7 @@ function renderReport(){
 
 /* === THE BOARD — one canonical play per game, merged across sources === */
 var boardFilter='all',boardExpand=false;
-var trackExpand={sig:false,line:false,ss:false,picks:false,mlv:false};
+var trackExpand={sig:false,line:false,ss:false,picks:false,mlv:false,spec:false};
 var TRACK_CAP=8; // last 5-10 visible; rest behind Show all
 function toggleTrack(k){trackExpand[k]=!trackExpand[k];renderTracking();}
 function trkMoreBtn(k,total){
@@ -1816,7 +1845,7 @@ async function gradeFromESPN(){
     });
     if(changed)ss(key,plays);
   }
-  tryGrade(linePlays,'pm:line-plays');tryGrade(sharpScorePlays,'pm:ss-plays');tryGrade(sigPlays,'pm:sig-plays');tryGrade(mlvPlays,'pm:mlv-plays');
+  tryGrade(specPlays,'pm:spec-plays');tryGrade(linePlays,'pm:line-plays');tryGrade(sharpScorePlays,'pm:ss-plays');tryGrade(sigPlays,'pm:sig-plays');tryGrade(mlvPlays,'pm:mlv-plays');
   if(changed)renderTracking();
 }
 
@@ -1876,6 +1905,36 @@ function renderTracking(){
     }
   }
   fillFlagCard('fs-sig',sigStat,sigPlays.length);
+
+  /* ── POLY SPECIALIST PLAYS (separate record from whales, deliberately) ── */
+  var specStat=unitPnL(specPlays);
+  setStats('spec-rec','spec-wr','spec-units',specStat);
+  var srEl=el('spec-record');
+  if(srEl)srEl.textContent=specStat.W+'W-'+specStat.L+'L'+(specPlays.length?' on '+specPlays.length+' plays':'');
+  var scEl=el('spec-plays'),scEm=el('spec-empty');
+  if(scEl){
+    if(!specPlays.length){if(scEm)scEm.style.display='';scEl.innerHTML='';}
+    else{
+      if(scEm)scEm.style.display='none';
+      var specShow=trackExpand.spec?specPlays:specPlays.slice(0,TRACK_CAP);
+      scEl.innerHTML=specShow.map(function(p,i){
+        var sport=p.sport||'';
+        return '<div class="sig-play '+(p.status||'open').toLowerCase()+'" style="border-left:3px solid rgba(64,180,255,.5)">'
+          +'<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+          +'<div><span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(64,180,255,.15);color:#40B4FF">SPECIALIST</span>'
+          +'<span style="font-size:10px;font-family:var(--mono);color:var(--t3);margin-left:6px">'+(p.score||0)+'pts</span>'
+          +(sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'')+'</div>'
+          +'<span style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+timeAgo(p.loggedAt)+'</span>'
+          +'</div>'
+          +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+(p.title||'')+'</div>'
+          +'<div style="font-size:12px;color:var(--t3);margin-bottom:5px">Buying <strong style="color:var(--t1)">'+(p.outcome||'')+'</strong> \u00b7 '+(p.buyers||1)+' buyer'+(p.buyers>1?'s':'')+' \u00b7 '+fu(p.totalVol||0)+'</div>'
+          +(p.gameTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-bottom:5px">\u23F0 Game: '+gdt(p.gameTime)+'</div>':'')
+          +playBtns(specPlays,'pm:spec-plays',i,p)
+          +'</div>';
+      }).join('')+trkMoreBtn('spec',specPlays.length);
+    }
+  }
+  fillFlagCard('fs-spec',specStat,specPlays.length);
 
   /* ── SHARP LINE SIGNAL PLAYS ── */
   var lineStat=unitPnL(linePlays);
@@ -2644,7 +2703,7 @@ document.addEventListener('click',e=>{
   const atpBtn=e.target.closest('.atp-btn');
   if(atpBtn){
     const arr=atpBtn.dataset.arr,i=parseInt(atpBtn.dataset.i),st=atpBtn.dataset.st;
-    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:sharpScorePlays;
+    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:arr==='pm:spec-plays'?specPlays:sharpScorePlays;
     if(plays[i]){plays[i].status=st;plays[i].gradedAt=Date.now();ss(arr,plays);renderTracking();}
     return;
   }
@@ -2652,7 +2711,7 @@ document.addEventListener('click',e=>{
   const atpDel=e.target.closest('.atp-del');
   if(atpDel&&atpDel.dataset.arr){
     const arr=atpDel.dataset.arr,i=parseInt(atpDel.dataset.i);
-    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:sharpScorePlays;
+    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:arr==='pm:spec-plays'?specPlays:sharpScorePlays;
     plays.splice(i,1);ss(arr,plays);renderTracking();
     return;
   }
