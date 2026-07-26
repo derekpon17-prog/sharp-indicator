@@ -240,6 +240,27 @@ function bucket(rawPositions) {
     sampleBiased = true; biasReason = 'zero losses over ' + positions.length + ' positions — sample cannot be representative';
   }
 
+  /* ENTRY-PRICE AGGREGATION.
+     A 99.1% win rate over 109 markets is not handicapping — it is buying near-certainties
+     at 0.97-0.99, where ~97% of bets win by construction. The filter caught hedgers but
+     had nothing to say about price selection, so a favourite-scalper passed every test:
+     positive PnL, large sample, near-zero hedging, and zero information about which side
+     is right.
+     The honest measure is win rate against what the price ALREADY implied. Buying at 0.50
+     and winning 54% is a 4pp edge; buying at 0.98 and winning 99% is 1pp and inside noise.
+     Dollar-weighted across RAW legs, because a netted market carries only one leg's price. */
+  const entryBySport = {};
+  rawPositions.forEach(p => {
+    const { sport } = sportOf(p);
+    if (!sport) return;
+    const px = parseFloat(p && p.avgPrice);
+    const sh = parseFloat(p && p.totalBought);
+    if (!isFinite(px) || !isFinite(sh) || sh <= 0) return;
+    const e = entryBySport[sport] || (entryBySport[sport] = { cost: 0, shares: 0 });
+    e.cost += px * sh;
+    e.shares += sh;
+  });
+
   positions.forEach(p => {
     const pnl = p._netPnl;
     total += pnl;
@@ -256,6 +277,15 @@ function bucket(rawPositions) {
     b.pnl = Math.round(b.pnl * 100) / 100;
     const graded = b.wins + b.losses;
     b.winRate = graded ? Math.round((b.wins / graded) * 1000) / 10 : null;
+    const e = entryBySport[k];
+    if (e && e.shares > 0) {
+      b.avgEntry = Math.round((e.cost / e.shares) * 1000) / 1000;
+      b.impliedWinRate = Math.round(b.avgEntry * 1000) / 10;   // price IS the implied probability
+      // The number that matters: how much the wallet beat its own entry prices.
+      b.edgePP = b.winRate !== null ? Math.round((b.winRate - b.impliedWinRate) * 10) / 10 : null;
+    } else {
+      b.avgEntry = null; b.impliedWinRate = null; b.edgePP = null;
+    }
   });
 
   return { bySport, totalPnl: Math.round(total * 100) / 100, positions: positions.length,
