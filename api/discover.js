@@ -196,6 +196,14 @@ async function evaluateCandidate(c, opts) {
     return { verdict: 'pending', sample: b.positions, settled: b.settled, hedgePct, ...px,
       reason: 'ROI unavailable — stats predate current metrics, re-fetch required' };
   }
+  /* A FLAWLESS RECORD IS A DATA PROBLEM, NOT A TRADER.
+     Nobody resolves 100% of settled bets at fair prices. When it appears it means the
+     fetch was truncated and we are looking at the head of an ordering, not a history.
+     Observed: torta.tech at 36-for-36 with 74% ROI, promoted, alerting. */
+  if (hasPx(b.resolvedWinRate) && b.resolvedWinRate >= 100) {
+    return { verdict: 'unknown', sample: b.positions, settled: b.settled, hedgePct, ...px,
+      reason: '100% of ' + b.settled + ' settled bets won — truncated or unrepresentative sample' };
+  }
   if (b.roiPct < MIN_ROI_PCT) {
     return { verdict: 'reject', sample: b.positions, settled: b.settled, pnl: b.pnl,
       winRate: b.resolvedWinRate, hedgePct, ...px,
@@ -298,6 +306,20 @@ async function runDiscovery(opts) {
     const rk = c.wallet + '|' + c.sport;
     if (v.verdict === 'promote') {
       const prev = roster[rk];
+      /* SAMPLE COLLAPSE GUARD.
+         A roster entry re-scored on a fraction of its previous sample is a data-quality
+         event, not a performance change: 0x3dfb153c went from 425 settled bets at 14.5%
+         ROI to 45 at 80.8% within an hour, because rate limiting cut pagination to one
+         page. Re-scoring on the truncated set would overwrite good evidence with noise and
+         inflate every number. Keep the existing entry and retry next cycle. */
+      if (prev && prev.sample && v.sample && v.sample < prev.sample * 0.5) {
+        c.lastVerdict = 'unknown';
+        c.lastReason = 'sample collapsed ' + prev.sample + ' -> ' + v.sample + ' (likely truncated fetch)';
+        c.lastEval = 0;
+        evaluated.push({ wallet: c.wallet.slice(0, 10), sport: c.sport, verdict: 'unknown',
+          reason: c.lastReason, sample: v.sample, priorSample: prev.sample });
+        continue;
+      }
       roster[rk] = { wallet: c.wallet, sport: c.sport, name: c.name || null,
                      pnl: v.pnl, sample: v.sample, winRate: v.winRate, hedgePct: v.hedgePct,
                      avgEntry: v.avgEntry, impliedWinRate: v.impliedWinRate, edgePP: v.edgePP,
