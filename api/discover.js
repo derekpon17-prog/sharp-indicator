@@ -267,8 +267,19 @@ async function runDiscovery(opts) {
     .sort((a, b) => (b.totalUsd || 0) - (a.totalUsd || 0))
     .slice(0, limitEvals);
 
+  /* TIME BUDGET.
+     Each evaluation can cost up to MAX_PAGES sequential upstream fetches, so a forced run
+     over 25 wallets is ~400 calls in one request — past the Vercel timeout and into
+     rate-limit territory, which is what produced the wall of 'stats unavailable'. Stop
+     cleanly before that and let the next cycle continue; discovery is cumulative by
+     design, so a partial pass costs nothing but time. */
+  const BUDGET_MS = 20000;
+  const startedAt = Date.now();
+  let budgetHit = false;
+
   const evaluated = [];
   for (const c of queue) {
+    if (Date.now() - startedAt > BUDGET_MS) { budgetHit = true; break; }
     const v = await evaluateCandidate(c, { fresh: force });
     c.lastEval = now;
     c.lastVerdict = v.verdict;
@@ -282,8 +293,18 @@ async function runDiscovery(opts) {
                      roiPct: v.roiPct, staked: v.staked, pnlPerMarket: v.pnlPerMarket,
                      avgEntryByCount: v.avgEntryByCount, entrySkew: v.entrySkew,
                      reason: v.reason, addedAt: prev ? prev.addedAt : now, confirmedAt: now };
+    } else if (v.verdict === 'unknown') {
+      /* UNKNOWN IS NOT EVIDENCE.
+         'stats unavailable' means the upstream fetch failed — a rate limit, a timeout, a
+         bad gateway. It says nothing about the wallet. Demoting on it makes roster
+         membership a function of API availability rather than performance, and a forced
+         run that trips rate limits would wipe good wallets wholesale. Observed exactly
+         that: 11 of 25 evaluations came back unknown and took canoflanagan off the roster
+         for reasons that had nothing to do with its record. Leave the entry alone and
+         re-check next cycle. */
+      c.lastEval = 0;   // clear so it is retried promptly rather than waiting 24h
     } else if (roster[rk]) {
-      /* DEMOTE ON ANYTHING THAT IS NOT A PROMOTION.
+      /* DEMOTE ON ANY EVIDENCE-BASED NON-PROMOTION.
          Previously only an explicit 'reject' removed an entry, so a wallet that became
          UNVERIFIABLE — verdict 'pending' or 'unknown' — kept its old score and kept firing
          alerts on evidence the current rules can no longer confirm. Ten entries survived a
@@ -318,7 +339,10 @@ async function runDiscovery(opts) {
     readyToEvaluate: Object.keys(cands).filter(k => cands[k].sightings >= MIN_SIGHTINGS).length,
     evaluated,
     forced: force,
-    demoted: evaluated.filter(e => e.verdict !== 'promote').length,
+    budgetHit,
+    queued: queue.length,
+    demoted: evaluated.filter(e => e.verdict === 'reject' || e.verdict === 'pending').length,
+    unknown: evaluated.filter(e => e.verdict === 'unknown').length,
     rosterSize: Object.keys(roster).length,
     roster: bySport,
   };
