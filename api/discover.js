@@ -138,8 +138,15 @@ function foldCandidates(trades, cands, now) {
 
 /* Evaluate one candidate. Returns a verdict plus the evidence behind it, so a roster
    entry can always explain itself rather than being an opaque allow-list. */
-async function evaluateCandidate(c) {
-  const stats = await traderStats.getTraderStats(c.wallet);
+async function evaluateCandidate(c, opts) {
+  /* FORCE MUST PROPAGATE.
+     discover's force=1 bypassed its own 24h evaluation guard but still let trader-stats
+     serve from ITS 24h cache, so a wallet cached before a metric existed was re-judged
+     against the old object. Observed exactly that: torta.tech came back with no roiPct,
+     the ROI gate silently skipped (hasPx(undefined) === false), it fell through to the
+     weaker edgePP check, and it survived a purge that removed 18 others. A forced re-score
+     has to be forced all the way down or it is not a re-score. */
+  const stats = await traderStats.getTraderStats(c.wallet, { fresh: !!(opts && opts.fresh) });
   if (!stats || !stats.ok) return { verdict: 'unknown', reason: 'stats unavailable' };
   if (stats.sampleBiased) return { verdict: 'unknown', reason: stats.biasReason || 'sample biased' };
 
@@ -182,7 +189,14 @@ async function evaluateCandidate(c) {
   /* ROI FIRST. This is the gate that answers "is this wallet actually making money on the
      money it risks", which is the only question that matters and the one win rate keeps
      getting wrong in both directions. */
-  if (hasPx(b.roiPct) && b.roiPct < MIN_ROI_PCT) {
+  /* MISSING ROI IS NOT A PASS. When the metric is absent the wallet cannot be judged under
+     the current rules, so it returns to pending rather than falling through to the weaker
+     checks below — which is exactly how a stale cached wallet survived a purge. */
+  if (!hasPx(b.roiPct)) {
+    return { verdict: 'pending', sample: b.positions, settled: b.settled, hedgePct, ...px,
+      reason: 'ROI unavailable — stats predate current metrics, re-fetch required' };
+  }
+  if (b.roiPct < MIN_ROI_PCT) {
     return { verdict: 'reject', sample: b.positions, settled: b.settled, pnl: b.pnl,
       winRate: b.resolvedWinRate, hedgePct, ...px,
       reason: 'ROI ' + b.roiPct + '% on $' + Math.round(b.staked || 0).toLocaleString()
@@ -255,7 +269,7 @@ async function runDiscovery(opts) {
 
   const evaluated = [];
   for (const c of queue) {
-    const v = await evaluateCandidate(c);
+    const v = await evaluateCandidate(c, { fresh: force });
     c.lastEval = now;
     c.lastVerdict = v.verdict;
     c.lastReason = v.reason;
