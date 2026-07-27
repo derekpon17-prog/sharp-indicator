@@ -51,6 +51,16 @@ const MAX_HEDGE_PCT  = 60;    // above this the wallet is market-making, not han
    above a 99% one — which is correct, and is why the guard is needed. */
 const MAX_AVG_ENTRY  = 0.80;  // above this the wallet is buying favourites, not handicapping
 const MIN_EDGE_PP    = 2.0;   // win rate must beat its own average entry price by this much
+/* ROI IS THE PRIMARY GATE.
+   Win rate is distorted in both directions and neither distortion is rare. A disciplined
+   underdog bettor winning 40% at +200 is genuinely profitable and every win-rate metric
+   penalises them. A favourite-farmer winning 98% at 0.97 is nearly break-even and every
+   win-rate metric crowns them. ROI ranks those correctly and cannot be gamed by bet
+   selection: profit over dollars actually staked, computed on the same settled legs the
+   win rate uses, so no count/dollar weighting mismatch can inflate it.
+   PROVISIONAL — calibrate at the Aug 1 review once the roster has real distribution. */
+const MIN_ROI_PCT    = 4.0;   // below this it is churn or coin-flipping, not an edge
+const MAX_ENTRY_SKEW = 0.15;  // count- vs dollar-weighted entry gap that signals farming
 const CAND_TTL       = 604800;   // 7d — candidates decay if they stop appearing
 const ROSTER_TTL     = 2592000;  // 30d — roster is re-confirmed by ongoing evaluation
 
@@ -153,7 +163,9 @@ async function evaluateCandidate(c) {
   }
   // Price selection. Carried on every verdict so the numbers are visible even when passing.
   const px = { avgEntry: b.avgEntry, impliedWinRate: b.impliedWinRate, edgePP: b.edgePP,
-               resolvedWinRate: b.resolvedWinRate, settled: b.settled, unsettled: b.unsettled };
+               resolvedWinRate: b.resolvedWinRate, settled: b.settled, unsettled: b.unsettled,
+               roiPct: b.roiPct, staked: b.staked, settledPnl: b.settledPnl,
+               pnlPerMarket: b.pnlPerMarket, avgEntryByCount: b.avgEntryByCount, entrySkew: b.entrySkew };
   const hasPx = (v) => typeof v === 'number' && isFinite(v);
   if (hasPx(b.avgEntry) && b.avgEntry > MAX_AVG_ENTRY) {
     return { verdict: 'reject', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct, ...px,
@@ -167,6 +179,28 @@ async function evaluateCandidate(c) {
       reason: (b.settled || 0) + '/' + MIN_SAMPLE + ' SETTLED ' + c.sport + ' markets ('
               + b.positions + ' total, rest exited pre-settlement)' };
   }
+  /* ROI FIRST. This is the gate that answers "is this wallet actually making money on the
+     money it risks", which is the only question that matters and the one win rate keeps
+     getting wrong in both directions. */
+  if (hasPx(b.roiPct) && b.roiPct < MIN_ROI_PCT) {
+    return { verdict: 'reject', sample: b.positions, settled: b.settled, pnl: b.pnl,
+      winRate: b.resolvedWinRate, hedgePct, ...px,
+      reason: 'ROI ' + b.roiPct + '% on $' + Math.round(b.staked || 0).toLocaleString()
+              + ' staked — not an edge'
+              + (hasPx(b.resolvedWinRate) ? ' (despite ' + b.resolvedWinRate + '% wins)' : '') };
+  }
+  /* ENTRY SKEW. Win rate counts markets equally while entry price is dollar-weighted, so a
+     wallet farming many tiny 0.97 near-certainties alongside a few large mid-priced bets
+     shows ~98% wins against a ~0.60 "average" entry. A large positive skew means those two
+     numbers describe different populations and the win-rate evidence is not trustworthy. */
+  if (hasPx(b.entrySkew) && b.entrySkew > MAX_ENTRY_SKEW) {
+    return { verdict: 'reject', sample: b.positions, settled: b.settled, pnl: b.pnl,
+      winRate: b.resolvedWinRate, hedgePct, ...px,
+      reason: 'entry skew ' + b.entrySkew + ' — typical bet at ' + b.avgEntryByCount
+              + ' but dollars at ' + b.avgEntry + ', win rate reflects small favourites' };
+  }
+  // edgePP is now ADVISORY: informative when the populations line up, misleading when they
+  // do not, so it only rejects once ROI and skew have already passed.
   if (hasPx(b.edgePP) && b.edgePP < MIN_EDGE_PP) {
     return { verdict: 'reject', sample: b.positions, settled: b.settled, pnl: b.pnl,
       winRate: b.resolvedWinRate, hedgePct, ...px,
@@ -178,7 +212,9 @@ async function evaluateCandidate(c) {
     verdict: 'promote', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct, ...px,
     // Guarded: a fixture (or a schema change) without price data must not render
     // "undefined% implied (undefinedpp)" — the same defect caught once already.
-    reason: c.sport + ' +$' + Math.round(b.pnl).toLocaleString() + ' \u00b7 '
+    reason: c.sport + ' ' + (hasPx(b.roiPct) ? b.roiPct + '% ROI on $'
+              + Math.round(b.staked || 0).toLocaleString() + ' staked' : '+$' + Math.round(b.pnl).toLocaleString())
+            + ' \u00b7 '
             + (hasPx(b.resolvedWinRate) ? b.resolvedWinRate + '% of ' + b.settled + ' settled bets won' : b.settled + ' settled bets')
             + (hasPx(b.impliedWinRate) && hasPx(b.edgePP)
                ? ' vs ' + b.impliedWinRate + '% implied (' + (b.edgePP >= 0 ? '+' : '') + b.edgePP + 'pp)'
@@ -229,9 +265,17 @@ async function runDiscovery(opts) {
       roster[rk] = { wallet: c.wallet, sport: c.sport, name: c.name || null,
                      pnl: v.pnl, sample: v.sample, winRate: v.winRate, hedgePct: v.hedgePct,
                      avgEntry: v.avgEntry, impliedWinRate: v.impliedWinRate, edgePP: v.edgePP,
+                     roiPct: v.roiPct, staked: v.staked, pnlPerMarket: v.pnlPerMarket,
+                     avgEntryByCount: v.avgEntryByCount, entrySkew: v.entrySkew,
                      reason: v.reason, addedAt: prev ? prev.addedAt : now, confirmedAt: now };
-    } else if (v.verdict === 'reject' && roster[rk]) {
-      delete roster[rk];   // demote — the roster must be able to shrink
+    } else if (roster[rk]) {
+      /* DEMOTE ON ANYTHING THAT IS NOT A PROMOTION.
+         Previously only an explicit 'reject' removed an entry, so a wallet that became
+         UNVERIFIABLE — verdict 'pending' or 'unknown' — kept its old score and kept firing
+         alerts on evidence the current rules can no longer confirm. Ten entries survived a
+         forced re-evaluation that way. A roster place has to be continuously earned: if we
+         cannot verify it today, it comes off and can return when it re-qualifies. */
+      delete roster[rk];
     }
     evaluated.push({ wallet: c.wallet.slice(0, 10), sport: c.sport, ...v });
   }
@@ -245,7 +289,9 @@ async function runDiscovery(opts) {
     (bySport[e.sport] = bySport[e.sport] || []).push(e);
   });
   // Ranked by EDGE, not profit: raw PnL rewards bankroll size, edge rewards being right.
-  Object.keys(bySport).forEach(s => bySport[s].sort((a, b) => (b.edgePP || 0) - (a.edgePP || 0)));
+  // Ranked by ROI, not profit and not win rate — the only one of the three that a wallet
+  // cannot inflate through bet selection.
+  Object.keys(bySport).forEach(s => bySport[s].sort((a, b) => (b.roiPct || 0) - (a.roiPct || 0)));
 
   return {
     ok: h.ok, harvestError: h.error,
@@ -258,6 +304,7 @@ async function runDiscovery(opts) {
     readyToEvaluate: Object.keys(cands).filter(k => cands[k].sightings >= MIN_SIGHTINGS).length,
     evaluated,
     forced: force,
+    demoted: evaluated.filter(e => e.verdict !== 'promote').length,
     rosterSize: Object.keys(roster).length,
     roster: bySport,
   };
@@ -295,3 +342,5 @@ module.exports.MIN_SIGHTINGS = MIN_SIGHTINGS;
 module.exports.MIN_SAMPLE = MIN_SAMPLE;
 module.exports.MAX_AVG_ENTRY = MAX_AVG_ENTRY;
 module.exports.MIN_EDGE_PP = MIN_EDGE_PP;
+module.exports.MIN_ROI_PCT = MIN_ROI_PCT;
+module.exports.MAX_ENTRY_SKEW = MAX_ENTRY_SKEW;
