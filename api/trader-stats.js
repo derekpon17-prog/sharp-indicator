@@ -249,14 +249,31 @@ function bucket(rawPositions) {
      The honest measure is win rate against what the price ALREADY implied. Buying at 0.50
      and winning 54% is a 4pp edge; buying at 0.98 and winning 99% is 1pp and inside noise.
      Dollar-weighted across RAW legs, because a netted market carries only one leg's price. */
+  /* RESOLVED-OUTCOME ACCOUNTING.
+     The first version of this counted a "win" as realizedPnl > 0 — a market closed at a
+     profit. That is a TRADING statistic, not a betting one: buy at 0.40, sell at 0.45, and
+     you book a profit whichever side wins. For an active trader nearly every closed
+     position is profitable, which is how discovery surfaced a wallet at a 97.6% "win rate"
+     on an average entry of 0.598 — an impossibility that should have been caught before
+     it reached a roster. Comparing that against entry price was a category error.
+     curPrice IS the resolution: 1 means the side held won, 0 means it lost, anything in
+     between means the position was exited before the market settled and carries no verdict.
+     Counting only settled positions makes win rate and entry price finally comparable. */
+  const RESOLVED_WIN = 0.99, RESOLVED_LOSS = 0.01;
   const entryBySport = {};
   rawPositions.forEach(p => {
     const { sport } = sportOf(p);
     if (!sport) return;
     const px = parseFloat(p && p.avgPrice);
     const sh = parseFloat(p && p.totalBought);
+    const cp = parseFloat(p && p.curPrice);
     if (!isFinite(px) || !isFinite(sh) || sh <= 0) return;
-    const e = entryBySport[sport] || (entryBySport[sport] = { cost: 0, shares: 0 });
+    const e = entryBySport[sport] || (entryBySport[sport] = { cost: 0, shares: 0, wins: 0, losses: 0, unsettled: 0 });
+    if (!isFinite(cp)) { e.unsettled++; return; }
+    if (cp >= RESOLVED_WIN) e.wins++;
+    else if (cp <= RESOLVED_LOSS) e.losses++;
+    else { e.unsettled++; return; }   // exited pre-settlement — no verdict, and no price signal
+    // Entry price is averaged over SETTLED legs only, so it matches the win rate it is compared against.
     e.cost += px * sh;
     e.shares += sh;
   });
@@ -278,13 +295,19 @@ function bucket(rawPositions) {
     const graded = b.wins + b.losses;
     b.winRate = graded ? Math.round((b.wins / graded) * 1000) / 10 : null;
     const e = entryBySport[k];
-    if (e && e.shares > 0) {
+    const settled = e ? e.wins + e.losses : 0;
+    if (e && e.shares > 0 && settled > 0) {
       b.avgEntry = Math.round((e.cost / e.shares) * 1000) / 1000;
       b.impliedWinRate = Math.round(b.avgEntry * 1000) / 10;   // price IS the implied probability
-      // The number that matters: how much the wallet beat its own entry prices.
-      b.edgePP = b.winRate !== null ? Math.round((b.winRate - b.impliedWinRate) * 10) / 10 : null;
+      b.settled = settled;
+      b.unsettled = e.unsettled;
+      // Settled win rate — of the bets that actually resolved, how many were right.
+      b.resolvedWinRate = Math.round((e.wins / settled) * 1000) / 10;
+      // THE metric: did the picks beat the prices paid for them?
+      b.edgePP = Math.round((b.resolvedWinRate - b.impliedWinRate) * 10) / 10;
     } else {
       b.avgEntry = null; b.impliedWinRate = null; b.edgePP = null;
+      b.settled = settled; b.unsettled = e ? e.unsettled : null; b.resolvedWinRate = null;
     }
   });
 
