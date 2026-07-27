@@ -152,29 +152,50 @@ async function evaluateCandidate(c) {
              + ' over ' + b.positions + ' markets', sample: b.positions, pnl: b.pnl, hedgePct };
   }
   // Price selection. Carried on every verdict so the numbers are visible even when passing.
-  const px = { avgEntry: b.avgEntry, impliedWinRate: b.impliedWinRate, edgePP: b.edgePP };
+  const px = { avgEntry: b.avgEntry, impliedWinRate: b.impliedWinRate, edgePP: b.edgePP,
+               resolvedWinRate: b.resolvedWinRate, settled: b.settled, unsettled: b.unsettled };
   const hasPx = (v) => typeof v === 'number' && isFinite(v);
   if (hasPx(b.avgEntry) && b.avgEntry > MAX_AVG_ENTRY) {
     return { verdict: 'reject', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct, ...px,
       reason: 'avg entry ' + b.avgEntry + ' — buying favourites, not handicapping'
               + (hasPx(b.winRate) ? ' (' + b.winRate + '% wins vs ' + b.impliedWinRate + '% implied)' : '') };
   }
+  // A verdict needs SETTLED bets. Positions exited before the market resolved say nothing
+  // about whether the pick was right, so they cannot support a promotion.
+  if (!hasPx(b.settled) || b.settled < MIN_SAMPLE) {
+    return { verdict: 'pending', sample: b.positions, settled: b.settled || 0, hedgePct, ...px,
+      reason: (b.settled || 0) + '/' + MIN_SAMPLE + ' SETTLED ' + c.sport + ' markets ('
+              + b.positions + ' total, rest exited pre-settlement)' };
+  }
   if (hasPx(b.edgePP) && b.edgePP < MIN_EDGE_PP) {
-    return { verdict: 'reject', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct, ...px,
-      reason: 'no edge over price — ' + b.winRate + '% wins vs ' + b.impliedWinRate
-              + '% implied (' + (b.edgePP >= 0 ? '+' : '') + b.edgePP + 'pp)' };
+    return { verdict: 'reject', sample: b.positions, settled: b.settled, pnl: b.pnl,
+      winRate: b.resolvedWinRate, hedgePct, ...px,
+      reason: 'no edge over price — ' + b.resolvedWinRate + '% of ' + b.settled
+              + ' settled bets won vs ' + b.impliedWinRate + '% implied ('
+              + (b.edgePP >= 0 ? '+' : '') + b.edgePP + 'pp)' };
   }
   return {
     verdict: 'promote', sample: b.positions, pnl: b.pnl, winRate: b.winRate, hedgePct, ...px,
-    reason: c.sport + ' +$' + Math.round(b.pnl).toLocaleString() + ' over ' + b.positions
-            + ' markets' + (hasPx(b.winRate) ? ' (' + b.winRate + '%' +
-              (hasPx(b.edgePP) ? ', ' + (b.edgePP >= 0 ? '+' : '') + b.edgePP + 'pp vs price' : '') + ')' : ''),
+    // Guarded: a fixture (or a schema change) without price data must not render
+    // "undefined% implied (undefinedpp)" — the same defect caught once already.
+    reason: c.sport + ' +$' + Math.round(b.pnl).toLocaleString() + ' \u00b7 '
+            + (hasPx(b.resolvedWinRate) ? b.resolvedWinRate + '% of ' + b.settled + ' settled bets won' : b.settled + ' settled bets')
+            + (hasPx(b.impliedWinRate) && hasPx(b.edgePP)
+               ? ' vs ' + b.impliedWinRate + '% implied (' + (b.edgePP >= 0 ? '+' : '') + b.edgePP + 'pp)'
+               : ''),
   };
 }
 
 async function runDiscovery(opts) {
   const now = Date.now();
   const limitEvals = (opts && opts.evals !== undefined) ? opts.evals : EVALS_PER_RUN;
+  /* FORCE RE-EVALUATION.
+     Roster entries were shielded by a 24h freshness guard, so three wallets promoted
+     BEFORE the price and settlement filters existed could never be re-examined and simply
+     stayed on the roster with stale, weaker evidence. Raising the eval cap did not help —
+     it lifts the ceiling, not the guard. force=1 bypasses it so a rule change can be
+     applied retroactively to everyone already on the list. */
+  const force = !!(opts && opts.force);
 
   const h = await harvest();
   const cands = (await kvGetJson('discover:candidates')) || {};
@@ -192,7 +213,7 @@ async function runDiscovery(opts) {
   const queue = Object.keys(cands)
     .map(k => cands[k])
     .filter(c => c.sightings >= MIN_SIGHTINGS)
-    .filter(c => !c.lastEval || (now - c.lastEval) > 86400000)
+    .filter(c => force || !c.lastEval || (now - c.lastEval) > 86400000)
     .sort((a, b) => (b.totalUsd || 0) - (a.totalUsd || 0))
     .slice(0, limitEvals);
 
@@ -236,6 +257,7 @@ async function runDiscovery(opts) {
     totalCandidates: Object.keys(cands).length,
     readyToEvaluate: Object.keys(cands).filter(k => cands[k].sightings >= MIN_SIGHTINGS).length,
     evaluated,
+    forced: force,
     rosterSize: Object.keys(roster).length,
     roster: bySport,
   };
@@ -258,7 +280,8 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, sport, roster: await getRoster(sport === 'ALL' ? null : sport) });
     }
     const evals = req.query && req.query.evals ? parseInt(req.query.evals) : undefined;
-    return res.status(200).json(await runDiscovery({ evals }));
+    const force = String((req.query && req.query.force) || '') === '1';
+    return res.status(200).json(await runDiscovery({ evals, force }));
   } catch (err) {
     return res.status(200).json({ ok: false, error: err.message });
   }
