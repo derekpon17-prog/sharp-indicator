@@ -264,7 +264,18 @@ async function runDiscovery(opts) {
     .map(k => cands[k])
     .filter(c => c.sightings >= MIN_SIGHTINGS)
     .filter(c => force || !c.lastEval || (now - c.lastEval) > 86400000)
-    .sort((a, b) => (b.totalUsd || 0) - (a.totalUsd || 0))
+    /* ROSTER MEMBERS FIRST.
+       Sorting purely by trade volume meant a wallet already ON the roster — already firing
+       Specialist alerts — could sit below the cut indefinitely while new candidates were
+       evaluated ahead of it. hypoxia1 did exactly that across three forced runs and kept
+       alerting on pre-ROI evidence. Verifying what you are already acting on outranks
+       discovering something new; volume breaks ties within each group. */
+    .sort((a, b) => {
+      const ar = roster[a.wallet + '|' + a.sport] ? 1 : 0;
+      const br = roster[b.wallet + '|' + b.sport] ? 1 : 0;
+      if (ar !== br) return br - ar;
+      return (b.totalUsd || 0) - (a.totalUsd || 0);
+    })
     .slice(0, limitEvals);
 
   /* TIME BUDGET.
@@ -341,6 +352,8 @@ async function runDiscovery(opts) {
     forced: force,
     budgetHit,
     queued: queue.length,
+    rosterInQueue: queue.filter(c => !!roster[c.wallet + '|' + c.sport]).length,
+    rosterUnverified: Object.keys(roster).filter(k => roster[k].roiPct === undefined).length,
     demoted: evaluated.filter(e => e.verdict === 'reject' || e.verdict === 'pending').length,
     unknown: evaluated.filter(e => e.verdict === 'unknown').length,
     rosterSize: Object.keys(roster).length,
