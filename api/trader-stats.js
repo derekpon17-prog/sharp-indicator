@@ -268,7 +268,8 @@ function bucket(rawPositions) {
     const sh = parseFloat(p && p.totalBought);
     const cp = parseFloat(p && p.curPrice);
     if (!isFinite(px) || !isFinite(sh) || sh <= 0) return;
-    const e = entryBySport[sport] || (entryBySport[sport] = { cost: 0, shares: 0, wins: 0, losses: 0, unsettled: 0 });
+    const e = entryBySport[sport] || (entryBySport[sport] =
+      { cost: 0, shares: 0, wins: 0, losses: 0, unsettled: 0, pnl: 0, legs: 0, pxSum: 0 });
     if (!isFinite(cp)) { e.unsettled++; return; }
     if (cp >= RESOLVED_WIN) e.wins++;
     else if (cp <= RESOLVED_LOSS) e.losses++;
@@ -276,6 +277,19 @@ function bucket(rawPositions) {
     // Entry price is averaged over SETTLED legs only, so it matches the win rate it is compared against.
     e.cost += px * sh;
     e.shares += sh;
+    /* ROI inputs, accumulated over the SAME settled legs as the win rate, so profit and
+       stake describe the same population. Dividing total PnL by settled cost would mix
+       two different sets and quietly overstate return. */
+    const legPnl = parseFloat(p[pnlField]);
+    if (isFinite(legPnl)) e.pnl += legPnl;
+    /* Count-weighted entry price, kept alongside the dollar-weighted one. The gap between
+       them is the tell for a specific distortion: win rate counts every market equally
+       while avgEntry is weighted by dollars, so a wallet placing many tiny bets on 0.97
+       near-certainties and a few large bets at mid prices shows a 98% win rate against a
+       0.60 "average" entry — two numbers describing different populations. When
+       avgEntryByCount sits far above avgEntry, that is what is happening. */
+    e.legs++;
+    e.pxSum += px;
   });
 
   positions.forEach(p => {
@@ -303,11 +317,26 @@ function bucket(rawPositions) {
       b.unsettled = e.unsettled;
       // Settled win rate — of the bets that actually resolved, how many were right.
       b.resolvedWinRate = Math.round((e.wins / settled) * 1000) / 10;
-      // THE metric: did the picks beat the prices paid for them?
       b.edgePP = Math.round((b.resolvedWinRate - b.impliedWinRate) * 10) / 10;
+
+      /* ROI — THE PRIMARY METRIC, because it is immune to both distortions win rate suffers.
+         A disciplined underdog bettor winning 40% at +200 returns ~20%; a favourite-farmer
+         winning 98% at 0.97 returns ~1%. Win rate ranks those backwards, ROI does not.
+         It is also count/dollar consistent by construction: profit and stake come from the
+         same settled legs, so no weighting mismatch can inflate it. */
+      b.staked = Math.round(e.cost * 100) / 100;
+      b.settledPnl = Math.round(e.pnl * 100) / 100;
+      b.roiPct = e.cost > 0 ? Math.round((e.pnl / e.cost) * 1000) / 10 : null;
+      b.pnlPerMarket = b.positions ? Math.round((b.pnl / b.positions) * 100) / 100 : null;
+      // Count-weighted entry, and how far it diverges from the dollar-weighted one.
+      b.avgEntryByCount = e.legs ? Math.round((e.pxSum / e.legs) * 1000) / 1000 : null;
+      b.entrySkew = (b.avgEntryByCount !== null && b.avgEntry !== null)
+        ? Math.round((b.avgEntryByCount - b.avgEntry) * 1000) / 1000 : null;
     } else {
       b.avgEntry = null; b.impliedWinRate = null; b.edgePP = null;
       b.settled = settled; b.unsettled = e ? e.unsettled : null; b.resolvedWinRate = null;
+      b.staked = null; b.settledPnl = null; b.roiPct = null; b.pnlPerMarket = null;
+      b.avgEntryByCount = null; b.entrySkew = null;
     }
   });
 
