@@ -236,7 +236,12 @@ function bucket(rawPositions) {
     if (descending) { sampleBiased = true; biasReason = 'results sorted by PnL — sample is top-N winners, not representative'; }
   }
   const losses = PNL_MODE === 'raw' ? compare.rawLosses : compare.netLosses;
-  if (!sampleBiased && positions.length >= 50 && losses === 0) {
+  /* Threshold lowered 50 -> 15. A truncated fetch (rate limiting cutting pagination to a
+     single page) returns the head of a PnL-adjacent ordering, so small samples show 100%
+     win rates and absurd ROI. torta.tech came back 36-for-36 and slipped under a 50-row
+     bar straight onto the roster. Fifteen settled bets with zero losses is already not a
+     representative sample of anything. */
+  if (!sampleBiased && positions.length >= 15 && losses === 0) {
     sampleBiased = true; biasReason = 'zero losses over ' + positions.length + ' positions — sample cannot be representative';
   }
 
