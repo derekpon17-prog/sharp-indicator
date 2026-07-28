@@ -203,6 +203,7 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .flag-card.f-ss{border-top-color:var(--green)}
 .flag-card.f-picks{border-top-color:var(--purple)}
 .flag-card.f-spec{border-top-color:#40B4FF}
+.flag-card.f-watch{border-top-color:var(--t4)}
 .flag-card.f-mlv{border-top-color:var(--purple);border-style:solid;background:linear-gradient(180deg,rgba(155,109,255,.05),var(--s1))}
 .minisrc.on-vel{background:rgba(155,109,255,.16);color:var(--purple)}
 .fc-name{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
@@ -482,12 +483,13 @@ select.finput option{background:var(--s2)}
       <div style="font-size:12px;color:var(--t3);margin-bottom:14px">Which flags are earning their spot &mdash; updates as plays grade</div>
     </div>
     <div class="flag-grid">
-      <div class="flag-card f-poly"><div class="fc-name">Poly Whale</div><div class="fc-rec" id="fs-sig">&mdash;</div><div class="fc-sub" id="fs-sig-sub">no graded plays</div></div>
-      <div class="flag-card f-spec"><div class="fc-name">Poly Specialist <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(64,180,255,.15);color:#40B4FF;margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-spec">&mdash;</div><div class="fc-sub" id="fs-spec-sub">no graded plays</div></div>
-      <div class="flag-card f-line"><div class="fc-name">Sharp Line</div><div class="fc-rec" id="fs-line">&mdash;</div><div class="fc-sub" id="fs-line-sub">no graded plays</div></div>
-      <div class="flag-card f-ss"><div class="fc-name">Sharp Score</div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div></div>
+      <div class="flag-card f-poly"><div class="fc-name">Poly Whale</div><div class="fc-rec" id="fs-sig">&mdash;</div><div class="fc-sub" id="fs-sig-sub">no graded plays</div><div id="fs-sig-bands"></div></div>
+      <div class="flag-card f-watch"><div class="fc-name">Watchlist <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.07);color:var(--t3);margin-left:3px">TIER C</span></div><div class="fc-rec" id="fs-watch">&mdash;</div><div class="fc-sub" id="fs-watch-sub">no graded plays</div><div id="fs-watch-bands"></div></div>
+      <div class="flag-card f-spec"><div class="fc-name">Poly Specialist <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(64,180,255,.15);color:#40B4FF;margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-spec">&mdash;</div><div class="fc-sub" id="fs-spec-sub">no graded plays</div><div id="fs-spec-bands"></div></div>
+      <div class="flag-card f-line"><div class="fc-name">Sharp Line</div><div class="fc-rec" id="fs-line">&mdash;</div><div class="fc-sub" id="fs-line-sub">no graded plays</div><div id="fs-line-bands"></div></div>
+      <div class="flag-card f-ss"><div class="fc-name">Sharp Score</div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div><div id="fs-ss-bands"></div></div>
       <div class="flag-card f-picks"><div class="fc-name">My Picks</div><div class="fc-rec" id="fs-picks">&mdash;</div><div class="fc-sub" id="fs-picks-sub">no graded picks</div></div>
-      <div class="flag-card f-mlv"><div class="fc-name">ML Velocity <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:3px">SHADOW</span></div><div class="fc-rec" id="fs-mlv">&mdash;</div><div class="fc-sub" id="fs-mlv-sub">validating &mdash; not in real record</div></div>
+      <div class="flag-card f-mlv"><div class="fc-name">ML Velocity <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:3px">SHADOW</span></div><div class="fc-rec" id="fs-mlv">&mdash;</div><div class="fc-sub" id="fs-mlv-sub">validating &mdash; not in real record</div><div id="fs-mlv-bands"></div></div>
     </div>
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <div style="margin-bottom:28px">
@@ -713,6 +715,7 @@ const el=id=>document.getElementById(id);
 let alerts=ls('pm:alert-log',[]),trades=ls('pm:trades',[]),wallets=ls('pm:traders',[]),sigPlays=ls('pm:sig-plays',[]);
 let linePlays=ls('pm:line-plays',[]);
 let sharpScorePlays=ls('pm:ss-plays',[]);
+let watchPlays=ls('pm:watch-plays',[]); // WATCHLIST (tier C) — shown, therefore graded
 let specPlays=ls('pm:spec-plays',[]); // POLY SPECIALIST — discovered wallets, own record
 let mlvPlays=ls('pm:mlv-plays',[]); // ML Velocity SHADOW plays — validation only, never mixed into real records
 let sharpLines=[];
@@ -1108,6 +1111,24 @@ function autoTrackLinePlays(lines){
        the composite, not on the one pathway that post-devig cannot fire.
        siScore is retained below purely as a display value. */
     const ind=g.indication;
+    /* WATCHLIST IS GRADED TOO.
+       Tier C was displayed on the report and captured nowhere, so you could act on it and
+       nothing recorded whether it was right — the worst of both worlds. It now grades into
+       its own store, which is the only way to answer whether tier C deserves to be on the
+       page at all. Kept separate from Sharp Line so a weaker tier cannot flatter or drag
+       the stronger one's record. */
+    if(ind&&ind.tier==='C'&&ind.side){
+      var wkey=(g.away||'')+'vs'+(g.home||'')+'||'+ind.side;
+      if(!watchPlays.some(function(p){return p.key===wkey;})
+         &&!(g.commenceTime&&new Date(g.commenceTime).getTime()<=Date.now())){
+        watchPlays.unshift({key:wkey,score:ind.score||0,tier:'C',tierLabel:ind.label||'WATCHLIST',
+          title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:ind.side,
+          sources:ind.sources||[],reasons:ind.reasons||[],bestBook:ind.bestBook||null,
+          sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',
+          loggedAt:Date.now(),status:'OPEN'});
+        ss('pm:watch-plays',watchPlays);
+      }
+    }
     if(!ind||(ind.tier!=='A'&&ind.tier!=='B'))return;
     const score=parseInt(ind.score||g.siScore||0);
     // Never auto-track live games — only pre-game signals
@@ -1336,8 +1357,15 @@ var todayReport=[];
 function buildReport(){
   var now=Date.now();
   if(todayReport&&todayReport.length){
+    var tierRank={A:0,B:1,C:2,N:3};
     return todayReport.slice().sort(function(a,b){
       if(a.started!==b.started)return a.started?1:-1;      // actionable first
+      /* Tier before score. Sorting purely by score put SIGNAL 98 above CONVERGENCE 82,
+         which reads wrong because the tier label is what the eye lands on and convergence
+         is the rarer, stronger claim. Score still orders within a tier. */
+      var ta=tierRank[a.tier]!==undefined?tierRank[a.tier]:9;
+      var tb=tierRank[b.tier]!==undefined?tierRank[b.tier]:9;
+      if(ta!==tb)return ta-tb;
       return (b.peakScore||b.score||0)-(a.peakScore||a.score||0);
     }).slice(0,REPORT_MAX).map(function(r){
       return {away:r.away,home:r.home,commenceTime:r.commenceTime,started:r.started,
@@ -1389,7 +1417,7 @@ function renderReport(){
 
 /* === THE BOARD — one canonical play per game, merged across sources === */
 var boardFilter='all',boardExpand=false;
-var trackExpand={sig:false,line:false,ss:false,picks:false,mlv:false,spec:false};
+var trackExpand={sig:false,line:false,ss:false,picks:false,mlv:false,spec:false,watch:false};
 var TRACK_CAP=8; // last 5-10 visible; rest behind Show all
 function toggleTrack(k){trackExpand[k]=!trackExpand[k];renderTracking();}
 function trkMoreBtn(k,total){
@@ -1398,12 +1426,40 @@ function trkMoreBtn(k,total){
     ?'<button class="trk-more" onclick="toggleTrack(\''+k+'\')">Show recent only</button>'
     :'<button class="trk-more" onclick="toggleTrack(\''+k+'\')">Show all '+total+' plays</button>';
 }
-function fillFlagCard(id,stat,total){
+/* SCORE BANDS.
+   Tier is a label derived from how many sources fired; score is the measurement. Asking
+   "do 90s beat 70s" is the question that sets thresholds, and it cannot be answered from
+   tier counts. Bands are computed from the same graded stores the flag cards use, so a
+   record and its breakdown can never disagree. Only bands with graded plays are shown —
+   an empty band is noise, not information. */
+function scoreBands(plays){
+  var bands=[{k:'90+',lo:90,hi:1e9},{k:'70-89',lo:70,hi:89.999},{k:'50-69',lo:50,hi:69.999},{k:'<50',lo:-1e9,hi:49.999}];
+  return bands.map(function(b){
+    var inBand=(plays||[]).filter(function(p){var v=parseFloat(p.score||p.combined||0);return v>=b.lo&&v<=b.hi;});
+    var st=unitPnLCalc(inBand);   // top-level; unitPnL is a local alias inside renderTracking
+    return {band:b.k,W:st.W,L:st.L,P:st.P,wr:st.wr,units:st.units,total:inBand.length};
+  }).filter(function(b){return b.W+b.L+b.P>0;});
+}
+function bandHTML(plays){
+  var bs=scoreBands(plays);
+  if(!bs.length)return '';
+  return '<div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">'+bs.map(function(b){
+    var col=b.wr===null?'var(--t3)':b.wr>=55?'var(--green)':b.wr>=50?'var(--gold)':'var(--red)';
+    return '<span style="font-size:9px;font-family:var(--mono);padding:1px 5px;border-radius:3px;'
+      +'background:rgba(255,255,255,.05);color:'+col+'" title="'+b.total+' graded">'
+      +b.band+' '+b.W+'-'+b.L+(b.wr!==null?' ('+b.wr+'%)':'')+'</span>';
+  }).join('')+'</div>';
+}
+
+function fillFlagCard(id,stat,total,plays){
   var rec=el(id),sub=el(id+'-sub');if(!rec)return;
   if(stat.W+stat.L+stat.P===0){rec.innerHTML='&mdash;';if(sub)sub.textContent=total?total+' open, none graded':'no plays yet';return;}
   rec.textContent=stat.W+'\u2013'+stat.L+(stat.P?'\u2013'+stat.P+'P':'');
   rec.style.color=stat.wr===null?'var(--t1)':stat.wr>=55?'var(--green)':stat.wr>=50?'var(--gold)':'var(--red)';
   if(sub)sub.textContent=(stat.wr!==null?stat.wr+'% \u00b7 ':'')+(stat.units>=0?'+':'')+stat.units.toFixed(2)+'u \u00b7 '+total+' plays';
+  // Band breakdown sits under the record so strength and outcome are read together.
+  var host=el(id+'-bands');
+  if(host)host.innerHTML=plays?bandHTML(plays):'';
 }
 function buildBoard(){
   var now=Date.now(),rows=[],usedAlertKeys={};
@@ -1845,7 +1901,7 @@ async function gradeFromESPN(){
     });
     if(changed)ss(key,plays);
   }
-  tryGrade(specPlays,'pm:spec-plays');tryGrade(linePlays,'pm:line-plays');tryGrade(sharpScorePlays,'pm:ss-plays');tryGrade(sigPlays,'pm:sig-plays');tryGrade(mlvPlays,'pm:mlv-plays');
+  tryGrade(watchPlays,'pm:watch-plays');tryGrade(specPlays,'pm:spec-plays');tryGrade(linePlays,'pm:line-plays');tryGrade(sharpScorePlays,'pm:ss-plays');tryGrade(sigPlays,'pm:sig-plays');tryGrade(mlvPlays,'pm:mlv-plays');
   if(changed)renderTracking();
 }
 
@@ -1904,7 +1960,7 @@ function renderTracking(){
       }).join('')+trkMoreBtn('sig',sigPlays.length);
     }
   }
-  fillFlagCard('fs-sig',sigStat,sigPlays.length);
+  fillFlagCard('fs-sig',sigStat,sigPlays.length,sigPlays);
 
   /* ── POLY SPECIALIST PLAYS (separate record from whales, deliberately) ── */
   var specStat=unitPnL(specPlays);
@@ -1934,7 +1990,11 @@ function renderTracking(){
       }).join('')+trkMoreBtn('spec',specPlays.length);
     }
   }
-  fillFlagCard('fs-spec',specStat,specPlays.length);
+  fillFlagCard('fs-spec',specStat,specPlays.length,specPlays);
+
+  /* ── WATCHLIST (tier C) — graded so it can be judged or retired ── */
+  var watchStat=unitPnL(watchPlays);
+  fillFlagCard('fs-watch',watchStat,watchPlays.length,watchPlays);
 
   /* ── SHARP LINE SIGNAL PLAYS ── */
   var lineStat=unitPnL(linePlays);
@@ -1988,7 +2048,7 @@ function renderTracking(){
       }).join('')+trkMoreBtn('line',linePlays.length);
     }
   }
-  fillFlagCard('fs-line',lineStat,linePlays.length);
+  fillFlagCard('fs-line',lineStat,linePlays.length,linePlays);
 
   /* ── SHARP SCORE PLAYS (combined) ── */
   var ssStat=unitPnL(sharpScorePlays);
@@ -2030,7 +2090,7 @@ function renderTracking(){
       }).join('')+trkMoreBtn('ss',sharpScorePlays.length);
     }
   }
-  fillFlagCard('fs-ss',ssStat,sharpScorePlays.length);
+  fillFlagCard('fs-ss',ssStat,sharpScorePlays.length,sharpScorePlays);
 
   /* ── ML VELOCITY SHADOW PLAYS ── */
   var mlvStat=unitPnL(mlvPlays);
@@ -2062,7 +2122,7 @@ function renderTracking(){
       }).join('')+trkMoreBtn('mlv',mlvPlays.length);
     }
   }
-  fillFlagCard('fs-mlv',mlvStat,mlvPlays.length);
+  fillFlagCard('fs-mlv',mlvStat,mlvPlays.length,mlvPlays);
 
   /* ── MY PICKS (manual) ── */
   var W2=trades.filter(function(t){return t.status==='WIN';}).length;
@@ -2703,7 +2763,7 @@ document.addEventListener('click',e=>{
   const atpBtn=e.target.closest('.atp-btn');
   if(atpBtn){
     const arr=atpBtn.dataset.arr,i=parseInt(atpBtn.dataset.i),st=atpBtn.dataset.st;
-    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:arr==='pm:spec-plays'?specPlays:sharpScorePlays;
+    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:arr==='pm:spec-plays'?specPlays:arr==='pm:watch-plays'?watchPlays:sharpScorePlays;
     if(plays[i]){plays[i].status=st;plays[i].gradedAt=Date.now();ss(arr,plays);renderTracking();}
     return;
   }
@@ -2711,7 +2771,7 @@ document.addEventListener('click',e=>{
   const atpDel=e.target.closest('.atp-del');
   if(atpDel&&atpDel.dataset.arr){
     const arr=atpDel.dataset.arr,i=parseInt(atpDel.dataset.i);
-    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:arr==='pm:spec-plays'?specPlays:sharpScorePlays;
+    const plays=arr==='pm:sig-plays'?sigPlays:arr==='pm:line-plays'?linePlays:arr==='pm:mlv-plays'?mlvPlays:arr==='pm:spec-plays'?specPlays:arr==='pm:watch-plays'?watchPlays:sharpScorePlays;
     plays.splice(i,1);ss(arr,plays);renderTracking();
     return;
   }
