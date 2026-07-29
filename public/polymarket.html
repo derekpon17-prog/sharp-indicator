@@ -744,12 +744,21 @@ const _sc={};
 
 /* === SPORT DETECTION (WHITELIST ONLY) === */
 const MLB_TEAMS=['yankees','red sox','dodgers','cubs','mets','astros','braves','phillies','padres','giants','cardinals','brewers','guardians','royals','twins','orioles','rays','blue jays','mariners','rangers','angels','athletics','tigers','white sox','reds','pirates','rockies','marlins','nationals','diamondbacks'];
+// BUGFIX 2026-07-29: WNBA had no branch at all here, so every WNBA alert (title text
+// only, e.g. "Indiana Fever vs. Seattle Storm") returned null and was silently dropped
+// before buildTrending, auto-tracking, or the By Sport breakdown ever saw it — even
+// though the server-side alert already carries a correct sport:"WNBA" tag. This list
+// must be checked BEFORE the NBA branch below: the substring "nba" is contained inside
+// "wnba" itself ("w-NBA"), so without ordering, a literal "WNBA" in a title would have
+// still misclassified as NBA.
+const WNBA_TEAMS=['fever','storm','sparks','liberty','sky','mercury','lynx','sun','mystics','wings','aces','dream','valkyries','tempo','fire'];
 const ESPORTS=['dota','valorant','cs2','counter-strike','league of legends','lol:','esports world cup','starcraft','overwatch','fortnite','pubg','apex legends','rainbow six','rocket league'];
 const SOCCER_INTL=['premier league','la liga','serie a','bundesliga','champions league','copa america','gold cup','concacaf','fa cup','nations league','world cup qualifier','man city','man united','liverpool','chelsea','arsenal','barcelona','real madrid','france vs','england vs','brazil vs','germany vs','spain vs','portugal vs','argentina vs','italy vs','netherlands vs'];
 function detectSport(title){
   const t=(title||'').toLowerCase();
   if(ESPORTS.some(x=>t.includes(x)))return null;
   if(t.includes('mlb')||t.includes('world baseball classic')||t.includes('wbc')||MLB_TEAMS.some(x=>t.includes(x)))return 'MLB';
+  if(t.includes('wnba')||WNBA_TEAMS.some(x=>t.includes(x)))return 'WNBA';
   if(t.includes('nba')||t.includes('nba finals'))return 'NBA';
   if(t.includes('nfl')||t.includes('super bowl')||t.includes('afc championship')||t.includes('nfc championship'))return 'NFL';
   if(t.includes('nhl')||t.includes('stanley cup'))return 'NHL';
