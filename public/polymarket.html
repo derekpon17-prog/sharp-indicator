@@ -803,7 +803,19 @@ function findGameDateForTitle(title,eventSlug){
 function moneyTier(score){if(score>=85)return{lbl:'ELITE DISCREPANCY',cls:'var(--purple)'};if(score>=70)return{lbl:'STRONG DISCREPANCY',cls:'var(--green)'};return{lbl:'MODERATE DISCREPANCY',cls:'var(--gold)'};}
 function fu(n){return '$'+Math.round(n||0).toLocaleString();}
 function fp(n){if(!n&&n!==0)return '$0';const abs=Math.abs(n);const v=abs>=1e6?'$'+(n/1e6).toFixed(1)+'M':abs>=1e3?'$'+(n/1e3).toFixed(1)+'K':'$'+Math.round(n).toLocaleString();return v;}
-function bdg(cats){return (cats||[]).map(c=>{const ct=c.category||c.cat||'';return '<span class="badge badge-'+(ct==='OVERALL'?'o':'s')+'">'+(ct==='OVERALL'?'Overall':'Sports')+' #'+c.rank+'</span>';}).join('');}
+// BUGFIX 2026-07-29: SPECIALIST wallets carry category:"SPECIALIST:MLB", rank:null — this
+// is a wallet flagged as proven-profitable in one sport specifically, not ranked on the
+// global leaderboard, so there is no rank number to show. Previously fell through to the
+// generic branch and rendered "Sports #null". Now shows the sport code plainly instead.
+function bdg(cats){return (cats||[]).map(c=>{
+  const ct=c.category||c.cat||'';
+  if(ct.indexOf('SPECIALIST:')===0)return '<span class="badge badge-s">'+ct.split(':')[1]+' SPECIALIST</span>';
+  return '<span class="badge badge-'+(ct==='OVERALL'?'o':'s')+'">'+(ct==='OVERALL'?'Overall':'Sports')+' #'+c.rank+'</span>';
+}).join('');}
+// The bot already computes a real season/specialist record server-side (ROI, win rate,
+// sample size, edge vs. implied odds) and ships it on every SPEC-type alert — it just
+// wasn't being rendered anywhere. Surface it directly, no async fetch required.
+function traderRecordLine(b){return b.specialistRecord||b.sportRecord||null;}
 function oc(o){const l=(o||'').toLowerCase();return l==='yes'?'<span class="oc-y">YES</span>':l==='no'?'<span class="oc-n">NO</span>':'<span>'+(o||'&mdash;')+'</span>';}
 function calcP(t){const amt=parseFloat(t.amount)||0;if(t.odds){const odds=parseInt(t.odds)||0;if(t.status==='WIN')return odds<0?Math.round(amt*(100/Math.abs(odds))*100)/100:Math.round(amt*(odds/100)*100)/100;if(t.status==='LOSS')return -amt;return 0;}const price=parseFloat(t.price)||50;if(t.status==='WIN')return Math.round(amt*(100/price-1)*100)/100;if(t.status==='LOSS')return -amt;return 0;}
 function isLosingTrader(wallet){if(!wallet)return false;const c=_sc[wallet];return c&&c.pnl!==null&&c.pnl<0;}
@@ -1688,7 +1700,8 @@ function acardHTML(b){
       +'<div style="background:rgba(229,160,13,.06);border-radius:5px;padding:4px 7px"><div style="font-size:9px;color:var(--gold);font-weight:700;margin-bottom:1px">POLY '+(b.polyScore||'')+'</div><div style="font-size:10px;color:var(--t2)">'+(b.polyOutcome||b.outcome||'')+'</div></div>'
       +'</div>';
   } else {
-    detailRow='<div style="font-size:11px;color:var(--t3);margin:4px 0">Bought <strong style="color:var(--t1)">'+(b.outcome||'')+'</strong>'+(pr&&pr!=='0.0'?' @ '+pr+'&#xa2;':'')+'</div>';
+    detailRow='<div style="font-size:11px;color:var(--t3);margin:4px 0">Bought <strong style="color:var(--t1)">'+(b.outcome||'')+'</strong>'+(pr&&pr!=='0.0'?' @ '+pr+'&#xa2;':'')+'</div>'
+      +(function(){var r=traderRecordLine(b);return r?'<div style="font-size:10px;color:var(--green);font-family:var(--mono);margin-bottom:3px;line-height:1.4">'+esc(r)+'</div>':'';})();
   }
 
   return '<div class="ac '+(big?'big':'')+'" style="border-left:3px solid '+borderColor+';position:relative">'
@@ -1762,6 +1775,7 @@ function renderAlerts(){
     return '<div class="al-row'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
       +'<div class="al-av-fb">'+init+'</div>'
       +'<div class="al-main"><div class="al-trader">'+shortWallet(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+'</div>'
+      +(function(){var r=traderRecordLine(b);return r?'<div style="font-size:10.5px;color:var(--green);font-family:var(--mono);margin:3px 0 2px;line-height:1.4">'+esc(r)+'</div>':'';})()
       +'<div class="sb" style="margin:5px 0"></div>'
       +'<div class="al-meta">Bought '+(b.outcome||'').toUpperCase()+' @ '+pr+'&#xa2;</div></div>'
       +'<div class="al-r"><div class="al-size">'+fu(b.usdValue||0)+'</div><div class="al-time">'+timeAgo(b.loggedAt||b.timestamp*1000)+'</div><button class="al-follow" data-akey="'+key+'">Follow Trade</button></div>'
