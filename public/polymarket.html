@@ -492,6 +492,20 @@ select.finput option{background:var(--s2)}
       <div class="flag-card f-mlv"><div class="fc-name">ML Velocity <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:3px">SHADOW</span></div><div class="fc-rec" id="fs-mlv">&mdash;</div><div class="fc-sub" id="fs-mlv-sub">validating &mdash; not in real record</div><div id="fs-mlv-bands"></div></div>
     </div>
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
+    <!-- ── BY SPORT — same records above, sliced by sport instead of by signal. My Picks
+         excluded: the market field is free text with no sport tag, so a split there would
+         be a guess rather than a read. ── -->
+    <div style="margin-bottom:28px">
+      <div class="row-hdr" style="margin-bottom:12px">
+        <div class="row-ttl" style="font-size:16px"><i class="ti ti-trophy" style="color:var(--gold)"></i>By Sport <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">every signal's record, broken out per sport</span></div>
+      </div>
+      <div id="sport-breakdown-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px"></div>
+      <div id="sport-breakdown-empty" class="empty" style="display:none;padding:22px">
+        <div class="empty-ico"><i class="ti ti-trophy"></i></div><h3>No graded plays yet</h3>
+        <p>Once plays grade, each sport gets its own record breakdown here</p>
+      </div>
+    </div>
+    <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <div style="margin-bottom:28px">
       <div class="row-hdr" style="margin-bottom:12px">
         <div class="row-ttl" style="font-size:16px"><i class="ti ti-bolt" style="color:var(--gold)"></i>Poly Whale Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">leaderboard wallets &middot; auto-tracked at 60+ score</span></div>
@@ -1905,9 +1919,68 @@ async function gradeFromESPN(){
   if(changed)renderTracking();
 }
 
+/* === BY SPORT — every auto-tracked store's record, sliced by play.sport instead of
+   by signal type. Reads the same status field (WIN/LOSS/PUSH/OPEN) the flag cards
+   already use, so this can never disagree with the numbers above it. My Picks (trades)
+   is deliberately excluded — the market field is free text with no sport tag captured
+   at log time, so a split there would be invented, not read. */
+var SPORT_BREAKDOWN_SOURCES=[
+  {key:'line',label:'Sharp Line',store:function(){return linePlays;}},
+  {key:'ss',label:'Sharp Score',store:function(){return sharpScorePlays;}},
+  {key:'sig',label:'Poly Whale',store:function(){return sigPlays;}},
+  {key:'spec',label:'Poly Specialist',store:function(){return specPlays;}},
+  {key:'watch',label:'Watchlist',store:function(){return watchPlays;}},
+  {key:'mlv',label:'ML Velocity (shadow)',store:function(){return mlvPlays;}}
+];
+function buildSportBreakdown(){
+  var bySport={};
+  SPORT_BREAKDOWN_SOURCES.forEach(function(src){
+    (src.store()||[]).forEach(function(p){
+      if(p.status==='OPEN')return; // graded only — same convention as the flag cards
+      var sport=(p.sport||'').trim()||'Other';
+      if(!bySport[sport])bySport[sport]={};
+      if(!bySport[sport][src.key])bySport[sport][src.key]={label:src.label,W:0,L:0,P:0};
+      var b=bySport[sport][src.key];
+      if(p.status==='WIN')b.W++;else if(p.status==='LOSS')b.L++;else if(p.status==='PUSH')b.P++;
+    });
+  });
+  return bySport;
+}
+function renderSportBreakdown(){
+  var grid=el('sport-breakdown-grid'),empty=el('sport-breakdown-empty');
+  if(!grid)return;
+  var bySport=buildSportBreakdown();
+  var sports=Object.keys(bySport).sort(function(a,b){
+    var ta=0,tb=0;
+    Object.values(bySport[a]).forEach(function(x){ta+=x.W+x.L+x.P;});
+    Object.values(bySport[b]).forEach(function(x){tb+=x.W+x.L+x.P;});
+    return tb-ta; // busiest sport first
+  });
+  if(!sports.length){grid.innerHTML='';if(empty)empty.style.display='';return;}
+  if(empty)empty.style.display='none';
+  grid.innerHTML=sports.map(function(sport){
+    var tags=SPORT_BREAKDOWN_SOURCES.filter(function(src){return bySport[sport][src.key];});
+    var rows=tags.map(function(src){
+      var b=bySport[sport][src.key];
+      var tot=b.W+b.L;
+      var wr=tot>0?Math.round(b.W/tot*100):null;
+      var col=wr===null?'var(--t3)':wr>=55?'var(--green)':wr>=50?'var(--gold)':'var(--red)';
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--b1)">'
+        +'<span style="font-size:11.5px;color:var(--t2)">'+esc(b.label)+'</span>'
+        +'<span style="font-size:12.5px;font-weight:800;font-family:var(--mono);color:'+col+'">'+b.W+'-'+b.L+(b.P?'-'+b.P+'P':'')+(wr!==null?' <span style="font-size:9.5px;color:var(--t4);font-weight:600">('+wr+'%)</span>':'')+'</span>'
+        +'</div>';
+    }).join('');
+    return '<div style="background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:13px 15px">'
+      +'<div style="font-size:12.5px;font-weight:800;color:var(--t1);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">'+esc(sport)+'</div>'
+      +rows
+      +'</div>';
+  }).join('');
+}
+
 function renderTracking(){
   gradeOpenPlays();
   gradeFromESPN();
+  renderSportBreakdown();
 
   // Unit calc lives at top level now (unitPnLCalc) so the hero record panel shares it.
   var unitPnL=unitPnLCalc;
