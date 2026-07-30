@@ -221,11 +221,11 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .al-list{display:flex;flex-direction:column;gap:8px}
 .al-row{display:flex;align-items:center;gap:12px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:13px 16px}
 .al-row:hover{border-color:var(--b2)}.al-row.big{border-left:3px solid var(--gold)}
-.al-av,.al-av-fb{width:34px;height:34px;border-radius:50%;flex-shrink:0}
-.al-av{object-fit:cover;background:var(--s3)}.al-av-fb{background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--t2)}
+.al-av,.al-av-fb{width:38px;height:38px;border-radius:50%;flex-shrink:0}
+.al-av{object-fit:cover;background:var(--s3)}.al-av-fb{background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--t2)}
 .al-main{flex:1;min-width:0}
 .al-trader{font-size:12px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:2px}
-.al-mkt{font-size:13px;font-weight:600;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.al-mkt{font-size:13.5px;font-weight:700;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
 .al-meta{font-size:11px;color:var(--t4);font-family:var(--mono)}
 .al-r{text-align:right;flex-shrink:0;margin-left:8px}
 .al-size{font-size:18px;font-weight:900;font-family:var(--mono);color:var(--gold)}
@@ -774,6 +774,28 @@ function detectSport(title){
   if(t.includes('wimbledon')||t.includes('us open tennis')||t.includes('french open')||t.includes('australian open')||t.includes('roland garros')||(t.includes('atp ')&&!t.includes('esport'))||t.includes('wta ')||t.includes('grand slam'))return 'Tennis';
   return null;
 }
+// TEAM LOGOS — ESPN's public CDN, keyed by normTN'd team name so lookups tolerate the
+// same punctuation/spacing quirks as everything else in this file (e.g. "St. Louis" vs
+// "St Louis", or Polymarket's occasional concatenated titles like "PortlandFire" — that
+// quirk only ever hits the raw title text, never the clean `outcome` field this looks up
+// against, so it doesn't need special-casing here).
+function buildTeamMap(pairs){const m={};pairs.forEach(function(p){m[normTN(p[0])]=p[1];});return m;}
+const TEAM_LOGOS={
+  mlb:buildTeamMap([['Arizona Diamondbacks','ari'],['Atlanta Braves','atl'],['Baltimore Orioles','bal'],['Boston Red Sox','bos'],['Chicago Cubs','chc'],['Chicago White Sox','chw'],['Cincinnati Reds','cin'],['Cleveland Guardians','cle'],['Colorado Rockies','col'],['Detroit Tigers','det'],['Houston Astros','hou'],['Kansas City Royals','kc'],['Los Angeles Angels','laa'],['Los Angeles Dodgers','lad'],['Miami Marlins','mia'],['Milwaukee Brewers','mil'],['Minnesota Twins','min'],['New York Mets','nym'],['New York Yankees','nyy'],['Athletics','ath'],['Oakland Athletics','ath'],['Philadelphia Phillies','phi'],['Pittsburgh Pirates','pit'],['San Diego Padres','sd'],['San Francisco Giants','sf'],['Seattle Mariners','sea'],['St. Louis Cardinals','stl'],['St Louis Cardinals','stl'],['Tampa Bay Rays','tb'],['Texas Rangers','tex'],['Toronto Blue Jays','tor'],['Washington Nationals','wsh']]),
+  nba:buildTeamMap([['Atlanta Hawks','atl'],['Boston Celtics','bos'],['Brooklyn Nets','bkn'],['Charlotte Hornets','cha'],['Chicago Bulls','chi'],['Cleveland Cavaliers','cle'],['Dallas Mavericks','dal'],['Denver Nuggets','den'],['Detroit Pistons','det'],['Golden State Warriors','gs'],['Houston Rockets','hou'],['Indiana Pacers','ind'],['LA Clippers','lac'],['Los Angeles Clippers','lac'],['Los Angeles Lakers','lal'],['Memphis Grizzlies','mem'],['Miami Heat','mia'],['Milwaukee Bucks','mil'],['Minnesota Timberwolves','min'],['New Orleans Pelicans','no'],['New York Knicks','ny'],['Oklahoma City Thunder','okc'],['Orlando Magic','orl'],['Philadelphia 76ers','phi'],['Phoenix Suns','phx'],['Portland Trail Blazers','por'],['Sacramento Kings','sac'],['San Antonio Spurs','sa'],['Toronto Raptors','tor'],['Utah Jazz','utah'],['Washington Wizards','wsh']]),
+  nfl:buildTeamMap([['Arizona Cardinals','ari'],['Atlanta Falcons','atl'],['Baltimore Ravens','bal'],['Buffalo Bills','buf'],['Carolina Panthers','car'],['Chicago Bears','chi'],['Cincinnati Bengals','cin'],['Cleveland Browns','cle'],['Dallas Cowboys','dal'],['Denver Broncos','den'],['Detroit Lions','det'],['Green Bay Packers','gb'],['Houston Texans','hou'],['Indianapolis Colts','ind'],['Jacksonville Jaguars','jax'],['Kansas City Chiefs','kc'],['Los Angeles Chargers','lac'],['Los Angeles Rams','lar'],['Las Vegas Raiders','lv'],['Miami Dolphins','mia'],['Minnesota Vikings','min'],['New England Patriots','ne'],['New Orleans Saints','no'],['New York Giants','nyg'],['New York Jets','nyj'],['Philadelphia Eagles','phi'],['Pittsburgh Steelers','pit'],['Seattle Seahawks','sea'],['San Francisco 49ers','sf'],['Tampa Bay Buccaneers','tb'],['Tennessee Titans','ten'],['Washington Commanders','wsh']]),
+  nhl:buildTeamMap([['Anaheim Ducks','ana'],['Boston Bruins','bos'],['Buffalo Sabres','buf'],['Calgary Flames','cgy'],['Carolina Hurricanes','car'],['Chicago Blackhawks','chi'],['Colorado Avalanche','col'],['Columbus Blue Jackets','cbj'],['Dallas Stars','dal'],['Detroit Red Wings','det'],['Edmonton Oilers','edm'],['Florida Panthers','fla'],['Los Angeles Kings','la'],['Minnesota Wild','min'],['Montreal Canadiens','mtl'],['Nashville Predators','nsh'],['New Jersey Devils','nj'],['New York Islanders','nyi'],['New York Rangers','nyr'],['Ottawa Senators','ott'],['Philadelphia Flyers','phi'],['Pittsburgh Penguins','pit'],['San Jose Sharks','sj'],['Seattle Kraken','sea'],['St. Louis Blues','stl'],['St Louis Blues','stl'],['Tampa Bay Lightning','tb'],['Toronto Maple Leafs','tor'],['Utah Mammoth','utah'],['Vancouver Canucks','van'],['Vegas Golden Knights','vgk'],['Washington Capitals','wsh'],['Winnipeg Jets','wpg']]),
+  wnba:buildTeamMap([['Atlanta Dream','atl'],['Chicago Sky','chi'],['Connecticut Sun','con'],['Dallas Wings','dal'],['Golden State Valkyries','gs'],['Indiana Fever','ind'],['Las Vegas Aces','lv'],['Los Angeles Sparks','la'],['Minnesota Lynx','min'],['New York Liberty','ny'],['Phoenix Mercury','phx'],['Portland Fire','por'],['Seattle Storm','sea'],['Toronto Tempo','tor'],['Washington Mystics','wsh']])
+};
+function teamLogoUrl(sport,name){
+  if(!sport||!name)return null;
+  const sp=sport.toLowerCase();
+  const map=TEAM_LOGOS[sp];
+  if(!map)return null;
+  const abbr=map[normTN(name)];
+  if(!abbr)return null;
+  return 'https://a.espncdn.com/i/teamlogos/'+sp+'/500/'+abbr+'.png';
+}
 
 /* === HELPERS === */
 function timeAgo(ts){const s=Math.floor((Date.now()-(ts>1e12?ts:ts*1000))/1000);if(s<60)return s+'s ago';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
@@ -978,13 +1000,12 @@ function buildSB(oe,se,fetched,sport){
   const rows=[],G='#00C896',R='#FF3D5A',T='rgba(245,246,250,.42)';
   function pRow(lbl,val){if(!val||val===0)return null;return '<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:10px;color:'+T+';font-family:var(--mono)">'+lbl+'</span><span style="font-size:11px;font-family:var(--mono);font-weight:800;color:'+(val>=0?G:R)+'">'+fp(val)+'</span></div>';}
   function rRow(lbl,w,l){const tot=w+l;if(!tot)return null;const p=Math.round(w/tot*100);const c=p>=55?G:p>=50?'#E5A00D':R;return '<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:10px;color:'+T+';font-family:var(--mono)">'+lbl+'</span><span style="font-size:11px;font-family:var(--mono);font-weight:800;color:'+c+'">'+p+'% ('+w+'W-'+l+'L)</span></div>';}
-  function sTag(s){return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="font-size:10px;color:'+T+';font-family:var(--mono)">Market</span><span style="font-size:10px;font-family:var(--mono);font-weight:700;padding:2px 7px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:4px">'+s+'</span></div>';}
   if(oe&&oe.pnl)rows.push(pRow('All-Time PnL \xb7 #'+oe.rank,oe.pnl));
   else if(fetched&&fetched.pnl&&fetched.pnl!==0)rows.push(pRow('All-Time PnL',fetched.pnl));
   if(fetched&&(fetched.wins||fetched.losses))rows.push(rRow('All-Time Record',fetched.wins||0,fetched.losses||0));
   if(se&&se.pnl)rows.push(pRow('Sports PnL \xb7 #'+se.rank,se.pnl));
   if(sport&&fetched){const spPnl=fetched.sp?fetched.sp[sport]:null,spW=fetched.spW?fetched.spW[sport]||0:0,spL=fetched.spL?fetched.spL[sport]||0:0;if(spPnl&&spPnl!==0)rows.push(pRow(sport+' PnL',spPnl));if(spW||spL)rows.push(rRow(sport+' Record',spW,spL));}
-  if(sport)rows.push(sTag(sport));
+  if(sport){/* sport already shown as a badge next to the trader name — no need to repeat it here */}
   const valid=rows.filter(Boolean);
   return valid.length?'<div style="background:var(--s2);border-radius:7px;padding:7px 10px;margin:7px 0">'+valid.join('')+'</div>':'';
 }
@@ -1720,7 +1741,12 @@ function acardHTML(b){
       +'<div style="background:rgba(229,160,13,.06);border-radius:5px;padding:4px 7px"><div style="font-size:9px;color:var(--gold);font-weight:700;margin-bottom:1px">POLY '+(b.polyScore||'')+'</div><div style="font-size:10px;color:var(--t2)">'+(b.polyOutcome||b.outcome||'')+'</div></div>'
       +'</div>';
   } else {
-    detailRow='<div style="font-size:11px;color:var(--t3);margin:4px 0">Bought <strong style="color:var(--t1)">'+(b.outcome||'')+'</strong>'+(pr&&pr!=='0.0'?' @ '+pr+'&#xa2;':'')+'</div>'
+    const logo=teamLogoUrl(sport,b.outcome);
+    detailRow='<div style="display:flex;align-items:center;gap:7px;margin:5px 0 3px">'
+      +(logo?'<img src="'+logo+'" alt="" style="width:22px;height:22px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'')
+      +'<div style="font-size:14px;font-weight:800;color:var(--t1);line-height:1.15">'+esc((b.outcome||'').toUpperCase())+'</div>'
+      +(pr&&pr!=='0.0'?'<div style="font-size:11.5px;font-weight:700;color:var(--gold);font-family:var(--mono)">@ '+pr+'&#xa2;</div>':'')
+      +'</div>'
       +(function(){var r=traderRecordLine(b);return r?'<div style="font-size:10px;color:var(--green);font-family:var(--mono);margin-bottom:3px;line-height:1.4">'+esc(r)+'</div>':'';})();
   }
 
@@ -1792,12 +1818,17 @@ function renderAlerts(){
     const key=b.transactionHash||(b.wallet+(b.timestamp||''));
     const sport=detectSport(b.title);
     const sportTag=sport?'<span style="font-size:10px;font-weight:700;padding:1px 7px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:4px">'+sport+'</span>':'';
+    const logo=teamLogoUrl(sport,b.outcome);
     return '<div class="al-row'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
       +'<div class="al-av-fb">'+init+'</div>'
       +'<div class="al-main"><div class="al-trader">'+shortWallet(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+'</div>'
       +(function(){var r=traderRecordLine(b);return r?'<div style="font-size:10.5px;color:var(--green);font-family:var(--mono);margin:3px 0 2px;line-height:1.4">'+esc(r)+'</div>':'';})()
       +'<div class="sb" style="margin:5px 0"></div>'
-      +'<div class="al-meta">Bought '+(b.outcome||'').toUpperCase()+' @ '+pr+'&#xa2;</div></div>'
+      +'<div style="display:flex;align-items:center;gap:9px;margin-top:6px">'
+      +(logo?'<img src="'+logo+'" alt="" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'')
+      +'<div style="font-size:16px;font-weight:800;color:var(--t1);line-height:1.15;letter-spacing:.01em">'+esc((b.outcome||'').toUpperCase())+'</div>'
+      +'<div style="font-size:13px;font-weight:700;color:var(--gold);font-family:var(--mono)">@ '+pr+'&#xa2;</div>'
+      +'</div></div>'
       +'<div class="al-r"><div class="al-size">'+fu(b.usdValue||0)+'</div><div class="al-time">'+timeAgo(b.loggedAt||b.timestamp*1000)+'</div><button class="al-follow" data-akey="'+key+'">Follow Trade</button></div>'
       +'</div>';
   }).join('');
