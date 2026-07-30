@@ -43,7 +43,7 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .rep-score{font-family:var(--mono);font-size:15px;font-weight:800;line-height:1.1;margin-top:3px;opacity:.9}
 .rep-body{flex:1;min-width:0}
 .rep-play{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:2px}
-.rep-price{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--green)}
+.rep-price{font-family:var(--mono);font-size:15.5px;font-weight:800;color:var(--green);display:flex;align-items:center;gap:7px;margin-top:3px}
 .rep-price .bk{color:var(--t3);font-weight:500;font-size:11px}
 .rep-why{font-size:11.5px;color:var(--t3);line-height:1.55;margin-top:5px}
 .rep-why li{margin-left:14px}
@@ -146,7 +146,7 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .h2-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
 .h2-eyebrow::before{content:"";width:16px;height:1px;background:var(--gold)}
 .h2-game{font-family:var(--disp);font-size:21px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
-.h2-side{font-size:14px;font-weight:600;color:var(--green);margin-bottom:13px}
+.h2-side{font-size:19px;font-weight:800;color:var(--green);margin-bottom:13px;display:flex;align-items:center;gap:8px}
 .h2-side span{color:var(--t3);font-weight:400;font-size:12px}
 .h2-scorewrap{position:absolute;top:18px;right:22px;text-align:right}
 .h2-score{font-family:var(--disp);font-size:48px;font-weight:700;line-height:1;color:var(--gold);letter-spacing:-.02em}
@@ -795,6 +795,15 @@ function teamLogoUrl(sport,name){
   const abbr=map[normTN(name)];
   if(!abbr)return null;
   return 'https://a.espncdn.com/i/teamlogos/'+sp+'/500/'+abbr+'.png';
+}
+// Sharp Report rows don't carry an explicit sport field (server doesn't attach one to
+// dayReport entries), so try each sport's map in turn — team names don't collide across
+// leagues, so this is safe and means the report doesn't need a server change to get logos.
+function anyTeamLogoUrl(name){
+  if(!name)return null;
+  const order=['mlb','nba','nfl','nhl','wnba'];
+  for(let i=0;i<order.length;i++){const u=teamLogoUrl(order[i],name);if(u)return u;}
+  return null;
 }
 
 /* === HELPERS === */
@@ -1481,7 +1490,8 @@ function renderReport(){
       +'<div class="rep-body">'
       +'<div class="rep-play">'+esc((g.away||'')+' @ '+(g.home||''))+'</div>'
       +'<div class="rep-price">'+(i.side
-          ? esc(i.side)+(bb?' '+fmtAm(bb.price)+' <span class="bk">\u2014 '+esc(String(bb.book).toUpperCase())+'</span>':'')
+          ? (function(){var logo=anyTeamLogoUrl(i.side);return (logo?'<img src="'+logo+'" alt="" style="width:20px;height:20px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'');})()
+            +esc(i.side)+(bb?' '+fmtAm(bb.price)+' <span class="bk">\u2014 '+esc(String(bb.book).toUpperCase())+'</span>':'')
           : '<span class="bk">side not resolved \u2014 see reasons</span>')
         +'</div>'
       +'<ul class="rep-why">'+(i.reasons||[]).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>'
@@ -1623,7 +1633,13 @@ function renderHero(){
       +'<div class="h2-scorewrap"><div class="h2-score">'+top.score+'</div><div class="h2-scorelbl">Sharp Score</div></div>'
       +'<div class="h2-eyebrow">Top play today</div>'
       +'<div class="h2-game">'+top.title+(top.sport?' <span style="font-size:11px;color:var(--t4);font-weight:500">'+top.sport+'</span>':'')+'</div>'
-      +'<div class="h2-side">&#x25B6; '+(top.side||'&mdash;')+(top.why?' <span>&middot; '+top.why+'</span>':'')+'</div>'
+      +(function(){
+        var logo=top.side?teamLogoUrl(top.sport,top.side):null;
+        return '<div class="h2-side">'
+          +(logo?'<img src="'+logo+'" alt="" style="width:24px;height:24px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'&#x25B6;')
+          +' '+(top.side||'&mdash;')+(top.why?' <span style="font-size:13px;font-weight:600;color:var(--t3)">&middot; '+top.why+'</span>':'')
+          +'</div>';
+      })()
       +chips
       +'<div class="h2-foot">'
       +'<button class="btn-hero ss-log-btn" data-title="'+String(top.title).replace(/"/g,"\'")+'">Track this play</button>'
