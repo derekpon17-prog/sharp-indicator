@@ -1239,6 +1239,19 @@ function renderSharpLines(){
   const row=el('sharp-line-row'),cont=el('sharp-line-cont'),dotsEl=el('sharp-line-dots');
   if(!cont)return;
   const now2=Date.now();
+  // BUGFIX 2026-07-30 (council-reviewed): autoTrackLinePlays/autoTrackSharpScorePlays were
+  // only ever called with THIS function's display subset — games with raw siScore>=50,
+  // capped to 8 for the trending row. But siScore is largely dead post-devig (see the
+  // gate-change note inside autoTrackSharpScorePlays); the real signal these two functions
+  // already correctly gate on internally is g.indication.tier (A/B/C). Result: tier-A
+  // games shown on the Sharp Report every day almost never reached the tracking functions
+  // at all, which is exactly why Sharp Line/Sharp Score have sat at "no plays yet" while
+  // Poly Whale/Specialist accumulated real records. Fix: build a separate, untruncated
+  // candidate list for tracking — same live-game/time filter, no siScore floor, no slice —
+  // and leave the siScore-based display list below exactly as it was.
+  const trackCandidates=sharpLines.filter(function(g){return !g.noSignal&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now2-4*3600000);});
+  autoTrackLinePlays(trackCandidates);
+  autoTrackSharpScorePlays(trackCandidates,alerts);
   const plays=sharpLines.filter(function(g){return !g.noSignal&&parseInt(g.siScore||0)>=50&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now2-4*3600000);}).slice(0,8);
   if(!plays.length){
     if(row){
@@ -1248,8 +1261,6 @@ function renderSharpLines(){
     return;
   }
   if(row)row.style.display='';
-  autoTrackLinePlays(plays);
-  autoTrackSharpScorePlays(plays,alerts);
   const maxVol=Math.max.apply(null,plays.map(function(g){return parseInt(g.siScore||0);}));
   const recentAlerts=alerts.filter(function(a){return(a.loggedAt||(a.timestamp*1000))>Date.now()-43200000;});
   cont.innerHTML=plays.map(function(g){
@@ -1519,7 +1530,13 @@ function trkMoreBtn(k,total){
    record and its breakdown can never disagree. Only bands with graded plays are shown —
    an empty band is noise, not information. */
 function scoreBands(plays){
-  var bands=[{k:'90+',lo:90,hi:1e9},{k:'70-89',lo:70,hi:89.999},{k:'50-69',lo:50,hi:69.999},{k:'<50',lo:-1e9,hi:49.999}];
+  // BAND CUTS 2026-07-30 (council-reviewed, per Derek): re-cut from 90/70/50 to 80/65/50.
+  // Chosen to land near the tier A/B boundary in the underlying score formula (2+ sources
+  // = +40 base, 1 source = +15 base, both plus capped SI/rel/exchange/velocity terms) —
+  // 50 is roughly where tier B starts contributing meaningfully, 65 and 80 split the rest
+  // into "solid" vs "tier-A-with-real-weight." Applies to every signal type since this
+  // function is shared, which keeps every store's breakdown on the same comparable scale.
+  var bands=[{k:'80+',lo:80,hi:1e9},{k:'65-79',lo:65,hi:79.999},{k:'50-64',lo:50,hi:64.999},{k:'<50',lo:-1e9,hi:49.999}];
   return bands.map(function(b){
     var inBand=(plays||[]).filter(function(p){var v=parseFloat(p.score||p.combined||0);return v>=b.lo&&v<=b.hi;});
     var st=unitPnLCalc(inBand);   // top-level; unitPnL is a local alias inside renderTracking
