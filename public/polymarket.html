@@ -1249,7 +1249,15 @@ function renderSharpLines(){
   // Poly Whale/Specialist accumulated real records. Fix: build a separate, untruncated
   // candidate list for tracking — same live-game/time filter, no siScore floor, no slice —
   // and leave the siScore-based display list below exactly as it was.
-  const trackCandidates=sharpLines.filter(function(g){return !g.noSignal&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now2-4*3600000);});
+  // CORRECTION (same day): trackCandidates still had `!g.noSignal` in it, copied from the
+  // original filter without noticing that `noSignal` is defined server-side purely as
+  // `siScore===0` — the exact dead metric this fix exists to route around. Confirmed live:
+  // SF Giants @ SD Padres carries noSignal:true yet indication.tier 'A' (VEL+DISP sources,
+  // score 55) — a real, not-yet-started CONVERGENCE play that this clause was silently
+  // dropping. The only filter that belongs here is liveness; ind.tier is what actually
+  // qualifies a play, and that check already lives correctly inside autoTrackLinePlays /
+  // autoTrackSharpScorePlays.
+  const trackCandidates=sharpLines.filter(function(g){return !g.commenceTime||new Date(g.commenceTime).getTime()>now2-4*3600000;});
   autoTrackLinePlays(trackCandidates);
   autoTrackSharpScorePlays(trackCandidates,alerts);
   const plays=sharpLines.filter(function(g){return !g.noSignal&&parseInt(g.siScore||0)>=50&&(!g.commenceTime||new Date(g.commenceTime).getTime()>now2-4*3600000);}).slice(0,8);
