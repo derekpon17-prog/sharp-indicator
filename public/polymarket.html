@@ -2013,22 +2013,36 @@ function buildSportBreakdown(){
   });
   return bySport;
 }
+// Fixed display order so the section is "ready" for a sport before it has any graded
+// plays — matches the same convention the Signal Performance tiles above already use
+// (Watchlist/Sharp Line/Sharp Score/My Picks show "no plays yet" rather than disappearing).
+// Any sport that shows up in the data but isn't in this list (e.g. a new one added later)
+// still gets appended automatically.
+var SPORT_DISPLAY_ORDER=['MLB','NFL','NBA','WNBA','NCAAB','NCAAF','NHL'];
 function renderSportBreakdown(){
   var grid=el('sport-breakdown-grid'),empty=el('sport-breakdown-empty');
   if(!grid)return;
   var bySport=buildSportBreakdown();
-  var sports=Object.keys(bySport).sort(function(a,b){
-    var ta=0,tb=0;
-    Object.values(bySport[a]).forEach(function(x){ta+=x.W+x.L+x.P;});
-    Object.values(bySport[b]).forEach(function(x){tb+=x.W+x.L+x.P;});
-    return tb-ta; // busiest sport first
-  });
-  if(!sports.length){grid.innerHTML='';if(empty)empty.style.display='';return;}
+  var extra=Object.keys(bySport).filter(function(s){return SPORT_DISPLAY_ORDER.indexOf(s)===-1;})
+    .sort(function(a,b){
+      var ta=0,tb=0;
+      Object.values(bySport[a]).forEach(function(x){ta+=x.W+x.L+x.P;});
+      Object.values(bySport[b]).forEach(function(x){tb+=x.W+x.L+x.P;});
+      return tb-ta;
+    });
+  var sports=SPORT_DISPLAY_ORDER.concat(extra);
   if(empty)empty.style.display='none';
   grid.innerHTML=sports.map(function(sport){
-    var tags=SPORT_BREAKDOWN_SOURCES.filter(function(src){return bySport[sport][src.key];});
+    var data=bySport[sport];
+    if(!data){
+      return '<div style="background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:13px 15px">'
+        +'<div style="font-size:12.5px;font-weight:800;color:var(--t1);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">'+esc(sport)+'</div>'
+        +'<div style="font-size:11px;color:var(--t3)">No graded plays yet</div>'
+        +'</div>';
+    }
+    var tags=SPORT_BREAKDOWN_SOURCES.filter(function(src){return data[src.key];});
     var rows=tags.map(function(src){
-      var b=bySport[sport][src.key];
+      var b=data[src.key];
       var tot=b.W+b.L;
       var wr=tot>0?Math.round(b.W/tot*100):null;
       var col=wr===null?'var(--t3)':wr>=55?'var(--green)':wr>=50?'var(--gold)':'var(--red)';
