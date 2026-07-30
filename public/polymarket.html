@@ -636,6 +636,10 @@ select.finput option{background:var(--s2)}
         <button class="lb-tab" onclick="setLT('nba',this)">NBA</button>
         <button class="lb-tab" onclick="setLT('nfl',this)">NFL</button>
         <button class="lb-tab" onclick="setLT('nhl',this)">NHL</button>
+        <button class="lb-tab" onclick="setLT('wnba',this)">WNBA</button>
+        <button class="lb-tab" onclick="setLT('ncaab',this)">NCAAB</button>
+        <button class="lb-tab" onclick="setLT('ncaaf',this)">NCAAF</button>
+        <button class="lb-tab" onclick="setLT('alerted',this)">Everyone</button>
       </div>
       <div id="lb-list"></div>
     </div>
@@ -2513,18 +2517,81 @@ function renderHot(){
 
 /* === LEADERBOARD === */
 function setLT(tab,btn){lbTab=tab;document.querySelectorAll('.lb-tab').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');renderLB();}
-function buildSportLB(key){
-  const kw={mlb:['yankee','red sox','dodger','cub','mets','astro','brave','phillies','padre','giant','cardinal','brewer','guardian','royal','twin','oriole','ray','blue jay','mariner','ranger','angel','athletic','tiger','white sox','red','pirate','rockie','marlin','national','diamondback','baseball','mlb'],nba:['nba','basketball'],nfl:['nfl','football','super bowl'],nhl:['nhl','hockey','stanley cup']};
-  const terms=kw[key]||[];
+function parseRecordPnl(str){
+  if(!str)return 0;
+  const m=str.match(/([+-]?)\$([\d,]+)/);
+  if(!m)return 0;
+  const n=parseFloat(m[2].replace(/,/g,''))||0;
+  return m[1]==='-'?-n:n;
+}
+// BUGFIX/FEATURE 2026-07-30: the old buildSportLB sourced from allBuys — a volatile
+// snapshot of the 500 most-recent GLOBAL sports buys — filtered through a hardcoded
+// keyword list that didn't even cover WNBA/NCAAB/NCAAF. Result: a wallet could be firing
+// alerts right now (visible in HOT, which reads the persisted alert log directly) and
+// still be invisible on every Leaderboard tab, because neither the official top-50
+// (specialists aren't on it by definition) nor the keyword-matched buy snapshot picked
+// it up. Exact case reported: 0x3DFb, an MLB specialist wallet, showed in HOT but nowhere
+// on the Leaderboard below it.
+// This builds every per-sport tab (plus a comprehensive "Everyone" tab) directly from the
+// persisted alert log using the already-correct a.sport tag instead — no keyword lists to
+// maintain, and any sport that starts producing alerts (WNBA, NCAAB, NCAAF, whatever's
+// next) works automatically with zero code changes. Alert log is capped at the most
+// recent 200 (same cap the Alerts tab and HOT already use), so a wallet that hasn't
+// fired in a while will roll off here too — consistent with the rest of the app, not a
+// new limitation.
+function buildAlertLB(sportKey){
   const map={};
-  allBuys.forEach(b=>{const t=(b.title||'').toLowerCase();if(!terms.some(x=>t.includes(x)))return;if(!map[b.wallet])map[b.wallet]={wallet:b.wallet,name:b.traderName,image:b.profileImage,categories:b.categories||[],totalVol:0,trades:0};map[b.wallet].totalVol+=(b.usdValue||0);map[b.wallet].trades++;});
-  return Object.values(map).filter(t=>t.totalVol>0).sort((a,b)=>b.totalVol-a.totalVol).slice(0,20).map((t,i)=>({...t,rank:i+1,pnl:t.totalVol,vol:t.totalVol,category:'SPORT'}));
+  alerts.forEach(function(a){
+    if(!a.wallet)return;
+    if(sportKey&&(a.sport||'').toUpperCase()!==sportKey.toUpperCase())return;
+    if(!map[a.wallet])map[a.wallet]={wallet:a.wallet,name:a.traderName,image:a.profileImage,categories:a.categories||[],alertCount:0,sports:new Set(),record:null,recordPnl:0,lastSeen:0};
+    const e=map[a.wallet];
+    e.alertCount++;
+    if(a.sport)e.sports.add(a.sport);
+    const ts=a.loggedAt||(a.timestamp*1000)||0;
+    if(ts>=e.lastSeen){
+      e.lastSeen=ts;
+      const r=traderRecordLine(a);
+      if(r){e.record=r;e.recordPnl=parseRecordPnl(r);}
+      if(a.categories&&a.categories.length)e.categories=a.categories;
+      if(a.traderName)e.name=a.traderName;
+      if(a.profileImage)e.image=a.profileImage;
+    }
+  });
+  return Object.values(map).sort(function(x,y){
+    if(y.recordPnl!==x.recordPnl)return y.recordPnl-x.recordPnl;
+    return y.alertCount-x.alertCount;
+  }).map(function(e,i){return Object.assign({},e,{rank:i+1});});
 }
 function renderLB(){
-  const sportKeys={mlb:1,nba:1,nfl:1,nhl:1};
-  const rawList=sportKeys[lbTab]?buildSportLB(lbTab):(lbData[lbTab]||[]);
+  const alertSportKeys={mlb:1,nba:1,nfl:1,nhl:1,wnba:1,ncaab:1,ncaaf:1,alerted:1};
+  if(alertSportKeys[lbTab]){
+    const list=buildAlertLB(lbTab==='alerted'?null:lbTab);
+    if(!list.length){
+      el('lb-list').innerHTML='<div class="empty"><div class="empty-ico">&#x1F3C6;</div><h3>No alerts yet'+(lbTab==='alerted'?'':' for '+lbTab.toUpperCase())+'</h3><p>Traders appear here as soon as we log a qualifying alert for them</p></div>';
+      return;
+    }
+    el('lb-list').innerHTML=list.map(function(t){
+      const isW=wallets.some(function(w){return w.wallet===t.wallet;});
+      const hotNow=alerts.some(function(a){return a.wallet===t.wallet&&(Date.now()-(a.loggedAt||a.timestamp*1000))<86400000;});
+      const init=(t.name||'?').slice(0,2).toUpperCase();
+      const avPart=t.image?'<img class="lb-av" src="'+t.image+'" alt="'+init+'">':'<div class="lb-av-fb">'+init+'</div>';
+      const sportsStr=[...t.sports].join(', ');
+      return '<div class="lb-row" style="align-items:flex-start">'
+        +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'">#'+t.rank+'</div>'
+        +avPart
+        +'<div class="lb-info"><div class="lb-name">'+(hotNow?'&#x1F525; ':'')+(t.name||t.wallet.slice(0,8)+'\u2026')+bdg(t.categories)+'</div>'
+        +'<div class="lb-meta"><span style="color:var(--gold)">'+t.alertCount+' alert'+(t.alertCount>1?'s':'')+'</span>'+(sportsStr?'<span>'+esc(sportsStr)+'</span>':'')+'</div>'
+        +(t.record?'<div style="font-size:10.5px;color:var(--green);font-family:var(--mono);margin-top:3px;line-height:1.4">'+esc(t.record)+'</div>':'')
+        +'</div>'
+        +(isW?'<button class="lb-add w"><i class="ti ti-eye" style="font-size:10px"></i> Watching</button>':'<button class="lb-add" data-ww="'+t.wallet+'" data-wn="'+(t.name||'')+'"><i class="ti ti-plus" style="font-size:10px"></i> Watch</button>')
+        +'</div>';
+    }).join('');
+    return;
+  }
+  const rawList=lbData[lbTab]||[];
   const list=rawList.filter(t=>t.pnl>0);
-  if(!list.length){el('lb-list').innerHTML='<div class="empty"><div class="empty-ico">&#x1F3C6;</div><h3>'+(sportKeys[lbTab]?lbTab.toUpperCase()+' volume leaders':'Loading&hellip;')+'</h3><p>'+(sportKeys[lbTab]?'Based on current trade feed':'')+'</p></div>';return;}
+  if(!list.length){el('lb-list').innerHTML='<div class="empty"><div class="empty-ico">&#x1F3C6;</div><h3>Loading&hellip;</h3><p></p></div>';return;}
   el('lb-list').innerHTML=list.map(t=>{
     const isW=wallets.some(w=>w.wallet===t.wallet);
     const hot=alerts.some(a=>a.wallet===t.wallet&&(Date.now()-(a.loggedAt||a.timestamp*1000))<86400000);
