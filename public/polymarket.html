@@ -1274,7 +1274,18 @@ function renderSharpLines(){
 }
 
 /* === SIGNAL STRENGTH (POLYMARKET) === */
-function buildTrending(){
+// BUGFIX 2026-07-30: autoTrackPlays() was only ever called with the SAME top-8-by-score
+// list used for the dashboard's Trending Plays row. MLB's alert volume (specialist wallets
+// routinely staking $10k-90k+ per game) reliably fills all 8 slots on any given day, so a
+// qualifying group from a lower-volume sport could score well above the 60 auto-track
+// threshold and still never get tracked, simply because it lost a display-only seat count
+// to MLB. Confirmed directly: the Indiana Fever vs. Seattle Storm WNBA alert (two unique
+// wallets converging on the same side) scores 68 — comfortably past threshold — yet 0 WNBA
+// plays had ever been tracked. Fix: build the full candidate set once, feed the untruncated
+// list to auto-tracking, and keep the top-8 slice for the trending row display only. Doesn't
+// touch the 60-point threshold or the dashboard's top-8 UI cap — just stops one from
+// silently starving the other.
+function buildTrendingGroups(){
   const cutoff=Date.now()-24*60*60*1000,groups={};
   alerts.forEach(a=>{
     const ts=a.loggedAt||(a.timestamp*1000);
@@ -1291,8 +1302,13 @@ function buildTrending(){
     groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
     if(ts>groups[key].latestTs)groups[key].latestTs=ts;
   });
-  return Object.values(groups).filter(g=>{const {score}=signalScore(g);return score>=40;})
-    .sort((a,b)=>signalScore(b).score-signalScore(a).score).slice(0,8);
+  return Object.values(groups).filter(g=>{const {score}=signalScore(g);return score>=40;});
+}
+function buildTrending(){
+  return buildTrendingGroups().sort((a,b)=>signalScore(b).score-signalScore(a).score).slice(0,8);
+}
+function buildAutoTrackCandidates(){
+  return buildTrendingGroups(); // full set, no top-8 display cap — see bugfix note above
 }
 function autoTrackPlays(groups){
   let changed=false;
@@ -1316,9 +1332,9 @@ function autoTrackPlays(groups){
 function renderTrending(){
   const trends=buildTrending();
   const row=el('trending-row'),cont=el('d-trend'),dotsEl=el('trend-dots');
+  autoTrackPlays(buildAutoTrackCandidates());
   if(!trends.length){if(row)row.style.display='none';return;}
   if(row)row.style.display='';
-  autoTrackPlays(trends);
   const maxVol=Math.max(...trends.map(t=>t.totalVol));
   cont.innerHTML=trends.map(g=>{
     const {score,bestRank}=polyDisplayScore(g);
