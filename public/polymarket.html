@@ -1794,9 +1794,17 @@ async function purgeLosers(){
 /* === TRACKING === */
 function setSigStatus(i,s){if(sigPlays[i]){sigPlays[i].status=s;sigPlays[i].gradedAt=Date.now();}ss('pm:sig-plays',sigPlays);renderTracking();}
 function delSigPlay(i){sigPlays.splice(i,1);ss('pm:sig-plays',sigPlays);renderTracking();}
-async function gradeOpenPlays(){
+// BUGFIX 2026-07-30: this only ever looped over sigPlays (Poly Whale). Specialist plays
+// (specPlays) got pushed through auto-track with the identical shape (same eventSlug,
+// title, outcome fields) but were never given this Polymarket-resolution path — their
+// only route to a graded status was gradeFromESPN(), which had its own separate bug (see
+// below). Confirmed via Derek's own tracked-play dump: two Poly Whale plays from 7/24
+// graded fine through this path, while every Specialist play from 7/28-29 sat OPEN
+// indefinitely with no second path to fall back on. Refactored into a shared grader so
+// both populations get the same (date-independent) resolution check.
+async function gradePlaysViaPolymarket(plays,key){
   let changed=false;
-  for(const play of sigPlays){
+  for(const play of plays){
     if(play.status!=='OPEN'||!play.eventSlug)continue;
     try{
       // BUGFIX: was hitting data-api.polymarket.com/markets?eventSlug=... which doesn't
@@ -1835,7 +1843,12 @@ async function gradeOpenPlays(){
       }
     }catch{}
   }
-  if(changed){ss('pm:sig-plays',sigPlays);renderTracking();}
+  if(changed){ss(key,plays);renderTracking();}
+  return changed;
+}
+async function gradeOpenPlays(){
+  await gradePlaysViaPolymarket(sigPlays,'pm:sig-plays');
+  await gradePlaysViaPolymarket(specPlays,'pm:spec-plays');
 }
 
 /* === ESPN AUTO-GRADE === */
@@ -1903,22 +1916,49 @@ function gGrade(play,hN,aN,hS,aS){
   return{status:(shH?hS>aS:aS>hS)?'WIN':'LOSS',espnScore:scoreStr};
 }
 async function gradeFromESPN(){
-  var sN=new Set();[...linePlays,...sharpScorePlays,...sigPlays].forEach(function(p){if(p.status==='OPEN')sN.add(p.sport||'MLB');});
-  if(!sN.size)return;
+  // BUGFIX 2026-07-30: the previous version only ever fetched ESPN's scoreboard for
+  // "today" and "yesterday" relative to whenever this function happened to execute — never
+  // anchored to the play's own gameTime (already stored on every tracked play). A play
+  // that didn't successfully grade within ~24-48h of its game rotated out of that window
+  // and could never grade again, no matter how many times Tracking was reopened later.
+  // Confirmed directly: Derek's specPlays from 7/28-29 sat OPEN indefinitely while 7/24
+  // plays (which happened to fall inside the window when last checked) graded fine.
+  // Also widened the sport-scan below to all six stores — specPlays/watchPlays/mlvPlays
+  // were previously excluded, so a sport with only e.g. open Specialist plays could get
+  // skipped from the ESPN fetch entirely.
+  var openPlays=[...linePlays,...sharpScorePlays,...sigPlays,...specPlays,...watchPlays,...mlvPlays].filter(function(p){return p.status==='OPEN';});
+  if(!openPlays.length)return;
+  var sN=new Set();openPlays.forEach(function(p){sN.add(p.sport||'MLB');});
   var results={};
-  // Fetch today AND yesterday — covers games that started yesterday (late starts, west coast)
+  var dateSet=new Set();
   var todayStr=new Date().toISOString().slice(0,10).replace(/-/g,'');
-  var yday=new Date(Date.now()-86400000).toISOString().slice(0,10).replace(/-/g,'');
+  dateSet.add(todayStr);
+  openPlays.forEach(function(p){
+    if(p.gameTime){
+      try{dateSet.add(new Date(p.gameTime).toISOString().slice(0,10).replace(/-/g,''));}catch(e){}
+    }
+  });
+  // Also grab the day before each date in the set — late starts / west-coast games can
+  // complete after midnight UTC, same reasoning as the original today+yesterday pairing.
+  var extra=new Set();
+  dateSet.forEach(function(d){
+    var dt=new Date(d.slice(0,4)+'-'+d.slice(4,6)+'-'+d.slice(6,8)+'T00:00:00Z');
+    dt.setUTCDate(dt.getUTCDate()-1);
+    extra.add(dt.toISOString().slice(0,10).replace(/-/g,''));
+  });
+  extra.forEach(function(d){dateSet.add(d);});
+  var dates=[...dateSet];
   await Promise.all([...sN].map(async function(sp){
     var path=ESPN_SPORTS[sp];if(!path)return;
-    try{
-      var [r1,r2]=await Promise.all([
-        fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard?dates='+todayStr),
-        fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard?dates='+yday),
-      ]);
-      var [d1,d2]=await Promise.all([r1.json(),r2.json()]);
-      results[sp]=[...(d1.events||[]),...(d2.events||[])];
-    }catch{}
+    var evsAll=[];
+    await Promise.all(dates.map(async function(d){
+      try{
+        var r=await fetch('https://site.api.espn.com/apis/site/v2/sports/'+path+'/scoreboard?dates='+d);
+        var j=await r.json();
+        evsAll.push.apply(evsAll,(j.events||[]));
+      }catch(e){}
+    }));
+    results[sp]=evsAll;
   }));
   var changed=false;
   function tryGrade(plays,key){
