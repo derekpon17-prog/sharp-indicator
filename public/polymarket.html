@@ -486,8 +486,8 @@ select.finput option{background:var(--s2)}
       <div class="flag-card f-poly"><div class="fc-name">Poly Whale</div><div class="fc-rec" id="fs-sig">&mdash;</div><div class="fc-sub" id="fs-sig-sub">no graded plays</div><div id="fs-sig-bands"></div></div>
       <div class="flag-card f-watch"><div class="fc-name">Watchlist <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.07);color:var(--t3);margin-left:3px">TIER C</span></div><div class="fc-rec" id="fs-watch">&mdash;</div><div class="fc-sub" id="fs-watch-sub">no graded plays</div><div id="fs-watch-bands"></div></div>
       <div class="flag-card f-spec"><div class="fc-name">Poly Specialist <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(64,180,255,.15);color:#40B4FF;margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-spec">&mdash;</div><div class="fc-sub" id="fs-spec-sub">no graded plays</div><div id="fs-spec-bands"></div></div>
-      <div class="flag-card f-line"><div class="fc-name">Sharp Line</div><div class="fc-rec" id="fs-line">&mdash;</div><div class="fc-sub" id="fs-line-sub">no graded plays</div><div id="fs-line-bands"></div></div>
-      <div class="flag-card f-ss"><div class="fc-name">Sharp Score</div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div><div id="fs-ss-bands"></div></div>
+      <div class="flag-card f-line"><div class="fc-name">Sharp Line <span style="font-size:8px;font-weight:600;color:var(--t4);text-transform:none;letter-spacing:0">&middot; line only</span></div><div class="fc-rec" id="fs-line">&mdash;</div><div class="fc-sub" id="fs-line-sub">no graded plays</div><div id="fs-line-bands"></div></div>
+      <div class="flag-card f-ss"><div class="fc-name">Sharp Score <span style="font-size:8px;font-weight:600;color:var(--t4);text-transform:none;letter-spacing:0">&middot; line + poly agree</span></div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div><div id="fs-ss-bands"></div></div>
       <div class="flag-card f-picks"><div class="fc-name">My Picks</div><div class="fc-rec" id="fs-picks">&mdash;</div><div class="fc-sub" id="fs-picks-sub">no graded picks</div></div>
       <div class="flag-card f-mlv"><div class="fc-name">ML Velocity <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:3px">SHADOW</span></div><div class="fc-rec" id="fs-mlv">&mdash;</div><div class="fc-sub" id="fs-mlv-sub">validating &mdash; not in real record</div><div id="fs-mlv-bands"></div></div>
     </div>
@@ -1502,11 +1502,31 @@ function renderReport(){
     wrap.innerHTML=head+'<div class="rep-empty">Nothing on today\u2019s board clears even the watchlist bar. On an efficient slate that is the honest answer \u2014 no play is a result.</div></div>';
     wrap.style.display='';return;
   }
+  var rankCounter=0;
   wrap.innerHTML=head+rows.map(function(g){
     var i=g.indication,bb=i.bestBook;
+    // Rank badge — only among plays still live to bet (started games get no rank, they're
+    // done; existing rep-done styling already mutes those). Rows already arrive sorted
+    // strongest-first from buildReport().
+    var rankBadge='';
+    if(!g.started){
+      rankCounter++;
+      rankBadge=rankCounter===1
+        ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--gold);background:rgba(229,160,13,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">&#9733; BEST PLAY</div>'
+        :'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--t3);background:rgba(255,255,255,.06);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">#'+rankCounter+'</div>';
+    }
+    // SHARP LINE vs SHARP SCORE — reuses the exact same matching function that decides real
+    // Sharp Score promotion (matchLineToAlert), so this badge can never disagree with what
+    // actually ends up tracked. Same color coding as the Tracking tab tiles: blue = Sharp
+    // Line, green = Sharp Score, so the two views read as the same system.
+    var polyMatch=i.side?matchLineToAlert({sharpSide:i.side,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts):null;
+    var sourceBadge=polyMatch
+      ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.03em;color:var(--green);background:rgba(16,163,74,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block;margin-left:6px">SHARP SCORE &middot; line + poly agree</div>'
+      :'<div style="font-size:9.5px;font-weight:800;letter-spacing:.03em;color:var(--blue);background:rgba(64,120,255,.1);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block;margin-left:6px">SHARP LINE &middot; line only</div>';
     return '<div class="rep-row'+(g.started?' rep-done':'')+'">'
-      +'<div class="rep-tier t'+i.tier+'">'+i.label+'<div class="rep-score">'+(i.score||0)+'</div></div>'
+      +'<div class="rep-tier t'+i.tier+'">TIER '+i.tier+'<div style="font-size:8px;font-weight:700;opacity:.8;margin-top:1px">'+i.label+'</div><div class="rep-score">'+(i.score||0)+'</div></div>'
       +'<div class="rep-body">'
+      +'<div>'+rankBadge+sourceBadge+'</div>'
       +'<div class="rep-play">'+esc((g.away||'')+' @ '+(g.home||''))+'</div>'
       +'<div class="rep-price">'+(i.side
           ? (function(){var logo=anyTeamLogoUrl(i.side);return (logo?'<img src="'+logo+'" alt="" style="width:20px;height:20px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'');})()
