@@ -398,6 +398,19 @@ async function sendDiscord(webhookUrl, content) {
   }
 }
 
+/* Some wallets have traderName stored as "0xADDRESS-1722957908185" — a raw wallet address
+   with what looks like a discovery timestamp appended, instead of a real display name or
+   a clean short address. This isn't something the convergence code introduced; it's
+   already sitting in stored alert data (confirmed directly against the live alert log —
+   e.g. 0x3dfb153c..., 0xb8c842bc..., 0x2c335066... all carry this pattern). Detect it and
+   fall back to a clean short address instead of printing the raw composite string. */
+function cleanTraderName(name, wallet) {
+  const malformed = name && /^0x[a-fA-F0-9]{20,}-\d{10,}$/.test(name);
+  if (!malformed && name) return name;
+  const w = wallet || (name ? name.split('-')[0] : '');
+  return w ? w.slice(0, 6) + '...' + w.slice(-4) : 'Anon';
+}
+
 /* ═══════════════════════════════════════════════════════
    MAIN HANDLER
 ═══════════════════════════════════════════════════════ */
@@ -615,7 +628,7 @@ module.exports = async function handler(req, res) {
       const price    = (parseFloat(alert.price || 0) * 100).toFixed(1);
       const rankInfo = (alert.categories || []).map(c => `${c.category} #${c.rank}`).join(' / ');
       const body     = [
-        `$${usd} BUY [${alert.sport}] — ${alert.traderName}`,
+        `$${usd} BUY [${alert.sport}] — ${cleanTraderName(alert.traderName, alert.wallet)}`,
         rankInfo ? `Rank: ${rankInfo}` : null,
         // Specialists earned their place on an in-sport record — lead with it.
         alert.specialistRecord ? `Specialist: ${alert.specialistRecord}` : null,
@@ -673,7 +686,7 @@ module.exports = async function handler(req, res) {
           if (!(await claimAlert(dedupKey))) continue;
 
           const buyers = [...g.wallets.values()];
-          const names = buyers.map(a => a.traderName || (a.wallet || '').slice(0, 6) + '...').join(', ');
+          const names = buyers.map(a => cleanTraderName(a.traderName, a.wallet)).join(', ');
           const content = [
             `🎯 **POLY CONVERGENCE** — ${buyers.length} traders on the same side`,
             `**${g.title}**`,
@@ -811,7 +824,6 @@ module.exports = async function handler(req, res) {
                  specialistWallets: results.poly.specialistWallets, specSent: results.poly.specSent },
         line:  { scanned: results.line.scanned,  sent: results.line.sent,  alerts: results.line.alerts },
         sharp: { scanned: results.sharp.scanned, sent: results.sharp.sent, alerts: results.sharp.alerts },
-        discord: { scanned: results.discord.scanned, sent: results.discord.sent, alerts: results.discord.alerts, error: results.discord.error || null },
       },
       debug: {
         lbLimitUsed: lbDiag.limitUsed,
