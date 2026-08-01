@@ -380,6 +380,24 @@ async function sendNtfy(topic, title, body, priority = 'high') {
   }
 }
 
+/* ─── SEND DISCORD ────────────────────────────────────────
+   Webhook URL comes from process.env.DISCORD_WEBHOOK_URL — never hardcode it here. It's a
+   credential: anyone holding the URL can post into that channel, and this file is committed
+   to a repo. Set it once in Vercel (Project Settings → Environment Variables) and it's
+   available to every future deploy without ever touching source. */
+async function sendDiscord(webhookUrl, content) {
+  try {
+    const r = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content }),
+    });
+    return { ok: r.ok, status: r.status };
+  } catch (e) {
+    return { ok: false, error: e.message };
+  }
+}
+
 /* ═══════════════════════════════════════════════════════
    MAIN HANDLER
 ═══════════════════════════════════════════════════════ */
@@ -613,6 +631,64 @@ module.exports = async function handler(req, res) {
       results.poly.alerts.push({ title: alert.title, usd: Math.round(alert.usdValue), result: r });
       await storeAlert(alert);
       if (polyAlerts.length > 1) await new Promise(r => setTimeout(r, 300));
+    }
+
+    /* ── STEP 1.5: Discord convergence ping — 2+ unique wallets on the same side ──
+       This is a server-side port of the client's own convergence grouping (buildTrending's
+       title+outcome key). It has to live here rather than in the browser because
+       convergence is only meaningful if it fires whether or not anyone has the site open —
+       the whole point of a ping to a phone. Runs off the alert log this run's polyAlerts
+       were just storeAlert()'d into above, so a convergence that only completes THIS run
+       (one buyer already logged, a second one lands in this same batch) is caught
+       immediately rather than waiting for the next 15-minute pass.
+       Dedup uses the same claimAlert() 48h-NX pattern as every other alert type in this
+       file, keyed per group — a still-converged play won't re-ping every cycle, but a
+       genuinely new convergence always gets exactly one shot at firing. */
+    const discordWebhook = process.env.DISCORD_WEBHOOK_URL;
+    results.discord = { scanned: 0, sent: 0, alerts: [] };
+    if (discordWebhook) {
+      try {
+        const histRes = await fetch(`${SITE_URL}/api/polymarket-alerts`);
+        const histData = await histRes.json();
+        const histAlerts = (histData.alerts || []).filter(a => a.type === 'POLY' || a.type === 'SPEC');
+        const convCutoff = now - 86400; // 24h — matches the client's own convergence window
+        const groups = {};
+        histAlerts.forEach(a => {
+          const ts = a.loggedAt ? Math.floor(a.loggedAt / 1000) : a.timestamp;
+          if (!ts || ts < convCutoff) return;
+          const key = `${a.title || ''}||${a.outcome || ''}`;
+          if (!a.title || !a.outcome) return;
+          if (!groups[key]) groups[key] = { title: a.title, outcome: a.outcome, wallets: new Map(), totalVol: 0 };
+          const w = (a.wallet || '').toLowerCase();
+          if (w && !groups[key].wallets.has(w)) groups[key].wallets.set(w, a);
+          groups[key].totalVol += (a.usdValue || 0);
+        });
+
+        for (const key of Object.keys(groups)) {
+          const g = groups[key];
+          if (g.wallets.size < 2) continue;
+          results.discord.scanned++;
+
+          const dedupKey = `discord:conv:${key}`;
+          if (!(await claimAlert(dedupKey))) continue;
+
+          const buyers = [...g.wallets.values()];
+          const names = buyers.map(a => a.traderName || (a.wallet || '').slice(0, 6) + '...').join(', ');
+          const content = [
+            `🎯 **POLY CONVERGENCE** — ${buyers.length} traders on the same side`,
+            `**${g.title}**`,
+            `Side: **${g.outcome}**`,
+            `Traders: ${names}`,
+            `Combined volume: $${Math.round(g.totalVol).toLocaleString()}`,
+          ].join('\n');
+
+          const r = await sendDiscord(discordWebhook, content);
+          if (r.ok) results.discord.sent++;
+          results.discord.alerts.push({ title: g.title, outcome: g.outcome, buyers: buyers.length, result: r });
+        }
+      } catch (e) {
+        results.discord.error = e.message;
+      }
     }
 
     /* ── STEP 2: Sharp Line Signal — from /api/odds ── */
