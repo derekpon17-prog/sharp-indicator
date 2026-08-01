@@ -546,7 +546,7 @@ select.finput option{background:var(--s2)}
     <!-- Sharp Line Signal Auto-Plays -->
     <div style="margin-bottom:28px">
       <div class="row-hdr" style="margin-bottom:12px">
-        <div class="row-ttl" style="font-size:16px"><i class="ti ti-chart-bar" style="color:var(--blue)"></i>Sharp Line Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at 65+ SI Score</span></div>
+        <div class="row-ttl" style="font-size:16px"><i class="ti ti-chart-bar" style="color:var(--blue)"></i>Sharp Line Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at Report Tier A or B</span></div>
         <div style="display:flex;align-items:center;gap:10px">
           <button onclick="gradeFromESPN().then(function(){renderTracking();})" style="font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);cursor:pointer;font-family:var(--mono)">Grade now</button>
           <div id="line-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
@@ -560,7 +560,7 @@ select.finput option{background:var(--s2)}
       <div id="line-plays" style="display:flex;flex-direction:column;gap:8px"></div>
       <div id="line-empty" class="empty" style="padding:22px">
         <div class="empty-ico">&#x1F4CA;</div><h3>No Sharp Line plays yet</h3>
-        <p>Line plays scoring 65+ land here automatically and grade themselves after the game</p>
+        <p>Report Tier A or B plays land here automatically and grade themselves after the game</p>
       </div>
     </div>
 
@@ -1505,9 +1505,6 @@ function renderReport(){
   var rankCounter=0;
   wrap.innerHTML=head+rows.map(function(g){
     var i=g.indication,bb=i.bestBook;
-    // Rank badge — only among plays still live to bet (started games get no rank, they're
-    // done; existing rep-done styling already mutes those). Rows already arrive sorted
-    // strongest-first from buildReport().
     var rankBadge='';
     if(!g.started){
       rankCounter++;
@@ -1515,10 +1512,6 @@ function renderReport(){
         ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--gold);background:rgba(229,160,13,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">&#9733; BEST PLAY</div>'
         :'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--t3);background:rgba(255,255,255,.06);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">#'+rankCounter+'</div>';
     }
-    // SHARP LINE vs SHARP SCORE — reuses the exact same matching function that decides real
-    // Sharp Score promotion (matchLineToAlert), so this badge can never disagree with what
-    // actually ends up tracked. Same color coding as the Tracking tab tiles: blue = Sharp
-    // Line, green = Sharp Score, so the two views read as the same system.
     var polyMatch=i.side?matchLineToAlert({sharpSide:i.side,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts):null;
     var sourceBadge=polyMatch
       ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.03em;color:var(--green);background:rgba(16,163,74,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block;margin-left:6px">SHARP SCORE &middot; line + poly agree</div>'
@@ -1869,7 +1862,15 @@ function setAF(f,btn){af=f;document.querySelectorAll('.fp').forEach(b=>b.classLi
 function renderAlerts(){
   const q=(el('asearch')?.value||'').toLowerCase();
   const minMap={all:0,'1k':1000,'5k':5000,'10k':10000,'25k':25000};
-  const fil=alerts.filter(b=>{if((b.usdValue||0)<(minMap[af]||0))return false;if(q&&!(b.title||'').toLowerCase().includes(q)&&!(b.traderName||'').toLowerCase().includes(q))return false;return true;});
+  // BUGFIX 2026-07-31: LINE and SHARP_SCORE auto-track entries post to this same
+  // /api/polymarket-alerts store (confirmed server-side: "All three auto-track to
+  // /api/polymarket-alerts for the dashboard") but they represent a line signal, not an
+  // actual Polymarket wallet buy — no wallet, no traderName, no usdValue, no outcome field
+  // (they use sharpSide instead). This row template assumes every entry is a trader buy,
+  // so those entries rendered as "Anon" with $0 and a blank side — real data, wrong feed.
+  // They already have dedicated homes (Sharp Report, Sharp Score Plays); this tab is for
+  // individual wallet activity specifically.
+  const fil=alerts.filter(b=>{if(b.type==='LINE'||b.type==='SHARP_SCORE')return false;if((b.usdValue||0)<(minMap[af]||0))return false;if(q&&!(b.title||'').toLowerCase().includes(q)&&!(b.traderName||'').toLowerCase().includes(q))return false;return true;});
   fil.forEach(b=>{window._al=window._al||{};window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
   const list=el('al-list');
   if(!fil.length){list.innerHTML='<div class="empty"><div class="empty-ico">&#x1F514;</div><h3>No alerts match</h3><p>Try a different filter</p></div>';return;}
@@ -2273,11 +2274,12 @@ function renderTracking(){
         var sport=p.sport||'MLB';
         var sportTag='<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>';
         var sigBadge=si>=80?'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(155,109,255,.15);color:var(--purple)">🔥 STRONG</span>':'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(64,180,255,.12);color:var(--blue)">📊 LINE</span>';
+        var tierBadge=p.tier?'<span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:var(--t2);font-family:var(--mono);margin-left:5px">TIER '+p.tier+(p.tierLabel?' \u00b7 '+p.tierLabel:'')+'</span>':'';
         var exBadge=(p.exchangeConfirmed||p.exConfirms>0)?'<span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(0,200,150,.1);color:var(--green);border-radius:3px;font-family:var(--mono)">✓ EXCHANGE</span>':'';
         var pinLine=p.lines&&p.lines.pinnacle?'Pin: <strong>'+p.lines.pinnacle+'</strong>':'SI: '+si;
         return '<div class="sig-play '+(p.status||'open').toLowerCase()+'">'
           +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
-          +'<div style="display:flex;gap:5px;flex-wrap:wrap">'+sigBadge+exBadge+'</div>'
+          +'<div style="display:flex;gap:5px;flex-wrap:wrap">'+sigBadge+tierBadge+exBadge+'</div>'
           +'<div style="text-align:right"><div style="font-size:20px;font-weight:900;font-family:var(--mono);color:var(--blue);line-height:1">'+si+'</div><div style="font-size:9px;color:var(--t4);font-family:var(--mono)">SI</div></div>'
           +'</div>'
           +'<div style="font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px">'+(p.title||p.market||'')+'</div>'
