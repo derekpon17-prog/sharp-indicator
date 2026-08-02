@@ -704,8 +704,22 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    /* ── STEP 2: Sharp Line Signal — from /api/odds ── */
-    const linePlays = await fetchSharpLinePlays('MLB'); // Only SI >= 70 returned (raised from 65)
+    /* ── STEP 2: Sharp Line Signal — from /api/odds ──
+       READINESS 2026-08-02 (per Derek, NFL/NBA/NHL prep): was hardcoded to fetchSharpLinePlays
+       ('MLB') only. The odds engine itself (SI score, REL z-score, DISP dispersion, RLM,
+       exchange lean) is already sport-agnostic — confirmed directly in odds.js, the only
+       sport-specific code there is the default query-param fallback and MLB-gated weather.
+       So the one thing actually blocking NFL/NBA/NHL was this hardcoded call. Now loops over
+       ACTIVE_LINE_SPORTS — to turn a sport on once its season starts, add its code to this
+       one array; no other change needed here. Left as MLB-only for now since NFL/NBA/NHL are
+       all off-season — no reason to spend API quota polling empty boards. */
+    const ACTIVE_LINE_SPORTS = ['MLB'];
+    let linePlays = [];
+    for (const lsport of ACTIVE_LINE_SPORTS) {
+      const sportPlays = await fetchSharpLinePlays(lsport); // Only SI >= 70 returned (raised from 65)
+      sportPlays.forEach(p => { p.sport = p.sport || lsport; });
+      linePlays = linePlays.concat(sportPlays);
+    }
     results.line.scanned = linePlays.length;
 
     for (const play of linePlays) {
