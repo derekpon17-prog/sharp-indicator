@@ -247,6 +247,8 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .lb-wrap{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rxl);overflow:hidden;margin-bottom:26px}
 .lb-tabs{display:flex;border-bottom:1px solid var(--b1);overflow-x:auto}
 .lb-tab{flex:0 0 auto;padding:12px 16px;border:none;background:transparent;color:var(--t3);font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.lb-conf-tab{flex:0 0 auto;padding:5px 11px;border:1px solid var(--b1);border-radius:14px;background:transparent;color:var(--t3);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+.lb-conf-tab.on{background:rgba(229,160,13,.14);color:var(--gold);border-color:rgba(229,160,13,.4)}
 .lb-tab:hover{color:var(--t2)}.lb-tab.on{color:var(--gold);border-bottom-color:var(--gold)}
 .lb-row{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--b1);transition:background .1s}
 .lb-row:last-child{border-bottom:none}.lb-row:hover{background:var(--s2)}
@@ -641,6 +643,18 @@ select.finput option{background:var(--s2)}
         <button class="lb-tab" onclick="setLT('ncaaf',this)">NCAAF</button>
         <button class="lb-tab" onclick="setLT('alerted',this)">Everyone</button>
       </div>
+      <div id="ncaaf-conf-tabs" style="display:none;padding:8px 0;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--b1);margin-bottom:10px">
+        <button class="lb-conf-tab on" onclick="setLBConf('all',this)">All NCAAF</button>
+        <button class="lb-conf-tab" onclick="setLBConf('SEC',this)">SEC</button>
+        <button class="lb-conf-tab" onclick="setLBConf('Big Ten',this)">Big Ten</button>
+        <button class="lb-conf-tab" onclick="setLBConf('Big 12',this)">Big 12</button>
+        <button class="lb-conf-tab" onclick="setLBConf('ACC',this)">ACC</button>
+        <button class="lb-conf-tab" onclick="setLBConf('American',this)">American</button>
+        <button class="lb-conf-tab" onclick="setLBConf('Mountain West',this)">Mtn West</button>
+        <button class="lb-conf-tab" onclick="setLBConf('MAC',this)">MAC</button>
+        <button class="lb-conf-tab" onclick="setLBConf('Sun Belt',this)">Sun Belt</button>
+        <button class="lb-conf-tab" onclick="setLBConf('C-USA',this)">C-USA</button>
+      </div>
       <div id="lb-list"></div>
     </div>
     <div class="row-hdr" style="margin-bottom:14px">
@@ -739,7 +753,7 @@ let mlvPlays=ls('pm:mlv-plays',[]); // ML Velocity SHADOW plays — validation o
 let sharpLines=[];
 const dismissed=new Set(ls('pm:dismissed',[]));
 function dismiss(key){dismissed.add(key);ss('pm:dismissed',[...dismissed]);renderTrending();}
-let af='all',lbTab='sports',lbData={overall:[],sports:[]},allBuys=[],view='dashboard';
+let af='all',lbTab='sports',lbConf='all',lbData={overall:[],sports:[]},allBuys=[],view='dashboard';
 try{if(!window._sA)window._sA=[];}catch(e){}
 let cd=0,cdT;
 const REFRESH=30*60*1000; // 30min — saves quota (was 10min)
@@ -769,6 +783,38 @@ const WNBA_TEAMS=['fever','storm','sparks','liberty','sky','mercury','lynx','sun
 const NBA_TEAMS=['hawks','celtics','nets','hornets','bulls','cavaliers','mavericks','nuggets','pistons','warriors','rockets','pacers','clippers','lakers','grizzlies','heat','bucks','timberwolves','pelicans','knicks','thunder','magic','76ers','suns','trail blazers','sacramento kings','spurs','raptors','jazz','wizards'];
 const NFL_TEAMS=['arizona cardinals','falcons','ravens','bills','carolina panthers','bears','bengals','browns','cowboys','broncos','lions','packers','texans','colts','jaguars','chiefs','chargers','rams','raiders','dolphins','vikings','patriots','saints','new york giants','new york jets','eagles','steelers','seahawks','49ers','buccaneers','titans','commanders'];
 const NHL_TEAMS=['ducks','bruins','sabres','flames','hurricanes','blackhawks','avalanche','blue jackets','stars','red wings','oilers','florida panthers','los angeles kings','wild','canadiens','predators','devils','islanders','new york rangers','senators','flyers','penguins','sharks','kraken','blues','lightning','maple leafs','mammoth','canucks','golden knights','capitals','winnipeg jets'];
+// NCAAF TEAM -> CONFERENCE, per council (Aug 2 2026): tracking needs three layers, not just
+// overall — a specialist could be genuinely sharp on the SEC specifically and mediocre
+// elsewhere, or conversely have real edge on a Group of 5 conference like the MAC where
+// books are thin rather than sharp-money-efficient. Uses SCHOOL NAME as the match key, not
+// mascot — many schools share mascots (Tigers, Bulldogs, Wildcats...) so mascot-only
+// matching would be far too collision-prone in college football specifically, unlike the
+// pro leagues above where nicknames are mostly unique once disambiguated. Safe against the
+// pro-league collisions fixed above (e.g. "Texas" alone won't wrongly match MLB's now-full
+// "texas rangers" phrase) because this check runs after every pro-league check in the
+// chain below — first match wins, so a real "Texas Rangers" MLB title is claimed by MLB
+// long before this map is ever consulted.
+// CAVEAT: conference realignment happens most years (this reflects the 2024-25 realignment
+// as known at last training update) — spot-check this against current conference sites
+// before the season, don't treat it as guaranteed-current out of the box.
+const NCAAF_CONFERENCES={
+  SEC:['alabama','arkansas','auburn','florida gators','georgia bulldogs','kentucky','lsu','mississippi state','missouri','ole miss','oklahoma sooners','south carolina','tennessee','texas longhorns','texas a&m','vanderbilt'],
+  'Big Ten':['illinois','indiana hoosiers','iowa hawkeyes','maryland','michigan wolverines','michigan state','minnesota','nebraska','northwestern','ohio state','oregon ducks','penn state','purdue','rutgers','ucla','usc trojans','washington huskies','wisconsin'],
+  'Big 12':['arizona wildcats','arizona state','baylor','byu','cincinnati bearcats','colorado buffaloes','houston cougars','iowa state','kansas jayhawks','kansas state','oklahoma state','tcu','texas tech','ucf','utah utes','west virginia'],
+  ACC:['boston college','california golden bears','clemson','duke','florida state','georgia tech','louisville','miami hurricanes','nc state','north carolina tar heels','pittsburgh panthers','smu','stanford cardinal','syracuse','virginia cavaliers','virginia tech','wake forest'],
+  American:['charlotte 49ers','east carolina','florida atlantic','memphis tigers','navy midshipmen','north texas','rice owls','south florida','temple owls','tulane','tulsa golden hurricane','uab','utsa'],
+  'Mountain West':['air force falcons','boise state','colorado state','fresno state','hawaii rainbow warriors','nevada wolf pack','new mexico lobos','san diego state','san jose state','unlv','utah state','wyoming cowboys'],
+  MAC:['akron zips','ball state','bowling green','buffalo bulls','central michigan','eastern michigan','kent state','miami redhawks','northern illinois','ohio bobcats','toledo','western michigan'],
+  'Sun Belt':['appalachian state','arkansas state','coastal carolina','georgia southern','georgia state','james madison','louisiana ragin','louisiana-monroe','marshall thundering','old dominion','south alabama','southern miss','texas state','troy trojans'],
+  'C-USA':['delaware blue hens','fiu panthers','jacksonville state','kennesaw state','liberty flames','louisiana tech','middle tennessee','new mexico state','sam houston','utep','western kentucky'],
+  Independent:['notre dame','uconn huskies','umass minutemen']
+};
+const NCAAF_TEAMS=Object.values(NCAAF_CONFERENCES).flat();
+function ncaafConference(teamName){
+  const t=(teamName||'').toLowerCase();
+  for(const conf in NCAAF_CONFERENCES){if(NCAAF_CONFERENCES[conf].some(x=>t.includes(x)))return conf;}
+  return null;
+}
 const ESPORTS=['dota','valorant','cs2','counter-strike','league of legends','lol:','esports world cup','starcraft','overwatch','fortnite','pubg','apex legends','rainbow six','rocket league'];
 const SOCCER_INTL=['premier league','la liga','serie a','bundesliga','champions league','copa america','gold cup','concacaf','fa cup','nations league','world cup qualifier','man city','man united','liverpool','chelsea','arsenal','barcelona','real madrid','france vs','england vs','brazil vs','germany vs','spain vs','portugal vs','argentina vs','italy vs','netherlands vs'];
 function detectSport(title){
@@ -779,7 +825,7 @@ function detectSport(title){
   if(t.includes('nba')||t.includes('nba finals')||NBA_TEAMS.some(x=>t.includes(x)))return 'NBA';
   if(t.includes('nfl')||t.includes('super bowl')||t.includes('afc championship')||t.includes('nfc championship')||NFL_TEAMS.some(x=>t.includes(x)))return 'NFL';
   if(t.includes('nhl')||t.includes('stanley cup')||NHL_TEAMS.some(x=>t.includes(x)))return 'NHL';
-  if(t.includes('ncaaf')||t.includes('college football playoff')||t.includes('cfp')||t.includes('rose bowl')||t.includes('sugar bowl')||t.includes('orange bowl')||t.includes('cotton bowl')||t.includes('fiesta bowl'))return 'NCAAF';
+  if(t.includes('ncaaf')||t.includes('college football playoff')||t.includes('cfp')||t.includes('rose bowl')||t.includes('sugar bowl')||t.includes('orange bowl')||t.includes('cotton bowl')||t.includes('fiesta bowl')||NCAAF_TEAMS.some(x=>t.includes(x)))return 'NCAAF';
   if(t.includes('ncaab')||t.includes('march madness')||t.includes('ncaa tournament')||t.includes('ncaa basketball')||t.includes('final four'))return 'NCAAB';
   if(t.includes('pga')||t.includes('masters ')||t.includes('ryder cup')||t.includes('the open championship')||t.includes('us open golf')||t.includes('pga championship')||t.includes('liv golf'))return 'Golf';
   if(t.includes('fifa world cup')||t.includes('world cup winner')||SOCCER_INTL.some(x=>t.includes(x)))return 'Soccer';
@@ -2140,6 +2186,23 @@ function buildSportBreakdown(){
       if(!bySport[sport][src.key])bySport[sport][src.key]={label:src.label,W:0,L:0,P:0};
       var b=bySport[sport][src.key];
       if(p.status==='WIN')b.W++;else if(p.status==='LOSS')b.L++;else if(p.status==='PUSH')b.P++;
+      // NCAAF conference breakdown, per council (Aug 2 2026): combined across signal
+      // types rather than per-type-per-conference, since splitting both ways at once
+      // would fragment sample size into pieces too small to read on a phone screen.
+      if(sport==='NCAAF'){
+        // Prefer the specific side (outcome for sigPlays/specPlays, sharpSide for
+        // linePlays/sharpScorePlays) over the full title — a title contains BOTH teams,
+        // so a cross-conference matchup (e.g. Notre Dame @ USC) would otherwise resolve
+        // to whichever conference happens to be checked first, not necessarily the side
+        // that was actually tracked.
+        var conf=ncaafConference(p.outcome||p.sharpSide)||ncaafConference(p.title);
+        if(conf){
+          if(!bySport[sport]._conferences)bySport[sport]._conferences={};
+          if(!bySport[sport]._conferences[conf])bySport[sport]._conferences[conf]={W:0,L:0,P:0};
+          var cb=bySport[sport]._conferences[conf];
+          if(p.status==='WIN')cb.W++;else if(p.status==='LOSS')cb.L++;else if(p.status==='PUSH')cb.P++;
+        }
+      }
     });
   });
   return bySport;
@@ -2182,9 +2245,30 @@ function renderSportBreakdown(){
         +'<span style="font-size:12.5px;font-weight:800;font-family:var(--mono);color:'+col+'">'+b.W+'-'+b.L+(b.P?'-'+b.P+'P':'')+(wr!==null?' <span style="font-size:9.5px;color:var(--t4);font-weight:600">('+wr+'%)</span>':'')+'</span>'
         +'</div>';
     }).join('');
+    var confRows='';
+    if(sport==='NCAAF'&&data._conferences){
+      var confKeys=Object.keys(data._conferences).sort(function(a,b){
+        var ta=data._conferences[a],tb=data._conferences[b];
+        return (tb.W+tb.L+tb.P)-(ta.W+ta.L+ta.P);
+      });
+      if(confKeys.length){
+        confRows='<div style="font-size:9.5px;font-weight:800;color:var(--t4);text-transform:uppercase;letter-spacing:.05em;margin:9px 0 4px">By Conference</div>'
+          +confKeys.map(function(conf){
+            var cb=data._conferences[conf];
+            var ctot=cb.W+cb.L;
+            var cwr=ctot>0?Math.round(cb.W/ctot*100):null;
+            var ccol=cwr===null?'var(--t3)':cwr>=55?'var(--green)':cwr>=50?'var(--gold)':'var(--red)';
+            return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--b1)">'
+              +'<span style="font-size:11px;color:var(--t3)">'+esc(conf)+'</span>'
+              +'<span style="font-size:12px;font-weight:700;font-family:var(--mono);color:'+ccol+'">'+cb.W+'-'+cb.L+(cb.P?'-'+cb.P+'P':'')+(cwr!==null?' <span style="font-size:9px;color:var(--t4);font-weight:600">('+cwr+'%)</span>':'')+'</span>'
+              +'</div>';
+          }).join('');
+      }
+    }
     return '<div style="background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:13px 15px">'
       +'<div style="font-size:12.5px;font-weight:800;color:var(--t1);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">'+esc(sport)+'</div>'
       +rows
+      +confRows
       +'</div>';
   }).join('');
 }
@@ -2662,7 +2746,26 @@ function renderHot(){
 }
 
 /* === LEADERBOARD === */
-function setLT(tab,btn){lbTab=tab;document.querySelectorAll('.lb-tab').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');renderLB();}
+function setLT(tab,btn){
+  lbTab=tab;
+  document.querySelectorAll('.lb-tab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  const confRow=el('ncaaf-conf-tabs');
+  if(confRow)confRow.style.display=(tab==='ncaaf')?'flex':'none';
+  if(tab!=='ncaaf'){
+    lbConf='all';
+    document.querySelectorAll('.lb-conf-tab').forEach(b=>b.classList.remove('on'));
+    const allBtn=document.querySelector('.lb-conf-tab');
+    if(allBtn)allBtn.classList.add('on');
+  }
+  renderLB();
+}
+function setLBConf(conf,btn){
+  lbConf=conf;
+  document.querySelectorAll('.lb-conf-tab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderLB();
+}
 function parseRecordPnl(str){
   if(!str)return 0;
   const m=str.match(/([+-]?)\$([\d,]+)/);
@@ -2685,11 +2788,19 @@ function parseRecordPnl(str){
 // recent 200 (same cap the Alerts tab and HOT already use), so a wallet that hasn't
 // fired in a while will roll off here too — consistent with the rest of the app, not a
 // new limitation.
-function buildAlertLB(sportKey){
+function buildAlertLB(sportKey,conf){
   const map={};
   alerts.forEach(function(a){
     if(!a.wallet)return;
     if(sportKey&&(a.sport||'').toUpperCase()!==sportKey.toUpperCase())return;
+    // Conference filter only meaningful for NCAAF right now — derives conference from the
+    // actual side the wallet bet (a.outcome), not just either team in the game, since a
+    // wallet betting the SEC side of an SEC-vs-MAC crossover game is a different signal
+    // than one betting the MAC side.
+    if(conf&&conf!=='all'){
+      const wc=ncaafConference(a.outcome)||ncaafConference(a.title);
+      if(wc!==conf)return;
+    }
     if(!map[a.wallet])map[a.wallet]={wallet:a.wallet,name:a.traderName,image:a.profileImage,categories:a.categories||[],alertCount:0,sports:new Set(),record:null,recordPnl:0,lastSeen:0};
     const e=map[a.wallet];
     e.alertCount++;
@@ -2712,9 +2823,10 @@ function buildAlertLB(sportKey){
 function renderLB(){
   const alertSportKeys={mlb:1,nba:1,nfl:1,nhl:1,wnba:1,ncaab:1,ncaaf:1,alerted:1};
   if(alertSportKeys[lbTab]){
-    const list=buildAlertLB(lbTab==='alerted'?null:lbTab);
+    const list=buildAlertLB(lbTab==='alerted'?null:lbTab,lbTab==='ncaaf'?lbConf:null);
     if(!list.length){
-      el('lb-list').innerHTML='<div class="empty"><div class="empty-ico">&#x1F3C6;</div><h3>No alerts yet'+(lbTab==='alerted'?'':' for '+lbTab.toUpperCase())+'</h3><p>Traders appear here as soon as we log a qualifying alert for them</p></div>';
+      const confNote=(lbTab==='ncaaf'&&lbConf!=='all')?' in '+lbConf:'';
+      el('lb-list').innerHTML='<div class="empty"><div class="empty-ico">&#x1F3C6;</div><h3>No alerts yet'+(lbTab==='alerted'?'':' for '+lbTab.toUpperCase()+confNote)+'</h3><p>Traders appear here as soon as we log a qualifying alert for them</p></div>';
       return;
     }
     el('lb-list').innerHTML=list.map(function(t){
