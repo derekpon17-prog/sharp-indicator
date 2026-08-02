@@ -747,7 +747,7 @@ const POLY_AUTOTRACK_THRESHOLD=60; // flat threshold for Poly Signal qualify/aut
 const _sc={};
 
 /* === SPORT DETECTION (WHITELIST ONLY) === */
-const MLB_TEAMS=['yankees','red sox','dodgers','cubs','mets','astros','braves','phillies','padres','giants','cardinals','brewers','guardians','royals','twins','orioles','rays','blue jays','mariners','rangers','angels','athletics','tigers','white sox','reds','pirates','rockies','marlins','nationals','diamondbacks'];
+const MLB_TEAMS=['yankees','red sox','dodgers','cubs','mets','astros','braves','phillies','padres','san francisco giants','st. louis cardinals','st louis cardinals','brewers','guardians','royals','twins','orioles','rays','blue jays','mariners','texas rangers','angels','athletics','tigers','white sox','reds','pirates','rockies','marlins','nationals','diamondbacks'];
 // BUGFIX 2026-07-29: WNBA had no branch at all here, so every WNBA alert (title text
 // only, e.g. "Indiana Fever vs. Seattle Storm") returned null and was silently dropped
 // before buildTrending, auto-tracking, or the By Sport breakdown ever saw it — even
@@ -756,6 +756,19 @@ const MLB_TEAMS=['yankees','red sox','dodgers','cubs','mets','astros','braves','
 // "wnba" itself ("w-NBA"), so without ordering, a literal "WNBA" in a title would have
 // still misclassified as NBA.
 const WNBA_TEAMS=['fever','storm','sparks','liberty','sky','mercury','lynx','sun','mystics','wings','aces','dream','valkyries','tempo','fire'];
+// BUGFIX 2026-08-02: NBA/NFL/NHL had zero team-name coverage — only bare keyword checks
+// like t.includes('nba')/t.includes('nfl')/t.includes('nhl'), which a normal title like
+// "Kansas City Chiefs vs. Buffalo Bills" or "Los Angeles Lakers vs. Boston Celtics" never
+// contains. Same exact bug shape as the WNBA gap from a few days ago, just not yet hit
+// because none of these three sports are in season. Disambiguated entries below (full
+// "City Nickname" instead of bare nickname) exist specifically to avoid cross-league
+// collisions found while building this: Cardinals (STL vs Arizona), Giants (SF vs NY),
+// Rangers (Texas vs NY), Kings (Sacramento vs LA), Panthers (Carolina vs Florida), Jets
+// (NY vs Winnipeg) — MLB_TEAMS above was also patched for the same reason, since MLB is
+// checked first in this chain and would otherwise win every one of those collisions.
+const NBA_TEAMS=['hawks','celtics','nets','hornets','bulls','cavaliers','mavericks','nuggets','pistons','warriors','rockets','pacers','clippers','lakers','grizzlies','heat','bucks','timberwolves','pelicans','knicks','thunder','magic','76ers','suns','trail blazers','sacramento kings','spurs','raptors','jazz','wizards'];
+const NFL_TEAMS=['arizona cardinals','falcons','ravens','bills','carolina panthers','bears','bengals','browns','cowboys','broncos','lions','packers','texans','colts','jaguars','chiefs','chargers','rams','raiders','dolphins','vikings','patriots','saints','new york giants','new york jets','eagles','steelers','seahawks','49ers','buccaneers','titans','commanders'];
+const NHL_TEAMS=['ducks','bruins','sabres','flames','hurricanes','blackhawks','avalanche','blue jackets','stars','red wings','oilers','florida panthers','los angeles kings','wild','canadiens','predators','devils','islanders','new york rangers','senators','flyers','penguins','sharks','kraken','blues','lightning','maple leafs','mammoth','canucks','golden knights','capitals','winnipeg jets'];
 const ESPORTS=['dota','valorant','cs2','counter-strike','league of legends','lol:','esports world cup','starcraft','overwatch','fortnite','pubg','apex legends','rainbow six','rocket league'];
 const SOCCER_INTL=['premier league','la liga','serie a','bundesliga','champions league','copa america','gold cup','concacaf','fa cup','nations league','world cup qualifier','man city','man united','liverpool','chelsea','arsenal','barcelona','real madrid','france vs','england vs','brazil vs','germany vs','spain vs','portugal vs','argentina vs','italy vs','netherlands vs'];
 function detectSport(title){
@@ -763,9 +776,9 @@ function detectSport(title){
   if(ESPORTS.some(x=>t.includes(x)))return null;
   if(t.includes('mlb')||t.includes('world baseball classic')||t.includes('wbc')||MLB_TEAMS.some(x=>t.includes(x)))return 'MLB';
   if(t.includes('wnba')||WNBA_TEAMS.some(x=>t.includes(x)))return 'WNBA';
-  if(t.includes('nba')||t.includes('nba finals'))return 'NBA';
-  if(t.includes('nfl')||t.includes('super bowl')||t.includes('afc championship')||t.includes('nfc championship'))return 'NFL';
-  if(t.includes('nhl')||t.includes('stanley cup'))return 'NHL';
+  if(t.includes('nba')||t.includes('nba finals')||NBA_TEAMS.some(x=>t.includes(x)))return 'NBA';
+  if(t.includes('nfl')||t.includes('super bowl')||t.includes('afc championship')||t.includes('nfc championship')||NFL_TEAMS.some(x=>t.includes(x)))return 'NFL';
+  if(t.includes('nhl')||t.includes('stanley cup')||NHL_TEAMS.some(x=>t.includes(x)))return 'NHL';
   if(t.includes('ncaaf')||t.includes('college football playoff')||t.includes('cfp')||t.includes('rose bowl')||t.includes('sugar bowl')||t.includes('orange bowl')||t.includes('cotton bowl')||t.includes('fiesta bowl'))return 'NCAAF';
   if(t.includes('ncaab')||t.includes('march madness')||t.includes('ncaa tournament')||t.includes('ncaa basketball')||t.includes('final four'))return 'NCAAB';
   if(t.includes('pga')||t.includes('masters ')||t.includes('ryder cup')||t.includes('the open championship')||t.includes('us open golf')||t.includes('pga championship')||t.includes('liv golf'))return 'Golf';
@@ -1339,7 +1352,16 @@ function buildTrendingGroups(){
   alerts.forEach(a=>{
     const ts=a.loggedAt||(a.timestamp*1000);
     if(ts<cutoff)return;
-    if(!detectSport(a.title))return;
+    // BUGFIX 2026-08-02: was detectSport(a.title) only — re-deriving sport from title text
+    // even though the server already tags every alert with a correct a.sport field. A team
+    // market ("Brewers vs. Angels") has a team name to match on; a prop market ("Riley
+    // Greene: Home Runs O/U 0.5") never does, so this silently dropped EVERY player prop,
+    // in every sport, before it ever reached convergence detection, auto-tracking, or a
+    // Discord ping — confirmed directly: the Riley Greene alert carries sport:"MLB" from
+    // the server, yet detectSport() on its title returns null. Prefer a.sport; only fall
+    // back to title-parsing for the rare alert missing the field.
+    const sp=a.sport||detectSport(a.title);
+    if(!sp)return;
     if(isStaleAlert(a))return; // STALE-MARKET FILTER: game date already passed (ET) — off active views, tracking unaffected
     if(isLiveAlert(a))return;  // LIVE-GAME FILTER: game already underway
     if(isLosingTrader(a.wallet))return;
@@ -1347,7 +1369,7 @@ function buildTrendingGroups(){
     if(!inLB&&cached!==null&&cached!==undefined&&(cached.pnl===null||cached.pnl<=0))return;
     const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
     if(dismissed.has(key))return;
-    if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,buys:[],totalVol:0,latestTs:0};
+    if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,sport:sp,buys:[],totalVol:0,latestTs:0};
     groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
     if(ts>groups[key].latestTs)groups[key].latestTs=ts;
   });
@@ -1373,7 +1395,7 @@ function autoTrackPlays(groups){
     const store=isSpec?specPlays:sigPlays;
     const storeKey=isSpec?'pm:spec-plays':'pm:sig-plays';
     if(store.some(p=>p.key===key))return;
-    store.unshift({key,population:isSpec?'SPECIALIST':'WHALE',title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:detectSport(g.title),gameTime:findGameDateForTitle(g.title,g.eventSlug),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
+    store.unshift({key,population:isSpec?'SPECIALIST':'WHALE',title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:g.sport||detectSport(g.title),gameTime:findGameDateForTitle(g.title,g.eventSlug),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
     changed=true;
   });
   if(changed){ss('pm:sig-plays',sigPlays);ss('pm:spec-plays',specPlays);}
@@ -1391,7 +1413,7 @@ function renderTrending(){
     const barPct=Math.round((g.totalVol/maxVol)*100);
     const traders=g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,4);
     const link=g.eventSlug?'https://polymarket.com/event/'+g.eventSlug:'#';
-    const sport=detectSport(g.title);
+    const sport=g.sport||detectSport(g.title);
     const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
     const ocLower=(g.outcome||'').toLowerCase();
     const ocColor=ocLower==='yes'?'#00C896':ocLower==='no'?'#FF3D5A':'var(--t1)';
@@ -1621,7 +1643,7 @@ function buildBoard(){
     rows.push({
       title:g.title,side:g.outcome||'',score:sc,
       srcLine:0,srcPoly:sc,srcExch:0,combined:false,
-      gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:detectSport(g.title)||'',
+      gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||'',
       why:b>=2?b+' profitable traders converging':fu(g.totalVol)+' from a top trader'
     });
   });
@@ -1694,7 +1716,7 @@ function renderHero(){
   h.style.display='';
   h.innerHTML='<div class="h2-wrap">'+main+trust+'</div>';
   // biggest-buy stats still feed the header numbers
-  var rec24=alerts.filter(function(a){var ts=a.loggedAt||(a.timestamp*1000);return ts>Date.now()-86400000&&detectSport(a.title)&&!isStaleAlert(a)&&!isLiveAlert(a)&&!isLosingTrader(a.wallet);});
+  var rec24=alerts.filter(function(a){var ts=a.loggedAt||(a.timestamp*1000);return ts>Date.now()-86400000&&(a.sport||detectSport(a.title))&&!isStaleAlert(a)&&!isLiveAlert(a)&&!isLosingTrader(a.wallet);});
   window._heroAlert=rec24.sort(function(a,b){return b.usdValue-a.usdValue;})[0]||null;
 }
 
@@ -1878,7 +1900,7 @@ function renderAlerts(){
     const pr=(parseFloat(b.price||0)*100).toFixed(1),big=(b.usdValue||0)>=5000;
     const init=(b.traderName||'?').slice(0,2).toUpperCase();
     const key=b.transactionHash||(b.wallet+(b.timestamp||''));
-    const sport=detectSport(b.title);
+    const sport=b.sport||detectSport(b.title);
     const sportTag=sport?'<span style="font-size:10px;font-weight:700;padding:1px 7px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:4px">'+sport+'</span>':'';
     const logo=teamLogoUrl(sport,b.outcome);
     return '<div class="al-row'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
@@ -1982,7 +2004,7 @@ let gameStatuses=[];
 async function fetchGameStatuses(){
   var sports=new Set();
   (sharpLines||[]).forEach(function(g){var s=detectSportFromTeams(g.away,g.home);if(s)sports.add(s);});
-  (alerts||[]).forEach(function(a){var s=detectSport(a.title);if(s)sports.add(s);});
+  (alerts||[]).forEach(function(a){var s=a.sport||detectSport(a.title);if(s)sports.add(s);});
   if(!sports.size)sports.add('MLB');
   var todayStr=new Date().toISOString().slice(0,10).replace(/-/g,'');
   var results=[];
@@ -2433,7 +2455,7 @@ function renderSharpScore(){
     buildTrending().forEach(function(g){
       const sc=polyDisplayScore(g).score;if(sc<POLY_AUTOTRACK_THRESHOLD)return;
       const key=g.title+'_'+g.outcome;if(seen.has(key))return;seen.add(key);
-      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:detectSport(g.title)||''});
+      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||''});
     });
   }
   plays.sort(function(a,b){return b.score-a.score||(a.type==='combined'?-1:b.type==='combined'?1:0);});
@@ -2632,7 +2654,7 @@ function renderCommandCenter(){
 /* === HOT === *//* === HOT === */
 function renderHot(){
   const cutoff=Date.now()-86400000,hm={};
-  alerts.forEach(a=>{const ts=a.loggedAt||(a.timestamp*1000);if(ts<cutoff||(a.usdValue||0)<1000||!detectSport(a.title))return;if(!hm[a.wallet]||a.usdValue>hm[a.wallet].usdValue)hm[a.wallet]=a;});
+  alerts.forEach(a=>{const ts=a.loggedAt||(a.timestamp*1000);if(ts<cutoff||(a.usdValue||0)<1000||!(a.sport||detectSport(a.title)))return;if(!hm[a.wallet]||a.usdValue>hm[a.wallet].usdValue)hm[a.wallet]=a;});
   const hot=Object.values(hm).sort((a,b)=>b.usdValue-a.usdValue).slice(0,5);
   el('hot-sub').textContent=hot.length?hot.length+' trader'+(hot.length>1?'s':'')+' active today':'None today';
   if(!hot.length){el('hot-list').innerHTML='<div style="font-size:12px;color:var(--t4);text-align:center;padding:8px">No qualifying buys in last 24h</div>';return;}
@@ -2937,10 +2959,11 @@ function renderSignalLab(){
   recentAlerts.forEach(a=>{
     const ts=a.loggedAt||(a.timestamp*1000);
     if(ts<cutoffExt)return;
-    if(!detectSport(a.title||''))return; // apply whitelist — skip esports/blocked
+    const spExt=a.sport||detectSport(a.title||''); // prefer server-tagged sport — see buildTrendingGroups note
+    if(!spExt)return; // apply whitelist — skip esports/blocked
     const key=(a.title||'')+'||'+(a.outcome||'');
     if(!key||key==='||')return;
-    if(!allGroups[key])allGroups[key]={title:a.title,outcome:a.outcome,eventSlug:a.eventSlug,buys:[],totalVol:0,latestTs:0};
+    if(!allGroups[key])allGroups[key]={title:a.title,outcome:a.outcome,eventSlug:a.eventSlug,sport:spExt,buys:[],totalVol:0,latestTs:0};
     allGroups[key].buys.push(a);
     allGroups[key].totalVol+=(a.usdValue||0);
     if(ts>allGroups[key].latestTs)allGroups[key].latestTs=ts;
@@ -2960,7 +2983,7 @@ function renderSignalLab(){
     const threshold=POLY_AUTOTRACK_THRESHOLD;
     const qualifies=score>=threshold&&!isLosingTrader(g.buys[0]&&g.buys[0].wallet);
     const nearMiss=score>=40&&score<threshold;
-    const sport=detectSport(g.title)||'';
+    const sport=g.sport||detectSport(g.title)||'';
     const traders=[...new Set(g.buys.map(b=>b.traderName||'Anon'))];
     const topCats=g.buys.flatMap(b=>b.categories||[]).sort((a,b)=>a.rank-b.rank).slice(0,2);
 
