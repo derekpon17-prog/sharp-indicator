@@ -646,58 +646,155 @@ module.exports = async function handler(req, res) {
       if (polyAlerts.length > 1) await new Promise(r => setTimeout(r, 300));
     }
 
-    /* ── STEP 1.5: Discord convergence ping — 2+ unique wallets on the same side ──
-       This is a server-side port of the client's own convergence grouping (buildTrending's
-       title+outcome key). It has to live here rather than in the browser because
-       convergence is only meaningful if it fires whether or not anyone has the site open —
-       the whole point of a ping to a phone. Runs off the alert log this run's polyAlerts
-       were just storeAlert()'d into above, so a convergence that only completes THIS run
-       (one buyer already logged, a second one lands in this same batch) is caught
-       immediately rather than waiting for the next 15-minute pass.
-       Dedup uses the same claimAlert() 48h-NX pattern as every other alert type in this
-       file, keyed per group — a still-converged play won't re-ping every cycle, but a
-       genuinely new convergence always gets exactly one shot at firing. */
+    /* ── STEP 1.5: Discord convergence ping — 2+ unique wallets on the same TEAM ──
+       Server-side port of the client's own convergence grouping. Has to live here rather
+       than in the browser because convergence is only meaningful if it fires whether or
+       not anyone has the site open — the whole point of a ping to a phone.
+       Runs off the alert log this run's polyAlerts were just storeAlert()'d into above.
+
+       GROUPING: groups by eventSlug+outcome ("same team, any bet type" — see 2026-08-01
+       note in git history for why title+outcome and eventSlug-alone both fail here).
+
+       SCORING 2026-08-03 (per Derek): now computes and shows the same 0-100 score and
+       ELITE/STRONG/MODERATE tier the website shows for the same play — ported directly
+       from the client's signalScore()/sigLabel(), not reinvented, specifically so this
+       number can never disagree with what Top Signals or Polymarket Signal would show
+       for the identical convergence. (Confirmed live: a 44-score convergence pinged
+       Discord fine but didn't clear the 60-point Top Signals bar — that's a real, known
+       gap between the two thresholds, not a bug; showing the score here at least makes
+       that visible instead of silent.)
+
+       LIVE-UPDATING 2026-08-03 (per Derek): previously, once a convergence claimed its
+       48h dedup key, it could never post again even if a third (or fourth) trader joined
+       later — worth knowing immediately if, say, a $2M-PnL specialist jumps onto a play
+       two traders already flagged. Discord webhook messages can be edited after posting
+       (PATCH .../webhooks/{id}/{token}/messages/{message_id}), so the dedup key now
+       stores the message ID and wallet count instead of just a claim flag. Each run: if
+       the wallet count grew since last sent, EDIT the original message in place with the
+       new trader list/score/volume instead of posting a duplicate or staying silent. */
     const discordWebhook = process.env.DISCORD_WEBHOOK_URL;
-    results.discord = { scanned: 0, sent: 0, alerts: [] };
+    results.discord = { scanned: 0, sent: 0, edited: 0, alerts: [] };
     if (discordWebhook) {
       try {
         const histRes = await fetch(`${SITE_URL}/api/polymarket-alerts`);
         const histData = await histRes.json();
         const histAlerts = (histData.alerts || []).filter(a => a.type === 'POLY' || a.type === 'SPEC');
         const convCutoff = now - 86400; // 24h — matches the client's own convergence window
+        const isTotals = o => /^(over|under)\b/i.test(o || '');
+
         const groups = {};
+        const slugTitle = {};
         histAlerts.forEach(a => {
           const ts = a.loggedAt ? Math.floor(a.loggedAt / 1000) : a.timestamp;
           if (!ts || ts < convCutoff) return;
-          const key = `${a.title || ''}||${a.outcome || ''}`;
-          if (!a.title || !a.outcome) return;
-          if (!groups[key]) groups[key] = { title: a.title, outcome: a.outcome, wallets: new Map(), totalVol: 0 };
+          if (!a.eventSlug || !a.outcome) return;
+          const key = `${a.eventSlug}||${a.outcome}`;
+          if (!groups[key]) groups[key] = { eventSlug: a.eventSlug, outcome: a.outcome, wallets: new Map(), totalVol: 0 };
           const w = (a.wallet || '').toLowerCase();
           if (w && !groups[key].wallets.has(w)) groups[key].wallets.set(w, a);
           groups[key].totalVol += (a.usdValue || 0);
+          const t = (a.title || '').trim();
+          const isCleanMatchup = /\bvs\.?\s/i.test(t) && !/^spread:/i.test(t);
+          if (t && (!slugTitle[a.eventSlug] || (isCleanMatchup && !slugTitle[a.eventSlug].clean))) {
+            slugTitle[a.eventSlug] = { text: t.replace(/:\s*O\/U.*$/i, '').trim(), clean: isCleanMatchup };
+          }
         });
+
+        // Ported from the client's signalScore()/sigLabel() — same formula, same tiers,
+        // on purpose, so this number is never a second, disagreeing scoring system.
+        function computeGroupScore(g) {
+          const buyers = [...g.wallets.values()];
+          const vol = g.totalVol;
+          const base = vol <= 500 ? 5 : Math.min(Math.round(Math.log10(vol / 500) * 38) + 15, 90);
+          let bestRank = 999;
+          buyers.forEach(b => (b.categories || []).forEach(c => { const r = parseInt(c.rank) || 999; if (r < bestRank) bestRank = r; }));
+          const rm = bestRank <= 5 ? 1.6 : bestRank <= 15 ? 1.4 : bestRank <= 30 ? 1.2 : bestRank <= 75 ? 1.0 : 0.85;
+          const conv = buyers.length >= 4 ? 28 : buyers.length >= 3 ? 20 : buyers.length >= 2 ? 12 : 0;
+          const score = Math.min(Math.round(base * rm) + conv, 100);
+          const tier = score >= 80 ? 'ELITE' : score >= 60 ? 'STRONG' : 'MODERATE';
+          return { score, tier, bestRank };
+        }
 
         for (const key of Object.keys(groups)) {
           const g = groups[key];
           if (g.wallets.size < 2) continue;
           results.discord.scanned++;
 
-          const dedupKey = `discord:conv:${key}`;
-          if (!(await claimAlert(dedupKey))) continue;
-
           const buyers = [...g.wallets.values()];
           const names = buyers.map(a => cleanTraderName(a.traderName, a.wallet)).join(', ');
+          const gameTitle = (slugTitle[g.eventSlug] && slugTitle[g.eventSlug].text) || g.outcome;
+          const { score, tier } = computeGroupScore(g);
+
+          let contrastLine = '';
+          if (!isTotals(g.outcome)) {
+            const oppKey = Object.keys(groups).find(k2 => {
+              const g2 = groups[k2];
+              return g2.eventSlug === g.eventSlug && g2.outcome !== g.outcome && !isTotals(g2.outcome) && g2.wallets.size > 0;
+            });
+            if (oppKey) {
+              const opp = groups[oppKey];
+              const oppNames = [...opp.wallets.values()].map(a => cleanTraderName(a.traderName, a.wallet)).join(', ');
+              contrastLine = `\n**${g.wallets.size}v${opp.wallets.size}** — ${opp.wallets.size} on **${opp.outcome}** (${oppNames})`;
+            }
+          }
+
           const content = [
-            `🎯 **POLY CONVERGENCE** — ${buyers.length} traders on the same side`,
-            `**${g.title}**`,
+            `🎯 **POLY CONVERGENCE** — ${buyers.length} traders on the same side (ML + spread combined)`,
+            `Score: **${score}** (${tier})`,
+            `**${gameTitle}**`,
             `Side: **${g.outcome}**`,
             `Traders: ${names}`,
             `Combined volume: $${Math.round(g.totalVol).toLocaleString()}`,
-          ].join('\n');
+          ].join('\n') + contrastLine;
 
-          const r = await sendDiscord(discordWebhook, content);
-          if (r.ok) results.discord.sent++;
-          results.discord.alerts.push({ title: g.title, outcome: g.outcome, buyers: buyers.length, result: r });
+          const dedupKey = `discord:conv:${key}`;
+          const stateRes = await upstashPost(['GET', dedupKey]);
+          let state = null;
+          if (stateRes.ok && stateRes.result) { try { state = JSON.parse(stateRes.result); } catch {} }
+
+          if (!state) {
+            // Never sent before — post new, capturing the message ID for future edits.
+            // ?wait=true makes the webhook return the created message object (incl. id);
+            // without it Discord returns 204 No Content and there's nothing to edit later.
+            try {
+              const r = await fetch(`${discordWebhook}?wait=true`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content }),
+              });
+              if (r.ok) {
+                const msg = await r.json();
+                await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: msg.id, walletCount: buyers.length }), 'EX', '172800']);
+                results.discord.sent++;
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'sent' });
+              } else {
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'send-failed', status: r.status });
+              }
+            } catch (e) {
+              results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'send-error', error: e.message });
+            }
+          } else if (buyers.length > state.walletCount) {
+            // Convergence grew since we last posted — edit the original message in place
+            // rather than posting a duplicate or staying silent for the rest of the 48h.
+            try {
+              const editUrl = `${discordWebhook}/messages/${state.messageId}`;
+              const r = await fetch(editUrl, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: content + `\n_(updated — was ${state.walletCount}, now ${buyers.length})_` }),
+              });
+              if (r.ok) {
+                await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: state.messageId, walletCount: buyers.length }), 'EX', '172800']);
+                results.discord.edited++;
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'edited', was: state.walletCount });
+              } else {
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'edit-failed', status: r.status });
+              }
+            } catch (e) {
+              results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'edit-error', error: e.message });
+            }
+          }
+          // else: already posted, no new wallets since — nothing to do.
         }
       } catch (e) {
         results.discord.error = e.message;
