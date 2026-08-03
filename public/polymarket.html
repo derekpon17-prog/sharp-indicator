@@ -1580,7 +1580,17 @@ function renderReport(){
         ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--gold);background:rgba(229,160,13,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">&#9733; BEST PLAY</div>'
         :'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--t3);background:rgba(255,255,255,.06);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">#'+rankCounter+'</div>';
     }
-    var polyMatch=i.side?matchLineToAlert({sharpSide:i.side,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts):null;
+    // BUGFIX 2026-08-03: this only ever checked whether SOME Poly alert existed for this
+    // game (matchLineToAlert doesn't verify side at all) and treated any match as
+    // "agree." Confirmed against real data: a Cardinals @ Yankees game where the line
+    // favored Yankees, but the only Poly activity (SDTrading $13.6k, Mooseborzoi $459)
+    // was on Cardinals — the opposite side — still showed "SHARP SCORE · line + poly
+    // agree". The actual tracking logic (autoTrackSharpScorePlays) already gets this
+    // right via an explicit sameSharpSide() check; this badge just wasn't doing the same
+    // check, so it could show something the real system would never track. Fixed to
+    // match exactly.
+    var polyMatchRaw=i.side?matchLineToAlert({sharpSide:i.side,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts):null;
+    var polyMatch=polyMatchRaw&&sameSharpSide(i.side,polyMatchRaw.outcome)?polyMatchRaw:null;
     var sourceBadge=polyMatch
       ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.03em;color:var(--green);background:rgba(16,163,74,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block;margin-left:6px">SHARP SCORE &middot; line + poly agree</div>'
       :'<div style="font-size:9.5px;font-weight:800;letter-spacing:.03em;color:var(--blue);background:rgba(64,120,255,.1);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block;margin-left:6px">SHARP LINE &middot; line only</div>';
