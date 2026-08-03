@@ -1181,7 +1181,18 @@ function gameEasternDate(line){
 function matchLineToAlert(line,alertList){
   const sh=normTeam(line.sharpSide||'');const aw=normTeam(line.away||'');const hm=normTeam(line.home||'');
   const gameDate=gameEasternDate(line);
-  return alertList.find(function(a){
+  // BUGFIX 2026-08-03: previously matched against the full alertList including LINE and
+  // SHARP_SCORE log entries, which share this same title-matching pool but have no
+  // `outcome` field at all. Since alerts sort newest-first, if the freshest entry for a
+  // game happened to be a LINE log line, .find() returned it, and every downstream
+  // sameSharpSide() check saw undefined outcome and reported "no agreement" — even when
+  // a real trader alert on the SAME side existed just a few entries later. Confirmed on
+  // live data: Washington Nationals @ Philadelphia Phillies had 3 traders genuinely on
+  // Phillies (ferrariChampions2026, mooseborzoi, SDTrading), but the freshest matching
+  // entry was a bare LINE log line, so agreement was invisible both on the Sharp Report
+  // badge AND in autoTrackSharpScorePlays' real tracking (same function, same bug).
+  const candidates=alertList.filter(function(a){
+    if(a.type!=='POLY'&&a.type!=='SPEC')return false;
     const t=(a.title||'').toLowerCase().replace(/[^a-z]/g,'');
     const nameMatch=(sh&&sh.length>2&&t.includes(sh))||(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));
     if(!nameMatch)return false;
@@ -1190,7 +1201,13 @@ function matchLineToAlert(line,alertList){
     const alertDate=extractSlugDate(a);
     if(gameDate&&alertDate&&alertDate!==gameDate)return false;
     return true;
-  })||null;
+  });
+  if(!candidates.length)return null;
+  // Prefer a candidate that genuinely agrees on side, if one exists, rather than just the
+  // first/most-recent name match — real agreement shouldn't be hidden behind an unrelated
+  // buy on the opposing side that merely happened to log more recently.
+  const agreeing=candidates.find(function(a){return sameSharpSide(sh,a.outcome);});
+  return agreeing||candidates[0];
 }
 function lineLabel(score){
   if(score>=80)return{lbl:'ELITE LINE',cls:'sig-3'};
@@ -1580,15 +1597,6 @@ function renderReport(){
         ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--gold);background:rgba(229,160,13,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">&#9733; BEST PLAY</div>'
         :'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--t3);background:rgba(255,255,255,.06);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">#'+rankCounter+'</div>';
     }
-    // BUGFIX 2026-08-03: this only ever checked whether SOME Poly alert existed for this
-    // game (matchLineToAlert doesn't verify side at all) and treated any match as
-    // "agree." Confirmed against real data: a Cardinals @ Yankees game where the line
-    // favored Yankees, but the only Poly activity (SDTrading $13.6k, Mooseborzoi $459)
-    // was on Cardinals — the opposite side — still showed "SHARP SCORE · line + poly
-    // agree". The actual tracking logic (autoTrackSharpScorePlays) already gets this
-    // right via an explicit sameSharpSide() check; this badge just wasn't doing the same
-    // check, so it could show something the real system would never track. Fixed to
-    // match exactly.
     var polyMatchRaw=i.side?matchLineToAlert({sharpSide:i.side,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts):null;
     var polyMatch=polyMatchRaw&&sameSharpSide(i.side,polyMatchRaw.outcome)?polyMatchRaw:null;
     var sourceBadge=polyMatch
