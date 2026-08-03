@@ -652,28 +652,25 @@ module.exports = async function handler(req, res) {
        not anyone has the site open — the whole point of a ping to a phone.
        Runs off the alert log this run's polyAlerts were just storeAlert()'d into above.
 
-       GROUPING: groups by eventSlug+outcome ("same team, any bet type" — see 2026-08-01
-       note in git history for why title+outcome and eventSlug-alone both fail here).
+       GROUPING: groups by eventSlug+outcome ("same team, any bet type").
 
-       SCORING 2026-08-03 (per Derek): now computes and shows the same 0-100 score and
-       ELITE/STRONG/MODERATE tier the website shows for the same play — ported directly
-       from the client's signalScore()/sigLabel(), not reinvented, specifically so this
-       number can never disagree with what Top Signals or Polymarket Signal would show
-       for the identical convergence. (Confirmed live: a 44-score convergence pinged
-       Discord fine but didn't clear the 60-point Top Signals bar — that's a real, known
-       gap between the two thresholds, not a bug; showing the score here at least makes
-       that visible instead of silent.)
+       SCORING: computes the same 0-100 score and ELITE/STRONG/MODERATE tier the website
+       shows for the same play — ported directly from the client's signalScore()/
+       sigLabel(), not reinvented, so this number can never disagree with what Top Signals
+       or Polymarket Signal would show for the identical convergence.
 
-       LIVE-UPDATING 2026-08-03 (per Derek): previously, once a convergence claimed its
-       48h dedup key, it could never post again even if a third (or fourth) trader joined
-       later — worth knowing immediately if, say, a $2M-PnL specialist jumps onto a play
-       two traders already flagged. Discord webhook messages can be edited after posting
-       (PATCH .../webhooks/{id}/{token}/messages/{message_id}), so the dedup key now
-       stores the message ID and wallet count instead of just a claim flag. Each run: if
-       the wallet count grew since last sent, EDIT the original message in place with the
-       new trader list/score/volume instead of posting a duplicate or staying silent. */
+       LIVE-UPDATING: the dedup key stores messageId + walletCount + score/tier instead of
+       just a claim flag. Two different kinds of "the situation changed" are handled
+       differently on purpose:
+         - Wallet count grew (someone else joined) → EDIT the original message in place.
+           Keeps the existing message accurate without spamming a new ping for every
+           incremental buyer.
+         - Tier improved (e.g. MODERATE → STRONG/ELITE) → POST A NEW MESSAGE. An edited
+           message does not re-notify on Discord the way a new one does, and a jump from
+           a 44 to an 80+ is exactly the kind of thing worth an actual fresh ping, not a
+           silent update buried in a message already scrolled past. */
     const discordWebhook = process.env.DISCORD_WEBHOOK_URL;
-    results.discord = { scanned: 0, sent: 0, edited: 0, alerts: [] };
+    results.discord = { scanned: 0, sent: 0, edited: 0, upgraded: 0, alerts: [] };
     if (discordWebhook) {
       try {
         const histRes = await fetch(`${SITE_URL}/api/polymarket-alerts`);
@@ -681,6 +678,7 @@ module.exports = async function handler(req, res) {
         const histAlerts = (histData.alerts || []).filter(a => a.type === 'POLY' || a.type === 'SPEC');
         const convCutoff = now - 86400; // 24h — matches the client's own convergence window
         const isTotals = o => /^(over|under)\b/i.test(o || '');
+        const tierRank = t => t === 'ELITE' ? 2 : t === 'STRONG' ? 1 : 0;
 
         const groups = {};
         const slugTitle = {};
@@ -700,8 +698,7 @@ module.exports = async function handler(req, res) {
           }
         });
 
-        // Ported from the client's signalScore()/sigLabel() — same formula, same tiers,
-        // on purpose, so this number is never a second, disagreeing scoring system.
+        // Ported from the client's signalScore()/sigLabel() — same formula, same tiers.
         function computeGroupScore(g) {
           const buyers = [...g.wallets.values()];
           const vol = g.totalVol;
@@ -754,8 +751,6 @@ module.exports = async function handler(req, res) {
 
           if (!state) {
             // Never sent before — post new, capturing the message ID for future edits.
-            // ?wait=true makes the webhook return the created message object (incl. id);
-            // without it Discord returns 204 No Content and there's nothing to edit later.
             try {
               const r = await fetch(`${discordWebhook}?wait=true`, {
                 method: 'POST',
@@ -764,18 +759,23 @@ module.exports = async function handler(req, res) {
               });
               if (r.ok) {
                 const msg = await r.json();
-                await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: msg.id, walletCount: buyers.length }), 'EX', '172800']);
+                await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: msg.id, walletCount: buyers.length, score, tier }), 'EX', '172800']);
                 results.discord.sent++;
-                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'sent' });
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, score, tier, action: 'sent' });
               } else {
-                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'send-failed', status: r.status });
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'send-failed', status: r.status });
               }
             } catch (e) {
               results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'send-error', error: e.message });
             }
-          } else if (buyers.length > state.walletCount) {
-            // Convergence grew since we last posted — edit the original message in place
-            // rather than posting a duplicate or staying silent for the rest of the 48h.
+            continue;
+          }
+
+          const grew = buyers.length > state.walletCount;
+          const upgraded = tierRank(tier) > tierRank(state.tier || 'MODERATE');
+
+          if (grew) {
+            // Wallet count grew — edit the original message in place to stay accurate.
             try {
               const editUrl = `${discordWebhook}/messages/${state.messageId}`;
               const r = await fetch(editUrl, {
@@ -784,7 +784,6 @@ module.exports = async function handler(req, res) {
                 body: JSON.stringify({ content: content + `\n_(updated — was ${state.walletCount}, now ${buyers.length})_` }),
               });
               if (r.ok) {
-                await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: state.messageId, walletCount: buyers.length }), 'EX', '172800']);
                 results.discord.edited++;
                 results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'edited', was: state.walletCount });
               } else {
@@ -794,7 +793,38 @@ module.exports = async function handler(req, res) {
               results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'edit-error', error: e.message });
             }
           }
-          // else: already posted, no new wallets since — nothing to do.
+
+          if (upgraded) {
+            // Tier improved — a silent edit doesn't re-notify on Discord, so this earns
+            // an actual new message, not just an update to the old one.
+            const upgradeContent = [
+              `🚀 **CONVERGENCE UPGRADE** — jumped from ${state.tier || 'MODERATE'} (${state.score ?? '—'}) to **${tier}** (${score})`,
+              `**${gameTitle}**`,
+              `Side: **${g.outcome}**`,
+              `Now ${buyers.length} traders: ${names}`,
+              `Combined volume: $${Math.round(g.totalVol).toLocaleString()}`,
+            ].join('\n') + contrastLine;
+            try {
+              const r = await fetch(discordWebhook, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: upgradeContent }),
+              });
+              if (r.ok) {
+                results.discord.upgraded++;
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'upgrade-alert', fromTier: state.tier, toTier: tier });
+              } else {
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'upgrade-failed', status: r.status });
+              }
+            } catch (e) {
+              results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'upgrade-error', error: e.message });
+            }
+          }
+
+          if (grew || upgraded) {
+            await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: state.messageId, walletCount: buyers.length, score, tier }), 'EX', '172800']);
+          }
+          // else: already posted, nothing changed since — no action.
         }
       } catch (e) {
         results.discord.error = e.message;
