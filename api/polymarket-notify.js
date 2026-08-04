@@ -659,16 +659,16 @@ module.exports = async function handler(req, res) {
        sigLabel(), not reinvented, so this number can never disagree with what Top Signals
        or Polymarket Signal would show for the identical convergence.
 
-       LIVE-UPDATING: the dedup key stores messageId + walletCount + score/tier instead of
-       just a claim flag. Two different kinds of "the situation changed" are handled
-       differently on purpose:
-         - Wallet count grew (someone else joined) → EDIT the original message in place.
-           Keeps the existing message accurate without spamming a new ping for every
-           incremental buyer.
-         - Tier improved (e.g. MODERATE → STRONG/ELITE) → POST A NEW MESSAGE. An edited
-           message does not re-notify on Discord the way a new one does, and a jump from
-           a 44 to an 80+ is exactly the kind of thing worth an actual fresh ping, not a
-           silent update buried in a message already scrolled past. */
+       LIVE-UPDATING: the dedup key stores walletCount + score/tier to detect what changed
+       since last sent. Both kinds of "the situation changed" now POST A NEW MESSAGE
+       rather than editing anything in place (changed 2026-08-03, per Derek — he wants
+       every real update to show as its own fresh line in Discord, not require scrolling
+       back to find an edited message):
+         - Wallet count grew (someone else joined) → new message, same "🎯 POLY
+           CONVERGENCE" framing plus a "(updated — was X, now Y)" note.
+         - Tier improved (e.g. MODERATE → STRONG/ELITE) → new message with its own "🚀
+           CONVERGENCE UPGRADE" framing — this is the more important kind of change, and
+           reads differently on purpose so it doesn't blend in with a routine update. */
     const discordWebhook = process.env.DISCORD_WEBHOOK_URL;
     results.discord = { scanned: 0, sent: 0, edited: 0, upgraded: 0, alerts: [] };
     if (discordWebhook) {
@@ -775,22 +775,25 @@ module.exports = async function handler(req, res) {
           const upgraded = tierRank(tier) > tierRank(state.tier || 'MODERATE');
 
           if (grew) {
-            // Wallet count grew — edit the original message in place to stay accurate.
+            // CHANGE 2026-08-03 (per Derek): was PATCH-editing the original message in
+            // place. Derek wants a net-new message every time instead, specifically so
+            // it shows up as a fresh line in Discord rather than requiring a scroll back
+            // to find something that changed quietly. Keeps the same "(updated — was X,
+            // now Y)" wording he liked, just posted fresh instead of edited in place.
             try {
-              const editUrl = `${discordWebhook}/messages/${state.messageId}`;
-              const r = await fetch(editUrl, {
-                method: 'PATCH',
+              const r = await fetch(discordWebhook, {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ content: content + `\n_(updated — was ${state.walletCount}, now ${buyers.length})_` }),
               });
               if (r.ok) {
                 results.discord.edited++;
-                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'edited', was: state.walletCount });
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'update-posted', was: state.walletCount });
               } else {
-                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'edit-failed', status: r.status });
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'update-post-failed', status: r.status });
               }
             } catch (e) {
-              results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'edit-error', error: e.message });
+              results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'update-post-error', error: e.message });
             }
           }
 
