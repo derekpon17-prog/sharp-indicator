@@ -1497,6 +1497,30 @@ function calcTraderROI(playsWithStakes){
     return {trader:t,staked:b.staked,profit:b.profit,roiPct:b.staked>0?(b.profit/b.staked*100):null,W:b.W,L:b.L};
   }).sort(function(a,b){return (b.roiPct||-999)-(a.roiPct||-999);});
 }
+// FEATURE 2026-08-04 (per Derek): already-tracked plays only ever saved the combined
+// group total, never each trader's individual stake — but the raw alert log (server-side,
+// last 200 entries) still HAS those individual usdValue/price values for every POLY/SPEC
+// alert. This isn't an inference — it's a real join back to real data that already
+// existed and was simply never linked to the tracked play record. Only works for plays
+// whose underlying alerts haven't aged out of the 200-alert window; older plays are left
+// alone rather than guessed at. Safe to call repeatedly — skips plays that already have
+// stakes (either from this backfill or from the live capture going forward) and mutates
+// in place, so the caller just needs to re-save the store after calling it.
+function backfillStakes(plays,alertLog){
+  let changed=false;
+  const pool=(alertLog||[]).filter(function(a){return a.type==='POLY'||a.type==='SPEC';});
+  plays.forEach(function(p){
+    if(Array.isArray(p.stakes)&&p.stakes.length)return; // already has real data
+    const matches=pool.filter(function(a){
+      if(p.eventSlug&&a.eventSlug)return a.eventSlug===p.eventSlug&&a.outcome===p.outcome;
+      return a.title===p.title&&a.outcome===p.outcome; // fallback if eventSlug missing
+    });
+    if(!matches.length)return;
+    p.stakes=matches.map(function(a){return {trader:a.traderName||'Anon',wallet:a.wallet||null,usdValue:a.usdValue||0,price:a.price||null,type:a.type||null};});
+    changed=true;
+  });
+  return changed;
+}
 function renderTrending(){
   const trends=buildTrending();
   const row=el('trending-row'),cont=el('d-trend'),dotsEl=el('trend-dots');
@@ -2328,6 +2352,12 @@ function renderSportBreakdown(){
 function renderTracking(){
   gradeOpenPlays();
   gradeFromESPN();
+  // Backfill real per-trader stakes onto already-tracked plays by joining back to the raw
+  // alert log — safe to run every load, only touches plays that don't already have it.
+  var sigStakesChanged=backfillStakes(sigPlays,alerts);
+  var specStakesChanged=backfillStakes(specPlays,alerts);
+  if(sigStakesChanged)ss('pm:sig-plays',sigPlays);
+  if(specStakesChanged)ss('pm:spec-plays',specPlays);
   renderSportBreakdown();
 
   // Unit calc lives at top level now (unitPnLCalc) so the hero record panel shares it.
