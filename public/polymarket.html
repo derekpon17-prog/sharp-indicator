@@ -1458,10 +1458,44 @@ function autoTrackPlays(groups){
     const store=isSpec?specPlays:sigPlays;
     const storeKey=isSpec?'pm:spec-plays':'pm:sig-plays';
     if(store.some(p=>p.key===key))return;
-    store.unshift({key,population:isSpec?'SPECIALIST':'WHALE',title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),sport:g.sport||detectSport(g.title),gameTime:findGameDateForTitle(g.title,g.eventSlug),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
+    // FEATURE 2026-08-04 (per Derek): capture each trader's REAL individual stake and
+    // entry price, not an inferred/estimated one — g.buys already has usdValue and price
+    // per buy at this exact moment, it just wasn't being persisted onto the tracked play,
+    // only the combined group total was kept. This is the prerequisite for computing real
+    // dollar-weighted, price-weighted ROI per trader later (see calcTraderROI below) —
+    // win/loss counts alone can't tell a $40K conviction bet from a $1K one, or a win at
+    // 0.36 (pays ~2.8x) from a win at 0.85 (pays ~1.2x). One entry per buy, so a trader
+    // with multiple legs on the same side (e.g. ML + spread) keeps each stake separate.
+    const stakes=(g.buys||[]).map(function(b){return {trader:b.traderName||'Anon',wallet:b.wallet||null,usdValue:b.usdValue||0,price:b.price||null,type:b.type||null};});
+    store.unshift({key,population:isSpec?'SPECIALIST':'WHALE',title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,score,rawScore,buyers:uniqueBuyerCount(g),totalVol:g.totalVol,traders:g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,5),stakes,sport:g.sport||detectSport(g.title),gameTime:findGameDateForTitle(g.title,g.eventSlug),bestRank,loggedAt:Date.now(),status:'OPEN',resolution:null});
     changed=true;
   });
   if(changed){ss('pm:sig-plays',sigPlays);ss('pm:spec-plays',specPlays);}
+}
+// Real dollar-weighted, price-weighted ROI per trader, using the stakes captured above.
+// Polymarket prices are quoted as cost-per-$1-contract (0-1), so profit on a win is
+// stake*(1/price - 1) — a win at 0.36 nets ~2.8x the stake, a win at 0.85 nets ~0.18x.
+// A loss simply forfeits the stake. Requires graded plays that were tracked AFTER this
+// change shipped; plays tracked before it have no per-trader stake data to compute from,
+// since only the combined group total was ever saved for them — there's no way to
+// retroactively split that total back out to individual traders with confidence.
+function calcTraderROI(playsWithStakes){
+  const byTrader={};
+  playsWithStakes.forEach(function(p){
+    if(p.status==='OPEN'||!Array.isArray(p.stakes))return;
+    p.stakes.forEach(function(s){
+      if(!s.trader||!s.price||s.price<=0)return;
+      if(!byTrader[s.trader])byTrader[s.trader]={staked:0,profit:0,W:0,L:0};
+      const b=byTrader[s.trader];
+      b.staked+=s.usdValue;
+      if(p.status==='WIN'){b.profit+=s.usdValue*(1/s.price-1);b.W++;}
+      else if(p.status==='LOSS'){b.profit-=s.usdValue;b.L++;}
+    });
+  });
+  return Object.keys(byTrader).map(function(t){
+    const b=byTrader[t];
+    return {trader:t,staked:b.staked,profit:b.profit,roiPct:b.staked>0?(b.profit/b.staked*100):null,W:b.W,L:b.L};
+  }).sort(function(a,b){return (b.roiPct||-999)-(a.roiPct||-999);});
 }
 function renderTrending(){
   const trends=buildTrending();
