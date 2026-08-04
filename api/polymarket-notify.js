@@ -1,3 +1,4 @@
+
 /* =========================================================
    api/polymarket-notify.js  v6
    
@@ -50,6 +51,46 @@ async function upstashPost(body) {
     const d = await r.json();
     return { ok: true, result: d.result ?? null };
   } catch { return { ok: false, result: null }; }
+}
+
+/* NICKNAMES 2026-08-04 (per Derek): a wallet with no real Polymarket display name (no
+   .name, no .pseudonym, no leaderboard profile name) previously fell back to a truncated
+   address like "0x076d...8d4c" — technically readable, but hard to recognize or remember
+   across Discord pings, the alert feed, and Traders tab. Assigns a distinct, memorable
+   name instead (e.g. "BigBob"), stored permanently in KV keyed by wallet address, so the
+   SAME wallet always gets the SAME name everywhere it appears — this is the only place
+   traderName gets constructed (see polyAlerts below), so fixing it here is enough for
+   every consumer, no client-side logic needed.
+   Uses an atomic KV INCR as the assignment index rather than anything random, so two
+   wallets resolving in parallel (this whole scan runs wallets concurrently) can never
+   collide on the same name — Redis guarantees INCR is atomic even under concurrent calls. */
+const NICKNAME_POOL = [
+  'BigBob','SwiftMike','SharpTony','SteadyNate','QuickMax','IronDave','BoldRick','CalmLuke',
+  'FastEddie','ColdSteve','WarmSam','DeepJoe','SlyCarl','LoudMarv','QuietPete','KeenAlex',
+  'RapidJack','FirmGreg','SmoothLee','HardyKen','BraveTom','WiseHank','StoutJim','LeanRoy',
+  'TallDon','ShortWes','GruffAl','SoftBen','HeavyRon','LightVic','DryFred','WetGus',
+  'OldChip','YoungMo','NewGabe','LateChet','EarlyDex','SteadyRex','BriskArt','SharpOtis',
+  'BoldNed','CalmOwen','QuickIra','FirmSid','SlyRuss','KeenEli','WiseHugo','HardyCole',
+  'BraveJett','LeanNico','TallReid','ShortJude','GruffKirk','SoftEzra','HeavyBrooks','LightFinn',
+  'DryLane','WetShane','OldTrent','YoungPaul','NewCyrus','LateWade','EarlyDean','ToughGavin',
+  'MildBryce','KeenAaron','SlowBlake','FastEli','GoldSaul','SilverRex','IronMabel','SteelDrew',
+  'RoyalDex','CopperJon','StoneKurt','FlashTodd','StormLee','ThunderJay','FrostSam','EmberLuke',
+];
+async function getWalletNickname(wallet) {
+  const key = 'nickname:' + wallet;
+  try {
+    const existing = await upstashPost(['GET', key]);
+    if (existing.ok && existing.result) return existing.result;
+  } catch {}
+  let idx = 0;
+  try {
+    const inc = await upstashPost(['INCR', 'nickname:counter']);
+    idx = (typeof inc.result === 'number' ? inc.result : parseInt(inc.result) || 1) - 1;
+  } catch {}
+  const cycle = Math.floor(idx / NICKNAME_POOL.length);
+  const name = NICKNAME_POOL[idx % NICKNAME_POOL.length] + (cycle > 0 ? cycle + 1 : '');
+  try { await upstashPost(['SET', key, name]); } catch {}
+  return name;
 }
 
 // Returns true if THIS invocation may send the alert. 48h TTL comfortably outstrips the
@@ -597,6 +638,18 @@ module.exports = async function handler(req, res) {
       gated.push({ ...cand, gate });
     });
 
+    // Resolve nicknames only for wallets that actually need one — no real name from the
+    // trade feed, pseudonym, or leaderboard profile. Parallel, same pattern as
+    // statsByWallet above, and getWalletNickname's KV INCR keeps concurrent resolution
+    // collision-free.
+    const needsNickname = [...new Set(
+      gated.filter(c => !(c.t.name || c.t.pseudonym || c.traderInfo.name)).map(c => c.wallet)
+    )];
+    const nicknameByWallet = {};
+    await Promise.all(needsNickname.map(async w => {
+      nicknameByWallet[w] = await getWalletNickname(w);
+    }));
+
     const polyAlerts = gated.map(({ wallet, usd, sport, t, traderInfo, gate }) => ({
       /* WHALE if the wallet earned its place on the leaderboard; SPECIALIST only if it
          got here purely through discovery. Overlap resolves to WHALE so the validated
@@ -607,7 +660,7 @@ module.exports = async function handler(req, res) {
       specialistRecord: specialistMap[wallet] && specialistMap[wallet].sports[sport]
                         ? specialistMap[wallet].sports[sport].reason : null,
       wallet,
-      traderName: t.name || t.pseudonym || traderInfo.name || wallet.slice(0,6)+'...'+wallet.slice(-4),
+      traderName: t.name || t.pseudonym || traderInfo.name || nicknameByWallet[wallet] || wallet.slice(0,6)+'...'+wallet.slice(-4),
       profileImage: t.profileImageOptimized || t.profileImage || null,
       categories: traderInfo.categories,
       sport, title: t.title, slug: t.slug, eventSlug: t.eventSlug,
