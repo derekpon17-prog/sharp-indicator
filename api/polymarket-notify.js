@@ -968,6 +968,7 @@ module.exports = async function handler(req, res) {
                  specialistWallets: results.poly.specialistWallets, specSent: results.poly.specSent },
         line:  { scanned: results.line.scanned,  sent: results.line.sent,  alerts: results.line.alerts },
         sharp: { scanned: results.sharp.scanned, sent: results.sharp.sent, alerts: results.sharp.alerts },
+        discord: { scanned: results.discord.scanned, sent: results.discord.sent, edited: results.discord.edited, upgraded: results.discord.upgraded, alerts: results.discord.alerts, error: results.discord.error || null },
       },
       debug: {
         lbLimitUsed: lbDiag.limitUsed,
