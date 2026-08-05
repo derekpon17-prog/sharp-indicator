@@ -481,7 +481,10 @@ select.finput option{background:var(--s2)}
   <div class="page" style="padding-top:20px">
     <!-- ── SIGNAL PERFORMANCE — per-flag traction, the council's decision view ── -->
     <div style="margin-bottom:6px">
-      <div class="row-ttl" style="font-size:16px;margin-bottom:3px"><i class="ti ti-flag-check" style="color:var(--gold)"></i>Signal Performance</div>
+      <div class="row-ttl" style="font-size:16px;margin-bottom:3px;display:flex;align-items:center;justify-content:space-between">
+        <span><i class="ti ti-flag-check" style="color:var(--gold)"></i>Signal Performance</span>
+        <button onclick="var d=prompt('Regrade every play graded before this date (YYYY-MM-DD) back to OPEN so current logic re-checks it. Leave blank to cancel:');if(d){var t=new Date(d).getTime();if(!isNaN(t)){var n=regradeStale(t);alert(n+' plays reset to OPEN. They\\'ll regrade automatically.');}else{alert('Could not parse that date.');}}" style="font-size:10px;font-weight:700;padding:4px 9px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t3);cursor:pointer">&#x21bb; Regrade Stale Plays</button>
+      </div>
       <div style="font-size:12px;color:var(--t3);margin-bottom:14px">Which flags are earning their spot &mdash; updates as plays grade</div>
     </div>
     <div class="flag-grid">
@@ -1263,7 +1266,7 @@ function autoTrackLinePlays(lines){
        page at all. Kept separate from Sharp Line so a weaker tier cannot flatter or drag
        the stronger one's record. */
     if(ind&&ind.tier==='C'&&ind.side){
-      var wkey=(g.away||'')+'vs'+(g.home||'')+'||'+ind.side;
+      var wkey=(g.away||'')+'vs'+(g.home||'')+'||'+ind.side+'||'+(g.commenceTime||''); // BUGFIX 2026-08-05: same date-collision fix as Sharp Line/Score
       if(!watchPlays.some(function(p){return p.key===wkey;})
          &&!(g.commenceTime&&new Date(g.commenceTime).getTime()<=Date.now())){
         watchPlays.unshift({key:wkey,score:ind.score||0,tier:'C',tierLabel:ind.label||'WATCHLIST',
@@ -1278,7 +1281,14 @@ function autoTrackLinePlays(lines){
     const score=parseInt(ind.score||g.siScore||0);
     // Never auto-track live games — only pre-game signals
     if(g.commenceTime&&new Date(g.commenceTime).getTime()<nowMs)return;
-    const key=(g.away||'')+'vs'+(g.home||'')+'||'+(ind.side||g.sharpSide||'');
+    // BUGFIX 2026-08-05: key was title+side only, no date — two teams playing each other
+    // twice in a short series (routine in MLB) produced the SAME key for genuinely
+    // different games. Confirmed directly via a web/mobile merge: Toronto/Houston played
+    // Aug 3 and Aug 5, both games tracked under the identical key, one silently at risk of
+    // colliding with the other. commenceTime (full ISO, includes time-of-day) also
+    // disambiguates doubleheaders, not just multi-day series, since Game 1 and Game 2
+    // start at different times even on the same date.
+    const key=(g.away||'')+'vs'+(g.home||'')+'||'+(ind.side||g.sharpSide||'')+'||'+(g.commenceTime||'');
     if(linePlays.some(function(p){return p.key===key;}))return;
     const gt=g.commenceTime?new Date(g.commenceTime).toLocaleString():'';
     linePlays.unshift({key,score,tier:ind.tier,tierLabel:ind.label,sources:ind.sources||[],reasons:ind.reasons||[],bestBook:ind.bestBook||null,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:ind.side||g.sharpSide||'',signalType:ind.label||g.signalType||'Sharp Signal',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,exConfirms:g.exConfirms||0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
@@ -1304,7 +1314,9 @@ function autoTrackSharpScorePlays(lines,alertList){
     if(!sameSide)return; // the category means both signals agree on the SAME SIDE, not merely the same game
     const polyScore=signalScore({buys:[match],totalVol:match.usdValue}).score;
     const combined=Math.max(lineScore,calcSharpScore(lineScore,polyScore,sameSide));
-    const key='ss_'+(g.away||'')+'vs'+(g.home||'');
+    // BUGFIX 2026-08-05: same class of issue as Sharp Line — key had no date at all, and
+    // was even more exposed since it didn't include the side either, just team names.
+    const key='ss_'+(g.away||'')+'vs'+(g.home||'')+'||'+(g.commenceTime||'');
     if(sharpScorePlays.some(function(p){return p.key===key;}))return;
     sharpScorePlays.unshift({key,combined,lineScore,polyScore,agree:sameSide,tier:ind.tier,tierLabel:ind.label,sources:ind.sources||[],reasons:ind.reasons||[],bestBook:ind.bestBook||null,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:ind.side||g.sharpSide||'',signalType:ind.label||g.signalType||'',polyTitle:match.title,polyOutcome:match.outcome,polyTrader:match.traderName||'',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
     changed=true;
@@ -1449,7 +1461,11 @@ function autoTrackPlays(groups){
   groups.forEach(g=>{
     const {score,bestRank,rawScore}=polyDisplayScore(g);
     if(score<POLY_AUTOTRACK_THRESHOLD)return; // flat threshold — matches Sharp Score display floor, no rank gating
-    const key=(g.title||'')+'||'+(g.outcome||'');
+    // BUGFIX 2026-08-05: title+outcome alone collided across a team's different games in
+    // the same short series (confirmed: Toronto/Houston Aug 3 and Aug 5 tracked under the
+    // identical key). eventSlug is Polymarket's own per-game identifier, already carried
+    // on the group, and already includes the date.
+    const key=(g.title||'')+'||'+(g.outcome||'')+'||'+(g.eventSlug||'');
     /* Route by population. A group is SPECIALIST only if EVERY buy came from a discovered
        wallet; any leaderboard participation makes it a whale play. Overlap resolves to
        whale so the validated 38-play record keeps its meaning and the new cohort's record
@@ -2103,6 +2119,65 @@ async function gradePlaysViaPolymarket(plays,key){
   if(changed){ss(key,plays);renderTracking();}
   return changed;
 }
+/* REGRADE TOOL 2026-08-05 (per Derek). Grading only ever runs once per play — every
+   grading function skips anything that isn't status==='OPEN'. That's normally correct
+   (don't re-grade a settled result), but it has a real failure mode: if a play got graded
+   WRONG by a bug that's since been fixed (confirmed directly this week — several
+   ESPN-matching bugs shipped fixes mid-conversation), that wrong result is frozen forever,
+   since nothing ever goes back and re-checks it. Found via a web/mobile merge: 18 plays
+   where the SAME game graded to opposite results depending on which device happened to
+   grade it first, with the earlier-graded copy consistently the one carrying the bug.
+   This doesn't guess which side was right — it resets the play to OPEN so the CURRENT
+   (fixed) code grades it fresh, which is the only way to actually know the correct answer
+   rather than picking a side on a coin flip. */
+const REGRADE_STORES=[
+  {key:'pm:sig-plays',get:function(){return sigPlays;}},
+  {key:'pm:spec-plays',get:function(){return specPlays;}},
+  {key:'pm:line-plays',get:function(){return linePlays;}},
+  {key:'pm:ss-plays',get:function(){return sharpScorePlays;}},
+  {key:'pm:watch-plays',get:function(){return watchPlays;}},
+  {key:'pm:mlv-plays',get:function(){return mlvPlays;}}
+];
+function resetPlayToOpen(p){
+  p.status='OPEN';
+  delete p.gradedAt;delete p.espnScore;delete p.gradedBy;
+  if('resolution' in p)p.resolution=null;
+}
+// Reset one specific play by store key + play key. Usage from console:
+//   regradePlay('pm:spec-plays', 'Kansas City Royals vs. Minnesota Twins||Minnesota Twins||mlb-kc-min-2026-07-29')
+window.regradePlay=function(storeKey,playKey){
+  var src=REGRADE_STORES.find(function(s){return s.key===storeKey;});
+  if(!src){console.log('Unknown store:',storeKey,'-- valid:',REGRADE_STORES.map(function(s){return s.key;}));return false;}
+  var arr=src.get();
+  var play=arr.find(function(p){return p.key===playKey;});
+  if(!play){console.log('No play found with that key in',storeKey);return false;}
+  resetPlayToOpen(play);
+  ss(storeKey,arr);
+  console.log('Reset to OPEN — will regrade next time gradeOpenPlays()/gradeFromESPN() runs (happens automatically on Tracking tab load).');
+  renderTracking();
+  return true;
+};
+// Reset EVERY play across every store graded before a given cutoff — the practical tool
+// for "a grading bug got fixed today, clean up everything it might have corrupted."
+// Usage from console: regradeStale(new Date('2026-08-05').getTime())
+window.regradeStale=function(cutoffMs){
+  var total=0;
+  REGRADE_STORES.forEach(function(src){
+    var arr=src.get();
+    var changedHere=false;
+    arr.forEach(function(p){
+      if(p.status!=='OPEN'&&p.gradedAt&&p.gradedAt<cutoffMs){
+        resetPlayToOpen(p);
+        changedHere=true;
+        total++;
+      }
+    });
+    if(changedHere)ss(src.key,arr);
+  });
+  console.log('Reset',total,'stale plays to OPEN across all stores. They will regrade automatically.');
+  renderTracking();
+  return total;
+};
 async function gradeOpenPlays(){
   await gradePlaysViaPolymarket(sigPlays,'pm:sig-plays');
   await gradePlaysViaPolymarket(specPlays,'pm:spec-plays');
