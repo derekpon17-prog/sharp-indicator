@@ -53,6 +53,26 @@ async function upstashPost(body) {
   } catch { return { ok: false, result: null }; }
 }
 
+/* BUGFIX 2026-08-04: the original needsNickname check only tested whether t.name /
+   t.pseudonym / traderInfo.name were truthy — but Polymarket itself sometimes returns an
+   already-truncated address (e.g. "0x547f...2937") AS the pseudonym for a wallet that
+   never set a real username. That's a truthy string, so it looked like "this wallet has
+   a real name" and nickname assignment got skipped entirely — confirmed directly: wallet
+   0x547f...'s alert showed the raw truncated address instead of a nickname. Fix: treat
+   an address-shaped string as "not a real name" the same way an empty one is, whether it
+   came from Polymarket's own API or from this file's own fallback slice. */
+function isAddressLike(str) {
+  if (!str) return true;
+  const s = String(str).trim();
+  if (/^0x[a-fA-F0-9]{2,10}\.\.\.[a-fA-F0-9]{2,10}$/.test(s)) return true; // "0x547f...2937"
+  if (/^0x[a-fA-F0-9]{20,}-\d{6,}$/i.test(s)) return true;                 // "0x3DFb...-1722957908185"
+  return false;
+}
+function pickRealName(...candidates) {
+  for (const c of candidates) { if (c && !isAddressLike(c)) return c; }
+  return null;
+}
+
 /* NICKNAMES 2026-08-04 (per Derek): a wallet with no real Polymarket display name (no
    .name, no .pseudonym, no leaderboard profile name) previously fell back to a truncated
    address like "0x076d...8d4c" — technically readable, but hard to recognize or remember
@@ -643,7 +663,7 @@ module.exports = async function handler(req, res) {
     // statsByWallet above, and getWalletNickname's KV INCR keeps concurrent resolution
     // collision-free.
     const needsNickname = [...new Set(
-      gated.filter(c => !(c.t.name || c.t.pseudonym || c.traderInfo.name)).map(c => c.wallet)
+      gated.filter(c => !pickRealName(c.t.name, c.t.pseudonym, c.traderInfo.name)).map(c => c.wallet)
     )];
     const nicknameByWallet = {};
     await Promise.all(needsNickname.map(async w => {
@@ -660,7 +680,7 @@ module.exports = async function handler(req, res) {
       specialistRecord: specialistMap[wallet] && specialistMap[wallet].sports[sport]
                         ? specialistMap[wallet].sports[sport].reason : null,
       wallet,
-      traderName: t.name || t.pseudonym || traderInfo.name || nicknameByWallet[wallet] || wallet.slice(0,6)+'...'+wallet.slice(-4),
+      traderName: pickRealName(t.name, t.pseudonym, traderInfo.name) || nicknameByWallet[wallet] || wallet.slice(0,6)+'...'+wallet.slice(-4),
       profileImage: t.profileImageOptimized || t.profileImage || null,
       categories: traderInfo.categories,
       sport, title: t.title, slug: t.slug, eventSlug: t.eventSlug,
