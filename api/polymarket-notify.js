@@ -472,6 +472,57 @@ function cleanTraderName(name, wallet) {
   return w ? w.slice(0, 6) + '...' + w.slice(-4) : 'Anon';
 }
 
+/* WIN-RATE DISPLAY + INFERRED LEAN 2026-08-05 (per Derek).
+   IMPORTANT SCOPE NOTE: this parses Polymarket's own self-reported specialistRecord/
+   sportRecord text — it is NOT Derek's own tracked graded record. The server has never
+   seen Derek's tracked plays (those live in browser localStorage); giving Discord/ntfy
+   access to Derek's real W-L requires the KV-sync migration already scoped separately.
+   This is the best real signal available server-side today, clearly labeled as such in
+   every message so it's never confused with Derek's own tracked results. */
+function parseSpecialistRecord(str) {
+  if (!str) return null;
+  const m = str.match(/([\d.]+)%\s*ROI\s*on\s*\$[\d,]+\s*staked\s*(?:·|-)\s*([\d.]+)%\s*of\s*(\d+)\s*settled\s*bets\s*won.*?\(([+-][\d.]+)pp\)/);
+  if (!m) return null;
+  return { roiPct: parseFloat(m[1]), winPct: parseFloat(m[2]), settled: parseInt(m[3], 10), edgePP: parseFloat(m[4]) };
+}
+// Compact display next to a name, e.g. "wr0ngw4yb3tt0r (66%W·41)" or just the plain name
+// if there's no parseable record (whales/leaderboard-only wallets don't carry this field).
+function nameWithRecord(a) {
+  const label = cleanTraderName(a.traderName, a.wallet);
+  const rec = parseSpecialistRecord(a.specialistRecord);
+  return rec ? `${label} (${rec.winPct}%W·${rec.settled})` : label;
+}
+// Per-side quality score from available records: rewards win rate above coinflip, scaled
+// by a sample-size confidence factor (capped at 30 settled bets for full confidence so one
+// deep-sample specialist doesn't get double-counted vs a side with only shallow samples),
+// plus a smaller credit for edge over the market's own implied odds. Wallets with no
+// parseable record (whales) don't contribute a score either way — treated as unrated
+// rather than penalized or assumed good.
+function sideQualityScore(buyers) {
+  const scored = buyers.map(a => parseSpecialistRecord(a.specialistRecord)).filter(Boolean);
+  if (!scored.length) return null;
+  const total = scored.reduce((sum, r) => {
+    const confidence = Math.min(1, r.settled / 30);
+    return sum + (r.winPct - 50) * confidence + r.edgePP * 0.5;
+  }, 0);
+  return total / scored.length;
+}
+// Compares two sides and returns a lean line, or '' if too close / not enough data to say
+// anything meaningful. Threshold (8) is deliberately conservative — this should stay quiet
+// rather than manufacture a confident-sounding lean out of thin data.
+function inferLean(sideBuyers, sideOutcome, oppBuyers, oppOutcome) {
+  const sideScore = sideQualityScore(sideBuyers);
+  const oppScore = oppBuyers && oppBuyers.length ? sideQualityScore(oppBuyers) : null;
+  if (sideScore === null && oppScore === null) return '';
+  if (oppScore === null) {
+    return sideScore > 5 ? `\n📊 *Data lean: ${sideOutcome} — the only side with a real record here, and it's a strong one.*` : '';
+  }
+  const gap = sideScore - oppScore;
+  if (Math.abs(gap) < 8) return `\n📊 *Data lean: too close to call — both sides have comparable records.*`;
+  const leaderOutcome = gap > 0 ? sideOutcome : oppOutcome;
+  return `\n📊 *Data lean: ${leaderOutcome} — stronger win rate/edge among traders on this side (based on Polymarket's own reported stats, not Derek's tracked record).*`;
+}
+
 /* ═══════════════════════════════════════════════════════
    MAIN HANDLER
 ═══════════════════════════════════════════════════════ */
@@ -701,7 +752,7 @@ module.exports = async function handler(req, res) {
       const price    = (parseFloat(alert.price || 0) * 100).toFixed(1);
       const rankInfo = (alert.categories || []).map(c => `${c.category} #${c.rank}`).join(' / ');
       const body     = [
-        `$${usd} BUY [${alert.sport}] — ${cleanTraderName(alert.traderName, alert.wallet)}`,
+        `$${usd} BUY [${alert.sport}] — ${nameWithRecord(alert)}`,
         rankInfo ? `Rank: ${rankInfo}` : null,
         // Specialists earned their place on an in-sport record — lead with it.
         alert.specialistRecord ? `Specialist: ${alert.specialistRecord}` : null,
@@ -791,11 +842,12 @@ module.exports = async function handler(req, res) {
           results.discord.scanned++;
 
           const buyers = [...g.wallets.values()];
-          const names = buyers.map(a => cleanTraderName(a.traderName, a.wallet)).join(', ');
+          const names = buyers.map(a => nameWithRecord(a)).join(', ');
           const gameTitle = (slugTitle[g.eventSlug] && slugTitle[g.eventSlug].text) || g.outcome;
           const { score, tier } = computeGroupScore(g);
 
           let contrastLine = '';
+          let oppBuyersForLean = null, oppOutcomeForLean = null;
           if (!isTotals(g.outcome)) {
             const oppKey = Object.keys(groups).find(k2 => {
               const g2 = groups[k2];
@@ -803,10 +855,14 @@ module.exports = async function handler(req, res) {
             });
             if (oppKey) {
               const opp = groups[oppKey];
-              const oppNames = [...opp.wallets.values()].map(a => cleanTraderName(a.traderName, a.wallet)).join(', ');
+              const oppBuyers = [...opp.wallets.values()];
+              const oppNames = oppBuyers.map(a => nameWithRecord(a)).join(', ');
               contrastLine = `\n**${g.wallets.size}v${opp.wallets.size}** — ${opp.wallets.size} on **${opp.outcome}** (${oppNames})`;
+              oppBuyersForLean = oppBuyers;
+              oppOutcomeForLean = opp.outcome;
             }
           }
+          const leanLine = inferLean(buyers, g.outcome, oppBuyersForLean, oppOutcomeForLean);
 
           const content = [
             `🎯 **POLY CONVERGENCE** — ${buyers.length} traders on the same side (ML + spread combined)`,
@@ -815,7 +871,7 @@ module.exports = async function handler(req, res) {
             `Side: **${g.outcome}**`,
             `Traders: ${names}`,
             `Combined volume: $${Math.round(g.totalVol).toLocaleString()}`,
-          ].join('\n') + contrastLine;
+          ].join('\n') + contrastLine + leanLine;
 
           const dedupKey = `discord:conv:${key}`;
           const stateRes = await upstashPost(['GET', dedupKey]);
@@ -879,7 +935,7 @@ module.exports = async function handler(req, res) {
               `Side: **${g.outcome}**`,
               `Now ${buyers.length} traders: ${names}`,
               `Combined volume: $${Math.round(g.totalVol).toLocaleString()}`,
-            ].join('\n') + contrastLine;
+            ].join('\n') + contrastLine + leanLine;
             try {
               const r = await fetch(discordWebhook, {
                 method: 'POST',
