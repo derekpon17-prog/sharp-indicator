@@ -511,6 +511,21 @@ select.finput option{background:var(--s2)}
       </div>
     </div>
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
+    <!-- ── BY TRADER — real W-L per wallet, from your own graded Poly Whale/Specialist
+         plays (not Polymarket's self-reported stats). ROI where stake data exists;
+         plain win rate always shown since that's the direct "how often do they just win"
+         answer, separate from dollar-weighted ROI. ── -->
+    <div style="margin-bottom:28px">
+      <div class="row-hdr" style="margin-bottom:12px">
+        <div class="row-ttl" style="font-size:16px"><i class="ti ti-users" style="color:var(--gold)"></i>By Trader <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">your own graded record, not Polymarket's self-reported stats</span></div>
+      </div>
+      <div id="trader-breakdown-list" style="display:flex;flex-direction:column;gap:8px"></div>
+      <div id="trader-breakdown-empty" class="empty" style="display:none;padding:22px">
+        <div class="empty-ico"><i class="ti ti-users"></i></div><h3>No graded plays yet</h3>
+        <p>Once Poly Whale/Specialist plays grade, each trader's record shows up here</p>
+      </div>
+    </div>
+    <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <div style="margin-bottom:28px">
       <div class="row-hdr" style="margin-bottom:12px">
         <div class="row-ttl" style="font-size:16px"><i class="ti ti-bolt" style="color:var(--gold)"></i>Poly Whale Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">leaderboard wallets &middot; auto-tracked at 60+ score</span></div>
@@ -2423,6 +2438,46 @@ function renderSportBreakdown(){
       +'</div>';
   }).join('');
 }
+function renderTraderBreakdown(){
+  var list=el('trader-breakdown-list'),empty=el('trader-breakdown-empty');
+  if(!list)return;
+  // Simple win rate — works from just the `traders` array, no stake data required. This
+  // is the direct "how often do they just win" answer Derek asked for, separate from ROI.
+  var byTrader={};
+  [sigPlays,specPlays].forEach(function(arr){
+    (arr||[]).forEach(function(p){
+      if(p.status==='OPEN')return;
+      (p.traders||[]).forEach(function(t){
+        if(!byTrader[t])byTrader[t]={W:0,L:0};
+        if(p.status==='WIN')byTrader[t].W++;
+        else if(p.status==='LOSS')byTrader[t].L++;
+      });
+    });
+  });
+  // ROI layer — only where real stake data exists (backfillStakes already ran in
+  // renderTracking before this is called). Not every trader will have it, especially on
+  // older plays tracked before stakes were captured — shown as "—" rather than guessed.
+  var roiByTrader={};
+  calcTraderROI([...sigPlays,...specPlays]).forEach(function(r){roiByTrader[r.trader]=r;});
+
+  var rows=Object.keys(byTrader).map(function(t){
+    var b=byTrader[t];
+    var tot=b.W+b.L;
+    return {trader:t,W:b.W,L:b.L,tot:tot,wr:tot>0?Math.round(b.W/tot*100):null,roi:roiByTrader[t]||null};
+  }).filter(function(r){return r.tot>0;})
+    .sort(function(a,b){return b.tot-a.tot||(b.wr||0)-(a.wr||0);});
+
+  if(!rows.length){list.innerHTML='';if(empty)empty.style.display='';return;}
+  if(empty)empty.style.display='none';
+  list.innerHTML=rows.map(function(r){
+    var col=r.wr===null?'var(--t3)':r.wr>=60?'var(--green)':r.wr>=50?'var(--gold)':'var(--red)';
+    var roiText=r.roi&&r.roi.roiPct!==null?'<span style="font-size:10.5px;color:var(--t4);font-family:var(--mono);margin-left:8px">ROI '+(r.roi.roiPct>=0?'+':'')+Math.round(r.roi.roiPct)+'%</span>':'';
+    return '<div style="display:flex;justify-content:space-between;align-items:center;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:10px 14px">'
+      +'<span style="font-size:12.5px;font-weight:700;color:var(--t1)">'+esc(r.trader)+'</span>'
+      +'<span style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+col+'">'+r.W+'-'+r.L+' <span style="font-size:10px;color:var(--t4);font-weight:600">('+r.wr+'%)</span>'+roiText+'</span>'
+      +'</div>';
+  }).join('');
+}
 
 function renderTracking(){
   gradeOpenPlays();
@@ -2434,6 +2489,7 @@ function renderTracking(){
   if(sigStakesChanged)ss('pm:sig-plays',sigPlays);
   if(specStakesChanged)ss('pm:spec-plays',specPlays);
   renderSportBreakdown();
+  renderTraderBreakdown();
 
   // Unit calc lives at top level now (unitPnLCalc) so the hero record panel shares it.
   var unitPnL=unitPnLCalc;
