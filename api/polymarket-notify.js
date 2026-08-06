@@ -1,4 +1,3 @@
-
 /* =========================================================
    api/polymarket-notify.js  v6
    
@@ -495,22 +494,51 @@ function parseSpecialistRecord(str) {
 // format as the Tracking tab's By Trader section. IMPORTANT: this is Polymarket's own
 // self-reported record (settled bets on their platform), NOT Derek's own tracked graded
 // record — those can genuinely disagree (confirmed directly this session: SDTrading's
-// self-reported stats vs. Derek's own tracked results told two different stories). Derek's
-// actual tracked W-L only exists client-side (Tracking tab) until the KV-sync migration
-// gives the server visibility into it too.
-function nameWithRecord(a) {
-  const label = cleanTraderName(a.traderName, a.wallet);
+// self-reported stats vs. Derek's own tracked results told two different stories).
+//
+// BRIDGE 2026-08-05 (per Derek): the Tracking tab now pushes its computed by-trader W-L
+// to shared KV (api/trader-records.js) after every grading pass. This function checks
+// that FIRST — by wallet, falling back to cleaned name — before ever falling back to
+// Polymarket's specialistRecord parse. Records sourced from Polymarket (not Derek's own
+// tracking) get a trailing "*" so the source is visible at a glance without a legend.
+function getRecordFor(a, tracked) {
+  if (tracked) {
+    const byWallet = a.wallet && tracked[a.wallet];
+    if (byWallet && (byWallet.W + byWallet.L) > 0) {
+      return { wins: byWallet.W, losses: byWallet.L, edgePP: 0, source: 'tracked' };
+    }
+    const label = cleanTraderName(a.traderName, a.wallet);
+    const byName = tracked[label];
+    if (byName && (byName.W + byName.L) > 0) {
+      return { wins: byName.W, losses: byName.L, edgePP: 0, source: 'tracked' };
+    }
+  }
   const rec = parseSpecialistRecord(a.specialistRecord);
-  return rec ? `${label} (${rec.wins}-${rec.losses})` : label;
+  if (rec) return { wins: rec.wins, losses: rec.losses, edgePP: rec.edgePP, source: 'specialist' };
+  return null;
 }
-// Per-side quality score from available records: rewards win rate above coinflip, scaled
-// by a sample-size confidence factor (capped at 30 settled bets for full confidence so one
-// deep-sample specialist doesn't get double-counted vs a side with only shallow samples),
-// plus a smaller credit for edge over the market's own implied odds. Wallets with no
-// parseable record (whales) don't contribute a score either way — treated as unrated
-// rather than penalized or assumed good.
-function sideQualityScore(buyers) {
-  const scored = buyers.map(a => parseSpecialistRecord(a.specialistRecord)).filter(Boolean);
+function nameWithRecord(a, tracked) {
+  const label = cleanTraderName(a.traderName, a.wallet);
+  const rec = getRecordFor(a, tracked);
+  if (!rec) return label;
+  const marker = rec.source === 'specialist' ? '*' : '';
+  return `${label} (${rec.wins}-${rec.losses}${marker})`;
+}
+// Per-side quality score from available records (tracked first, specialist stat as
+// fallback — see getRecordFor above): rewards win rate above coinflip, scaled by a
+// sample-size confidence factor (capped at 30 for full confidence so one deep-sample
+// wallet doesn't get double-counted vs a side with only shallow samples), plus a smaller
+// credit for edge over implied odds where that's known (tracked-only records don't carry
+// an edge figure, treated as 0 rather than guessed). Wallets with no record at all — from
+// either source — don't contribute a score either way.
+function sideQualityScore(buyers, tracked) {
+  const scored = buyers.map(a => {
+    const rec = getRecordFor(a, tracked);
+    if (!rec) return null;
+    const settled = rec.wins + rec.losses;
+    if (settled <= 0) return null;
+    return { winPct: (rec.wins / settled) * 100, settled, edgePP: rec.edgePP };
+  }).filter(Boolean);
   if (!scored.length) return null;
   const total = scored.reduce((sum, r) => {
     const confidence = Math.min(1, r.settled / 30);
@@ -521,9 +549,9 @@ function sideQualityScore(buyers) {
 // Compares two sides and returns a lean line, or '' if too close / not enough data to say
 // anything meaningful. Threshold (8) is deliberately conservative — this should stay quiet
 // rather than manufacture a confident-sounding lean out of thin data.
-function inferLean(sideBuyers, sideOutcome, oppBuyers, oppOutcome) {
-  const sideScore = sideQualityScore(sideBuyers);
-  const oppScore = oppBuyers && oppBuyers.length ? sideQualityScore(oppBuyers) : null;
+function inferLean(sideBuyers, sideOutcome, oppBuyers, oppOutcome, tracked) {
+  const sideScore = sideQualityScore(sideBuyers, tracked);
+  const oppScore = oppBuyers && oppBuyers.length ? sideQualityScore(oppBuyers, tracked) : null;
   if (sideScore === null && oppScore === null) return '';
   if (oppScore === null) {
     return sideScore > 5 ? `\n📊 *Data lean: ${sideOutcome} — the only side with a real record here, and it's a strong one.*` : '';
@@ -531,7 +559,7 @@ function inferLean(sideBuyers, sideOutcome, oppBuyers, oppOutcome) {
   const gap = sideScore - oppScore;
   if (Math.abs(gap) < 8) return `\n📊 *Data lean: too close to call — both sides have comparable records.*`;
   const leaderOutcome = gap > 0 ? sideOutcome : oppOutcome;
-  return `\n📊 *Data lean: ${leaderOutcome} — stronger win rate/edge among traders on this side (based on Polymarket's own reported stats, not Derek's tracked record).*`;
+  return `\n📊 *Data lean: ${leaderOutcome} — stronger win rate/edge among traders on this side. (* = Polymarket's own stat, no asterisk = Derek's own tracked record.)*`;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -556,6 +584,18 @@ module.exports = async function handler(req, res) {
   };
 
   try {
+    // Derek's own tracked W-L, pushed by the client after every grading pass (see
+    // api/trader-records.js) — the primary source for nameWithRecord()/inferLean() used
+    // in both the ntfy push body below and the Discord convergence block further down.
+    // Polymarket's specialistRecord is only a fallback for wallets Derek hasn't graded
+    // yet. Fetched once here, before either consumer needs it.
+    let trackedRecords = {};
+    try {
+      const trRes = await fetch(`${SITE_URL}/api/trader-records`);
+      const trData = await trRes.json();
+      trackedRecords = trData.records || {};
+    } catch { /* best-effort — falls back to specialistRecord-only if this fails */ }
+
     /* ── STEP 1: Polymarket — profitable wallet scan ── */
     const [sportsLB, overallLB] = await Promise.all([
       fetchLeaderboard('SPORTS'),
@@ -763,7 +803,7 @@ module.exports = async function handler(req, res) {
       const price    = (parseFloat(alert.price || 0) * 100).toFixed(1);
       const rankInfo = (alert.categories || []).map(c => `${c.category} #${c.rank}`).join(' / ');
       const body     = [
-        `$${usd} BUY [${alert.sport}] — ${nameWithRecord(alert)}`,
+        `$${usd} BUY [${alert.sport}] — ${nameWithRecord(alert, trackedRecords)}`,
         rankInfo ? `Rank: ${rankInfo}` : null,
         // Specialists earned their place on an in-sport record — lead with it.
         alert.specialistRecord ? `Specialist: ${alert.specialistRecord}` : null,
@@ -853,7 +893,7 @@ module.exports = async function handler(req, res) {
           results.discord.scanned++;
 
           const buyers = [...g.wallets.values()];
-          const names = buyers.map(a => nameWithRecord(a)).join(', ');
+          const names = buyers.map(a => nameWithRecord(a, trackedRecords)).join(', ');
           const gameTitle = (slugTitle[g.eventSlug] && slugTitle[g.eventSlug].text) || g.outcome;
           const { score, tier } = computeGroupScore(g);
 
@@ -867,13 +907,13 @@ module.exports = async function handler(req, res) {
             if (oppKey) {
               const opp = groups[oppKey];
               const oppBuyers = [...opp.wallets.values()];
-              const oppNames = oppBuyers.map(a => nameWithRecord(a)).join(', ');
+              const oppNames = oppBuyers.map(a => nameWithRecord(a, trackedRecords)).join(', ');
               contrastLine = `\n**${g.wallets.size}v${opp.wallets.size}** — ${opp.wallets.size} on **${opp.outcome}** (${oppNames})`;
               oppBuyersForLean = oppBuyers;
               oppOutcomeForLean = opp.outcome;
             }
           }
-          const leanLine = inferLean(buyers, g.outcome, oppBuyersForLean, oppOutcomeForLean);
+          const leanLine = inferLean(buyers, g.outcome, oppBuyersForLean, oppOutcomeForLean, trackedRecords);
 
           const content = [
             `🎯 **POLY CONVERGENCE** — ${buyers.length} traders on the same side (ML + spread combined)`,
