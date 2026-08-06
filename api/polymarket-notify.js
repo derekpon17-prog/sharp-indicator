@@ -483,14 +483,25 @@ function parseSpecialistRecord(str) {
   if (!str) return null;
   const m = str.match(/([\d.]+)%\s*ROI\s*on\s*\$[\d,]+\s*staked\s*(?:·|-)\s*([\d.]+)%\s*of\s*(\d+)\s*settled\s*bets\s*won.*?\(([+-][\d.]+)pp\)/);
   if (!m) return null;
-  return { roiPct: parseFloat(m[1]), winPct: parseFloat(m[2]), settled: parseInt(m[3], 10), edgePP: parseFloat(m[4]) };
+  const winPct = parseFloat(m[2]);
+  const settled = parseInt(m[3], 10);
+  // W-L derived from win% × settled count, rounded — Polymarket doesn't publish the raw
+  // integers directly, only the percentage and the sample size.
+  const wins = Math.round((winPct / 100) * settled);
+  const losses = settled - wins;
+  return { roiPct: parseFloat(m[1]), winPct, settled, edgePP: parseFloat(m[4]), wins, losses };
 }
-// Compact display next to a name, e.g. "wr0ngw4yb3tt0r (66%W·41)" or just the plain name
-// if there's no parseable record (whales/leaderboard-only wallets don't carry this field).
+// Compact display next to a name, e.g. "wr0ngw4yb3tt0r (27-14)" — a real W-L split, same
+// format as the Tracking tab's By Trader section. IMPORTANT: this is Polymarket's own
+// self-reported record (settled bets on their platform), NOT Derek's own tracked graded
+// record — those can genuinely disagree (confirmed directly this session: SDTrading's
+// self-reported stats vs. Derek's own tracked results told two different stories). Derek's
+// actual tracked W-L only exists client-side (Tracking tab) until the KV-sync migration
+// gives the server visibility into it too.
 function nameWithRecord(a) {
   const label = cleanTraderName(a.traderName, a.wallet);
   const rec = parseSpecialistRecord(a.specialistRecord);
-  return rec ? `${label} (${rec.winPct}%W·${rec.settled})` : label;
+  return rec ? `${label} (${rec.wins}-${rec.losses})` : label;
 }
 // Per-side quality score from available records: rewards win rate above coinflip, scaled
 // by a sample-size confidence factor (capped at 30 settled bets for full confidence so one
