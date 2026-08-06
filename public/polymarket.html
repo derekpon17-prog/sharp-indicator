@@ -2477,6 +2477,37 @@ function renderTraderBreakdown(){
       +'<span style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+col+'">'+r.W+'-'+r.L+' <span style="font-size:10px;color:var(--t4);font-weight:600">('+r.wr+'%)</span>'+roiText+'</span>'
       +'</div>';
   }).join('');
+
+  pushTraderRecords(rows);
+}
+// BRIDGE 2026-08-05 (per Derek): pushes the by-trader summary computed above up to shared
+// KV storage, so the server-side Discord/ntfy cron can use Derek's own tracked record as
+// the primary source, instead of only Polymarket's specialist-only stat (which is null
+// for every whale-type wallet, even ones Derek has real graded history on). Keyed by
+// wallet address where derivable from stake data — falls back to name if a trader has no
+// stakes captured yet (older plays). Best-effort: never blocks the UI, and only actually
+// sends when something changed since the last push.
+var _lastPushedTraderRecords=null;
+function pushTraderRecords(rows){
+  if(!rows||!rows.length)return;
+  // Build name -> wallet from whatever stake data exists across tracked plays.
+  var nameToWallet={};
+  [sigPlays,specPlays].forEach(function(arr){
+    (arr||[]).forEach(function(p){
+      (p.stakes||[]).forEach(function(s){
+        if(s.trader&&s.wallet)nameToWallet[s.trader]=s.wallet;
+      });
+    });
+  });
+  var records={};
+  rows.forEach(function(r){
+    var key=nameToWallet[r.trader]||r.trader;
+    records[key]={name:r.trader,W:r.W,L:r.L,roiPct:(r.roi&&r.roi.roiPct!==null&&r.roi.roiPct!==undefined)?r.roi.roiPct:null};
+  });
+  var json=JSON.stringify(records);
+  if(json===_lastPushedTraderRecords)return; // no real change since last push
+  _lastPushedTraderRecords=json;
+  fetch('/api/trader-records',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({records:records})}).catch(function(){});
 }
 
 function renderTracking(){
