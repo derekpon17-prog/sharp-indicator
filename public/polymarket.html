@@ -2441,13 +2441,39 @@ function renderSportBreakdown(){
 function renderTraderBreakdown(){
   var list=el('trader-breakdown-list'),empty=el('trader-breakdown-empty');
   if(!list)return;
+  // BUGFIX 2026-08-06 (per Derek): a wallet that fired alerts both before and after the
+  // nickname fix (or the earlier cleanTraderName malformed-pattern fix) ends up with its
+  // history split across two different display names — the raw "0xADDR-timestamp" string
+  // from old plays, and its real name/nickname from new ones — with no visible link
+  // between them. Extract the wallet address directly from the malformed pattern itself
+  // (it's literally embedded in the string), then resolve it to whatever clean name that
+  // wallet has used most recently, from stake data. Old and new plays for the same wallet
+  // now merge into one row under the current name — the raw string never displays.
+  var walletToCleanName={};
+  [sigPlays,specPlays].forEach(function(arr){
+    (arr||[]).forEach(function(p){
+      (p.stakes||[]).forEach(function(s){
+        if(s.wallet&&s.trader&&!/^0x[a-fA-F0-9]{20,}-\d{10,}$/.test(s.trader)){
+          walletToCleanName[s.wallet.toLowerCase()]=s.trader;
+        }
+      });
+    });
+  });
+  function resolveDisplayName(rawName){
+    var m=rawName.match(/^(0x[a-fA-F0-9]{20,})-\d{10,}$/);
+    if(!m)return rawName;
+    var wallet=m[1].toLowerCase();
+    if(walletToCleanName[wallet])return walletToCleanName[wallet];
+    return wallet.slice(0,6)+'...'+wallet.slice(-4); // no clean name seen yet — short address beats the raw timestamp string
+  }
   // Simple win rate — works from just the `traders` array, no stake data required. This
   // is the direct "how often do they just win" answer Derek asked for, separate from ROI.
   var byTrader={};
   [sigPlays,specPlays].forEach(function(arr){
     (arr||[]).forEach(function(p){
       if(p.status==='OPEN')return;
-      (p.traders||[]).forEach(function(t){
+      (p.traders||[]).forEach(function(rawT){
+        var t=resolveDisplayName(rawT);
         if(!byTrader[t])byTrader[t]={W:0,L:0};
         if(p.status==='WIN')byTrader[t].W++;
         else if(p.status==='LOSS')byTrader[t].L++;
@@ -2458,7 +2484,7 @@ function renderTraderBreakdown(){
   // renderTracking before this is called). Not every trader will have it, especially on
   // older plays tracked before stakes were captured — shown as "—" rather than guessed.
   var roiByTrader={};
-  calcTraderROI([...sigPlays,...specPlays]).forEach(function(r){roiByTrader[r.trader]=r;});
+  calcTraderROI([...sigPlays,...specPlays]).forEach(function(r){roiByTrader[resolveDisplayName(r.trader)]=r;});
 
   var rows=Object.keys(byTrader).map(function(t){
     var b=byTrader[t];
@@ -2470,8 +2496,17 @@ function renderTraderBreakdown(){
   if(!rows.length){list.innerHTML='';if(empty)empty.style.display='';return;}
   if(empty)empty.style.display='none';
   list.innerHTML=rows.map(function(r){
-    var col=r.wr===null?'var(--t3)':r.wr>=60?'var(--green)':r.wr>=50?'var(--gold)':'var(--red)';
-    var roiText=r.roi&&r.roi.roiPct!==null?'<span style="font-size:10.5px;color:var(--t4);font-family:var(--mono);margin-left:8px">ROI '+(r.roi.roiPct>=0?'+':'')+Math.round(r.roi.roiPct)+'%</span>':'';
+    // BUGFIX 2026-08-06 (per Derek): was coloring purely by win rate, so SDTrading's
+    // 20-20 (50%, but +32% ROI) read as neutral gold — exactly the win-rate-vs-ROI trap
+    // this whole project has been navigating all session (a lower win rate can still be
+    // strongly profitable if the wins are bigger than the losses). Color by ROI first
+    // when it's known; only fall back to win-rate bands when there's no stake data to
+    // compute a real ROI from.
+    var hasROI=r.roi&&r.roi.roiPct!==null&&r.roi.roiPct!==undefined;
+    var col=hasROI
+      ?(r.roi.roiPct>0?'var(--green)':r.roi.roiPct<0?'var(--red)':'var(--gold)')
+      :(r.wr===null?'var(--t3)':r.wr>=60?'var(--green)':r.wr>=50?'var(--gold)':'var(--red)');
+    var roiText=hasROI?'<span style="font-size:10.5px;color:'+col+';font-family:var(--mono);margin-left:8px;font-weight:700">ROI '+(r.roi.roiPct>=0?'+':'')+Math.round(r.roi.roiPct)+'%</span>':'';
     return '<div style="display:flex;justify-content:space-between;align-items:center;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:10px 14px">'
       +'<span style="font-size:12.5px;font-weight:700;color:var(--t1)">'+esc(r.trader)+'</span>'
       +'<span style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+col+'">'+r.W+'-'+r.L+' <span style="font-size:10px;color:var(--t4);font-weight:600">('+r.wr+'%)</span>'+roiText+'</span>'
