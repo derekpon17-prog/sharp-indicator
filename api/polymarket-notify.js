@@ -505,24 +505,34 @@ function getRecordFor(a, tracked) {
   if (tracked) {
     const byWallet = a.wallet && tracked[a.wallet];
     if (byWallet && (byWallet.W + byWallet.L) > 0) {
-      return { wins: byWallet.W, losses: byWallet.L, edgePP: 0, source: 'tracked' };
+      return { wins: byWallet.W, losses: byWallet.L, edgePP: 0, roiPct: byWallet.roiPct, source: 'tracked' };
     }
     const label = cleanTraderName(a.traderName, a.wallet);
     const byName = tracked[label];
     if (byName && (byName.W + byName.L) > 0) {
-      return { wins: byName.W, losses: byName.L, edgePP: 0, source: 'tracked' };
+      return { wins: byName.W, losses: byName.L, edgePP: 0, roiPct: byName.roiPct, source: 'tracked' };
     }
   }
   const rec = parseSpecialistRecord(a.specialistRecord);
-  if (rec) return { wins: rec.wins, losses: rec.losses, edgePP: rec.edgePP, source: 'specialist' };
+  if (rec) return { wins: rec.wins, losses: rec.losses, edgePP: rec.edgePP, roiPct: rec.roiPct, source: 'specialist' };
   return null;
 }
+// BUGFIX 2026-08-06 (per Derek): roiPct was being computed and pushed by the client but
+// silently discarded here — Discord showed W-L only, never ROI, even though the whole
+// point of building the KV bridge was to surface the same picture the Tracking tab has.
+// Discord can't render color, so a green/red circle emoji stands in for the Tracking
+// tab's green/red ROI coloring — same signal, text-only medium.
 function nameWithRecord(a, tracked) {
   const label = cleanTraderName(a.traderName, a.wallet);
   const rec = getRecordFor(a, tracked);
   if (!rec) return label;
   const marker = rec.source === 'specialist' ? '*' : '';
-  return `${label} (${rec.wins}-${rec.losses}${marker})`;
+  let roiPart = '';
+  if (rec.roiPct !== null && rec.roiPct !== undefined) {
+    const dot = rec.roiPct > 0 ? '🟢' : rec.roiPct < 0 ? '🔴' : '⚪';
+    roiPart = ` ${dot}${rec.roiPct >= 0 ? '+' : ''}${Math.round(rec.roiPct)}%`;
+  }
+  return `${label} (${rec.wins}-${rec.losses}${marker}${roiPart})`;
 }
 // Per-side quality score from available records (tracked first, specialist stat as
 // fallback — see getRecordFor above): rewards win rate above coinflip, scaled by a
