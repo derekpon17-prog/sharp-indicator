@@ -477,6 +477,17 @@ select.finput option{background:var(--s2)}
       </div>
       <div class="hscr" id="d-ar"></div>
     </div>
+    <!-- Watched Traders — per Derek, 2026-08-07: watching someone from the leaderboard
+         previously saved silently with no visible confirmation anywhere. This surfaces
+         each watched wallet's real record and most recent picks right on the Dashboard,
+         not just buried in the Traders tab. Hidden entirely when nobody's watched. -->
+    <div class="row-s" id="d-watched-wrap" style="display:none">
+      <div class="row-hdr">
+        <div class="row-ttl"><em>&#x1F441;&#xFE0F;</em>Watched Traders</div>
+        <div class="row-all" onclick="showV('traders',document.querySelectorAll('.ntab')[3])">See all &rsaquo;</div>
+      </div>
+      <div class="hscr" id="d-watched"></div>
+    </div>
     <!-- Open Trades -->
     <div class="row-s">
       <div class="row-hdr">
@@ -2101,11 +2112,44 @@ function renderHero(){
 }
 
 /* === DASHBOARD === */
+function watchedTraderCardHTML(w,lookup){
+  var todayET=new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'});
+  var todaysPicks=alerts.filter(function(a){
+    if(a.wallet!==w.wallet)return false;
+    if(a.type!=='POLY'&&a.type!=='SPEC')return false;
+    return extractSlugDate(a)===todayET;
+  });
+  var specRec=(todaysPicks[0]&&todaysPicks[0].specialistRecord)||null;
+  var chip=traderRecordChip({traderName:w.name,wallet:w.wallet,specialistRecord:specRec},lookup);
+  var hasRec=chip.wins!==null;
+  var recColor=hasRec?(chip.roiPct>0?'var(--green)':chip.roiPct<0?'var(--red)':'var(--t3)'):'var(--t4)';
+  var recTxt=hasRec?(chip.wins+'-'+chip.losses+(chip.source==='specialist'?'*':'')+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')):'no record yet';
+  var picksHtml=todaysPicks.length
+    ?todaysPicks.slice(0,4).map(function(p){
+        return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b1);font-size:11.5px"><span style="color:var(--t2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(p.outcome||p.title)+'</span><span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0;margin-left:8px">'+fu(p.usdValue||0)+'</span></div>';
+      }).join('')
+    :'<div style="font-size:11px;color:var(--t4);padding:6px 0">No picks yet today</div>';
+  return '<div style="min-width:230px;max-width:230px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:14px;flex-shrink:0">'
+    +'<div style="font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(chip.label)+'</div>'
+    +'<div style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+recColor+';margin-bottom:10px">'+recTxt+'</div>'
+    +'<div style="font-size:9.5px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Today\'s Picks</div>'
+    +picksHtml
+    +'</div>';
+}
+function renderWatchedOnDash(){
+  var wrap=el('d-watched-wrap'),cont=el('d-watched');
+  if(!wrap||!cont)return;
+  if(!wallets.length){wrap.style.display='none';return;}
+  wrap.style.display='';
+  var lookup=buildClientTrackedLookup();
+  cont.innerHTML=wallets.map(function(w){return watchedTraderCardHTML(w,lookup);}).join('');
+}
 function renderDash(){
   renderHero();
   renderSharpScore();
   renderSharpLines();
   renderCommandCenter();
+  renderWatchedOnDash();
   const set=trades.filter(t=>t.status!=='OPEN');
   const W=set.filter(t=>t.status==='WIN').length,L=set.filter(t=>t.status==='LOSS').length;
   const wr=W+L>0?Math.round(W/(W+L)*100):null;
@@ -3762,7 +3806,7 @@ document.addEventListener('click',e=>{
   if(wrm&&wrm.dataset.wrem){wallets=wallets.filter(w=>w.wallet!==wrm.dataset.wrem);ss('pm:traders',wallets);renderWallets();}
   // Leaderboard watch
   const lwb=e.target.closest('.lb-add:not(.w)');
-  if(lwb&&lwb.dataset.ww){const ww=lwb.dataset.ww,wn=lwb.dataset.wn||null;if(!wallets.find(w=>w.wallet===ww)){wallets.push({wallet:ww,name:wn,addedAt:Date.now()});ss('pm:traders',wallets);renderLB();}}
+  if(lwb&&lwb.dataset.ww){const ww=lwb.dataset.ww,wn=lwb.dataset.wn||null;if(!wallets.find(w=>w.wallet===ww)){wallets.push({wallet:ww,name:wn,addedAt:Date.now()});ss('pm:traders',wallets);renderLB();renderWallets();}}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeTM();closeAT();closeCfg();closeSignalLab();}});
 
