@@ -85,6 +85,7 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .rep-quiet-dot.agree{background:var(--green)}
 .rep-quiet-dot.lineonly{background:var(--blue)}
 .rep-quiet-score{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gold)}
+.rep-quiet-traderline{font-family:var(--mono);font-size:10.5px;padding:0 0 12px 34px;line-height:1.5}
 @media(max-width:700px){.rep-row{flex-direction:column;gap:6px}.rep-tier{flex:none;align-self:flex-start}}
 .ntab.ntab-action:hover{color:var(--gold)}
 .ntab{display:flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;border:none;background:transparent;color:var(--t3);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
@@ -1809,18 +1810,32 @@ function renderReport(){
     }
 
     if(!g.started)rankCounter++;
-    var traderSummary=tradersOnSide.length?(' \u00b7 '+tradersOnSide.length+' trader'+(tradersOnSide.length>1?'s':'')):'';
+    var logoQ=i.side?anyTeamLogoUrl(i.side):null;
+    // FEATURE 2026-08-07 (per Derek): was just "· 2 traders" — a count with no way to
+    // judge whether those 2 are worth following. Same traderRecordChip used in the hero,
+    // Tracking tab's By Trader, and Discord — a wallet's record reads identically
+    // everywhere it shows up, exactly the "stay consistent" ask.
+    var traderChipsQ=tradersOnSide.length
+      ?tradersOnSide.map(function(a){
+          var c=traderRecordChip(a,traderLk);
+          var hasRec=c.wins!==null;
+          var col=hasRec?(c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)'):'var(--t4)';
+          var txt=hasRec?(c.label+' '+c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):(c.label+' \u00b7 no record yet');
+          return '<span style="color:'+col+'">'+esc(txt)+'</span>';
+        }).join(' <span style="color:var(--t4)">\u00b7</span> ')
+      :'';
     return '<div class="rep-quiet-row'+(g.started?' rep-done':'')+'">'
       +'<div class="rep-quiet-left">'
       +'<span class="rep-quiet-rank">'+(g.started?'\u2014':'#'+rankCounter)+'</span>'
+      +(logoQ?'<img src="'+logoQ+'" alt="" style="width:16px;height:16px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'')
       +'<span class="rep-quiet-matchup">'+esc((g.away||'')+' @ '+(g.home||''))+'</span>'
       +'<span class="rep-quiet-side">'+(i.side?esc(i.side):'unresolved')+'</span>'
-      +'<span class="rep-quiet-trader">'+esc(traderSummary)+'</span>'
       +'</div>'
       +'<div class="rep-quiet-right">'
       +'<span class="rep-quiet-dot '+(agree?'agree':'lineonly')+'" title="'+(agree?'Line + Poly agree':'Line only')+'"></span>'
       +'<span class="rep-quiet-score">'+(i.score||0)+'</span>'
-      +'</div></div>';
+      +'</div></div>'
+      +(traderChipsQ?'<div class="rep-quiet-traderline">'+traderChipsQ+'</div>':'');
   }).join('');
   wrap.innerHTML=head+body+'</div>';
   wrap.style.display='';
@@ -1908,6 +1923,15 @@ function buildBoard(){
   buildTrending().forEach(function(g){
     var key=(g.title||'')+'||'+(g.outcome||'');
     if(usedAlertKeys[key])return;
+    // BUGFIX 2026-08-07 (per Derek): this branch never checked started/live status at
+    // all — the MLB Sharp Line branch above has its own commenceTime check, but
+    // Poly-trending rows had zero filter, so a completed NFL game (Panthers 33,
+    // Cardinals 30) stayed on "Top Play Today" for hours after it ended, independent of
+    // whether schedule data was even available. Confirmed directly: Today's Sharp Report
+    // correctly dropped it once schedule data improved, but this separate ingestion path
+    // was never wired to check at all.
+    var sched=findScheduledGame(g);
+    if(sched&&sched.started)return;
     var sc=polyDisplayScore(g).score;
     if(sc<POLY_AUTOTRACK_THRESHOLD)return;
     var b=uniqueBuyerCount(g);
