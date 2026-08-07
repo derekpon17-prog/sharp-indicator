@@ -1013,12 +1013,30 @@ function findScheduledGame(a){
 }
 function isLiveAlert(a){
   var g=findScheduledGame(a);
-  if(!g)return false;                      // unknown game — fail open, same as the bot
-  if(g.started===true)return true;         // API's own verdict
-  var ct=g.commenceTime?new Date(g.commenceTime).getTime():0;
-  if(!ct)return false;
-  var ts=a.loggedAt||(a.timestamp?a.timestamp*1000:0);
-  return !!(ts&&ts>ct);                    // bet placed after first pitch
+  if(g){
+    if(g.started===true)return true;         // API's own verdict
+    var ct=g.commenceTime?new Date(g.commenceTime).getTime():0;
+    if(!ct)return false;
+    var ts=a.loggedAt||(a.timestamp?a.timestamp*1000:0);
+    return !!(ts&&ts>ct);                    // bet placed after first pitch
+  }
+  // BUGFIX 2026-08-07 (per Derek, third pass): "unknown game — fail open" was the bug.
+  // Confirmed directly: the Hall of Fame Game (Panthers 33, Cardinals 30, played Aug 6)
+  // still showed on Top Signals — a completely separate path from Today's Board/Top Play
+  // Today, which were already fixed. Root cause is the SAME class of issue, just never
+  // patched at the actual shared source: buildTrendingGroups() (which both buildTrending
+  // for Top Signals AND buildBoard both call) already checks isLiveAlert() per-alert, but
+  // this function itself failed open whenever no schedule match existed — which is
+  // exactly the case once a game ages out of The Odds API's /events response.
+  // Fix, applied ONCE here instead of duplicated in every downstream consumer: if real
+  // schedule data exists for this alert's own sport (confirmed populated — dozens of real
+  // NFL games, for example) but this specific game isn't among them, that's a meaningful
+  // signal it already happened and aged out, not a legitimate future game with no data
+  // yet. Only fails open when there's no schedule coverage for the sport at all.
+  var aSport=(a.sport||detectSport(a.title)||'').toUpperCase();
+  var sameSportCount=aSport?gameSchedule.filter(function(s){return (s.sport||'').toUpperCase()===aSport;}).length:0;
+  if(aSport&&sameSportCount>0)return true;
+  return false;
 }
 
 /* === REDESIGN HELPERS (council pass) === */
