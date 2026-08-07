@@ -1349,6 +1349,22 @@ function traderRecordChip(a,lookup){
   }
   return {label:resolvedLabel,wins,losses,roiPct,source};
 }
+// SHARED 2026-08-07 (per Derek, asked several times): every dashboard section that shows
+// "N traders" needs the actual names + real W-L + ROI, not just a count — same source of
+// truth as Sharp Report, Tracking's By Trader, and Discord, so a wallet's record never
+// reads differently depending on which part of the dashboard you're looking at.
+function traderChipsInlineHTML(traders,lookup){
+  if(!traders||!traders.length)return '';
+  return traders.map(function(a){
+    var c=traderRecordChip(a,lookup);
+    var hasRec=c.wins!==null;
+    var col=hasRec?(c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)'):'var(--t4)';
+    var txt=hasRec
+      ?(c.label+' '+c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':''))
+      :(c.label+' \u00b7 no record yet');
+    return '<span style="color:'+col+'">'+esc(txt)+'</span>';
+  }).join(' <span style="color:var(--t4)">\u00b7</span> ');
+}
 function detectSportFromTeams(away,home){
   const t=((away||'')+(home||'')).toLowerCase();
   if(MLB_TEAMS.some(function(x){return t.includes(x);})||t.includes('sox')||t.includes('jays'))return'MLB';
@@ -1657,11 +1673,17 @@ function renderTrending(){
   if(!trends.length){if(row)row.style.display='none';return;}
   if(row)row.style.display='';
   const maxVol=Math.max(...trends.map(t=>t.totalVol));
+  const trendLk=buildClientTrackedLookup();
   cont.innerHTML=trends.map(g=>{
     const {score,bestRank}=polyDisplayScore(g);
     const {lbl,cls}=sigLabel(score);
     const barPct=Math.round((g.totalVol/maxVol)*100);
-    const traders=g.buys.map(b=>b.traderName||'Anon').filter((v,i,a)=>a.indexOf(v)===i).slice(0,4);
+    // BUGFIX 2026-08-07 (per Derek, asked several times): was showing bare shortened
+    // wallet/name tags with no record — same gap already fixed on Sharp Report, Today's
+    // Board, and Top Play Today. Dedupe by wallet (not just name) so the same wallet
+    // trading under a slightly different logged name doesn't double-count.
+    const seenTw={},uniqueTradeBuys=[];
+    (g.buys||[]).forEach(function(b){if(b.wallet&&!seenTw[b.wallet]){seenTw[b.wallet]=true;uniqueTradeBuys.push(b);}});
     const link=g.eventSlug?'https://polymarket.com/event/'+g.eventSlug:'#';
     const sport=g.sport||detectSport(g.title);
     const sportTag=sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+sport+'</span>':'';
@@ -1679,7 +1701,7 @@ function renderTrending(){
       +(function(){var b=statusBadgeHTML(g.title);return b?'<div style="margin-bottom:6px">'+b+'</div>':'';})()
       +'<div style="margin-bottom:7px">Buying <span style="font-weight:800;color:'+ocColor+'">'+g.outcome+'</span></div>'
       +'<div class="t-bar-wrap"><div class="t-bar '+cls+'" style="width:'+barPct+'%"></div></div>'
-      +'<div class="t-chips">'+traders.map(n=>'<span class="t-chip">'+shortWallet(n)+'</span>').join('')+'</div>'
+      +'<div style="font-family:var(--mono);font-size:10.5px;margin-top:8px;line-height:1.6">'+traderChipsInlineHTML(uniqueTradeBuys,trendLk)+'</div>'
       +(function(){var gdv=findGameDateForTitle(g.title,g.eventSlug);return gdv?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:4px">\u23F0 Game: '+gdt(gdv)+'</div>':'';})()
       +'<a href="'+link+'" target="_blank" class="t-link">View on Polymarket \u2192</a>'
       +'</div>';
@@ -1913,11 +1935,13 @@ function buildBoard(){
       :match?'Books moved; Poly active on this game'
       :(g.exConfirms||0)>0?'Books + exchange confirm'
       :'Sharp books moved '+parseFloat(g.gapPP||0).toFixed(1)+'pp';
+    var tradersOnSide=findAllTradersOnSide({sharpSide:g.sharpSide,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts);
     rows.push({
       title:(g.away||'')+(g.home?' @ '+g.home:''),side:g.sharpSide||'',score:combined,
       srcLine:si,srcPoly:agree?ps:0,srcExch:g.exConfirms||0,combined:agree,
       velState:vel?vel.state:'NONE',
-      gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home),why:why
+      gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home),why:why,
+      traders:tradersOnSide
     });
   });
   buildTrending().forEach(function(g){
@@ -1959,11 +1983,14 @@ function buildBoard(){
     var sc=polyDisplayScore(g).score;
     if(sc<POLY_AUTOTRACK_THRESHOLD)return;
     var b=uniqueBuyerCount(g);
+    var seenW={},uniqueTraders=[];
+    (g.buys||[]).forEach(function(buy){if(buy.wallet&&!seenW[buy.wallet]){seenW[buy.wallet]=true;uniqueTraders.push(buy);}});
     rows.push({
       title:g.title,side:g.outcome||'',score:sc,
       srcLine:0,srcPoly:sc,srcExch:0,combined:false,
       gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||'',
-      why:b>=2?b+' profitable traders converging':fu(g.totalVol)+' from a top trader'
+      why:b>=2?b+' profitable traders converging':fu(g.totalVol)+' from a top trader',
+      traders:uniqueTraders
     });
   });
   rows.sort(function(a,b){return b.score-a.score||(a.combined?-1:b.combined?1:0);});
@@ -1980,6 +2007,7 @@ function renderHero(){
   var board=buildBoard();
   var top=board[0]||null;
   var rec=overallRecord();
+  var heroLk=buildClientTrackedLookup();
   // trust panel
   var trust='<div class="h2-trust"><div>'
     +'<div class="trust-hd">Verified record &middot; last 30 days</div>';
@@ -2020,6 +2048,7 @@ function renderHero(){
           +'</div>';
       })()
       +chips
+      +(top.traders&&top.traders.length?'<div style="font-family:var(--mono);font-size:11.5px;margin:12px 0;padding:12px 0;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);line-height:1.6">'+traderChipsInlineHTML(top.traders,heroLk)+'</div>':'')
       +'<div class="h2-foot">'
       +'<button class="btn-hero ss-log-btn" data-title="'+String(top.title).replace(/"/g,"\'")+'">Track this play</button>'
       +'<button class="btn-ghost2 ss-track-btn">See the log</button>'
@@ -3152,9 +3181,11 @@ function renderCommandCenter(){
   if(ccTitle)ccTitle.textContent=view2.length+' play'+(view2.length===1?'':'s')+(f!=='all'?' \u00b7 '+(f==='exch'?'exchange':f)+' filter':'')+' \u00b7 Best: '+view2[0].title;
   var CAP=6;
   var shown=boardExpand?view2:view2.slice(0,CAP);
+  var boardLk=buildClientTrackedLookup();
   grid.innerHTML=shown.map(function(r,i){
     var isTop=(f==='all'&&i===0);
     var tier=boardTier(r.score);
+    var traderChips=r.traders&&r.traders.length?traderChipsInlineHTML(r.traders,boardLk):'';
     return '<div class="brow'+(isTop?' top':'')+'">'
       +'<div class="br-score"><div class="n">'+r.score+'</div><div class="t">'+tier+'</div></div>'
       +'<div><div class="br-game">'+r.title+(r.sport?' <span style="font-size:9px;color:var(--t4);font-weight:500;margin-left:4px">'+r.sport+'</span>':'')
@@ -3167,6 +3198,7 @@ function renderCommandCenter(){
       +(r.velState==='MID_MOVE'?'<span class="minisrc on-vel" title="ML moving, books lagging \u2014 shadow signal">VEL</span>':'')
       +'</div>'
       +'<div class="br-meta">'+(r.gameTime?'<div class="tm">'+gdt(r.gameTime)+'</div>':'')+'<div class="why">'+(r.why||'')+'</div></div>'
+      +(traderChips?'<div style="grid-column:1/-1;font-family:var(--mono);font-size:10.5px;padding:8px 0 0;margin-top:8px;border-top:1px solid var(--b1);line-height:1.6">'+traderChips+'</div>':'')
       +'</div>';
   }).join('');
   if(view2.length>CAP&&!boardExpand){
