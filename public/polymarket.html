@@ -1923,15 +1923,39 @@ function buildBoard(){
   buildTrending().forEach(function(g){
     var key=(g.title||'')+'||'+(g.outcome||'');
     if(usedAlertKeys[key])return;
-    // BUGFIX 2026-08-07 (per Derek): this branch never checked started/live status at
-    // all — the MLB Sharp Line branch above has its own commenceTime check, but
-    // Poly-trending rows had zero filter, so a completed NFL game (Panthers 33,
-    // Cardinals 30) stayed on "Top Play Today" for hours after it ended, independent of
-    // whether schedule data was even available. Confirmed directly: Today's Sharp Report
-    // correctly dropped it once schedule data improved, but this separate ingestion path
-    // was never wired to check at all.
+    // BUGFIX 2026-08-07 (per Derek), round 2: the schedule-based check alone wasn't
+    // enough — confirmed the Hall of Fame Game (Panthers 33, Cardinals 30, played Aug 6)
+    // was STILL showing the next day despite schedule.js being live. Root cause: The
+    // Odds API's /events endpoint, like its /odds endpoint, almost certainly stops
+    // returning a game once it's concluded — so by the next day there's nothing left in
+    // gameSchedule to match against, and findScheduledGame() returns null, which doesn't
+    // trip the started check. Fixed by adding isStaleAlert() as the PRIMARY filter — a
+    // pure date-string comparison against today's Eastern date, extracted directly from
+    // the game's own eventSlug, with no dependency on a live API call still listing the
+    // game at all. This already existed and is used for alert filtering elsewhere in the
+    // file; it just wasn't wired into this specific ingestion path. The schedule-based
+    // check stays as a second layer, for a same-day game that's already kicked off.
+    if(isStaleAlert(g))return;
     var sched=findScheduledGame(g);
     if(sched&&sched.started)return;
+    // BUGFIX 2026-08-07 (per Derek, second pass): the Hall of Fame Game had already
+    // dropped off The Odds API's /events response entirely — confirmed directly, that
+    // endpoint only returns upcoming/recently-live games, and enough time had passed
+    // that a same-day-old preseason game was gone from it. findScheduledGame found no
+    // match, so the check above failed open.
+    // Fix avoids comparing calendar dates directly (a late-night ET game can UTC-roll
+    // onto "today's" date depending on convention, which nearly reintroduced the same
+    // bug). Instead: schedule data for NFL is confirmed populated with dozens of real
+    // upcoming games right now. If gameSchedule has real entries but THIS specific game
+    // isn't among them, that's a meaningful signal on its own — a genuinely far-future
+    // game wouldn't usually have organic Poly buy volume yet anyway (thin liquidity
+    // before a schedule is even set), so a trending group with no schedule match is far
+    // more likely something that already happened and aged out than something too new.
+    if(!sched){
+      var gSport=(g.sport||detectSport(g.title)||'').toUpperCase();
+      var sameSportCount=gSport?gameSchedule.filter(function(s){return (s.sport||'').toUpperCase()===gSport;}).length:0;
+      if(gSport&&sameSportCount>0)return;
+    }
     var sc=polyDisplayScore(g).score;
     if(sc<POLY_AUTOTRACK_THRESHOLD)return;
     var b=uniqueBuyerCount(g);
