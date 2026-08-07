@@ -1332,8 +1332,22 @@ function parseSpecialistRecordClient(str){
   const wins=Math.round((winPct/100)*settled),losses=settled-wins;
   return {roiPct:parseFloat(m[1]),wins,losses,settled};
 }
+// BUGFIX 2026-08-07 (per Derek): traderRecordChip referenced cleanTraderName, which only
+// ever existed server-side (polymarket-notify.js) — never defined on the client. An
+// undeclared identifier throws ReferenceError in JS the moment it's referenced, which
+// crashed renderHero/renderCommandCenter/renderTrending the instant any row had a real
+// matched trader (i.e., almost always) — hence the Error badge and stuck "Loading..."
+// states. Latent before this build since Sharp Report's hero happened to hit the
+// no-traders fallback path in the screenshot that looked fine. Same malformed-address
+// cleanup logic as the server, ported here directly instead of assumed to exist.
+function cleanTraderNameClient(name,wallet){
+  var malformed=name&&/^0x[a-fA-F0-9]{20,}-\d{10,}$/.test(name);
+  if(!malformed&&name)return name;
+  var w=wallet||(name?name.split('-')[0]:'');
+  return w?w.slice(0,6)+'...'+w.slice(-4):'Anon';
+}
 function traderRecordChip(a,lookup){
-  const label=cleanTraderName?cleanTraderName(a.traderName,a.wallet):(a.traderName||'Anon');
+  const label=cleanTraderNameClient(a.traderName,a.wallet);
   const resolvedLabel=lookup.resolveDisplayName(label);
   const tracked=lookup.byTrader[resolvedLabel];
   const trackedROI=lookup.roiByTrader[resolvedLabel];
