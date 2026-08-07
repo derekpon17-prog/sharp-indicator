@@ -7,7 +7,7 @@
 <meta property="og:description" content="Real-time tracking of top profitable Polymarket sports traders.">
 <meta property="og:url" content="https://sharp-indicator-a34j.vercel.app/polymarket.html">
 <title>Sharp Money</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Fraunces:opsz,wght@9..144,380;9..144,480;9..144,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.26.0/dist/tabler-icons.min.css">
 <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -50,6 +50,41 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .rep-empty{font-size:12.5px;color:var(--t4);padding:10px 0}
 .rep-row.rep-done{opacity:.45}
 .rep-row.rep-done .rep-price{color:var(--t3)}
+/* HERO PLAY — Clay-inspired treatment for the #1 ranked play. One loud thing per board;
+   everything else (the .rep-row list below) stays quiet and disciplined by comparison. */
+.rep-hero{border-bottom:1px solid var(--b1);padding-bottom:26px;margin-bottom:22px}
+.rep-hero-tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;padding:6px 12px;border-radius:20px;margin-bottom:18px}
+.rep-hero-tag::before{content:'';width:6px;height:6px;border-radius:50%}
+.rep-hero-tag.agree{color:var(--green);background:var(--grl)}
+.rep-hero-tag.agree::before{background:var(--green)}
+.rep-hero-tag.lineonly{color:var(--blue);background:var(--bl)}
+.rep-hero-tag.lineonly::before{background:var(--blue)}
+.rep-hero-matchup{font-family:'Fraunces',serif;font-weight:480;font-size:clamp(26px,4.2vw,38px);line-height:1.05;letter-spacing:-.01em;margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rep-hero-matchup img{width:28px;height:28px;object-fit:contain;flex-shrink:0}
+.rep-hero-side{font-size:16px;font-weight:700;color:var(--t1)}
+.rep-hero-price{font-family:var(--mono);font-size:13.5px;color:var(--t3);margin-bottom:22px}
+.rep-hero-grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:520px){.rep-hero-grid{grid-template-columns:1.3fr 1fr}}
+.rep-hero-label{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--t4);margin-bottom:8px;font-weight:700}
+.rep-hero-reason{font-size:12.5px;color:var(--t3);line-height:1.55;margin-bottom:4px}
+.rep-hero-trader-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--b1)}
+.rep-hero-trader-row:first-of-type{border-top:none;padding-top:0}
+.rep-hero-trader-name{font-size:13px;font-weight:600;color:var(--t1)}
+.rep-hero-trader-rec{font-family:var(--mono);font-size:12px;font-weight:700}
+.rep-hero-score{font-family:'Fraunces',serif;font-weight:480;font-size:40px;color:var(--gold)}
+.rep-hero-notrader{font-size:12px;color:var(--t4);font-style:italic}
+/* Quiet rows for the rest of the board — compact, single line, no competing weight */
+.rep-quiet-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--b1)}
+.rep-quiet-left{display:flex;align-items:baseline;gap:12px;min-width:0}
+.rep-quiet-rank{font-family:var(--mono);font-size:10.5px;color:var(--t4);flex-shrink:0;width:22px}
+.rep-quiet-matchup{font-family:var(--disp);font-size:14px;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rep-quiet-side{font-size:11.5px;color:var(--t3);white-space:nowrap}
+.rep-quiet-trader{font-size:10.5px;color:var(--t4);font-family:var(--mono);white-space:nowrap}
+.rep-quiet-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.rep-quiet-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.rep-quiet-dot.agree{background:var(--green)}
+.rep-quiet-dot.lineonly{background:var(--blue)}
+.rep-quiet-score{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gold)}
 @media(max-width:700px){.rep-row{flex-direction:column;gap:6px}.rep-tier{flex:none;align-self:flex-start}}
 .ntab.ntab-action:hover{color:var(--gold)}
 .ntab{display:flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;border:none;background:transparent;color:var(--t3);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
@@ -1251,6 +1286,53 @@ function sameSharpSide(lineSide,polyOutcome){
   const a=normTeam(lineSide||''),b=normTeam(polyOutcome||'');
   return !!a&&!!b&&a===b;
 }
+// Finds every unique wallet genuinely on this side of this game (not just the first
+// match) so the report can show all of them, not just confirm agreement exists.
+function findAllTradersOnSide(line,alertList){
+  const sh=normTeam(line.sharpSide||'');const aw=normTeam(line.away||'');const hm=normTeam(line.home||'');
+  const gameDate=gameEasternDate(line);
+  const seen=new Set(),out=[];
+  (alertList||[]).forEach(function(a){
+    if(a.type!=='POLY'&&a.type!=='SPEC')return;
+    const t=(a.title||'').toLowerCase().replace(/[^a-z]/g,'');
+    const nameMatch=(sh&&sh.length>2&&t.includes(sh))||(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));
+    if(!nameMatch)return;
+    const alertDate=extractSlugDate(a);
+    if(gameDate&&alertDate&&alertDate!==gameDate)return;
+    if(!sameSharpSide(line.sharpSide,a.outcome))return;
+    if(!a.wallet||seen.has(a.wallet))return;
+    seen.add(a.wallet);
+    out.push(a);
+  });
+  return out;
+}
+function parseSpecialistRecordClient(str){
+  if(!str)return null;
+  const m=str.match(/([\d.]+)%\s*ROI\s*on\s*\$[\d,]+\s*staked\s*(?:·|-)\s*([\d.]+)%\s*of\s*(\d+)\s*settled\s*bets\s*won.*?\(([+-][\d.]+)pp\)/);
+  if(!m)return null;
+  const winPct=parseFloat(m[2]),settled=parseInt(m[3],10);
+  const wins=Math.round((winPct/100)*settled),losses=settled-wins;
+  return {roiPct:parseFloat(m[1]),wins,losses,settled};
+}
+// Tracked-first/specialist-fallback — same logic as Discord's nameWithRecord, so a
+// wallet's record never reads differently between the two.
+function traderRecordChip(a,lookup){
+  const label=cleanTraderName?cleanTraderName(a.traderName,a.wallet):(a.traderName||'Anon');
+  const resolvedLabel=lookup.resolveDisplayName(label);
+  const tracked=lookup.byTrader[resolvedLabel];
+  const trackedROI=lookup.roiByTrader[resolvedLabel];
+  let wins,losses,roiPct,source;
+  if(tracked&&(tracked.W+tracked.L)>0){
+    wins=tracked.W;losses=tracked.L;
+    roiPct=(trackedROI&&trackedROI.roiPct!==null&&trackedROI.roiPct!==undefined)?trackedROI.roiPct:null;
+    source='tracked';
+  }else{
+    const rec=parseSpecialistRecordClient(a.specialistRecord);
+    if(!rec)return {label:resolvedLabel,wins:null,losses:null,roiPct:null,source:null};
+    wins=rec.wins;losses=rec.losses;roiPct=rec.roiPct;source='specialist';
+  }
+  return {label:resolvedLabel,wins,losses,roiPct,source};
+}
 function detectSportFromTeams(away,home){
   const t=((away||'')+(home||'')).toLowerCase();
   if(MLB_TEAMS.some(function(x){return t.includes(x);})||t.includes('sox')||t.includes('jays'))return'MLB';
@@ -1676,35 +1758,58 @@ function renderReport(){
     wrap.innerHTML=head+'<div class="rep-empty">Nothing on today\u2019s board clears even the watchlist bar. On an efficient slate that is the honest answer \u2014 no play is a result.</div></div>';
     wrap.style.display='';return;
   }
-  var rankCounter=0;
-  wrap.innerHTML=head+rows.map(function(g){
-    var i=g.indication,bb=i.bestBook;
-    var rankBadge='';
-    if(!g.started){
-      rankCounter++;
-      rankBadge=rankCounter===1
-        ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--gold);background:rgba(229,160,13,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">&#9733; BEST PLAY</div>'
-        :'<div style="font-size:9.5px;font-weight:800;letter-spacing:.04em;color:var(--t3);background:rgba(255,255,255,.06);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block">#'+rankCounter+'</div>';
-    }
+  var traderLk=buildClientTrackedLookup();
+  function agreeCheck(g,i){
     var polyMatchRaw=i.side?matchLineToAlert({sharpSide:i.side,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts):null;
-    var polyMatch=polyMatchRaw&&sameSharpSide(i.side,polyMatchRaw.outcome)?polyMatchRaw:null;
-    var sourceBadge=polyMatch
-      ?'<div style="font-size:9.5px;font-weight:800;letter-spacing:.03em;color:var(--green);background:rgba(16,163,74,.12);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block;margin-left:6px">SHARP SCORE &middot; line + poly agree</div>'
-      :'<div style="font-size:9.5px;font-weight:800;letter-spacing:.03em;color:var(--blue);background:rgba(64,120,255,.1);border-radius:4px;padding:2px 7px;margin-bottom:5px;display:inline-block;margin-left:6px">SHARP LINE &middot; line only</div>';
-    return '<div class="rep-row'+(g.started?' rep-done':'')+'">'
-      +'<div class="rep-tier t'+i.tier+'">TIER '+i.tier+'<div style="font-size:8px;font-weight:700;opacity:.8;margin-top:1px">'+i.label+'</div><div class="rep-score">'+(i.score||0)+'</div></div>'
-      +'<div class="rep-body">'
-      +'<div>'+rankBadge+sourceBadge+'</div>'
-      +'<div class="rep-play">'+esc((g.away||'')+' @ '+(g.home||''))+'</div>'
-      +'<div class="rep-price">'+(i.side
-          ? (function(){var logo=anyTeamLogoUrl(i.side);return (logo?'<img src="'+logo+'" alt="" style="width:20px;height:20px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'');})()
-            +esc(i.side)+(bb?' '+fmtAm(bb.price)+' <span class="bk">\u2014 '+esc(String(bb.book).toUpperCase())+'</span>':'')
-          : '<span class="bk">side not resolved \u2014 see reasons</span>')
+    return polyMatchRaw&&sameSharpSide(i.side,polyMatchRaw.outcome);
+  }
+  // Find the hero play — first not-yet-started play in rank order (same "BEST PLAY" logic
+  // as before, just now gets a genuinely different visual treatment instead of a badge).
+  var heroIdx=rows.findIndex(function(g){return !g.started;});
+  var rankCounter=0;
+  var body=rows.map(function(g,idx){
+    var i=g.indication,bb=i.bestBook;
+    var agree=agreeCheck(g,i);
+    var tradersOnSide=i.side?findAllTradersOnSide({sharpSide:i.side,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts):[];
+
+    if(idx===heroIdx){
+      var traderRowsHtml=tradersOnSide.length
+        ?tradersOnSide.map(function(a){
+            var c=traderRecordChip(a,traderLk);
+            var hasRec=c.wins!==null;
+            var col=hasRec?(c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)'):'var(--t3)';
+            var recTxt=hasRec?(c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' \u00b7 '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
+            return '<div class="rep-hero-trader-row"><span class="rep-hero-trader-name">'+esc(c.label)+'</span><span class="rep-hero-trader-rec" style="color:'+col+'">'+esc(recTxt)+'</span></div>';
+          }).join('')
+        :'<div class="rep-hero-notrader">No Poly activity on this side yet</div>';
+      var logo=i.side?anyTeamLogoUrl(i.side):null;
+      return '<div class="rep-hero">'
+        +'<div class="rep-hero-tag '+(agree?'agree':'lineonly')+'">'+(agree?'SHARP SCORE \u00b7 LINE + POLY AGREE':'SHARP LINE \u00b7 LINE ONLY')+'</div>'
+        +'<div class="rep-hero-matchup">'+(logo?'<img src="'+logo+'" alt="" onerror="this.style.display=\'none\'">':'')+esc((g.away||'')+' @ '+(g.home||''))+'</div>'
+        +'<div class="rep-hero-side">'+(i.side?esc(i.side):'Side not resolved')+'</div>'
+        +'<div class="rep-hero-price">'+(bb?fmtAm(bb.price)+' \u2014 '+esc(String(bb.book).toUpperCase()):'see reasons')+(g.commenceTime?' \u00b7 '+gdt(g.commenceTime):'')+'</div>'
+        +'<div class="rep-hero-grid">'
+        +'<div><div class="rep-hero-label">Why</div>'+(i.reasons||[]).map(function(r){return '<div class="rep-hero-reason">'+esc(r)+'</div>';}).join('')+'</div>'
+        +'<div><div class="rep-hero-label">Who\u2019s On It</div>'+traderRowsHtml+'</div>'
         +'</div>'
-      +'<ul class="rep-why">'+(i.reasons||[]).map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>'
-      +(g.commenceTime?'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:5px">'+gdt(g.commenceTime)+(g.started?' \u00b7 STARTED':'')+'</div>':'')
+        +'</div>';
+    }
+
+    if(!g.started)rankCounter++;
+    var traderSummary=tradersOnSide.length?(' \u00b7 '+tradersOnSide.length+' trader'+(tradersOnSide.length>1?'s':'')):'';
+    return '<div class="rep-quiet-row'+(g.started?' rep-done':'')+'">'
+      +'<div class="rep-quiet-left">'
+      +'<span class="rep-quiet-rank">'+(g.started?'\u2014':'#'+rankCounter)+'</span>'
+      +'<span class="rep-quiet-matchup">'+esc((g.away||'')+' @ '+(g.home||''))+'</span>'
+      +'<span class="rep-quiet-side">'+(i.side?esc(i.side):'unresolved')+'</span>'
+      +'<span class="rep-quiet-trader">'+esc(traderSummary)+'</span>'
+      +'</div>'
+      +'<div class="rep-quiet-right">'
+      +'<span class="rep-quiet-dot '+(agree?'agree':'lineonly')+'" title="'+(agree?'Line + Poly agree':'Line only')+'"></span>'
+      +'<span class="rep-quiet-score">'+(i.score||0)+'</span>'
       +'</div></div>';
-  }).join('')+'</div>';
+  }).join('');
+  wrap.innerHTML=head+body+'</div>';
   wrap.style.display='';
 }
 
@@ -2438,17 +2543,14 @@ function renderSportBreakdown(){
       +'</div>';
   }).join('');
 }
-function renderTraderBreakdown(){
-  var list=el('trader-breakdown-list'),empty=el('trader-breakdown-empty');
-  if(!list)return;
-  // BUGFIX 2026-08-06 (per Derek): a wallet that fired alerts both before and after the
-  // nickname fix (or the earlier cleanTraderName malformed-pattern fix) ends up with its
-  // history split across two different display names — the raw "0xADDR-timestamp" string
-  // from old plays, and its real name/nickname from new ones — with no visible link
-  // between them. Extract the wallet address directly from the malformed pattern itself
-  // (it's literally embedded in the string), then resolve it to whatever clean name that
-  // wallet has used most recently, from stake data. Old and new plays for the same wallet
-  // now merge into one row under the current name — the raw string never displays.
+// SHARED: used by both the Tracking tab's By Trader section and the Sharp Report's
+// per-play trader display, so both read the exact same resolved records.
+function buildClientTrackedLookup(){
+  // A wallet that fired alerts both before and after the nickname fix ends up with its
+  // history split across two display names — the raw "0xADDR-timestamp" string from old
+  // plays, and its real name/nickname from new ones. Extract the wallet address directly
+  // from the malformed pattern, then resolve to whatever clean name that wallet has used
+  // most recently, from stake data.
   var walletToCleanName={};
   [sigPlays,specPlays].forEach(function(arr){
     (arr||[]).forEach(function(p){
@@ -2464,10 +2566,8 @@ function renderTraderBreakdown(){
     if(!m)return rawName;
     var wallet=m[1].toLowerCase();
     if(walletToCleanName[wallet])return walletToCleanName[wallet];
-    return wallet.slice(0,6)+'...'+wallet.slice(-4); // no clean name seen yet — short address beats the raw timestamp string
+    return wallet.slice(0,6)+'...'+wallet.slice(-4);
   }
-  // Simple win rate — works from just the `traders` array, no stake data required. This
-  // is the direct "how often do they just win" answer Derek asked for, separate from ROI.
   var byTrader={};
   [sigPlays,specPlays].forEach(function(arr){
     (arr||[]).forEach(function(p){
@@ -2480,11 +2580,15 @@ function renderTraderBreakdown(){
       });
     });
   });
-  // ROI layer — only where real stake data exists (backfillStakes already ran in
-  // renderTracking before this is called). Not every trader will have it, especially on
-  // older plays tracked before stakes were captured — shown as "—" rather than guessed.
   var roiByTrader={};
   calcTraderROI([...sigPlays,...specPlays]).forEach(function(r){roiByTrader[resolveDisplayName(r.trader)]=r;});
+  return {byTrader:byTrader,roiByTrader:roiByTrader,walletToCleanName:walletToCleanName,resolveDisplayName:resolveDisplayName};
+}
+function renderTraderBreakdown(){
+  var list=el('trader-breakdown-list'),empty=el('trader-breakdown-empty');
+  if(!list)return;
+  var lk=buildClientTrackedLookup();
+  var byTrader=lk.byTrader,roiByTrader=lk.roiByTrader;
 
   var rows=Object.keys(byTrader).map(function(t){
     var b=byTrader[t];
