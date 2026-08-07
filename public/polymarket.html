@@ -1210,6 +1210,25 @@ async function fetchSharpLines(){
     // Schedule INCLUDES games already underway; sharpLines does not (API filters to
     // ct>now), which is precisely why a live play could never be identified here before.
     gameSchedule=Array.isArray(d.schedule)?d.schedule:gameSchedule;
+    // BUGFIX 2026-08-07 (per Derek): this MLB-only schedule was the ONLY source of
+    // "has this game started" data — any other sport had zero commence-time data to
+    // check against, so a completed NFL preseason game (Panthers 33, Cardinals 30 — the
+    // Hall of Fame Game) stayed visible as an active "Top Play Today" recommendation
+    // hours after it ended. /api/schedule pulls every sport via The Odds API's free
+    // /events endpoint (zero quota cost, no odds requested) — merged in here so ANY
+    // sport's games fall off correctly once they start, automatically, with no per-sport
+    // activation needed. Does NOT touch Sharp Line's own MLB-only signal generation.
+    try{
+      const sr=await fetch('/api/schedule');
+      if(sr.ok){
+        const sd=await sr.json();
+        if(Array.isArray(sd.schedule)&&sd.schedule.length){
+          const mlbSlugs=new Set(gameSchedule.map(function(g){return (g.away||'')+'|'+(g.home||'')+'|'+(g.commenceTime||'');}));
+          const extra=sd.schedule.filter(function(g){return !mlbSlugs.has((g.away||'')+'|'+(g.home||'')+'|'+(g.commenceTime||''));});
+          gameSchedule=gameSchedule.concat(extra);
+        }
+      }
+    }catch(e){console.warn('[Sharp.idx] all-sport schedule fetch failed, started-detection stays MLB-only this run:',e.message);}
     todayReport=Array.isArray(d.todayReport)?d.todayReport:todayReport;
     captureVelocityShadow(sharpLines);
     return sharpLines;
@@ -1286,8 +1305,6 @@ function sameSharpSide(lineSide,polyOutcome){
   const a=normTeam(lineSide||''),b=normTeam(polyOutcome||'');
   return !!a&&!!b&&a===b;
 }
-// Finds every unique wallet genuinely on this side of this game (not just the first
-// match) so the report can show all of them, not just confirm agreement exists.
 function findAllTradersOnSide(line,alertList){
   const sh=normTeam(line.sharpSide||'');const aw=normTeam(line.away||'');const hm=normTeam(line.home||'');
   const gameDate=gameEasternDate(line);
@@ -1314,8 +1331,6 @@ function parseSpecialistRecordClient(str){
   const wins=Math.round((winPct/100)*settled),losses=settled-wins;
   return {roiPct:parseFloat(m[1]),wins,losses,settled};
 }
-// Tracked-first/specialist-fallback — same logic as Discord's nameWithRecord, so a
-// wallet's record never reads differently between the two.
 function traderRecordChip(a,lookup){
   const label=cleanTraderName?cleanTraderName(a.traderName,a.wallet):(a.traderName||'Anon');
   const resolvedLabel=lookup.resolveDisplayName(label);
@@ -1763,8 +1778,6 @@ function renderReport(){
     var polyMatchRaw=i.side?matchLineToAlert({sharpSide:i.side,away:g.away,home:g.home,commenceTime:g.commenceTime},alerts):null;
     return polyMatchRaw&&sameSharpSide(i.side,polyMatchRaw.outcome);
   }
-  // Find the hero play — first not-yet-started play in rank order (same "BEST PLAY" logic
-  // as before, just now gets a genuinely different visual treatment instead of a badge).
   var heroIdx=rows.findIndex(function(g){return !g.started;});
   var rankCounter=0;
   var body=rows.map(function(g,idx){
@@ -2546,11 +2559,6 @@ function renderSportBreakdown(){
 // SHARED: used by both the Tracking tab's By Trader section and the Sharp Report's
 // per-play trader display, so both read the exact same resolved records.
 function buildClientTrackedLookup(){
-  // A wallet that fired alerts both before and after the nickname fix ends up with its
-  // history split across two display names — the raw "0xADDR-timestamp" string from old
-  // plays, and its real name/nickname from new ones. Extract the wallet address directly
-  // from the malformed pattern, then resolve to whatever clean name that wallet has used
-  // most recently, from stake data.
   var walletToCleanName={};
   [sigPlays,specPlays].forEach(function(arr){
     (arr||[]).forEach(function(p){
