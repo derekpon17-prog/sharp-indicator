@@ -880,6 +880,46 @@ function ncaafConference(teamName){
   for(const conf in NCAAF_CONFERENCES){if(NCAAF_CONFERENCES[conf].some(x=>t.includes(x)))return conf;}
   return null;
 }
+// BUGFIX 2026-08-08 (per council audit): detectSport() only recognized NCAAB from
+// generic phrases like 'march madness' or 'ncaa tournament' — a real regular-season game
+// like "Duke vs. North Carolina" was never tagged as NCAAB at all, same silent-drop bug
+// already fixed for NFL/NBA/NHL/WNBA weeks ago but missed here. Scoped to the major
+// conferences (~130 schools) rather than all ~360 D1 teams — this is where real betting
+// and Poly volume concentrates; a smaller mid-major school with no market volume costs
+// nothing by being absent, unlike a real Duke or Kansas game going untagged. School names,
+// not mascots, for the same reason as NCAAF — too many schools share mascots (Tigers,
+// Bulldogs, Wildcats) for mascot-only matching to be safe. Same caveat as NCAAF: reflects
+// conference membership as of last training update, worth a spot-check before tip-off.
+const NCAAB_TEAMS=[
+  // ACC (basketball membership differs slightly from football — Notre Dame plays ACC hoops)
+  'boston college','california golden bears','clemson','duke','florida state','georgia tech',
+  'louisville','miami hurricanes','nc state','north carolina tar heels','notre dame',
+  'pittsburgh panthers','smu','stanford cardinal','syracuse','virginia cavaliers','virginia tech','wake forest',
+  // Big Ten
+  'illinois','indiana hoosiers','iowa hawkeyes','maryland','michigan wolverines','michigan state',
+  'minnesota','nebraska','northwestern','ohio state','oregon ducks','penn state','purdue',
+  'rutgers','ucla','usc trojans','washington huskies','wisconsin',
+  // Big 12
+  'arizona wildcats','arizona state','baylor','byu','cincinnati bearcats','colorado buffaloes',
+  'houston cougars','iowa state','kansas jayhawks','kansas state','oklahoma state','tcu',
+  'texas tech','ucf','utah utes','west virginia',
+  // SEC
+  'alabama','arkansas','auburn','florida gators','georgia bulldogs','kentucky','lsu',
+  'mississippi state','missouri','oklahoma sooners','ole miss','south carolina','tennessee',
+  'texas longhorns','texas a&m','vanderbilt',
+  // Big East (basketball-only conference, no football equivalent)
+  'butler','creighton','depaul','georgetown','marquette','providence friars','seton hall',
+  "st. john's",'uconn huskies','villanova','xavier',
+  // American
+  'charlotte 49ers','east carolina','florida atlantic','memphis tigers','north texas',
+  'rice owls','south florida','temple owls','tulane','tulsa golden hurricane','uab','utsa','wichita state',
+  // Mountain West
+  'air force falcons','boise state','colorado state','fresno state','nevada wolf pack',
+  'new mexico lobos','san diego state','san jose state','unlv','utah state','wyoming cowboys',
+  // WCC (Gonzaga's conference — real national relevance despite being a mid-major league)
+  'gonzaga','loyola marymount','oregon state','pacific tigers','pepperdine','portland pilots',
+  "saint mary's",'san diego toreros','san francisco dons','santa clara','washington state',
+];
 const ESPORTS=['dota','valorant','cs2','counter-strike','league of legends','lol:','esports world cup','starcraft','overwatch','fortnite','pubg','apex legends','rainbow six','rocket league'];
 const SOCCER_INTL=['premier league','la liga','serie a','bundesliga','champions league','copa america','gold cup','concacaf','fa cup','nations league','world cup qualifier','man city','man united','liverpool','chelsea','arsenal','barcelona','real madrid','france vs','england vs','brazil vs','germany vs','spain vs','portugal vs','argentina vs','italy vs','netherlands vs'];
 function detectSport(title){
@@ -891,7 +931,7 @@ function detectSport(title){
   if(t.includes('nfl')||t.includes('super bowl')||t.includes('afc championship')||t.includes('nfc championship')||NFL_TEAMS.some(x=>t.includes(x)))return 'NFL';
   if(t.includes('nhl')||t.includes('stanley cup')||NHL_TEAMS.some(x=>t.includes(x)))return 'NHL';
   if(t.includes('ncaaf')||t.includes('college football playoff')||t.includes('cfp')||t.includes('rose bowl')||t.includes('sugar bowl')||t.includes('orange bowl')||t.includes('cotton bowl')||t.includes('fiesta bowl')||NCAAF_TEAMS.some(x=>t.includes(x)))return 'NCAAF';
-  if(t.includes('ncaab')||t.includes('march madness')||t.includes('ncaa tournament')||t.includes('ncaa basketball')||t.includes('final four'))return 'NCAAB';
+  if(t.includes('ncaab')||t.includes('march madness')||t.includes('ncaa tournament')||t.includes('ncaa basketball')||t.includes('final four')||NCAAB_TEAMS.some(x=>t.includes(x)))return 'NCAAB';
   if(t.includes('pga')||t.includes('masters ')||t.includes('ryder cup')||t.includes('the open championship')||t.includes('us open golf')||t.includes('pga championship')||t.includes('liv golf'))return 'Golf';
   if(t.includes('fifa world cup')||t.includes('world cup winner')||SOCCER_INTL.some(x=>t.includes(x)))return 'Soccer';
   if(t.includes('olympic')||t.includes('summer games')||t.includes('winter games'))return 'Olympics';
@@ -2124,21 +2164,9 @@ function watchedTraderCardHTML(w,lookup){
   var hasRec=chip.wins!==null;
   var recColor=hasRec?(chip.roiPct>0?'var(--green)':chip.roiPct<0?'var(--red)':'var(--t3)'):'var(--t4)';
   var recTxt=hasRec?(chip.wins+'-'+chip.losses+(chip.source==='specialist'?'*':'')+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')):'no record yet';
-  // BUGFIX 2026-08-07 (per Derek): outcome||title meant a totals pick ("Under") always
-  // won over the actual game, since "Under" is truthy on its own — a totals side means
-  // nothing without knowing which game it's on. Always show the matchup; append the side
-  // when it's a bare Over/Under (moneyline/spread outcomes already name a team, so those
-  // stay as-is rather than redundantly repeating the team name twice).
-  function pickDisplayText(p){
-    var teams=(p.title||'').replace(/:\s*O\/U.*$/i,'').replace(/^Spread:\s*/i,'').trim();
-    var outcome=p.outcome||'';
-    var isTotals=/^(over|under)\b/i.test(outcome);
-    if(isTotals&&teams)return teams+' \u2014 '+outcome;
-    return outcome||teams||'Unknown';
-  }
   var picksHtml=todaysPicks.length
     ?todaysPicks.slice(0,4).map(function(p){
-        return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b1);font-size:11.5px"><span style="color:var(--t2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(pickDisplayText(p))+'</span><span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0;margin-left:8px">'+fu(p.usdValue||0)+'</span></div>';
+        return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b1);font-size:11.5px"><span style="color:var(--t2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(p.outcome||p.title)+'</span><span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0;margin-left:8px">'+fu(p.usdValue||0)+'</span></div>';
       }).join('')
     :'<div style="font-size:11px;color:var(--t4);padding:6px 0">No picks yet today</div>';
   return '<div style="min-width:230px;max-width:230px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:14px;flex-shrink:0">'
