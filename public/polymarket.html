@@ -2261,7 +2261,8 @@ function renderDash(){
   }).slice(0,8);
   if(recent.length){
     recent.forEach(function(b){window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
-    arEl.innerHTML=recent.map(acardHTML).join('');
+    var dashLk=buildClientTrackedLookup();
+    arEl.innerHTML=recent.map(function(b){return acardHTML(b,dashLk);}).join('');
   }else{
     arEl.innerHTML='<div style="color:var(--t4);font-size:13px;padding:16px">No alerts in last 24h — signals appear here when profitable wallets are active</div>';
   }
@@ -2279,7 +2280,7 @@ function renderDash(){
 }
 
 /* === ALERT CARD === */
-function acardHTML(b){
+function acardHTML(b,lookup){
   const pr=(parseFloat(b.price||0)*100).toFixed(1),big=(b.usdValue||0)>=5000;
   const init=(b.traderName||'?').slice(0,2).toUpperCase();
   const key=b.transactionHash||(b.wallet+(b.timestamp||''));
@@ -2336,7 +2337,14 @@ function acardHTML(b){
       +'<div style="font-size:14px;font-weight:800;color:var(--t1);line-height:1.15">'+esc((b.outcome||'').toUpperCase())+'</div>'
       +(pr&&pr!=='0.0'?'<div style="font-size:11.5px;font-weight:700;color:var(--gold);font-family:var(--mono)">@ '+pr+'&#xa2;</div>':'')
       +'</div>'
-      +(function(){var r=traderRecordLine(b);return r?'<div style="font-size:10px;color:var(--green);font-family:var(--mono);margin-bottom:3px;line-height:1.4">'+esc(r)+'</div>':'';})();
+      +(function(){
+          if(!lookup)return '';
+          var c=traderRecordChip(b,lookup);
+          if(c.wins===null)return '';
+          var col=c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)';
+          var txt=c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
+          return '<div style="font-size:10px;color:'+col+';font-family:var(--mono);margin-bottom:3px;line-height:1.4;font-weight:700">'+esc(txt)+'</div>';
+        })();
   }
 
   return '<div class="ac '+(big?'big':'')+'" style="border-left:3px solid '+borderColor+';position:relative">'
@@ -2409,6 +2417,10 @@ function renderAlerts(){
   fil.forEach(b=>{window._al=window._al||{};window._al[b.transactionHash||(b.wallet+(b.timestamp||''))]=b;});
   const list=el('al-list');
   if(!fil.length){list.innerHTML='<div class="empty"><div class="empty-ico">&#x1F514;</div><h3>No alerts match</h3><p>Try a different filter</p></div>';return;}
+  // FEATURE 2026-08-08 (per Derek): was using traderRecordLine, which only ever shows
+  // Polymarket's own self-reported text — never the tracked-first record used everywhere
+  // else (Sharp Report, Tracking, Discord). Built once here, not per-row, for efficiency.
+  const alertsLk=buildClientTrackedLookup();
   list.innerHTML=fil.map(b=>{
     const pr=(parseFloat(b.price||0)*100).toFixed(1),big=(b.usdValue||0)>=5000;
     const init=(b.traderName||'?').slice(0,2).toUpperCase();
@@ -2419,7 +2431,13 @@ function renderAlerts(){
     return '<div class="al-row'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
       +'<div class="al-av-fb">'+init+'</div>'
       +'<div class="al-main"><div class="al-trader">'+shortWallet(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+'</div>'
-      +(function(){var r=traderRecordLine(b);return r?'<div style="font-size:10.5px;color:var(--green);font-family:var(--mono);margin:3px 0 2px;line-height:1.4">'+esc(r)+'</div>':'';})()
+      +(function(){
+          var c=traderRecordChip(b,alertsLk);
+          if(c.wins===null)return '';
+          var col=c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)';
+          var txt=c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
+          return '<div style="font-size:10.5px;color:'+col+';font-family:var(--mono);margin:3px 0 2px;line-height:1.4;font-weight:700">'+esc(txt)+'</div>';
+        })()
       +'<div class="sb" style="margin:5px 0"></div>'
       +'<div style="display:flex;align-items:center;gap:9px;margin-top:6px">'
       +(logo?'<img src="'+logo+'" alt="" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'')
@@ -3507,7 +3525,7 @@ async function renderWallets(){
   if(!wallets.length){el('wgrid').innerHTML='';el('wempty').style.display='';return;}
   el('wempty').style.display='none';
   el('wgrid').innerHTML=wallets.map(w=>wcardHTML(w,[])).join('');
-  for(const w of wallets){try{const r=await fetch('https://data-api.polymarket.com/trades?user='+w.wallet+'&side=BUY&takerOnly=true&limit=4');const b=await r.json();const c=el('wc-'+w.wallet);if(c&&Array.isArray(b)){const bd=c.querySelector('.wcard-body');if(bd)bd.innerHTML=wbodyHTML(w,b);}}catch{}}
+  for(const w of wallets){try{const r=await fetch('https://data-api.polymarket.com/trades?user='+w.wallet+'&side=BUY&takerOnly=true&limit=50');const b=await r.json();const c=el('wc-'+w.wallet);if(c&&Array.isArray(b)){const bd=c.querySelector('.wcard-body');if(bd)bd.innerHTML=wbodyHTML(w,b);}}catch{}}
 }
 function wcardHTML(w,buys){
   const oe=lbData.overall.find(x=>x.wallet===w.wallet);
@@ -3527,8 +3545,25 @@ function wbodyHTML(w,buys){
   if(oe)pnlRows+='<div class="wpnl-row"><span class="wpnl-lbl">All-Time PnL</span><span class="wpnl-val" style="color:'+(oe.pnl>=0?'var(--green)':'var(--red)')+'">'+fp(oe.pnl)+'</span></div>';
   if(se)pnlRows+='<div class="wpnl-row"><span class="wpnl-lbl">Sports PnL</span><span class="wpnl-val" style="color:'+(se.pnl>=0?'var(--green)':'var(--red)')+'">'+fp(se.pnl)+'</span></div>';
   pnlRows+='<div class="wpnl-row" style="border-bottom:none"><span class="wpnl-lbl">Alerts</span><span class="wpnl-val" style="color:var(--gold)">'+myA.length+'</span></div>';
-  const rec=Array.isArray(buys)&&buys.length?buys.slice(0,3).map(b=>{const u=(parseFloat(b.size)||0)*(parseFloat(b.price)||0);return'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b1);font-size:12px"><span style="color:var(--t2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(b.title||'Unknown')+'</span><span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0;margin-left:8px">'+fu(u)+'</span></div>';}).join(''):'<div style="font-size:11px;color:var(--t4);padding:4px 0">Loading&hellip;</div>';
-  return '<div style="margin-bottom:10px">'+pnlRows+'</div><div style="font-size:10px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Recent Buys</div>'+rec;
+  // FEATURE 2026-08-08 (per Derek): was capped to 3 with no way to see more, and never
+  // showed which side/outcome each buy was actually on — just the game title and dollar
+  // amount, so a moneyline pick gave no idea who was picked. Now shows every buy the API
+  // returned (up to 50, see the fetch above) in a scrollable list, with the outcome shown
+  // next to the game the same way it's shown everywhere else on the site.
+  const rec=Array.isArray(buys)&&buys.length
+    ?buys.map(b=>{
+        const u=(parseFloat(b.size)||0)*(parseFloat(b.price)||0);
+        const outcome=b.outcome?' <span style="color:var(--green);font-weight:600">— '+esc(b.outcome)+'</span>':'';
+        return '<div style="padding:5px 0;border-bottom:1px solid var(--b1);font-size:12px">'
+          +'<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">'
+          +'<span style="color:var(--t2);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(b.title||'Unknown')+'</span>'
+          +'<span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0">'+fu(u)+'</span>'
+          +'</div>'
+          +(outcome?'<div style="font-size:11px;margin-top:1px">'+outcome+'</div>':'')
+          +'</div>';
+      }).join('')
+    :'<div style="font-size:11px;color:var(--t4);padding:4px 0">Loading&hellip;</div>';
+  return '<div style="margin-bottom:10px">'+pnlRows+'</div><div style="font-size:10px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Recent Buys ('+(Array.isArray(buys)?buys.length:0)+')</div><div style="max-height:280px;overflow-y:auto">'+rec+'</div>';
 }
 
 /* === MODALS === */
