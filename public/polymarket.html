@@ -1465,8 +1465,17 @@ function cleanTraderNameClient(name,wallet){
   return w?w.slice(0,6)+'...'+w.slice(-4):'Anon';
 }
 function traderRecordChip(a,lookup){
-  const label=cleanTraderNameClient(a.traderName,a.wallet);
-  const resolvedLabel=lookup.resolveDisplayName(label);
+  // BUGFIX 2026-08-08 (per Derek): resolveDisplayName must see the RAW traderName first —
+  // it specifically looks for the full "0xADDRESS-timestamp" pattern to find a wallet's
+  // real nickname. Running cleanTraderNameClient first shortened that same pattern into a
+  // short truncated address that no longer matches resolveDisplayName's regex, silently
+  // defeating the nickname lookup. Confirmed directly: 0x3DFb153c...-1722957908185 and
+  // 0xb8C842Bc...-1766967229992 (Wordy-Littleneck and Formal-Cupcake) were both stuck
+  // showing their raw malformed names anywhere this ran, despite By Trader (which calls
+  // resolveDisplayName directly, no detour through cleanTraderNameClient) already
+  // resolving them correctly. Try resolving the raw name directly; only fall back to the
+  // short-address cleanup when there's no raw name at all.
+  const resolvedLabel=a.traderName?lookup.resolveDisplayName(a.traderName):cleanTraderNameClient(null,a.wallet);
   const tracked=lookup.byTrader[resolvedLabel];
   const trackedROI=lookup.roiByTrader[resolvedLabel];
   let wins,losses,roiPct,source;
@@ -3524,15 +3533,22 @@ function renderLB(){
 async function renderWallets(){
   if(!wallets.length){el('wgrid').innerHTML='';el('wempty').style.display='';return;}
   el('wempty').style.display='none';
-  el('wgrid').innerHTML=wallets.map(w=>wcardHTML(w,[])).join('');
+  // BUGFIX 2026-08-08 (per Derek): these cards showed the raw name captured at the moment
+  // "Watch" was clicked — for wallets watched before the nickname system existed, that's
+  // permanently the old malformed "0xADDRESS-timestamp" string, with zero attempt to
+  // re-resolve it since. Same wallets confirmed showing correctly elsewhere (By Trader)
+  // because that path calls resolveDisplayName directly.
+  const wLk=buildClientTrackedLookup();
+  el('wgrid').innerHTML=wallets.map(w=>wcardHTML(w,[],wLk)).join('');
   for(const w of wallets){try{const r=await fetch('https://data-api.polymarket.com/trades?user='+w.wallet+'&side=BUY&takerOnly=true&limit=50');const b=await r.json();const c=el('wc-'+w.wallet);if(c&&Array.isArray(b)){const bd=c.querySelector('.wcard-body');if(bd)bd.innerHTML=wbodyHTML(w,b);}}catch{}}
 }
-function wcardHTML(w,buys){
+function wcardHTML(w,buys,lookup){
   const oe=lbData.overall.find(x=>x.wallet===w.wallet);
   const se=lbData.sports.find(x=>x.wallet===w.wallet);
   const bs=[oe?'<span class="badge badge-o">Overall #'+oe.rank+'</span>':null,se?'<span class="badge badge-s">Sports #'+se.rank+'</span>':null].filter(Boolean).join('');
+  const resolvedName=lookup&&w.name?lookup.resolveDisplayName(w.name):(w.name||w.wallet.slice(0,8)+'\u2026');
   return '<div class="wcard" id="wc-'+w.wallet+'">'
-    +'<div class="wcard-hdr"><div class="wc-av-fb">'+(w.name||w.wallet).slice(0,2).toUpperCase()+'</div><div><div class="wc-name">'+(w.name||w.wallet.slice(0,8)+'\u2026')+'</div><div class="wc-bdg">'+bs+'</div></div></div>'
+    +'<div class="wcard-hdr"><div class="wc-av-fb">'+resolvedName.slice(0,2).toUpperCase()+'</div><div><div class="wc-name">'+esc(resolvedName)+'</div><div class="wc-bdg">'+bs+'</div></div></div>'
     +'<div class="wcard-body">'+wbodyHTML(w,buys)+'</div>'
     +'<div class="wcard-ft"><a class="wcard-link" href="https://polymarket.com/profile/'+w.wallet+'" target="_blank">View on Polymarket \u2192</a><button class="wcard-rm" data-wrem="'+w.wallet+'"><i class="ti ti-trash" style="font-size:12px"></i></button></div>'
     +'</div>';
