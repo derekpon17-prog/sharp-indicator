@@ -890,36 +890,85 @@ function ncaafConference(teamName){
 // not mascots, for the same reason as NCAAF — too many schools share mascots (Tigers,
 // Bulldogs, Wildcats) for mascot-only matching to be safe. Same caveat as NCAAF: reflects
 // conference membership as of last training update, worth a spot-check before tip-off.
-const NCAAB_TEAMS=[
-  // ACC (basketball membership differs slightly from football — Notre Dame plays ACC hoops)
-  'boston college','california golden bears','clemson','duke','florida state','georgia tech',
-  'louisville','miami hurricanes','nc state','north carolina tar heels','notre dame',
-  'pittsburgh panthers','smu','stanford cardinal','syracuse','virginia cavaliers','virginia tech','wake forest',
-  // Big Ten
-  'illinois','indiana hoosiers','iowa hawkeyes','maryland','michigan wolverines','michigan state',
-  'minnesota','nebraska','northwestern','ohio state','oregon ducks','penn state','purdue',
-  'rutgers','ucla','usc trojans','washington huskies','wisconsin',
-  // Big 12
-  'arizona wildcats','arizona state','baylor','byu','cincinnati bearcats','colorado buffaloes',
-  'houston cougars','iowa state','kansas jayhawks','kansas state','oklahoma state','tcu',
-  'texas tech','ucf','utah utes','west virginia',
-  // SEC
-  'alabama','arkansas','auburn','florida gators','georgia bulldogs','kentucky','lsu',
-  'mississippi state','missouri','oklahoma sooners','ole miss','south carolina','tennessee',
-  'texas longhorns','texas a&m','vanderbilt',
-  // Big East (basketball-only conference, no football equivalent)
-  'butler','creighton','depaul','georgetown','marquette','providence friars','seton hall',
-  "st. john's",'uconn huskies','villanova','xavier',
-  // American
-  'charlotte 49ers','east carolina','florida atlantic','memphis tigers','north texas',
-  'rice owls','south florida','temple owls','tulane','tulsa golden hurricane','uab','utsa','wichita state',
-  // Mountain West
-  'air force falcons','boise state','colorado state','fresno state','nevada wolf pack',
-  'new mexico lobos','san diego state','san jose state','unlv','utah state','wyoming cowboys',
-  // WCC (Gonzaga's conference — real national relevance despite being a mid-major league)
-  'gonzaga','loyola marymount','oregon state','pacific tigers','pepperdine','portland pilots',
-  "saint mary's",'san diego toreros','san francisco dons','santa clara','washington state',
-];
+// FEATURE 2026-08-08 (per Derek): "great betting opportunities in small conferences" —
+// upgraded from an 8-conference flat list to the full 32-conference Division 1 map,
+// structured the same way as NCAAF_CONFERENCES (not flat) specifically so conference-level
+// tracking becomes cheap to add later, the same way it already exists for NCAAF — seeing
+// "am I actually good in the Southland specifically" is the whole point of this ask, not
+// just "detect the game." Same caveat as NCAAF, more so here: small-conference realignment
+// has been at least as volatile as the power conferences the last few years (WAC/ASUN
+// especially), worth a spot-check before tip-off more than the major conferences need.
+const NCAAB_CONFERENCES={
+  ACC:['boston college','california golden bears','clemson','duke','florida state','georgia tech','louisville','miami hurricanes','nc state','north carolina tar heels','notre dame','pittsburgh panthers','smu','stanford cardinal','syracuse','virginia cavaliers','virginia tech','wake forest'],
+  'Big Ten':['illinois','indiana hoosiers','iowa hawkeyes','maryland','michigan wolverines','michigan state','minnesota','nebraska','northwestern','ohio state','oregon ducks','penn state','purdue','rutgers','ucla','usc trojans','washington huskies','wisconsin'],
+  'Big 12':['arizona wildcats','arizona state','baylor','byu','cincinnati bearcats','colorado buffaloes','houston cougars','iowa state','kansas jayhawks','kansas state','oklahoma state','tcu','texas tech','ucf','utah utes','west virginia'],
+  SEC:['alabama','arkansas','auburn','florida gators','georgia bulldogs','kentucky','lsu','mississippi state','missouri','oklahoma sooners','ole miss','south carolina','tennessee','texas longhorns','texas a&m','vanderbilt'],
+  'Big East':['butler','creighton','depaul','georgetown','marquette','providence friars','seton hall',"st. john's",'uconn huskies','villanova','xavier'],
+  American:['charlotte 49ers','east carolina','florida atlantic','memphis tigers','north texas','rice owls','south florida','temple owls','tulane','tulsa golden hurricane','uab','utsa','wichita state'],
+  'Mountain West':['air force falcons','boise state','colorado state','fresno state','nevada wolf pack','new mexico lobos','san diego state','san jose state','unlv','utah state','wyoming cowboys'],
+  WCC:['gonzaga','loyola marymount','oregon state','pacific tigers','pepperdine','portland pilots',"saint mary's",'san diego toreros','san francisco dons','santa clara','washington state'],
+  'Atlantic 10':['davidson','dayton flyers','duquesne','fordham','george mason','george washington','la salle','loyola chicago','rhode island','richmond spiders',"saint joseph's",'saint louis billikens','st. bonaventure','umass minutemen','vcu rams'],
+  'Missouri Valley':['belmont bruins','bradley braves','drake bulldogs','evansville aces','illinois state','indiana state','missouri state','murray state','northern iowa','southern illinois','uic flames','valparaiso'],
+  Ivy:['brown bears','columbia lions','cornell big red','dartmouth big green','harvard crimson','penn quakers','princeton tigers','yale bulldogs'],
+  CAA:['charleston cougars','delaware blue hens','drexel dragons','elon phoenix','hampton pirates','hofstra pride','monmouth hawks','north carolina a&t','northeastern huskies','stony brook','towson tigers','unc wilmington','william & mary','campbell fighting camels'],
+  'Sun Belt':['appalachian state','arkansas state','coastal carolina','georgia southern','georgia state','james madison','louisiana ragin','louisiana-monroe','marshall thundering','old dominion','south alabama','southern miss','texas state','troy trojans'],
+  'C-USA':['delaware blue hens','fiu panthers','jacksonville state','kennesaw state','liberty flames','louisiana tech','middle tennessee','new mexico state','sam houston','utep','western kentucky','missouri state'],
+  MAC:['akron zips','ball state','bowling green','buffalo bulls','central michigan','eastern michigan','kent state','miami redhawks','northern illinois','ohio bobcats','toledo','western michigan'],
+  Horizon:['cleveland state','detroit mercy','green bay phoenix','iu indianapolis','milwaukee panthers','northern kentucky','oakland golden grizzlies','purdue fort wayne','robert morris','wright state','youngstown state'],
+  Summit:['denver pioneers','kansas city roos','north dakota fighting','north dakota state','omaha mavericks','oral roberts','st. thomas tommies','south dakota coyotes','south dakota state','western illinois'],
+  'Big Sky':['eastern washington','idaho vandals','idaho state','montana grizzlies','montana state','northern arizona','northern colorado','portland state','sacramento state','weber state'],
+  'Big South':['charleston southern','gardner-webb','high point panthers','longwood lancers','presbyterian blue hose','radford highlanders','unc asheville','usc upstate','winthrop eagles'],
+  Southland:['east texas a&m','houston christian','incarnate word','lamar cardinals','mcneese cowboys','new orleans privateers','nicholls colonels','northwestern state','southeastern louisiana','texas a&m-corpus christi','ut arlington'],
+  SoCon:['chattanooga mocs','the citadel','east tennessee state','furman paladins','mercer bears','samford bulldogs','unc greensboro','vmi keydets','western carolina','wofford terriers'],
+  SWAC:['alabama a&m','alabama state','alcorn state','arkansas-pine bluff','bethune-cookman','florida a&m','grambling state','jackson state','mississippi valley state','prairie view','southern jaguars','texas southern'],
+  MEAC:['coppin state','delaware state','howard bison','maryland-eastern shore','morgan state','norfolk state','north carolina central','south carolina state'],
+  'Ohio Valley':['eastern illinois','lindenwood lions','little rock trojans','morehead state','siu edwardsville','southeast missouri','southern indiana','tennessee state','tennessee tech','ut martin','western illinois'],
+  NEC:['central connecticut','chicago state','fairleigh dickinson','liu sharks','le moyne dolphins','mercyhurst lakers','sacred heart','saint francis','stonehill skyhawks','wagner seahawks'],
+  'America East':['albany great danes','binghamton bearcats','bryant bulldogs','maine black bears','njit highlanders','new hampshire wildcats','umass lowell','umbc retrievers','vermont catamounts'],
+  ASUN:['austin peay governors','bellarmine knights','central arkansas','eastern kentucky','fgcu eagles','jacksonville dolphins','north alabama','north florida','queens royals','stetson hatters','west georgia','lipscomb bisons'],
+  WAC:['abilene christian','california baptist','grand canyon','seattle u redhawks','southern utah','tarleton state','ut rio grande valley','utah tech','utah valley'],
+  Patriot:['american university eagles','army black knights','boston university terriers','bucknell bison','colgate raiders','holy cross crusaders','lafayette leopards','lehigh mountain hawks','loyola maryland','navy midshipmen'],
+  MAAC:['canisius golden griffins','fairfield stags','iona gaels','manhattan jaspers','marist red foxes','merrimack warriors',"mount st. mary's",'niagara purple eagles','quinnipiac bobcats','rider broncs',"saint peter's",'siena saints'],
+  'Big West':['cal poly mustangs','cal state bakersfield','cal state fullerton','cal state northridge','hawaii rainbow warriors','long beach state','uc davis aggies','uc irvine anteaters','uc riverside','uc san diego tritons','uc santa barbara'],
+};
+const NCAAB_TEAMS=Object.values(NCAAB_CONFERENCES).flat();
+// BUGFIX 2026-08-08, caught during testing: entries like 'bryant bulldogs' require the
+// FULL phrase to appear in a title, but a real market title often says just "Bryant" —
+// no mascot. Confirmed directly: "Bryant vs. Vermont" failed to match despite both
+// schools being in the list. Fixes this by also trying just the first word of a
+// multi-word entry, guarded against generic/directional words (East, Saint, North...)
+// that would cause false positives if matched alone rather than fix real misses.
+const NCAAB_GENERIC_PREFIX=new Set(['east','west','north','south','central','saint','st','the','mount','new','san','santa','loyola']);
+function matchesNCAABEntry(t,entry){
+  if(t.includes(entry))return true;
+  const firstWord=entry.split(' ')[0];
+  return firstWord.length>=5&&!NCAAB_GENERIC_PREFIX.has(firstWord)&&t.includes(firstWord);
+}
+function ncaabConference(teamName){
+  const t=(teamName||'').toLowerCase();
+  // BUGFIX 2026-08-08, caught during testing: a plain "longest entry wins" tiebreak let a
+  // weak first-word fallback match (e.g. 'kansas' from 'kansas city roos') outscore a
+  // genuine full-phrase match elsewhere (bare 'duke' from ACC) just because the fallback
+  // entry's full text was longer — even though only one word of it actually matched.
+  // Fixed to two tiers: any real full-phrase match, anywhere, wins outright over ANY
+  // fallback match regardless of length. Fallback is only consulted when nothing in any
+  // conference matches a full phrase at all — a genuine last resort, not a tiebreaker.
+  let fullMatch=null,fullLen=0;
+  for(const conf in NCAAB_CONFERENCES){
+    NCAAB_CONFERENCES[conf].forEach(function(entry){
+      if(t.includes(entry)&&entry.length>fullLen){fullMatch=conf;fullLen=entry.length;}
+    });
+  }
+  if(fullMatch)return fullMatch;
+  let fbMatch=null,fbLen=0;
+  for(const conf in NCAAB_CONFERENCES){
+    NCAAB_CONFERENCES[conf].forEach(function(entry){
+      const firstWord=entry.split(' ')[0];
+      if(firstWord.length>=5&&!NCAAB_GENERIC_PREFIX.has(firstWord)&&t.includes(firstWord)&&firstWord.length>fbLen){fbMatch=conf;fbLen=firstWord.length;}
+    });
+  }
+  return fbMatch;
+}
 const ESPORTS=['dota','valorant','cs2','counter-strike','league of legends','lol:','esports world cup','starcraft','overwatch','fortnite','pubg','apex legends','rainbow six','rocket league'];
 const SOCCER_INTL=['premier league','la liga','serie a','bundesliga','champions league','copa america','gold cup','concacaf','fa cup','nations league','world cup qualifier','man city','man united','liverpool','chelsea','arsenal','barcelona','real madrid','france vs','england vs','brazil vs','germany vs','spain vs','portugal vs','argentina vs','italy vs','netherlands vs'];
 function detectSport(title){
@@ -931,7 +980,7 @@ function detectSport(title){
   if(t.includes('nfl')||t.includes('super bowl')||t.includes('afc championship')||t.includes('nfc championship')||NFL_TEAMS.some(x=>t.includes(x)))return 'NFL';
   if(t.includes('nhl')||t.includes('stanley cup')||NHL_TEAMS.some(x=>t.includes(x)))return 'NHL';
   if(t.includes('ncaaf')||t.includes('college football playoff')||t.includes('cfp')||t.includes('rose bowl')||t.includes('sugar bowl')||t.includes('orange bowl')||t.includes('cotton bowl')||t.includes('fiesta bowl')||NCAAF_TEAMS.some(x=>t.includes(x)))return 'NCAAF';
-  if(t.includes('ncaab')||t.includes('march madness')||t.includes('ncaa tournament')||t.includes('ncaa basketball')||t.includes('final four')||NCAAB_TEAMS.some(x=>t.includes(x)))return 'NCAAB';
+  if(t.includes('ncaab')||t.includes('march madness')||t.includes('ncaa tournament')||t.includes('ncaa basketball')||t.includes('final four')||NCAAB_TEAMS.some(x=>matchesNCAABEntry(t,x)))return 'NCAAB';
   if(t.includes('pga')||t.includes('masters ')||t.includes('ryder cup')||t.includes('the open championship')||t.includes('us open golf')||t.includes('pga championship')||t.includes('liv golf'))return 'Golf';
   if(t.includes('fifa world cup')||t.includes('world cup winner')||SOCCER_INTL.some(x=>t.includes(x)))return 'Soccer';
   if(t.includes('olympic')||t.includes('summer games')||t.includes('winter games'))return 'Olympics';
