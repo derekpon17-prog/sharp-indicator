@@ -29,7 +29,13 @@ const SPORT_KEYS = {
   NBA: 'basketball_nba',
   NHL: 'icehockey_nhl',
   WNBA: 'basketball_wnba',
-  NCAAFB: 'americanfootball_ncaaf',
+  // BUGFIX 2026-08-08 (per council audit): was keyed NCAAFB here specifically, while
+  // detectSport() (client), LEAGUE_BY_SLUG (discover.js), and NCAAF conference tracking
+  // all already use NCAAF consistently. Since isLiveAlert()'s same-sport-coverage check
+  // compares this key against a.sport (which is always "NCAAF"), the mismatch meant
+  // "NCAAFB" !== "NCAAF" would never match — silently defeating the started/live-game
+  // filter specifically for college football, the exact bug already fixed for NFL.
+  NCAAF: 'americanfootball_ncaaf',
   NCAAB: 'basketball_ncaab',
 };
 
