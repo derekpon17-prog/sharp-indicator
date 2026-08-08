@@ -2124,9 +2124,21 @@ function watchedTraderCardHTML(w,lookup){
   var hasRec=chip.wins!==null;
   var recColor=hasRec?(chip.roiPct>0?'var(--green)':chip.roiPct<0?'var(--red)':'var(--t3)'):'var(--t4)';
   var recTxt=hasRec?(chip.wins+'-'+chip.losses+(chip.source==='specialist'?'*':'')+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')):'no record yet';
+  // BUGFIX 2026-08-07 (per Derek): outcome||title meant a totals pick ("Under") always
+  // won over the actual game, since "Under" is truthy on its own — a totals side means
+  // nothing without knowing which game it's on. Always show the matchup; append the side
+  // when it's a bare Over/Under (moneyline/spread outcomes already name a team, so those
+  // stay as-is rather than redundantly repeating the team name twice).
+  function pickDisplayText(p){
+    var teams=(p.title||'').replace(/:\s*O\/U.*$/i,'').replace(/^Spread:\s*/i,'').trim();
+    var outcome=p.outcome||'';
+    var isTotals=/^(over|under)\b/i.test(outcome);
+    if(isTotals&&teams)return teams+' \u2014 '+outcome;
+    return outcome||teams||'Unknown';
+  }
   var picksHtml=todaysPicks.length
     ?todaysPicks.slice(0,4).map(function(p){
-        return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b1);font-size:11.5px"><span style="color:var(--t2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(p.outcome||p.title)+'</span><span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0;margin-left:8px">'+fu(p.usdValue||0)+'</span></div>';
+        return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b1);font-size:11.5px"><span style="color:var(--t2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(pickDisplayText(p))+'</span><span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0;margin-left:8px">'+fu(p.usdValue||0)+'</span></div>';
       }).join('')
     :'<div style="font-size:11px;color:var(--t4);padding:6px 0">No picks yet today</div>';
   return '<div style="min-width:230px;max-width:230px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:14px;flex-shrink:0">'
