@@ -7,7 +7,12 @@
    ========================================================= */
 
 const ALERTS_KEY = 'pm:alerts';
-const MAX_ALERTS = 200;
+// BUGFIX 2026-08-09 (per Derek, real integrity issue): confirmed directly — Formal-
+// Cupcake's real Aug 8 Orioles/Diamondbacks losses had scrolled off this log entirely by
+// the time client-side auto-tracking tried to catch them, with nothing left to recover.
+// 200 wasn't enough headroom, especially on busier days. Raised to 500 for real margin;
+// worth revisiting again if this recurs at the new size.
+const MAX_ALERTS = 500;
 
 async function upstash(body) {
   const url   = process.env.KV_REST_API_URL;
