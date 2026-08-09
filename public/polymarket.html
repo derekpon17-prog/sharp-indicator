@@ -1804,32 +1804,6 @@ function buildTrendingGroups(){
   netOutBothSidesTraders(groups);
   return Object.values(groups).filter(g=>{const {score}=signalScore(g);return score>=40;});
 }
-// FEATURE 2026-08-09 (per Derek, real integrity issue): mirrors buildTrendingGroups'
-// core filtering exactly, but deliberately skips its final score>=40 filter — that gate
-// is appropriate for deciding what's worth SHOWING (Top Signals, Today's Board), but was
-// also silently deciding what counts toward a specialist's tracked record, which isn't
-// the same question. Confirmed directly: a solo $1,300 specialist buy scores only ~26,
-// so it never reached buildTrendingGroups' output at all — not graded wrong, never even
-// built as a candidate. Restricted to SPEC-only alerts specifically, so whale tracking
-// (still gated at the real threshold — raw leaderboard rank isn't pre-vetted the way a
-// discovered specialist is) is completely unaffected.
-function buildSpecialistTrackingCandidates(){
-  const cutoff=Date.now()-24*60*60*1000,groups={};
-  alerts.forEach(a=>{
-    if(a.type!=='SPEC')return;
-    const ts=a.loggedAt||(a.timestamp*1000);
-    if(ts<cutoff)return;
-    const sp=a.sport||detectSport(a.title);
-    if(!sp)return;
-    if(isStaleAlert(a))return;
-    if(isLiveAlert(a))return;
-    const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
-    if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,sport:sp,buys:[],totalVol:0,latestTs:0};
-    groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
-    if(ts>groups[key].latestTs)groups[key].latestTs=ts;
-  });
-  return Object.values(groups);
-}
 // FEATURE 2026-08-09 (per Derek): confirmed directly against real alert data — the same
 // wallet sometimes buys BOTH outcomes of the exact same market (e.g. Dodgers $17,077 then
 // Diamondbacks $17,557 ~2.5h later, same Aug 8 game), and both sides were counting as
@@ -1879,28 +1853,17 @@ function autoTrackPlays(groups){
   let changed=false;
   groups.forEach(g=>{
     const {score,bestRank,rawScore}=polyDisplayScore(g);
-    /* Route by population. A group is SPECIALIST only if EVERY buy came from a discovered
-       wallet; any leaderboard participation makes it a whale play. Overlap resolves to
-       whale so the validated 38-play record keeps its meaning and the new cohort's record
-       stays clean. */
-    const isSpec=(g.buys||[]).length>0&&(g.buys||[]).every(function(b){return b.type==='SPEC';});
-    // FEATURE 2026-08-09 (per Derek, real integrity issue): the 60-point threshold makes
-    // sense as a DISPLAY filter — deciding what's worth surfacing as an alert — but was
-    // also gating what counts toward a specialist's TRACKED RECORD, which is backwards.
-    // A specialist's discovery/vetting IS the validation; a small solo bet from a proven
-    // specialist is still a real result worth counting, win or lose. Confirmed directly:
-    // a solo $1,300 specialist buy scores only ~26 — so Formal-Cupcake's real Baltimore
-    // Orioles and Arizona Diamondbacks losses were never tracked at all, not graded
-    // wrong, never created in the first place — silently making his record look better
-    // than his real one. Whale plays stay gated at the threshold: raw leaderboard rank
-    // isn't the same kind of pre-vetted signal as a discovered specialist, and tracking
-    // every tiny whale buy regardless of size would mostly add noise, not integrity.
-    if(!isSpec&&score<POLY_AUTOTRACK_THRESHOLD)return; // flat threshold — matches Sharp Score display floor, no rank gating
+    if(score<POLY_AUTOTRACK_THRESHOLD)return; // flat threshold — matches Sharp Score display floor, no rank gating
     // BUGFIX 2026-08-05: title+outcome alone collided across a team's different games in
     // the same short series (confirmed: Toronto/Houston Aug 3 and Aug 5 tracked under the
     // identical key). eventSlug is Polymarket's own per-game identifier, already carried
     // on the group, and already includes the date.
     const key=(g.title||'')+'||'+(g.outcome||'')+'||'+(g.eventSlug||'');
+    /* Route by population. A group is SPECIALIST only if EVERY buy came from a discovered
+       wallet; any leaderboard participation makes it a whale play. Overlap resolves to
+       whale so the validated 38-play record keeps its meaning and the new cohort's record
+       stays clean. */
+    const isSpec=(g.buys||[]).length>0&&(g.buys||[]).every(function(b){return b.type==='SPEC';});
     const store=isSpec?specPlays:sigPlays;
     const storeKey=isSpec?'pm:spec-plays':'pm:sig-plays';
     if(store.some(p=>p.key===key))return;
@@ -1998,7 +1961,6 @@ function renderTrending(){
   const trends=buildTrending();
   const row=el('trending-row'),cont=el('d-trend'),dotsEl=el('trend-dots');
   autoTrackPlays(buildAutoTrackCandidates());
-  autoTrackPlays(buildSpecialistTrackingCandidates());
   autoTrackQualityConvergence();
   if(!trends.length){if(row)row.style.display='none';return;}
   if(row)row.style.display='';
@@ -2973,6 +2935,17 @@ async function gradeFromESPN(){
       // could silently grade against the wrong day's final. Fixed by collecting every
       // team-name match across the window and preferring whichever one's own date is
       // closest to the play's gameTime, instead of just the first one encountered.
+      // BUGFIX 2026-08-09 (second pass, per Derek): the closest-match fix above stops the
+      // WRONG-DAY problem when two real completed games exist to choose between — but
+      // never checked whether the closest match found was actually close enough to be
+      // real. Confirmed directly: an Aug 9 Dodgers/Diamondbacks play graded WIN using
+      // Aug 8's real final score, HOURS before Aug 9's game had even been played — the
+      // only completed game in the fetch window was Aug 8's, so "closest available" still
+      // picked it, even though it's genuinely the wrong game. A real game (including
+      // extra innings) rarely runs past ~6 hours from its scheduled start; a match more
+      // than 14 hours away is almost certainly a different day's game, not a late finish
+      // of this one — reject it and leave the play OPEN rather than grade it wrong.
+      var MAX_GRADE_DELTA_MS=14*60*60*1000;
       var playTime=play.gameTime?new Date(play.gameTime).getTime():null;
       var best=null,bestDelta=Infinity;
       for(var i=0;i<evs.length;i++){
@@ -2986,6 +2959,7 @@ async function gradeFromESPN(){
         if(delta<bestDelta){bestDelta=delta;best={hN:hN,aN:aN,hs:parseFloat(home.score||0),as:parseFloat(away.score||0)};}
       }
       if(!best)return;
+      if(playTime&&bestDelta>MAX_GRADE_DELTA_MS)return; // closest match still too far away to be real — leave OPEN
       var res=gGrade(play,best.hN,best.aN,best.hs,best.as);
       if(res){play.status=res.status;play.gradedAt=Date.now();play.espnScore=res.espnScore;play.gradedBy='ESPN';changed=true;}
     });
