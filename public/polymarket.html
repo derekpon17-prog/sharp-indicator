@@ -1054,11 +1054,18 @@ function gdt(iso){
   return d.toLocaleDateString('en-US',opts)+' \u00b7 '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
 }
 function findGameDateForTitle(title,eventSlug){
-  // BUGFIX: previously only worked if this game ALSO happened to be in the currently-
-  // fetched Sharp Line list (a separate, independently-refreshing data source that can be
-  // thin at any given moment) — causing some plays to show a date and others not, purely
-  // by chance of timing, unrelated to whether the play itself is valid. eventSlug is always
-  // present on every alert and reliably gives the real calendar date.
+  // BUGFIX 2026-08-09 (per Derek, real consequence found): extractSlugDate only ever
+  // returns a bare calendar date ("2026-08-09"), never a real time. new Date() on a bare
+  // date parses as midnight UTC — which can be many hours away from the real evening
+  // start time, in either direction. That imprecision was quietly undermining the grading
+  // safety check built a few messages ago: a play's "gameTime" looked far enough from an
+  // adjacent day's real final score to seem safe, when it wasn't actually precise enough
+  // to trust. Confirmed directly: an Aug 9 Diamondbacks play still graded using Aug 8's
+  // real final. Fix: prefer gameSchedule's real commenceTime (already fetched, already
+  // date-disambiguated via findScheduledGame) when available; only fall back to the bare
+  // date — better than nothing, but not as precise — when no schedule entry exists yet.
+  var sched=findScheduledGame({title:title,eventSlug:eventSlug});
+  if(sched&&sched.commenceTime)return sched.commenceTime;
   if(eventSlug){var d=extractSlugDate({eventSlug:eventSlug});if(d)return d;}
   var t=normTeam(title||'');if(!t||t.length<3)return '';
   var m=(sharpLines||[]).find(function(g){var aw=normTeam(g.away||''),hm=normTeam(g.home||'');return(aw&&aw.length>2&&t.includes(aw))||(hm&&hm.length>2&&t.includes(hm));});
@@ -2947,18 +2954,24 @@ async function gradeFromESPN(){
       // of this one — reject it and leave the play OPEN rather than grade it wrong.
       var MAX_GRADE_DELTA_MS=14*60*60*1000;
       var playTime=play.gameTime?new Date(play.gameTime).getTime():null;
-      var best=null,bestDelta=Infinity;
+      var best=null,bestDelta=Infinity,matchCount=0;
       for(var i=0;i<evs.length;i++){
         var comp=evs[i].competitions&&evs[i].competitions[0];if(!comp||!comp.status||!comp.status.type||!comp.status.type.completed)continue;
         var home=comp.competitors.find(function(c){return c.homeAway==='home';});var away=comp.competitors.find(function(c){return c.homeAway==='away';});
         if(!home||!away)continue;
         var hN=home.team&&(home.team.displayName||home.team.name)||'';var aN=away.team&&(away.team.displayName||away.team.name)||'';
         if(!gMatch(hN,aN,play.title))continue;
+        matchCount++;
         var evTime=evs[i].date?new Date(evs[i].date).getTime():null;
-        var delta=(playTime&&evTime)?Math.abs(evTime-playTime):0; // no gameTime on either side — can't disambiguate, accept first as before
+        var delta=(playTime&&evTime)?Math.abs(evTime-playTime):0;
         if(delta<bestDelta){bestDelta=delta;best={hN:hN,aN:aN,hs:parseFloat(home.score||0),as:parseFloat(away.score||0)};}
       }
       if(!best)return;
+      // Second layer of defense: if we don't know the play's real time at all, don't
+      // trust a "closest match" pick blindly when multiple candidates exist — that's
+      // exactly the ambiguous case (e.g. a back-to-back series) this whole fix is about.
+      // Only grade without a time reference when there's a single unambiguous match.
+      if(!playTime&&matchCount>1)return;
       if(playTime&&bestDelta>MAX_GRADE_DELTA_MS)return; // closest match still too far away to be real — leave OPEN
       var res=gGrade(play,best.hN,best.aN,best.hs,best.as);
       if(res){play.status=res.status;play.gradedAt=Date.now();play.espnScore=res.espnScore;play.gradedBy='ESPN';changed=true;}
