@@ -1149,6 +1149,35 @@ function esc(x){
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
+// FEATURE 2026-08-08 (per Derek): shared date-grouping used on both Watched Wallets'
+// Recent Buys and the Alerts tab. Uses the browser's own local today/yesterday — this is
+// about when DEREK is looking at it, not a game's own scheduling timezone, so no forced
+// America/New_York like the game-date logic elsewhere uses.
+function dateGroupLabel(ts){
+  if(!ts)return 'Unknown date';
+  var d=new Date(ts),now=new Date();
+  var dKey=d.toDateString(),todayKey=now.toDateString();
+  var yest=new Date(now);yest.setDate(yest.getDate()-1);
+  if(dKey===todayKey)return 'Today';
+  if(dKey===yest.toDateString())return 'Yesterday';
+  return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+}
+// Walks a list (already sorted newest-first) and inserts a header row every time the
+// date-group label changes — so "Today" shows once, then every item under it, then
+// "Yesterday" once the date actually changes, etc. rowFn renders one item; tsFn pulls its
+// timestamp.
+function withDateGroups(items,tsFn,rowFn){
+  var out='',lastLabel=null;
+  items.forEach(function(item){
+    var label=dateGroupLabel(tsFn(item));
+    if(label!==lastLabel){
+      out+='<div style="font-size:10px;font-weight:800;color:var(--t4);text-transform:uppercase;letter-spacing:.06em;padding:10px 0 5px;border-top:1px solid var(--b1);margin-top:2px">'+label+'</div>';
+      lastLabel=label;
+    }
+    out+=rowFn(item);
+  });
+  return out;
+}
 function shortWallet(n){
   n=String(n||'');
   var m=n.match(/^(0x[a-fA-F0-9]{6,})/);
@@ -2430,7 +2459,7 @@ function renderAlerts(){
   // Polymarket's own self-reported text — never the tracked-first record used everywhere
   // else (Sharp Report, Tracking, Discord). Built once here, not per-row, for efficiency.
   const alertsLk=buildClientTrackedLookup();
-  list.innerHTML=fil.map(b=>{
+  list.innerHTML=withDateGroups(fil,function(b){return b.loggedAt||(b.timestamp?b.timestamp*1000:null);},function(b){
     const pr=(parseFloat(b.price||0)*100).toFixed(1),big=(b.usdValue||0)>=5000;
     const init=(b.traderName||'?').slice(0,2).toUpperCase();
     const key=b.transactionHash||(b.wallet+(b.timestamp||''));
@@ -2455,7 +2484,7 @@ function renderAlerts(){
       +'</div></div>'
       +'<div class="al-r"><div class="al-size">'+fu(b.usdValue||0)+'</div><div class="al-time">'+timeAgo(b.loggedAt||b.timestamp*1000)+'</div><button class="al-follow" data-akey="'+key+'">Follow Trade</button></div>'
       +'</div>';
-  }).join('');
+  });
   setTimeout(enrichCards,50);
 }
 async function purgeLosers(){
@@ -3593,7 +3622,7 @@ function wbodyHTML(w,buys){
   // returned (up to 50, see the fetch above) in a scrollable list, with the outcome shown
   // next to the game the same way it's shown everywhere else on the site.
   const rec=Array.isArray(buys)&&buys.length
-    ?buys.map(b=>{
+    ?withDateGroups(buys,function(b){return b.timestamp?b.timestamp*1000:null;},function(b){
         const u=(parseFloat(b.size)||0)*(parseFloat(b.price)||0);
         const outcome=b.outcome?' <span style="color:var(--green);font-weight:600">— '+esc(b.outcome)+'</span>':'';
         return '<div style="padding:5px 0;border-bottom:1px solid var(--b1);font-size:12px">'
@@ -3603,7 +3632,7 @@ function wbodyHTML(w,buys){
           +'</div>'
           +(outcome?'<div style="font-size:11px;margin-top:1px">'+outcome+'</div>':'')
           +'</div>';
-      }).join('')
+      })
     :'<div style="font-size:11px;color:var(--t4);padding:4px 0">Loading&hellip;</div>';
   return '<div style="margin-bottom:10px">'+pnlRows+'</div><div style="font-size:10px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Recent Buys ('+(Array.isArray(buys)?buys.length:0)+')</div><div style="max-height:280px;overflow-y:auto">'+rec+'</div>';
 }
