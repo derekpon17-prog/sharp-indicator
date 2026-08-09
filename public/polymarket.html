@@ -2856,16 +2856,32 @@ async function gradeFromESPN(){
     plays.forEach(function(play){
       if(play.status!=='OPEN')return;
       var evs=results[play.sport||'MLB']||[];
+      // BUGFIX 2026-08-09 (per Derek): confirmed directly — an Aug 8 Dodgers/Diamondbacks
+      // play graded WIN using the score "Dodgers 3 - Diamondbacks 4", which is actually
+      // Aug 7's final (a walk-off Diamondbacks win), not Aug 8's real result (Dodgers won
+      // 2-1). Root cause: this fetch deliberately spans the play's date AND the day
+      // before (a real, separate fix for late West Coast games completing after midnight
+      // UTC) — but the match loop below took the FIRST team-name match in that combined
+      // list and broke immediately, with no check that the matched event's own date was
+      // actually the right one. Any team playing on back-to-back days — routine in MLB —
+      // could silently grade against the wrong day's final. Fixed by collecting every
+      // team-name match across the window and preferring whichever one's own date is
+      // closest to the play's gameTime, instead of just the first one encountered.
+      var playTime=play.gameTime?new Date(play.gameTime).getTime():null;
+      var best=null,bestDelta=Infinity;
       for(var i=0;i<evs.length;i++){
         var comp=evs[i].competitions&&evs[i].competitions[0];if(!comp||!comp.status||!comp.status.type||!comp.status.type.completed)continue;
         var home=comp.competitors.find(function(c){return c.homeAway==='home';});var away=comp.competitors.find(function(c){return c.homeAway==='away';});
         if(!home||!away)continue;
         var hN=home.team&&(home.team.displayName||home.team.name)||'';var aN=away.team&&(away.team.displayName||away.team.name)||'';
         if(!gMatch(hN,aN,play.title))continue;
-        var res=gGrade(play,hN,aN,parseFloat(home.score||0),parseFloat(away.score||0));
-        if(res){play.status=res.status;play.gradedAt=Date.now();play.espnScore=res.espnScore;play.gradedBy='ESPN';changed=true;}
-        break;
+        var evTime=evs[i].date?new Date(evs[i].date).getTime():null;
+        var delta=(playTime&&evTime)?Math.abs(evTime-playTime):0; // no gameTime on either side — can't disambiguate, accept first as before
+        if(delta<bestDelta){bestDelta=delta;best={hN:hN,aN:aN,hs:parseFloat(home.score||0),as:parseFloat(away.score||0)};}
       }
+      if(!best)return;
+      var res=gGrade(play,best.hN,best.aN,best.hs,best.as);
+      if(res){play.status=res.status;play.gradedAt=Date.now();play.espnScore=res.espnScore;play.gradedBy='ESPN';changed=true;}
     });
     if(changed)ss(key,plays);
   }
