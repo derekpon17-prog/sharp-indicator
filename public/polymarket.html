@@ -3193,13 +3193,15 @@ function renderSharpScore(){
     const combined=calcSharpScore(si,polyScore,agree);
     const type=agree?'combined':(polyScore>si?'poly':'line');
     const key=(g.away||'')+'_'+(g.home||'');if(seen.has(key))return;seen.add(key);
-    plays.push({type,score:combined,title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',lineScore:si,polyScore,combined,agree,gapPP:parseFloat(g.gapPP||0).toFixed(1),signalType:g.signalType||'',exConfirms:g.exConfirms||0,polyOutcome:match?match.outcome:'',polyTrader:match?shortWallet(match.traderName||''):'',polyVol:match?match.usdValue:0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||''});
+    plays.push({type,score:combined,title:(g.away||'')+(g.home?' vs '+g.home:''),side:g.sharpSide||'',lineScore:si,polyScore,combined,agree,gapPP:parseFloat(g.gapPP||0).toFixed(1),signalType:g.signalType||'',exConfirms:g.exConfirms||0,polyOutcome:match?match.outcome:'',polyTraderObj:match||null,polyVol:match?match.usdValue:0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||''});
   });
   if(plays.length<3){
     buildTrending().forEach(function(g){
       const sc=polyDisplayScore(g).score;if(sc<POLY_AUTOTRACK_THRESHOLD)return;
       const key=g.title+'_'+g.outcome;if(seen.has(key))return;seen.add(key);
-      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traders:g.buys.map(function(b){return b.traderName||'Anon';}).filter(function(v,i,a){return a.indexOf(v)===i;}).slice(0,3),gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||''});
+      const seenPT={},uniqueTraders=[];
+      (g.buys||[]).forEach(function(b){if(b.wallet&&!seenPT[b.wallet]){seenPT[b.wallet]=true;uniqueTraders.push(b);}});
+      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traderObjs:uniqueTraders,gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||''});
     });
   }
   plays.sort(function(a,b){return b.score-a.score||(a.type==='combined'?-1:b.type==='combined'?1:0);});
@@ -3218,12 +3220,26 @@ function renderSharpScore(){
     else{tag.textContent='SHARP LINE';tag.style.color='var(--blue)';}
   }
   list.innerHTML=plays.slice(0,3).map(function(p){
+    const ssLk=buildClientTrackedLookup();
     const sc=p.score>=80?'var(--green)':p.score>=65?'var(--gold)':'var(--t2)';
     const typeBadge=p.type==='combined'?'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.2),rgba(229,160,13,.2));color:var(--t1)">&#x1F3AF; COMBINED</span>':p.type==='poly'?'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:rgba(229,160,13,.12);color:var(--gold)">&#x26A1; POLY</span>':'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:rgba(64,180,255,.12);color:var(--blue)">&#x1F4CA; LINE</span>';
     const sportTag=p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.08);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+p.sport+'</span>':'';
     var detail='';
-    if(p.type==='combined'){detail='<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px"><div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 9px"><div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">SHARP LINE</div><div style="font-size:12px;font-weight:800;color:var(--t1)">'+p.side+'</div><div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+p.gapPP+'pp &bull; Line: '+p.lineScore+'</div></div><div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 9px"><div style="font-size:9px;font-weight:700;color:var(--gold);margin-bottom:2px">POLY SIGNAL</div><div style="font-size:12px;font-weight:800;color:var(--t1)">'+p.polyOutcome+'</div><div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+fu(p.polyVol)+' &bull; '+p.polyTrader+'</div></div></div>';}
-    else if(p.type==='poly'){detail='<div style="font-size:11px;color:var(--t3);margin-bottom:6px">'+(p.buyers||1)+' buyer'+(p.buyers>1?'s':'')+' &bull; '+fu(p.polyVol||0)+'</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px">'+((p.traders||[]).map(function(n){return'<span style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.06);color:var(--t3);font-family:var(--mono)">'+shortWallet(n)+'</span>';}).join(''))+'</div>';}
+    // BUGFIX 2026-08-08 (per Derek): this section (labeled "Top Signals" in the UI, though
+    // internally named sharp-score-row/list — a separate function from renderTrending,
+    // which is why the earlier trader-record fix never reached it) showed bare name tags
+    // with zero record info. Now uses the same traderRecordChip/traderChipsInlineHTML
+    // pattern as every other section.
+    if(p.type==='combined'){
+      var ptChip=p.polyTraderObj?traderRecordChip(p.polyTraderObj,ssLk):null;
+      var ptTxt=p.polyTraderObj?cleanTraderNameClient(p.polyTraderObj.traderName,p.polyTraderObj.wallet):'';
+      if(ptChip&&ptChip.wins!==null){
+        var ptCol=ptChip.roiPct>0?'var(--green)':ptChip.roiPct<0?'var(--red)':'var(--t3)';
+        ptTxt=ptChip.label+' <span style="color:'+ptCol+'">'+ptChip.wins+'-'+ptChip.losses+(ptChip.source==='specialist'?'*':'')+(ptChip.roiPct!==null&&ptChip.roiPct!==undefined?' '+(ptChip.roiPct>=0?'+':'')+Math.round(ptChip.roiPct)+'%':'')+'</span>';
+      }
+      detail='<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px"><div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 9px"><div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">SHARP LINE</div><div style="font-size:12px;font-weight:800;color:var(--t1)">'+p.side+'</div><div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+p.gapPP+'pp &bull; Line: '+p.lineScore+'</div></div><div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 9px"><div style="font-size:9px;font-weight:700;color:var(--gold);margin-bottom:2px">POLY SIGNAL</div><div style="font-size:12px;font-weight:800;color:var(--t1)">'+p.polyOutcome+'</div><div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+fu(p.polyVol)+' &bull; '+ptTxt+'</div></div></div>';
+    }
+    else if(p.type==='poly'){detail='<div style="font-size:11px;color:var(--t3);margin-bottom:6px">'+(p.buyers||1)+' buyer'+(p.buyers>1?'s':'')+' &bull; '+fu(p.polyVol||0)+'</div><div style="font-family:var(--mono);font-size:10.5px;line-height:1.6;margin-bottom:6px">'+traderChipsInlineHTML(p.traderObjs||[],ssLk)+'</div>';}
     else{detail='<div style="font-size:11px;color:var(--t3);font-family:var(--mono);margin-bottom:6px">+'+p.gapPP+'pp Pinnacle &bull; '+p.signalType+(p.exConfirms>0?' &bull; &#x1F501; '+p.exConfirms+' exchange':'')+'</div>';}
     return '<div style="background:var(--s1);border:1px solid rgba(229,160,13,.18);border-left:3px solid '+(p.type==='combined'?'var(--gold)':p.type==='poly'?'rgba(229,160,13,.5)':'rgba(64,180,255,.5)')+';border-radius:var(--rl2);padding:14px 16px">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
@@ -3492,17 +3508,24 @@ function renderLB(){
       el('lb-list').innerHTML='<div class="empty"><div class="empty-ico">&#x1F3C6;</div><h3>No alerts yet'+(lbTab==='alerted'?'':' for '+lbTab.toUpperCase()+confNote)+'</h3><p>Traders appear here as soon as we log a qualifying alert for them</p></div>';
       return;
     }
+    const lbLk1=buildClientTrackedLookup();
     el('lb-list').innerHTML=list.map(function(t){
       const isW=wallets.some(function(w){return w.wallet===t.wallet;});
       const hotNow=alerts.some(function(a){return a.wallet===t.wallet&&(Date.now()-(a.loggedAt||a.timestamp*1000))<86400000;});
       const init=(t.name||'?').slice(0,2).toUpperCase();
       const avPart=t.image?'<img class="lb-av" src="'+t.image+'" alt="'+init+'">':'<div class="lb-av-fb">'+init+'</div>';
       const sportsStr=[...t.sports].join(', ');
+      // FEATURE 2026-08-08 (per Derek): added the tracked-first W-L chip alongside the
+      // existing Polymarket detail line, not replacing it — the detail line has real
+      // extra context (ROI%, staked amount, edge vs implied) worth keeping.
+      const chip=traderRecordChip({traderName:t.name,wallet:t.wallet,specialistRecord:t.record},lbLk1);
+      const chipHtml=chip.wins!==null?(function(){var col=chip.roiPct>0?'var(--green)':chip.roiPct<0?'var(--red)':'var(--t3)';return '<div style="font-size:11px;font-weight:700;font-family:var(--mono);color:'+col+';margin-top:2px">'+chip.wins+'-'+chip.losses+(chip.source==='specialist'?'*':'')+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')+'</div>';})():'';
       return '<div class="lb-row" style="align-items:flex-start">'
         +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'">#'+t.rank+'</div>'
         +avPart
         +'<div class="lb-info"><div class="lb-name">'+(hotNow?'&#x1F525; ':'')+(t.name||t.wallet.slice(0,8)+'\u2026')+bdg(t.categories)+'</div>'
         +'<div class="lb-meta"><span style="color:var(--gold)">'+t.alertCount+' alert'+(t.alertCount>1?'s':'')+'</span>'+(sportsStr?'<span>'+esc(sportsStr)+'</span>':'')+'</div>'
+        +chipHtml
         +(t.record?'<div style="font-size:10.5px;color:var(--green);font-family:var(--mono);margin-top:3px;line-height:1.4">'+esc(t.record)+'</div>':'')
         +'</div>'
         +(isW?'<button class="lb-add w"><i class="ti ti-eye" style="font-size:10px"></i> Watching</button>':'<button class="lb-add" data-ww="'+t.wallet+'" data-wn="'+(t.name||'')+'"><i class="ti ti-plus" style="font-size:10px"></i> Watch</button>')
@@ -3513,16 +3536,19 @@ function renderLB(){
   const rawList=lbData[lbTab]||[];
   const list=rawList.filter(t=>t.pnl>0);
   if(!list.length){el('lb-list').innerHTML='<div class="empty"><div class="empty-ico">&#x1F3C6;</div><h3>Loading&hellip;</h3><p></p></div>';return;}
+  const lbLk2=buildClientTrackedLookup();
   el('lb-list').innerHTML=list.map(t=>{
     const isW=wallets.some(w=>w.wallet===t.wallet);
     const hot=alerts.some(a=>a.wallet===t.wallet&&(Date.now()-(a.loggedAt||a.timestamp*1000))<86400000);
     const init=(t.name||'?').slice(0,2).toUpperCase();
     const avPart=t.image?'<img class="lb-av" src="'+t.image+'" alt="'+init+'">':'<div class="lb-av-fb">'+init+'</div>';
     const als=alerts.filter(a=>a.wallet===t.wallet);
+    const chip2=traderRecordChip({traderName:t.name,wallet:t.wallet,specialistRecord:null},lbLk2);
+    const chip2Html=chip2.wins!==null?(function(){var col=chip2.roiPct>0?'var(--green)':chip2.roiPct<0?'var(--red)':'var(--t3)';return ' <span style="font-family:var(--mono);color:'+col+';font-weight:700">'+chip2.wins+'-'+chip2.losses+(chip2.roiPct!==null&&chip2.roiPct!==undefined?' '+(chip2.roiPct>=0?'+':'')+Math.round(chip2.roiPct)+'%':'')+'</span>';})():'';
     return '<div class="lb-row">'
       +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'>#'+t.rank+'</div>'
       +avPart
-      +'<div class="lb-info"><div class="lb-name">'+(hot?'&#x1F525; ':'')+(t.name||t.wallet.slice(0,8)+'\u2026')+'</div><div class="lb-meta"><span>Vol: '+fp(t.vol)+'</span>'+(als.length?'<span style="color:var(--gold)">'+als.length+' alert'+(als.length>1?'s':'')+'</span>':'')+'</div></div>'
+      +'<div class="lb-info"><div class="lb-name">'+(hot?'&#x1F525; ':'')+(t.name||t.wallet.slice(0,8)+'\u2026')+'</div><div class="lb-meta"><span>Vol: '+fp(t.vol)+'</span>'+(als.length?'<span style="color:var(--gold)">'+als.length+' alert'+(als.length>1?'s':'')+'</span>':'')+chip2Html+'</div></div>'
       +'<div style="text-align:right;flex-shrink:0;margin-right:9px"><div class="lb-pnl">'+fp(t.pnl)+'</div><div class="lb-pnl-lbl">'+(t.category==='OVERALL'?'All-Time':t.category==='SPORT'?'Buy Vol':'Sports')+' PnL</div></div>'
       +(isW?'<button class="lb-add w"><i class="ti ti-eye" style="font-size:10px"></i> Watching</button>':'<button class="lb-add" data-ww="'+t.wallet+'" data-wn="'+(t.name||'')+'"><i class="ti ti-plus" style="font-size:10px"></i> Watch</button>')
       +'</div>';
