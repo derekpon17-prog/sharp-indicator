@@ -1549,6 +1549,14 @@ function isWinningTraderChip(chip){
   var tot=chip.wins+chip.losses;
   return tot>0&&(chip.wins/tot)>=0.55;
 }
+// FEATURE 2026-08-09 (per Derek): "2+ whales same side" is a genuinely different signal
+// from Quality Convergence (tracked win record) — this checks Polymarket's own official
+// leaderboard categories (OVERALL/SPORTS with a real numeric rank), not Derek's own W-L
+// tracking. A buy object carries this directly (a.categories), so this works on raw
+// alerts/buys without needing the trader-record lookup at all.
+function isRankedWhale(a){
+  return !!(a&&a.categories&&a.categories.some(function(c){return (c.category==='OVERALL'||c.category==='SPORTS')&&c.rank!=null;}));
+}
 // FEATURE 2026-08-09 (per Derek): explicit flag for a genuine statistical standout, not
 // just "currently winning" — requires BOTH a very high win rate AND a real sample large
 // enough that it's not just a hot streak. Threshold is Derek's own stated example (90%+
@@ -1793,7 +1801,47 @@ function buildTrendingGroups(){
     groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
     if(ts>groups[key].latestTs)groups[key].latestTs=ts;
   });
+  netOutBothSidesTraders(groups);
   return Object.values(groups).filter(g=>{const {score}=signalScore(g);return score>=40;});
+}
+// FEATURE 2026-08-09 (per Derek): confirmed directly against real alert data — the same
+// wallet sometimes buys BOTH outcomes of the exact same market (e.g. Dodgers $17,077 then
+// Diamondbacks $17,557 ~2.5h later, same Aug 8 game), and both sides were counting as
+// independent convergence votes for the same wallet, crowding alerts with what's really
+// one position being flipped or hedged, not two people agreeing. Runs on the raw group
+// map before the score filter, so it affects every consumer (Today's Board, Top Signals,
+// Quality Convergence, Sharp Report matching) from one shared source, not per-screen.
+function netOutBothSidesTraders(groupMap){
+  const byTitle={};
+  Object.values(groupMap).forEach(function(g){
+    if(!byTitle[g.title])byTitle[g.title]=[];
+    byTitle[g.title].push(g);
+  });
+  Object.values(byTitle).forEach(function(sides){
+    if(sides.length<2)return;
+    const walletSideVol={};
+    sides.forEach(function(side,idx){
+      side.buys.forEach(function(b){
+        if(!b.wallet)return;
+        if(!walletSideVol[b.wallet])walletSideVol[b.wallet]={};
+        walletSideVol[b.wallet][idx]=(walletSideVol[b.wallet][idx]||0)+(b.usdValue||0);
+      });
+    });
+    Object.keys(walletSideVol).forEach(function(wallet){
+      const bySide=walletSideVol[wallet];
+      const sideIdxs=Object.keys(bySide);
+      if(sideIdxs.length<2)return;
+      let winnerIdx=sideIdxs[0],winnerVol=bySide[sideIdxs[0]];
+      sideIdxs.forEach(function(idx){if(bySide[idx]>winnerVol){winnerVol=bySide[idx];winnerIdx=idx;}});
+      sideIdxs.forEach(function(idx){
+        if(idx===winnerIdx)return;
+        const side=sides[idx];
+        const removedVol=side.buys.filter(function(b){return b.wallet===wallet;}).reduce(function(s,b){return s+(b.usdValue||0);},0);
+        side.buys=side.buys.filter(function(b){return b.wallet!==wallet;});
+        side.totalVol-=removedVol;
+      });
+    });
+  });
 }
 function buildTrending(){
   return buildTrendingGroups().sort((a,b)=>signalScore(b).score-signalScore(a).score).slice(0,8);
@@ -2182,7 +2230,7 @@ function buildBoard(){
       srcLine:si,srcPoly:agree?ps:0,srcExch:g.exConfirms||0,combined:agree,
       velState:vel?vel.state:'NONE',
       gameTime:g.commenceTime||'',sport:detectSportFromTeams(g.away,g.home),why:why,
-      traders:tradersOnSide
+      traders:tradersOnSide,whaleCount:tradersOnSide.filter(isRankedWhale).length
     });
   });
   buildTrending().forEach(function(g){
@@ -2226,12 +2274,13 @@ function buildBoard(){
     var b=uniqueBuyerCount(g);
     var seenW={},uniqueTraders=[];
     (g.buys||[]).forEach(function(buy){if(buy.wallet&&!seenW[buy.wallet]){seenW[buy.wallet]=true;uniqueTraders.push(buy);}});
+    var whaleCount=uniqueTraders.filter(isRankedWhale).length;
     rows.push({
       title:g.title,side:g.outcome||'',score:sc,
       srcLine:0,srcPoly:sc,srcExch:0,combined:false,
       gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||'',
       why:b>=2?b+' profitable traders converging':fu(g.totalVol)+' from a top trader',
-      traders:uniqueTraders
+      traders:uniqueTraders,whaleCount:whaleCount
     });
   });
   // FEATURE 2026-08-09 (per Derek): sort now accounts for trader quality, not just raw
@@ -2361,7 +2410,11 @@ function renderQualityConvergence(){
     if(winners.length<2)return;
     qualifying.push({g:g,winners:winners});
   });
-  if(!qualifying.length){wrap.style.display='none';cont.innerHTML='';return;}
+  if(!qualifying.length){
+    wrap.style.display='';
+    cont.innerHTML='<div style="font-size:12.5px;color:var(--t4);padding:14px 16px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2)">Nothing clears the bar right now &mdash; needs 2+ traders with a real <em>winning</em> tracked or specialist record on the same side, not just 2 buyers. A game with 2 buyers where only one has a confirmed winning record won\u2019t show up here; that\u2019s working as intended, not empty by mistake.</div>';
+    return;
+  }
   wrap.style.display='';
   qualifying.sort(function(a,b){return b.winners.length-a.winners.length||b.g.totalVol-a.g.totalVol;});
   cont.innerHTML=qualifying.map(function(item){
@@ -3391,7 +3444,7 @@ function renderSharpScore(){
       const key=g.title+'_'+g.outcome;if(seen.has(key))return;seen.add(key);
       const seenPT={},uniqueTraders=[];
       (g.buys||[]).forEach(function(b){if(b.wallet&&!seenPT[b.wallet]){seenPT[b.wallet]=true;uniqueTraders.push(b);}});
-      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traderObjs:uniqueTraders,gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||''});
+      plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traderObjs:uniqueTraders,whaleCount:uniqueTraders.filter(isRankedWhale).length,gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||''});
     });
   }
   // FEATURE 2026-08-09 (per Derek): same quality-boost sort as Today's Board — normalizes
@@ -3424,6 +3477,7 @@ function renderSharpScore(){
     const sc=p.score>=80?'var(--green)':p.score>=65?'var(--gold)':'var(--t2)';
     const typeBadge=p.type==='combined'?'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:linear-gradient(90deg,rgba(64,180,255,.2),rgba(229,160,13,.2));color:var(--t1)">&#x1F3AF; COMBINED</span>':p.type==='poly'?'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:rgba(229,160,13,.12);color:var(--gold)">&#x26A1; POLY</span>':'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:rgba(64,180,255,.12);color:var(--blue)">&#x1F4CA; LINE</span>';
     const sportTag=p.sport?'<span style="font-size:9px;font-weight:700;padding:1px 6px;background:rgba(64,180,255,.08);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:5px">'+p.sport+'</span>':'';
+    const whaleBadgeSS=(p.whaleCount||0)>=2?' <span title="'+p.whaleCount+' officially ranked Polymarket whales on this side" style="font-size:9px;font-weight:800;padding:1px 7px;border-radius:4px;background:rgba(64,180,255,.15);color:var(--blue);margin-left:5px">&#x1F40B;\u00d7'+p.whaleCount+' WHALES</span>':'';
     var detail='';
     // BUGFIX 2026-08-08 (per Derek): this section (labeled "Top Signals" in the UI, though
     // internally named sharp-score-row/list — a separate function from renderTrending,
@@ -3440,7 +3494,7 @@ function renderSharpScore(){
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
       +'<div style="display:flex;align-items:center;gap:8px"><div style="font-size:36px;font-weight:900;font-family:var(--mono);color:'+sc+';line-height:1">'+p.score+'</div>'
       +'<div>'+typeBadge+'<div style="font-size:10px;color:var(--t4);font-family:var(--mono);margin-top:3px">'+(p.gameTime?'&#x23F0; '+gdt(p.gameTime):'')+'</div></div></div>'
-      +(p.sport?'<span style="font-size:10px;font-weight:700;padding:2px 8px;background:rgba(64,180,255,.1);color:#40B4FF;border-radius:4px;font-family:var(--mono)">'+p.sport+'</span>':'')
+      +(p.sport?'<span style="font-size:10px;font-weight:700;padding:2px 8px;background:rgba(64,180,255,.1);color:#40B4FF;border-radius:4px;font-family:var(--mono)">'+p.sport+'</span>':'')+whaleBadgeSS
       +'</div>'
       +'<div style="font-size:15px;font-weight:800;color:var(--t1);margin-bottom:5px">'+p.title+'</div>'
       +(function(){var b=statusBadgeHTML(p.title);return b?'<div style="margin-bottom:6px">'+b+'</div>':'';})()
@@ -3589,9 +3643,10 @@ function renderCommandCenter(){
     var isTop=(f==='all'&&i===0);
     var tier=boardTier(r.score);
     var traderChips=r.traders&&r.traders.length?traderChipsInlineHTML(r.traders,boardLk):'';
+    var whaleBadge=(r.whaleCount||0)>=2?' <span title="'+r.whaleCount+' officially ranked Polymarket whales on this side" style="font-size:9px;font-weight:800;padding:1px 7px;border-radius:4px;background:rgba(64,180,255,.15);color:var(--blue)">&#x1F40B;\\u00d7'+r.whaleCount+' WHALES</span>':'';
     return '<div class="brow'+(isTop?' top':'')+'">'
       +'<div class="br-score"><div class="n">'+r.score+'</div><div class="t">'+tier+'</div></div>'
-      +'<div><div class="br-game">'+r.title+(r.sport?' <span style="font-size:9px;color:var(--t4);font-weight:500;margin-left:4px">'+r.sport+'</span>':'')
+      +'<div><div class="br-game">'+r.title+(r.sport?' <span style="font-size:9px;color:var(--t4);font-weight:500;margin-left:4px">'+r.sport+'</span>':'')+whaleBadge
       +(function(){var b=statusBadgeHTML(r.title);return b?' '+b:'';})()
       +'</div><div class="br-side">&#x25B6; '+(r.side||'&mdash;')+'</div></div>'
       +'<div style="display:flex;gap:5px">'
