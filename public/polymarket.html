@@ -544,7 +544,7 @@ select.finput option{background:var(--s2)}
     <div style="margin-bottom:6px">
       <div class="row-ttl" style="font-size:16px;margin-bottom:3px;display:flex;align-items:center;justify-content:space-between">
         <span><i class="ti ti-flag-check" style="color:var(--gold)"></i>Signal Performance</span>
-        <button onclick="var d=prompt('Regrade every play graded before this date (YYYY-MM-DD) back to OPEN so current logic re-checks it. Leave blank to cancel:');if(d){var t=new Date(d).getTime();if(!isNaN(t)){var n=regradeStale(t);alert(n+' plays reset to OPEN. They\\'ll regrade automatically.');}else{alert('Could not parse that date.');}}" style="font-size:10px;font-weight:700;padding:4px 9px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t3);cursor:pointer">&#x21bb; Regrade Stale Plays</button>
+        <button onclick="regradeStaleButtonHandler()" style="font-size:10px;font-weight:700;padding:4px 9px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t3);cursor:pointer">&#x21bb; Regrade Stale Plays</button>
       </div>
       <div style="font-size:12px;color:var(--t3);margin-bottom:14px">Which flags are earning their spot &mdash; updates as plays grade</div>
     </div>
@@ -2737,6 +2737,21 @@ window.regradeStale=function(cutoffMs){
   renderTracking();
   return total;
 };
+// BUGFIX 2026-08-09 (per Derek): the button previously called an inline onclick with the
+// prompt/alert logic embedded directly in the HTML attribute — a nested apostrophe in
+// "They'll" ended up escaped with four backslashes instead of one, which produced invalid
+// JavaScript. Browsers fail silently on a broken inline onclick, so the button did
+// genuinely nothing on every click, on every device — not a mobile-specific issue.
+// Moved the logic into a real function so string literals never need HTML-attribute-safe
+// escaping again.
+function regradeStaleButtonHandler(){
+  var d=prompt('Regrade every play graded before this date (YYYY-MM-DD) back to OPEN so current logic re-checks it. Leave blank to cancel:');
+  if(!d)return;
+  var t=new Date(d).getTime();
+  if(isNaN(t)){alert('Could not parse that date.');return;}
+  var n=regradeStale(t);
+  alert(n+' plays reset to OPEN. They\'ll regrade automatically.');
+}
 async function gradeOpenPlays(){
   await gradePlaysViaPolymarket(sigPlays,'pm:sig-plays');
   await gradePlaysViaPolymarket(specPlays,'pm:spec-plays');
