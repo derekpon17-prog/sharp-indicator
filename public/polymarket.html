@@ -241,6 +241,7 @@ a{color:inherit;text-decoration:none}.view{display:none}.view.on{display:block}
 .flag-card.f-spec{border-top-color:#40B4FF}
 .flag-card.f-watch{border-top-color:var(--t4)}
 .flag-card.f-mlv{border-top-color:var(--purple);border-style:solid;background:linear-gradient(180deg,rgba(155,109,255,.05),var(--s1))}
+.flag-card.f-qc{border-top-color:var(--green);border-style:solid;background:linear-gradient(180deg,rgba(0,200,150,.05),var(--s1))}
 .minisrc.on-vel{background:rgba(155,109,255,.16);color:var(--purple)}
 .fc-name{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
 .fc-rec{font-family:var(--disp);font-size:21px;font-weight:700;line-height:1}
@@ -477,6 +478,19 @@ select.finput option{background:var(--s2)}
       </div>
       <div class="hscr" id="d-ar"></div>
     </div>
+    <!-- Quality Convergence — per Derek, 2026-08-09: the actual direct translation of his
+         own stated selection criteria (2+ traders with a real WINNING record on the same
+         side) into its own screen, instead of something reconstructed by eye across eight
+         different views. Live-recomputed each render, same as Sharp Report/Today's Board
+         — this shows what currently qualifies, not the historical tracked log (that's
+         what powers the Quality Convergence tile on Tracking instead). Hidden when empty
+         rather than showing a discouraging "nothing qualifies" block on every load. -->
+    <div class="row-s" id="d-qc-wrap" style="display:none">
+      <div class="row-hdr">
+        <div class="row-ttl"><em>&#x1F3AF;</em>Quality Convergence <span style="font-size:10px;font-weight:700;color:var(--t4);text-transform:none;letter-spacing:0">&middot; 2+ real winners, same side</span></div>
+      </div>
+      <div id="d-qc"></div>
+    </div>
     <!-- Watched Traders — per Derek, 2026-08-07: watching someone from the leaderboard
          previously saved silently with no visible confirmation anywhere. This surfaces
          each watched wallet's real record and most recent picks right on the Dashboard,
@@ -542,6 +556,7 @@ select.finput option{background:var(--s2)}
       <div class="flag-card f-ss"><div class="fc-name">Sharp Score <span style="font-size:8px;font-weight:600;color:var(--t4);text-transform:none;letter-spacing:0">&middot; line + poly agree</span></div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div><div id="fs-ss-bands"></div></div>
       <div class="flag-card f-picks"><div class="fc-name">My Picks</div><div class="fc-rec" id="fs-picks">&mdash;</div><div class="fc-sub" id="fs-picks-sub">no graded picks</div></div>
       <div class="flag-card f-mlv"><div class="fc-name">ML Velocity <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:3px">SHADOW</span></div><div class="fc-rec" id="fs-mlv">&mdash;</div><div class="fc-sub" id="fs-mlv-sub">validating &mdash; not in real record</div><div id="fs-mlv-bands"></div></div>
+      <div class="flag-card f-qc"><div class="fc-name">Quality Convergence <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(0,200,150,.15);color:var(--green);margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-qc">&mdash;</div><div class="fc-sub" id="fs-qc-sub">no graded plays</div><div id="fs-qc-bands"></div></div>
     </div>
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <!-- ── BY SPORT — same records above, sliced by sport instead of by signal. My Picks
@@ -815,6 +830,7 @@ let sharpScorePlays=ls('pm:ss-plays',[]);
 let watchPlays=ls('pm:watch-plays',[]); // WATCHLIST (tier C) — shown, therefore graded
 let specPlays=ls('pm:spec-plays',[]); // POLY SPECIALIST — discovered wallets, own record
 let mlvPlays=ls('pm:mlv-plays',[]); // ML Velocity SHADOW plays — validation only, never mixed into real records
+let qcPlays=ls('pm:qc-plays',[]); // QUALITY CONVERGENCE — 2+ traders with a real WINNING tracked record on the same side, per Derek's own stated selection criteria. Own record, tracked separately from raw convergence count.
 let sharpLines=[];
 const dismissed=new Set(ls('pm:dismissed',[]));
 function dismiss(key){dismissed.add(key);ss('pm:dismissed',[...dismissed]);renderTrending();}
@@ -1519,21 +1535,40 @@ function traderRecordChip(a,lookup){
   }
   return {label:resolvedLabel,wins,losses,roiPct,source};
 }
+// FEATURE 2026-08-09 (per Derek): single shared definition of "winning trader" — used
+// identically for (a) visually de-emphasizing non-winning chips everywhere they appear,
+// and (b) qualifying a play into the new Quality Convergence category below. Derek was
+// explicit these two have to use the exact same rule, or "2 winners converging" could
+// silently include a trader who's actually dimmed as a loser right above it. ROI is the
+// primary signal (matches Derek's own stated criteria); falls back to a clearly-above-
+// breakeven win rate only when ROI isn't available (e.g. a tracked record with no stake
+// data captured yet).
+function isWinningTraderChip(chip){
+  if(!chip||chip.wins===null)return false;
+  if(chip.roiPct!==null&&chip.roiPct!==undefined)return chip.roiPct>0;
+  var tot=chip.wins+chip.losses;
+  return tot>0&&(chip.wins/tot)>=0.55;
+}
+// Renders one trader as a styled chip string — winners read at full weight, everyone else
+// (losing record, or no record at all) gets visually dimmed so the eye goes straight to
+// who actually matters. Replaces the bare "*" specialist marker with a small readable tag.
+function traderChipHTML(a,lookup){
+  const c=traderRecordChip(a,lookup);
+  const winning=isWinningTraderChip(c);
+  const hasRec=c.wins!==null;
+  const col=!hasRec?'var(--t4)':winning?'var(--green)':(c.roiPct<0?'var(--red)':'var(--t3)');
+  const srcTag=c.source==='specialist'?' <span style="font-size:8.5px;padding:0 4px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+  const txt=hasRec?(c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
+  const dimStyle=winning?'':'opacity:.5';
+  return '<span style="'+dimStyle+'"><span style="color:'+(winning?'var(--t1)':'var(--t3)')+';font-weight:'+(winning?'700':'500')+'">'+esc(c.label)+'</span>'+srcTag+' <span style="color:'+col+';font-weight:700">'+esc(txt)+'</span></span>';
+}
 // SHARED 2026-08-07 (per Derek, asked several times): every dashboard section that shows
 // "N traders" needs the actual names + real W-L + ROI, not just a count — same source of
 // truth as Sharp Report, Tracking's By Trader, and Discord, so a wallet's record never
 // reads differently depending on which part of the dashboard you're looking at.
 function traderChipsInlineHTML(traders,lookup){
   if(!traders||!traders.length)return '';
-  return traders.map(function(a){
-    var c=traderRecordChip(a,lookup);
-    var hasRec=c.wins!==null;
-    var col=hasRec?(c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)'):'var(--t4)';
-    var txt=hasRec
-      ?(c.label+' '+c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':''))
-      :(c.label+' \u00b7 no record yet');
-    return '<span style="color:'+col+'">'+esc(txt)+'</span>';
-  }).join(' <span style="color:var(--t4)">\u00b7</span> ');
+  return traders.map(function(a){return traderChipHTML(a,lookup);}).join(' <span style="color:var(--t4)">\u00b7</span> ');
 }
 function detectSportFromTeams(away,home){
   const t=((away||'')+(home||'')).toLowerCase();
@@ -1787,6 +1822,33 @@ function autoTrackPlays(groups){
   });
   if(changed){ss('pm:sig-plays',sigPlays);ss('pm:spec-plays',specPlays);}
 }
+// FEATURE 2026-08-09 (per Derek): tracks his own actual selection criteria — 2+ traders
+// with a real WINNING record (isWinningTraderChip, the exact same definition used to dim
+// non-winning chips everywhere) converging on the same side — as its own category with
+// its own W-L record, separate from raw convergence count. This is the only way to find
+// out objectively whether "2+ winners converging" actually beats the raw signal, rather
+// than staying a personal heuristic applied by eye every time.
+function autoTrackQualityConvergence(){
+  const lookup=buildClientTrackedLookup();
+  let changed=false;
+  buildAutoTrackCandidates().forEach(g=>{
+    const seenW={},uniqueTraders=[];
+    (g.buys||[]).forEach(function(b){if(b.wallet&&!seenW[b.wallet]){seenW[b.wallet]=true;uniqueTraders.push(b);}});
+    const winners=uniqueTraders.filter(function(a){return isWinningTraderChip(traderRecordChip(a,lookup));});
+    if(winners.length<2)return;
+    const key=(g.title||'')+'||'+(g.outcome||'')+'||'+(g.eventSlug||'');
+    if(qcPlays.some(p=>p.key===key))return;
+    const winnerSnapshots=winners.map(function(a){
+      const c=traderRecordChip(a,lookup);
+      return {name:c.label,wins:c.wins,losses:c.losses,roiPct:c.roiPct,source:c.source};
+    });
+    qcPlays.unshift({key,title:g.title,outcome:g.outcome,eventSlug:g.eventSlug,sport:g.sport||detectSport(g.title)||'',
+      winners:winnerSnapshots,winnerCount:winners.length,totalVol:g.totalVol,
+      gameTime:findGameDateForTitle(g.title,g.eventSlug),loggedAt:Date.now(),status:'OPEN',resolution:null});
+    changed=true;
+  });
+  if(changed)ss('pm:qc-plays',qcPlays);
+}
 // Real dollar-weighted, price-weighted ROI per trader, using the stakes captured above.
 // Polymarket prices are quoted as cost-per-$1-contract (0-1), so profit on a win is
 // stake*(1/price - 1) — a win at 0.36 nets ~2.8x the stake, a win at 0.85 nets ~0.18x.
@@ -1840,6 +1902,7 @@ function renderTrending(){
   const trends=buildTrending();
   const row=el('trending-row'),cont=el('d-trend'),dotsEl=el('trend-dots');
   autoTrackPlays(buildAutoTrackCandidates());
+  autoTrackQualityConvergence();
   if(!trends.length){if(row)row.style.display='none';return;}
   if(row)row.style.display='';
   const maxVol=Math.max(...trends.map(t=>t.totalVol));
@@ -1983,9 +2046,11 @@ function renderReport(){
         ?tradersOnSide.map(function(a){
             var c=traderRecordChip(a,traderLk);
             var hasRec=c.wins!==null;
-            var col=hasRec?(c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)'):'var(--t3)';
-            var recTxt=hasRec?(c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' \u00b7 '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
-            return '<div class="rep-hero-trader-row"><span class="rep-hero-trader-name">'+esc(c.label)+'</span><span class="rep-hero-trader-rec" style="color:'+col+'">'+esc(recTxt)+'</span></div>';
+            var winning=isWinningTraderChip(c);
+            var col=!hasRec?'var(--t4)':winning?'var(--green)':(c.roiPct<0?'var(--red)':'var(--t3)');
+            var srcTag=c.source==='specialist'?' <span style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+            var recTxt=hasRec?(c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' \u00b7 '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
+            return '<div class="rep-hero-trader-row" style="'+(winning?'':'opacity:.5')+'"><span class="rep-hero-trader-name">'+esc(c.label)+srcTag+'</span><span class="rep-hero-trader-rec" style="color:'+col+'">'+esc(recTxt)+'</span></div>';
           }).join('')
         :'<div class="rep-hero-notrader">No Poly activity on this side yet</div>';
       var logo=i.side?anyTeamLogoUrl(i.side):null;
@@ -2008,13 +2073,7 @@ function renderReport(){
     // Tracking tab's By Trader, and Discord — a wallet's record reads identically
     // everywhere it shows up, exactly the "stay consistent" ask.
     var traderChipsQ=tradersOnSide.length
-      ?tradersOnSide.map(function(a){
-          var c=traderRecordChip(a,traderLk);
-          var hasRec=c.wins!==null;
-          var col=hasRec?(c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)'):'var(--t4)';
-          var txt=hasRec?(c.label+' '+c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):(c.label+' \u00b7 no record yet');
-          return '<span style="color:'+col+'">'+esc(txt)+'</span>';
-        }).join(' <span style="color:var(--t4)">\u00b7</span> ')
+      ?tradersOnSide.map(function(a){return traderChipHTML(a,traderLk);}).join(' <span style="color:var(--t4)">\u00b7</span> ')
       :'';
     return '<div class="rep-quiet-row'+(g.started?' rep-done':'')+'">'
       +'<div class="rep-quiet-left">'
@@ -2249,19 +2308,55 @@ function watchedTraderCardHTML(w,lookup){
   var specRec=(todaysPicks[0]&&todaysPicks[0].specialistRecord)||null;
   var chip=traderRecordChip({traderName:w.name,wallet:w.wallet,specialistRecord:specRec},lookup);
   var hasRec=chip.wins!==null;
-  var recColor=hasRec?(chip.roiPct>0?'var(--green)':chip.roiPct<0?'var(--red)':'var(--t3)'):'var(--t4)';
-  var recTxt=hasRec?(chip.wins+'-'+chip.losses+(chip.source==='specialist'?'*':'')+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')):'no record yet';
+  var winningW=isWinningTraderChip(chip);
+  var recColor=!hasRec?'var(--t4)':winningW?'var(--green)':(chip.roiPct<0?'var(--red)':'var(--t3)');
+  var srcTagW=chip.source==='specialist'?' <span style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+  var recTxt=hasRec?(chip.wins+'-'+chip.losses+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')):'no record yet';
   var picksHtml=todaysPicks.length
     ?todaysPicks.slice(0,4).map(function(p){
         return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b1);font-size:11.5px"><span style="color:var(--t2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(p.outcome||p.title)+'</span><span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0;margin-left:8px">'+fu(p.usdValue||0)+'</span></div>';
       }).join('')
     :'<div style="font-size:11px;color:var(--t4);padding:6px 0">No picks yet today</div>';
   return '<div style="min-width:230px;max-width:230px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:14px;flex-shrink:0">'
-    +'<div style="font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(chip.label)+'</div>'
+    +'<div style="font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(chip.label)+srcTagW+'</div>'
     +'<div style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+recColor+';margin-bottom:10px">'+recTxt+'</div>'
     +'<div style="font-size:9.5px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Today\'s Picks</div>'
     +picksHtml
     +'</div>';
+}
+function renderQualityConvergence(){
+  var wrap=el('d-qc-wrap'),cont=el('d-qc');
+  if(!wrap||!cont)return;
+  var lookup=buildClientTrackedLookup();
+  var qualifying=[];
+  buildAutoTrackCandidates().forEach(function(g){
+    var seenW={},uniqueTraders=[];
+    (g.buys||[]).forEach(function(b){if(b.wallet&&!seenW[b.wallet]){seenW[b.wallet]=true;uniqueTraders.push(b);}});
+    var winners=uniqueTraders.filter(function(a){return isWinningTraderChip(traderRecordChip(a,lookup));});
+    if(winners.length<2)return;
+    qualifying.push({g:g,winners:winners});
+  });
+  if(!qualifying.length){wrap.style.display='none';cont.innerHTML='';return;}
+  wrap.style.display='';
+  qualifying.sort(function(a,b){return b.winners.length-a.winners.length||b.g.totalVol-a.g.totalVol;});
+  cont.innerHTML=qualifying.map(function(item){
+    var g=item.g;
+    var logo=anyTeamLogoUrl(g.outcome);
+    var chips=item.winners.map(function(a){return traderChipHTML(a,lookup);}).join(' <span style="color:var(--t4)">\u00b7</span> ');
+    var gameDate=findGameDateForTitle(g.title,g.eventSlug);
+    return '<div style="background:var(--s1);border:1px solid rgba(0,200,150,.25);border-radius:var(--rl2);padding:14px 16px;margin-bottom:10px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
+      +'<div style="font-size:14px;font-weight:800;color:var(--t1)">'+esc(g.title)+'</div>'
+      +'<span style="font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:rgba(0,200,150,.12);color:var(--green);flex-shrink:0;margin-left:8px">'+item.winners.length+' WINNERS</span>'
+      +'</div>'
+      +'<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">'
+      +(logo?'<img src="'+logo+'" alt="" style="width:20px;height:20px;object-fit:contain">':'')
+      +'<span style="font-size:13px;font-weight:700;color:var(--green)">&#x25B6; '+esc(g.outcome)+'</span>'
+      +'</div>'
+      +'<div style="font-family:var(--mono);font-size:11px;line-height:1.6;margin-bottom:6px">'+chips+'</div>'
+      +'<div style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+fu(g.totalVol)+' combined'+(gameDate?' \u00b7 '+gdt(gameDate):'')+'</div>'
+      +'</div>';
+  }).join('');
 }
 function renderWatchedOnDash(){
   var wrap=el('d-watched-wrap'),cont=el('d-watched');
@@ -2276,6 +2371,7 @@ function renderDash(){
   renderSharpScore();
   renderSharpLines();
   renderCommandCenter();
+  renderQualityConvergence();
   renderWatchedOnDash();
   const set=trades.filter(t=>t.status!=='OPEN');
   const W=set.filter(t=>t.status==='WIN').length,L=set.filter(t=>t.status==='LOSS').length;
@@ -2379,9 +2475,11 @@ function acardHTML(b,lookup){
           if(!lookup)return '';
           var c=traderRecordChip(b,lookup);
           if(c.wins===null)return '';
-          var col=c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)';
-          var txt=c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
-          return '<div style="font-size:10px;color:'+col+';font-family:var(--mono);margin-bottom:3px;line-height:1.4;font-weight:700">'+esc(txt)+'</div>';
+          var winning=isWinningTraderChip(c);
+          var col=winning?'var(--green)':(c.roiPct<0?'var(--red)':'var(--t3)');
+          var srcTag=c.source==='specialist'?' <span style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+          var txt=c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
+          return '<div style="font-size:10px;color:'+col+';font-family:var(--mono);margin-bottom:3px;line-height:1.4;font-weight:700;'+(winning?'':'opacity:.6')+'">'+esc(txt)+srcTag+'</div>';
         })();
   }
 
@@ -2472,9 +2570,11 @@ function renderAlerts(){
       +(function(){
           var c=traderRecordChip(b,alertsLk);
           if(c.wins===null)return '';
-          var col=c.roiPct>0?'var(--green)':c.roiPct<0?'var(--red)':'var(--t3)';
-          var txt=c.wins+'-'+c.losses+(c.source==='specialist'?'*':'')+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
-          return '<div style="font-size:10.5px;color:'+col+';font-family:var(--mono);margin:3px 0 2px;line-height:1.4;font-weight:700">'+esc(txt)+'</div>';
+          var winning=isWinningTraderChip(c);
+          var col=winning?'var(--green)':(c.roiPct<0?'var(--red)':'var(--t3)');
+          var srcTag=c.source==='specialist'?' <span style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+          var txt=c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
+          return '<div style="font-size:10.5px;color:'+col+';font-family:var(--mono);margin:3px 0 2px;line-height:1.4;font-weight:700;'+(winning?'':'opacity:.6')+'">'+esc(txt)+srcTag+'</div>';
         })()
       +'<div class="sb" style="margin:5px 0"></div>'
       +'<div style="display:flex;align-items:center;gap:9px;margin-top:6px">'
@@ -2567,7 +2667,8 @@ const REGRADE_STORES=[
   {key:'pm:line-plays',get:function(){return linePlays;}},
   {key:'pm:ss-plays',get:function(){return sharpScorePlays;}},
   {key:'pm:watch-plays',get:function(){return watchPlays;}},
-  {key:'pm:mlv-plays',get:function(){return mlvPlays;}}
+  {key:'pm:mlv-plays',get:function(){return mlvPlays;}},
+  {key:'pm:qc-plays',get:function(){return qcPlays;}}
 ];
 function resetPlayToOpen(p){
   p.status='OPEN';
@@ -2689,7 +2790,7 @@ async function gradeFromESPN(){
   // Also widened the sport-scan below to all six stores — specPlays/watchPlays/mlvPlays
   // were previously excluded, so a sport with only e.g. open Specialist plays could get
   // skipped from the ESPN fetch entirely.
-  var openPlays=[...linePlays,...sharpScorePlays,...sigPlays,...specPlays,...watchPlays,...mlvPlays].filter(function(p){return p.status==='OPEN';});
+  var openPlays=[...linePlays,...sharpScorePlays,...sigPlays,...specPlays,...watchPlays,...mlvPlays,...qcPlays].filter(function(p){return p.status==='OPEN';});
   if(!openPlays.length)return;
   var sN=new Set();openPlays.forEach(function(p){sN.add(p.sport||'MLB');});
   var results={};
@@ -2741,7 +2842,7 @@ async function gradeFromESPN(){
     });
     if(changed)ss(key,plays);
   }
-  tryGrade(watchPlays,'pm:watch-plays');tryGrade(specPlays,'pm:spec-plays');tryGrade(linePlays,'pm:line-plays');tryGrade(sharpScorePlays,'pm:ss-plays');tryGrade(sigPlays,'pm:sig-plays');tryGrade(mlvPlays,'pm:mlv-plays');
+  tryGrade(watchPlays,'pm:watch-plays');tryGrade(specPlays,'pm:spec-plays');tryGrade(linePlays,'pm:line-plays');tryGrade(sharpScorePlays,'pm:ss-plays');tryGrade(sigPlays,'pm:sig-plays');tryGrade(mlvPlays,'pm:mlv-plays');tryGrade(qcPlays,'pm:qc-plays');
   if(changed)renderTracking();
 }
 
@@ -3182,6 +3283,8 @@ function renderTracking(){
     }
   }
   fillFlagCard('fs-mlv',mlvStat,mlvPlays.length,mlvPlays);
+  var qcStat=unitPnL(qcPlays);
+  fillFlagCard('fs-qc',qcStat,qcPlays.length,qcPlays);
 
   /* ── MY PICKS (manual) ── */
   var W2=trades.filter(function(t){return t.status==='WIN';}).length;
@@ -3260,12 +3363,7 @@ function renderSharpScore(){
     // with zero record info. Now uses the same traderRecordChip/traderChipsInlineHTML
     // pattern as every other section.
     if(p.type==='combined'){
-      var ptChip=p.polyTraderObj?traderRecordChip(p.polyTraderObj,ssLk):null;
-      var ptTxt=p.polyTraderObj?cleanTraderNameClient(p.polyTraderObj.traderName,p.polyTraderObj.wallet):'';
-      if(ptChip&&ptChip.wins!==null){
-        var ptCol=ptChip.roiPct>0?'var(--green)':ptChip.roiPct<0?'var(--red)':'var(--t3)';
-        ptTxt=ptChip.label+' <span style="color:'+ptCol+'">'+ptChip.wins+'-'+ptChip.losses+(ptChip.source==='specialist'?'*':'')+(ptChip.roiPct!==null&&ptChip.roiPct!==undefined?' '+(ptChip.roiPct>=0?'+':'')+Math.round(ptChip.roiPct)+'%':'')+'</span>';
-      }
+      var ptTxt=p.polyTraderObj?traderChipHTML(p.polyTraderObj,ssLk):'';
       detail='<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px"><div style="background:rgba(64,180,255,.06);border-radius:6px;padding:6px 9px"><div style="font-size:9px;font-weight:700;color:var(--blue);margin-bottom:2px">SHARP LINE</div><div style="font-size:12px;font-weight:800;color:var(--t1)">'+p.side+'</div><div style="font-size:10px;color:var(--t3);font-family:var(--mono)">+'+p.gapPP+'pp &bull; Line: '+p.lineScore+'</div></div><div style="background:rgba(229,160,13,.06);border-radius:6px;padding:6px 9px"><div style="font-size:9px;font-weight:700;color:var(--gold);margin-bottom:2px">POLY SIGNAL</div><div style="font-size:12px;font-weight:800;color:var(--t1)">'+p.polyOutcome+'</div><div style="font-size:10px;color:var(--t3);font-family:var(--mono)">'+fu(p.polyVol)+' &bull; '+ptTxt+'</div></div></div>';
     }
     else if(p.type==='poly'){detail='<div style="font-size:11px;color:var(--t3);margin-bottom:6px">'+(p.buyers||1)+' buyer'+(p.buyers>1?'s':'')+' &bull; '+fu(p.polyVol||0)+'</div><div style="font-family:var(--mono);font-size:10.5px;line-height:1.6;margin-bottom:6px">'+traderChipsInlineHTML(p.traderObjs||[],ssLk)+'</div>';}
@@ -3548,7 +3646,8 @@ function renderLB(){
       // existing Polymarket detail line, not replacing it — the detail line has real
       // extra context (ROI%, staked amount, edge vs implied) worth keeping.
       const chip=traderRecordChip({traderName:t.name,wallet:t.wallet,specialistRecord:t.record},lbLk1);
-      const chipHtml=chip.wins!==null?(function(){var col=chip.roiPct>0?'var(--green)':chip.roiPct<0?'var(--red)':'var(--t3)';return '<div style="font-size:11px;font-weight:700;font-family:var(--mono);color:'+col+';margin-top:2px">'+chip.wins+'-'+chip.losses+(chip.source==='specialist'?'*':'')+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')+'</div>';})():'';
+      const winningLB=isWinningTraderChip(chip);
+      const chipHtml=chip.wins!==null?(function(){var col=winningLB?'var(--green)':(chip.roiPct<0?'var(--red)':'var(--t3)');return '<div style="font-size:11px;font-weight:700;font-family:var(--mono);color:'+col+';margin-top:2px;'+(winningLB?'':'opacity:.6')+'">'+chip.wins+'-'+chip.losses+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')+'</div>';})():'';
       return '<div class="lb-row" style="align-items:flex-start">'
         +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'">#'+t.rank+'</div>'
         +avPart
@@ -3573,7 +3672,8 @@ function renderLB(){
     const avPart=t.image?'<img class="lb-av" src="'+t.image+'" alt="'+init+'">':'<div class="lb-av-fb">'+init+'</div>';
     const als=alerts.filter(a=>a.wallet===t.wallet);
     const chip2=traderRecordChip({traderName:t.name,wallet:t.wallet,specialistRecord:null},lbLk2);
-    const chip2Html=chip2.wins!==null?(function(){var col=chip2.roiPct>0?'var(--green)':chip2.roiPct<0?'var(--red)':'var(--t3)';return ' <span style="font-family:var(--mono);color:'+col+';font-weight:700">'+chip2.wins+'-'+chip2.losses+(chip2.roiPct!==null&&chip2.roiPct!==undefined?' '+(chip2.roiPct>=0?'+':'')+Math.round(chip2.roiPct)+'%':'')+'</span>';})():'';
+    const winningLB2=isWinningTraderChip(chip2);
+    const chip2Html=chip2.wins!==null?(function(){var col=winningLB2?'var(--green)':(chip2.roiPct<0?'var(--red)':'var(--t3)');return ' <span style="font-family:var(--mono);color:'+col+';font-weight:700;'+(winningLB2?'':'opacity:.6')+'">'+chip2.wins+'-'+chip2.losses+(chip2.roiPct!==null&&chip2.roiPct!==undefined?' '+(chip2.roiPct>=0?'+':'')+Math.round(chip2.roiPct)+'%':'')+'</span>';})():'';
     return '<div class="lb-row">'
       +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'>#'+t.rank+'</div>'
       +avPart
