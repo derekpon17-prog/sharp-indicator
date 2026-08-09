@@ -1549,18 +1549,29 @@ function isWinningTraderChip(chip){
   var tot=chip.wins+chip.losses;
   return tot>0&&(chip.wins/tot)>=0.55;
 }
+// FEATURE 2026-08-09 (per Derek): explicit flag for a genuine statistical standout, not
+// just "currently winning" — requires BOTH a very high win rate AND a real sample large
+// enough that it's not just a hot streak. Threshold is Derek's own stated example (90%+
+// on 40+ bets), used as the literal bar rather than a guessed one.
+function isOutlierTraderChip(chip){
+  if(!chip||chip.wins===null)return false;
+  var tot=chip.wins+chip.losses;
+  return tot>=40&&(chip.wins/tot)>=0.90;
+}
 // Renders one trader as a styled chip string — winners read at full weight, everyone else
 // (losing record, or no record at all) gets visually dimmed so the eye goes straight to
 // who actually matters. Replaces the bare "*" specialist marker with a small readable tag.
 function traderChipHTML(a,lookup){
   const c=traderRecordChip(a,lookup);
   const winning=isWinningTraderChip(c);
+  const outlier=isOutlierTraderChip(c);
   const hasRec=c.wins!==null;
   const col=!hasRec?'var(--t4)':winning?'var(--green)':(c.roiPct<0?'var(--red)':'var(--t3)');
   const srcTag=c.source==='specialist'?' <span style="font-size:8.5px;padding:0 4px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+  const outlierTag=outlier?' <span title="90%+ win rate on 40+ settled bets" style="font-size:8.5px;padding:0 4px;border-radius:3px;background:rgba(229,160,13,.15);color:var(--gold);font-weight:800">&#9733; OUTLIER</span>':'';
   const txt=hasRec?(c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
   const dimStyle=winning?'':'opacity:.5';
-  return '<span style="'+dimStyle+'"><span style="color:'+(winning?'var(--t1)':'var(--t3)')+';font-weight:'+(winning?'700':'500')+'">'+esc(c.label)+'</span>'+srcTag+' <span style="color:'+col+';font-weight:700">'+esc(txt)+'</span></span>';
+  return '<span style="'+dimStyle+'"><span style="color:'+(winning?'var(--t1)':'var(--t3)')+';font-weight:'+(winning?'700':'500')+'">'+esc(c.label)+'</span>'+srcTag+outlierTag+' <span style="color:'+col+';font-weight:700">'+esc(txt)+'</span></span>';
 }
 // SHARED 2026-08-07 (per Derek, asked several times): every dashboard section that shows
 // "N traders" needs the actual names + real W-L + ROI, not just a count — same source of
@@ -2049,8 +2060,9 @@ function renderReport(){
             var winning=isWinningTraderChip(c);
             var col=!hasRec?'var(--t4)':winning?'var(--green)':(c.roiPct<0?'var(--red)':'var(--t3)');
             var srcTag=c.source==='specialist'?' <span style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+            var outTag=isOutlierTraderChip(c)?' <span title="90%+ win rate on 40+ settled bets" style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(229,160,13,.15);color:var(--gold);font-weight:800">&#9733;</span>':'';
             var recTxt=hasRec?(c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' \u00b7 '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
-            return '<div class="rep-hero-trader-row" style="'+(winning?'':'opacity:.5')+'"><span class="rep-hero-trader-name">'+esc(c.label)+srcTag+'</span><span class="rep-hero-trader-rec" style="color:'+col+'">'+esc(recTxt)+'</span></div>';
+            return '<div class="rep-hero-trader-row" style="'+(winning?'':'opacity:.5')+'"><span class="rep-hero-trader-name">'+esc(c.label)+srcTag+outTag+'</span><span class="rep-hero-trader-rec" style="color:'+col+'">'+esc(recTxt)+'</span></div>';
           }).join('')
         :'<div class="rep-hero-notrader">No Poly activity on this side yet</div>';
       var logo=i.side?anyTeamLogoUrl(i.side):null;
@@ -2222,7 +2234,19 @@ function buildBoard(){
       traders:uniqueTraders
     });
   });
-  rows.sort(function(a,b){return b.score-a.score||(a.combined?-1:b.combined?1:0);});
+  // FEATURE 2026-08-09 (per Derek): sort now accounts for trader quality, not just raw
+  // score. A modest, capped boost per winning trader (same isWinningTraderChip definition
+  // used for dimming and Quality Convergence) — deliberately not a full override, since a
+  // genuinely strong Sharp Line signal shouldn't drop below a weak play just because it
+  // happens to have more winners attached. Built once here, not per-row comparison, so
+  // sorting a large board doesn't rebuild the lookup on every pairwise check.
+  var boardLk=buildClientTrackedLookup();
+  function qualityBoost(row){
+    var winners=(row.traders||[]).filter(function(a){return isWinningTraderChip(traderRecordChip(a,boardLk));});
+    return Math.min(winners.length,3)*4;
+  }
+  rows.forEach(function(r){r._qBoost=qualityBoost(r);});
+  rows.sort(function(a,b){return (b.score+b._qBoost)-(a.score+a._qBoost)||(a.combined?-1:b.combined?1:0);});
   return rows;
 }
 function boardTier(sc){return sc>=85?'Elite':sc>=75?'Strong':sc>=65?'Moderate':'Watch';}
@@ -2311,6 +2335,7 @@ function watchedTraderCardHTML(w,lookup){
   var winningW=isWinningTraderChip(chip);
   var recColor=!hasRec?'var(--t4)':winningW?'var(--green)':(chip.roiPct<0?'var(--red)':'var(--t3)');
   var srcTagW=chip.source==='specialist'?' <span style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+  var outTagW=isOutlierTraderChip(chip)?' <span title="90%+ win rate on 40+ settled bets" style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(229,160,13,.15);color:var(--gold);font-weight:800">&#9733;</span>':'';
   var recTxt=hasRec?(chip.wins+'-'+chip.losses+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')):'no record yet';
   var picksHtml=todaysPicks.length
     ?todaysPicks.slice(0,4).map(function(p){
@@ -2318,7 +2343,7 @@ function watchedTraderCardHTML(w,lookup){
       }).join('')
     :'<div style="font-size:11px;color:var(--t4);padding:6px 0">No picks yet today</div>';
   return '<div style="min-width:230px;max-width:230px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:14px;flex-shrink:0">'
-    +'<div style="font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(chip.label)+srcTagW+'</div>'
+    +'<div style="font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(chip.label)+srcTagW+outTagW+'</div>'
     +'<div style="font-family:var(--mono);font-size:12px;font-weight:700;color:'+recColor+';margin-bottom:10px">'+recTxt+'</div>'
     +'<div style="font-size:9.5px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Today\'s Picks</div>'
     +picksHtml
@@ -2478,8 +2503,9 @@ function acardHTML(b,lookup){
           var winning=isWinningTraderChip(c);
           var col=winning?'var(--green)':(c.roiPct<0?'var(--red)':'var(--t3)');
           var srcTag=c.source==='specialist'?' <span style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+          var outTag=isOutlierTraderChip(c)?' <span title="90%+ win rate on 40+ settled bets" style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(229,160,13,.15);color:var(--gold);font-weight:800">&#9733;</span>':'';
           var txt=c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
-          return '<div style="font-size:10px;color:'+col+';font-family:var(--mono);margin-bottom:3px;line-height:1.4;font-weight:700;'+(winning?'':'opacity:.6')+'">'+esc(txt)+srcTag+'</div>';
+          return '<div style="font-size:10px;color:'+col+';font-family:var(--mono);margin-bottom:3px;line-height:1.4;font-weight:700;'+(winning?'':'opacity:.6')+'">'+esc(txt)+srcTag+outTag+'</div>';
         })();
   }
 
@@ -2573,8 +2599,9 @@ function renderAlerts(){
           var winning=isWinningTraderChip(c);
           var col=winning?'var(--green)':(c.roiPct<0?'var(--red)':'var(--t3)');
           var srcTag=c.source==='specialist'?' <span style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.08);color:var(--t4);font-weight:700">PM</span>':'';
+          var outTag=isOutlierTraderChip(c)?' <span title="90%+ win rate on 40+ settled bets" style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(229,160,13,.15);color:var(--gold);font-weight:800">&#9733;</span>':'';
           var txt=c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
-          return '<div style="font-size:10.5px;color:'+col+';font-family:var(--mono);margin:3px 0 2px;line-height:1.4;font-weight:700;'+(winning?'':'opacity:.6')+'">'+esc(txt)+srcTag+'</div>';
+          return '<div style="font-size:10.5px;color:'+col+';font-family:var(--mono);margin:3px 0 2px;line-height:1.4;font-weight:700;'+(winning?'':'opacity:.6')+'">'+esc(txt)+srcTag+outTag+'</div>';
         })()
       +'<div class="sb" style="margin:5px 0"></div>'
       +'<div style="display:flex;align-items:center;gap:9px;margin-top:6px">'
@@ -3336,7 +3363,17 @@ function renderSharpScore(){
       plays.push({type:'poly',score:sc,title:g.title,side:g.outcome||'',buyers:uniqueBuyerCount(g),polyVol:g.totalVol,traderObjs:uniqueTraders,gameTime:findGameDateForTitle(g.title,g.eventSlug),sport:g.sport||detectSport(g.title)||''});
     });
   }
-  plays.sort(function(a,b){return b.score-a.score||(a.type==='combined'?-1:b.type==='combined'?1:0);});
+  // FEATURE 2026-08-09 (per Derek): same quality-boost sort as Today's Board — normalizes
+  // across this function's three play shapes (combined has one polyTraderObj, poly has a
+  // traderObjs array, line has neither) so all three get evaluated the same way.
+  var ssBoostLk=buildClientTrackedLookup();
+  function ssQualityBoost(p){
+    var candidates=p.traderObjs||(p.polyTraderObj?[p.polyTraderObj]:[]);
+    var winners=candidates.filter(function(a){return isWinningTraderChip(traderRecordChip(a,ssBoostLk));});
+    return Math.min(winners.length,3)*4;
+  }
+  plays.forEach(function(p){p._qBoost=ssQualityBoost(p);});
+  plays.sort(function(a,b){return (b.score+b._qBoost)-(a.score+a._qBoost)||(a.type==='combined'?-1:b.type==='combined'?1:0);});
   if(!plays.length){
     row.style.display='';
     if(list)list.innerHTML='<div style="padding:16px 8px;text-align:center;color:var(--t4);font-size:12px">No combined Sharp Score plays yet — requires Line + Poly signals on the same game</div>';
@@ -3647,7 +3684,8 @@ function renderLB(){
       // extra context (ROI%, staked amount, edge vs implied) worth keeping.
       const chip=traderRecordChip({traderName:t.name,wallet:t.wallet,specialistRecord:t.record},lbLk1);
       const winningLB=isWinningTraderChip(chip);
-      const chipHtml=chip.wins!==null?(function(){var col=winningLB?'var(--green)':(chip.roiPct<0?'var(--red)':'var(--t3)');return '<div style="font-size:11px;font-weight:700;font-family:var(--mono);color:'+col+';margin-top:2px;'+(winningLB?'':'opacity:.6')+'">'+chip.wins+'-'+chip.losses+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')+'</div>';})():'';
+      const outLB=isOutlierTraderChip(chip)?' <span title="90%+ win rate on 40+ settled bets" style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(229,160,13,.15);color:var(--gold);font-weight:800">&#9733; OUTLIER</span>':'';
+      const chipHtml=chip.wins!==null?(function(){var col=winningLB?'var(--green)':(chip.roiPct<0?'var(--red)':'var(--t3)');return '<div style="font-size:11px;font-weight:700;font-family:var(--mono);color:'+col+';margin-top:2px;'+(winningLB?'':'opacity:.6')+'">'+chip.wins+'-'+chip.losses+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')+outLB+'</div>';})():'';
       return '<div class="lb-row" style="align-items:flex-start">'
         +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'">#'+t.rank+'</div>'
         +avPart
@@ -3673,7 +3711,8 @@ function renderLB(){
     const als=alerts.filter(a=>a.wallet===t.wallet);
     const chip2=traderRecordChip({traderName:t.name,wallet:t.wallet,specialistRecord:null},lbLk2);
     const winningLB2=isWinningTraderChip(chip2);
-    const chip2Html=chip2.wins!==null?(function(){var col=winningLB2?'var(--green)':(chip2.roiPct<0?'var(--red)':'var(--t3)');return ' <span style="font-family:var(--mono);color:'+col+';font-weight:700;'+(winningLB2?'':'opacity:.6')+'">'+chip2.wins+'-'+chip2.losses+(chip2.roiPct!==null&&chip2.roiPct!==undefined?' '+(chip2.roiPct>=0?'+':'')+Math.round(chip2.roiPct)+'%':'')+'</span>';})():'';
+    const outLB2=isOutlierTraderChip(chip2)?' <span title="90%+ win rate on 40+ settled bets" style="font-size:8px;padding:0 3px;border-radius:3px;background:rgba(229,160,13,.15);color:var(--gold);font-weight:800">&#9733;</span>':'';
+    const chip2Html=chip2.wins!==null?(function(){var col=winningLB2?'var(--green)':(chip2.roiPct<0?'var(--red)':'var(--t3)');return ' <span style="font-family:var(--mono);color:'+col+';font-weight:700;'+(winningLB2?'':'opacity:.6')+'">'+chip2.wins+'-'+chip2.losses+(chip2.roiPct!==null&&chip2.roiPct!==undefined?' '+(chip2.roiPct>=0?'+':'')+Math.round(chip2.roiPct)+'%':'')+outLB2+'</span>';})():'';
     return '<div class="lb-row">'
       +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'>#'+t.rank+'</div>'
       +avPart
