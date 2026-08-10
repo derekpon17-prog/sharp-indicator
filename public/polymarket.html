@@ -1922,17 +1922,25 @@ function autoTrackPlays(groups){
   let changed=false;
   groups.forEach(g=>{
     const {score,bestRank,rawScore}=polyDisplayScore(g);
-    if(score<POLY_AUTOTRACK_THRESHOLD)return; // flat threshold — matches Sharp Score display floor, no rank gating
-    // BUGFIX 2026-08-05: title+outcome alone collided across a team's different games in
-    // the same short series (confirmed: Toronto/Houston Aug 3 and Aug 5 tracked under the
-    // identical key). eventSlug is Polymarket's own per-game identifier, already carried
-    // on the group, and already includes the date.
-    const key=(g.title||'')+'||'+(g.outcome||'')+'||'+(g.eventSlug||'');
     /* Route by population. A group is SPECIALIST only if EVERY buy came from a discovered
        wallet; any leaderboard participation makes it a whale play. Overlap resolves to
        whale so the validated 38-play record keeps its meaning and the new cohort's record
        stays clean. */
     const isSpec=(g.buys||[]).length>0&&(g.buys||[]).every(function(b){return b.type==='SPEC';});
+    // RESTORED 2026-08-10 (per Derek, real integrity issue — this fix was lost somewhere
+    // between deliveries and is being re-applied here): the 60-point threshold is right
+    // as a DISPLAY filter but was also gating what counts toward a specialist's tracked
+    // record, which is backwards — a specialist's discovery/vetting IS the validation.
+    // Confirmed directly against BigGumbaBoots' actual real $3,000 solo buy: it scores
+    // only 38, well under 60, so without this bypass it would never get tracked at all.
+    // Whale plays stay gated at the real threshold — raw leaderboard rank isn't the same
+    // kind of pre-vetted signal as a discovered specialist.
+    if(!isSpec&&score<POLY_AUTOTRACK_THRESHOLD)return;
+    // BUGFIX 2026-08-05: title+outcome alone collided across a team's different games in
+    // the same short series (confirmed: Toronto/Houston Aug 3 and Aug 5 tracked under the
+    // identical key). eventSlug is Polymarket's own per-game identifier, already carried
+    // on the group, and already includes the date.
+    const key=(g.title||'')+'||'+(g.outcome||'')+'||'+(g.eventSlug||'');
     const store=isSpec?specPlays:sigPlays;
     const storeKey=isSpec?'pm:spec-plays':'pm:sig-plays';
     if(store.some(p=>p.key===key))return;
@@ -1949,6 +1957,28 @@ function autoTrackPlays(groups){
     changed=true;
   });
   if(changed){ss('pm:sig-plays',sigPlays);ss('pm:spec-plays',specPlays);}
+}
+// RESTORED 2026-08-10: same real function as before, re-applied after being lost from a
+// later paste. Mirrors buildTrendingGroups' core filtering exactly, but deliberately
+// skips its final score>=40 filter — that gate is right for deciding what's worth
+// SHOWING, but was also silently deciding what counts toward a specialist's tracked
+// record. Restricted to SPEC-only alerts, so whale tracking is unaffected.
+function buildSpecialistTrackingCandidates(){
+  const cutoff=Date.now()-24*60*60*1000,groups={};
+  alerts.forEach(a=>{
+    if(a.type!=='SPEC')return;
+    const ts=a.loggedAt||(a.timestamp*1000);
+    if(ts<cutoff)return;
+    const sp=a.sport||detectSport(a.title);
+    if(!sp)return;
+    if(isStaleAlert(a))return;
+    if(isLiveAlert(a))return;
+    const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
+    if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,sport:sp,buys:[],totalVol:0,latestTs:0};
+    groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
+    if(ts>groups[key].latestTs)groups[key].latestTs=ts;
+  });
+  return Object.values(groups);
 }
 // FEATURE 2026-08-09 (per Derek): tracks his own actual selection criteria — 2+ traders
 // with a real WINNING record (isWinningTraderChip, the exact same definition used to dim
@@ -2030,6 +2060,7 @@ function renderTrending(){
   const trends=buildTrending();
   const row=el('trending-row'),cont=el('d-trend'),dotsEl=el('trend-dots');
   autoTrackPlays(buildAutoTrackCandidates());
+  autoTrackPlays(buildSpecialistTrackingCandidates());
   autoTrackQualityConvergence();
   if(!trends.length){if(row)row.style.display='none';return;}
   if(row)row.style.display='';
