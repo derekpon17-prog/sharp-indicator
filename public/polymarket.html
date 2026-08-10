@@ -1284,14 +1284,21 @@ function overallRecord(){
 // as 2 independent "buyers" for both the convergence bonus and the single-buyer cap,
 // letting one whale's repeat purchases masquerade as multi-trader consensus. Confirmed
 // with real data: a play showing "2 buyers" was the same wallet (RN1) buying twice.
-function uniqueBuyerCount(group){
-  return new Set(group.buys.map(function(b){return (b.wallet||b.traderName||'').toLowerCase();})).size;
+// COUNCIL DECISION 2026-08-10 (per Derek, unanimous): mirrors the server-side fix exactly
+// — a wallet known-negative in this specific sport (gateFailed, now flowing through from
+// the same stored alert data the server tags) can no longer inflate volume, buyer count,
+// or rank multiplier. Defaults to real-only; pass true explicitly for a display context
+// that specifically wants the full count including gate-failed context.
+function uniqueBuyerCount(group,includeGateFailed){
+  var buys=includeGateFailed?group.buys:group.buys.filter(function(b){return !b.gateFailed;});
+  return new Set(buys.map(function(b){return (b.wallet||b.traderName||'').toLowerCase();})).size;
 }
 function signalScore(group){
-  const vol=group.totalVol,buyers=uniqueBuyerCount(group);
+  var realBuys=(group.buys||[]).filter(function(b){return !b.gateFailed;});
+  const vol=realBuys.reduce(function(s,b){return s+(b.usdValue||0);},0),buyers=uniqueBuyerCount({buys:realBuys});
   const base=vol<=500?5:Math.min(Math.round(Math.log10(vol/500)*38)+15,90);
   let bestRank=999;
-  group.buys.forEach(b=>(b.categories||[]).forEach(c=>{const r=parseInt(c.rank||c.rank)||999;if(r<bestRank)bestRank=r;}));
+  realBuys.forEach(b=>(b.categories||[]).forEach(c=>{const r=parseInt(c.rank||c.rank)||999;if(r<bestRank)bestRank=r;}));
   const rm=bestRank<=5?1.6:bestRank<=15?1.4:bestRank<=30?1.2:bestRank<=75?1.0:0.85;
   const conv=buyers>=4?28:buyers>=3?20:buyers>=2?12:0;
   const rawScore=Math.round(base*rm)+conv; // uncapped — kept for validation/backtesting, not for display
@@ -1627,6 +1634,12 @@ function isOutlierTraderChip(chip){
 // (losing record, or no record at all) gets visually dimmed so the eye goes straight to
 // who actually matters. Replaces the bare "*" specialist marker with a small readable tag.
 function traderChipHTML(a,lookup){
+  if(a.gateFailed){
+    // COUNCIL DECISION 2026-08-10: a wallet known-negative in this specific sport —
+    // visible as context, always dimmed, and never rendered through the normal win/loss
+    // record path so it can't be mistaken for a validated tracked or specialist record.
+    return '<span class="tchip dim"><span class="tchip-name">'+esc(a.traderName||'Anon')+'</span> <span class="tchip-src-pm" title="'+esc(a.sportRecord||'')+'">&#9888; NEG IN-SPORT</span></span>';
+  }
   const c=traderRecordChip(a,lookup);
   const winning=isWinningTraderChip(c);
   const outlier=isOutlierTraderChip(c);
