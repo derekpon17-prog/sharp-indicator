@@ -847,11 +847,20 @@ module.exports = async function handler(req, res) {
       const usd      = Math.round(alert.usdValue).toLocaleString();
       const price    = (parseFloat(alert.price || 0) * 100).toFixed(1);
       const rankInfo = (alert.categories || []).map(c => `${c.category} #${c.rank}`).join(' / ');
+      // BUGFIX 2026-08-10 (per Derek): "Specialist: 96.2% of 26 settled bets" was showing
+      // unconditionally, even when the name line right above it was already using OUR OWN
+      // tracked record (e.g. kkookkoo's real 0-1) instead — two different numbers for the
+      // same wallet in the same message, no indication which one actually counts. Same
+      // tracked-first principle used everywhere else on the site, just never applied to
+      // this specific line before: only show the self-reported stat when actually falling
+      // back to it, not alongside a real tracked result.
+      const usingTracked = getRecordFor(alert, trackedRecords)?.source === 'tracked';
       const body     = [
         `$${usd} BUY [${alert.sport}] — ${nameWithRecord(alert, trackedRecords)}`,
         rankInfo ? `Rank: ${rankInfo}` : null,
-        // Specialists earned their place on an in-sport record — lead with it.
-        alert.specialistRecord ? `Specialist: ${alert.specialistRecord}` : null,
+        // Specialists earned their place on an in-sport record — lead with it, but only
+        // when it's not redundant with a real tracked number already shown above.
+        (alert.specialistRecord && !usingTracked) ? `Specialist: ${alert.specialistRecord}` : null,
         alert.sportRecord ? `Record: ${alert.sportRecord}` : null,
         `Market: ${(alert.title || '').slice(0, 80)}`,
         `Side: ${alert.outcome || '—'} @ ${price}¢`,
