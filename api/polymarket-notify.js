@@ -994,9 +994,9 @@ module.exports = async function handler(req, res) {
               });
               if (r.ok) {
                 const msg = await r.json();
-                await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: msg.id, walletCount: buyers.length, score, tier }), 'EX', '172800']);
+                await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: msg.id, walletCount: realBuyers.length, score, tier }), 'EX', '172800']);
                 results.discord.sent++;
-                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, score, tier, action: 'sent' });
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: realBuyers.length, score, tier, action: 'sent' });
               } else {
                 results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'send-failed', status: r.status });
               }
@@ -1006,7 +1006,7 @@ module.exports = async function handler(req, res) {
             continue;
           }
 
-          const grew = buyers.length > state.walletCount;
+          const grew = realBuyers.length > state.walletCount;
           const upgraded = tierRank(tier) > tierRank(state.tier || 'MODERATE');
 
           if (grew) {
@@ -1019,11 +1019,11 @@ module.exports = async function handler(req, res) {
               const r = await fetch(discordWebhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: content + `\n_(updated — was ${state.walletCount}, now ${buyers.length})_` }),
+                body: JSON.stringify({ content: content + `\n_(updated — was ${state.walletCount}, now ${realBuyers.length})_` }),
               });
               if (r.ok) {
                 results.discord.edited++;
-                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: buyers.length, action: 'update-posted', was: state.walletCount });
+                results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, buyers: realBuyers.length, action: 'update-posted', was: state.walletCount });
               } else {
                 results.discord.alerts.push({ title: gameTitle, outcome: g.outcome, action: 'update-post-failed', status: r.status });
               }
@@ -1039,9 +1039,9 @@ module.exports = async function handler(req, res) {
               `🚀 **CONVERGENCE UPGRADE** — jumped from ${state.tier || 'MODERATE'} (${state.score ?? '—'}) to **${tier}** (${score})`,
               `**${gameTitle}**`,
               `Side: **${g.outcome}**`,
-              `Now ${buyers.length} traders: ${names}`,
-              `Combined volume: $${Math.round(g.totalVol).toLocaleString()}`,
-            ].join('\n') + contrastLine + leanLine;
+              `Now ${realBuyers.length} traders: ${names}`,
+              `Combined volume: $${Math.round(realVol).toLocaleString()}`,
+            ].join('\n') + gfNote + contrastLine + leanLine;
             try {
               const r = await fetch(discordWebhook, {
                 method: 'POST',
@@ -1060,7 +1060,7 @@ module.exports = async function handler(req, res) {
           }
 
           if (grew || upgraded) {
-            await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: state.messageId, walletCount: buyers.length, score, tier }), 'EX', '172800']);
+            await upstashPost(['SET', dedupKey, JSON.stringify({ messageId: state.messageId, walletCount: realBuyers.length, score, tier }), 'EX', '172800']);
           }
           // else: already posted, nothing changed since — no action.
         }
