@@ -1559,6 +1559,17 @@ function isWinningTraderChip(chip){
   var tot=chip.wins+chip.losses;
   return tot>0&&(chip.wins/tot)>=0.55;
 }
+// FEATURE 2026-08-10 (council vote, unanimous, per Derek): Quality Convergence's "2+
+// winners" bar previously accepted a Polymarket self-reported ("PM") record the same as
+// Derek's own tracked wins — but PM's self-reported stats have repeatedly proven less
+// trustworthy this session (e.g. the SDTrading divergence). This is deliberately NOT a
+// change to isWinningTraderChip itself — general dimming everywhere else (Sharp Report,
+// Today's Board, etc.) still treats a strong PM record as legitimate context. This
+// stricter check is used ONLY for qualifying a play into Quality Convergence: a PM record
+// can still display, it just can no longer count toward the 2-winner threshold.
+function isTrackedWinner(chip){
+  return !!(chip&&chip.source==='tracked'&&isWinningTraderChip(chip));
+}
 // FEATURE 2026-08-09 (per Derek): "2+ whales same side" is a genuinely different signal
 // from Quality Convergence (tracked win record) — this checks Polymarket's own official
 // leaderboard categories (OVERALL/SPORTS with a real numeric rank), not Derek's own W-L
@@ -1903,7 +1914,7 @@ function autoTrackQualityConvergence(){
   buildAutoTrackCandidates().forEach(g=>{
     const seenW={},uniqueTraders=[];
     (g.buys||[]).forEach(function(b){if(b.wallet&&!seenW[b.wallet]){seenW[b.wallet]=true;uniqueTraders.push(b);}});
-    const winners=uniqueTraders.filter(function(a){return isWinningTraderChip(traderRecordChip(a,lookup));});
+    const winners=uniqueTraders.filter(function(a){return isTrackedWinner(traderRecordChip(a,lookup));});
     if(winners.length<2)return;
     const key=(g.title||'')+'||'+(g.outcome||'')+'||'+(g.eventSlug||'');
     if(qcPlays.some(p=>p.key===key))return;
@@ -2416,13 +2427,13 @@ function renderQualityConvergence(){
   buildAutoTrackCandidates().forEach(function(g){
     var seenW={},uniqueTraders=[];
     (g.buys||[]).forEach(function(b){if(b.wallet&&!seenW[b.wallet]){seenW[b.wallet]=true;uniqueTraders.push(b);}});
-    var winners=uniqueTraders.filter(function(a){return isWinningTraderChip(traderRecordChip(a,lookup));});
+    var winners=uniqueTraders.filter(function(a){return isTrackedWinner(traderRecordChip(a,lookup));});
     if(winners.length<2)return;
     qualifying.push({g:g,winners:winners});
   });
   if(!qualifying.length){
     wrap.style.display='';
-    cont.innerHTML='<div style="font-size:12.5px;color:var(--t4);padding:14px 16px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2)">Nothing clears the bar right now &mdash; needs 2+ traders with a real <em>winning</em> tracked or specialist record on the same side, not just 2 buyers. A game with 2 buyers where only one has a confirmed winning record won\u2019t show up here; that\u2019s working as intended, not empty by mistake.</div>';
+    cont.innerHTML='<div style="font-size:12.5px;color:var(--t4);padding:14px 16px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2)">Nothing clears the bar right now &mdash; needs 2+ traders with a real <em>winning tracked</em> record on the same side (your own graded plays specifically, not Polymarket\u2019s self-reported stats). A game with 2 buyers where only one has a confirmed tracked win won\u2019t show up here; that\u2019s working as intended, not empty by mistake.</div>';
     return;
   }
   wrap.style.display='';
