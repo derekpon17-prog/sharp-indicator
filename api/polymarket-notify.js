@@ -759,11 +759,26 @@ module.exports = async function handler(req, res) {
     results.poly.walletsEvaluated = distinctWallets.length;
 
     const gated = [];
+    // COUNCIL DECISION 2026-08-10 (per Derek, unanimous): a gate-failed wallet's real
+    // activity was being discarded entirely here — never stored, so invisible not just to
+    // Discord/ntfy but to almost the whole website (Alerts, Today's Board, Top Signals,
+    // Sharp Report all read from the same stored log this candidate never reached; only
+    // Watched Wallets cards, which bypass the log via a direct Polymarket fetch, ever
+    // showed it). Council's verdict: still worth knowing about — just as visible CONTEXT,
+    // not a standalone alert, so it doesn't dilute what counts as validated signal.
+    // gateFailed keeps these SEPARATE from gated (real signal) throughout — they get
+    // stored and can appear in a contrast line, but never trigger their own ping and
+    // never count toward a "2+ wallets converging" threshold on their own.
+    const gateFailed = [];
     candidates.forEach(cand => {
       const gate = traderStats.qualifiesForSport(statsByWallet[cand.wallet], cand.sport);
       if (!gate.pass) {
         results.poly.sportPnlSkipped++;
         if (cand.dbg) cand.dbg.reject = 'sport PnL gate: ' + gate.reason;
+        // Only worth keeping as context when the gate verdict is a real, known negative —
+        // not when it merely failed open on a thin/unavailable sample (that's not
+        // information, just missing data, and would just be noise here).
+        if (gate.known) gateFailed.push({ ...cand, gate });
         return;
       }
       if (!gate.known) results.poly.sportPnlUnknown++;
@@ -775,7 +790,7 @@ module.exports = async function handler(req, res) {
     // statsByWallet above, and getWalletNickname's KV INCR keeps concurrent resolution
     // collision-free.
     const needsNickname = [...new Set(
-      gated.filter(c => !pickRealName(c.t.name, c.t.pseudonym, c.traderInfo.name)).map(c => c.wallet)
+      [...gated, ...gateFailed].filter(c => !pickRealName(c.t.name, c.t.pseudonym, c.traderInfo.name)).map(c => c.wallet)
     )];
     const nicknameByWallet = {};
     await Promise.all(needsNickname.map(async w => {
@@ -800,7 +815,27 @@ module.exports = async function handler(req, res) {
       timestamp: parseInt(t.timestamp), loggedAt: Date.now(),
       transactionHash: t.transactionHash,
       sportRecord: gate && gate.known ? gate.reason : null,   // e.g. "MLB +$12,400 over 84 positions (58.3%)"
+      gateFailed: false,
     })).sort((a, b) => b.usdValue - a.usdValue);
+
+    // COUNCIL DECISION 2026-08-10: same shape as polyAlerts, stored the same way, but
+    // never sent as a ping and marked gateFailed so every consumer knows to treat it as
+    // context, not signal — dimmed, not alerted, not counted toward a real convergence.
+    const gateFailedAlerts = gateFailed.map(({ wallet, usd, sport, t, traderInfo, gate }) => ({
+      type: 'POLY',
+      specialistRecord: null,
+      wallet,
+      traderName: pickRealName(t.name, t.pseudonym, traderInfo.name) || nicknameByWallet[wallet] || wallet.slice(0,6)+'...'+wallet.slice(-4),
+      profileImage: t.profileImageOptimized || t.profileImage || null,
+      categories: traderInfo.categories,
+      sport, title: t.title, slug: t.slug, eventSlug: t.eventSlug,
+      outcome: t.outcome, price: t.price, usdValue: usd,
+      timestamp: parseInt(t.timestamp), loggedAt: Date.now(),
+      transactionHash: t.transactionHash,
+      sportRecord: gate.reason,
+      gateFailed: true,
+    }));
+    for (const alert of gateFailedAlerts) await storeAlert(alert); // context only — no ntfy, no Discord ping of its own
 
     results.poly.scanned = rawTrades.length;
 
@@ -899,13 +934,23 @@ module.exports = async function handler(req, res) {
 
         for (const key of Object.keys(groups)) {
           const g = groups[key];
-          if (g.wallets.size < 2) continue;
+          const allBuyers = [...g.wallets.values()];
+          const realBuyers = allBuyers.filter(a => !a.gateFailed);
+          const gfBuyers = allBuyers.filter(a => a.gateFailed);
+          // COUNCIL DECISION 2026-08-10: the trigger, score, and tier all come from REAL
+          // wallets only — a known-negative-in-sport wallet's dollars don't inflate
+          // conviction, and can't singlehandedly (or in pairs) trigger a ping. They can
+          // still appear as visible, clearly-marked context on this same line.
+          if (realBuyers.length < 2) continue;
           results.discord.scanned++;
 
-          const buyers = [...g.wallets.values()];
-          const names = buyers.map(a => nameWithRecord(a, trackedRecords)).join(', ');
+          const names = realBuyers.map(a => nameWithRecord(a, trackedRecords)).join(', ');
+          const realVol = realBuyers.reduce((s, a) => s + (a.usdValue || 0), 0);
           const gameTitle = (slugTitle[g.eventSlug] && slugTitle[g.eventSlug].text) || g.outcome;
-          const { score, tier } = computeGroupScore(g);
+          const { score, tier } = computeGroupScore({ ...g, totalVol: realVol, wallets: new Map(realBuyers.map(b => [b.wallet, b])) });
+          const gfNote = gfBuyers.length
+            ? `\n_Also on this side, known negative in-sport (not counted): ${gfBuyers.map(a => nameWithRecord(a, trackedRecords)).join(', ')}_`
+            : '';
 
           let contrastLine = '';
           let oppBuyersForLean = null, oppOutcomeForLean = null;
@@ -916,23 +961,23 @@ module.exports = async function handler(req, res) {
             });
             if (oppKey) {
               const opp = groups[oppKey];
-              const oppBuyers = [...opp.wallets.values()];
-              const oppNames = oppBuyers.map(a => nameWithRecord(a, trackedRecords)).join(', ');
-              contrastLine = `\n**${g.wallets.size}v${opp.wallets.size}** — ${opp.wallets.size} on **${opp.outcome}** (${oppNames})`;
-              oppBuyersForLean = oppBuyers;
+              const oppAll = [...opp.wallets.values()];
+              const oppNames = oppAll.map(a => nameWithRecord(a, trackedRecords) + (a.gateFailed ? ' _(known negative in-sport)_' : '')).join(', ');
+              contrastLine = `\n**${realBuyers.length}v${oppAll.length}** — ${oppAll.length} on **${opp.outcome}** (${oppNames})`;
+              oppBuyersForLean = oppAll.filter(a => !a.gateFailed); // lean inference stays on real records only
               oppOutcomeForLean = opp.outcome;
             }
           }
-          const leanLine = inferLean(buyers, g.outcome, oppBuyersForLean, oppOutcomeForLean, trackedRecords);
+          const leanLine = inferLean(realBuyers, g.outcome, oppBuyersForLean, oppOutcomeForLean, trackedRecords);
 
           const content = [
-            `🎯 **POLY CONVERGENCE** — ${buyers.length} traders on the same side (ML + spread combined)`,
+            `🎯 **POLY CONVERGENCE** — ${realBuyers.length} traders on the same side (ML + spread combined)`,
             `Score: **${score}** (${tier})`,
             `**${gameTitle}**`,
             `Side: **${g.outcome}**`,
             `Traders: ${names}`,
-            `Combined volume: $${Math.round(g.totalVol).toLocaleString()}`,
-          ].join('\n') + contrastLine + leanLine;
+            `Combined volume: $${Math.round(realVol).toLocaleString()}`,
+          ].join('\n') + gfNote + contrastLine + leanLine;
 
           const dedupKey = `discord:conv:${key}`;
           const stateRes = await upstashPost(['GET', dedupKey]);
