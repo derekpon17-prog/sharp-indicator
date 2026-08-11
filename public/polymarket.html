@@ -1621,6 +1621,25 @@ function isTrackedWinner(chip){
 function isRankedWhale(a){
   return !!(a&&a.categories&&a.categories.some(function(c){return (c.category==='OVERALL'||c.category==='SPORTS')&&c.rank!=null;}));
 }
+// FEATURE 2026-08-11 (per Derek): "I don't know who's who anymore, don't see the whale
+// icon" — isRankedWhale already existed but only worked on objects that directly carry
+// .categories (a raw alert/buy). Several places that show a trader's NAME (Watched
+// Wallets cards, Dashboard Watched Traders, Tracking's By Trader) only have a wallet or
+// resolved name string at that point, not the original categories object. This builds a
+// wallet-keyed lookup once, from the two sources that actually carry rank data — the live
+// leaderboard (most authoritative) and recent alerts (catches anyone not in lbData yet) —
+// so every consumer can check whale status the same way regardless of what shape of
+// object it happens to have on hand.
+function buildWhaleWalletSet(){
+  var s=new Set();
+  (lbData.overall||[]).forEach(function(t){if(t.wallet)s.add(t.wallet);});
+  (lbData.sports||[]).forEach(function(t){if(t.wallet)s.add(t.wallet);});
+  alerts.forEach(function(a){if(a.wallet&&isRankedWhale(a))s.add(a.wallet);});
+  return s;
+}
+function whaleIconHTML(wallet,whaleSet){
+  return (wallet&&whaleSet&&whaleSet.has(wallet))?'<span title="Ranked on Polymarket\'s official leaderboard" style="margin-right:2px">\u{1F40B}</span>':'';
+}
 // FEATURE 2026-08-09 (per Derek): explicit flag for a genuine statistical standout, not
 // just "currently winning" — requires BOTH a very high win rate AND a real sample large
 // enough that it's not just a hot streak. Threshold is Derek's own stated example (90%+
@@ -1634,11 +1653,12 @@ function isOutlierTraderChip(chip){
 // (losing record, or no record at all) gets visually dimmed so the eye goes straight to
 // who actually matters. Replaces the bare "*" specialist marker with a small readable tag.
 function traderChipHTML(a,lookup){
+  const whaleTag=isRankedWhale(a)?'<span title="Ranked on Polymarket\'s official leaderboard" style="margin-right:2px">\u{1F40B}</span>':'';
   if(a.gateFailed){
     // COUNCIL DECISION 2026-08-10: a wallet known-negative in this specific sport —
     // visible as context, always dimmed, and never rendered through the normal win/loss
     // record path so it can't be mistaken for a validated tracked or specialist record.
-    return '<span class="tchip dim"><span class="tchip-name">'+esc(a.traderName||'Anon')+'</span> <span class="tchip-src-pm" title="'+esc(a.sportRecord||'')+'">&#9888; NEG IN-SPORT</span></span>';
+    return '<span class="tchip dim">'+whaleTag+'<span class="tchip-name">'+esc(a.traderName||'Anon')+'</span> <span class="tchip-src-pm" title="'+esc(a.sportRecord||'')+'">&#9888; NEG IN-SPORT</span></span>';
   }
   const c=traderRecordChip(a,lookup);
   const winning=isWinningTraderChip(c);
@@ -1648,7 +1668,7 @@ function traderChipHTML(a,lookup){
   const srcTag=c.source==='specialist'?' <span class="tchip-src-pm">PM</span>':'';
   const outlierTag=outlier?' <span class="tchip-outlier" title="90%+ win rate on 40+ settled bets">&#9733; OUTLIER</span>':'';
   const txt=hasRec?(c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
-  return '<span class="tchip'+(winning?'':' dim')+'"><span class="tchip-name">'+esc(c.label)+'</span>'+srcTag+outlierTag+' <span class="tchip-rec '+recClass+'">'+esc(txt)+'</span></span>';
+  return '<span class="tchip'+(winning?'':' dim')+'">'+whaleTag+'<span class="tchip-name">'+esc(c.label)+'</span>'+srcTag+outlierTag+' <span class="tchip-rec '+recClass+'">'+esc(txt)+'</span></span>';
 }
 // SHARED 2026-08-07 (per Derek, asked several times): every dashboard section that shows
 // "N traders" needs the actual names + real W-L + ROI, not just a count — same source of
@@ -2486,13 +2506,15 @@ function watchedTraderCardHTML(w,lookup){
   var srcTagW=chip.source==='specialist'?' <span class="tchip-src-pm">PM</span>':'';
   var outTagW=isOutlierTraderChip(chip)?' <span class="tchip-outlier" title="90%+ win rate on 40+ settled bets">&#9733;</span>':'';
   var recTxt=hasRec?(chip.wins+'-'+chip.losses+(chip.roiPct!==null&&chip.roiPct!==undefined?' '+(chip.roiPct>=0?'+':'')+Math.round(chip.roiPct)+'%':'')):'no record yet';
+  var isWhaleW=lbData.overall.some(function(x){return x.wallet===w.wallet;})||lbData.sports.some(function(x){return x.wallet===w.wallet;});
+  var whaleTagW=isWhaleW?'\u{1F40B} ':'';
   var picksHtml=todaysPicks.length
     ?todaysPicks.slice(0,4).map(function(p){
         return '<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b1);font-size:11.5px"><span style="color:var(--t2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(p.outcome||p.title)+'</span><span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0;margin-left:8px">'+fu(p.usdValue||0)+'</span></div>';
       }).join('')
     :'<div style="font-size:11px;color:var(--t4);padding:6px 0">No picks yet today</div>';
   return '<div style="min-width:230px;max-width:230px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:14px;flex-shrink:0">'
-    +'<div style="font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(chip.label)+srcTagW+outTagW+'</div>'
+    +'<div style="font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+whaleTagW+esc(chip.label)+srcTagW+outTagW+'</div>'
     +'<div class="tchip-rec '+recClassW+'" style="font-family:var(--mono);font-size:12px;margin-bottom:10px">'+recTxt+'</div>'
     +'<div style="font-size:9.5px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Today\'s Picks</div>'
     +picksHtml
@@ -2673,7 +2695,7 @@ function acardHTML(b,lookup){
     +'<div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(b.title||b.market||'Unknown market')+'</div>'
     +detailRow
     +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px">'
-    +'<div style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+shortWallet(b.traderName||b.wallet||'')+'</div>'
+    +'<div style="font-size:10px;color:var(--t4);font-family:var(--mono)">'+(isRankedWhale(b)?'\u{1F40B} ':'')+shortWallet(b.traderName||b.wallet||'')+'</div>'
     +'<div style="font-size:11px;color:var(--t4)">'+ago+'</div>'
     +'</div></div>'
     +'<div style="flex-shrink:0;text-align:right">'
@@ -2745,7 +2767,7 @@ function renderAlerts(){
     const logo=teamLogoUrl(sport,b.outcome);
     return '<div class="al-row'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
       +'<div class="al-av-fb">'+init+'</div>'
-      +'<div class="al-main"><div class="al-trader">'+shortWallet(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+'</div>'
+      +'<div class="al-main"><div class="al-trader">'+(isRankedWhale(b)?'\u{1F40B} ':'')+shortWallet(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+'</div>'
       +(function(){
           var c=traderRecordChip(b,alertsLk);
           if(c.wins===null)return '';
@@ -3264,6 +3286,14 @@ function renderTraderBreakdown(){
   if(!list)return;
   var lk=buildClientTrackedLookup();
   var byTrader=lk.byTrader,roiByTrader=lk.roiByTrader;
+  // This section keys by resolved NAME, not wallet, so buildWhaleWalletSet (wallet-keyed)
+  // doesn't directly apply here — build a name-keyed version using the same resolution
+  // logic already in scope, so a wallet's whale status matches what By Trader itself
+  // already resolved it to.
+  var whaleNames=new Set();
+  alerts.forEach(function(a){
+    if(isRankedWhale(a))whaleNames.add(lk.resolveDisplayName(a.traderName||a.wallet||''));
+  });
 
   var rows=Object.keys(byTrader).map(function(t){
     var b=byTrader[t];
@@ -3287,7 +3317,7 @@ function renderTraderBreakdown(){
       :(r.wr===null?'var(--t3)':r.wr>=60?'var(--green)':r.wr>=50?'var(--gold)':'var(--red)');
     var roiText=hasROI?'<span style="font-size:10.5px;color:'+col+';font-family:var(--mono);margin-left:8px;font-weight:700">ROI '+(r.roi.roiPct>=0?'+':'')+Math.round(r.roi.roiPct)+'%</span>':'';
     return '<div style="display:flex;justify-content:space-between;align-items:center;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:10px 14px">'
-      +'<span style="font-size:12.5px;font-weight:700;color:var(--t1)">'+esc(r.trader)+'</span>'
+      +'<span style="font-size:12.5px;font-weight:700;color:var(--t1)">'+(whaleNames.has(r.trader)?'\u{1F40B} ':'')+esc(r.trader)+'</span>'
       +'<span style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+col+'">'+r.W+'-'+r.L+' <span style="font-size:10px;color:var(--t4);font-weight:600">('+r.wr+'%)</span>'+roiText+'</span>'
       +'</div>';
   }).join('');
@@ -3933,7 +3963,7 @@ function renderLB(){
       return '<div class="lb-row" style="align-items:flex-start">'
         +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'">#'+t.rank+'</div>'
         +avPart
-        +'<div class="lb-info"><div class="lb-name">'+(hotNow?'&#x1F525; ':'')+(t.name||t.wallet.slice(0,8)+'\u2026')+bdg(t.categories)+'</div>'
+        +'<div class="lb-info"><div class="lb-name">'+(hotNow?'&#x1F525; ':'')+(isRankedWhale(t)?'\u{1F40B} ':'')+(t.name||t.wallet.slice(0,8)+'\u2026')+bdg(t.categories)+'</div>'
         +'<div class="lb-meta"><span style="color:var(--gold)">'+t.alertCount+' alert'+(t.alertCount>1?'s':'')+'</span>'+(sportsStr?'<span>'+esc(sportsStr)+'</span>':'')+'</div>'
         +chipHtml
         +(t.record?'<div style="font-size:10.5px;color:var(--green);font-family:var(--mono);margin-top:3px;line-height:1.4">'+esc(t.record)+'</div>':'')
@@ -3961,7 +3991,7 @@ function renderLB(){
     return '<div class="lb-row">'
       +'<div class="lb-rank'+(t.rank<=3?' t3':'')+'>#'+t.rank+'</div>'
       +avPart
-      +'<div class="lb-info"><div class="lb-name">'+(hot?'&#x1F525; ':'')+(t.name||t.wallet.slice(0,8)+'\u2026')+'</div><div class="lb-meta"><span>Vol: '+fp(t.vol)+'</span>'+(als.length?'<span style="color:var(--gold)">'+als.length+' alert'+(als.length>1?'s':'')+'</span>':'')+chip2Html+'</div></div>'
+      +'<div class="lb-info"><div class="lb-name">'+(hot?'&#x1F525; ':'')+'\u{1F40B} '+(t.name||t.wallet.slice(0,8)+'\u2026')+'</div><div class="lb-meta"><span>Vol: '+fp(t.vol)+'</span>'+(als.length?'<span style="color:var(--gold)">'+als.length+' alert'+(als.length>1?'s':'')+'</span>':'')+chip2Html+'</div></div>'
       +'<div style="text-align:right;flex-shrink:0;margin-right:9px"><div class="lb-pnl">'+fp(t.pnl)+'</div><div class="lb-pnl-lbl">'+(t.category==='OVERALL'?'All-Time':t.category==='SPORT'?'Buy Vol':'Sports')+' PnL</div></div>'
       +(isW?'<button class="lb-add w"><i class="ti ti-eye" style="font-size:10px"></i> Watching</button>':'<button class="lb-add" data-ww="'+t.wallet+'" data-wn="'+(t.name||'')+'"><i class="ti ti-plus" style="font-size:10px"></i> Watch</button>')
       +'</div>';
@@ -3986,8 +4016,9 @@ function wcardHTML(w,buys,lookup){
   const se=lbData.sports.find(x=>x.wallet===w.wallet);
   const bs=[oe?'<span class="badge badge-o">Overall #'+oe.rank+'</span>':null,se?'<span class="badge badge-s">Sports #'+se.rank+'</span>':null].filter(Boolean).join('');
   const resolvedName=lookup&&w.name?lookup.resolveDisplayName(w.name):(w.name||w.wallet.slice(0,8)+'\u2026');
+  const whaleTag=(oe||se)?'\u{1F40B} ':'';
   return '<div class="wcard" id="wc-'+w.wallet+'">'
-    +'<div class="wcard-hdr"><div class="wc-av-fb">'+resolvedName.slice(0,2).toUpperCase()+'</div><div><div class="wc-name">'+esc(resolvedName)+'</div><div class="wc-bdg">'+bs+'</div></div></div>'
+    +'<div class="wcard-hdr"><div class="wc-av-fb">'+resolvedName.slice(0,2).toUpperCase()+'</div><div><div class="wc-name">'+whaleTag+esc(resolvedName)+'</div><div class="wc-bdg">'+bs+'</div></div></div>'
     +'<div class="wcard-body">'+wbodyHTML(w,buys)+'</div>'
     +'<div class="wcard-ft"><a class="wcard-link" href="https://polymarket.com/profile/'+w.wallet+'" target="_blank">View on Polymarket \u2192</a><button class="wcard-rm" data-wrem="'+w.wallet+'"><i class="ti ti-trash" style="font-size:12px"></i></button></div>'
     +'</div>';
