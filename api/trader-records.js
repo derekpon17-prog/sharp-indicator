@@ -60,12 +60,34 @@ module.exports = async function handler(req, res) {
       if (!body || typeof body !== 'object' || !body.records) {
         return res.status(400).json({ error: 'Expected { records: {...} }' });
       }
-      // Basic shape guard — only keep entries that look like real trader records, so a
-      // malformed client payload can't corrupt what the cron reads back.
+      // SAFEGUARD 2026-08-11 (per Derek, real incident): a partial/incomplete push
+      // briefly overwrote real records — Formal-Cupcake's genuine 12-5 with 0-3,
+      // ferrariChampions2026's genuine 45-43 with 0-1 — and Discord alerted on the wrong
+      // numbers for real games during that window, before a later full push corrected it.
+      // Since this endpoint always does a full-snapshot replace by design (simpler than
+      // merging), a client push that fires before all localStorage data has finished
+      // loading can silently corrupt good data with an incomplete subset. Guard: read the
+      // current stored snapshot first, and for any wallet whose sample count drops
+      // drastically, keep the existing larger record instead — a real correction is
+      // usually a small adjustment; a wallet dropping from 88 total plays to 3 is almost
+      // certainly a partial push, not genuine new data. Increases and small changes still
+      // pass through normally.
+      const prevRaw = await upstash(['GET', RECORDS_KEY]);
+      let prev = {};
+      if (prevRaw) { try { prev = JSON.parse(prevRaw); } catch {} }
+
       const clean = {};
+      let suspiciousDrops = 0;
       for (const wallet in body.records) {
         const r = body.records[wallet];
         if (r && typeof r.W === 'number' && typeof r.L === 'number') {
+          const newSample = r.W + r.L;
+          const oldSample = prev[wallet] ? (prev[wallet].W + prev[wallet].L) : 0;
+          if (oldSample >= 10 && newSample < oldSample * 0.5) {
+            clean[wallet] = prev[wallet];
+            suspiciousDrops++;
+            continue;
+          }
           clean[wallet] = {
             name: typeof r.name === 'string' ? r.name : wallet,
             W: r.W, L: r.L,
@@ -75,7 +97,7 @@ module.exports = async function handler(req, res) {
         }
       }
       await upstash(['SET', RECORDS_KEY, JSON.stringify(clean)]);
-      return res.status(200).json({ ok: true, stored: Object.keys(clean).length });
+      return res.status(200).json({ ok: true, stored: Object.keys(clean).length, suspiciousDropsBlocked: suspiciousDrops });
     }
 
     return res.status(405).json({ error: 'Method not allowed' });
