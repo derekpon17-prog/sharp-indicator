@@ -581,7 +581,13 @@ select.finput option{background:var(--s2)}
         <button onclick="regradeStaleButtonHandler()" style="font-size:10px;font-weight:700;padding:4px 9px;border-radius:6px;border:1px solid var(--b1);background:transparent;color:var(--t3);cursor:pointer">&#x21bb; Regrade Stale Plays</button>
         </span>
       </div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:14px">Which flags are earning their spot &mdash; updates as plays grade</div>
+      <div style="font-size:12px;color:var(--t3);margin-bottom:8px">Which flags are earning their spot &mdash; updates as plays grade</div>
+      <div style="display:flex;gap:6px;margin-bottom:14px" id="track-window-toggle">
+        <button onclick="setTrackWindow('today')" data-tw="today" style="font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;border:1px solid var(--b1);background:transparent;color:var(--t3);cursor:pointer">Today</button>
+        <button onclick="setTrackWindow('yesterday')" data-tw="yesterday" style="font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;border:1px solid var(--b1);background:transparent;color:var(--t3);cursor:pointer">Yesterday</button>
+        <button onclick="setTrackWindow('7d')" data-tw="7d" style="font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;border:1px solid var(--b1);background:transparent;color:var(--t3);cursor:pointer">7 Days</button>
+        <button onclick="setTrackWindow('all')" data-tw="all" style="font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;border:1px solid var(--gold);background:rgba(229,160,13,.1);color:var(--gold);cursor:pointer">All-Time</button>
+      </div>
     </div>
     <div class="flag-grid">
       <div class="flag-card f-poly"><div class="fc-name">Poly Whale</div><div class="fc-rec" id="fs-sig">&mdash;</div><div class="fc-sub" id="fs-sig-sub">no graded plays</div><div id="fs-sig-bands"></div></div>
@@ -864,6 +870,31 @@ const el=id=>document.getElementById(id);
 
 /* === STATE === */
 let alerts=ls('pm:alert-log',[]),trades=ls('pm:trades',[]),wallets=ls('pm:traders',[]),sigPlays=ls('pm:sig-plays',[]);
+// FEATURE 2026-08-11 (per Derek): "what was the record yesterday" had no direct answer —
+// every Signal Performance tile only ever showed the all-time cumulative number. One
+// shared window applies to every tile at once (Today/Yesterday/7-Day/All-Time), filtered
+// by gradedAt — when a play actually RESOLVED, not when it was first tracked, since
+// "yesterday's results" means games that finished yesterday, not bets placed yesterday.
+let trackWindow='all';
+function filterPlaysByWindow(plays,windowKey){
+  if(windowKey==='all')return plays;
+  var now=new Date();
+  if(windowKey==='today'||windowKey==='yesterday'){
+    var ref=new Date(now);
+    if(windowKey==='yesterday')ref.setDate(ref.getDate()-1);
+    var refET=ref.toLocaleDateString('en-CA',{timeZone:'America/New_York'});
+    return plays.filter(function(p){
+      if(!p.gradedAt)return false;
+      return new Date(p.gradedAt).toLocaleDateString('en-CA',{timeZone:'America/New_York'})===refET;
+    });
+  }
+  if(windowKey==='7d'){
+    var cutoff=now.getTime()-7*24*60*60*1000;
+    return plays.filter(function(p){return p.gradedAt&&p.gradedAt>=cutoff;});
+  }
+  return plays;
+}
+function setTrackWindow(w){trackWindow=w;renderTracking();}
 let linePlays=ls('pm:line-plays',[]);
 let sharpScorePlays=ls('pm:ss-plays',[]);
 let watchPlays=ls('pm:watch-plays',[]); // WATCHLIST (tier C) — shown, therefore graded
@@ -3357,6 +3388,12 @@ function pushTraderRecords(rows){
 function renderTracking(){
   gradeOpenPlays();
   gradeFromESPN();
+  document.querySelectorAll('#track-window-toggle button').forEach(function(btn){
+    var active=btn.dataset.tw===trackWindow;
+    btn.style.borderColor=active?'var(--gold)':'var(--b1)';
+    btn.style.background=active?'rgba(229,160,13,.1)':'transparent';
+    btn.style.color=active?'var(--gold)':'var(--t3)';
+  });
   // Backfill real per-trader stakes onto already-tracked plays by joining back to the raw
   // alert log — safe to run every load, only touches plays that don't already have it.
   var sigStakesChanged=backfillStakes(sigPlays,alerts);
@@ -3390,7 +3427,7 @@ function renderTracking(){
   }
 
   /* ── POLY SIGNAL PLAYS ── */
-  var sigStat=unitPnL(sigPlays);
+  var sigStat=unitPnL(filterPlaysByWindow(sigPlays,trackWindow));
   setStats('sig-rec','sig-wr','sig-units',sigStat);
   el('sig-record').textContent=sigStat.W+'W-'+sigStat.L+'L'+(sigPlays.length?' on '+sigPlays.length+' plays':'');
   var spEl=el('sig-plays'),spEm=el('sig-empty');
@@ -3417,10 +3454,10 @@ function renderTracking(){
       }).join('')+trkMoreBtn('sig',sigPlays.length);
     }
   }
-  fillFlagCard('fs-sig',sigStat,sigPlays.length,sigPlays);
+  fillFlagCard('fs-sig',sigStat,sigStat.W+sigStat.L+sigStat.P,sigPlays);
 
   /* ── POLY SPECIALIST PLAYS (separate record from whales, deliberately) ── */
-  var specStat=unitPnL(specPlays);
+  var specStat=unitPnL(filterPlaysByWindow(specPlays,trackWindow));
   setStats('spec-rec','spec-wr','spec-units',specStat);
   var srEl=el('spec-record');
   if(srEl)srEl.textContent=specStat.W+'W-'+specStat.L+'L'+(specPlays.length?' on '+specPlays.length+' plays':'');
@@ -3447,14 +3484,14 @@ function renderTracking(){
       }).join('')+trkMoreBtn('spec',specPlays.length);
     }
   }
-  fillFlagCard('fs-spec',specStat,specPlays.length,specPlays);
+  fillFlagCard('fs-spec',specStat,specStat.W+specStat.L+specStat.P,specPlays);
 
   /* ── WATCHLIST (tier C) — graded so it can be judged or retired ── */
-  var watchStat=unitPnL(watchPlays);
-  fillFlagCard('fs-watch',watchStat,watchPlays.length,watchPlays);
+  var watchStat=unitPnL(filterPlaysByWindow(watchPlays,trackWindow));
+  fillFlagCard('fs-watch',watchStat,watchStat.W+watchStat.L+watchStat.P,watchPlays);
 
   /* ── SHARP LINE SIGNAL PLAYS ── */
-  var lineStat=unitPnL(linePlays);
+  var lineStat=unitPnL(filterPlaysByWindow(linePlays,trackWindow));
   setStats('line-rec','line-wr','line-units',lineStat);
   el('line-record').textContent=lineStat.W+'W-'+lineStat.L+'L'+(linePlays.length?' on '+linePlays.length+' plays':'');
   var lpEl=el('line-plays'),lpEm=el('line-empty');
@@ -3506,10 +3543,10 @@ function renderTracking(){
       }).join('')+trkMoreBtn('line',linePlays.length);
     }
   }
-  fillFlagCard('fs-line',lineStat,linePlays.length,linePlays);
+  fillFlagCard('fs-line',lineStat,lineStat.W+lineStat.L+lineStat.P,linePlays);
 
   /* ── SHARP SCORE PLAYS (combined) ── */
-  var ssStat=unitPnL(sharpScorePlays);
+  var ssStat=unitPnL(filterPlaysByWindow(sharpScorePlays,trackWindow));
   setStats('ss-rec','ss-wr','ss-units',ssStat);
   el('ss-record').textContent=ssStat.W+'W-'+ssStat.L+'L'+(sharpScorePlays.length?' on '+sharpScorePlays.length+' plays':'');
   var ssEl=el('ss-plays'),ssEm=el('ss-empty');
@@ -3548,10 +3585,10 @@ function renderTracking(){
       }).join('')+trkMoreBtn('ss',sharpScorePlays.length);
     }
   }
-  fillFlagCard('fs-ss',ssStat,sharpScorePlays.length,sharpScorePlays);
+  fillFlagCard('fs-ss',ssStat,ssStat.W+ssStat.L+ssStat.P,sharpScorePlays);
 
   /* ── ML VELOCITY SHADOW PLAYS ── */
-  var mlvStat=unitPnL(mlvPlays);
+  var mlvStat=unitPnL(filterPlaysByWindow(mlvPlays,trackWindow));
   setStats('mlv-rec','mlv-wr','mlv-units',mlvStat);
   var mre=el('mlv-record');if(mre)mre.textContent=mlvStat.W+'W-'+mlvStat.L+'L'+(mlvPlays.length?' on '+mlvPlays.length+' plays':'');
   var mvEl=el('mlv-plays'),mvEm=el('mlv-empty');
@@ -3580,9 +3617,9 @@ function renderTracking(){
       }).join('')+trkMoreBtn('mlv',mlvPlays.length);
     }
   }
-  fillFlagCard('fs-mlv',mlvStat,mlvPlays.length,mlvPlays);
-  var qcStat=unitPnL(qcPlays);
-  fillFlagCard('fs-qc',qcStat,qcPlays.length,qcPlays);
+  fillFlagCard('fs-mlv',mlvStat,mlvStat.W+mlvStat.L+mlvStat.P,mlvPlays);
+  var qcStat=unitPnL(filterPlaysByWindow(qcPlays,trackWindow));
+  fillFlagCard('fs-qc',qcStat,qcStat.W+qcStat.L+qcStat.P,qcPlays);
 
   /* ── MY PICKS (manual) ── */
   var W2=trades.filter(function(t){return t.status==='WIN';}).length;
