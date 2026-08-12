@@ -927,6 +927,48 @@ module.exports = async function handler(req, res) {
           }
         });
 
+        // FEATURE 2026-08-11 (per Derek, confirmed real case): the client-side net-out
+        // fix (a wallet buying both outcomes of the same market shouldn't count as two
+        // independent convergences) was only ever applied to the dashboard — Discord ran
+        // entirely separate grouping code and never got it. Confirmed directly: Ferrari
+        // fired a real Over convergence at 12pm and a separate Under convergence at 1pm on
+        // the exact same Brewers/Padres totals market, while the dashboard correctly
+        // netted him to Over only. Grouped by TITLE here, not eventSlug — h2h, spread, and
+        // totals markets on the same game all share one eventSlug, and netting a wallet's
+        // h2h position against their totals position would be wrong; title is what
+        // actually distinguishes one specific market from another, same as the client.
+        const byTitleForNet = {};
+        Object.values(groups).forEach(g => {
+          const sample = [...g.wallets.values()][0];
+          const t = sample ? sample.title : g.eventSlug;
+          if (!byTitleForNet[t]) byTitleForNet[t] = [];
+          byTitleForNet[t].push(g);
+        });
+        Object.values(byTitleForNet).forEach(sides => {
+          if (sides.length < 2) return;
+          const walletSideVol = {};
+          sides.forEach((side, idx) => {
+            for (const [wallet, a] of side.wallets) {
+              if (!walletSideVol[wallet]) walletSideVol[wallet] = {};
+              walletSideVol[wallet][idx] = (walletSideVol[wallet][idx] || 0) + (a.usdValue || 0);
+            }
+          });
+          Object.keys(walletSideVol).forEach(wallet => {
+            const bySide = walletSideVol[wallet];
+            const sideIdxs = Object.keys(bySide);
+            if (sideIdxs.length < 2) return;
+            let winnerIdx = sideIdxs[0], winnerVol = bySide[sideIdxs[0]];
+            sideIdxs.forEach(idx => { if (bySide[idx] > winnerVol) { winnerVol = bySide[idx]; winnerIdx = idx; } });
+            sideIdxs.forEach(idx => {
+              if (idx === winnerIdx) return;
+              const side = sides[idx];
+              const a = side.wallets.get(wallet);
+              if (a) side.totalVol -= (a.usdValue || 0);
+              side.wallets.delete(wallet);
+            });
+          });
+        });
+
         // Ported from the client's signalScore()/sigLabel() — same formula, same tiers.
         function computeGroupScore(g) {
           const buyers = [...g.wallets.values()];
@@ -963,10 +1005,20 @@ module.exports = async function handler(req, res) {
 
           let contrastLine = '';
           let oppBuyersForLean = null, oppOutcomeForLean = null;
-          if (!isTotals(g.outcome)) {
+          // FEATURE 2026-08-11 (per Derek, confirmed real case): this previously skipped
+          // totals markets entirely, so an Over/Under split with real disagreement never
+          // showed a contrast line at all. Matches by exact market TITLE now (not just
+          // eventSlug) rather than removing the totals check outright — that's what
+          // correctly limits Over to only ever matching Under on the SAME total line, and
+          // stops an H2H group from ever cross-matching against an unrelated Totals group
+          // just because they share a game.
+          const myTitle = realBuyers[0] ? realBuyers[0].title : null;
+          if (myTitle) {
             const oppKey = Object.keys(groups).find(k2 => {
               const g2 = groups[k2];
-              return g2.eventSlug === g.eventSlug && g2.outcome !== g.outcome && !isTotals(g2.outcome) && g2.wallets.size > 0;
+              if (g2.outcome === g.outcome || g2.wallets.size === 0) return false;
+              const g2Sample = [...g2.wallets.values()][0];
+              return g2Sample && g2Sample.title === myTitle;
             });
             if (oppKey) {
               const opp = groups[oppKey];
