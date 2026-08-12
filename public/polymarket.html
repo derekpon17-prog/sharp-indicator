@@ -4017,8 +4017,26 @@ function wcardHTML(w,buys,lookup){
   const bs=[oe?'<span class="badge badge-o">Overall #'+oe.rank+'</span>':null,se?'<span class="badge badge-s">Sports #'+se.rank+'</span>':null].filter(Boolean).join('');
   const resolvedName=lookup&&w.name?lookup.resolveDisplayName(w.name):(w.name||w.wallet.slice(0,8)+'\u2026');
   const whaleTag=(oe||se)?'\u{1F40B} ':'';
+  // FEATURE 2026-08-11 (per Derek): "when I select someone to watch I want to see W-L and
+  // ROI" — this card had PnL rows (Polymarket's own leaderboard stat) but never the
+  // actual tracked record every other section shows. Reuses traderRecordChip directly —
+  // same function, same tracked-first/specialist-fallback logic, same CSS classes — so
+  // this is guaranteed to read identically to Tracking, Alerts, and Dashboard rather than
+  // risk a second implementation quietly drifting from the first.
+  const recChip=lookup?traderRecordChip({traderName:w.name,wallet:w.wallet,specialistRecord:null},lookup):null;
+  let recHtml='';
+  if(recChip&&recChip.wins!==null){
+    const winning=isWinningTraderChip(recChip);
+    const outlier=isOutlierTraderChip(recChip);
+    const recClass=winning?'win':(recChip.roiPct<0?'loss':'neutral');
+    const outlierTag=outlier?' <span class="tchip-outlier" title="90%+ win rate on 40+ settled bets">&#9733;</span>':'';
+    const txt=recChip.wins+'-'+recChip.losses+(recChip.roiPct!==null&&recChip.roiPct!==undefined?' '+(recChip.roiPct>=0?'+':'')+Math.round(recChip.roiPct)+'%':'');
+    recHtml='<div class="tchip-rec '+recClass+(winning?'':' dim')+'" style="font-family:var(--mono);font-size:13px;margin-top:4px">'+esc(txt)+outlierTag+'</div>';
+  }else{
+    recHtml='<div style="font-size:11px;color:var(--t4);margin-top:4px">no record yet</div>';
+  }
   return '<div class="wcard" id="wc-'+w.wallet+'">'
-    +'<div class="wcard-hdr"><div class="wc-av-fb">'+resolvedName.slice(0,2).toUpperCase()+'</div><div><div class="wc-name">'+whaleTag+esc(resolvedName)+'</div><div class="wc-bdg">'+bs+'</div></div></div>'
+    +'<div class="wcard-hdr"><div class="wc-av-fb">'+resolvedName.slice(0,2).toUpperCase()+'</div><div><div class="wc-name">'+whaleTag+esc(resolvedName)+'</div><div class="wc-bdg">'+bs+'</div>'+recHtml+'</div></div>'
     +'<div class="wcard-body">'+wbodyHTML(w,buys)+'</div>'
     +'<div class="wcard-ft"><a class="wcard-link" href="https://polymarket.com/profile/'+w.wallet+'" target="_blank">View on Polymarket \u2192</a><button class="wcard-rm" data-wrem="'+w.wallet+'"><i class="ti ti-trash" style="font-size:12px"></i></button></div>'
     +'</div>';
