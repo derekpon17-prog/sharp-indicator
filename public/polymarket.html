@@ -1073,6 +1073,24 @@ function detectSport(title){
   if(t.includes('wimbledon')||t.includes('us open tennis')||t.includes('french open')||t.includes('australian open')||t.includes('roland garros')||(t.includes('atp ')&&!t.includes('esport'))||t.includes('wta ')||t.includes('grand slam'))return 'Tennis';
   return null;
 }
+// FEATURE 2026-08-11 (per Derek): Watched Wallets shows a wallet's raw recent activity,
+// unfiltered — everything they trade, sports or not. Derek wants it scoped to just the
+// sports he tracks (MLB/WNBA/NFL/NHL/NBA/NCAAB/NCAAF), plus World Cup/Olympics/World
+// Baseball Classic specifically, excluding regular club soccer, tennis, and UFC/MMA.
+// detectSport already separates Olympics as its own category and already folds World
+// Baseball Classic into MLB, so those need no special handling. Soccer is the one tricky
+// case — World Cup and club/regional soccer (Premier League, Copa America, etc.) both
+// currently collapse into one generic 'Soccer' category from detectSport, so this checks
+// the title text directly to split the actual World Cup out from everything else soccer.
+function isAllowedWatchedSport(title){
+  var sport=detectSport(title);
+  if(['MLB','WNBA','NFL','NHL','NBA','NCAAF','NCAAB','Olympics'].indexOf(sport)>=0)return true;
+  if(sport==='Soccer'){
+    var t=(title||'').toLowerCase();
+    if((t.includes('fifa world cup')||t.includes('world cup winner')||t.includes('world cup'))&&!t.includes('qualifier'))return true;
+  }
+  return false; // excludes non-World-Cup soccer, tennis, UFC/MMA, politics, everything else
+}
 // TEAM LOGOS — ESPN's public CDN, keyed by normTN'd team name so lookups tolerate the
 // same punctuation/spacing quirks as everything else in this file (e.g. "St. Louis" vs
 // "St Louis", or Polymarket's occasional concatenated titles like "PortlandFire" — that
@@ -4079,6 +4097,7 @@ function wcardHTML(w,buys,lookup){
     +'</div>';
 }
 function wbodyHTML(w,buys){
+  buys=Array.isArray(buys)?buys.filter(function(b){return isAllowedWatchedSport(b.title);}):buys;
   const oe=lbData.overall.find(x=>x.wallet===w.wallet);
   const se=lbData.sports.find(x=>x.wallet===w.wallet);
   const myA=alerts.filter(a=>a.wallet===w.wallet);
