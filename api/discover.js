@@ -268,6 +268,17 @@ async function runDiscovery(opts) {
 
   /* Evaluation queue: enough sightings to be worth the call, not evaluated recently, and
      roster members re-checked on the same footing so a decayed edge gets demoted. */
+  // COUNCIL DECISION 2026-08-13 (per Derek): confirmed directly — NFL trades ARE flowing
+  // through the harvest correctly (8 seen in a single run), but new candidates were
+  // sorted purely by trade volume, with no sport-awareness. A sport with months of MLB
+  // history permanently outcompetes a brand-new sport's candidates on raw dollar volume
+  // alone, so NFL (and NCAAF/NCAAB/NBA/NHL as each comes online) would never surface in
+  // reasonable time behind a 742-deep, MLB-heavy backlog. Roster members still get
+  // re-verified first (unchanged, and for the same good reason documented above) — this
+  // only changes how NEW candidates get ordered within that remaining budget.
+  const rosterCountBySport = {};
+  Object.values(roster).forEach(r => { rosterCountBySport[r.sport] = (rosterCountBySport[r.sport] || 0) + 1; });
+
   const queue = Object.keys(cands)
     .map(k => cands[k])
     .filter(c => c.sightings >= MIN_SIGHTINGS)
@@ -277,11 +288,15 @@ async function runDiscovery(opts) {
        Specialist alerts — could sit below the cut indefinitely while new candidates were
        evaluated ahead of it. hypoxia1 did exactly that across three forced runs and kept
        alerting on pre-ROI evidence. Verifying what you are already acting on outranks
-       discovering something new; volume breaks ties within each group. */
+       discovering something new; sport coverage gap breaks ties within each group, volume
+       breaks ties within that. */
     .sort((a, b) => {
       const ar = roster[a.wallet + '|' + a.sport] ? 1 : 0;
       const br = roster[b.wallet + '|' + b.sport] ? 1 : 0;
       if (ar !== br) return br - ar;
+      const aCoverage = rosterCountBySport[a.sport] || 0;
+      const bCoverage = rosterCountBySport[b.sport] || 0;
+      if (aCoverage !== bCoverage) return aCoverage - bCoverage;
       return (b.totalUsd || 0) - (a.totalUsd || 0);
     })
     .slice(0, limitEvals);
