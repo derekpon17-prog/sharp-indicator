@@ -1026,9 +1026,15 @@ const NCAAB_TEAMS=Object.values(NCAAB_CONFERENCES).flat();
 // that would cause false positives if matched alone rather than fix real misses.
 const NCAAB_GENERIC_PREFIX=new Set(['east','west','north','south','central','saint','st','the','mount','new','san','santa','loyola','cincinnati']);
 function matchesNCAABEntry(t,entry){
-  if(t.includes(entry))return true;
+  // BUGFIX 2026-08-11 (per Derek, confirmed real case): this function had its OWN
+  // internal substring checks, separate from the outer team-list matching already fixed
+  // with wordBoundaryIncludes — so "Brown Bears" (Brown University) still matched inside
+  // "Brownsburg" (an ATP Challenger tour city) via plain t.includes(), the exact same
+  // class of bug as Aalesunds/Sun, just in a different function that got missed the first
+  // time. Both checks here now go through the same word-boundary helper.
+  if(wordBoundaryIncludes(t,entry))return true;
   const firstWord=entry.split(' ')[0];
-  return firstWord.length>=5&&!NCAAB_GENERIC_PREFIX.has(firstWord)&&t.includes(firstWord);
+  return firstWord.length>=5&&!NCAAB_GENERIC_PREFIX.has(firstWord)&&wordBoundaryIncludes(t,firstWord);
 }
 function ncaabConference(teamName){
   const t=(teamName||'').toLowerCase();
