@@ -273,33 +273,55 @@ async function runDiscovery(opts) {
   // sorted purely by trade volume, with no sport-awareness. A sport with months of MLB
   // history permanently outcompetes a brand-new sport's candidates on raw dollar volume
   // alone, so NFL (and NCAAF/NCAAB/NBA/NHL as each comes online) would never surface in
-  // reasonable time behind a 742-deep, MLB-heavy backlog. Roster members still get
-  // re-verified first (unchanged, and for the same good reason documented above) — this
-  // only changes how NEW candidates get ordered within that remaining budget.
+  // reasonable time behind a 742-deep, MLB-heavy backlog.
+  //
+  // REVISITED 2026-08-13 (per Derek, real weekend timing): roster re-verification was
+  // still unlimited and always went first — with 20 MLB roster members, several being due
+  // for re-check on the same run could consume the entire 5-slot budget before a single
+  // new candidate (NFL or otherwise) ever got evaluated. Confirmed real risk, not
+  // hypothetical, since it's exactly the mechanism that was starving new-candidate
+  // discovery. Fix keeps the safety net (a decayed roster entry can't silently keep
+  // firing alerts on stale evidence — that's the documented hypoxia1 incident, still a
+  // real risk to guard against) but CAPS how much of the budget it can consume, so most
+  // of every run's capacity goes to new-candidate discovery regardless of roster size.
+  // sportFocus is optional and opt-in — pass ?sportFocus=NFL to point the remaining
+  // budget at a specific sport ahead of the generic under-coverage heuristic, for a
+  // weekend where catching new activity in one sport specifically matters most.
+  const MAX_ROSTER_REVERIFY_PER_RUN = 2;
+  const sportFocus = opts && opts.sportFocus ? String(opts.sportFocus).toUpperCase() : null;
+
   const rosterCountBySport = {};
   Object.values(roster).forEach(r => { rosterCountBySport[r.sport] = (rosterCountBySport[r.sport] || 0) + 1; });
 
-  const queue = Object.keys(cands)
+  const eligible = Object.keys(cands)
     .map(k => cands[k])
     .filter(c => c.sightings >= MIN_SIGHTINGS)
-    .filter(c => force || !c.lastEval || (now - c.lastEval) > 86400000)
-    /* ROSTER MEMBERS FIRST.
-       Sorting purely by trade volume meant a wallet already ON the roster — already firing
-       Specialist alerts — could sit below the cut indefinitely while new candidates were
-       evaluated ahead of it. hypoxia1 did exactly that across three forced runs and kept
-       alerting on pre-ROI evidence. Verifying what you are already acting on outranks
-       discovering something new; sport coverage gap breaks ties within each group, volume
-       breaks ties within that. */
-    .sort((a, b) => {
-      const ar = roster[a.wallet + '|' + a.sport] ? 1 : 0;
-      const br = roster[b.wallet + '|' + b.sport] ? 1 : 0;
-      if (ar !== br) return br - ar;
-      const aCoverage = rosterCountBySport[a.sport] || 0;
-      const bCoverage = rosterCountBySport[b.sport] || 0;
-      if (aCoverage !== bCoverage) return aCoverage - bCoverage;
-      return (b.totalUsd || 0) - (a.totalUsd || 0);
-    })
-    .slice(0, limitEvals);
+    .filter(c => force || !c.lastEval || (now - c.lastEval) > 86400000);
+
+  const rosterCands = eligible.filter(c => roster[c.wallet + '|' + c.sport]);
+  const newCands = eligible.filter(c => !roster[c.wallet + '|' + c.sport]);
+
+  /* ROSTER MEMBERS FIRST, BUT CAPPED.
+     Highest-volume roster members re-verify first within that capped slice — the biggest
+     positions matter most if something has decayed. hypoxia1 kept alerting on pre-ROI
+     evidence across three forced runs before this safety net existed at all; the cap
+     keeps the net without letting it eat the whole budget. */
+  rosterCands.sort((a, b) => (b.totalUsd || 0) - (a.totalUsd || 0));
+  const rosterSlice = rosterCands.slice(0, MAX_ROSTER_REVERIFY_PER_RUN);
+
+  newCands.sort((a, b) => {
+    if (sportFocus) {
+      const af = a.sport === sportFocus ? 1 : 0;
+      const bf = b.sport === sportFocus ? 1 : 0;
+      if (af !== bf) return bf - af;
+    }
+    const aCoverage = rosterCountBySport[a.sport] || 0;
+    const bCoverage = rosterCountBySport[b.sport] || 0;
+    if (aCoverage !== bCoverage) return aCoverage - bCoverage;
+    return (b.totalUsd || 0) - (a.totalUsd || 0);
+  });
+  const remainingBudget = Math.max(0, limitEvals - rosterSlice.length);
+  const queue = [...rosterSlice, ...newCands.slice(0, remainingBudget)];
 
   /* TIME BUDGET.
      Each evaluation can cost up to MAX_PAGES sequential upstream fetches, so a forced run
@@ -416,7 +438,8 @@ module.exports = async function handler(req, res) {
     }
     const evals = req.query && req.query.evals ? parseInt(req.query.evals) : undefined;
     const force = String((req.query && req.query.force) || '') === '1';
-    return res.status(200).json(await runDiscovery({ evals, force }));
+    const sportFocus = req.query && req.query.sportFocus ? String(req.query.sportFocus) : undefined;
+    return res.status(200).json(await runDiscovery({ evals, force, sportFocus }));
   } catch (err) {
     return res.status(200).json({ ok: false, error: err.message });
   }
