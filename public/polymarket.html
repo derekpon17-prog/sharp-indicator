@@ -1024,7 +1024,7 @@ const NCAAB_TEAMS=Object.values(NCAAB_CONFERENCES).flat();
 // schools being in the list. Fixes this by also trying just the first word of a
 // multi-word entry, guarded against generic/directional words (East, Saint, North...)
 // that would cause false positives if matched alone rather than fix real misses.
-const NCAAB_GENERIC_PREFIX=new Set(['east','west','north','south','central','saint','st','the','mount','new','san','santa','loyola']);
+const NCAAB_GENERIC_PREFIX=new Set(['east','west','north','south','central','saint','st','the','mount','new','san','santa','loyola','cincinnati']);
 function matchesNCAABEntry(t,entry){
   if(t.includes(entry))return true;
   const firstWord=entry.split(' ')[0];
@@ -1057,18 +1057,35 @@ function ncaabConference(teamName){
 }
 const ESPORTS=['dota','valorant','cs2','counter-strike','league of legends','lol:','esports world cup','starcraft','overwatch','fortnite','pubg','apex legends','rainbow six','rocket league'];
 const SOCCER_INTL=['premier league','la liga','serie a','bundesliga','champions league','copa america','gold cup','concacaf','fa cup','nations league','world cup qualifier','man city','man united','liverpool','chelsea','arsenal','barcelona','real madrid','france vs','england vs','brazil vs','germany vs','spain vs','portugal vs','argentina vs','italy vs','netherlands vs'];
+// BUGFIX 2026-08-11 (per Derek, confirmed real case): plain substring matching let short
+// mascot names collide with unrelated text — confirmed directly, "Aalesunds" (a Norwegian
+// soccer club) matched WNBA's "Sun" (Connecticut Sun) because "sun" is literally a
+// substring of "Aalesunds", with no check that it was actually a standalone word. Checks
+// the characters immediately before/after the match manually (cheaper than compiling a
+// regex per comparison, and this runs across many team names on every title checked).
+function wordBoundaryIncludes(text,term){
+  var idx=text.indexOf(term);
+  while(idx!==-1){
+    var beforeOk=idx===0||!/[a-z0-9]/.test(text[idx-1]);
+    var afterIdx=idx+term.length;
+    var afterOk=afterIdx>=text.length||!/[a-z0-9]/.test(text[afterIdx]);
+    if(beforeOk&&afterOk)return true;
+    idx=text.indexOf(term,idx+1);
+  }
+  return false;
+}
 function detectSport(title){
   const t=(title||'').toLowerCase();
   if(ESPORTS.some(x=>t.includes(x)))return null;
-  if(t.includes('mlb')||t.includes('world baseball classic')||t.includes('wbc')||MLB_TEAMS.some(x=>t.includes(x)))return 'MLB';
-  if(t.includes('wnba')||WNBA_TEAMS.some(x=>t.includes(x)))return 'WNBA';
-  if(t.includes('nba')||t.includes('nba finals')||NBA_TEAMS.some(x=>t.includes(x)))return 'NBA';
-  if(t.includes('nfl')||t.includes('super bowl')||t.includes('afc championship')||t.includes('nfc championship')||NFL_TEAMS.some(x=>t.includes(x)))return 'NFL';
-  if(t.includes('nhl')||t.includes('stanley cup')||NHL_TEAMS.some(x=>t.includes(x)))return 'NHL';
-  if(t.includes('ncaaf')||t.includes('college football playoff')||t.includes('cfp')||t.includes('rose bowl')||t.includes('sugar bowl')||t.includes('orange bowl')||t.includes('cotton bowl')||t.includes('fiesta bowl')||NCAAF_TEAMS.some(x=>t.includes(x)))return 'NCAAF';
+  if(t.includes('mlb')||t.includes('world baseball classic')||t.includes('wbc')||MLB_TEAMS.some(x=>wordBoundaryIncludes(t,x)))return 'MLB';
+  if(t.includes('wnba')||WNBA_TEAMS.some(x=>wordBoundaryIncludes(t,x)))return 'WNBA';
+  if(t.includes('nba')||t.includes('nba finals')||NBA_TEAMS.some(x=>wordBoundaryIncludes(t,x)))return 'NBA';
+  if(t.includes('nfl')||t.includes('super bowl')||t.includes('afc championship')||t.includes('nfc championship')||NFL_TEAMS.some(x=>wordBoundaryIncludes(t,x)))return 'NFL';
+  if(t.includes('nhl')||t.includes('stanley cup')||NHL_TEAMS.some(x=>wordBoundaryIncludes(t,x)))return 'NHL';
+  if(t.includes('ncaaf')||t.includes('college football playoff')||t.includes('cfp')||t.includes('rose bowl')||t.includes('sugar bowl')||t.includes('orange bowl')||t.includes('cotton bowl')||t.includes('fiesta bowl')||NCAAF_TEAMS.some(x=>wordBoundaryIncludes(t,x)))return 'NCAAF';
   if(t.includes('ncaab')||t.includes('march madness')||t.includes('ncaa tournament')||t.includes('ncaa basketball')||t.includes('final four')||NCAAB_TEAMS.some(x=>matchesNCAABEntry(t,x)))return 'NCAAB';
   if(t.includes('pga')||t.includes('masters ')||t.includes('ryder cup')||t.includes('the open championship')||t.includes('us open golf')||t.includes('pga championship')||t.includes('liv golf'))return 'Golf';
-  if(t.includes('fifa world cup')||t.includes('world cup winner')||SOCCER_INTL.some(x=>t.includes(x)))return 'Soccer';
+  if(t.includes('fifa world cup')||t.includes('world cup winner')||SOCCER_INTL.some(x=>wordBoundaryIncludes(t,x)))return 'Soccer';
   if(t.includes('olympic')||t.includes('summer games')||t.includes('winter games'))return 'Olympics';
   if(t.includes('wimbledon')||t.includes('us open tennis')||t.includes('french open')||t.includes('australian open')||t.includes('roland garros')||(t.includes('atp ')&&!t.includes('esport'))||t.includes('wta ')||t.includes('grand slam'))return 'Tennis';
   return null;
