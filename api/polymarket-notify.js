@@ -505,17 +505,31 @@ function getRecordFor(a, tracked) {
   if (tracked) {
     const byWallet = a.wallet && tracked[a.wallet];
     if (byWallet && (byWallet.W + byWallet.L) > 0) {
-      return { wins: byWallet.W, losses: byWallet.L, edgePP: 0, roiPct: byWallet.roiPct, source: 'tracked' };
+      return { wins: byWallet.W, losses: byWallet.L, edgePP: 0, roiPct: byWallet.roiPct, source: 'tracked', sportBreakdown: extractSportBreakdown(byWallet, a.sport) };
     }
     const label = cleanTraderName(a.traderName, a.wallet);
     const byName = tracked[label];
     if (byName && (byName.W + byName.L) > 0) {
-      return { wins: byName.W, losses: byName.L, edgePP: 0, roiPct: byName.roiPct, source: 'tracked' };
+      return { wins: byName.W, losses: byName.L, edgePP: 0, roiPct: byName.roiPct, source: 'tracked', sportBreakdown: extractSportBreakdown(byName, a.sport) };
     }
   }
   const rec = parseSpecialistRecord(a.specialistRecord);
   if (rec) return { wins: rec.wins, losses: rec.losses, edgePP: rec.edgePP, roiPct: rec.roiPct, source: 'specialist' };
   return null;
+}
+// FEATURE 2026-08-14 (per Derek): "should also be reflected on...discord alerts" — same
+// exact condition as the client side (genuinely cross-sport, this alert's own sport has
+// real data), so Discord and the site can never disagree about who counts as cross-sport.
+function extractSportBreakdown(trackedEntry, sport) {
+  if (!sport || !trackedEntry.bySport) return null;
+  const sportsWithData = Object.keys(trackedEntry.bySport).filter(sp => {
+    const sb = trackedEntry.bySport[sp];
+    return sb && (sb.W + sb.L) > 0;
+  });
+  if (sportsWithData.length <= 1) return null;
+  const sb = trackedEntry.bySport[sport];
+  if (!sb || (sb.W + sb.L) === 0) return null;
+  return { sport, wins: sb.W, losses: sb.L, roiPct: sb.roiPct };
 }
 // BUGFIX 2026-08-06 (per Derek): roiPct was being computed and pushed by the client but
 // silently discarded here — Discord showed W-L only, never ROI, even though the whole
@@ -532,7 +546,13 @@ function nameWithRecord(a, tracked) {
     const dot = rec.roiPct > 0 ? '🟢' : rec.roiPct < 0 ? '🔴' : '⚪';
     roiPart = ` ${dot}${rec.roiPct >= 0 ? '+' : ''}${Math.round(rec.roiPct)}%`;
   }
-  return `${label} (${rec.wins}-${rec.losses}${marker}${roiPart})`;
+  let sportPart = '';
+  if (rec.sportBreakdown) {
+    const sb = rec.sportBreakdown;
+    const sbRoi = (sb.roiPct !== null && sb.roiPct !== undefined) ? ` ${sb.roiPct >= 0 ? '+' : ''}${Math.round(sb.roiPct)}%` : '';
+    sportPart = ` (${sb.sport}: ${sb.wins}-${sb.losses}${sbRoi})`;
+  }
+  return `${label} (${rec.wins}-${rec.losses}${marker}${roiPart})${sportPart}`;
 }
 // Per-side quality score from available records (tracked first, specialist stat as
 // fallback — see getRecordFor above): rewards win rate above coinflip, scaled by a
