@@ -92,6 +92,16 @@ module.exports = async function handler(req, res) {
             name: typeof r.name === 'string' ? r.name : wallet,
             W: r.W, L: r.L,
             roiPct: typeof r.roiPct === 'number' ? r.roiPct : null,
+            // FEATURE 2026-08-14 (per Derek): per-sport breakdown, only kept when it's
+            // actually shaped like one — each entry needs real W/L numbers, same
+            // validation posture as the overall record right above it.
+            bySport: (r.bySport && typeof r.bySport === 'object') ? Object.keys(r.bySport).reduce((acc, sp) => {
+              const sb = r.bySport[sp];
+              if (sb && typeof sb.W === 'number' && typeof sb.L === 'number') {
+                acc[sp] = { W: sb.W, L: sb.L, roiPct: typeof sb.roiPct === 'number' ? sb.roiPct : null };
+              }
+              return acc;
+            }, {}) : null,
             updatedAt: Date.now(),
           };
         }
