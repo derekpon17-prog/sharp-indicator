@@ -1658,7 +1658,21 @@ function traderRecordChip(a,lookup){
     if(!rec)return {label:resolvedLabel,wins:null,losses:null,roiPct:null,source:null};
     wins=rec.wins;losses=rec.losses;roiPct=rec.roiPct;source='specialist';
   }
-  return {label:resolvedLabel,wins,losses,roiPct,source};
+  // FEATURE 2026-08-14 (per Derek): "should also be reflected on our alerts tab and
+  // discord alerts" — only computed when it's actually meaningful: the trader has to have
+  // real tracked results in MORE than one sport, and this specific alert/play needs its
+  // own known sport to break out. A trader active in just one sport never shows this —
+  // their overall record already IS their in-sport record.
+  var sportBreakdown=null;
+  if(source==='tracked'&&a.sport&&lookup.byTraderSport&&lookup.byTraderSport[resolvedLabel]){
+    var bySport=lookup.byTraderSport[resolvedLabel];
+    var sportsWithData=Object.keys(bySport).filter(function(sp){return(bySport[sp].W+bySport[sp].L)>0;});
+    if(sportsWithData.length>1&&bySport[a.sport]&&(bySport[a.sport].W+bySport[a.sport].L)>0){
+      var sportRoi=lookup.roiByTraderSport&&lookup.roiByTraderSport[resolvedLabel]&&lookup.roiByTraderSport[resolvedLabel][a.sport];
+      sportBreakdown={sport:a.sport,wins:bySport[a.sport].W,losses:bySport[a.sport].L,roiPct:(sportRoi&&sportRoi.roiPct!==null&&sportRoi.roiPct!==undefined)?sportRoi.roiPct:null};
+    }
+  }
+  return {label:resolvedLabel,wins,losses,roiPct,source,sportBreakdown};
 }
 // FEATURE 2026-08-09 (per Derek): single shared definition of "winning trader" — used
 // identically for (a) visually de-emphasizing non-winning chips everywhere they appear,
@@ -1740,7 +1754,8 @@ function traderChipHTML(a,lookup){
   const srcTag=c.source==='specialist'?' <span class="tchip-src-pm">PM</span>':'';
   const outlierTag=outlier?' <span class="tchip-outlier" title="90%+ win rate on 40+ settled bets">&#9733; OUTLIER</span>':'';
   const txt=hasRec?(c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
-  return '<span class="tchip'+(winning?'':' dim')+'">'+whaleTag+'<span class="tchip-name">'+esc(c.label)+'</span>'+srcTag+outlierTag+' <span class="tchip-rec '+recClass+'">'+esc(txt)+'</span></span>';
+  const sportTag=c.sportBreakdown?' <span class="tchip-sport-breakdown" style="font-size:9.5px;color:var(--t4);font-family:var(--mono)" title="'+esc(c.sportBreakdown.sport)+'-specific record, separate from the overall number">('+esc(c.sportBreakdown.sport)+': '+c.sportBreakdown.wins+'-'+c.sportBreakdown.losses+(c.sportBreakdown.roiPct!==null&&c.sportBreakdown.roiPct!==undefined?' '+(c.sportBreakdown.roiPct>=0?'+':'')+Math.round(c.sportBreakdown.roiPct)+'%':'')+')</span>':'';
+  return '<span class="tchip'+(winning?'':' dim')+'">'+whaleTag+'<span class="tchip-name">'+esc(c.label)+'</span>'+srcTag+outlierTag+' <span class="tchip-rec '+recClass+'">'+esc(txt)+'</span>'+sportTag+'</span>';
 }
 // SHARED 2026-08-07 (per Derek, asked several times): every dashboard section that shows
 // "N traders" needs the actual names + real W-L + ROI, not just a count — same source of
@@ -2848,7 +2863,8 @@ function renderAlerts(){
           var srcTag=c.source==='specialist'?' <span class="tchip-src-pm">PM</span>':'';
           var outTag=isOutlierTraderChip(c)?' <span class="tchip-outlier" title="90%+ win rate on 40+ settled bets">&#9733;</span>':'';
           var txt=c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'');
-          return '<div class="tchip-rec '+recClass+(winning?'':' dim')+'" style="font-size:10.5px;font-family:var(--mono);margin:3px 0 2px;line-height:1.4">'+esc(txt)+srcTag+outTag+'</div>';
+          var sportTag2=c.sportBreakdown?' <span style="font-size:9.5px;color:var(--t4);font-family:var(--mono)">('+esc(c.sportBreakdown.sport)+': '+c.sportBreakdown.wins+'-'+c.sportBreakdown.losses+(c.sportBreakdown.roiPct!==null&&c.sportBreakdown.roiPct!==undefined?' '+(c.sportBreakdown.roiPct>=0?'+':'')+Math.round(c.sportBreakdown.roiPct)+'%':'')+')</span>':'';
+          return '<div class="tchip-rec '+recClass+(winning?'':' dim')+'" style="font-size:10.5px;font-family:var(--mono);margin:3px 0 2px;line-height:1.4">'+esc(txt)+srcTag+outTag+sportTag2+'</div>';
         })()
       +'<div class="sb" style="margin:5px 0"></div>'
       +'<div style="display:flex;align-items:center;gap:9px;margin-top:6px">'
@@ -3338,26 +3354,49 @@ function buildClientTrackedLookup(){
     return wallet.slice(0,6)+'...'+wallet.slice(-4);
   }
   var byTrader={};
+  // FEATURE 2026-08-14 (per Derek): "know their overall record but then their in-sport
+  // records too" — byTraderSport mirrors byTrader's exact same build loop, just also
+  // keyed by each play's own sport, so a cross-sport trader's MLB and NFL results don't
+  // get silently blended into one combined number that doesn't tell you which sport
+  // they're actually good at.
+  var byTraderSport={};
   [sigPlays,specPlays].forEach(function(arr){
     (arr||[]).forEach(function(p){
       if(p.status==='OPEN')return;
+      var sport=p.sport||'Other';
       (p.traders||[]).forEach(function(rawT){
         var t=resolveDisplayName(rawT);
         if(!byTrader[t])byTrader[t]={W:0,L:0};
-        if(p.status==='WIN')byTrader[t].W++;
-        else if(p.status==='LOSS')byTrader[t].L++;
+        if(!byTraderSport[t])byTraderSport[t]={};
+        if(!byTraderSport[t][sport])byTraderSport[t][sport]={W:0,L:0};
+        if(p.status==='WIN'){byTrader[t].W++;byTraderSport[t][sport].W++;}
+        else if(p.status==='LOSS'){byTrader[t].L++;byTraderSport[t][sport].L++;}
       });
     });
   });
   var roiByTrader={};
   calcTraderROI([...sigPlays,...specPlays]).forEach(function(r){roiByTrader[resolveDisplayName(r.trader)]=r;});
-  return {byTrader:byTrader,roiByTrader:roiByTrader,walletToCleanName:walletToCleanName,resolveDisplayName:resolveDisplayName};
+  // Per-sport ROI reuses calcTraderROI exactly as-is, just called once per sport against
+  // a filtered subset — no separate ROI-calculation logic to maintain or drift from the
+  // overall figure's own math.
+  var roiByTraderSport={};
+  var sportsSeen={};
+  [...sigPlays,...specPlays].forEach(function(p){if(p.sport)sportsSeen[p.sport]=true;});
+  Object.keys(sportsSeen).forEach(function(sport){
+    var subset=[...sigPlays,...specPlays].filter(function(p){return p.sport===sport;});
+    calcTraderROI(subset).forEach(function(r){
+      var name=resolveDisplayName(r.trader);
+      if(!roiByTraderSport[name])roiByTraderSport[name]={};
+      roiByTraderSport[name][sport]=r;
+    });
+  });
+  return {byTrader:byTrader,roiByTrader:roiByTrader,byTraderSport:byTraderSport,roiByTraderSport:roiByTraderSport,walletToCleanName:walletToCleanName,resolveDisplayName:resolveDisplayName};
 }
 function renderTraderBreakdown(){
   var list=el('trader-breakdown-list'),empty=el('trader-breakdown-empty');
   if(!list)return;
   var lk=buildClientTrackedLookup();
-  var byTrader=lk.byTrader,roiByTrader=lk.roiByTrader;
+  var byTrader=lk.byTrader,roiByTrader=lk.roiByTrader,byTraderSport=lk.byTraderSport,roiByTraderSport=lk.roiByTraderSport;
   // This section keys by resolved NAME, not wallet, so buildWhaleWalletSet (wallet-keyed)
   // doesn't directly apply here — build a name-keyed version using the same resolution
   // logic already in scope, so a wallet's whale status matches what By Trader itself
@@ -3370,7 +3409,10 @@ function renderTraderBreakdown(){
   var rows=Object.keys(byTrader).map(function(t){
     var b=byTrader[t];
     var tot=b.W+b.L;
-    return {trader:t,W:b.W,L:b.L,tot:tot,wr:tot>0?Math.round(b.W/tot*100):null,roi:roiByTrader[t]||null};
+    var bySport=byTraderSport[t]||{};
+    var sportsWithData=Object.keys(bySport).filter(function(sp){return(bySport[sp].W+bySport[sp].L)>0;});
+    return {trader:t,W:b.W,L:b.L,tot:tot,wr:tot>0?Math.round(b.W/tot*100):null,roi:roiByTrader[t]||null,
+      crossSport:sportsWithData.length>1,sports:sportsWithData,bySport:bySport,roiBySport:roiByTraderSport[t]||{}};
   }).filter(function(r){return r.tot>0;})
     .sort(function(a,b){return b.tot-a.tot||(b.wr||0)-(a.wr||0);});
 
@@ -3388,9 +3430,28 @@ function renderTraderBreakdown(){
       ?(r.roi.roiPct>0?'var(--green)':r.roi.roiPct<0?'var(--red)':'var(--gold)')
       :(r.wr===null?'var(--t3)':r.wr>=60?'var(--green)':r.wr>=50?'var(--gold)':'var(--red)');
     var roiText=hasROI?'<span style="font-size:10.5px;color:'+col+';font-family:var(--mono);margin-left:8px;font-weight:700">ROI '+(r.roi.roiPct>=0?'+':'')+Math.round(r.roi.roiPct)+'%</span>':'';
-    return '<div style="display:flex;justify-content:space-between;align-items:center;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:10px 14px">'
+    // FEATURE 2026-08-14 (per Derek): "want to know their overall record but then their
+    // in-sport records too" — only shown for traders genuinely active in more than one
+    // sport; a single-sport trader's overall record already IS their in-sport record, so
+    // repeating it beneath itself would just be noise.
+    var sportBreakdownHtml='';
+    if(r.crossSport){
+      sportBreakdownHtml='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--b1);display:flex;flex-direction:column;gap:5px">'
+        +r.sports.map(function(sp){
+            var sb=r.bySport[sp],stot=sb.W+sb.L,swr=stot>0?Math.round(sb.W/stot*100):null;
+            var sroi=r.roiBySport[sp],sHasROI=sroi&&sroi.roiPct!==null&&sroi.roiPct!==undefined;
+            var scol=sHasROI?(sroi.roiPct>0?'var(--green)':sroi.roiPct<0?'var(--red)':'var(--gold)'):(swr===null?'var(--t3)':swr>=60?'var(--green)':swr>=50?'var(--gold)':'var(--red)');
+            var sRoiText=sHasROI?' <span style="color:'+scol+'">'+(sroi.roiPct>=0?'+':'')+Math.round(sroi.roiPct)+'%</span>':'';
+            return '<div style="display:flex;justify-content:space-between;font-size:11px;padding-left:4px"><span style="color:var(--t3);font-weight:600">'+esc(sp)+'</span><span style="font-family:var(--mono);color:'+scol+';font-weight:700">'+sb.W+'-'+sb.L+' <span style="color:var(--t4);font-weight:600">('+swr+'%)</span>'+sRoiText+'</span></div>';
+          }).join('')
+        +'</div>';
+    }
+    return '<div style="background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:10px 14px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center">'
       +'<span style="font-size:12.5px;font-weight:700;color:var(--t1)">'+(whaleNames.has(r.trader)?'\u{1F40B} ':'')+esc(r.trader)+'</span>'
       +'<span style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+col+'">'+r.W+'-'+r.L+' <span style="font-size:10px;color:var(--t4);font-weight:600">('+r.wr+'%)</span>'+roiText+'</span>'
+      +'</div>'
+      +sportBreakdownHtml
       +'</div>';
   }).join('');
 
@@ -3418,7 +3479,20 @@ function pushTraderRecords(rows){
   var records={};
   rows.forEach(function(r){
     var key=nameToWallet[r.trader]||r.trader;
-    records[key]={name:r.trader,W:r.W,L:r.L,roiPct:(r.roi&&r.roi.roiPct!==null&&r.roi.roiPct!==undefined)?r.roi.roiPct:null};
+    // FEATURE 2026-08-14 (per Derek): "should also be reflected on...discord alerts" —
+    // bySport only gets included when it actually exists AND the trader is genuinely
+    // cross-sport (matches the same condition used for display, so what Discord shows
+    // and what the site shows can never disagree about who counts as cross-sport).
+    var bySportOut=null;
+    if(r.crossSport&&r.bySport){
+      bySportOut={};
+      r.sports.forEach(function(sp){
+        var sb=r.bySport[sp];
+        var sroi=r.roiBySport&&r.roiBySport[sp];
+        bySportOut[sp]={W:sb.W,L:sb.L,roiPct:(sroi&&sroi.roiPct!==null&&sroi.roiPct!==undefined)?sroi.roiPct:null};
+      });
+    }
+    records[key]={name:r.trader,W:r.W,L:r.L,roiPct:(r.roi&&r.roi.roiPct!==null&&r.roi.roiPct!==undefined)?r.roi.roiPct:null,bySport:bySportOut};
   });
   var json=JSON.stringify(records);
   if(json===_lastPushedTraderRecords)return; // no real change since last push
