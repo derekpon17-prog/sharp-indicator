@@ -1142,8 +1142,28 @@ function teamLogoUrl(sport,name){
   const map=TEAM_LOGOS[sp];
   if(!map)return null;
   const abbr=map[normTN(name)];
-  if(!abbr)return null;
-  return 'https://a.espncdn.com/i/teamlogos/'+sp+'/500/'+abbr+'.png';
+  if(abbr)return 'https://a.espncdn.com/i/teamlogos/'+sp+'/500/'+abbr+'.png';
+  // RESTORED 2026-08-14: this fallback (spread-market outcomes carry a short code like
+  // "PIT"/"GB" instead of the full team name) was fixed once before and had regressed
+  // back to the version without it at some point since. Re-applying — ESPN's own logo
+  // codes ARE the standard team abbreviations already present in the map's values.
+  const asAbbr=(name||'').toLowerCase().replace(/[^a-z]/g,'');
+  if(Object.values(map).includes(asAbbr))return 'https://a.espncdn.com/i/teamlogos/'+sp+'/500/'+asAbbr+'.png';
+  return null;
+}
+// FEATURE 2026-08-14 (per Derek): "hard to decipher without it" — a totals market's
+// outcome is just "Over"/"Under", never a team name, so teamLogoUrl always correctly
+// returns null for these — there's genuinely nothing in the outcome to look up. Both
+// teams DO live in the title itself ("Denver Broncos vs. Atlanta Falcons: O/U 40.5"),
+// so this parses that out for the dual-logo display specifically on totals cards.
+function parseTeamsFromTitle(title){
+  if(!title)return null;
+  var parts=title.split(/\s+vs\.?\s+/i);
+  if(parts.length<2)return null;
+  var teamA=parts[0].trim();
+  var teamB=parts[1].split(':')[0].trim();
+  if(!teamA||!teamB)return null;
+  return {teamA:teamA,teamB:teamB};
 }
 // Sharp Report rows don't carry an explicit sport field (server doesn't attach one to
 // dayReport entries), so try each sport's map in turn — team names don't collide across
@@ -2762,8 +2782,19 @@ function acardHTML(b,lookup){
       +'</div>';
   } else {
     const logo=teamLogoUrl(sport,b.outcome);
+    const isTotalsOutcome=/^(over|under)$/i.test((b.outcome||'').trim());
+    const dualTeams=isTotalsOutcome?parseTeamsFromTitle(b.title):null;
+    const dualLogoHtml=dualTeams?(function(){
+      var lA=teamLogoUrl(sport,dualTeams.teamA),lB=teamLogoUrl(sport,dualTeams.teamB);
+      if(!lA&&!lB)return '';
+      return '<div style="display:flex;align-items:center;gap:3px;flex-shrink:0">'
+        +(lA?'<img src="'+lA+'" alt="" style="width:18px;height:18px;object-fit:contain" onerror="this.style.display=\'none\'">':'')
+        +'<span style="font-size:9px;color:var(--t4);font-weight:700">vs</span>'
+        +(lB?'<img src="'+lB+'" alt="" style="width:18px;height:18px;object-fit:contain" onerror="this.style.display=\'none\'">':'')
+        +'</div>';
+    })():'';
     detailRow='<div style="display:flex;align-items:center;gap:7px;margin:5px 0 3px">'
-      +(logo?'<img src="'+logo+'" alt="" style="width:22px;height:22px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'')
+      +(dualLogoHtml||(logo?'<img src="'+logo+'" alt="" style="width:22px;height:22px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':''))
       +'<div style="font-size:14px;font-weight:800;color:var(--t1);line-height:1.15">'+esc((b.outcome||'').toUpperCase())+'</div>'
       +(pr&&pr!=='0.0'?'<div style="font-size:11.5px;font-weight:700;color:var(--gold);font-family:var(--mono)">@ '+pr+'&#xa2;</div>':'')
       +'</div>'
@@ -2861,6 +2892,17 @@ function renderAlerts(){
     const sport=b.sport||detectSport(b.title);
     const sportTag=sport?'<span style="font-size:10px;font-weight:700;padding:1px 7px;background:rgba(64,180,255,.12);color:#40B4FF;border-radius:3px;font-family:var(--mono);margin-left:4px">'+sport+'</span>':'';
     const logo=teamLogoUrl(sport,b.outcome);
+    const isTotalsOutcome=/^(over|under)$/i.test((b.outcome||'').trim());
+    const dualTeams=isTotalsOutcome?parseTeamsFromTitle(b.title):null;
+    const dualLogoHtml=dualTeams?(function(){
+      var lA=teamLogoUrl(sport,dualTeams.teamA),lB=teamLogoUrl(sport,dualTeams.teamB);
+      if(!lA&&!lB)return '';
+      return '<div style="display:flex;align-items:center;gap:3px;flex-shrink:0">'
+        +(lA?'<img src="'+lA+'" alt="" style="width:24px;height:24px;object-fit:contain" onerror="this.style.display=\'none\'">':'')
+        +'<span style="font-size:9px;color:var(--t4);font-weight:700">vs</span>'
+        +(lB?'<img src="'+lB+'" alt="" style="width:24px;height:24px;object-fit:contain" onerror="this.style.display=\'none\'">':'')
+        +'</div>';
+    })():'';
     return '<div class="al-row'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
       +'<div class="al-av-fb">'+init+'</div>'
       +'<div class="al-main"><div class="al-trader">'+(isRankedWhale(b)?'\u{1F40B} ':'')+shortWallet(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+'</div>'
@@ -2877,7 +2919,7 @@ function renderAlerts(){
         })()
       +'<div class="sb" style="margin:5px 0"></div>'
       +'<div style="display:flex;align-items:center;gap:9px;margin-top:6px">'
-      +(logo?'<img src="'+logo+'" alt="" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':'')
+      +(dualLogoHtml||(logo?'<img src="'+logo+'" alt="" style="width:28px;height:28px;object-fit:contain;flex-shrink:0" onerror="this.style.display=\'none\'">':''))
       +'<div style="font-size:16px;font-weight:800;color:var(--t1);line-height:1.15;letter-spacing:.01em">'+esc((b.outcome||'').toUpperCase())+'</div>'
       +'<div style="font-size:13px;font-weight:700;color:var(--gold);font-family:var(--mono)">@ '+pr+'&#xa2;</div>'
       +'</div></div>'
