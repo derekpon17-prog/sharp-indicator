@@ -4235,6 +4235,25 @@ function wcardHTML(w,buys,lookup){
     const outlierTag=outlier?' <span class="tchip-outlier" title="90%+ win rate on 40+ settled bets">&#9733;</span>':'';
     const txt=recChip.wins+'-'+recChip.losses+(recChip.roiPct!==null&&recChip.roiPct!==undefined?' '+(recChip.roiPct>=0?'+':'')+Math.round(recChip.roiPct)+'%':'');
     recHtml='<div class="tchip-rec '+recClass+(winning?'':' dim')+'" style="font-family:var(--mono);font-size:13px;margin-top:4px">'+esc(txt)+outlierTag+'</div>';
+    // FEATURE 2026-08-14 (per Derek): "I want to see their by sport record next to
+    // anyone I watch" — same byTraderSport data already built for the Tracking tab's By
+    // Trader section and Discord, just applied here too. Only shown when genuinely
+    // cross-sport, same condition used everywhere else this exists, so a single-sport
+    // trader doesn't get a redundant repeat of their own overall number.
+    if(lookup&&lookup.byTraderSport&&lookup.byTraderSport[recChip.label]){
+      const bySport=lookup.byTraderSport[recChip.label];
+      const sportsWithData=Object.keys(bySport).filter(function(sp){return(bySport[sp].W+bySport[sp].L)>0;});
+      if(sportsWithData.length>1){
+        const roiBySport=(lookup.roiByTraderSport&&lookup.roiByTraderSport[recChip.label])||{};
+        recHtml+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:5px">'+sportsWithData.map(function(sp){
+          const sb=bySport[sp],sroi=roiBySport[sp];
+          const sHasROI=sroi&&sroi.roiPct!==null&&sroi.roiPct!==undefined;
+          const scol=sHasROI?(sroi.roiPct>0?'var(--green)':sroi.roiPct<0?'var(--red)':'var(--gold)'):'var(--t3)';
+          const sRoiText=sHasROI?' '+(sroi.roiPct>=0?'+':'')+Math.round(sroi.roiPct)+'%':'';
+          return '<span style="font-size:10.5px;font-family:var(--mono);color:'+scol+';font-weight:700">'+esc(sp)+' '+sb.W+'-'+sb.L+sRoiText+'</span>';
+        }).join('')+'</div>';
+      }
+    }
   }else{
     recHtml='<div style="font-size:11px;color:var(--t4);margin-top:4px">no record yet</div>';
   }
