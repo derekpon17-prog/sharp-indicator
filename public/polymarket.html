@@ -3550,6 +3550,21 @@ function pushTraderRecords(rows){
   _lastPushedTraderRecords=json;
   fetch('/api/trader-records',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({records:records})}).catch(function(){});
 }
+// FEATURE 2026-08-14 (per Derek, real incident): the Discord/alert pipeline only ever
+// fetches trades for wallets it already knows about — Polymarket's leaderboard, plus the
+// discovered specialist roster. A wallet Derek personally watches, with a real tracked
+// record already computed here client-side (laozishudaosan, 7-1 +61%), was invisible to
+// the server simply because nothing ever told it that wallet existed. This pushes the
+// current watched-wallet list so the server can include them too. Same dedup pattern as
+// pushTraderRecords — only actually calls the network when the list has really changed.
+var _lastPushedWatchedWallets=null;
+function pushWatchedWallets(){
+  var payload=wallets.map(function(w){return {wallet:w.wallet,name:w.name||null};});
+  var json=JSON.stringify(payload);
+  if(json===_lastPushedWatchedWallets)return;
+  _lastPushedWatchedWallets=json;
+  fetch('/api/watched-wallets',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallets:payload})}).catch(function(){});
+}
 
 function renderTracking(){
   gradeOpenPlays();
@@ -4205,6 +4220,10 @@ function renderLB(){
 async function renderWallets(){
   if(!wallets.length){el('wgrid').innerHTML='';el('wempty').style.display='';return;}
   el('wempty').style.display='none';
+  // FEATURE 2026-08-14: existing watched wallets (added before this sync mechanism
+  // existed) need to reach the server too, not just future adds/removes — the dedup
+  // check inside pushWatchedWallets means this is a no-op after the first real sync.
+  pushWatchedWallets();
   // BUGFIX 2026-08-08 (per Derek): these cards showed the raw name captured at the moment
   // "Watch" was clicked — for wallets watched before the nickname system existed, that's
   // permanently the old malformed "0xADDRESS-timestamp" string, with zero attempt to
@@ -4301,7 +4320,7 @@ function saveTrade(){const m=el('tm-mkt').value.trim();if(!m){el('tm-mkt').style
 function followAlert(b){if(!b)return;openTM({market:b.title||'',odds:'',book:'Novig',betType:'ML',notes:'PM: '+(b.traderName||'')});showV('tracking',document.querySelectorAll('.ntab')[2]);}
 function openAT(){el('at-w').value='';el('at-n').value='';el('at-msg').textContent='';el('at-ov').classList.add('open');}
 function closeAT(){el('at-ov').classList.remove('open');}
-function saveTrader(){const w=el('at-w').value.trim();if(!w||!w.startsWith('0x')){el('at-msg').style.color='var(--red)';el('at-msg').textContent='Enter wallet starting with 0x';return;}if(wallets.find(t=>t.wallet===w)){el('at-msg').style.color='var(--gold)';el('at-msg').textContent='Already watching';return;}wallets.push({wallet:w,name:el('at-n').value.trim()||null,addedAt:Date.now()});ss('pm:traders',wallets);closeAT();renderWallets();}
+function saveTrader(){const w=el('at-w').value.trim();if(!w||!w.startsWith('0x')){el('at-msg').style.color='var(--red)';el('at-msg').textContent='Enter wallet starting with 0x';return;}if(wallets.find(t=>t.wallet===w)){el('at-msg').style.color='var(--gold)';el('at-msg').textContent='Already watching';return;}wallets.push({wallet:w,name:el('at-n').value.trim()||null,addedAt:Date.now()});ss('pm:traders',wallets);pushWatchedWallets();closeAT();renderWallets();}
 /* === SIGNAL LAB — Full transparency on every assessed play === */
 function openSignalLab(){
   el('lab-ov').classList.add('open');
@@ -4654,10 +4673,10 @@ document.addEventListener('click',e=>{
   if(tdb){const i=parseInt(tdb.dataset.ti);if(!isNaN(i)){trades.splice(i,1);ss('pm:trades',trades);renderTracking();renderDash();}}
   // Wallet remove
   const wrm=e.target.closest('.wcard-rm');
-  if(wrm&&wrm.dataset.wrem){wallets=wallets.filter(w=>w.wallet!==wrm.dataset.wrem);ss('pm:traders',wallets);renderWallets();}
+  if(wrm&&wrm.dataset.wrem){wallets=wallets.filter(w=>w.wallet!==wrm.dataset.wrem);ss('pm:traders',wallets);pushWatchedWallets();renderWallets();}
   // Leaderboard watch
   const lwb=e.target.closest('.lb-add:not(.w)');
-  if(lwb&&lwb.dataset.ww){const ww=lwb.dataset.ww,wn=lwb.dataset.wn||null;if(!wallets.find(w=>w.wallet===ww)){wallets.push({wallet:ww,name:wn,addedAt:Date.now()});ss('pm:traders',wallets);renderLB();renderWallets();}}
+  if(lwb&&lwb.dataset.ww){const ww=lwb.dataset.ww,wn=lwb.dataset.wn||null;if(!wallets.find(w=>w.wallet===ww)){wallets.push({wallet:ww,name:wn,addedAt:Date.now()});ss('pm:traders',wallets);pushWatchedWallets();renderLB();renderWallets();}}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeTM();closeAT();closeCfg();closeSignalLab();}});
 
