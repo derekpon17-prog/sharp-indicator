@@ -668,6 +668,33 @@ module.exports = async function handler(req, res) {
     });
     results.poly.specialistWallets = Object.keys(specialistMap).length;
 
+    // FEATURE 2026-08-14 (per Derek, real incident): laozishudaosan — a real, tracked
+    // 7-1 (+61%) wallet Derek has personally watched — bought Chicago White Sox on the
+    // exact game a 4-trader Detroit Tigers convergence fired on, and neither the alert
+    // nor the Discord contrast line ever showed him. Root cause: this whole pipeline
+    // only ever fetches trades for wallets it already knows about (leaderboard + roster,
+    // above) — a wallet Derek has personally chosen to watch was invisible simply
+    // because nothing ever told the server it existed. Tagged WATCHED, its own distinct
+    // category — not a whale (no real leaderboard rank), not a specialist (not
+    // independently discovered/validated) — so it stays visible as a different kind of
+    // evidence, the same way SPECIALIST is kept separate from WHALE above. Still subject
+    // to the same sport-PnL gate as anyone else.
+    let watchedWallets = [];
+    try {
+      const wwRes = await fetch(`${SITE_URL}/api/watched-wallets`);
+      const wwData = await wwRes.json();
+      watchedWallets = Array.isArray(wwData.wallets) ? wwData.wallets : [];
+    } catch { /* best-effort — falls back to leaderboard+roster only if this fails */ }
+    watchedWallets.forEach(w => {
+      if (!w.wallet) return;
+      if (!walletMap[w.wallet]) {
+        walletMap[w.wallet] = { wallet: w.wallet, name: w.name || w.wallet.slice(0, 6), categories: [] };
+        walletList.push(walletMap[w.wallet]);
+      }
+      walletMap[w.wallet].categories.push({ category: 'WATCHED', rank: null, pnl: null });
+    });
+    results.poly.watchedWallets = watchedWallets.length;
+
     const rawTrades = await fetchWalletTrades(walletList, cutoff);
 
     // Dedup
