@@ -2063,15 +2063,15 @@ function autoTrackPlays(groups){
        whale so the validated 38-play record keeps its meaning and the new cohort's record
        stays clean. */
     const isSpec=(g.buys||[]).length>0&&(g.buys||[]).every(function(b){return b.type==='SPEC';});
-    // RESTORED 2026-08-10 (per Derek, real integrity issue — this fix was lost somewhere
-    // between deliveries and is being re-applied here): the 60-point threshold is right
-    // as a DISPLAY filter but was also gating what counts toward a specialist's tracked
-    // record, which is backwards — a specialist's discovery/vetting IS the validation.
-    // Confirmed directly against BigGumbaBoots' actual real $3,000 solo buy: it scores
-    // only 38, well under 60, so without this bypass it would never get tracked at all.
-    // Whale plays stay gated at the real threshold — raw leaderboard rank isn't the same
-    // kind of pre-vetted signal as a discovered specialist.
-    if(!isSpec&&score<POLY_AUTOTRACK_THRESHOLD)return;
+    // FEATURE 2026-08-16 (per Derek, confirmed real case): BigBob — a wallet Derek
+    // personally watches — had 17 real alerts logged over 3+ days, and only 1 ever
+    // became a tracked play. Confirmed directly: even his LARGEST solo buy ($7,662)
+    // scores only 51, under the 60-point threshold. This is the exact same class of gap
+    // the specialist bypass fixed, just for a different population that bypass never
+    // covered — a wallet Derek has personally chosen to watch is already vetted by his
+    // own judgment, the same reasoning that already applies to a discovered specialist.
+    const isWatched=(g.buys||[]).length>0&&(g.buys||[]).some(function(b){return(b.categories||[]).some(function(c){return c.category==='WATCHED';});});
+    if(!isSpec&&!isWatched&&score<POLY_AUTOTRACK_THRESHOLD)return;
     // BUGFIX 2026-08-05: title+outcome alone collided across a team's different games in
     // the same short series (confirmed: Toronto/Houston Aug 3 and Aug 5 tracked under the
     // identical key). eventSlug is Polymarket's own per-game identifier, already carried
@@ -2103,6 +2103,28 @@ function buildSpecialistTrackingCandidates(){
   const cutoff=Date.now()-24*60*60*1000,groups={};
   alerts.forEach(a=>{
     if(a.type!=='SPEC')return;
+    const ts=a.loggedAt||(a.timestamp*1000);
+    if(ts<cutoff)return;
+    const sp=a.sport||detectSport(a.title);
+    if(!sp)return;
+    if(isStaleAlert(a))return;
+    if(isLiveAlert(a))return;
+    const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
+    if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,sport:sp,buys:[],totalVol:0,latestTs:0};
+    groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
+    if(ts>groups[key].latestTs)groups[key].latestTs=ts;
+  });
+  return Object.values(groups);
+}
+// FEATURE 2026-08-16 (per Derek): mirrors buildSpecialistTrackingCandidates exactly, for
+// watched wallets instead of discovered specialists. Window is 7 days rather than 24h —
+// deliberately wide enough to sweep in BigBob's existing 3+ day backlog in one pass
+// rather than only catching activity from this point forward, since the underlying alert
+// data was confirmed still present and worth recovering, not lost off the rolling log.
+function buildWatchedTrackingCandidates(){
+  const cutoff=Date.now()-7*24*60*60*1000,groups={};
+  alerts.forEach(a=>{
+    if(!(a.categories||[]).some(function(c){return c.category==='WATCHED';}))return;
     const ts=a.loggedAt||(a.timestamp*1000);
     if(ts<cutoff)return;
     const sp=a.sport||detectSport(a.title);
@@ -2197,6 +2219,7 @@ function renderTrending(){
   const row=el('trending-row'),cont=el('d-trend'),dotsEl=el('trend-dots');
   autoTrackPlays(buildAutoTrackCandidates());
   autoTrackPlays(buildSpecialistTrackingCandidates());
+  autoTrackPlays(buildWatchedTrackingCandidates());
   autoTrackQualityConvergence();
   if(!trends.length){if(row)row.style.display='none';return;}
   if(row)row.style.display='';
