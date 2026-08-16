@@ -12,7 +12,14 @@ const ALERTS_KEY = 'pm:alerts';
 // the time client-side auto-tracking tried to catch them, with nothing left to recover.
 // 200 wasn't enough headroom, especially on busier days. Raised to 500 for real margin;
 // worth revisiting again if this recurs at the new size.
-const MAX_ALERTS = 500;
+// BUGFIX 2026-08-16 (per Derek, real recurring incident): confirmed directly — 500
+// entries got consumed in roughly 3 days during a busy stretch, well under the 7-day
+// window buildWatchedTrackingCandidates and the specialist backfill logic depend on.
+// This is the SECOND time this exact failure mode has cost a real trader's history
+// (Formal-Cupcake earlier, laozishudaosan now) — raised meaningfully rather than
+// incrementally this time, to actually clear a full week with real safety margin
+// instead of needing another bump the next time volume is high.
+const MAX_ALERTS = 2000;
 
 async function upstash(body) {
   const url   = process.env.KV_REST_API_URL;
