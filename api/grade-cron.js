@@ -1,0 +1,298 @@
+/* =========================================================
+   api/grade-cron.js
+   Upstash Redis — same KV_REST_API_URL / KV_REST_API_TOKEN as everything else.
+
+   PURPOSE (per Derek, 2026-08-16 — real recurring incident): tracked records only ever
+   update when Derek personally opens the Tracking tab — grading and auto-tracking are
+   pure client-side JS with no background process. laozishudaosan's real Aug 15 results
+   sat un-graded for days, and by the time anyone looked, the underlying alert data had
+   already scrolled off the log entirely (before the retention fix landed). Formal-Cupcake
+   hit the same failure mode earlier. Root cause isn't retention alone — it's that nothing
+   runs this logic unless a human happens to load a specific tab.
+
+   THIS IS STEP 1 OF A STAGED MIGRATION, not a full cutover:
+     1. THIS FILE — port grading + auto-track to a cron, write to NEW KV keys
+        (pm:server-sig-plays / pm:server-spec-plays). The client's own localStorage-based
+        system is completely untouched — this runs in parallel, not in place of it.
+     2. Run both in parallel for a real validation window, comparing outputs, before
+        trusting the server version for anything.
+     3. Once they agree consistently, flip the client to read from the server instead of
+        generating its own copy.
+     4. Wire Add Historical Play into the same server path.
+   Steps 2-4 are NOT done here — this file is step 1 only.
+
+   DELIBERATE SCOPE REDUCTIONS FOR THIS FIRST PASS (see comments below for each):
+     - Whale-population tracking (buildTrendingGroups and everything under it — net-out-
+       both-sides, the 40-point display filter) is NOT ported yet. Every real recurring
+       failure this session (BigBob, laozishudaosan, Formal-Cupcake) was in the
+       specialist/watched pathway, not whale tracking, so that's what's covered first.
+     - Precise game-time matching (gameSchedule / findScheduledGame) is NOT ported —
+       this uses the same bare-date fallback the client itself uses when its own
+       schedule cache misses, protected by the existing 14h-delta + ambiguity safety net.
+     - Live-game pre-filtering (isLiveAlert/isStaleAlert, which depend on gameSchedule
+       too) is skipped — a candidate for a still-live game just stays OPEN harmlessly
+       until ESPN confirms it's actually completed, which is what real grading
+       correctness depends on, not the pre-filter.
+
+   GET  → runs one grading + auto-track pass, returns a diagnostic summary.
+   ========================================================= */
+
+const SIG_KEY = 'pm:server-sig-plays';
+const SPEC_KEY = 'pm:server-spec-plays';
+const ALERTS_KEY = 'pm:alerts';
+const WATCHED_KEY = 'pm:watched-wallets';
+const POLY_AUTOTRACK_THRESHOLD = 60;
+const ESPN_SPORTS = { MLB: 'baseball/mlb', NBA: 'basketball/nba', NFL: 'football/nfl', NHL: 'hockey/nhl' };
+
+const MLB_TEAMS = ['yankees','red sox','dodgers','cubs','mets','astros','braves','phillies','padres','san francisco giants','st. louis cardinals','st louis cardinals','brewers','guardians','royals','twins','orioles','rays','blue jays','mariners','texas rangers','angels','athletics','tigers','white sox','reds','pirates','rockies','marlins','nationals','diamondbacks'];
+const WNBA_TEAMS = ['fever','storm','sparks','liberty','sky','mercury','lynx','sun','mystics','wings','aces','dream','valkyries','tempo','fire'];
+const NBA_TEAMS = ['hawks','celtics','nets','hornets','bulls','cavaliers','mavericks','nuggets','pistons','warriors','rockets','pacers','clippers','lakers','grizzlies','heat','bucks','timberwolves','pelicans','knicks','thunder','magic','76ers','suns','trail blazers','sacramento kings','spurs','raptors','jazz','wizards'];
+const NFL_TEAMS = ['cardinals','falcons','ravens','bills','panthers','bears','bengals','browns','cowboys','broncos','lions','packers','texans','colts','jaguars','chiefs','raiders','chargers','rams','dolphins','vikings','patriots','saints','giants','jets','eagles','steelers','seahawks','49ers','buccaneers','titans','commanders'];
+const NHL_TEAMS = ['ducks','bruins','sabres','flames','hurricanes','blackhawks','avalanche','blue jackets','stars','red wings','oilers','florida panthers','los angeles kings','wild','canadiens','predators','devils','islanders','new york rangers','senators','flyers','penguins','sharks','kraken','blues','lightning','maple leafs','mammoth','canucks','golden knights','capitals','winnipeg jets'];
+const SOCCER_INTL = ['premier league','la liga','serie a','bundesliga','champions league','copa america','gold cup','concacaf','fa cup','nations league','world cup qualifier','man city','man united','liverpool','chelsea','arsenal','barcelona','real madrid','france vs','england vs','brazil vs','germany vs','spain vs','portugal vs','argentina vs','italy vs','netherlands vs'];
+const ESPORTS = ['dota','valorant','cs2','counter-strike','league of legends','lol:','esports world cup','starcraft','overwatch','fortnite','pubg','apex legends','rainbow six','rocket league'];
+
+async function upstash(body) {
+  const url = process.env.KV_REST_API_URL;
+  const token = process.env.KV_REST_API_TOKEN;
+  if (!url || !token) throw new Error('KV_NOT_CONFIGURED');
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const d = await r.json();
+  if (d.error) throw new Error(d.error);
+  return d.result;
+}
+
+function wordBoundaryIncludes(text, term) {
+  var idx = text.indexOf(term);
+  while (idx !== -1) {
+    var beforeOk = idx === 0 || !/[a-z0-9]/.test(text[idx - 1]);
+    var afterIdx = idx + term.length;
+    var afterOk = afterIdx >= text.length || !/[a-z0-9]/.test(text[afterIdx]);
+    if (beforeOk && afterOk) return true;
+    idx = text.indexOf(term, idx + 1);
+  }
+  return false;
+}
+
+// SCOPE NOTE: MLB/WNBA/NBA/NFL/NHL/Soccer/Olympics/Tennis only — NCAAF/NCAAB conference
+// matching intentionally not ported for this first pass (see file header).
+function detectSport(title) {
+  const t = (title || '').toLowerCase();
+  if (ESPORTS.some(x => t.includes(x))) return null;
+  if (t.includes('mlb') || t.includes('world baseball classic') || t.includes('wbc') || MLB_TEAMS.some(x => wordBoundaryIncludes(t, x))) return 'MLB';
+  if (t.includes('wnba') || WNBA_TEAMS.some(x => wordBoundaryIncludes(t, x))) return 'WNBA';
+  if (t.includes('nba') || t.includes('nba finals') || NBA_TEAMS.some(x => wordBoundaryIncludes(t, x))) return 'NBA';
+  if (t.includes('nfl') || t.includes('super bowl') || t.includes('afc championship') || t.includes('nfc championship') || NFL_TEAMS.some(x => wordBoundaryIncludes(t, x))) return 'NFL';
+  if (t.includes('nhl') || t.includes('stanley cup') || NHL_TEAMS.some(x => wordBoundaryIncludes(t, x))) return 'NHL';
+  if (t.includes('fifa world cup') || t.includes('world cup winner') || SOCCER_INTL.some(x => wordBoundaryIncludes(t, x))) return 'Soccer';
+  if (t.includes('olympic') || t.includes('summer games') || t.includes('winter games')) return 'Olympics';
+  if (t.includes('wimbledon') || t.includes('us open tennis') || t.includes('french open') || t.includes('australian open') || t.includes('roland garros') || (t.includes('atp ') && !t.includes('esport')) || t.includes('wta ') || t.includes('grand slam')) return 'Tennis';
+  return null;
+}
+
+function extractSlugDate(a) {
+  const s = (a && (a.eventSlug || a.slug)) || '';
+  const m = s.match(/(\d{4}-\d{2}-\d{2})/);
+  return m ? m[1] : null;
+}
+
+// SCOPE NOTE: precise-time schedule matching (findScheduledGame/gameSchedule) not
+// ported yet — same bare-date fallback the client uses on its own cache-miss path.
+function findGameDateForTitle(title, eventSlug) {
+  if (eventSlug) { const d = extractSlugDate({ eventSlug }); if (d) return d; }
+  return '';
+}
+
+function normTN(s) { return (s || '').toLowerCase().replace(/[^a-z]/g, '').trim(); }
+function gMatch(hN, aN, title) {
+  var t = (title || '').toLowerCase();
+  var normPhrase = function (s) { return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); };
+  var nh = normPhrase(hN), na = normPhrase(aN);
+  return (nh.length > 2 && t.includes(nh)) || (na.length > 2 && t.includes(na));
+}
+function gGrade(play, hN, aN, hS, aS) {
+  var side = (play.outcome || '').toLowerCase();
+  var total = hS + aS; var scoreStr = aN + ' ' + aS + ' - ' + hS + ' ' + hN;
+  if (side.includes('over') || side.includes('under')) {
+    var m = (play.title || '').match(/(\d+\.?\d*)/); var line = m ? parseFloat(m[1]) : 0; if (!line) return null;
+    return { status: side.includes('over') ? (total > line ? 'WIN' : total === line ? 'PUSH' : 'LOSS') : (total < line ? 'WIN' : total === line ? 'PUSH' : 'LOSS'), espnScore: scoreStr };
+  }
+  var sN = normTN(side.split(' ').slice(-1)[0] || side);
+  var shH = normTN(hN).includes(sN) || sN.includes(normTN(hN));
+  var shA = normTN(aN).includes(sN) || sN.includes(normTN(aN));
+  if (!shH && !shA) return null;
+  return { status: (shH ? hS > aS : aS > hS) ? 'WIN' : 'LOSS', espnScore: scoreStr };
+}
+
+function uniqueBuyerCount(group, includeGateFailed) {
+  var buys = includeGateFailed ? group.buys : group.buys.filter(b => !b.gateFailed);
+  return new Set(buys.map(b => (b.wallet || b.traderName || '').toLowerCase())).size;
+}
+function signalScore(group) {
+  var realBuys = (group.buys || []).filter(b => !b.gateFailed);
+  const vol = realBuys.reduce((s, b) => s + (b.usdValue || 0), 0), buyers = uniqueBuyerCount({ buys: realBuys });
+  const base = vol <= 500 ? 5 : Math.min(Math.round(Math.log10(vol / 500) * 38) + 15, 90);
+  let bestRank = 999;
+  realBuys.forEach(b => (b.categories || []).forEach(c => { const r = parseInt(c.rank) || 999; if (r < bestRank) bestRank = r; }));
+  const rm = bestRank <= 5 ? 1.6 : bestRank <= 15 ? 1.4 : bestRank <= 30 ? 1.2 : bestRank <= 75 ? 1.0 : 0.85;
+  const conv = buyers >= 4 ? 28 : buyers >= 3 ? 20 : buyers >= 2 ? 12 : 0;
+  const rawScore = Math.round(base * rm) + conv;
+  return { score: Math.min(rawScore, 100), bestRank, rawScore };
+}
+function polyDisplayScore(group) {
+  const r = signalScore(group);
+  const capped = uniqueBuyerCount(group) < 2 ? Math.min(r.score, 84) : r.score;
+  return { score: capped, bestRank: r.bestRank, rawScore: r.rawScore };
+}
+
+function buildTrackingCandidates(alerts, windowMs, filterFn) {
+  const cutoff = Date.now() - windowMs, groups = {};
+  alerts.forEach(a => {
+    if (!filterFn(a)) return;
+    const ts = a.loggedAt || (a.timestamp * 1000);
+    if (ts < cutoff) return;
+    const sp = a.sport || detectSport(a.title);
+    if (!sp) return;
+    const key = (a.title || '') + '||' + (a.outcome || ''); if (!key || key === '||') return;
+    if (!groups[key]) groups[key] = { title: a.title || 'Unknown', outcome: a.outcome || '', eventSlug: a.eventSlug, sport: sp, buys: [], totalVol: 0 };
+    groups[key].buys.push(a); groups[key].totalVol += (a.usdValue || 0);
+  });
+  return Object.values(groups);
+}
+
+function autoTrackPlays(groups, sigPlays, specPlays) {
+  let changed = false;
+  groups.forEach(g => {
+    const { score, bestRank, rawScore } = polyDisplayScore(g);
+    const isSpec = (g.buys || []).length > 0 && (g.buys || []).every(b => b.type === 'SPEC');
+    const isWatched = (g.buys || []).length > 0 && (g.buys || []).some(b => (b.categories || []).some(c => c.category === 'WATCHED'));
+    if (!isSpec && !isWatched && score < POLY_AUTOTRACK_THRESHOLD) return;
+    const key = (g.title || '') + '||' + (g.outcome || '') + '||' + (g.eventSlug || '');
+    const store = isSpec ? specPlays : sigPlays;
+    if (store.some(p => p.key === key)) return;
+    const stakes = (g.buys || []).map(b => ({ trader: b.traderName || 'Anon', wallet: b.wallet || null, usdValue: b.usdValue || 0, price: b.price || null, type: b.type || null }));
+    store.unshift({ key, population: isSpec ? 'SPECIALIST' : 'WHALE', title: g.title, outcome: g.outcome, eventSlug: g.eventSlug, score, rawScore, buyers: uniqueBuyerCount(g), totalVol: g.totalVol, traders: g.buys.map(b => b.traderName || 'Anon').filter((v, i, a) => a.indexOf(v) === i).slice(0, 5), stakes, sport: g.sport || detectSport(g.title), gameTime: findGameDateForTitle(g.title, g.eventSlug), bestRank, loggedAt: Date.now(), status: 'OPEN', resolution: null, gradedBy: null });
+    changed = true;
+  });
+  return changed;
+}
+
+async function gradeFromESPN(sigPlays, specPlays) {
+  var openPlays = [...sigPlays, ...specPlays].filter(p => p.status === 'OPEN');
+  if (!openPlays.length) return false;
+  var sN = new Set(); openPlays.forEach(p => sN.add(p.sport || 'MLB'));
+  var results = {};
+  var dateSet = new Set();
+  var todayStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  dateSet.add(todayStr);
+  openPlays.forEach(p => {
+    if (p.gameTime) { try { dateSet.add(new Date(p.gameTime).toISOString().slice(0, 10).replace(/-/g, '')); } catch (e) {} }
+  });
+  var extra = new Set();
+  dateSet.forEach(d => {
+    var dt = new Date(d.slice(0, 4) + '-' + d.slice(4, 6) + '-' + d.slice(6, 8) + 'T00:00:00Z');
+    dt.setUTCDate(dt.getUTCDate() - 1);
+    extra.add(dt.toISOString().slice(0, 10).replace(/-/g, ''));
+  });
+  extra.forEach(d => dateSet.add(d));
+  var dates = [...dateSet];
+  await Promise.all([...sN].map(async sp => {
+    var path = ESPN_SPORTS[sp]; if (!path) return;
+    var evsAll = [];
+    await Promise.all(dates.map(async d => {
+      try {
+        var r = await fetch('https://site.api.espn.com/apis/site/v2/sports/' + path + '/scoreboard?dates=' + d);
+        var j = await r.json();
+        evsAll.push.apply(evsAll, (j.events || []));
+      } catch (e) {}
+    }));
+    results[sp] = evsAll;
+  }));
+  var changed = false;
+  function tryGrade(plays) {
+    plays.forEach(play => {
+      if (play.status !== 'OPEN') return;
+      var evs = results[play.sport || 'MLB'] || [];
+      var MAX_GRADE_DELTA_MS = 14 * 60 * 60 * 1000;
+      var playTime = play.gameTime ? new Date(play.gameTime).getTime() : null;
+      var best = null, bestDelta = Infinity, matchCount = 0;
+      for (var i = 0; i < evs.length; i++) {
+        var comp = evs[i].competitions && evs[i].competitions[0]; if (!comp || !comp.status || !comp.status.type || !comp.status.type.completed) continue;
+        var home = comp.competitors.find(c => c.homeAway === 'home'); var away = comp.competitors.find(c => c.homeAway === 'away');
+        if (!home || !away) continue;
+        var hN = home.team && (home.team.displayName || home.team.name) || ''; var aN = away.team && (away.team.displayName || away.team.name) || '';
+        if (!gMatch(hN, aN, play.title)) continue;
+        matchCount++;
+        var evTime = evs[i].date ? new Date(evs[i].date).getTime() : null;
+        var delta = (playTime && evTime) ? Math.abs(evTime - playTime) : 0;
+        if (delta < bestDelta) { bestDelta = delta; best = { hN, aN, hs: parseFloat(home.score || 0), as: parseFloat(away.score || 0) }; }
+      }
+      if (!best) return;
+      if (!playTime && matchCount > 1) return;
+      if (playTime && bestDelta > MAX_GRADE_DELTA_MS) return;
+      var res = gGrade(play, best.hN, best.aN, best.hs, best.as);
+      if (res) { play.status = res.status; play.gradedAt = Date.now(); play.espnScore = res.espnScore; play.gradedBy = 'ESPN-cron'; changed = true; }
+    });
+  }
+  tryGrade(sigPlays); tryGrade(specPlays);
+  return changed;
+}
+
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  try {
+    const [sigRaw, specRaw, alertsRaw, watchedRaw] = await Promise.all([
+      upstash(['GET', SIG_KEY]),
+      upstash(['GET', SPEC_KEY]),
+      upstash(['LRANGE', ALERTS_KEY, 0, 2000]),
+      upstash(['GET', WATCHED_KEY]),
+    ]);
+    let sigPlays = []; try { sigPlays = sigRaw ? JSON.parse(sigRaw) : []; } catch {}
+    let specPlays = []; try { specPlays = specRaw ? JSON.parse(specRaw) : []; } catch {}
+    let alerts = (alertsRaw || []).map(x => { try { return JSON.parse(x); } catch { return null; } }).filter(Boolean);
+    let watched = []; try { watched = watchedRaw ? JSON.parse(watchedRaw) : []; } catch {}
+    const watchedWalletSet = new Set(watched.map(w => w.wallet));
+    // Tag alerts from watched wallets the same way the notify cron does, so the
+    // isWatched check in autoTrackPlays works identically to the client/server alert path.
+    alerts.forEach(a => {
+      if (a.wallet && watchedWalletSet.has(a.wallet) && !(a.categories || []).some(c => c.category === 'WATCHED')) {
+        a.categories = [...(a.categories || []), { category: 'WATCHED', rank: null, pnl: null }];
+      }
+    });
+
+    const specCandidates = buildTrackingCandidates(alerts, 24 * 60 * 60 * 1000, a => a.type === 'SPEC');
+    const watchedCandidates = buildTrackingCandidates(alerts, 7 * 24 * 60 * 60 * 1000, a => (a.categories || []).some(c => c.category === 'WATCHED'));
+
+    const trackedNew1 = autoTrackPlays(specCandidates, sigPlays, specPlays);
+    const trackedNew2 = autoTrackPlays(watchedCandidates, sigPlays, specPlays);
+    const graded = await gradeFromESPN(sigPlays, specPlays);
+
+    if (trackedNew1 || trackedNew2 || graded) {
+      await Promise.all([
+        upstash(['SET', SIG_KEY, JSON.stringify(sigPlays)]),
+        upstash(['SET', SPEC_KEY, JSON.stringify(specPlays)]),
+      ]);
+    }
+
+    return res.status(200).json({
+      ok: true,
+      step: '1 of 4 — parallel server-side tracking, not yet authoritative',
+      alertsScanned: alerts.length,
+      watchedWallets: watched.length,
+      specCandidates: specCandidates.length,
+      watchedCandidates: watchedCandidates.length,
+      newlyTracked: trackedNew1 || trackedNew2,
+      graded,
+      sigPlaysTotal: sigPlays.length,
+      specPlaysTotal: specPlays.length,
+      sigPlaysOpen: sigPlays.filter(p => p.status === 'OPEN').length,
+      specPlaysOpen: specPlays.filter(p => p.status === 'OPEN').length,
+    });
+  } catch (err) {
+    return res.status(200).json({ ok: false, error: err.message });
+  }
+};
