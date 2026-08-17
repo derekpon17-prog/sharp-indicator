@@ -255,6 +255,45 @@ module.exports = async function handler(req, res) {
     let specPlays = []; try { specPlays = specRaw ? JSON.parse(specRaw) : []; } catch {}
     let alerts = (alertsRaw || []).map(x => { try { return JSON.parse(x); } catch { return null; } }).filter(Boolean);
     let watched = []; try { watched = watchedRaw ? JSON.parse(watchedRaw) : []; } catch {}
+
+    // FEATURE 2026-08-17 (per Derek): "how many units is $74,000 for Wordy-Littleneck" --
+    // there's no explicit unit size on file for any wallet except Derek's own ($50),
+    // unlike a wallet whose typical bet size we can only infer from their own real
+    // history. Uses the MEDIAN of a trader's own past stakes as the inferred "1 unit"
+    // baseline -- median specifically because it's resistant to a few huge outlier bets
+    // skewing the number the way a mean would, which matters given real bettors often
+    // have a handful of much-larger high-conviction plays mixed into mostly-standard-size
+    // activity. ?unitsFor=NAME (optionally &amount=74000 for a specific bet) runs this
+    // lookup directly against the same play data already being tracked, without running
+    // a full grading pass -- this is read-only, no ESPN calls, no KV writes.
+    if (req.query && req.query.unitsFor) {
+      const target = String(req.query.unitsFor).toLowerCase();
+      const amount = req.query.amount ? parseFloat(req.query.amount) : null;
+      const allStakes = [];
+      [...sigPlays, ...specPlays].forEach(p => {
+        (p.stakes || []).forEach(s => {
+          if ((s.trader || '').toLowerCase() === target || (s.wallet || '').toLowerCase() === target) {
+            allStakes.push(s.usdValue || 0);
+          }
+        });
+      });
+      if (!allStakes.length) {
+        return res.status(200).json({ ok: true, trader: req.query.unitsFor, found: false, note: 'No tracked stakes found for this name/wallet yet in server-side data.' });
+      }
+      const sorted = [...allStakes].sort((a, b) => a - b);
+      const mid = Math.floor(sorted.length / 2);
+      const median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+      const result = {
+        ok: true, trader: req.query.unitsFor, found: true,
+        sampleSize: allStakes.length,
+        inferredUnitSize: Math.round(median),
+        minStake: Math.round(Math.min(...allStakes)),
+        maxStake: Math.round(Math.max(...allStakes)),
+      };
+      if (amount) result.impliedUnits = Math.round((amount / median) * 10) / 10;
+      return res.status(200).json(result);
+    }
+
     const watchedWalletSet = new Set(watched.map(w => w.wallet));
     // Tag alerts from watched wallets the same way the notify cron does, so the
     // isWatched check in autoTrackPlays works identically to the client/server alert path.
