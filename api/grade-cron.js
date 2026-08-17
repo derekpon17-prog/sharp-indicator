@@ -266,6 +266,36 @@ module.exports = async function handler(req, res) {
     // activity. ?unitsFor=NAME (optionally &amount=74000 for a specific bet) runs this
     // lookup directly against the same play data already being tracked, without running
     // a full grading pass -- this is read-only, no ESPN calls, no KV writes.
+    // FEATURE 2026-08-17 (per Derek): the site needs to show this next to every play by
+    // every trader, not just one lookup at a time -- computing per-trader on demand would
+    // mean dozens of round-trips for a single page render. This returns every trader's
+    // inferred unit size in one call, so the client fetches once and reuses it everywhere.
+    // MIN_SAMPLE_FOR_UNITS=15: below this, a "unit size" is more likely noise from a
+    // handful of data points than a real read on a trader's typical bet size -- Derek's
+    // own call on where that line sits, not a fixed convention Claude invented.
+    if (req.query && req.query.allUnits) {
+      const MIN_SAMPLE_FOR_UNITS = 15;
+      const byTrader = {};
+      [...sigPlays, ...specPlays].forEach(p => {
+        (p.stakes || []).forEach(s => {
+          const key = s.wallet || s.trader;
+          if (!key) return;
+          if (!byTrader[key]) byTrader[key] = { name: s.trader, stakes: [] };
+          byTrader[key].stakes.push(s.usdValue || 0);
+        });
+      });
+      const result = {};
+      Object.keys(byTrader).forEach(key => {
+        const entry = byTrader[key];
+        if (entry.stakes.length < MIN_SAMPLE_FOR_UNITS) return;
+        const sorted = [...entry.stakes].sort((a, b) => a - b);
+        const mid = Math.floor(sorted.length / 2);
+        const median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+        result[key] = { name: entry.name, sampleSize: entry.stakes.length, inferredUnitSize: Math.round(median) };
+      });
+      return res.status(200).json({ ok: true, minSample: MIN_SAMPLE_FOR_UNITS, traderCount: Object.keys(result).length, units: result });
+    }
+
     if (req.query && req.query.unitsFor) {
       const target = String(req.query.unitsFor).toLowerCase();
       const amount = req.query.amount ? parseFloat(req.query.amount) : null;
