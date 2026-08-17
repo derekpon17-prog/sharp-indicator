@@ -626,6 +626,24 @@ module.exports = async function handler(req, res) {
       trackedRecords = trData.records || {};
     } catch { /* best-effort — falls back to specialistRecord-only if this fails */ }
 
+    // FEATURE 2026-08-17 (per Derek): "how many units is $X for this trader" -- same
+    // inferred-unit-size data (median of a trader's own real stakes, 15+ sample minimum)
+    // already wired into the site's Alerts/Watched Wallets/By Trader views. Fetched once
+    // here so Discord can show the same context, not a separate computation that could
+    // drift from what the site shows.
+    let unitSizes = {};
+    try {
+      const usRes = await fetch(`${SITE_URL}/api/grade-cron?allUnits=1`);
+      const usData = await usRes.json();
+      unitSizes = usData.units || {};
+    } catch { /* best-effort — alert still works without unit context */ }
+    function unitsLabel(dollarAmount, wallet) {
+      const u = wallet && unitSizes[wallet];
+      if (!u || !u.inferredUnitSize) return '';
+      const units = dollarAmount / u.inferredUnitSize;
+      return units >= 0.1 ? ` (${Math.round(units * 10) / 10}u)` : '';
+    }
+
     /* ── STEP 1: Polymarket — profitable wallet scan ── */
     const [sportsLB, overallLB] = await Promise.all([
       fetchLeaderboard('SPORTS'),
@@ -903,7 +921,7 @@ module.exports = async function handler(req, res) {
       // back to it, not alongside a real tracked result.
       const usingTracked = getRecordFor(alert, trackedRecords)?.source === 'tracked';
       const body     = [
-        `$${usd} BUY [${alert.sport}] — ${nameWithRecord(alert, trackedRecords)}`,
+        `$${usd}${unitsLabel(alert.usdValue, alert.wallet)} BUY [${alert.sport}] — ${nameWithRecord(alert, trackedRecords)}`,
         rankInfo ? `Rank: ${rankInfo}` : null,
         // Specialists earned their place on an in-sport record — lead with it, but only
         // when it's not redundant with a real tracked number already shown above.
