@@ -273,6 +273,28 @@ module.exports = async function handler(req, res) {
     // MIN_SAMPLE_FOR_UNITS=15: below this, a "unit size" is more likely noise from a
     // handful of data points than a real read on a trader's typical bet size -- Derek's
     // own call on where that line sits, not a fixed convention Claude invented.
+    // DIAGNOSTIC 2026-08-17 (per Derek): "is this wallet broken or just not betting" --
+    // fetches directly from Polymarket's own API (ground truth, independent of anything
+    // in our own pipeline) so quiet-vs-broken can actually be told apart with evidence
+    // instead of guessed. ?checkWallet=0x...
+    if (req.query && req.query.checkWallet) {
+      try {
+        const wr = await fetch(`https://data-api.polymarket.com/trades?user=${req.query.checkWallet}&side=BUY&takerOnly=true&limit=10`);
+        const trades = await wr.json();
+        const inAlerts = alerts.filter(a => (a.wallet || '').toLowerCase() === String(req.query.checkWallet).toLowerCase());
+        return res.status(200).json({
+          ok: true,
+          wallet: req.query.checkWallet,
+          realRecentTradesOnPolymarket: Array.isArray(trades) ? trades.length : 0,
+          mostRecentTradeTimestamp: Array.isArray(trades) && trades[0] ? trades[0].timestamp : null,
+          sampleTitles: Array.isArray(trades) ? trades.slice(0, 5).map(t => t.title) : [],
+          inOurAlertLog: inAlerts.length,
+        });
+      } catch (e) {
+        return res.status(200).json({ ok: false, error: e.message });
+      }
+    }
+
     if (req.query && req.query.allUnits) {
       const MIN_SAMPLE_FOR_UNITS = 15;
       const byTrader = {};
