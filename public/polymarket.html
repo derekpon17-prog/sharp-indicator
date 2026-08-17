@@ -3566,6 +3566,18 @@ function pushTraderRecords(rows){
         bySportOut[sp]={W:sb.W,L:sb.L,roiPct:(sroi&&sroi.roiPct!==null&&sroi.roiPct!==undefined)?sroi.roiPct:null};
       });
     }
+    // BUGFIX 2026-08-17 (per Derek, real incident): confirmed directly against a live
+    // KV pull -- BigBob existed under TWO separate byTrader keys ("BigBob", correctly
+    // resolved with his real 8-3, and his unresolved raw wallet string, stuck at a stale
+    // 1-0) -- both mapping to the SAME wallet when pushed. This used to blindly
+    // overwrite on collision, so whichever entry got processed last silently won,
+    // regardless of which one was actually correct. Now explicitly keeps whichever
+    // entry has the larger sample (W+L) on a collision, rather than depending on
+    // iteration order matching the caller's current sort -- correct regardless of how
+    // renderTraderBreakdown happens to order rows, now or in the future.
+    var newTotal=r.W+r.L;
+    var existing=records[key];
+    if(existing&&(existing.W+existing.L)>=newTotal)return; // keep the larger, more complete record
     records[key]={name:r.trader,W:r.W,L:r.L,roiPct:(r.roi&&r.roi.roiPct!==null&&r.roi.roiPct!==undefined)?r.roi.roiPct:null,bySport:bySportOut};
   });
   var json=JSON.stringify(records);
