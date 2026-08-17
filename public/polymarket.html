@@ -870,6 +870,29 @@ const el=id=>document.getElementById(id);
 
 /* === STATE === */
 let alerts=ls('pm:alert-log',[]),trades=ls('pm:trades',[]),wallets=ls('pm:traders',[]),sigPlays=ls('pm:sig-plays',[]);
+// FEATURE 2026-08-17 (per Derek): "how many units is $74,000 for Wordy-Littleneck" -- a
+// trader's own inferred unit size (median of their real historical stakes, computed
+// server-side from the same data grade-cron.js has been accumulating). Fetched once per
+// session, keyed by wallet, so every surface that shows a dollar amount can also show
+// its unit-equivalent without each one making its own network call.
+let unitSizeByWallet={};
+async function fetchUnitSizes(){
+  try{
+    const r=await fetch('/api/grade-cron?allUnits=1');
+    const d=await r.json();
+    if(d.ok&&d.units)unitSizeByWallet=d.units;
+  }catch(e){}
+}
+// Only meaningful once a trader has real history behind it -- a "unit size" from a
+// handful of data points is closer to noise than signal, same reasoning as the
+// server-side minSample gate, kept in sync with it rather than picking a separate number.
+function unitsLabel(dollarAmount,wallet){
+  const u=wallet&&unitSizeByWallet[wallet];
+  if(!u||!u.inferredUnitSize)return '';
+  const units=dollarAmount/u.inferredUnitSize;
+  return units>=0.1?(Math.round(units*10)/10)+'u':'';
+}
+
 // FEATURE 2026-08-11 (per Derek): "what was the record yesterday" had no direct answer —
 // every Signal Performance tile only ever showed the all-time cumulative number. One
 // shared window applies to every tile at once (Today/Yesterday/7-Day/All-Time), filtered
@@ -2946,7 +2969,7 @@ function renderAlerts(){
       +'<div style="font-size:16px;font-weight:800;color:var(--t1);line-height:1.15;letter-spacing:.01em">'+esc((b.outcome||'').toUpperCase())+'</div>'
       +'<div style="font-size:13px;font-weight:700;color:var(--gold);font-family:var(--mono)">@ '+pr+'&#xa2;</div>'
       +'</div></div>'
-      +'<div class="al-r"><div class="al-size">'+fu(b.usdValue||0)+'</div><div class="al-time">'+timeAgo(b.loggedAt||b.timestamp*1000)+'</div><button class="al-follow" data-akey="'+key+'">Follow Trade</button></div>'
+      +'<div class="al-r"><div class="al-size">'+fu(b.usdValue||0)+(function(){var ul=unitsLabel(b.usdValue||0,b.wallet);return ul?' <span style="font-size:11px;color:var(--t4);font-weight:700">('+ul+')</span>':'';})()+'</div><div class="al-time">'+timeAgo(b.loggedAt||b.timestamp*1000)+'</div><button class="al-follow" data-akey="'+key+'">Follow Trade</button></div>'
       +'</div>';
   });
   setTimeout(enrichCards,50);
@@ -4727,7 +4750,7 @@ function startCd(){
 }
 
 /* === INIT === */
-renderDash();fetchData();cd=REFRESH;startCd();
+renderDash();fetchData();fetchUnitSizes();cd=REFRESH;startCd();
 // Grade on load + every 15 min
 setTimeout(function(){gradeFromESPN();gradeOpenPlays();fetchGameStatuses().then(function(){if(view==='dashboard')renderDash();});},3000); // 3s delay lets page settle
 setInterval(function(){gradeFromESPN();gradeOpenPlays();fetchGameStatuses().then(function(){if(view==='dashboard')renderDash();});},15*60*1000);
