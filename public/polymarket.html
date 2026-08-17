@@ -3494,6 +3494,12 @@ function renderTraderBreakdown(){
   if(!list)return;
   var lk=buildClientTrackedLookup();
   var byTrader=lk.byTrader,roiByTrader=lk.roiByTrader,byTraderSport=lk.byTraderSport,roiByTraderSport=lk.roiByTraderSport;
+  // FEATURE 2026-08-17 (per Derek): By Trader shows an aggregate record, not individual
+  // bets, so there's no single dollar amount to convert -- shown here as the trader's own
+  // typical bet size instead, giving scale context (a $75-sample trader's "1 unit" vs
+  // another's). Inverts the existing wallet->name map since unit data is wallet-keyed.
+  var nameToWalletRev={};
+  Object.keys(lk.walletToCleanName||{}).forEach(function(w){nameToWalletRev[lk.walletToCleanName[w]]=w;});
   // This section keys by resolved NAME, not wallet, so buildWhaleWalletSet (wallet-keyed)
   // doesn't directly apply here — build a name-keyed version using the same resolution
   // logic already in scope, so a wallet's whale status matches what By Trader itself
@@ -3545,7 +3551,7 @@ function renderTraderBreakdown(){
     }
     return '<div style="background:var(--s1);border:1px solid var(--b1);border-radius:var(--rl2);padding:10px 14px">'
       +'<div style="display:flex;justify-content:space-between;align-items:center">'
-      +'<span style="font-size:12.5px;font-weight:700;color:var(--t1)">'+(whaleNames.has(r.trader)?'\u{1F40B} ':'')+esc(r.trader)+'</span>'
+      +'<span style="font-size:12.5px;font-weight:700;color:var(--t1)">'+(whaleNames.has(r.trader)?'\u{1F40B} ':'')+esc(r.trader)+(function(){var w=nameToWalletRev[r.trader],u=w&&unitSizeByWallet[w];return u?' <span style="font-size:10px;color:var(--t4);font-weight:600">(1u='+fu(u.inferredUnitSize)+')</span>':'';})()+'</span>'
       +'<span style="font-size:13px;font-weight:800;font-family:var(--mono);color:'+col+'">'+r.W+'-'+r.L+' <span style="font-size:10px;color:var(--t4);font-weight:600">('+r.wr+'%)</span>'+roiText+'</span>'
       +'</div>'
       +sportBreakdownHtml
@@ -4361,7 +4367,7 @@ function wbodyHTML(w,buys){
         return '<div style="padding:5px 0;border-bottom:1px solid var(--b1);font-size:12px">'
           +'<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">'
           +'<span style="color:var(--t2);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(b.title||'Unknown')+'</span>'
-          +'<span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0">'+fu(u)+'</span>'
+          +'<span style="color:var(--t1);font-weight:700;font-family:var(--mono);flex-shrink:0">'+fu(u)+(function(){var ul=unitsLabel(u,w.wallet);return ul?' <span style="font-size:10px;color:var(--t4);font-weight:700">('+ul+')</span>':'';})()+'</span>'
           +'</div>'
           +(outcome?'<div style="font-size:11px;margin-top:1px">'+outcome+'</div>':'')
           +'</div>';
