@@ -276,7 +276,7 @@ module.exports = async function handler(req, res) {
     // DIAGNOSTIC 2026-08-17 (per Derek): "is this wallet broken or just not betting" --
     // fetches directly from Polymarket's own API (ground truth, independent of anything
     // in our own pipeline) so quiet-vs-broken can actually be told apart with evidence
-    // instead of guessed. ?checkWallet=0x...
+    // instead of guessed. ?checkWallet=0x... (redeploy-trigger 2026-08-18)
     if (req.query && req.query.checkWallet) {
       try {
         const wr = await fetch(`https://data-api.polymarket.com/trades?user=${req.query.checkWallet}&side=BUY&takerOnly=true&limit=10`);
