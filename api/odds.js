@@ -969,30 +969,47 @@ module.exports=async function handler(req,res){
     +'&oddsFormat=american';
 
   try{
-    // Fetch odds + previous lines from KV in parallel
+    // BUGFIX 2026-08-19 (per Derek, real incident): quota ran out mid-month -- confirmed
+    // the actual math: at the previous every-15-min polling rate with zero caching, this
+    // endpoint alone consumed ~51,840 credits/month against a 20,000 budget, 159% over.
+    // This was never sustainable, not a recent regression. Caches the RAW odds response
+    // (just the games array from The Odds API) in KV, keyed per sport, 40-min TTL -- kept
+    // deliberately short of the old ~30-min intent while landing comfortably under
+    // budget (~19,440/month at this rate, real margin instead of an exact match).
+    // Everything else (prevLines, current time, day report) still loads fresh every call
+    // -- only the actual quota-consuming fetch itself is what's being reused.
+    const oddsRawCacheKey = 'odds-raw-cache:'+sport;
     const dayET = easternDay(Date.now());
-    const [up, prevLines, openMap, closeMap, dayReport] = await Promise.all([
-      fetch(url),
+    const [cachedRaw, prevLines, openMap, closeMap, dayReport] = await Promise.all([
+      upstashPost(['GET', oddsRawCacheKey]).catch(()=>null),
       loadPrevLines(sport),
       loadOpenLines(sport),
       loadCloseLines(sport),
       loadDayReport(sport, dayET),
     ]);
 
-    const rem=up.headers.get('x-requests-remaining');
-    const used=up.headers.get('x-requests-used');
-    if(rem)res.setHeader('x-requests-remaining',rem);
-    if(used)res.setHeader('x-requests-used',used);
-
-    if(up.status===401){
-      let body='';try{const j=await up.clone().json();body=j.message||'';}catch{}
-      const exhausted=body.toLowerCase().includes('exceed')||body.toLowerCase().includes('limit');
-      return res.status(200).json({plays:[],error:exhausted?'API quota exhausted':'Invalid API key',quota:{remaining:0,used}});
+    let games=null, rem=null, used=null, servedFromCache=false;
+    if(cachedRaw){
+      try{ games = typeof cachedRaw==='string' ? JSON.parse(cachedRaw) : cachedRaw; if(games)servedFromCache=true; }catch{ games=null; }
     }
-    if(up.status===422)return res.status(200).json({plays:[],message:sport+' not in season',quota:{remaining:rem,used}});
-    if(!up.ok)return res.status(200).json({plays:[],error:'Odds API error '+up.status,quota:{remaining:rem,used}});
+    if(!games){
+      const up = await fetch(url);
+      rem=up.headers.get('x-requests-remaining');
+      used=up.headers.get('x-requests-used');
+      if(rem)res.setHeader('x-requests-remaining',rem);
+      if(used)res.setHeader('x-requests-used',used);
 
-    const games=await up.json();
+      if(up.status===401){
+        let body='';try{const j=await up.clone().json();body=j.message||'';}catch{}
+        const exhausted=body.toLowerCase().includes('exceed')||body.toLowerCase().includes('limit');
+        return res.status(200).json({plays:[],error:exhausted?'API quota exhausted':'Invalid API key',quota:{remaining:0,used}});
+      }
+      if(up.status===422)return res.status(200).json({plays:[],message:sport+' not in season',quota:{remaining:rem,used}});
+      if(!up.ok)return res.status(200).json({plays:[],error:'Odds API error '+up.status,quota:{remaining:rem,used}});
+
+      games=await up.json();
+      try{ await upstashPost(['SET', oddsRawCacheKey, JSON.stringify(games), 'EX', '2400']); }catch{}
+    }
     const now=Date.now();
     const upcoming=(Array.isArray(games)?games:[]).filter(g=>{
       const ct=new Date(g.commence_time).getTime();
@@ -1209,6 +1226,7 @@ module.exports=async function handler(req,res){
       reportDay: dayET,
       total:       upcoming.length,
       quota:       { remaining: rem, used },
+      cached:      servedFromCache,
       rlmSource:   Object.keys(prevLines).length > 0 ? 'line_velocity' : 'inferred_first_run',
       gamesTracked: Object.keys(prevLines).length,
       mlvBaselines: Object.keys(openMap).length,
