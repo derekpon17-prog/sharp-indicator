@@ -298,6 +298,23 @@ module.exports = async function handler(req, res) {
             }
           });
         }
+        // FEATURE 2026-08-19 (per Derek): "let all his plays come in and track by sport"
+        // -- before building anything new, check whether the existing watched-wallet
+        // bypass (already sport-agnostic by design) is already handling this. Shows what
+        // our own tracked plays actually contain for this wallet, broken out by sport, so
+        // this can be confirmed with evidence instead of assumed either way.
+        const trackedForWallet = [...sigPlays, ...specPlays].filter(p =>
+          (p.stakes || []).some(s => (s.wallet || '').toLowerCase() === String(req.query.checkWallet).toLowerCase())
+        );
+        const trackedBySport = {};
+        trackedForWallet.forEach(p => {
+          const sp = p.sport || 'Unknown';
+          if (!trackedBySport[sp]) trackedBySport[sp] = { open: 0, win: 0, loss: 0, push: 0 };
+          if (p.status === 'OPEN') trackedBySport[sp].open++;
+          else if (p.status === 'WIN') trackedBySport[sp].win++;
+          else if (p.status === 'LOSS') trackedBySport[sp].loss++;
+          else if (p.status === 'PUSH') trackedBySport[sp].push++;
+        });
         return res.status(200).json({
           ok: true,
           wallet: req.query.checkWallet,
@@ -305,6 +322,7 @@ module.exports = async function handler(req, res) {
           mostRecentTradeTimestamp: Array.isArray(trades) && trades[0] ? trades[0].timestamp : null,
           mostRecentTradeBySport: bySport,
           inOurAlertLog: inAlerts.length,
+          ourTrackedPlaysBySport: trackedBySport,
         });
       } catch (e) {
         return res.status(200).json({ ok: false, error: e.message });
