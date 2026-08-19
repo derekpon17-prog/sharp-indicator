@@ -3629,6 +3629,26 @@ function pushWatchedWallets(){
   _lastPushedWatchedWallets=json;
   fetch('/api/watched-wallets',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallets:payload})}).catch(function(){});
 }
+// FEATURE 2026-08-19 (per Derek): the server can carry an allSports flag per wallet
+// (set directly via ?setAllSports=, not something the client's own push knows about),
+// letting one specific wallet's activity bypass the normal sport allowlist entirely.
+// This pulls that flag back down so the Watched Wallets display actually reflects it --
+// pushWatchedWallets only ever sends data up, this is the read-back half.
+async function syncAllSportsFlags(){
+  try{
+    var r=await fetch('/api/watched-wallets');
+    var d=await r.json();
+    if(!d.ok||!Array.isArray(d.wallets))return;
+    var flagByWallet={};
+    d.wallets.forEach(function(w){if(w.allSports===true)flagByWallet[w.wallet]=true;});
+    var changed=false;
+    wallets.forEach(function(w){
+      var shouldHave=!!flagByWallet[w.wallet];
+      if(!!w.allSports!==shouldHave){w.allSports=shouldHave;changed=true;}
+    });
+    if(changed)ss('pm:traders',wallets);
+  }catch(e){}
+}
 
 function renderTracking(){
   gradeOpenPlays();
@@ -4347,7 +4367,9 @@ function wcardHTML(w,buys,lookup){
     +'</div>';
 }
 function wbodyHTML(w,buys){
-  buys=Array.isArray(buys)?buys.filter(function(b){return isAllowedWatchedSport(b.title);}):buys;
+  // allSports wallets skip the sport filter entirely -- per-wallet exception (per Derek,
+  // laozishudaosan specifically), not a change to the default allowlist everyone else gets.
+  buys=(Array.isArray(buys)&&!w.allSports)?buys.filter(function(b){return isAllowedWatchedSport(b.title);}):buys;
   const oe=lbData.overall.find(x=>x.wallet===w.wallet);
   const se=lbData.sports.find(x=>x.wallet===w.wallet);
   const myA=alerts.filter(a=>a.wallet===w.wallet);
@@ -4756,7 +4778,7 @@ function startCd(){
 }
 
 /* === INIT === */
-renderDash();fetchData();fetchUnitSizes();cd=REFRESH;startCd();
+renderDash();fetchData();fetchUnitSizes();syncAllSportsFlags();cd=REFRESH;startCd();
 // Grade on load + every 15 min
 setTimeout(function(){gradeFromESPN();gradeOpenPlays();fetchGameStatuses().then(function(){if(view==='dashboard')renderDash();});},3000); // 3s delay lets page settle
 setInterval(function(){gradeFromESPN();gradeOpenPlays();fetchGameStatuses().then(function(){if(view==='dashboard')renderDash();});},15*60*1000);
