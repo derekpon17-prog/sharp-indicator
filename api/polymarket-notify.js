@@ -992,7 +992,11 @@ module.exports = async function handler(req, res) {
         // when it's not redundant with a real tracked number already shown above.
         (alert.specialistRecord && !usingTracked) ? `Specialist: ${alert.specialistRecord}` : null,
         alert.sportRecord ? `Record: ${alert.sportRecord}` : null,
-        `Market: ${(alert.title || '').slice(0, 80)}`,
+        // FEATURE 2026-08-19 (per Derek, real ambiguity): "no date on alerts to tell" --
+        // confirmed real confusion, a team playing a multi-game series has no way to tell
+        // which specific game an alert refers to from the text alone. eventSlug already
+        // carries the real date; this just surfaces it instead of leaving it invisible.
+        `Market: ${(alert.title || '').slice(0, 80)}${extractSlugDate(alert) ? ` (${extractSlugDate(alert)})` : ''}`,
         `Side: ${alert.outcome || '—'} @ ${price}¢`,
       ].filter(Boolean).join('\n');
 
@@ -1127,7 +1131,12 @@ module.exports = async function handler(req, res) {
 
           const names = realBuyers.map(a => nameWithRecord(a, trackedRecords)).join(', ');
           const realVol = realBuyers.reduce((s, a) => s + (a.usdValue || 0), 0);
-          const gameTitle = (slugTitle[g.eventSlug] && slugTitle[g.eventSlug].text) || g.outcome;
+          // FEATURE 2026-08-19 (per Derek, real ambiguity): same fix as the main alert body --
+          // a bare team-vs-team title gives no way to tell which game in a series this is.
+          // Fixed at the source so both the initial convergence message and the upgrade
+          // message (which both reuse gameTitle) get the date automatically.
+          const gameDate = extractSlugDate(g);
+          const gameTitle = ((slugTitle[g.eventSlug] && slugTitle[g.eventSlug].text) || g.outcome) + (gameDate ? ` (${gameDate})` : '');
           const { score, tier } = computeGroupScore({ ...g, totalVol: realVol, wallets: new Map(realBuyers.map(b => [b.wallet, b])) });
           const gfNote = gfBuyers.length
             ? `\n_Also on this side, known negative in-sport (not counted): ${gfBuyers.map(a => nameWithRecord(a, trackedRecords)).join(', ')}_`
