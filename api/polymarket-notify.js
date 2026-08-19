@@ -1151,11 +1151,17 @@ module.exports = async function handler(req, res) {
           // correctly limits Over to only ever matching Under on the SAME total line, and
           // stops an H2H group from ever cross-matching against an unrelated Totals group
           // just because they share a game.
+          // BUGFIX 2026-08-19 (per Derek, real incident): confirmed directly -- HomeRunHazard's
+          // real Aug 18 Pirates bet was showing up as the "opposing side" of today's (Aug 19)
+          // Tigers convergence, because this matched by bare title text only. "Detroit Tigers
+          // vs. Pittsburgh Pirates" is identical across both days of a series -- eventSlug is
+          // what actually distinguishes one game from another, and it was never checked here.
           const myTitle = realBuyers[0] ? realBuyers[0].title : null;
           if (myTitle) {
             const oppKey = Object.keys(groups).find(k2 => {
               const g2 = groups[k2];
               if (g2.outcome === g.outcome || g2.wallets.size === 0) return false;
+              if (g2.eventSlug !== g.eventSlug) return false;
               const g2Sample = [...g2.wallets.values()][0];
               return g2Sample && g2Sample.title === myTitle;
             });
