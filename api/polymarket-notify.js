@@ -1128,6 +1128,24 @@ module.exports = async function handler(req, res) {
           return { score, tier, bestRank };
         }
 
+        // BUGFIX 2026-08-19 (per Derek, real incident): confirmed directly -- HomeRunHazard's
+        // Tigers trade was genuinely pre-game when made (11:15am ET, game at 12:35pm ET), and
+        // correctly passed the live-check at that point. But Discord's convergence groups are
+        // built from ALREADY-STORED alerts (histAlerts, pulled from the alert log) -- once a
+        // trade clears the live-check once and gets stored, nothing ever re-checks live status
+        // again before Discord actually sends or updates a message. The game started in the
+        // gap between storage and this later "was 2, now 3" update, and nothing caught it.
+        // This re-checks live status right here, immediately before send/update, using the
+        // same schedule mechanism as the main path -- with a per-run cache so repeated MLB
+        // groups in the same invocation don't each trigger their own schedule fetch.
+        const scheduleCache = {};
+        async function isGameLiveNow(sport, sampleTrade) {
+          if (!sport) return false;
+          if (!scheduleCache[sport]) scheduleCache[sport] = await getSchedule(sport);
+          const game = findGameForTrade(sampleTrade, scheduleCache[sport]);
+          return !!(game && game.started);
+        }
+
         for (const key of Object.keys(groups)) {
           const g = groups[key];
           const allBuyers = [...g.wallets.values()];
@@ -1138,6 +1156,8 @@ module.exports = async function handler(req, res) {
           // conviction, and can't singlehandedly (or in pairs) trigger a ping. They can
           // still appear as visible, clearly-marked context on this same line.
           if (realBuyers.length < 2) continue;
+          const liveNow = await isGameLiveNow(realBuyers[0].sport, realBuyers[0]);
+          if (liveNow) continue;
           results.discord.scanned++;
 
           const names = realBuyers.map(a => nameWithRecord(a, trackedRecords)).join(', ');
