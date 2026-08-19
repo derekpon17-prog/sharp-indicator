@@ -712,6 +712,11 @@ module.exports = async function handler(req, res) {
       walletMap[w.wallet].categories.push({ category: 'WATCHED', rank: null, pnl: null });
     });
     results.poly.watchedWallets = watchedWallets.length;
+    // FEATURE 2026-08-19 (per Derek): "let ALL activity for him come in, just for his
+    // account" -- a per-wallet exception to the normal sport allowlist, not a site-wide
+    // change (everyone else still gets the normal MLB/WNBA/NFL/etc filter). Set via
+    // POST /api/watched-wallets?setAllSports=0x...
+    const allSportsWalletSet = new Set(watchedWallets.filter(w => w.allSports === true).map(w => w.wallet));
 
     const rawTrades = await fetchWalletTrades(walletList, cutoff);
 
@@ -733,7 +738,14 @@ module.exports = async function handler(req, res) {
       const wallet = t.proxyWallet || t._wallet || t.maker;
       const ts     = parseInt(t.timestamp) || 0;
       const usd    = (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0);
-      const sport  = marketSport(t);
+      let sport  = marketSport(t);
+      // Give allSports wallets' non-whitelisted-league trades a real label instead of
+      // the generic "OTHER" -- soccer is the actual case in hand (confirmed real
+      // titles: "Will RCD Espanyol de Barcelona win...", "Kalmar FF vs. Hammarby IF").
+      if (sport === 'OTHER' && allSportsWalletSet.has(wallet)) {
+        const tl = (t.title || '').toLowerCase();
+        if (/\bwin on \d{4}-\d{2}-\d{2}\?|\bfk\b| ff | if |soccer|premier league|la liga|serie a|bundesliga/.test(tl)) sport = 'Soccer';
+      }
 
       /* Diagnostic row is created BEFORE the filters so its rejection reason can be
          recorded as they run. Without this, "94 buys in window but 0 evaluated" required
@@ -755,7 +767,10 @@ module.exports = async function handler(req, res) {
       const rej = (why) => { if (dbg) dbg.reject = why; };
 
       if (ts < cutoff || ts > winMax) { rej(ts < cutoff ? 'older than window' : 'too recent (settling)'); return; }
-      if (!isSportsMarket(t)) { rej('sport not whitelisted'); return; }
+      // allSports wallets bypass the sport allowlist entirely -- confirmed real case:
+      // laozishudaosan's soccer trades were being rejected here before any other check
+      // ever ran, since isSportsMarket() only recognizes the named leagues.
+      if (!isSportsMarket(t) && !allSportsWalletSet.has(wallet)) { rej('sport not whitelisted'); return; }
       // STALE-MARKET FILTER: skip buys on markets whose slug-dated game is already in
       // the past (ET) — e.g. late trading / position-dumping on an old unresolved market
       // (proven: a Jun 25 ARI/STL market took an $18.9K buy on Jul 23 and alerted).
