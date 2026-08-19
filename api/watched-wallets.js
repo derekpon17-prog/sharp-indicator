@@ -53,7 +53,7 @@ module.exports = async function handler(req, res) {
     // account" -- a per-wallet exception to the normal sport allowlist (the site-wide
     // "no soccer/tennis/UFC" rule stays in place for everyone else). ?setAllSports=0x...
     // sets the flag directly for one wallet, bypassing the client entirely.
-    if (req.method === 'POST' && req.query && req.query.setAllSports) {
+    if ((req.method === 'POST' || req.method === 'GET') && req.query && req.query.setAllSports) {
       const targetWallet = String(req.query.setAllSports);
       const raw = await upstash(['GET', WALLETS_KEY]);
       let wallets = [];
