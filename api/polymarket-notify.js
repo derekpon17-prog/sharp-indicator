@@ -1071,10 +1071,21 @@ module.exports = async function handler(req, res) {
         // totals markets on the same game all share one eventSlug, and netting a wallet's
         // h2h position against their totals position would be wrong; title is what
         // actually distinguishes one specific market from another, same as the client.
+        // BUGFIX 2026-08-19 (per Derek, real incident): confirmed directly -- this had the
+        // exact same bug just fixed in the contrast-line matching. Grouping by title alone
+        // (not eventSlug) was DELIBERATE to keep h2h separate from totals on the same game
+        // (they share one eventSlug but shouldn't net against each other) -- but the same
+        // title text repeats across every day of a series, so a wallet's Tuesday bet could
+        // get netted against their unrelated Wednesday bet on the same two teams. Composite
+        // key (eventSlug + title) gets both right at once: h2h/totals on the SAME game stay
+        // separate (different title, same eventSlug), and the SAME market on DIFFERENT days
+        // now also stays separate (same title, different eventSlug) -- only a genuine same-
+        // game, same-market both-sides bet nets together, which is the one case this was
+        // actually meant to catch.
         const byTitleForNet = {};
         Object.values(groups).forEach(g => {
           const sample = [...g.wallets.values()][0];
-          const t = sample ? sample.title : g.eventSlug;
+          const t = (sample ? `${g.eventSlug}||${sample.title}` : g.eventSlug);
           if (!byTitleForNet[t]) byTitleForNet[t] = [];
           byTitleForNet[t].push(g);
         });
