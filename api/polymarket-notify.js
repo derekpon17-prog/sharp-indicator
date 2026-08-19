@@ -322,11 +322,26 @@ const ESPN_SPORT_PATH = { MLB: 'baseball/mlb', NBA: 'basketball/nba', NFL: 'foot
 async function getScheduleFromESPN(sport) {
   const path = ESPN_SPORT_PATH[sport];
   if (!path) return [];
+  // BUGFIX 2026-08-19 (per Derek, real incident): confirmed directly -- this used
+  // new Date().toISOString(), which is UTC. An evening MLB game (e.g. 7:10pm CT) is
+  // still "today" by every US clock, but UTC has often already rolled to the NEXT
+  // calendar date by kickoff -- querying ESPN for "today" (UTC) silently returned zero
+  // games for the actual live slate, findGameForTrade found no match, and live
+  // suppression failed open for the entire run (confirmed: liveSkipped:0 while a real
+  // live Angels/Astros trade passed with reject:null). Queries both the real Eastern
+  // "baseball day" AND the UTC date as a second attempt, rather than picking one and
+  // risking the same class of mismatch in the other direction.
   try {
-    const todayStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${todayStr}`);
-    const j = await r.json();
-    return (j.events || []).map(ev => {
+    const etDateStr = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' }).replace(/-/g, '');
+    const utcDateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const dates = [...new Set([etDateStr, utcDateStr])];
+    const allEvents = [];
+    for (const d of dates) {
+      const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${d}`);
+      const j = await r.json();
+      allEvents.push(...(j.events || []));
+    }
+    return allEvents.map(ev => {
       const comp = ev.competitions && ev.competitions[0];
       if (!comp) return null;
       const home = comp.competitors.find(c => c.homeAway === 'home');
