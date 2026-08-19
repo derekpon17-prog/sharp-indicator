@@ -279,15 +279,31 @@ module.exports = async function handler(req, res) {
     // instead of guessed. ?checkWallet=0x... (redeploy-trigger 2026-08-18)
     if (req.query && req.query.checkWallet) {
       try {
-        const wr = await fetch(`https://data-api.polymarket.com/trades?user=${req.query.checkWallet}&side=BUY&takerOnly=true&limit=10`);
+        // BUGFIX 2026-08-19 (per Derek): "most recent trade" alone conflated a wallet's
+        // most recent trade OVERALL with their most recent trade in the SPECIFIC sport
+        // being asked about -- confirmed real gap, laozishudaosan's recent activity was
+        // mostly soccer, so his true most-recent MLB trade could be meaningfully older
+        // than his most-recent trade shown. Fetches a larger sample (50, not 10) and
+        // reports the most recent trade PER SPORT, using the same detectSport already
+        // used everywhere else in this file.
+        const wr = await fetch(`https://data-api.polymarket.com/trades?user=${req.query.checkWallet}&side=BUY&takerOnly=true&limit=50`);
         const trades = await wr.json();
         const inAlerts = alerts.filter(a => (a.wallet || '').toLowerCase() === String(req.query.checkWallet).toLowerCase());
+        const bySport = {};
+        if (Array.isArray(trades)) {
+          trades.forEach(t => {
+            const sp = detectSport(t.title) || 'Other/Unrecognized';
+            if (!bySport[sp] || t.timestamp > bySport[sp].timestamp) {
+              bySport[sp] = { timestamp: t.timestamp, title: t.title };
+            }
+          });
+        }
         return res.status(200).json({
           ok: true,
           wallet: req.query.checkWallet,
-          realRecentTradesOnPolymarket: Array.isArray(trades) ? trades.length : 0,
+          totalTradesFetched: Array.isArray(trades) ? trades.length : 0,
           mostRecentTradeTimestamp: Array.isArray(trades) && trades[0] ? trades[0].timestamp : null,
-          sampleTitles: Array.isArray(trades) ? trades.slice(0, 5).map(t => t.title) : [],
+          mostRecentTradeBySport: bySport,
           inOurAlertLog: inAlerts.length,
         });
       } catch (e) {
