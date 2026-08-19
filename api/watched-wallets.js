@@ -42,17 +42,13 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    if (req.method === 'GET') {
-      const raw = await upstash(['GET', WALLETS_KEY]);
-      let wallets = [];
-      if (raw) { try { wallets = JSON.parse(raw); } catch {} }
-      return res.status(200).json({ ok: true, wallets, configured: !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) });
-    }
-
     // FEATURE 2026-08-19 (per Derek): "let ALL activity for him come in, just for his
     // account" -- a per-wallet exception to the normal sport allowlist (the site-wide
     // "no soccer/tennis/UFC" rule stays in place for everyone else). ?setAllSports=0x...
-    // sets the flag directly for one wallet, bypassing the client entirely.
+    // sets the flag directly for one wallet, bypassing the client entirely. BUGFIX:
+    // this must come BEFORE the general GET handler below -- it was originally placed
+    // after, so any GET request (including one with ?setAllSports=) was being
+    // intercepted by the general handler first and returning early, never reaching this.
     if ((req.method === 'POST' || req.method === 'GET') && req.query && req.query.setAllSports) {
       const targetWallet = String(req.query.setAllSports);
       const raw = await upstash(['GET', WALLETS_KEY]);
@@ -63,6 +59,13 @@ module.exports = async function handler(req, res) {
       wallets[idx].allSports = true;
       await upstash(['SET', WALLETS_KEY, JSON.stringify(wallets)]);
       return res.status(200).json({ ok: true, wallet: targetWallet, allSports: true });
+    }
+
+    if (req.method === 'GET') {
+      const raw = await upstash(['GET', WALLETS_KEY]);
+      let wallets = [];
+      if (raw) { try { wallets = JSON.parse(raw); } catch {} }
+      return res.status(200).json({ ok: true, wallets, configured: !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) });
     }
 
     if (req.method === 'POST') {
