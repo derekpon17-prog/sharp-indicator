@@ -49,16 +49,46 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, wallets, configured: !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) });
     }
 
+    // FEATURE 2026-08-19 (per Derek): "let ALL activity for him come in, just for his
+    // account" -- a per-wallet exception to the normal sport allowlist (the site-wide
+    // "no soccer/tennis/UFC" rule stays in place for everyone else). ?setAllSports=0x...
+    // sets the flag directly for one wallet, bypassing the client entirely.
+    if (req.method === 'POST' && req.query && req.query.setAllSports) {
+      const targetWallet = String(req.query.setAllSports);
+      const raw = await upstash(['GET', WALLETS_KEY]);
+      let wallets = [];
+      if (raw) { try { wallets = JSON.parse(raw); } catch {} }
+      const idx = wallets.findIndex(w => w.wallet === targetWallet);
+      if (idx === -1) return res.status(404).json({ ok: false, error: 'Wallet not found in watched list' });
+      wallets[idx].allSports = true;
+      await upstash(['SET', WALLETS_KEY, JSON.stringify(wallets)]);
+      return res.status(200).json({ ok: true, wallet: targetWallet, allSports: true });
+    }
+
     if (req.method === 'POST') {
       const body = req.body;
       if (!body || !Array.isArray(body.wallets)) {
         return res.status(400).json({ error: 'Expected { wallets: [{wallet, name}] }' });
       }
+      // The client is authoritative for wallet/name, but has no concept of allSports --
+      // without preserving it here, the NEXT time the client syncs its own list (which
+      // happens on every page load), this flag would silently get wiped back out, since
+      // the client would send a payload that simply never mentions it.
+      const existingRaw = await upstash(['GET', WALLETS_KEY]);
+      let existing = [];
+      if (existingRaw) { try { existing = JSON.parse(existingRaw); } catch {} }
+      const existingByWallet = {};
+      existing.forEach(w => { existingByWallet[w.wallet] = w; });
+
       // Shape guard — only keep entries that look like a real wallet, so a malformed
       // client payload can't corrupt what the cron reads back.
       const clean = body.wallets
         .filter(w => w && typeof w.wallet === 'string' && w.wallet.startsWith('0x'))
-        .map(w => ({ wallet: w.wallet, name: typeof w.name === 'string' ? w.name : null }));
+        .map(w => ({
+          wallet: w.wallet,
+          name: typeof w.name === 'string' ? w.name : null,
+          allSports: (existingByWallet[w.wallet] && existingByWallet[w.wallet].allSports) === true,
+        }));
       await upstash(['SET', WALLETS_KEY, JSON.stringify(clean)]);
       return res.status(200).json({ ok: true, stored: clean.length });
     }
