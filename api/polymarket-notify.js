@@ -309,14 +309,49 @@ async function fetchSharpLinePlays(sport = 'MLB') {
    filters plays to ct>now, so an in-progress game is absent from it entirely — the live
    check could never match one, always failed open, and suppressed exactly nothing.
    `schedule` is built from the closing-line store and retains games past first pitch. */
+const ESPN_SPORT_PATH = { MLB: 'baseball/mlb', NBA: 'basketball/nba', NFL: 'football/nfl', NHL: 'hockey/nhl' };
+
+// BUGFIX 2026-08-19 (per Derek, real incident): live MLB games were getting alerted on --
+// traced to the Odds API quota running out (confirmed: 19,996/20,000 used). getSchedule
+// silently returned no real games once that happened, so the live-game check had nothing
+// to compare against and correctly-by-design "failed open" rather than drop a real
+// signal -- but that meant live suppression itself silently stopped working. This adds a
+// free, quota-independent fallback using ESPN's own scoreboard (same source grade-cron.js
+// already uses for grading), so live suppression keeps working even when the paid odds
+// feed is exhausted.
+async function getScheduleFromESPN(sport) {
+  const path = ESPN_SPORT_PATH[sport];
+  if (!path) return [];
+  try {
+    const todayStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${todayStr}`);
+    const j = await r.json();
+    return (j.events || []).map(ev => {
+      const comp = ev.competitions && ev.competitions[0];
+      if (!comp) return null;
+      const home = comp.competitors.find(c => c.homeAway === 'home');
+      const away = comp.competitors.find(c => c.homeAway === 'away');
+      if (!home || !away) return null;
+      return {
+        away: away.team && (away.team.displayName || away.team.name),
+        home: home.team && (home.team.displayName || home.team.name),
+        commenceTime: ev.date,
+        started: !!(comp.status && comp.status.type && comp.status.type.state !== 'pre'),
+      };
+    }).filter(Boolean);
+  } catch { return []; }
+}
+
 async function getSchedule(sport) {
   const d = await fetchOddsPayload(sport);
   const sched = (d && d.schedule) || [];
   if (sched.length) return sched;
-  // Fallback for a deploy skew where the API predates `schedule`: pregame games only,
-  // which restores the old (non-functional) behaviour rather than throwing.
-  return ((d && d.plays) || []).filter(p => p.commenceTime)
+  const fromPlays = ((d && d.plays) || []).filter(p => p.commenceTime)
     .map(p => ({ away: p.away, home: p.home, commenceTime: p.commenceTime, started: false }));
+  if (fromPlays.length) return fromPlays;
+  // Both odds-API paths came back empty (e.g. quota exhausted) -- fall back to ESPN's
+  // free scoreboard rather than silently letting live-game suppression stop working.
+  return getScheduleFromESPN(sport);
 }
 // Reuses the exact team-substring + date-gate pattern already shipped in matchLineToAlert.
 // Requires BOTH teams (stricter than matchLineToAlert's either/or) since here we're
