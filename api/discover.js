@@ -440,7 +440,10 @@ async function getRoster(sport) {
 //   Phase 2 (evaluating): run each newly-found wallet through the exact same
 //     evaluateCandidate() gate normal discovery uses -- same standards, same promotion
 //     path, same roster. This isn't a separate, looser bar.
-const SERIES_IDS = { NFL: '1', NBA: '2', MLB: '3', NHL: '4' };
+// Confirmed via Polymarket's own /series endpoint directly (not guessed) --
+// NFL/NBA/MLB from their docs example, NHL/NCAAF/NCAAB confirmed live via ?listSeries=.
+// NCAAF's actual slug is "cfb", not "ncaaf" -- worth knowing if this ever needs re-verifying.
+const SERIES_IDS = { NFL: '1', NBA: '2', MLB: '3', NHL: '4', NCAAF: '10002', NCAAB: '10012' };
 async function runHistoricalDiscovery(sport, opts) {
   const seriesId = SERIES_IDS[sport];
   if (!seriesId) return { ok: false, error: `No known series id for ${sport}` };
@@ -566,11 +569,9 @@ module.exports = async function handler(req, res) {
     // guessed tag_id, matching the same slug convention already confirmed for MLB
     // (mlb-det-pit-2026-08-19) -- don't know the real tag_id for NFL, this doesn't
     // require knowing it. ?checkSeries=nfl
-    // Confirmed via Polymarket's own /series endpoint (not guessed): NFL=1, NBA=2, MLB=3.
-    // Brute-force scanning "most recent closed" events never reaches NFL season (500
-    // events only reached back 1 day -- Polymarket closes an enormous volume across
-    // every category daily). Series-scoped queries are the actual right tool here.
-    const SERIES_IDS = { NFL: '1', NBA: '2', MLB: '3' };
+    // BUGFIX: this used to redeclare its own separate, incomplete SERIES_IDS here,
+    // drifted out of sync with the module-level one runHistoricalDiscovery uses (missing
+    // NHL/NCAAF/NCAAB). Now shares the single source of truth defined above instead.
     if (req.query && req.query.checkSeries) {
       const sport = String(req.query.checkSeries).toUpperCase();
       const seriesId = SERIES_IDS[sport];
