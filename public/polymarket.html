@@ -1265,11 +1265,22 @@ function isLosingTrader(wallet){if(!wallet)return false;const c=_sc[wallet];retu
 const STALE_GRACE_HOURS=3; // set to 0 for a strict midnight-ET cutoff
 function easternDateStr(ms){try{return new Date(ms).toLocaleDateString('en-CA',{timeZone:'America/New_York'});}catch(e){return '';}}
 function effectiveTodayET(){return easternDateStr(Date.now()-STALE_GRACE_HOURS*3600000);}
+// FEATURE 2026-08-20 (per Derek, real incident): confirmed real scenario -- a bet made
+// late one night for a game that plays (or already played) the next calendar day was
+// invisible to Quality Convergence/Top Signals/Today's Board by the time anyone actually
+// looked at it, since the existing 3h grace period only extends "today" to 3am ET, and
+// these tiles get checked well after that. Extends the cutoff to a full extra day (today
+// OR yesterday) rather than the existing few-hour grace window, so a play made the night
+// before genuinely stays visible through the next day. Scoped to this one function only --
+// effectiveTodayET() itself is unchanged, since other logic depends on its exact meaning.
 function isStaleGameDate(dateStr){
   if(!dateStr)return false;
   var m=String(dateStr).match(/^(\d{4}-\d{2}-\d{2})/);
   if(!m)return false;
-  return m[1]<effectiveTodayET(); // ISO date strings compare correctly as strings
+  var todayET=effectiveTodayET();
+  if(m[1]>=todayET)return false; // today or future -- never stale
+  var yesterdayET=easternDateStr(Date.now()-24*3600000-STALE_GRACE_HOURS*3600000);
+  return m[1]<yesterdayET; // stale only once it's more than a day old, not the instant it's not "today"
 }
 function isStaleAlert(a){return isStaleGameDate(extractSlugDate(a));}
 
