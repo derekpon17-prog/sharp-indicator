@@ -448,14 +448,24 @@ module.exports = async function handler(req, res) {
     // require knowing it. ?checkSeries=nfl
     if (req.query && req.query.checkSeries) {
       const slugPrefix = String(req.query.checkSeries).toLowerCase();
+      // BUGFIX (same run): first attempt sorted "most recent closed" and only looked at
+      // the top 100 -- but NFL season ended months ago, so its games are buried well
+      // behind everything MLB/other sports have closed continuously since then. Paginate
+      // through multiple pages rather than assume one page reaches far enough back.
       try {
-        const searchRes = await fetch(`https://gamma-api.polymarket.com/events?closed=true&order=startDate&ascending=false&limit=500`);
-        const searchData = await searchRes.json();
-        const matches = (Array.isArray(searchData) ? searchData : []).filter(e => (e.slug || '').toLowerCase().includes(slugPrefix));
+        let allEvents = [];
+        for (let offset = 0; offset < 1000; offset += 200) {
+          const searchRes = await fetch(`https://gamma-api.polymarket.com/events?closed=true&order=startDate&ascending=false&limit=200&offset=${offset}`);
+          const page = await searchRes.json();
+          if (!Array.isArray(page) || !page.length) break;
+          allEvents.push(...page);
+        }
+        const matches = allEvents.filter(e => (e.slug || '').toLowerCase().includes(slugPrefix));
         return res.status(200).json({
           ok: true, slugPrefix,
           note: 'Feasibility check only -- not the full pipeline',
-          totalClosedEventsScanned: Array.isArray(searchData) ? searchData.length : 0,
+          totalClosedEventsScanned: allEvents.length,
+          oldestScanned: allEvents.length ? allEvents[allEvents.length - 1].startDate : null,
           matchCount: matches.length,
           sampleMatches: matches.slice(0, 10).map(e => ({
             id: e.id, slug: e.slug, title: e.title, startDate: e.startDate,
