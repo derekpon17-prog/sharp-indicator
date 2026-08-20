@@ -61,6 +61,22 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, wallet: targetWallet, allSports: true });
     }
 
+    // FEATURE 2026-08-19 (per Derek): standalone Discord ping when a specifically-flagged
+    // wallet makes any real play, regardless of whether anyone else is on it -- same
+    // pattern as setAllSports (preserved across client syncs, set directly here).
+    // ?setAlwaysAlert=0x...
+    if ((req.method === 'POST' || req.method === 'GET') && req.query && req.query.setAlwaysAlert) {
+      const targetWallet = String(req.query.setAlwaysAlert);
+      const raw = await upstash(['GET', WALLETS_KEY]);
+      let wallets = [];
+      if (raw) { try { wallets = JSON.parse(raw); } catch {} }
+      const idx = wallets.findIndex(w => w.wallet === targetWallet);
+      if (idx === -1) return res.status(404).json({ ok: false, error: 'Wallet not found in watched list' });
+      wallets[idx].alwaysAlert = true;
+      await upstash(['SET', WALLETS_KEY, JSON.stringify(wallets)]);
+      return res.status(200).json({ ok: true, wallet: targetWallet, alwaysAlert: true });
+    }
+
     if (req.method === 'GET') {
       const raw = await upstash(['GET', WALLETS_KEY]);
       let wallets = [];
@@ -91,6 +107,7 @@ module.exports = async function handler(req, res) {
           wallet: w.wallet,
           name: typeof w.name === 'string' ? w.name : null,
           allSports: (existingByWallet[w.wallet] && existingByWallet[w.wallet].allSports) === true,
+          alwaysAlert: (existingByWallet[w.wallet] && existingByWallet[w.wallet].alwaysAlert) === true,
         }));
       await upstash(['SET', WALLETS_KEY, JSON.stringify(clean)]);
       return res.status(200).json({ ok: true, stored: clean.length });
