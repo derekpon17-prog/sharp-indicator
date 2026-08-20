@@ -436,6 +436,35 @@ module.exports = async function handler(req, res) {
       const sport = String(req.query.roster).toUpperCase();
       return res.status(200).json({ ok: true, sport, roster: await getRoster(sport === 'ALL' ? null : sport) });
     }
+    // DIAGNOSTIC 2026-08-19 (per Derek): "have we analyzed wallets that were profitable
+    // last year but don't have current NFL activity yet" -- feasibility check for pulling
+    // wallets from LAST season's events directly, rather than waiting for current-season
+    // activity to surface them the normal way. Confirmed via Polymarket's own docs that
+    // event-scoped trade queries exist with a ~3yr window -- this checks whether real NFL
+    // events from last season are actually findable before building the full
+    // evaluate-and-promote pipeline on top of it. Searches by slug prefix rather than a
+    // guessed tag_id, matching the same slug convention already confirmed for MLB
+    // (mlb-det-pit-2026-08-19) -- don't know the real tag_id for NFL, this doesn't
+    // require knowing it. ?checkSeries=nfl
+    if (req.query && req.query.checkSeries) {
+      const slugPrefix = String(req.query.checkSeries).toLowerCase();
+      try {
+        const searchRes = await fetch(`https://gamma-api.polymarket.com/events?closed=true&order=startDate&ascending=false&limit=500`);
+        const searchData = await searchRes.json();
+        const matches = (Array.isArray(searchData) ? searchData : []).filter(e => (e.slug || '').toLowerCase().includes(slugPrefix));
+        return res.status(200).json({
+          ok: true, slugPrefix,
+          note: 'Feasibility check only -- not the full pipeline',
+          totalClosedEventsScanned: Array.isArray(searchData) ? searchData.length : 0,
+          matchCount: matches.length,
+          sampleMatches: matches.slice(0, 10).map(e => ({
+            id: e.id, slug: e.slug, title: e.title, startDate: e.startDate,
+          })),
+        });
+      } catch (e) {
+        return res.status(200).json({ ok: false, error: e.message });
+      }
+    }
     const evals = req.query && req.query.evals ? parseInt(req.query.evals) : undefined;
     const force = String((req.query && req.query.force) || '') === '1';
     const sportFocus = req.query && req.query.sportFocus ? String(req.query.sportFocus) : undefined;
