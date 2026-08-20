@@ -1319,6 +1319,19 @@ function isLiveAlert(a){
   // NFL games, for example) but this specific game isn't among them, that's a meaningful
   // signal it already happened and aged out, not a legitimate future game with no data
   // yet. Only fails open when there's no schedule coverage for the sport at all.
+  // BUGFIX 2026-08-20 (per Derek, real incident): confirmed directly -- laozishudaosan's
+  // real Baltimore Orioles buy (Aug 19 game, bought late that night) was being excluded
+  // from Quality Convergence entirely. Root cause: this "aged out of schedule = treat as
+  // live" fallback can't distinguish two different reasons a game might be missing from
+  // current schedule data -- a FUTURE game that hasn't been scheduled yet (the original
+  // Hall of Fame Game bug this fallback was built for) vs. a PAST game that's simply
+  // older than the schedule API's window, because it already finished normally hours ago.
+  // A bet placed more than ~6h before "now" cannot possibly still be live -- no MLB/NFL/
+  // NBA/NHL game runs anywhere near that long -- so aging out at that point is evidence
+  // the game already concluded, not evidence it's ambiguously in-progress.
+  var aTs=a.loggedAt||(a.timestamp?a.timestamp*1000:0);
+  var hoursSinceAlert=aTs?(Date.now()-aTs)/3600000:0;
+  if(aTs&&hoursSinceAlert>6)return false;
   var aSport=(a.sport||detectSport(a.title)||'').toUpperCase();
   var sameSportCount=aSport?gameSchedule.filter(function(s){return (s.sport||'').toUpperCase()===aSport;}).length:0;
   if(aSport&&sameSportCount>0)return true;
@@ -2023,7 +2036,13 @@ function buildTrendingGroups(){
     if(isLosingTrader(a.wallet))return;
     const cached=_sc[a.wallet],inLB=lbData.overall.some(x=>x.wallet===a.wallet)||lbData.sports.some(x=>x.wallet===a.wallet);
     if(!inLB&&cached!==null&&cached!==undefined&&(cached.pnl===null||cached.pnl<=0))return;
-    const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
+    // BUGFIX 2026-08-20 (per Derek, real incident): confirmed directly -- this key was
+    // title+outcome only, no eventSlug, meaning "New York Yankees vs. Baltimore Orioles"
+    // gets treated as ONE group across every night of a multi-day series, even though
+    // eventSlug (mlb-nyy-bal-2026-08-18 vs -19 vs -20) proves these are different games.
+    // Same class of bug as the server-side contrast-line and net-out fixes -- just found
+    // here too, in the shared function this whole client relies on for convergence.
+    const key=(a.title||'')+'||'+(a.outcome||'')+'||'+(a.eventSlug||'');if(!key||key==='||||')return;
     if(dismissed.has(key))return;
     if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,sport:sp,buys:[],totalVol:0,latestTs:0};
     groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
@@ -2040,10 +2059,17 @@ function buildTrendingGroups(){
 // map before the score filter, so it affects every consumer (Today's Board, Top Signals,
 // Quality Convergence, Sharp Report matching) from one shared source, not per-screen.
 function netOutBothSidesTraders(groupMap){
+  // BUGFIX 2026-08-20 (per Derek, real incident): same class of bug just fixed in the
+  // buildTrendingGroups grouping key above, and the same one already fixed server-side
+  // in polymarket-notify.js -- grouping by title alone conflates every night of a multi-
+  // day series (identical team names, different eventSlug). Composite key keeps h2h
+  // separate from totals on the SAME game (different title, same eventSlug) while also
+  // keeping the SAME market on DIFFERENT days separate (same title, different eventSlug).
   const byTitle={};
   Object.values(groupMap).forEach(function(g){
-    if(!byTitle[g.title])byTitle[g.title]=[];
-    byTitle[g.title].push(g);
+    var t=(g.eventSlug||'')+'||'+g.title;
+    if(!byTitle[t])byTitle[t]=[];
+    byTitle[t].push(g);
   });
   Object.values(byTitle).forEach(function(sides){
     if(sides.length<2)return;
