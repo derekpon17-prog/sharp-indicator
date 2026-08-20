@@ -969,6 +969,38 @@ module.exports = async function handler(req, res) {
 
     results.poly.scanned = rawTrades.length;
 
+    // FEATURE 2026-08-19 (per Derek): standalone Discord ping when a specifically-flagged
+    // wallet makes any real play, regardless of whether anyone else is on it -- separate
+    // from the convergence pipeline entirely. Reuses polyAlerts (already live-checked,
+    // gate-checked, sport-filtered), so this inherits every existing safety check rather
+    // than re-implementing them. Independently deduped (standalone:* prefix) from the
+    // ntfy poly:* dedup, since these are different channels for the same underlying trade.
+    results.discordStandalone = { scanned: 0, sent: 0, alerts: [] };
+    const standaloneWebhook = process.env.DISCORD_WEBHOOK_URL;
+    if (standaloneWebhook) {
+      const alwaysAlertWalletSet = new Set(watchedWallets.filter(w => w.alwaysAlert === true).map(w => w.wallet));
+      for (const alert of polyAlerts) {
+        if (!alwaysAlertWalletSet.has(alert.wallet)) continue;
+        results.discordStandalone.scanned++;
+        const standaloneKey = `standalone:${alert.transactionHash || alert.wallet + alert.title}`;
+        if (!(await claimAlert(standaloneKey))) continue;
+
+        const usd = Math.round(alert.usdValue).toLocaleString();
+        const price = (parseFloat(alert.price || 0) * 100).toFixed(1);
+        const gameDate = extractSlugDate(alert);
+        const body = [
+          `\ud83d\udd14 **WATCHED WALLET PLAY** \u2014 ${cleanTraderName(alert.traderName, alert.wallet)}`,
+          `$${usd}${unitsLabel(alert.usdValue, alert.wallet)} on ${alert.sport || 'Unknown'}`,
+          `Market: ${(alert.title || '').slice(0, 80)}${gameDate ? ` (${gameDate})` : ''}`,
+          `Side: ${alert.outcome || '\u2014'} @ ${price}\u00a2`,
+        ].join('\n');
+
+        const result = await sendDiscord(standaloneWebhook, body);
+        results.discordStandalone.alerts.push({ trader: alert.traderName, title: alert.title, usd: alert.usdValue, result });
+        if (result.ok) results.discordStandalone.sent++;
+      }
+    }
+
     // Send Poly alerts
     for (const alert of polyAlerts) {
       const sessionKey = `poly:${alert.transactionHash || alert.wallet + alert.title}`;
