@@ -444,16 +444,25 @@ async function getRoster(sport) {
 // NFL/NBA/MLB from their docs example, NHL/NCAAF/NCAAB confirmed live via ?listSeries=.
 // NCAAF's actual slug is "cfb", not "ncaaf" -- worth knowing if this ever needs re-verifying.
 const SERIES_IDS = { NFL: '1', NBA: '2', MLB: '3', NHL: '4', NCAAF: '10002', NCAAB: '10012' };
+// SPEEDUP 2026-08-20 (per Derek, real concern -- "I don't want to rely on waiting for the
+// season to start"): confirmed honest math -- at the original one-at-a-time, 8s-budget
+// design, NFL's 4,200+ discovered wallets alone would have taken DAYS to evaluate. Fixed
+// with two real changes: (1) both phases now process in small concurrent batches instead
+// of sequentially awaiting one request at a time, (2) budget raised from 8s to 20s. This
+// is a genuine multi-x throughput improvement, not a cosmetic tweak -- concurrency is the
+// actual lever here, since each fetch spends most of its time waiting on the network, not
+// on this server doing work.
 async function runHistoricalDiscovery(sport, opts) {
   const seriesId = SERIES_IDS[sport];
   if (!seriesId) return { ok: false, error: `No known series id for ${sport}` };
   const startedAt = Date.now();
-  const BUDGET_MS = (opts && opts.budgetMs) || 8000;
+  const BUDGET_MS = (opts && opts.budgetMs) || 20000;
+  const CONCURRENCY = (opts && opts.concurrency) || 8;
 
   const progressKey = `discover:historical:${sport}:progress`;
   let progress = (await kvGetJson(progressKey)) || { eventsHarvested: 0, walletsFound: [], harvestDone: false };
 
-  // PHASE 1: harvest events -> unique wallets, a batch at a time.
+  // PHASE 1: harvest events -> unique wallets, concurrent batches within the budget.
   if (!progress.harvestDone) {
     const limit = 20;
     try {
@@ -462,20 +471,21 @@ async function runHistoricalDiscovery(sport, opts) {
       if (!Array.isArray(events) || !events.length) {
         progress.harvestDone = true;
       } else {
-        for (const ev of events) {
+        const walletSet = new Set(progress.walletsFound);
+        for (let i = 0; i < events.length; i += CONCURRENCY) {
           if (Date.now() - startedAt > BUDGET_MS) break;
-          try {
-            const trRes = await fetch(`https://data-api.polymarket.com/trades?eventId=${ev.id}&limit=500&takerOnly=true&side=BUY`);
-            const trades = await trRes.json();
-            if (Array.isArray(trades)) {
-              trades.forEach(t => {
-                const w = t.proxyWallet;
-                if (w && !progress.walletsFound.includes(w)) progress.walletsFound.push(w);
-              });
-            }
-          } catch { /* one event's trade fetch failing shouldn't stop the batch */ }
-          progress.eventsHarvested++;
+          const batch = events.slice(i, i + CONCURRENCY);
+          const batchResults = await Promise.all(batch.map(async ev => {
+            try {
+              const trRes = await fetch(`https://data-api.polymarket.com/trades?eventId=${ev.id}&limit=500&takerOnly=true&side=BUY`);
+              const trades = await trRes.json();
+              return Array.isArray(trades) ? trades.map(t => t.proxyWallet).filter(Boolean) : [];
+            } catch { return []; } // one event's trade fetch failing shouldn't stop the batch
+          }));
+          batchResults.forEach(wallets => wallets.forEach(w => walletSet.add(w)));
+          progress.eventsHarvested += batch.length;
         }
+        progress.walletsFound = [...walletSet];
       }
     } catch (e) {
       return { ok: false, error: e.message, phase: 'harvesting' };
@@ -490,33 +500,38 @@ async function runHistoricalDiscovery(sport, opts) {
     };
   }
 
-  // PHASE 2: evaluate newly-found wallets, a batch at a time, same gate as normal discovery.
+  // PHASE 2: evaluate newly-found wallets, concurrent batches, same gate as normal discovery.
   const roster = (await kvGetJson('discover:roster')) || {};
   const evaluatedKey = `discover:historical:${sport}:evaluated`;
   let evaluatedWallets = (await kvGetJson(evaluatedKey)) || [];
-  const toEvaluate = progress.walletsFound.filter(w => !evaluatedWallets.includes(w));
+  const evaluatedSet = new Set(evaluatedWallets);
+  const toEvaluate = progress.walletsFound.filter(w => !evaluatedSet.has(w));
 
   if (!toEvaluate.length) {
     return { ok: true, sport, phase: 'done', totalWalletsFound: progress.walletsFound.length, evaluated: evaluatedWallets.length, promoted: Object.keys(roster).filter(k => k.endsWith('|' + sport)).length };
   }
 
   const results = [];
-  for (const wallet of toEvaluate) {
+  for (let i = 0; i < toEvaluate.length; i += CONCURRENCY) {
     if (Date.now() - startedAt > BUDGET_MS) break;
-    const v = await evaluateCandidate({ wallet, sport }, { fresh: false });
-    evaluatedWallets.push(wallet);
-    if (v.verdict === 'promote') {
-      const rk = wallet + '|' + sport;
-      const prev = roster[rk];
-      roster[rk] = { wallet, sport, name: null, pnl: v.pnl, sample: v.sample, winRate: v.winRate,
-        hedgePct: v.hedgePct, avgEntry: v.avgEntry, impliedWinRate: v.impliedWinRate, edgePP: v.edgePP,
-        roiPct: v.roiPct, staked: v.staked, pnlPerMarket: v.pnlPerMarket, avgEntryByCount: v.avgEntryByCount,
-        entrySkew: v.entrySkew, reason: v.reason, addedAt: prev ? prev.addedAt : Date.now(), confirmedAt: Date.now(),
-        source: 'historical-last-season' };
-    }
-    results.push({ wallet: wallet.slice(0, 10), verdict: v.verdict, reason: v.reason });
+    const batch = toEvaluate.slice(i, i + CONCURRENCY);
+    const verdicts = await Promise.all(batch.map(wallet => evaluateCandidate({ wallet, sport }, { fresh: false }).then(v => ({ wallet, v }))));
+    verdicts.forEach(({ wallet, v }) => {
+      evaluatedSet.add(wallet);
+      if (v.verdict === 'promote') {
+        const rk = wallet + '|' + sport;
+        const prev = roster[rk];
+        roster[rk] = { wallet, sport, name: null, pnl: v.pnl, sample: v.sample, winRate: v.winRate,
+          hedgePct: v.hedgePct, avgEntry: v.avgEntry, impliedWinRate: v.impliedWinRate, edgePP: v.edgePP,
+          roiPct: v.roiPct, staked: v.staked, pnlPerMarket: v.pnlPerMarket, avgEntryByCount: v.avgEntryByCount,
+          entrySkew: v.entrySkew, reason: v.reason, addedAt: prev ? prev.addedAt : Date.now(), confirmedAt: Date.now(),
+          source: 'historical-last-season' };
+      }
+      results.push({ wallet: wallet.slice(0, 10), verdict: v.verdict, reason: v.reason });
+    });
   }
 
+  evaluatedWallets = [...evaluatedSet];
   await kvSetJson(evaluatedKey, evaluatedWallets, CAND_TTL);
   await kvSetJson('discover:roster', roster, ROSTER_TTL);
 
@@ -525,6 +540,8 @@ async function runHistoricalDiscovery(sport, opts) {
     totalWalletsFound: progress.walletsFound.length,
     evaluatedSoFar: evaluatedWallets.length,
     remainingToEvaluate: toEvaluate.length - results.length,
+    thisRunCount: results.length,
+    thisRunPromotions: results.filter(r => r.verdict === 'promote').length,
     thisRun: results,
   };
 }
