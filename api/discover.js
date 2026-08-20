@@ -537,6 +537,21 @@ module.exports = async function handler(req, res) {
     // discovery pipeline (harvest phase, then evaluate phase). Designed to be called
     // repeatedly -- via a dedicated cron job, same pattern as the other discovery crons --
     // resuming exactly where the last call left off, until the whole season is processed.
+    // DIAGNOSTIC 2026-08-20 (per Derek): find the real series IDs for NCAAF/NCAAB/NHL
+    // rather than guess -- lists real series matching a keyword search.
+    if (req.query && req.query.listSeries) {
+      const q = String(req.query.listSeries).toLowerCase();
+      try {
+        const r = await fetch(`https://gamma-api.polymarket.com/series?limit=200`);
+        const all = await r.json();
+        const matches = (Array.isArray(all) ? all : []).filter(s =>
+          (s.slug || '').toLowerCase().includes(q) || (s.title || '').toLowerCase().includes(q));
+        return res.status(200).json({ ok: true, query: q, totalSeriesScanned: Array.isArray(all) ? all.length : 0, matches: matches.map(s => ({ id: s.id, slug: s.slug, title: s.title })) });
+      } catch (e) {
+        return res.status(200).json({ ok: false, error: e.message });
+      }
+    }
+
     if (req.query && req.query.historical) {
       const sport = String(req.query.historical).toUpperCase();
       return res.status(200).json(await runHistoricalDiscovery(sport, {}));
