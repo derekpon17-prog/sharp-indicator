@@ -446,28 +446,26 @@ module.exports = async function handler(req, res) {
     // guessed tag_id, matching the same slug convention already confirmed for MLB
     // (mlb-det-pit-2026-08-19) -- don't know the real tag_id for NFL, this doesn't
     // require knowing it. ?checkSeries=nfl
+    // Confirmed via Polymarket's own /series endpoint (not guessed): NFL=1, NBA=2, MLB=3.
+    // Brute-force scanning "most recent closed" events never reaches NFL season (500
+    // events only reached back 1 day -- Polymarket closes an enormous volume across
+    // every category daily). Series-scoped queries are the actual right tool here.
+    const SERIES_IDS = { NFL: '1', NBA: '2', MLB: '3' };
     if (req.query && req.query.checkSeries) {
-      const slugPrefix = String(req.query.checkSeries).toLowerCase();
-      // BUGFIX (same run): first attempt sorted "most recent closed" and only looked at
-      // the top 100 -- but NFL season ended months ago, so its games are buried well
-      // behind everything MLB/other sports have closed continuously since then. Paginate
-      // through multiple pages rather than assume one page reaches far enough back.
+      const sport = String(req.query.checkSeries).toUpperCase();
+      const seriesId = SERIES_IDS[sport];
+      if (!seriesId) return res.status(200).json({ ok: false, error: `No known series id for ${sport}` });
       try {
-        let allEvents = [];
-        for (let offset = 0; offset < 1000; offset += 200) {
-          const searchRes = await fetch(`https://gamma-api.polymarket.com/events?closed=true&order=startDate&ascending=false&limit=200&offset=${offset}`);
-          const page = await searchRes.json();
-          if (!Array.isArray(page) || !page.length) break;
-          allEvents.push(...page);
-        }
-        const matches = allEvents.filter(e => (e.slug || '').toLowerCase().includes(slugPrefix));
+        const searchRes = await fetch(`https://gamma-api.polymarket.com/events?series_id=${seriesId}&closed=true&order=startDate&ascending=false&limit=50`);
+        const searchData = await searchRes.json();
+        const events = Array.isArray(searchData) ? searchData : [];
         return res.status(200).json({
-          ok: true, slugPrefix,
+          ok: true, sport, seriesId,
           note: 'Feasibility check only -- not the full pipeline',
-          totalClosedEventsScanned: allEvents.length,
-          oldestScanned: allEvents.length ? allEvents[allEvents.length - 1].startDate : null,
-          matchCount: matches.length,
-          sampleMatches: matches.slice(0, 10).map(e => ({
+          eventCount: events.length,
+          newestEventDate: events[0] ? events[0].startDate : null,
+          oldestOfThisBatch: events.length ? events[events.length - 1].startDate : null,
+          sampleEvents: events.slice(0, 10).map(e => ({
             id: e.id, slug: e.slug, title: e.title, startDate: e.startDate,
           })),
         });
