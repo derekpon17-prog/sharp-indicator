@@ -429,12 +429,117 @@ async function getRoster(sport) {
     .filter(e => !sport || e.sport === sport);
 }
 
+// FEATURE 2026-08-19 (per Derek): "wallets that were profitable last year but don't have
+// current activity yet" -- pulls candidates from LAST SEASON's actual events (via
+// Polymarket's own /series endpoint, confirmed real: NFL=1, NBA=2, MLB=3) instead of
+// waiting for current-season activity to surface them the normal way. Two phases, both
+// resumable across calls via KV-tracked progress, since a full season is too much for one
+// serverless invocation:
+//   Phase 1 (harvesting): page through last season's closed events, fetch trades for each,
+//     collect every unique wallet that participated.
+//   Phase 2 (evaluating): run each newly-found wallet through the exact same
+//     evaluateCandidate() gate normal discovery uses -- same standards, same promotion
+//     path, same roster. This isn't a separate, looser bar.
+const SERIES_IDS = { NFL: '1', NBA: '2', MLB: '3', NHL: '4' };
+async function runHistoricalDiscovery(sport, opts) {
+  const seriesId = SERIES_IDS[sport];
+  if (!seriesId) return { ok: false, error: `No known series id for ${sport}` };
+  const startedAt = Date.now();
+  const BUDGET_MS = (opts && opts.budgetMs) || 8000;
+
+  const progressKey = `discover:historical:${sport}:progress`;
+  let progress = (await kvGetJson(progressKey)) || { eventsHarvested: 0, walletsFound: [], harvestDone: false };
+
+  // PHASE 1: harvest events -> unique wallets, a batch at a time.
+  if (!progress.harvestDone) {
+    const limit = 20;
+    try {
+      const evRes = await fetch(`https://gamma-api.polymarket.com/events?series_id=${seriesId}&closed=true&order=startDate&ascending=false&limit=${limit}&offset=${progress.eventsHarvested}`);
+      const events = await evRes.json();
+      if (!Array.isArray(events) || !events.length) {
+        progress.harvestDone = true;
+      } else {
+        for (const ev of events) {
+          if (Date.now() - startedAt > BUDGET_MS) break;
+          try {
+            const trRes = await fetch(`https://data-api.polymarket.com/trades?eventId=${ev.id}&limit=500&takerOnly=true&side=BUY`);
+            const trades = await trRes.json();
+            if (Array.isArray(trades)) {
+              trades.forEach(t => {
+                const w = t.proxyWallet;
+                if (w && !progress.walletsFound.includes(w)) progress.walletsFound.push(w);
+              });
+            }
+          } catch { /* one event's trade fetch failing shouldn't stop the batch */ }
+          progress.eventsHarvested++;
+        }
+      }
+    } catch (e) {
+      return { ok: false, error: e.message, phase: 'harvesting' };
+    }
+    await kvSetJson(progressKey, progress, CAND_TTL);
+    return {
+      ok: true, sport, phase: 'harvesting',
+      eventsHarvested: progress.eventsHarvested,
+      uniqueWalletsFound: progress.walletsFound.length,
+      harvestDone: progress.harvestDone,
+      note: progress.harvestDone ? 'Harvest complete -- next call begins evaluation' : 'Call again to continue harvesting',
+    };
+  }
+
+  // PHASE 2: evaluate newly-found wallets, a batch at a time, same gate as normal discovery.
+  const roster = (await kvGetJson('discover:roster')) || {};
+  const evaluatedKey = `discover:historical:${sport}:evaluated`;
+  let evaluatedWallets = (await kvGetJson(evaluatedKey)) || [];
+  const toEvaluate = progress.walletsFound.filter(w => !evaluatedWallets.includes(w));
+
+  if (!toEvaluate.length) {
+    return { ok: true, sport, phase: 'done', totalWalletsFound: progress.walletsFound.length, evaluated: evaluatedWallets.length, promoted: Object.keys(roster).filter(k => k.endsWith('|' + sport)).length };
+  }
+
+  const results = [];
+  for (const wallet of toEvaluate) {
+    if (Date.now() - startedAt > BUDGET_MS) break;
+    const v = await evaluateCandidate({ wallet, sport }, { fresh: false });
+    evaluatedWallets.push(wallet);
+    if (v.verdict === 'promote') {
+      const rk = wallet + '|' + sport;
+      const prev = roster[rk];
+      roster[rk] = { wallet, sport, name: null, pnl: v.pnl, sample: v.sample, winRate: v.winRate,
+        hedgePct: v.hedgePct, avgEntry: v.avgEntry, impliedWinRate: v.impliedWinRate, edgePP: v.edgePP,
+        roiPct: v.roiPct, staked: v.staked, pnlPerMarket: v.pnlPerMarket, avgEntryByCount: v.avgEntryByCount,
+        entrySkew: v.entrySkew, reason: v.reason, addedAt: prev ? prev.addedAt : Date.now(), confirmedAt: Date.now(),
+        source: 'historical-last-season' };
+    }
+    results.push({ wallet: wallet.slice(0, 10), verdict: v.verdict, reason: v.reason });
+  }
+
+  await kvSetJson(evaluatedKey, evaluatedWallets, CAND_TTL);
+  await kvSetJson('discover:roster', roster, ROSTER_TTL);
+
+  return {
+    ok: true, sport, phase: 'evaluating',
+    totalWalletsFound: progress.walletsFound.length,
+    evaluatedSoFar: evaluatedWallets.length,
+    remainingToEvaluate: toEvaluate.length - results.length,
+    thisRun: results,
+  };
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   try {
     if (req.query && req.query.roster) {
       const sport = String(req.query.roster).toUpperCase();
       return res.status(200).json({ ok: true, sport, roster: await getRoster(sport === 'ALL' ? null : sport) });
+    }
+    // FEATURE 2026-08-19 (per Derek): ?historical=NFL runs one batch of the historical
+    // discovery pipeline (harvest phase, then evaluate phase). Designed to be called
+    // repeatedly -- via a dedicated cron job, same pattern as the other discovery crons --
+    // resuming exactly where the last call left off, until the whole season is processed.
+    if (req.query && req.query.historical) {
+      const sport = String(req.query.historical).toUpperCase();
+      return res.status(200).json(await runHistoricalDiscovery(sport, {}));
     }
     // DIAGNOSTIC 2026-08-19 (per Derek): "have we analyzed wallets that were profitable
     // last year but don't have current NFL activity yet" -- feasibility check for pulling
