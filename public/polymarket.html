@@ -1276,7 +1276,25 @@ function isStaleGameDate(dateStr){
   if(!m)return false;
   return m[1]<effectiveTodayET(); // ISO date strings compare correctly as strings
 }
-function isStaleAlert(a){return isStaleGameDate(extractSlugDate(a));}
+// BUGFIX 2026-08-21 (per Derek, real incident): confirmed directly -- Polymarket's own
+// eventSlug for a late-night NFL game (Raiders/Texans, 8pm ET Aug 20 -- midnight UTC,
+// right at the rollover point) was "nfl-lv-hou-2026-08-21", one calendar day AHEAD of
+// the real Eastern game date. Polymarket appears to date its own slugs by UTC, not
+// Eastern time -- so trusting the bare slug date alone is unreliable for any late-enough
+// game, independent of anything else already fixed this session. This wasn't a bug in
+// the comparison logic; the input being trusted was sometimes wrong by design. Fixed by
+// also checking the alert's own real loggedAt timestamp -- unambiguous, not subject to
+// Polymarket's slug convention at all. 20h covers even a long NFL game plus a real
+// buffer, without being so aggressive it could cut off a same-day game still in its
+// pre-game window. 12h chosen after testing against the exact real case (16.5h old) --
+// long enough that a genuinely fresh pre-game signal from a few hours ago is never
+// caught, short enough to actually flag something this old.
+function isStaleAlert(a){
+  if(isStaleGameDate(extractSlugDate(a)))return true;
+  var ts=a.loggedAt||(a.timestamp?a.timestamp*1000:0);
+  if(ts&&(Date.now()-ts)>12*3600000)return true;
+  return false;
+}
 
 /* === LIVE-GAME FILTER ===
    Directive: no in-progress plays on active views. The engine's `plays` array drops a
