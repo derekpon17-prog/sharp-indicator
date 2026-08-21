@@ -1206,6 +1206,21 @@ module.exports = async function handler(req, res) {
           const game = findGameForTrade(sampleTrade, scheduleCache[sport]);
           return !!(game && game.started);
         }
+        // BUGFIX 2026-08-21 (per Derek, real incident): confirmed directly -- Fever/Wings
+        // (Aug 20) generated a fresh "3 traders" convergence AND an upgrade message at
+        // 6:45pm the NEXT day. The main poly loop's stale-date check (line ~836) only
+        // ever runs once, at the moment a trade is first stored as an alert -- a trade
+        // made on Aug 20, while Aug 20 was still "today", correctly passed that check at
+        // the time. But this convergence logic builds groups from ALREADY-STORED alerts
+        // later, and nothing re-checks whether the game's date has since become
+        // yesterday's before actually sending or updating a message -- the exact same
+        // class of gap the live re-check above already closes, just for date staleness
+        // instead of live status.
+        function isGameStaleNow(sampleTrade) {
+          const slugDate = extractSlugDate(sampleTrade);
+          const todayET = effectiveTodayET();
+          return !!(slugDate && todayET && slugDate < todayET);
+        }
 
         for (const key of Object.keys(groups)) {
           const g = groups[key];
@@ -1217,6 +1232,7 @@ module.exports = async function handler(req, res) {
           // conviction, and can't singlehandedly (or in pairs) trigger a ping. They can
           // still appear as visible, clearly-marked context on this same line.
           if (realBuyers.length < 2) continue;
+          if (isGameStaleNow(realBuyers[0])) continue;
           const liveNow = await isGameLiveNow(realBuyers[0].sport, realBuyers[0]);
           if (liveNow) continue;
           results.discord.scanned++;
