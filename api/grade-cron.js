@@ -333,6 +333,10 @@ module.exports = async function handler(req, res) {
           mostRecentTradeBySport: bySport,
           inOurAlertLog: inAlerts.length,
           ourTrackedPlaysBySport: trackedBySport,
+          // DIAGNOSTIC 2026-08-21 (per Derek, real question): "why were those late but
+          // Orioles wasn't" -- need each real trade's exact timestamp, not just the most
+          // recent per sport, to actually answer this instead of guessing.
+          allTradesRaw: req.query.allTrades ? (Array.isArray(trades) ? trades.map(t => ({ title: t.title, outcome: t.outcome, timestamp: t.timestamp, usd: (parseFloat(t.size)||0)*(parseFloat(t.price)||0) })) : []) : undefined,
         });
       } catch (e) {
         return res.status(200).json({ ok: false, error: e.message });
