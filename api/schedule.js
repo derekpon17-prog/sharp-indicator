@@ -76,6 +76,47 @@ async function fetchEventsForSport(sport, sportKey, apiKey) {
   }
 }
 
+// BUGFIX 2026-08-21 (per Derek, real incident): confirmed directly -- The Odds API's
+// americanfootball_nfl events endpoint only carries REGULAR SEASON games (earliest entry
+// starts Sept 10), zero preseason coverage. Texans vs. Raiders (Aug 20, preseason week 2)
+// simply doesn't exist in that data source at all, so findGameForTrade could never match
+// it, and the dashboard's "has this game started" check silently failed open for the
+// entire preseason. This is a genuine data coverage gap, not a logic bug -- same class of
+// issue the MLB ESPN fallback in polymarket-notify.js already solves, applied here for
+// NFL specifically. ESPN's scoreboard covers preseason games directly (confirmed: this is
+// literally how the real Texans/Raiders final score was verified). Added as a SUPPLEMENT,
+// not a replacement -- merged alongside whatever The Odds API already provides, same
+// "don't lose what's already working" pattern as every other fix like this this session.
+async function fetchNflFromESPN() {
+  try {
+    const todayET = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' }).replace(/-/g, '');
+    const yesterdayET = new Date(Date.now() - 24 * 3600000).toLocaleDateString('en-CA', { timeZone: 'America/New_York' }).replace(/-/g, '');
+    const dates = [...new Set([todayET, yesterdayET])];
+    const allEvents = [];
+    for (const d of dates) {
+      const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=${d}`);
+      const j = await r.json();
+      allEvents.push(...(j.events || []));
+    }
+    return allEvents.map(ev => {
+      const comp = ev.competitions && ev.competitions[0];
+      if (!comp) return null;
+      const home = comp.competitors.find(c => c.homeAway === 'home');
+      const away = comp.competitors.find(c => c.homeAway === 'away');
+      if (!home || !away) return null;
+      return {
+        sport: 'NFL',
+        away: away.team && (away.team.displayName || away.team.name),
+        home: home.team && (home.team.displayName || home.team.name),
+        commenceTime: ev.date,
+        started: !!(comp.status && comp.status.type && comp.status.type.state !== 'pre'),
+      };
+    }).filter(g => g && g.away && g.home && g.commenceTime);
+  } catch {
+    return [];
+  }
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
@@ -99,7 +140,14 @@ module.exports = async function handler(req, res) {
     const results = await Promise.all(
       Object.entries(SPORT_KEYS).map(([sport, key]) => fetchEventsForSport(sport, key, apiKey))
     );
-    const schedule = results.flat();
+    const nflEspn = await fetchNflFromESPN();
+    // Merge, don't duplicate: keep The Odds API's NFL entries as-is (regular season,
+    // wherever it has them) and only ADD ESPN games not already covered by team+date.
+    const existingNflKeys = new Set(
+      results.flat().filter(g => g.sport === 'NFL').map(g => `${g.away}|${g.home}|${(g.commenceTime||'').slice(0,10)}`)
+    );
+    const newFromEspn = nflEspn.filter(g => !existingNflKeys.has(`${g.away}|${g.home}|${(g.commenceTime||'').slice(0,10)}`));
+    const schedule = results.flat().concat(newFromEspn);
     await upstash(['SET', CACHE_KEY, JSON.stringify({ schedule, fetchedAt: Date.now() }), 'EX', String(CACHE_TTL_SEC * 2)]);
     return res.status(200).json({ schedule, cached: false });
   } catch (err) {
