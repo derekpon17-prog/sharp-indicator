@@ -149,6 +149,16 @@ function polyDisplayScore(group) {
   return { score: capped, bestRank: r.bestRank, rawScore: r.rawScore };
 }
 
+// BUGFIX 2026-08-21 (per Derek, real incident): confirmed directly -- third occurrence of
+// the same class of bug already fixed in the client's contrast-line matching and net-out
+// grouping. This key was title+outcome only, no eventSlug -- meaning a wallet's alerts
+// for the same two teams across DIFFERENT days of a series (e.g. Seattle Mariners vs.
+// Milwaukee Brewers played more than once) could get merged into one group, with the
+// group's eventSlug silently locked to whichever alert was processed first. Downstream,
+// autoTrackPlays' dedup key inherits that wrong eventSlug and can then falsely match an
+// existing tracked play from a DIFFERENT day, silently skipping a genuinely new trade as
+// if it were a duplicate. Confirmed real: laozishudaosan's Aug 20 Athletics/Mariners/
+// Guardians trades were never tracked despite being correctly SPEC+WATCHED tagged.
 function buildTrackingCandidates(alerts, windowMs, filterFn) {
   const cutoff = Date.now() - windowMs, groups = {};
   alerts.forEach(a => {
@@ -157,7 +167,7 @@ function buildTrackingCandidates(alerts, windowMs, filterFn) {
     if (ts < cutoff) return;
     const sp = a.sport || detectSport(a.title);
     if (!sp) return;
-    const key = (a.title || '') + '||' + (a.outcome || ''); if (!key || key === '||') return;
+    const key = (a.title || '') + '||' + (a.outcome || '') + '||' + (a.eventSlug || ''); if (!key || key === '||||') return;
     if (!groups[key]) groups[key] = { title: a.title || 'Unknown', outcome: a.outcome || '', eventSlug: a.eventSlug, sport: sp, buys: [], totalVol: 0 };
     groups[key].buys.push(a); groups[key].totalVol += (a.usdValue || 0);
   });
