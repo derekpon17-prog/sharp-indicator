@@ -843,8 +843,30 @@ module.exports = async function handler(req, res) {
     const schedules = {};
     for (const sp of sportsToCheck) schedules[sp] = await getSchedule(sp);
 
-    liveGameChecks.forEach((cand) => {
+    // BUGFIX 2026-08-20 (per Derek, real incident): confirmed directly -- laozishudaosan's
+    // real Orioles trade was correctly rejected as live at the time it was made (game
+    // genuinely in progress), but once that game later fully concluded and dropped out of
+    // active schedule data entirely, findGameForTrade found no match, the code correctly
+    // "failed open" (its own separate, deliberate safety net for missing schedule data),
+    // and the SAME trade got a silent second chance -- surfacing hours later as if it were
+    // new, on a game whose outcome was already known. A live rejection needs to be
+    // permanent, not re-decided from scratch every run based on whatever schedule data
+    // happens to still be available. Tracked by transactionHash, 7-day TTL (long enough
+    // to cover any realistic delay, short enough not to accumulate forever).
+    for (const cand of liveGameChecks) {
       const { wallet, usd, sport, t, traderInfo } = cand;
+      const txKey = 'liverejected:' + (t.transactionHash || (wallet + '|' + t.title + '|' + t.timestamp));
+      let alreadyLiveRejected = false;
+      try {
+        const r = await upstashPost(['GET', txKey]);
+        alreadyLiveRejected = r.ok && r.result != null;
+      } catch { /* best-effort -- falls through to the normal check below on failure */ }
+      if (alreadyLiveRejected) {
+        results.poly.liveSkipped++;
+        if (cand.dbg) cand.dbg.reject = 'live: game already started (previously flagged, permanent)';
+        continue;
+      }
+
       const game = findGameForTrade(t, schedules[sport] || []);
       if (game && game.commenceTime) {
         const commenceTs = Math.floor(new Date(game.commenceTime).getTime() / 1000);
@@ -856,7 +878,8 @@ module.exports = async function handler(req, res) {
         if (game.started === true || ts > commenceTs) {
           results.poly.liveSkipped++;
           if (cand.dbg) cand.dbg.reject = 'live: game already started';
-          return;
+          try { await upstashPost(['SET', txKey, '1', 'EX', '604800']); } catch {}
+          continue;
         }
       }
       // No matching game found (e.g. schedule fetch failed, or a market our
@@ -864,7 +887,7 @@ module.exports = async function handler(req, res) {
       const key = `${wallet}||${t.title}`;
       const ex  = walletMarketBest.get(key);
       if (!ex || usd > ex.usd) walletMarketBest.set(key, { wallet, usd, sport, t, traderInfo, dbg: cand.dbg });
-    });
+    }
 
     /* SPORT-SPECIFIC PnL GATE.
        Leaderboard presence only proves a wallet made money SOMEWHERE — that board ranks
