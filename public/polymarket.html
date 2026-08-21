@@ -2153,6 +2153,14 @@ function autoTrackPlays(groups){
 // skips its final score>=40 filter — that gate is right for deciding what's worth
 // SHOWING, but was also silently deciding what counts toward a specialist's tracked
 // record. Restricted to SPEC-only alerts, so whale tracking is unaffected.
+// BUGFIX 2026-08-21 (per Derek, real incident): same class of bug already fixed in
+// buildTrendingGroups/netOutBothSidesTraders and just fixed server-side in grade-cron.js
+// -- title+outcome grouping with no eventSlug meant a wallet's alerts for the same two
+// teams across different days of a series could get merged, silently locking the group's
+// eventSlug to whichever alert was processed first. autoTrackPlays' dedup key inherits
+// that eventSlug downstream, so a genuinely new trade could get falsely matched against
+// an existing tracked play from a DIFFERENT day and skipped as a duplicate. Confirmed
+// real: laozishudaosan's Aug 20 MLB trades weren't appearing as open plays.
 function buildSpecialistTrackingCandidates(){
   const cutoff=Date.now()-24*60*60*1000,groups={};
   alerts.forEach(a=>{
@@ -2163,7 +2171,7 @@ function buildSpecialistTrackingCandidates(){
     if(!sp)return;
     if(isStaleAlert(a))return;
     if(isLiveAlert(a))return;
-    const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
+    const key=(a.title||'')+'||'+(a.outcome||'')+'||'+(a.eventSlug||'');if(!key||key==='||||')return;
     if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,sport:sp,buys:[],totalVol:0,latestTs:0};
     groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
     if(ts>groups[key].latestTs)groups[key].latestTs=ts;
@@ -2185,7 +2193,7 @@ function buildWatchedTrackingCandidates(){
     if(!sp)return;
     if(isStaleAlert(a))return;
     if(isLiveAlert(a))return;
-    const key=(a.title||'')+'||'+(a.outcome||'');if(!key||key==='||')return;
+    const key=(a.title||'')+'||'+(a.outcome||'')+'||'+(a.eventSlug||'');if(!key||key==='||||')return;
     if(!groups[key])groups[key]={title:a.title||'Unknown',outcome:a.outcome||'',eventSlug:a.eventSlug,sport:sp,buys:[],totalVol:0,latestTs:0};
     groups[key].buys.push(a);groups[key].totalVol+=(a.usdValue||0);
     if(ts>groups[key].latestTs)groups[key].latestTs=ts;
