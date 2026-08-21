@@ -357,16 +357,22 @@ async function getScheduleFromESPN(sport) {
   } catch { return []; }
 }
 
+// FEATURE 2026-08-21 (per Derek): "can we do poly tracking only, no odds API" -- this
+// function is ONLY ever used for the live-game check (confirmed: not called anywhere in
+// Sharp Line's own price-fetching path), so it doesn't need paid data at all, just
+// schedule/started info. ESPN already proven fully reliable for this all session
+// (including the UTC/ET slug fix) -- tried first now, so Poly tracking's live-check
+// never touches paid quota. The Odds API is now a last-resort fallback only, for a sport
+// ESPN's free scoreboard doesn't cover (ESPN_SPORT_PATH is MLB/NBA/NFL/NHL only).
 async function getSchedule(sport) {
+  const espnSched = await getScheduleFromESPN(sport);
+  if (espnSched.length) return espnSched;
   const d = await fetchOddsPayload(sport);
   const sched = (d && d.schedule) || [];
   if (sched.length) return sched;
   const fromPlays = ((d && d.plays) || []).filter(p => p.commenceTime)
     .map(p => ({ away: p.away, home: p.home, commenceTime: p.commenceTime, started: false }));
-  if (fromPlays.length) return fromPlays;
-  // Both odds-API paths came back empty (e.g. quota exhausted) -- fall back to ESPN's
-  // free scoreboard rather than silently letting live-game suppression stop working.
-  return getScheduleFromESPN(sport);
+  return fromPlays;
 }
 // Reuses the exact team-substring + date-gate pattern already shipped in matchLineToAlert.
 // Requires BOTH teams (stricter than matchLineToAlert's either/or) since here we're
