@@ -2990,7 +2990,7 @@ function renderAlerts(){
     })():'';
     return '<div class="al-row'+(big?' big':'')+'" data-wallet="'+(b.wallet||'')+'" data-sport="'+(sport||'')+'">'
       +'<div class="al-av-fb">'+init+'</div>'
-      +'<div class="al-main"><div class="al-trader">'+(isRankedWhale(b)?'\u{1F40B} ':'')+shortWallet(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+'</div>'
+      +'<div class="al-main"><div class="al-trader">'+(isRankedWhale(b)?'\u{1F40B} ':'')+shortWallet(b.traderName||'Anon')+bdg(b.categories)+sportTag+'</div><div class="al-mkt">'+(b.title||'Unknown')+(function(){var gd=extractSlugDate(b);return gd?' <span style="color:var(--t4);font-weight:600;font-size:11px">('+gdt(gd)+')</span>':'';})()+'</div>'
       +(function(){
           var c=traderRecordChip(b,alertsLk);
           if(c.wins===null)return '';
