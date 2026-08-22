@@ -589,6 +589,32 @@ module.exports = async function handler(req, res) {
     // BUGFIX: this used to redeclare its own separate, incomplete SERIES_IDS here,
     // drifted out of sync with the module-level one runHistoricalDiscovery uses (missing
     // NHL/NCAAF/NCAAB). Now shares the single source of truth defined above instead.
+    // DIAGNOSTIC 2026-08-22 (per Derek, real question): "will a prop just come through
+    // if we do nothing" -- need to see a real prop market's actual slug/structure to
+    // know whether it would even pass the existing sport-detection at all, since props
+    // apparently don't show up as top-level events (all samples so far were game lines).
+    // ?checkEventMarkets=EVENT_ID pulls that event's individual markets directly.
+    if (req.query && req.query.checkEventMarkets) {
+      try {
+        const r = await fetch(`https://gamma-api.polymarket.com/events/${req.query.checkEventMarkets}`);
+        const ev = await r.json();
+        const markets = (ev && ev.markets) || [];
+        return res.status(200).json({
+          ok: true,
+          eventId: req.query.checkEventMarkets,
+          eventSlug: ev.slug,
+          eventTitle: ev.title,
+          marketCount: markets.length,
+          sampleMarkets: markets.slice(0, 15).map(m => ({
+            slug: m.slug, question: m.question, groupItemTitle: m.groupItemTitle,
+            outcomeType: m.outcome_type || m.outcomeType, propType: m.prop_type || m.propType,
+          })),
+        });
+      } catch (e) {
+        return res.status(200).json({ ok: false, error: e.message });
+      }
+    }
+
     if (req.query && req.query.checkSeries) {
       const sport = String(req.query.checkSeries).toUpperCase();
       const seriesId = SERIES_IDS[sport];
