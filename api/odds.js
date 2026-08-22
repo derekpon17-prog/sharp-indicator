@@ -972,12 +972,12 @@ module.exports=async function handler(req,res){
     // BUGFIX 2026-08-19 (per Derek, real incident): quota ran out mid-month -- confirmed
     // the actual math: at the previous every-15-min polling rate with zero caching, this
     // endpoint alone consumed ~51,840 credits/month against a 20,000 budget, 159% over.
-    // This was never sustainable, not a recent regression. Caches the RAW odds response
-    // (just the games array from The Odds API) in KV, keyed per sport, 40-min TTL -- kept
-    // deliberately short of the old ~30-min intent while landing comfortably under
-    // budget (~19,440/month at this rate, real margin instead of an exact match).
-    // Everything else (prevLines, current time, day report) still loads fresh every call
-    // -- only the actual quota-consuming fetch itself is what's being reused.
+    // UPDATED 2026-08-21 (per Derek): raised 40min -> 60min TTL for real margin under
+    // budget (~12,960/month at this rate vs ~19,440 at 40min -- 35% margin instead of
+    // 3%). Real tradeoff, not free: Sharp Line's Pinnacle-vs-soft-book prices can now be
+    // up to 60min stale before a genuine line move is reflected in the signal, up from
+    // 40min. Everything else (prevLines, current time, day report) still loads fresh
+    // every call -- only the actual quota-consuming fetch itself is being reused.
     const oddsRawCacheKey = 'odds-raw-cache:'+sport;
     const dayET = easternDay(Date.now());
     const [cachedRaw, prevLines, openMap, closeMap, dayReport] = await Promise.all([
@@ -1008,7 +1008,7 @@ module.exports=async function handler(req,res){
       if(!up.ok)return res.status(200).json({plays:[],error:'Odds API error '+up.status,quota:{remaining:rem,used}});
 
       games=await up.json();
-      try{ await upstashPost(['SET', oddsRawCacheKey, JSON.stringify(games), 'EX', '2400']); }catch{}
+      try{ await upstashPost(['SET', oddsRawCacheKey, JSON.stringify(games), 'EX', '3600']); }catch{}
     }
     const now=Date.now();
     const upcoming=(Array.isArray(games)?games:[]).filter(g=>{
