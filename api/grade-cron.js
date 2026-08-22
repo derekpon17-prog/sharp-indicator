@@ -337,6 +337,12 @@ module.exports = async function handler(req, res) {
           // Orioles wasn't" -- need each real trade's exact timestamp, not just the most
           // recent per sport, to actually answer this instead of guessing.
           allTradesRaw: req.query.allTrades ? (Array.isArray(trades) ? trades.map(t => ({ title: t.title, outcome: t.outcome, timestamp: t.timestamp, usd: (parseFloat(t.size)||0)*(parseFloat(t.price)||0) })) : []) : undefined,
+          // DIAGNOSTIC 2026-08-22 (per Derek, real question): "are we set to capture
+          // props" -- need to see the FULL raw trade object (not just the 4 fields
+          // above) to know whether Polymarket's own outcome_type/prop_type metadata is
+          // even present on the trades endpoint, since our whole pipeline currently only
+          // ever looks at title/slug text, never this metadata.
+          firstRawTradeFullObject: req.query.rawObject && Array.isArray(trades) && trades[0] ? trades[0] : undefined,
         });
       } catch (e) {
         return res.status(200).json({ ok: false, error: e.message });
