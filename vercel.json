@@ -1,1 +1,7 @@
-{}
+{
+  "functions": {
+    "api/discover.js": {
+      "maxDuration": 60
+    }
+  }
+}
