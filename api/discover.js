@@ -640,7 +640,29 @@ module.exports = async function handler(req, res) {
     const evals = req.query && req.query.evals ? parseInt(req.query.evals) : undefined;
     const force = String((req.query && req.query.force) || '') === '1';
     const sportFocus = req.query && req.query.sportFocus ? String(req.query.sportFocus) : undefined;
-    return res.status(200).json(await runDiscovery({ evals, force, sportFocus }));
+    const liveResult = await runDiscovery({ evals, force, sportFocus });
+
+    // AUTOMATION 2026-08-26 (per Derek): the historical NFL/NCAAF backfill was designed
+    // to run via "a dedicated cron job" (see comment above) but that cron was never
+    // actually created -- confirmed via two real days of zero progress between manual
+    // checks (180 events / 15,224 wallets NFL, 80 events / 6,636 wallets NCAAF, both
+    // frozen at exactly the last manual call). Piggybacking one small batch of each onto
+    // this already-running 15-min cron instead of requiring a new external cron entry.
+    // Small budgets (8s each) so this can't meaningfully threaten the 60s function
+    // ceiling alongside runDiscovery's own work.
+    let historicalNFL = null, historicalNCAAF = null;
+    try {
+      historicalNFL = await runHistoricalDiscovery('NFL', { budgetMs: 8000 });
+    } catch (e) {
+      historicalNFL = { ok: false, error: e.message };
+    }
+    try {
+      historicalNCAAF = await runHistoricalDiscovery('NCAAF', { budgetMs: 8000 });
+    } catch (e) {
+      historicalNCAAF = { ok: false, error: e.message };
+    }
+
+    return res.status(200).json({ ...liveResult, historicalNFL, historicalNCAAF });
   } catch (err) {
     return res.status(200).json({ ok: false, error: err.message });
   }
