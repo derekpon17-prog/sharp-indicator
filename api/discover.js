@@ -501,14 +501,36 @@ async function runHistoricalDiscovery(sport, opts) {
   }
 
   // PHASE 2: evaluate newly-found wallets, concurrent batches, same gate as normal discovery.
+  // FIX 2026-08-26 (per Derek): 'pending' verdicts (real wallet, under the 20-settled-bet
+  // floor) were being added to the permanent evaluatedSet exactly like a real reject --
+  // silently discarded, never re-checked, even though the underlying wallet might clear
+  // the bar with more real games played. Confirmed this is a historical-pipeline-only gap:
+  // the live discovery path already re-checks every candidate every 24h via c.lastEval, but
+  // this evaluatedSet has no such expiry at all. Only 'reject'/'unknown' -- real negative
+  // evidence, or a wallet whose historical record won't change -- get permanently excluded
+  // here; ongoing monitoring for a wallet that becomes active again is live discovery's job,
+  // not this backfill's. 'pending' wallets now persist in their own bucket with a recheck
+  // date instead of vanishing.
   const roster = (await kvGetJson('discover:roster')) || {};
   const evaluatedKey = `discover:historical:${sport}:evaluated`;
   let evaluatedWallets = (await kvGetJson(evaluatedKey)) || [];
   const evaluatedSet = new Set(evaluatedWallets);
-  const toEvaluate = progress.walletsFound.filter(w => !evaluatedSet.has(w));
+
+  const pendingKey = `discover:historical:${sport}:pending`;
+  const pendingMap = (await kvGetJson(pendingKey)) || {};
+  const PENDING_RECHECK_MS = 3 * 24 * 60 * 60 * 1000; // 3 days -- real sample only grows via real games played
+
+  const toEvaluate = progress.walletsFound.filter(w => {
+    if (evaluatedSet.has(w)) return false; // permanently done (promoted, rejected, or unknown)
+    const p = pendingMap[w];
+    if (p && (Date.now() - p.lastCheckedAt) < PENDING_RECHECK_MS) return false; // pending, not due yet
+    return true;
+  });
 
   if (!toEvaluate.length) {
-    return { ok: true, sport, phase: 'done', totalWalletsFound: progress.walletsFound.length, evaluated: evaluatedWallets.length, promoted: Object.keys(roster).filter(k => k.endsWith('|' + sport)).length };
+    return { ok: true, sport, phase: 'done', totalWalletsFound: progress.walletsFound.length,
+      evaluated: evaluatedWallets.length, pending: Object.keys(pendingMap).length,
+      promoted: Object.keys(roster).filter(k => k.endsWith('|' + sport)).length };
   }
 
   const results = [];
@@ -517,7 +539,6 @@ async function runHistoricalDiscovery(sport, opts) {
     const batch = toEvaluate.slice(i, i + CONCURRENCY);
     const verdicts = await Promise.all(batch.map(wallet => evaluateCandidate({ wallet, sport }, { fresh: false }).then(v => ({ wallet, v }))));
     verdicts.forEach(({ wallet, v }) => {
-      evaluatedSet.add(wallet);
       if (v.verdict === 'promote') {
         const rk = wallet + '|' + sport;
         const prev = roster[rk];
@@ -526,6 +547,16 @@ async function runHistoricalDiscovery(sport, opts) {
           roiPct: v.roiPct, staked: v.staked, pnlPerMarket: v.pnlPerMarket, avgEntryByCount: v.avgEntryByCount,
           entrySkew: v.entrySkew, reason: v.reason, addedAt: prev ? prev.addedAt : Date.now(), confirmedAt: Date.now(),
           source: 'historical-last-season' };
+        evaluatedSet.add(wallet);
+        delete pendingMap[wallet];
+      } else if (v.verdict === 'pending') {
+        pendingMap[wallet] = { wallet, sport, sample: v.sample || 0, reason: v.reason,
+          firstSeenAt: (pendingMap[wallet] && pendingMap[wallet].firstSeenAt) || Date.now(),
+          lastCheckedAt: Date.now() };
+      } else {
+        // reject or unknown -- real negative evidence, or unrecoverable this pass. Done for good.
+        evaluatedSet.add(wallet);
+        delete pendingMap[wallet];
       }
       results.push({ wallet: wallet.slice(0, 10), verdict: v.verdict, reason: v.reason });
     });
@@ -533,12 +564,14 @@ async function runHistoricalDiscovery(sport, opts) {
 
   evaluatedWallets = [...evaluatedSet];
   await kvSetJson(evaluatedKey, evaluatedWallets, CAND_TTL);
+  await kvSetJson(pendingKey, pendingMap, CAND_TTL);
   await kvSetJson('discover:roster', roster, ROSTER_TTL);
 
   return {
     ok: true, sport, phase: 'evaluating',
     totalWalletsFound: progress.walletsFound.length,
     evaluatedSoFar: evaluatedWallets.length,
+    pendingCount: Object.keys(pendingMap).length,
     remainingToEvaluate: toEvaluate.length - results.length,
     thisRunCount: results.length,
     thisRunPromotions: results.filter(r => r.verdict === 'promote').length,
@@ -552,6 +585,15 @@ module.exports = async function handler(req, res) {
     if (req.query && req.query.roster) {
       const sport = String(req.query.roster).toUpperCase();
       return res.status(200).json({ ok: true, sport, roster: await getRoster(sport === 'ALL' ? null : sport) });
+    }
+    // FEATURE 2026-08-26 (per Derek): read-only view of wallets sitting in the historical
+    // pipeline's pending bucket (real wallet, under 20 settled bets, rechecked every 3
+    // days rather than discarded). ?pending=NFL -- built now so the dashboard section
+    // scoped for Saturday has something real to read from day one.
+    if (req.query && req.query.pending) {
+      const sport = String(req.query.pending).toUpperCase();
+      const pendingMap = (await kvGetJson(`discover:historical:${sport}:pending`)) || {};
+      return res.status(200).json({ ok: true, sport, pending: Object.values(pendingMap) });
     }
     // FEATURE 2026-08-19 (per Derek): ?historical=NFL runs one batch of the historical
     // discovery pipeline (harvest phase, then evaluate phase). Designed to be called
