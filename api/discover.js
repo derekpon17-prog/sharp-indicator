@@ -608,7 +608,12 @@ async function runHistoricalDiscovery(sport, opts) {
         evaluatedSet.add(wallet);
         delete pendingMap[wallet];
       } else if (v.verdict === 'pending') {
+        /* FIX 2026-08-27 (per Derek, seen live on the site): provisional cards were
+           showing raw 0x addresses -- nicknames were only ever assigned at PROMOTION,
+           never at pending. Same assignNickname call, same shared KV keys/counter as
+           promotion and polymarket-notify -- keeps existing name if already assigned. */
         pendingMap[wallet] = { wallet, sport, sample: v.sample || 0, reason: v.reason,
+          name: (pendingMap[wallet] && pendingMap[wallet].name) || await assignNickname(wallet),
           firstSeenAt: (pendingMap[wallet] && pendingMap[wallet].firstSeenAt) || Date.now(),
           lastCheckedAt: Date.now() };
       } else if (v.verdict === 'unknown' && /stats unavailable|fetch|timeout|rate/i.test(v.reason || '')) {
