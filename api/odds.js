@@ -31,6 +31,21 @@ const MLV_GAP_PP    = 1.0;   // residual soft-book lag for MID_MOVE (mirrors PIN
 const MLV_STEAM_MIN = 0.005; // implied-prob rise for a soft book to count toward steam width
 const MLV_QUALIFY   = 60;    // shadow-log floor
 
+/* ── SP CONFIRMATION (added 2026-08-27, per Derek) — SHADOW ONLY ──────────
+   WHY THIS EXISTS. Rotation announcements can move a line by themselves -- that's not
+   sharp money, it's news. This surfaces "a probable pitcher just changed for this game"
+   as its own visible field, the same way weather and ML Velocity already sit alongside
+   siScore without touching it. Deliberately NOT wired into siScore/pillars.rlm: this file's
+   own established pattern (every addition since the 52/38/10 formula was locked in --
+   weather, ML Velocity, relSignal, exSignal -- shipped as shadow first, only promoted into
+   real scoring as a separate, deliberate, calibrated decision). Suppressing RLM outright
+   today would be exactly the kind of unilateral threshold change that's caused real
+   problems before. This makes the information visible; whether/how it discounts RLM is a
+   council calibration decision for later, with real data to check against.
+   3h window is a first-cut default, not tuned -- revisit once there's real data on how
+   long after a rotation announcement a line keeps moving for that reason alone. */
+const PITCHER_CHANGE_WINDOW_HOURS = 3;
+
 const SPORT_KEYS = {
   MLB:'baseball_mlb',NFL:'americanfootball_nfl',
   NBA:'basketball_nba',NHL:'icehockey_nhl',
@@ -387,6 +402,69 @@ async function fetchWeather(play){
     return wx;
   }catch(e){
     return{state:'NONE',score:0,label:'Weather error: '+e.message,shadow:true};
+  }
+}
+
+async function fetchPitcherWatch(play){
+  // MLB only -- Odds API team names, matched loosely against MLB Stats API's schedule
+  // (free, no key) the same way kalshi.js matches team names against Kalshi tickers.
+  const cacheKey='pw:'+play.id;
+  try{
+    const cached=await upstashPost(['GET',cacheKey]);
+    if(cached){
+      const c=typeof cached==='string'?JSON.parse(cached):cached;
+      // Short cache on purpose -- a change needs to be caught close to when it happens,
+      // not read stale from an hour-old cache the way weather's 2h cache is fine to be.
+      if(Date.now()-(c.checkedAt||0)<15*60000)return c;
+    }
+  }catch{}
+  if(!play.commenceTime)return{state:'NONE',score:0,label:'No game time to look up',shadow:true};
+  const dateStr=new Date(play.commenceTime).toISOString().slice(0,10);
+  try{
+    const r=await fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1&date='+dateStr+'&hydrate=probablePitcher');
+    if(!r.ok)return{state:'NONE',score:0,label:'MLB schedule fetch failed ('+r.status+')',shadow:true};
+    const d=await r.json();
+    const games=(d.dates&&d.dates[0]&&d.dates[0].games)||[];
+    const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
+    const awayLast=norm(play.away).split(' ').pop(), homeLast=norm(play.home).split(' ').pop();
+    const match=games.find(g=>{
+      const gA=norm(g.teams&&g.teams.away&&g.teams.away.team&&g.teams.away.team.name);
+      const gH=norm(g.teams&&g.teams.home&&g.teams.home.team&&g.teams.home.team.name);
+      return gA.includes(awayLast)&&gH.includes(homeLast);
+    });
+    if(!match)return{state:'NONE',score:0,label:'No MLB schedule match for '+play.away+' @ '+play.home,shadow:true};
+    const awayP=(match.teams.away.probablePitcher&&match.teams.away.probablePitcher.fullName)||null;
+    const homeP=(match.teams.home.probablePitcher&&match.teams.home.probablePitcher.fullName)||null;
+
+    // Change detection: compare against the last confirmed pair for this exact game,
+    // stored under its own long-lived key -- separate from the short cache above.
+    const watchKey='pitcherwatch:'+play.id;
+    let prev=null;
+    try{
+      const prevRaw=await upstashPost(['GET',watchKey]);
+      if(prevRaw)prev=typeof prevRaw==='string'?JSON.parse(prevRaw):prevRaw;
+    }catch{}
+    const now=Date.now();
+    const changed=!!prev&&(prev.away!==awayP||prev.home!==homeP);
+    const changedAt=changed?now:(prev?prev.changedAt:now);
+    try{await upstashPost(['SET',watchKey,JSON.stringify({away:awayP,home:homeP,changedAt}),'EX','172800']);}catch{}
+    const hoursSinceChange=Math.round(((now-changedAt)/3600000)*10)/10;
+    const recentChange=!!(awayP||homeP)&&hoursSinceChange<PITCHER_CHANGE_WINDOW_HOURS;
+
+    const pw={
+      state:recentChange?'RECENT_CHANGE':(awayP||homeP?'CONFIRMED':'NONE'),
+      score:recentChange?60:0,
+      awayPitcher:awayP,homePitcher:homeP,
+      changedAt,hoursSinceChange,
+      label:recentChange
+        ?'Probable pitcher changed '+hoursSinceChange+'h ago \u2014 line moves right now may be rotation news, not sharp money'
+        :(awayP||homeP?'Pitchers confirmed, no recent change':'No probable pitcher data yet'),
+      shadow:true,checkedAt:now,
+    };
+    try{await upstashPost(['SET',cacheKey,JSON.stringify(pw),'EX','900']);}catch{}
+    return pw;
+  }catch(e){
+    return{state:'NONE',score:0,label:'Pitcher watch error: '+e.message,shadow:true};
   }
 }
 
@@ -1125,10 +1203,19 @@ module.exports=async function handler(req,res){
       const wxres=await Promise.all(soon.map(p=>fetchWeather(p)));
       soon.forEach((p,i)=>{wxMap[p.id]=wxres[i];});
     }
+    // Pitcher watch -- unlike weather, not windowed to "soon" games. A forecast goes
+    // stale with distance; a probable-pitcher announcement doesn't, so every MLB play
+    // in the slate gets checked regardless of how far out it is.
+    const pwMap={};
+    if(sport==='MLB'){
+      const pwres=await Promise.all(velPlays.map(p=>fetchPitcherWatch(p)));
+      velPlays.forEach((p,i)=>{pwMap[p.id]=pwres[i];});
+    }
     const withShadow=velPlays.map(p=>({...p,
       relSignal:computeRelSignal(p,boardStats),
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
+      pitcherWatch:pwMap[p.id]||null,
       /* BUGFIX: this exposed only closeMap[id].h2h[p.sharpSide], but sharpSide is the
          literal string '—' on every no-signal game — which is the overwhelming majority
          of the board — so the lookup always missed and closeLine.pinnacle came back null
