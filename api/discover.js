@@ -608,12 +608,20 @@ async function runHistoricalDiscovery(sport, opts) {
         evaluatedSet.add(wallet);
         delete pendingMap[wallet];
       } else if (v.verdict === 'pending') {
-        /* FIX 2026-08-27 (per Derek, seen live on the site): provisional cards were
-           showing raw 0x addresses -- nicknames were only ever assigned at PROMOTION,
-           never at pending. Same assignNickname call, same shared KV keys/counter as
-           promotion and polymarket-notify -- keeps existing name if already assigned. */
+        /* REVERTED 2026-08-27 (per Derek, real problem seen live): the previous fix here
+           assigned pending wallets a name from the SAME scarce pool/counter used for real
+           promotions. Pending is a huge, constantly-refreshed population -- thousands of
+           wallets, most never individually looked at -- so it burned through the 80-name
+           pool in hours, producing collisions like SilverRex23 and SilverRex47 as two
+           completely unrelated wallets. That's worse than the raw address it replaced:
+           not just ugly, actively misleading (implies a relationship that doesn't exist).
+           Nicknames now stay reserved for PROMOTION only, matching the pool's original
+           intent (memorable names for a small, meaningful set) -- pending cards fall back
+           to the raw address, which is honest even if less pretty. If a nicer pending
+           display is wanted later, it needs a genuinely separate, non-scarce scheme, not
+           reuse of this pool -- a real design decision, not something to default into. */
         pendingMap[wallet] = { wallet, sport, sample: v.sample || 0, reason: v.reason,
-          name: (pendingMap[wallet] && pendingMap[wallet].name) || await assignNickname(wallet),
+          name: (pendingMap[wallet] && pendingMap[wallet].name) || null,
           firstSeenAt: (pendingMap[wallet] && pendingMap[wallet].firstSeenAt) || Date.now(),
           lastCheckedAt: Date.now() };
       } else if (v.verdict === 'unknown' && /stats unavailable|fetch|timeout|rate/i.test(v.reason || '')) {
@@ -675,6 +683,21 @@ module.exports = async function handler(req, res) {
        touch discover:roster (real promotions survive) or the harvest progress (no re-walking
        events). Re-evaluation is idempotent: a wallet that legitimately rejected will simply
        reject again. */
+    /* ADMIN 2026-08-27 (per Derek): ?clearPendingNames=SPORT strips the bad pool-sourced
+       names already assigned to the pending bucket before the revert above shipped --
+       cheap and surgical, no re-evaluation needed. Leaves sample/reason/everything else
+       untouched, just nulls .name so the frontend falls back to the honest raw address. */
+    if (req.query && req.query.clearPendingNames) {
+      const sport = String(req.query.clearPendingNames).toUpperCase();
+      const pendingKey = `discover:historical:${sport}:pending`;
+      const pendingMap = (await kvGetJson(pendingKey)) || {};
+      let cleared = 0;
+      for (const k of Object.keys(pendingMap)) {
+        if (pendingMap[k].name) { pendingMap[k].name = null; cleared++; }
+      }
+      await kvSetJson(pendingKey, pendingMap, CAND_TTL);
+      return res.status(200).json({ ok: true, sport, cleared, total: Object.keys(pendingMap).length });
+    }
     if (req.query && req.query.resetEvaluated) {
       const sport = String(req.query.resetEvaluated).toUpperCase();
       const before = ((await kvGetJson(`discover:historical:${sport}:evaluated`)) || []).length;
