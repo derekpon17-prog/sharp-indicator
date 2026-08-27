@@ -497,10 +497,22 @@ async function sendNtfy(topic, title, body, priority = 'high') {
 }
 
 /* ─── SEND DISCORD ────────────────────────────────────────
-   Webhook URL comes from process.env.DISCORD_WEBHOOK_URL — never hardcode it here. It's a
-   credential: anyone holding the URL can post into that channel, and this file is committed
-   to a repo. Set it once in Vercel (Project Settings → Environment Variables) and it's
-   available to every future deploy without ever touching source. */
+   Webhook URLs come from env vars -- never hardcode them here. They're credentials: anyone
+   holding a URL can post into that channel, and this file is committed to a repo. Set once
+   in Vercel (Project Settings → Environment Variables) and available to every future deploy
+   without ever touching source.
+
+   TWO SEPARATE CHANNELS, TWO SEPARATE VARS (added 2026-08-27, per Derek):
+     DISCORD_WEBHOOK_URL         -- convergence only. Unchanged, still the only thing that
+                                    posts here (2+ wallets on the same side).
+     DISCORD_WEBHOOK_URL_ALERTS  -- every individual Poly alert that passes the existing
+                                    gates. Replaces ntfy for this alert type specifically --
+                                    Sharp Line and Combined Sharp Score alerts (different
+                                    call sites, no wallet/bettor involved) still go to ntfy
+                                    unchanged, since "bettor's record" and "units" don't
+                                    apply to those. If DISCORD_WEBHOOK_URL_ALERTS isn't set,
+                                    this silently no-ops (same fail-open pattern as the
+                                    convergence webhook) rather than erroring. */
 async function sendDiscord(webhookUrl, content) {
   try {
     const r = await fetch(webhookUrl, {
@@ -1061,9 +1073,20 @@ module.exports = async function handler(req, res) {
         `Side: ${alert.outcome || '—'} @ ${price}¢`,
       ].filter(Boolean).join('\n');
 
-      // Title names the population so the phone tells you which cohort fired at a glance.
+      // Title names the population so it's clear which cohort fired at a glance.
       const tag = alert.type === 'SPEC' ? 'Specialist' : 'Whale';
-      const r = await sendNtfy(topic, `⚡ $${usd} ${alert.sport} Poly ${tag}`, body);
+      // CHANGED 2026-08-27 (per Derek): this channel replaces ntfy -- every single alert
+      // that passes the existing gates now goes to its OWN Discord channel (separate from
+      // the convergence channel below, which is untouched), instead of a phone push. Same
+      // body that already had nameWithRecord (overall + by-sport) and unitsLabel built in
+      // -- reused as-is, not reconstructed, so this can't drift from what ntfy was showing.
+      const alertsWebhook = process.env.DISCORD_WEBHOOK_URL_ALERTS;
+      let r = { ok: false };
+      if (alertsWebhook) {
+        const discordContent = `⚡ **$${usd} ${alert.sport} Poly ${tag}**
+` + body;
+        r = await sendDiscord(alertsWebhook, discordContent);
+      }
       if (r.ok) { results.poly.sent++; if (alert.type === 'SPEC') results.poly.specSent++; }
       results.poly.alerts.push({ title: alert.title, usd: Math.round(alert.usdValue), result: r });
       await storeAlert(alert);
@@ -1237,7 +1260,11 @@ module.exports = async function handler(req, res) {
           if (liveNow) continue;
           results.discord.scanned++;
 
-          const names = realBuyers.map(a => nameWithRecord(a, trackedRecords)).join(', ');
+          // CHANGED 2026-08-27 (per Derek): convergence messages had record via
+          // nameWithRecord already, but never units -- only a combined dollar total.
+          // Appends the same per-wallet unitsLabel already used in the standalone alert
+          // body, so each trader's line reads consistently across both Discord channels.
+          const names = realBuyers.map(a => nameWithRecord(a, trackedRecords) + unitsLabel(a.usdValue, a.wallet)).join(', ');
           const realVol = realBuyers.reduce((s, a) => s + (a.usdValue || 0), 0);
           // FEATURE 2026-08-19 (per Derek, real ambiguity): same fix as the main alert body --
           // a bare team-vs-team title gives no way to tell which game in a series this is.
