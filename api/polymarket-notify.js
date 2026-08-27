@@ -505,18 +505,16 @@ async function sendNtfy(topic, title, body, priority = 'high') {
    TWO SEPARATE CHANNELS, TWO SEPARATE VARS (added 2026-08-27, per Derek):
      DISCORD_WEBHOOK_URL   -- convergence only. Unchanged, still the only thing that posts
                               here (2+ wallets on the same side).
-     WEBHOOK_URL_ALERTS    -- every individual Poly alert that passes the existing gates.
-                              Replaces ntfy for this alert type specifically -- Sharp Line
-                              and Combined Sharp Score alerts (different call sites, no
+     DISCORD_WEBHOOK_URL_ALERTS -- every individual Poly alert that passes the existing
+                              gates. Replaces ntfy for this alert type specifically -- Sharp
+                              Line and Combined Sharp Score alerts (different call sites, no
                               wallet/bettor involved) still go to ntfy unchanged, since
-                              "bettor's record" and "units" don't apply to those. NOT named
-                              DISCORD_WEBHOOK_URL_ALERTS -- Discord's own webhook-name field
-                              rejects "DISCORD" as a substring, so Derek's Vercel var is
-                              named WEBHOOK_URL_ALERTS instead (confirmed the mismatch live:
-                              all real alerts came back {ok:false} while convergence, on the
-                              untouched var, sent fine). If unset, silently no-ops rather
-                              than erroring, same fail-open pattern as the convergence
-                              webhook. */
+                              "bettor's record" and "units" don't apply to those. Discord's
+                              own webhook DISPLAY NAME rejects "DISCORD" as a substring --
+                              that's a separate field from this Vercel variable, which does
+                              carry the DISCORD_ prefix like the other one. If unset,
+                              silently no-ops rather than erroring, same fail-open pattern
+                              as the convergence webhook. */
 async function sendDiscord(webhookUrl, content) {
   try {
     const r = await fetch(webhookUrl, {
@@ -1084,13 +1082,13 @@ module.exports = async function handler(req, res) {
       // the convergence channel below, which is untouched), instead of a phone push. Same
       // body that already had nameWithRecord (overall + by-sport) and unitsLabel built in
       // -- reused as-is, not reconstructed, so this can't drift from what ntfy was showing.
-      // FIX 2026-08-27 (per Derek): Discord itself blocked "DISCORD" as a substring in a
-      // webhook name when he tried to set this in Vercel, so the actual env var is named
-      // WEBHOOK_URL_ALERTS, not DISCORD_WEBHOOK_URL_ALERTS. Confirmed live: all 5 real
-      // alerts this run came back {ok:false} while the convergence channel (still reading
-      // DISCORD_WEBHOOK_URL, unaffected by this) sent successfully -- exact signature of a
-      // silently-unset env var, not a real send failure.
-      const alertsWebhook = process.env.WEBHOOK_URL_ALERTS;
+      // CORRECTED 2026-08-27 (per Derek, confirmed via screenshot): the earlier "fix" here
+      // was a real misdiagnosis on Claude's part, not a setup mistake -- Discord's
+      // "DISCORD" naming restriction only applies to the webhook's DISPLAY NAME inside
+      // Discord (what it posts as), a completely separate field from the Vercel env var.
+      // The Vercel variable was DISCORD_WEBHOOK_URL_ALERTS the entire time, confirmed
+      // directly in the Vercel UI. Reverted back to the original name.
+      const alertsWebhook = process.env.DISCORD_WEBHOOK_URL_ALERTS;
       let r = { ok: false };
       if (alertsWebhook) {
         const discordContent = `⚡ **$${usd} ${alert.sport} Poly ${tag}**
@@ -1567,9 +1565,9 @@ module.exports = async function handler(req, res) {
         // dedup state, which was blocking a clean retest after the URL got re-pasted.
         // Reports presence/shape only, never the real URL. Safe to remove once confirmed.
         webhookAlertsEnvCheck: {
-          set: !!process.env.WEBHOOK_URL_ALERTS,
-          looksLikeDiscordUrl: /^https:\/\/discord(app)?\.com\/api\/webhooks\//.test(process.env.WEBHOOK_URL_ALERTS || ''),
-          length: (process.env.WEBHOOK_URL_ALERTS || '').length,
+          set: !!process.env.DISCORD_WEBHOOK_URL_ALERTS,
+          looksLikeDiscordUrl: /^https:\/\/discord(app)?\.com\/api\/webhooks\//.test(process.env.DISCORD_WEBHOOK_URL_ALERTS || ''),
+          length: (process.env.DISCORD_WEBHOOK_URL_ALERTS || '').length,
         },
         /* Sorted NEWEST FIRST. In insertion order this showed ten 52-day-old trades while
            hiding every recent buy, which made it useless for the one question it exists to
