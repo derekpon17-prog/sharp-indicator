@@ -25,6 +25,7 @@
 
 const DATA_API = 'https://data-api.polymarket.com';
 const traderStats = require('./trader-stats.js');
+const kalshi = require('./kalshi.js');
 
 // Mirrors the whitelist in polymarket-notify.js and trader-stats.js.
 const LEAGUE_BY_SLUG = {
@@ -704,7 +705,21 @@ module.exports = async function handler(req, res) {
       historicalNCAAF = { ok: false, error: e.message };
     }
 
-    return res.status(200).json({ ...liveResult, historicalNFL, historicalNCAAF });
+    // STEAM 2026-08-26 (per Derek): same piggyback pattern -- snapshot every tracked
+    // sport's Kalshi markets on the same cadence this cron already runs at, so steam
+    // (rapid price move + real volume, within the actual elapsed window since last
+    // snapshot) gets detected continuously instead of only when someone happens to load
+    // a page. NCAAF skipped -- no confirmed Kalshi series ticker for it yet.
+    const kalshiSteam = {};
+    for (const sp of ['MLB', 'NFL', 'NBA', 'NHL', 'WNBA']) {
+      try {
+        kalshiSteam[sp] = await kalshi.detectSteam(sp);
+      } catch (e) {
+        kalshiSteam[sp] = { ok: false, sport: sp, error: e.message };
+      }
+    }
+
+    return res.status(200).json({ ...liveResult, historicalNFL, historicalNCAAF, kalshiSteam });
   } catch (err) {
     return res.status(200).json({ ok: false, error: err.message });
   }
