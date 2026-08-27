@@ -623,6 +623,22 @@ module.exports = async function handler(req, res) {
     // pipeline's pending bucket (real wallet, under 20 settled bets, rechecked every 3
     // days rather than discarded). ?pending=NFL -- built now so the dashboard section
     // scoped for Saturday has something real to read from day one.
+    /* ADMIN 2026-08-27 (per Derek): ?resetEvaluated=SPORT clears the historical pipeline's
+       "already evaluated, never look again" set so the whole wallet population gets a fresh
+       pass. Needed because thousands of wallets were locked out by transient rate-limit
+       failures ("stats unavailable") BEFORE the retry fix shipped -- they can't self-heal,
+       since the whole point of that set is that it's never revisited. Deliberately does NOT
+       touch discover:roster (real promotions survive) or the harvest progress (no re-walking
+       events). Re-evaluation is idempotent: a wallet that legitimately rejected will simply
+       reject again. */
+    if (req.query && req.query.resetEvaluated) {
+      const sport = String(req.query.resetEvaluated).toUpperCase();
+      const before = ((await kvGetJson(`discover:historical:${sport}:evaluated`)) || []).length;
+      await kvSetJson(`discover:historical:${sport}:evaluated`, [], CAND_TTL);
+      await kvSetJson(`discover:historical:${sport}:pending`, {}, CAND_TTL);
+      return res.status(200).json({ ok: true, sport, clearedEvaluated: before,
+        note: 'Evaluated set cleared. Next ?historical=' + sport + ' call re-evaluates the full population. Roster untouched.' });
+    }
     if (req.query && req.query.pending) {
       const sport = String(req.query.pending).toUpperCase();
       const pendingMap = (await kvGetJson(`discover:historical:${sport}:pending`)) || {};
