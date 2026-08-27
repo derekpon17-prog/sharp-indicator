@@ -503,16 +503,20 @@ async function sendNtfy(topic, title, body, priority = 'high') {
    without ever touching source.
 
    TWO SEPARATE CHANNELS, TWO SEPARATE VARS (added 2026-08-27, per Derek):
-     DISCORD_WEBHOOK_URL         -- convergence only. Unchanged, still the only thing that
-                                    posts here (2+ wallets on the same side).
-     DISCORD_WEBHOOK_URL_ALERTS  -- every individual Poly alert that passes the existing
-                                    gates. Replaces ntfy for this alert type specifically --
-                                    Sharp Line and Combined Sharp Score alerts (different
-                                    call sites, no wallet/bettor involved) still go to ntfy
-                                    unchanged, since "bettor's record" and "units" don't
-                                    apply to those. If DISCORD_WEBHOOK_URL_ALERTS isn't set,
-                                    this silently no-ops (same fail-open pattern as the
-                                    convergence webhook) rather than erroring. */
+     DISCORD_WEBHOOK_URL   -- convergence only. Unchanged, still the only thing that posts
+                              here (2+ wallets on the same side).
+     WEBHOOK_URL_ALERTS    -- every individual Poly alert that passes the existing gates.
+                              Replaces ntfy for this alert type specifically -- Sharp Line
+                              and Combined Sharp Score alerts (different call sites, no
+                              wallet/bettor involved) still go to ntfy unchanged, since
+                              "bettor's record" and "units" don't apply to those. NOT named
+                              DISCORD_WEBHOOK_URL_ALERTS -- Discord's own webhook-name field
+                              rejects "DISCORD" as a substring, so Derek's Vercel var is
+                              named WEBHOOK_URL_ALERTS instead (confirmed the mismatch live:
+                              all real alerts came back {ok:false} while convergence, on the
+                              untouched var, sent fine). If unset, silently no-ops rather
+                              than erroring, same fail-open pattern as the convergence
+                              webhook. */
 async function sendDiscord(webhookUrl, content) {
   try {
     const r = await fetch(webhookUrl, {
@@ -1080,7 +1084,13 @@ module.exports = async function handler(req, res) {
       // the convergence channel below, which is untouched), instead of a phone push. Same
       // body that already had nameWithRecord (overall + by-sport) and unitsLabel built in
       // -- reused as-is, not reconstructed, so this can't drift from what ntfy was showing.
-      const alertsWebhook = process.env.DISCORD_WEBHOOK_URL_ALERTS;
+      // FIX 2026-08-27 (per Derek): Discord itself blocked "DISCORD" as a substring in a
+      // webhook name when he tried to set this in Vercel, so the actual env var is named
+      // WEBHOOK_URL_ALERTS, not DISCORD_WEBHOOK_URL_ALERTS. Confirmed live: all 5 real
+      // alerts this run came back {ok:false} while the convergence channel (still reading
+      // DISCORD_WEBHOOK_URL, unaffected by this) sent successfully -- exact signature of a
+      // silently-unset env var, not a real send failure.
+      const alertsWebhook = process.env.WEBHOOK_URL_ALERTS;
       let r = { ok: false };
       if (alertsWebhook) {
         const discordContent = `⚡ **$${usd} ${alert.sport} Poly ${tag}**
