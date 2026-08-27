@@ -22,6 +22,14 @@
   --mono:"JetBrains Mono",monospace;--sans:"Inter",system-ui,sans-serif;--disp:"Space Grotesk",sans-serif;
   --r:8px;--rl2:14px;--rxl:20px;
 }
+/* PROVISIONAL TIER (2026-08-27) -- deliberately distinct from tier A/B/C cards: dashed
+   border + purple, never solid/gold, so an unconfirmed wallet can't be mistaken at a
+   glance for a real promoted one. */
+.prov-card{background:var(--s2);border:1.5px dashed var(--pl);border-radius:var(--rl2);padding:14px 16px;position:relative}
+.prov-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--purple);background:var(--pl);border:1px solid var(--purple);border-radius:100px;padding:3px 10px;margin-bottom:8px}
+.prov-sample{font-family:var(--mono);font-size:11px;color:var(--t3)}
+.prov-bar-bg{width:100%;height:4px;background:var(--s3);border-radius:2px;margin-top:6px;overflow:hidden}
+.prov-bar-fill{height:100%;background:var(--purple);border-radius:2px}
 html,body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;overflow-x:hidden}
 button,input,select{font-family:inherit;outline:none}
 ::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px}
@@ -788,6 +796,18 @@ select.finput option{background:var(--s2)}
     </div>
     <div class="wgrid" id="wgrid"></div>
     <div id="wempty" class="empty"><div class="empty-ico">&#x1F440;</div><h3>No wallets watched</h3><p>Click Watch on a leaderboard entry to track them</p></div>
+
+    <!-- PROVISIONAL TIER (added 2026-08-27, per Derek + council). Deliberately its own
+         look, not a fourth TIER letter -- Product/UX flagged that reusing the A/B/C badge
+         style would make an unconfirmed, under-20-sample wallet look as trustworthy as a
+         real promoted one. Dashed border + muted purple = "still forming," never solid/
+         gold like a confirmed tier. Reads from /api/discover?pending=SPORT, a real
+         production endpoint already shipped -- not mocked. -->
+    <div class="row-hdr" style="margin-bottom:14px;margin-top:28px">
+      <div class="row-ttl"><em>&#x1F52C;</em>Provisional &mdash; Early Season, Unconfirmed</div>
+    </div>
+    <div id="provgrid" class="wgrid"></div>
+    <div id="provempty" class="empty" style="display:none"><div class="empty-ico">&#x1F52C;</div><h3>Nothing provisional right now</h3><p>Wallets under the 20-settled-bet floor for NFL/NCAAF will surface here as the season builds real samples</p></div>
   </div>
 </div>
 
@@ -1530,7 +1550,7 @@ function showV(v,btn){
   if(v==='dashboard')renderDash();
   if(v==='alerts')renderAlerts();
   if(v==='tracking')renderTracking();
-  if(v==='traders'){renderHot();renderLB();renderWallets();}
+  if(v==='traders'){renderHot();renderLB();renderWallets();renderProvisional();}
 }
 
 /* === FETCH === */
@@ -4373,6 +4393,39 @@ async function renderWallets(){
   const wLk=buildClientTrackedLookup();
   el('wgrid').innerHTML=wallets.map(w=>wcardHTML(w,[],wLk)).join('');
   for(const w of wallets){try{const r=await fetch('https://data-api.polymarket.com/trades?user='+w.wallet+'&side=BUY&takerOnly=true&limit=150');const b=await r.json();const c=el('wc-'+w.wallet);if(c&&Array.isArray(b)){const bd=c.querySelector('.wcard-body');if(bd)bd.innerHTML=wbodyHTML(w,b);}}catch{}}
+}
+// PROVISIONAL TIER (2026-08-27, per Derek + council): reads the real /api/discover
+// ?pending=SPORT endpoint shipped alongside the backend fix. Fails open exactly like
+// every other shadow addition this session -- a failed fetch just leaves the section
+// showing its empty state, never breaks the rest of the page.
+async function renderProvisional(){
+  const grid=el('provgrid'), empty=el('provempty');
+  if(!grid||!empty)return;
+  let all=[];
+  for(const sport of ['NFL','NCAAF']){
+    try{
+      const r=await fetch('https://sharp-indicator-a34j.vercel.app/api/discover?pending='+sport);
+      const d=await r.json();
+      if(d&&d.ok&&Array.isArray(d.pending))all=all.concat(d.pending.map(p=>({...p,sport})));
+    }catch{}
+  }
+  if(!all.length){grid.innerHTML='';empty.style.display='';return;}
+  empty.style.display='none';
+  all.sort((a,b)=>(b.sample||0)-(a.sample||0));
+  grid.innerHTML=all.map(provCardHTML).join('');
+}
+function provCardHTML(p){
+  const sample=p.sample||0;
+  const pct=Math.max(4,Math.min(100,Math.round(sample/20*100)));
+  const wallet=p.wallet?(p.wallet.slice(0,8)+'\u2026'+p.wallet.slice(-4)):'?';
+  const reason=p.reason?esc(p.reason):'';
+  return '<div class="prov-card">'
+    +'<div class="prov-badge">\u{1F52C} Provisional</div>'
+    +'<div style="font-family:var(--mono);font-weight:700;color:var(--t1);font-size:14px">'+esc(p.sport)+' \u00b7 '+wallet+'</div>'
+    +'<div class="prov-sample">'+sample+'/20 settled bets</div>'
+    +'<div class="prov-bar-bg"><div class="prov-bar-fill" style="width:'+pct+'%"></div></div>'
+    +(reason?'<div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.4">'+reason+'</div>':'')
+    +'</div>';
 }
 function wcardHTML(w,buys,lookup){
   const oe=lbData.overall.find(x=>x.wallet===w.wallet);
