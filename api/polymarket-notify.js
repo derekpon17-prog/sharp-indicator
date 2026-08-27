@@ -1562,6 +1562,15 @@ module.exports = async function handler(req, res) {
         tradeDepth:  { pagesFetched: trDiag.pages, offsetSupported: trDiag.offsetSupported,
                        truncatedWallets: trDiag.truncated },
         lbCoverage:  { overall: overallLB.length, sports: sportsLB.length, profitable: walletList.length },
+        // TEMP DIAGNOSTIC 2026-08-27 (per Derek): direct, immediate check of whether the
+        // env var is actually readable -- doesn't depend on a real trade happening or on
+        // dedup state, which was blocking a clean retest after the URL got re-pasted.
+        // Reports presence/shape only, never the real URL. Safe to remove once confirmed.
+        webhookAlertsEnvCheck: {
+          set: !!process.env.WEBHOOK_URL_ALERTS,
+          looksLikeDiscordUrl: /^https:\/\/discord(app)?\.com\/api\/webhooks\//.test(process.env.WEBHOOK_URL_ALERTS || ''),
+          length: (process.env.WEBHOOK_URL_ALERTS || '').length,
+        },
         /* Sorted NEWEST FIRST. In insertion order this showed ten 52-day-old trades while
            hiding every recent buy, which made it useless for the one question it exists to
            answer: was the slate genuinely quiet, or is a filter over-rejecting? Counts are
