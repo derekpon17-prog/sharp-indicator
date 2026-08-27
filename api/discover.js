@@ -461,7 +461,10 @@ async function runHistoricalDiscovery(sport, opts) {
   // The piggyback path on the 30-min cron still passes an explicit 8s budget, so this
   // only affects direct ?historical=SPORT calls, which have the function to themselves.
   const BUDGET_MS = (opts && opts.budgetMs) || 45000;
-  const CONCURRENCY = (opts && opts.concurrency) || 8;
+  /* Lowered 8 -> 4 for the evaluation phase specifically: the first full-throughput run
+     rate-limited Polymarket badly enough that a large share of wallets returned "stats
+     unavailable". Slower per call, but a result that's actually trustworthy. */
+  const CONCURRENCY = (opts && opts.concurrency) || 4;
 
   const progressKey = `discover:historical:${sport}:progress`;
   let progress = (await kvGetJson(progressKey)) || { eventsHarvested: 0, walletsFound: [], harvestDone: false };
@@ -569,8 +572,22 @@ async function runHistoricalDiscovery(sport, opts) {
         pendingMap[wallet] = { wallet, sport, sample: v.sample || 0, reason: v.reason,
           firstSeenAt: (pendingMap[wallet] && pendingMap[wallet].firstSeenAt) || Date.now(),
           lastCheckedAt: Date.now() };
+      } else if (v.verdict === 'unknown' && /stats unavailable|fetch|timeout|rate/i.test(v.reason || '')) {
+        /* FIX 2026-08-27 (per Derek, found on the first full NCAAF evaluation pass): an
+           'unknown' verdict caused by a FAILED FETCH is not evidence about the wallet --
+           it's evidence the API was rate-limited. The first full-throughput run evaluated
+           1,319 wallets in one call and a large share came back "stats unavailable" purely
+           from hammering Polymarket's API, then got permanently locked out of ever being
+           re-evaluated by the blanket else-branch below. That made a "zero promotions"
+           result meaningless, because a big chunk of the population was never really
+           assessed. Transient failures now go to the pending bucket for retry instead.
+           Note the distinction: 'zero losses over N positions' is a REAL unknown (we saw
+           the data and it's not trustworthy) and stays permanently excluded below. */
+        pendingMap[wallet] = { wallet, sport, sample: 0, reason: 'retry: ' + (v.reason || 'fetch failed'),
+          firstSeenAt: (pendingMap[wallet] && pendingMap[wallet].firstSeenAt) || Date.now(),
+          lastCheckedAt: Date.now() };
       } else {
-        // reject or unknown -- real negative evidence, or unrecoverable this pass. Done for good.
+        // reject, or a real 'unknown' where the data WAS seen and judged untrustworthy.
         evaluatedSet.add(wallet);
         delete pendingMap[wallet];
       }
