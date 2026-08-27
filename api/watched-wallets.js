@@ -77,6 +77,34 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, wallet: targetWallet, alwaysAlert: true });
     }
 
+    // FIX 2026-08-27 (per Derek, real request): the flip side of setAllSports/
+    // setAlwaysAlert above -- those two could turn a flag ON, nothing could turn one
+    // back OFF. Needed for laozishudaosan specifically: was pinging standalone for
+    // every sport regardless of what Sharp Money actually tracks. This routes it back
+    // through the exact same gates every other watched wallet already goes through.
+    if ((req.method === 'POST' || req.method === 'GET') && req.query && req.query.clearAllSports) {
+      const targetWallet = String(req.query.clearAllSports);
+      const raw = await upstash(['GET', WALLETS_KEY]);
+      let wallets = [];
+      if (raw) { try { wallets = JSON.parse(raw); } catch {} }
+      const idx = wallets.findIndex(w => w.wallet === targetWallet);
+      if (idx === -1) return res.status(404).json({ ok: false, error: 'Wallet not found in watched list' });
+      wallets[idx].allSports = false;
+      await upstash(['SET', WALLETS_KEY, JSON.stringify(wallets)]);
+      return res.status(200).json({ ok: true, wallet: targetWallet, allSports: false });
+    }
+    if ((req.method === 'POST' || req.method === 'GET') && req.query && req.query.clearAlwaysAlert) {
+      const targetWallet = String(req.query.clearAlwaysAlert);
+      const raw = await upstash(['GET', WALLETS_KEY]);
+      let wallets = [];
+      if (raw) { try { wallets = JSON.parse(raw); } catch {} }
+      const idx = wallets.findIndex(w => w.wallet === targetWallet);
+      if (idx === -1) return res.status(404).json({ ok: false, error: 'Wallet not found in watched list' });
+      wallets[idx].alwaysAlert = false;
+      await upstash(['SET', WALLETS_KEY, JSON.stringify(wallets)]);
+      return res.status(200).json({ ok: true, wallet: targetWallet, alwaysAlert: false });
+    }
+
     if (req.method === 'GET') {
       const raw = await upstash(['GET', WALLETS_KEY]);
       let wallets = [];
