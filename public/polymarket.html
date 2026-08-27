@@ -4417,11 +4417,17 @@ async function renderProvisional(){
 function provCardHTML(p){
   const sample=p.sample||0;
   const pct=Math.max(4,Math.min(100,Math.round(sample/20*100)));
+  // FIX 2026-08-27 (per Derek, seen live on site): was always showing the raw 0x address.
+  // Backend now assigns a nickname at pending-time too (same shared system as promoted
+  // wallets and the alert bot) -- display it when present, raw address only as fallback
+  // for anything evaluated before this fix shipped.
   const wallet=p.wallet?(p.wallet.slice(0,8)+'\u2026'+p.wallet.slice(-4)):'?';
+  const display=p.name?esc(p.name):wallet;
   const reason=p.reason?esc(p.reason):'';
   return '<div class="prov-card">'
     +'<div class="prov-badge">\u{1F52C} Provisional</div>'
-    +'<div style="font-family:var(--mono);font-weight:700;color:var(--t1);font-size:14px">'+esc(p.sport)+' \u00b7 '+wallet+'</div>'
+    +'<div style="font-family:var(--mono);font-weight:700;color:var(--t1);font-size:14px">'+esc(p.sport)+' \u00b7 '+display+'</div>'
+    +(p.name?'<div style="font-family:var(--mono);font-size:10px;color:var(--t4);margin-top:1px">'+wallet+'</div>':'')
     +'<div class="prov-sample">'+sample+'/20 settled bets</div>'
     +'<div class="prov-bar-bg"><div class="prov-bar-fill" style="width:'+pct+'%"></div></div>'
     +(reason?'<div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.4">'+reason+'</div>':'')
