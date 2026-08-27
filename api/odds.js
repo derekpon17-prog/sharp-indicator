@@ -46,6 +46,75 @@ const MLV_QUALIFY   = 60;    // shadow-log floor
    long after a rotation announcement a line keeps moving for that reason alone. */
 const PITCHER_CHANGE_WINDOW_HOURS = 3;
 
+/* ── KELLY SIZING (added 2026-08-27, per Derek + council) — SHADOW, SUGGESTION ONLY ───
+   Council verdict: Half Kelly (standard risk reduction, ~75% of full Kelly's growth at a
+   fraction of the variance), a hard ceiling independent of the formula's own output (a
+   mis-modeled edge should never be able to suggest an oversized bet), and sized off a
+   conservative benchmark rather than an unvalidated proprietary win-rate estimate --
+   Sharp Line has only 53 graded plays (56%) as real validation so far, everything else is
+   thinner. So the probability input here is Pinnacle's own price -- this file's
+   established fair-value benchmark everywhere else -- not a fabricated "true win rate."
+   Deliberately expressed as % of bankroll, not a unit count: converting to actual $50
+   units would require knowing bankroll size, which nothing in this system tracks. Never
+   auto-applied to anything -- a visible suggestion, same posture as weather/pitcherWatch. */
+const KELLY_FRACTION    = 0.5;  // Half Kelly, per council
+const KELLY_MAX_PCT     = 5;    // hard ceiling on suggested bankroll %, regardless of formula output
+const KELLY_MIN_EDGE_PP = 1.0;  // below this the edge is too thin to size off at all
+
+function americanToImplied(odds){
+  const n=Number(odds);
+  if(!isFinite(n)||n===0)return null;
+  return n>0?100/(n+100):Math.abs(n)/(Math.abs(n)+100);
+}
+function americanToDecimalOdds(odds){
+  const n=Number(odds);
+  if(!isFinite(n)||n===0)return null;
+  return n>0?1+n/100:1+100/Math.abs(n);
+}
+
+function computeKellySuggestion(play){
+  if(!play||play.noSignal||!play.sharpSide||play.sharpSide==='\u2014')return null;
+  const pinPrice=play.currentPinPrice;
+  const best=play.bestPrices&&play.bestPrices[play.sharpSide];
+  if(pinPrice===undefined||pinPrice===null||!best||best.price===undefined||best.price===null)return null;
+
+  // Single-side implied probability from Pinnacle's price, not devigged against the
+  // opposite side (that pairing isn't reliably available at this outer layer). This
+  // means p carries a small amount of vig -- i.e., understates the true edge slightly.
+  // That's the safe direction for a sizing formula to be wrong in, not the dangerous one.
+  const p=americanToImplied(pinPrice);
+  const dec=americanToDecimalOdds(best.price);
+  if(p===null||dec===null)return null;
+
+  const bestImplied=americanToImplied(best.price);
+  const edgePP=bestImplied===null?null:Math.round((p-bestImplied)*10000)/100;
+  if(edgePP===null||edgePP<KELLY_MIN_EDGE_PP){
+    return{suggestedPctOfBankroll:0,fullKellyPct:0,edgePP,cappedByCeiling:false,
+      label:'Edge below '+KELLY_MIN_EDGE_PP+'pp floor \u2014 too thin to size off',shadow:true};
+  }
+
+  const b=dec-1, q=1-p;
+  const fullKelly=(b*p-q)/b;
+  if(!isFinite(fullKelly)||fullKelly<=0){
+    return{suggestedPctOfBankroll:0,fullKellyPct:0,edgePP,cappedByCeiling:false,
+      label:'No positive edge at best available price',shadow:true};
+  }
+
+  const fullKellyPct=Math.round(fullKelly*10000)/100;
+  const halfKellyPct=Math.round(fullKellyPct*KELLY_FRACTION*100)/100;
+  const cappedByCeiling=halfKellyPct>KELLY_MAX_PCT;
+  const suggestedPctOfBankroll=cappedByCeiling?KELLY_MAX_PCT:halfKellyPct;
+
+  return{
+    suggestedPctOfBankroll,fullKellyPct,edgePP,cappedByCeiling,
+    atPrice:best.price,atBook:best.book,pinnaclePrice:pinPrice,
+    label:cappedByCeiling
+      ?'Half Kelly suggests '+halfKellyPct+'% \u2014 capped at '+KELLY_MAX_PCT+'% ceiling'
+      :'Half Kelly suggests '+suggestedPctOfBankroll+'% of bankroll at '+best.book+' ('+best.price+')',
+    shadow:true,
+  };
+}
+
 const SPORT_KEYS = {
   MLB:'baseball_mlb',NFL:'americanfootball_nfl',
   NBA:'basketball_nba',NHL:'icehockey_nhl',
@@ -1216,6 +1285,7 @@ module.exports=async function handler(req,res){
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
       pitcherWatch:pwMap[p.id]||null,
+      kelly:computeKellySuggestion(p),
       /* BUGFIX: this exposed only closeMap[id].h2h[p.sharpSide], but sharpSide is the
          literal string '—' on every no-signal game — which is the overwhelming majority
          of the board — so the lookup always missed and closeLine.pinnacle came back null
