@@ -34,6 +34,14 @@
 .prov-watch-btn{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.3px;padding:5px 12px;border-radius:100px;border:1px solid var(--purple);background:transparent;color:var(--purple);cursor:pointer;margin-top:10px}
 .prov-watch-btn:hover{background:var(--pl)}
 .prov-watch-btn:disabled{opacity:.5;cursor:default;border-color:var(--b2);color:var(--t3)}
+/* CONFIRMED SPECIALISTS (2026-08-27, per Derek): deliberate visual contrast with the
+   provisional cards above -- solid border, green accent, no dashes. Confirmed means
+   confirmed, shouldn't look tentative the way provisional correctly does. */
+.spec-card{background:var(--s2);border:1.5px solid var(--grl);border-left:3px solid var(--green);border-radius:var(--rl2);padding:14px 16px}
+.spec-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--green);background:var(--grl);border:1px solid var(--green);border-radius:100px;padding:3px 10px;margin-bottom:8px}
+.spec-stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-family:var(--mono);font-size:11px}
+.spec-stat{color:var(--t2)}
+.spec-stat b{color:var(--t1)}
 html,body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;overflow-x:hidden}
 button,input,select{font-family:inherit;outline:none}
 ::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px}
@@ -801,6 +809,28 @@ select.finput option{background:var(--s2)}
     <div class="wgrid" id="wgrid"></div>
     <div id="wempty" class="empty"><div class="empty-ico">&#x1F440;</div><h3>No wallets watched</h3><p>Click Watch on a leaderboard entry to track them</p></div>
 
+    <!-- CONFIRMED SPECIALISTS (2026-08-27, per Derek): the discovery pipeline's real
+         promoted roster (NFL/NCAAF/MLB/NBA/NHL/WNBA -- whatever discover:roster holds)
+         had no browse view at all -- a wallet only became visible if you happened to
+         manually watch it while it was still provisional, or it fired a live alert.
+         SilverRex23 was real and promoted and effectively invisible for exactly this
+         reason. Solid green cards, deliberate contrast with the dashed purple provisional
+         ones below -- confirmed shouldn't look tentative. -->
+    <div class="row-hdr" style="margin-bottom:14px;margin-top:28px">
+      <div class="row-ttl"><em>&#9989;</em>Confirmed Specialists</div>
+    </div>
+    <div class="lb-tabs" id="spec-tabs" style="margin-bottom:14px">
+      <button class="lb-tab on" onclick="setSpecFilter('ALL',this)">All</button>
+      <button class="lb-tab" onclick="setSpecFilter('NFL',this)">NFL</button>
+      <button class="lb-tab" onclick="setSpecFilter('NCAAF',this)">NCAAF</button>
+      <button class="lb-tab" onclick="setSpecFilter('MLB',this)">MLB</button>
+      <button class="lb-tab" onclick="setSpecFilter('NBA',this)">NBA</button>
+      <button class="lb-tab" onclick="setSpecFilter('NHL',this)">NHL</button>
+      <button class="lb-tab" onclick="setSpecFilter('WNBA',this)">WNBA</button>
+    </div>
+    <div id="specgrid" class="wgrid"></div>
+    <div id="specempty" class="empty" style="display:none"><div class="empty-ico">&#9989;</div><h3>No confirmed specialists yet</h3><p>Promoted wallets will appear here as the discovery pipeline confirms them</p></div>
+
     <!-- PROVISIONAL TIER (added 2026-08-27, per Derek + council). Deliberately its own
          look, not a fourth TIER letter -- Product/UX flagged that reusing the A/B/C badge
          style would make an unconfirmed, under-20-sample wallet look as trustworthy as a
@@ -1554,7 +1584,7 @@ function showV(v,btn){
   if(v==='dashboard')renderDash();
   if(v==='alerts')renderAlerts();
   if(v==='tracking')renderTracking();
-  if(v==='traders'){renderHot();renderLB();renderWallets();renderProvisional();}
+  if(v==='traders'){renderHot();renderLB();renderWallets();renderSpecialists();renderProvisional();}
 }
 
 /* === FETCH === */
@@ -4418,6 +4448,61 @@ async function renderWallets(){
 // ?pending=SPORT endpoint shipped alongside the backend fix. Fails open exactly like
 // every other shadow addition this session -- a failed fetch just leaves the section
 // showing its empty state, never breaks the rest of the page.
+let specSportFilter='ALL', specAll=[];
+function setSpecFilter(sport,btn){
+  specSportFilter=sport;
+  document.querySelectorAll('#spec-tabs .lb-tab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderSpecGrid();
+}
+async function renderSpecialists(){
+  const grid=el('specgrid'), empty=el('specempty');
+  if(!grid||!empty)return;
+  try{
+    const r=await fetch('https://sharp-indicator-a34j.vercel.app/api/discover?roster=ALL');
+    const d=await r.json();
+    specAll=(d&&d.ok&&Array.isArray(d.roster))?d.roster:[];
+  }catch{specAll=[];}
+  renderSpecGrid();
+}
+function renderSpecGrid(){
+  const grid=el('specgrid'), empty=el('specempty');
+  if(!grid||!empty)return;
+  const filtered=specSportFilter==='ALL'?specAll:specAll.filter(w=>w.sport===specSportFilter);
+  if(!filtered.length){grid.innerHTML='';empty.style.display='';return;}
+  empty.style.display='none';
+  const sorted=filtered.slice().sort((a,b)=>(b.staked||0)-(a.staked||0));
+  grid.innerHTML=sorted.map(specCardHTML).join('');
+}
+function specCardHTML(w){
+  const walletShort=w.wallet.slice(0,8)+'\u2026'+w.wallet.slice(-4);
+  const display=w.name?esc(w.name):walletShort;
+  const alreadyWatched=wallets.some(t=>t.wallet===w.wallet);
+  const watchBtn=alreadyWatched
+    ? '<button class="prov-watch-btn" disabled>\u2713 Watching</button>'
+    : '<button class="prov-watch-btn" style="border-color:var(--green);color:var(--green)" onclick="watchSpecialist(\''+w.wallet+'\',\''+esc(w.name||'')+'\')">+ Add Watched Wallet</button>';
+  return '<div class="spec-card">'
+    +'<div class="spec-badge">\u2705 '+esc(w.sport)+'</div>'
+    +'<div style="font-family:var(--mono);font-weight:700;color:var(--t1);font-size:14px">'+display+'</div>'
+    +(w.name?'<div style="font-family:var(--mono);font-size:10px;color:var(--t4);margin-top:1px">'+walletShort+'</div>':'')
+    +'<div class="spec-stats">'
+      +'<span class="spec-stat">Staked <b>'+fu(w.staked||0)+'</b></span>'
+      +'<span class="spec-stat">Sample <b>'+(w.sample||0)+'</b></span>'
+      +'<span class="spec-stat">ROI <b style="color:'+((w.roiPct||0)>=0?'var(--green)':'var(--red)')+'">'+(w.roiPct>=0?'+':'')+w.roiPct+'%</b></span>'
+      +'<span class="spec-stat">Edge <b>+'+w.edgePP+'pp</b></span>'
+    +'</div>'
+    +(w.reason?'<div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.4">'+esc(w.reason)+'</div>':'')
+    +watchBtn
+    +'</div>';
+}
+function watchSpecialist(wallet,name){
+  if(wallets.find(t=>t.wallet===wallet))return;
+  wallets.push({wallet,name:name||null,addedAt:Date.now()});
+  ss('pm:traders',wallets);
+  pushWatchedWallets();
+  renderWallets();
+  renderSpecGrid();
+}
 async function renderProvisional(){
   const grid=el('provgrid'), empty=el('provempty');
   if(!grid||!empty)return;
