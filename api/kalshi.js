@@ -101,10 +101,25 @@ async function fetchSeries(sport) {
 /* Normalise a Kalshi market. Field names are taken from the documented schema but the
    payload is unverified here, so every field falls back and `raw` keys are surfaced. */
 function normalizeMarket(m) {
-  const cents = (v) => (typeof v === 'number' && isFinite(v) ? v / 100 : null);
-  const yesBid = cents(m.yes_bid), yesAsk = cents(m.yes_ask), last = cents(m.last_price);
+  // FIX 2026-08-27 (per Derek, first live call per the header above): the schema guess
+  // was wrong. Kalshi actually returns yes_bid_dollars/yes_ask_dollars/last_price_dollars
+  // as STRING dollar amounts (e.g. "0.2300"), not yes_bid/yes_ask/last_price as numeric
+  // cents -- confirmed via a live sampleRaw pull showing count:96 real NFL markets with
+  // count:0 actually priced under the old parsing. volume_fp/open_interest_fp are the real
+  // fields too, and volume_fp is CONTRACT COUNT (confirmed against yes_ask_size_fp/
+  // yes_bid_size_fp in the same sample), not a dollar amount -- treat accordingly.
+  const dollars = (v) => {
+    if (v === null || v === undefined || v === '') return null;
+    const n = parseFloat(v);
+    return isFinite(n) ? n : null;
+  };
+  const yesBid = dollars(m.yes_bid_dollars ?? m.yes_bid);
+  const yesAsk = dollars(m.yes_ask_dollars ?? m.yes_ask);
+  const last = dollars(m.last_price_dollars ?? m.last_price);
   // Mid is the fairest single read; fall back to last trade when the book is one-sided.
   const mid = (yesBid !== null && yesAsk !== null) ? (yesBid + yesAsk) / 2 : last;
+  const volNum = parseFloat(m.volume_fp ?? m.volume);
+  const oiNum = parseFloat(m.open_interest_fp ?? m.open_interest);
   return {
     ticker: m.ticker || null,
     eventTicker: m.event_ticker || null,
@@ -113,8 +128,8 @@ function normalizeMarket(m) {
     yesBid, yesAsk, last,
     impliedProb: mid,
     spreadPP: (yesBid !== null && yesAsk !== null) ? Math.round((yesAsk - yesBid) * 1000) / 10 : null,
-    volume: m.volume ?? null,
-    openInterest: m.open_interest ?? null,
+    volume: isFinite(volNum) ? volNum : null,           // contract count, NOT dollars -- see fix note
+    openInterest: isFinite(oiNum) ? oiNum : null,        // contract count
     closeTime: m.close_time || m.expiration_time || null,
     feeAtMid: mid !== null ? Math.round(kalshiFee(mid) * 10000) / 100 : null,  // in cents
   };
@@ -212,8 +227,11 @@ function compareToPinnacle(kalshiProb, pinnacleFairProb) {
    (unverified from here, same caveat as the rest of this file) -- steam only covers the
    sports with a confirmed ticker: MLB, WNBA, NBA, NHL, NFL. */
 
+// FIX 2026-08-27: volume is CONTRACT COUNT (see normalizeMarket fix above), not dollars.
+// 2000 contracts at typical NFL game-line prices (~$0.20-$0.80) is roughly $400-$1,600 of
+// real flow -- an approximation, not a confirmed dollar figure. Still a first-cut default.
 const STEAM_MIN_PP = 5;
-const STEAM_MIN_VOL_ADDED = 2000;
+const STEAM_MIN_VOL_ADDED = 2000; // contracts, not dollars
 const STEAM_MIN_VOL_PCT = 0.15;
 const SNAPSHOT_TTL = 3 * 24 * 60 * 60; // 3 days -- plenty of headroom over the ~30-min cadence
 
