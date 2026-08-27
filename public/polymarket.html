@@ -30,6 +30,10 @@
 .prov-sample{font-family:var(--mono);font-size:11px;color:var(--t3)}
 .prov-bar-bg{width:100%;height:4px;background:var(--s3);border-radius:2px;margin-top:6px;overflow:hidden}
 .prov-bar-fill{height:100%;background:var(--purple);border-radius:2px}
+.wc-prov-badge{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--purple);background:var(--pl);border:1px solid var(--purple);border-radius:100px;padding:2px 8px;margin-right:5px}
+.prov-watch-btn{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.3px;padding:5px 12px;border-radius:100px;border:1px solid var(--purple);background:transparent;color:var(--purple);cursor:pointer;margin-top:10px}
+.prov-watch-btn:hover{background:var(--pl)}
+.prov-watch-btn:disabled{opacity:.5;cursor:default;border-color:var(--b2);color:var(--t3)}
 html,body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;overflow-x:hidden}
 button,input,select{font-family:inherit;outline:none}
 ::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px}
@@ -4385,13 +4389,29 @@ async function renderWallets(){
   // existed) need to reach the server too, not just future adds/removes — the dedup
   // check inside pushWatchedWallets means this is a no-op after the first real sync.
   pushWatchedWallets();
+  // PROVISIONAL BADGE (2026-08-27, per Derek): a wallet watched from the Provisional
+  // section carries a provSport tag. Whether it still shows the badge is checked LIVE
+  // against the real roster every render, not stored as a static flag -- so the tag
+  // correctly disappears the moment that wallet actually clears into discover:roster,
+  // without needing any explicit "un-tag" step. Only fetches roster for sports actually
+  // present among watched wallets, so this costs nothing when nobody's watching a
+  // provisional pick.
+  const provSports=[...new Set(wallets.filter(w=>w.provSport).map(w=>w.provSport))];
+  const promotedSet=new Set();
+  for(const sp of provSports){
+    try{
+      const r=await fetch('https://sharp-indicator-a34j.vercel.app/api/discover?roster='+sp);
+      const d=await r.json();
+      if(d&&d.ok&&Array.isArray(d.roster))d.roster.forEach(e=>promotedSet.add(e.wallet.toLowerCase()+'|'+sp));
+    }catch{}
+  }
   // BUGFIX 2026-08-08 (per Derek): these cards showed the raw name captured at the moment
   // "Watch" was clicked — for wallets watched before the nickname system existed, that's
   // permanently the old malformed "0xADDRESS-timestamp" string, with zero attempt to
   // re-resolve it since. Same wallets confirmed showing correctly elsewhere (By Trader)
   // because that path calls resolveDisplayName directly.
   const wLk=buildClientTrackedLookup();
-  el('wgrid').innerHTML=wallets.map(w=>wcardHTML(w,[],wLk)).join('');
+  el('wgrid').innerHTML=wallets.map(w=>wcardHTML(w,[],wLk,promotedSet)).join('');
   for(const w of wallets){try{const r=await fetch('https://data-api.polymarket.com/trades?user='+w.wallet+'&side=BUY&takerOnly=true&limit=150');const b=await r.json();const c=el('wc-'+w.wallet);if(c&&Array.isArray(b)){const bd=c.querySelector('.wcard-body');if(bd)bd.innerHTML=wbodyHTML(w,b);}}catch{}}
 }
 // PROVISIONAL TIER (2026-08-27, per Derek + council): reads the real /api/discover
@@ -4424,6 +4444,17 @@ function provCardHTML(p){
   const wallet=p.wallet?(p.wallet.slice(0,8)+'\u2026'+p.wallet.slice(-4)):'?';
   const display=p.name?esc(p.name):wallet;
   const reason=p.reason?esc(p.reason):'';
+  // WATCH BUTTON (2026-08-27, per Derek): lets a provisional wallet be added to the same
+  // personal Watched Wallets list as any other trader, one click, no address re-typing --
+  // the wallet/name/sport are already known here. Tagged with provSport so wcardHTML can
+  // keep showing the PROVISIONAL badge on the watched card until this wallet actually
+  // clears into discover:roster -- checked live against the real roster on every render,
+  // not just remembered as a one-time flag, so the tag correctly disappears the moment a
+  // later evaluation pass promotes it.
+  const alreadyWatched=wallets.some(w=>w.wallet===p.wallet);
+  const watchBtn=alreadyWatched
+    ? '<button class="prov-watch-btn" disabled>\u2713 Watching</button>'
+    : '<button class="prov-watch-btn" onclick="watchProvisional(\''+p.wallet+'\',\''+esc(p.name||'')+'\',\''+esc(p.sport)+'\')">+ Add Watched Wallet</button>';
   return '<div class="prov-card">'
     +'<div class="prov-badge">\u{1F52C} Provisional</div>'
     +'<div style="font-family:var(--mono);font-weight:700;color:var(--t1);font-size:14px">'+esc(p.sport)+' \u00b7 '+display+'</div>'
@@ -4431,12 +4462,26 @@ function provCardHTML(p){
     +'<div class="prov-sample">'+sample+'/20 settled bets</div>'
     +'<div class="prov-bar-bg"><div class="prov-bar-fill" style="width:'+pct+'%"></div></div>'
     +(reason?'<div style="font-size:11px;color:var(--t3);margin-top:8px;line-height:1.4">'+reason+'</div>':'')
+    +watchBtn
     +'</div>';
 }
-function wcardHTML(w,buys,lookup){
+function watchProvisional(wallet,name,sport){
+  if(wallets.find(t=>t.wallet===wallet))return; // already watched, nothing to do
+  wallets.push({wallet,name:name||null,addedAt:Date.now(),provSport:sport});
+  ss('pm:traders',wallets);
+  pushWatchedWallets();
+  renderWallets();
+  renderProvisional(); // refresh this card to its "Watching" state
+}
+function wcardHTML(w,buys,lookup,promotedSet){
   const oe=lbData.overall.find(x=>x.wallet===w.wallet);
   const se=lbData.sports.find(x=>x.wallet===w.wallet);
-  const bs=[oe?'<span class="badge badge-o">Overall #'+oe.rank+'</span>':null,se?'<span class="badge badge-s">Sports #'+se.rank+'</span>':null].filter(Boolean).join('');
+  // PROVISIONAL BADGE (2026-08-27, per Derek): shows only while this wallet is still
+  // genuinely unpromoted for the sport it was watched from -- promotedSet is fetched
+  // fresh from the real roster each render (see renderWallets), so this is never stale.
+  const stillProvisional=w.provSport&&promotedSet&&!promotedSet.has(w.wallet.toLowerCase()+'|'+w.provSport);
+  const provBadge=stillProvisional?'<span class="wc-prov-badge">\u{1F52C} Provisional \u00b7 '+esc(w.provSport)+'</span>':'';
+  const bs=provBadge+[oe?'<span class="badge badge-o">Overall #'+oe.rank+'</span>':null,se?'<span class="badge badge-s">Sports #'+se.rank+'</span>':null].filter(Boolean).join('');
   const resolvedName=lookup&&w.name?lookup.resolveDisplayName(w.name):(w.name||w.wallet.slice(0,8)+'\u2026');
   const whaleTag=(oe||se)?'\u{1F40B} ':'';
   // FEATURE 2026-08-11 (per Derek): "when I select someone to watch I want to see W-L and
