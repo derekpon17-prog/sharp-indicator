@@ -79,6 +79,44 @@ async function kv(body) {
     return { ok: true, result: d.result ?? null };
   } catch { return { ok: false, result: null }; }
 }
+/* NICKNAMES 2026-08-27 (per Derek): historical-pipeline promotions were writing
+   name: null, so a newly promoted NCAAF/NFL wallet shows as a raw 0x address until it
+   happens to trigger an alert (polymarket-notify assigns nicknames lazily at alert time).
+   This assigns one AT PROMOTION instead. Deliberately reuses the exact same KV key format
+   ('nickname:'+wallet) and the same atomic 'nickname:counter' INCR as polymarket-notify's
+   getWalletNickname -- so a wallet keeps ONE name everywhere, and the collision-free
+   guarantee still holds across both callers. NOT a second naming system: if notify already
+   named this wallet, the GET below returns that existing name unchanged. Pool is
+   intentionally duplicated rather than imported to avoid a circular require between these
+   two modules; if the pool ever changes, change it in both (noted in both files). */
+const NICKNAME_POOL = [
+  'BigBob','SwiftMike','SharpTony','SteadyNate','QuickMax','IronDave','BoldRick','CalmLuke',
+  'FastEddie','ColdSteve','WarmSam','DeepJoe','SlyCarl','LoudMarv','QuietPete','KeenAlex',
+  'RapidJack','FirmGreg','SmoothLee','HardyKen','BraveTom','WiseHank','StoutJim','LeanRoy',
+  'TallDon','ShortWes','GruffAl','SoftBen','HeavyRon','LightVic','DryFred','WetGus',
+  'OldChip','YoungMo','NewGabe','LateChet','EarlyDex','SteadyRex','BriskArt','SharpOtis',
+  'BoldNed','CalmOwen','QuickIra','FirmSid','SlyRuss','KeenEli','WiseHugo','HardyCole',
+  'BraveJett','LeanNico','TallReid','ShortJude','GruffKirk','SoftEzra','HeavyBrooks','LightFinn',
+  'DryLane','WetShane','OldTrent','YoungPaul','NewCyrus','LateWade','EarlyDean','ToughGavin',
+  'MildBryce','KeenAaron','SlowBlake','FastEli','GoldSaul','SilverRex','IronMabel','SteelDrew',
+  'RoyalDex','CopperJon','StoneKurt','FlashTodd','StormLee','ThunderJay','FrostSam','EmberLuke',
+];
+async function assignNickname(wallet) {
+  const key = 'nickname:' + wallet;
+  try {
+    const existing = await kv(['GET', key]);
+    if (existing.ok && existing.result) return existing.result;   // already named -- keep it
+  } catch {}
+  let idx = 0;
+  try {
+    const inc = await kv(['INCR', 'nickname:counter']);
+    idx = (typeof inc.result === 'number' ? inc.result : parseInt(inc.result) || 1) - 1;
+  } catch {}
+  const cycle = Math.floor(idx / NICKNAME_POOL.length);
+  const name = NICKNAME_POOL[idx % NICKNAME_POOL.length] + (cycle > 0 ? cycle + 1 : '');
+  try { await kv(['SET', key, name]); } catch {}
+  return name;
+}
 async function kvGetJson(key) {
   const r = await kv(['GET', key]);
   if (!r.ok || !r.result) return null;
@@ -557,11 +595,12 @@ async function runHistoricalDiscovery(sport, opts) {
     if (Date.now() - startedAt > BUDGET_MS) break;
     const batch = toEvaluate.slice(i, i + CONCURRENCY);
     const verdicts = await Promise.all(batch.map(wallet => evaluateCandidate({ wallet, sport }, { fresh: false }).then(v => ({ wallet, v }))));
-    verdicts.forEach(({ wallet, v }) => {
+    // for...of rather than forEach: assignNickname is async and forEach can't await.
+    for (const { wallet, v } of verdicts) {
       if (v.verdict === 'promote') {
         const rk = wallet + '|' + sport;
         const prev = roster[rk];
-        roster[rk] = { wallet, sport, name: null, pnl: v.pnl, sample: v.sample, winRate: v.winRate,
+        roster[rk] = { wallet, sport, name: await assignNickname(wallet), pnl: v.pnl, sample: v.sample, winRate: v.winRate,
           hedgePct: v.hedgePct, avgEntry: v.avgEntry, impliedWinRate: v.impliedWinRate, edgePP: v.edgePP,
           roiPct: v.roiPct, staked: v.staked, pnlPerMarket: v.pnlPerMarket, avgEntryByCount: v.avgEntryByCount,
           entrySkew: v.entrySkew, reason: v.reason, addedAt: prev ? prev.addedAt : Date.now(), confirmedAt: Date.now(),
@@ -592,7 +631,7 @@ async function runHistoricalDiscovery(sport, opts) {
         delete pendingMap[wallet];
       }
       results.push({ wallet: wallet.slice(0, 10), verdict: v.verdict, reason: v.reason });
-    });
+    }
   }
 
   evaluatedWallets = [...evaluatedSet];
