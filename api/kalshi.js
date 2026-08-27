@@ -182,8 +182,101 @@ function compareToPinnacle(kalshiProb, pinnacleFairProb) {
   };
 }
 
+/* ─── KALSHI STEAM (added 2026-08-26, per Derek) ────────────────────────
+   WHY THIS EXISTS. Kalshi's public trades carry no trader identity (see header above --
+   wallet-style tracking cannot be replicated here), but rapid price movement backed by
+   real volume is visible and legitimate regardless of who's behind it. This is the same
+   concept as this project's existing steam detection on soft books ("rapid coordinated
+   movement across multiple books"), just sourced from a third, structurally distinct venue
+   (CFTC-regulated, KYC-gated) instead of retail sportsbooks.
+
+   HOW IT WORKS. No /trades endpoint needed -- steam is detected by snapshotting every
+   market's implied probability + volume on each call and comparing to the last stored
+   snapshot. If price moved enough AND real volume backed the move AND it happened within
+   the window since the last snapshot, it's flagged. Snapshot cadence is whatever calls
+   this (currently piggybacked on the same ~30-min cron driving NFL/NCAAF harvest), so the
+   window is measured from actual elapsed time, not assumed.
+
+   THRESHOLDS ARE FIRST-CUT DEFAULTS, NOT TUNED. Unlike changing an existing production
+   threshold, these are initial values for a brand-new signal with no baseline yet --
+   flagged here explicitly so they get revisited with real data, not treated as settled:
+     STEAM_MIN_PP        = 5     -- minimum probability move to even consider
+     STEAM_MIN_VOL_ADDED  = 2000  -- absolute $ floor, so a thin market can't fake a print
+     STEAM_MIN_VOL_PCT    = 0.15  -- OR volume must grow >=15% relative to its own prior size
+   A market must clear the $ floor AND (have near-zero prior volume OR clear the % growth
+   bar) -- this mirrors the same per-market-relative-plus-absolute-floor pattern used by
+   commercial whale-flow trackers on this exact problem (a flat $ threshold treats a
+   Tuesday college market and a Chiefs Sunday market as equally liquid, which they aren't).
+
+   NCAAF IS NOT INCLUDED. No confirmed Kalshi series ticker for NCAAF exists in SERIES yet
+   (unverified from here, same caveat as the rest of this file) -- steam only covers the
+   sports with a confirmed ticker: MLB, WNBA, NBA, NHL, NFL. */
+
+const STEAM_MIN_PP = 5;
+const STEAM_MIN_VOL_ADDED = 2000;
+const STEAM_MIN_VOL_PCT = 0.15;
+const SNAPSHOT_TTL = 3 * 24 * 60 * 60; // 3 days -- plenty of headroom over the ~30-min cadence
+
+async function detectSteam(sport) {
+  const data = await getKalshi(sport);
+  if (!data.ok) return { ok: false, sport, error: data.error, steamMarkets: [] };
+
+  const snapKey = `kalshi:steamsnap:${sport}`;
+  const prevRaw = await kv(['GET', snapKey]);
+  let prev = {};
+  if (prevRaw.ok && prevRaw.result) {
+    try { prev = typeof prevRaw.result === 'string' ? JSON.parse(prevRaw.result) : prevRaw.result; } catch {}
+  }
+
+  const now = Date.now();
+  const nextSnap = {};
+  const steamMarkets = [];
+
+  for (const m of data.markets) {
+    if (!m.ticker || m.impliedProb === null) continue;
+    nextSnap[m.ticker] = { impliedProb: m.impliedProb, volume: m.volume || 0, at: now };
+
+    const p = prev[m.ticker];
+    if (!p) continue; // first time seeing this market -- nothing to compare against yet
+
+    const movePP = Math.round((m.impliedProb - p.impliedProb) * 1000) / 10;
+    const volAdded = (m.volume || 0) - (p.volume || 0);
+    const volPct = p.volume > 0 ? volAdded / p.volume : (volAdded > 0 ? Infinity : 0);
+    const windowMs = now - p.at;
+
+    const clearsVolBar = volAdded >= STEAM_MIN_VOL_ADDED && (p.volume < 100 || volPct >= STEAM_MIN_VOL_PCT);
+    const clearsPriceBar = Math.abs(movePP) >= STEAM_MIN_PP;
+
+    if (clearsVolBar && clearsPriceBar) {
+      steamMarkets.push({
+        ticker: m.ticker, title: m.title, yesSubTitle: m.yesSubTitle,
+        movePP, direction: movePP > 0 ? 'toward YES' : 'toward NO',
+        volumeAdded: volAdded, windowMinutes: Math.round(windowMs / 60000),
+        currentImpliedProb: m.impliedProb, priorImpliedProb: p.impliedProb,
+      });
+    }
+  }
+
+  await kv(['SET', snapKey, JSON.stringify(nextSnap), 'EX', String(SNAPSHOT_TTL)]);
+
+  return {
+    ok: true, sport, marketsTracked: Object.keys(nextSnap).length,
+    steamCount: steamMarkets.length, steamMarkets, checkedAt: now,
+  };
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
+
+  if (req.query && req.query.steam) {
+    const sport = String(req.query.steam).toUpperCase();
+    try {
+      return res.status(200).json(await detectSteam(sport));
+    } catch (err) {
+      return res.status(200).json({ ok: false, sport, error: err.message, steamMarkets: [] });
+    }
+  }
+
   const sport = String((req.query && req.query.sport) || 'MLB').toUpperCase();
   try {
     const data = await getKalshi(sport);
@@ -203,3 +296,4 @@ module.exports.normalizeMarket = normalizeMarket;
 module.exports.compareToPinnacle = compareToPinnacle;
 module.exports.kalshiFee = kalshiFee;
 module.exports.SERIES = SERIES;
+module.exports.detectSteam = detectSteam;
