@@ -457,7 +457,10 @@ async function runHistoricalDiscovery(sport, opts) {
   const seriesId = SERIES_IDS[sport];
   if (!seriesId) return { ok: false, error: `No known series id for ${sport}` };
   const startedAt = Date.now();
-  const BUDGET_MS = (opts && opts.budgetMs) || 20000;
+  // Default raised 20s -> 45s to use the 60s maxDuration now configured in vercel.json.
+  // The piggyback path on the 30-min cron still passes an explicit 8s budget, so this
+  // only affects direct ?historical=SPORT calls, which have the function to themselves.
+  const BUDGET_MS = (opts && opts.budgetMs) || 45000;
   const CONCURRENCY = (opts && opts.concurrency) || 8;
 
   const progressKey = `discover:historical:${sport}:progress`;
@@ -465,7 +468,19 @@ async function runHistoricalDiscovery(sport, opts) {
 
   // PHASE 1: harvest events -> unique wallets, concurrent batches within the budget.
   if (!progress.harvestDone) {
-    const limit = 20;
+    /* THROUGHPUT FIX 2026-08-27 (per Derek, kickoff deadline): this was hardcoded to 20.
+       That -- not the time budget -- was the real cap: 20 events processed in ~3 batches
+       of 8 finishes in a few seconds and returns, never approaching the 20s budget. It's
+       why raising Vercel's maxDuration to 60s produced exactly zero change in throughput
+       (measured: +20 events per call before and after, identically). Now the page is large
+       enough that the BUDGET is the binding constraint, which is what was intended all
+       along. Safe by construction: offset advances only by batches actually processed
+       (progress.eventsHarvested += batch.length inside the loop), so a budget-truncated
+       call resumes exactly where it stopped and skips nothing -- the only cost is
+       re-fetching an event-list page that was partially consumed.
+       CONCURRENCY deliberately left at 8: raising parallel fetches against Polymarket's
+       API risks rate-limiting, which would be slower overall, not faster. */
+    const limit = 200;
     try {
       const evRes = await fetch(`https://gamma-api.polymarket.com/events?series_id=${seriesId}&closed=true&order=startDate&ascending=false&limit=${limit}&offset=${progress.eventsHarvested}`);
       const events = await evRes.json();
