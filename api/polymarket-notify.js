@@ -566,6 +566,21 @@ async function sendDiscord(webhookUrl, content, embeds) {
    0-100 shape and the same 75+/85+ tier language already in use, but not the identical
    scale. Revisit once Sharp Line has its own graded sample stored server-side. */
 const TOP_PLAY_MIN = 75;        // evidence-backed (see above); was 70
+
+// TRACKING START DATE 2026-08-28 (per Derek): today's MLB SI scores are unreliable --
+// the Odds API key was expanded this morning, resetting quota and forcing a fresh line
+// baseline (rlmSource: "line_velocity" / "inferred_first_run" earlier today, siScore 0
+// across the board). The report still sends today so Derek sees real output, but nothing
+// posted today gets captured into converge:pending -- starting the real W-L/units record
+// off a broken baseline would poison it from day one. Tracking (capture only, not
+// sending) begins the day after this ships.
+const TRACKING_START_DATE = '2026-08-29';
+// FIX: anchor on Eastern time, same convention already used elsewhere in this file
+// (etDateStr, etDateForCommence) -- UTC would flip this gate at 8pm ET tonight, mid-slate
+// for tonight's MLB games, not on an actual "tomorrow" the way a bettor means it.
+function trackingIsLive() {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' }) >= TRACKING_START_DATE;
+}
 const REPORT_TTL   = 172800;    // 2 days, comfortably past a single slate
 
 function tierFor(score) {
@@ -1014,16 +1029,19 @@ module.exports = async function handler(req, res) {
         // Capture what's needed to grade this play later -- teams, sport, market, the
         // sharpSide string (already embeds the spread/total line), and the odds at the
         // moment it was posted (units are computed off THIS price, not whatever it moves
-        // to later).
-        try {
-          const best = p.bestPrices && p.bestPrices[p.sharpSide];
-          const pendingRes = await upstashPost(['GET', 'converge:pending']);
-          const pendingRaw = pendingRes && pendingRes.ok ? pendingRes.result : null;
-          const pendingArr = pendingRaw ? (typeof pendingRaw === 'string' ? JSON.parse(pendingRaw) : pendingRaw) : [];
-          pendingArr.push({ away: p.away, home: p.home, sport: p.sport, market: p.market,
-            sharpSide: p.sharpSide, odds: best ? best.price : null, siScore: p.siScore, postedAt: Date.now() });
-          await upstashPost(['SET', 'converge:pending', JSON.stringify(pendingArr), 'EX', '2592000']);
-        } catch {}
+        // to later). Gated on trackingIsLive() -- see TRACKING_START_DATE above -- so
+        // today's unreliable-baseline plays send normally but never enter the record.
+        if (trackingIsLive()) {
+          try {
+            const best = p.bestPrices && p.bestPrices[p.sharpSide];
+            const pendingRes = await upstashPost(['GET', 'converge:pending']);
+            const pendingRaw = pendingRes && pendingRes.ok ? pendingRes.result : null;
+            const pendingArr = pendingRaw ? (typeof pendingRaw === 'string' ? JSON.parse(pendingRaw) : pendingRaw) : [];
+            pendingArr.push({ away: p.away, home: p.home, sport: p.sport, market: p.market,
+              sharpSide: p.sharpSide, odds: best ? best.price : null, siScore: p.siScore, postedAt: Date.now() });
+            await upstashPost(['SET', 'converge:pending', JSON.stringify(pendingArr), 'EX', '2592000']);
+          } catch {}
+        }
       }
     }
     return res.status(200).json(result);
