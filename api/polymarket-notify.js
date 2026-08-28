@@ -869,6 +869,27 @@ module.exports = async function handler(req, res) {
       return units >= 0.1 ? ` (${Math.round(units * 10) / 10}u)` : '';
     }
 
+    /* WALLET FORM 2026-08-27 (council-approved) -- rolling per-sport recent form, fetched
+       once per run alongside unitSizes so Discord shows the same tag the site will.
+       SHADOW ONLY: this is a display callout, it does NOT gate or score anything. It exists
+       because a wallet's all-time record can look excellent while recent form is mediocre
+       (confirmed live: SDTrading is 80.1% all-time ROI but 10-10 over its last 20 MLB
+       plays). Walk-forward test backing this: hot 57.9% / warm 52.0% / cold 50.0% against a
+       52.4% break-even. Internal call to our own endpoint -- costs no Odds API quota. */
+    let walletForm = {};
+    try {
+      const wfRes = await fetch(`${SITE_URL}/api/grade-cron?walletForm=1`);
+      const wfData = await wfRes.json();
+      walletForm = wfData.form || {};
+    } catch { /* best-effort -- alert still works without form context */ }
+    function formLabel(wallet, sport) {
+      if (!wallet || !sport) return '';
+      const f = walletForm[wallet + '|' + sport];
+      if (!f) return '';   // under the min-sample gate -- deliberately show nothing
+      const icon = f.form === 'HOT' ? '\u{1F525}' : (f.form === 'COLD' ? '\u{1F9CA}' : '\u2696\ufe0f');
+      return `${icon} ${f.form} in ${sport} \u2014 ${f.wins}-${f.losses} (${f.winPct}%) last ${f.window}`;
+    }
+
     /* ── STEP 1: Polymarket — profitable wallet scan ── */
     const [sportsLB, overallLB] = await Promise.all([
       fetchLeaderboard('SPORTS'),
@@ -1191,7 +1212,10 @@ module.exports = async function handler(req, res) {
           `$${usd}${unitsLabel(alert.usdValue, alert.wallet)} on ${alert.sport || 'Unknown'}`,
           `Market: ${(alert.title || '').slice(0, 80)}${gameDate ? ` (${gameDate})` : ''}`,
           `Side: ${alert.outcome || '\u2014'} @ ${price}\u00a2`,
-        ].join('\n');
+          // Own line, deliberately separate from the record/units line above -- council
+          // was explicit this must never read as part of the score.
+          formLabel(alert.wallet, alert.sport) ? `Form: ${formLabel(alert.wallet, alert.sport)}` : null,
+        ].filter(Boolean).join('\n');
 
         const result = await sendDiscord(standaloneWebhook, body);
         results.discordStandalone.alerts.push({ trader: alert.traderName, title: alert.title, usd: alert.usdValue, result });
@@ -1222,6 +1246,7 @@ module.exports = async function handler(req, res) {
         // when it's not redundant with a real tracked number already shown above.
         (alert.specialistRecord && !usingTracked) ? `Specialist: ${alert.specialistRecord}` : null,
         alert.sportRecord ? `Record: ${alert.sportRecord}` : null,
+        formLabel(alert.wallet, alert.sport) ? `Form: ${formLabel(alert.wallet, alert.sport)}` : null,
         // FEATURE 2026-08-19 (per Derek, real ambiguity): "no date on alerts to tell" --
         // confirmed real confusion, a team playing a multi-game series has no way to tell
         // which specific game an alert refers to from the text alone. eventSlug already
