@@ -1135,8 +1135,16 @@ module.exports=async function handler(req,res){
       loadDayReport(sport, dayET),
     ]);
 
+    // BYPASS 2026-08-28 (per Derek, real need): no way existed to check true current
+    // market state without waiting out the 60-min cache -- confirmed this directly when
+    // a cached empty NFL/NCAAF result couldn't be verified against a claim of active
+    // lines. ?fresh=1 skips the cache read entirely and forces a live upstream pull.
+    // Explicit opt-in only (never the default) so this can't accidentally multiply quota
+    // burn from normal traffic -- costs one real credit-consuming call same as any
+    // cache miss, just triggered on purpose instead of by TTL expiry.
+    const forceFresh = String((req.query && req.query.fresh) || '') === '1';
     let games=null, rem=null, used=null, servedFromCache=false;
-    if(cachedRaw){
+    if(cachedRaw && !forceFresh){
       try{ games = typeof cachedRaw==='string' ? JSON.parse(cachedRaw) : cachedRaw; if(games)servedFromCache=true; }catch{ games=null; }
     }
     if(!games){
