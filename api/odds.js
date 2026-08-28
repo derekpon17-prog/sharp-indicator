@@ -1114,7 +1114,7 @@ module.exports=async function handler(req,res){
   // after review, not a committed feature.
   if(req.query && req.query.rawCheck){
     try{
-      const rawUrl='https://api.the-odds-api.com/v4/sports/'+sportKey+'/odds?apiKey='+apiKey+'&markets=h2h&oddsFormat=american';
+      const rawUrl='https://api.the-odds-api.com/v4/sports/'+sportKey+'/odds?apiKey='+apiKey+'&regions=us,us2&markets=h2h&oddsFormat=american';
       const rr=await fetch(rawUrl);
       const rj=await rr.json();
       const bookSet=new Set();
