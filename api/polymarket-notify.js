@@ -777,7 +777,11 @@ module.exports = async function handler(req, res) {
     const sports = (req.query.sports ? String(req.query.sports) : 'MLB')
       .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
     const dry = String(req.query.dry || '') === '1';
-    const webhook = process.env.DISCORD_WEBHOOK_URL_ALERTS;
+    // FIX 2026-08-28 (per Derek): Best Plays Report gets its own channel/webhook, separate
+    // from the every-alert channel (DISCORD_WEBHOOK_URL_ALERTS, untouched below). Derek's
+    // Vercel variable is lowercase sharp_report -- confirmed exact casing directly with him
+    // rather than guessing, same lesson as the DISCORD-substring naming mixup earlier.
+    const webhook = process.env.sharp_report;
 
     const { plays, errors } = await buildBestPlaysReport(sports);
 
