@@ -593,6 +593,151 @@ async function buildBestPlaysReport(sports) {
   return { plays, errors };
 }
 
+/* CONVERGE SCORE RECORD 2026-08-28 (per Derek): tracks real W-L and units for every
+   play the Converge Score Report actually posts, using American-odds unit convention
+   Derek specified exactly: positive odds risk 1u to win (odds/100)u; negative odds risk
+   (|odds|/100)u to win 1u -- e.g. -120 risks 1.2u to win 1u.
+   PENDING/GRADED split, same shape as everything else built today: a play gets appended
+   to converge:pending at post time with everything needed to grade it later (teams,
+   sport, market, sharpSide -- which already embeds the spread/total line, e.g.
+   "Yankees -1.5" or "Over 8.5" -- and the odds captured at posting). Grading runs via
+   ESPN's free scoreboard (same source grade-cron.js already uses elsewhere), moves
+   resolved plays into converge:graded, and record/units are computed fresh from that
+   array every time rather than kept as a running counter that could drift. */
+function unitsForOdds(americanOdds) {
+  const o = parseFloat(americanOdds);
+  if (!isFinite(o) || o === 0) return { risk: 1, toWin: 1 };
+  return o > 0 ? { risk: 1, toWin: o / 100 } : { risk: Math.abs(o) / 100, toWin: 1 };
+}
+
+function resolveConvergePlay(sharpSide, market, hN, aN, hS, aS) {
+  const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const s = (sharpSide || '').trim();
+
+  if (market === 'totals') {
+    const m = s.match(/^(Over|Under)\s+([\d.]+)$/i);
+    if (!m) return null;
+    const total = hS + aS, line = parseFloat(m[2]);
+    if (total === line) return 'PUSH';
+    const isOver = total > line;
+    return (m[1].toLowerCase() === 'over') === isOver ? 'WIN' : 'LOSS';
+  }
+
+  // spreads embed a trailing +/-N; h2h has no trailing number -- same sharpSide shape
+  // odds.js already builds (out.name + ' ' + point for spreads, bare name for h2h).
+  const spreadMatch = s.match(/^(.+?)\s+([+-][\d.]+)$/);
+  const team = spreadMatch ? spreadMatch[1].trim() : s;
+  const line = spreadMatch ? parseFloat(spreadMatch[2]) : null;
+
+  const nTeam = norm(team), nH = norm(hN), nA = norm(aN);
+  const isHome = nH.includes(nTeam) || nTeam.includes(nH);
+  const isAway = nA.includes(nTeam) || nTeam.includes(nA);
+  if (!isHome && !isAway) return null;
+
+  if (market === 'spreads' && line !== null) {
+    const margin = (isHome ? (hS - aS) : (aS - hS)) + line;
+    if (margin === 0) return 'PUSH';
+    return margin > 0 ? 'WIN' : 'LOSS';
+  }
+  // h2h
+  if (hS === aS) return 'PUSH';
+  const won = isHome ? hS > aS : aS > hS;
+  return won ? 'WIN' : 'LOSS';
+}
+
+async function gradeConvergePending() {
+  let pending = [];
+  try {
+    const raw = await upstashPost(['GET', 'converge:pending']);
+    pending = raw ? (typeof raw === 'string' ? JSON.parse(raw) : raw) : [];
+  } catch {}
+  if (!pending.length) return { graded: 0, stillPending: 0 };
+
+  const sports = [...new Set(pending.map(p => p.sport))];
+  const dates = [...new Set(pending.map(p => (p.postedAt ? new Date(p.postedAt) : new Date())
+    .toISOString().slice(0, 10).replace(/-/g, '')))];
+  // also check the day before, in case a play posted late and the game finished after midnight UTC
+  const extraDates = new Set();
+  dates.forEach(d => {
+    const dt = new Date(d.slice(0,4)+'-'+d.slice(4,6)+'-'+d.slice(6,8)+'T00:00:00Z');
+    dt.setUTCDate(dt.getUTCDate() + 1);
+    extraDates.add(dt.toISOString().slice(0,10).replace(/-/g,''));
+  });
+  extraDates.forEach(d => dates.push(d));
+
+  const eventsBySport = {};
+  await Promise.all(sports.map(async sp => {
+    const path = ESPN_SPORT_PATH[sp];
+    if (!path) { eventsBySport[sp] = []; return; }
+    const all = [];
+    await Promise.all(dates.map(async d => {
+      try {
+        const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${d}`);
+        const j = await r.json();
+        all.push(...(j.events || []));
+      } catch {}
+    }));
+    eventsBySport[sp] = all;
+  }));
+
+  const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const stillPending = [];
+  const newlyGraded = [];
+  for (const p of pending) {
+    const evs = eventsBySport[p.sport] || [];
+    let match = null;
+    for (const ev of evs) {
+      const comp = ev.competitions && ev.competitions[0];
+      if (!comp || !comp.status || !comp.status.type || !comp.status.type.completed) continue;
+      const home = comp.competitors.find(c => c.homeAway === 'home');
+      const away = comp.competitors.find(c => c.homeAway === 'away');
+      if (!home || !away) continue;
+      const hN = home.team && (home.team.displayName || home.team.name) || '';
+      const aN = away.team && (away.team.displayName || away.team.name) || '';
+      const nHN = norm(hN), nAN = norm(aN), nPH = norm(p.home), nPA = norm(p.away);
+      if ((nHN.includes(nPH) || nPH.includes(nHN)) && (nAN.includes(nPA) || nPA.includes(nAN))) {
+        match = { hN, aN, hS: parseFloat(home.score || 0), aS: parseFloat(away.score || 0) };
+        break;
+      }
+    }
+    if (!match) { stillPending.push(p); continue; }
+    const result = resolveConvergePlay(p.sharpSide, p.market, match.hN, match.aN, match.hS, match.aS);
+    if (!result) { stillPending.push(p); continue; }
+    const u = unitsForOdds(p.odds);
+    const netUnits = result === 'WIN' ? u.toWin : (result === 'LOSS' ? -u.risk : 0);
+    newlyGraded.push({ ...p, result, netUnits, riskUnits: u.risk, toWinUnits: u.toWin, gradedAt: Date.now(),
+      finalScore: `${match.aN} ${match.aS} - ${match.hS} ${match.hN}` });
+  }
+
+  if (newlyGraded.length) {
+    let graded = [];
+    try {
+      const raw = await upstashPost(['GET', 'converge:graded']);
+      graded = raw ? (typeof raw === 'string' ? JSON.parse(raw) : raw) : [];
+    } catch {}
+    graded.push(...newlyGraded);
+    await upstashPost(['SET', 'converge:graded', JSON.stringify(graded), 'EX', '7776000']); // 90 days
+  }
+  await upstashPost(['SET', 'converge:pending', JSON.stringify(stillPending), 'EX', '2592000']); // 30 days
+
+  return { graded: newlyGraded.length, stillPending: stillPending.length };
+}
+
+async function getConvergeRecord() {
+  let graded = [];
+  try {
+    const raw = await upstashPost(['GET', 'converge:graded']);
+    graded = raw ? (typeof raw === 'string' ? JSON.parse(raw) : raw) : [];
+  } catch {}
+  const wins = graded.filter(g => g.result === 'WIN').length;
+  const losses = graded.filter(g => g.result === 'LOSS').length;
+  const pushes = graded.filter(g => g.result === 'PUSH').length;
+  const decided = wins + losses;
+  const winPct = decided ? Math.round((wins / decided) * 1000) / 10 : null;
+  const netUnits = Math.round(graded.reduce((s, g) => s + (g.netUnits || 0), 0) * 100) / 100;
+  return { wins, losses, pushes, winPct, netUnits, sample: graded.length };
+}
+
 function playKey(p) {
   const day = new Date().toISOString().slice(0, 10);
   return `report:posted:${day}:${p.sport}:${p.away}@${p.home}:${p.market}:${p.sharpSide}`;
@@ -809,6 +954,12 @@ module.exports = async function handler(req, res) {
     // rather than guessing, same lesson as the DISCORD-substring naming mixup earlier.
     const webhook = process.env.sharp_report;
 
+    // Grade any previously-posted plays whose games have finished, before building this
+    // report -- so the record shown is always current, not from whenever grading last ran.
+    let gradeResult = { graded: 0, stillPending: 0 };
+    try { gradeResult = await gradeConvergePending(); } catch {}
+    const record = await getConvergeRecord();
+
     const { plays, errors } = await buildBestPlaysReport(sports);
 
     // Dedup: skip plays already posted today, unless the score climbed a tier.
@@ -829,19 +980,27 @@ module.exports = async function handler(req, res) {
       ok: true, mode, sports, threshold: TOP_PLAY_MIN,
       qualifying: plays.length, newOrUpgraded: fresh.length,
       oddsErrors: errors,
+      record, gradedThisRun: gradeResult.graded, stillPendingGrade: gradeResult.stillPending,
       plays: fresh.map(p => ({ game: `${p.away} @ ${p.home}`, sport: p.sport, market: p.market,
         side: p.sharpSide, siScore: p.siScore, reason: p._reason })),
     };
 
-    if (dry) { result.dryRun = true; result.embedsPreview = fresh.slice(0, 10).map(playEmbed); return res.status(200).json(result); }
+    // Record line, same wherever the record is shown -- report header or dry preview.
+    // "no graded plays yet" until real games settle; never a fabricated 0-0 record.
+    const recordLine = record.sample
+      ? `Converge Score Record: ${record.wins}-${record.losses}${record.pushes ? '-' + record.pushes : ''} (${record.winPct}%) \u00b7 ${record.netUnits >= 0 ? '+' : ''}${record.netUnits}u`
+      : 'Converge Score Record: no graded plays yet';
+
+    if (dry) { result.dryRun = true; result.recordLine = recordLine; result.embedsPreview = fresh.slice(0, 10).map(playEmbed); return res.status(200).json(result); }
     if (!fresh.length) { result.sent = false; result.note = 'Nothing new above threshold'; return res.status(200).json(result); }
     if (!webhook) { result.sent = false; result.note = 'DISCORD_WEBHOOK_URL_ALERTS not set'; return res.status(200).json(result); }
 
     // Discord caps embeds at 10 per message.
     const embeds = fresh.slice(0, 10).map(playEmbed);
-    const header = mode === 'check'
+    const header = (mode === 'check'
       ? `\u{1F195} **New top play${fresh.length > 1 ? 's' : ''}** \u2014 crossed ${TOP_PLAY_MIN}+ since the last report`
-      : `\u{1F3AF} **Converge Score Report** \u2014 ${sports.join('/')} \u00b7 ${fresh.length} play${fresh.length > 1 ? 's' : ''} at ${TOP_PLAY_MIN}+`;
+      : `\u{1F3AF} **Converge Score Report** \u2014 ${sports.join('/')} \u00b7 ${fresh.length} play${fresh.length > 1 ? 's' : ''} at ${TOP_PLAY_MIN}+`)
+      + `\n${recordLine}`;
     const send = await sendDiscord(webhook, header, embeds);
     result.sent = send.ok;
     result.sendResult = send;
@@ -849,6 +1008,18 @@ module.exports = async function handler(req, res) {
     if (send.ok) {
       for (const p of fresh) {
         try { await upstashPost(['SET', playKey(p), JSON.stringify({ siScore: p.siScore, at: Date.now() }), 'EX', String(REPORT_TTL)]); } catch {}
+        // Capture what's needed to grade this play later -- teams, sport, market, the
+        // sharpSide string (already embeds the spread/total line), and the odds at the
+        // moment it was posted (units are computed off THIS price, not whatever it moves
+        // to later).
+        try {
+          const best = p.bestPrices && p.bestPrices[p.sharpSide];
+          const pendingRaw = await upstashPost(['GET', 'converge:pending']);
+          const pendingArr = pendingRaw ? (typeof pendingRaw === 'string' ? JSON.parse(pendingRaw) : pendingRaw) : [];
+          pendingArr.push({ away: p.away, home: p.home, sport: p.sport, market: p.market,
+            sharpSide: p.sharpSide, odds: best ? best.price : null, siScore: p.siScore, postedAt: Date.now() });
+          await upstashPost(['SET', 'converge:pending', JSON.stringify(pendingArr), 'EX', '2592000']);
+        } catch {}
       }
     }
     return res.status(200).json(result);
