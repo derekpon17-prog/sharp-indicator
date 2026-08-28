@@ -1106,6 +1106,31 @@ module.exports=async function handler(req,res){
   const apiKey=process.env.ODDS_API_KEY;
   if(!apiKey)return res.status(200).json({plays:[],error:'ODDS_API_KEY not set',quota:{remaining:null,used:null}});
 
+  // TEMP DIAGNOSTIC 2026-08-28 (per Derek): ?rawCheck=1 -- hits the Odds API with NO
+  // bookmaker filter at all, to answer a real question definitively: is a sport genuinely
+  // empty, or does it have lines that just aren't on OUR narrowed book list? A fresh=1
+  // pull already confirmed genuinely zero games under our normal filtered request; this
+  // checks the unfiltered case before concluding anything further. Meant to be removed
+  // after review, not a committed feature.
+  if(req.query && req.query.rawCheck){
+    try{
+      const rawUrl='https://api.the-odds-api.com/v4/sports/'+sportKey+'/odds?apiKey='+apiKey+'&markets=h2h&oddsFormat=american';
+      const rr=await fetch(rawUrl);
+      const rj=await rr.json();
+      const bookSet=new Set();
+      (Array.isArray(rj)?rj:[]).forEach(g=>(g.bookmakers||[]).forEach(b=>bookSet.add(b.key)));
+      return res.status(200).json({
+        ok:true, sport, status:rr.status,
+        gamesFound:Array.isArray(rj)?rj.length:0,
+        allBookmakersSeen:[...bookSet],
+        sampleGame: Array.isArray(rj)&&rj[0] ? {away:rj[0].away_team,home:rj[0].home_team,commenceTime:rj[0].commence_time,bookCount:(rj[0].bookmakers||[]).length,books:(rj[0].bookmakers||[]).map(b=>b.key)} : null,
+        rawIfError: rr.status!==200 ? rj : undefined,
+      });
+    }catch(e){
+      return res.status(200).json({ok:false,error:e.message});
+    }
+  }
+
   const softKeys=SOFT_BOOKS.join(',');
   const exKeys=EXCHANGE_BOOKS.join(',');
   const allBooks='pinnacle,'+exKeys+','+softKeys;
