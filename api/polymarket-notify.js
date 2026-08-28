@@ -552,7 +552,20 @@ async function sendDiscord(webhookUrl, content, embeds) {
    DEDUP. Each posted play is keyed by date+game+market+side in KV. A play is only
    posted once. If it later UPGRADES (score climbs into a higher tier) it re-pings,
    same pattern the convergence alerts already use for tier upgrades. */
-const TOP_PLAY_MIN = 70;        // first-cut default -- confirm with Derek
+/* THRESHOLD SET FROM REAL GRADED DATA 2026-08-27 (council, per Derek). Was a provisional
+   70; raised to 75 on evidence from 750 graded plays (?scoreStats=1):
+     cumulative win rate at-or-above 75 ... 58.0%  (n=157)  <-- best
+     cumulative win rate at-or-above 70 ... 56.6%  (n=189)
+     the 70-74 band ALONE .................. 50.0%  (n=32)
+   Break-even at -110 juice is 52.4%, so 70-74 is a net LOSER after vig -- including it
+   actively dilutes the report. Also: the relationship is NOT monotonic. The 90-100 band
+   grades 52.9% (n=85), WORSE than 75-79's 65.7% (n=35). Higher is not reliably better,
+   so raising this further is not automatically safer and shouldn't be done without
+   re-running the numbers.
+   CAVEAT: those bands are POLY convergence scores, not Sharp Line SI scores -- same
+   0-100 shape and the same 75+/85+ tier language already in use, but not the identical
+   scale. Revisit once Sharp Line has its own graded sample stored server-side. */
+const TOP_PLAY_MIN = 75;        // evidence-backed (see above); was 70
 const REPORT_TTL   = 172800;    // 2 days, comfortably past a single slate
 
 function tierFor(score) {
@@ -1569,7 +1582,14 @@ module.exports = async function handler(req, res) {
        ACTIVE_LINE_SPORTS — to turn a sport on once its season starts, add its code to this
        one array; no other change needed here. Left as MLB-only for now since NFL/NBA/NHL are
        all off-season — no reason to spend API quota polling empty boards. */
-    const ACTIVE_LINE_SPORTS = ['MLB'];
+    /* OPENED 2026-08-27 (per Derek): NCAAF Week 0 is this Saturday, NFL follows shortly.
+       QUOTA NOTE -- cheaper than it looks: The Odds API does not charge for responses
+       containing no odds, so polling a sport with no scheduled games costs nothing; real
+       cost only starts once boards are posted. Each populated pull is markets x regions
+       = 3 credits (h2h,spreads,totals), and every pull hits the existing 60-minute KV
+       cache first, so repeat callers inside the hour are free. NBA/NHL deliberately left
+       OFF -- genuinely out of season, turning them on would spend quota on nothing. */
+    const ACTIVE_LINE_SPORTS = ['MLB', 'NCAAF', 'NFL'];
     let linePlays = [];
     for (const lsport of ACTIVE_LINE_SPORTS) {
       const sportPlays = await fetchSharpLinePlays(lsport); // Only SI >= 70 returned (raised from 65)
