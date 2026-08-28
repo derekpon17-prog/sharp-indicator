@@ -648,7 +648,8 @@ function resolveConvergePlay(sharpSide, market, hN, aN, hS, aS) {
 async function gradeConvergePending() {
   let pending = [];
   try {
-    const raw = await upstashPost(['GET', 'converge:pending']);
+    const res = await upstashPost(['GET', 'converge:pending']);
+    const raw = res && res.ok ? res.result : null;
     pending = raw ? (typeof raw === 'string' ? JSON.parse(raw) : raw) : [];
   } catch {}
   if (!pending.length) return { graded: 0, stillPending: 0 };
@@ -712,7 +713,8 @@ async function gradeConvergePending() {
   if (newlyGraded.length) {
     let graded = [];
     try {
-      const raw = await upstashPost(['GET', 'converge:graded']);
+      const res = await upstashPost(['GET', 'converge:graded']);
+      const raw = res && res.ok ? res.result : null;
       graded = raw ? (typeof raw === 'string' ? JSON.parse(raw) : raw) : [];
     } catch {}
     graded.push(...newlyGraded);
@@ -726,7 +728,8 @@ async function gradeConvergePending() {
 async function getConvergeRecord() {
   let graded = [];
   try {
-    const raw = await upstashPost(['GET', 'converge:graded']);
+    const res = await upstashPost(['GET', 'converge:graded']);
+    const raw = res && res.ok ? res.result : null;
     graded = raw ? (typeof raw === 'string' ? JSON.parse(raw) : raw) : [];
   } catch {}
   const wins = graded.filter(g => g.result === 'WIN').length;
@@ -1014,7 +1017,8 @@ module.exports = async function handler(req, res) {
         // to later).
         try {
           const best = p.bestPrices && p.bestPrices[p.sharpSide];
-          const pendingRaw = await upstashPost(['GET', 'converge:pending']);
+          const pendingRes = await upstashPost(['GET', 'converge:pending']);
+          const pendingRaw = pendingRes && pendingRes.ok ? pendingRes.result : null;
           const pendingArr = pendingRaw ? (typeof pendingRaw === 'string' ? JSON.parse(pendingRaw) : pendingRaw) : [];
           pendingArr.push({ away: p.away, home: p.home, sport: p.sport, market: p.market,
             sharpSide: p.sharpSide, odds: best ? best.price : null, siScore: p.siScore, postedAt: Date.now() });
