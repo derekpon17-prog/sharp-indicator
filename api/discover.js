@@ -709,6 +709,32 @@ module.exports = async function handler(req, res) {
        address-timestamp placeholders already stored on the roster with real pool
        nicknames. Genuine usernames are left completely untouched -- only the
        0xADDRESS-timestamp pattern is rewritten. */
+    /* ADMIN 2026-08-27 (per Derek): ?setName=<wallet>&name=<Name> restores or sets a
+       wallet's display name by hand. Needed because the clobbering bug (see assignNickname)
+       destroyed three real names before it was caught, and the originals aren't recoverable
+       from anything stored -- they have to be put back explicitly.
+       Writes BOTH the roster entry (every sport that wallet appears under) and the KV
+       nickname key, so the name is consistent across the site, Discord, and any future
+       re-promotion -- and because assignNickname now treats a real name as authoritative,
+       this survives future evaluation passes rather than being overwritten again. */
+    if (req.query && req.query.setName) {
+      const wallet = String(req.query.setName).toLowerCase();
+      const newName = String(req.query.name || '').trim();
+      if (!newName) return res.status(400).json({ ok: false, error: 'name query param required' });
+      const roster = (await kvGetJson('discover:roster')) || {};
+      const updated = [];
+      for (const [k, entry] of Object.entries(roster)) {
+        if ((entry.wallet || '').toLowerCase() !== wallet) continue;
+        updated.push({ sport: entry.sport, was: entry.name || null, now: newName });
+        entry.name = newName;
+      }
+      if (updated.length) await kvSetJson('discover:roster', roster, ROSTER_TTL);
+      try { await kv(['SET', 'nickname:' + wallet, newName]); } catch {}
+      return res.status(200).json({ ok: true, wallet, name: newName,
+        rosterEntriesUpdated: updated.length, updated,
+        note: updated.length ? undefined : 'Not currently on the roster -- KV nickname still set, so it will apply if/when promoted.' });
+    }
+
     if (req.query && req.query.fixNames) {
       const sport = String(req.query.fixNames).toUpperCase();
       const roster = (await kvGetJson('discover:roster')) || {};
