@@ -1669,7 +1669,7 @@ module.exports = async function handler(req, res) {
 
       const title = `📊 Sharp Line: ${play.away} vs ${play.home}`;
       const body  = [
-        `SI Score: ${si} — ${play.signalType}`,
+        `Converge Score: ${si} — ${play.signalType}`,
         `Sharp Side: ${play.sharpSide}`,
         `Pinnacle: ${play.lines?.pinnacle || '—'} | Soft avg: ${play.lines?.softAvg || '—'}`,
         `Gap: +${gap}pp | Exchange confirms: ${ex}`,
@@ -1677,8 +1677,16 @@ module.exports = async function handler(req, res) {
         play.pillars?.rlmIsReal ? '✓ Real line velocity data' : '⚠ RLM inferred (building baseline)',
       ].join('\n');
 
-      const priority = si >= 80 ? 'urgent' : 'high';
-      const r = await sendNtfy(topic, title, body, priority);
+      // CHANGED 2026-08-28 (per Derek): Sharp Line moves to its own Discord channel,
+      // replacing ntfy -- same pattern as the Poly alerts move. Reuses this exact body
+      // (already renamed SI Score -> Converge Score above, matching today's site rename)
+      // rather than reconstructing it, so this can't drift from what ntfy was showing.
+      const sharpLineWebhook = process.env.sharp_line_alerts;
+      let r = { ok: false };
+      if (sharpLineWebhook) {
+        const discordContent = `${title}\n${body}`;
+        r = await sendDiscord(sharpLineWebhook, discordContent);
+      }
       if (r.ok) results.line.sent++;
       results.line.alerts.push({ game: `${play.away} vs ${play.home}`, si, side: play.sharpSide, result: r });
 
