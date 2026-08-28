@@ -455,6 +455,22 @@ async function runDiscovery(opts) {
   // cannot inflate through bet selection.
   Object.keys(bySport).forEach(s => bySport[s].sort((a, b) => (b.roiPct || 0) - (a.roiPct || 0)));
 
+  /* FIX 2026-08-28 (per Derek, real incident): this used to return the FULL roster
+     (every field, every wallet) on every single call -- harmless back when the roster
+     was ~12 wallets, but it grew to 273 today and the response hit 155KB, which
+     cron-job.org rejected outright ("output too large") on every routine trigger.
+     Confirmed live: roster alone was 139,740 of 155,374 total bytes -- 90% of the
+     payload, dwarfing the thisRun arrays that were the original suspect. Full detail is
+     still one call away via ?roster=SPORT (a completely separate, unaffected code path,
+     getRoster()) -- this only trims what the routine cron response carries by default. */
+  const rosterSummary = {};
+  Object.keys(bySport).forEach(s => {
+    rosterSummary[s] = {
+      count: bySport[s].length,
+      topByROI: bySport[s].slice(0, 3).map(e => ({ name: e.name, wallet: e.wallet, roiPct: e.roiPct, staked: e.staked })),
+    };
+  });
+
   return {
     ok: h.ok, harvestError: h.error,
     harvested: h.trades.length,
@@ -473,7 +489,7 @@ async function runDiscovery(opts) {
     demoted: evaluated.filter(e => e.verdict === 'reject' || e.verdict === 'pending').length,
     unknown: evaluated.filter(e => e.verdict === 'unknown').length,
     rosterSize: Object.keys(roster).length,
-    roster: bySport,
+    roster: rosterSummary,
   };
 }
 
