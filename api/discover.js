@@ -897,7 +897,18 @@ module.exports = async function handler(req, res) {
     const historical = {};
     for (const sp of ['NFL', 'NCAAF', 'MLB']) {
       try {
-        historical[sp] = await runHistoricalDiscovery(sp, { budgetMs: 6000 });
+        const full = await runHistoricalDiscovery(sp, { budgetMs: 6000 });
+        // FIX 2026-08-28 (per Derek, same real incident as the roster trim above): the
+        // full thisRun array (each wallet evaluated this pass, ~100-800 entries) was also
+        // embedded in the routine cron response on top of the roster bloat. Not the main
+        // cause this time -- confirmed roster was 90% of the 155KB payload -- but real
+        // uncertainty about cron-job.org's exact size limit means leaving this in risks
+        // the same failure recurring as the roster grows further. Full detail is still
+        // one call away via the dedicated ?historical=SPORT endpoint (unaffected, used
+        // for manual checks), which is the only place this level of detail is actually
+        // read from in practice.
+        const { thisRun, ...summary } = full;
+        historical[sp] = summary;
       } catch (e) {
         historical[sp] = { ok: false, error: e.message };
       }
