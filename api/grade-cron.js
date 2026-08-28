@@ -349,6 +349,57 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    /* SCORE-BAND STATS 2026-08-27 (per Derek, for the TOP_PLAY_MIN council decision):
+       the server has 500+ graded plays sitting in KV with scores attached, but nothing
+       ever read them back for analysis. This buckets graded plays by score band and
+       reports real win rate per band -- actual evidence for where a threshold should sit,
+       instead of picking a round number. Read-only, changes no stored data.
+       SCOPE CAVEAT: these are POLY convergence scores (polyDisplayScore), NOT Sharp Line
+       SI scores. Related but not the same scale -- see the analysis note before treating
+       these numbers as directly setting an SI threshold. */
+    if (req.query && req.query.scoreStats) {
+      const [sigRaw, specRaw] = await Promise.all([
+        upstash(['GET', SIG_KEY]),
+        upstash(['GET', SPEC_KEY]),
+      ]);
+      const parse = (r) => { try { return r ? (typeof r === 'string' ? JSON.parse(r) : r) : []; } catch { return []; } };
+      const all = [...parse(sigRaw).map(p => ({ ...p, pop: 'WHALE' })), ...parse(specRaw).map(p => ({ ...p, pop: 'SPECIALIST' }))];
+      const graded = all.filter(p => p.status === 'WIN' || p.status === 'LOSS');
+
+      const bands = [
+        { label: '90-100', min: 90, max: 1000 },
+        { label: '85-89',  min: 85, max: 90 },
+        { label: '80-84',  min: 80, max: 85 },
+        { label: '75-79',  min: 75, max: 80 },
+        { label: '70-74',  min: 70, max: 75 },
+        { label: '65-69',  min: 65, max: 70 },
+        { label: '60-64',  min: 60, max: 65 },
+        { label: 'under 60', min: -1, max: 60 },
+      ];
+      const summarize = (rows) => {
+        const w = rows.filter(r => r.status === 'WIN').length;
+        const l = rows.filter(r => r.status === 'LOSS').length;
+        const n = w + l;
+        return { n, wins: w, losses: l, winPct: n ? Math.round((w / n) * 1000) / 10 : null };
+      };
+      const byBand = bands.map(b => {
+        const rows = graded.filter(p => typeof p.score === 'number' && p.score >= b.min && p.score < b.max);
+        return { band: b.label, ...summarize(rows),
+          cumulativeAtOrAbove: summarize(graded.filter(p => typeof p.score === 'number' && p.score >= b.min)) };
+      });
+      return res.status(200).json({
+        ok: true,
+        note: 'POLY convergence scores, not Sharp Line SI scores. Break-even at -110 juice is 52.4%.',
+        totalTracked: all.length, totalGraded: graded.length,
+        overall: summarize(graded),
+        byPopulation: {
+          WHALE: summarize(graded.filter(p => p.pop === 'WHALE')),
+          SPECIALIST: summarize(graded.filter(p => p.pop === 'SPECIALIST')),
+        },
+        byBand,
+      });
+    }
+
     if (req.query && req.query.allUnits) {
       const MIN_SAMPLE_FOR_UNITS = 15;
       const byTrader = {};
