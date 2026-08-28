@@ -372,6 +372,72 @@ module.exports = async function handler(req, res) {
        fake positive.
        MIN_PRIOR is the guard against the thin-sample trap the council flagged -- a wallet
        with 2 prior bets tells you nothing, so it's excluded rather than counted as signal. */
+    /* WALLET FORM 2026-08-27 (council-approved, per Derek) -- SHADOW TAG, NOT A SCORE.
+       Production counterpart to ?recencyStats=1 (which PROVED the effect: hot wallets
+       57.9% vs warm 52.0% vs cold 50.0%, walk-forward, break-even 52.4%).
+
+       DELIBERATE DESIGN CHOICES, per council:
+       - ROLLING WINDOW, not all-time. FORM_WINDOW=20 most recent settled plays per
+         wallet PER SPORT. All-time records are exactly why the current demotion logic is
+         toothless -- a wallet coasts on old results forever. The rolling window is the
+         entire point of this test.
+       - MIN sample gate. Under FORM_MIN settled we return null rather than a label,
+         so the UI can't show an authoritative-looking "COLD" off 3 bets.
+       - PER SPORT. A wallet hot in MLB says nothing about their NFL. Confirmed relevant:
+         hot specialists grade 57.3% while warm specialists grade 45.8% -- the population
+         label alone hides a real split.
+       - ZERO SCORING EFFECT. Consumed for display only (site Sharp Report + its own
+         Discord callout line). Nothing here feeds siScore or polyDisplayScore. */
+    if (req.query && req.query.walletForm) {
+      const FORM_WINDOW = req.query.window ? parseInt(req.query.window) : 20;
+      const FORM_MIN    = req.query.min ? parseInt(req.query.min) : 8;
+      const [sigRaw3, specRaw3] = await Promise.all([
+        upstash(['GET', SIG_KEY]),
+        upstash(['GET', SPEC_KEY]),
+      ]);
+      const parse3 = (r) => { try { return r ? (typeof r === 'string' ? JSON.parse(r) : r) : []; } catch { return []; } };
+      const all3 = [...parse3(sigRaw3), ...parse3(specRaw3)];
+      // newest first, so slicing the head gives the most recent N
+      const graded3 = all3
+        .filter(p => (p.status === 'WIN' || p.status === 'LOSS') && p.loggedAt)
+        .sort((a, b) => b.loggedAt - a.loggedAt);
+
+      const seq = {};   // wallet|sport -> array of 'W'/'L', newest first
+      for (const p of graded3) {
+        const sport = p.sport || 'UNKNOWN';
+        const won = p.status === 'WIN';
+        for (const s of (Array.isArray(p.stakes) ? p.stakes : [])) {
+          if (!s.wallet) continue;
+          const k = s.wallet + '|' + sport;
+          (seq[k] = seq[k] || []).push(won ? 'W' : 'L');
+        }
+      }
+
+      const form = {};
+      for (const [k, arr] of Object.entries(seq)) {
+        const recent = arr.slice(0, FORM_WINDOW);
+        const n = recent.length;
+        if (n < FORM_MIN) continue;                 // too thin to label -- omitted entirely
+        const w = recent.filter(x => x === 'W').length;
+        const pct = Math.round((w / n) * 1000) / 10;
+        const [wallet, sport] = k.split('|');
+        form[k] = {
+          wallet, sport, window: n, wins: w, losses: n - w, winPct: pct,
+          form: pct >= 60 ? 'HOT' : (pct >= 50 ? 'WARM' : 'COLD'),
+        };
+      }
+
+      const counts = { HOT: 0, WARM: 0, COLD: 0 };
+      Object.values(form).forEach(f => counts[f.form]++);
+      return res.status(200).json({
+        ok: true,
+        note: 'SHADOW display tag only -- does not affect any score. Rolling per-sport form.',
+        windowSize: FORM_WINDOW, minSample: FORM_MIN,
+        tagged: Object.keys(form).length, counts,
+        form,
+      });
+    }
+
     if (req.query && req.query.recencyStats) {
       const MIN_PRIOR = req.query.minPrior ? parseInt(req.query.minPrior) : 5;
       const [sigRaw2, specRaw2] = await Promise.all([
