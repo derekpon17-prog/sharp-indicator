@@ -454,7 +454,7 @@ select.finput option{background:var(--s2)}
     <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
       <div class="sc gold" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-chart-bar"></i>Line Plays</div><div id="cc-line-cnt" style="font-size:20px;font-weight:900;font-family:var(--mono)">0</div></div>
       <div class="sc blue" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-bolt"></i>Poly Plays</div><div id="cc-poly-cnt" style="font-size:20px;font-weight:900;font-family:var(--mono)">0</div></div>
-      <div class="sc green" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-target"></i>Sharp Score</div><div id="cc-ss-cnt" style="font-size:20px;font-weight:900;font-family:var(--mono)">0</div></div>
+      <div class="sc green" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-target"></i>Converge Score</div><div id="cc-ss-cnt" style="font-size:20px;font-weight:900;font-family:var(--mono)">0</div></div>
       <div class="sc purple" style="flex:1;min-width:100px;padding:12px 14px"><div class="sc-lbl"><i class="ti ti-coin"></i>P&amp;L Est.</div><div id="d-pl" style="font-size:20px;font-weight:900;font-family:var(--mono);color:var(--t4)">$0</div></div>
       <div class="sc" style="flex:1;min-width:100px;padding:12px 14px;border-top-color:var(--red)"><div class="sc-lbl"><i class="ti ti-bell"></i>Alerts</div><div style="font-size:20px;font-weight:900;font-family:var(--mono)" id="d-ws">0&ndash;0</div></div>
     </div>
@@ -621,7 +621,7 @@ select.finput option{background:var(--s2)}
       <div class="flag-card f-watch"><div class="fc-name">Watchlist <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.07);color:var(--t3);margin-left:3px">TIER C</span></div><div class="fc-rec" id="fs-watch">&mdash;</div><div class="fc-sub" id="fs-watch-sub">no graded plays</div><div id="fs-watch-bands"></div></div>
       <div class="flag-card f-spec"><div class="fc-name">Poly Specialist <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(64,180,255,.15);color:#40B4FF;margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-spec">&mdash;</div><div class="fc-sub" id="fs-spec-sub">no graded plays</div><div id="fs-spec-bands"></div></div>
       <div class="flag-card f-line"><div class="fc-name">Sharp Line <span style="font-size:8px;font-weight:600;color:var(--t4);text-transform:none;letter-spacing:0">&middot; line only</span></div><div class="fc-rec" id="fs-line">&mdash;</div><div class="fc-sub" id="fs-line-sub">no graded plays</div><div id="fs-line-bands"></div></div>
-      <div class="flag-card f-ss"><div class="fc-name">Sharp Score <span style="font-size:8px;font-weight:600;color:var(--t4);text-transform:none;letter-spacing:0">&middot; line + poly agree</span></div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div><div id="fs-ss-bands"></div></div>
+      <div class="flag-card f-ss"><div class="fc-name">Converge Score <span style="font-size:8px;font-weight:600;color:var(--t4);text-transform:none;letter-spacing:0">&middot; line + poly agree</span></div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div><div id="fs-ss-bands"></div></div>
       <div class="flag-card f-picks"><div class="fc-name">My Picks</div><div class="fc-rec" id="fs-picks">&mdash;</div><div class="fc-sub" id="fs-picks-sub">no graded picks</div></div>
       <div class="flag-card f-mlv"><div class="fc-name">ML Velocity <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:3px">SHADOW</span></div><div class="fc-rec" id="fs-mlv">&mdash;</div><div class="fc-sub" id="fs-mlv-sub">validating &mdash; not in real record</div><div id="fs-mlv-bands"></div></div>
       <div class="flag-card f-qc"><div class="fc-name">Quality Convergence <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(0,200,150,.15);color:var(--green);margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-qc">&mdash;</div><div class="fc-sub" id="fs-qc-sub">no graded plays</div><div id="fs-qc-bands"></div></div>
@@ -717,7 +717,7 @@ select.finput option{background:var(--s2)}
     <!-- Sharp Score Auto-Plays (combined) -->
     <div style="margin-bottom:28px">
       <div class="row-hdr" style="margin-bottom:12px">
-        <div class="row-ttl" style="font-size:16px"><i class="ti ti-target" style="color:var(--green)"></i>Sharp Score Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">the full algorithm &mdash; both signals agree, 70+ combined</span></div>
+        <div class="row-ttl" style="font-size:16px"><i class="ti ti-target" style="color:var(--green)"></i>Converge Score Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">the full algorithm &mdash; both signals agree, 70+ combined</span></div>
         <div id="ss-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
       </div>
       <div class="perf" style="margin-bottom:16px">
@@ -727,7 +727,7 @@ select.finput option{background:var(--s2)}
       </div>
       <div id="ss-plays" style="display:flex;flex-direction:column;gap:8px"></div>
       <div id="ss-empty" class="empty" style="padding:22px">
-        <div class="empty-ico">&#x1F3AF;</div><h3>No Sharp Score plays yet</h3>
+        <div class="empty-ico">&#x1F3AF;</div><h3>No Converge Score plays yet</h3>
         <p>The rarest flag &mdash; logged when the line signal and Poly money agree on the same side</p>
       </div>
     </div>
@@ -1990,7 +1990,7 @@ function autoTrackLinePlays(lines){
     const key=(g.away||'')+'vs'+(g.home||'')+'||'+(ind.side||g.sharpSide||'')+'||'+(g.commenceTime||'');
     if(linePlays.some(function(p){return p.key===key;}))return;
     const gt=g.commenceTime?new Date(g.commenceTime).toLocaleString():'';
-    linePlays.unshift({key,score,tier:ind.tier,tierLabel:ind.label,sources:ind.sources||[],reasons:ind.reasons||[],bestBook:ind.bestBook||null,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:ind.side||g.sharpSide||'',signalType:ind.label||g.signalType||'Sharp Signal',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,exConfirms:g.exConfirms||0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
+    linePlays.unshift({key,score,tier:ind.tier,tierLabel:ind.label,sources:ind.sources||[],reasons:ind.reasons||[],bestBook:ind.bestBook||null,title:(g.away||'')+(g.home?' vs '+g.home:''),sharpSide:ind.side||g.sharpSide||'',signalType:ind.label||g.signalType||'Converge Signal',pinnacleGap:parseFloat(g.gapPP||0).toFixed(1),exchangeConfirmed:g.novigConfirm||g.exConfirms>0,exConfirms:g.exConfirms||0,sport:detectSportFromTeams(g.away,g.home),gameTime:g.commenceTime||'',loggedAt:Date.now(),status:'OPEN'});
     changed=true;
   });
   if(changed)ss('pm:line-plays',linePlays);
@@ -2499,7 +2499,7 @@ function renderReport(){
   var tiers={A:0,B:0,C:0},pending=0;
   rows.forEach(function(r){tiers[r.indication.tier]=(tiers[r.indication.tier]||0)+1;if(!r.started)pending++;});
   var head='<div class="rep"><div class="rep-hd"><div>'
-    +'<div class="rep-ttl">Today\u2019s Sharp Report</div>'
+    +'<div class="rep-ttl">Today\u2019s Converge Score Report</div>'
     +'<div class="rep-sub">'+(rows.length
         ?tiers.A+' convergence \u00b7 '+tiers.B+' signal \u00b7 '+tiers.C+' watchlist \u00b7 '+pending+' still pregame'
         :'No qualifying reads on the board')
