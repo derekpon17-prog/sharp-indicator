@@ -1614,7 +1614,11 @@ module.exports = async function handler(req, res) {
        = 3 credits (h2h,spreads,totals), and every pull hits the existing 60-minute KV
        cache first, so repeat callers inside the hour are free. NBA/NHL deliberately left
        OFF -- genuinely out of season, turning them on would spend quota on nothing. */
-    const ACTIVE_LINE_SPORTS = ['MLB', 'NCAAF', 'NFL'];
+    // FIX 2026-08-28 (per Derek, real API key now live): odds.js's own SPORT_KEYS has
+    // always used NCAAFB, not NCAAF -- confirmed live, /api/odds?sport=NCAAF returned
+    // "Unknown sport". Last night's open only worked for NFL; NCAAF has been silently
+    // dead since. Corrected to match odds.js's real key.
+    const ACTIVE_LINE_SPORTS = ['MLB', 'NCAAFB', 'NFL'];
     let linePlays = [];
     for (const lsport of ACTIVE_LINE_SPORTS) {
       const sportPlays = await fetchSharpLinePlays(lsport); // Only SI >= 70 returned (raised from 65)
