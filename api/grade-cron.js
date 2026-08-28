@@ -357,6 +357,87 @@ module.exports = async function handler(req, res) {
        SCOPE CAVEAT: these are POLY convergence scores (polyDisplayScore), NOT Sharp Line
        SI scores. Related but not the same scale -- see the analysis note before treating
        these numbers as directly setting an SI threshold. */
+    /* WALK-FORWARD RECENCY TEST 2026-08-27 (council, per Derek).
+       QUESTION: should wallet weighting use RECENT, PER-SPORT form instead of the current
+       all-time WHALE/SPECIALIST labels? Motivating evidence: specialists grade 50.7%
+       (113-110) vs whales 55.6% (293-234) -- and both populations are selected on all-time
+       numbers with no recency component at all.
+
+       METHOD -- deliberately walk-forward, not hindsight. Plays are sorted oldest-first.
+       For each play, each participating wallet is scored ONLY on what was knowable BEFORE
+       that play: that wallet's prior record IN THAT SPORT. The play's outcome is then
+       bucketed by that prior form. This answers "did knowing a wallet was hot in this sport
+       actually predict the next result", which is the only version of the question that
+       could justify changing a weight. Fitting on full-sample records would guarantee a
+       fake positive.
+       MIN_PRIOR is the guard against the thin-sample trap the council flagged -- a wallet
+       with 2 prior bets tells you nothing, so it's excluded rather than counted as signal. */
+    if (req.query && req.query.recencyStats) {
+      const MIN_PRIOR = req.query.minPrior ? parseInt(req.query.minPrior) : 5;
+      const [sigRaw2, specRaw2] = await Promise.all([
+        upstash(['GET', SIG_KEY]),
+        upstash(['GET', SPEC_KEY]),
+      ]);
+      const parse2 = (r) => { try { return r ? (typeof r === 'string' ? JSON.parse(r) : r) : []; } catch { return []; } };
+      const all2 = [...parse2(sigRaw2).map(p => ({ ...p, pop: 'WHALE' })), ...parse2(specRaw2).map(p => ({ ...p, pop: 'SPECIALIST' }))];
+      const graded2 = all2
+        .filter(p => (p.status === 'WIN' || p.status === 'LOSS') && p.loggedAt)
+        .sort((a, b) => a.loggedAt - b.loggedAt);
+
+      // running per-wallet, per-sport record built up as we walk forward in time
+      const hist = {};                       // key: wallet|sport -> {w,l}
+      const buckets = {
+        'hot (>=60%)':      { n: 0, w: 0 },
+        'warm (50-59%)':    { n: 0, w: 0 },
+        'cold (<50%)':      { n: 0, w: 0 },
+      };
+      const bucketsByPop = { WHALE: {}, SPECIALIST: {} };
+      const bucketsBySport = {};
+      let skippedThinPrior = 0, noWalletData = 0;
+
+      for (const p of graded2) {
+        const sport = p.sport || 'UNKNOWN';
+        const won = p.status === 'WIN';
+        const stakes = Array.isArray(p.stakes) ? p.stakes : [];
+        if (!stakes.length) noWalletData++;
+        for (const s of stakes) {
+          const wal = s.wallet;
+          if (!wal) continue;
+          const k = wal + '|' + sport;
+          const prior = hist[k];
+          if (prior && (prior.w + prior.l) >= MIN_PRIOR) {
+            const pct = prior.w / (prior.w + prior.l) * 100;
+            const label = pct >= 60 ? 'hot (>=60%)' : (pct >= 50 ? 'warm (50-59%)' : 'cold (<50%)');
+            buckets[label].n++; if (won) buckets[label].w++;
+            const bp = bucketsByPop[p.pop] || (bucketsByPop[p.pop] = {});
+            bp[label] = bp[label] || { n: 0, w: 0 }; bp[label].n++; if (won) bp[label].w++;
+            const bs = bucketsBySport[sport] || (bucketsBySport[sport] = {});
+            bs[label] = bs[label] || { n: 0, w: 0 }; bs[label].n++; if (won) bs[label].w++;
+          } else {
+            skippedThinPrior++;
+          }
+          // update history AFTER scoring, so this play never informs its own prediction
+          if (!hist[k]) hist[k] = { w: 0, l: 0 };
+          if (won) hist[k].w++; else hist[k].l++;
+        }
+      }
+
+      const pct = (o) => o && o.n ? Math.round((o.w / o.n) * 1000) / 10 : null;
+      const fmt = (obj) => Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, { n: v.n, wins: v.w, winPct: pct(v) }]));
+
+      return res.status(200).json({
+        ok: true,
+        method: 'walk-forward: each play scored only on the wallet prior record in that sport, before that play',
+        minPriorBets: MIN_PRIOR,
+        breakEvenAt110: 52.4,
+        gradedPlaysUsed: graded2.length,
+        skippedThinPrior, playsWithNoWalletData: noWalletData,
+        overallByPriorForm: fmt(buckets),
+        byPopulation: { WHALE: fmt(bucketsByPop.WHALE || {}), SPECIALIST: fmt(bucketsByPop.SPECIALIST || {}) },
+        bySport: Object.fromEntries(Object.entries(bucketsBySport).map(([sp, v]) => [sp, fmt(v)])),
+      });
+    }
+
     if (req.query && req.query.scoreStats) {
       const [sigRaw, specRaw] = await Promise.all([
         upstash(['GET', SIG_KEY]),
