@@ -21,6 +21,13 @@ const MIN_SOFT_ML    = 3;
 const PIN_GAP_ML     = 1.0;
 const PIN_GAP_STD    = 2.0;
 const EX_CONFIRM_GAP = 1.5;
+/* EX_LEAN_GAP 2026-08-28 (council-approved, per Derek). A weaker, separately-labeled
+   signal for the 0.75-1.5pp band -- real exchange divergence, just below the confirm
+   bar. Strictly the BAND (>0.75 and <=1.5), never overlapping with what clears
+   EX_CONFIRM_GAP, so Money Score and Exchange-Only Signals can never show the same game.
+   First-cut threshold per council, not independently validated -- same posture as every
+   other new signal shipped this way (Kelly, Kalshi steam, SP confirmation). */
+const EX_LEAN_GAP = 0.75;
 
 /* ── ML VELOCITY (SHADOW MODE) — provisional thresholds, recalibrate in Phase B ──
    Council build 2026-07-24. State ladder: MID_MOVE (move + books still lagging) >
@@ -845,7 +852,8 @@ function sigType(rlm,pin,mon,exConfirms){
 // entirely. This surfaces the real per-book breakdown that already existed in the math.
 function detectExchangeLean(pm,sms,exBooks,mkey){
   const result={};
-  EXCHANGE_BOOKS.forEach(key=>{result[key]={favors:null,gapPP:null}});
+  const leanResult={};
+  EXCHANGE_BOOKS.forEach(key=>{result[key]={favors:null,gapPP:null};leanResult[key]={favors:null,gapPP:null};});
   for(let i=0;i<pm.outcomes.length;i++){
     const out=pm.outcomes[i];
     const simps=sms.map(sm=>{const o=findOut(sm.outcomes,out.name,out.point);return o?toImp(o.price):null;}).filter(x=>x!==null);
@@ -872,12 +880,18 @@ function detectExchangeLean(pm,sms,exBooks,mkey){
       if(gapPP>EX_CONFIRM_GAP&&(result[eb.key].gapPP===null||gapPP>result[eb.key].gapPP)){
         result[eb.key]={favors:side,gapPP:Math.round(gapPP*10)/10};
       }
+      // LEAN 2026-08-28 (council-approved): strictly the 0.75-1.5pp band, never the
+      // confirmed range above -- keeps Money Score and Exchange-Only Signals mutually
+      // exclusive by construction, not by a display-layer filter that could drift.
+      else if(gapPP>EX_LEAN_GAP&&gapPP<=EX_CONFIRM_GAP&&(leanResult[eb.key].gapPP===null||gapPP>leanResult[eb.key].gapPP)){
+        leanResult[eb.key]={favors:side,gapPP:Math.round(gapPP*10)/10};
+      }
     });
   }
   const keys=Object.keys(result);
   const bothLean=keys.length===2&&result[keys[0]].favors&&result[keys[1]].favors;
   const disagreement=!!(bothLean&&result[keys[0]].favors!==result[keys[1]].favors);
-  return{detail:result,disagreement};
+  return{detail:result,disagreement,leanDetail:leanResult};
 }
 // Derives a standalone "exchange confirms, Pinnacle doesn't" signal directly from the
 // already-computed exchangeLean data — no restructuring of the Pinnacle-gated scoring
@@ -886,7 +900,13 @@ function detectExchangeLean(pm,sms,exBooks,mkey){
 // but inherently thinner than a Pinnacle-confirmed one — lower liquidity, easier for a
 // single trader to move — so it must never be silently merged in at equal weight.
 function exchangeOnlySignal(lean){
-  const cands=Object.entries(lean.detail).filter(([k,v])=>v.favors&&v.gapPP!==null);
+  // FIX 2026-08-28 (council-approved, per Derek): this was reading lean.detail -- the
+  // CONFIRMED (1.5pp+) field -- meaning "Exchange-Only Signals" was silently gated on
+  // the exact same bar as full Money Score confirmation, despite being labeled and
+  // displayed as a weaker, speculative secondary signal. Never actually populated
+  // anything the confirm path hadn't already caught. Now reads leanDetail, the
+  // dedicated 0.75-1.5pp band captured above.
+  const cands=Object.entries(lean.leanDetail||{}).filter(([k,v])=>v.favors&&v.gapPP!==null);
   if(!cands.length)return null;
   cands.sort((a,b)=>b[1].gapPP-a[1].gapPP);
   const[book,d]=cands[0];
