@@ -515,17 +515,101 @@ async function sendNtfy(topic, title, body, priority = 'high') {
                               carry the DISCORD_ prefix like the other one. If unset,
                               silently no-ops rather than erroring, same fail-open pattern
                               as the convergence webhook. */
-async function sendDiscord(webhookUrl, content) {
+async function sendDiscord(webhookUrl, content, embeds) {
+  // EMBEDS 2026-08-27 (per Derek): optional third param. Existing callers pass only
+  // (url, content) and are completely unaffected -- embeds stays undefined and is
+  // stripped from the payload below. Embeds are Discord's native rich-card format
+  // (the coloured left bar + structured fields, same as the BettorOdds card Derek
+  // liked). Chosen over AI-generated images deliberately: this report is entirely
+  // exact numbers, and image models render text/digits unreliably -- a wrong number
+  // in a pretty card is worse than no card.
   try {
+    const payload = {};
+    if (content) payload.content = content;
+    if (embeds && embeds.length) payload.embeds = embeds;
     const r = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content }),
+      body: JSON.stringify(payload),
     });
     return { ok: r.ok, status: r.status };
   } catch (e) {
     return { ok: false, error: e.message };
   }
+}
+
+/* ─── BEST PLAYS REPORT (added 2026-08-27, per Derek) ──────────────────────────
+   WHAT THIS IS. A scheduled digest posted to Discord ahead of first pitch/kickoff,
+   plus follow-up pings when a NEW play later crosses the bar. Hit via
+   ?bestPlays=1 so it adds ZERO serverless functions -- the project is exactly at
+   the Hobby plan's 12-function ceiling (confirmed live: a new file broke the deploy).
+
+   THRESHOLD IS A FIRST-CUT DEFAULT, NOT CONFIRMED. TOP_PLAY_MIN=70 mirrors the
+   existing auto-track bar (plays >=70 SI are already auto-tracked) so it's at least
+   consistent with current behaviour rather than invented. Derek should confirm or
+   change it -- flagged rather than silently chosen.
+
+   DEDUP. Each posted play is keyed by date+game+market+side in KV. A play is only
+   posted once. If it later UPGRADES (score climbs into a higher tier) it re-pings,
+   same pattern the convergence alerts already use for tier upgrades. */
+const TOP_PLAY_MIN = 70;        // first-cut default -- confirm with Derek
+const REPORT_TTL   = 172800;    // 2 days, comfortably past a single slate
+
+function tierFor(score) {
+  if (score >= 85) return { name: 'ELITE',  color: 0xE5A00D };
+  if (score >= 75) return { name: 'STRONG', color: 0x00C896 };
+  return { name: 'MODERATE', color: 0x40B4FF };
+}
+
+async function buildBestPlaysReport(sports) {
+  const plays = [];
+  const errors = [];
+  for (const sp of sports) {
+    try {
+      const r = await fetch(`${SITE_URL}/api/odds?sport=${sp}`);
+      const d = await r.json();
+      if (d && d.error) { errors.push(`${sp}: ${d.error}`); continue; }
+      (d.plays || []).forEach(p => {
+        if (p && !p.noSignal && typeof p.siScore === 'number' && p.siScore >= TOP_PLAY_MIN) {
+          plays.push({ ...p, sport: sp });
+        }
+      });
+    } catch (e) { errors.push(`${sp}: ${e.message}`); }
+  }
+  plays.sort((a, b) => b.siScore - a.siScore);
+  return { plays, errors };
+}
+
+function playKey(p) {
+  const day = new Date().toISOString().slice(0, 10);
+  return `report:posted:${day}:${p.sport}:${p.away}@${p.home}:${p.market}:${p.sharpSide}`;
+}
+
+function playEmbed(p) {
+  const tier = tierFor(p.siScore);
+  const fields = [
+    { name: 'Pick',   value: `**${p.sharpSide}** (${p.market})`, inline: true },
+    { name: 'Score',  value: `**${p.siScore}** · ${tier.name}`,  inline: true },
+  ];
+  if (p.signalType) fields.push({ name: 'Signal', value: String(p.signalType), inline: true });
+  if (p.gapPP != null) fields.push({ name: 'Pinnacle gap', value: `${p.gapPP}pp`, inline: true });
+  const best = p.bestPrices && p.bestPrices[p.sharpSide];
+  if (best && best.price != null) {
+    fields.push({ name: 'Best price', value: `${best.price > 0 ? '+' : ''}${best.price} (${best.book || '—'})`, inline: true });
+  }
+  if (p.kelly && p.kelly.suggestedPctOfBankroll > 0) {
+    fields.push({ name: 'Half-Kelly', value: `${p.kelly.suggestedPctOfBankroll}% bankroll`, inline: true });
+  }
+  if (p.exConfirms) fields.push({ name: 'Exchange', value: `${p.exConfirms} confirm(s)`, inline: true });
+  if (p.pitcherWatch && p.pitcherWatch.state === 'RECENT_CHANGE') {
+    fields.push({ name: '\u26a0\ufe0f SP change', value: `${p.pitcherWatch.hoursSinceChange}h ago \u2014 line move may be rotation news`, inline: false });
+  }
+  return {
+    title: `${p.away} @ ${p.home}`,
+    description: `${p.sport}${p.commenceTime ? ` \u00b7 <t:${Math.floor(new Date(p.commenceTime).getTime() / 1000)}:t>` : ''}`,
+    color: tier.color,
+    fields,
+  };
 }
 
 /* Some wallets have traderName stored as "0xADDRESS-1722957908185" — a raw wallet address
@@ -668,6 +752,64 @@ function inferLean(sideBuyers, sideOutcome, oppBuyers, oppOutcome, tracked) {
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
+
+  /* BEST PLAYS REPORT -- ?bestPlays=1 (scheduled digest) or ?bestPlays=check (follow-up
+     sweep for plays that newly crossed the bar). Both share the same dedup, so the
+     scheduled send and the follow-ups can never double-post the same play.
+     Optional &sports=MLB,NFL overrides which sports to pull; defaults to MLB.
+     &dry=1 builds the report and returns it WITHOUT posting -- for tuning the format
+     without spamming the channel. */
+  if (req.query && req.query.bestPlays) {
+    const mode = String(req.query.bestPlays);
+    const sports = (req.query.sports ? String(req.query.sports) : 'MLB')
+      .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
+    const dry = String(req.query.dry || '') === '1';
+    const webhook = process.env.DISCORD_WEBHOOK_URL_ALERTS;
+
+    const { plays, errors } = await buildBestPlaysReport(sports);
+
+    // Dedup: skip plays already posted today, unless the score climbed a tier.
+    const fresh = [];
+    for (const p of plays) {
+      const key = playKey(p);
+      let prior = null;
+      try {
+        const raw = await upstashPost(['GET', key]);
+        if (raw) prior = typeof raw === 'string' ? JSON.parse(raw) : raw;
+      } catch {}
+      if (!prior) { fresh.push({ ...p, _reason: 'new' }); continue; }
+      const upgraded = tierFor(p.siScore).name !== tierFor(prior.siScore).name && p.siScore > prior.siScore;
+      if (upgraded) fresh.push({ ...p, _reason: `upgraded from ${prior.siScore}` });
+    }
+
+    const result = {
+      ok: true, mode, sports, threshold: TOP_PLAY_MIN,
+      qualifying: plays.length, newOrUpgraded: fresh.length,
+      oddsErrors: errors,
+      plays: fresh.map(p => ({ game: `${p.away} @ ${p.home}`, sport: p.sport, market: p.market,
+        side: p.sharpSide, siScore: p.siScore, reason: p._reason })),
+    };
+
+    if (dry) { result.dryRun = true; result.embedsPreview = fresh.slice(0, 10).map(playEmbed); return res.status(200).json(result); }
+    if (!fresh.length) { result.sent = false; result.note = 'Nothing new above threshold'; return res.status(200).json(result); }
+    if (!webhook) { result.sent = false; result.note = 'DISCORD_WEBHOOK_URL_ALERTS not set'; return res.status(200).json(result); }
+
+    // Discord caps embeds at 10 per message.
+    const embeds = fresh.slice(0, 10).map(playEmbed);
+    const header = mode === 'check'
+      ? `\u{1F195} **New top play${fresh.length > 1 ? 's' : ''}** \u2014 crossed ${TOP_PLAY_MIN}+ since the last report`
+      : `\u{1F3AF} **Best Plays Report** \u2014 ${sports.join('/')} \u00b7 ${fresh.length} play${fresh.length > 1 ? 's' : ''} at ${TOP_PLAY_MIN}+`;
+    const send = await sendDiscord(webhook, header, embeds);
+    result.sent = send.ok;
+    result.sendResult = send;
+
+    if (send.ok) {
+      for (const p of fresh) {
+        try { await upstashPost(['SET', playKey(p), JSON.stringify({ siScore: p.siScore, at: Date.now() }), 'EX', String(REPORT_TTL)]); } catch {}
+      }
+    }
+    return res.status(200).json(result);
+  }
 
   const topic     = process.env.NTFY_TOPIC;
   const threshold = parseInt(process.env.PM_THRESHOLD || '749');
