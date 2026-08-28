@@ -772,6 +772,32 @@ module.exports = async function handler(req, res) {
      Optional &sports=MLB,NFL overrides which sports to pull; defaults to MLB.
      &dry=1 builds the report and returns it WITHOUT posting -- for tuning the format
      without spamming the channel. */
+  /* TEST MODE 2026-08-28 (per Derek): ?bestPlays=test posts one clearly-labeled sample
+     embed to #sharp-report -- verifies the webhook, embed rendering, and delivery
+     actually work end-to-end before any real play ever qualifies. Deliberately isolated
+     from the real modes below: no dedup KV write, no odds.js call, cannot be confused
+     with or interfere with a real report. Every field is fabricated and says so. */
+  if (req.query && req.query.bestPlays === 'test') {
+    const webhook = process.env.sharp_report;
+    if (!webhook) return res.status(200).json({ ok: false, note: 'sharp_report env var not set' });
+    const sampleEmbed = {
+      title: '\u26a0\ufe0f TEST DATA \u2014 Boston Red Sox @ New York Yankees',
+      description: 'MLB \u00b7 SAMPLE ONLY, not a real signal',
+      color: 0x9B6DFF,
+      fields: [
+        { name: 'Pick', value: '**New York Yankees** (h2h) [SAMPLE]', inline: true },
+        { name: 'Score', value: '**82** \u00b7 STRONG [FABRICATED]', inline: true },
+        { name: 'Signal', value: 'Dual Consensus [SAMPLE]', inline: true },
+        { name: 'Pinnacle gap', value: '2.3pp [SAMPLE]', inline: true },
+        { name: 'Best price', value: '-142 (fanduel) [SAMPLE]', inline: true },
+        { name: 'Half-Kelly', value: '3.1% bankroll [SAMPLE]', inline: true },
+      ],
+      footer: { text: 'This is a test send to verify formatting and delivery -- not a real play.' },
+    };
+    const send = await sendDiscord(webhook, '\u{1F9EA} **Sharp Report Test Send** \u2014 verifying channel + formatting, not a real signal', [sampleEmbed]);
+    return res.status(200).json({ ok: true, testSend: true, sendResult: send });
+  }
+
   if (req.query && req.query.bestPlays) {
     const mode = String(req.query.bestPlays);
     const sports = (req.query.sports ? String(req.query.sports) : 'MLB')
