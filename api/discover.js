@@ -808,17 +808,21 @@ module.exports = async function handler(req, res) {
     // this already-running 15-min cron instead of requiring a new external cron entry.
     // Small budgets (8s each) so this can't meaningfully threaten the 60s function
     // ceiling alongside runDiscovery's own work.
-    let historicalNFL = null, historicalNCAAF = null;
-    try {
-      historicalNFL = await runHistoricalDiscovery('NFL', { budgetMs: 8000 });
-    } catch (e) {
-      historicalNFL = { ok: false, error: e.message };
+    // MLB ADDED 2026-08-27 (per Derek): originally NFL/NCAAF only because those had the
+    // kickoff deadline. That left MLB's historical harvest advancing ONLY on manual calls
+    // -- confirmed live, it sat frozen at 1,500 events while the football sports ran
+    // themselves. MLB is the highest-volume sport here and holds the strongest confirmed
+    // wallets, so it belongs on the same automatic footing. Budgets trimmed 8s -> 6s each
+    // so three sports fit in the same headroom two used, well clear of the 60s ceiling.
+    const historical = {};
+    for (const sp of ['NFL', 'NCAAF', 'MLB']) {
+      try {
+        historical[sp] = await runHistoricalDiscovery(sp, { budgetMs: 6000 });
+      } catch (e) {
+        historical[sp] = { ok: false, error: e.message };
+      }
     }
-    try {
-      historicalNCAAF = await runHistoricalDiscovery('NCAAF', { budgetMs: 8000 });
-    } catch (e) {
-      historicalNCAAF = { ok: false, error: e.message };
-    }
+    const historicalNFL = historical.NFL, historicalNCAAF = historical.NCAAF;
 
     // STEAM 2026-08-26 (per Derek): same piggyback pattern -- snapshot every tracked
     // sport's Kalshi markets on the same cadence this cron already runs at, so steam
@@ -834,7 +838,7 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    return res.status(200).json({ ...liveResult, historicalNFL, historicalNCAAF, kalshiSteam });
+    return res.status(200).json({ ...liveResult, historicalNFL, historicalNCAAF, historicalMLB: historical.MLB, kalshiSteam });
   } catch (err) {
     return res.status(200).json({ ok: false, error: err.message });
   }
