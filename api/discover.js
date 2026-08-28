@@ -101,8 +101,26 @@ const NICKNAME_POOL = [
   'MildBryce','KeenAaron','SlowBlake','FastEli','GoldSaul','SilverRex','IronMabel','SteelDrew',
   'RoyalDex','CopperJon','StoneKurt','FlashTodd','StormLee','ThunderJay','FrostSam','EmberLuke',
 ];
-async function assignNickname(wallet) {
+/* Polymarket returns this shape when a wallet has never set a username: the raw address
+   with a discovery timestamp appended (e.g. 0xb8C842Bc...-1766967229992). It's not a real
+   name -- it's the absence of one -- so it should be REPLACED by a pool nickname, unlike a
+   genuine username which must be preserved. */
+function isMalformedName(n) {
+  return !!n && /^0x[a-fA-F0-9]{20,}-\d{10,}$/.test(n);
+}
+async function assignNickname(wallet, existingName) {
+  /* FIX 2026-08-27 (per Derek, caught live): this previously only checked the KV nickname
+     key. A wallet promoted long before the nickname system had its real name stored on the
+     ROSTER, not in KV -- so re-promotion found no KV entry, assigned a pool name, and
+     silently clobbered a genuine username. Confirmed: laozishudaosan was overwritten to
+     LightVic74 on re-promotion tonight. Now a real existing name always wins; only a
+     missing name or Polymarket's malformed address-timestamp placeholder gets a pool
+     nickname. Also backfills KV so the choice is stable from here on. */
   const key = 'nickname:' + wallet;
+  if (existingName && !isMalformedName(existingName)) {
+    try { await kv(['SET', key, existingName]); } catch {}
+    return existingName;
+  }
   try {
     const existing = await kv(['GET', key]);
     if (existing.ok && existing.result) return existing.result;   // already named -- keep it
@@ -600,7 +618,7 @@ async function runHistoricalDiscovery(sport, opts) {
       if (v.verdict === 'promote') {
         const rk = wallet + '|' + sport;
         const prev = roster[rk];
-        roster[rk] = { wallet, sport, name: await assignNickname(wallet), pnl: v.pnl, sample: v.sample, winRate: v.winRate,
+        roster[rk] = { wallet, sport, name: await assignNickname(wallet, prev && prev.name), pnl: v.pnl, sample: v.sample, winRate: v.winRate,
           hedgePct: v.hedgePct, avgEntry: v.avgEntry, impliedWinRate: v.impliedWinRate, edgePP: v.edgePP,
           roiPct: v.roiPct, staked: v.staked, pnlPerMarket: v.pnlPerMarket, avgEntryByCount: v.avgEntryByCount,
           entrySkew: v.entrySkew, reason: v.reason, addedAt: prev ? prev.addedAt : Date.now(), confirmedAt: Date.now(),
@@ -687,6 +705,26 @@ module.exports = async function handler(req, res) {
        names already assigned to the pending bucket before the revert above shipped --
        cheap and surgical, no re-evaluation needed. Leaves sample/reason/everything else
        untouched, just nulls .name so the frontend falls back to the honest raw address. */
+    /* ADMIN 2026-08-27 (per Derek): ?fixNames=SPORT replaces Polymarket's malformed
+       address-timestamp placeholders already stored on the roster with real pool
+       nicknames. Genuine usernames are left completely untouched -- only the
+       0xADDRESS-timestamp pattern is rewritten. */
+    if (req.query && req.query.fixNames) {
+      const sport = String(req.query.fixNames).toUpperCase();
+      const roster = (await kvGetJson('discover:roster')) || {};
+      const fixed = [];
+      for (const [k, entry] of Object.entries(roster)) {
+        if (sport !== 'ALL' && entry.sport !== sport) continue;
+        if (!entry.name || isMalformedName(entry.name)) {
+          const newName = await assignNickname(entry.wallet, null);
+          fixed.push({ wallet: entry.wallet, sport: entry.sport, was: entry.name || null, now: newName });
+          entry.name = newName;
+        }
+      }
+      if (fixed.length) await kvSetJson('discover:roster', roster, ROSTER_TTL);
+      return res.status(200).json({ ok: true, sport, fixedCount: fixed.length, fixed });
+    }
+
     if (req.query && req.query.clearPendingNames) {
       const sport = String(req.query.clearPendingNames).toUpperCase();
       const pendingKey = `discover:historical:${sport}:pending`;
