@@ -841,7 +841,7 @@ module.exports = async function handler(req, res) {
     const embeds = fresh.slice(0, 10).map(playEmbed);
     const header = mode === 'check'
       ? `\u{1F195} **New top play${fresh.length > 1 ? 's' : ''}** \u2014 crossed ${TOP_PLAY_MIN}+ since the last report`
-      : `\u{1F3AF} **Best Plays Report** \u2014 ${sports.join('/')} \u00b7 ${fresh.length} play${fresh.length > 1 ? 's' : ''} at ${TOP_PLAY_MIN}+`;
+      : `\u{1F3AF} **Converge Score Report** \u2014 ${sports.join('/')} \u00b7 ${fresh.length} play${fresh.length > 1 ? 's' : ''} at ${TOP_PLAY_MIN}+`;
     const send = await sendDiscord(webhook, header, embeds);
     result.sent = send.ok;
     result.sendResult = send;
