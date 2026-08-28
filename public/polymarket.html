@@ -42,6 +42,13 @@
 .spec-stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-family:var(--mono);font-size:11px}
 .spec-stat{color:var(--t2)}
 .spec-stat b{color:var(--t1)}
+/* WALLET FORM (2026-08-27, council): rolling per-sport recent form. Deliberately its own
+   look, separate from record chips -- council was explicit this must never read as part
+   of the score. Outline-only, no fill, so it reads as annotation not as a rating. */
+.form-chip{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.3px;padding:1px 6px;border-radius:100px;border:1px solid;margin-left:4px;vertical-align:middle}
+.form-chip.HOT{color:#FF7A45;border-color:#FF7A45}
+.form-chip.WARM{color:var(--t3);border-color:var(--b3)}
+.form-chip.COLD{color:var(--blue);border-color:var(--blue)}
 html,body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:14px;overflow-x:hidden}
 button,input,select{font-family:inherit;outline:none}
 ::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px}
@@ -1776,6 +1783,27 @@ function cleanTraderNameClient(name,wallet){
   var w=wallet||(name?name.split('-')[0]:'');
   return w?w.slice(0,6)+'...'+w.slice(-4):'Anon';
 }
+/* WALLET FORM (2026-08-27, council-approved) — SHADOW DISPLAY ONLY.
+   Rolling per-sport form (last 20 settled, min 8) from /api/grade-cron?walletForm=1.
+   Backed by a real walk-forward test: hot 57.9% / warm 52.0% / cold 50.0% against a
+   52.4% break-even. Shown because all-time records hide recent decay — SDTrading reads
+   80.1% all-time ROI but 10-10 over its last 20 MLB plays. Does NOT feed any score,
+   does NOT gate anything; purely annotation next to a trader's record. */
+var walletFormMap={};
+async function loadWalletForm(){
+  try{
+    const r=await fetch('https://sharp-indicator-a34j.vercel.app/api/grade-cron?walletForm=1');
+    const d=await r.json();
+    walletFormMap=(d&&d.form)||{};
+  }catch{ walletFormMap={}; }
+}
+function formChipHTML(wallet,sport){
+  if(!wallet||!sport)return '';
+  var f=walletFormMap[wallet+'|'+sport];
+  if(!f)return '';                       // under min-sample gate — show nothing
+  var icon=f.form==='HOT'?'\u{1F525}':(f.form==='COLD'?'\u{1F9CA}':'\u2696\ufe0f');
+  return '<span class="form-chip '+f.form+'" title="Rolling form: '+f.wins+'-'+f.losses+' ('+f.winPct+'%) over last '+f.window+' settled '+sport+' plays. Display only — not part of any score.">'+icon+' '+f.form+'</span>';
+}
 function traderRecordChip(a,lookup){
   // BUGFIX 2026-08-08 (per Derek): resolveDisplayName must see the RAW traderName first —
   // it specifically looks for the full "0xADDRESS-timestamp" pattern to find a wallet's
@@ -2503,7 +2531,9 @@ function renderReport(){
             var srcTag=c.source==='specialist'?' <span class="tchip-src-pm">PM</span>':'';
             var outTag=isOutlierTraderChip(c)?' <span class="tchip-outlier" title="90%+ win rate on 40+ settled bets">&#9733;</span>':'';
             var recTxt=hasRec?(c.wins+'-'+c.losses+(c.roiPct!==null&&c.roiPct!==undefined?' \u00b7 '+(c.roiPct>=0?'+':'')+Math.round(c.roiPct)+'%':'')):'no record yet';
-            return '<div class="rep-hero-trader-row'+(winning?'':' dim')+'"><span class="rep-hero-trader-name">'+esc(c.label)+srcTag+outTag+'</span><span class="rep-hero-trader-rec tchip-rec '+recClass+'">'+esc(recTxt)+'</span></div>';
+            // Form chip sits AFTER the record, visually separate — annotation, not rating.
+            var formTag=formChipHTML(a.wallet,a.sport||g.sport);
+            return '<div class="rep-hero-trader-row'+(winning?'':' dim')+'"><span class="rep-hero-trader-name">'+esc(c.label)+srcTag+outTag+formTag+'</span><span class="rep-hero-trader-rec tchip-rec '+recClass+'">'+esc(recTxt)+'</span></div>';
           }).join('')
         :'<div class="rep-hero-notrader">No Poly activity on this side yet</div>';
       var logo=i.side?anyTeamLogoUrl(i.side):null;
@@ -2696,8 +2726,17 @@ function setBoardFilter(f){boardFilter=f;boardExpand=false;
   document.querySelectorAll('.bf-pill').forEach(function(b){b.classList.toggle('on',b.dataset.bf===f);});
   renderCommandCenter();}
 
+var _walletFormLoaded=false;
+function ensureWalletForm(){
+  // Loaded once per page, then re-render so the chips appear. Cheap: our own endpoint,
+  // no Odds API quota, and the data only changes when grading runs.
+  if(_walletFormLoaded)return;
+  _walletFormLoaded=true;
+  loadWalletForm().then(function(){ try{ renderReport(); }catch(e){} });
+}
 function renderHero(){
   var h=el('hero');if(!h)return;
+  ensureWalletForm();
   renderReport();
   var board=buildBoard();
   var top=board[0]||null;
