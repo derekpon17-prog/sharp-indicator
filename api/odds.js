@@ -86,7 +86,7 @@ const CONVERGE_WEIGHTS = { book: 0.6, poly: 0.4 };
    candidates on every play -- visible for review, NOT counted in score, so there's a
    real record to check before any of them are reconsidered for the actual blend later.
    Novig/ProphetX shadow scores are a first-cut placeholder (linear scale off gapPP),
-   not validated -- exists to make them comparably-shaped for future review, nothing more.
+   not validated -- exists to make them comparably-shaped for future review, nothing more. */
 // Mirrors TOP_PLAY_MIN in polymarket-notify.js (evidence-backed, 750 graded plays) --
 // kept as its own constant here rather than cross-file import, but must be changed in
 // both places together if the threshold is ever revisited.
