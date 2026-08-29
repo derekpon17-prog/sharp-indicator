@@ -1746,7 +1746,7 @@ module.exports = async function handler(req, res) {
           const leanLine = inferLean(realBuyers, g.outcome, oppBuyersForLean, oppOutcomeForLean, trackedRecords);
 
           const content = [
-            `🎯 **POLY CONVERGENCE** — ${realBuyers.length} traders on the same side (ML + spread combined)`,
+            `🎯 **POLY ALIGNMENT** — ${realBuyers.length} traders on the same side (ML + spread combined)`,
             `Score: **${score}** (${tier})`,
             `**${gameTitle}**`,
             `Side: **${g.outcome}**`,
