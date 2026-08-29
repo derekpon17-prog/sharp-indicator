@@ -15,11 +15,16 @@ const ALERTS_KEY = 'pm:alerts';
 // BUGFIX 2026-08-16 (per Derek, real recurring incident): confirmed directly — 500
 // entries got consumed in roughly 3 days during a busy stretch, well under the 7-day
 // window buildWatchedTrackingCandidates and the specialist backfill logic depend on.
-// This is the SECOND time this exact failure mode has cost a real trader's history
-// (Formal-Cupcake earlier, laozishudaosan now) — raised meaningfully rather than
-// incrementally this time, to actually clear a full week with real safety margin
-// instead of needing another bump the next time volume is high.
-const MAX_ALERTS = 2000;
+// This is the THIRD time this exact failure mode has recurred (Formal-Cupcake,
+// laozishudaosan, now confirmed live 2026-08-29: the log was sitting at exactly 2000/2000
+// -- genuinely full, actively evicting -- during a normal MLB trading day. Real, observed
+// consequence: a real cross-side comparison (White Sox 3-trader ELITE alert vs. a later
+// Twins 2-trader alert on the same game) never got its "Data lean" contrast line because
+// the earlier side's alerts had likely already rolled off, despite being well inside the
+// nominal 24h window the comparison logic assumes. The 200->500->2000 jump wasn't
+// actually enough in practice. Raised further this time -- 5000, a meaningfully bigger
+// jump, not another incremental bump that just delays the next recurrence.
+const MAX_ALERTS = 5000;
 
 async function upstash(body) {
   const url   = process.env.KV_REST_API_URL;
