@@ -1772,6 +1772,14 @@ module.exports = async function handler(req, res) {
           // nameWithRecord already, but never units -- only a combined dollar total.
           // Appends the same per-wallet unitsLabel already used in the standalone alert
           // body, so each trader's line reads consistently across both Discord channels.
+          // FORMATTING OVERHAUL 2026-08-29 (per Derek, real complaint w/ screenshot): comma-
+          // joined trader records crammed into flowing sentences were unreadable on
+          // mobile. Kept as a helper here rather than joined inline -- names/lines/etc
+          // all reused across the initial send, the "grew" update, and the tier-upgrade
+          // alert below, so all three stay visually consistent.
+          const pollyTierColor = t => t === 'ELITE' ? 0xE5A00D : t === 'STRONG' ? 0x00C896 : 0x40B4FF;
+          const traderBullets = buyers => buyers.map(a =>
+            `• ${nameWithRecord(a, trackedRecords)}${unitsLabel(a.usdValue, a.wallet)}`).join('\n');
           const names = realBuyers.map(a => nameWithRecord(a, trackedRecords) + unitsLabel(a.usdValue, a.wallet)).join(', ');
           const realVol = realBuyers.reduce((s, a) => s + (a.usdValue || 0), 0);
           // FEATURE 2026-08-19 (per Derek, real ambiguity): same fix as the main alert body --
@@ -1787,6 +1795,7 @@ module.exports = async function handler(req, res) {
 
           let contrastLine = '';
           let oppBuyersForLean = null, oppOutcomeForLean = null;
+          let oppFieldForEmbed = null; // structured version, built alongside contrastLine below -- avoids re-parsing a display string
           // FEATURE 2026-08-11 (per Derek, confirmed real case): this previously skipped
           // totals markets entirely, so an Over/Under split with real disagreement never
           // showed a contrast line at all. Matches by exact market TITLE now (not just
@@ -1815,18 +1824,28 @@ module.exports = async function handler(req, res) {
               contrastLine = `\n**${realBuyers.length}v${oppAll.length}** — ${oppAll.length} on **${opp.outcome}** (${oppNames})`;
               oppBuyersForLean = oppAll.filter(a => !a.gateFailed); // lean inference stays on real records only
               oppOutcomeForLean = opp.outcome;
+              oppFieldForEmbed = { name: `Opposing: ${opp.outcome} (${oppAll.length})`, value: traderBullets(oppAll) || '—', inline: false };
             }
           }
           const leanLine = inferLean(realBuyers, g.outcome, oppBuyersForLean, oppOutcomeForLean, trackedRecords);
 
-          const content = [
-            `🎯 **POLY ALIGNMENT** — ${realBuyers.length} traders on the same side (ML + spread combined)`,
-            `Score: **${score}** (${tier})`,
-            `**${gameTitle}**`,
-            `Side: **${g.outcome}**`,
-            `Traders: ${names}`,
-            `Combined volume: $${Math.round(realVol).toLocaleString()}`,
-          ].join('\n') + gfNote + contrastLine + leanLine;
+          const baseFields = [
+            { name: 'Side', value: g.outcome, inline: true },
+            { name: 'Score', value: `${score} (${tier})`, inline: true },
+            { name: 'Volume', value: `$${Math.round(realVol).toLocaleString()}`, inline: true },
+            { name: `Traders (${realBuyers.length})`, value: traderBullets(realBuyers) || '—', inline: false },
+          ];
+          if (gfBuyers.length) {
+            baseFields.push({ name: 'Also on this side (not counted)', value: traderBullets(gfBuyers) + '\n_known negative in-sport_', inline: false });
+          }
+          if (oppFieldForEmbed) baseFields.push(oppFieldForEmbed);
+          const embed = {
+            title: `🎯 Poly Alignment — ${realBuyers.length} on the same side`,
+            description: `**${gameTitle}**`,
+            color: pollyTierColor(tier),
+            fields: baseFields,
+            footer: leanLine ? { text: leanLine.replace(/^\n📊 \*/, '').replace(/\*$/, '') } : undefined,
+          };
 
           const dedupKey = `discord:conv:${key}`;
           const stateRes = await upstashPost(['GET', dedupKey]);
@@ -1839,7 +1858,7 @@ module.exports = async function handler(req, res) {
               const r = await fetch(`${discordWebhook}?wait=true`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content }),
+                body: JSON.stringify({ embeds: [embed] }),
               });
               if (r.ok) {
                 const msg = await r.json();
@@ -1864,11 +1883,12 @@ module.exports = async function handler(req, res) {
             // it shows up as a fresh line in Discord rather than requiring a scroll back
             // to find something that changed quietly. Keeps the same "(updated — was X,
             // now Y)" wording he liked, just posted fresh instead of edited in place.
+            const growEmbed = { ...embed, footer: { text: `Updated — was ${state.walletCount} traders, now ${realBuyers.length}` + (embed.footer ? ' · ' + embed.footer.text : '') } };
             try {
               const r = await fetch(discordWebhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: content + `\n_(updated — was ${state.walletCount}, now ${realBuyers.length})_` }),
+                body: JSON.stringify({ embeds: [growEmbed] }),
               });
               if (r.ok) {
                 results.discord.edited++;
@@ -1884,18 +1904,26 @@ module.exports = async function handler(req, res) {
           if (upgraded) {
             // Tier improved — a silent edit doesn't re-notify on Discord, so this earns
             // an actual new message, not just an update to the old one.
-            const upgradeContent = [
-              `🚀 **CONVERGENCE UPGRADE** — jumped from ${state.tier || 'MODERATE'} (${state.score ?? '—'}) to **${tier}** (${score})`,
-              `**${gameTitle}**`,
-              `Side: **${g.outcome}**`,
-              `Now ${realBuyers.length} traders: ${names}`,
-              `Combined volume: $${Math.round(realVol).toLocaleString()}`,
-            ].join('\n') + gfNote + contrastLine + leanLine;
+            const upgradeFields = [
+              { name: 'Side', value: g.outcome, inline: true },
+              { name: 'Score', value: `${score} (${tier})`, inline: true },
+              { name: 'Volume', value: `$${Math.round(realVol).toLocaleString()}`, inline: true },
+              { name: `Traders (${realBuyers.length})`, value: traderBullets(realBuyers) || '—', inline: false },
+            ];
+            if (gfBuyers.length) upgradeFields.push({ name: 'Also on this side (not counted)', value: traderBullets(gfBuyers) + '\n_known negative in-sport_', inline: false });
+            if (oppFieldForEmbed) upgradeFields.push(oppFieldForEmbed);
+            const upgradeEmbed = {
+              title: `🚀 Convergence Upgrade — ${state.tier || 'MODERATE'} (${state.score ?? '—'}) → ${tier} (${score})`,
+              description: `**${gameTitle}**`,
+              color: pollyTierColor(tier),
+              fields: upgradeFields,
+              footer: leanLine ? { text: leanLine.replace(/^\n📊 \*/, '').replace(/\*$/, '') } : undefined,
+            };
             try {
               const r = await fetch(discordWebhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: upgradeContent }),
+                body: JSON.stringify({ embeds: [upgradeEmbed] }),
               });
               if (r.ok) {
                 results.discord.upgraded++;
