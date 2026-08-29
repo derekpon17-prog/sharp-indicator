@@ -962,42 +962,6 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // TEMP DIAGNOSTIC 2026-08-29 (per Derek): investigating real live-MLB-alert incident
-  // from last night. ?debugSchedule=SPORT dumps the real getSchedule() output as ESPN
-  // actually returns it -- team name strings, started flags -- so matching can be
-  // checked against real data instead of guessed at. ?debugMatch=SPORT&title=X&home=Y&
-  // away=Z&slug=S runs the exact findGameForTrade/isGameLiveNow path against a
-  // synthetic trade, to see precisely where a real trade would or wouldn't match.
-  // Meant to be removed once the real incident is understood, not a committed feature.
-  if (req.query && req.query.debugSchedule) {
-    const sport = String(req.query.debugSchedule).toUpperCase();
-    try {
-      const sched = await getSchedule(sport);
-      return res.status(200).json({ ok: true, sport, count: sched.length, schedule: sched });
-    } catch (e) {
-      return res.status(200).json({ ok: false, error: e.message });
-    }
-  }
-  if (req.query && req.query.debugMatch) {
-    const sport = String(req.query.debugMatch).toUpperCase();
-    const fakeTrade = {
-      title: req.query.title || '',
-      eventSlug: req.query.slug || '',
-    };
-    try {
-      const sched = await getSchedule(sport);
-      const match = findGameForTrade(fakeTrade, sched);
-      const liveNow = match ? !!match.started : null;
-      return res.status(200).json({
-        ok: true, sport, trade: fakeTrade, scheduleCount: sched.length,
-        matchedGame: match, wouldBeConsideredLive: liveNow,
-        note: match ? undefined : 'NO MATCH -- this is the fail-open scenario: isGameLiveNow would return false here, incorrectly treating this as not-live.',
-      });
-    } catch (e) {
-      return res.status(200).json({ ok: false, error: e.message });
-    }
-  }
-
   /* BEST PLAYS REPORT -- ?bestPlays=1 (scheduled digest) or ?bestPlays=check (follow-up
      sweep for plays that newly crossed the bar). Both share the same dedup, so the
      scheduled send and the follow-ups can never double-post the same play.
