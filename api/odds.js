@@ -1438,13 +1438,42 @@ module.exports=async function handler(req,res){
     const withShadow=velPlays.map(p=>{
       const polyMatch=findPolyScoreForPlay(p,polyScoresAll);
       const kalshiMatch=findKalshiScoreForPlay(p,kalshiSteamAll);
-      return{...p,
-      relSignal:computeRelSignal(p,boardStats),
+      const relSignal=computeRelSignal(p,boardStats);
+      /* RETROFIT 2026-08-29 (council-approved, per Derek): closes a month-old gap the
+         team's own 2026-07-26 comment already diagnosed -- the absolute Pinnacle floor
+         (PIN_GAP_ML=1.0pp/PIN_GAP_SPREADS=2.0pp) never clears on the real board
+         distribution (max gap seen across two full days: ~1.1pp), so pillars.pinnacle
+         sits at exactly 0 and the ps>0 gate marks EVERY play noSignal:true regardless of
+         real relative standing. computeRelSignal (the relative/percentile system built
+         specifically to replace this) already existed as a pure shadow display -- never
+         wired back into the real score. Fix is additive only: ONLY plays that were
+         noSignal (the absolute floor produced literally nothing) get a fallback score
+         from relSignal. Any play where the absolute floor DID clear keeps its exact
+         original si/pillars/signalType, byte-for-byte -- this never touches a validated
+         case. Source is explicitly flagged (pinnacleSource) so a relative fallback can
+         never be mistaken for a real absolute-gap confirmation. */
+      let retrofit={};
+      if(p.noSignal&&relSignal&&relSignal.score>0){
+        retrofit={
+          siScore:relSignal.score,
+          noSignal:false,
+          sharpSide:relSignal.side||p.sharpSide,
+          signalType:'RELATIVE_STANDOUT',
+          pillars:{...p.pillars,pinnacle:relSignal.score,pinnacleSource:'relative_fallback'},
+        };
+      }
+      // Merged BEFORE convergeScore is computed -- convergeScore.breakdown.book reads
+      // play.siScore directly, so it MUST see the retrofitted value, not the original
+      // pre-fallback p.siScore, or this fix would never actually reach the real number
+      // that drives the Discord report and site.
+      const retrofitted={...p,...retrofit};
+      return{...retrofitted,
+      relSignal,
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
       pitcherWatch:pwMap[p.id]||null,
-      kelly:computeKellySuggestion(p),
-      convergeScore:computeConvergeScore(p,polyMatch,kalshiMatch),
+      kelly:computeKellySuggestion(retrofitted),
+      convergeScore:computeConvergeScore(retrofitted,polyMatch,kalshiMatch),
       /* BUGFIX: this exposed only closeMap[id].h2h[p.sharpSide], but sharpSide is the
          literal string '—' on every no-signal game — which is the overwhelming majority
          of the board — so the lookup always missed and closeLine.pinnacle came back null
