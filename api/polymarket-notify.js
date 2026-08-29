@@ -610,7 +610,16 @@ async function buildBestPlaysReport(sports) {
   // scale. A play can now qualify purely off a strong book signal (book absent poly/kalshi
   // still gets full weight renormalized), which is intended, but the right cutoff for the
   // blended number specifically hasn't been checked against real graded results yet.
+  /* TOP SIGNALS FALLBACK 2026-08-29 (per Derek): confirmed real -- two straight days
+     where nothing cleared 75 at all, even though real relative standouts exist (the
+     indication system's dispersion/percentile catches, independent of the absolute book
+     floor). Rather than silence, always also track the best available candidates
+     regardless of threshold, clearly separated from real qualifiers, never blended into
+     the same count. Sorted by convergeScore first, indication.score as a tiebreaker --
+     necessary specifically because convergeScore ties at 0 on a quiet day (as it has for
+     two days straight) while indication still meaningfully differentiates games. */
   const plays = [];
+  const allCandidates = [];
   const errors = [];
   for (const sp of sports) {
     try {
@@ -618,15 +627,19 @@ async function buildBestPlaysReport(sports) {
       const d = await r.json();
       if (d && d.error) { errors.push(`${sp}: ${d.error}`); continue; }
       (d.plays || []).forEach(p => {
-        const cs = p && p.convergeScore && typeof p.convergeScore.score === 'number' ? p.convergeScore.score : null;
-        if (p && !p.noSignal && cs !== null && cs >= TOP_PLAY_MIN) {
-          plays.push({ ...p, sport: sp, _convergeScore: cs });
-        }
+        if (!p || p.isLive) return; // never surface a live game, fallback or not
+        const cs = p && p.convergeScore && typeof p.convergeScore.score === 'number' ? p.convergeScore.score : 0;
+        const ind = p.indication && typeof p.indication.score === 'number' ? p.indication.score : 0;
+        const candidate = { ...p, sport: sp, _convergeScore: cs, _indicationScore: ind };
+        if (!p.noSignal && cs >= TOP_PLAY_MIN) plays.push(candidate);
+        allCandidates.push(candidate);
       });
     } catch (e) { errors.push(`${sp}: ${e.message}`); }
   }
   plays.sort((a, b) => b._convergeScore - a._convergeScore);
-  return { plays, errors };
+  allCandidates.sort((a, b) => (b._convergeScore - a._convergeScore) || (b._indicationScore - a._indicationScore));
+  const topAvailable = allCandidates.filter(c => c._convergeScore < TOP_PLAY_MIN).slice(0, 3);
+  return { plays, errors, topAvailable };
 }
 
 /* CONVERGE SCORE RECORD 2026-08-28 (per Derek): tracks real W-L and units for every
@@ -1011,7 +1024,7 @@ module.exports = async function handler(req, res) {
     try { gradeResult = await gradeConvergePending(); } catch {}
     const record = await getConvergeRecord();
 
-    const { plays, errors } = await buildBestPlaysReport(sports);
+    const { plays, errors, topAvailable } = await buildBestPlaysReport(sports);
 
     // Dedup: skip plays already posted today, unless the score climbed a tier.
     const fresh = [];
@@ -1030,9 +1043,26 @@ module.exports = async function handler(req, res) {
       if (upgraded) fresh.push({ ...p, _reason: `upgraded from ${prior.convergeScore}` });
     }
 
+    // TOP SIGNALS FALLBACK 2026-08-29 (per Derek): only relevant when nothing real
+    // qualified this run. Own dedup key (prefixed topsig:, separate from playKey's real
+    // dedup) so a quiet day's "best available" doesn't get re-posted every single 30-min
+    // cycle -- once per candidate per day, same TTL reasoning as the real dedup.
+    const freshTopAvailable = [];
+    if (!fresh.length) {
+      for (const p of topAvailable) {
+        const key = 'topsig:' + playKey(p);
+        try {
+          const raw = await upstashPost(['GET', key]);
+          if (raw) continue; // already shown today
+        } catch {}
+        freshTopAvailable.push(p);
+      }
+    }
+
     const result = {
       ok: true, mode, sports, threshold: TOP_PLAY_MIN,
       qualifying: plays.length, newOrUpgraded: fresh.length,
+      topAvailableShown: freshTopAvailable.length,
       oddsErrors: errors,
       record, gradedThisRun: gradeResult.graded, stillPendingGrade: gradeResult.stillPending,
       plays: fresh.map(p => ({ game: `${p.away} @ ${p.home}`, sport: p.sport, market: p.market,
@@ -1045,16 +1075,41 @@ module.exports = async function handler(req, res) {
       ? `Converge Score Record: ${record.wins}-${record.losses}${record.pushes ? '-' + record.pushes : ''} (${record.winPct}%) \u00b7 ${record.netUnits >= 0 ? '+' : ''}${record.netUnits}u`
       : 'Converge Score Record: no graded plays yet';
 
-    if (dry) { result.dryRun = true; result.recordLine = recordLine; result.embedsPreview = fresh.slice(0, 10).map(playEmbed); return res.status(200).json(result); }
-    if (!fresh.length) { result.sent = false; result.note = 'Nothing new above threshold'; return res.status(200).json(result); }
+    if (dry) {
+      result.dryRun = true; result.recordLine = recordLine;
+      result.embedsPreview = fresh.slice(0, 10).map(playEmbed);
+      result.topAvailablePreview = freshTopAvailable.slice(0, 3).map(playEmbed);
+      return res.status(200).json(result);
+    }
+    if (!fresh.length && !freshTopAvailable.length) { result.sent = false; result.note = 'Nothing new above threshold, and no new below-threshold candidates to show'; return res.status(200).json(result); }
     if (!webhook) { result.sent = false; result.note = 'DISCORD_WEBHOOK_URL_ALERTS not set'; return res.status(200).json(result); }
 
-    // Discord caps embeds at 10 per message.
+    // Discord caps embeds at 10 per message. Real qualifiers first, then up to 3
+    // below-threshold candidates, clearly separated by their own header line inside the
+    // same message -- never silently blended into what looks like a real qualifying list.
     const embeds = fresh.slice(0, 10).map(playEmbed);
-    const header = (mode === 'check'
+    let header = (mode === 'check'
       ? `\u{1F195} **New top play${fresh.length > 1 ? 's' : ''}** \u2014 crossed ${TOP_PLAY_MIN}+ since the last report`
       : `\u{1F3AF} **Converge Score Report** \u2014 ${sports.join('/')} \u00b7 ${fresh.length} play${fresh.length > 1 ? 's' : ''} at ${TOP_PLAY_MIN}+`)
       + `\n${recordLine}`;
+
+    if (!fresh.length && freshTopAvailable.length) {
+      header = `\u{1F3AF} **Converge Score Report** \u2014 ${sports.join('/')}\n${recordLine}\n`
+        + `\u26a0\ufe0f *Nothing cleared the ${TOP_PLAY_MIN}+ preferred threshold today -- showing the most promising available signals below it instead.*`;
+      embeds.push(...freshTopAvailable.slice(0, 3).map(p => {
+        const e = playEmbed(p);
+        e.title = `\u26a0\ufe0f BELOW THRESHOLD \u2014 ${e.title}`;
+        e.color = 0x808080;
+        return e;
+      }));
+    } else if (fresh.length && freshTopAvailable.length) {
+      embeds.push(...freshTopAvailable.slice(0, Math.max(0, 10 - embeds.length)).map(p => {
+        const e = playEmbed(p);
+        e.title = `\u26a0\ufe0f BELOW THRESHOLD \u2014 ${e.title}`;
+        e.color = 0x808080;
+        return e;
+      }));
+    }
     const send = await sendDiscord(webhook, header, embeds);
     result.sent = send.ok;
     result.sendResult = send;
@@ -1078,6 +1133,12 @@ module.exports = async function handler(req, res) {
             await upstashPost(['SET', 'converge:pending', JSON.stringify(pendingArr), 'EX', '2592000']);
           } catch {}
         }
+      }
+      // Below-threshold candidates get ONLY the topsig dedup marker -- deliberately NOT
+      // captured into converge:pending/grading. They're explicitly not real qualifiers;
+      // grading them would mix unvalidated below-threshold picks into the real record.
+      for (const p of freshTopAvailable.slice(0, 3)) {
+        try { await upstashPost(['SET', 'topsig:' + playKey(p), JSON.stringify({ at: Date.now() }), 'EX', String(REPORT_TTL)]); } catch {}
       }
     }
     return res.status(200).json(result);
