@@ -1559,21 +1559,25 @@ module.exports = async function handler(req, res) {
       // this specific line before: only show the self-reported stat when actually falling
       // back to it, not alongside a real tracked result.
       const usingTracked = getRecordFor(alert, trackedRecords)?.source === 'tracked';
-      const body     = [
-        `$${usd}${unitsLabel(alert.usdValue, alert.wallet)} BUY [${alert.sport}] — ${nameWithRecord(alert, trackedRecords)}`,
-        rankInfo ? `Rank: ${rankInfo}` : null,
-        // Specialists earned their place on an in-sport record — lead with it, but only
-        // when it's not redundant with a real tracked number already shown above.
-        (alert.specialistRecord && !usingTracked) ? `Specialist: ${alert.specialistRecord}` : null,
-        alert.sportRecord ? `Record: ${alert.sportRecord}` : null,
-        formLabel(alert.wallet, alert.sport) ? `Form: ${formLabel(alert.wallet, alert.sport)}` : null,
-        // FEATURE 2026-08-19 (per Derek, real ambiguity): "no date on alerts to tell" --
-        // confirmed real confusion, a team playing a multi-game series has no way to tell
-        // which specific game an alert refers to from the text alone. eventSlug already
-        // carries the real date; this just surfaces it instead of leaving it invisible.
-        `Market: ${(alert.title || '').slice(0, 80)}${extractSlugDate(alert) ? ` (${extractSlugDate(alert)})` : ''}`,
-        `Side: ${alert.outcome || '—'} @ ${price}¢`,
-      ].filter(Boolean).join('\n');
+      // FORMATTING OVERHAUL 2026-08-29 (per Derek, real complaint -- "poly alerts feels
+      // crowded too"): same treatment as the convergence channel got moments ago. Every
+      // field its own line/row instead of a stacked plain-text block.
+      const alertFields = [
+        { name: 'Trader', value: nameWithRecord(alert, trackedRecords), inline: false },
+        { name: 'Side', value: `${alert.outcome || '—'} @ ${price}¢`, inline: true },
+        { name: 'Amount', value: `$${usd}${unitsLabel(alert.usdValue, alert.wallet)}`, inline: true },
+      ];
+      if (rankInfo) alertFields.push({ name: 'Rank', value: rankInfo, inline: true });
+      if (alert.specialistRecord && !usingTracked) alertFields.push({ name: 'Specialist Record', value: alert.specialistRecord, inline: false });
+      if (alert.sportRecord) alertFields.push({ name: 'Record', value: alert.sportRecord, inline: false });
+      const form = formLabel(alert.wallet, alert.sport);
+      if (form) alertFields.push({ name: 'Form', value: form, inline: false });
+      const alertEmbed = {
+        title: `⚡ $${usd} ${alert.sport} Poly ${tag}`,
+        description: `**${(alert.title || '').slice(0, 80)}**${extractSlugDate(alert) ? ` (${extractSlugDate(alert)})` : ''}`,
+        color: alert.type === 'SPEC' ? 0x9B6DFF : 0x40B4FF,
+        fields: alertFields,
+      };
 
       // Title names the population so it's clear which cohort fired at a glance.
       const tag = alert.type === 'SPEC' ? 'Specialist' : 'Whale';
@@ -1591,9 +1595,7 @@ module.exports = async function handler(req, res) {
       const alertsWebhook = process.env.DISCORD_WEBHOOK_URL_ALERTS;
       let r = { ok: false };
       if (alertsWebhook) {
-        const discordContent = `⚡ **$${usd} ${alert.sport} Poly ${tag}**
-` + body;
-        r = await sendDiscord(alertsWebhook, discordContent);
+        r = await sendDiscord(alertsWebhook, null, [alertEmbed]);
       }
       if (r.ok) { results.poly.sent++; if (alert.type === 'SPEC') results.poly.specSent++; }
       results.poly.alerts.push({ title: alert.title, usd: Math.round(alert.usdValue), result: r });
