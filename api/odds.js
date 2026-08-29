@@ -70,7 +70,23 @@ const PITCHER_CHANGE_WINDOW_HOURS = 3;
    conventions than this file's away/home fields -- matched by team-name tokens, not
    guaranteed precise. Full component breakdown always returned so a bad match is visible,
    never hidden inside one opaque number. */
-const CONVERGE_WEIGHTS = { book: 0.5, poly: 0.3, kalshi: 0.2 };
+/* COUNCIL DECISION 2026-08-28 (per Derek): Kalshi pulled out of the real blend entirely.
+   Evidence gap was too stark to weight it as a fifth of the score: Book has 53 graded
+   plays, Poly has 750 (58% win rate at 75+, real walk-forward validated), Kalshi has
+   ZERO -- built the same day, never backtested against anything. Same standard already
+   applied to Wallet Form (excluded from Converge Score for the identical reason -- an
+   unvalidated signal blended into a real score contaminates it, doesn't strengthen it).
+   Kalshi keeps running exactly as before (steam detection, snapshots, Discovery Watch)
+   -- it just no longer counts toward the number that decides what makes the report.
+   Rebalanced proportionally: book/poly kept their original 50:30 ratio, now spread
+   across just the two components with real evidence -- 0.5/(0.5+0.3)=0.625, rounded to
+   a clean 0.6/0.4 per Derek. */
+const CONVERGE_WEIGHTS = { book: 0.6, poly: 0.4 };
+/* SHADOW TRACKING (per Derek): Kalshi, Novig, and ProphetX are all logged as shadow
+   candidates on every play -- visible for review, NOT counted in score, so there's a
+   real record to check before any of them are reconsidered for the actual blend later.
+   Novig/ProphetX shadow scores are a first-cut placeholder (linear scale off gapPP),
+   not validated -- exists to make them comparably-shaped for future review, nothing more.
 // Mirrors TOP_PLAY_MIN in polymarket-notify.js (evidence-backed, 750 graded plays) --
 // kept as its own constant here rather than cross-file import, but must be changed in
 // both places together if the threshold is ever revisited.
@@ -118,19 +134,41 @@ function findKalshiScoreForPlay(play, steamMarkets){
   return matches.sort((a,b)=>b.score-a.score)[0]||null;
 }
 
+// First-cut, unvalidated scaling for a raw exchange-lean gap into a comparable 0-100
+// shadow score. 1.5pp (the real confirm floor) lands at 60; scales up from there.
+// Purely for logging/future-review shape -- not used in any real decision today.
+function exchangeShadowScore(gapPP){
+  if(typeof gapPP!=='number')return null;
+  return Math.max(0,Math.min(100,Math.round(gapPP*40)));
+}
+
 function computeConvergeScore(play, polyMatch, kalshiMatch){
+  // COUNCIL 2026-08-28: only book + poly ever enter the real blend now. Kalshi/Novig/
+  // ProphetX are computed and attached as shadowCandidates below -- visible, logged,
+  // explicitly NOT counted, until each has real graded history behind it.
   const parts=[{key:'book',score:play.siScore||0,weight:CONVERGE_WEIGHTS.book}];
   if(polyMatch)parts.push({key:'poly',score:polyMatch.score,weight:CONVERGE_WEIGHTS.poly});
-  if(kalshiMatch)parts.push({key:'kalshi',score:kalshiMatch.score,weight:CONVERGE_WEIGHTS.kalshi});
   const totalWeight=parts.reduce((s,p)=>s+p.weight,0);
   const blended=Math.round(parts.reduce((s,p)=>s+p.score*p.weight,0)/totalWeight);
+
+  const exLean=play.exchangeLean||null;
+  const novigGap=exLean&&(exLean.detail&&exLean.detail.novig&&exLean.detail.novig.gapPP!=null?exLean.detail.novig.gapPP:(exLean.leanDetail&&exLean.leanDetail.novig&&exLean.leanDetail.novig.gapPP));
+  const pxGap=exLean&&(exLean.detail&&exLean.detail.prophetx&&exLean.detail.prophetx.gapPP!=null?exLean.detail.prophetx.gapPP:(exLean.leanDetail&&exLean.leanDetail.prophetx&&exLean.leanDetail.prophetx.gapPP));
+  const novigFavors=exLean&&((exLean.detail&&exLean.detail.novig&&exLean.detail.novig.favors)||(exLean.leanDetail&&exLean.leanDetail.novig&&exLean.leanDetail.novig.favors));
+  const pxFavors=exLean&&((exLean.detail&&exLean.detail.prophetx&&exLean.detail.prophetx.favors)||(exLean.leanDetail&&exLean.leanDetail.prophetx&&exLean.leanDetail.prophetx.favors));
+
   return{
     score:blended,
     componentsUsed:parts.map(p=>p.key),
     breakdown:{
       book:{score:play.siScore||0,weight:CONVERGE_WEIGHTS.book},
       poly:polyMatch?{score:polyMatch.score,weight:CONVERGE_WEIGHTS.poly,tier:polyMatch.tier,buyers:polyMatch.buyers,totalVol:polyMatch.totalVol}:null,
-      kalshi:kalshiMatch?{score:kalshiMatch.score,weight:CONVERGE_WEIGHTS.kalshi,movePP:kalshiMatch.movePP,direction:kalshiMatch.direction}:null,
+    },
+    // Not counted in score. Logged for later review once each has real graded history.
+    shadowCandidates:{
+      kalshi:kalshiMatch?{score:kalshiMatch.score,movePP:kalshiMatch.movePP,direction:kalshiMatch.direction,counted:false}:null,
+      novig:novigGap!=null?{score:exchangeShadowScore(novigGap),gapPP:novigGap,favors:novigFavors||null,counted:false}:null,
+      prophetx:pxGap!=null?{score:exchangeShadowScore(pxGap),gapPP:pxGap,favors:pxFavors||null,counted:false}:null,
     },
     shadow:false, // this IS the intended headline number, not a display-only side field
   };
