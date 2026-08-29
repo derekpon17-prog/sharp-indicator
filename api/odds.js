@@ -71,6 +71,10 @@ const PITCHER_CHANGE_WINDOW_HOURS = 3;
    guaranteed precise. Full component breakdown always returned so a bad match is visible,
    never hidden inside one opaque number. */
 const CONVERGE_WEIGHTS = { book: 0.5, poly: 0.3, kalshi: 0.2 };
+// Mirrors TOP_PLAY_MIN in polymarket-notify.js (evidence-backed, 750 graded plays) --
+// kept as its own constant here rather than cross-file import, but must be changed in
+// both places together if the threshold is ever revisited.
+const DAILY_REPORT_MIN = 75;
 
 function normTeamTokens(s){
   return String(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').split(' ').filter(Boolean);
@@ -1432,18 +1436,32 @@ module.exports=async function handler(req,res){
        signal that strengthens is reflected. Games only enter while still PREGAME — a
        signal is a pregame call or it is nothing — but the entry SURVIVES first pitch so
        the day's record stays readable after the slate has gone. */
+    /* FIX 2026-08-28 (per Derek): this persisted indication's own tier/score -- a
+       THIRD, separate scoring system from convergeScore (book+poly+kalshi blend), which
+       is what actually goes to Discord's Converge Score Report. The site section
+       literally titled "Converge Score Report" was showing indication's numbers, not
+       the Converge Score at all. Now persists convergeScore as the primary qualifying
+       and sorting field; indication's tier/label/reasons kept alongside as real
+       diagnostic context (dispersion/relative-percentile catches convergeScore's
+       absolute-floor book gate can miss, e.g. a standout that ranks p89 on today's board
+       but doesn't clear Pinnacle's 1.0pp entry floor) -- not discarded, just no longer
+       the thing that decides what makes the report or how it's ranked. */
     let reportChanged=false;
     finalPlays.forEach(p=>{
+      const cs=p.convergeScore&&typeof p.convergeScore.score==='number'?p.convergeScore.score:0;
       const ind=p.indication;
-      if(!ind||ind.tier==='N'||!p.id)return;
+      if(cs<DAILY_REPORT_MIN||!p.id)return;
       const startTs=p.commenceTime?new Date(p.commenceTime).getTime():0;
       if(startTs&&now>=startTs)return;             // never create an entry for a live game
       const prev=dayReport[p.id];
       dayReport[p.id]={
         id:p.id, away:p.away, home:p.home, commenceTime:p.commenceTime,
-        tier:ind.tier, label:ind.label, score:ind.score,
-        peakScore:Math.max(ind.score||0, prev?prev.peakScore||0:0),
-        side:ind.side, bestBook:ind.bestBook, sources:ind.sources, reasons:ind.reasons,
+        convergeScore:cs, peakConvergeScore:Math.max(cs, prev?prev.peakConvergeScore||0:0),
+        convergeBreakdown:p.convergeScore.breakdown,
+        sharpSide:p.sharpSide,
+        tier:ind?ind.tier:'N', label:ind?ind.label:'NONE', score:ind?ind.score:0,
+        peakScore:Math.max(ind?ind.score||0:0, prev?prev.peakScore||0:0),
+        side:ind?ind.side:p.sharpSide, bestBook:ind?ind.bestBook:null, sources:ind?ind.sources:[], reasons:ind?ind.reasons:[],
         firstSeen:prev?prev.firstSeen:now, lastSeen:now,
       };
       reportChanged=true;
@@ -1455,7 +1473,7 @@ module.exports=async function handler(req,res){
       const e=dayReport[k];
       const st=e.commenceTime?new Date(e.commenceTime).getTime():0;
       return {...e, started: !!(st&&now>=st)};
-    }).sort((a,b)=>(b.peakScore||0)-(a.peakScore||0));
+    }).sort((a,b)=>(b.peakConvergeScore||0)-(a.peakConvergeScore||0));
 
     // Shadow log: first time a game enters a qualifying state, append to KV (server-side,
     // device-independent). NX seen-key dedupes across cron runs. Never touches SI/auto-track.
