@@ -47,6 +47,49 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    /* CONVERGE SCORE 2026-08-28 (per Derek + council): real, fetchable Poly convergence
+       score per game, for the new unified Converge Score. This is NOT a new formula --
+       it's the exact same computeGroupScore math already used to decide Discord
+       convergence pings (polymarket-notify.js), pulled out here so other systems
+       (odds.js) can read it over HTTP instead of duplicating the logic. Grouped by
+       title+eventSlug+outcome (same side, same game), gateFailed alerts excluded (per
+       the 2026-08-10 council decision -- context, never counted toward real signal),
+       windowed to the last 24h so a score reflects today's board, not stale history. */
+    if (req.query && req.query.convergeScores) {
+      const raw = await upstash(['LRANGE', ALERTS_KEY, 0, MAX_ALERTS - 1]);
+      const alerts = (raw || []).map(item => {
+        try { return typeof item === 'string' ? JSON.parse(item) : item; }
+        catch { return null; }
+      }).filter(Boolean).filter(a => a && !a.gateFailed && a.loggedAt && (Date.now() - a.loggedAt) < 24 * 3600000);
+
+      const groups = {};
+      alerts.forEach(a => {
+        const key = (a.title || '') + '||' + (a.outcome || '') + '||' + (a.eventSlug || '');
+        if (!groups[key]) groups[key] = { title: a.title, outcome: a.outcome, eventSlug: a.eventSlug, sport: a.sport, wallets: new Map(), totalVol: 0 };
+        const g = groups[key];
+        g.totalVol += a.usdValue || 0;
+        if (a.wallet && !g.wallets.has(a.wallet)) g.wallets.set(a.wallet, a);
+      });
+
+      // Exact same formula as computeGroupScore in polymarket-notify.js -- kept identical
+      // on purpose so a Discord convergence ping and this score can never disagree about
+      // the same game.
+      const scored = Object.values(groups).map(g => {
+        const buyers = [...g.wallets.values()];
+        const vol = g.totalVol;
+        const base = vol <= 500 ? 5 : Math.min(Math.round(Math.log10(vol / 500) * 38) + 15, 90);
+        let bestRank = 999;
+        buyers.forEach(b => (b.categories || []).forEach(c => { const r = parseInt(c.rank) || 999; if (r < bestRank) bestRank = r; }));
+        const rm = bestRank <= 5 ? 1.6 : bestRank <= 15 ? 1.4 : bestRank <= 30 ? 1.2 : bestRank <= 75 ? 1.0 : 0.85;
+        const conv = buyers.length >= 4 ? 28 : buyers.length >= 3 ? 20 : buyers.length >= 2 ? 12 : 0;
+        const score = Math.min(Math.round(base * rm) + conv, 100);
+        const tier = score >= 80 ? 'ELITE' : score >= 60 ? 'STRONG' : 'MODERATE';
+        return { title: g.title, outcome: g.outcome, eventSlug: g.eventSlug, sport: g.sport, score, tier, buyers: buyers.length, totalVol: Math.round(g.totalVol) };
+      });
+
+      return res.status(200).json({ ok: true, scores: scored });
+    }
+
     if (req.method === 'GET') {
       const raw = await upstash(['LRANGE', ALERTS_KEY, 0, MAX_ALERTS - 1]);
       const alerts = (raw || []).map(item => {
