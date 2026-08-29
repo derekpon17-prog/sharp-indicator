@@ -590,6 +590,13 @@ function tierFor(score) {
 }
 
 async function buildBestPlaysReport(sports) {
+  // CHANGED 2026-08-28 (per Derek): the report now filters/sorts on convergeScore (the
+  // real book+poly+kalshi blend already computed in odds.js) instead of siScore alone.
+  // HONEST CAVEAT: TOP_PLAY_MIN=75 was validated against 750 graded POLY-only plays, not
+  // this blended metric -- carried over as a starting point, not re-validated for this
+  // scale. A play can now qualify purely off a strong book signal (book absent poly/kalshi
+  // still gets full weight renormalized), which is intended, but the right cutoff for the
+  // blended number specifically hasn't been checked against real graded results yet.
   const plays = [];
   const errors = [];
   for (const sp of sports) {
@@ -598,13 +605,14 @@ async function buildBestPlaysReport(sports) {
       const d = await r.json();
       if (d && d.error) { errors.push(`${sp}: ${d.error}`); continue; }
       (d.plays || []).forEach(p => {
-        if (p && !p.noSignal && typeof p.siScore === 'number' && p.siScore >= TOP_PLAY_MIN) {
-          plays.push({ ...p, sport: sp });
+        const cs = p && p.convergeScore && typeof p.convergeScore.score === 'number' ? p.convergeScore.score : null;
+        if (p && !p.noSignal && cs !== null && cs >= TOP_PLAY_MIN) {
+          plays.push({ ...p, sport: sp, _convergeScore: cs });
         }
       });
     } catch (e) { errors.push(`${sp}: ${e.message}`); }
   }
-  plays.sort((a, b) => b.siScore - a.siScore);
+  plays.sort((a, b) => b._convergeScore - a._convergeScore);
   return { plays, errors };
 }
 
@@ -762,11 +770,23 @@ function playKey(p) {
 }
 
 function playEmbed(p) {
-  const tier = tierFor(p.siScore);
+  // CHANGED 2026-08-28 (per Derek): headline is now Converge Score (book+poly+kalshi
+  // blend), with the full breakdown shown so it's never a black box -- exactly the
+  // transparency requirement from the council session that approved this blend. Book
+  // (siScore) shown as its own field either way, since that's still the always-present
+  // anchor component.
+  const cs = p.convergeScore || { score: p.siScore || 0, componentsUsed: ['book'], breakdown: { book: { score: p.siScore || 0 } } };
+  const tier = tierFor(cs.score);
   const fields = [
     { name: 'Pick',   value: `**${p.sharpSide}** (${p.market})`, inline: true },
-    { name: 'Score',  value: `**${p.siScore}** · ${tier.name}`,  inline: true },
+    { name: 'Converge Score', value: `**${cs.score}** \u00b7 ${tier.name}`,  inline: true },
   ];
+  const b = cs.breakdown || {};
+  const parts = [];
+  if (b.book) parts.push(`Book ${b.book.score}`);
+  if (b.poly) parts.push(`Poly ${b.poly.score}${b.poly.buyers ? ` (${b.poly.buyers} buyers)` : ''}`);
+  if (b.kalshi) parts.push(`Kalshi ${b.kalshi.score} (${b.kalshi.direction || 'steam'})`);
+  if (parts.length) fields.push({ name: 'Components', value: parts.join(' \u00b7 '), inline: true });
   if (p.signalType) fields.push({ name: 'Signal', value: String(p.signalType), inline: true });
   if (p.gapPP != null) fields.push({ name: 'Pinnacle gap', value: `${p.gapPP}pp`, inline: true });
   const best = p.bestPrices && p.bestPrices[p.sharpSide];
@@ -990,8 +1010,11 @@ module.exports = async function handler(req, res) {
         if (raw) prior = typeof raw === 'string' ? JSON.parse(raw) : raw;
       } catch {}
       if (!prior) { fresh.push({ ...p, _reason: 'new' }); continue; }
-      const upgraded = tierFor(p.siScore).name !== tierFor(prior.siScore).name && p.siScore > prior.siScore;
-      if (upgraded) fresh.push({ ...p, _reason: `upgraded from ${prior.siScore}` });
+      // FIX 2026-08-28: upgrade detection now compares Converge Score, matching what
+      // qualifies/sorts the report -- was still comparing siScore, which could miss a
+      // real upgrade driven by poly/kalshi and falsely fire on an unrelated siScore wobble.
+      const upgraded = tierFor(p._convergeScore).name !== tierFor(prior.convergeScore).name && p._convergeScore > prior.convergeScore;
+      if (upgraded) fresh.push({ ...p, _reason: `upgraded from ${prior.convergeScore}` });
     }
 
     const result = {
@@ -1000,7 +1023,7 @@ module.exports = async function handler(req, res) {
       oddsErrors: errors,
       record, gradedThisRun: gradeResult.graded, stillPendingGrade: gradeResult.stillPending,
       plays: fresh.map(p => ({ game: `${p.away} @ ${p.home}`, sport: p.sport, market: p.market,
-        side: p.sharpSide, siScore: p.siScore, reason: p._reason })),
+        side: p.sharpSide, convergeScore: p._convergeScore, siScore: p.siScore, reason: p._reason })),
     };
 
     // Record line, same wherever the record is shown -- report header or dry preview.
@@ -1025,7 +1048,7 @@ module.exports = async function handler(req, res) {
 
     if (send.ok) {
       for (const p of fresh) {
-        try { await upstashPost(['SET', playKey(p), JSON.stringify({ siScore: p.siScore, at: Date.now() }), 'EX', String(REPORT_TTL)]); } catch {}
+        try { await upstashPost(['SET', playKey(p), JSON.stringify({ convergeScore: p._convergeScore, siScore: p.siScore, at: Date.now() }), 'EX', String(REPORT_TTL)]); } catch {}
         // Capture what's needed to grade this play later -- teams, sport, market, the
         // sharpSide string (already embeds the spread/total line), and the odds at the
         // moment it was posted (units are computed off THIS price, not whatever it moves
