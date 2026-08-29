@@ -1572,15 +1572,20 @@ module.exports = async function handler(req, res) {
       if (alert.sportRecord) alertFields.push({ name: 'Record', value: alert.sportRecord, inline: false });
       const form = formLabel(alert.wallet, alert.sport);
       if (form) alertFields.push({ name: 'Form', value: form, inline: false });
+      // FIX 2026-08-29 (per Derek, real total outage): tag was referenced inside
+      // alertEmbed's title BEFORE its own const declaration further down -- a real
+      // ReferenceError (TDZ violation), not a typo that happened to still run. This
+      // crashed every single invocation of this endpoint outright ("Cannot access 'tag'
+      // before initialization"), meaning zero Poly alerts of ANY kind have gone out
+      // since this shipped, not just the standalone channel. Title names the population
+      // so it's clear which cohort fired at a glance -- moved before the object that uses it.
+      const tag = alert.type === 'SPEC' ? 'Specialist' : 'Whale';
       const alertEmbed = {
         title: `⚡ $${usd} ${alert.sport} Poly ${tag}`,
         description: `**${(alert.title || '').slice(0, 80)}**${extractSlugDate(alert) ? ` (${extractSlugDate(alert)})` : ''}`,
         color: alert.type === 'SPEC' ? 0x9B6DFF : 0x40B4FF,
         fields: alertFields,
       };
-
-      // Title names the population so it's clear which cohort fired at a glance.
-      const tag = alert.type === 'SPEC' ? 'Specialist' : 'Whale';
       // CHANGED 2026-08-27 (per Derek): this channel replaces ntfy -- every single alert
       // that passes the existing gates now goes to its OWN Discord channel (separate from
       // the convergence channel below, which is untouched), instead of a phone push. Same
