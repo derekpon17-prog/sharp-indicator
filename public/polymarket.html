@@ -538,7 +538,7 @@ select.finput option{background:var(--s2)}
          rather than showing a discouraging "nothing qualifies" block on every load. -->
     <div class="row-s" id="d-qc-wrap" style="display:none">
       <div class="row-hdr">
-        <div class="row-ttl"><em>&#x1F3AF;</em>Quality Convergence <span style="font-size:10px;font-weight:700;color:var(--t4);text-transform:none;letter-spacing:0">&middot; 2+ real winners, same side</span></div>
+        <div class="row-ttl"><em>&#x1F3AF;</em>Poly Alignment <span style="font-size:10px;font-weight:700;color:var(--t4);text-transform:none;letter-spacing:0">&middot; 2+ real winners, same side</span></div>
       </div>
       <div id="d-qc"></div>
     </div>
@@ -548,7 +548,7 @@ select.finput option{background:var(--s2)}
          not just buried in the Traders tab. Hidden entirely when nobody's watched. -->
     <div class="row-s" id="d-watched-wrap" style="display:none">
       <div class="row-hdr">
-        <div class="row-ttl"><em>&#x1F441;&#xFE0F;</em>Watched Traders</div>
+        <div class="row-ttl"><em>&#x1F441;&#xFE0F;</em>Watched Wallets</div>
         <div class="row-all" onclick="showV('traders',document.querySelectorAll('.ntab')[3])">See all &rsaquo;</div>
       </div>
       <div class="hscr" id="d-watched"></div>
@@ -624,7 +624,7 @@ select.finput option{background:var(--s2)}
       <div class="flag-card f-ss"><div class="fc-name">Converge Score <span style="font-size:8px;font-weight:600;color:var(--t4);text-transform:none;letter-spacing:0">&middot; line + poly agree</span></div><div class="fc-rec" id="fs-ss">&mdash;</div><div class="fc-sub" id="fs-ss-sub">no graded plays</div><div id="fs-ss-bands"></div></div>
       <div class="flag-card f-picks"><div class="fc-name">My Picks</div><div class="fc-rec" id="fs-picks">&mdash;</div><div class="fc-sub" id="fs-picks-sub">no graded picks</div></div>
       <div class="flag-card f-mlv"><div class="fc-name">ML Velocity <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(155,109,255,.15);color:var(--purple);margin-left:3px">SHADOW</span></div><div class="fc-rec" id="fs-mlv">&mdash;</div><div class="fc-sub" id="fs-mlv-sub">validating &mdash; not in real record</div><div id="fs-mlv-bands"></div></div>
-      <div class="flag-card f-qc"><div class="fc-name">Quality Convergence <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(0,200,150,.15);color:var(--green);margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-qc">&mdash;</div><div class="fc-sub" id="fs-qc-sub">no graded plays</div><div id="fs-qc-bands"></div></div>
+      <div class="flag-card f-qc"><div class="fc-name">Poly Alignment <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:rgba(0,200,150,.15);color:var(--green);margin-left:3px">NEW</span></div><div class="fc-rec" id="fs-qc">&mdash;</div><div class="fc-sub" id="fs-qc-sub">no graded plays</div><div id="fs-qc-bands"></div></div>
     </div>
     <div style="height:1px;background:var(--b1);margin:0 0 24px"></div>
     <!-- ── BY SPORT — same records above, sliced by sport instead of by signal. My Picks
@@ -696,7 +696,7 @@ select.finput option{background:var(--s2)}
     <!-- Sharp Line Signal Auto-Plays -->
     <div style="margin-bottom:28px">
       <div class="row-hdr" style="margin-bottom:12px">
-        <div class="row-ttl" style="font-size:16px"><i class="ti ti-chart-bar" style="color:var(--blue)"></i>Sharp Line Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">auto-tracked at Report Tier A or B</span></div>
+        <div class="row-ttl" style="font-size:16px"><i class="ti ti-chart-bar" style="color:var(--blue)"></i>Sharp Line Plays <span style="font-size:11px;color:var(--t3);font-weight:500;margin-left:6px">book-only view &mdash; one input into Converge Score, not a separate score</span></div>
         <div style="display:flex;align-items:center;gap:10px">
           <button onclick="gradeFromESPN().then(function(){renderTracking();})" style="font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--b2);background:transparent;color:var(--t3);cursor:pointer;font-family:var(--mono)">Grade now</button>
           <div id="line-record" style="font-size:12px;font-family:var(--mono);color:var(--t3)">0W-0L</div>
@@ -810,7 +810,7 @@ select.finput option{background:var(--s2)}
       <div id="lb-list"></div>
     </div>
     <div class="row-hdr" style="margin-bottom:14px">
-      <div class="row-ttl"><em>&#x1F440;</em>Watched Wallets</div>
+      <div class="row-ttl"><em>&#x1F440;</em>Watched Wallets <span style="font-size:10px;font-weight:700;color:var(--t4);text-transform:none;letter-spacing:0">&middot; full activity</span></div>
       <button onclick="openAT()" style="padding:7px 16px;border-radius:100px;border:1px solid var(--b2);background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer"><i class="ti ti-plus" style="font-size:12px"></i> Add Wallet</button>
     </div>
     <div class="wgrid" id="wgrid"></div>
@@ -4964,15 +4964,19 @@ function renderSignalLab(){
   html2 += '<div style="height:1px;background:var(--b1);margin-bottom:24px"></div>';
   html2 += '<div style="margin-bottom:24px">';
   html2 += '<div style="font-size:14px;font-weight:800;color:var(--t1);margin-bottom:4px">&#x1F3AF; Combined Sharp Score Status</div>';
-  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">Games where Sharp Line Signal + Polymarket Signal can be combined &middot; Formula: max(Line, Poly) + 15pt bonus if both agree on the same side</div>';
+  html2 += '<div style="font-size:11px;color:var(--t3);margin-bottom:14px">Games where Sharp Line Signal + Polymarket Signal can be combined &middot; Formula: weighted blend of book/poly/kalshi (50/30/20), only components with real data included &mdash; see Converge Score</div>';
 
   let foundCombined=false;
+  // FIX 2026-08-28 (per Derek): this diagnostic panel computed its own local combined
+  // score via calcSharpScore -- the same stale formula already replaced everywhere real
+  // (Command Center, Converge Score Report). Now reads the actual convergeScore off the
+  // play object, so this panel can never show a number that disagrees with the real one.
   sharpLines.filter(g=>!g.noSignal&&parseInt(g.siScore||0)>0).forEach(g=>{
     const match=matchLineToAlert(g,recentAlerts);
     const si=parseInt(g.siScore||0);
     const polyScore=match?signalScore({buys:[match],totalVol:match.usdValue}).score:0;
     const agree=match?sameSharpSide(g.sharpSide,match.outcome):false;
-    const combined=match?calcSharpScore(si,polyScore,agree):0;
+    const combined=(g.convergeScore&&typeof g.convergeScore.score==='number')?g.convergeScore.score:si;
     if(si===0&&!match)return;
     foundCombined=true;
     const wouldCombine=match&&agree;
@@ -4997,7 +5001,7 @@ function renderSignalLab(){
 
   // Footer
   html2 += '<div style="border-top:1px solid var(--b1);padding-top:16px;font-size:11px;color:var(--t4);line-height:1.7">';
-  html2 += '<strong style="color:var(--t3)">Threshold guide:</strong> Sharp Line qualifies at SI &ge;65 &bull; Poly Signal qualifies at score &ge;60 (flat) &bull; Overall Score = max(Line, Poly) + 15pt bonus if both agree on the same side &bull; Sharp Score Plays requires genuine agreement + combined &ge;70<br>';
+  html2 += '<strong style="color:var(--t3)">Threshold guide:</strong> Sharp Line qualifies at SI &ge;65 &bull; Poly Signal qualifies at score &ge;60 (flat) &bull; Converge Score = weighted blend of book/poly/kalshi (50/30/20), only present components counted &bull; Converge Score Report requires &ge;75<br>';
   html2 += '<strong style="color:var(--t3)">Single-buyer cap:</strong> A Poly Signal play with only 1 buyer caps at 84, no matter how large the buy or how highly ranked the wallet &mdash; 85+ requires 2+ buyers converging, or a genuine Sharp Line match (which scores through its own combined-score path instead).<br>';
   html2 += '<strong style="color:var(--t3)">RLM note:</strong> * = Inferred (no Action Network match). Real RLM shows when AN returns ticket % for that game.<br>';
   html2 += '<strong style="color:var(--t3)">Last refreshed:</strong> '+new Date().toLocaleTimeString();
