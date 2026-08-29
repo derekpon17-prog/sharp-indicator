@@ -53,6 +53,85 @@ const MLV_QUALIFY   = 60;    // shadow-log floor
    long after a rotation announcement a line keeps moving for that reason alone. */
 const PITCHER_CHANGE_WINDOW_HOURS = 3;
 
+/* CONVERGE SCORE 2026-08-28 (per Derek + council): the real unified final score --
+   "line data + cash + poly + kalshi" as Derek framed it. NOT a replacement for siScore --
+   siScore keeps computing exactly as before (proven byte-identical after every prior
+   addition this session) and IS the "line + cash" component here, reused as-is rather
+   than re-deriving pinnacle/money/rlm weights a second time.
+   WEIGHTS ARE A FIRST CUT, NOT VALIDATED. 50/30/20 (book/poly/kalshi) -- same posture as
+   TOP_PLAY_MIN was before 750 graded plays justified 75. This needs its own grading
+   period before the weights should be trusted.
+   MISSING DATA IS EXCLUDED, NOT ZEROED (council requirement): most games have no Poly
+   activity and no Kalshi steam at all -- that's an absence of data, not a real signal
+   reading of "quiet," and must not drag the score down. Weights renormalize across
+   whatever's actually present. siScore is always present (it's always computed, even
+   when the true value is a real 0), so it's never excluded.
+   MATCHING IS FUZZY, a known limitation. Poly/Kalshi titles come from different naming
+   conventions than this file's away/home fields -- matched by team-name tokens, not
+   guaranteed precise. Full component breakdown always returned so a bad match is visible,
+   never hidden inside one opaque number. */
+const CONVERGE_WEIGHTS = { book: 0.5, poly: 0.3, kalshi: 0.2 };
+
+function normTeamTokens(s){
+  return String(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').split(' ').filter(Boolean);
+}
+function titleHasTeam(title, teamName){
+  const t=String(title||'').toLowerCase();
+  const tokens=normTeamTokens(teamName);
+  const last=tokens[tokens.length-1];
+  return last && t.includes(last);
+}
+function sideMatches(a,b){
+  if(!a||!b)return false;
+  const na=normTeamTokens(a).join(' '), nb=normTeamTokens(b).join(' ');
+  return na===nb || na.includes(nb) || nb.includes(na);
+}
+
+async function fetchPolyScores(){
+  try{
+    const r=await fetch(SITE_URL+'/api/polymarket-alerts?convergeScores=1');
+    const d=await r.json();
+    return (d&&d.ok&&Array.isArray(d.scores))?d.scores:[];
+  }catch{ return []; }
+}
+async function fetchKalshiSteamAll(sport){
+  try{
+    const r=await fetch(SITE_URL+'/api/kalshi?steam='+sport);
+    const d=await r.json();
+    return (d&&d.ok&&Array.isArray(d.steamMarkets))?d.steamMarkets:[];
+  }catch{ return []; }
+}
+
+function findPolyScoreForPlay(play, polyScores){
+  const matches=polyScores.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home));
+  if(!matches.length)return null;
+  const sideMatch=matches.find(s=>sideMatches(s.outcome,play.sharpSide));
+  return sideMatch||matches.sort((a,b)=>b.score-a.score)[0]||null;
+}
+function findKalshiScoreForPlay(play, steamMarkets){
+  const matches=steamMarkets.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home));
+  if(!matches.length)return null;
+  return matches.sort((a,b)=>b.score-a.score)[0]||null;
+}
+
+function computeConvergeScore(play, polyMatch, kalshiMatch){
+  const parts=[{key:'book',score:play.siScore||0,weight:CONVERGE_WEIGHTS.book}];
+  if(polyMatch)parts.push({key:'poly',score:polyMatch.score,weight:CONVERGE_WEIGHTS.poly});
+  if(kalshiMatch)parts.push({key:'kalshi',score:kalshiMatch.score,weight:CONVERGE_WEIGHTS.kalshi});
+  const totalWeight=parts.reduce((s,p)=>s+p.weight,0);
+  const blended=Math.round(parts.reduce((s,p)=>s+p.score*p.weight,0)/totalWeight);
+  return{
+    score:blended,
+    componentsUsed:parts.map(p=>p.key),
+    breakdown:{
+      book:{score:play.siScore||0,weight:CONVERGE_WEIGHTS.book},
+      poly:polyMatch?{score:polyMatch.score,weight:CONVERGE_WEIGHTS.poly,tier:polyMatch.tier,buyers:polyMatch.buyers,totalVol:polyMatch.totalVol}:null,
+      kalshi:kalshiMatch?{score:kalshiMatch.score,weight:CONVERGE_WEIGHTS.kalshi,movePP:kalshiMatch.movePP,direction:kalshiMatch.direction}:null,
+    },
+    shadow:false, // this IS the intended headline number, not a display-only side field
+  };
+}
+
 /* ── KELLY SIZING (added 2026-08-27, per Derek + council) — SHADOW, SUGGESTION ONLY ───
    Council verdict: Half Kelly (standard risk reduction, ~75% of full Kelly's growth at a
    fraction of the variance), a hard ceiling independent of the formula's own output (a
@@ -1308,12 +1387,22 @@ module.exports=async function handler(req,res){
       const pwres=await Promise.all(velPlays.map(p=>fetchPitcherWatch(p)));
       velPlays.forEach((p,i)=>{pwMap[p.id]=pwres[i];});
     }
-    const withShadow=velPlays.map(p=>({...p,
+    // Converge Score inputs -- fetched ONCE per request, not once per game, then matched
+    // per-play below. Both calls are to our own endpoints (no Odds API quota cost).
+    const [polyScoresAll, kalshiSteamAll] = await Promise.all([
+      fetchPolyScores(),
+      fetchKalshiSteamAll(sport),
+    ]);
+    const withShadow=velPlays.map(p=>{
+      const polyMatch=findPolyScoreForPlay(p,polyScoresAll);
+      const kalshiMatch=findKalshiScoreForPlay(p,kalshiSteamAll);
+      return{...p,
       relSignal:computeRelSignal(p,boardStats),
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
       pitcherWatch:pwMap[p.id]||null,
       kelly:computeKellySuggestion(p),
+      convergeScore:computeConvergeScore(p,polyMatch,kalshiMatch),
       /* BUGFIX: this exposed only closeMap[id].h2h[p.sharpSide], but sharpSide is the
          literal string '—' on every no-signal game — which is the overwhelming majority
          of the board — so the lookup always missed and closeLine.pinnacle came back null
@@ -1334,7 +1423,7 @@ module.exports=async function handler(req,res){
           frozen:!!(ct&&now>=ct),   // derived, not a stored flag
         };
       })():null,
-    }));
+    };});
     // Indication needs every shadow field populated, so it runs as a second pass.
     const finalPlays=withShadow.map(p=>({...p,indication:computeIndication(p)}));
 
