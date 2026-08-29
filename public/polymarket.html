@@ -2458,6 +2458,7 @@ function captureVelocityShadow(lines){
    and the tier label carries the honesty: CONVERGENCE only when independent sources
    agree, WATCHLIST when a game is merely notable relative to today's distribution. */
 var REPORT_MAX=6;
+var DAILY_REPORT_MIN_CLIENT=75; // mirrors DAILY_REPORT_MIN in odds.js / TOP_PLAY_MIN in polymarket-notify.js
 function fmtAm(p){return (p>0?'+':'')+p;}
 /* Reads the SERVER-PERSISTED day report when available. Previously this filtered the
    live board, so a signal vanished the moment its game started — on a Sunday with 1:05
@@ -2466,32 +2467,34 @@ function fmtAm(p){return (p>0?'+':'')+p;}
    Falls back to the live board if the API predates the store. */
 var todayReport=[];
 function buildReport(){
+  // FIX 2026-08-28 (per Derek): this section is literally titled "Converge Score
+  // Report" but was sorting/qualifying on indication's separate tier/score system, not
+  // convergeScore (the real book+poly+kalshi blend, same number now sent to Discord).
+  // Both paths below switched to read/sort by convergeScore -- site and Discord now
+  // agree on both WHAT qualifies and HOW it's ranked, not just similar-looking numbers.
+  // indication's tier/reasons kept as diagnostic context on each row, not discarded.
   var now=Date.now();
   if(todayReport&&todayReport.length){
-    var tierRank={A:0,B:1,C:2,N:3};
     return todayReport.slice().sort(function(a,b){
       if(a.started!==b.started)return a.started?1:-1;      // actionable first
-      /* Tier before score. Sorting purely by score put SIGNAL 98 above CONVERGENCE 82,
-         which reads wrong because the tier label is what the eye lands on and convergence
-         is the rarer, stronger claim. Score still orders within a tier. */
-      var ta=tierRank[a.tier]!==undefined?tierRank[a.tier]:9;
-      var tb=tierRank[b.tier]!==undefined?tierRank[b.tier]:9;
-      if(ta!==tb)return ta-tb;
-      return (b.peakScore||b.score||0)-(a.peakScore||a.score||0);
+      return (b.peakConvergeScore||b.convergeScore||0)-(a.peakConvergeScore||a.convergeScore||0);
     }).slice(0,REPORT_MAX).map(function(r){
       return {away:r.away,home:r.home,commenceTime:r.commenceTime,started:r.started,
+              convergeScore:{score:r.peakConvergeScore||r.convergeScore||0,breakdown:r.convergeBreakdown||null},
+              sharpSide:r.sharpSide,
               indication:{tier:r.tier,label:r.label,score:r.peakScore||r.score,
                           side:r.side,bestBook:r.bestBook,reasons:r.reasons||[]}};
     });
   }
   return (sharpLines||[]).filter(function(g){
-    var ind=g.indication;
-    if(!ind||ind.tier==='N')return false;
+    var cs=g.convergeScore&&typeof g.convergeScore.score==='number'?g.convergeScore.score:0;
+    if(cs<DAILY_REPORT_MIN_CLIENT)return false;
     if(g.commenceTime&&new Date(g.commenceTime).getTime()<=now)return false;
     return true;
-  }).sort(function(a,b){return (b.indication.score||0)-(a.indication.score||0);})
+  }).sort(function(a,b){return (b.convergeScore.score||0)-(a.convergeScore.score||0);})
     .slice(0,REPORT_MAX).map(function(g){return {away:g.away,home:g.home,
-      commenceTime:g.commenceTime,started:false,indication:g.indication};});
+      commenceTime:g.commenceTime,started:false,convergeScore:g.convergeScore,
+      sharpSide:g.sharpSide,indication:g.indication};});
 }
 function renderReport(){
   var wrap=el('report-wrap');if(!wrap)return;
@@ -2567,7 +2570,7 @@ function renderReport(){
       +'</div>'
       +'<div class="rep-quiet-right">'
       +'<span class="rep-quiet-dot '+(agree?'agree':'lineonly')+'" title="'+(agree?'Line + Poly agree':'Line only')+'"></span>'
-      +'<span class="rep-quiet-score">'+(i.score||0)+'</span>'
+      +'<span class="rep-quiet-score">'+((g.convergeScore&&g.convergeScore.score)||i.score||0)+'</span>'
       +'</div></div>'
       +(traderChipsQ?'<div class="rep-quiet-traderline">'+traderChipsQ+'</div>':'');
   }).join('');
@@ -2639,7 +2642,16 @@ function buildBoard(){
     var match=matchLineToAlert(g,recentAlerts);
     var ps=match?signalScore({buys:[match],totalVol:match.usdValue}).score:0;
     var agree=match?sameSharpSide(g.sharpSide,match.outcome):false;
-    var combined=calcSharpScore(si,ps,agree);
+    // FIX 2026-08-28 (per Derek): this board's headline number was calcSharpScore --
+    // a completely separate client-side calc (max of line/poly + 15pt agreement bonus,
+    // no Kalshi at all) from convergeScore, the real server-side weighted blend
+    // (book/poly/kalshi, only-present-components) now feeding the Discord report. Same
+    // game could show two different "top" numbers depending on where you looked. Site
+    // now reads the same number Discord does -- one source of truth, not two competing
+    // calculations. calcSharpScore/signalScore's local agree-detection is kept for the
+    // "why" text and Poly trader chips below, which are legitimately about what's visible
+    // in the CLIENT's own alert cache, separate from the server blend.
+    var combined=(g.convergeScore&&typeof g.convergeScore.score==='number')?g.convergeScore.score:si;
     if(match)usedAlertKeys[(match.title||'')+'||'+(match.outcome||'')]=true;
     var vel=g.mlVelocity||null;
     var why=(vel&&vel.state==='MID_MOVE')?('ML moving \u2014 '+(vel.laggingBooks||0)+' books still lagging')
