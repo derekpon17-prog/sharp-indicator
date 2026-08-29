@@ -233,6 +233,20 @@ function compareToPinnacle(kalshiProb, pinnacleFairProb) {
 const STEAM_MIN_PP = 5;
 const STEAM_MIN_VOL_ADDED = 2000; // contracts, not dollars
 const STEAM_MIN_VOL_PCT = 0.15;
+
+/* STEAM SCORE 2026-08-28 (per Derek + council): 0-100 score for the new unified Converge
+   Score -- steam detection previously only produced a yes/no event with raw movePP/
+   volumeAdded, no single number to blend with other pillars. First-cut bands, not
+   independently validated -- same posture as every other new score shipped this
+   session. Move dominates (it's the real signal); volume is a secondary confidence
+   multiplier, not a separate additive term, so a huge-volume/tiny-move market can't
+   outscore a real, sharp move on thin volume. */
+function steamScore(movePP, volumeAdded) {
+  const absMove = Math.abs(movePP);
+  let base = absMove >= 15 ? 85 : absMove >= 10 ? 70 : absMove >= 7 ? 55 : absMove >= 5 ? 40 : 20;
+  const volBonus = volumeAdded >= 10000 ? 15 : volumeAdded >= 5000 ? 10 : volumeAdded >= 2000 ? 5 : 0;
+  return Math.min(100, base + volBonus);
+}
 const SNAPSHOT_TTL = 3 * 24 * 60 * 60; // 3 days -- plenty of headroom over the ~30-min cadence
 
 async function detectSteam(sport) {
@@ -271,6 +285,7 @@ async function detectSteam(sport) {
         movePP, direction: movePP > 0 ? 'toward YES' : 'toward NO',
         volumeAdded: volAdded, windowMinutes: Math.round(windowMs / 60000),
         currentImpliedProb: m.impliedProb, priorImpliedProb: p.impliedProb,
+        score: steamScore(movePP, volAdded),
       });
     }
   }
