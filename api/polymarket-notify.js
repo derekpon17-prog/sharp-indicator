@@ -332,9 +332,22 @@ async function getScheduleFromESPN(sport) {
   // "baseball day" AND the UTC date as a second attempt, rather than picking one and
   // risking the same class of mismatch in the other direction.
   try {
+    /* FIX 2026-08-29 (per Derek, real incident investigated this morning): confirmed
+       directly -- Orioles/Athletics trades from last night, timestamped ~12:15-1:00 AM
+       ET, fed a "6 traders ELITE" convergence alert for a game that had actually been
+       live since 9:41 PM the evening before. Root cause, confirmed mathematically: at
+       that trade timestamp, BOTH the ET date (20260829) and UTC date (20260829) the old
+       code queried had already rolled to the 29th -- but ESPN still files a 9:41 PM
+       start under the 28th's scoreboard even hours after midnight. Neither existing
+       query could ever have found it; this isn't the same gap the Aug 19 fix closed
+       (that was ET-vs-UTC on the SAME calendar day), it's a late-night game surviving
+       past a real midnight rollover. Added yesterday's ET date as a third query -- cheap
+       (one more free ESPN call), and directly closes the exact gap that let this happen. */
     const etDateStr = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' }).replace(/-/g, '');
     const utcDateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const dates = [...new Set([etDateStr, utcDateStr])];
+    const yesterdayET = new Date(Date.now() - 24 * 3600000)
+      .toLocaleDateString('en-CA', { timeZone: 'America/New_York' }).replace(/-/g, '');
+    const dates = [...new Set([etDateStr, utcDateStr, yesterdayET])];
     const allEvents = [];
     for (const d of dates) {
       const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${d}`);
