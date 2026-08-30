@@ -596,6 +596,31 @@ function trackingIsLive() {
 }
 const REPORT_TTL   = 172800;    // 2 days, comfortably past a single slate
 
+// FORMATTING FIXES 2026-08-30 (per Derek, real screenshot): three separate readability
+// issues on the same card. (1) marketLabel -- raw market keys ('h2h'/'spreads'/'totals')
+// aren't self-explanatory. (2) signalTypeLabel -- RELATIVE_STANDOUT is an internal
+// system name, not something an average bettor would understand at a glance. (3) the
+// Pinnacle gap field switches to real odds (reusing currentPinPrice/currentSoftAvg,
+// already real American-odds numbers on the play object) instead of a raw pp figure --
+// same fix already applied to the ML-velocity reasoning text, extended here to the
+// Discord card itself.
+function marketLabel(mk) {
+  return { h2h: 'Moneyline', spreads: 'Spread', totals: 'Total' }[mk] || mk || 'Moneyline';
+}
+function signalTypeLabel(st) {
+  const map = {
+    RELATIVE_STANDOUT: 'Stands out vs. today\u2019s board',
+    NONE: 'No signal',
+  };
+  return map[st] || st;
+}
+function pinnacleGapDisplay(p) {
+  if (p.currentPinPrice != null && p.currentSoftAvg != null) {
+    const fmtOdds = n => n > 0 ? `+${n}` : String(n);
+    return `${fmtOdds(p.currentPinPrice)} vs ${fmtOdds(p.currentSoftAvg)} avg`;
+  }
+  return p.gapPP != null ? `${p.gapPP}pp` : null;
+}
 function tierFor(score) {
   if (score >= 85) return { name: 'ELITE',  color: 0xE5A00D };
   if (score >= 75) return { name: 'STRONG', color: 0x00C896 };
@@ -751,7 +776,7 @@ async function gradeConvergePending() {
       }
     }
     if (!match) { stillPending.push(p); continue; }
-    const result = resolveConvergePlay(p.sharpSide, p.market, match.hN, match.aN, match.hS, match.aS);
+    const result = resolveConvergePlay(p.sharpSide, p.market || p.activeMarket, match.hN, match.aN, match.hS, match.aS);
     if (!result) { stillPending.push(p); continue; }
     const u = unitsForOdds(p.odds);
     const netUnits = result === 'WIN' ? u.toWin : (result === 'LOSS' ? -u.risk : 0);
@@ -801,7 +826,7 @@ function playKey(p) {
   // the same convention already used everywhere else in this file (etDateStr, etDateForCommence,
   // trackingIsLive).
   const day = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
-  return `report:posted:${day}:${p.sport}:${p.away}@${p.home}:${p.market}:${p.sharpSide}`;
+  return `report:posted:${day}:${p.sport}:${p.away}@${p.home}:${p.market || p.activeMarket}:${p.sharpSide}`;
 }
 
 function playEmbed(p) {
@@ -813,7 +838,7 @@ function playEmbed(p) {
   const cs = p.convergeScore || { score: p.siScore || 0, componentsUsed: ['book'], breakdown: { book: { score: p.siScore || 0 } } };
   const tier = tierFor(cs.score);
   const fields = [
-    { name: 'Pick',   value: `**${p.sharpSide}** (${p.market})`, inline: true },
+    { name: 'Pick',   value: `**${p.sharpSide}** (${marketLabel(p.market || p.activeMarket)})`, inline: true },
     { name: 'Converge Score', value: `**${cs.score}** \u00b7 ${tier.name}`,  inline: true },
   ];
   const b = cs.breakdown || {};
@@ -822,8 +847,9 @@ function playEmbed(p) {
   if (b.poly) parts.push(`Poly ${b.poly.score}${b.poly.buyers ? ` (${b.poly.buyers} buyers)` : ''}`);
   if (b.kalshi) parts.push(`Kalshi ${b.kalshi.score} (${b.kalshi.direction || 'steam'})`);
   if (parts.length) fields.push({ name: 'Components', value: parts.join(' \u00b7 '), inline: true });
-  if (p.signalType) fields.push({ name: 'Signal', value: String(p.signalType), inline: true });
-  if (p.gapPP != null) fields.push({ name: 'Pinnacle gap', value: `${p.gapPP}pp`, inline: true });
+  if (p.signalType) fields.push({ name: 'Signal', value: signalTypeLabel(p.signalType), inline: true });
+  const gapDisplay = pinnacleGapDisplay(p);
+  if (gapDisplay) fields.push({ name: 'Pinnacle', value: gapDisplay, inline: true });
   const best = p.bestPrices && p.bestPrices[p.sharpSide];
   if (best && best.price != null) {
     fields.push({ name: 'Best price', value: `${best.price > 0 ? '+' : ''}${best.price} (${best.book || '—'})`, inline: true });
@@ -1086,7 +1112,7 @@ module.exports = async function handler(req, res) {
       topAvailableShown: freshTopAvailable.length,
       oddsErrors: errors,
       record, gradedThisRun: gradeResult.graded, stillPendingGrade: gradeResult.stillPending,
-      plays: fresh.map(p => ({ game: `${p.away} @ ${p.home}`, sport: p.sport, market: p.market,
+      plays: fresh.map(p => ({ game: `${p.away} @ ${p.home}`, sport: p.sport, market: p.market || p.activeMarket,
         side: p.sharpSide, convergeScore: p._convergeScore, siScore: p.siScore, reason: p._reason })),
     };
 
@@ -1149,7 +1175,7 @@ module.exports = async function handler(req, res) {
             const pendingRes = await upstashPost(['GET', 'converge:pending']);
             const pendingRaw = pendingRes && pendingRes.ok ? pendingRes.result : null;
             const pendingArr = pendingRaw ? (typeof pendingRaw === 'string' ? JSON.parse(pendingRaw) : pendingRaw) : [];
-            pendingArr.push({ away: p.away, home: p.home, sport: p.sport, market: p.market,
+            pendingArr.push({ away: p.away, home: p.home, sport: p.sport, market: p.market || p.activeMarket,
               sharpSide: p.sharpSide, odds: best ? best.price : null, siScore: p.siScore, postedAt: Date.now() });
             await upstashPost(['SET', 'converge:pending', JSON.stringify(pendingArr), 'EX', '2592000']);
           } catch {}
