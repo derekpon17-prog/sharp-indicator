@@ -110,9 +110,11 @@ function sideMatches(a,b){
 async function fetchPolyScores(){
   try{
     const r=await fetch(SITE_URL+'/api/polymarket-alerts?convergeScores=1');
+    if(!r.ok){ console.error('[fetchPolyScores] non-200:', r.status); return []; }
     const d=await r.json();
-    return (d&&d.ok&&Array.isArray(d.scores))?d.scores:[];
-  }catch{ return []; }
+    if(!(d&&d.ok&&Array.isArray(d.scores))){ console.error('[fetchPolyScores] bad shape:', JSON.stringify(d).slice(0,200)); return []; }
+    return d.scores;
+  }catch(e){ console.error('[fetchPolyScores] FAILED:', e.message); return []; }
 }
 async function fetchKalshiSteamAll(sport){
   try{
