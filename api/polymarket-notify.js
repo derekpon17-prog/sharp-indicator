@@ -869,6 +869,25 @@ function playEmbed(p) {
   };
 }
 
+// OPTION A REPORT FORMAT 2026-08-30 (per Derek, real complaint w/ screenshot): full
+// embeds per play were too crowded across 6 plays. Cleaner: one compact line per play,
+// plus a poly bullet underneath showing BOTH sides' real counts and who's on them --
+// not just the side Converge Score happens to be picking. Plain text, not an embed --
+// six embeds each with their own colored bar reads as more visual weight than six lines
+// of text, which was the actual complaint.
+function playLine(p) {
+  const tier = tierFor(p._convergeScore != null ? p._convergeScore : p.siScore);
+  const gap = pinnacleGapDisplay(p);
+  const mainLine = `\u{1F3AF} **${p.away} @ ${p.home}** \u00b7 ${p.sharpSide} (${marketLabel(p.market || p.activeMarket)}) \u00b7 **${p._convergeScore != null ? p._convergeScore : p.siScore} ${tier.name}**${gap ? ` \u00b7 Pinnacle ${gap}` : ''}`;
+
+  const sides = (p.polyBothSides || []).filter(s => s.buyers > 0);
+  if (!sides.length) return mainLine;
+  sides.sort((a, b) => b.buyers - a.buyers);
+  const polyLine = '   Poly: ' + sides.map(s => `${s.buyers} ${s.outcome}`).join(', ');
+  const nameLines = sides.map(s => `   \u2022 ${s.outcome} (${s.buyers}): ${s.traderNames.slice(0, 6).join(', ')}${s.traderNames.length > 6 ? '\u2026' : ''}`);
+  return [mainLine, polyLine, ...nameLines].join('\n');
+}
+
 /* Some wallets have traderName stored as "0xADDRESS-1722957908185" — a raw wallet address
    with what looks like a discovery timestamp appended, instead of a real display name or
    a clean short address. This isn't something the convergence code introduced; it's
@@ -1124,40 +1143,36 @@ module.exports = async function handler(req, res) {
 
     if (dry) {
       result.dryRun = true; result.recordLine = recordLine;
-      result.embedsPreview = fresh.slice(0, 10).map(playEmbed);
-      result.topAvailablePreview = freshTopAvailable.slice(0, 3).map(playEmbed);
+      result.linePreview = fresh.map(playLine);
+      result.topAvailablePreview = freshTopAvailable.slice(0, 3).map(playLine);
       return res.status(200).json(result);
     }
     if (!fresh.length && !freshTopAvailable.length) { result.sent = false; result.note = 'Nothing new above threshold, and no new below-threshold candidates to show'; return res.status(200).json(result); }
     if (!webhook) { result.sent = false; result.note = 'DISCORD_WEBHOOK_URL_ALERTS not set'; return res.status(200).json(result); }
 
-    // Discord caps embeds at 10 per message. Real qualifiers first, then up to 3
-    // below-threshold candidates, clearly separated by their own header line inside the
-    // same message -- never silently blended into what looks like a real qualifying list.
-    const embeds = fresh.slice(0, 10).map(playEmbed);
+    // OPTION A FORMAT (per Derek, 2026-08-30): plain compact lines instead of one embed
+    // per play -- six colored embed cards read as more visual weight than six lines of
+    // text, which was the actual "too crowded" complaint. Discord content caps at 2000
+    // chars; sliced defensively so a big slate can never silently get cut mid-play.
     let header = (mode === 'check'
       ? `\u{1F195} **New top play${fresh.length > 1 ? 's' : ''}** \u2014 crossed ${TOP_PLAY_MIN}+ since the last report`
       : `\u{1F3AF} **Converge Score Report** \u2014 ${sports.join('/')} \u00b7 ${fresh.length} play${fresh.length > 1 ? 's' : ''} at ${TOP_PLAY_MIN}+`)
       + `\n${recordLine}`;
 
+    const bodyParts = fresh.map(playLine);
+
     if (!fresh.length && freshTopAvailable.length) {
       header = `\u{1F3AF} **Converge Score Report** \u2014 ${sports.join('/')}\n${recordLine}\n`
         + `\u26a0\ufe0f *Nothing cleared the ${TOP_PLAY_MIN}+ preferred threshold today -- showing the most promising available signals below it instead.*`;
-      embeds.push(...freshTopAvailable.slice(0, 3).map(p => {
-        const e = playEmbed(p);
-        e.title = `\u26a0\ufe0f BELOW THRESHOLD \u2014 ${e.title}`;
-        e.color = 0x808080;
-        return e;
-      }));
+      bodyParts.push(...freshTopAvailable.slice(0, 3).map(p => `\u26a0\ufe0f BELOW THRESHOLD \u2014 ${playLine(p)}`));
     } else if (fresh.length && freshTopAvailable.length) {
-      embeds.push(...freshTopAvailable.slice(0, Math.max(0, 10 - embeds.length)).map(p => {
-        const e = playEmbed(p);
-        e.title = `\u26a0\ufe0f BELOW THRESHOLD \u2014 ${e.title}`;
-        e.color = 0x808080;
-        return e;
-      }));
+      bodyParts.push(...freshTopAvailable.slice(0, 3).map(p => `\u26a0\ufe0f BELOW THRESHOLD \u2014 ${playLine(p)}`));
     }
-    const send = await sendDiscord(webhook, header, embeds);
+
+    let fullMessage = header + '\n\n' + bodyParts.join('\n\n');
+    if (fullMessage.length > 1900) fullMessage = fullMessage.slice(0, 1880) + '\n\n_(truncated -- see site for the rest)_';
+
+    const send = await sendDiscord(webhook, fullMessage);
     result.sent = send.ok;
     result.sendResult = send;
 
