@@ -436,7 +436,13 @@ function computeIndication(play) {
   }
   if (mlv.state === 'MID_MOVE') {
     src.push('VEL');
-    reasons.push('ML moved ' + mlv.movementPP + 'pp, ' + (mlv.laggingBooks || 0) + ' books still lagging');
+    // FIX 2026-08-29 (per Derek, real request): translate the abstract pp figure into
+    // actual odds -- "moved -120 to -129" reads far more directly than "moved 0.9pp" for
+    // anyone not doing the probability math in their head. openPin/nowPin already exist
+    // on mlVelocity as real American-odds numbers (oPin[name]/cPin[name]), reusing the
+    // same fmt() helper mlVelocity's own label already uses, for consistency.
+    const oddsMove = (mlv.openPin != null && mlv.nowPin != null) ? (fmt(mlv.openPin) + ' \u2192 ' + fmt(mlv.nowPin) + ', ') : '';
+    reasons.push('ML moved ' + oddsMove + mlv.movementPP + 'pp, ' + (mlv.laggingBooks || 0) + ' books still lagging');
   }
 
   // Pinnacle priced outside the entire soft-book range is a genuinely distinct read from
