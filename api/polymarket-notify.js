@@ -1550,7 +1550,18 @@ module.exports = async function handler(req, res) {
 
       const usd      = Math.round(alert.usdValue).toLocaleString();
       const price    = (parseFloat(alert.price || 0) * 100).toFixed(1);
-      const rankInfo = (alert.categories || []).map(c => `${c.category} #${c.rank}`).join(' / ');
+      // FIX 2026-08-29 (per Derek, real incident w/ screenshot): two bugs in one. (1)
+      // categories were shown unfiltered by sport -- an NCAAF alert displayed an unrelated
+      // MLB specialist tag just because the same wallet happens to also be a confirmed
+      // MLB specialist. (2) SPECIALIST categories were built with rank:null always (no
+      // numeric-rank concept exists for a specialist promotion, unlike a real leaderboard
+      // rank), producing the literal text "#null". Now: only show a category if it's sport-
+      // agnostic (no colon, e.g. a real leaderboard rank) OR matches THIS alert's own
+      // sport; specialist entries show PnL context instead of a fabricated rank number.
+      const rankInfo = (alert.categories || [])
+        .filter(c => !c.category.includes(':') || c.category.endsWith(':' + alert.sport))
+        .map(c => c.rank != null ? `${c.category} #${c.rank}` : `${c.category}${c.pnl != null ? ` ($${Math.round(c.pnl).toLocaleString()} PnL)` : ''}`)
+        .join(' / ');
       // BUGFIX 2026-08-10 (per Derek): "Specialist: 96.2% of 26 settled bets" was showing
       // unconditionally, even when the name line right above it was already using OUR OWN
       // tracked record (e.g. kkookkoo's real 0-1) instead — two different numbers for the
@@ -1580,9 +1591,27 @@ module.exports = async function handler(req, res) {
       // since this shipped, not just the standalone channel. Title names the population
       // so it's clear which cohort fired at a glance -- moved before the object that uses it.
       const tag = alert.type === 'SPEC' ? 'Specialist' : 'Whale';
+      /* FIX 2026-08-29 (per Derek, real incident w/ screenshot): confirmed live -- some
+         totals-market titles from Polymarket are genuinely bare ("O/U 56.5", no teams at
+         all), unlike moneyline/spread markets which always carry both team names. Real
+         example: NCAAF, alert.title="O/U 56.5" while eventSlug="cfb-mphs-unlv-2026-08-30"
+         -- the team codes exist, just not in title. Same eventSlug convention already
+         used everywhere else in this file (sport-team-team-date), so this is a real,
+         reliable fallback, not a guess. Only kicks in when title lacks "vs" -- moneyline/
+         spread titles that already carry both team names are left completely untouched. */
+      let displayTitle = alert.title || '';
+      if (!/\bvs\.?\b/i.test(displayTitle) && alert.eventSlug) {
+        const parts = alert.eventSlug.split('-');
+        // Drop the sport prefix and the trailing YYYY-MM-DD (3 segments) -- whatever's
+        // left in the middle is the team codes, however many there are.
+        if (parts.length >= 5) {
+          const teams = parts.slice(1, -3).join(' vs ').toUpperCase();
+          if (teams) displayTitle = `${teams}: ${displayTitle}`;
+        }
+      }
       const alertEmbed = {
         title: `⚡ $${usd} ${alert.sport} Poly ${tag}`,
-        description: `**${(alert.title || '').slice(0, 80)}**${extractSlugDate(alert) ? ` (${extractSlugDate(alert)})` : ''}`,
+        description: `**${displayTitle.slice(0, 80)}**${extractSlugDate(alert) ? ` (${extractSlugDate(alert)})` : ''}`,
         color: alert.type === 'SPEC' ? 0x9B6DFF : 0x40B4FF,
         fields: alertFields,
       };
