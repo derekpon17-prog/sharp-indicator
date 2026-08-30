@@ -791,7 +791,16 @@ async function getConvergeRecord() {
 }
 
 function playKey(p) {
-  const day = new Date().toISOString().slice(0, 10);
+  // FIX 2026-08-30 (per Derek, real recurring incident -- qualifying>0 but
+  // newOrUpgraded:0, twice now): same exact bug class as yesterday's
+  // getScheduleFromESPN midnight fix, different function. Used UTC date for the "day"
+  // boundary -- testing last night around 10-11pm CT already meant UTC had rolled to the
+  // 30th while it was still the 29th locally, so dedup keys got written under TODAY's
+  // date last night. This morning's genuinely new qualifying plays then collided with
+  // those stale entries and were incorrectly treated as already-posted. Switched to ET,
+  // the same convention already used everywhere else in this file (etDateStr, etDateForCommence,
+  // trackingIsLive).
+  const day = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
   return `report:posted:${day}:${p.sport}:${p.away}@${p.home}:${p.market}:${p.sharpSide}`;
 }
 
