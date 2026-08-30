@@ -128,6 +128,14 @@ function findPolyScoreForPlay(play, polyScores){
   const sideMatch=matches.find(s=>sideMatches(s.outcome,play.sharpSide));
   return sideMatch||matches.sort((a,b)=>b.score-a.score)[0]||null;
 }
+// FEATURE 2026-08-30 (per Derek, Option A report format): "number of poly accounts on
+// each side" -- findPolyScoreForPlay above deliberately collapses to ONE side (whichever
+// matches or scores best). This returns every real side for the game instead, so the
+// report can show both counts and who's on each, not just the winning side's.
+function findAllPolySidesForPlay(play, polyScores){
+  return polyScores.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home))
+    .map(s=>({outcome:s.outcome, buyers:s.buyers, traderNames:s.traderNames||[], score:s.score}));
+}
 function findKalshiScoreForPlay(play, steamMarkets){
   const matches=steamMarkets.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home));
   if(!matches.length)return null;
@@ -1475,6 +1483,7 @@ module.exports=async function handler(req,res){
       const retrofitted={...p,...retrofit};
       return{...retrofitted,
       relSignal,
+      polyBothSides:findAllPolySidesForPlay(p,polyScoresAll),
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
       pitcherWatch:pwMap[p.id]||null,
