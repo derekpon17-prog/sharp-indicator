@@ -1041,7 +1041,18 @@ module.exports = async function handler(req, res) {
       const key = playKey(p);
       let prior = null;
       try {
-        const raw = await upstashPost(['GET', key]);
+        // REAL ROOT CAUSE 2026-08-30 (per Derek, confirmed on the second recurrence):
+        // upstashPost returns {ok,result} -- an object, ALWAYS truthy even when the key
+        // doesn't exist. `if (raw)` on the wrapper itself was therefore always true,
+        // `prior` got set to the wrapper (not the real stored data), so !prior never
+        // fired for genuinely new plays, and prior.convergeScore was always undefined --
+        // any real score compared to undefined via > is always false in JS, so upgraded
+        // was always false too. Result: newOrUpgraded:0 no matter what, deterministically,
+        // every single run. This was never about timing (yesterday's ET fix was real and
+        // worth keeping, but it wasn't THIS bug). Extract .result first, matching the
+        // correct pattern already used elsewhere in this file (getConvergeRecord etc).
+        const res = await upstashPost(['GET', key]);
+        const raw = res && res.ok ? res.result : null;
         if (raw) prior = typeof raw === 'string' ? JSON.parse(raw) : raw;
       } catch {}
       if (!prior) { fresh.push({ ...p, _reason: 'new' }); continue; }
@@ -1061,7 +1072,8 @@ module.exports = async function handler(req, res) {
       for (const p of topAvailable) {
         const key = 'topsig:' + playKey(p);
         try {
-          const raw = await upstashPost(['GET', key]);
+          const res = await upstashPost(['GET', key]);
+          const raw = res && res.ok ? res.result : null;
           if (raw) continue; // already shown today
         } catch {}
         freshTopAvailable.push(p);
