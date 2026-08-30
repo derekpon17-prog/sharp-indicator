@@ -8,6 +8,15 @@
    Action Network: real ticket % for RLM (POC)
 ════════════════════════════════════════════ */
 
+// FIX 2026-08-30 (per Derek, real root cause confirmed via runtime logs): SITE_URL was
+// used by fetchPolyScores() and fetchKalshiSteamAll() but never actually declared in
+// this file -- a genuine ReferenceError, silently swallowed by their catch{} blocks,
+// meaning both returned [] on every single call. This is why poly has shown null on
+// every play for two nights straight, and why Kalshi shadow-tracking has been silently
+// dead the same whole time. One missing constant, confirmed the hard way: added real
+// error logging, redeployed, triggered a real request, read the actual captured error
+// ("SITE_URL is not defined") from Vercel's logs instead of guessing further.
+const SITE_URL = 'https://sharp-indicator-a34j.vercel.app';
 const SHARP_BOOKS = ['pinnacle'];
 const EXCHANGE_BOOKS = ['novig','prophetx'];
 const SOFT_BOOKS = [
