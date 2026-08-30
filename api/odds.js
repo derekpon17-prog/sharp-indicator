@@ -170,7 +170,7 @@ function computeConvergeScore(play, polyMatch, kalshiMatch){
     componentsUsed:parts.map(p=>p.key),
     breakdown:{
       book:{score:play.siScore||0,weight:CONVERGE_WEIGHTS.book},
-      poly:polyMatch?{score:polyMatch.score,weight:CONVERGE_WEIGHTS.poly,tier:polyMatch.tier,buyers:polyMatch.buyers,totalVol:polyMatch.totalVol}:null,
+      poly:polyMatch?{score:polyMatch.score,weight:CONVERGE_WEIGHTS.poly,tier:polyMatch.tier,buyers:polyMatch.buyers,traderNames:polyMatch.traderNames||[],totalVol:polyMatch.totalVol}:null,
     },
     // Not counted in score. Logged for later review once each has real graded history.
     shadowCandidates:{
