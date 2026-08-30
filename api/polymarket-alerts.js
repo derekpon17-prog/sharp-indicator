@@ -89,7 +89,12 @@ module.exports = async function handler(req, res) {
         const conv = buyers.length >= 4 ? 28 : buyers.length >= 3 ? 20 : buyers.length >= 2 ? 12 : 0;
         const score = Math.min(Math.round(base * rm) + conv, 100);
         const tier = score >= 80 ? 'ELITE' : score >= 60 ? 'STRONG' : 'MODERATE';
-        return { title: g.title, outcome: g.outcome, eventSlug: g.eventSlug, sport: g.sport, score, tier, buyers: buyers.length, totalVol: Math.round(g.totalVol) };
+        // FEATURE 2026-08-30 (per Derek, Option A report format): "how many, who" -- was
+        // only ever returning a bare count. traderNames added here, not just at the
+        // consuming end, since this is the one place real buyer identity already exists
+        // before it gets collapsed into a count.
+        const traderNames = buyers.map(b => b.traderName || (b.wallet ? b.wallet.slice(0, 8) : 'Unknown'));
+        return { title: g.title, outcome: g.outcome, eventSlug: g.eventSlug, sport: g.sport, score, tier, buyers: buyers.length, traderNames, totalVol: Math.round(g.totalVol) };
       });
 
       return res.status(200).json({ ok: true, scores: scored });
