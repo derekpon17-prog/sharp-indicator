@@ -951,12 +951,14 @@ function getRecordFor(a, tracked) {
 // exact condition as the client side (genuinely cross-sport, this alert's own sport has
 // real data), so Discord and the site can never disagree about who counts as cross-sport.
 function extractSportBreakdown(trackedEntry, sport) {
+  // FIX 2026-08-30 (per Derek, real confusion): this used to suppress the sport tag
+  // whenever a wallet's tracked history was all one sport, on the reasoning that
+  // "(MLB: 2-6)" next to an already-identical "(2-6)" was pure redundant noise. Real
+  // feedback: showing the number twice isn't noise, it's CONFIRMATION -- without it,
+  // there's no way to tell "2-6 overall, which happens to be his only tracked sport"
+  // from "2-6 overall, but I have no idea what his MLB-specific number even is." Always
+  // show it now when the sport has any tracked data at all, single-sport or not.
   if (!sport || !trackedEntry.bySport) return null;
-  const sportsWithData = Object.keys(trackedEntry.bySport).filter(sp => {
-    const sb = trackedEntry.bySport[sp];
-    return sb && (sb.W + sb.L) > 0;
-  });
-  if (sportsWithData.length <= 1) return null;
   const sb = trackedEntry.bySport[sport];
   if (!sb || (sb.W + sb.L) === 0) return null;
   return { sport, wins: sb.W, losses: sb.L, roiPct: sb.roiPct };
@@ -982,7 +984,17 @@ function nameWithRecord(a, tracked) {
     const sbRoi = (sb.roiPct !== null && sb.roiPct !== undefined) ? ` ${sb.roiPct >= 0 ? '+' : ''}${Math.round(sb.roiPct)}%` : '';
     sportPart = ` (${sb.sport}: ${sb.wins}-${sb.losses}${sbRoi})`;
   }
-  return `${label} (${rec.wins}-${rec.losses}${marker}${roiPart})${sportPart}`;
+  // FEATURE 2026-08-30 (per Derek): a small tracked sample overriding a much larger,
+  // better real record (per the IAmHomelessNow case -- 2-6 tracked vs. a real 36-bet,
+  // 91.7% specialist record) shouldn't just look like a scary flat negative number with
+  // no context. Cold flag on the TRACKED record specifically -- distinct icon from the
+  // existing wallet-form 🧊 (which means "recent cooling trend", a different concept) --
+  // signals "small sample, weigh cautiously" without hiding or discarding the number.
+  // Threshold is a first cut, not validated against anything -- same posture as every
+  // other new threshold shipped this way tonight.
+  const SMALL_SAMPLE_MAX = 10;
+  const coldFlag = (rec.source === 'tracked' && (rec.wins + rec.losses) > 0 && (rec.wins + rec.losses) <= SMALL_SAMPLE_MAX) ? ' \u2744\ufe0f' : '';
+  return `${label} (${rec.wins}-${rec.losses}${marker}${roiPart})${sportPart}${coldFlag}`;
 }
 // Per-side quality score from available records (tracked first, specialist stat as
 // fallback — see getRecordFor above): rewards win rate above coinflip, scaled by a
