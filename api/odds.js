@@ -134,10 +134,18 @@ async function fetchKalshiSteamAll(sport){
 }
 
 function findPolyScoreForPlay(play, polyScores){
+  // FIX 2026-08-31 (per Derek, real bug w/ screenshot): Pwaddler bought Philadelphia
+  // Phillies, but Converge Score blended his data into an Arizona Diamondbacks pick as
+  // if it were confirming evidence. Root cause: when no real buyer existed on the SAME
+  // side as the books pick, this fell back to the highest-scoring match on ANY side --
+  // including the OPPOSING side -- silently treating a bet against the pick as if it
+  // supported it. A wrong-side match is not weaker evidence, it is evidence for the
+  // OTHER conclusion. Never substitute it. Return null (correctly excluding poly
+  // entirely) when there is no real same-side match, exactly like a genuinely poly-less
+  // game already gets handled.
   const matches=polyScores.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home));
   if(!matches.length)return null;
-  const sideMatch=matches.find(s=>sideMatches(s.outcome,play.sharpSide));
-  return sideMatch||matches.sort((a,b)=>b.score-a.score)[0]||null;
+  return matches.find(s=>sideMatches(s.outcome,play.sharpSide))||null;
 }
 // FEATURE 2026-08-30 (per Derek, Option A report format): "number of poly accounts on
 // each side" -- findPolyScoreForPlay above deliberately collapses to ONE side (whichever
