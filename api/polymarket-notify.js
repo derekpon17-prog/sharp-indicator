@@ -651,8 +651,17 @@ async function buildBestPlaysReport(sports) {
       const r = await fetch(`${SITE_URL}/api/odds?sport=${sp}`);
       const d = await r.json();
       if (d && d.error) { errors.push(`${sp}: ${d.error}`); continue; }
+      const nowMs = Date.now();
       (d.plays || []).forEach(p => {
-        if (!p || p.isLive) return; // never surface a live game, fallback or not
+        // FIX 2026-08-30 (per Derek, real incident -- games shown well after they'd
+        // ended): p.isLive is computed once, when /api/odds's response gets CACHED
+        // (up to 60 minutes, and this internal call doesn't force fresh=1) -- if that
+        // cache was written before a game started, isLive:false gets frozen into the
+        // stale snapshot and never self-corrects until the cache naturally expires.
+        // commenceTime comparison is evaluated fresh right here, at report-build time,
+        // so it can never be stale regardless of how old the underlying cache is.
+        const alreadyStarted = p && p.commenceTime && new Date(p.commenceTime).getTime() < nowMs;
+        if (!p || p.isLive || alreadyStarted) return; // never surface a live or finished game, fallback or not
         const cs = p && p.convergeScore && typeof p.convergeScore.score === 'number' ? p.convergeScore.score : 0;
         const ind = p.indication && typeof p.indication.score === 'number' ? p.indication.score : 0;
         const candidate = { ...p, sport: sp, _convergeScore: cs, _indicationScore: ind };
