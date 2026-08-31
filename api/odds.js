@@ -1483,6 +1483,13 @@ module.exports=async function handler(req,res){
           siScore:relSignal.score,
           noSignal:false,
           sharpSide:relSignal.side||p.sharpSide,
+          // FIX 2026-08-31 (per Derek, real screenshot -- Over 8.5 labeled Moneyline):
+          // relSignal picks whichever market (h2h/spreads/totals) has the best
+          // percentile standing, and sharpSide already reflected that market's side --
+          // but activeMarket, which marketLabel() reads for display, was never updated
+          // to match. It stayed at whatever the pre-retrofit default was, so a totals
+          // standout could display with the wrong market label entirely.
+          activeMarket:relSignal.market||p.activeMarket,
           signalType:'RELATIVE_STANDOUT',
           pillars:{...p.pillars,pinnacle:relSignal.score,pinnacleSource:'relative_fallback'},
         };
