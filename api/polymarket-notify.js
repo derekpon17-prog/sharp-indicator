@@ -665,14 +665,33 @@ async function buildBestPlaysReport(sports) {
         const cs = p && p.convergeScore && typeof p.convergeScore.score === 'number' ? p.convergeScore.score : 0;
         const ind = p.indication && typeof p.indication.score === 'number' ? p.indication.score : 0;
         const candidate = { ...p, sport: sp, _convergeScore: cs, _indicationScore: ind };
-        if (!p.noSignal && cs >= TOP_PLAY_MIN) plays.push(candidate);
+        // REAL QUALIFYING GATE 2026-08-31 (per Derek, real complaint): score >= 75 alone
+        // let plays through on book OR poly independently -- a relative-percentile book
+        // standout with zero real Poly backing, or a single Poly buyer with a thin book
+        // gap, could both clear 75 through the blend. Derek wants genuine confirmation
+        // from BOTH sides, not a blend that lets one compensate for the other's absence.
+        // bookConfirmed: the ABSOLUTE gap floor was actually cleared (pinnacleSource is
+        // only set to relative_fallback when the retrofit fired instead of the real
+        // floor -- undefined/absent means the genuine floor was met).
+        // polyConfirmed: 2+ real distinct accounts on this exact side, not the phantom
+        // single-buyer case already excluded upstream in polymarket-alerts.js.
+        const bookConfirmed = p.pillars && p.pillars.pinnacleSource !== 'relative_fallback' && !p.noSignal;
+        const polyConfirmed = !!(p.convergeScore && p.convergeScore.breakdown && p.convergeScore.breakdown.poly && p.convergeScore.breakdown.poly.buyers >= 2);
+        if (bookConfirmed && polyConfirmed) plays.push(candidate);
         allCandidates.push(candidate);
       });
     } catch (e) { errors.push(`${sp}: ${e.message}`); }
   }
   plays.sort((a, b) => b._convergeScore - a._convergeScore);
   allCandidates.sort((a, b) => (b._convergeScore - a._convergeScore) || (b._indicationScore - a._indicationScore));
-  const topAvailable = allCandidates.filter(c => c._convergeScore < TOP_PLAY_MIN).slice(0, 3);
+  // FIX 2026-08-31: was filtering purely by score < TOP_PLAY_MIN, but qualifying is now
+  // the bookConfirmed+polyConfirmed gate above, not the raw score -- a play could score
+  // 100 and still fail the real gate (exactly whats expected most days now), and under
+  // the old filter it would show in neither list: too high a score for below-threshold,
+  // but not in plays since it failed the real gate. Now anything not already in the
+  // real qualifying list is eligible for the fallback, regardless of its raw score.
+  const qualifyingIds = new Set(plays.map(p => p.id));
+  const topAvailable = allCandidates.filter(c => !qualifyingIds.has(c.id)).slice(0, 3);
   return { plays, errors, topAvailable };
 }
 
