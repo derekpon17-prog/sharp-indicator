@@ -1346,7 +1346,13 @@ module.exports = async function handler(req, res) {
     let fullMessage = header + '\n\n' + bodyParts.join('\n\n');
     if (fullMessage.length > 1900) fullMessage = fullMessage.slice(0, 1880) + '\n\n_(truncated -- see site for the rest)_';
 
-    const send = await sendDiscord(webhook, fullMessage);
+    // IMAGE 2026-08-31 (per Derek): attach the real rendered card (see ?reportImage=1
+    // above) alongside the existing text. Discord fetches embed.image.url itself -- no
+    // file upload needed, just a public URL to the same endpoint with the same sports
+    // param, so the image always reflects the identical qualifying plays as the text.
+    const imageEmbed = { image: { url: `${SITE_URL}/api/polymarket-notify?reportImage=1&sports=${sports.join(',')}&t=${Date.now()}` } };
+
+    const send = await sendDiscord(webhook, fullMessage, [imageEmbed]);
     result.sent = send.ok;
     result.sendResult = send;
 
