@@ -1050,6 +1050,159 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
+  /* REPORT IMAGE 2026-08-30 (per Derek): renders the Converge Score Report as a real PNG
+     using satori + resvg (the same engine behind @vercel/og). Folded into this existing
+     file as a query branch rather than a new /api/report-image.js file -- confirmed live
+     that a separate file (even just a plain data module with no handler) pushes this
+     project past the Hobby plans hard 12-serverless-function ceiling; this is the same
+     pattern already used everywhere else in this codebase for that exact constraint.
+     MLB/NFL logos are bundled at /lib/team_logos_data.js (verified real, correctly
+     rendering, pulled from MLBAMGames/mlb_teams_logo_svg and ChrisKatsaras/React-NFL-Logos).
+     NCAAF has no equivalent clean bundle (130+ FBS teams) -- fetched dynamically from
+     ESPN's own scoreboard API at render time instead, the same ESPN endpoint
+     getScheduleFromESPN already uses successfully today.
+     GET ?reportImage=1&sports=MLB,NFL,NCAAF -> image/png
+     Known real gap: Poly names render without win-loss records (bare traderNames only;
+     the record-lookup lives elsewhere in this file and isn't wired into this branch yet). */
+  if (req.query && req.query.reportImage) {
+    try {
+      const satori = require('satori').default;
+      const { Resvg } = require('@resvg/resvg-js');
+      const teamLogos = require('../lib/team_logos_data.js');
+
+      let cachedFonts = global.__reportImageFonts;
+      async function getFonts() {
+        if (cachedFonts) return cachedFonts;
+        const [regular, bold] = await Promise.all([
+          fetch('https://raw.githubusercontent.com/googlefonts/opensans/main/fonts/ttf/OpenSans-Regular.ttf').then(r => r.arrayBuffer()),
+          fetch('https://raw.githubusercontent.com/googlefonts/opensans/main/fonts/ttf/OpenSans-Bold.ttf').then(r => r.arrayBuffer()),
+        ]);
+        cachedFonts = [
+          { name: 'Open Sans', data: Buffer.from(regular), weight: 400, style: 'normal' },
+          { name: 'Open Sans', data: Buffer.from(bold), weight: 700, style: 'normal' },
+        ];
+        global.__reportImageFonts = cachedFonts;
+        return cachedFonts;
+      }
+
+      let ncaafLogoCache = null;
+      async function getNcaafLogoUrl(teamName) {
+        if (!ncaafLogoCache) {
+          ncaafLogoCache = {};
+          try {
+            const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates=${today}&groups=80&limit=200`);
+            const j = await r.json();
+            (j.events || []).forEach(ev => {
+              const comp = ev.competitions && ev.competitions[0];
+              (comp && comp.competitors || []).forEach(c => {
+                const name = c.team && (c.team.displayName || c.team.name);
+                const logo = c.team && c.team.logos && c.team.logos[0] && c.team.logos[0].href;
+                if (name && logo) ncaafLogoCache[name] = logo;
+              });
+            });
+          } catch {}
+        }
+        return ncaafLogoCache[teamName] || null;
+      }
+
+      async function toDataUri(sport, teamName) {
+        if (sport === 'NCAAF') {
+          const url = await getNcaafLogoUrl(teamName);
+          if (!url) return null;
+          try {
+            const r = await fetch(url);
+            const buf = Buffer.from(await r.arrayBuffer());
+            return `data:image/png;base64,${buf.toString('base64')}`;
+          } catch { return null; }
+        }
+        const table = sport === 'NFL' ? teamLogos.nfl : teamLogos.mlb;
+        const b64 = table && table[teamName];
+        return b64 ? `data:image/png;base64,${b64}` : null;
+      }
+
+      function tierColorImg(score) { return score >= 85 ? '#E5A00D' : score >= 75 ? '#00C896' : '#40B4FF'; }
+      function tierNameImg(score) { return score >= 85 ? 'ELITE' : score >= 75 ? 'STRONG' : 'MODERATE'; }
+      function marketLabelImg(mk) { return { h2h: 'Moneyline', spreads: 'Spread', totals: 'Total' }[mk] || 'Moneyline'; }
+
+      async function playCardImg(p) {
+        const cs = p.convergeScore || { score: p.siScore || 0, breakdown: { book: { score: p.siScore || 0 } } };
+        const color = tierColorImg(cs.score);
+        const isTotal = (p.market || p.activeMarket) === 'totals';
+        const logoEls = [];
+        if (isTotal) {
+          const [awayUri, homeUri] = await Promise.all([toDataUri(p.sport, p.away), toDataUri(p.sport, p.home)]);
+          if (awayUri) logoEls.push({ type: 'img', props: { src: awayUri, width: 44, height: 44 } });
+          if (awayUri && homeUri) logoEls.push({ type: 'div', props: { style: { fontSize: 16, color: '#5a5a66', margin: '0 4px', display: 'flex' }, children: '@' } });
+          if (homeUri) logoEls.push({ type: 'img', props: { src: homeUri, width: 44, height: 44 } });
+        } else {
+          const pickedTeam = [p.away, p.home].find(t => (p.sharpSide || '').includes(t)) || p.home;
+          const uri = await toDataUri(p.sport, pickedTeam);
+          if (uri) logoEls.push({ type: 'img', props: { src: uri, width: 52, height: 52, style: { display: 'flex' } } });
+        }
+        const poly = cs.breakdown && cs.breakdown.poly;
+        const polyNames = (poly && poly.traderNames) || [];
+        return { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', padding: '22px 26px', backgroundColor: '#1a1a24', borderRadius: 14, borderLeft: `5px solid ${color}`, marginTop: 18 },
+          children: [
+            { type: 'div', props: { style: { fontSize: 15, color: '#ffffff', display: 'flex' }, children: `${p.away} @ ${p.home}` } },
+            { type: 'div', props: { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 },
+                children: [
+                  { type: 'div', props: { style: { display: 'flex', alignItems: 'center' },
+                      children: [
+                        ...(logoEls.length ? [{ type: 'div', props: { style: { display: 'flex', alignItems: 'center', marginRight: 14 }, children: logoEls } }] : []),
+                        { type: 'div', props: { style: { display: 'flex', fontSize: 24, fontWeight: 700, color: '#0d0d12', backgroundColor: color, padding: '8px 16px', borderRadius: 8 }, children: p.sharpSide || '\u2014' } },
+                      ] } },
+                  { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', alignItems: 'flex-end' },
+                      children: [
+                        { type: 'div', props: { style: { fontSize: 32, fontWeight: 700, color, display: 'flex' }, children: String(cs.score) } },
+                        { type: 'div', props: { style: { fontSize: 14, fontWeight: 700, color, display: 'flex' }, children: tierNameImg(cs.score) } },
+                      ] } },
+                ] } },
+            { type: 'div', props: { style: { fontSize: 16, color: '#9ca3af', marginTop: 14, display: 'flex' }, children:
+              (p.currentPinPrice != null && p.currentSoftAvg != null)
+                ? `Pinnacle ${p.currentPinPrice > 0 ? '+' : ''}${p.currentPinPrice} vs ${p.currentSoftAvg > 0 ? '+' : ''}${p.currentSoftAvg} avg`
+                : (p.gapPP != null ? `Pinnacle gap ${p.gapPP}pp` : 'Pinnacle: \u2014') } },
+            ...(polyNames.length ? [{ type: 'div', props: { style: { display: 'flex', flexDirection: 'column', marginTop: 10 },
+                children: polyNames.map(n => ({ type: 'div', props: { style: { fontSize: 16, color: '#7ee787', marginTop: 4, display: 'flex' }, children: `\u2713 ${n}` } })) } }] : []),
+          ] } };
+      }
+
+      const sports = ((req.query.sports) || 'MLB').split(',').map(s => s.trim().toUpperCase());
+      const allPlays = [];
+      for (const sp of sports) {
+        try {
+          const r = await fetch(`${SITE_URL}/api/odds?sport=${sp}`);
+          const d = await r.json();
+          (d.plays || []).forEach(p => {
+            const csv = p.convergeScore && p.convergeScore.score;
+            if (!p.noSignal && typeof csv === 'number' && csv >= TOP_PLAY_MIN) allPlays.push({ ...p, sport: sp });
+          });
+        } catch {}
+      }
+      allPlays.sort((a, b) => b.convergeScore.score - a.convergeScore.score);
+
+      const cards = await Promise.all(allPlays.slice(0, 10).map(playCardImg));
+      const fonts = await getFonts();
+      const tree = { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', width: '100%', height: '100%', backgroundColor: '#0d0d12', padding: '36px 40px', fontFamily: 'Open Sans' },
+        children: [
+          { type: 'div', props: { style: { display: 'flex', alignItems: 'center' }, children: [
+              { type: 'div', props: { style: { fontSize: 30, marginRight: 10, display: 'flex' }, children: '\u{1F3AF}' } },
+              { type: 'div', props: { style: { fontSize: 30, fontWeight: 700, color: '#fff', display: 'flex' }, children: 'Converge Score Report' } },
+            ] } },
+          { type: 'div', props: { style: { fontSize: 18, color: '#9ca3af', marginTop: 6, display: 'flex' }, children: sports.join(' / ') } },
+          ...(cards.length ? cards : [{ type: 'div', props: { style: { fontSize: 18, color: '#9ca3af', marginTop: 24, display: 'flex' }, children: 'Nothing cleared the 75+ threshold right now.' } }]),
+        ] } };
+      const height = 140 + cards.length * 190 + (cards.length ? 0 : 60);
+      const svg = await satori(tree, { width: 900, height: Math.max(height, 300), fonts });
+      const png = new Resvg(svg, { fitTo: { mode: 'width', value: 900 } }).render().asPng();
+      res.setHeader('Content-Type', 'image/png');
+      res.setHeader('Cache-Control', 'public, max-age=60');
+      return res.status(200).send(png);
+    } catch (e) {
+      return res.status(500).json({ error: e.message });
+    }
+  }
+
   /* BEST PLAYS REPORT -- ?bestPlays=1 (scheduled digest) or ?bestPlays=check (follow-up
      sweep for plays that newly crossed the bar). Both share the same dedup, so the
      scheduled send and the follow-ups can never double-post the same play.
