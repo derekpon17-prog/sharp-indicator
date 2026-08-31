@@ -94,7 +94,13 @@ module.exports = async function handler(req, res) {
         // consuming end, since this is the one place real buyer identity already exists
         // before it gets collapsed into a count.
         const traderNames = buyers.map(b => b.traderName || (b.wallet ? b.wallet.slice(0, 8) : 'Unknown'));
-        return { title: g.title, outcome: g.outcome, eventSlug: g.eventSlug, sport: g.sport, score, tier, buyers: buyers.length, traderNames, totalVol: Math.round(g.totalVol) };
+        // FEATURE 2026-08-31 (per Derek): report image wants real records + wallet-form
+        // icons next to each name, which needs the actual wallet address to look up --
+        // traderNames alone (bare strings) can't drive that lookup. Adding the real
+        // {wallet, traderName} pairs alongside, not replacing traderNames since other
+        // consumers already depend on the plain string array.
+        const traders = buyers.map(b => ({ wallet: b.wallet || null, traderName: b.traderName || (b.wallet ? b.wallet.slice(0, 8) : 'Unknown') }));
+        return { title: g.title, outcome: g.outcome, eventSlug: g.eventSlug, sport: g.sport, score, tier, buyers: buyers.length, traderNames, traders, totalVol: Math.round(g.totalVol) };
       })
       // FIX 2026-08-31 (per Derek, real incident): a malformed alert record missing its
       // wallet field still incremented totalVol while never entering the wallets Map,
