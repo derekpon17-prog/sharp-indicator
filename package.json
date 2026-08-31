@@ -1,0 +1,8 @@
+{
+  "name": "sharp-indicator",
+  "version": "1.0.0",
+  "dependencies": {
+    "satori": "^0.10.13",
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}
