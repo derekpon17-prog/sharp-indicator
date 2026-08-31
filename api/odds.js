@@ -153,7 +153,7 @@ function findPolyScoreForPlay(play, polyScores){
 // report can show both counts and who's on each, not just the winning side's.
 function findAllPolySidesForPlay(play, polyScores){
   return polyScores.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home))
-    .map(s=>({outcome:s.outcome, buyers:s.buyers, traderNames:s.traderNames||[], score:s.score}));
+    .map(s=>({outcome:s.outcome, buyers:s.buyers, traderNames:s.traderNames||[], traders:s.traders||[], score:s.score}));
 }
 function findKalshiScoreForPlay(play, steamMarkets){
   const matches=steamMarkets.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home));
@@ -189,7 +189,7 @@ function computeConvergeScore(play, polyMatch, kalshiMatch){
     componentsUsed:parts.map(p=>p.key),
     breakdown:{
       book:{score:play.siScore||0,weight:CONVERGE_WEIGHTS.book},
-      poly:polyMatch?{score:polyMatch.score,weight:CONVERGE_WEIGHTS.poly,tier:polyMatch.tier,buyers:polyMatch.buyers,traderNames:polyMatch.traderNames||[],totalVol:polyMatch.totalVol}:null,
+      poly:polyMatch?{score:polyMatch.score,weight:CONVERGE_WEIGHTS.poly,tier:polyMatch.tier,buyers:polyMatch.buyers,traderNames:polyMatch.traderNames||[],traders:polyMatch.traders||[],totalVol:polyMatch.totalVol}:null,
     },
     // Not counted in score. Logged for later review once each has real graded history.
     shadowCandidates:{
