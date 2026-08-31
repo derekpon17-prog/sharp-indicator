@@ -95,7 +95,17 @@ module.exports = async function handler(req, res) {
         // before it gets collapsed into a count.
         const traderNames = buyers.map(b => b.traderName || (b.wallet ? b.wallet.slice(0, 8) : 'Unknown'));
         return { title: g.title, outcome: g.outcome, eventSlug: g.eventSlug, sport: g.sport, score, tier, buyers: buyers.length, traderNames, totalVol: Math.round(g.totalVol) };
-      });
+      })
+      // FIX 2026-08-31 (per Derek, real incident): a malformed alert record missing its
+      // wallet field still incremented totalVol while never entering the wallets Map,
+      // producing a phantom group with buyers:0 but real volume -- the score formula
+      // still computed a fake floor score (~4) off that volume alone, with zero actual
+      // identified traders. computeConvergeScore then blended this phantom score into
+      // Converge Score at full 40 percent weight as if it were real Poly backing,
+      // artificially dragging down every book-only play's score. A zero-buyer group
+      // is not a real signal -- exclude it, matching the real Discord alert paths
+      // existing 2+ buyer floor (this endpoint never had an equivalent gate at all).
+      .filter(s => s.buyers > 0);
 
       return res.status(200).json({ ok: true, scores: scored });
     }
