@@ -1089,6 +1089,30 @@ module.exports = async function handler(req, res) {
       const { Resvg } = require('@resvg/resvg-js');
       const teamLogos = require('../lib/team_logos_data.js');
 
+      // FEATURE 2026-08-31 (per Derek, real screenshot): image cards want real trader
+      // records (full + sport-specific) and hot/cold icons next to each name, matching
+      // the text alerts' nameWithRecord()/formLabel(). Those live in the bestPlays
+      // block's own try{}, a separate scope this branch can't reach -- replicated here
+      // rather than reaching across scopes, same pattern as everything else in this file.
+      let trackedRecordsImg = {};
+      try {
+        const trRes = await fetch(`${SITE_URL}/api/trader-records`);
+        const trData = await trRes.json();
+        trackedRecordsImg = trData.records || {};
+      } catch {}
+      let walletFormImg = {};
+      try {
+        const wfRes = await fetch(`${SITE_URL}/api/grade-cron?walletForm=1`);
+        const wfData = await wfRes.json();
+        walletFormImg = wfData.form || {};
+      } catch {}
+      function formIconImg(wallet, sport) {
+        if (!wallet || !sport) return '';
+        const f = walletFormImg[wallet + '|' + sport];
+        if (!f) return '';
+        return f.form === 'HOT' ? ' \u{1F525}' : (f.form === 'COLD' ? ' \u{1F9CA}' : '');
+      }
+
       let cachedFonts = global.__reportImageFonts;
       async function getFonts() {
         if (cachedFonts) return cachedFonts;
@@ -1160,7 +1184,38 @@ module.exports = async function handler(req, res) {
           if (uri) logoEls.push({ type: 'img', props: { src: uri, width: 52, height: 52, style: { display: 'flex' } } });
         }
         const poly = cs.breakdown && cs.breakdown.poly;
-        const polyNames = (poly && poly.traderNames) || [];
+        const polyTraders = (poly && poly.traders && poly.traders.length) ? poly.traders : ((poly && poly.traderNames) || []).map(n => ({ traderName: n, wallet: null }));
+        // FIX 2026-08-31: nameWithRecord()'s output embeds emoji (🟢/🔴 dots, 🔥/🧊 form
+        // icons) inline in one string -- satori has no emoji glyph coverage without a
+        // separate emoji-font setup, so those rendered as invisible blanks, not missing
+        // data. Building the row from getRecordFor()'s structured return directly here
+        // instead, using colored TEXT/shapes (real satori primitives, not font-dependent)
+        // in place of every emoji: a plain colored dot div for win/loss sign, HOT/COLD as
+        // a small colored text badge instead of 🔥/🧊.
+        const polyRows = polyTraders.map(t => {
+          const rec = t.wallet ? getRecordFor({ wallet: t.wallet, traderName: t.traderName, sport: p.sport }, trackedRecordsImg) : null;
+          const parts = [{ type: 'div', props: { style: { display: 'flex', color: '#7ee787', fontWeight: 700 }, children: `\u2713 ${t.traderName}` } }];
+          if (rec) {
+            const dotColor = rec.roiPct > 0 ? '#4ade80' : rec.roiPct < 0 ? '#f87171' : '#9ca3af';
+            parts.push({ type: 'div', props: { style: { display: 'flex', width: 8, height: 8, borderRadius: 4, backgroundColor: dotColor, marginLeft: 8, marginRight: 4, alignSelf: 'center' } } });
+            parts.push({ type: 'div', props: { style: { display: 'flex', color: '#9ca3af' }, children: `${rec.wins}-${rec.losses}${rec.roiPct != null ? ` (${rec.roiPct >= 0 ? '+' : ''}${Math.round(rec.roiPct)}%)` : ''}` } });
+            if (rec.sportBreakdown) {
+              const sb = rec.sportBreakdown;
+              parts.push({ type: 'div', props: { style: { display: 'flex', color: '#6b6b76', marginLeft: 6 }, children: `${sb.sport}: ${sb.wins}-${sb.losses}${sb.roiPct != null ? ` (${sb.roiPct >= 0 ? '+' : ''}${Math.round(sb.roiPct)}%)` : ''}` } });
+            }
+          }
+          if (t.wallet) {
+            const form = walletFormImg[t.wallet + '|' + p.sport];
+            if (form && form.form !== 'WARM') {
+              const isHot = form.form === 'HOT';
+              parts.push({ type: 'div', props: {
+                  style: { display: 'flex', fontSize: 11, fontWeight: 700, color: isHot ? '#fb923c' : '#60a5fa', border: `1px solid ${isHot ? '#fb923c' : '#60a5fa'}`, borderRadius: 4, padding: '1px 6px', marginLeft: 8, alignSelf: 'center' },
+                  children: form.form,
+                } });
+            }
+          }
+          return { type: 'div', props: { style: { display: 'flex', alignItems: 'center', marginTop: 4, fontSize: 15 }, children: parts } };
+        });
         return { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', padding: '22px 26px', backgroundColor: '#1a1a24', borderRadius: 14, borderLeft: `5px solid ${color}`, marginTop: 18 },
           children: [
             { type: 'div', props: { style: { fontSize: 15, color: '#ffffff', display: 'flex' }, children: `${p.away} @ ${p.home}` } },
@@ -1181,8 +1236,8 @@ module.exports = async function handler(req, res) {
               (p.currentPinPrice != null && p.currentSoftAvg != null)
                 ? `Pinnacle ${p.currentPinPrice > 0 ? '+' : ''}${p.currentPinPrice} vs ${p.currentSoftAvg > 0 ? '+' : ''}${p.currentSoftAvg} avg`
                 : (p.gapPP != null ? `Pinnacle gap ${p.gapPP}pp` : 'Pinnacle: \u2014') } },
-            ...(polyNames.length ? [{ type: 'div', props: { style: { display: 'flex', flexDirection: 'column', marginTop: 10 },
-                children: polyNames.map(n => ({ type: 'div', props: { style: { fontSize: 16, color: '#7ee787', marginTop: 4, display: 'flex' }, children: `\u2713 ${n}` } })) } }] : []),
+            ...(polyRows.length ? [{ type: 'div', props: { style: { display: 'flex', flexDirection: 'column', marginTop: 10 },
+                children: polyRows } }] : []),
           ] } };
       }
 
