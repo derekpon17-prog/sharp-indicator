@@ -1284,8 +1284,15 @@ module.exports = async function handler(req, res) {
           const r = await fetch(`${SITE_URL}/api/odds?sport=${sp}`);
           const d = await r.json();
           (d.plays || []).forEach(p => {
-            const csv = p.convergeScore && p.convergeScore.score;
-            if (!p.noSignal && typeof csv === 'number' && csv >= TOP_PLAY_MIN) allPlays.push({ ...p, sport: sp });
+            // REAL FIX 2026-09-01 (per Derek, real incident -- Yankees/Angels, book-only,
+            // zero poly, still showed): this branch is a completely SEPARATE code path
+            // from buildBestPlaysReport, and never inherited the bookConfirmed+polyConfirmed
+            // gate built there -- it was only ever checking score >= 75. Applying the exact
+            // same standard here directly: book confirmed (real absolute floor, not the
+            // relative_fallback retrofit) AND poly confirmed (2+ real distinct wallets).
+            const bookConfirmedImg = p.pillars && p.pillars.pinnacleSource !== 'relative_fallback' && !p.noSignal;
+            const polyConfirmedImg = !!(p.convergeScore && p.convergeScore.breakdown && p.convergeScore.breakdown.poly && p.convergeScore.breakdown.poly.buyers >= 2);
+            if (bookConfirmedImg && polyConfirmedImg) allPlays.push({ ...p, sport: sp });
           });
         } catch {}
       }
