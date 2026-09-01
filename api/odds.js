@@ -1524,14 +1524,35 @@ module.exports=async function handler(req,res){
       // so matching only ever happens against what's actually being recommended.
       const polyMatch=findPolyScoreForPlay(retrofitted,polyScoresAll);
       const kalshiMatch=findKalshiScoreForPlay(retrofitted,kalshiSteamAll);
+      const polyBothSidesForPlay=findAllPolySidesForPlay(retrofitted,polyScoresAll);
+      // FIX 2026-09-01 (per Derek, real screenshot): a wallet betting BOTH Over and
+      // Under, or a moneyline side AND the total, on the SAME game was being counted as
+      // real backing on every one of those outcomes independently -- 2-3 highly active
+      // accounts scattered across the whole board inflated every side's buyer count,
+      // when it is really the same 1-2 traders touching everything, not independent
+      // conviction. Real confirmation means a wallet commits to ONE side of this game,
+      // not that it shows up somewhere on the board. Excludes any wallet from this
+      // side's count if that same wallet also appears on a DIFFERENT outcome for this
+      // same game -- polyMatch's buyers/traders are corrected to reflect only genuinely
+      // side-exclusive wallets before this ever reaches the gate or the display.
+      let polyMatchDeduped=polyMatch;
+      if(polyMatch&&polyMatch.traders&&polyMatch.traders.length&&polyBothSidesForPlay.length>1){
+        const otherSideWallets=new Set();
+        polyBothSidesForPlay.forEach(side=>{
+          if(side.outcome===polyMatch.outcome)return;
+          (side.traders||[]).forEach(t=>{if(t.wallet)otherSideWallets.add(t.wallet);});
+        });
+        const exclusiveTraders=polyMatch.traders.filter(t=>!t.wallet||!otherSideWallets.has(t.wallet));
+        polyMatchDeduped={...polyMatch,traders:exclusiveTraders,traderNames:exclusiveTraders.map(t=>t.traderName),buyers:exclusiveTraders.length};
+      }
       return{...retrofitted,
       relSignal,
-      polyBothSides:findAllPolySidesForPlay(retrofitted,polyScoresAll),
+      polyBothSides:polyBothSidesForPlay,
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
       pitcherWatch:pwMap[p.id]||null,
       kelly:computeKellySuggestion(retrofitted),
-      convergeScore:computeConvergeScore(retrofitted,polyMatch,kalshiMatch),
+      convergeScore:computeConvergeScore(retrofitted,polyMatchDeduped,kalshiMatch),
       /* BUGFIX: this exposed only closeMap[id].h2h[p.sharpSide], but sharpSide is the
          literal string '—' on every no-signal game — which is the overwhelming majority
          of the board — so the lookup always missed and closeLine.pinnacle came back null
