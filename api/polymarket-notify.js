@@ -1096,6 +1096,42 @@ module.exports = async function handler(req, res) {
      GET ?reportImage=1&sports=MLB,NFL,NCAAF -> image/png
      Known real gap: Poly names render without win-loss records (bare traderNames only;
      the record-lookup lives elsewhere in this file and isn't wired into this branch yet). */
+  // ONE-TIME ADMIN RESET 2026-09-01 (per Derek, real decision): none of the 6-26 graded
+  // plays were selected under the current gates (book+poly AND-gate, wallet dedup,
+  // SITE_URL poly-matching fix) -- that record reflects a fundamentally different,
+  // partially broken selection process, not the current algorithm. Archives the old
+  // record under a clearly-labeled key (never destroyed, just no longer active) and
+  // resets the live counter to start fresh. Also resets converge:pending -- the 8
+  // still-grading plays were ALSO selected under the old logic, same reasoning applies.
+  // Requires an explicit confirm param so this can never fire by accident.
+  if (req.query && req.query.adminResetRecord === 'confirm') {
+    try {
+      const gradedRes = await upstashPost(['GET', 'converge:graded']);
+      const gradedRaw = gradedRes && gradedRes.ok ? gradedRes.result : null;
+      const graded = gradedRaw ? (typeof gradedRaw === 'string' ? JSON.parse(gradedRaw) : gradedRaw) : [];
+      const pendingRes = await upstashPost(['GET', 'converge:pending']);
+      const pendingRaw = pendingRes && pendingRes.ok ? pendingRes.result : null;
+      const pending = pendingRaw ? (typeof pendingRaw === 'string' ? JSON.parse(pendingRaw) : pendingRaw) : [];
+
+      const archiveKey = 'converge:graded:archive:pre-gate-fix-2026-09-01';
+      await upstashPost(['SET', archiveKey, JSON.stringify(graded), 'EX', '31536000']); // 1 year
+      const pendingArchiveKey = 'converge:pending:archive:pre-gate-fix-2026-09-01';
+      await upstashPost(['SET', pendingArchiveKey, JSON.stringify(pending), 'EX', '31536000']);
+
+      await upstashPost(['SET', 'converge:graded', JSON.stringify([]), 'EX', '2592000']);
+      await upstashPost(['SET', 'converge:pending', JSON.stringify([]), 'EX', '2592000']);
+
+      return res.status(200).json({
+        ok: true,
+        archived: { graded: graded.length, pending: pending.length },
+        archiveKeys: [archiveKey, pendingArchiveKey],
+        reset: 'converge:graded and converge:pending both cleared -- record now starts fresh under the current gates',
+      });
+    } catch (e) {
+      return res.status(500).json({ error: e.message });
+    }
+  }
+
   if (req.query && req.query.reportImage) {
     try {
       const satori = require('satori').default;
