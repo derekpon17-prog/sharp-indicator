@@ -143,6 +143,13 @@ function findPolyScoreForPlay(play, polyScores){
   // OTHER conclusion. Never substitute it. Return null (correctly excluding poly
   // entirely) when there is no real same-side match, exactly like a genuinely poly-less
   // game already gets handled.
+  // FIX 2026-08-31 (per Derek, second confirmed live case): the ordering fix above
+  // closed this for retrofit plays, but a genuinely no-signal game where relSignal
+  // itself never computes (state:NONE, insufficient board sample) never leaves
+  // sharpSide at the placeholder -- and sideMatches trivially matches ANY outcome
+  // against an empty normalized string. Direct guard here, independent of ordering:
+  // a placeholder pick can never be attributed real poly backing, period.
+  if(!play.sharpSide||play.sharpSide==="—")return null;
   const matches=polyScores.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home));
   if(!matches.length)return null;
   return matches.find(s=>sideMatches(s.outcome,play.sharpSide))||null;
