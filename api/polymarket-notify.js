@@ -1099,30 +1099,6 @@ module.exports = async function handler(req, res) {
       const { Resvg } = require('@resvg/resvg-js');
       const teamLogos = require('../lib/team_logos_data.js');
 
-      // FEATURE 2026-08-31 (per Derek, real screenshot): image cards want real trader
-      // records (full + sport-specific) and hot/cold icons next to each name, matching
-      // the text alerts' nameWithRecord()/formLabel(). Those live in the bestPlays
-      // block's own try{}, a separate scope this branch can't reach -- replicated here
-      // rather than reaching across scopes, same pattern as everything else in this file.
-      let trackedRecordsImg = {};
-      try {
-        const trRes = await fetch(`${SITE_URL}/api/trader-records`);
-        const trData = await trRes.json();
-        trackedRecordsImg = trData.records || {};
-      } catch {}
-      let walletFormImg = {};
-      try {
-        const wfRes = await fetch(`${SITE_URL}/api/grade-cron?walletForm=1`);
-        const wfData = await wfRes.json();
-        walletFormImg = wfData.form || {};
-      } catch {}
-      function formIconImg(wallet, sport) {
-        if (!wallet || !sport) return '';
-        const f = walletFormImg[wallet + '|' + sport];
-        if (!f) return '';
-        return f.form === 'HOT' ? ' \u{1F525}' : (f.form === 'COLD' ? ' \u{1F9CA}' : '');
-      }
-
       let cachedFonts = global.__reportImageFonts;
       async function getFonts() {
         if (cachedFonts) return cachedFonts;
@@ -1137,6 +1113,13 @@ module.exports = async function handler(req, res) {
         global.__reportImageFonts = cachedFonts;
         return cachedFonts;
       }
+
+      let trackedRecordsImg = {};
+      try {
+        const trRes = await fetch(`${SITE_URL}/api/trader-records`);
+        const trData = await trRes.json();
+        trackedRecordsImg = trData.records || {};
+      } catch {}
 
       let ncaafLogoCache = null;
       async function getNcaafLogoUrl(teamName) {
@@ -1174,81 +1157,112 @@ module.exports = async function handler(req, res) {
         return b64 ? `data:image/png;base64,${b64}` : null;
       }
 
-      function tierColorImg(score) { return score >= 85 ? '#E5A00D' : score >= 75 ? '#00C896' : '#40B4FF'; }
-      function tierNameImg(score) { return score >= 85 ? 'ELITE' : score >= 75 ? 'STRONG' : 'MODERATE'; }
-      function marketLabelImg(mk) { return { h2h: 'Moneyline', spreads: 'Spread', totals: 'Total' }[mk] || 'Moneyline'; }
+      const fmtOdds = n => (n > 0 ? `+${n}` : String(n));
 
       async function playCardImg(p) {
         const cs = p.convergeScore || { score: p.siScore || 0, breakdown: { book: { score: p.siScore || 0 } } };
-        const color = tierColorImg(cs.score);
-        const isTotal = (p.market || p.activeMarket) === 'totals';
-        const logoEls = [];
-        if (isTotal) {
-          const [awayUri, homeUri] = await Promise.all([toDataUri(p.sport, p.away), toDataUri(p.sport, p.home)]);
-          if (awayUri) logoEls.push({ type: 'img', props: { src: awayUri, width: 44, height: 44 } });
-          if (awayUri && homeUri) logoEls.push({ type: 'div', props: { style: { fontSize: 16, color: '#5a5a66', margin: '0 4px', display: 'flex' }, children: '@' } });
-          if (homeUri) logoEls.push({ type: 'img', props: { src: homeUri, width: 44, height: 44 } });
-        } else {
-          const pickedTeam = [p.away, p.home].find(t => (p.sharpSide || '').includes(t)) || p.home;
-          const uri = await toDataUri(p.sport, pickedTeam);
-          if (uri) logoEls.push({ type: 'img', props: { src: uri, width: 52, height: 52, style: { display: 'flex' } } });
-        }
+        const book = cs.breakdown && cs.breakdown.book;
         const poly = cs.breakdown && cs.breakdown.poly;
-        const polyTraders = (poly && poly.traders && poly.traders.length) ? poly.traders : ((poly && poly.traderNames) || []).map(n => ({ traderName: n, wallet: null }));
-        // FIX 2026-08-31: nameWithRecord()'s output embeds emoji (🟢/🔴 dots, 🔥/🧊 form
-        // icons) inline in one string -- satori has no emoji glyph coverage without a
-        // separate emoji-font setup, so those rendered as invisible blanks, not missing
-        // data. Building the row from getRecordFor()'s structured return directly here
-        // instead, using colored TEXT/shapes (real satori primitives, not font-dependent)
-        // in place of every emoji: a plain colored dot div for win/loss sign, HOT/COLD as
-        // a small colored text badge instead of 🔥/🧊.
-        const polyRows = polyTraders.map(t => {
-          const rec = t.wallet ? getRecordFor({ wallet: t.wallet, traderName: t.traderName, sport: p.sport }, trackedRecordsImg) : null;
-          const parts = [{ type: 'div', props: { style: { display: 'flex', color: '#7ee787', fontWeight: 700 }, children: `\u2713 ${t.traderName}` } }];
-          if (rec) {
-            const dotColor = rec.roiPct > 0 ? '#4ade80' : rec.roiPct < 0 ? '#f87171' : '#9ca3af';
-            parts.push({ type: 'div', props: { style: { display: 'flex', width: 8, height: 8, borderRadius: 4, backgroundColor: dotColor, marginLeft: 8, marginRight: 4, alignSelf: 'center' } } });
-            parts.push({ type: 'div', props: { style: { display: 'flex', color: '#9ca3af' }, children: `${rec.wins}-${rec.losses}${rec.roiPct != null ? ` (${rec.roiPct >= 0 ? '+' : ''}${Math.round(rec.roiPct)}%)` : ''}` } });
-            if (rec.sportBreakdown) {
-              const sb = rec.sportBreakdown;
-              parts.push({ type: 'div', props: { style: { display: 'flex', color: '#6b6b76', marginLeft: 6 }, children: `${sb.sport}: ${sb.wins}-${sb.losses}${sb.roiPct != null ? ` (${sb.roiPct >= 0 ? '+' : ''}${Math.round(sb.roiPct)}%)` : ''}` } });
-            }
-          }
-          if (t.wallet) {
-            const form = walletFormImg[t.wallet + '|' + p.sport];
-            if (form && form.form !== 'WARM') {
-              const isHot = form.form === 'HOT';
-              parts.push({ type: 'div', props: {
-                  style: { display: 'flex', fontSize: 11, fontWeight: 700, color: isHot ? '#fb923c' : '#60a5fa', border: `1px solid ${isHot ? '#fb923c' : '#60a5fa'}`, borderRadius: 4, padding: '1px 6px', marginLeft: 8, alignSelf: 'center' },
-                  children: form.form,
-                } });
-            }
-          }
-          return { type: 'div', props: { style: { display: 'flex', alignItems: 'center', marginTop: 4, fontSize: 15 }, children: parts } };
-        });
-        return { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', padding: '22px 26px', backgroundColor: '#1a1a24', borderRadius: 14, borderLeft: `5px solid ${color}`, marginTop: 18 },
-          children: [
-            { type: 'div', props: { style: { fontSize: 15, color: '#ffffff', display: 'flex' }, children: `${p.away} @ ${p.home}` } },
-            { type: 'div', props: { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 },
+        const combined = !!poly;
+        const tagColor = combined ? '#00C896' : '#40B4FF';
+        const tagLabel = combined ? 'COMBINED' : 'LINE';
+
+        const [awayUri, homeUri] = await Promise.all([toDataUri(p.sport, p.away), toDataUri(p.sport, p.home)]);
+        const d = new Date(p.commenceTime);
+        const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+        const timeStr = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
+
+        const tagIconEl = combined
+          ? { type: 'div', props: { style: { display: 'flex', width: 14, height: 14, borderRadius: 7, border: `2px solid ${tagColor}`, marginRight: 6, alignItems: 'center', justifyContent: 'center' },
+              children: [{ type: 'div', props: { style: { display: 'flex', width: 5, height: 5, borderRadius: 3, backgroundColor: tagColor } } }] } }
+          : { type: 'div', props: { style: { display: 'flex', alignItems: 'flex-end', marginRight: 8, height: 14 },
+              children: [
+                { type: 'div', props: { style: { display: 'flex', width: 3, height: 6, backgroundColor: tagColor, marginRight: 2 } } },
+                { type: 'div', props: { style: { display: 'flex', width: 3, height: 10, backgroundColor: tagColor, marginRight: 2 } } },
+                { type: 'div', props: { style: { display: 'flex', width: 3, height: 14, backgroundColor: tagColor } } },
+              ] } };
+
+        const children = [
+          { type: 'div', props: { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+            children: [
+              { type: 'div', props: { style: { display: 'flex', alignItems: 'center' },
                 children: [
-                  { type: 'div', props: { style: { display: 'flex', alignItems: 'center' },
-                      children: [
-                        ...(logoEls.length ? [{ type: 'div', props: { style: { display: 'flex', alignItems: 'center', marginRight: 14 }, children: logoEls } }] : []),
-                        { type: 'div', props: { style: { display: 'flex', fontSize: 24, fontWeight: 700, color: '#0d0d12', backgroundColor: color, padding: '8px 16px', borderRadius: 8 }, children: p.sharpSide || '\u2014' } },
-                      ] } },
-                  { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', alignItems: 'flex-end' },
-                      children: [
-                        { type: 'div', props: { style: { fontSize: 32, fontWeight: 700, color, display: 'flex' }, children: String(cs.score) } },
-                        { type: 'div', props: { style: { fontSize: 14, fontWeight: 700, color, display: 'flex' }, children: tierNameImg(cs.score) } },
-                      ] } },
+                  { type: 'div', props: { style: { fontSize: 48, fontWeight: 700, color: '#4ade80', display: 'flex', marginRight: 16 }, children: String(cs.score) } },
+                  { type: 'div', props: { style: { display: 'flex', alignItems: 'center', fontSize: 14, fontWeight: 700, color: tagColor, backgroundColor: tagColor + '22', border: `1px solid ${tagColor}`, borderRadius: 6, padding: '4px 12px' },
+                      children: [tagIconEl, { type: 'div', props: { style: { display: 'flex' }, children: tagLabel } }] } },
                 ] } },
-            { type: 'div', props: { style: { fontSize: 16, color: '#9ca3af', marginTop: 14, display: 'flex' }, children:
-              (p.currentPinPrice != null && p.currentSoftAvg != null)
-                ? `Pinnacle ${p.currentPinPrice > 0 ? '+' : ''}${p.currentPinPrice} vs ${p.currentSoftAvg > 0 ? '+' : ''}${p.currentSoftAvg} avg`
-                : (p.gapPP != null ? `Pinnacle gap ${p.gapPP}pp` : 'Pinnacle: \u2014') } },
-            ...(polyRows.length ? [{ type: 'div', props: { style: { display: 'flex', flexDirection: 'column', marginTop: 10 },
-                children: polyRows } }] : []),
-          ] } };
+              { type: 'div', props: { style: { display: 'flex', fontSize: 14, fontWeight: 700, color: '#9ca3af', border: '1px solid #333', borderRadius: 6, padding: '4px 12px' }, children: p.sport } },
+            ] } },
+          { type: 'div', props: { style: { display: 'flex', alignItems: 'center', marginTop: 6 },
+            children: [
+              { type: 'div', props: { style: { display: 'flex', width: 12, height: 12, borderRadius: 6, border: '2px solid #8a8a96', marginRight: 6 } } },
+              { type: 'div', props: { style: { fontSize: 14, color: '#8a8a96', display: 'flex' }, children: `${dateStr} \u00b7 ${timeStr}` } },
+            ] } },
+          { type: 'div', props: { style: { display: 'flex', alignItems: 'center', marginTop: 10 },
+            children: [
+              ...(awayUri ? [{ type: 'img', props: { src: awayUri, width: 30, height: 30, style: { marginRight: 8, display: 'flex' } } }] : []),
+              { type: 'div', props: { style: { fontSize: 20, fontWeight: 700, color: '#fff', display: 'flex' }, children: `${p.away} vs ${p.home}` } },
+              ...(homeUri ? [{ type: 'img', props: { src: homeUri, width: 30, height: 30, style: { marginLeft: 8, display: 'flex' } } }] : []),
+            ] } },
+          { type: 'div', props: { style: { display: 'flex', alignItems: 'center', marginTop: 8 },
+            children: [
+              { type: 'div', props: { style: { fontSize: 16, color: '#4ade80', marginRight: 6, display: 'flex' }, children: '\u25B6' } },
+              { type: 'div', props: { style: { fontSize: 18, fontWeight: 700, color: '#4ade80', display: 'flex' }, children: p.sharpSide || '\u2014' } },
+            ] } },
+        ];
+
+        const oddsLine = (p.currentPinPrice != null && p.currentSoftAvg != null)
+          ? `Pinnacle ${fmtOdds(p.currentPinPrice)} vs ${fmtOdds(p.currentSoftAvg)} avg`
+          : (p.gapPP != null ? `Pinnacle gap ${p.gapPP}pp` : 'Pinnacle: \u2014');
+
+        if (!combined) {
+          children.push({ type: 'div', props: { style: { fontSize: 14, color: '#8a8a96', marginTop: 10, display: 'flex' }, children: oddsLine } });
+        } else {
+          // SPACE FOR MULTIPLE TRADERS 2026-09-01 (per Derek): the poly box must never
+          // clip real backers -- height is built from the actual trader count, not a
+          // fixed guess, so 1 trader and 5 traders both render completely.
+          const traders = (poly.traders && poly.traders.length) ? poly.traders : (poly.traderNames || []).map(n => ({ traderName: n, wallet: null }));
+          const traderRows = traders.map(t => {
+            const rec = t.wallet ? getRecordFor({ wallet: t.wallet, traderName: t.traderName, sport: p.sport }, trackedRecordsImg) : null;
+            const rows = [{ type: 'div', props: { style: { fontSize: 15, fontWeight: 700, color: '#fff', marginTop: 8, display: 'flex' }, children: t.traderName } }];
+            if (rec) {
+              // FIX 2026-09-01: caught via visual check -- record color was hardcoded
+              // green regardless of sign, so a real losing record (-47%) displayed as if
+              // it were positive. Now reflects actual win/loss sign, matching the color
+              // logic used everywhere else in this file.
+              const recColor = rec.roiPct > 0 ? '#4ade80' : rec.roiPct < 0 ? '#f87171' : '#9ca3af';
+              rows.push({ type: 'div', props: { style: { fontSize: 13, color: recColor, marginTop: 2, display: 'flex' },
+                children: `${rec.wins}-${rec.losses}${rec.roiPct != null ? ` (${rec.roiPct >= 0 ? '+' : ''}${Math.round(rec.roiPct)}%)` : ''}` } });
+              if (rec.sportBreakdown) {
+                const sb = rec.sportBreakdown;
+                rows.push({ type: 'div', props: { style: { fontSize: 12, color: '#6b6b76', marginTop: 1, display: 'flex' },
+                  children: `(${sb.sport}: ${sb.wins}-${sb.losses}${sb.roiPct != null ? ` ${sb.roiPct >= 0 ? '+' : ''}${Math.round(sb.roiPct)}%` : ''})` } });
+              }
+            }
+            return rows;
+          }).flat();
+
+          children.push({ type: 'div', props: { style: { display: 'flex', marginTop: 14, gap: 14 },
+            children: [
+              { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', flex: 1, backgroundColor: '#12161c', borderRadius: 10, padding: 16 },
+                children: [
+                  { type: 'div', props: { style: { fontSize: 12, fontWeight: 700, color: '#40B4FF', letterSpacing: 1, display: 'flex' }, children: 'SHARP LINE' } },
+                  { type: 'div', props: { style: { fontSize: 16, fontWeight: 700, color: '#fff', marginTop: 6, display: 'flex' }, children: p.sharpSide || '\u2014' } },
+                  { type: 'div', props: { style: { fontSize: 13, color: '#8a8a96', marginTop: 6, display: 'flex' }, children: oddsLine } },
+                ] } },
+              { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', flex: 1, backgroundColor: '#1c1712', borderRadius: 10, padding: 16 },
+                children: [
+                  { type: 'div', props: { style: { fontSize: 12, fontWeight: 700, color: '#E5A00D', letterSpacing: 1, display: 'flex' }, children: 'POLY SIGNAL' } },
+                  { type: 'div', props: { style: { fontSize: 13, color: '#8a8a96', marginTop: 4, display: 'flex' }, children: `$${Math.round(poly.totalVol || 0).toLocaleString()} \u00b7 ${traders.length} trader${traders.length > 1 ? 's' : ''}` } },
+                  ...traderRows,
+                ] } },
+            ] } });
+        }
+
+        return { type: 'div', props: {
+          style: { display: 'flex', flexDirection: 'column', backgroundColor: '#181c22', borderRadius: 14, borderLeft: `4px solid ${tagColor}`, padding: 22, marginTop: 18 },
+          children,
+        } };
       }
 
       const sports = ((req.query.sports) || 'MLB').split(',').map(s => s.trim().toUpperCase());
@@ -1265,19 +1279,29 @@ module.exports = async function handler(req, res) {
       }
       allPlays.sort((a, b) => b.convergeScore.score - a.convergeScore.score);
 
+      // HEIGHT 2026-09-01: built from real content (multi-trader poly boxes vary a lot in
+      // height), not a fixed per-card guess -- estimate per card from its trader count so
+      // real cards with 4-5 backers never get clipped.
       const cards = await Promise.all(allPlays.slice(0, 10).map(playCardImg));
       const fonts = await getFonts();
-      const tree = { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', width: '100%', height: '100%', backgroundColor: '#0d0d12', padding: '36px 40px', fontFamily: 'Open Sans' },
+      let totalHeight = 130;
+      allPlays.slice(0, 10).forEach(p => {
+        const poly = p.convergeScore && p.convergeScore.breakdown && p.convergeScore.breakdown.poly;
+        const traderCount = poly ? ((poly.traders && poly.traders.length) || (poly.traderNames && poly.traderNames.length) || 1) : 0;
+        totalHeight += poly ? (150 + traderCount * 46) : 170;
+      });
+
+      const tree = { type: 'div', props: { style: { display: 'flex', flexDirection: 'column', width: '100%', height: '100%', backgroundColor: '#0a0a0d', padding: '32px 36px', fontFamily: 'Open Sans' },
         children: [
           { type: 'div', props: { style: { display: 'flex', alignItems: 'center' }, children: [
-              { type: 'div', props: { style: { fontSize: 30, marginRight: 10, display: 'flex' }, children: '\u{1F3AF}' } },
-              { type: 'div', props: { style: { fontSize: 30, fontWeight: 700, color: '#fff', display: 'flex' }, children: 'Converge Score Report' } },
+              { type: 'div', props: { style: { display: 'flex', width: 22, height: 22, borderRadius: 11, border: '3px solid #4ade80', marginRight: 10, alignItems: 'center', justifyContent: 'center' },
+                  children: [{ type: 'div', props: { style: { display: 'flex', width: 8, height: 8, borderRadius: 4, backgroundColor: '#4ade80' } } }] } },
+              { type: 'div', props: { style: { fontSize: 26, fontWeight: 700, color: '#fff', display: 'flex' }, children: 'Converge Score Report' } },
             ] } },
-          { type: 'div', props: { style: { fontSize: 18, color: '#9ca3af', marginTop: 6, display: 'flex' }, children: sports.join(' / ') } },
           ...(cards.length ? cards : [{ type: 'div', props: { style: { fontSize: 18, color: '#9ca3af', marginTop: 24, display: 'flex' }, children: 'Nothing cleared the 75+ threshold right now.' } }]),
         ] } };
-      const height = 140 + cards.length * 190 + (cards.length ? 0 : 60);
-      const svg = await satori(tree, { width: 900, height: Math.max(height, 300), fonts });
+
+      const svg = await satori(tree, { width: 900, height: Math.max(totalHeight, 300), fonts });
       const png = new Resvg(svg, { fitTo: { mode: 'width', value: 900 } }).render().asPng();
       res.setHeader('Content-Type', 'image/png');
       res.setHeader('Cache-Control', 'public, max-age=60');
