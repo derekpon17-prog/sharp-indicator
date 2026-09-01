@@ -191,6 +191,26 @@ function computeConvergeScore(play, polyMatch, kalshiMatch){
   const novigFavors=exLean&&((exLean.detail&&exLean.detail.novig&&exLean.detail.novig.favors)||(exLean.leanDetail&&exLean.leanDetail.novig&&exLean.leanDetail.novig.favors));
   const pxFavors=exLean&&((exLean.detail&&exLean.detail.prophetx&&exLean.detail.prophetx.favors)||(exLean.leanDetail&&exLean.leanDetail.prophetx&&exLean.leanDetail.prophetx.favors));
 
+  // SHADOW BLEND 2026-09-01 (per Derek): "run it as if it was contributing to our live
+  // algorithm" -- a hypothetical Converge Score computed AS IF Kalshi/Novig/ProphetX
+  // were real components too, using illustrative placeholder weights (book 50/poly 35/
+  // kalshi 5/novig 5/prophetx 5), logged alongside the REAL score below so a real
+  // dataset accumulates for later comparison. This number is NEVER the real score and
+  // NEVER drives the report -- only computeConvergeScore's own score field (book+poly
+  // only, per the 2026-08-28 council decision) does that. This is purely a parallel,
+  // logged-for-review track.
+  const kalshiShadow=kalshiMatch?{score:kalshiMatch.score}:null;
+  const novigShadow=novigGap!=null?{score:exchangeShadowScore(novigGap)}:null;
+  const pxShadow=pxGap!=null?{score:exchangeShadowScore(pxGap)}:null;
+  const SHADOW_WEIGHTS={book:0.50,poly:0.35,kalshi:0.05,novig:0.05,prophetx:0.05};
+  const shadowParts=[{key:'book',score:play.siScore||0,weight:SHADOW_WEIGHTS.book}];
+  if(polyMatch)shadowParts.push({key:'poly',score:polyMatch.score,weight:SHADOW_WEIGHTS.poly});
+  if(kalshiShadow)shadowParts.push({key:'kalshi',score:kalshiShadow.score,weight:SHADOW_WEIGHTS.kalshi});
+  if(novigShadow)shadowParts.push({key:'novig',score:novigShadow.score,weight:SHADOW_WEIGHTS.novig});
+  if(pxShadow)shadowParts.push({key:'prophetx',score:pxShadow.score,weight:SHADOW_WEIGHTS.prophetx});
+  const shadowTotalWeight=shadowParts.reduce((s,p)=>s+p.weight,0);
+  const shadowBlended=Math.round(shadowParts.reduce((s,p)=>s+p.score*p.weight,0)/shadowTotalWeight);
+
   return{
     score:blended,
     componentsUsed:parts.map(p=>p.key),
@@ -204,6 +224,8 @@ function computeConvergeScore(play, polyMatch, kalshiMatch){
       novig:novigGap!=null?{score:exchangeShadowScore(novigGap),gapPP:novigGap,favors:novigFavors||null,counted:false}:null,
       prophetx:pxGap!=null?{score:exchangeShadowScore(pxGap),gapPP:pxGap,favors:pxFavors||null,counted:false}:null,
     },
+    // Hypothetical "if these counted" score, purely for logging/eventual comparison.
+    shadowScore:{score:shadowBlended,componentsUsed:shadowParts.map(p=>p.key),weights:SHADOW_WEIGHTS},
     shadow:false, // this IS the intended headline number, not a display-only side field
   };
 }
@@ -1630,6 +1652,30 @@ module.exports=async function handler(req,res){
       if(first==='OK'){
         await upstashPost(['LPUSH','mlv:shadow:'+sport,JSON.stringify({ts:now,id:p.id,away:p.away,home:p.home,gameTime:p.commenceTime,state:p.mlVelocity.state,score:p.mlVelocity.score,side:p.mlVelocity.side,movementPP:p.mlVelocity.movementPP,steamWidth:p.mlVelocity.steamWidth,residualGap:p.mlVelocity.residualGap,openPin:p.mlVelocity.openPin,nowPin:p.mlVelocity.nowPin})]);
         await upstashPost(['LTRIM','mlv:shadow:'+sport,'0','299']);
+      }
+    }
+
+    // KALSHI/NOVIG/PROPHETX SHADOW LOG 2026-09-01 (per Derek): "run it as if it was
+    // contributing to our live algorithm" -- previously computed fresh on every request
+    // and discarded, meaning zero real history accumulated despite being called shadow-
+    // tracking. Now persisted, same first-time-today dedup pattern as mlv:shadow above --
+    // one representative snapshot per game per day, real score AND the hypothetical
+    // shadowScore side by side, so a real dataset builds up for eventual comparison
+    // against actual outcomes once graded.
+    const shadowCands=finalPlays.filter(p=>p.convergeScore&&p.convergeScore.shadowCandidates&&(p.convergeScore.shadowCandidates.kalshi||p.convergeScore.shadowCandidates.novig||p.convergeScore.shadowCandidates.prophetx)).slice(0,10);
+    const todayKey=new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'});
+    for(const p of shadowCands){
+      const seenKey='shadow3:seen:'+p.id+':'+todayKey;
+      const first=await upstashPost(['SET',seenKey,'1','NX','EX','172800']);
+      if(first==='OK'){
+        await upstashPost(['LPUSH','shadow3:log:'+sport,JSON.stringify({
+          ts:now,id:p.id,away:p.away,home:p.home,gameTime:p.commenceTime,
+          sharpSide:p.sharpSide,market:p.market||p.activeMarket,
+          realScore:p.convergeScore.score,
+          shadowScore:p.convergeScore.shadowScore,
+          candidates:p.convergeScore.shadowCandidates,
+        })]);
+        await upstashPost(['LTRIM','shadow3:log:'+sport,'0','499']);
       }
     }
 
