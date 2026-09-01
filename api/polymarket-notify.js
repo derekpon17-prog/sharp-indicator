@@ -83,17 +83,20 @@ function pickRealName(...candidates) {
    Uses an atomic KV INCR as the assignment index rather than anything random, so two
    wallets resolving in parallel (this whole scan runs wallets concurrently) can never
    collide on the same name — Redis guarantees INCR is atomic even under concurrent calls. */
-const NICKNAME_POOL = [
-  'BigBob','SwiftMike','SharpTony','SteadyNate','QuickMax','IronDave','BoldRick','CalmLuke',
-  'FastEddie','ColdSteve','WarmSam','DeepJoe','SlyCarl','LoudMarv','QuietPete','KeenAlex',
-  'RapidJack','FirmGreg','SmoothLee','HardyKen','BraveTom','WiseHank','StoutJim','LeanRoy',
-  'TallDon','ShortWes','GruffAl','SoftBen','HeavyRon','LightVic','DryFred','WetGus',
-  'OldChip','YoungMo','NewGabe','LateChet','EarlyDex','SteadyRex','BriskArt','SharpOtis',
-  'BoldNed','CalmOwen','QuickIra','FirmSid','SlyRuss','KeenEli','WiseHugo','HardyCole',
-  'BraveJett','LeanNico','TallReid','ShortJude','GruffKirk','SoftEzra','HeavyBrooks','LightFinn',
-  'DryLane','WetShane','OldTrent','YoungPaul','NewCyrus','LateWade','EarlyDean','ToughGavin',
-  'MildBryce','KeenAaron','SlowBlake','FastEli','GoldSaul','SilverRex','IronMabel','SteelDrew',
-  'RoyalDex','CopperJon','StoneKurt','FlashTodd','StormLee','ThunderJay','FrostSam','EmberLuke',
+// REBUILT 2026-09-01 (per Derek, real trigger -- a wallet needed a name and hit this
+// exact system): this was still the flat 60/90-name pool with a numbered-suffix fallback
+// (BigBob, BigBob2, BigBob3...) already flagged as explicitly unwanted, with an agreed
+// direction never actually built until now -- two independent word lists combined at
+// assignment time, 20x20 = 400 real combinations before any repeat, no numbered suffixes
+// for a very long time. Same atomic KV-INCR index as before, just decoded into two
+// dimensions (adjective = idx % 20, noun = idx / 20) instead of one flat array + suffix.
+const NICKNAME_ADJECTIVES = [
+  'Swift','Sharp','Steady','Quick','Iron','Bold','Calm','Fast','Cold','Warm',
+  'Deep','Sly','Loud','Quiet','Keen','Rapid','Firm','Smooth','Hardy','Brave',
+];
+const NICKNAME_NOUNS = [
+  'Falcon','Wolf','Hawk','Tiger','Bear','Eagle','Fox','Lion','Shark','Panther',
+  'Raven','Cobra','Viper','Puma','Lynx','Jaguar','Osprey','Badger','Stallion','Griffin',
 ];
 async function getWalletNickname(wallet) {
   const key = 'nickname:' + wallet;
@@ -106,8 +109,12 @@ async function getWalletNickname(wallet) {
     const inc = await upstashPost(['INCR', 'nickname:counter']);
     idx = (typeof inc.result === 'number' ? inc.result : parseInt(inc.result) || 1) - 1;
   } catch {}
-  const cycle = Math.floor(idx / NICKNAME_POOL.length);
-  const name = NICKNAME_POOL[idx % NICKNAME_POOL.length] + (cycle > 0 ? cycle + 1 : '');
+  const totalCombos = NICKNAME_ADJECTIVES.length * NICKNAME_NOUNS.length;
+  const cycle = Math.floor(idx / totalCombos);
+  const comboIdx = idx % totalCombos;
+  const adj = NICKNAME_ADJECTIVES[comboIdx % NICKNAME_ADJECTIVES.length];
+  const noun = NICKNAME_NOUNS[Math.floor(comboIdx / NICKNAME_ADJECTIVES.length) % NICKNAME_NOUNS.length];
+  const name = adj + noun + (cycle > 0 ? cycle + 1 : '');
   try { await upstashPost(['SET', key, name]); } catch {}
   return name;
 }
