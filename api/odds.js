@@ -1469,8 +1469,6 @@ module.exports=async function handler(req,res){
       fetchKalshiSteamAll(sport),
     ]);
     const withShadow=velPlays.map(p=>{
-      const polyMatch=findPolyScoreForPlay(p,polyScoresAll);
-      const kalshiMatch=findKalshiScoreForPlay(p,kalshiSteamAll);
       const relSignal=computeRelSignal(p,boardStats);
       /* RETROFIT 2026-08-29 (council-approved, per Derek): closes a month-old gap the
          team's own 2026-07-26 comment already diagnosed -- the absolute Pinnacle floor
@@ -1507,9 +1505,21 @@ module.exports=async function handler(req,res){
       // pre-fallback p.siScore, or this fix would never actually reach the real number
       // that drives the Discord report and site.
       const retrofitted={...p,...retrofit};
+      // FIX 2026-08-31 (per Derek, real screenshot): polyMatch/kalshiMatch were computed
+      // ABOVE, using p.sharpSide BEFORE the retrofit set the real final side. For every
+      // retrofit play, p.sharpSide at that point was still the placeholder '-' -- and
+      // sideMatches('-') trivially matches ANY outcome (an empty normalized string is
+      // "included in" every string in JS), so findPolyScoreForPlay grabbed essentially
+      // arbitrary poly data for that game, completely unrelated to the real side. This is
+      // exactly why the Mets/Rays card showed Rays backers under a Mets pick, and the
+      // Tigers/Twins card showed a trader whose real bet was Minnesota/Over under an
+      // Under 9 pick. Moved below, using retrofitted.sharpSide -- the real, final pick --
+      // so matching only ever happens against what's actually being recommended.
+      const polyMatch=findPolyScoreForPlay(retrofitted,polyScoresAll);
+      const kalshiMatch=findKalshiScoreForPlay(retrofitted,kalshiSteamAll);
       return{...retrofitted,
       relSignal,
-      polyBothSides:findAllPolySidesForPlay(p,polyScoresAll),
+      polyBothSides:findAllPolySidesForPlay(retrofitted,polyScoresAll),
       exSignal:computeExchangeSignal(p),
       weather:wxMap[p.id]||null,
       pitcherWatch:pwMap[p.id]||null,
