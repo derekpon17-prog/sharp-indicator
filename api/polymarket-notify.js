@@ -1214,8 +1214,17 @@ module.exports = async function handler(req, res) {
             ] } },
         ];
 
-        const oddsLine = (p.currentPinPrice != null && p.currentSoftAvg != null)
-          ? `Pinnacle ${fmtOdds(p.currentPinPrice)} vs ${fmtOdds(p.currentSoftAvg)} avg`
+        // FIX 2026-09-01 (per Derek, real screenshot -- still showing pp in production):
+        // currentPinPrice/currentSoftAvg only exist INSIDE markets[activeMarket], never
+        // replicated to the top level of the play object. Checking p.currentPinPrice
+        // directly was always undefined, so this fell back to the pp format every single
+        // time regardless of the earlier fix -- confirmed by inspecting the actual real
+        // JSON structure, not assuming the top-level fields existed.
+        const activeMarketData = p.markets && p.activeMarket ? p.markets[p.activeMarket] : null;
+        const pinPrice = activeMarketData ? activeMarketData.currentPinPrice : p.currentPinPrice;
+        const softAvg = activeMarketData ? activeMarketData.currentSoftAvg : p.currentSoftAvg;
+        const oddsLine = (pinPrice != null && softAvg != null)
+          ? `Pinnacle ${fmtOdds(pinPrice)} vs ${fmtOdds(softAvg)} avg`
           : (p.gapPP != null ? `Pinnacle gap ${p.gapPP}pp` : 'Pinnacle: \u2014');
 
         if (!combined) {
