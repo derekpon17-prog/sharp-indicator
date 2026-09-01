@@ -691,7 +691,17 @@ async function buildBestPlaysReport(sports) {
   // but not in plays since it failed the real gate. Now anything not already in the
   // real qualifying list is eligible for the fallback, regardless of its raw score.
   const qualifyingIds = new Set(plays.map(p => p.id));
-  const topAvailable = allCandidates.filter(c => !qualifyingIds.has(c.id)).slice(0, 3);
+  // FIX 2026-09-01 (per Derek, real incident -- 3 of 4 sent plays should not have sent):
+  // the fallback had NO poly requirement at all, purely best-score-available. That let
+  // pure book-only plays (LINE tag, zero real Poly backing) through as "below threshold"
+  // signals -- which is a real signal, but not what Derek wants surfaced as a Converge
+  // Score alert at all. A book-only play belongs in Sharp Line specifically, not here.
+  // Deliberately a LOWER bar than the real gate (any real poly backing, not 2+) since
+  // this is the fallback -- it should show weaker-but-real signals, never zero-poly ones.
+  const topAvailable = allCandidates
+    .filter(c => !qualifyingIds.has(c.id))
+    .filter(c => !!(c.convergeScore && c.convergeScore.breakdown && c.convergeScore.breakdown.poly))
+    .slice(0, 3);
   return { plays, errors, topAvailable };
 }
 
