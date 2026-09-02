@@ -668,7 +668,14 @@ async function buildBestPlaysReport(sports) {
         // commenceTime comparison is evaluated fresh right here, at report-build time,
         // so it can never be stale regardless of how old the underlying cache is.
         const alreadyStarted = p && p.commenceTime && new Date(p.commenceTime).getTime() < nowMs;
-        if (!p || p.isLive || alreadyStarted) return; // never surface a live or finished game, fallback or not
+        // TIMING GATE 2026-09-02 (per Derek, real incident -- a 1:30am send with the
+        // relevant game hours away): a play more than 2 hours before its own commence
+        // time is real information but not yet actionable -- lines and Poly positioning
+        // both keep moving in that window, so an early ping just creates noise now and
+        // asks Derek to re-check the same game again closer to game time anyway. Applies
+        // to every send path (real qualifying AND the fallback), not just the digest.
+        const tooEarly = p && p.commenceTime && (new Date(p.commenceTime).getTime() - nowMs) > (2 * 60 * 60 * 1000);
+        if (!p || p.isLive || alreadyStarted || tooEarly) return; // never surface a live/finished/too-early game, fallback or not
         const cs = p && p.convergeScore && typeof p.convergeScore.score === 'number' ? p.convergeScore.score : 0;
         const ind = p.indication && typeof p.indication.score === 'number' ? p.indication.score : 0;
         const candidate = { ...p, sport: sp, _convergeScore: cs, _indicationScore: ind };
@@ -924,16 +931,21 @@ function playEmbed(p) {
 // six embeds each with their own colored bar reads as more visual weight than six lines
 // of text, which was the actual complaint.
 function playLine(p) {
+  // FIX 2026-09-02 (per Derek, real complaint w/ screenshot): was dumping polyBothSides
+  // raw and unfiltered -- every scattered market/outcome for the whole game mixed
+  // together ("5 Under, 5 Over, 2 Under, 2 Seattle Mariners..."), completely unreadable.
+  // Now shows only the actual picks own side, using the already-deduplicated,
+  // side-exclusive backers from convergeScore.breakdown.poly -- the same real count that
+  // decided whether this play qualifies at all, not a wall of unrelated activity.
   const tier = tierFor(p._convergeScore != null ? p._convergeScore : p.siScore);
   const gap = pinnacleGapDisplay(p);
   const mainLine = `\u{1F3AF} **${p.away} @ ${p.home}** \u00b7 ${p.sharpSide} (${marketLabel(p.market || p.activeMarket)}) \u00b7 **${p._convergeScore != null ? p._convergeScore : p.siScore} ${tier.name}**${gap ? ` \u00b7 Pinnacle ${gap}` : ''}`;
 
-  const sides = (p.polyBothSides || []).filter(s => s.buyers > 0);
-  if (!sides.length) return mainLine;
-  sides.sort((a, b) => b.buyers - a.buyers);
-  const polyLine = '   Poly: ' + sides.map(s => `${s.buyers} ${s.outcome}`).join(', ');
-  const nameLines = sides.map(s => `   \u2022 ${s.outcome} (${s.buyers}): ${s.traderNames.slice(0, 6).join(', ')}${s.traderNames.length > 6 ? '\u2026' : ''}`);
-  return [mainLine, polyLine, ...nameLines].join('\n');
+  const poly = p.convergeScore && p.convergeScore.breakdown && p.convergeScore.breakdown.poly;
+  if (!poly || !poly.buyers) return mainLine;
+  const names = (poly.traderNames || []).slice(0, 6).join(', ');
+  const polyLine = `   \u2713 ${poly.buyers} real backer${poly.buyers > 1 ? 's' : ''}${names ? `: ${names}` : ''}`;
+  return [mainLine, polyLine].join('\n');
 }
 
 /* Some wallets have traderName stored as "0xADDRESS-1722957908185" — a raw wallet address
@@ -1335,7 +1347,12 @@ module.exports = async function handler(req, res) {
             // relative_fallback retrofit) AND poly confirmed (2+ real distinct wallets).
             const bookConfirmedImg = p.pillars && p.pillars.pinnacleSource !== 'relative_fallback' && !p.noSignal;
             const polyConfirmedImg = !!(p.convergeScore && p.convergeScore.breakdown && p.convergeScore.breakdown.poly && p.convergeScore.breakdown.poly.buyers >= 2);
-            if (bookConfirmedImg && polyConfirmedImg) allPlays.push({ ...p, sport: sp });
+            // TIMING GATE 2026-09-02 (per Derek): same 2-hour-before-commence gate as
+            // buildBestPlaysReport -- this is a separate code path and does not
+            // automatically inherit it, same lesson as the bookConfirmed/polyConfirmed
+            // gate above having needed its own separate fix here too.
+            const tooEarlyImg = p.commenceTime && (new Date(p.commenceTime).getTime() - Date.now()) > (2 * 60 * 60 * 1000);
+            if (bookConfirmedImg && polyConfirmedImg && !tooEarlyImg) allPlays.push({ ...p, sport: sp });
           });
         } catch {}
       }
