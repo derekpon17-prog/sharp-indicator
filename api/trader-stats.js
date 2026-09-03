@@ -444,7 +444,18 @@ async function getPerPlayPnl(wallet, days) {
         sport: sportOf(p).sport,
       };
     })
-    .filter(p => cutoffMs === null || (p.endDate && new Date(p.endDate).getTime() >= cutoffMs));
+    .filter(p => {
+      if (cutoffMs === null) return true;
+      if (!p.endDate) return false;
+      const t = new Date(p.endDate).getTime();
+      // FIX 2026-09-03 (per Derek, real bug caught live): only checked endDate >= cutoff
+      // (not too OLD), never checked <= now -- a position closed by exiting early, before
+      // its market actually resolves, can carry a FUTURE endDate (confirmed live: real
+      // tennis positions came back with endDate 7 days out on a days=3 request). Now
+      // requires both bounds -- genuinely resolved within the window, not scheduled to
+      // resolve later.
+      return t >= cutoffMs && t <= Date.now();
+    });
 
   const wins = plays.filter(p => p.result === 'W').length;
   const losses = plays.filter(p => p.result === 'L').length;
