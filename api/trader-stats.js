@@ -409,12 +409,67 @@ function qualifiesForSport(stats, sport, minSample) {
   };
 }
 
+const UNIT = 50; // per Derek's established convention, matches Juice Reel unit sizing
+
+// PER-PLAY P&L 2026-09-03 (per Derek, real request): "calculate what they are up on a
+// per unit basis" -- previously this required me to manually web-search individual box
+// scores and grade by hand, which doesn't scale and can't be trusted for precise per-play
+// numbers. Real fix: Polymarket's own /closed-positions already carries realizedPnl per
+// SETTLED position -- the exact, correct answer, not an estimate reconstructed from final
+// scores. Reuses fetchClosedPositions/positionPnl/resolvePnlField directly (the same
+// proven fetch and PnL math already hardened for the aggregate stats above), just exposed
+// per-play instead of collapsed into one bucket. Real position objects don't reliably
+// carry a per-trade timestamp Polymarket-side -- endDate (the market's resolution date)
+// is what's actually available, so "last N days" here means resolved within that window,
+// not necessarily entered within it. Noted directly in the response, not hidden.
+async function getPerPlayPnl(wallet, days) {
+  const { positions, ok, error } = await fetchClosedPositions(wallet);
+  if (!ok) return { ok: false, error };
+  const pnlField = resolvePnlField(positions);
+  const cutoffMs = days ? Date.now() - (days * 24 * 60 * 60 * 1000) : null;
+  const plays = positions
+    .map(p => {
+      const pnl = positionPnl(p, pnlField, 'raw');
+      const stakeUsd = (parseFloat(p.avgPrice) || 0) * (parseFloat(p.totalBought) || 0);
+      const endMs = p.endDate ? new Date(p.endDate).getTime() : null;
+      return {
+        title: p.title || p.question || p.slug || 'Unknown market',
+        outcome: p.outcome || null,
+        endDate: p.endDate || null,
+        stakeUsd: Math.round(stakeUsd * 100) / 100,
+        stakeUnits: Math.round((stakeUsd / UNIT) * 100) / 100,
+        pnlUsd: Math.round(pnl * 100) / 100,
+        pnlUnits: Math.round((pnl / UNIT) * 100) / 100,
+        result: pnl > 0 ? 'W' : pnl < 0 ? 'L' : 'PUSH',
+        sport: sportOf(p).sport,
+      };
+    })
+    .filter(p => cutoffMs === null || (p.endDate && new Date(p.endDate).getTime() >= cutoffMs));
+
+  const wins = plays.filter(p => p.result === 'W').length;
+  const losses = plays.filter(p => p.result === 'L').length;
+  const totalUnits = Math.round(plays.reduce((s, p) => s + p.pnlUnits, 0) * 100) / 100;
+  const totalUsd = Math.round(plays.reduce((s, p) => s + p.pnlUsd, 0) * 100) / 100;
+
+  return {
+    ok: true, wallet, days: days || 'all', pnlField,
+    note: 'endDate is the markets resolution date -- when a position SETTLED, not necessarily when it was entered.',
+    summary: { plays: plays.length, wins, losses, winPct: plays.length ? Math.round((wins / plays.length) * 1000) / 10 : null, totalUnits, totalUsd },
+    plays: plays.sort((a, b) => (b.endDate || '').localeCompare(a.endDate || '')),
+  };
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   const wallet = req.query && req.query.wallet;
   const sport = String((req.query && req.query.sport) || '').toUpperCase();
   if (!wallet) return res.status(200).json({ ok: false, error: 'wallet query param required' });
   try {
+    if (req.query && req.query.perPlay) {
+      const days = req.query.days ? parseInt(req.query.days, 10) : null;
+      const out = await getPerPlayPnl(String(wallet), days);
+      return res.status(200).json(out);
+    }
     const fresh = String((req.query && req.query.fresh) || '') === '1';
     const stats = await getTraderStats(String(wallet), { fresh });
     const out = { ...stats };
@@ -429,3 +484,11 @@ module.exports.qualifiesForSport = qualifiesForSport;
 module.exports.bucket = bucket;
 module.exports.sportOf = sportOf;
 module.exports.MIN_SAMPLE = MIN_SAMPLE;
+// EXPORTED 2026-09-03 (per Derek, real per-unit P&L request): these were private to this
+// file, computed real settled P&L only to feed the aggregate bySport buckets. Exposing
+// the raw pieces so a per-play breakdown feature can reuse the exact same proven fetch
+// (laddered-limit + pagination, already hardened against a real 19-hour outage) and PnL
+// math instead of reimplementing it a second time with its own bugs.
+module.exports.fetchClosedPositions = fetchClosedPositions;
+module.exports.positionPnl = positionPnl;
+module.exports.resolvePnlField = resolvePnlField;
