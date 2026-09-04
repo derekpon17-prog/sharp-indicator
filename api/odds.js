@@ -162,6 +162,98 @@ function findAllPolySidesForPlay(play, polyScores){
   return polyScores.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home))
     .map(s=>({outcome:s.outcome, buyers:s.buyers, traderNames:s.traderNames||[], traders:s.traders||[], score:s.score}));
 }
+// NOVIG SHARP SIGNAL 2026-09-03 (per Derek, real feature request): reads Novig's own
+// order book directly (gql.novig.us -- found via the published novig-liquidity PyPI
+// package source, confirmed reachable live from Vercel with no proxy needed) instead of
+// just the current best price, which is all this project used before. Real mechanic,
+// confirmed structurally and matching how OddsJam's own "Sharp Money" feature explains
+// it: resting orders attached to an outcome's book are offers to SELL that outcome at
+// that price -- large real size offering to sell "Under" means that trader wants to be
+// short Under, i.e. actually wants Over. The side with MORE resting liquidity is the
+// side the real money is offloading, not the side it wants -- the sharp read is the
+// OPPOSITE outcome.
+// Honest, stated limitation: dollar notional here is qty*price, using Novig's raw
+// numbers as returned -- unverified against what the Novig app itself displays as a
+// dollar figure (a real screenshot showed roughly $2-4k on a comparable market; this
+// hasn't been cross-checked line-for-line against the live app yet). Treat the notional
+// as directionally real, not penny-precise, until spot-checked against the app directly.
+async function fetchNovigOrderBook(eventId){
+  try{
+    const r=await fetch('https://gql.novig.us/v1/graphql',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        query:`query ($eventId: uuid!) {
+          event(where: {_and: [{id: {_eq: $eventId}}, {_or: [{status: {_eq: "OPEN_PREGAME"}}]}]}) {
+            description
+            markets {
+              description
+              type
+              strike
+              outcomes(where: {_or: [{last: {_is_null: false}}, {available: {_is_null: false}}]}) {
+                description
+                orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}) {
+                  qty
+                  price
+                }
+              }
+            }
+          }
+        }`,
+        variables:{eventId},
+      }),
+    });
+    const j=await r.json();
+    const ev=j&&j.data&&j.data.event&&j.data.event[0];
+    return ev?ev.markets||[]:[];
+  }catch{ return []; }
+}
+
+async function fetchNovigEventId(away,home,league){
+  try{
+    const r=await fetch('https://gql.novig.us/v1/graphql',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        operationName:'MyQuery',
+        query:`query MyQuery($league: String!) {
+          event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
+            id
+            description
+          }
+        }`,
+        variables:{league},
+      }),
+    });
+    const j=await r.json();
+    const events=j&&j.data&&j.data.event||[];
+    const match=events.find(e=>titleHasTeam(e.description,away)&&titleHasTeam(e.description,home));
+    return match?match.id:null;
+  }catch{ return null; }
+}
+
+function novigLiquidityUsd(outcome){
+  return (outcome.orders||[]).reduce((sum,o)=>sum+(parseFloat(o.qty)||0)*(parseFloat(o.price)||0),0);
+}
+
+// For one binary market (e.g. a specific total line's Over/Under), returns the real
+// sharp side (opposite of whichever outcome carries more resting sell liquidity) and a
+// 0-100 score scaled by how lopsided the imbalance is. Null if the market has fewer than
+// two live outcomes or genuinely balanced liquidity (no real lean either way).
+function novigSharpSideForMarket(market){
+  const outcomes=(market.outcomes||[]).filter(o=>(o.orders||[]).length>0);
+  if(outcomes.length<2)return null;
+  const withLiq=outcomes.map(o=>({description:o.description,liquidityUsd:novigLiquidityUsd(o)}));
+  withLiq.sort((a,b)=>b.liquidityUsd-a.liquidityUsd);
+  const [heaviest,lightest]=withLiq;
+  if(heaviest.liquidityUsd<=0)return null;
+  const imbalance=lightest?(heaviest.liquidityUsd-lightest.liquidityUsd)/heaviest.liquidityUsd:1;
+  // Real sharp side is the OPPOSITE of the outcome carrying the resting sell liquidity.
+  const sharpSide=lightest?lightest.description:null;
+  const score=Math.round(Math.min(imbalance,1)*100);
+  return{market:market.description,marketType:market.type,strike:market.strike,heavySide:heaviest.description,heavySideLiquidityUsd:Math.round(heaviest.liquidityUsd),sharpSide,score};
+}
+
 function findKalshiScoreForPlay(play, steamMarkets){
   const matches=steamMarkets.filter(s=>titleHasTeam(s.title,play.away)&&titleHasTeam(s.title,play.home));
   if(!matches.length)return null;
@@ -1302,75 +1394,20 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
 
-  // TEMP DIAGNOSTIC 2026-09-03 (per Derek, real feasibility test): checking whether
-  // Novigs real GraphQL endpoint (found via the published novig-liquidity PyPI package
-  // source) is reachable from Vercels network without a proxy -- that package uses a
-  // rotating residential proxy pool, which usually signals the target blocks plain
-  // datacenter IPs. Testing before building anything real on this. Remove after use.
-  if(req.query&&req.query.novigMarketTest){
+  // TEMP END-TO-END TEST 2026-09-03: full pipeline, real game lookup by team name ->
+  // order book -> sharp side per market. Remove after confirming.
+  if(req.query&&req.query.novigSharpTest){
     try{
-      const eventId=req.query.eventId;
-      const r=await fetch('https://gql.novig.us/v1/graphql',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          query: `query ($eventId: uuid!) {
-            event(where: {_and: [{id: {_eq: $eventId}}, {_or: [{status: {_eq: "OPEN_PREGAME"}}]}]}) {
-              description
-              id
-              markets {
-                description
-                type
-                strike
-                outcomes(where: {_or: [{last: {_is_null: false}}, {available: {_is_null: false}}]}) {
-                  id
-                  description
-                  last
-                  available
-                  orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}) {
-                    status
-                    qty
-                    price
-                    originalQty
-                  }
-                }
-              }
-            }
-          }`,
-          variables:{eventId},
-        }),
-      });
-      const status=r.status;
-      const text=await r.text();
-      return res.status(200).json({ok:true,upstreamStatus:status,bodyPreview:text.slice(0,3000)});
+      const eventId=await fetchNovigEventId(req.query.away,req.query.home,(req.query.league||'MLB').toUpperCase());
+      if(!eventId)return res.status(200).json({ok:false,error:'no matching event found'});
+      const markets=await fetchNovigOrderBook(eventId);
+      const results=markets.map(novigSharpSideForMarket).filter(Boolean);
+      return res.status(200).json({ok:true,eventId,results});
     }catch(e){
       return res.status(200).json({ok:false,error:e.message});
     }
   }
-  if(req.query&&req.query.novigTest){
-    try{
-      const r=await fetch('https://gql.novig.us/v1/graphql',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          operationName:'MyQuery',
-          query:`query MyQuery($league: String!) {
-            event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
-              game { scheduled_start }
-              id
-              description
-            }
-          }`,
-          variables:{league:'MLB'},
-        }),
-      });
-      const status=r.status;
-      const text=await r.text();
-      return res.status(200).json({ok:true,upstreamStatus:status,bodyPreview:text.slice(0,2000)});
-    }catch(e){
-      return res.status(200).json({ok:false,error:e.message});
-    }
-  }
+
 
   const sport=((req.query&&req.query.sport)||'MLB').toUpperCase();
   const sportKey=SPORT_KEYS[sport];
