@@ -410,7 +410,16 @@ async function scanNovigSharpSignals(leagues, opts){
      Capped PER LEAGUE instead -- each league gets its own budget regardless of how many
      games another league has, and within a league still sorted soonest-first so the cap
      (when it does bite) drops the most distant games, not the most imminent ones. */
-  const PER_LEAGUE_CAP = 12;
+  /* FIX 2026-09-04 (per Derek, same real incident): 12 was still far below what NCAAF
+     alone can have in-window on a Saturday (54 confirmed live) -- the per-league split
+     fixed cross-league starvation but this league could still starve ITSELF. Order-book
+     fetches run concurrently below (Promise.all), so the wall-clock cost of raising this
+     is close to the SLOWEST single fetch, not the sum -- confirmed by the 25-cap version
+     already completing comfortably inside the 60s ceiling. Raised well past the busiest
+     day seen so far, with real margin rather than matching it exactly. Untested: whether
+     Novig itself rate-limits a genuinely large burst of concurrent requests -- has not
+     been hit yet at this volume, worth watching rather than assuming settled. */
+  const PER_LEAGUE_CAP = 40;
   const byLeague = {};
   events.forEach(e => { (byLeague[e.league] = byLeague[e.league] || []).push(e); });
   const capped = [];
@@ -1602,6 +1611,10 @@ module.exports=async function handler(req,res){
 
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
+  if(req.query&&req.query.novigRawTest){
+    const markets = await fetchNovigOrderBook(req.query.eventId);
+    return res.status(200).json({ markets: markets.slice(0, 8) });
+  }
   if(req.query&&req.query.novigSharp){
     // No league param = every supported league, which is the intended default for the
     // single all-sports cron. An explicit league (or comma list) still works for testing.
