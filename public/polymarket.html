@@ -5135,6 +5135,10 @@ var EXDATA={novig:[],kalshi:[],agree:[]};
 var EXVIEW='agree';
 var exLoaded=false;
 
+function exDate(s){
+  var t=s.gameTimeLabel||s.gameDate;
+  return t?'<span style="font-size:11px;color:var(--t3);opacity:.8;margin-left:8px">'+t+'</span>':'';
+}
 function exAmer(a){return (a===null||a===undefined)?'\u2014':(a>0?'+'+a:String(a));}
 function exUsd(n){return '$'+Math.round(n||0).toLocaleString();}
 
@@ -5179,7 +5183,7 @@ function renderExchanges(force){
     .then(function(r){return r.json();}).then(function(j){return (j&&j.signals)||[];})
     .catch(function(){return [];});
   var pKal=Promise.all(EX_LEAGUES.map(function(lg){
-    return fetch('/api/kalshi?sharpBook='+lg+'&minScore=0&minLiq=0')
+    return fetch('/api/kalshi?sharpBook='+lg+'&minScore=0&minLiq=0&windowHours=48')
       .then(function(r){return r.json();}).then(function(j){return (j&&j.signals)||[];})
       .catch(function(){return [];});
   }));
@@ -5230,19 +5234,19 @@ function exRender(){
   if(EXVIEW==='agree'){
     box.innerHTML=rows.map(function(a){
       return exCard('agree',AGR,'BOTH',a.novig.sharpSide,exAmer(a.novig.sharpSideAmerican),
-        a.novig.event,'Novig '+a.novig.score+' ('+exUsd(a.novig.sharpSideLiquidityUsd)+
+        a.novig.event+exDate(a.novig),'Novig '+a.novig.score+' ('+exUsd(a.novig.sharpSideLiquidityUsd)+
         ') \u00b7 Kalshi '+a.kalshi.score+' ('+exUsd(a.kalshi.sharpSideLiquidityUsd)+')',a.combined);
     }).join('');
   }else if(EXVIEW==='novig'){
     box.innerHTML=rows.map(function(s){
       return exCard('novig',NOV,'NOVIG',s.sharpSide,exAmer(s.sharpSideAmerican),
-        (s.league?'['+s.league+'] ':'')+s.event+' \u00b7 '+s.market,
+        (s.league?'['+s.league+'] ':'')+s.event+' \u00b7 '+s.market+exDate(s),
         exUsd(s.sharpSideLiquidityUsd)+' bid vs '+exUsd(s.otherSideLiquidityUsd),s.score);
     }).join('');
   }else{
     box.innerHTML=rows.map(function(s){
       return exCard('kalshi',KAL,'KALSHI',s.sharpSide,exAmer(s.sharpSideAmerican),
-        '['+s.league+'] '+(s.title||s.ticker),
+        '['+s.league+'] '+(s.title||s.ticker)+exDate(s),
         exUsd(s.sharpSideLiquidityUsd)+' bid vs '+exUsd(s.otherSideLiquidityUsd),s.score);
     }).join('');
   }
