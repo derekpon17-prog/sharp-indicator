@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Exchange Signals — Novig + Kalshi</title>
+<style>
+  :root{--bg:#0a0a0d;--card:#181c22;--card2:#12161c;--txt:#fff;--dim:#8a8a96;--dim2:#6b6b76;
+        --green:#4ade80;--gold:#E5A00D;--blue:#40B4FF;--line:#24242e;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+       font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:20px 16px 60px}
+  .wrap{max-width:1000px;margin:0 auto}
+  h1{font-size:24px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  .bolt{width:7px;height:22px;background:var(--green);border-radius:2px;display:inline-block}
+  .sub{color:var(--dim);font-size:14px;margin-bottom:6px}
+  .warn{background:#1c1712;border:1px solid var(--gold);color:#f0d190;border-radius:8px;
+        padding:10px 13px;font-size:13px;margin:14px 0 18px}
+  .tabs{display:flex;gap:8px;margin:18px 0 14px;flex-wrap:wrap}
+  .tab{background:var(--card);border:1px solid var(--line);color:var(--dim);border-radius:8px;
+       padding:7px 14px;cursor:pointer;font-size:14px;font-weight:600}
+  .tab.on{background:var(--green);color:#0d0d12;border-color:var(--green)}
+  .card{background:var(--card);border-radius:12px;border-left:4px solid var(--line);
+        padding:15px 17px;margin-bottom:11px}
+  .card.agree{border-left-color:var(--green)}
+  .card.novig{border-left-color:var(--blue)}
+  .card.kalshi{border-left-color:var(--gold)}
+  .row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .side{font-size:19px;font-weight:700}
+  .odds{font-size:15px;color:var(--dim);font-weight:600;margin-left:7px}
+  .ev{font-size:13px;color:var(--dim);margin-top:3px}
+  .meta{font-size:12px;color:var(--dim2);margin-top:7px}
+  .score{font-size:26px;font-weight:700;text-align:right;line-height:1}
+  .slbl{font-size:10px;color:var(--dim2);text-align:right;letter-spacing:1px;margin-top:2px}
+  .pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;
+        padding:2px 7px;border-radius:4px;margin-right:6px;vertical-align:2px}
+  .p-nov{background:#12283c;color:var(--blue)}
+  .p-kal{background:#2b2410;color:var(--gold)}
+  .p-agr{background:#132119;color:var(--green)}
+  .empty{color:var(--dim);padding:26px 0;text-align:center}
+  .bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:8px}
+  .bar>span{display:block;height:100%;background:var(--green)}
+  .stat{display:flex;gap:22px;flex-wrap:wrap;background:var(--card2);border-radius:10px;
+        padding:12px 15px;margin-bottom:16px}
+  .stat div b{display:block;font-size:19px}
+  .stat div span{font-size:11px;color:var(--dim2);letter-spacing:.5px}
+  a.rf{color:var(--green);cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><span class="bolt"></span>Exchange Signals</h1>
+  <div class="sub">Novig + Kalshi resting-liquidity reads &middot;
+    <a class="rf" onclick="loadAll()">refresh</a> <span id="ts"></span></div>
+
+  <div class="warn">
+    <b>Shadow mode &mdash; not validated.</b> Neither venue has graded plays yet. The score is
+    raw liquidity imbalance, not confidence. Novig and Kalshi books differ a lot in depth, so
+    their scores are <b>not</b> comparable on the same scale &mdash; measuring that difference
+    is the point of this page, before any alert thresholds get set.
+  </div>
+
+  <div class="stat" id="stats"></div>
+
+  <div class="tabs">
+    <div class="tab on" data-v="agree">Agreement</div>
+    <div class="tab" data-v="novig">Novig</div>
+    <div class="tab" data-v="kalshi">Kalshi</div>
+  </div>
+  <div id="list"><div class="empty">Loading&hellip;</div></div>
+</div>
+
+<script>
+var LEAGUES = ['MLB','NFL','NCAAF','NBA','NHL'];
+var DATA = { novig: [], kalshi: [], agree: [] };
+var VIEW = 'agree';
+
+function amer(a){ return (a === null || a === undefined) ? '\u2014' : (a > 0 ? '+' + a : String(a)); }
+function usd(n){ return '$' + Math.round(n || 0).toLocaleString(); }
+
+/* Kalshi lists each game twice, one binary per team. Both point at the same side, which is
+   a useful correctness check, but it would double-count in a list -- so collapse by game
+   and keep the stronger read. */
+function dedupeKalshi(sigs){
+  var by = {};
+  sigs.forEach(function(s){
+    var k = s.eventTicker || s.ticker;
+    if (!by[k] || s.score > by[k].score) by[k] = s;
+  });
+  return Object.keys(by).map(function(k){ return by[k]; }).sort(function(a,b){ return b.score - a.score; });
+}
+
+/* Best-effort cross-venue match. Novig gives "Away @ Home" full names; Kalshi gives team
+   codes in a ticker. Requiring the code to appear in BOTH the Novig event text and its
+   sharp side is deliberately conservative -- a miss just drops the agreement row, it never
+   produces a wrong pairing. */
+function findAgreement(nov, kal){
+  var out = [];
+  kal.forEach(function(k){
+    var code = String(k.sharpSide || '').toUpperCase();
+    if (code.length < 2 || code.indexOf('NOT ') === 0) return;
+    nov.forEach(function(n){
+      var nSide = String(n.sharpSide || '').toUpperCase().replace(/[^A-Z]/g,'');
+      var nEv   = String(n.event || '').toUpperCase().replace(/[^A-Z]/g,'');
+      if (nEv.indexOf(code) === -1) return;
+      if (nSide.indexOf(code) === -1) return;
+      out.push({ code: code, novig: n, kalshi: k,
+                 combined: Math.round((n.score + k.score) / 2) });
+    });
+  });
+  return out.sort(function(a,b){ return b.combined - a.combined; });
+}
+
+function loadAll(){
+  document.getElementById('list').innerHTML = '<div class="empty">Loading\u2026</div>';
+  var pNov = fetch('/api/odds?novigSharp=1&minScore=0&minLiq=0')
+    .then(function(r){ return r.json(); })
+    .then(function(j){ return (j && j.signals) || []; })
+    .catch(function(){ return []; });
+  var pKal = Promise.all(LEAGUES.map(function(lg){
+    return fetch('/api/kalshi?sharpBook=' + lg + '&minScore=0&minLiq=0')
+      .then(function(r){ return r.json(); })
+      .then(function(j){ return (j && j.signals) || []; })
+      .catch(function(){ return []; });
+  }));
+  Promise.all([pNov, pKal]).then(function(res){
+    var nov = res[0];
+    var kal = dedupeKalshi([].concat.apply([], res[1]));
+    DATA = { novig: nov, kalshi: kal, agree: findAgreement(nov, kal) };
+    document.getElementById('ts').textContent = '\u00b7 updated ' + new Date().toLocaleTimeString();
+    renderStats(); render();
+  });
+}
+
+function renderStats(){
+  var n = DATA.novig, k = DATA.kalshi;
+  function mx(a){ return a.length ? Math.max.apply(null, a.map(function(x){ return x.score; })) : 0; }
+  function md(a){
+    if (!a.length) return 0;
+    var s = a.map(function(x){ return x.score; }).sort(function(x,y){ return x - y; });
+    return s[Math.floor(s.length / 2)];
+  }
+  document.getElementById('stats').innerHTML =
+    '<div><b>' + n.length + '</b><span>NOVIG MARKETS</span></div>' +
+    '<div><b>' + mx(n) + ' / ' + md(n) + '</b><span>NOVIG MAX / MEDIAN</span></div>' +
+    '<div><b>' + k.length + '</b><span>KALSHI GAMES</span></div>' +
+    '<div><b>' + mx(k) + ' / ' + md(k) + '</b><span>KALSHI MAX / MEDIAN</span></div>' +
+    '<div><b>' + DATA.agree.length + '</b><span>BOTH AGREE</span></div>';
+}
+
+function card(cls, pillCls, pillTxt, side, odds, ev, meta, score){
+  return '<div class="card ' + cls + '"><div class="row"><div>' +
+    '<div><span class="pill ' + pillCls + '">' + pillTxt + '</span>' +
+    '<span class="side">' + side + '</span><span class="odds">' + odds + '</span></div>' +
+    '<div class="ev">' + ev + '</div><div class="meta">' + meta + '</div></div>' +
+    '<div><div class="score">' + score + '</div><div class="slbl">IMBALANCE</div></div>' +
+    '</div><div class="bar"><span style="width:' + Math.min(score, 100) + '%"></span></div></div>';
+}
+
+function render(){
+  var el = document.getElementById('list');
+  var rows = DATA[VIEW] || [];
+  if (!rows.length){
+    el.innerHTML = '<div class="empty">' + (VIEW === 'agree'
+      ? 'No games where both venues point the same way right now.'
+      : 'No markets returned.') + '</div>';
+    return;
+  }
+  if (VIEW === 'agree'){
+    el.innerHTML = rows.map(function(a){
+      return card('agree', 'p-agr', 'BOTH', a.novig.sharpSide, amer(a.novig.sharpSideAmerican),
+        a.novig.event,
+        'Novig ' + a.novig.score + ' (' + usd(a.novig.sharpSideLiquidityUsd) + ') \u00b7 Kalshi ' +
+        a.kalshi.score + ' (' + usd(a.kalshi.sharpSideLiquidityUsd) + ')', a.combined);
+    }).join('');
+  } else if (VIEW === 'novig'){
+    el.innerHTML = rows.map(function(s){
+      return card('novig', 'p-nov', 'NOVIG', s.sharpSide, amer(s.sharpSideAmerican),
+        (s.league ? '[' + s.league + '] ' : '') + s.event + ' \u00b7 ' + s.market,
+        usd(s.sharpSideLiquidityUsd) + ' bid vs ' + usd(s.otherSideLiquidityUsd), s.score);
+    }).join('');
+  } else {
+    el.innerHTML = rows.map(function(s){
+      return card('kalshi', 'p-kal', 'KALSHI', s.sharpSide, amer(s.sharpSideAmerican),
+        '[' + s.league + '] ' + (s.title || s.ticker),
+        usd(s.sharpSideLiquidityUsd) + ' bid vs ' + usd(s.otherSideLiquidityUsd), s.score);
+    }).join('');
+  }
+}
+
+Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(t){
+  t.onclick = function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(x){ x.classList.remove('on'); });
+    t.classList.add('on'); VIEW = t.getAttribute('data-v'); render();
+  };
+});
+loadAll();
+setInterval(loadAll, 300000);
+</script>
+</body>
+</html>
