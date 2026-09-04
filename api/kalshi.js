@@ -298,7 +298,36 @@ async function detectSteam(sport) {
   };
 }
 
+/* TEMP DIAGNOSTIC 2026-09-04: dump the RAW Kalshi orderbook for one market before any
+   parsing is written. This file's own history is the reason: the first normalizeMarket
+   guessed the schema (numeric cents) and was wrong -- Kalshi actually returns string
+   dollar amounts -- and every market silently priced as zero until it was checked against
+   a live sample. Same failure shape as the Novig `available` field earlier tonight, which
+   the query filtered on but never selected. So: look at the real bytes first, then parse. */
+async function kalshiRawOrderbook(sport) {
+  const series = SERIES[sport];
+  if (!series) return { ok: false, error: 'no series for ' + sport };
+  for (const base of BASE_CANDIDATES) {
+    try {
+      const mr = await fetch(`${base}/markets?series_ticker=${series}&status=open&limit=5`);
+      if (!mr.ok) continue;
+      const mj = await mr.json();
+      const mk = (mj.markets || [])[0];
+      if (!mk) continue;
+      const or = await fetch(`${base}/markets/${mk.ticker}/orderbook?depth=10`);
+      const txt = await or.text();
+      return { ok: true, base, ticker: mk.ticker, title: mk.title || mk.subtitle || null,
+        obStatus: or.status, marketSample: mk, orderbookRaw: txt.slice(0, 1500) };
+    } catch (e) { /* try next base */ }
+  }
+  return { ok: false, error: 'no base reachable' };
+}
+
 module.exports = async function handler(req, res) {
+  if (req.query && req.query.rawBook) {
+    const out = await kalshiRawOrderbook(String(req.query.rawBook).toUpperCase());
+    return res.status(200).json(out);
+  }
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (req.query && req.query.steam) {
