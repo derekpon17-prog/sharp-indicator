@@ -361,7 +361,11 @@ function kalshiGameTimeFromTicker(eventTicker) {
 }
 
 // Default window. Futures and far-out games are excluded rather than filling the board.
-const KALSHI_WINDOW_HOURS = 48;
+/* Per-sport windows, matching Novig. Football lines form across days so they need early
+   visibility; daily sports form late and do not. Windows look forward from now, so NFL
+   Thursday and Monday games are covered the same as Sunday ones. */
+const KALSHI_WINDOW_BY_SPORT = { NCAAF:24, NFL:48, MLB:3, NBA:3, NHL:3 };
+const KALSHI_WINDOW_HOURS = 3;
 
 const KALSHI_MIN_SCORE = 80;
 const KALSHI_MIN_LIQ   = 1000; // PROVISIONAL: Kalshi books run thinner than Novig's; the
@@ -391,7 +395,8 @@ async function kalshiSharpSignals(sport, opts) {
       }));
 
       const nowMs = Date.now();
-      const windowMs = ((opts && opts.windowHours != null) ? opts.windowHours : KALSHI_WINDOW_HOURS) * 3600 * 1000;
+      const windowMs = ((opts && opts.windowHours != null) ? opts.windowHours
+        : (KALSHI_WINDOW_BY_SPORT[sport] || KALSHI_WINDOW_HOURS)) * 3600 * 1000;
       const signals = [];
       books.forEach(({ mk, book }) => {
         if (!book) return;
