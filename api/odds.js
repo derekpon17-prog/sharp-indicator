@@ -261,58 +261,109 @@ function novigSharpSideForMarket(market){
   return{market:market.description,marketType:market.type,strike:market.strike,heavySide:heaviest.description,heavySideLiquidityUsd:Math.round(heaviest.liquidityUsd),lightSideLiquidityUsd:lightest?Math.round(lightest.liquidityUsd):0,sharpSide,score};
 }
 
-/* NOVIG SHARP ALERT THRESHOLDS 2026-09-03 -- FIRST CUT, NOT VALIDATED, same posture as
-   every other new threshold in this project. Two gates deliberately, because either one
-   alone is misleading: a 98 imbalance score on a market carrying $50 total is noise, and
-   $50k of liquidity split evenly across both sides is no lean at all. Real signal needs
-   a lopsided book AND real money in it. Confirm with Derek before treating as settled. */
-const NOVIG_ALERT_MIN_SCORE = 70;   // how lopsided the resting liquidity has to be
-const NOVIG_ALERT_MIN_LIQ   = 2000; // real dollars on the heavy side, post-units-fix
+/* NOVIG SHARP ALERT GATES 2026-09-04 -- council-reviewed and raised from the first cut.
+   Still not validated against graded outcomes (this signal has no history yet), but each
+   number now has a real reason behind it rather than being a round guess:
 
-// Scans every open pregame Novig event for a league and returns the markets where the
-// resting-liquidity imbalance is large enough to imply a real sharp lean. Note this path
-// touches ONLY Novig's own free GraphQL API -- no Odds API key, no Odds API quota, which
-// matters now that the Odds API subscription is being wound down.
-async function scanNovigSharpSignals(league, opts){
+   MIN_SCORE 80 (was 70): at 70 the light side still holds ~30% of the heavy side's
+     money -- a lean, not a conviction. On the first live MLB slate, 70 cleared 24 signals
+     across 18 games (>1 per game, implausible for a real edge); 80 cut that to ~9.
+   MIN_LIQ $3,000 (was $2,000): real Novig books that night ran $2,000-$7,400, so a
+     $2,000 floor admitted nearly the whole population instead of filtering it. $3,000
+     sits meaningfully above the median and matches the "$3,000 P Limit" Novig itself
+     displays -- a market-observed reference, not an invented one.
+   MAIN LINES ONLY: every top signal on that slate was a -2.5/-3.5 alternate spread --
+     thin derivative books where a single ordinary order dominates by default. That's
+     market structure, not sharp money. Rather than hardcode a strike (which would be
+     baseball-specific and wrong for football), the main line is identified empirically:
+     within each event and market type, keep only the book carrying the most total
+     liquidity. The main line is by definition the most-traded one, so this is
+     sport-agnostic. Derivative types (1H, first-inning, team totals) are dropped. */
+const NOVIG_ALERT_MIN_SCORE = 80;
+const NOVIG_ALERT_MIN_LIQ   = 3000;
+const NOVIG_MAIN_TYPES      = ['MONEY','SPREAD','TOTAL'];
+const NOVIG_LEAGUES         = ['MLB','NFL','NCAAF','NBA','NHL'];
+
+// Scans open pregame Novig events across one or many leagues for markets where the
+// resting-liquidity imbalance implies a real sharp lean. Touches ONLY Novig's own free
+// GraphQL API -- no Odds API key or quota, so it survives that subscription lapsing.
+//
+// Order of operations matters for cost: event lists are one cheap call per league, but
+// order books are one call per EVENT. So leagues are listed first, filtered down to the
+// games actually near start time, and only those get an order-book fetch. Scanning five
+// leagues naively would be ~100 calls and blow the 60s function ceiling; this keeps a
+// normal run in the low teens.
+async function scanNovigSharpSignals(leagues, opts){
   const minScore=(opts&&opts.minScore!=null)?opts.minScore:NOVIG_ALERT_MIN_SCORE;
   const minLiq=(opts&&opts.minLiq!=null)?opts.minLiq:NOVIG_ALERT_MIN_LIQ;
-  let events=[];
-  try{
-    const r=await fetch('https://gql.novig.us/v1/graphql',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        operationName:'MyQuery',
-        query:`query MyQuery($league: String!) {
-          event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
-            id
-            description
-            game { scheduled_start }
-          }
-        }`,
-        variables:{league},
-      }),
-    });
-    const j=await r.json();
-    events=(j&&j.data&&j.data.event)||[];
-  }catch(e){ return {ok:false,error:'event list fetch failed: '+e.message,signals:[]}; }
+  const windowHours=(opts&&opts.windowHours!=null)?opts.windowHours:null;
+  const list=Array.isArray(leagues)?leagues:[leagues];
 
-  // Capped so one call can't blow the 60s function ceiling on a huge slate.
-  const capped=events.slice(0,20);
+  async function listEvents(league){
+    try{
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          operationName:'MyQuery',
+          query:`query MyQuery($league: String!) {
+            event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
+              id
+              description
+              game { scheduled_start }
+            }
+          }`,
+          variables:{league},
+        }),
+      });
+      const j=await r.json();
+      return ((j&&j.data&&j.data.event)||[]).map(e=>({...e,league}));
+    }catch{ return []; }
+  }
+
+  const perLeague=await Promise.all(list.map(listEvents));
+  let events=perLeague.flat();
+  const leaguesFound={};
+  events.forEach(e=>{leaguesFound[e.league]=(leaguesFound[e.league]||0)+1;});
+
+  const nowMs=Date.now();
+  if(windowHours!=null){
+    const cutoff=windowHours*60*60*1000;
+    events=events.filter(e=>{
+      const t=e.game&&e.game.scheduled_start?new Date(e.game.scheduled_start).getTime():null;
+      return t!=null && t>nowMs && (t-nowMs)<=cutoff;
+    });
+  }
+  // Soonest first, so if the cap bites it drops the most distant games, not the imminent ones.
+  events.sort((a,b)=>{
+    const ta=a.game&&a.game.scheduled_start?new Date(a.game.scheduled_start).getTime():Infinity;
+    const tb=b.game&&b.game.scheduled_start?new Date(b.game.scheduled_start).getTime():Infinity;
+    return ta-tb;
+  });
+  const capped=events.slice(0,25);
   const books=await Promise.all(capped.map(async ev=>({event:ev,markets:await fetchNovigOrderBook(ev.id)})));
 
   const signals=[];
   books.forEach(({event,markets})=>{
+    // Keep only the single highest-liquidity book per market type -- the main line.
+    const bestByType={};
     (markets||[]).forEach(m=>{
+      if(!NOVIG_MAIN_TYPES.includes(m.type))return;
       const s=novigSharpSideForMarket(m);
       if(!s)return;
-      if(s.score<minScore)return;
-      if(s.heavySideLiquidityUsd<minLiq)return;
-      signals.push({event:event.description,eventId:event.id,gameTime:(event.game&&event.game.scheduled_start)||null,...s});
+      const total=s.heavySideLiquidityUsd+s.lightSideLiquidityUsd;
+      if(!bestByType[m.type]||total>bestByType[m.type].total)bestByType[m.type]={sig:s,total};
+    });
+    Object.values(bestByType).forEach(({sig})=>{
+      if(sig.score<minScore)return;
+      if(sig.heavySideLiquidityUsd<minLiq)return;
+      signals.push({event:event.description,eventId:event.id,league:event.league,
+        gameTime:(event.game&&event.game.scheduled_start)||null,...sig});
     });
   });
   signals.sort((a,b)=>b.score-a.score);
-  return {ok:true,league,eventsScanned:capped.length,minScore,minLiq,signalCount:signals.length,signals};
+  return {ok:true,leagues:list,leaguesFound,eventsScanned:capped.length,eventsInWindow:events.length,
+    minScore,minLiq,windowHours,signalCount:signals.length,signals};
 }
 
 function findKalshiScoreForPlay(play, steamMarkets){
@@ -1460,10 +1511,15 @@ module.exports=async function handler(req,res){
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
   if(req.query&&req.query.novigSharp){
-    const league=((req.query.league)||'MLB').toUpperCase();
-    const out=await scanNovigSharpSignals(league,{
+    // No league param = every supported league, which is the intended default for the
+    // single all-sports cron. An explicit league (or comma list) still works for testing.
+    const leagues=req.query.league
+      ? String(req.query.league).split(',').map(s=>s.trim().toUpperCase()).filter(Boolean)
+      : NOVIG_LEAGUES;
+    const out=await scanNovigSharpSignals(leagues,{
       minScore:req.query.minScore?parseInt(req.query.minScore,10):null,
       minLiq:req.query.minLiq?parseInt(req.query.minLiq,10):null,
+      windowHours:req.query.windowHours?parseFloat(req.query.windowHours):null,
     });
     return res.status(200).json(out);
   }
