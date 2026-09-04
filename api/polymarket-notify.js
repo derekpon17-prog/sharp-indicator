@@ -1151,6 +1151,73 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  /* NOVIG SHARP-SIDE ALERT 2026-09-03 (per Derek): posts to Discord when Novig's own
+     order book shows a large one-sided pile of resting liquidity. Real mechanic: resting
+     orders on an outcome are offers to SELL it, so heavy size sitting on "MIL +2.5" means
+     that money actually wants CIN -2.5 -- the sharp read is the OPPOSITE of the heavy
+     side. Format is exactly what Derek asked for: SHARP SIDE - team - score.
+     Reads /api/odds?novigSharp=1, which touches ONLY Novig's free API -- no Odds API key
+     or quota, so this keeps working after that subscription lapses.
+     Dedup is per event+market+side+day, so a standing imbalance pings once, not every
+     sweep. Same 2h-before-commence gate as the Converge report, per Derek's stated rule
+     that nothing should fire while a game is still hours away.
+     GET ?novigAlert=1&league=MLB[&dry=1] */
+  if (req.query && req.query.novigAlert) {
+    try {
+      const league = String(req.query.league || 'MLB').toUpperCase();
+      const dry = String(req.query.dry || '') === '1';
+      const r = await fetch(`${SITE_URL}/api/odds?novigSharp=1&league=${league}`);
+      const d = await r.json();
+      if (!d || !d.ok) return res.status(200).json({ ok: false, error: (d && d.error) || 'scan failed' });
+
+      const nowMs = Date.now();
+      const TWO_HOURS = 2 * 60 * 60 * 1000;
+      const eligible = (d.signals || []).filter(s => {
+        if (!s.gameTime) return false;
+        const t = new Date(s.gameTime).getTime();
+        return t > nowMs && (t - nowMs) <= TWO_HOURS;
+      });
+
+      const day = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+      const fresh = [];
+      for (const s of eligible) {
+        const key = `novigsharp:${day}:${s.eventId}:${s.market}:${s.sharpSide}`;
+        try {
+          const seen = await upstashPost(['SET', key, '1', 'NX', 'EX', '172800']);
+          if (!(seen && seen.result === 'OK')) continue;
+        } catch { /* KV down -- fall through and send rather than silently drop */ }
+        fresh.push(s);
+      }
+
+      const lines = fresh.slice(0, 10).map(s =>
+        `\u{1F3AF} **SHARP SIDE \u2014 ${s.sharpSide} \u2014 ${s.score}**\n`
+        + `   ${s.event} \u00b7 ${s.market}\n`
+        + `   $${s.heavySideLiquidityUsd.toLocaleString()} resting on ${s.heavySide} (vs $${s.lightSideLiquidityUsd.toLocaleString()})`
+      );
+
+      const result = {
+        ok: true, league, scanned: d.eventsScanned, totalSignals: d.signalCount,
+        withinWindow: eligible.length, newAlerts: fresh.length,
+        thresholds: { minScore: d.minScore, minLiq: d.minLiq },
+        preview: lines,
+      };
+      if (dry) { result.dryRun = true; return res.status(200).json(result); }
+      if (!fresh.length) { result.sent = false; result.note = 'No new signals within the 2h window'; return res.status(200).json(result); }
+
+      const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
+      if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
+
+      const header = `\u26A1 **Novig Sharp Money** \u2014 ${league} \u00b7 ${fresh.length} signal${fresh.length > 1 ? 's' : ''}\n`
+        + `_Heavy resting liquidity means that money is SELLING that side \u2014 the sharp read is the opposite._`;
+      const send = await sendDiscord(webhook, header + '\n\n' + lines.join('\n\n'));
+      result.sent = !!(send && send.ok);
+      result.sendResult = send;
+      return res.status(200).json(result);
+    } catch (e) {
+      return res.status(200).json({ ok: false, error: e.message });
+    }
+  }
+
   if (req.query && req.query.reportImage) {
     try {
       const satori = require('satori').default;
