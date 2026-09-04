@@ -232,8 +232,15 @@ async function fetchNovigEventId(away,home,league){
   }catch{ return null; }
 }
 
+// UNITS FIX 2026-09-03 (per Derek, real cross-check against live screenshots): qty is
+// denominated in CENTS, not whole contracts. Raw qty*price produced ~$680k on a regular
+// MLB moneyline, while Derek's own Novig/OddsJam screenshots show real liquidity in the
+// hundreds-to-low-thousands ($4,282 / $474 / $242 Liq, and $2.3k at +125 in the video).
+// Dividing by 100 reconciles both: e.g. a $2,300 position at +125 (implied ~0.44) needs
+// qty ~520,000 -> 520000*0.44/100 = $2,288. Verified against two independent screenshots
+// before applying; still worth a live side-by-side spot-check in the Novig app itself.
 function novigLiquidityUsd(outcome){
-  return (outcome.orders||[]).reduce((sum,o)=>sum+(parseFloat(o.qty)||0)*(parseFloat(o.price)||0),0);
+  return (outcome.orders||[]).reduce((sum,o)=>sum+(parseFloat(o.qty)||0)*(parseFloat(o.price)||0),0)/100;
 }
 
 // For one binary market (e.g. a specific total line's Over/Under), returns the real
@@ -251,7 +258,61 @@ function novigSharpSideForMarket(market){
   // Real sharp side is the OPPOSITE of the outcome carrying the resting sell liquidity.
   const sharpSide=lightest?lightest.description:null;
   const score=Math.round(Math.min(imbalance,1)*100);
-  return{market:market.description,marketType:market.type,strike:market.strike,heavySide:heaviest.description,heavySideLiquidityUsd:Math.round(heaviest.liquidityUsd),sharpSide,score};
+  return{market:market.description,marketType:market.type,strike:market.strike,heavySide:heaviest.description,heavySideLiquidityUsd:Math.round(heaviest.liquidityUsd),lightSideLiquidityUsd:lightest?Math.round(lightest.liquidityUsd):0,sharpSide,score};
+}
+
+/* NOVIG SHARP ALERT THRESHOLDS 2026-09-03 -- FIRST CUT, NOT VALIDATED, same posture as
+   every other new threshold in this project. Two gates deliberately, because either one
+   alone is misleading: a 98 imbalance score on a market carrying $50 total is noise, and
+   $50k of liquidity split evenly across both sides is no lean at all. Real signal needs
+   a lopsided book AND real money in it. Confirm with Derek before treating as settled. */
+const NOVIG_ALERT_MIN_SCORE = 70;   // how lopsided the resting liquidity has to be
+const NOVIG_ALERT_MIN_LIQ   = 2000; // real dollars on the heavy side, post-units-fix
+
+// Scans every open pregame Novig event for a league and returns the markets where the
+// resting-liquidity imbalance is large enough to imply a real sharp lean. Note this path
+// touches ONLY Novig's own free GraphQL API -- no Odds API key, no Odds API quota, which
+// matters now that the Odds API subscription is being wound down.
+async function scanNovigSharpSignals(league, opts){
+  const minScore=(opts&&opts.minScore!=null)?opts.minScore:NOVIG_ALERT_MIN_SCORE;
+  const minLiq=(opts&&opts.minLiq!=null)?opts.minLiq:NOVIG_ALERT_MIN_LIQ;
+  let events=[];
+  try{
+    const r=await fetch('https://gql.novig.us/v1/graphql',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        operationName:'MyQuery',
+        query:`query MyQuery($league: String!) {
+          event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
+            id
+            description
+            game { scheduled_start }
+          }
+        }`,
+        variables:{league},
+      }),
+    });
+    const j=await r.json();
+    events=(j&&j.data&&j.data.event)||[];
+  }catch(e){ return {ok:false,error:'event list fetch failed: '+e.message,signals:[]}; }
+
+  // Capped so one call can't blow the 60s function ceiling on a huge slate.
+  const capped=events.slice(0,20);
+  const books=await Promise.all(capped.map(async ev=>({event:ev,markets:await fetchNovigOrderBook(ev.id)})));
+
+  const signals=[];
+  books.forEach(({event,markets})=>{
+    (markets||[]).forEach(m=>{
+      const s=novigSharpSideForMarket(m);
+      if(!s)return;
+      if(s.score<minScore)return;
+      if(s.heavySideLiquidityUsd<minLiq)return;
+      signals.push({event:event.description,eventId:event.id,gameTime:(event.game&&event.game.scheduled_start)||null,...s});
+    });
+  });
+  signals.sort((a,b)=>b.score-a.score);
+  return {ok:true,league,eventsScanned:capped.length,minScore,minLiq,signalCount:signals.length,signals};
 }
 
 function findKalshiScoreForPlay(play, steamMarkets){
@@ -1395,6 +1456,17 @@ module.exports=async function handler(req,res){
   if(req.method==='OPTIONS')return res.status(200).end();
 
 
+
+  // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
+  // path uses only Novig's own free API and must keep working with no Odds API at all.
+  if(req.query&&req.query.novigSharp){
+    const league=((req.query.league)||'MLB').toUpperCase();
+    const out=await scanNovigSharpSignals(league,{
+      minScore:req.query.minScore?parseInt(req.query.minScore,10):null,
+      minLiq:req.query.minLiq?parseInt(req.query.minLiq,10):null,
+    });
+    return res.status(200).json(out);
+  }
 
   const sport=((req.query&&req.query.sport)||'MLB').toUpperCase();
   const sportKey=SPORT_KEYS[sport];
