@@ -250,7 +250,12 @@ function novigLiquidityUsd(outcome){
 function novigSharpSideForMarket(market){
   const outcomes=(market.outcomes||[]).filter(o=>(o.orders||[]).length>0);
   if(outcomes.length<2)return null;
-  const withLiq=outcomes.map(o=>({description:o.description,liquidityUsd:novigLiquidityUsd(o)}));
+  // available = best price you can actually BUY that outcome at (decimal 0-1). Captured
+  // per outcome so the sharp side's real entry price rides along with the signal --
+  // needed to stake and grade the play later, and it has to be the price AT ALERT TIME,
+  // not whatever it drifts to by the time the game settles.
+  const withLiq=outcomes.map(o=>({description:o.description,liquidityUsd:novigLiquidityUsd(o),
+    price:(o.available!=null&&isFinite(parseFloat(o.available)))?parseFloat(o.available):null}));
   withLiq.sort((a,b)=>b.liquidityUsd-a.liquidityUsd);
   const [heaviest,lightest]=withLiq;
   if(heaviest.liquidityUsd<=0)return null;
@@ -258,7 +263,13 @@ function novigSharpSideForMarket(market){
   // Real sharp side is the OPPOSITE of the outcome carrying the resting sell liquidity.
   const sharpSide=lightest?lightest.description:null;
   const score=Math.round(Math.min(imbalance,1)*100);
-  return{market:market.description,marketType:market.type,strike:market.strike,heavySide:heaviest.description,heavySideLiquidityUsd:Math.round(heaviest.liquidityUsd),lightSideLiquidityUsd:lightest?Math.round(lightest.liquidityUsd):0,sharpSide,score};
+  // Decimal -> American. Kept here so every consumer sees the same conversion rather
+  // than each re-deriving it and drifting.
+  const p=lightest?lightest.price:null;
+  const sharpSideAmerican=(p!=null&&p>0&&p<1)
+    ? (p>=0.5?Math.round(-(p/(1-p))*100):Math.round(((1-p)/p)*100))
+    : null;
+  return{market:market.description,marketType:market.type,strike:market.strike,heavySide:heaviest.description,heavySideLiquidityUsd:Math.round(heaviest.liquidityUsd),lightSideLiquidityUsd:lightest?Math.round(lightest.liquidityUsd):0,sharpSide,sharpSidePrice:p,sharpSideAmerican,score};
 }
 
 /* NOVIG SHARP ALERT GATES 2026-09-04 -- council-reviewed and raised from the first cut.
