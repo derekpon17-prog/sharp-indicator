@@ -1161,6 +1161,74 @@ module.exports = async function handler(req, res) {
      fuzzy-matching team names: Novig says "GAST", ESPN says "GAST". When that match is
      not unambiguous the play is left UNGRADED and reported as such -- a wrong grade is
      worse than a missing one, especially on a signal with no track record yet. */
+  /* CROSS-BOOK PRICE CHECK 2026-09-04 (council). This is the piece that turns the signal
+     from "here is where money is" into something with a verifiable edge. Knowing money is
+     on a side requires believing that money is smart -- unprovable, and on a big favorite
+     probably false. But "that same side is available cheaper at another book" is a fact,
+     independent of whose money it is. That price gap is the actual product.
+     Reuses /api/odds bestPrices, already computed per book per market for every game, so
+     no new data source is needed. Matching is deliberately conservative: Novig uses team
+     abbreviations, the Odds API uses full names, so anything that does not match cleanly
+     returns null and the play simply carries no cross-book edge rather than a wrong one. */
+  const NOVIG_ODDS_SPORT = { MLB:'MLB', NFL:'NFL', NCAAF:'NCAAF', NBA:'NBA', NHL:'NHL' };
+
+  async function novigCrossBook(signals) {
+    const bySport = {};
+    signals.forEach(s => { if (s.league) (bySport[s.league] = bySport[s.league] || []).push(s); });
+    const boards = {};
+    await Promise.all(Object.keys(bySport).map(async lg => {
+      const sp = NOVIG_ODDS_SPORT[lg];
+      if (!sp) return;
+      try {
+        const r = await fetch(`${SITE_URL}/api/odds?sport=${sp}`);
+        const j = await r.json();
+        boards[lg] = (j && j.plays) || [];
+      } catch { boards[lg] = []; }
+    }));
+
+    const mktKey = { MONEY: 'h2h', SPREAD: 'spreads', TOTAL: 'totals' };
+    return signals.map(s => {
+      const board = boards[s.league] || [];
+      // Match the game by requiring BOTH team surnames to appear in the Novig event text.
+      const desc = String(s.event || '').toLowerCase();
+      const game = board.find(p => {
+        const last = n => String(n || '').toLowerCase().split(' ').pop();
+        const a = last(p.away), h = last(p.home);
+        return a && h && desc.includes(a) && desc.includes(h);
+      });
+      if (!game) return { ...s, crossBook: null };
+      const mk = game.markets && game.markets[mktKey[s.marketType]];
+      const best = mk && mk.bestPrices;
+      if (!best) return { ...s, crossBook: null };
+
+      // Find the bestPrices entry for our side. Totals key on Over/Under; team markets
+      // key on full name, which we match back from the Novig abbreviation.
+      const side = String(s.sharpSide || '');
+      let key = null;
+      if (s.marketType === 'TOTAL') {
+        const m = side.match(/^(Over|Under)/i);
+        if (m) key = Object.keys(best).find(k => k.toLowerCase() === m[1].toLowerCase());
+      } else {
+        const ab = side.replace(/\s*[+-][\d.]+\s*$/, '').trim().toUpperCase();
+        key = Object.keys(best).find(k => {
+          const words = String(k).toUpperCase().split(' ');
+          const initials = words.map(w => w[0]).join('');
+          return initials === ab || String(k).toUpperCase().replace(/[^A-Z]/g, '').startsWith(ab);
+        });
+      }
+      if (!key || !best[key] || best[key].price == null) return { ...s, crossBook: null };
+
+      const bookPrice = best[key].price;
+      const nov = s.sharpSideAmerican;
+      if (nov == null) return { ...s, crossBook: null };
+      // "Better" means a higher payout for the same side: less negative, or more positive.
+      const payout = a => (a > 0 ? a / 100 : 100 / Math.abs(a));
+      const better = payout(bookPrice) > payout(nov);
+      return { ...s, crossBook: { book: best[key].book, price: bookPrice, better,
+        edgePct: Math.round((payout(bookPrice) - payout(nov)) * 1000) / 10 } };
+    });
+  }
+
   const NOVIG_ESPN_PATHS = { MLB:'baseball/mlb', NFL:'football/nfl',
     NCAAF:'football/college-football', NBA:'basketball/nba', NHL:'hockey/nhl' };
 
@@ -1314,7 +1382,13 @@ module.exports = async function handler(req, res) {
       const d = await r.json();
       if (!d || !d.ok) return res.status(200).json({ ok: false, error: (d && d.error) || 'scan failed' });
 
-      const eligible = d.signals || [];
+      // Council: alert only when BOTH agree -- exchange money on a side AND a better
+      // price for it elsewhere. Either alone is weaker than the pair.
+      const withBook = await novigCrossBook(d.signals || []);
+      const requireEdge = String(req.query.anyEdge || '') !== '1';
+      const eligible = requireEdge
+        ? withBook.filter(s => s.crossBook && s.crossBook.better)
+        : withBook;
       // Grade anything settled before reporting, so the record shown is current.
       const gradeRes = await novigGradePending();
       const rec = await novigRecord();
@@ -1330,17 +1404,23 @@ module.exports = async function handler(req, res) {
         fresh.push(s);
       }
 
-      const lines = fresh.slice(0, 10).map(s =>
-        `\u{1F3AF} **SHARP SIDE \u2014 ${s.sharpSide} \u2014 ${s.score}**\n`
-        + `   ${s.league ? '[' + s.league + '] ' : ''}${s.event} \u00b7 ${s.market}\n`
-        + `   $${s.heavySideLiquidityUsd.toLocaleString()} resting on ${s.heavySide} (vs $${s.lightSideLiquidityUsd.toLocaleString()})`
-        + (s.sharpSideAmerican != null
-            ? `\n   Entry ${s.sharpSideAmerican > 0 ? '+' : ''}${s.sharpSideAmerican} \u00b7 ${(() => {
-                const st = novigStakeFor(s.sharpSideAmerican);
-                return st ? `risk ${st.risk}u to win ${st.toWin}u` : '';
-              })()}`
-            : '')
-      );
+      /* ALERT FORMAT 2026-09-04 (per Derek: "simple to say, this is the inferred sharp
+         side take this"). Lead with the action and the number to take it at. Mechanics
+         (liquidity, imbalance score) are demoted to one supporting line -- present for
+         auditing, never the headline. */
+      const lines = fresh.slice(0, 10).map(s => {
+        const cb = s.crossBook;
+        const px = cb && cb.better ? cb.price : s.sharpSideAmerican;
+        const where = cb && cb.better ? cb.book : 'Novig';
+        const fmt = a => (a > 0 ? '+' + a : String(a));
+        const st = novigStakeFor(px);
+        return `\u26A1 **TAKE: ${s.sharpSide} (${fmt(px)} at ${where})**\n`
+          + `   ${s.league ? '[' + s.league + '] ' : ''}${s.event}\n`
+          + `   Exchange money on ${s.sharpSide}`
+          + (cb && cb.better ? ` \u00b7 better than Novig's ${fmt(s.sharpSideAmerican)}` : '')
+          + (st ? `\n   Risk ${st.risk}u to win ${st.toWin}u` : '')
+          + `\n   _$${s.sharpSideLiquidityUsd.toLocaleString()} bid \u00b7 imbalance ${s.score}_`;
+      });
 
       const result = {
         ok: true, leagues: d.leagues, leaguesFound: d.leaguesFound,
@@ -1361,9 +1441,8 @@ module.exports = async function handler(req, res) {
           + `${rec.winPct != null ? ` (${rec.winPct}%)` : ''} \u00b7 ${rec.units >= 0 ? '+' : ''}${rec.units}u`
           + `${rec.ungraded ? ` \u00b7 ${rec.ungraded} ungraded` : ''}`
         : 'Record: no graded plays yet';
-      const header = `\u26A1 **Novig Sharp Money** \u2014 ${fresh.length} signal${fresh.length > 1 ? 's' : ''}\n`
-        + `${recLine}\n`
-        + `_Heavy resting liquidity means that money is SELLING that side \u2014 the sharp read is the opposite._`;
+      const header = `\u26A1 **Novig Sharp Money** \u2014 ${fresh.length} play${fresh.length > 1 ? 's' : ''}\n${recLine}`;
+
       const send = await sendDiscord(webhook, header + '\n\n' + lines.join('\n\n'));
       result.sent = !!(send && send.ok);
       // Only record plays that actually went out -- a signal nobody was told about
@@ -1377,7 +1456,11 @@ module.exports = async function handler(req, res) {
             event: s.event, eventId: s.eventId, league: s.league, gameTime: s.gameTime,
             market: s.market, marketType: s.marketType, strike: s.strike,
             sharpSide: s.sharpSide, sharpSideAmerican: s.sharpSideAmerican,
-            score: s.score, heavySideLiquidityUsd: s.heavySideLiquidityUsd,
+            score: s.score, sharpSideLiquidityUsd: s.sharpSideLiquidityUsd,
+            crossBook: s.crossBook || null,
+            // Old inverted read, graded in parallel so results settle the direction
+            // question rather than more reasoning about it.
+            shadowInverseSide: s.shadowInverseSide, shadowInverseAmerican: s.shadowInverseAmerican,
             alertedAt: Date.now(),
           }));
           await upstashPost(['SET', 'novig:pending', JSON.stringify(cur.slice(-300)), 'EX', '2592000']);
