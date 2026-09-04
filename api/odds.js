@@ -412,8 +412,14 @@ async function scanNovigSharpSignals(leagues, opts){
       const a=sig.sharpSideAmerican, b=sig.otherSideAmerican;
       if(a==null||Math.abs(a)>NOVIG_MAX_ABS_AMERICAN)return;
       if(b!=null&&Math.abs(b)>NOVIG_MAX_ABS_AMERICAN)return;
+      // Game date carried alongside gameTime so every venue displays consistently and a
+      // stale/far-out game is obvious on sight rather than needing the raw timestamp read.
+      const gt=(event.game&&event.game.scheduled_start)||null;
       signals.push({event:event.description,eventId:event.id,league:event.league,
-        gameTime:(event.game&&event.game.scheduled_start)||null,sportFloor,...sig});
+        gameTime:gt,
+        gameDate:gt?new Date(gt).toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'America/New_York'}):null,
+        gameTimeLabel:gt?new Date(gt).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/New_York'}):null,
+        sportFloor,...sig});
     });
   });
   signals.sort((a,b)=>b.score-a.score);
