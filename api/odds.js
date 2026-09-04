@@ -247,29 +247,48 @@ function novigLiquidityUsd(outcome){
 // sharp side (opposite of whichever outcome carries more resting sell liquidity) and a
 // 0-100 score scaled by how lopsided the imbalance is. Null if the market has fewer than
 // two live outcomes or genuinely balanced liquidity (no real lean either way).
+/* DIRECTION 2026-09-04 -- corrected, and deliberately logged BOTH ways.
+   Novig's `orders` are BIDS to buy that outcome, not offers to sell it. Proof from the
+   real MIL/CIN book: Under's `available` 0.59 + Over's best `orders` 0.41 = exactly 1.00,
+   and Over's `available` 0.47 + Under's `orders` 0.53 = 1.00. On a binary exchange a bid
+   to buy Under at 0.53 IS the offer to buy Over at 0.47 -- same order, two views. So bid
+   weight sitting on a side means money WANTS that side.
+   The original build followed OddsJam's public writeup, which describes `available`
+   (the ask side), and mapped it onto `orders` (the bid side) without checking. The 1.00
+   sum would have caught it immediately.
+   Because this read has now been revised twice, BOTH interpretations are emitted --
+   `sharpSide` (bid-heavy, current best understanding) and `shadowInverseSide` (the old
+   read). Both get graded, so outcomes settle this instead of more argument. */
 function novigSharpSideForMarket(market){
   const outcomes=(market.outcomes||[]).filter(o=>(o.orders||[]).length>0);
   if(outcomes.length<2)return null;
-  // available = best price you can actually BUY that outcome at (decimal 0-1). Captured
-  // per outcome so the sharp side's real entry price rides along with the signal --
-  // needed to stake and grade the play later, and it has to be the price AT ALERT TIME,
-  // not whatever it drifts to by the time the game settles.
   const withLiq=outcomes.map(o=>({description:o.description,liquidityUsd:novigLiquidityUsd(o),
     price:(o.available!=null&&isFinite(parseFloat(o.available)))?parseFloat(o.available):null}));
   withLiq.sort((a,b)=>b.liquidityUsd-a.liquidityUsd);
   const [heaviest,lightest]=withLiq;
-  if(heaviest.liquidityUsd<=0)return null;
-  const imbalance=lightest?(heaviest.liquidityUsd-lightest.liquidityUsd)/heaviest.liquidityUsd:1;
-  // Real sharp side is the OPPOSITE of the outcome carrying the resting sell liquidity.
-  const sharpSide=lightest?lightest.description:null;
+  if(!lightest||heaviest.liquidityUsd<=0)return null;
+  const imbalance=(heaviest.liquidityUsd-lightest.liquidityUsd)/heaviest.liquidityUsd;
   const score=Math.round(Math.min(imbalance,1)*100);
-  // Decimal -> American. Kept here so every consumer sees the same conversion rather
-  // than each re-deriving it and drifting.
-  const p=lightest?lightest.price:null;
-  const sharpSideAmerican=(p!=null&&p>0&&p<1)
-    ? (p>=0.5?Math.round(-(p/(1-p))*100):Math.round(((1-p)/p)*100))
-    : null;
-  return{market:market.description,marketType:market.type,strike:market.strike,heavySide:heaviest.description,heavySideLiquidityUsd:Math.round(heaviest.liquidityUsd),lightSideLiquidityUsd:lightest?Math.round(lightest.liquidityUsd):0,sharpSide,sharpSidePrice:p,sharpSideAmerican,score};
+
+  // Money is bidding on the heavy side -> that is the inferred side to take.
+  const sharp=heaviest, other=lightest;
+  const toAmerican=x=>(x!=null&&x>0&&x<1)
+    ? (x>=0.5?Math.round(-(x/(1-x))*100):Math.round(((1-x)/x)*100)) : null;
+
+  return{
+    market:market.description,marketType:market.type,strike:market.strike,
+    sharpSide:sharp.description,
+    sharpSideLiquidityUsd:Math.round(sharp.liquidityUsd),
+    sharpSidePrice:sharp.price,
+    sharpSideAmerican:toAmerican(sharp.price),
+    otherSide:other.description,
+    otherSideLiquidityUsd:Math.round(other.liquidityUsd),
+    otherSideAmerican:toAmerican(other.price),
+    // Old (inverted) read, carried for shadow grading only -- never alerted on.
+    shadowInverseSide:other.description,
+    shadowInverseAmerican:toAmerican(other.price),
+    score,
+  };
 }
 
 /* NOVIG SHARP ALERT GATES 2026-09-04 -- council-reviewed and raised from the first cut.
@@ -291,7 +310,26 @@ function novigSharpSideForMarket(market){
      liquidity. The main line is by definition the most-traded one, so this is
      sport-agnostic. Derivative types (1H, first-inning, team totals) are dropped. */
 const NOVIG_ALERT_MIN_SCORE = 80;
-const NOVIG_ALERT_MIN_LIQ   = 3000;
+const NOVIG_ALERT_MIN_LIQ   = 3000; // default; per-sport overrides below
+
+/* PRICE EXTREMITY GATE 2026-09-04 (council). Replaces the earlier idea of cutting by
+   spread size, which was wrong: "beyond +/-3.5" was reasoned off a baseball slate and
+   would have thrown away +7 NFL spreads -- normal, competitive markets where sharp money
+   is most plausible. The real distinction is not how many points, it is whether a genuine
+   two-way market exists at all. A +7 spread prices near -110 both ways; a -41.5 blowout
+   prices near -2000/+1200, where nobody is making a market and any money there is
+   one-directional by default. Filtering on PRICE generalises across every sport with no
+   per-sport tuning, which is exactly where the last two attempts went wrong. */
+const NOVIG_MAX_ABS_AMERICAN = 400;
+
+/* PER-SPORT LIQUIDITY FLOORS 2026-09-04 (council). The one gate that genuinely cannot be
+   shared. $3,000 was calibrated on MLB books running $2k-$7k; real NFL books the same
+   night carried $1,292 on a moneyline and $750 on a spread -- real markets, an order of
+   magnitude thinner because kickoff was two weeks out. A flat floor silently excludes
+   whole sports instead of filtering them.
+   PROVISIONAL: 1500 is inferred from a two-weeks-out NFL board, the thinnest case, not a
+   representative one. Revisit once real in-window data exists. */
+const NOVIG_MIN_LIQ_BY_SPORT = { MLB:3000, NCAAF:3000, NFL:1500, NBA:1500, NHL:1500 };
 const NOVIG_MAIN_TYPES      = ['MONEY','SPREAD','TOTAL'];
 const NOVIG_LEAGUES         = ['MLB','NFL','NCAAF','NBA','NHL'];
 
@@ -362,14 +400,19 @@ async function scanNovigSharpSignals(leagues, opts){
       if(!NOVIG_MAIN_TYPES.includes(m.type))return;
       const s=novigSharpSideForMarket(m);
       if(!s)return;
-      const total=s.heavySideLiquidityUsd+s.lightSideLiquidityUsd;
+      const total=s.sharpSideLiquidityUsd+s.otherSideLiquidityUsd;
       if(!bestByType[m.type]||total>bestByType[m.type].total)bestByType[m.type]={sig:s,total};
     });
+    const sportFloor=(opts&&opts.minLiq!=null)?minLiq:(NOVIG_MIN_LIQ_BY_SPORT[event.league]||NOVIG_ALERT_MIN_LIQ);
     Object.values(bestByType).forEach(({sig})=>{
       if(sig.score<minScore)return;
-      if(sig.heavySideLiquidityUsd<minLiq)return;
+      if(sig.sharpSideLiquidityUsd<sportFloor)return;
+      // Price gate: skip markets with no real two-way pricing on either side.
+      const a=sig.sharpSideAmerican, b=sig.otherSideAmerican;
+      if(a==null||Math.abs(a)>NOVIG_MAX_ABS_AMERICAN)return;
+      if(b!=null&&Math.abs(b)>NOVIG_MAX_ABS_AMERICAN)return;
       signals.push({event:event.description,eventId:event.id,league:event.league,
-        gameTime:(event.game&&event.game.scheduled_start)||null,...sig});
+        gameTime:(event.game&&event.game.scheduled_start)||null,sportFloor,...sig});
     });
   });
   signals.sort((a,b)=>b.score-a.score);
