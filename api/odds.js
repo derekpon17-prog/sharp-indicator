@@ -1394,19 +1394,6 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
 
-  // TEMP END-TO-END TEST 2026-09-03: full pipeline, real game lookup by team name ->
-  // order book -> sharp side per market. Remove after confirming.
-  if(req.query&&req.query.novigSharpTest){
-    try{
-      const eventId=await fetchNovigEventId(req.query.away,req.query.home,(req.query.league||'MLB').toUpperCase());
-      if(!eventId)return res.status(200).json({ok:false,error:'no matching event found'});
-      const markets=await fetchNovigOrderBook(eventId);
-      const results=markets.map(novigSharpSideForMarket).filter(Boolean);
-      return res.status(200).json({ok:true,eventId,results});
-    }catch(e){
-      return res.status(200).json({ok:false,error:e.message});
-    }
-  }
 
 
   const sport=((req.query&&req.query.sport)||'MLB').toUpperCase();
