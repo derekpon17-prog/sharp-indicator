@@ -1370,6 +1370,184 @@ module.exports = async function handler(req, res) {
      sweep. Same 2h-before-commence gate as the Converge report, per Derek's stated rule
      that nothing should fire while a game is still hours away.
      GET ?novigAlert=1&league=MLB[&dry=1] */
+  /* NOVIG ALERT GRAPHIC 2026-09-04 (per Derek). Same satori+resvg pipeline as the
+     Converge report. Two Novig-specific wrinkles:
+     - Novig identifies sides by abbreviation ("KU", "GAST"), not full team name, so
+       logos are looked up from the EVENT description ("Long Island University @ Kansas")
+       which does carry real names, rather than from the abbreviation.
+     - Totals get both logos, since neither team is "the pick". Moneyline/spread show the
+       picked team alone when the abbreviation matches confidently, and fall back to both
+       logos when it doesn't -- showing both is honest, showing the wrong one is not.
+     Icons are drawn shapes, never emoji: satori has no emoji glyph coverage and they
+     render as invisible blanks, which is how the first Converge card silently lost its
+     markers. */
+  if (req.query && req.query.novigImage) {
+    try {
+      const satori = require('satori').default;
+      const { Resvg } = require('@resvg/resvg-js');
+      const teamLogos = require('../lib/team_logos_data.js');
+
+      let fonts = global.__reportImageFonts;
+      if (!fonts) {
+        const [rg, bd] = await Promise.all([
+          fetch('https://raw.githubusercontent.com/googlefonts/opensans/main/fonts/ttf/OpenSans-Regular.ttf').then(r => r.arrayBuffer()),
+          fetch('https://raw.githubusercontent.com/googlefonts/opensans/main/fonts/ttf/OpenSans-Bold.ttf').then(r => r.arrayBuffer()),
+        ]);
+        fonts = [
+          { name: 'Open Sans', data: Buffer.from(rg), weight: 400, style: 'normal' },
+          { name: 'Open Sans', data: Buffer.from(bd), weight: 700, style: 'normal' },
+        ];
+        global.__reportImageFonts = fonts;
+      }
+
+      let espnCache = null;
+      async function espnLogo(name) {
+        if (!espnCache) {
+          espnCache = {};
+          try {
+            const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard?dates=${today}&groups=80&limit=300`);
+            const j = await r.json();
+            (j.events || []).forEach(ev => {
+              const comp = ev.competitions && ev.competitions[0];
+              (comp && comp.competitors || []).forEach(x => {
+                const n = x.team && (x.team.displayName || x.team.name);
+                const l = x.team && x.team.logos && x.team.logos[0] && x.team.logos[0].href;
+                if (n && l) espnCache[n] = l;
+              });
+            });
+          } catch {}
+        }
+        const want = String(name || '').toLowerCase();
+        const hit = Object.keys(espnCache).find(k => {
+          const kk = k.toLowerCase();
+          return kk === want || kk.includes(want) || want.includes(kk);
+        });
+        return hit ? espnCache[hit] : null;
+      }
+
+      async function logoFor(league, teamName) {
+        if (!teamName) return null;
+        if (league === 'NCAAF') {
+          const url = await espnLogo(teamName);
+          if (!url) return null;
+          try {
+            const r = await fetch(url);
+            return `data:image/png;base64,${Buffer.from(await r.arrayBuffer()).toString('base64')}`;
+          } catch { return null; }
+        }
+        const tbl = league === 'NFL' ? teamLogos.nfl : teamLogos.mlb;
+        if (!tbl) return null;
+        const want = String(teamName).toLowerCase();
+        const key = Object.keys(tbl).find(k => {
+          const kk = k.toLowerCase();
+          return kk === want || kk.includes(want) || want.includes(kk);
+        });
+        return key ? `data:image/png;base64,${tbl[key]}` : null;
+      }
+
+      const leagueQ = req.query.league ? `&league=${encodeURIComponent(String(req.query.league))}` : '';
+      const win = req.query.windowHours ? `&windowHours=${encodeURIComponent(String(req.query.windowHours))}` : '&windowHours=2';
+      const sr = await fetch(`${SITE_URL}/api/odds?novigSharp=1${win}${leagueQ}`);
+      const sd = await sr.json();
+      let sigs = (sd && sd.signals) || [];
+      if (String(req.query.anyEdge || '') !== '1') {
+        const withBook = await novigCrossBook(sigs);
+        sigs = withBook.filter(s => s.crossBook && s.crossBook.better);
+      }
+      sigs = sigs.slice(0, 6);
+      const rec = await novigRecord();
+
+      const fmt = a => (a > 0 ? '+' + a : String(a));
+      const cards = await Promise.all(sigs.map(async s => {
+        const parts = String(s.event || '').split(' @ ');
+        const away = (parts[0] || '').trim(), home = (parts[1] || '').trim();
+        const [aL, hL] = await Promise.all([logoFor(s.league, away), logoFor(s.league, home)]);
+
+        // Totals -> both logos. Team markets -> the picked side alone when the
+        // abbreviation matches confidently, otherwise both.
+        let logos = [aL, hL];
+        if (s.marketType !== 'TOTAL') {
+          const ab = String(s.sharpSide || '').replace(/\s*[+-][\d.]+\s*$/, '').trim().toUpperCase();
+          const match = n => {
+            const N = String(n || '').toUpperCase();
+            return N === ab || N.replace(/[^A-Z]/g, '').startsWith(ab)
+              || N.split(' ').map(w => w[0]).join('') === ab;
+          };
+          if (match(away) && !match(home)) logos = [aL];
+          else if (match(home) && !match(away)) logos = [hL];
+        }
+        logos = logos.filter(Boolean);
+
+        const cb = s.crossBook;
+        const px = cb && cb.better ? cb.price : s.sharpSideAmerican;
+        const where = cb && cb.better ? cb.book : 'Novig';
+        const st = novigStakeFor(px);
+
+        return { type: 'div', props: {
+          style: { display: 'flex', flexDirection: 'column', backgroundColor: '#181c22',
+            borderRadius: 14, borderLeft: '4px solid #4ade80', padding: 22, marginTop: 16 },
+          children: [
+            { type: 'div', props: { style: { display: 'flex', alignItems: 'center' }, children: [
+              ...(logos.length ? [{ type: 'div', props: {
+                style: { display: 'flex', alignItems: 'center', marginRight: 14 },
+                children: logos.map((u, i) => ({ type: 'img', props: { src: u, width: 44, height: 44,
+                  style: { marginLeft: i ? 6 : 0, display: 'flex' } } })) } }] : []),
+              { type: 'div', props: { style: { display: 'flex', flexDirection: 'column' }, children: [
+                { type: 'div', props: { style: { display: 'flex', alignItems: 'center' }, children: [
+                  { type: 'div', props: { style: { display: 'flex', fontSize: 13, fontWeight: 700,
+                    color: '#0d0d12', backgroundColor: '#4ade80', borderRadius: 5,
+                    padding: '3px 9px', marginRight: 10 }, children: 'TAKE' } },
+                  { type: 'div', props: { style: { fontSize: 26, fontWeight: 700, color: '#fff', display: 'flex' },
+                    children: `${s.sharpSide}  ${fmt(px)}` } },
+                ] } },
+                { type: 'div', props: { style: { fontSize: 14, color: '#8a8a96', marginTop: 4, display: 'flex' },
+                  children: `at ${where}${cb && cb.better ? ` \u00b7 better than Novig ${fmt(s.sharpSideAmerican)}` : ''}` } },
+              ] } },
+            ] } },
+            { type: 'div', props: { style: { fontSize: 15, color: '#fff', marginTop: 12, display: 'flex' },
+              children: `${s.league ? '[' + s.league + '] ' : ''}${s.event}` } },
+            ...(st ? [{ type: 'div', props: { style: { fontSize: 14, color: '#9ca3af', marginTop: 4, display: 'flex' },
+              children: `Risk ${st.risk}u to win ${st.toWin}u` } }] : []),
+            { type: 'div', props: { style: { fontSize: 13, color: '#6b6b76', marginTop: 8, display: 'flex' },
+              children: `$${(s.sharpSideLiquidityUsd || 0).toLocaleString()} bid \u00b7 imbalance ${s.score}` } },
+          ] } };
+      }));
+
+      const recTxt = rec.sample
+        ? `Record ${rec.wins}-${rec.losses}${rec.pushes ? '-' + rec.pushes : ''}`
+          + `${rec.winPct != null ? ` (${rec.winPct}%)` : ''} \u00b7 ${rec.units >= 0 ? '+' : ''}${rec.units}u`
+        : 'Record: no graded plays yet';
+
+      const tree = { type: 'div', props: {
+        style: { display: 'flex', flexDirection: 'column', width: '100%', height: '100%',
+          backgroundColor: '#0a0a0d', padding: '30px 34px', fontFamily: 'Open Sans' },
+        children: [
+          { type: 'div', props: { style: { display: 'flex', alignItems: 'center' }, children: [
+            // Drawn bolt, not an emoji -- satori can't render emoji glyphs.
+            { type: 'div', props: { style: { display: 'flex', width: 8, height: 24,
+              backgroundColor: '#4ade80', marginRight: 12, borderRadius: 2 } } },
+            { type: 'div', props: { style: { fontSize: 26, fontWeight: 700, color: '#fff', display: 'flex' },
+              children: 'Novig Sharp Money' } },
+          ] } },
+          { type: 'div', props: { style: { fontSize: 15, color: '#9ca3af', marginTop: 6, display: 'flex' },
+            children: recTxt } },
+          ...(cards.length ? cards : [{ type: 'div', props: {
+            style: { fontSize: 17, color: '#9ca3af', marginTop: 22, display: 'flex' },
+            children: 'No qualifying plays right now.' } }]),
+        ] } };
+
+      const height = 120 + (cards.length ? cards.length * 168 : 60);
+      const svg = await satori(tree, { width: 900, height: Math.max(height, 260), fonts });
+      const png = new Resvg(svg, { fitTo: { mode: 'width', value: 900 } }).render().asPng();
+      res.setHeader('Content-Type', 'image/png');
+      res.setHeader('Cache-Control', 'public, max-age=60');
+      return res.status(200).send(png);
+    } catch (e) {
+      return res.status(500).json({ error: e.message });
+    }
+  }
+
   if (req.query && req.query.novigAlert) {
     try {
       const dry = String(req.query.dry || '') === '1';
@@ -1443,7 +1621,10 @@ module.exports = async function handler(req, res) {
         : 'Record: no graded plays yet';
       const header = `\u26A1 **Novig Sharp Money** \u2014 ${fresh.length} play${fresh.length > 1 ? 's' : ''}\n${recLine}`;
 
-      const send = await sendDiscord(webhook, header + '\n\n' + lines.join('\n\n'));
+      // Discord fetches embed.image.url itself; cache-buster so a later send never
+      // shows a stale render of an earlier board.
+      const imgEmbed = { image: { url: `${SITE_URL}/api/polymarket-notify?novigImage=1&t=${Date.now()}` } };
+      const send = await sendDiscord(webhook, header + '\n\n' + lines.join('\n\n'), [imgEmbed]);
       result.sent = !!(send && send.ok);
       // Only record plays that actually went out -- a signal nobody was told about
       // shouldn't count for or against the record.
