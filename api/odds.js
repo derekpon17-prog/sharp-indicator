@@ -1611,6 +1611,16 @@ module.exports=async function handler(req,res){
 
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
+  if(req.query&&req.query.novigIdsTest){
+    const lg=(req.query.league||'MLB').toUpperCase();
+    const r=await fetch('https://gql.novig.us/v1/graphql',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({operationName:'MyQuery',
+        query:`query MyQuery($league: String!) { event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) { id description game { scheduled_start } } }`,
+        variables:{league:lg}})});
+    const j=await r.json();
+    return res.status(200).json({ events:((j&&j.data&&j.data.event)||[]).slice(0,10) });
+  }
   if(req.query&&req.query.novigRawTest){
     const markets = await fetchNovigOrderBook(req.query.eventId);
     return res.status(200).json({ markets: markets.slice(0, 8) });
