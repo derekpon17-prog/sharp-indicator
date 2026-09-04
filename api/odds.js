@@ -1307,6 +1307,46 @@ module.exports=async function handler(req,res){
   // source) is reachable from Vercels network without a proxy -- that package uses a
   // rotating residential proxy pool, which usually signals the target blocks plain
   // datacenter IPs. Testing before building anything real on this. Remove after use.
+  if(req.query&&req.query.novigMarketTest){
+    try{
+      const eventId=req.query.eventId;
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          query: `query ($eventId: uuid!) {
+            event(where: {_and: [{id: {_eq: $eventId}}, {_or: [{status: {_eq: "OPEN_PREGAME"}}]}]}) {
+              description
+              id
+              markets {
+                description
+                type
+                strike
+                outcomes(where: {_or: [{last: {_is_null: false}}, {available: {_is_null: false}}]}) {
+                  id
+                  description
+                  last
+                  available
+                  orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}) {
+                    status
+                    qty
+                    price
+                    originalQty
+                  }
+                }
+              }
+            }
+          }`,
+          variables:{eventId},
+        }),
+      });
+      const status=r.status;
+      const text=await r.text();
+      return res.status(200).json({ok:true,upstreamStatus:status,bodyPreview:text.slice(0,3000)});
+    }catch(e){
+      return res.status(200).json({ok:false,error:e.message});
+    }
+  }
   if(req.query&&req.query.novigTest){
     try{
       const r=await fetch('https://gql.novig.us/v1/graphql',{
