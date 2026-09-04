@@ -298,34 +298,117 @@ async function detectSteam(sport) {
   };
 }
 
-/* TEMP DIAGNOSTIC 2026-09-04: dump the RAW Kalshi orderbook for one market before any
-   parsing is written. This file's own history is the reason: the first normalizeMarket
-   guessed the schema (numeric cents) and was wrong -- Kalshi actually returns string
-   dollar amounts -- and every market silently priced as zero until it was checked against
-   a live sample. Same failure shape as the Novig `available` field earlier tonight, which
-   the query filtered on but never selected. So: look at the real bytes first, then parse. */
-async function kalshiRawOrderbook(sport) {
+/* KALSHI ORDER-BOOK DEPTH 2026-09-04 (per Derek, council-approved as the real second
+   opinion alongside Novig). Same concept: resting BIDS are money committed to a side, so
+   the heavier bid stack is the side money wants.
+
+   SCHEMA WAS VERIFIED, NOT ASSUMED. A live pull showed Kalshi returns
+     orderbook_fp: { yes_dollars: [["0.3200","395.00"], ...], no_dollars: [...] }
+   -- not the `orderbook: { yes: [[cents, qty]] }` shape the standard docs describe, and
+   both price and quantity are STRINGS. Parsing was cross-checked by summing the top level
+   of each stack and confirming it equals the market's own yes_bid_dollars/no_bid_dollars
+   (0.32 and 0.65 on the sample). This file already has one documented instance of a
+   schema guess silently pricing every market at zero; that is why this was sampled first.
+
+   Kalshi markets are per-TEAM binaries ("Washington wins"), unlike Novig where both sides
+   sit in one market. So YES = the team in the ticker suffix, NO = the opponent, derived
+   from the event ticker. Where the opponent cannot be derived confidently the side is
+   labelled "NOT <team>" rather than guessed into a wrong team name. */
+function kalshiBookLiquidity(rawText) {
+  let j; try { j = JSON.parse(rawText); } catch { return null; }
+  const ob = (j && (j.orderbook_fp || j.orderbook)) || null;
+  if (!ob) return null;
+  const yes = ob.yes_dollars || ob.yes || [];
+  const no  = ob.no_dollars  || ob.no  || [];
+  const sum = a => a.reduce((s, row) => s + ((parseFloat(row[0]) || 0) * (parseFloat(row[1]) || 0)), 0);
+  // Stacks arrive ascending, so the last entry is the top of book. Verified against the
+  // market's own bid fields rather than assumed from ordering.
+  const top = a => (a.length ? parseFloat(a[a.length - 1][0]) : null);
+  return { yesUsd: sum(yes), noUsd: sum(no), yesTop: top(yes), noTop: top(no) };
+}
+
+function kalshiTeamsFromTicker(marketTicker, eventTicker) {
+  // KXMLBGAME-26SEP062210WSHLAD-WSH -> yes side WSH; event code WSHLAD holds both.
+  const suffix = String(marketTicker || '').split('-').pop() || null;
+  const evCode = String(eventTicker || '').split('-')[1] || '';
+  const m = evCode.match(/[A-Z]{2,4}$/);
+  let opponent = null;
+  if (suffix && m) {
+    const pair = evCode.slice(evCode.search(/[A-Z]{4,}$/));
+    if (pair && pair.includes(suffix)) {
+      const other = pair.replace(suffix, '');
+      if (other && other.length >= 2) opponent = other;
+    }
+  }
+  return { yesTeam: suffix, noTeam: opponent };
+}
+
+const KALSHI_MIN_SCORE = 80;
+const KALSHI_MIN_LIQ   = 1000; // PROVISIONAL: Kalshi books run thinner than Novig's; the
+                               // sampled MLB market held ~$906 YES / ~$3,227 NO. Needs
+                               // real in-window data before being treated as settled.
+const KALSHI_MAX_ABS_AMERICAN = 400;
+
+async function kalshiSharpSignals(sport, opts) {
   const series = SERIES[sport];
-  if (!series) return { ok: false, error: 'no series for ' + sport };
+  if (!series) return { ok: false, error: 'no Kalshi series for ' + sport, signals: [] };
+  const minScore = (opts && opts.minScore != null) ? opts.minScore : KALSHI_MIN_SCORE;
+  const minLiq   = (opts && opts.minLiq   != null) ? opts.minLiq   : KALSHI_MIN_LIQ;
+  const toAmerican = p => (p != null && p > 0 && p < 1)
+    ? (p >= 0.5 ? Math.round(-(p / (1 - p)) * 100) : Math.round(((1 - p) / p) * 100)) : null;
+
   for (const base of BASE_CANDIDATES) {
     try {
-      const mr = await fetch(`${base}/markets?series_ticker=${series}&status=open&limit=5`);
+      const mr = await fetch(`${base}/markets?series_ticker=${series}&status=open&limit=100`);
       if (!mr.ok) continue;
       const mj = await mr.json();
-      const mk = (mj.markets || [])[0];
-      if (!mk) continue;
-      const or = await fetch(`${base}/markets/${mk.ticker}/orderbook?depth=10`);
-      const txt = await or.text();
-      return { ok: true, base, ticker: mk.ticker, title: mk.title || mk.subtitle || null,
-        obStatus: or.status, marketSample: mk, orderbookRaw: txt.slice(0, 1500) };
-    } catch (e) { /* try next base */ }
+      const markets = (mj.markets || []).slice(0, 20); // cap: one book call per market
+      const books = await Promise.all(markets.map(async mk => {
+        try {
+          const or = await fetch(`${base}/markets/${mk.ticker}/orderbook?depth=20`);
+          return { mk, book: kalshiBookLiquidity(await or.text()) };
+        } catch { return { mk, book: null }; }
+      }));
+
+      const signals = [];
+      books.forEach(({ mk, book }) => {
+        if (!book) return;
+        const { yesUsd, noUsd, yesTop, noTop } = book;
+        const heavyIsYes = yesUsd >= noUsd;
+        const heavy = heavyIsYes ? yesUsd : noUsd;
+        const light = heavyIsYes ? noUsd : yesUsd;
+        if (heavy <= 0) return;
+        const score = Math.round(((heavy - light) / heavy) * 100);
+        if (score < minScore || heavy < minLiq) return;
+        const price = heavyIsYes ? yesTop : noTop;
+        const american = toAmerican(price);
+        if (american == null || Math.abs(american) > KALSHI_MAX_ABS_AMERICAN) return;
+        const { yesTeam, noTeam } = kalshiTeamsFromTicker(mk.ticker, mk.event_ticker);
+        const sharpSide = heavyIsYes
+          ? (yesTeam || mk.yes_sub_title || 'YES')
+          : (noTeam || (yesTeam ? 'NOT ' + yesTeam : 'NO'));
+        signals.push({
+          venue: 'kalshi', league: sport, ticker: mk.ticker, eventTicker: mk.event_ticker || null,
+          title: mk.title || null, gameTime: mk.expected_expiration_time || mk.close_time || null,
+          sharpSide, sharpSideAmerican: american, sharpSidePrice: price,
+          sharpSideLiquidityUsd: Math.round(heavy), otherSideLiquidityUsd: Math.round(light),
+          score,
+        });
+      });
+      signals.sort((a, b) => b.score - a.score);
+      return { ok: true, base, sport, marketsScanned: markets.length,
+        minScore, minLiq, signalCount: signals.length, signals };
+    } catch { /* try next base */ }
   }
-  return { ok: false, error: 'no base reachable' };
+  return { ok: false, error: 'no base reachable', signals: [] };
 }
 
 module.exports = async function handler(req, res) {
-  if (req.query && req.query.rawBook) {
-    const out = await kalshiRawOrderbook(String(req.query.rawBook).toUpperCase());
+  if (req.query && req.query.sharpBook) {
+    const out = await kalshiSharpSignals(String(req.query.sharpBook).toUpperCase(), {
+      minScore: req.query.minScore ? parseInt(req.query.minScore, 10) : null,
+      minLiq:   req.query.minLiq   ? parseInt(req.query.minLiq, 10)   : null,
+    });
     return res.status(200).json(out);
   }
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -353,6 +436,7 @@ module.exports = async function handler(req, res) {
   }
 };
 module.exports.getKalshi = getKalshi;
+module.exports.kalshiSharpSignals = kalshiSharpSignals;
 module.exports.matchGame = matchGame;
 module.exports.normalizeMarket = normalizeMarket;
 module.exports.compareToPinnacle = compareToPinnacle;
