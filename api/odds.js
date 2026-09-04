@@ -400,12 +400,28 @@ async function scanNovigSharpSignals(leagues, opts){
     return (t-nowMs)<=hrs*60*60*1000;
   });
   // Soonest first, so if the cap bites it drops the most distant games, not the imminent ones.
-  events.sort((a,b)=>{
-    const ta=a.game&&a.game.scheduled_start?new Date(a.game.scheduled_start).getTime():Infinity;
-    const tb=b.game&&b.game.scheduled_start?new Date(b.game.scheduled_start).getTime():Infinity;
-    return ta-tb;
+  /* FIX 2026-09-04 (per Derek, real incident -- Army -35.5, score 86, silently dropped).
+     The cap was GLOBAL across every requested league combined. On a Saturday, NCAAF alone
+     can have 50+ games in its 24h window -- enough on its own to fill the entire cap and
+     starve every other league, and even starve OTHER NCAAF games that arrived later in
+     the same run despite being real, in-window, alert-eligible signals. A real 86-score
+     signal was never scanned, not because it failed any gate, but because it lost a
+     capacity race it was never told about.
+     Capped PER LEAGUE instead -- each league gets its own budget regardless of how many
+     games another league has, and within a league still sorted soonest-first so the cap
+     (when it does bite) drops the most distant games, not the most imminent ones. */
+  const PER_LEAGUE_CAP = 12;
+  const byLeague = {};
+  events.forEach(e => { (byLeague[e.league] = byLeague[e.league] || []).push(e); });
+  const capped = [];
+  Object.keys(byLeague).forEach(lg => {
+    const es = byLeague[lg].sort((a,b)=>{
+      const ta=a.game&&a.game.scheduled_start?new Date(a.game.scheduled_start).getTime():Infinity;
+      const tb=b.game&&b.game.scheduled_start?new Date(b.game.scheduled_start).getTime():Infinity;
+      return ta-tb;
+    });
+    capped.push(...es.slice(0, PER_LEAGUE_CAP));
   });
-  const capped=events.slice(0,25);
   const books=await Promise.all(capped.map(async ev=>({event:ev,markets:await fetchNovigOrderBook(ev.id)})));
 
   const signals=[];
@@ -1586,27 +1602,6 @@ module.exports=async function handler(req,res){
 
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
-  if(req.query&&req.query.novigRawDebug){
-    // TEMP: raw order book for one real in-window MLB game, to see whether the
-    // 0-signal result is genuinely empty books or a real bug. Remove after use.
-    try{
-      const league=(req.query.league||'MLB').toUpperCase();
-      const r=await fetch('https://gql.novig.us/v1/graphql',{method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({operationName:'MyQuery',
-          query:`query MyQuery($league: String!) { event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) { id description game { scheduled_start } } }`,
-          variables:{league}})});
-      const j=await r.json();
-      const events=(j.data&&j.data.event)||[];
-      const nowMs=Date.now();
-      const soon=events.filter(e=>{const t=new Date(e.game.scheduled_start).getTime();return t>nowMs&&(t-nowMs)<3*3600*1000;});
-      if(!soon.length)return res.status(200).json({ok:false,note:'no MLB events in 3h window at all',totalEvents:events.length});
-      const books=await Promise.all(soon.slice(0,3).map(ev=>fetchNovigOrderBook(ev.id)));
-      return res.status(200).json({ok:true,inWindow:soon.length,sample:soon.slice(0,3).map(e=>e.description),
-        marketsPerGame:books.map(b=>(b||[]).length),
-        firstMarketRaw:books[0]&&books[0][0]?JSON.stringify(books[0][0]).slice(0,900):null});
-    }catch(e){return res.status(200).json({ok:false,error:e.message});}
-  }
   if(req.query&&req.query.novigSharp){
     // No league param = every supported league, which is the intended default for the
     // single all-sports cron. An explicit league (or comma list) still works for testing.
