@@ -343,6 +343,26 @@ function kalshiTeamsFromTicker(marketTicker, eventTicker) {
   return { yesTeam: suffix, noTeam: opponent };
 }
 
+/* GAME TIME 2026-09-04 (per Derek: "kalshi is full of futures"). The real game time is
+   encoded in the EVENT TICKER, not in any time field on the market. Confirmed on a live
+   sample: ticker KXMLBGAME-26SEP062210WSHLAD means Sep 6 22:10, while that same market
+   reported close_time 2026-09-10 and expected_expiration_time 2026-09-07 -- both are
+   SETTLEMENT dates days after the game. Using those as the game time is what made a
+   normal slate look like a board full of futures.
+   Parsed as UTC. The date is what the window filter actually keys on, so a few hours of
+   timezone ambiguity in the HHMM does not change which games qualify. */
+const KALSHI_MONTHS = { JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11 };
+function kalshiGameTimeFromTicker(eventTicker) {
+  const m = String(eventTicker || '').match(/-(\d{2})([A-Z]{3})(\d{2})(\d{4})/);
+  if (!m || KALSHI_MONTHS[m[2]] === undefined) return null;
+  const dt = new Date(Date.UTC(2000 + Number(m[1]), KALSHI_MONTHS[m[2]], Number(m[3]),
+    Number(m[4].slice(0, 2)), Number(m[4].slice(2))));
+  return isNaN(dt.getTime()) ? null : dt.toISOString();
+}
+
+// Default window. Futures and far-out games are excluded rather than filling the board.
+const KALSHI_WINDOW_HOURS = 48;
+
 const KALSHI_MIN_SCORE = 80;
 const KALSHI_MIN_LIQ   = 1000; // PROVISIONAL: Kalshi books run thinner than Novig's; the
                                // sampled MLB market held ~$906 YES / ~$3,227 NO. Needs
@@ -370,9 +390,16 @@ async function kalshiSharpSignals(sport, opts) {
         } catch { return { mk, book: null }; }
       }));
 
+      const nowMs = Date.now();
+      const windowMs = ((opts && opts.windowHours != null) ? opts.windowHours : KALSHI_WINDOW_HOURS) * 3600 * 1000;
       const signals = [];
       books.forEach(({ mk, book }) => {
         if (!book) return;
+        // Drop anything outside the window -- this is what keeps futures off the board.
+        const gt = kalshiGameTimeFromTicker(mk.event_ticker);
+        if (!gt) return; // no derivable game time -> not a dated game market, skip it
+        const gms = new Date(gt).getTime();
+        if (gms < nowMs || (gms - nowMs) > windowMs) return;
         const { yesUsd, noUsd, yesTop, noTop } = book;
         const heavyIsYes = yesUsd >= noUsd;
         const heavy = heavyIsYes ? yesUsd : noUsd;
@@ -389,7 +416,15 @@ async function kalshiSharpSignals(sport, opts) {
           : (noTeam || (yesTeam ? 'NOT ' + yesTeam : 'NO'));
         signals.push({
           venue: 'kalshi', league: sport, ticker: mk.ticker, eventTicker: mk.event_ticker || null,
-          title: mk.title || null, gameTime: mk.expected_expiration_time || mk.close_time || null,
+          title: mk.title || null,
+          gameTime: gt,
+          gameDate: new Date(gt).toLocaleDateString('en-US',
+            { month:'short', day:'numeric', timeZone:'America/New_York' }),
+          gameTimeLabel: new Date(gt).toLocaleString('en-US',
+            { month:'short', day:'numeric', hour:'numeric', minute:'2-digit', timeZone:'America/New_York' }),
+          // Settlement fields kept for reference -- they are days after the game and must
+          // never be used as the game time again.
+          closeTime: mk.close_time || null,
           sharpSide, sharpSideAmerican: american, sharpSidePrice: price,
           sharpSideLiquidityUsd: Math.round(heavy), otherSideLiquidityUsd: Math.round(light),
           score,
@@ -408,6 +443,7 @@ module.exports = async function handler(req, res) {
     const out = await kalshiSharpSignals(String(req.query.sharpBook).toUpperCase(), {
       minScore: req.query.minScore ? parseInt(req.query.minScore, 10) : null,
       minLiq:   req.query.minLiq   ? parseInt(req.query.minLiq, 10)   : null,
+      windowHours: req.query.windowHours ? parseFloat(req.query.windowHours) : null,
     });
     return res.status(200).json(out);
   }
