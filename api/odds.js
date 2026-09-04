@@ -331,6 +331,20 @@ const NOVIG_MAX_ABS_AMERICAN = 400;
    PROVISIONAL: 1500 is inferred from a two-weeks-out NFL board, the thinnest case, not a
    representative one. Revisit once real in-window data exists. */
 const NOVIG_MIN_LIQ_BY_SPORT = { MLB:3000, NCAAF:3000, NFL:1500, NBA:1500, NHL:1500 };
+
+/* PER-SPORT ALERT WINDOWS 2026-09-04 (per Derek). A flat 2h window was wrong for football.
+   MLB plays daily, so its line forms late and stays liquid to first pitch -- 2h is fine.
+   Football games happen once a week, so money accumulates across days; by 2h before a
+   Saturday or Sunday kickoff the line has already fully formed and you are looking at the
+   RESULT of sharp action rather than the action itself. A 2h window also bunches every
+   NFL alert into the narrow band before the 1pm block, which is the least useful moment
+   to receive it. Windows are forward-looking from now, so Thursday and Monday night games
+   are covered the same as Sunday ones.
+   The tradeoff is real: earlier books are thinner, and thin books are where structural
+   imbalance noise comes from. That is what the per-sport LIQUIDITY floor is for --
+   filtering on real money is more honest than using time as a proxy for it. */
+const NOVIG_WINDOW_BY_SPORT = { NCAAF:24, NFL:48, MLB:3, NBA:3, NHL:3 };
+const NOVIG_WINDOW_DEFAULT  = 3;
 const NOVIG_MAIN_TYPES      = ['MONEY','SPREAD','TOTAL'];
 const NOVIG_LEAGUES         = ['MLB','NFL','NCAAF','NBA','NHL'];
 
@@ -377,13 +391,14 @@ async function scanNovigSharpSignals(leagues, opts){
   events.forEach(e=>{leaguesFound[e.league]=(leaguesFound[e.league]||0)+1;});
 
   const nowMs=Date.now();
-  if(windowHours!=null){
-    const cutoff=windowHours*60*60*1000;
-    events=events.filter(e=>{
-      const t=e.game&&e.game.scheduled_start?new Date(e.game.scheduled_start).getTime():null;
-      return t!=null && t>nowMs && (t-nowMs)<=cutoff;
-    });
-  }
+  // An explicit windowHours overrides everything (used for testing); otherwise each
+  // league gets its own window.
+  events=events.filter(e=>{
+    const t=e.game&&e.game.scheduled_start?new Date(e.game.scheduled_start).getTime():null;
+    if(t==null||t<=nowMs)return false;
+    const hrs=(windowHours!=null)?windowHours:(NOVIG_WINDOW_BY_SPORT[e.league]||NOVIG_WINDOW_DEFAULT);
+    return (t-nowMs)<=hrs*60*60*1000;
+  });
   // Soonest first, so if the cap bites it drops the most distant games, not the imminent ones.
   events.sort((a,b)=>{
     const ta=a.game&&a.game.scheduled_start?new Date(a.game.scheduled_start).getTime():Infinity;
@@ -424,7 +439,7 @@ async function scanNovigSharpSignals(leagues, opts){
   });
   signals.sort((a,b)=>b.score-a.score);
   return {ok:true,leagues:list,leaguesFound,eventsScanned:capped.length,eventsInWindow:events.length,
-    minScore,minLiq,windowHours,signalCount:signals.length,signals};
+    minScore,minLiq,windowHours:windowHours!=null?windowHours:NOVIG_WINDOW_BY_SPORT,signalCount:signals.length,signals};
 }
 
 function findKalshiScoreForPlay(play, steamMarkets){
