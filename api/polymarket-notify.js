@@ -1151,6 +1151,146 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  /* NOVIG RECORD TRACKING 2026-09-04 (per Derek). Staking rule, his: a plus-money play
+     RISKS 1u to win the odds; a minus-money play risks the odds TO WIN 1u. So +127 risks
+     1u to win 1.27u, and -150 risks 1.5u to win 1u. P&L is therefore asymmetric and must
+     be computed per play from the entry price, not assumed flat.
+     Price is captured at ALERT time, not at grade time -- a signal's honest result is
+     what you could actually have gotten when it fired, not where the line drifted to.
+     Grading matches Novig's team abbreviation against ESPN's own abbreviation rather than
+     fuzzy-matching team names: Novig says "GAST", ESPN says "GAST". When that match is
+     not unambiguous the play is left UNGRADED and reported as such -- a wrong grade is
+     worse than a missing one, especially on a signal with no track record yet. */
+  const NOVIG_ESPN_PATHS = { MLB:'baseball/mlb', NFL:'football/nfl',
+    NCAAF:'football/college-football', NBA:'basketball/nba', NHL:'hockey/nhl' };
+
+  function novigStakeFor(american) {
+    if (american == null || !isFinite(american)) return null;
+    const r2 = n => Math.round(n * 100) / 100;
+    return american > 0 ? { risk: 1, toWin: r2(american / 100) }
+                        : { risk: r2(Math.abs(american) / 100), toWin: 1 };
+  }
+
+  async function novigFetchFinal(league, eventDesc, gameTime) {
+    const path = NOVIG_ESPN_PATHS[league];
+    if (!path || !gameTime) return null;
+    const d0 = new Date(gameTime);
+    // Check the game's own UTC day and the day before -- late starts file under the
+    // prior day's scoreboard, the same rollover issue already hit elsewhere here.
+    const days = [d0, new Date(d0.getTime() - 86400000)]
+      .map(x => x.toISOString().slice(0, 10).replace(/-/g, ''));
+    const desc = String(eventDesc || '').toLowerCase();
+    for (const day of days) {
+      try {
+        const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${day}&limit=300`);
+        const j = await r.json();
+        for (const ev of (j.events || [])) {
+          const comp = ev.competitions && ev.competitions[0];
+          if (!comp || !(comp.status && comp.status.type && comp.status.type.completed)) continue;
+          const cs = comp.competitors || [];
+          const home = cs.find(x => x.homeAway === 'home');
+          const away = cs.find(x => x.homeAway === 'away');
+          if (!home || !away || !home.team || !away.team) continue;
+          const lastWord = n => String(n || '').toLowerCase().split(' ').pop();
+          const hit = [home.team.displayName, away.team.displayName]
+            .every(n => { const w = lastWord(n); return w && desc.includes(w); });
+          if (!hit) continue;
+          return {
+            home: { abbrev: home.team.abbreviation, score: parseInt(home.score, 10) },
+            away: { abbrev: away.team.abbreviation, score: parseInt(away.score, 10) },
+          };
+        }
+      } catch { /* try the other day */ }
+    }
+    return null;
+  }
+
+  function novigGradeOne(play, final) {
+    const side = String(play.sharpSide || '');
+    const total = final.home.score + final.away.score;
+    if (play.marketType === 'TOTAL') {
+      const m = side.match(/^(Over|Under)\s+([\d.]+)$/i);
+      if (!m) return null;
+      const line = parseFloat(m[2]);
+      if (total === line) return 'PUSH';
+      return ((m[1].toLowerCase() === 'over') === (total > line)) ? 'W' : 'L';
+    }
+    const abbrev = side.replace(/\s*[+-][\d.]+\s*$/, '').trim().toUpperCase();
+    const isHome = abbrev === String(final.home.abbrev || '').toUpperCase();
+    const isAway = abbrev === String(final.away.abbrev || '').toUpperCase();
+    if (isHome === isAway) return null; // ambiguous -- do not guess
+    const mine = isHome ? final.home : final.away;
+    const opp  = isHome ? final.away : final.home;
+    if (play.marketType === 'MONEY') {
+      return mine.score > opp.score ? 'W' : (mine.score < opp.score ? 'L' : 'PUSH');
+    }
+    if (play.marketType === 'SPREAD') {
+      const m = side.match(/([+-][\d.]+)\s*$/);
+      if (!m) return null;
+      const margin = (mine.score - opp.score) + parseFloat(m[1]);
+      if (margin === 0) return 'PUSH';
+      return margin > 0 ? 'W' : 'L';
+    }
+    return null;
+  }
+
+  async function novigGradePending() {
+    let pending = [];
+    try {
+      const raw = await upstashPost(['GET', 'novig:pending']);
+      const v = raw && raw.ok ? raw.result : null;
+      pending = v ? (typeof v === 'string' ? JSON.parse(v) : v) : [];
+    } catch { return { graded: 0, stillPending: 0 }; }
+    if (!pending.length) return { graded: 0, stillPending: 0 };
+
+    const nowMs = Date.now();
+    const ready = pending.filter(p => p.gameTime && (nowMs - new Date(p.gameTime).getTime()) > (3.5 * 3600 * 1000));
+    const notReady = pending.filter(p => !ready.includes(p));
+    if (!ready.length) return { graded: 0, stillPending: notReady.length };
+
+    let graded = [];
+    try {
+      const raw = await upstashPost(['GET', 'novig:graded']);
+      const v = raw && raw.ok ? raw.result : null;
+      graded = v ? (typeof v === 'string' ? JSON.parse(v) : v) : [];
+    } catch {}
+
+    const stillOpen = [];
+    let newlyGraded = 0;
+    for (const p of ready.slice(0, 25)) {
+      const final = await novigFetchFinal(p.league, p.event, p.gameTime);
+      if (!final) { stillOpen.push(p); continue; }
+      const res = novigGradeOne(p, final);
+      if (!res) { graded.push({ ...p, result: 'UNGRADED', units: 0, gradedAt: nowMs }); newlyGraded++; continue; }
+      const st = novigStakeFor(p.sharpSideAmerican);
+      const units = !st ? 0 : (res === 'W' ? st.toWin : (res === 'L' ? -st.risk : 0));
+      graded.push({ ...p, result: res, units: Math.round(units * 100) / 100,
+        finalScore: `${final.away.score}-${final.home.score}`, gradedAt: nowMs });
+      newlyGraded++;
+    }
+    try {
+      await upstashPost(['SET', 'novig:graded', JSON.stringify(graded.slice(-500)), 'EX', '7776000']);
+      await upstashPost(['SET', 'novig:pending', JSON.stringify(notReady.concat(stillOpen)), 'EX', '2592000']);
+    } catch {}
+    return { graded: newlyGraded, stillPending: notReady.length + stillOpen.length };
+  }
+
+  async function novigRecord() {
+    try {
+      const raw = await upstashPost(['GET', 'novig:graded']);
+      const v = raw && raw.ok ? raw.result : null;
+      const g = v ? (typeof v === 'string' ? JSON.parse(v) : v) : [];
+      const scored = g.filter(x => x.result === 'W' || x.result === 'L' || x.result === 'PUSH');
+      const w = scored.filter(x => x.result === 'W').length;
+      const l = scored.filter(x => x.result === 'L').length;
+      const p = scored.filter(x => x.result === 'PUSH').length;
+      const units = Math.round(scored.reduce((s, x) => s + (x.units || 0), 0) * 100) / 100;
+      const ungraded = g.filter(x => x.result === 'UNGRADED').length;
+      return { sample: scored.length, wins: w, losses: l, pushes: p, units, ungraded,
+        winPct: (w + l) ? Math.round((w / (w + l)) * 1000) / 10 : null };
+    } catch { return { sample: 0, wins: 0, losses: 0, pushes: 0, units: 0, ungraded: 0, winPct: null }; }
+  }
+
   /* NOVIG SHARP-SIDE ALERT 2026-09-03 (per Derek): posts to Discord when Novig's own
      order book shows a large one-sided pile of resting liquidity. Real mechanic: resting
      orders on an outcome are offers to SELL it, so heavy size sitting on "MIL +2.5" means
@@ -1175,6 +1315,9 @@ module.exports = async function handler(req, res) {
       if (!d || !d.ok) return res.status(200).json({ ok: false, error: (d && d.error) || 'scan failed' });
 
       const eligible = d.signals || [];
+      // Grade anything settled before reporting, so the record shown is current.
+      const gradeRes = await novigGradePending();
+      const rec = await novigRecord();
 
       const day = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
       const fresh = [];
@@ -1191,6 +1334,12 @@ module.exports = async function handler(req, res) {
         `\u{1F3AF} **SHARP SIDE \u2014 ${s.sharpSide} \u2014 ${s.score}**\n`
         + `   ${s.league ? '[' + s.league + '] ' : ''}${s.event} \u00b7 ${s.market}\n`
         + `   $${s.heavySideLiquidityUsd.toLocaleString()} resting on ${s.heavySide} (vs $${s.lightSideLiquidityUsd.toLocaleString()})`
+        + (s.sharpSideAmerican != null
+            ? `\n   Entry ${s.sharpSideAmerican > 0 ? '+' : ''}${s.sharpSideAmerican} \u00b7 ${(() => {
+                const st = novigStakeFor(s.sharpSideAmerican);
+                return st ? `risk ${st.risk}u to win ${st.toWin}u` : '';
+              })()}`
+            : '')
       );
 
       const result = {
@@ -1198,6 +1347,7 @@ module.exports = async function handler(req, res) {
         scanned: d.eventsScanned, eventsInWindow: d.eventsInWindow, totalSignals: d.signalCount,
         withinWindow: eligible.length, newAlerts: fresh.length,
         thresholds: { minScore: d.minScore, minLiq: d.minLiq },
+        record: rec, gradedThisRun: gradeRes.graded, stillPendingGrade: gradeRes.stillPending,
         preview: lines,
       };
       if (dry) { result.dryRun = true; return res.status(200).json(result); }
@@ -1206,10 +1356,33 @@ module.exports = async function handler(req, res) {
       const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
       if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
 
+      const recLine = rec.sample
+        ? `Record: ${rec.wins}-${rec.losses}${rec.pushes ? '-' + rec.pushes : ''}`
+          + `${rec.winPct != null ? ` (${rec.winPct}%)` : ''} \u00b7 ${rec.units >= 0 ? '+' : ''}${rec.units}u`
+          + `${rec.ungraded ? ` \u00b7 ${rec.ungraded} ungraded` : ''}`
+        : 'Record: no graded plays yet';
       const header = `\u26A1 **Novig Sharp Money** \u2014 ${fresh.length} signal${fresh.length > 1 ? 's' : ''}\n`
+        + `${recLine}\n`
         + `_Heavy resting liquidity means that money is SELLING that side \u2014 the sharp read is the opposite._`;
       const send = await sendDiscord(webhook, header + '\n\n' + lines.join('\n\n'));
       result.sent = !!(send && send.ok);
+      // Only record plays that actually went out -- a signal nobody was told about
+      // shouldn't count for or against the record.
+      if (send && send.ok) {
+        try {
+          const raw = await upstashPost(['GET', 'novig:pending']);
+          const v = raw && raw.ok ? raw.result : null;
+          const cur = v ? (typeof v === 'string' ? JSON.parse(v) : v) : [];
+          fresh.slice(0, 10).forEach(s => cur.push({
+            event: s.event, eventId: s.eventId, league: s.league, gameTime: s.gameTime,
+            market: s.market, marketType: s.marketType, strike: s.strike,
+            sharpSide: s.sharpSide, sharpSideAmerican: s.sharpSideAmerican,
+            score: s.score, heavySideLiquidityUsd: s.heavySideLiquidityUsd,
+            alertedAt: Date.now(),
+          }));
+          await upstashPost(['SET', 'novig:pending', JSON.stringify(cur.slice(-300)), 'EX', '2592000']);
+        } catch {}
+      }
       result.sendResult = send;
       return res.status(200).json(result);
     } catch (e) {
