@@ -1507,6 +1507,9 @@ module.exports = async function handler(req, res) {
             ] } },
             { type: 'div', props: { style: { fontSize: 15, color: '#fff', marginTop: 12, display: 'flex' },
               children: `${s.league ? '[' + s.league + '] ' : ''}${s.event}` } },
+            ...(s.gameTimeLabel ? [{ type: 'div', props: {
+              style: { fontSize: 13, color: '#8a8a96', marginTop: 3, display: 'flex' },
+              children: s.gameTimeLabel } }] : []),
             ...(st ? [{ type: 'div', props: { style: { fontSize: 14, color: '#9ca3af', marginTop: 4, display: 'flex' },
               children: `Risk ${st.risk}u to win ${st.toWin}u` } }] : []),
             { type: 'div', props: { style: { fontSize: 13, color: '#6b6b76', marginTop: 8, display: 'flex' },
@@ -1593,7 +1596,7 @@ module.exports = async function handler(req, res) {
         const fmt = a => (a > 0 ? '+' + a : String(a));
         const st = novigStakeFor(px);
         return `\u26A1 **TAKE: ${s.sharpSide} (${fmt(px)} at ${where})**\n`
-          + `   ${s.league ? '[' + s.league + '] ' : ''}${s.event}\n`
+          + `   ${s.league ? '[' + s.league + '] ' : ''}${s.event}${s.gameTimeLabel ? ' \u00b7 ' + s.gameTimeLabel : ''}\n`
           + `   Exchange money on ${s.sharpSide}`
           + (cb && cb.better ? ` \u00b7 better than Novig's ${fmt(s.sharpSideAmerican)}` : '')
           + (st ? `\n   Risk ${st.risk}u to win ${st.toWin}u` : '')
