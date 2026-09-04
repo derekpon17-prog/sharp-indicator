@@ -1586,6 +1586,27 @@ module.exports=async function handler(req,res){
 
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
+  if(req.query&&req.query.novigRawDebug){
+    // TEMP: raw order book for one real in-window MLB game, to see whether the
+    // 0-signal result is genuinely empty books or a real bug. Remove after use.
+    try{
+      const league=(req.query.league||'MLB').toUpperCase();
+      const r=await fetch('https://gql.novig.us/v1/graphql',{method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({operationName:'MyQuery',
+          query:`query MyQuery($league: String!) { event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) { id description game { scheduled_start } } }`,
+          variables:{league}})});
+      const j=await r.json();
+      const events=(j.data&&j.data.event)||[];
+      const nowMs=Date.now();
+      const soon=events.filter(e=>{const t=new Date(e.game.scheduled_start).getTime();return t>nowMs&&(t-nowMs)<3*3600*1000;});
+      if(!soon.length)return res.status(200).json({ok:false,note:'no MLB events in 3h window at all',totalEvents:events.length});
+      const books=await Promise.all(soon.slice(0,3).map(ev=>fetchNovigOrderBook(ev.id)));
+      return res.status(200).json({ok:true,inWindow:soon.length,sample:soon.slice(0,3).map(e=>e.description),
+        marketsPerGame:books.map(b=>(b||[]).length),
+        firstMarketRaw:books[0]&&books[0][0]?JSON.stringify(books[0][0]).slice(0,900):null});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   if(req.query&&req.query.novigSharp){
     // No league param = every supported league, which is the intended default for the
     // single all-sports cron. An explicit league (or comma list) still works for testing.
