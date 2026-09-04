@@ -1302,6 +1302,36 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
 
+  // TEMP DIAGNOSTIC 2026-09-03 (per Derek, real feasibility test): checking whether
+  // Novigs real GraphQL endpoint (found via the published novig-liquidity PyPI package
+  // source) is reachable from Vercels network without a proxy -- that package uses a
+  // rotating residential proxy pool, which usually signals the target blocks plain
+  // datacenter IPs. Testing before building anything real on this. Remove after use.
+  if(req.query&&req.query.novigTest){
+    try{
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          operationName:'MyQuery',
+          query:`query MyQuery($league: String!) {
+            event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
+              game { scheduled_start }
+              id
+              description
+            }
+          }`,
+          variables:{league:'MLB'},
+        }),
+      });
+      const status=r.status;
+      const text=await r.text();
+      return res.status(200).json({ok:true,upstreamStatus:status,bodyPreview:text.slice(0,2000)});
+    }catch(e){
+      return res.status(200).json({ok:false,error:e.message});
+    }
+  }
+
   const sport=((req.query&&req.query.sport)||'MLB').toUpperCase();
   const sportKey=SPORT_KEYS[sport];
   if(!sportKey)return res.status(400).json({error:'Unknown sport: '+sport});
