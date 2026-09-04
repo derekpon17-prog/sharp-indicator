@@ -1164,19 +1164,17 @@ module.exports = async function handler(req, res) {
      GET ?novigAlert=1&league=MLB[&dry=1] */
   if (req.query && req.query.novigAlert) {
     try {
-      const league = String(req.query.league || 'MLB').toUpperCase();
       const dry = String(req.query.dry || '') === '1';
-      const r = await fetch(`${SITE_URL}/api/odds?novigSharp=1&league=${league}`);
+      // No league param scans every supported league -- one cron covers all sports.
+      // windowHours is pushed DOWN into the scan rather than filtered here afterwards:
+      // order books cost one API call per event, so filtering to near-start games before
+      // fetching is what keeps an all-sports run inside the function time limit.
+      const leagueQ = req.query.league ? `&league=${encodeURIComponent(String(req.query.league))}` : '';
+      const r = await fetch(`${SITE_URL}/api/odds?novigSharp=1&windowHours=2${leagueQ}`);
       const d = await r.json();
       if (!d || !d.ok) return res.status(200).json({ ok: false, error: (d && d.error) || 'scan failed' });
 
-      const nowMs = Date.now();
-      const TWO_HOURS = 2 * 60 * 60 * 1000;
-      const eligible = (d.signals || []).filter(s => {
-        if (!s.gameTime) return false;
-        const t = new Date(s.gameTime).getTime();
-        return t > nowMs && (t - nowMs) <= TWO_HOURS;
-      });
+      const eligible = d.signals || [];
 
       const day = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
       const fresh = [];
@@ -1191,12 +1189,13 @@ module.exports = async function handler(req, res) {
 
       const lines = fresh.slice(0, 10).map(s =>
         `\u{1F3AF} **SHARP SIDE \u2014 ${s.sharpSide} \u2014 ${s.score}**\n`
-        + `   ${s.event} \u00b7 ${s.market}\n`
+        + `   ${s.league ? '[' + s.league + '] ' : ''}${s.event} \u00b7 ${s.market}\n`
         + `   $${s.heavySideLiquidityUsd.toLocaleString()} resting on ${s.heavySide} (vs $${s.lightSideLiquidityUsd.toLocaleString()})`
       );
 
       const result = {
-        ok: true, league, scanned: d.eventsScanned, totalSignals: d.signalCount,
+        ok: true, leagues: d.leagues, leaguesFound: d.leaguesFound,
+        scanned: d.eventsScanned, eventsInWindow: d.eventsInWindow, totalSignals: d.signalCount,
         withinWindow: eligible.length, newAlerts: fresh.length,
         thresholds: { minScore: d.minScore, minLiq: d.minLiq },
         preview: lines,
@@ -1207,7 +1206,7 @@ module.exports = async function handler(req, res) {
       const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
       if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
 
-      const header = `\u26A1 **Novig Sharp Money** \u2014 ${league} \u00b7 ${fresh.length} signal${fresh.length > 1 ? 's' : ''}\n`
+      const header = `\u26A1 **Novig Sharp Money** \u2014 ${fresh.length} signal${fresh.length > 1 ? 's' : ''}\n`
         + `_Heavy resting liquidity means that money is SELLING that side \u2014 the sharp read is the opposite._`;
       const send = await sendDiscord(webhook, header + '\n\n' + lines.join('\n\n'));
       result.sent = !!(send && send.ok);
