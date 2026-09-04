@@ -1559,7 +1559,10 @@ module.exports = async function handler(req, res) {
       // order books cost one API call per event, so filtering to near-start games before
       // fetching is what keeps an all-sports run inside the function time limit.
       const leagueQ = req.query.league ? `&league=${encodeURIComponent(String(req.query.league))}` : '';
-      const r = await fetch(`${SITE_URL}/api/odds?novigSharp=1&windowHours=2${leagueQ}`);
+      // No windowHours here on purpose -- the scan applies its own PER-SPORT window
+      // (football needs days of visibility, daily sports do not). Forcing a flat 2h
+      // here would silently override that.
+      const r = await fetch(`${SITE_URL}/api/odds?novigSharp=1${leagueQ}`);
       const d = await r.json();
       if (!d || !d.ok) return res.status(200).json({ ok: false, error: (d && d.error) || 'scan failed' });
 
