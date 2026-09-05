@@ -1699,75 +1699,58 @@ module.exports = async function handler(req, res) {
         fresh.push(s);
       }
 
-      /* ALERT FORMAT 2026-09-05 (per Derek, matching the Poly ping cards). Structured
-         Discord embeds instead of a wall of plain text: same shape the Poly channel
-         already uses -- bold title carrying the action, description with the matchup and
-         date, then labelled inline fields. Each play is its own embed, so Discord renders
-         them as separate panels rather than one run-on block.
-         The rendered PNG was dropped here deliberately: it attached as a second embed and
-         showed as an empty box whenever its own scan returned nothing, which is exactly
-         what Derek hit -- text reporting a real 85 while the image underneath said "no
-         qualifying plays". Two independent scans for one message can always disagree;
-         one embed per play cannot. */
+      /* ALERT CARD 2026-09-05 (per Derek + council): readable by someone who has never
+         placed a bet. Three questions in order -- what do I bet, how much do I risk, and
+         why should I believe it -- and nothing else.
+         Deliberately removed: the raw imbalance score. A 0-100 number implies a precision
+         this signal has not earned with zero graded plays, and means nothing to a new
+         reader. Confidence is words instead, derived from the same data.
+         The "why" is stated in plain money because that is both the most convincing thing
+         to a beginner and literally what the evidence is: X dollars backing this side, Y
+         against, held across N different lines. */
+      const fmtOdds = a => (a > 0 ? '+' + a : String(a));
+      const money = n => '$' + Math.round(n || 0).toLocaleString();
+
+      function confidenceOf(s) {
+        const cv = s.conviction;
+        const stacked = cv && !cv.middling && cv.rungsSameDirection >= 3 && cv.consistency >= 70;
+        if (s.score >= 85 && stacked) return { word: 'STRONG', color: 0x22C55E, dot: '\u{1F7E2}' };
+        if (s.score >= 70 || stacked)  return { word: 'GOOD',   color: 0x4ADE80, dot: '\u{1F7E2}' };
+        return { word: 'LEAN', color: 0x60A5FA, dot: '\u{1F535}' };
+      }
+
+      function whyOf(s) {
+        const bits = [];
+        bits.push(`${money(s.sharpSideLiquidityUsd)} is backing this side. Only ${money(s.otherSideLiquidityUsd)} is against it.`);
+        const cv = s.conviction;
+        if (cv && !cv.middling && cv.rungsSameDirection >= 2) {
+          bits.push(`Bettors are on ${cv.direction} at ${cv.rungsSameDirection} different lines \u2014 same side every time.`);
+        } else if (cv && cv.middling) {
+          bits.push(`Note: money is on both sides here, so this one is less clear-cut.`);
+        }
+        return bits.join('\n');
+      }
+
       const novEmbeds = fresh.slice(0, 8).map(s => {
         const cb = s.crossBook;
         const px = (cb && cb.better) ? cb.price : s.sharpSideAmerican;
         const where = (cb && cb.better) ? cb.book : 'Novig';
-        const fmt = a => (a > 0 ? '+' + a : String(a));
         const st = novigStakeFor(px);
+        const conf = confidenceOf(s);
         const f = [
-          { name: 'Take', value: `**${s.sharpSide}** @ ${fmt(px)} (${where})`, inline: false },
-          { name: 'Stake', value: st ? `Risk ${st.risk}u to win ${st.toWin}u` : '\u2014', inline: true },
-          { name: 'Imbalance', value: `${s.score}`, inline: true },
-          { name: 'Resting', value: `$${(s.sharpSideLiquidityUsd || 0).toLocaleString()} vs $${(s.otherSideLiquidityUsd || 0).toLocaleString()}`, inline: true },
+          { name: 'The bet', value: `**${s.sharpSide}** at ${fmtOdds(px)}\n_on ${where}_`, inline: false },
+          { name: 'Risk', value: st ? `${st.risk} unit${st.risk === 1 ? '' : 's'} to win ${st.toWin}` : '\u2014', inline: true },
+          { name: 'Game', value: s.gameTimeLabel || '\u2014', inline: true },
+          { name: 'Why', value: whyOf(s), inline: false },
         ];
         if (cb && cb.better) {
-          f.push({ name: 'Better Price', value: `${fmt(cb.price)} at ${cb.book} (Novig ${fmt(s.sharpSideAmerican)})`, inline: false });
-        }
-        // Size at each line level -- money on -13.5 and money on +14.5 are different
-        // reads, and collapsing them into one number hides that.
-        const lad2 = (s.ladder || []).filter(x => (x.totalLiquidityUsd || 0) > 0).slice(0, 4);
-        if (lad2.length > 1) {
-          f.push({ name: 'By Line', value: lad2.map(x =>
-            `${x.sharpSide}: $${(x.sharpSideLiquidityUsd || 0).toLocaleString()} vs ${x.otherSide} $${(x.otherSideLiquidityUsd || 0).toLocaleString()}`
-          ).join('\n'), inline: false });
+          f.push({ name: 'Better price elsewhere',
+            value: `${fmtOdds(cb.price)} at ${cb.book} (beats Novig's ${fmtOdds(s.sharpSideAmerican)})`, inline: false });
         }
         return {
-          title: `\u26A1 ${s.sharpSide} \u00b7 ${s.league || ''} Novig Sharp`,
-          description: `**${s.event}**${s.gameTimeLabel ? ` (${s.gameTimeLabel})` : ''}`,
-          color: s.score >= 85 ? 0xE5A00D : 0x4ADE80,
-          fields: f,
-        };
-      });
-      /* Update embeds. Deliberately visually distinct from a NEW play -- a flip means the
-         earlier read is now contradicted, which is different information from a fresh
-         signal and should never look identical to one. Includes the ladder so the size at
-         each line level is visible, which is the whole point of flagging the flip. */
-      const ladderText = s => {
-        const L = (s.ladder || []).filter(x => (x.totalLiquidityUsd || 0) > 0).slice(0, 4);
-        if (!L.length) return null;
-        return L.map(x => `${x.sharpSide}: $${(x.sharpSideLiquidityUsd || 0).toLocaleString()}`
-          + ` vs ${x.otherSide} $${(x.otherSideLiquidityUsd || 0).toLocaleString()}`).join('\n');
-      };
-      const updEmbeds = updates.slice(0, 6).map(s => {
-        const fmt = a => (a > 0 ? '+' + a : String(a));
-        const p = s._prior || {};
-        const flip = s._kind === 'FLIP';
-        const f = [
-          { name: flip ? 'Now' : 'Still', value: `**${s.sharpSide}** @ ${fmt(s.sharpSideAmerican)}`, inline: true },
-          { name: 'Was', value: flip
-              ? `${p.sharpSide || '\u2014'} (imb ${p.score != null ? p.score : '\u2014'})`
-              : `imb ${p.score != null ? p.score : '\u2014'} \u00b7 $${(p.liq || 0).toLocaleString()}`,
-            inline: true },
-          { name: 'Imbalance', value: `${p.score != null ? p.score + ' \u2192 ' : ''}${s.score}`, inline: true },
-          { name: 'Resting Now', value: `$${(s.sharpSideLiquidityUsd || 0).toLocaleString()} vs $${(s.otherSideLiquidityUsd || 0).toLocaleString()}`, inline: false },
-        ];
-        const lad = ladderText(s);
-        if (lad) f.push({ name: 'By Line', value: lad, inline: false });
-        return {
-          title: `${flip ? '\u{1F504} FLIP' : '\u{1F4C8} UPDATE'} \u00b7 ${s.sharpSide} \u00b7 ${s.league || ''}`,
-          description: `**${s.event}**${s.gameTimeLabel ? ` (${s.gameTimeLabel})` : ''}`,
-          color: flip ? 0xF87171 : 0x40B4FF,
+          title: `${conf.dot} ${conf.word} \u2014 ${s.sharpSide}`,
+          description: `${s.event}`,
+          color: conf.color,
           fields: f,
         };
       });
