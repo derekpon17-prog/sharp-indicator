@@ -389,6 +389,16 @@ async function scanNovigSharpSignals(leagues, opts){
   let events=perLeague.flat();
   const leaguesFound={};
   events.forEach(e=>{leaguesFound[e.league]=(leaguesFound[e.league]||0)+1;});
+  // DIAGNOSTIC 2026-09-04 (per Derek, real incident -- MLB showed nothing all afternoon
+  // and there was no way to tell why after the fact). Tracked per league at each stage so
+  // a quiet league is traceable to a specific cause instead of being a black box:
+  // raw events found -> passed the window filter -> actually got an order-book fetch
+  // (capped) -> produced a real signal. If raw=0, the event list call itself is failing
+  // for that league. If raw>0 but inWindow=0, the window is the story. If inWindow>0 but
+  // fetched=0, the per-league cap is starving it. If fetched>0 but signals=0, the books
+  // are genuinely balanced or something is wrong in scoring specifically for that league.
+  const diag={};
+  list.forEach(lg=>{ diag[lg]={raw:leaguesFound[lg]||0,inWindow:0,fetched:0,signals:0,topScore:0}; });
 
   const nowMs=Date.now();
   // An explicit windowHours overrides everything (used for testing); otherwise each
@@ -397,7 +407,9 @@ async function scanNovigSharpSignals(leagues, opts){
     const t=e.game&&e.game.scheduled_start?new Date(e.game.scheduled_start).getTime():null;
     if(t==null||t<=nowMs)return false;
     const hrs=(windowHours!=null)?windowHours:(NOVIG_WINDOW_BY_SPORT[e.league]||NOVIG_WINDOW_DEFAULT);
-    return (t-nowMs)<=hrs*60*60*1000;
+    const inWin=(t-nowMs)<=hrs*60*60*1000;
+    if(inWin&&diag[e.league])diag[e.league].inWindow++;
+    return inWin;
   });
   // Soonest first, so if the cap bites it drops the most distant games, not the imminent ones.
   /* FIX 2026-09-04 (per Derek, real incident -- Army -35.5, score 86, silently dropped).
@@ -429,7 +441,9 @@ async function scanNovigSharpSignals(leagues, opts){
       const tb=b.game&&b.game.scheduled_start?new Date(b.game.scheduled_start).getTime():Infinity;
       return ta-tb;
     });
-    capped.push(...es.slice(0, PER_LEAGUE_CAP));
+    const took=es.slice(0, PER_LEAGUE_CAP);
+    if(diag[lg])diag[lg].fetched=took.length;
+    capped.push(...took);
   });
   const books=await Promise.all(capped.map(async ev=>({event:ev,markets:await fetchNovigOrderBook(ev.id)})));
 
@@ -460,11 +474,17 @@ async function scanNovigSharpSignals(leagues, opts){
         gameDate:gt?new Date(gt).toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'America/New_York'}):null,
         gameTimeLabel:gt?new Date(gt).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/New_York'}):null,
         sportFloor,...sig});
+      if(diag[event.league]){diag[event.league].signals++;diag[event.league].topScore=Math.max(diag[event.league].topScore,sig.score);}
     });
   });
   signals.sort((a,b)=>b.score-a.score);
+  try{
+    await upstashPost(['LPUSH','novig:scanlog',JSON.stringify({ts:Date.now(),
+      isoTime:new Date().toISOString(),leagues:list,diag})]);
+    await upstashPost(['LTRIM','novig:scanlog','0','499']);
+  }catch{ /* logging must never break the real scan */ }
   return {ok:true,leagues:list,leaguesFound,eventsScanned:capped.length,eventsInWindow:events.length,
-    minScore,minLiq,windowHours:windowHours!=null?windowHours:NOVIG_WINDOW_BY_SPORT,signalCount:signals.length,signals};
+    minScore,minLiq,windowHours:windowHours!=null?windowHours:NOVIG_WINDOW_BY_SPORT,signalCount:signals.length,signals,diag};
 }
 
 function findKalshiScoreForPlay(play, steamMarkets){
@@ -1611,6 +1631,16 @@ module.exports=async function handler(req,res){
 
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
+  // Diagnostic read-back: GET ?novigScanLog=1[&n=20] -- real per-league history so a
+  // quiet league tomorrow is traceable instead of another after-the-fact guess.
+  if(req.query&&req.query.novigScanLog){
+    try{
+      const n=req.query.n?Math.min(parseInt(req.query.n,10),100):20;
+      const raw=await upstashPost(['LRANGE','novig:scanlog','0',String(n-1)]);
+      const rows=Array.isArray(raw)?raw.map(x=>{try{return JSON.parse(x);}catch{return null;}}).filter(Boolean):[];
+      return res.status(200).json({ok:true,count:rows.length,rows});
+    }catch(e){ return res.status(200).json({ok:false,error:e.message}); }
+  }
   if(req.query&&req.query.novigSharp){
     // No league param = every supported league, which is the intended default for the
     // single all-sports cron. An explicit league (or comma list) still works for testing.
