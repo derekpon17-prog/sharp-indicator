@@ -1559,6 +1559,26 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // Council review read-back: GET ?novigFlips=1[&n=100] -- chronological feed of every
+  // NEW/FLIP/MOVE observation, with the prior side preserved alongside the new one.
+  if (req.query && req.query.novigFlips) {
+    try {
+      const n = req.query.n ? Math.min(parseInt(req.query.n, 10), 500) : 100;
+      const raw = await upstashPost(['LRANGE', 'novig:flipfeed', '0', String(n - 1)]);
+      const arr = (raw && raw.ok && Array.isArray(raw.result)) ? raw.result : [];
+      const rows = arr.map(function (x) { try { return JSON.parse(x); } catch (e) { return null; } })
+        .filter(Boolean);
+      const flips = rows.filter(function (r) { return r.kind === 'FLIP'; });
+      return res.status(200).json({
+        ok: true, count: rows.length,
+        byKind: { NEW: rows.filter(function (r) { return r.kind === 'NEW'; }).length,
+                  FLIP: flips.length,
+                  MOVE: rows.filter(function (r) { return r.kind === 'MOVE'; }).length },
+        rows: rows,
+      });
+    } catch (e) { return res.status(200).json({ ok: false, error: e.message }); }
+  }
+
   if (req.query && req.query.novigAlert) {
     try {
       const dry = String(req.query.dry || '') === '1';
@@ -1635,6 +1655,36 @@ module.exports = async function handler(req, res) {
           await upstashPost(['SET', skey, JSON.stringify({
             sharpSide: s.sharpSide, score: s.score, liq: s.sharpSideLiquidityUsd, ts: Date.now(),
           }), 'EX', '172800']);
+          /* HISTORY 2026-09-05 (council). The SET above overwrites, which is fine for
+             detecting the NEXT change but destroys the earlier side the moment a flip
+             happens -- so a flip erases exactly the evidence needed to judge whether both
+             sides were genuinely live at once. Per Derek: money on TEM -13.5 does not
+             vanish when URI +14.5 appears; both can be real positions at different
+             numbers, and the Mason/Toledo case (someone took +10.5, +10, +9.5 AND MSU -9,
+             then won two and pushed one) shows that is deliberate middling, not a
+             reversal. Appending every observation preserves the full picture for the
+             council review WITHOUT changing any alert behaviour -- alerts still read the
+             same overwritten state and fire exactly as before. */
+          if (kind !== 'SAME') {
+            const hkey = 'novig:history:' + s.eventId + ':' + s.marketType;
+            await upstashPost(['LPUSH', hkey, JSON.stringify({
+              kind: kind, sharpSide: s.sharpSide, score: s.score,
+              liq: s.sharpSideLiquidityUsd, otherLiq: s.otherSideLiquidityUsd,
+              american: s.sharpSideAmerican, strike: s.strike != null ? s.strike : null,
+              ladder: (s.ladder || []).slice(0, 6),
+              event: s.event, league: s.league, gameTime: s.gameTime, ts: Date.now(),
+            })]);
+            await upstashPost(['LTRIM', hkey, '0', '49']);
+            await upstashPost(['EXPIRE', hkey, '604800']);
+            await upstashPost(['LPUSH', 'novig:flipfeed', JSON.stringify({
+              kind: kind, event: s.event, league: s.league, marketType: s.marketType,
+              sharpSide: s.sharpSide, score: s.score, liq: s.sharpSideLiquidityUsd,
+              priorSide: prior ? prior.sharpSide : null,
+              priorScore: prior ? prior.score : null,
+              priorLiq: prior ? prior.liq : null, ts: Date.now(),
+            })]);
+            await upstashPost(['LTRIM', 'novig:flipfeed', '0', '499']);
+          }
         } catch {}
       }
 
