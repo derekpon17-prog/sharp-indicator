@@ -1595,6 +1595,49 @@ module.exports = async function handler(req, res) {
       const gradeRes = await novigGradePending();
       const rec = await novigRecord();
 
+      /* FLIP / UPDATE DETECTION 2026-09-05 (per Derek). A signal is not a one-shot event:
+         money can sit on TEM -13.5, then the line moves and money pushes back on URI
+         +14.5, and both reads are real. Previously only the first was ever alerted -- the
+         day-dedup key includes sharpSide, so a flip technically produced a "new" alert
+         with no indication anything had changed, and a big move on the SAME side produced
+         nothing at all.
+         Now each signal is compared against its own last-seen state per event+market:
+           no prior            -> NEW
+           side changed        -> FLIP   (the interesting one)
+           same side, big move -> MOVE   (money piling on, or draining away)
+           otherwise           -> unchanged, stays silent
+         State is stored separately from the grading queue so this can never interfere
+         with record keeping. Thresholds are first-cut and unvalidated, flagged as such. */
+      const FLIP_SCORE_DELTA = 15;   // score points that count as a real move
+      const FLIP_LIQ_RATIO   = 0.5;  // +/-50% change in resting money on the sharp side
+      const updates = [];
+      for (const s of eligible) {
+        const skey = `novig:state:${s.eventId}:${s.marketType}`;
+        let prior = null;
+        try {
+          const raw = await upstashPost(['GET', skey]);
+          const v = raw && raw.ok ? raw.result : null;
+          if (v) prior = typeof v === 'string' ? JSON.parse(v) : v;
+        } catch {}
+        let kind = 'NEW';
+        if (prior) {
+          const sideChanged = String(prior.sharpSide) !== String(s.sharpSide);
+          const scoreMoved = Math.abs((s.score || 0) - (prior.score || 0)) >= FLIP_SCORE_DELTA;
+          const priorLiq = prior.liq || 0;
+          const liqMoved = priorLiq > 0
+            && Math.abs((s.sharpSideLiquidityUsd || 0) - priorLiq) / priorLiq >= FLIP_LIQ_RATIO;
+          kind = sideChanged ? 'FLIP' : ((scoreMoved || liqMoved) ? 'MOVE' : 'SAME');
+        }
+        s._kind = kind;
+        s._prior = prior;
+        if (kind === 'FLIP' || kind === 'MOVE') updates.push(s);
+        try {
+          await upstashPost(['SET', skey, JSON.stringify({
+            sharpSide: s.sharpSide, score: s.score, liq: s.sharpSideLiquidityUsd, ts: Date.now(),
+          }), 'EX', '172800']);
+        } catch {}
+      }
+
       const day = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
       const fresh = [];
       for (const s of eligible) {
@@ -1631,6 +1674,14 @@ module.exports = async function handler(req, res) {
         if (cb && cb.better) {
           f.push({ name: 'Better Price', value: `${fmt(cb.price)} at ${cb.book} (Novig ${fmt(s.sharpSideAmerican)})`, inline: false });
         }
+        // Size at each line level -- money on -13.5 and money on +14.5 are different
+        // reads, and collapsing them into one number hides that.
+        const lad2 = (s.ladder || []).filter(x => (x.totalLiquidityUsd || 0) > 0).slice(0, 4);
+        if (lad2.length > 1) {
+          f.push({ name: 'By Line', value: lad2.map(x =>
+            `${x.sharpSide}: $${(x.sharpSideLiquidityUsd || 0).toLocaleString()} vs ${x.otherSide} $${(x.otherSideLiquidityUsd || 0).toLocaleString()}`
+          ).join('\n'), inline: false });
+        }
         return {
           title: `\u26A1 ${s.sharpSide} \u00b7 ${s.league || ''} Novig Sharp`,
           description: `**${s.event}**${s.gameTimeLabel ? ` (${s.gameTimeLabel})` : ''}`,
@@ -1638,6 +1689,39 @@ module.exports = async function handler(req, res) {
           fields: f,
         };
       });
+      /* Update embeds. Deliberately visually distinct from a NEW play -- a flip means the
+         earlier read is now contradicted, which is different information from a fresh
+         signal and should never look identical to one. Includes the ladder so the size at
+         each line level is visible, which is the whole point of flagging the flip. */
+      const ladderText = s => {
+        const L = (s.ladder || []).filter(x => (x.totalLiquidityUsd || 0) > 0).slice(0, 4);
+        if (!L.length) return null;
+        return L.map(x => `${x.sharpSide}: $${(x.sharpSideLiquidityUsd || 0).toLocaleString()}`
+          + ` vs ${x.otherSide} $${(x.otherSideLiquidityUsd || 0).toLocaleString()}`).join('\n');
+      };
+      const updEmbeds = updates.slice(0, 6).map(s => {
+        const fmt = a => (a > 0 ? '+' + a : String(a));
+        const p = s._prior || {};
+        const flip = s._kind === 'FLIP';
+        const f = [
+          { name: flip ? 'Now' : 'Still', value: `**${s.sharpSide}** @ ${fmt(s.sharpSideAmerican)}`, inline: true },
+          { name: 'Was', value: flip
+              ? `${p.sharpSide || '\u2014'} (imb ${p.score != null ? p.score : '\u2014'})`
+              : `imb ${p.score != null ? p.score : '\u2014'} \u00b7 $${(p.liq || 0).toLocaleString()}`,
+            inline: true },
+          { name: 'Imbalance', value: `${p.score != null ? p.score + ' \u2192 ' : ''}${s.score}`, inline: true },
+          { name: 'Resting Now', value: `$${(s.sharpSideLiquidityUsd || 0).toLocaleString()} vs $${(s.otherSideLiquidityUsd || 0).toLocaleString()}`, inline: false },
+        ];
+        const lad = ladderText(s);
+        if (lad) f.push({ name: 'By Line', value: lad, inline: false });
+        return {
+          title: `${flip ? '\u{1F504} FLIP' : '\u{1F4C8} UPDATE'} \u00b7 ${s.sharpSide} \u00b7 ${s.league || ''}`,
+          description: `**${s.event}**${s.gameTimeLabel ? ` (${s.gameTimeLabel})` : ''}`,
+          color: flip ? 0xF87171 : 0x40B4FF,
+          fields: f,
+        };
+      });
+
       // Kept for the JSON response / debugging only -- not what gets sent any more.
       const lines = fresh.slice(0, 10).map(s => `${s.sharpSide} ${s.score} ${s.event}`);
 
@@ -1645,12 +1729,16 @@ module.exports = async function handler(req, res) {
         ok: true, leagues: d.leagues, leaguesFound: d.leaguesFound,
         scanned: d.eventsScanned, eventsInWindow: d.eventsInWindow, totalSignals: d.signalCount,
         withinWindow: eligible.length, newAlerts: fresh.length,
+        flips: updates.filter(u => u._kind === 'FLIP').length,
+        moves: updates.filter(u => u._kind === 'MOVE').length,
         thresholds: { minScore: d.minScore, minLiq: d.minLiq },
         record: rec, gradedThisRun: gradeRes.graded, stillPendingGrade: gradeRes.stillPending,
         preview: lines,
       };
       if (dry) { result.dryRun = true; return res.status(200).json(result); }
-      if (!fresh.length) { result.sent = false; result.note = 'No new signals within the 2h window'; return res.status(200).json(result); }
+      // Updates are worth sending even when nothing NEW qualified -- a flip on an already
+      // alerted play is exactly the case Derek asked to be told about.
+      if (!fresh.length && !updEmbeds.length) { result.sent = false; result.note = 'No new or updated signals in window'; return res.status(200).json(result); }
 
       const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
       if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
@@ -1660,9 +1748,13 @@ module.exports = async function handler(req, res) {
           + `${rec.winPct != null ? ` (${rec.winPct}%)` : ''} \u00b7 ${rec.units >= 0 ? '+' : ''}${rec.units}u`
           + `${rec.ungraded ? ` \u00b7 ${rec.ungraded} ungraded` : ''}`
         : 'Record: no graded plays yet';
-      const header = `\u26A1 **Novig Sharp Money** \u2014 ${fresh.length} play${fresh.length > 1 ? 's' : ''} \u00b7 ${recLine}`;
+      const bits = [];
+      if (fresh.length) bits.push(`${fresh.length} new`);
+      if (updEmbeds.length) bits.push(`${updEmbeds.length} update${updEmbeds.length > 1 ? 's' : ''}`);
+      const header = `\u26A1 **Novig Sharp Money** \u2014 ${bits.join(' \u00b7 ') || 'no plays'} \u00b7 ${recLine}`;
 
-      const send = await sendDiscord(webhook, header, novEmbeds);
+      const allEmbeds = novEmbeds.concat(updEmbeds).slice(0, 10);
+      const send = await sendDiscord(webhook, header, allEmbeds);
       result.sent = !!(send && send.ok);
       // Only record plays that actually went out -- a signal nobody was told about
       // shouldn't count for or against the record.
