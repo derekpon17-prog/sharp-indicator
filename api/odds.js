@@ -455,12 +455,29 @@ async function scanNovigSharpSignals(leagues, opts){
   books.forEach(({event,markets})=>{
     // Keep only the single highest-liquidity book per market type -- the main line.
     const bestByType={};
+    /* LADDER 2026-09-05 (per Derek): the main-line pick collapses each market type to one
+       number and throws the rest away, but the discarded strikes are real information --
+       money can sit on TEM -13.5 early and then push back on URI +14.5 after the line
+       moves, and BOTH can be sharp. Keeping every strike with its own liquidity means the
+       alert can show where money sits at each level instead of pretending one line is the
+       whole story. Built alongside the existing pick, which is unchanged. */
+    const ladderByType={};
     (markets||[]).forEach(m=>{
       if(!NOVIG_MAIN_TYPES.includes(m.type))return;
       const s=novigSharpSideForMarket(m);
       if(!s)return;
       const total=s.sharpSideLiquidityUsd+s.otherSideLiquidityUsd;
       if(!bestByType[m.type]||total>bestByType[m.type].total)bestByType[m.type]={sig:s,total};
+      (ladderByType[m.type]=ladderByType[m.type]||[]).push({
+        strike:m.strike!=null?m.strike:null,
+        market:m.description,
+        sharpSide:s.sharpSide,sharpSideLiquidityUsd:s.sharpSideLiquidityUsd,
+        otherSide:s.otherSide,otherSideLiquidityUsd:s.otherSideLiquidityUsd,
+        score:s.score,totalLiquidityUsd:Math.round(total),
+      });
+    });
+    Object.keys(ladderByType).forEach(t=>{
+      ladderByType[t].sort((a,b)=>b.totalLiquidityUsd-a.totalLiquidityUsd);
     });
     const sportFloor=(opts&&opts.minLiq!=null)?minLiq:(NOVIG_MIN_LIQ_BY_SPORT[event.league]||NOVIG_ALERT_MIN_LIQ);
     Object.values(bestByType).forEach(({sig})=>{
@@ -477,7 +494,7 @@ async function scanNovigSharpSignals(leagues, opts){
         gameTime:gt,
         gameDate:gt?new Date(gt).toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'America/New_York'}):null,
         gameTimeLabel:gt?new Date(gt).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/New_York'}):null,
-        sportFloor,...sig});
+        sportFloor,ladder:(ladderByType[sig.marketType]||[]).slice(0,6),...sig});
       if(diag[event.league]){diag[event.league].signals++;diag[event.league].topScore=Math.max(diag[event.league].topScore,sig.score);}
     });
   });
