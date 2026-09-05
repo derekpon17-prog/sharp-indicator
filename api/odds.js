@@ -310,7 +310,11 @@ function novigSharpSideForMarket(market){
      within each event and market type, keep only the book carrying the most total
      liquidity. The main line is by definition the most-traded one, so this is
      sport-agnostic. Derivative types (1H, first-inning, team totals) are dropped. */
-const NOVIG_ALERT_MIN_SCORE = 80;
+const NOVIG_ALERT_MIN_SCORE = 60; // lowered from 80 per Derek 2026-09-05 -- real evidence
+// tonight showed 80 was excluding genuinely large, real signals (Gardner-Webb/Wofford at
+// 85 with $5,779 real bid never got to send before the game moved on; several 60-75
+// range signals on tonights slate never got a chance to prove out at all). The liquidity
+// floor below is still doing real filtering work independently of this number.
 const NOVIG_ALERT_MIN_LIQ   = 3000; // default; per-sport overrides below
 
 /* PRICE EXTREMITY GATE 2026-09-04 (council). Replaces the earlier idea of cutting by
