@@ -1446,14 +1446,22 @@ module.exports = async function handler(req, res) {
         return key ? `data:image/png;base64,${tbl[key]}` : null;
       }
 
+      // FIX 2026-09-05 (per Derek, real screenshot -- text said imbalance 85, image said
+      // no qualifying plays): this fetch had its own hardcoded windowHours=2 and its own
+      // requireEdge-by-default, both DIFFERENT from what the real alert path now uses
+      // (per-sport windows, edge optional not required). Two configs for the same signal
+      // meant the image and text could disagree on the exact same board. Now matches the
+      // alert path exactly -- no forced window, requireEdge opt-in only.
       const leagueQ = req.query.league ? `&league=${encodeURIComponent(String(req.query.league))}` : '';
-      const win = req.query.windowHours ? `&windowHours=${encodeURIComponent(String(req.query.windowHours))}` : '&windowHours=2';
+      const win = req.query.windowHours ? `&windowHours=${encodeURIComponent(String(req.query.windowHours))}` : '';
       const sr = await fetch(`${SITE_URL}/api/odds?novigSharp=1${win}${leagueQ}`);
       const sd = await sr.json();
       let sigs = (sd && sd.signals) || [];
-      if (String(req.query.anyEdge || '') !== '1') {
+      if (String(req.query.requireEdge || '') === '1') {
         const withBook = await novigCrossBook(sigs);
         sigs = withBook.filter(s => s.crossBook && s.crossBook.better);
+      } else {
+        sigs = await novigCrossBook(sigs); // still attach crossBook info for display, just not required
       }
       sigs = sigs.slice(0, 6);
       const rec = await novigRecord();
