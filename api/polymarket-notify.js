@@ -1606,23 +1606,40 @@ module.exports = async function handler(req, res) {
         fresh.push(s);
       }
 
-      /* ALERT FORMAT 2026-09-04 (per Derek: "simple to say, this is the inferred sharp
-         side take this"). Lead with the action and the number to take it at. Mechanics
-         (liquidity, imbalance score) are demoted to one supporting line -- present for
-         auditing, never the headline. */
-      const lines = fresh.slice(0, 10).map(s => {
+      /* ALERT FORMAT 2026-09-05 (per Derek, matching the Poly ping cards). Structured
+         Discord embeds instead of a wall of plain text: same shape the Poly channel
+         already uses -- bold title carrying the action, description with the matchup and
+         date, then labelled inline fields. Each play is its own embed, so Discord renders
+         them as separate panels rather than one run-on block.
+         The rendered PNG was dropped here deliberately: it attached as a second embed and
+         showed as an empty box whenever its own scan returned nothing, which is exactly
+         what Derek hit -- text reporting a real 85 while the image underneath said "no
+         qualifying plays". Two independent scans for one message can always disagree;
+         one embed per play cannot. */
+      const novEmbeds = fresh.slice(0, 8).map(s => {
         const cb = s.crossBook;
-        const px = cb && cb.better ? cb.price : s.sharpSideAmerican;
-        const where = cb && cb.better ? cb.book : 'Novig';
+        const px = (cb && cb.better) ? cb.price : s.sharpSideAmerican;
+        const where = (cb && cb.better) ? cb.book : 'Novig';
         const fmt = a => (a > 0 ? '+' + a : String(a));
         const st = novigStakeFor(px);
-        return `\u26A1 **TAKE: ${s.sharpSide} (${fmt(px)} at ${where})**\n`
-          + `   ${s.league ? '[' + s.league + '] ' : ''}${s.event}${s.gameTimeLabel ? ' \u00b7 ' + s.gameTimeLabel : ''}\n`
-          + `   Exchange money on ${s.sharpSide}`
-          + (cb && cb.better ? ` \u00b7 better than Novig's ${fmt(s.sharpSideAmerican)}` : '')
-          + (st ? `\n   Risk ${st.risk}u to win ${st.toWin}u` : '')
-          + `\n   _$${s.sharpSideLiquidityUsd.toLocaleString()} bid \u00b7 imbalance ${s.score}_`;
+        const f = [
+          { name: 'Take', value: `**${s.sharpSide}** @ ${fmt(px)} (${where})`, inline: false },
+          { name: 'Stake', value: st ? `Risk ${st.risk}u to win ${st.toWin}u` : '\u2014', inline: true },
+          { name: 'Imbalance', value: `${s.score}`, inline: true },
+          { name: 'Resting', value: `$${(s.sharpSideLiquidityUsd || 0).toLocaleString()} vs $${(s.otherSideLiquidityUsd || 0).toLocaleString()}`, inline: true },
+        ];
+        if (cb && cb.better) {
+          f.push({ name: 'Better Price', value: `${fmt(cb.price)} at ${cb.book} (Novig ${fmt(s.sharpSideAmerican)})`, inline: false });
+        }
+        return {
+          title: `\u26A1 ${s.sharpSide} \u00b7 ${s.league || ''} Novig Sharp`,
+          description: `**${s.event}**${s.gameTimeLabel ? ` (${s.gameTimeLabel})` : ''}`,
+          color: s.score >= 85 ? 0xE5A00D : 0x4ADE80,
+          fields: f,
+        };
       });
+      // Kept for the JSON response / debugging only -- not what gets sent any more.
+      const lines = fresh.slice(0, 10).map(s => `${s.sharpSide} ${s.score} ${s.event}`);
 
       const result = {
         ok: true, leagues: d.leagues, leaguesFound: d.leaguesFound,
@@ -1643,12 +1660,9 @@ module.exports = async function handler(req, res) {
           + `${rec.winPct != null ? ` (${rec.winPct}%)` : ''} \u00b7 ${rec.units >= 0 ? '+' : ''}${rec.units}u`
           + `${rec.ungraded ? ` \u00b7 ${rec.ungraded} ungraded` : ''}`
         : 'Record: no graded plays yet';
-      const header = `\u26A1 **Novig Sharp Money** \u2014 ${fresh.length} play${fresh.length > 1 ? 's' : ''}\n${recLine}`;
+      const header = `\u26A1 **Novig Sharp Money** \u2014 ${fresh.length} play${fresh.length > 1 ? 's' : ''} \u00b7 ${recLine}`;
 
-      // Discord fetches embed.image.url itself; cache-buster so a later send never
-      // shows a stale render of an earlier board.
-      const imgEmbed = { image: { url: `${SITE_URL}/api/polymarket-notify?novigImage=1&t=${Date.now()}` } };
-      const send = await sendDiscord(webhook, header + '\n\n' + lines.join('\n\n'), [imgEmbed]);
+      const send = await sendDiscord(webhook, header, novEmbeds);
       result.sent = !!(send && send.ok);
       // Only record plays that actually went out -- a signal nobody was told about
       // shouldn't count for or against the record.
