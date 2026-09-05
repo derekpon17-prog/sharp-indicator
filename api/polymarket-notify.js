@@ -1568,8 +1568,18 @@ module.exports = async function handler(req, res) {
 
       // Council: alert only when BOTH agree -- exchange money on a side AND a better
       // price for it elsewhere. Either alone is weaker than the pair.
+      // FIX 2026-09-04 (per Derek, real incident -- zero alerts all day on a board with
+      // real 80+ score signals). Cross-book price was a HARD requirement, and it silently
+      // killed every real signal tonight: novigCrossBook only finds an edge when the Odds
+      // API tracks the same game, and small-conference/FCS games (exactly the kind of
+      // thin market that produces a real 80+ imbalance) are often not carried by
+      // mainstream books at all. Requiring an edge on top of an already-strict quality
+      // gate meant nothing could ever pass both at once. The quality gates (score,
+      // liquidity, price-extremity) are what decide whether a signal is real; cross-book
+      // is now a bonus shown ON the alert when it exists, never a requirement to fire.
+      // Old strict behavior is still available via requireEdge=1 for anyone who wants it.
       const withBook = await novigCrossBook(d.signals || []);
-      const requireEdge = String(req.query.anyEdge || '') !== '1';
+      const requireEdge = String(req.query.requireEdge || '') === '1';
       const eligible = requireEdge
         ? withBook.filter(s => s.crossBook && s.crossBook.better)
         : withBook;
