@@ -486,51 +486,83 @@ async function scanNovigSharpSignals(leagues, opts){
       ladderByType[t].sort((a,b)=>b.totalLiquidityUsd-a.totalLiquidityUsd);
     });
 
-    /* CONVICTION 2026-09-05 (council). The old main-line pick chose the strike with the
-       most TOTAL liquidity -- which is by definition the most balanced, most-traded
-       number, the market's consensus, and the place you'd expect the LEAST edge. On
-       Fordham/NDSU it picked Under 55.5 (score 62) while Under 57.5 sat at $5,022 against
-       $124 (score 98) and never surfaced. We were systematically selecting the least
-       informative strike in the ladder.
-       The naive correction -- just take the highest score -- fails the other way, since it
-       surfaces any thin alternate line where a few hundred dollars sits unopposed.
-       What actually distinguishes real conviction is DIRECTION HELD ACROSS STRIKES:
-       someone taking Under at 57.5, then again at 56.5, then again at 55.5 is paying
-       progressively worse numbers to keep the same side -- that is conviction. Someone
-       taking both sides around a number is middling (the Toledo/Michigan State case), and
-       means the opposite. Summing by direction separates them: stacking concentrates on
-       one side, middling splits. */
+    /* CONVICTION v2 2026-09-05 (council). IMPORTANT: this is MEASURED, not used to pick
+       the play. The v1 selection (main line = strike with the most total liquidity) is
+       untouched and still chooses what gets alerted, because v1 is 2-0 on real graded
+       plays and this rework is unproven -- it was built to fix flaws reasoned about, not
+       because anything was losing. Conviction rides alongside as extra context and as the
+       dataset for deciding later whether it deserves to drive selection at all.
+
+       Three fixes from the council review, all found in real data:
+       (1) RUNG LIQUIDITY FLOOR. v1 of this code picked "best rung" by highest score within
+           a direction, which on UC Davis chose Over 57.5 holding $36 -- a score of 99 on
+           thirty-six dollars. Exactly the thin-alternate noise the price gate and
+           liquidity floor exist to filter, reintroduced by the back door.
+       (2) NEAR-LINE ONLY. The deeper problem the $36 rung exposed: alternate ladders carry
+           structural liquidity that is not conviction. Money on Over 37.5 when the real
+           total is 47.5 is not a read on the game, it is near-certain money parked at a
+           safe number, and counting it inflated UC Davis to 99% consistency. Only rungs
+           within NEAR_LINE_PTS of the main line express an actual view, so only those
+           count now.
+       (3) THIN-MARKET FLAG. Every strong signal on the 9/5 board was FCS or low-major --
+           Fordham, UC Davis, Butler, Western Illinois -- while deep, balanced books like
+           Georgia showed nothing. That pattern suggests this may be measuring market
+           thinness rather than sharp money. Flagging it per signal so the question is
+           answerable from data instead of argued about. */
+    const RUNG_MIN_LIQ = 400;   // a rung below this cannot be "best" -- provisional
+    const NEAR_LINE_PTS = 3;    // strikes within this of the main line count -- provisional
+    const THIN_BOOK_USD = 5000; // total two-sided money below this = thin market -- provisional
+
     const convictionByType={};
     Object.keys(ladderByType).forEach(t=>{
       const rungs=ladderByType[t];
+      if(!rungs.length)return;
+      // Anchor on the same strike v1 selects, so conviction describes the play actually
+      // being alerted rather than some other number.
+      const anchor=(bestByType[t]&&bestByType[t].sig)?bestByType[t].sig:null;
+      const anchorStrike=anchor&&anchor.strike!=null?Math.abs(Number(anchor.strike)):null;
+
+      const near=rungs.filter(x=>{
+        if(anchorStrike==null||x.strike==null)return true; // moneyline has no strike
+        return Math.abs(Math.abs(Number(x.strike))-anchorStrike)<=NEAR_LINE_PTS;
+      });
+      const pool=near.length?near:rungs;
+
       const byDir={};
-      rungs.forEach(x=>{
-        // "Under 57.5" -> "Under"; "FOR +41.5" -> "FOR"; "WCU -3.5" -> "WCU"
+      pool.forEach(x=>{
         const dir=String(x.sharpSide||'').replace(/\s*[+-]?[\d.]+\s*$/,'').trim();
         if(!dir)return;
         const e=byDir[dir]=byDir[dir]||{dir,liq:0,rungs:[],best:null};
         e.liq+=x.sharpSideLiquidityUsd||0;
         e.rungs.push(x);
-        if(!e.best||x.score>e.best.score)e.best=x;
+        // Fix (1): a rung must carry real money to be the headline.
+        if((x.sharpSideLiquidityUsd||0)>=RUNG_MIN_LIQ){
+          if(!e.best||x.score>e.best.score)e.best=x;
+        }
       });
       const dirs=Object.values(byDir).sort((a,b)=>b.liq-a.liq);
       if(!dirs.length)return;
       const top=dirs[0];
       const totalDirLiq=dirs.reduce((s,x)=>s+x.liq,0);
-      // Share of same-direction money. High = stacked one way. Near 50% = split/middled.
       const consistency=totalDirLiq>0?Math.round((top.liq/totalDirLiq)*100):0;
+      const bookTotal=rungs.reduce((s,x)=>s+(x.totalLiquidityUsd||0),0);
+
       convictionByType[t]={
         direction:top.dir,
         directionLiquidityUsd:Math.round(top.liq),
         opposingLiquidityUsd:Math.round(totalDirLiq-top.liq),
         rungsSameDirection:top.rungs.length,
+        rungsConsidered:pool.length,
+        rungsTotal:rungs.length,
+        nearLineOnly:near.length>0&&near.length<rungs.length,
         consistency,
-        // Within the dominant direction, the strike where money is most lopsided is the
-        // real headline -- not the most-traded consensus number.
-        bestRung:top.best,
+        bestRung:top.best, // null when no rung clears RUNG_MIN_LIQ -- deliberately not faked
         middling:dirs.length>1&&consistency<60,
+        bookTotalUsd:Math.round(bookTotal),
+        thinMarket:bookTotal<THIN_BOOK_USD,
       };
     });
+
     const sportFloor=(opts&&opts.minLiq!=null)?minLiq:(NOVIG_MIN_LIQ_BY_SPORT[event.league]||NOVIG_ALERT_MIN_LIQ);
     Object.values(bestByType).forEach(({sig})=>{
       if(sig.score<minScore)return;
