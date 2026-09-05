@@ -435,7 +435,13 @@ async function scanNovigSharpSignals(leagues, opts){
      day seen so far, with real margin rather than matching it exactly. Untested: whether
      Novig itself rate-limits a genuinely large burst of concurrent requests -- has not
      been hit yet at this volume, worth watching rather than assuming settled. */
-  const PER_LEAGUE_CAP = 40;
+  /* CAP 2026-09-05 (council: this was the priority, ahead of any tuning). At 40 a full
+     Saturday NCAAF slate of 77 in-window games was only half seen -- Georgia was simply
+     never fetched, which reads as "no signal" and is indistinguishable from a real
+     absence. Tuning thresholds on a board we can only half see is pointless.
+     Order-book calls already run in parallel via Promise.all, so the binding cost is the
+     slowest single response, not the count -- 40 was cautious rather than measured. */
+  const PER_LEAGUE_CAP = 80;
   const byLeague = {};
   events.forEach(e => { (byLeague[e.league] = byLeague[e.league] || []).push(e); });
   const capped = [];
@@ -479,6 +485,52 @@ async function scanNovigSharpSignals(leagues, opts){
     Object.keys(ladderByType).forEach(t=>{
       ladderByType[t].sort((a,b)=>b.totalLiquidityUsd-a.totalLiquidityUsd);
     });
+
+    /* CONVICTION 2026-09-05 (council). The old main-line pick chose the strike with the
+       most TOTAL liquidity -- which is by definition the most balanced, most-traded
+       number, the market's consensus, and the place you'd expect the LEAST edge. On
+       Fordham/NDSU it picked Under 55.5 (score 62) while Under 57.5 sat at $5,022 against
+       $124 (score 98) and never surfaced. We were systematically selecting the least
+       informative strike in the ladder.
+       The naive correction -- just take the highest score -- fails the other way, since it
+       surfaces any thin alternate line where a few hundred dollars sits unopposed.
+       What actually distinguishes real conviction is DIRECTION HELD ACROSS STRIKES:
+       someone taking Under at 57.5, then again at 56.5, then again at 55.5 is paying
+       progressively worse numbers to keep the same side -- that is conviction. Someone
+       taking both sides around a number is middling (the Toledo/Michigan State case), and
+       means the opposite. Summing by direction separates them: stacking concentrates on
+       one side, middling splits. */
+    const convictionByType={};
+    Object.keys(ladderByType).forEach(t=>{
+      const rungs=ladderByType[t];
+      const byDir={};
+      rungs.forEach(x=>{
+        // "Under 57.5" -> "Under"; "FOR +41.5" -> "FOR"; "WCU -3.5" -> "WCU"
+        const dir=String(x.sharpSide||'').replace(/\s*[+-]?[\d.]+\s*$/,'').trim();
+        if(!dir)return;
+        const e=byDir[dir]=byDir[dir]||{dir,liq:0,rungs:[],best:null};
+        e.liq+=x.sharpSideLiquidityUsd||0;
+        e.rungs.push(x);
+        if(!e.best||x.score>e.best.score)e.best=x;
+      });
+      const dirs=Object.values(byDir).sort((a,b)=>b.liq-a.liq);
+      if(!dirs.length)return;
+      const top=dirs[0];
+      const totalDirLiq=dirs.reduce((s,x)=>s+x.liq,0);
+      // Share of same-direction money. High = stacked one way. Near 50% = split/middled.
+      const consistency=totalDirLiq>0?Math.round((top.liq/totalDirLiq)*100):0;
+      convictionByType[t]={
+        direction:top.dir,
+        directionLiquidityUsd:Math.round(top.liq),
+        opposingLiquidityUsd:Math.round(totalDirLiq-top.liq),
+        rungsSameDirection:top.rungs.length,
+        consistency,
+        // Within the dominant direction, the strike where money is most lopsided is the
+        // real headline -- not the most-traded consensus number.
+        bestRung:top.best,
+        middling:dirs.length>1&&consistency<60,
+      };
+    });
     const sportFloor=(opts&&opts.minLiq!=null)?minLiq:(NOVIG_MIN_LIQ_BY_SPORT[event.league]||NOVIG_ALERT_MIN_LIQ);
     Object.values(bestByType).forEach(({sig})=>{
       if(sig.score<minScore)return;
@@ -494,7 +546,7 @@ async function scanNovigSharpSignals(leagues, opts){
         gameTime:gt,
         gameDate:gt?new Date(gt).toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'America/New_York'}):null,
         gameTimeLabel:gt?new Date(gt).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/New_York'}):null,
-        sportFloor,ladder:(ladderByType[sig.marketType]||[]).slice(0,6),...sig});
+        sportFloor,ladder:(ladderByType[sig.marketType]||[]).slice(0,6),conviction:convictionByType[sig.marketType]||null,...sig});
       if(diag[event.league]){diag[event.league].signals++;diag[event.league].topScore=Math.max(diag[event.league].topScore,sig.score);}
     });
   });
