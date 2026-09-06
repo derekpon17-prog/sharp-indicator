@@ -1343,20 +1343,57 @@ module.exports = async function handler(req, res) {
     return { graded: newlyGraded, stillPending: notReady.length + stillOpen.length };
   }
 
+  /* BREAKDOWN 2026-09-06 (per Derek): a single overall number hides where the record is
+     actually coming from -- 3-1 overall could be 3-1 on NCAAF spreads or 1-0 across four
+     different sport/type combinations, and those are very different things to trust. Both
+     league and marketType already ride on every graded play (set when the alert first
+     fired), so no new data collection was needed -- just grouping what already exists.
+     "Props" isn't a real Novig marketType today (only MONEY/SPREAD/TOTAL are scanned),
+     but the bucket is included now so nothing needs restructuring if props are ever added. */
+  function novigWL(rows) {
+    const scored = rows.filter(x => x.result === 'W' || x.result === 'L' || x.result === 'PUSH');
+    const w = scored.filter(x => x.result === 'W').length;
+    const l = scored.filter(x => x.result === 'L').length;
+    const p = scored.filter(x => x.result === 'PUSH').length;
+    const units = Math.round(scored.reduce((s, x) => s + (x.units || 0), 0) * 100) / 100;
+    return { sample: scored.length, wins: w, losses: l, pushes: p, units,
+      winPct: (w + l) ? Math.round((w / (w + l)) * 1000) / 10 : null };
+  }
+  const NOVIG_TYPE_LABEL = { MONEY: 'ML', SPREAD: 'Spread', TOTAL: 'Total', PROP: 'Props' };
+
   async function novigRecord() {
     try {
       const raw = await upstashPost(['GET', 'novig:graded']);
       const v = raw && raw.ok ? raw.result : null;
       const g = v ? (typeof v === 'string' ? JSON.parse(v) : v) : [];
-      const scored = g.filter(x => x.result === 'W' || x.result === 'L' || x.result === 'PUSH');
-      const w = scored.filter(x => x.result === 'W').length;
-      const l = scored.filter(x => x.result === 'L').length;
-      const p = scored.filter(x => x.result === 'PUSH').length;
-      const units = Math.round(scored.reduce((s, x) => s + (x.units || 0), 0) * 100) / 100;
+      const overall = novigWL(g);
       const ungraded = g.filter(x => x.result === 'UNGRADED').length;
-      return { sample: scored.length, wins: w, losses: l, pushes: p, units, ungraded,
-        winPct: (w + l) ? Math.round((w / (w + l)) * 1000) / 10 : null };
-    } catch { return { sample: 0, wins: 0, losses: 0, pushes: 0, units: 0, ungraded: 0, winPct: null }; }
+
+      const bySport = {};
+      const byType = {};
+      const bySportType = {};
+      g.forEach(x => {
+        const lg = x.league || 'UNK';
+        const ty = NOVIG_TYPE_LABEL[x.marketType] || x.marketType || 'Other';
+        (bySport[lg] = bySport[lg] || []).push(x);
+        (byType[ty] = byType[ty] || []).push(x);
+        const key = lg + '|' + ty;
+        (bySportType[key] = bySportType[key] || []).push(x);
+      });
+      const sportRows = Object.keys(bySport).map(lg => ({ league: lg, ...novigWL(bySport[lg]) }))
+        .filter(r => r.sample > 0).sort((a, b) => b.sample - a.sample);
+      const typeRows = Object.keys(byType).map(ty => ({ type: ty, ...novigWL(byType[ty]) }))
+        .filter(r => r.sample > 0).sort((a, b) => b.sample - a.sample);
+      const sportTypeRows = Object.keys(bySportType).map(k => {
+        const [lg, ty] = k.split('|');
+        return { league: lg, type: ty, ...novigWL(bySportType[k]) };
+      }).filter(r => r.sample > 0).sort((a, b) => b.sample - a.sample);
+
+      return { ...overall, ungraded, bySport: sportRows, byType: typeRows, bySportType: sportTypeRows };
+    } catch {
+      return { sample: 0, wins: 0, losses: 0, pushes: 0, units: 0, winPct: null, ungraded: 0,
+        bySport: [], byType: [], bySportType: [] };
+    }
   }
 
   /* NOVIG SHARP-SIDE ALERT 2026-09-03 (per Derek): posts to Discord when Novig's own
@@ -1833,9 +1870,33 @@ module.exports = async function handler(req, res) {
       const bits = [];
       if (fresh.length) bits.push(`${fresh.length} new`);
       if (updEmbeds.length) bits.push(`${updEmbeds.length} update${updEmbeds.length > 1 ? 's' : ''}`);
-      const header = `\u26A1 **Novig Sharp Money** \u2014 ${bits.join(' \u00b7 ') || 'no plays'} \u00b7 ${recLine}`;
+      const header = `\u26A1 **Novig Sharp Money** \u2014 ${bits.join(' \u00b7 ') || 'no plays'}`;
 
-      const allEmbeds = novEmbeds.concat(updEmbeds).slice(0, 10);
+      /* RECORD EMBED 2026-09-06 (per Derek: broken out by overall, sport, and bet type,
+         repeated on every alert). A single flat number hides where the record actually
+         comes from -- shown as its own card so it never gets buried in the header text,
+         and sent alongside the play embeds on every send, not just when something new
+         fires. */
+      const recFields = [{ name: 'Overall',
+        value: rec.sample ? `${rec.wins}-${rec.losses}${rec.pushes ? '-' + rec.pushes : ''}`
+          + `${rec.winPct != null ? ` (${rec.winPct}%)` : ''} \u00b7 ${rec.units >= 0 ? '+' : ''}${rec.units}u`
+          : 'No graded plays yet', inline: false }];
+      if (rec.bySport && rec.bySport.length) {
+        recFields.push({ name: 'By Sport',
+          value: rec.bySport.map(r => `${r.league}: ${r.wins}-${r.losses}${r.pushes ? '-' + r.pushes : ''}`).join('  \u00b7  '),
+          inline: false });
+      }
+      if (rec.byType && rec.byType.length) {
+        recFields.push({ name: 'By Bet Type',
+          value: rec.byType.map(r => `${r.type}: ${r.wins}-${r.losses}${r.pushes ? '-' + r.pushes : ''}`).join('  \u00b7  '),
+          inline: false });
+      }
+      if (rec.ungraded) recFields.push({ name: 'Pending', value: `${rec.ungraded} ungraded`, inline: true });
+      const recordEmbed = { title: '\u{1F4CA} Novig Record', color: 0x8A8A96, fields: recFields };
+
+      // Record leads every send, ahead of the individual play cards, since Discord shows
+      // embeds in the array order given.
+      const allEmbeds = [recordEmbed].concat(novEmbeds).concat(updEmbeds).slice(0, 10);
       const send = await sendDiscord(webhook, header, allEmbeds);
       result.sent = !!(send && send.ok);
       // Only record plays that actually went out -- a signal nobody was told about
