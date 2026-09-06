@@ -1732,6 +1732,26 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
 
+  // TEMP: quick check whether NBA/NHL events genuinely have zero open markets right now
+  // (like the earlier Clemson/LSU delayed-game case) vs a hidden query problem.
+  if(req.query&&req.query.checkLeague){
+    try{
+      const lg=String(req.query.checkLeague).toUpperCase();
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          query:`query ($lg: String!) { event(where: {game: {league: {_eq: $lg}}}, limit: 10) { id description status } }`,
+          variables:{lg},
+        }),
+      });
+      const j=await r.json();
+      const evs=(j&&j.data&&j.data.event)||[];
+      if(!evs.length)return res.status(200).json({ok:true,eventCount:0});
+      const markets=await fetchNovigOrderBook(evs[0].id);
+      return res.status(200).json({ok:true,event:evs[0],eventCount:evs.length,marketCount:markets.length});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
+
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
   // Diagnostic read-back: GET ?novigScanLog=1[&n=20] -- real per-league history so a
