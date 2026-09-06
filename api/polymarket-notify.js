@@ -1361,6 +1361,28 @@ module.exports = async function handler(req, res) {
   }
   const NOVIG_TYPE_LABEL = { MONEY: 'ML', SPREAD: 'Spread', TOTAL: 'Total', PROP: 'Props' };
 
+  // Shared by the per-alert Record card and the daily summary, so both always show the
+  // identical breakdown rather than two copies that could drift apart.
+  function novigRecordEmbed(rec, opts) {
+    const title = (opts && opts.title) || '\u{1F4CA} Novig Record';
+    const fields = [{ name: 'Overall',
+      value: rec.sample ? `${rec.wins}-${rec.losses}${rec.pushes ? '-' + rec.pushes : ''}`
+        + `${rec.winPct != null ? ` (${rec.winPct}%)` : ''} \u00b7 ${rec.units >= 0 ? '+' : ''}${rec.units}u`
+        : 'No graded plays yet', inline: false }];
+    if (rec.bySport && rec.bySport.length) {
+      fields.push({ name: 'By Sport',
+        value: rec.bySport.map(r => `${r.league}: ${r.wins}-${r.losses}${r.pushes ? '-' + r.pushes : ''}`).join('  \u00b7  '),
+        inline: false });
+    }
+    if (rec.byType && rec.byType.length) {
+      fields.push({ name: 'By Bet Type',
+        value: rec.byType.map(r => `${r.type}: ${r.wins}-${r.losses}${r.pushes ? '-' + r.pushes : ''}`).join('  \u00b7  '),
+        inline: false });
+    }
+    if (rec.ungraded) fields.push({ name: 'Pending', value: `${rec.ungraded} ungraded`, inline: true });
+    return { title, color: 0x8A8A96, fields };
+  }
+
   async function novigRecord() {
     try {
       const raw = await upstashPost(['GET', 'novig:graded']);
@@ -1614,6 +1636,39 @@ module.exports = async function handler(req, res) {
         rows: rows,
       });
     } catch (e) { return res.status(200).json({ ok: false, error: e.message }); }
+  }
+
+  /* DAILY RECORD SUMMARY 2026-09-06 (per Derek: "full record update at the conclusion of
+     games each day"). Separate from the per-signal alert -- this fires once daily rather
+     than being tied to a new play, and grades pending plays first so the numbers reflect
+     everything that finished today, not whatever happened to be graded by the last
+     20-minute cron pass. Same webhook, same channel, same Record card format as every
+     alert -- this is that same card, just sent on its own schedule instead of only
+     riding alongside a new signal.
+     GET ?novigDailySummary=1[&dry=1] -- needs its own cron, separate from novigAlert. */
+  if (req.query && req.query.novigDailySummary) {
+    try {
+      const dry = String(req.query.dry || '') === '1';
+      const gradeRes = await novigGradePending();
+      const rec = await novigRecord();
+      const embed = novigRecordEmbed(rec, { title: '\u{1F4CA} Novig Daily Record' });
+      const today = new Date().toLocaleDateString('en-US',
+        { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+      const header = `\u{1F303} **Novig Daily Summary** \u2014 ${today}`;
+
+      const result = { ok: true, gradedThisRun: gradeRes.graded, stillPendingGrade: gradeRes.stillPending, record: rec };
+      if (dry) { result.dryRun = true; return res.status(200).json(result); }
+
+      const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
+      if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
+
+      const send = await sendDiscord(webhook, header, [embed]);
+      result.sent = !!(send && send.ok);
+      result.sendResult = send;
+      return res.status(200).json(result);
+    } catch (e) {
+      return res.status(200).json({ ok: false, error: e.message });
+    }
   }
 
   if (req.query && req.query.novigAlert) {
@@ -1877,22 +1932,7 @@ module.exports = async function handler(req, res) {
          comes from -- shown as its own card so it never gets buried in the header text,
          and sent alongside the play embeds on every send, not just when something new
          fires. */
-      const recFields = [{ name: 'Overall',
-        value: rec.sample ? `${rec.wins}-${rec.losses}${rec.pushes ? '-' + rec.pushes : ''}`
-          + `${rec.winPct != null ? ` (${rec.winPct}%)` : ''} \u00b7 ${rec.units >= 0 ? '+' : ''}${rec.units}u`
-          : 'No graded plays yet', inline: false }];
-      if (rec.bySport && rec.bySport.length) {
-        recFields.push({ name: 'By Sport',
-          value: rec.bySport.map(r => `${r.league}: ${r.wins}-${r.losses}${r.pushes ? '-' + r.pushes : ''}`).join('  \u00b7  '),
-          inline: false });
-      }
-      if (rec.byType && rec.byType.length) {
-        recFields.push({ name: 'By Bet Type',
-          value: rec.byType.map(r => `${r.type}: ${r.wins}-${r.losses}${r.pushes ? '-' + r.pushes : ''}`).join('  \u00b7  '),
-          inline: false });
-      }
-      if (rec.ungraded) recFields.push({ name: 'Pending', value: `${rec.ungraded} ungraded`, inline: true });
-      const recordEmbed = { title: '\u{1F4CA} Novig Record', color: 0x8A8A96, fields: recFields };
+      const recordEmbed = novigRecordEmbed(rec);
 
       // Record leads every send, ahead of the individual play cards, since Discord shows
       // embeds in the array order given.
