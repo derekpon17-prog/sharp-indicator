@@ -1743,6 +1743,27 @@ module.exports=async function handler(req,res){
       return res.status(200).json({ok:true,marketCount:markets.length,marketTypes:markets.map(m=>m.type+':'+m.strike),sigs});
     }catch(e){return res.status(200).json({ok:false,error:e.message});}
   }
+  // TEMP: same query as fetchNovigOrderBook but surfaces GraphQL errors instead of
+  // swallowing them, to see the REAL cause instead of a silent empty array.
+  if(req.query&&req.query.novigDebug){
+    try{
+      const eventId=req.query.novigDebug;
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          query:`query ($eventId: uuid!) {
+            event(where: {id: {_eq: $eventId}, status: {_eq: "OPEN_PREGAME"}}) {
+              id description status
+            }
+          }`,
+          variables:{eventId},
+        }),
+      });
+      const j=await r.json();
+      return res.status(200).json({httpStatus:r.status,raw:j});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   // TEMP: raw, unfiltered dump -- no outcomes where-clause, no status filter, all raw
   // outcome fields visible -- to test whether the outcomes filter is wrongly excluding
   // real markets that populate differently than originally assumed.
