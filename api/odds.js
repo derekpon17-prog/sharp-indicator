@@ -1753,15 +1753,24 @@ module.exports=async function handler(req,res){
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
           query:`query ($eventId: uuid!) {
-            event(where: {id: {_eq: $eventId}, status: {_eq: "OPEN_PREGAME"}}) {
+            event(where: {id: {_eq: $eventId}}) {
               id description status
+              markets {
+                description type strike
+                outcomes {
+                  description available
+                  orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}) {
+                    qty price status currency
+                  }
+                }
+              }
             }
           }`,
           variables:{eventId},
         }),
       });
       const j=await r.json();
-      return res.status(200).json({httpStatus:r.status,raw:j});
+      return res.status(200).json({httpStatus:r.status,hasErrors:!!j.errors,errors:j.errors||null,eventCount:(j.data&&j.data.event||[]).length});
     }catch(e){return res.status(200).json({ok:false,error:e.message});}
   }
   // TEMP: raw, unfiltered dump -- no outcomes where-clause, no status filter, all raw
