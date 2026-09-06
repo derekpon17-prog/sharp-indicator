@@ -1732,6 +1732,26 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
 
+  // TEMP DIAGNOSTIC: search Novig for a team by name across ALL statuses, not just
+  // OPEN_PREGAME -- checking whether a delayed game carries a different status that
+  // would silently exclude it from the real scan.
+  if(req.query&&req.query.novigFind){
+    try{
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          query:`query { event(where: {game: {league: {_eq: "NCAAF"}}}, limit: 500) { id description status game { scheduled_start } } }`,
+        }),
+      });
+      const j=await r.json();
+      const evs=(j&&j.data&&j.data.event)||[];
+      const term=String(req.query.novigFind).toLowerCase();
+      const hits=evs.filter(e=>String(e.description||'').toLowerCase().includes(term));
+      return res.status(200).json({ok:true,totalEvents:evs.length,hits});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
+
 
 
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
