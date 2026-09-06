@@ -190,7 +190,7 @@ async function fetchNovigOrderBook(eventId){
               description
               type
               strike
-              outcomes(where: {_or: [{last: {_is_null: false}}, {available: {_is_null: false}}]}) {
+              outcomes {
                 description
                 available
                 orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}) {
