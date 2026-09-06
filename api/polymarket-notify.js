@@ -1769,12 +1769,25 @@ module.exports = async function handler(req, res) {
         const f = [
           { name: flip ? 'Now favored' : 'Still the play', value: `**${s.sharpSide}** at ${fmtOdds(s.sharpSideAmerican)}`, inline: true },
         ];
+        // FIX 2026-09-06 (real screenshot -- score fell 89->69 while the card said
+        // "Getting bigger" and "more money has piled onto this side"). The math was
+        // right: PV's own money DID grow ($10,995->$13,845), but Texas Southern's grew
+        // FASTER ($1,135->$4,288, nearly 4x) -- score measures the IMBALANCE between
+        // sides, not just one side's total, so the gap narrowing correctly lowered the
+        // score even as the labeled side kept growing. The card only ever described one
+        // side's number going up, so a falling score with a growing-money label looked
+        // like a contradiction. Now checks the real score direction and describes both
+        // sides, so "conviction cooling" only ever appears when the score actually fell.
+        const scoreRising = p.score == null || s.score >= p.score;
         if (flip) {
           f.push({ name: 'Was', value: `${p.sharpSide || '\u2014'}`, inline: true });
           f.push({ name: 'What happened', value: `Money that was on ${p.sharpSide || 'the other side'} has shifted to ${s.sharpSide}. Both may still be real -- this isn't necessarily a reversal.`, inline: false });
         } else {
           f.push({ name: 'Change', value: `${p.score != null ? p.score + ' \u2192 ' : ''}${s.score}`, inline: true });
-          f.push({ name: 'What happened', value: `More money has piled onto this side since it first showed up.`, inline: false });
+          f.push({ name: 'What happened', value: scoreRising
+            ? `More money has piled onto this side since it first showed up.`
+            : `Money grew on BOTH sides, but the other side grew faster -- this pick is less one-sided than it was.`,
+            inline: false });
         }
         f.push({ name: 'Resting Now', value: `\$${(s.sharpSideLiquidityUsd || 0).toLocaleString()} vs \$${(s.otherSideLiquidityUsd || 0).toLocaleString()}`, inline: false });
         const lad = (s.ladder || []).filter(x => (x.totalLiquidityUsd || 0) > 0).slice(0, 4);
@@ -1784,7 +1797,7 @@ module.exports = async function handler(req, res) {
           ).join('\n'), inline: false });
         }
         return {
-          title: `${flip ? '\u{1F504} Money moved' : '\u{1F4C8} Getting bigger'} \u2014 ${s.sharpSide}`,
+          title: `${flip ? '\u{1F504} Money moved' : (scoreRising ? '\u{1F4C8} Getting bigger' : '\u{1F4C9} Cooling off')} \u2014 ${s.sharpSide}`,
           description: `${s.event}`,
           color: flip ? 0xF87171 : 0x40B4FF,
           fields: f,
