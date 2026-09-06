@@ -186,14 +186,14 @@ async function fetchNovigOrderBook(eventId){
         query:`query ($eventId: uuid!) {
           event(where: {id: {_eq: $eventId}}) {
             description
-            markets {
+            markets(where: {type: {_in: ["MONEY", "SPREAD", "TOTAL"]}}) {
               description
               type
               strike
               outcomes {
                 description
                 available
-                orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}) {
+                orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}, limit: 20) {
                   qty
                   price
                 }
