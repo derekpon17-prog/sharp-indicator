@@ -1743,6 +1743,35 @@ module.exports=async function handler(req,res){
       return res.status(200).json({ok:true,marketCount:markets.length,marketTypes:markets.map(m=>m.type+':'+m.strike),sigs});
     }catch(e){return res.status(200).json({ok:false,error:e.message});}
   }
+  // TEMP: raw, unfiltered dump -- no outcomes where-clause, no status filter, all raw
+  // outcome fields visible -- to test whether the outcomes filter is wrongly excluding
+  // real markets that populate differently than originally assumed.
+  if(req.query&&req.query.novigRaw){
+    try{
+      const eventId=req.query.novigRaw;
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          query:`query ($eventId: uuid!) {
+            event(where: {id: {_eq: $eventId}}) {
+              id description status
+              markets {
+                description type strike
+                outcomes {
+                  description last available
+                  orders { status qty price currency }
+                }
+              }
+            }
+          }`,
+          variables:{eventId},
+        }),
+      });
+      const j=await r.json();
+      return res.status(200).json(j);
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   if(req.query&&req.query.novigFind){
     try{
       const lg=String(req.query.league||'NCAAF').toUpperCase();
