@@ -1745,18 +1745,20 @@ module.exports=async function handler(req,res){
   }
   if(req.query&&req.query.novigFind){
     try{
+      const lg=String(req.query.league||'NCAAF').toUpperCase();
       const r=await fetch('https://gql.novig.us/v1/graphql',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-          query:`query { event(where: {game: {league: {_eq: "NCAAF"}}}, limit: 500) { id description status game { scheduled_start } } }`,
+          query:`query ($lg: String!) { event(where: {game: {league: {_eq: $lg}}}, limit: 500) { id description status game { scheduled_start } } }`,
+          variables:{lg},
         }),
       });
       const j=await r.json();
       const evs=(j&&j.data&&j.data.event)||[];
       const term=String(req.query.novigFind).toLowerCase();
       const hits=evs.filter(e=>String(e.description||'').toLowerCase().includes(term));
-      return res.status(200).json({ok:true,totalEvents:evs.length,hits});
+      return res.status(200).json({ok:true,league:lg,totalEvents:evs.length,hits});
     }catch(e){return res.status(200).json({ok:false,error:e.message});}
   }
 
