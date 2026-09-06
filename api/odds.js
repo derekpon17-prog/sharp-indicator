@@ -184,7 +184,7 @@ async function fetchNovigOrderBook(eventId){
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         query:`query ($eventId: uuid!) {
-          event(where: {_and: [{id: {_eq: $eventId}}, {_or: [{status: {_eq: "OPEN_PREGAME"}}]}]}) {
+          event(where: {id: {_eq: $eventId}, status: {_eq: "OPEN_PREGAME"}}) {
             description
             markets {
               description
