@@ -334,7 +334,7 @@ const NOVIG_MAX_ABS_AMERICAN = 400;
    whole sports instead of filtering them.
    PROVISIONAL: 1500 is inferred from a two-weeks-out NFL board, the thinnest case, not a
    representative one. Revisit once real in-window data exists. */
-const NOVIG_MIN_LIQ_BY_SPORT = { MLB:3000, NCAAF:3000, NFL:1500, NBA:1500, NHL:1500 };
+const NOVIG_MIN_LIQ_BY_SPORT = { MLB:3000, NCAAF:3000, NFL:1500, NBA:1500, NHL:1500, WNBA:1500 };
 
 /* PER-SPORT ALERT WINDOWS 2026-09-04 (per Derek). A flat 2h window was wrong for football.
    MLB plays daily, so its line forms late and stays liquid to first pitch -- 2h is fine.
@@ -347,10 +347,14 @@ const NOVIG_MIN_LIQ_BY_SPORT = { MLB:3000, NCAAF:3000, NFL:1500, NBA:1500, NHL:1
    The tradeoff is real: earlier books are thinner, and thin books are where structural
    imbalance noise comes from. That is what the per-sport LIQUIDITY floor is for --
    filtering on real money is more honest than using time as a proxy for it. */
-const NOVIG_WINDOW_BY_SPORT = { NCAAF:24, NFL:48, MLB:3, NBA:3, NHL:3 };
+const NOVIG_WINDOW_BY_SPORT = { NCAAF:24, NFL:48, MLB:3, NBA:3, NHL:3, WNBA:3 };
 const NOVIG_WINDOW_DEFAULT  = 3;
 const NOVIG_MAIN_TYPES      = ['MONEY','SPREAD','TOTAL'];
-const NOVIG_LEAGUES         = ['MLB','NFL','NCAAF','NBA','NHL'];
+// WNBA added 2026-09-06 (per Derek, real gap found) -- was missing entirely from this
+// list despite the WNBA season being currently active with real markets (confirmed live:
+// 64 real markets on a real game), unlike NBA/NHL which are correctly absent because
+// their season has not started yet and Novig has not opened trading on those games.
+const NOVIG_LEAGUES         = ['MLB','NFL','NCAAF','NBA','NHL','WNBA'];
 
 // Scans open pregame Novig events across one or many leagues for markets where the
 // resting-liquidity imbalance implies a real sharp lean. Touches ONLY Novig's own free
@@ -1732,25 +1736,6 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
 
-  // TEMP: quick check whether NBA/NHL events genuinely have zero open markets right now
-  // (like the earlier Clemson/LSU delayed-game case) vs a hidden query problem.
-  if(req.query&&req.query.checkLeague){
-    try{
-      const lg=String(req.query.checkLeague).toUpperCase();
-      const r=await fetch('https://gql.novig.us/v1/graphql',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          query:`query ($lg: String!) { event(where: {game: {league: {_eq: $lg}}}, limit: 10) { id description status } }`,
-          variables:{lg},
-        }),
-      });
-      const j=await r.json();
-      const evs=(j&&j.data&&j.data.event)||[];
-      if(!evs.length)return res.status(200).json({ok:true,eventCount:0});
-      const markets=await fetchNovigOrderBook(evs[0].id);
-      return res.status(200).json({ok:true,event:evs[0],eventCount:evs.length,marketCount:markets.length});
-    }catch(e){return res.status(200).json({ok:false,error:e.message});}
-  }
 
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
