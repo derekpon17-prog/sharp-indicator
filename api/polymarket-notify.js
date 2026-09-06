@@ -1755,6 +1755,42 @@ module.exports = async function handler(req, res) {
         };
       });
 
+      /* RESTORED 2026-09-06 (real incident): this whole block was accidentally deleted
+         during the beginner-card rewrite -- that edit replaced the region between two
+         anchor comments and the replacement was too wide, swallowing updEmbeds along with
+         the old novEmbeds it was meant to replace. Every REAL (non-dry) alert crashed with
+         "updEmbeds is not defined" from that deploy until now -- dry=1 never reaches this
+         code path, which is exactly why testing only with dry=1 all day never caught it.
+         Rebuilt in the same plain-language style as the NEW cards above: what changed,
+         what to do about it, nothing else. */
+      const updEmbeds = updates.slice(0, 6).map(s => {
+        const p = s._prior || {};
+        const flip = s._kind === 'FLIP';
+        const f = [
+          { name: flip ? 'Now favored' : 'Still the play', value: `**${s.sharpSide}** at ${fmtOdds(s.sharpSideAmerican)}`, inline: true },
+        ];
+        if (flip) {
+          f.push({ name: 'Was', value: `${p.sharpSide || '\u2014'}`, inline: true });
+          f.push({ name: 'What happened', value: `Money that was on ${p.sharpSide || 'the other side'} has shifted to ${s.sharpSide}. Both may still be real -- this isn't necessarily a reversal.`, inline: false });
+        } else {
+          f.push({ name: 'Change', value: `${p.score != null ? p.score + ' \u2192 ' : ''}${s.score}`, inline: true });
+          f.push({ name: 'What happened', value: `More money has piled onto this side since it first showed up.`, inline: false });
+        }
+        f.push({ name: 'Resting Now', value: `\$${(s.sharpSideLiquidityUsd || 0).toLocaleString()} vs \$${(s.otherSideLiquidityUsd || 0).toLocaleString()}`, inline: false });
+        const lad = (s.ladder || []).filter(x => (x.totalLiquidityUsd || 0) > 0).slice(0, 4);
+        if (lad.length > 1) {
+          f.push({ name: 'By Line', value: lad.map(x =>
+            `${x.sharpSide}: \$${(x.sharpSideLiquidityUsd || 0).toLocaleString()} vs ${x.otherSide} \$${(x.otherSideLiquidityUsd || 0).toLocaleString()}`
+          ).join('\n'), inline: false });
+        }
+        return {
+          title: `${flip ? '\u{1F504} Money moved' : '\u{1F4C8} Getting bigger'} \u2014 ${s.sharpSide}`,
+          description: `${s.event}`,
+          color: flip ? 0xF87171 : 0x40B4FF,
+          fields: f,
+        };
+      });
+
       // Kept for the JSON response / debugging only -- not what gets sent any more.
       const lines = fresh.slice(0, 10).map(s => `${s.sharpSide} ${s.score} ${s.event}`);
 
