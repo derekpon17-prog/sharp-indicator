@@ -1735,6 +1735,14 @@ module.exports=async function handler(req,res){
   // TEMP DIAGNOSTIC: search Novig for a team by name across ALL statuses, not just
   // OPEN_PREGAME -- checking whether a delayed game carries a different status that
   // would silently exclude it from the real scan.
+  if(req.query&&req.query.novigDirect){
+    try{
+      const eventId=req.query.novigDirect;
+      const markets=await fetchNovigOrderBook(eventId);
+      const sigs=markets.filter(m=>NOVIG_MAIN_TYPES.includes(m.type)).map(m=>({type:m.type,strike:m.strike,sig:novigSharpSideForMarket(m)}));
+      return res.status(200).json({ok:true,marketCount:markets.length,marketTypes:markets.map(m=>m.type+':'+m.strike),sigs});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   if(req.query&&req.query.novigFind){
     try{
       const r=await fetch('https://gql.novig.us/v1/graphql',{
