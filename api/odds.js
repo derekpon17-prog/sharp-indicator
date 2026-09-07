@@ -177,37 +177,50 @@ function findAllPolySidesForPlay(play, polyScores){
 // dollar figure (a real screenshot showed roughly $2-4k on a comparable market; this
 // hasn't been cross-checked line-for-line against the live app yet). Treat the notional
 // as directionally real, not penny-precise, until spot-checked against the app directly.
+/* RETRY 2026-09-07 (real incident, confirmed via Derek's direct report). Reducing the
+   orders limit (20 -> 5 -> 2) helped but did not fully solve this: the EXACT SAME query,
+   confirmed working moments earlier in a live test, timed out again on a later call --
+   confirmed genuinely intermittent, driven by Novig's own real-time server load on a
+   heavy game (58 markets for SMU/Florida State), not a fixed threshold in this code.
+   A smaller and smaller limit chases a moving target; a retry is the right tool for a
+   genuinely intermittent upstream failure. Two attempts, small fixed delay between --
+   short enough to stay well inside Vercel's own function time limit even after a retry. */
 async function fetchNovigOrderBook(eventId){
-  try{
-    const r=await fetch('https://gql.novig.us/v1/graphql',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        query:`query ($eventId: uuid!) {
-          event(where: {id: {_eq: $eventId}}) {
-            description
-            markets(where: {type: {_in: ["MONEY", "SPREAD", "TOTAL"]}}) {
-              description
-              type
-              strike
-              outcomes {
-                description
-                available
-                orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}, limit: 2) {
-                  qty
-                  price
-                }
-              }
-            }
+  const query=`query ($eventId: uuid!) {
+    event(where: {id: {_eq: $eventId}}) {
+      description
+      markets(where: {type: {_in: ["MONEY", "SPREAD", "TOTAL"]}}) {
+        description
+        type
+        strike
+        outcomes {
+          description
+          available
+          orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}, limit: 2) {
+            qty
+            price
           }
-        }`,
-        variables:{eventId},
-      }),
-    });
-    const j=await r.json();
-    const ev=j&&j.data&&j.data.event&&j.data.event[0];
-    return ev?ev.markets||[]:[];
-  }catch{ return []; }
+        }
+      }
+    }
+  }`;
+  for(let attempt=0;attempt<2;attempt++){
+    try{
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({query,variables:{eventId}}),
+      });
+      const j=await r.json();
+      if(j.errors){ if(attempt===0){await new Promise(res=>setTimeout(res,300));continue;} return []; }
+      const ev=j&&j.data&&j.data.event&&j.data.event[0];
+      return ev?ev.markets||[]:[];
+    }catch{
+      if(attempt===0){await new Promise(res=>setTimeout(res,300));continue;}
+      return [];
+    }
+  }
+  return [];
 }
 
 async function fetchNovigEventId(away,home,league){
