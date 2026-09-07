@@ -1737,6 +1737,14 @@ module.exports=async function handler(req,res){
   if(req.method==='OPTIONS')return res.status(200).end();
 
   // TEMP: search Novig NCAAF events by name, ANY status, no window/score filter.
+  if(req.query&&req.query.ncaafDirect){
+    try{
+      const eventId=req.query.ncaafDirect;
+      const markets=await fetchNovigOrderBook(eventId);
+      const sigs=markets.filter(m=>NOVIG_MAIN_TYPES.includes(m.type)).map(m=>novigSharpSideForMarket(m)).filter(Boolean);
+      return res.status(200).json({ok:true,marketCount:markets.length,sigs});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   if(req.query&&req.query.ncaafFind){
     try{
       const r=await fetch('https://gql.novig.us/v1/graphql',{
