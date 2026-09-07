@@ -193,7 +193,7 @@ async function fetchNovigOrderBook(eventId){
               outcomes {
                 description
                 available
-                orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}, limit: 20) {
+                orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}, limit: 5) {
                   qty
                   price
                 }
@@ -1738,104 +1738,6 @@ module.exports=async function handler(req,res){
 
 
 
-  if(req.query&&req.query.ncaafOrdersTest){
-    try{
-      const eventId=req.query.ncaafOrdersTest;
-      const lim=parseInt(req.query.lim||"8",10);
-      const r=await fetch('https://gql.novig.us/v1/graphql',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          query:`query ($eventId: uuid!, $lim: Int!) {
-            event(where: {id: {_eq: $eventId}}) {
-              markets(where: {type: {_in: ["MONEY", "SPREAD", "TOTAL"]}}) {
-                type strike
-                outcomes {
-                  available
-                  orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}, limit: $lim) { qty price }
-                }
-              }
-            }
-          }`,
-          variables:{eventId,lim},
-        }),
-      });
-      const j=await r.json();
-      const evs=(j.data&&j.data.event)||[];
-      return res.status(200).json({httpStatus:r.status,hasErrors:!!j.errors,errors:j.errors||null,
-        limUsed:lim,eventCount:evs.length,marketCount:evs[0]?evs[0].markets.length:0});
-    }catch(e){return res.status(200).json({ok:false,error:e.message});}
-  }
-  if(req.query&&req.query.ncaafFullDebug){
-    try{
-      const eventId=req.query.ncaafFullDebug;
-      const r=await fetch('https://gql.novig.us/v1/graphql',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          query:`query ($eventId: uuid!) {
-            event(where: {id: {_eq: $eventId}}) {
-              markets(where: {type: {_in: ["MONEY", "SPREAD", "TOTAL"]}}) {
-                type strike
-                outcomes {
-                  available
-                  orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}, limit: 20) { qty price }
-                }
-              }
-            }
-          }`,
-          variables:{eventId},
-        }),
-      });
-      const j=await r.json();
-      return res.status(200).json({httpStatus:r.status,hasErrors:!!j.errors,errors:j.errors||null,
-        eventCount:(j.data&&j.data.event||[]).length});
-    }catch(e){return res.status(200).json({ok:false,error:e.message});}
-  }
-  if(req.query&&req.query.ncaafDebug){
-    try{
-      const eventId=req.query.ncaafDebug;
-      const r=await fetch('https://gql.novig.us/v1/graphql',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          query:`query ($eventId: uuid!) {
-            event(where: {id: {_eq: $eventId}}) {
-              id description status
-              markets(where: {type: {_in: ["MONEY", "SPREAD", "TOTAL"]}}) {
-                type strike
-              }
-            }
-          }`,
-          variables:{eventId},
-        }),
-      });
-      const j=await r.json();
-      const ev=(j.data&&j.data.event&&j.data.event[0])||null;
-      return res.status(200).json({httpStatus:r.status,hasErrors:!!j.errors,errors:j.errors||null,
-        eventFound:!!ev,marketCount:ev?ev.markets.length:0,markets:ev?ev.markets:[]});
-    }catch(e){return res.status(200).json({ok:false,error:e.message});}
-  }
-  if(req.query&&req.query.ncaafFind){
-    try{
-      const r=await fetch('https://gql.novig.us/v1/graphql',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          query:`query { event(where: {game: {league: {_eq: "NCAAF"}}}, limit: 500) { id description status game { scheduled_start } } }`,
-        }),
-      });
-      const j=await r.json();
-      const evs=(j&&j.data&&j.data.event)||[];
-      const term=String(req.query.ncaafFind).toLowerCase();
-      const hits=evs.filter(e=>String(e.description||'').toLowerCase().includes(term));
-      return res.status(200).json({ok:true,totalEvents:evs.length,hits});
-    }catch(e){return res.status(200).json({ok:false,error:e.message});}
-  }
-  if(req.query&&req.query.ncaafDirect){
-    try{
-      const eventId=req.query.ncaafDirect;
-      const markets=await fetchNovigOrderBook(eventId);
-      const sigs=markets.filter(m=>NOVIG_MAIN_TYPES.includes(m.type)).map(m=>novigSharpSideForMarket(m)).filter(Boolean);
-      return res.status(200).json({ok:true,marketCount:markets.length,sigs});
-    }catch(e){return res.status(200).json({ok:false,error:e.message});}
-  }
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
   // Diagnostic read-back: GET ?novigScanLog=1[&n=20] -- real per-league history so a
