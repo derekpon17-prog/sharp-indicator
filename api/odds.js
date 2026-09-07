@@ -1738,6 +1738,40 @@ module.exports=async function handler(req,res){
 
 
 
+  if(req.query&&req.query.ncaafProdTest){
+    try{
+      const eventId=req.query.ncaafProdTest;
+      const lim=parseInt(req.query.lim||"5",10);
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          query:`query ($eventId: uuid!, $lim: Int!) {
+            event(where: {id: {_eq: $eventId}}) {
+              description
+              markets(where: {type: {_in: ["MONEY", "SPREAD", "TOTAL"]}}) {
+                description
+                type
+                strike
+                outcomes {
+                  description
+                  available
+                  orders(where: {status: {_eq: "OPEN"}, currency: {_eq: "CASH"}}, order_by: {price: desc}, limit: $lim) {
+                    qty
+                    price
+                  }
+                }
+              }
+            }
+          }`,
+          variables:{eventId,lim},
+        }),
+      });
+      const j=await r.json();
+      return res.status(200).json({httpStatus:r.status,hasErrors:!!j.errors,errors:j.errors||null,
+        limUsed:lim,marketCount:(j.data&&j.data.event&&j.data.event[0]&&j.data.event[0].markets||[]).length});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   if(req.query&&req.query.ncaafVerify){
     try{
       const eventId=req.query.ncaafVerify;
