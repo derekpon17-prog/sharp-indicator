@@ -1261,71 +1261,113 @@ module.exports = async function handler(req, res) {
                         : { risk: r2(Math.abs(american) / 100), toWin: 1 };
   }
 
-  /* SITUATIONAL NOTES 2026-09-07 (per Derek + council). Real research (Wikipedia's own
-     overview of betting systems, and peer-reviewed studies -- Nichols 2014, Paul & Weinbach
-     2014, Spann & Skiera 2009) found little to no exploitable edge in static historical
-     trends once discovered; even ProComputerGambler, an actual SDQL practitioner, frames
-     every published trend as "a research signal, not a prediction machine." So this is
-     built as SUPPORTING CONTEXT ONLY -- it never changes a score, never gates an alert,
-     never fires anything on its own. It just tells a human something true and relevant
-     about a game a real signal already flagged.
-     Scoped deliberately to what's cheap and reliable: REST/SCHEDULE facts (short week,
-     extra rest, coming off a blowout), reusing the exact ESPN scoreboard-by-date pattern
-     novigFetchFinal already proved out, just scanned backward to find each team's last
-     game instead of forward to grade this one. "Lost to this same opponent earlier this
-     season" (a real revenge-spot fact) was considered and deliberately left out of v1 --
-     properly checking it means scanning back through the whole season, which is a lot of
-     ESPN calls for one fact; noted as a real follow-up, not built as a weak version. */
-  async function espnFindTeamLastGame(league, teamName, beforeGameTime, lookbackDays) {
+  /* SITUATIONAL NOTES 2026-09-07/08 (per Derek + council, expanded to "full details" on
+     request). Same posture as before: SUPPORTING CONTEXT ONLY -- never changes a score,
+     never gates an alert. The v1 cut (rest/schedule only) deliberately skipped revenge
+     spots and streaks because doing them properly meant scanning a whole season, which is
+     expensive done the day-by-day way novigFetchFinal uses for grading.
+     The efficient fix: ESPN's own team-schedule endpoint (confirmed live before building
+     on it -- teams/{id}/schedule returns the full ~17-event season in ONE call, same
+     competitions[0].competitors[].score/status.type.completed shape already proven for
+     grading). That single call now answers rest days, last-game blowout, revenge spot,
+     AND streaks together -- one call per team instead of dozens of day scans.
+     Team name -> ID requires ESPN's team list, fetched once and cached on the global
+     object so a warm Vercel instance reuses it instead of refetching every call. */
+  const ESPN_TEAM_CACHE = {}; // { NFL: { 'kansas city chiefs': '12', ... } }
+  async function getEspnTeamId(league, teamName) {
     const path = NOVIG_ESPN_PATHS[league];
-    if (!path || !beforeGameTime) return null;
-    const start = new Date(beforeGameTime);
-    const want = String(teamName || '').toLowerCase().split(' ').pop();
-    if (!want) return null;
-    for (let i = 1; i <= (lookbackDays || 10); i++) {
-      const day = new Date(start.getTime() - i * 86400000).toISOString().slice(0, 10).replace(/-/g, '');
+    if (!path) return null;
+    if (!global.__espnTeamIds) global.__espnTeamIds = {};
+    if (!global.__espnTeamIds[league]) {
       try {
-        const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${day}&limit=300`);
+        const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/teams?limit=100`);
         const j = await r.json();
-        for (const ev of (j.events || [])) {
-          const comp = ev.competitions && ev.competitions[0];
-          if (!comp || !(comp.status && comp.status.type && comp.status.type.completed)) continue;
-          const cs = comp.competitors || [];
-          const home = cs.find(x => x.homeAway === 'home');
-          const away = cs.find(x => x.homeAway === 'away');
-          if (!home || !away || !home.team || !away.team) continue;
-          const lastWord = n => String(n || '').toLowerCase().split(' ').pop();
-          const isHome = lastWord(home.team.displayName) === want;
-          const isAway = lastWord(away.team.displayName) === want;
-          if (!isHome && !isAway) continue;
-          const mine = isHome ? home : away, opp = isHome ? away : home;
-          const myScore = parseInt(mine.score, 10), oppScore = parseInt(opp.score, 10);
-          if (!isFinite(myScore) || !isFinite(oppScore)) continue;
-          return { daysAgo: i, opponent: opp.team.displayName, margin: myScore - oppScore,
-            result: myScore > oppScore ? 'W' : (myScore < oppScore ? 'L' : 'T') };
-        }
-      } catch { /* try the next day back */ }
+        const teams = (j.sports && j.sports[0] && j.sports[0].leagues && j.sports[0].leagues[0] && j.sports[0].leagues[0].teams) || [];
+        const map = {};
+        teams.forEach(t => { if (t.team && t.team.displayName) map[t.team.displayName.toLowerCase()] = t.team.id; });
+        global.__espnTeamIds[league] = map;
+      } catch { global.__espnTeamIds[league] = {}; }
     }
-    return null;
+    return global.__espnTeamIds[league][String(teamName || '').toLowerCase()] || null;
+  }
+
+  async function getEspnTeamSchedule(league, teamId) {
+    const path = NOVIG_ESPN_PATHS[league];
+    if (!path || !teamId) return [];
+    const key = `${league}:${teamId}`;
+    if (!global.__espnScheduleCache) global.__espnScheduleCache = {};
+    if (global.__espnScheduleCache[key]) return global.__espnScheduleCache[key];
+    try {
+      const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/teams/${teamId}/schedule`);
+      const j = await r.json();
+      const events = (j.events || []).map(ev => {
+        const comp = ev.competitions && ev.competitions[0];
+        if (!comp) return null;
+        const cs = comp.competitors || [];
+        const mine = cs.find(x => String(x.team && x.team.id) === String(teamId));
+        const opp = cs.find(x => String(x.team && x.team.id) !== String(teamId));
+        if (!mine || !opp) return null;
+        const completed = !!(comp.status && comp.status.type && comp.status.type.completed);
+        return {
+          date: ev.date, completed,
+          opponentId: opp.team && opp.team.id, opponentName: opp.team && opp.team.displayName,
+          myScore: completed ? parseInt(mine.score, 10) : null,
+          oppScore: completed ? parseInt(opp.score, 10) : null,
+        };
+      }).filter(Boolean).sort((a, b) => new Date(a.date) - new Date(b.date));
+      global.__espnScheduleCache[key] = events;
+      return events;
+    } catch { return []; }
   }
 
   const SITUATIONAL_SPORTS = ['NFL', 'NCAAF']; // weekly sports, where rest days are meaningful
   async function computeSituationalNotes(league, away, home, gameTime) {
     if (!SITUATIONAL_SPORTS.includes(league) || !gameTime) return [];
-    const [awayLast, homeLast] = await Promise.all([
-      espnFindTeamLastGame(league, away, gameTime, 10),
-      espnFindTeamLastGame(league, home, gameTime, 10),
+    const gameMs = new Date(gameTime).getTime();
+
+    async function notesForTeam(teamName, opponentName) {
+      const teamId = await getEspnTeamId(league, teamName);
+      if (!teamId) return [];
+      const sched = await getEspnTeamSchedule(league, teamId);
+      if (!sched.length) return [];
+      const played = sched.filter(g => g.completed && new Date(g.date).getTime() < gameMs);
+      const notes = [];
+
+      // Rest days + last-game blowout, from the most recent prior game.
+      const last = played[played.length - 1];
+      if (last) {
+        const daysAgo = Math.round((gameMs - new Date(last.date).getTime()) / 86400000);
+        if (daysAgo <= 4) notes.push(`${teamName} on a short week (${daysAgo}d rest)`);
+        else if (daysAgo >= 9) notes.push(`${teamName} off extra rest (${daysAgo}d, likely a bye)`);
+        const margin = last.myScore - last.oppScore;
+        if (margin <= -20) notes.push(`${teamName} coming off a blowout loss (by ${Math.abs(margin)})`);
+        if (margin >= 20) notes.push(`${teamName} coming off a blowout win (by ${margin})`);
+      }
+
+      // Revenge spot: a prior meeting THIS SEASON against this exact opponent that they lost.
+      // Only possible now because the full-season schedule is already in hand -- this is
+      // the fact v1 explicitly skipped rather than build a weak, expensive version of.
+      const priorMeeting = played.find(g => String(g.opponentName || '').toLowerCase() === String(opponentName || '').toLowerCase());
+      if (priorMeeting && priorMeeting.myScore < priorMeeting.oppScore) {
+        notes.push(`${teamName} lost the last meeting with ${opponentName} (${priorMeeting.myScore}-${priorMeeting.oppScore}) \u2014 revenge spot`);
+      }
+
+      // Streak: last 3 completed games, only flagged at 3+ so a single result never counts as a "streak".
+      const lastThree = played.slice(-3);
+      if (lastThree.length === 3) {
+        const results = lastThree.map(g => (g.myScore > g.oppScore ? 'W' : (g.myScore < g.oppScore ? 'L' : 'T')));
+        if (results.every(r => r === 'W')) notes.push(`${teamName} has won 3 straight`);
+        else if (results.every(r => r === 'L')) notes.push(`${teamName} has lost 3 straight`);
+      }
+
+      return notes;
+    }
+
+    const [awayNotes, homeNotes] = await Promise.all([
+      notesForTeam(away, home),
+      notesForTeam(home, away),
     ]);
-    const notes = [];
-    [{ team: away, g: awayLast }, { team: home, g: homeLast }].forEach(({ team, g }) => {
-      if (!g) return;
-      const short = team; // already the real team name passed in
-      if (g.daysAgo <= 4) notes.push(`${short} on a short week (${g.daysAgo}d rest)`);
-      else if (g.daysAgo >= 9) notes.push(`${short} off extra rest (${g.daysAgo}d, likely a bye)`);
-      if (g.result === 'L' && g.margin <= -20) notes.push(`${short} coming off a blowout loss (by ${Math.abs(g.margin)})`);
-      if (g.result === 'W' && g.margin >= 20) notes.push(`${short} coming off a blowout win (by ${g.margin})`);
-    });
-    return notes;
+    return awayNotes.concat(homeNotes);
   }
 
   async function novigFetchFinal(league, eventDesc, gameTime) {
@@ -1817,22 +1859,6 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  // TEMP: verify ESPN team list + team schedule endpoints before building on them.
-  if (req.query && req.query.espnCheck) {
-    try {
-      const r1 = await fetch('https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams');
-      const j1 = await r1.json();
-      const teams = (j1.sports && j1.sports[0] && j1.sports[0].leagues && j1.sports[0].leagues[0] && j1.sports[0].leagues[0].teams) || [];
-      const sample = teams.slice(0, 2).map(t => ({ id: t.team.id, name: t.team.displayName }));
-      let scheduleSample = null;
-      if (teams[0]) {
-        const r2 = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${teams[0].team.id}/schedule`);
-        const j2 = await r2.json();
-        scheduleSample = { keys: Object.keys(j2), eventCount: (j2.events || []).length, firstEvent: (j2.events || [])[0] || null };
-      }
-      return res.status(200).json({ ok: true, teamCount: teams.length, sample, scheduleSample });
-    } catch (e) { return res.status(200).json({ ok: false, error: e.message }); }
-  }
   if (req.query && req.query.novigAlert) {
     try {
       const dry = String(req.query.dry || '') === '1';
