@@ -548,6 +548,18 @@ module.exports = async function handler(req, res) {
     }
 
     if (req.query && req.query.allUnits) {
+      /* TIERED FALLBACK 2026-09-07 (per Derek: "make sure everyone has units if we can
+         imply it"). Some Poly alerts showed no units at all because a wallet needed 15+
+         tracked stakes before ANY inferred size was returned -- newer or less-frequent
+         wallets got nothing, silently. Real fix, not just lowering the bar: three tiers,
+         each labelled by its own real confidence rather than presented as equally solid.
+           HIGH (15+ stakes): unchanged, the original median-based inference.
+           LOW (1-14 stakes): a real per-wallet median from whatever sample exists -- an
+             actual inference about THIS wallet, just from a smaller sample, genuinely
+             better than nothing rather than a guess.
+           NONE (a wallet never seen at all, first alert ever): falls back to the GLOBAL
+             median across every wallet with real data, clearly marked estimated so it is
+             never confused with a real per-wallet read. */
       const MIN_SAMPLE_FOR_UNITS = 15;
       const byTrader = {};
       [...sigPlays, ...specPlays].forEach(p => {
@@ -558,16 +570,23 @@ module.exports = async function handler(req, res) {
           byTrader[key].stakes.push(s.usdValue || 0);
         });
       });
+      const median = arr => {
+        const sorted = [...arr].sort((a, b) => a - b);
+        const mid = Math.floor(sorted.length / 2);
+        return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+      };
       const result = {};
+      const allStakesForGlobal = [];
       Object.keys(byTrader).forEach(key => {
         const entry = byTrader[key];
-        if (entry.stakes.length < MIN_SAMPLE_FOR_UNITS) return;
-        const sorted = [...entry.stakes].sort((a, b) => a - b);
-        const mid = Math.floor(sorted.length / 2);
-        const median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
-        result[key] = { name: entry.name, sampleSize: entry.stakes.length, inferredUnitSize: Math.round(median) };
+        allStakesForGlobal.push(...entry.stakes);
+        const conf = entry.stakes.length >= MIN_SAMPLE_FOR_UNITS ? 'high' : 'low';
+        result[key] = { name: entry.name, sampleSize: entry.stakes.length,
+          inferredUnitSize: Math.round(median(entry.stakes)), confidence: conf };
       });
-      return res.status(200).json({ ok: true, minSample: MIN_SAMPLE_FOR_UNITS, traderCount: Object.keys(result).length, units: result });
+      const globalUnitSize = allStakesForGlobal.length ? Math.round(median(allStakesForGlobal)) : null;
+      return res.status(200).json({ ok: true, minSample: MIN_SAMPLE_FOR_UNITS,
+        traderCount: Object.keys(result).length, globalUnitSize, units: result });
     }
 
     if (req.query && req.query.unitsFor) {
