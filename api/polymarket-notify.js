@@ -2639,16 +2639,31 @@ module.exports = async function handler(req, res) {
     // here so Discord can show the same context, not a separate computation that could
     // drift from what the site shows.
     let unitSizes = {};
+    let globalUnitSize = null;
     try {
       const usRes = await fetch(`${SITE_URL}/api/grade-cron?allUnits=1`);
       const usData = await usRes.json();
       unitSizes = usData.units || {};
+      globalUnitSize = usData.globalUnitSize || null;
     } catch { /* best-effort — alert still works without unit context */ }
+    /* TIERED FALLBACK 2026-09-07 (per Derek: "make sure everyone has units if we can
+       imply it"). Previously showed nothing for any wallet without a HIGH-confidence
+       (15+ stake) inferred size -- a real per-wallet LOW-confidence size, or even the
+       population-wide default, is genuinely more useful than blank. Each tier is marked
+       differently so a real per-wallet read is never confused with a population guess:
+       real inference gets a plain "(1.6u)"; the global fallback gets "(~1.6u, est.)" so
+       it reads as an estimate rather than a fact about that specific wallet. */
     function unitsLabel(dollarAmount, wallet) {
       const u = wallet && unitSizes[wallet];
-      if (!u || !u.inferredUnitSize) return '';
-      const units = dollarAmount / u.inferredUnitSize;
-      return units >= 0.1 ? ` (${Math.round(units * 10) / 10}u)` : '';
+      if (u && u.inferredUnitSize) {
+        const units = dollarAmount / u.inferredUnitSize;
+        return units >= 0.1 ? ` (${Math.round(units * 10) / 10}u)` : '';
+      }
+      if (globalUnitSize) {
+        const units = dollarAmount / globalUnitSize;
+        return units >= 0.1 ? ` (~${Math.round(units * 10) / 10}u, est.)` : '';
+      }
+      return '';
     }
 
     /* WALLET FORM 2026-08-27 (council-approved) -- rolling per-sport recent form, fetched
