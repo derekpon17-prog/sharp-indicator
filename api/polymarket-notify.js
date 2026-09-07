@@ -1510,6 +1510,11 @@ module.exports = async function handler(req, res) {
         value: rec.byType.map(r => `${r.type}: ${r.wins}-${r.losses}${r.pushes ? '-' + r.pushes : ''}`).join('  \u00b7  '),
         inline: false });
     }
+    if (rec.byConfidence && rec.byConfidence.length) {
+      fields.push({ name: 'By Confidence',
+        value: rec.byConfidence.map(r => `${r.tier}: ${r.wins}-${r.losses}${r.pushes ? '-' + r.pushes : ''}`).join('  \u00b7  '),
+        inline: false });
+    }
     if (rec.ungraded) fields.push({ name: 'Pending', value: `${rec.ungraded} ungraded`, inline: true });
     return { title, color: 0x8A8A96, fields };
   }
@@ -1525,11 +1530,14 @@ module.exports = async function handler(req, res) {
       const bySport = {};
       const byType = {};
       const bySportType = {};
+      const byConfidence = {};
       g.forEach(x => {
         const lg = x.league || 'UNK';
         const ty = NOVIG_TYPE_LABEL[x.marketType] || x.marketType || 'Other';
+        const cf = x.confidence || 'Unknown'; // older graded plays predate this field
         (bySport[lg] = bySport[lg] || []).push(x);
         (byType[ty] = byType[ty] || []).push(x);
+        (byConfidence[cf] = byConfidence[cf] || []).push(x);
         const key = lg + '|' + ty;
         (bySportType[key] = bySportType[key] || []).push(x);
       });
@@ -1541,11 +1549,16 @@ module.exports = async function handler(req, res) {
         const [lg, ty] = k.split('|');
         return { league: lg, type: ty, ...novigWL(bySportType[k]) };
       }).filter(r => r.sample > 0).sort((a, b) => b.sample - a.sample);
+      // Fixed tier order (not sorted by sample) so STRONG/GOOD/LEAN always reads in the
+      // same, intuitive order rather than shuffling based on which has more plays.
+      const CONF_ORDER = { STRONG: 0, GOOD: 1, LEAN: 2, Unknown: 3 };
+      const confidenceRows = Object.keys(byConfidence).map(cf => ({ tier: cf, ...novigWL(byConfidence[cf]) }))
+        .filter(r => r.sample > 0).sort((a, b) => (CONF_ORDER[a.tier] ?? 9) - (CONF_ORDER[b.tier] ?? 9));
 
-      return { ...overall, ungraded, bySport: sportRows, byType: typeRows, bySportType: sportTypeRows };
+      return { ...overall, ungraded, bySport: sportRows, byType: typeRows, bySportType: sportTypeRows, byConfidence: confidenceRows };
     } catch {
       return { sample: 0, wins: 0, losses: 0, pushes: 0, units: 0, winPct: null, ungraded: 0,
-        bySport: [], byType: [], bySportType: [] };
+        bySport: [], byType: [], bySportType: [], byConfidence: [] };
     }
   }
 
@@ -2151,6 +2164,11 @@ module.exports = async function handler(req, res) {
             sharpSide: s.sharpSide, sharpSideAmerican: s.sharpSideAmerican,
             score: s.score, sharpSideLiquidityUsd: s.sharpSideLiquidityUsd,
             crossBook: s.crossBook || null,
+            // Confidence tier at the moment it was actually alerted, per Derek: the record
+            // should show whether STRONG/GOOD/LEAN plays perform differently, so a real
+            // decision on tightening the gate (e.g. dropping LEAN) can be made from data
+            // once there's enough of it, not a guess.
+            confidence: confidenceOf(s).word,
             // Old inverted read, graded in parallel so results settle the direction
             // question rather than more reasoning about it.
             shadowInverseSide: s.shadowInverseSide, shadowInverseAmerican: s.shadowInverseAmerican,
