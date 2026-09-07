@@ -2024,32 +2024,74 @@ module.exports = async function handler(req, res) {
         return bits.join('\n');
       }
 
-      const novEmbeds = await Promise.all(fresh.slice(0, 8).map(async s => {
-        const cb = s.crossBook;
-        const px = (cb && cb.better) ? cb.price : s.sharpSideAmerican;
-        const where = (cb && cb.better) ? cb.book : 'Novig';
-        const st = novigStakeFor(px);
-        const conf = confidenceOf(s);
-        const f = [
-          { name: 'The bet', value: `**${s.sharpSide}** at ${fmtOdds(px)}\n_on ${where}_`, inline: false },
-          { name: 'Risk', value: st ? `${st.risk} unit${st.risk === 1 ? '' : 's'} to win ${st.toWin}` : '\u2014', inline: true },
-          { name: 'Game', value: s.gameTimeLabel || '\u2014', inline: true },
-          { name: 'Why', value: whyOf(s), inline: false },
-        ];
-        if (cb && cb.better) {
-          f.push({ name: 'Better price elsewhere',
-            value: `${fmtOdds(cb.price)} at ${cb.book} (beats Novig's ${fmtOdds(s.sharpSideAmerican)})`, inline: false });
-        }
-        // Supporting context only -- never changes the score or whether this fires.
+      /* COMBINE PER GAME 2026-09-07 (per Derek, real live example -- Cardinals/Giants
+         showed Spread money on STL +1.5 (the underdog) and Moneyline money on SF (the
+         favorite) simultaneously, as two separate, disconnected alerts for the SAME game.
+         Those aren't necessarily contradictory -- a favorite can be backed to win outright
+         while the underdog is separately backed to keep it within the number -- but
+         showing them as two unrelated cards hides that they're the same game entirely.
+         Per Derek: expect this more in football, where a single line move commonly
+         produces exactly this spread/moneyline split.
+         Grouped by eventId before building cards: a game with one qualifying market keeps
+         the existing single-market card unchanged; a game with two or more gets ONE
+         combined card instead, one field per market. */
+      const byEvent = {};
+      fresh.slice(0, 10).forEach(s => { (byEvent[s.eventId] = byEvent[s.eventId] || []).push(s); });
+      const eventGroups = Object.values(byEvent).slice(0, 8);
+
+      const novEmbeds = await Promise.all(eventGroups.map(async group => {
+        const first = group[0];
+        let situational = [];
         try {
-          const parts = String(s.event || '').split(' @ ');
-          const notes = await computeSituationalNotes(s.league, (parts[0]||'').trim(), (parts[1]||'').trim(), s.gameTime);
-          if (notes.length) f.push({ name: 'Context', value: notes.join('\n'), inline: false });
+          const parts = String(first.event || '').split(' @ ');
+          situational = await computeSituationalNotes(first.league, (parts[0]||'').trim(), (parts[1]||'').trim(), first.gameTime);
         } catch { /* context is a bonus, never block the real alert on it */ }
+
+        if (group.length === 1) {
+          const s = first;
+          const cb = s.crossBook;
+          const px = (cb && cb.better) ? cb.price : s.sharpSideAmerican;
+          const where = (cb && cb.better) ? cb.book : 'Novig';
+          const st = novigStakeFor(px);
+          const conf = confidenceOf(s);
+          const f = [
+            { name: 'The bet', value: `**${s.sharpSide}** at ${fmtOdds(px)}\n_on ${where}_`, inline: false },
+            { name: 'Risk', value: st ? `${st.risk} unit${st.risk === 1 ? '' : 's'} to win ${st.toWin}` : '\u2014', inline: true },
+            { name: 'Game', value: s.gameTimeLabel || '\u2014', inline: true },
+            { name: 'Why', value: whyOf(s), inline: false },
+          ];
+          if (cb && cb.better) {
+            f.push({ name: 'Better price elsewhere',
+              value: `${fmtOdds(cb.price)} at ${cb.book} (beats Novig's ${fmtOdds(s.sharpSideAmerican)})`, inline: false });
+          }
+          if (situational.length) f.push({ name: 'Context', value: situational.join('\n'), inline: false });
+          return { title: `${conf.dot} ${conf.word} \u2014 ${s.sharpSide}`, description: `${s.event}`, color: conf.color, fields: f };
+        }
+
+        // Multiple markets on the same game -- one field per market instead of one card
+        // per market, so the connection is visible rather than hidden across separate
+        // messages.
+        const marketLabel = { MONEY: 'Moneyline', SPREAD: 'Spread', TOTAL: 'Total' };
+        const best = group.slice().sort((a, b) => b.score - a.score)[0];
+        const bestConf = confidenceOf(best);
+        const f = [];
+        group.sort((a, b) => (marketLabel[a.marketType] || '').localeCompare(marketLabel[b.marketType] || '')).forEach(s => {
+          const cb = s.crossBook;
+          const px = (cb && cb.better) ? cb.price : s.sharpSideAmerican;
+          const where = (cb && cb.better) ? cb.book : 'Novig';
+          const st = novigStakeFor(px);
+          const conf = confidenceOf(s);
+          f.push({ name: `${conf.dot} ${marketLabel[s.marketType] || s.marketType}`,
+            value: `**${s.sharpSide}** at ${fmtOdds(px)}${cb && cb.better ? ` (${cb.book}, beats Novig ${fmtOdds(s.sharpSideAmerican)})` : ''}`
+              + `\n${st ? `Risk ${st.risk}u to win ${st.toWin}` : ''}\n${whyOf(s)}`,
+            inline: false });
+        });
+        f.push({ name: 'Game', value: first.gameTimeLabel || '\u2014', inline: true });
+        if (situational.length) f.push({ name: 'Context', value: situational.join('\n'), inline: false });
         return {
-          title: `${conf.dot} ${conf.word} \u2014 ${s.sharpSide}`,
-          description: `${s.event}`,
-          color: conf.color,
+          title: `${bestConf.dot} ${group.length} markets \u2014 ${first.event}`,
+          description: `Multiple sides of the same game showing real money \u2014 not necessarily a contradiction, see each market below.`,
+          color: bestConf.color,
           fields: f,
         };
       }));
