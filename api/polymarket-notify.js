@@ -1817,6 +1817,22 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // TEMP: verify ESPN team list + team schedule endpoints before building on them.
+  if (req.query && req.query.espnCheck) {
+    try {
+      const r1 = await fetch('https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams');
+      const j1 = await r1.json();
+      const teams = (j1.sports && j1.sports[0] && j1.sports[0].leagues && j1.sports[0].leagues[0] && j1.sports[0].leagues[0].teams) || [];
+      const sample = teams.slice(0, 2).map(t => ({ id: t.team.id, name: t.team.displayName }));
+      let scheduleSample = null;
+      if (teams[0]) {
+        const r2 = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${teams[0].team.id}/schedule`);
+        const j2 = await r2.json();
+        scheduleSample = { keys: Object.keys(j2), eventCount: (j2.events || []).length, firstEvent: (j2.events || [])[0] || null };
+      }
+      return res.status(200).json({ ok: true, teamCount: teams.length, sample, scheduleSample });
+    } catch (e) { return res.status(200).json({ ok: false, error: e.message }); }
+  }
   if (req.query && req.query.novigAlert) {
     try {
       const dry = String(req.query.dry || '') === '1';
