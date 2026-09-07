@@ -1738,6 +1738,29 @@ module.exports=async function handler(req,res){
 
 
 
+  if(req.query&&req.query.ncaafDebug){
+    try{
+      const eventId=req.query.ncaafDebug;
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          query:`query ($eventId: uuid!) {
+            event(where: {id: {_eq: $eventId}}) {
+              id description status
+              markets(where: {type: {_in: ["MONEY", "SPREAD", "TOTAL"]}}) {
+                type strike
+              }
+            }
+          }`,
+          variables:{eventId},
+        }),
+      });
+      const j=await r.json();
+      const ev=(j.data&&j.data.event&&j.data.event[0])||null;
+      return res.status(200).json({httpStatus:r.status,hasErrors:!!j.errors,errors:j.errors||null,
+        eventFound:!!ev,marketCount:ev?ev.markets.length:0,markets:ev?ev.markets:[]});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   if(req.query&&req.query.ncaafFind){
     try{
       const r=await fetch('https://gql.novig.us/v1/graphql',{
