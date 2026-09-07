@@ -1261,6 +1261,73 @@ module.exports = async function handler(req, res) {
                         : { risk: r2(Math.abs(american) / 100), toWin: 1 };
   }
 
+  /* SITUATIONAL NOTES 2026-09-07 (per Derek + council). Real research (Wikipedia's own
+     overview of betting systems, and peer-reviewed studies -- Nichols 2014, Paul & Weinbach
+     2014, Spann & Skiera 2009) found little to no exploitable edge in static historical
+     trends once discovered; even ProComputerGambler, an actual SDQL practitioner, frames
+     every published trend as "a research signal, not a prediction machine." So this is
+     built as SUPPORTING CONTEXT ONLY -- it never changes a score, never gates an alert,
+     never fires anything on its own. It just tells a human something true and relevant
+     about a game a real signal already flagged.
+     Scoped deliberately to what's cheap and reliable: REST/SCHEDULE facts (short week,
+     extra rest, coming off a blowout), reusing the exact ESPN scoreboard-by-date pattern
+     novigFetchFinal already proved out, just scanned backward to find each team's last
+     game instead of forward to grade this one. "Lost to this same opponent earlier this
+     season" (a real revenge-spot fact) was considered and deliberately left out of v1 --
+     properly checking it means scanning back through the whole season, which is a lot of
+     ESPN calls for one fact; noted as a real follow-up, not built as a weak version. */
+  async function espnFindTeamLastGame(league, teamName, beforeGameTime, lookbackDays) {
+    const path = NOVIG_ESPN_PATHS[league];
+    if (!path || !beforeGameTime) return null;
+    const start = new Date(beforeGameTime);
+    const want = String(teamName || '').toLowerCase().split(' ').pop();
+    if (!want) return null;
+    for (let i = 1; i <= (lookbackDays || 10); i++) {
+      const day = new Date(start.getTime() - i * 86400000).toISOString().slice(0, 10).replace(/-/g, '');
+      try {
+        const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${day}&limit=300`);
+        const j = await r.json();
+        for (const ev of (j.events || [])) {
+          const comp = ev.competitions && ev.competitions[0];
+          if (!comp || !(comp.status && comp.status.type && comp.status.type.completed)) continue;
+          const cs = comp.competitors || [];
+          const home = cs.find(x => x.homeAway === 'home');
+          const away = cs.find(x => x.homeAway === 'away');
+          if (!home || !away || !home.team || !away.team) continue;
+          const lastWord = n => String(n || '').toLowerCase().split(' ').pop();
+          const isHome = lastWord(home.team.displayName) === want;
+          const isAway = lastWord(away.team.displayName) === want;
+          if (!isHome && !isAway) continue;
+          const mine = isHome ? home : away, opp = isHome ? away : home;
+          const myScore = parseInt(mine.score, 10), oppScore = parseInt(opp.score, 10);
+          if (!isFinite(myScore) || !isFinite(oppScore)) continue;
+          return { daysAgo: i, opponent: opp.team.displayName, margin: myScore - oppScore,
+            result: myScore > oppScore ? 'W' : (myScore < oppScore ? 'L' : 'T') };
+        }
+      } catch { /* try the next day back */ }
+    }
+    return null;
+  }
+
+  const SITUATIONAL_SPORTS = ['NFL', 'NCAAF']; // weekly sports, where rest days are meaningful
+  async function computeSituationalNotes(league, away, home, gameTime) {
+    if (!SITUATIONAL_SPORTS.includes(league) || !gameTime) return [];
+    const [awayLast, homeLast] = await Promise.all([
+      espnFindTeamLastGame(league, away, gameTime, 10),
+      espnFindTeamLastGame(league, home, gameTime, 10),
+    ]);
+    const notes = [];
+    [{ team: away, g: awayLast }, { team: home, g: homeLast }].forEach(({ team, g }) => {
+      if (!g) return;
+      const short = team; // already the real team name passed in
+      if (g.daysAgo <= 4) notes.push(`${short} on a short week (${g.daysAgo}d rest)`);
+      else if (g.daysAgo >= 9) notes.push(`${short} off extra rest (${g.daysAgo}d, likely a bye)`);
+      if (g.result === 'L' && g.margin <= -20) notes.push(`${short} coming off a blowout loss (by ${Math.abs(g.margin)})`);
+      if (g.result === 'W' && g.margin >= 20) notes.push(`${short} coming off a blowout win (by ${g.margin})`);
+    });
+    return notes;
+  }
+
   async function novigFetchFinal(league, eventDesc, gameTime) {
     const path = NOVIG_ESPN_PATHS[league];
     if (!path || !gameTime) return null;
@@ -1668,6 +1735,63 @@ module.exports = async function handler(req, res) {
      alert -- this is that same card, just sent on its own schedule instead of only
      riding alongside a new signal.
      GET ?novigDailySummary=1[&dry=1] -- needs its own cron, separate from novigAlert. */
+  /* WEEKLY NFL SITUATIONAL SUMMARY 2026-09-07 (per Derek: "start of the week before the
+     next week's set of NFL game days"). Same supporting-context-only posture as the
+     per-alert Context field -- this never picks a side, never claims a game is a bet,
+     it just surfaces real rest/schedule facts across the whole upcoming week's slate in
+     one place, ahead of time. Reuses /api/odds's own schedule data (already proven,
+     already the source of truth for started/not-started) rather than building a second
+     way to find upcoming games.
+     GET ?nflWeeklySummary=1[&dry=1] -- needs its own cron, once a week (Tuesday is the
+     natural boundary: NFL runs Thu-Mon, so by Tuesday the full upcoming week is set). */
+  if (req.query && req.query.nflWeeklySummary) {
+    try {
+      const dry = String(req.query.dry || '') === '1';
+      const r = await fetch(`${SITE_URL}/api/odds?sport=NFL`);
+      const j = await r.json();
+      const nowMs = Date.now();
+      const weekMs = 8 * 24 * 60 * 60 * 1000; // covers a full Thu-Mon NFL week with margin
+      const upcoming = (j.schedule || []).filter(g => {
+        if (g.started) return false;
+        const t = new Date(g.commenceTime).getTime();
+        return t > nowMs && (t - nowMs) <= weekMs;
+      });
+
+      const gameNotes = await Promise.all(upcoming.slice(0, 20).map(async g => {
+        const notes = await computeSituationalNotes('NFL', g.away, g.home, g.commenceTime);
+        return { away: g.away, home: g.home, commenceTime: g.commenceTime, notes };
+      }));
+      const withNotes = gameNotes.filter(g => g.notes.length);
+
+      const weekLabel = new Date().toLocaleDateString('en-US',
+        { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+      const header = `\u{1F4C5} **NFL Weekly Situational Notes** \u2014 week of ${weekLabel}`;
+      const fields = withNotes.length
+        ? withNotes.map(g => ({
+            name: `${g.away} @ ${g.home}`,
+            value: g.notes.join('\n'),
+            inline: false,
+          }))
+        : [{ name: 'Nothing notable', value: 'No short weeks, extra rest, or blowout comedowns found in this week\'s schedule.', inline: false }];
+      const embed = { title: '\u{1F4CB} Context for the upcoming week',
+        color: 0x8A8A96, fields,
+        footer: { text: 'Supporting context only -- not picks. See individual alerts for real signals.' } };
+
+      const result = { ok: true, upcomingGames: upcoming.length, gamesWithNotes: withNotes.length };
+      if (dry) { result.dryRun = true; result.preview = withNotes; return res.status(200).json(result); }
+
+      const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
+      if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
+
+      const send = await sendDiscord(webhook, header, [embed]);
+      result.sent = !!(send && send.ok);
+      result.sendResult = send;
+      return res.status(200).json(result);
+    } catch (e) {
+      return res.status(200).json({ ok: false, error: e.message });
+    }
+  }
+
   if (req.query && req.query.novigDailySummary) {
     try {
       const dry = String(req.query.dry || '') === '1';
@@ -1845,7 +1969,7 @@ module.exports = async function handler(req, res) {
         return bits.join('\n');
       }
 
-      const novEmbeds = fresh.slice(0, 8).map(s => {
+      const novEmbeds = await Promise.all(fresh.slice(0, 8).map(async s => {
         const cb = s.crossBook;
         const px = (cb && cb.better) ? cb.price : s.sharpSideAmerican;
         const where = (cb && cb.better) ? cb.book : 'Novig';
@@ -1861,13 +1985,19 @@ module.exports = async function handler(req, res) {
           f.push({ name: 'Better price elsewhere',
             value: `${fmtOdds(cb.price)} at ${cb.book} (beats Novig's ${fmtOdds(s.sharpSideAmerican)})`, inline: false });
         }
+        // Supporting context only -- never changes the score or whether this fires.
+        try {
+          const parts = String(s.event || '').split(' @ ');
+          const notes = await computeSituationalNotes(s.league, (parts[0]||'').trim(), (parts[1]||'').trim(), s.gameTime);
+          if (notes.length) f.push({ name: 'Context', value: notes.join('\n'), inline: false });
+        } catch { /* context is a bonus, never block the real alert on it */ }
         return {
           title: `${conf.dot} ${conf.word} \u2014 ${s.sharpSide}`,
           description: `${s.event}`,
           color: conf.color,
           fields: f,
         };
-      });
+      }));
 
       /* RESTORED 2026-09-06 (real incident): this whole block was accidentally deleted
          during the beginner-card rewrite -- that edit replaced the region between two
@@ -1877,7 +2007,7 @@ module.exports = async function handler(req, res) {
          code path, which is exactly why testing only with dry=1 all day never caught it.
          Rebuilt in the same plain-language style as the NEW cards above: what changed,
          what to do about it, nothing else. */
-      const updEmbeds = updates.slice(0, 6).map(s => {
+      const updEmbeds = await Promise.all(updates.slice(0, 6).map(async s => {
         const p = s._prior || {};
         const flip = s._kind === 'FLIP';
         const f = [
@@ -1910,13 +2040,18 @@ module.exports = async function handler(req, res) {
             `${x.sharpSide}: \$${(x.sharpSideLiquidityUsd || 0).toLocaleString()} vs ${x.otherSide} \$${(x.otherSideLiquidityUsd || 0).toLocaleString()}`
           ).join('\n'), inline: false });
         }
+        try {
+          const parts = String(s.event || '').split(' @ ');
+          const notes = await computeSituationalNotes(s.league, (parts[0] || '').trim(), (parts[1] || '').trim(), s.gameTime);
+          if (notes.length) f.push({ name: 'Context', value: notes.join('\n'), inline: false });
+        } catch { /* context is a bonus, never block the real alert on it */ }
         return {
           title: `${flip ? '\u{1F504} Money moved' : (scoreRising ? '\u{1F4C8} Getting bigger' : '\u{1F4C9} Cooling off')} \u2014 ${s.sharpSide}`,
           description: `${s.event}`,
           color: flip ? 0xF87171 : 0x40B4FF,
           fields: f,
         };
-      });
+      }));
 
       // Kept for the JSON response / debugging only -- not what gets sent any more.
       const lines = fresh.slice(0, 10).map(s => `${s.sharpSide} ${s.score} ${s.event}`);
