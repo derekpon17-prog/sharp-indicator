@@ -1738,6 +1738,14 @@ module.exports=async function handler(req,res){
 
 
 
+  if(req.query&&req.query.ncaafReal){
+    try{
+      const eventId=req.query.ncaafReal;
+      const markets=await fetchNovigOrderBook(eventId);
+      const sigs=markets.filter(m=>NOVIG_MAIN_TYPES.includes(m.type)).map(m=>({type:m.type,strike:m.strike,sig:novigSharpSideForMarket(m)})).filter(x=>x.sig);
+      return res.status(200).json({ok:true,marketCount:markets.length,realSignalCount:sigs.length,sigs});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
   // Diagnostic read-back: GET ?novigScanLog=1[&n=20] -- real per-league history so a
