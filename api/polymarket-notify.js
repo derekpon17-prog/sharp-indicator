@@ -1218,6 +1218,28 @@ module.exports = async function handler(req, res) {
       }
       if (!key || !best[key] || best[key].price == null) return { ...s, crossBook: null };
 
+      /* FIX 2026-09-07 (real screenshot: LAD +1.5 alerted at +115, "better price" showed
+         as "+115 at novig (beats Novig's -300)" -- Novig named twice for the same label).
+         bestPrices is keyed by team name ONLY, covering the single standard spread line
+         the Odds API tracks. Novig separately lists real ALTERNATE lines (a genuinely
+         different market literally named "LAD +1.5"), each with its own real price.
+         Matching purely by team name, after stripping the strike entirely, meant an
+         alternate-line signal always got compared against the standard line's price as if
+         they were the same bet -- they are not. rawPrices carries the real point tied to
+         each bestPrices entry; for SPREAD markets this must match the signal's own strike
+         before any comparison is valid at all. */
+      if (s.marketType === 'SPREAD' && mk.rawPrices) {
+        const ab2 = side.replace(/\s*[+-][\d.]+\s*$/, '').trim().toUpperCase();
+        const rp = mk.rawPrices.find(r => {
+          const words = String(r.name || '').toUpperCase().split(' ');
+          const initials = words.map(w => w[0]).join('');
+          return initials === ab2 || String(r.name || '').toUpperCase().replace(/[^A-Z]/g, '').startsWith(ab2);
+        });
+        if (!rp || rp.point == null || s.strike == null || Math.abs(Number(rp.point) - Number(s.strike)) > 0.01) {
+          return { ...s, crossBook: null };
+        }
+      }
+
       const bookPrice = best[key].price;
       const nov = s.sharpSideAmerican;
       if (nov == null) return { ...s, crossBook: null };
