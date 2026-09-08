@@ -1923,7 +1923,9 @@ module.exports = async function handler(req, res) {
     try {
       const dry = String(req.query.dry || '') === '1';
       const nowMs = Date.now();
-      const winLoMs = 20 * 60 * 1000, winHiMs = 40 * 60 * 1000;
+      // TEMP test override -- real 20/40 defaults unless explicitly overridden for a live check.
+      const winLoMs = (req.query.testWinLo ? parseInt(req.query.testWinLo,10) : 20) * 60 * 1000;
+      const winHiMs = (req.query.testWinHi ? parseInt(req.query.testWinHi,10) : 40) * 60 * 1000;
       const results = [];
 
       for (const lg of SLATE_LEAGUES) {
