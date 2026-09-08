@@ -1906,6 +1906,19 @@ module.exports = async function handler(req, res) {
     } catch { return []; }
   }
 
+  if (req.query && req.query.upcomingCheck) {
+    try {
+      const lg = String(req.query.upcomingCheck).toUpperCase();
+      const events = await novigUpcomingForLeague(lg);
+      const now = Date.now();
+      const withMinutes = events.map(e => ({
+        description: e.description,
+        commenceTime: e.game && e.game.scheduled_start,
+        minutesOut: e.game && e.game.scheduled_start ? Math.round((new Date(e.game.scheduled_start).getTime() - now) / 60000) : null,
+      })).filter(e => e.minutesOut != null && e.minutesOut > 0).sort((a, b) => a.minutesOut - b.minutesOut);
+      return res.status(200).json({ ok: true, count: withMinutes.length, upcoming: withMinutes.slice(0, 8) });
+    } catch (e) { return res.status(200).json({ ok: false, error: e.message }); }
+  }
   if (req.query && req.query.novigSlateSummary) {
     try {
       const dry = String(req.query.dry || '') === '1';
