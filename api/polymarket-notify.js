@@ -1872,6 +1872,125 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  /* PER-SPORT SLATE SUMMARY 2026-09-07 (per Derek): a summary 30 minutes before each
+     distinct wave of games starts for a sport, not once a day. NFL alone has multiple
+     real waves (noon, ~3-3:30, primetime), so a single daily time would miss most of
+     them -- this detects waves directly from real commence times instead of hardcoding
+     kickoff clocks that shift by matchup, week, and network.
+     Design: run on the same frequent cron as the real alert. Each pass looks for games
+     starting 20-40 minutes out (a window as wide as the cron interval, so no wave can
+     fall between two ticks and get missed entirely). Any sport with a qualifying game
+     gets ONE summary covering everything in that same tight window -- that IS the wave.
+     Deliberately reuses Novig's own event list (not the legacy /api/odds schedule) for
+     wave detection, since that already works uniformly across every sport tracked here,
+     not just the ones the old schedule endpoint happens to cover.
+     Does not halt or replace anything else -- this is additive, alongside the real
+     signal alerts and the daily/weekly summaries, never instead of them. */
+  const SLATE_LEAGUES = ['MLB', 'NFL', 'NCAAF', 'NBA', 'NHL', 'WNBA'];
+  async function novigUpcomingForLeague(league) {
+    try {
+      const r = await fetch('https://gql.novig.us/v1/graphql', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          operationName: 'MyQuery',
+          query: `query MyQuery($league: String!) {
+            event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
+              id description game { scheduled_start }
+            }
+          }`,
+          variables: { league },
+        }),
+      });
+      const j = await r.json();
+      return (j.data && j.data.event) || [];
+    } catch { return []; }
+  }
+
+  if (req.query && req.query.novigSlateSummary) {
+    try {
+      const dry = String(req.query.dry || '') === '1';
+      const nowMs = Date.now();
+      const winLoMs = 20 * 60 * 1000, winHiMs = 40 * 60 * 1000;
+      const results = [];
+
+      for (const lg of SLATE_LEAGUES) {
+        const events = await novigUpcomingForLeague(lg);
+        const wave = events.filter(e => {
+          const t = e.game && e.game.scheduled_start ? new Date(e.game.scheduled_start).getTime() : null;
+          if (t == null) return false;
+          const out = t - nowMs;
+          return out >= winLoMs && out <= winHiMs;
+        });
+        if (!wave.length) continue;
+
+        // Dedup per sport + rounded wave hour so this fires once per real slate, not
+        // once per cron tick while the wave sits inside the detection window.
+        const earliest = wave.reduce((a, b) => {
+          const ta = new Date(a.game.scheduled_start).getTime(), tb = new Date(b.game.scheduled_start).getTime();
+          return tb < ta ? b : a;
+        });
+        const waveHourKey = new Date(earliest.game.scheduled_start).toISOString().slice(0, 13); // YYYY-MM-DDTHH
+        const dedupKey = `novig:slatesent:${lg}:${waveHourKey}`;
+        if (!dry) {
+          try {
+            const seen = await upstashPost(['SET', dedupKey, '1', 'NX', 'EX', '10800']);
+            if (!(seen && seen.result === 'OK')) continue; // already sent for this exact wave
+          } catch { /* KV down -- fall through and send rather than silently drop */ }
+        }
+
+        // Real data for just this wave -- narrow window so the scan only touches these
+        // specific games, not the whole day's slate for the sport.
+        const scanR = await fetch(`${SITE_URL}/api/odds?novigSharp=1&league=${lg}&windowHours=1`);
+        const scanJ = await scanR.json();
+        const signals = (scanJ && scanJ.signals) || [];
+
+        const fmtOddsLocal = a => (a > 0 ? '+' + a : String(a));
+        const gameLines = wave.map(e => {
+          const t = new Date(e.game.scheduled_start);
+          const label = t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
+          return `${e.description} \u2014 ${label} ET`;
+        });
+        const sigLines = signals.slice(0, 6).map(s =>
+          `**${s.sharpSide}** at ${fmtOddsLocal(s.sharpSideAmerican)} (imb ${s.score}) \u2014 ${s.event}`
+        );
+
+        const fields = [{ name: 'This wave', value: gameLines.join('\n').slice(0, 1024), inline: false }];
+        fields.push({ name: signals.length ? 'Real signals right now' : 'Real signals',
+          value: signals.length ? sigLines.join('\n').slice(0, 1024) : 'Nothing clearing the bar yet -- games may still be too early for real money to show up.',
+          inline: false });
+
+        results.push({
+          league: lg, waveSize: wave.length, signalCount: signals.length,
+          embed: {
+            title: `\u23F0 ${lg} slate starting soon`,
+            description: `${wave.length} game${wave.length > 1 ? 's' : ''} kicking off in the next ~30 minutes`,
+            color: 0x40B4FF,
+            fields,
+          },
+        });
+      }
+
+      if (!results.length) {
+        return res.status(200).json({ ok: true, sent: false, note: 'No sport has a wave starting in the next ~30 minutes', dryRun: dry });
+      }
+
+      if (dry) return res.status(200).json({ ok: true, dryRun: true, waves: results });
+
+      const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
+      if (!webhook) return res.status(200).json({ ok: true, sent: false, note: 'No webhook set (novig_sharp_alerts or sharp_line_alerts)' });
+
+      const sendResults = [];
+      for (const r of results) {
+        const header = `\u{1F3DF}\uFE0F **Pre-slate summary** \u2014 ${r.league}`;
+        const send = await sendDiscord(webhook, header, [r.embed]);
+        sendResults.push({ league: r.league, sent: !!(send && send.ok) });
+      }
+      return res.status(200).json({ ok: true, sent: true, waves: results.map(r => ({ league: r.league, waveSize: r.waveSize, signalCount: r.signalCount })), sendResults });
+    } catch (e) {
+      return res.status(200).json({ ok: false, error: e.message });
+    }
+  }
+
   if (req.query && req.query.novigAlert) {
     try {
       const dry = String(req.query.dry || '') === '1';
