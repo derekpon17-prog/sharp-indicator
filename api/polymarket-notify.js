@@ -1847,6 +1847,20 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  if (req.query && req.query.novigPendingCheck) {
+    try {
+      const raw = await upstashPost(['GET', 'novig:pending']);
+      const v = raw && raw.ok ? raw.result : null;
+      const p = v ? (typeof v === 'string' ? JSON.parse(v) : v) : [];
+      const byLeague = {};
+      p.forEach(x => { const lg = x.league || 'UNK'; byLeague[lg] = (byLeague[lg]||0)+1; });
+      const nowMs = Date.now();
+      const withAge = p.map(x => ({ league: x.league, event: x.event, sharpSide: x.sharpSide,
+        gameTime: x.gameTime, alertedAt: x.alertedAt,
+        gameHoursAgo: x.gameTime ? Math.round((nowMs - new Date(x.gameTime).getTime())/3600000) : null }));
+      return res.status(200).json({ ok: true, total: p.length, byLeague, plays: withAge });
+    } catch (e) { return res.status(200).json({ ok: false, error: e.message }); }
+  }
   if (req.query && req.query.novigDailySummary) {
     try {
       const dry = String(req.query.dry || '') === '1';
