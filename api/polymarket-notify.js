@@ -1847,20 +1847,6 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  if (req.query && req.query.novigPendingCheck) {
-    try {
-      const raw = await upstashPost(['GET', 'novig:pending']);
-      const v = raw && raw.ok ? raw.result : null;
-      const p = v ? (typeof v === 'string' ? JSON.parse(v) : v) : [];
-      const byLeague = {};
-      p.forEach(x => { const lg = x.league || 'UNK'; byLeague[lg] = (byLeague[lg]||0)+1; });
-      const nowMs = Date.now();
-      const withAge = p.map(x => ({ league: x.league, event: x.event, sharpSide: x.sharpSide,
-        gameTime: x.gameTime, alertedAt: x.alertedAt,
-        gameHoursAgo: x.gameTime ? Math.round((nowMs - new Date(x.gameTime).getTime())/3600000) : null }));
-      return res.status(200).json({ ok: true, total: p.length, byLeague, plays: withAge });
-    } catch (e) { return res.status(200).json({ ok: false, error: e.message }); }
-  }
   if (req.query && req.query.novigDailySummary) {
     try {
       const dry = String(req.query.dry || '') === '1';
@@ -2349,7 +2335,19 @@ module.exports = async function handler(req, res) {
             shadowInverseSide: s.shadowInverseSide, shadowInverseAmerican: s.shadowInverseAmerican,
             alertedAt: Date.now(),
           }));
-          await upstashPost(['SET', 'novig:pending', JSON.stringify(cur.slice(-300)), 'EX', '2592000']);
+          /* FIX 2026-09-09 (real incident, confirmed via Derek: NCAAF alerts firing all week,
+             but zero NCAAF plays ever graded). Root cause: this cap ran on EVERY push, keeping
+             only the 300 most recent entries COMBINED across every league and market type --
+             not per-league, not per-game. NCAAF generates many alternate-line alerts per game
+             (same pattern already seen on NFL: a dozen+ entries for one single game), so real
+             combined volume across a busy week easily exceeded 300 before those specific NCAAF
+             games ever reached the 3.5-hour-post-kickoff grading window -- meaning the oldest,
+             still-ungraded NCAAF plays were being silently discarded before grading could ever
+             reach them. Anything in this array is BY DEFINITION still waiting to be graded
+             (grading removes an entry once resolved), so it should never be dropped just
+             because newer alerts came in faster. Raised substantially as a generous safety
+             ceiling against genuinely unbounded growth, not a real day-to-day limit. */
+          await upstashPost(['SET', 'novig:pending', JSON.stringify(cur.slice(-3000)), 'EX', '2592000']);
         } catch {}
       }
       result.sendResult = send;
