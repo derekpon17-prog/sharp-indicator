@@ -2782,6 +2782,26 @@ module.exports = async function handler(req, res) {
     result.sendResult = send;
 
     if (send.ok) {
+      /* SPLIT-MARKET EXCLUSION 2026-09-09 (per Derek, real screenshot: TEX/SEA O/U 8.5
+         showing real qualifying money on Over AND Under independently). When a game's
+         own report contains BOTH sides of the same market, that is not a signal -- it is
+         two real, independently-confirmed reads that disagree, and pushing both into the
+         record would silently wash to a near-coinflip while still occupying two W/L
+         slots as if they were separate, confident calls. Detected by grouping fresh
+         plays on (away, home, sport, market); any group with 2+ distinct sharpSide
+         values is split and every play in it is excluded from tracking. Reporting is
+         untouched -- a split market still sends normally so a human sees the real
+         disagreement, it just never enters converge:pending either way. */
+      const marketGroupsForSplit = {};
+      fresh.forEach(p => {
+        const k = p.away + '||' + p.home + '||' + p.sport + '||' + (p.market || p.activeMarket);
+        (marketGroupsForSplit[k] = marketGroupsForSplit[k] || new Set()).add(p.sharpSide);
+      });
+      const isSplitPlay = p => {
+        const k = p.away + '||' + p.home + '||' + p.sport + '||' + (p.market || p.activeMarket);
+        return (marketGroupsForSplit[k] && marketGroupsForSplit[k].size >= 2);
+      };
+
       for (const p of fresh) {
         try { await upstashPost(['SET', playKey(p), JSON.stringify({ convergeScore: p._convergeScore, siScore: p.siScore, at: Date.now() }), 'EX', String(REPORT_TTL)]); } catch {}
         // Capture what's needed to grade this play later -- teams, sport, market, the
@@ -2789,7 +2809,8 @@ module.exports = async function handler(req, res) {
         // moment it was posted (units are computed off THIS price, not whatever it moves
         // to later). Gated on trackingIsLive() -- see TRACKING_START_DATE above -- so
         // today's unreliable-baseline plays send normally but never enter the record.
-        if (trackingIsLive()) {
+        // Also gated on !isSplitPlay(p) -- see SPLIT-MARKET EXCLUSION above.
+        if (trackingIsLive() && !isSplitPlay(p)) {
           try {
             const best = p.bestPrices && p.bestPrices[p.sharpSide];
             const pendingRes = await upstashPost(['GET', 'converge:pending']);
