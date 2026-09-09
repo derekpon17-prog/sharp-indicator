@@ -2416,8 +2416,11 @@ module.exports = async function handler(req, res) {
         const book = cs.breakdown && cs.breakdown.book;
         const poly = cs.breakdown && cs.breakdown.poly;
         const combined = !!poly;
-        const tagColor = combined ? '#00C896' : '#40B4FF';
-        const tagLabel = combined ? 'COMBINED' : 'LINE';
+        // Below-threshold fallback cards get their own colour and label so they can
+        // never be mistaken for a real qualifying play, matching the text reports
+        // explicit BELOW THRESHOLD marking.
+        const tagColor = p._belowThreshold ? '#F5A623' : (combined ? '#00C896' : '#40B4FF');
+        const tagLabel = p._belowThreshold ? 'BELOW THRESHOLD' : (combined ? 'COMBINED' : 'LINE');
 
         const [awayUri, homeUri] = await Promise.all([toDataUri(p.sport, p.away), toDataUri(p.sport, p.home)]);
         const d = new Date(p.commenceTime);
@@ -2527,7 +2530,7 @@ module.exports = async function handler(req, res) {
       }
 
       const sports = ((req.query.sports) || 'MLB').split(',').map(s => s.trim().toUpperCase());
-      const allPlays = [];
+      let allPlays = [];
       for (const sp of sports) {
         try {
           const r = await fetch(`${SITE_URL}/api/odds?sport=${sp}`);
@@ -2546,11 +2549,37 @@ module.exports = async function handler(req, res) {
             // automatically inherit it, same lesson as the bookConfirmed/polyConfirmed
             // gate above having needed its own separate fix here too.
             const tooEarlyImg = p.commenceTime && (new Date(p.commenceTime).getTime() - Date.now()) > (2 * 60 * 60 * 1000);
-            if (bookConfirmedImg && polyConfirmedImg && !tooEarlyImg) allPlays.push({ ...p, sport: sp });
+            if (bookConfirmedImg && polyConfirmedImg && !tooEarlyImg) allPlays.push({ ...p, sport: sp, _belowThreshold: false });
           });
         } catch {}
       }
       allPlays.sort((a, b) => b.convergeScore.score - a.convergeScore.score);
+
+      /* FALLBACK 2026-09-08 (per Derek, real incident -- image rendering small/blank
+         while the text report correctly showed a "nothing cleared threshold, here's the
+         best available" message). This branch has always required the full strict gate
+         with no fallback of its own -- a real, separate gap from the text report, not a
+         new regression. Same criteria as the text report's topAvailable: real Poly
+         confirmation (2+ distinct wallets) still required, book's absolute floor is not.
+         Only engages when the strict pass found nothing, and every card built from this
+         path is clearly labelled BELOW THRESHOLD so it is never mistaken for a real
+         qualifying play. */
+      if (!allPlays.length) {
+        for (const sp of sports) {
+          try {
+            const r = await fetch(`${SITE_URL}/api/odds?sport=${sp}`);
+            const d = await r.json();
+            (d.plays || []).forEach(p => {
+              const polyConfirmedFallbackImg = !!(p.convergeScore && p.convergeScore.breakdown
+                && p.convergeScore.breakdown.poly && p.convergeScore.breakdown.poly.buyers >= 2);
+              const tooEarlyFallbackImg = p.commenceTime && (new Date(p.commenceTime).getTime() - Date.now()) > (2 * 60 * 60 * 1000);
+              if (polyConfirmedFallbackImg && !tooEarlyFallbackImg) allPlays.push({ ...p, sport: sp, _belowThreshold: true });
+            });
+          } catch {}
+        }
+        allPlays.sort((a, b) => b.convergeScore.score - a.convergeScore.score);
+        allPlays = allPlays.slice(0, 3); // matches the text report's below-threshold cap
+      }
 
       // HEIGHT 2026-09-01: built from real content (multi-trader poly boxes vary a lot in
       // height), not a fixed per-card guess -- estimate per card from its trader count so
@@ -2571,6 +2600,9 @@ module.exports = async function handler(req, res) {
                   children: [{ type: 'div', props: { style: { display: 'flex', width: 8, height: 8, borderRadius: 4, backgroundColor: '#4ade80' } } }] } },
               { type: 'div', props: { style: { fontSize: 26, fontWeight: 700, color: '#fff', display: 'flex' }, children: 'Converge Score Report' } },
             ] } },
+          ...(allPlays.length && allPlays.every(p => p._belowThreshold) ? [{ type: 'div', props: {
+              style: { fontSize: 15, color: '#F5A623', marginTop: 8, display: 'flex' },
+              children: 'Nothing cleared the 75+ preferred threshold -- showing the most promising available signals below it instead.' } }] : []),
           ...(cards.length ? cards : [{ type: 'div', props: { style: { fontSize: 18, color: '#9ca3af', marginTop: 24, display: 'flex' }, children: 'Nothing cleared the 75+ threshold right now.' } }]),
         ] } };
 
