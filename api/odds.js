@@ -406,6 +406,14 @@ async function scanNovigSharpSignals(leagues, opts){
     }catch{ return []; }
   }
 
+  if(req.query&&req.query.ncaafRawCheck){
+    const evs=await listEvents('NCAAF');
+    const nowMs=Date.now();
+    const withHours=evs.map(e=>({description:e.description,scheduled_start:e.game&&e.game.scheduled_start,
+      hoursOut:(e.game&&e.game.scheduled_start)?Math.round((new Date(e.game.scheduled_start).getTime()-nowMs)/3600000):null}))
+      .sort((a,b)=>(a.hoursOut??99999)-(b.hoursOut??99999));
+    return res.status(200).json({ok:true,count:evs.length,sample:withHours.slice(0,10)});
+  }
   const perLeague=await Promise.all(list.map(listEvents));
   let events=perLeague.flat();
   const leaguesFound={};
