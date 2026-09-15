@@ -1847,6 +1847,17 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  if (req.query && req.query.ncaafPendingCheck) {
+    try {
+      const raw = await upstashPost(['GET', 'novig:pending']);
+      const v = raw && raw.ok ? raw.result : null;
+      const p = v ? (typeof v === 'string' ? JSON.parse(v) : v) : [];
+      const byLeague = {};
+      p.forEach(x => { const lg = x.league || 'UNK'; byLeague[lg] = (byLeague[lg]||0)+1; });
+      const ncaaf = p.filter(x => x.league === 'NCAAF').slice(0, 5);
+      return res.status(200).json({ ok: true, total: p.length, byLeague, ncaafSample: ncaaf });
+    } catch (e) { return res.status(200).json({ ok: false, error: e.message }); }
+  }
   if (req.query && req.query.novigDailySummary) {
     try {
       const dry = String(req.query.dry || '') === '1';
