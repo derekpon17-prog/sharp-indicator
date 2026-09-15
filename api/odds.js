@@ -360,7 +360,20 @@ const NOVIG_MIN_LIQ_BY_SPORT = { MLB:3000, NCAAF:3000, NFL:1500, NBA:1500, NHL:1
    The tradeoff is real: earlier books are thinner, and thin books are where structural
    imbalance noise comes from. That is what the per-sport LIQUIDITY floor is for --
    filtering on real money is more honest than using time as a proxy for it. */
-const NOVIG_WINDOW_BY_SPORT = { NCAAF:24, NFL:48, MLB:3, NBA:3, NHL:3, WNBA:3 };
+/* FIX 2026-09-15 (real incident, confirmed via Derek: NCAAF alerts firing for weeks but
+   zero NCAAF plays ever graded). Root cause confirmed directly against Novig's real data:
+   100 consecutive scans over 33 straight hours showed zero NCAAF events ever entering the
+   24h window, while the nearest genuinely valid future NCAAF game was 58 hours out
+   (Thursday). NCAAF plays mainly on Saturday, same once-a-week cadence as NFL (which
+   already got 48h for exactly this reason), but NCAAF's window was left at 24h -- meaning
+   for most of the week (Sun-Wed), the window is structurally empty by design, not
+   quiet-by-chance. Widened to 96h to reliably reach back to early week and cover the full
+   Thu-Sat slate, similar reasoning to NFL's 48h but wider since NCAAF's game days spread
+   further (Tue-Sat some weeks) than NFL's Thu/Sun/Mon. Also confirmed separately: a
+   handful of stale zombie events (games listed weeks in the past, still OPEN_PREGAME on
+   Novig's own side) exist in the raw list but are harmless -- they fail on their negative
+   hoursOut and were never the cause of the gap. */
+const NOVIG_WINDOW_BY_SPORT = { NCAAF:96, NFL:48, MLB:3, NBA:3, NHL:3, WNBA:3 };
 const NOVIG_WINDOW_DEFAULT  = 3;
 const NOVIG_MAIN_TYPES      = ['MONEY','SPREAD','TOTAL'];
 // WNBA added 2026-09-06 (per Derek, real gap found) -- was missing entirely from this
@@ -1749,33 +1762,6 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
 
-  // TEMP: raw NCAAF event check, positioned at the TOP of handler this time (the earlier
-  // attempt was nested inside scanNovigSharpSignals, a function only invoked by the
-  // novigSharp branch -- this request pattern never reached it).
-  if(req.query&&req.query.ncaafRaw2){
-    try{
-      const r=await fetch('https://gql.novig.us/v1/graphql',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          operationName:'MyQuery',
-          query:`query MyQuery($league: String!) {
-            event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
-              id description game { scheduled_start }
-            }
-          }`,
-          variables:{league:'NCAAF'},
-        }),
-      });
-      const j=await r.json();
-      const evs=(j&&j.data&&j.data.event)||[];
-      const nowMs=Date.now();
-      const withHours=evs.map(e=>({description:e.description,scheduled_start:e.game&&e.game.scheduled_start,
-        hoursOut:(e.game&&e.game.scheduled_start)?Math.round((new Date(e.game.scheduled_start).getTime()-nowMs)/3600000):null}))
-        .sort((a,b)=>(a.hoursOut??99999)-(b.hoursOut??99999));
-      return res.status(200).json({ok:true,httpStatus:r.status,hasErrors:!!j.errors,errors:j.errors||null,
-        count:evs.length,nearest:withHours.slice(0,8),farthest:withHours.slice(-3)});
-    }catch(e){return res.status(200).json({ok:false,error:e.message});}
-  }
 
 
 
