@@ -1749,6 +1749,34 @@ module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,OPTIONS');
   if(req.method==='OPTIONS')return res.status(200).end();
 
+  // TEMP: raw NCAAF event check, positioned at the TOP of handler this time (the earlier
+  // attempt was nested inside scanNovigSharpSignals, a function only invoked by the
+  // novigSharp branch -- this request pattern never reached it).
+  if(req.query&&req.query.ncaafRaw2){
+    try{
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          operationName:'MyQuery',
+          query:`query MyQuery($league: String!) {
+            event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) {
+              id description game { scheduled_start }
+            }
+          }`,
+          variables:{league:'NCAAF'},
+        }),
+      });
+      const j=await r.json();
+      const evs=(j&&j.data&&j.data.event)||[];
+      const nowMs=Date.now();
+      const withHours=evs.map(e=>({description:e.description,scheduled_start:e.game&&e.game.scheduled_start,
+        hoursOut:(e.game&&e.game.scheduled_start)?Math.round((new Date(e.game.scheduled_start).getTime()-nowMs)/3600000):null}))
+        .sort((a,b)=>(a.hoursOut??99999)-(b.hoursOut??99999));
+      return res.status(200).json({ok:true,httpStatus:r.status,hasErrors:!!j.errors,errors:j.errors||null,
+        count:evs.length,nearest:withHours.slice(0,8),farthest:withHours.slice(-3)});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
+
 
 
   if(req.query&&req.query.ncaafReal){
