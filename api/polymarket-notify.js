@@ -1835,7 +1835,7 @@ module.exports = async function handler(req, res) {
       const result = { ok: true, upcomingGames: upcoming.length, gamesWithNotes: withNotes.length };
       if (dry) { result.dryRun = true; result.preview = withNotes; return res.status(200).json(result); }
 
-      const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
+      const webhook = process.env.novig_summary_alerts || process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
       if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
 
       const send = await sendDiscord(webhook, header, [embed]);
@@ -1871,7 +1871,7 @@ module.exports = async function handler(req, res) {
       const result = { ok: true, gradedThisRun: gradeRes.graded, stillPendingGrade: gradeRes.stillPending, record: rec };
       if (dry) { result.dryRun = true; return res.status(200).json(result); }
 
-      const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
+      const webhook = process.env.novig_summary_alerts || process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
       if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
 
       const send = await sendDiscord(webhook, header, [embed]);
@@ -1987,7 +1987,7 @@ module.exports = async function handler(req, res) {
 
       if (dry) return res.status(200).json({ ok: true, dryRun: true, waves: results });
 
-      const webhook = process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
+      const webhook = process.env.novig_summary_alerts || process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
       if (!webhook) return res.status(200).json({ ok: true, sent: false, note: 'No webhook set (novig_sharp_alerts or sharp_line_alerts)' });
 
       const sendResults = [];
