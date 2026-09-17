@@ -373,7 +373,15 @@ const NOVIG_MIN_LIQ_BY_SPORT = { MLB:3000, NCAAF:3000, NFL:1500, NBA:1500, NHL:1
    handful of stale zombie events (games listed weeks in the past, still OPEN_PREGAME on
    Novig's own side) exist in the raw list but are harmless -- they fail on their negative
    hoursOut and were never the cause of the gap. */
-const NOVIG_WINDOW_BY_SPORT = { NCAAF:96, NFL:48, MLB:3, NBA:3, NHL:3, WNBA:3 };
+/* WNBA FIX 2026-09-16 (real incident, confirmed live: 7 real games with scores up to 99
+   all sitting 20-27 hours out, all missed by a 3h window). WNBA games cluster in evening
+   slates rather than spreading through the day like MLB does, so a 3h window catches the
+   same structural gap NCAAF had -- real signal exists well before game time and a narrow
+   window simply never sees it. Widened to 24h to reliably catch the evening before.
+   NBA and NHL left at 3h for now since neither has real season data yet to confirm
+   against -- revisit once each actually starts, per the same evidence-first approach used
+   for NCAAF and WNBA rather than guessing ahead of real data. */
+const NOVIG_WINDOW_BY_SPORT = { NCAAF:96, NFL:48, MLB:3, NBA:3, NHL:3, WNBA:24 };
 const NOVIG_WINDOW_DEFAULT  = 3;
 const NOVIG_MAIN_TYPES      = ['MONEY','SPREAD','TOTAL'];
 // WNBA added 2026-09-06 (per Derek, real gap found) -- was missing entirely from this
