@@ -1783,6 +1783,23 @@ module.exports=async function handler(req,res){
       return res.status(200).json({ok:true,marketCount:markets.length,realSignalCount:sigs.length,sigs});
     }catch(e){return res.status(200).json({ok:false,error:e.message});}
   }
+  if(req.query&&req.query.nbaMktCheck){
+    try{
+      const r=await fetch('https://gql.novig.us/v1/graphql',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          operationName:'MyQuery',
+          query:`query MyQuery($league: String!) { event(where: {status: {_in: ["OPEN_PREGAME"]}, game: {league: {_eq: $league}}}) { id description status game { scheduled_start } } }`,
+          variables:{league:'NBA'},
+        }),
+      });
+      const j=await r.json();
+      const evs=(j&&j.data&&j.data.event)||[];
+      if(!evs.length)return res.status(200).json({ok:true,eventCount:0});
+      const markets=await fetchNovigOrderBook(evs[0].id);
+      return res.status(200).json({ok:true,event:evs[0],eventCount:evs.length,marketCount:markets.length});
+    }catch(e){return res.status(200).json({ok:false,error:e.message});}
+  }
   // Novig sharp-side scan. Deliberately before the ODDS_API_KEY check below -- this
   // path uses only Novig's own free API and must keep working with no Odds API at all.
   // Diagnostic read-back: GET ?novigScanLog=1[&n=20] -- real per-league history so a
