@@ -894,8 +894,16 @@ module.exports = async function handler(req, res) {
     // themselves. MLB is the highest-volume sport here and holds the strongest confirmed
     // wallets, so it belongs on the same automatic footing. Budgets trimmed 8s -> 6s each
     // so three sports fit in the same headroom two used, well clear of the 60s ceiling.
+    /* FIX 2026-09-16 (per Derek, real gap found: NHL starts Saturday and NBA soon, both
+       with zero wallets ever discovered -- confirmed live, both rosters empty). This loop
+       is the SAME historical-backfill mechanism that populated the real WNBA roster
+       (source: historical-last-season on every entry there) -- adding a sport here is
+       what actually seeds a real roster immediately, not a slow live crawl. NHL/NBA were
+       never added when this was originally scoped to football + MLB. Budget stays at
+       6000ms each; 5 sports x 6s = 30s, still comfortably under the 60s ceiling noted
+       above for 3 sports at 18s. */
     const historical = {};
-    for (const sp of ['NFL', 'NCAAF', 'MLB']) {
+    for (const sp of ['NFL', 'NCAAF', 'MLB', 'NHL', 'NBA']) {
       try {
         const full = await runHistoricalDiscovery(sp, { budgetMs: 6000 });
         // FIX 2026-08-28 (per Derek, same real incident as the roster trim above): the
