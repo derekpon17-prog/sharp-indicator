@@ -2572,7 +2572,16 @@ module.exports = async function handler(req, res) {
             // automatically inherit it, same lesson as the bookConfirmed/polyConfirmed
             // gate above having needed its own separate fix here too.
             const tooEarlyImg = p.commenceTime && (new Date(p.commenceTime).getTime() - Date.now()) > (2 * 60 * 60 * 1000);
-            if (bookConfirmedImg && polyConfirmedImg && !tooEarlyImg) allPlays.push({ ...p, sport: sp, _belowThreshold: false });
+            /* FIX 2026-09-18 (real incident, Derek: still getting a Bills/Lions poly alert
+               with the game over since last night). This branch checked tooEarlyImg but
+               never checked alreadyStarted/isLive -- the ORIGINAL report logic above
+               already excludes both (`if (!p || p.isLive || alreadyStarted || tooEarly)
+               return;`), but this image-fallback branch was added later and only copied
+               the early-side check, not the late/live side. Same class of gap as the
+               bookConfirmed/polyConfirmed fix noted in the comment above -- new branches
+               don't automatically inherit gates written elsewhere. */
+            const alreadyStartedImg = p.commenceTime && new Date(p.commenceTime).getTime() < Date.now();
+            if (bookConfirmedImg && polyConfirmedImg && !tooEarlyImg && !alreadyStartedImg && !p.isLive) allPlays.push({ ...p, sport: sp, _belowThreshold: false });
           });
         } catch {}
       }
@@ -2596,7 +2605,9 @@ module.exports = async function handler(req, res) {
               const polyConfirmedFallbackImg = !!(p.convergeScore && p.convergeScore.breakdown
                 && p.convergeScore.breakdown.poly && p.convergeScore.breakdown.poly.buyers >= 2);
               const tooEarlyFallbackImg = p.commenceTime && (new Date(p.commenceTime).getTime() - Date.now()) > (2 * 60 * 60 * 1000);
-              if (polyConfirmedFallbackImg && !tooEarlyFallbackImg) allPlays.push({ ...p, sport: sp, _belowThreshold: true });
+              // Same fix as the strict branch above -- alreadyStarted/isLive was never checked here either.
+              const alreadyStartedFallbackImg = p.commenceTime && new Date(p.commenceTime).getTime() < Date.now();
+              if (polyConfirmedFallbackImg && !tooEarlyFallbackImg && !alreadyStartedFallbackImg && !p.isLive) allPlays.push({ ...p, sport: sp, _belowThreshold: true });
             });
           } catch {}
         }
