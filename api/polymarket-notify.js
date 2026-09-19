@@ -3403,7 +3403,7 @@ module.exports = async function handler(req, res) {
           if (!ts || ts < convCutoff) return;
           if (!a.eventSlug || !a.outcome) return;
           const key = `${a.eventSlug}||${a.outcome}`;
-          if (!groups[key]) groups[key] = { eventSlug: a.eventSlug, outcome: a.outcome, wallets: new Map(), totalVol: 0 };
+          if (!groups[key]) groups[key] = { eventSlug: a.eventSlug, outcome: a.outcome, sport: a.sport, wallets: new Map(), totalVol: 0 };
           const w = (a.wallet || '').toLowerCase();
           if (w && !groups[key].wallets.has(w)) groups[key].wallets.set(w, a);
           groups[key].totalVol += (a.usdValue || 0);
@@ -3413,6 +3413,38 @@ module.exports = async function handler(req, res) {
             slugTitle[a.eventSlug] = { text: t.replace(/:\s*O\/U.*$/i, '').trim(), clean: isCleanMatchup };
           }
         });
+
+        /* FIX 2026-09-18 (real incident, Derek: STILL getting a Bills/Lions poly alert
+           with the game over since last night, even after the Converge Score image fix).
+           Root cause: this is a COMPLETELY SEPARATE pipeline from that fix -- it reads raw
+           trade activity from /api/polymarket-alerts and only checks convCutoff (was the
+           ALERT logged within 24h), with zero concept of the underlying game's real
+           commence time or whether it has already started. A whale trading on a
+           not-yet-formally-resolved Polymarket market sails right through this untouched.
+           The alert log itself never captured commenceTime, so it can't be checked
+           directly -- cross-referencing against the real schedule by team name, the same
+           way already proven for the NFL weekly summary, is the fix. Fetches each sport's
+           real schedule ONCE (not per group) and excludes any group whose matchup title
+           contains both team names of an already-started game. */
+        const sportsInGroups = [...new Set(Object.values(groups).map(g => g.sport).filter(Boolean))];
+        const startedGamesBySport = {};
+        await Promise.all(sportsInGroups.map(async sp => {
+          try {
+            const r = await fetch(`${SITE_URL}/api/odds?sport=${sp}`);
+            const d = await r.json();
+            startedGamesBySport[sp] = (d.schedule || []).filter(g => g.started).map(g => ({
+              away: (g.away || '').toLowerCase(), home: (g.home || '').toLowerCase(),
+            }));
+          } catch { startedGamesBySport[sp] = []; }
+        }));
+        function groupGameAlreadyStarted(g) {
+          const started = startedGamesBySport[g.sport];
+          if (!started || !started.length) return false;
+          const title = (slugTitle[g.eventSlug] && slugTitle[g.eventSlug].text || '').toLowerCase();
+          if (!title) return false;
+          return started.some(sg => sg.away && sg.home && title.includes(sg.away) && title.includes(sg.home));
+        }
+        Object.keys(groups).forEach(key => { if (groupGameAlreadyStarted(groups[key])) delete groups[key]; });
 
         // FEATURE 2026-08-11 (per Derek, confirmed real case): the client-side net-out
         // fix (a wallet buying both outcomes of the same market shouldn't count as two
