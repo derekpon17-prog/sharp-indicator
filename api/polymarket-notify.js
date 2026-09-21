@@ -3392,7 +3392,24 @@ module.exports = async function handler(req, res) {
         const histRes = await fetch(`${SITE_URL}/api/polymarket-alerts`);
         const histData = await histRes.json();
         const histAlerts = (histData.alerts || []).filter(a => a.type === 'POLY' || a.type === 'SPEC');
-        const convCutoff = now - 86400; // 24h — matches the client's own convergence window
+        /* FIX 2026-09-21 (real incident, THIRD occurrence: Derek still getting a stale
+           Chiefs/Colts alert with the game over since last night, even after the schedule
+           cross-reference fix deployed for Bills/Lions). Root cause of why that fix didn't
+           catch this one: checked directly -- /api/odds's schedule only returns a rolling
+           window of current/upcoming games; a finished game does not stay in it marked
+           started:true, it simply drops out entirely once old enough. The cross-reference
+           had nothing to match against, so it silently passed everything through.
+           Replaced with something that does not depend on an external schedule's
+           retention behavior at all: a per-sport cutoff sized to how long a game
+           realistically takes to finish, tight enough that anything from last night is
+           excluded outright regardless of what any schedule currently reports. 24h was
+           always far looser than any of these sports actually need. */
+        const CONV_CUTOFF_SECONDS_BY_SPORT = {
+          NFL: 5 * 3600, NCAAF: 5 * 3600, MLB: 4.5 * 3600, NBA: 3.5 * 3600,
+          NHL: 3.5 * 3600, WNBA: 3.5 * 3600,
+        };
+        const DEFAULT_CONV_CUTOFF_SECONDS = 5 * 3600; // unknown sport -- err on the tighter side
+        function convCutoffFor(sport) { return now - (CONV_CUTOFF_SECONDS_BY_SPORT[sport] || DEFAULT_CONV_CUTOFF_SECONDS); }
         const isTotals = o => /^(over|under)\b/i.test(o || '');
         const tierRank = t => t === 'ELITE' ? 2 : t === 'STRONG' ? 1 : 0;
 
@@ -3400,7 +3417,7 @@ module.exports = async function handler(req, res) {
         const slugTitle = {};
         histAlerts.forEach(a => {
           const ts = a.loggedAt ? Math.floor(a.loggedAt / 1000) : a.timestamp;
-          if (!ts || ts < convCutoff) return;
+          if (!ts || ts < convCutoffFor(a.sport)) return;
           if (!a.eventSlug || !a.outcome) return;
           const key = `${a.eventSlug}||${a.outcome}`;
           if (!groups[key]) groups[key] = { eventSlug: a.eventSlug, outcome: a.outcome, sport: a.sport, wallets: new Map(), totalVol: 0 };
