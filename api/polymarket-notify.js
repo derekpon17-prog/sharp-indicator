@@ -3122,9 +3122,38 @@ module.exports = async function handler(req, res) {
           try { await upstashPost(['SET', txKey, '1', 'EX', '604800']); } catch {}
           continue;
         }
+      } else {
+        /* FIX 2026-09-21 (real incident, FOURTH occurrence: Derek still getting stale
+           post-game alerts -- Bills/Lions, then Chiefs/Colts -- after three prior fixes
+           to two OTHER, unrelated send paths. Root cause traced to THIS path, which none
+           of those touched: the comment directly below explains the original reasoning --
+           "no match found, fail OPEN rather than silently dropping a real signal" -- a
+           reasonable call for a genuine schedule-parsing failure. But a FINISHED game
+           always fails to match here too, since /api/odds's schedule only retains a
+           rolling window of current/upcoming games and a completed one simply drops out
+           of it entirely (confirmed directly against real data during the Bills/Lions
+           investigation). So "no match" stopped meaning "possible parsing issue" and
+           started meaning, overwhelmingly, "this game is already over" -- and fail-open
+           let every one of those through by design.
+           Fix: no longer a blind fail-open. Use the trade's own age to tell the two cases
+           apart -- a fresh trade with no match is still treated as a genuine matching
+           failure and passes through as before; an old trade with no match is treated as
+           what it almost always actually is, a finished game, and is suppressed. Same
+           per-sport realistic-duration cutoffs already proven for the Poly Alignment fix,
+           applied here at the actual source instead of downstream in one branch. */
+        const ts = parseInt(t.timestamp) || 0;
+        const maxAgeSecondsBySport = { NFL: 5*3600, NCAAF: 5*3600, MLB: 4.5*3600, NBA: 3.5*3600, NHL: 3.5*3600, WNBA: 3.5*3600 };
+        const maxAgeSeconds = maxAgeSecondsBySport[sport] || 5*3600;
+        if (ts && (Math.floor(Date.now()/1000) - ts) > maxAgeSeconds) {
+          results.poly.liveSkipped++;
+          if (cand.dbg) cand.dbg.reject = 'live: no schedule match, trade too old -- game almost certainly already finished';
+          try { await upstashPost(['SET', txKey, '1', 'EX', '604800']); } catch {}
+          continue;
+        }
       }
       // No matching game found (e.g. schedule fetch failed, or a market our
-      // matcher can't parse): fail OPEN rather than silently dropping a real signal.
+      // matcher can't parse) AND the trade is recent enough to still be a genuine
+      // in-progress signal: fail OPEN rather than silently dropping a real signal.
       const key = `${wallet}||${t.title}`;
       const ex  = walletMarketBest.get(key);
       if (!ex || usd > ex.usd) walletMarketBest.set(key, { wallet, usd, sport, t, traderInfo, dbg: cand.dbg });
