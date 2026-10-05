@@ -500,8 +500,30 @@ async function storeAlert(payload) {
   } catch {}
 }
 
+/* ─── NOVIG-ONLY MODE 2026-10-05 (per Derek: "stop every alert other than the Novig
+   alert") ─────────────────────────────────────────────────────────────────────────
+   One switch. While true, the ONLY outbound notifications are the Novig sends (novigAlert,
+   novigDailySummary, novigSlateSummary), which call sendNovigDiscord below. Everything else
+   -- Poly ntfy pushes, Poly convergence + individual Poly alert Discord posts, Sharp Line
+   Discord, Best Plays / Sharp Report, NFL weekly notes -- is suppressed at the send itself.
+   Scans, KV logging, dedup markers and grading data keep running unchanged, so nothing
+   downstream loses data and flipping this back to false resumes alerts with no backlog flood.
+   Gate is by CALLER, not by webhook URL, so it holds even if two env vars point at the same
+   Discord channel. */
+const NOVIG_ONLY_MODE = true;
+const SUPPRESSED = { ok: false, status: 0, suppressed: 'novig-only mode' };
+
+/* Drop-in for the three raw fetch(discordWebhook...) calls in the convergence block.
+   Returns a response-like object with ok:false so those paths take their normal
+   not-sent branch. */
+async function postNonNovigWebhook(url, init) {
+  if (NOVIG_ONLY_MODE) return { ok: false, status: 0, json: async () => ({}) };
+  return fetch(url, init);
+}
+
 /* ─── SEND NTFY ───────────────────────────────────────── */
 async function sendNtfy(topic, title, body, priority = 'high') {
+  if (NOVIG_ONLY_MODE) return SUPPRESSED;
   // Strip non-ASCII from headers — ntfy requires ASCII only
   const asciiTitle = title.replace(/[^\x00-\x7F]/g, '').trim();
   try {
@@ -535,7 +557,14 @@ async function sendNtfy(topic, title, body, priority = 'high') {
                               carry the DISCORD_ prefix like the other one. If unset,
                               silently no-ops rather than erroring, same fail-open pattern
                               as the convergence webhook. */
+async function sendNovigDiscord(webhookUrl, content, embeds) {
+  return rawSendDiscord(webhookUrl, content, embeds);
+}
 async function sendDiscord(webhookUrl, content, embeds) {
+  if (NOVIG_ONLY_MODE) return SUPPRESSED;
+  return rawSendDiscord(webhookUrl, content, embeds);
+}
+async function rawSendDiscord(webhookUrl, content, embeds) {
   // EMBEDS 2026-08-27 (per Derek): optional third param. Existing callers pass only
   // (url, content) and are completely unaffected -- embeds stays undefined and is
   // stripped from the payload below. Embeds are Discord's native rich-card format
@@ -1874,7 +1903,7 @@ module.exports = async function handler(req, res) {
       const webhook = process.env.novig_summary_alerts || process.env.novig_sharp_alerts || process.env.sharp_line_alerts;
       if (!webhook) { result.sent = false; result.note = 'No webhook set (novig_sharp_alerts or sharp_line_alerts)'; return res.status(200).json(result); }
 
-      const send = await sendDiscord(webhook, header, [embed]);
+      const send = await sendNovigDiscord(webhook, header, [embed]);
       result.sent = !!(send && send.ok);
       result.sendResult = send;
       return res.status(200).json(result);
@@ -1993,7 +2022,7 @@ module.exports = async function handler(req, res) {
       const sendResults = [];
       for (const r of results) {
         const header = `\u{1F3DF}\uFE0F **Pre-slate summary** \u2014 ${r.league}`;
-        const send = await sendDiscord(webhook, header, [r.embed]);
+        const send = await sendNovigDiscord(webhook, header, [r.embed]);
         sendResults.push({ league: r.league, sent: !!(send && send.ok) });
       }
       return res.status(200).json({ ok: true, sent: true, waves: results.map(r => ({ league: r.league, waveSize: r.waveSize, signalCount: r.signalCount })), sendResults });
@@ -2321,7 +2350,7 @@ module.exports = async function handler(req, res) {
       // Record leads every send, ahead of the individual play cards, since Discord shows
       // embeds in the array order given.
       const allEmbeds = [recordEmbed].concat(novEmbeds).concat(updEmbeds).slice(0, 10);
-      const send = await sendDiscord(webhook, header, allEmbeds);
+      const send = await sendNovigDiscord(webhook, header, allEmbeds);
       result.sent = !!(send && send.ok);
       // Only record plays that actually went out -- a signal nobody was told about
       // shouldn't count for or against the record.
@@ -3694,7 +3723,7 @@ module.exports = async function handler(req, res) {
           if (!state) {
             // Never sent before — post new, capturing the message ID for future edits.
             try {
-              const r = await fetch(`${discordWebhook}?wait=true`, {
+              const r = await postNonNovigWebhook(`${discordWebhook}?wait=true`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ embeds: [embed] }),
@@ -3724,7 +3753,7 @@ module.exports = async function handler(req, res) {
             // now Y)" wording he liked, just posted fresh instead of edited in place.
             const growEmbed = { ...embed, footer: { text: `Updated — was ${state.walletCount} traders, now ${realBuyers.length}` + (embed.footer ? ' · ' + embed.footer.text : '') } };
             try {
-              const r = await fetch(discordWebhook, {
+              const r = await postNonNovigWebhook(discordWebhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ embeds: [growEmbed] }),
@@ -3759,7 +3788,7 @@ module.exports = async function handler(req, res) {
               footer: leanLine ? { text: leanLine.replace(/^\n📊 \*/, '').replace(/\*$/, '') } : undefined,
             };
             try {
-              const r = await fetch(discordWebhook, {
+              const r = await postNonNovigWebhook(discordWebhook, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ embeds: [upgradeEmbed] }),

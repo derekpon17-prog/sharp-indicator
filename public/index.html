@@ -1691,6 +1691,8 @@ function markNotified(keys){
 }
 
 async function checkAndNotify(plays){
+  // NOVIG-ONLY MODE 2026-10-05 (per Derek): browser-side SI pushes off. Novig alerts run server-side in api/polymarket-notify.js.
+  return;
   const topic=lsg('si:ntfy-topic');
   if(!topic||lsg('si:ntfy-on')==='0')return;
   const thresh=parseInt(lsg('si:ntfy-thresh')||'90');
