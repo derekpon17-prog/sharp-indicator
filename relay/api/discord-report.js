@@ -14,8 +14,8 @@ module.exports = async function handler(req, res) {
     const site = req.headers['sec-fetch-site'] || '';
     if (origin !== `https://${req.headers.host}` || site !== 'same-origin') return res.status(403).json({ error: 'forbidden' });
 
-    const hook = process.env.nflreports;
-    if (!hook) return res.status(500).json({ error: 'missing nflreports env var' });
+    const hook = process.env.nflreports || process.env.nflprops;
+    if (!hook) return res.status(500).json({ error: 'missing nflreports or nflprops env var' });
 
     const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
     const parts = (Array.isArray(body.parts) ? body.parts : []).map(p => String(p).slice(0, 1990)).filter(Boolean);
