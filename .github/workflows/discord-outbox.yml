@@ -1,0 +1,31 @@
+# Posts NFL props cards from outbox/ to Derek's Discord, then moves them to sent/.
+# Scheduled Claude runs only commit a card file to the `outbox` branch; this workflow does the posting.
+# The webhook lives only in the repo secret DISCORD_NFLPROPS. Pause posting by disabling this workflow.
+name: Discord outbox
+on:
+  push:
+    branches: [outbox]
+    paths: ['outbox/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: discord-outbox
+  cancel-in-progress: false
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post cards
+        env:
+          HOOK: ${{ secrets.DISCORD_NFLPROPS }}
+        run: python3 .github/scripts/post_outbox.py
+      - name: Move posted cards to sent/
+        if: always()
+        run: |
+          git config user.name "discord-outbox"
+          git config user.email "discord-outbox@users.noreply.github.com"
+          git add -A outbox sent
+          git diff --cached --quiet || (git commit -m "Posted outbox cards [skip ci]" && git push)

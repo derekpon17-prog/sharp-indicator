@@ -3,5 +3,10 @@
     "api/discover.js": {
       "maxDuration": 60
     }
+  },
+  "git": {
+    "deploymentEnabled": {
+      "outbox": false
+    }
   }
 }
