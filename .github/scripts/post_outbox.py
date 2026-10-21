@@ -1,13 +1,13 @@
 """Post each outbox/*.json card to Discord, then move it to sent/.
-Card format: {"parts": ["NFL Props ...", "..."]} - 1 to 6 parts, first starts with "NFL Props".
+Card format: {"parts": ["<prefix> ...", "..."]} - 1 to 6 parts. The first part's prefix picks the channel:
+  "NFL Props"     -> secret DISCORD_NFLPROPS
+  "Sharp Signals" -> secret DISCORD_SIGNALS
 Exits 1 if any card fails (the file stays in outbox/ and GitHub marks the run failed)."""
 import glob, json, os, shutil, sys, time, urllib.request, urllib.error
 
-hook = os.environ.get("HOOK", "").strip()
-if not hook:
-    sys.exit("DISCORD_NFLPROPS secret is not set")
+ROUTES = {"NFL Props": "HOOK", "Sharp Signals": "HOOK_SIGNALS"}
 
-def post(text):
+def post(hook, text):
     body = json.dumps({"content": text, "allowed_mentions": {"parse": []}}).encode()
     for attempt in range(3):
         req = urllib.request.Request(hook, data=body, method="POST",
@@ -31,10 +31,14 @@ for path in sorted(glob.glob("outbox/*.json")):
         parts = json.load(open(path)).get("parts")
         if not isinstance(parts, list) or not 1 <= len(parts) <= 6 or not all(isinstance(p, str) and p.strip() for p in parts):
             raise ValueError("parts must be a list of 1-6 non-empty strings")
-        if not parts[0].lstrip().startswith("NFL Props"):
-            raise ValueError('first part must start with "NFL Props"')
+        prefix = next((k for k in ROUTES if parts[0].lstrip().startswith(k)), None)
+        if not prefix:
+            raise ValueError("first part must start with one of: " + ", ".join(ROUTES))
+        hook = os.environ.get(ROUTES[prefix], "").strip()
+        if not hook:
+            raise ValueError(f"no webhook secret set for {prefix} cards")
         for p in parts:
-            post(p.strip()[:1990])
+            post(hook, p.strip()[:1990])
             time.sleep(1)
         shutil.move(path, os.path.join("sent", name))
         print(f"posted {name} ({len(parts)} parts)")
