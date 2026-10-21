@@ -1,0 +1,93 @@
+{
+ "route": "Sharp Signals",
+ "content": "**PREVIEW** - scorecard images (design B), 6:05pm window data",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Wed Oct 21",
+   "start": "6:35pm CT",
+   "matchup": "Hornets @ Nets",
+   "bet": "Hornets -1.5",
+   "price": "-109",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Hornets +3.5 to -1.5 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 94,
+    "line1": "Vegas Backed: line moved to the Hornets with a minority of bets",
+    "bets": 22,
+    "money": 25
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Exchange money near the top: Hornets $23K vs Nets $31K",
+    "line2": "Not enough of a gap to count either way"
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked 6:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Wed Oct 21",
+   "start": "7:05pm CT",
+   "matchup": "Pacers @ Pelicans",
+   "bet": "Pelicans ML",
+   "price": "+124",
+   "pinnacle": null,
+   "vegas": {
+    "strength": 76,
+    "line1": "Vegas Backed with only 15% of bets on the Pelicans",
+    "bets": 15,
+    "money": 17
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Pelicans $102K vs Pacers $48K near the top",
+    "line2": "Biggest single order $48.5K on the Pelicans"
+   },
+   "record_label": "VEGAS 70+ + NOVIG RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked 6:10pm CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Wed Oct 21",
+   "start": "7:00pm CT",
+   "matchup": "New Mexico St @ Sam Houston",
+   "bet": "Over 46.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 44.5 to 46.5 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Slightly more money on the Under (1.2 to 1)",
+    "line2": "Not enough of a gap to count either way"
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked 6:08pm CT"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📌 Pinnacle STRONG props · this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "🏀 NBA",
+     "value": "T. Jerome U30.5 PRA (MAX) · L. Markkanen O21.5 pts · C. Coward U5.5 reb\nD. Murray U6.5 ast · K. Oubre Jr. O12.5 pts · T. Murphy III U29.5 PRA\nC. Flagg O21.5 pts · R. Sheppard U8.5 pts"
+    }
+   ],
+   "footer": {
+    "text": "Checked 6:08pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}
