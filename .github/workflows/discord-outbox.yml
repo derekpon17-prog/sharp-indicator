@@ -15,9 +15,15 @@ concurrency:
 jobs:
   post:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Install card renderer (only when a card has scorecards)
+        run: |
+          if grep -lq '"scorecards"' outbox/*.json 2>/dev/null; then
+            pip install --quiet playwright
+            python3 -m playwright install --with-deps chromium
+          fi
       - name: Post cards
         env:
           HOOK: ${{ secrets.DISCORD_NFLPROPS }}

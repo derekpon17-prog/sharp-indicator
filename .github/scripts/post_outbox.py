@@ -4,11 +4,14 @@ Two card formats:
   Text:   {"parts": ["<prefix> ...", "..."]}  - 1 to 6 plain-text messages.
   Embeds: {"route": "<prefix>", "content": "optional header line",
            "embeds": [ {Discord embed}, ... ]} - posted 10 embeds per message.
+  Scorecards: same, plus "scorecards": [ {...}, ... ] (see render_scorecards.py) -
+           each rendered to a PNG and posted as image attachments, 10 per message,
+           before any embeds. A card may hold scorecards, embeds, or both.
 The prefix picks the channel:
   "NFL Props"     -> secret DISCORD_NFLPROPS
   "Sharp Signals" -> secret DISCORD_SIGNALS
 Exits 1 if any card fails (the file stays in outbox/ and GitHub marks the run failed)."""
-import glob, json, os, shutil, sys, time, urllib.request, urllib.error
+import glob, json, os, shutil, sys, tempfile, time, uuid, urllib.request, urllib.error
 
 ROUTES = {"NFL Props": "HOOK", "Sharp Signals": "HOOK_SIGNALS"}
 
@@ -28,6 +31,33 @@ def post(hook, payload):
                 continue
             detail = e.read()[:300].decode("utf-8", "replace")
             raise RuntimeError(f"Discord returned {e.code}: {detail}")
+    raise RuntimeError("Discord rate limit")
+
+def post_files(hook, paths, content=None):
+    boundary = "----outbox" + uuid.uuid4().hex
+    payload = {"allowed_mentions": {"parse": []},
+               "attachments": [{"id": i, "filename": os.path.basename(pth)} for i, pth in enumerate(paths)]}
+    if content:
+        payload["content"] = str(content)[:1990]
+    chunks = [f"--{boundary}\r\nContent-Disposition: form-data; name=\"payload_json\"\r\nContent-Type: application/json\r\n\r\n".encode()
+              + json.dumps(payload).encode() + b"\r\n"]
+    for i, pth in enumerate(paths):
+        chunks.append(f"--{boundary}\r\nContent-Disposition: form-data; name=\"files[{i}]\"; filename=\"{os.path.basename(pth)}\"\r\nContent-Type: image/png\r\n\r\n".encode()
+                      + open(pth, "rb").read() + b"\r\n")
+    chunks.append(f"--{boundary}--\r\n".encode())
+    body = b"".join(chunks)
+    for attempt in range(3):
+        req = urllib.request.Request(hook, data=body, method="POST",
+                                     headers={"Content-Type": f"multipart/form-data; boundary={boundary}", "User-Agent": "discord-outbox"})
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return r.status
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < 2:
+                wait = float(json.loads(e.read() or b"{}").get("retry_after", 2))
+                time.sleep(min(wait, 10))
+                continue
+            raise RuntimeError(f"Discord returned {e.code}: {e.read()[:300].decode('utf-8', 'replace')}")
     raise RuntimeError("Discord rate limit")
 
 def clean_embed(e):
@@ -57,8 +87,11 @@ for path in sorted(glob.glob("outbox/*.json")):
         card = json.load(open(path))
         embeds = card.get("embeds")
         parts = card.get("parts")
-        if embeds is not None:
-            if not isinstance(embeds, list) or not 1 <= len(embeds) <= 30:
+        scorecards = card.get("scorecards")
+        if scorecards is not None and (not isinstance(scorecards, list) or not 1 <= len(scorecards) <= 20):
+            raise ValueError("scorecards must be a list of 1-20 scorecards")
+        if embeds is not None or scorecards is not None:
+            if embeds is not None and (not isinstance(embeds, list) or not 1 <= len(embeds) <= 30):
                 raise ValueError("embeds must be a list of 1-30 embeds")
             route = str(card.get("route", ""))
         else:
@@ -71,13 +104,23 @@ for path in sorted(glob.glob("outbox/*.json")):
         hook = os.environ.get(ROUTES[prefix], "").strip()
         if not hook:
             raise ValueError(f"no webhook secret set for {prefix} cards")
+        first_content = card.get("content")
+        if scorecards is not None:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from render_scorecards import render
+            pngs = render(scorecards, tempfile.mkdtemp(prefix="cards_"))
+            for k in range(0, len(pngs), 10):
+                post_files(hook, pngs[k:k + 10], first_content if k == 0 else None)
+                time.sleep(1)
+            first_content = None
+            print(f"posted {name} scorecards ({len(pngs)} images)")
         if embeds is not None:
             embeds = [clean_embed(e) for e in embeds]
-            batch, size, first = [], 0, True
+            batch, size, first = [], 0, first_content is not None
             def flush(batch, first):
                 payload = {"embeds": batch}
-                if first and card.get("content"):
-                    payload["content"] = str(card["content"])[:1990]
+                if first and first_content:
+                    payload["content"] = str(first_content)[:1990]
                 post(hook, payload)
                 time.sleep(1)
             for e in embeds:
@@ -88,7 +131,7 @@ for path in sorted(glob.glob("outbox/*.json")):
             if batch:
                 flush(batch, first)
             print(f"posted {name} ({len(embeds)} embeds)")
-        else:
+        elif scorecards is None:
             for p in parts:
                 post(hook, {"content": p.strip()[:1990]})
                 time.sleep(1)
