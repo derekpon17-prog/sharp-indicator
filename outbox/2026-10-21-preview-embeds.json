@@ -1,0 +1,81 @@
+{
+ "route": "Sharp Signals",
+ "content": "**PREVIEW** - new card layout, using the 6:05pm window data",
+ "embeds": [
+  {
+   "title": "⚡ Sharp Signals · Wed 6:05pm CT window",
+   "color": 15844367,
+   "description": "NBA: UTA @ MEM, IND @ NO (7:05) · DAL @ HOU (7:35)\nCFB: NMSU @ SHSU (7:00)\nWNBA: GSV @ ATL (7:00)",
+   "fields": [
+    {
+     "name": "🎯 Overlay",
+     "value": "✅ **Pelicans ML (+124)** - Vegas 76 + Novig $102K vs $48K\n🎯 **K. Irving O19.5 pts (-115)** - Pinnacle STRONG + Novig $3.7K vs $0.9K\n🎯 **D. Murray U27.5 PRA (-106)** - Pinnacle STRONG + Novig $3.3K vs $0.1K"
+    },
+    {
+     "name": "⚠️ Conflicts",
+     "value": "P.J. Washington U5.5 reb: Pinnacle STRONG under, Novig $3.9K on the over"
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 6:08 · Vegas 6:09 · Novig 6:10pm CT · leans, not plays"
+   }
+  },
+  {
+   "title": "🏀 NBA",
+   "color": 16090150,
+   "fields": [
+    {
+     "name": "Pacers @ Pelicans · 7:05",
+     "value": "📊 Vegas 76 · Pelicans ML +124 · bets 15% / $ 17%\n💰 Novig · Pelicans ML $102K vs $48K (top order $48.5K)\n📌 Pinnacle · no STRONG game line"
+    },
+    {
+     "name": "Mavericks @ Rockets · 7:35",
+     "value": "💰 Novig only · Rockets ML -430 · $91K vs $33K\n📌 Pinnacle · no STRONG game line"
+    },
+    {
+     "name": "Jazz @ Grizzlies · 7:05",
+     "value": "No STRONG or 70+ game-line signals"
+    }
+   ]
+  },
+  {
+   "title": "🏀 NBA props",
+   "color": 16090150,
+   "fields": [
+    {
+     "name": "🎯 Pinnacle + Novig agree",
+     "value": "K. Irving **O19.5 pts** (-115) · Novig $3.7K vs $0.9K\nD. Murray **U27.5 PRA** (-106) · Novig $3.3K vs $0.1K (under skew)"
+    },
+    {
+     "name": "📌 Pinnacle STRONG",
+     "value": "T. Jerome U30.5 PRA (MAX) · L. Markkanen O21.5 pts · C. Coward U5.5 reb · D. Peterson U4.5 reb\nD. Murray U6.5 ast · K. Oubre Jr. O12.5 pts · T. Murphy III U29.5 PRA\nC. Flagg O21.5 pts · R. Sheppard U8.5 pts"
+    },
+    {
+     "name": "💰 Novig money (over side)",
+     "value": "C. Flagg O5.5 ast · $3.8K vs $0.6K\nC. Boozer O3.5 ast · $3.7K vs $0.7K\nH. Jones O8.5 pts · $2.2K vs $0.1K"
+    }
+   ]
+  },
+  {
+   "title": "🏈 CFB",
+   "color": 9132587,
+   "fields": [
+    {
+     "name": "New Mexico St @ Sam Houston · 7:00",
+     "value": "📌 Pinnacle STRONG · Over 46.5 (-112) · flipped\n💰 Novig only · NMSU ML -146 · $169K vs $61K (top order $29K)\n💰 Novig · SHSU +3.5 · single $15.4K order at top"
+    }
+   ]
+  },
+  {
+   "title": "🏀 WNBA",
+   "color": 7103487,
+   "description": "No Betting Insider coverage - Novig only",
+   "fields": [
+    {
+     "name": "Valkyries @ Dream · 7:00",
+     "value": "💰 A. Reese O15.5 pts · single $4K order\n💰 J. Canada O11.5 pts · $1.9K vs $0.5K"
+    }
+   ]
+  }
+ ]
+}
