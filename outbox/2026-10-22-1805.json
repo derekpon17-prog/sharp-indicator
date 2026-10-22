@@ -1,0 +1,92 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Thu 6:05pm CT window** · NFL NE @ CHI 7:15pm · NHL VGK @ STL 7:00pm, WPG @ DAL 7:00pm",
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Top plays",
+   "subtitle": "Thu 6:05pm CT window - Pinnacle checked 6:08 - Vegas 6:08 - Novig 6:09",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NFL - 7:15PM CT",
+     "picks": [
+      {
+       "bet": "Over 50.5",
+       "sub": "NE @ CHI",
+       "price": -114,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 60",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $136K v $114K",
+         "c": "green"
+        },
+        {
+         "t": "single $22K order",
+         "c": "orange"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 5.5",
+       "sub": "WPG @ DAL",
+       "price": -111,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "VEGAS 77",
+         "c": "blue"
+        },
+        {
+         "t": "PIN Lean",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $29K v $28K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "💰 Novig only (no Pinnacle Strong or Vegas 70+)",
+     "value": "NFL NE @ CHI\n• CHI ML (-158) - $1.34M v $576K near top (2.3x)\n• CHI -2.5 (Novig line; consensus -3) - single $88.6K order, $228K v $117K\nNHL VGK @ STL\n• STL +1.5 (-239) - $60K v $17K (3.5x), only $10K traded\n• Under 6.5 (Novig line; consensus 5.5) - $32K v $12K (2.6x)\n• VGK ML (-127) - single $10.9K order, $54K v $44K\nNHL WPG @ DAL\n• DAL ML (-200) - $60K v $28K (2.1x)\n• WPG +1.5 (DAL -1.5 +130) - single $14.5K order, $37K v $27K",
+     "inline": false
+    },
+    {
+     "name": "⚠️ Mixed reads",
+     "value": "VGK @ STL total: Pinnacle Lean Over 5.5 and a Pressure Move on Over 6 (61, 93% of bets), but Novig money sits on Under 6.5. Vegas Backed 53 on Blues ML (not 70+).",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 6:08 · Vegas 6:08 · Novig 6:09 pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}

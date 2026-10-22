@@ -1,0 +1,171 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Thu 6:05pm CT window** · NFL NE @ CHI 7:15pm · NHL VGK @ STL 7:00pm, WPG @ DAL 7:00pm · Pinnacle 6:08pm, Novig 6:09-6:20pm CT",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Thu 6:05pm CT window - Pinnacle checked 6:08 - Novig 6:09-6:20",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line (Novig take when no Pinnacle line)",
+   "footer": "Leans, not guarantees · Showing 6 of 14 logged · props record since Oct 21: 39-25, 61% · independent plays",
+   "sections": [
+    {
+     "heading": "NFL - NE @ CHI 7:15PM CT",
+     "picks": [
+      {
+       "bet": "D. Douglas O3.5 rec",
+       "sub": "NE @ CHI",
+       "price": -104,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "+EV 3 books",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $1.6K v $8.3K No",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "D. Swift U14.5 carries",
+       "sub": "NE @ CHI",
+       "price": -111,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG",
+         "c": "green"
+        },
+        {
+         "t": "flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG $1.2K v $0.8K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "C. Williams O19.5 rush yds",
+       "sub": "NE @ CHI",
+       "price": 102,
+       "book": "Novig",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN not posted",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG YES $4.6K v $0.7K",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "J. Robertson O2.5 SOG",
+       "sub": "WPG @ DAL",
+       "price": -172,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX",
+         "c": "green"
+        },
+        {
+         "t": "flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG thin",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "J. Eichel O2.5 SOG",
+       "sub": "VGK @ STL",
+       "price": -115,
+       "book": "Novig",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN not posted",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG YES $3.5K v $0.4K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "R. Thomas O0.5 pts",
+       "sub": "VGK @ STL",
+       "price": -150,
+       "book": "Novig",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN not posted",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG YES $1.5K v $0.4K",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "⚠️ Conflicts - avoid",
+   "color": 15158332,
+   "fields": [
+    {
+     "name": "NFL NE @ CHI",
+     "value": "T. Henderson U6.5 carries (-136): Pinnacle STRONG (flipped) on the Under, but a single $13.9K Novig order backs the Over (Yes $15.2K v $0).",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Parlay 1 - about +480",
+     "value": "• D. Douglas O3.5 rec (-104) - PIN STRONG stable\n• J. Robertson O2.5 SOG (-172) - PIN MAX\n• J. Eichel O2.5 SOG (-115) - Novig Yes 9x",
+     "inline": false
+    },
+    {
+     "name": "Parlay 2 - about +620",
+     "value": "• D. Swift U14.5 carries (-111) - PIN STRONG\n• C. Williams O19.5 rush yds (+102) - Novig Yes 7x\n• J. Eichel O2.5 SOG (-115) - Novig Yes 9x",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "1u flat · legs from shown plays only · Novig capped at 300 reads (78 lower-volume lines unread)"
+   }
+  }
+ ]
+}
