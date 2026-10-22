@@ -9,6 +9,8 @@ Two card formats:
            before any embeds. A card may hold scorecards, embeds, or both.
 The prefix picks the channel:
   "NFL Props"     -> secret DISCORD_NFLPROPS
+  Summaries: "summaries": [ {...} ] - bar-chart summary images (see render_scorecards.summary_html),
+           posted last, after any embeds.
   "Sharp Signals" -> secret DISCORD_SIGNALS
   "Sharp Props"   -> secret DISCORD_PROPS
 Exits 1 if any card fails (the file stays in outbox/ and GitHub marks the run failed)."""
@@ -89,9 +91,12 @@ for path in sorted(glob.glob("outbox/*.json")):
         embeds = card.get("embeds")
         parts = card.get("parts")
         scorecards = card.get("scorecards")
+        summaries = card.get("summaries")
+        if summaries is not None and (not isinstance(summaries, list) or not 1 <= len(summaries) <= 5):
+            raise ValueError("summaries must be a list of 1-5 summary cards")
         if scorecards is not None and (not isinstance(scorecards, list) or not 1 <= len(scorecards) <= 20):
             raise ValueError("scorecards must be a list of 1-20 scorecards")
-        if embeds is not None or scorecards is not None:
+        if embeds is not None or scorecards is not None or summaries is not None:
             if embeds is not None and (not isinstance(embeds, list) or not 1 <= len(embeds) <= 30):
                 raise ValueError("embeds must be a list of 1-30 embeds")
             route = str(card.get("route", ""))
@@ -132,11 +137,19 @@ for path in sorted(glob.glob("outbox/*.json")):
             if batch:
                 flush(batch, first)
             print(f"posted {name} ({len(embeds)} embeds)")
-        elif scorecards is None:
+        elif scorecards is None and summaries is None:
             for p in parts:
                 post(hook, {"content": p.strip()[:1990]})
                 time.sleep(1)
             print(f"posted {name} ({len(parts)} parts)")
+        if summaries is not None:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from render_scorecards import render_summaries
+            spngs = render_summaries(summaries, tempfile.mkdtemp(prefix="summ_"))
+            for pth in spngs:
+                post_files(hook, [pth], None)
+                time.sleep(1)
+            print(f"posted {name} summaries ({len(spngs)} images)")
         shutil.move(path, os.path.join("sent", name))
     except Exception as e:
         failed += 1

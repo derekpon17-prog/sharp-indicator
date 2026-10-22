@@ -119,3 +119,66 @@ def render(cards, out_dir):
             paths.append(path)
         browser.close()
     return paths
+
+
+RED = "#FF6B6B"
+
+def summary_html(c):
+    """Summary card: {"title","subtitle","sections":[{"heading","rows":[{"label","w","l","p","units"}]}],"footer"}.
+    Each row: label, W-L(-P), win-rate bar with a 52.4% breakeven tick, and units (green/red)."""
+    secs = ""
+    for sec in c.get("sections", []):
+        rows = ""
+        for r in sec.get("rows", []):
+            w, l, pu = int(r.get("w", 0)), int(r.get("l", 0)), int(r.get("p", 0))
+            n = w + l
+            rate = (100.0 * w / n) if n else 0.0
+            u = float(r.get("units", 0))
+            col = GREEN if u > 0 else (RED if u < 0 else GREY)
+            rec = f"{w}-{l}" + (f"-{pu}" if pu else "")
+            thin = n < 8
+            bar = (f'<div class="bt"><div class="bf" style="width:{rate:.0f}%;background:{BLUE if not thin else "#3B4A63"}"></div><div class="tick"></div></div>'
+                   if n else '<div class="bt"></div>')
+            rows += (f'<div class="r"><div class="rl2">{e(r.get("label"))}</div><div class="rr">{rec}</div>{bar}'
+                     f'<div class="rp">{rate:.0f}%</div><div class="ru" style="color:{col}">{u:+.2f}u</div></div>')
+        secs += f'<div class="sec"><div class="sh">{e(sec.get("heading"))}</div>{rows}</div>'
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+body{{margin:0;background:#0B0E13}}
+#card{{width:800px;box-sizing:border-box;background:#0B0E13;font-family:Inter,system-ui,sans-serif;color:#E8ECF2;padding:44px;display:flex;flex-direction:column;gap:24px}}
+.brand{{font-size:13px;font-weight:700;letter-spacing:3px;color:{GOLD}}}
+.ttl{{font-size:44px;font-weight:900;letter-spacing:-1px;line-height:1.05}}
+.sub{{font-size:16px;color:{GREY}}}
+.sec{{display:flex;flex-direction:column;gap:9px;background:#131820;border:1px solid #222936;border-radius:14px;padding:18px 22px}}
+.sh{{font-size:12px;font-weight:700;letter-spacing:2px;color:{GREY};margin-bottom:4px}}
+.r{{display:grid;grid-template-columns:200px 78px minmax(0,1fr) 44px 86px;align-items:center;gap:12px;font-size:15px}}
+.rl2{{font-weight:600}}
+.rr{{font-family:'JetBrains Mono',monospace;color:#C9D1DC;font-size:14px}}
+.bt{{position:relative;height:10px;border-radius:5px;background:#1B212B}}
+.bf{{height:10px;border-radius:5px}}
+.tick{{position:absolute;left:52.4%;top:-3px;width:2px;height:16px;background:{GOLD}}}
+.rp{{text-align:right;font-family:'JetBrains Mono',monospace;font-size:13px;color:#C9D1DC}}
+.ru{{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px}}
+.foot{{display:flex;justify-content:space-between;font-size:12px;color:#7D8796;border-top:1px solid #222936;padding-top:14px}}
+</style></head><body><div id="card">
+<div><div class="brand">{e(c.get("brand") or "SHARP SIGNALS")}</div></div>
+<div style="display:flex;flex-direction:column;gap:8px"><div class="ttl">{e(c.get("title"))}</div><div class="sub">{e(c.get("subtitle"))}</div></div>
+{secs}
+<div class="foot"><div>Gold tick = 52.4% breakeven at -110 · dim bars = under 8 graded</div><div>{e(c.get("footer") or "Leans, not guarantees")}</div></div>
+</div></body></html>'''
+
+def render_summaries(cards, out_dir):
+    from playwright.sync_api import sync_playwright
+    os.makedirs(out_dir, exist_ok=True)
+    paths = []
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        page = browser.new_page(viewport={"width": 800, "height": 1400}, device_scale_factor=1.5)
+        for i, c in enumerate(cards):
+            page.set_content(summary_html(c), wait_until="networkidle")
+            path = os.path.join(out_dir, f"summary_{i + 1}.png")
+            page.locator("#card").screenshot(path=path)
+            paths.append(path)
+        browser.close()
+    return paths

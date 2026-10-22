@@ -1,0 +1,127 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Game-line record summary** · through Wed Oct 21 finals",
+ "summaries": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Game-line record",
+   "subtitle": "Since Oct 21 · 1u flat · day 1, small sample",
+   "sections": [
+    {
+     "heading": "BY SIGNAL",
+     "rows": [
+      {
+       "label": "Pinnacle STRONG/MAX",
+       "w": 4,
+       "l": 4,
+       "p": 0,
+       "units": -1.25
+      },
+      {
+       "label": "Pinnacle Stable",
+       "w": 1,
+       "l": 1,
+       "p": 0,
+       "units": -0.98
+      },
+      {
+       "label": "Pinnacle Flipped",
+       "w": 3,
+       "l": 3,
+       "p": 0,
+       "units": -0.27
+      },
+      {
+       "label": "Vegas 70+",
+       "w": 1,
+       "l": 3,
+       "p": 0,
+       "units": -2.15
+      },
+      {
+       "label": "Vegas under 70",
+       "w": 6,
+       "l": 3,
+       "p": 1,
+       "units": 2.77
+      },
+      {
+       "label": "Vegas all strengths",
+       "w": 7,
+       "l": 6,
+       "p": 1,
+       "units": 0.62
+      },
+      {
+       "label": "Novig STRONG",
+       "w": 6,
+       "l": 8,
+       "p": 0,
+       "units": -3.72
+      },
+      {
+       "label": "Novig LEAN",
+       "w": 1,
+       "l": 1,
+       "p": 1,
+       "units": -0.12
+      }
+     ]
+    },
+    {
+     "heading": "ALIGNMENT",
+     "rows": [
+      {
+       "label": "Pinnacle + Vegas 70+",
+       "w": 1,
+       "l": 2,
+       "p": 0,
+       "units": -1.15
+      },
+      {
+       "label": "Pinnacle + Novig",
+       "w": 1,
+       "l": 2,
+       "p": 0,
+       "units": -2.1
+      },
+      {
+       "label": "Vegas + Novig",
+       "w": 0,
+       "l": 1,
+       "p": 0,
+       "units": -1.0
+      }
+     ]
+    },
+    {
+     "heading": "BY SPORT (PIN STRONG OR VEGAS 70+)",
+     "rows": [
+      {
+       "label": "NBA",
+       "w": 3,
+       "l": 3,
+       "p": 0,
+       "units": -0.2
+      },
+      {
+       "label": "NHL",
+       "w": 0,
+       "l": 2,
+       "p": 0,
+       "units": -3.05
+      },
+      {
+       "label": "CFB",
+       "w": 1,
+       "l": 0,
+       "p": 0,
+       "units": 1.0
+      }
+     ]
+    }
+   ],
+   "footer": "Leans, not guarantees"
+  }
+ ]
+}

@@ -18,9 +18,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Install card renderer (only when a card has scorecards)
+      - name: Install card renderer (only when a card has scorecards or summaries)
         run: |
-          if grep -lq '"scorecards"' outbox/*.json 2>/dev/null; then
+          if grep -lqE '"(scorecards|summaries)"' outbox/*.json 2>/dev/null; then
             pip install --quiet playwright
             python3 -m playwright install --with-deps chromium
           fi
