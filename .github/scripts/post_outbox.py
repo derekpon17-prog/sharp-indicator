@@ -10,10 +10,11 @@ Two card formats:
 The prefix picks the channel:
   "NFL Props"     -> secret DISCORD_NFLPROPS
   "Sharp Signals" -> secret DISCORD_SIGNALS
+  "Sharp Props"   -> secret DISCORD_PROPS
 Exits 1 if any card fails (the file stays in outbox/ and GitHub marks the run failed)."""
 import glob, json, os, shutil, sys, tempfile, time, uuid, urllib.request, urllib.error
 
-ROUTES = {"NFL Props": "HOOK", "Sharp Signals": "HOOK_SIGNALS"}
+ROUTES = {"NFL Props": "HOOK", "Sharp Signals": "HOOK_SIGNALS", "Sharp Props": "HOOK_PROPS"}
 
 def post(hook, payload):
     payload = dict(payload, allowed_mentions={"parse": []})

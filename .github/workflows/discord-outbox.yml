@@ -1,6 +1,6 @@
 # Posts NFL props and Sharp Signals cards from outbox/ to Derek's Discord, then moves them to sent/.
 # Scheduled Claude runs only commit a card file to the `outbox` branch; this workflow does the posting.
-# Webhooks live only in repo secrets DISCORD_NFLPROPS and DISCORD_SIGNALS. Pause posting by disabling this workflow.
+# Webhooks live only in repo secrets DISCORD_NFLPROPS, DISCORD_SIGNALS and DISCORD_PROPS. Pause posting by disabling this workflow.
 name: Discord outbox
 on:
   push:
@@ -28,6 +28,7 @@ jobs:
         env:
           HOOK: ${{ secrets.DISCORD_NFLPROPS }}
           HOOK_SIGNALS: ${{ secrets.DISCORD_SIGNALS }}
+          HOOK_PROPS: ${{ secrets.DISCORD_PROPS }}
         run: python3 .github/scripts/post_outbox.py
       - name: Move posted cards to sent/
         if: always()
