@@ -1,0 +1,130 @@
+{
+ "route": "NFL Props",
+ "content": "**NFL Props Model \u00b7 Record summary** \u00b7 through Week 6 (graded Tue Oct 20) \u00b7 TEST of the new summary image",
+ "summaries": [
+  {
+   "brand": "NFL PROPS MODEL",
+   "title": "Model record",
+   "subtitle": "Weeks 5-6 \u00b7 35-23 \u00b7 +7.08u \u00b7 1u flat at logged best price \u00b7 sample still small",
+   "sections": [
+    {
+     "heading": "BY TIER (ALL GRADED)",
+     "rows": [
+      {
+       "label": "Tier A",
+       "w": 9,
+       "l": 6,
+       "p": 0,
+       "units": null
+      },
+      {
+       "label": "Tier B",
+       "w": 17,
+       "l": 6,
+       "p": 0,
+       "units": null
+      },
+      {
+       "label": "Tier C",
+       "w": 9,
+       "l": 11,
+       "p": 0,
+       "units": null
+      }
+     ]
+    },
+    {
+     "heading": "WEEK 6 BY TIER",
+     "rows": [
+      {
+       "label": "Tier A",
+       "w": 7,
+       "l": 5,
+       "p": 0,
+       "units": 1.44
+      },
+      {
+       "label": "Tier B",
+       "w": 15,
+       "l": 6,
+       "p": 0,
+       "units": 6.89
+      },
+      {
+       "label": "Tier C",
+       "w": 9,
+       "l": 9,
+       "p": 0,
+       "units": -1.53
+      }
+     ]
+    },
+    {
+     "heading": "BY WEEK",
+     "rows": [
+      {
+       "label": "Week 6 (all games)",
+       "w": 31,
+       "l": 20,
+       "p": 0,
+       "units": 6.8
+      },
+      {
+       "label": "Week 5 (MNF only)",
+       "w": 4,
+       "l": 3,
+       "p": 0,
+       "units": 0.29
+      }
+     ]
+    },
+    {
+     "heading": "NOVIG CALL (WEEK 6)",
+     "rows": [
+      {
+       "label": "Novig agrees",
+       "w": 7,
+       "l": 7,
+       "p": 0,
+       "units": -1.06
+      },
+      {
+       "label": "Novig neutral",
+       "w": 2,
+       "l": 6,
+       "p": 0,
+       "units": -4.12
+      },
+      {
+       "label": "Not posted",
+       "w": 22,
+       "l": 7,
+       "p": 0,
+       "units": 11.98
+      }
+     ]
+    },
+    {
+     "heading": "PARLAYS (NOT STAKED)",
+     "rows": [
+      {
+       "label": "Week 6",
+       "w": 3,
+       "l": 4,
+       "p": 0,
+       "units": null
+      },
+      {
+       "label": "All graded",
+       "w": 3,
+       "l": 8,
+       "p": 0,
+       "units": null
+      }
+     ]
+    }
+   ],
+   "footer": "Through Week 6, graded Tue Oct 20"
+  }
+ ]
+}

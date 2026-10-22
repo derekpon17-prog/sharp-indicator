@@ -133,14 +133,15 @@ def summary_html(c):
             w, l, pu = int(r.get("w", 0)), int(r.get("l", 0)), int(r.get("p", 0))
             n = w + l
             rate = (100.0 * w / n) if n else 0.0
-            u = float(r.get("units", 0))
-            col = GREEN if u > 0 else (RED if u < 0 else GREY)
+            u = r.get("units")
+            col = GREY if u is None else (GREEN if u > 0 else (RED if u < 0 else GREY))
+            utxt = "n/a" if u is None else f"{float(u):+.2f}u"
             rec = f"{w}-{l}" + (f"-{pu}" if pu else "")
             thin = n < 8
             bar = (f'<div class="bt"><div class="bf" style="width:{rate:.0f}%;background:{BLUE if not thin else "#3B4A63"}"></div><div class="tick"></div></div>'
                    if n else '<div class="bt"></div>')
             rows += (f'<div class="r"><div class="rl2">{e(r.get("label"))}</div><div class="rr">{rec}</div>{bar}'
-                     f'<div class="rp">{rate:.0f}%</div><div class="ru" style="color:{col}">{u:+.2f}u</div></div>')
+                     f'<div class="rp">{rate:.0f}%</div><div class="ru" style="color:{col}">{utxt}</div></div>')
         secs += f'<div class="sec"><div class="sh">{e(sec.get("heading"))}</div>{rows}</div>'
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
