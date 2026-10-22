@@ -1,0 +1,95 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Daily record Thu Oct 22** · graded Wed Oct 21 (11 NBA, 2 NHL, 1 CFB games) · ESPN finals checked 9:10am CT",
+ "embeds": [
+  {
+   "title": "📊 Sharp Signals - Daily record Oct 22",
+   "color": 15844367,
+   "description": "Game lines, 1u flat. Small sample (day 1) - no bucket has 50+ graded rows yet. Yesterday = last 7 days = season to date (tracking started Oct 21).\nHeadline: Pinnacle STRONG 4-4 · -1.25u, Vegas 70+ 1-3 · -2.15u, Novig STRONG 6-8 · -3.72u. Vegas Backed under 70 was the best slice: 6-3-1 · +2.77u.",
+   "footer": {
+    "text": "Leans, not guarantees · records since Oct 21"
+   }
+  },
+  {
+   "title": "🧮 Records by bucket",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "📌 Pinnacle STRONG/MAX",
+     "value": "4-4 · -1.25u (Max-only: none yet)\nStable 1-1 · -0.98u · Flipped 3-3 · -0.27u",
+     "inline": false
+    },
+    {
+     "name": "🎰 Vegas 70+",
+     "value": "1-3 · -2.15u",
+     "inline": true
+    },
+    {
+     "name": "🎰 Vegas Backed - all strengths",
+     "value": "All 7-6-1 · +0.62u\n70+ 1-3 · -2.15u · under 70 6-3-1 · +2.77u\nPressure Move (separate) 2-2 · -1.10u",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig STRONG",
+     "value": "6-8 · -3.72u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig LEAN",
+     "value": "1-1-1 · -0.12u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Aligned (Pin + Vegas 70+)",
+     "value": "1-2 · -1.15u",
+     "inline": true
+    },
+    {
+     "name": "✅ Pin + Novig",
+     "value": "1-2 · -2.10u",
+     "inline": true
+    },
+    {
+     "name": "✅ Vegas + Novig",
+     "value": "0-1 · -1.00u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Triple",
+     "value": "no rows yet",
+     "inline": true
+    },
+    {
+     "name": "⚠️ Novig against (fade check)",
+     "value": "no rows yet",
+     "inline": true
+    },
+    {
+     "name": "By sport (Pin STRONG or Vegas 70+)",
+     "value": "NBA 3-3 · -0.20u · NHL 0-2 · -3.05u · CFB 1-0 · +1.00u",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "📝 Yesterday's graded plays (Pin STRONG / Vegas 70+)",
+   "color": 3447003,
+   "description": "❌ NBA ATL@ORL Under 233.5 (-108) - PIN_STRONG/VEGAS_70/ALIGNED - ATL 132 - ORL 125 - -1.08u\n✅ NBA MIN@MIA Under 240.5 (-111) - PIN_STRONG - MIN 131 - MIA 106 - +1.00u\n✅ NBA CHA@BKN CHA -1.5 (-109) - PIN_STRONG/VEGAS_70/ALIGNED - CHA 110 - BKN 103 - +1.00u\n✅ NBA CHA@BKN CHA ML (-119) - PIN_STRONG/NOVIG_STRONG/PIN_NOVIG - CHA 110 - BKN 103 - +1.00u\n❌ NBA CHI@TOR Over 237.5 (-112) - PIN_STRONG/NOVIG_LEAN/PIN_NOVIG - CHI 92 - TOR 135 - -1.12u\n❌ NHL PHI@BUF BUF ML (-198) - PIN_STRONG/NOVIG_STRONG/PIN_NOVIG - PHI 3 - BUF 1 - -1.98u\n❌ NHL FLA@OTT Under 5.5 (-107) - PIN_STRONG/VEGAS_70/ALIGNED - FLA 1 - OTT 5 - -1.07u\n❌ NBA IND@NOP NOP ML (+124) - VEGAS_70/NOVIG_STRONG/VEGAS_NOVIG - IND 123 - NOP 120 - -1.00u\n✅ CFB NMSU@SHSU Over 46.5 (-112) - PIN_STRONG - NMSU 30 - SHSU 24 - +1.00u"
+  },
+  {
+   "title": "📝 Other logged rows (Vegas under 70, Novig-only)",
+   "color": 9807270,
+   "description": "❌ NBA MIL@WSH MIL +4.5 (-113) - VEGAS_ALL - MIL 116 - WSH 128 - -1.13u\n✅ NBA ATL@ORL ATL ML (+112) - VEGAS_ALL - ATL 132 - ORL 125 - +1.12u\n❌ NBA MIN@MIA MIA -1.5 (-109) - NOVIG_STRONG - MIN 131 - MIA 106 - -1.09u\n✅ NBA CHI@TOR TOR ML (-469) - NOVIG_STRONG - CHI 92 - TOR 135 - +1.00u\n❌ NHL PHI@BUF Over 6 (-112) - NOVIG_STRONG - PHI 3 - BUF 1 - -1.12u\n❌ NBA MIN@MIA MIA ML (-119) - NOVIG_STRONG - MIN 131 - MIA 106 - -1.19u\n❌ NBA ATL@ORL ORL ML (-134) - NOVIG_STRONG - ATL 132 - ORL 125 - -1.34u\n✅ NBA MIL@WSH WSH ML (n/a) - NOVIG_STRONG - MIL 116 - WSH 128 - +1.00u\n✅ NBA CHI@TOR TOR -10.5 (-109) - NOVIG_STRONG - CHI 92 - TOR 135 - +1.00u\n❌ NHL FLA@OTT FLA +1.5 (n/a) - NOVIG_STRONG - FLA 1 - OTT 5 - -1.00u\n➖ NBA IND@NOP NOP +3.0 (-108) - NOVIG_LEAN - IND 123 - NOP 120 - +0.00u\n✅ NBA UTA@MEM MEM ML (-127) - NOVIG_LEAN - UTA 103 - MEM 123 - +1.00u\n✅ NBA UTA@MEM Under 241.5 (-110) - VEGAS_ALL - UTA 103 - MEM 123 - +1.00u\n✅ NBA DAL@HOU HOU -9.5 (-117) - VEGAS_ALL - DAL 110 - HOU 128 - +1.00u\n❌ NBA IND@NOP Under 239.5 (-113) - VEGAS_ALL - IND 123 - NOP 120 - -1.13u\n✅ NBA UTA@MEM MEM -1.5 (-112) - VEGAS_ALL - UTA 103 - MEM 123 - +1.00u\n✅ NBA DAL@HOU HOU ML (-430) - NOVIG_STRONG - DAL 110 - HOU 128 - +1.00u\n✅ CFB NMSU@SHSU NMSU ML (-146) - NOVIG_STRONG - NMSU 30 - SHSU 24 - +1.00u\n❌ CFB NMSU@SHSU SHSU +3.5 (n/a) - NOVIG_STRONG - NMSU 30 - SHSU 24 - -1.00u\nNote: 3 rows had no captured price (WSH ML, FLA +1.5, SHSU +3.5) and are graded at -100."
+  },
+  {
+   "title": "🧾 Your game-line bets",
+   "color": 3066993,
+   "description": "✅ CHA ML (-118) - Pinnacle STRONG + Novig STRONG - CHA 110-103 - +1.00u\nRunning: straights 1-0 +1.00u · by bucket PIN_STRONG/PIN_NOVIG 1-0"
+  },
+  {
+   "title": "📅 Today's slate (Thu Oct 22, CT)",
+   "color": 15105570,
+   "description": "🏈 NFL 1 - NE @ CHI 7:15pm\n🏈 CFB 3 - JMU @ APP 6:00pm, LIB @ KENN 6:00pm, ECU @ MEM 6:30pm\n🏀 NBA 2 - CLE @ PHI 6:00pm, DEN @ OKC 8:30pm\n🏒 NHL 12 - first puck 6:00pm, last 9:00pm\n⚾ MLB 0 · 🏀 NCAAB 0 (season starts in November) · 🏀 WNBA 0\nFirst window with games: the 5:05pm run (6:00pm starts). Betting Insider sports unchanged (MLB, NFL, CFB, NHL, NBA)."
+  }
+ ]
+}
