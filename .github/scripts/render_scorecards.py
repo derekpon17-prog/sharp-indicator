@@ -202,6 +202,21 @@ def board_html(c):
     for sec in c.get("sections", []):
         rows = ""
         for i, p in enumerate(sec.get("picks", []), 1):
+            if p.get("chips") is not None:
+                cols = {"green": GREEN, "red": RED, "blue": BLUE, "grey": GREY, "orange": ORANGE, "gold": GOLD}
+                cs = "".join(chip(ch.get("t"), cols.get(ch.get("c"), GREY)) for ch in p.get("chips", []))
+                n = int(p.get("sources") or 0)
+                segs = "".join(f'<div class="sg" style="background:{GREEN if k < n else "#1B212B"}"></div>' for k in range(3))
+                pr = p.get("price")
+                ptxt = "" if pr in (None, "") else f'{float(pr):+.0f}'
+                sub = p.get("sub") or ""
+                rows += (f'<div class="pr"><div class="pn">{i}</div>'
+                         f'<div><div class="pt">{e(p.get("bet"))} <span class="pp">{e(sub)}</span></div>'
+                         f'<div class="cs">{cs}</div></div>'
+                         f'<div><div class="pm"><span class="bk">{e(p.get("book") or "")}</span><span class="mp">{ptxt}</span></div>'
+                         f'<div class="sgs">{segs}</div>'
+                         f'<div class="ed">{n} of 3 sources</div></div></div>')
+                continue
             price = float(p.get("price"))
             m = float(p.get("model") or 0)
             b = be(price)
@@ -250,12 +265,13 @@ body{{margin:0;background:#0B0E13}}
 .bf{{height:10px;border-radius:5px}}
 .tick{{position:absolute;top:-3px;width:2px;height:16px;background:{GOLD}}}
 .ed{{font-family:'JetBrains Mono',monospace;font-size:11px;color:{GREY};margin-top:4px;text-align:right}}
+.sgs{{display:flex;gap:4px;margin-top:6px}} .sg{{flex:1;height:10px;border-radius:5px}}
 .foot{{display:flex;justify-content:space-between;font-size:12px;color:#7D8796;border-top:1px solid #222936;padding-top:12px}}
 </style></head><body><div id="card">
 <div><div class="brand">{e(c.get("brand") or "NFL PROPS MODEL")}</div></div>
 <div><div class="ttl">{e(c.get("title") or "Tier A picks")}</div><div class="sub">{e(c.get("subtitle"))}</div></div>
 {secs}
-<div class="foot"><div>Gold tick = break-even at the book price · model % is our win probability</div><div>{e(c.get("footer") or "Leans, not guarantees")}</div></div>
+<div class="foot"><div>{e(c.get("legend") or "Gold tick = break-even at the book price · model % is our win probability")}</div><div>{e(c.get("footer") or "Leans, not guarantees")}</div></div>
 </div></body></html>'''
 
 def render_boards(cards, out_dir):
