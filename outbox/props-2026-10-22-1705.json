@@ -1,0 +1,36 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props \u00b7 Thu 5:05pm CT window (manual catch-up)** \u00b7 NBA CLE @ PHI \u00b7 NHL ANA @ NJ, NSH @ BOS, NYR @ TOR, SJ @ OTT, FLA @ PIT, LA @ NYI (6:00-6:30pm CT) \u00b7 Pinnacle checked 5:52pm CT \u00b7 Novig props NOT checked this window (usage cap + time)",
+ "embeds": [
+  {
+   "title": "\ud83c\udfc0 NBA \u00b7 CLE @ PHI",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "\ud83d\udccc Pinnacle STRONG / MAX",
+     "value": "\u2022 MAX: P. Watson Under 13.5 pts (-124) - flipped\n\u2022 STRONG: J. Harden Under 17.5 pts (-111) - stable\n\u2022 STRONG: E. Mobley Under 1.5 3PM (-258) - stable",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "\ud83c\udfd2 NHL",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "\ud83d\udccc Pinnacle STRONG / MAX",
+     "value": "**ANA @ NJ**\n\u2022 MAX: L. Carlsson Over 0.5 pts (-150) - stable\n**NSH @ BOS**\n\u2022 STRONG: M. Geekie Under 1.5 SOG (+134) - stable\n\u2022 STRONG: D. Pastrnak Under 0.5 ast (+118) - flipped\n\u2022 STRONG: C. McAvoy Under 0.5 ast (-111) - flipped\n**NYR @ TOR**\n\u2022 STRONG: K. Marchenko Over 0.5 ast (+138) - stable\n\u2022 STRONG: G. Perreault Over 0.5 pts (+132) - stable\n**SJ @ OTT**\n\u2022 STRONG: C. Giroux Over 0.5 pts (+101) - flipped",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "\ud83e\udde9 Suggested parlays",
+   "color": 15844367,
+   "description": "**1)** Carlsson O 0.5 pts (-150, MAX) + Mobley U 1.5 3PM (-258, STRONG) + Perreault O 0.5 pts (+132, STRONG) \u00b7 approx +437\n**2)** Geekie U 1.5 SOG (+134) + Harden U 17.5 pts (-111) + Marchenko O 0.5 ast (+138), all STRONG stable \u00b7 approx +959\nNo Novig confirmation on any leg (not checked).",
+   "footer": {
+    "text": "Showing 10 of 16 logged \u00b7 Leans, not guarantees \u00b7 independent plays \u00b7 Novig not checked this window"
+   }
+  }
+ ]
+}
