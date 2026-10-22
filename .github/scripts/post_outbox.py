@@ -11,6 +11,8 @@ The prefix picks the channel:
   "NFL Props"     -> secret DISCORD_NFLPROPS
   Summaries: "summaries": [ {...} ] - bar-chart summary images (see render_scorecards.summary_html),
            posted last, after any embeds.
+  Boards: "boards": [ {...} ] - NFL Props Tier A board images (see render_scorecards.board_html),
+           posted before any embeds (1-3 per card).
   "Sharp Signals" -> secret DISCORD_SIGNALS
   "Sharp Props"   -> secret DISCORD_PROPS
 Exits 1 if any card fails (the file stays in outbox/ and GitHub marks the run failed)."""
@@ -92,11 +94,14 @@ for path in sorted(glob.glob("outbox/*.json")):
         parts = card.get("parts")
         scorecards = card.get("scorecards")
         summaries = card.get("summaries")
+        boards = card.get("boards")
+        if boards is not None and (not isinstance(boards, list) or not 1 <= len(boards) <= 3):
+            raise ValueError("boards must be a list of 1-3 board cards")
         if summaries is not None and (not isinstance(summaries, list) or not 1 <= len(summaries) <= 5):
             raise ValueError("summaries must be a list of 1-5 summary cards")
         if scorecards is not None and (not isinstance(scorecards, list) or not 1 <= len(scorecards) <= 20):
             raise ValueError("scorecards must be a list of 1-20 scorecards")
-        if embeds is not None or scorecards is not None or summaries is not None:
+        if embeds is not None or scorecards is not None or summaries is not None or boards is not None:
             if embeds is not None and (not isinstance(embeds, list) or not 1 <= len(embeds) <= 30):
                 raise ValueError("embeds must be a list of 1-30 embeds")
             route = str(card.get("route", ""))
@@ -120,6 +125,15 @@ for path in sorted(glob.glob("outbox/*.json")):
                 time.sleep(1)
             first_content = None
             print(f"posted {name} scorecards ({len(pngs)} images)")
+        if boards is not None:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from render_scorecards import render_boards
+            bpngs = render_boards(boards, tempfile.mkdtemp(prefix="boards_"))
+            for pth in bpngs:
+                post_files(hook, [pth], first_content)
+                first_content = None
+                time.sleep(1)
+            print(f"posted {name} boards ({len(bpngs)} images)")
         if embeds is not None:
             embeds = [clean_embed(e) for e in embeds]
             batch, size, first = [], 0, first_content is not None
@@ -137,7 +151,7 @@ for path in sorted(glob.glob("outbox/*.json")):
             if batch:
                 flush(batch, first)
             print(f"posted {name} ({len(embeds)} embeds)")
-        elif scorecards is None and summaries is None:
+        elif scorecards is None and summaries is None and boards is None:
             for p in parts:
                 post(hook, {"content": p.strip()[:1990]})
                 time.sleep(1)

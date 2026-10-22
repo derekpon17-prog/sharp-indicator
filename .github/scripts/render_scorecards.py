@@ -183,3 +183,92 @@ def render_summaries(cards, out_dir):
             paths.append(path)
         browser.close()
     return paths
+
+
+ORANGE = "#FF9F43"
+
+def board_html(c):
+    """NFL Props Tier A board (design A, Oct 22). Card dict:
+    {"brand","title","subtitle","sections":[{"heading","picks":[{"player","market","side":"U"|"O","line":43.5,
+      "book":"FD","price":-113,"model":61,"pin":"LEAN+STRONG agrees"|"against LEAN"|null,"pf":"U65"|null,
+      "novig":{"pct":48,"state":"agree"|"neutral"|"disagree"}|null,"note":"Q ankle, void if out"|null}]}],"footer"}
+    Break-even is computed from the price here, so it cannot be mis-stated."""
+    def be(p):
+        p = float(p)
+        return 100 * abs(p) / (abs(p) + 100) if p < 0 else 10000 / (p + 100)
+    def chip(t, col):
+        return f'<span class="chip" style="color:{col};border-color:{col}55;background:{col}14">{e(t)}</span>'
+    secs = ""
+    for sec in c.get("sections", []):
+        rows = ""
+        for i, p in enumerate(sec.get("picks", []), 1):
+            price = float(p.get("price"))
+            m = float(p.get("model") or 0)
+            b = be(price)
+            side = {"U": "U", "O": "O"}.get(str(p.get("side", "")).upper()[:1], "")
+            pin = p.get("pin")
+            if pin:
+                pc = chip("PIN " + str(pin), RED if "against" in str(pin).lower() else GREEN)
+            else:
+                pc = chip("PIN not posted", GREY)
+            pf = chip("PF " + str(p["pf"]), BLUE) if p.get("pf") else ""
+            nv = p.get("novig")
+            if nv:
+                col = {"agree": GREEN, "neutral": GREY, "disagree": RED}.get(str(nv.get("state")), GREY)
+                nc = chip(f'NOVIG {nv.get("pct")}% {nv.get("state")}', col)
+            else:
+                nc = chip("NOVIG -", GREY)
+            note = chip(p["note"], ORANGE) if p.get("note") else ""
+            edge = m - b
+            ptxt = f'{price:+.0f}'
+            rows += (f'<div class="pr"><div class="pn">{i}</div>'
+                     f'<div><div class="pt">{e(p.get("player"))} <span class="pp">{side}{e(p.get("line"))} {e(p.get("market"))}</span></div>'
+                     f'<div class="cs">{pc}{pf}{nc}{note}</div></div>'
+                     f'<div><div class="pm"><span class="bk">{e(p.get("book"))} {ptxt}</span><span class="mp">{m:.0f}%</span></div>'
+                     f'<div class="bt"><div class="bf" style="width:{min(m,100):.0f}%;background:{GREEN}"></div><div class="tick" style="left:{b:.1f}%"></div></div>'
+                     f'<div class="ed">edge {edge:+.0f} pts</div></div></div>')
+        secs += f'<div class="sec"><div class="sh">{e(sec.get("heading"))}</div>{rows}</div>'
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+body{{margin:0;background:#0B0E13}}
+#card{{width:800px;box-sizing:border-box;background:#0B0E13;font-family:Inter,system-ui,sans-serif;color:#E8ECF2;padding:40px;display:flex;flex-direction:column;gap:20px}}
+.brand{{font-size:13px;font-weight:700;letter-spacing:3px;color:{GOLD}}}
+.ttl{{font-size:40px;font-weight:900;letter-spacing:-1px;line-height:1.05}}
+.sub{{font-size:15px;color:{GREY};margin-top:6px}}
+.sec{{background:#131820;border:1px solid #222936;border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:2px}}
+.sh{{font-size:12px;font-weight:700;letter-spacing:2px;color:{GREY};margin-bottom:8px}}
+.pr{{display:grid;grid-template-columns:22px minmax(0,1fr) 150px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid #1E2531}}
+.pn{{font-family:'JetBrains Mono',monospace;color:#5F6B7C;font-size:13px}}
+.pt{{font-weight:800;font-size:16px}} .pp{{font-weight:600;color:{GREY}}}
+.cs{{margin-top:5px}}
+.chip{{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.3px;border:1px solid;border-radius:6px;padding:2px 7px;margin-right:5px;white-space:nowrap}}
+.pm{{display:flex;justify-content:space-between;align-items:baseline}}
+.bk{{font-family:'JetBrains Mono',monospace;font-size:12px;color:{GREY}}}
+.mp{{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:{GREEN}}}
+.bt{{position:relative;height:10px;border-radius:5px;background:#1B212B;margin-top:6px}}
+.bf{{height:10px;border-radius:5px}}
+.tick{{position:absolute;top:-3px;width:2px;height:16px;background:{GOLD}}}
+.ed{{font-family:'JetBrains Mono',monospace;font-size:11px;color:{GREY};margin-top:4px;text-align:right}}
+.foot{{display:flex;justify-content:space-between;font-size:12px;color:#7D8796;border-top:1px solid #222936;padding-top:12px}}
+</style></head><body><div id="card">
+<div><div class="brand">{e(c.get("brand") or "NFL PROPS MODEL")}</div></div>
+<div><div class="ttl">{e(c.get("title") or "Tier A picks")}</div><div class="sub">{e(c.get("subtitle"))}</div></div>
+{secs}
+<div class="foot"><div>Gold tick = break-even at the book price · model % is our win probability</div><div>{e(c.get("footer") or "Leans, not guarantees")}</div></div>
+</div></body></html>'''
+
+def render_boards(cards, out_dir):
+    from playwright.sync_api import sync_playwright
+    os.makedirs(out_dir, exist_ok=True)
+    paths = []
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        page = browser.new_page(viewport={"width": 800, "height": 1400}, device_scale_factor=1.5)
+        for i, c in enumerate(cards):
+            page.set_content(board_html(c), wait_until="networkidle")
+            path = os.path.join(out_dir, f"board_{i + 1}.png")
+            page.locator("#card").screenshot(path=path)
+            paths.append(path)
+        browser.close()
+    return paths
