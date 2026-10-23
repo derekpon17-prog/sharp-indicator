@@ -1,0 +1,442 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Fri 5:05pm CT window** · NBA: Knicks @ Celtics, Hawks @ Hornets, Mavericks @ Pacers, Timberwolves @ Magic, Raptors @ Wizards · CFB: UMass @ UConn, Duke @ Virginia · all 6:00pm CT",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "Timberwolves @ Magic",
+   "bet": "Magic ML",
+   "price": "-118",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved the Magic from +101 to -116 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: line moved to the Magic with a small minority of bets",
+    "bets": 12,
+    "money": 13
+   },
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Magic $108K vs Timberwolves $74K near the top",
+    "line2": "Novig money leans Magic at 1.47x with $336K traded."
+   },
+   "record_label": "TRIPLE (PINNACLE + VEGAS 70+ + NOVIG) RECORD",
+   "record": "0-0 · tracking started Oct 21 - first TRIPLE logged",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "Knicks @ Celtics",
+   "bet": "Under 221.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Pinnacle total moved from 224.5 to 220.5 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 76,
+    "line1": "Vegas Backed: total dropped from 224.5 to 221.5 with a minority on the Under",
+    "bets": 32,
+    "money": 37
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Under $41K vs Over $30K near the top (line 220.5)",
+    "line2": "Heavier on the Under at 1.38x, just short of a lean."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "1-2 · -1.15u · tracking started Oct 21 (first MAX game line)",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "Timberwolves @ Magic",
+   "bet": "Magic -1.5",
+   "price": "-106",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved from Magic +1.5 to -1 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: line moved from Magic +1.5 to -1.5 with a minority of bets",
+    "bets": 17,
+    "money": 20
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Magic $75K vs Timberwolves $55K near the top",
+    "line2": "Heavier on the Magic at 1.37x, just short of a lean."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "1-2 · -1.15u · tracking started Oct 21 (3 graded)",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "Timberwolves @ Magic",
+   "bet": "Under 234.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 239.5 to 234 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 78,
+    "line1": "Vegas Backed: total dropped from 237.5 to 234.5",
+    "bets": 33,
+    "money": 33
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Under $36K vs Over $36K near the top",
+    "line2": "Novig book is even on this total."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "1-2 · -1.15u · tracking started Oct 21 (3 graded)",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "Raptors @ Wizards",
+   "bet": "Raptors ML",
+   "price": "-343",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved the Raptors from -185 to -317 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 76,
+    "line1": "Pressure Move (not a Vegas Backed signal): 88% of bets and 91% of money on the Raptors",
+    "bets": 88,
+    "money": 91
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Raptors $125K vs Wizards $46K near the top",
+    "line2": "Novig money 2.73x on the Raptors, $195K traded."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "2-3 · -2.43u · tracking started Oct 21 (5 graded)",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "UMass @ UConn",
+   "bet": "UMass +12.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved from UMass +16 to +13 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "UMass $59K vs UConn $40K near the top (Novig line +13.5)",
+    "line2": "Single $10.2K order at the top backing UMass; ratio 1.48x."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "2-3 · -2.43u · tracking started Oct 21 (5 graded)",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "Mavericks @ Pacers",
+   "bet": "Over 240.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 237 to 240 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Under $37K vs Over $30K near the top",
+    "line2": "Slightly heavier on the Under, not enough to count against."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "Raptors @ Wizards",
+   "bet": "Raptors -8.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved from Raptors -4 to -9 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Wizards $63K vs Raptors $49K near the top",
+    "line2": "Slightly heavier on the Wizards +8.5, not enough to count against."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "UMass @ UConn",
+   "bet": "Over 53.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 49 to 53 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $13K vs Under $11K near the top (line 52.5)",
+    "line2": "Thin, roughly even book."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Fri Oct 23",
+   "start": "6:00pm CT",
+   "matchup": "UMass @ UConn",
+   "bet": "UMass ML",
+   "price": "+384",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved UMass from +514 to +406 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "UConn $67K vs UMass $27K near the top",
+    "line2": "Novig money 2.49x on UConn, the other side."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 5:08pm CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Window summary",
+   "subtitle": "Fri 5:05pm CT window - Pinnacle checked 5:08 - Vegas 5:11 - Novig 5:13",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NBA - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "Magic ML",
+       "sub": "MIN @ ORL",
+       "price": -118,
+       "book": "",
+       "sources": 3,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS 100", "c": "blue"},
+        {"t": "NOVIG $108K v $74K lean", "c": "green"}
+       ]
+      },
+      {
+       "bet": "Under 221.5",
+       "sub": "NY @ BOS",
+       "price": -112,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {"t": "PIN MAX flipped", "c": "orange"},
+        {"t": "VEGAS 76", "c": "blue"},
+        {"t": "NOVIG $41K v $30K", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "Magic -1.5",
+       "sub": "MIN @ ORL",
+       "price": -106,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS 100", "c": "blue"},
+        {"t": "NOVIG $75K v $55K", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "Under 234.5",
+       "sub": "MIN @ ORL",
+       "price": -111,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS 78", "c": "blue"},
+        {"t": "NOVIG even", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "Raptors ML",
+       "sub": "TOR @ WSH",
+       "price": -343,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "PRESSURE 76", "c": "grey"},
+        {"t": "NOVIG $125K v $46K", "c": "green"}
+       ]
+      },
+      {
+       "bet": "Over 240.5",
+       "sub": "DAL @ IND",
+       "price": -111,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG $30K v $37K", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "Raptors -8.5",
+       "sub": "TOR @ WSH",
+       "price": -113,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG $49K v $63K", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "Hornets +2.5",
+       "sub": "ATL @ CHA",
+       "price": -109,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN Lean", "c": "grey"},
+        {"t": "VEGAS 75", "c": "blue"},
+        {"t": "NOVIG $73K v $67K", "c": "grey"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "UMass +12.5",
+       "sub": "MASS @ CONN",
+       "price": -110,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG $10K single", "c": "green"}
+       ]
+      },
+      {
+       "bet": "Over 53.5",
+       "sub": "MASS @ CONN",
+       "price": -110,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG $13K v $11K", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "UMass ML",
+       "sub": "MASS @ CONN",
+       "price": 384,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG AGAINST $67K v $27K", "c": "red"}
+       ]
+      },
+      {
+       "bet": "Under 47",
+       "sub": "DUKE @ UVA",
+       "price": -110,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN no lean", "c": "grey"},
+        {"t": "VEGAS 74", "c": "blue"},
+        {"t": "NOVIG $33K v $45K", "c": "grey"}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "More game-line signals",
+     "value": "• Hawks @ Hornets: Hornets +2.5 (-109) - Vegas Backed 75 (15% bets / 13% money), Pinnacle Lean, Novig neutral\n• Duke @ Virginia: Under 47 (-110) - Vegas Backed 74 (26% / 30%), Pinnacle no lean, Novig neutral (line 47.5)\n• Novig only: Celtics ML (-143) $209K v $80K (2.6x), Pacers ML (-264) $109K v $45K (2.4x)",
+     "inline": false
+    },
+    {
+     "name": "⚠️ Conflicts",
+     "value": "• UMass ML (+384): Pinnacle STRONG on UMass, but Novig money is 2.49x on UConn ($67K v $27K). The UMass +12.5 side has Novig support; the moneyline does not.",
+     "inline": false
+    },
+    {
+     "name": "Run notes",
+     "value": "• Window 5:45-6:45pm CT: NBA Knicks @ Celtics, Hawks @ Hornets, Mavericks @ Pacers, Timberwolves @ Magic, Raptors @ Wizards; CFB UMass @ UConn, Duke @ Virginia (all 6:00pm).\n• First TRIPLE logged: Magic ML. First game-line MAX logged: Knicks @ Celtics Under 221.5.\n• Raptors ML Vegas row is a Pressure Move (76), not Vegas Backed, so it does not count as Vegas 70+.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 5:08 · Vegas 5:11 · Novig 5:13pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}

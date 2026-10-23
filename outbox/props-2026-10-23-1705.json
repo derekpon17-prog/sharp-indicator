@@ -1,0 +1,165 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Fri 5:05pm CT window** · NBA: Knicks @ Celtics, Hawks @ Hornets, Mavericks @ Pacers, Timberwolves @ Magic, Raptors @ Wizards (6:00pm) · Checked: Pinnacle 5:08 · Novig 5:14-5:17pm CT (300 reads, 1 failed; Novig capped at 300, 22 lower-priority lines unread)",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Fri 5:05pm CT window - Pinnacle checked 5:08 - Novig 5:14-5:17",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees · Showing 8 of 30 logged (8-per-sport cap)",
+   "sections": [
+    {
+     "heading": "NBA - DAL @ IND 6:00PM CT",
+     "picks": [
+      {
+       "bet": "C. Flagg O6.5 reb",
+       "sub": "DAL @ IND",
+       "price": 104,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $775 v $2.0K", "c": "grey"},
+        {"t": "+EV at 3 books", "c": "green"}
+       ]
+      },
+      {
+       "bet": "T. Haliburton U32.5 pra",
+       "sub": "DAL @ IND",
+       "price": -113,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $320 v $1.6K", "c": "grey"},
+        {"t": "+EV at 3 books", "c": "green"}
+       ]
+      },
+      {
+       "bet": "A. Nembhard U6.5 ast",
+       "sub": "DAL @ IND",
+       "price": -112,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $83 v $2.1K", "c": "grey"},
+        {"t": "+EV at 2 books", "c": "green"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - NY @ BOS 6:00PM CT",
+     "picks": [
+      {
+       "bet": "P. George U2.5 3pm",
+       "sub": "NY @ BOS",
+       "price": 106,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $1.3K v $5.2K", "c": "grey"},
+        {"t": "+EV at 5 books", "c": "green"}
+       ]
+      },
+      {
+       "bet": "K. Towns U3.5 ast",
+       "sub": "NY @ BOS",
+       "price": -101,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $1.4K v $4.8K", "c": "grey"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - MIN @ ORL 6:00PM CT",
+     "picks": [
+      {
+       "bet": "F. Wagner O20.5 pts",
+       "sub": "MIN @ ORL",
+       "price": -120,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $1.1K v $1.7K", "c": "grey"},
+        {"t": "+EV at 3 books", "c": "green"}
+       ]
+      },
+      {
+       "bet": "W. Carter Jr. U9.5 pts",
+       "sub": "MIN @ ORL",
+       "price": -109,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $1.5K v $4.7K", "c": "grey"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - ATL @ CHA 6:00PM CT",
+     "picks": [
+      {
+       "bet": "J. Johnson U6.5 ast",
+       "sub": "ATL @ CHA",
+       "price": 103,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $245 v $425", "c": "grey"},
+        {"t": "+EV at 6 books", "c": "green"}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "🏀 NBA - more logged (not shown, card caps)",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "Pinnacle STRONG stable",
+     "value": "• K. Irving U4.5 ast (-156), M. Bridges O11.5 pts (-127), J. McDaniels U1.5 3pm (-148)",
+     "inline": false
+    },
+    {
+     "name": "Pinnacle STRONG flipped",
+     "value": "• NY @ BOS: O. Anunoby U15.5 pts (-117), J. Hart U11.5 pts (-122), J. Brunson U34.5 pra (-112)\n• DAL @ IND: Z. Risacher U8.5 pts (-119), K. Oubre Jr. U9.5 pts (-111), N. Marshall U13.5 pts (-128)\n• MIN @ ORL: L. Ball U7.5 ast (-102), A. Edwards U3.5 3pm (-113)\n• ATL @ CHA: M. Diabate O9.5 pts (-113), N. Alexander-Walker O18.5 pts (-124)\n• TOR @ WSH: A. Sarr U6.5 reb (-120)",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig money",
+     "value": "• J. Kuminga O1.5 ast (take -167) - Yes $2.4K v $60\n• T. Young O19.5 pts (take -113) - Yes $2.2K v $324, Pinnacle Lean Over too\n• G. Allen O2.5 reb (take -111) - Yes $1.7K v $562\n• K. Irving U3.5 reb - No $11.9K v $986 with a $9.9K single order (default skew, weaker)",
+     "inline": false
+    },
+    {
+     "name": "Notes",
+     "value": "• No Pinnacle + Novig agreements and no conflicts at the cutoffs. Most heavy Novig No sides tonight are the repeated $3-5K No orders (bot pattern) and are skipped.\n• CFB UMass @ UConn and Duke @ Virginia: no Pinnacle Strong props and no Novig prop markets.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "**1) Plus-money unders/over, 3 games · ~+753**\n• J. Johnson U6.5 ast (+103) - PIN STRONG stable\n• P. George U2.5 3pm (+106) - PIN STRONG stable\n• C. Flagg O6.5 reb (+104) - PIN STRONG stable\n\n**2) Short-priced stable leans, 3 games · ~+619**\n• T. Haliburton U32.5 pra (-113) - PIN STRONG stable\n• K. Towns U3.5 ast (-101) - PIN STRONG stable\n• W. Carter Jr. U9.5 pts (-109) - PIN STRONG stable",
+   "footer": {
+    "text": "Leans, not guarantees · props record since Oct 21: 57-54, 51% · independent plays (111 graded, 144 raw rows)"
+   }
+  }
+ ]
+}
