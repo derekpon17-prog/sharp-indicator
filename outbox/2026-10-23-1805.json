@@ -1,0 +1,370 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Fri 6:05pm CT window** · NBA: Pistons @ Heat · NHL: Canadiens @ Blackhawks · MLB: Rays @ Brewers (all 7:00pm CT) · CFB: Army @ Tulsa (7:30pm CT)",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "7:00pm CT",
+   "matchup": "Pistons @ Heat",
+   "bet": "Pistons -1.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved from Pistons +2.5 to -1.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Pistons $70K vs Heat $65K near the top",
+    "line2": "Single $29.1K order at the top backing the Pistons; the Heat side has a $26.8K order too."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "2-3 · -2.43u · tracking started Oct 21 (5 graded)",
+   "checked": "Checked 6:07pm CT"
+  },
+  {
+   "sport": "NHL",
+   "date": "Fri Oct 23",
+   "start": "7:00pm CT",
+   "matchup": "Canadiens @ Blackhawks",
+   "bet": "Canadiens ML",
+   "price": "-164",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved the Canadiens from -136 to -160 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Canadiens $38K vs Blackhawks $27K near the top",
+    "line2": "Single $14.0K order at the top backing the Canadiens; ratio 1.39x."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "2-3 · -2.43u · tracking started Oct 21 (5 graded)",
+   "checked": "Checked 6:07pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "7:00pm CT",
+   "matchup": "Pistons @ Heat",
+   "bet": "Pistons ML",
+   "price": "-125",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved the Pistons from +113 to -120 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 63,
+    "line1": "Vegas Backed 63 (below 70): line moved to the Pistons from +103 to -125",
+    "bets": 40,
+    "money": 44
+   },
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Heat $96K vs Pistons $78K near the top",
+    "line2": "A $24.6K order at the top backs the Heat; the Pistons side has a $28.7K order too."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 6:07pm CT"
+  },
+  {
+   "sport": "NHL",
+   "date": "Fri Oct 23",
+   "start": "7:00pm CT",
+   "matchup": "Canadiens @ Blackhawks",
+   "bet": "Canadiens -1.5",
+   "price": "+149",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved Canadiens -1.5 from +183 to +158 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Blackhawks +1.5 $44K vs Canadiens -1.5 $30K near the top",
+    "line2": "Novig money 1.49x on the Blackhawks +1.5 with a $12.4K order at the top."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 6:07pm CT"
+  },
+  {
+   "sport": "MLB",
+   "date": "Fri Oct 23",
+   "start": "7:00pm CT",
+   "matchup": "Rays @ Brewers",
+   "bet": "Over 6.5",
+   "price": "-114",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 6 to 6.5 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $62K vs Under $56K near the top",
+    "line2": "Roughly even book, $209K traded."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 6:07pm CT"
+  },
+  {
+   "sport": "MLB",
+   "date": "Fri Oct 23",
+   "start": "7:00pm CT",
+   "matchup": "Rays @ Brewers",
+   "bet": "Brewers ML",
+   "price": "-191",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved the Brewers from -155 to -181 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Rays $306K vs Brewers $214K near the top",
+    "line2": "A $197K order at the top backs the Rays; $971K traded."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 6:07pm CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Fri Oct 23",
+   "start": "7:30pm CT",
+   "matchup": "Army @ Tulsa",
+   "bet": "Tulsa -1.5",
+   "price": "-107",
+   "pinnacle": null,
+   "vegas": {
+    "strength": 78,
+    "line1": "Vegas Backed: line moved from Tulsa +1.5 to -1.5 with a minority of bets",
+    "bets": 32,
+    "money": 34
+   },
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Army +1.5 $51K vs Tulsa -1.5 $44K near the top",
+    "line2": "A $12.75K order at the top backs Army +1.5."
+   },
+   "record_label": "VEGAS 70+ RECORD",
+   "record": "2-3 · -1.15u · tracking started Oct 21 (5 graded)",
+   "checked": "Checked 6:07pm CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Window summary",
+   "subtitle": "Fri 6:05pm CT window - Pinnacle checked 6:07 - Vegas 6:09 - Novig 6:10",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NBA - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "Pistons -1.5",
+       "sub": "DET @ MIA",
+       "price": -113,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $29K single",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Pistons ML",
+       "sub": "DET @ MIA",
+       "price": -125,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 63",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG AGAINST $96K v $78K",
+         "c": "red"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "Canadiens ML",
+       "sub": "MTL @ CHI",
+       "price": -164,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $14K single",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Canadiens -1.5",
+       "sub": "MTL @ CHI",
+       "price": 149,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG AGAINST $44K v $30K",
+         "c": "red"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "MLB - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "Over 6.5",
+       "sub": "TB @ MIL",
+       "price": -114,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $62K v $56K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Brewers ML",
+       "sub": "TB @ MIL",
+       "price": -191,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG AGAINST $306K v $214K",
+         "c": "red"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 7:30PM CT",
+     "picks": [
+      {
+       "bet": "Tulsa -1.5",
+       "sub": "ARMY @ TLSA",
+       "price": -107,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS 78",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG AGAINST $51K v $44K",
+         "c": "red"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "More game-line signals",
+     "value": "• Novig only (single-order triggers, no Pinnacle/Vegas on that side): Rays +1.5 (take -135) $89K v $46K, Rays ML (take +167) $197K order, Heat ML (take +113), Blackhawks +1.5 (take -167), Army +1.5 (take -111), Tulsa ML (take -102), Pistons @ Heat Over 235.5 (take -100)\n• Vegas under 70 (logged only): Pistons ML 63, Pistons @ Heat Under 235.5 36, Army @ Tulsa Over 53 51; Pressure Moves: Brewers -1.5 56, Canadiens @ Blackhawks Over 6.5 43",
+     "inline": false
+    },
+    {
+     "name": "⚠️ Conflicts",
+     "value": "• Brewers ML (-191): Pinnacle STRONG on the Brewers, but a $197K Novig order sits on the Rays (Rays $306K v $214K near the top).\n• Canadiens -1.5 (+149): Pinnacle STRONG, Novig 1.49x on Blackhawks +1.5. The Canadiens ML has Novig support; the puck line does not.\n• Pistons ML (-125): Pinnacle STRONG, Novig heavier on the Heat ML. Pistons -1.5 has Novig support instead.\n• Tulsa -1.5 (-107): Vegas 78, Novig single $12.75K order on Army +1.5; Pinnacle no lean.",
+     "inline": false
+    },
+    {
+     "name": "Run notes",
+     "value": "• Window 6:45-7:45pm CT: NBA Pistons @ Heat, NHL Canadiens @ Blackhawks, MLB Rays @ Brewers (7:00pm), CFB Army @ Tulsa (7:30pm).\n• Most Novig STRONG tags tonight are single-order triggers with big orders on both sides (market-maker liquidity); ratios are all under 1.5x.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 6:07 · Vegas 6:09 · Novig 6:10pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}

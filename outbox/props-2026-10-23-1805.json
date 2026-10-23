@@ -1,0 +1,234 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Fri 6:05pm CT window** · NBA: Pistons @ Heat · NHL: Canadiens @ Blackhawks · MLB: Rays @ Brewers (all 7:00pm) · Checked: Pinnacle 6:07 · Novig 6:11-6:14pm CT (237 reads, 0 failed, cap not hit)",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Fri 6:05pm CT window - Pinnacle checked 6:07 - Novig 6:11-6:14",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees · Showing 9 of 23 logged (3-per-game cap)",
+   "sections": [
+    {
+     "heading": "NBA - DET @ MIA 7:00PM CT",
+     "picks": [
+      {
+       "bet": "D. Mitchell U9.5 pts",
+       "sub": "DET @ MIA",
+       "price": -129,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $2.1K v $6.0K",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 4 books",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "K. Thompson U10.5 pts",
+       "sub": "DET @ MIA",
+       "price": -124,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG No $5.9K v $552 default skew",
+         "c": "orange"
+        }
+       ]
+      },
+      {
+       "bet": "G. Antetokounmpo U45.5 pra",
+       "sub": "DET @ MIA",
+       "price": -108,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG No $9.9K v $586",
+         "c": "green"
+        },
+        {
+         "t": "$9.1K single order",
+         "c": "orange"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - MTL @ CHI 7:00PM CT",
+     "picks": [
+      {
+       "bet": "C. Caufield U0.5 ast",
+       "sub": "MTL @ CHI",
+       "price": -139,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $106 v $155",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 2 books",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "R. Kantserov U1.5 sog",
+       "sub": "MTL @ CHI",
+       "price": 109,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $133 v $380",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 2 books",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "J. Slafkovsky O0.5 pts",
+       "sub": "MTL @ CHI",
+       "price": -205,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG thin $398 v $312",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "MLB - TB @ MIL 7:00PM CT",
+     "picks": [
+      {
+       "bet": "C. Yelich O0.5 tb",
+       "sub": "TB @ MIL",
+       "price": -192,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG no 0.5 line",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 1 book",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "J. Bauers O0.5 tb",
+       "sub": "TB @ MIL",
+       "price": -146,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG no 0.5 line",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "B. Turang O0.5 tb",
+       "sub": "TB @ MIL",
+       "price": -193,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG no 0.5 line",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📌 More logged (not shown, card caps)",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "💰 Novig money",
+     "value": "• J. Aranda O0.5 H+R+RBI (take -153) - Yes $8.5K v $1.6K with a $7.3K single order (MLB, cut by 3-per-game cap)\n• C. Bedard O2.5 sog (take -153) - Yes $2.0K v $352\n• O. Kapanen O1.5 sog (take -150) - Yes $3.5K v $637 (possible bot-size order)\n• Default-skew No sides logged: Hardaway Jr. U8.5 pts, Jenkins U2.5 ast, Collins U1.5 ast, A. Thompson U20.5 pra, Chourio U1.5 hits, Hicks U0.5 hits, Hamilton U0.5 hits, Walls U1.5 tb, Bauers U0.5 rbi",
+     "inline": false
+    },
+    {
+     "name": "⚠️ Conflicts",
+     "value": "• J. Bauers O0.5 tb: Pinnacle STRONG Over, but Novig No $3.9K v $156 on his RBIs 0.5 (different stat, so not a strict conflict).\n• K. Thompson U10.5 pts: Novig No side 10.8x agrees, but the order fits tonight's repeated ~$5K No pattern, so it is not counted as Pinnacle + Novig agreement.",
+     "inline": false
+    },
+    {
+     "name": "Notes",
+     "value": "• No Pinnacle MAX props and no Pinnacle + Novig agreements in this window.\n• Novig has no 0.5 total-bases lines for Rays @ Brewers (consensus is 1.5), so the three TB overs have no Novig read.\n• CFB Army @ Tulsa (7:30pm): no Pinnacle Strong props and no Novig prop markets.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "**1) Stable leans plus Yelich, 3 games · ~+464**\n• D. Mitchell U9.5 pts (-129) - PIN STRONG stable\n• R. Kantserov U1.5 sog (+109) - PIN STRONG stable\n• C. Yelich O0.5 tb (-192) - PIN STRONG flipped\n\n**2) Caufield, Klay and Turang, 3 games · ~+372**\n• C. Caufield U0.5 ast (-139) - PIN STRONG stable\n• K. Thompson U10.5 pts (-124) - PIN STRONG flipped\n• B. Turang O0.5 tb (-193) - PIN STRONG flipped",
+   "footer": {
+    "text": "Leans, not guarantees · props record since Oct 21: 57-54, 51% · independent plays (111 graded, 144 raw rows)"
+   }
+  }
+ ]
+}
