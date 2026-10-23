@@ -1,0 +1,66 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Thu 7:05pm CT window** · NHL CAR @ EDM 8:00pm, MIN @ CGY 8:00pm · NBA DEN @ OKC 8:30pm",
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Top plays",
+   "subtitle": "Thu 7:05pm CT window - Pinnacle checked 7:08 - Vegas 7:09 - Novig 7:10",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NHL - 8:00PM CT",
+     "picks": [
+      {
+       "bet": "Hurricanes ML",
+       "sub": "CAR @ EDM",
+       "price": -133,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $37K v $34K · $11K single",
+         "c": "green"
+        },
+        {
+         "t": "singles both sides",
+         "c": "orange"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Novig only",
+     "value": "• Thunder ML (-327) - $309K v $58K near top (5.4x), $200K single order\n• Wild ML (-212) - $59K v $25K (2.4x); Vegas Pressure Move 59, Pinnacle Slight",
+     "inline": false
+    },
+    {
+     "name": "Vegas under 70 (not counted)",
+     "value": "Pressure Move 62 Over 6.5 CAR @ EDM (Pinnacle Lean) · Pressure Move 59 Wild ML · Vegas Backed 33 Thunder -8 · Pressure Move 39 Over 6 MIN @ CGY · Pressure Move 35 Thunder ML",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 7:08 · Vegas 7:09 · Novig 7:10pm CT · leans, not guarantees · no Pinnacle STRONG/MAX or Vegas 70+ on MIN @ CGY or DEN @ OKC game lines"
+   }
+  }
+ ]
+}

@@ -1,0 +1,173 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Thu 7:05pm CT window** · NHL CAR @ EDM 8:00pm, MIN @ CGY 8:00pm · NBA DEN @ OKC 8:30pm · Pinnacle 7:08pm, Novig 7:11-7:13pm CT",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Thu 7:05pm CT window - Pinnacle checked 7:08 - Novig 7:11-7:13",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line (Novig take when no Pinnacle line)",
+   "footer": "Leans, not guarantees · Showing 9 of 22 logged · props record since Oct 21: 39-25, 61% · independent plays",
+   "sections": [
+    {
+     "heading": "NBA - DEN @ OKC 8:30PM CT",
+     "picks": [
+      {
+       "bet": "N. Jokic U47.5 PRA",
+       "sub": "DEN @ OKC",
+       "price": -118,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN MAX stable", "c": "green"},
+        {"t": "+EV 5 books", "c": "green"},
+        {"t": "NOVIG $0.6K v $2.9K No", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "A. Gordon O14.5 pts",
+       "sub": "DEN @ OKC",
+       "price": -119,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "+EV 2 books", "c": "green"},
+        {"t": "NOVIG $1.2K v $5.0K No (bot)", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "A. Mitchell U3.5 ast",
+       "sub": "DEN @ OKC",
+       "price": -149,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "+EV 7 books", "c": "green"},
+        {"t": "NOVIG No $4.5K (bot)", "c": "grey"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - CAR @ EDM 8:00PM CT",
+     "picks": [
+      {
+       "bet": "L. Stankoven O1.5 SOG",
+       "sub": "CAR @ EDM",
+       "price": -189,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN MAX stable", "c": "green"},
+        {"t": "NOVIG $528 v $244", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "V. Podkolzin U1.5 SOG",
+       "sub": "CAR @ EDM",
+       "price": 128,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "+EV 3 books", "c": "green"},
+        {"t": "NOVIG thin", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "C. McDavid U0.5 ast",
+       "sub": "CAR @ EDM",
+       "price": 152,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG", "c": "green"},
+        {"t": "flipped", "c": "orange"},
+        {"t": "NOVIG thin", "c": "grey"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - MIN @ CGY 8:00PM CT",
+     "picks": [
+      {
+       "bet": "J. Wallstedt O23.5 saves",
+       "sub": "MIN @ CGY",
+       "price": -113,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN MAX stable", "c": "green"},
+        {"t": "+EV 4 books", "c": "green"},
+        {"t": "NOVIG $1.1K v $0.8K", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "D. Cooley O26.5 saves",
+       "sub": "MIN @ CGY",
+       "price": -123,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN MAX", "c": "green"},
+        {"t": "flipped", "c": "orange"},
+        {"t": "NOVIG $481 v $4", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "R. Strome U1.5 SOG",
+       "sub": "MIN @ CGY",
+       "price": -149,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG $500 v $123", "c": "grey"}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📝 Run notes",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Also logged (not shown, 3-per-game cap)",
+     "value": "DEN @ OKC: Hartenstein O8.5 pts, J. Williams O4.5 ast (STRONG stable); Murray U6.5 ast, Braun O10.5 pts, McCain O10.5 pts (STRONG flipped); DeRozan O2.5 ast (Novig Yes $1.6K v $0.1K)\nNHL: Aho U0.5 ast, Parekh U1.5 SOG, Nemec U1.5 SOG (STRONG flipped)",
+     "inline": false
+    },
+    {
+     "name": "Novig note",
+     "value": "24 DEN @ OKC props show near-identical $3K-$5K orders on the No side - treated as the bot pattern, not signals (incl. Hartenstein O8.5, where it would read as a conflict). No Novig prop signal agreed with a shown Pinnacle play.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Parlay 1 - about +432",
+     "value": "• N. Jokic U47.5 PRA (-118) - PIN MAX stable\n• L. Stankoven O1.5 SOG (-189) - PIN MAX stable\n• J. Wallstedt O23.5 saves (-113) - PIN MAX stable",
+     "inline": false
+    },
+    {
+     "name": "Parlay 2 - about +601",
+     "value": "• A. Gordon O14.5 pts (-119) - PIN STRONG stable\n• R. Strome U1.5 SOG (-149) - PIN STRONG stable\n• V. Podkolzin U1.5 SOG (+128) - PIN STRONG stable",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "1u flat · legs from shown plays only · Novig capped at 300 reads (198 lower-priority lines unread)"
+   }
+  }
+ ]
+}
