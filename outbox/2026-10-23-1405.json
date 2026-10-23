@@ -1,0 +1,163 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Fri 2:05pm CT window** · NBA Bulls @ Bucks 3:00pm · Checked: Pinnacle 2:08 · Vegas 2:08 (no CHI @ MIL rows) · Novig 2:10pm CT",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "3:00pm CT",
+   "matchup": "Bulls @ Bucks",
+   "bet": "Over 239.5",
+   "price": "-115",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 238.5 to 240.5 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $35K vs Under $30K near the top (line 240.5)",
+    "line2": "Slightly heavier on the Over, not enough for a lean."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 2:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "3:00pm CT",
+   "matchup": "Bulls @ Bucks",
+   "bet": "Bucks ML",
+   "price": "-121",
+   "pinnacle": null,
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Bucks $84K vs Bulls $67K near the top",
+    "line2": "Single $11.4K order backing the Bucks, $267K traded; ratio only 1.25x."
+   },
+   "record_label": "NOVIG STRONG (SINGLE ORDER) RECORD",
+   "record": "9-8 · -1.39u · -6.5% ROI",
+   "checked": "Checked 2:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "3:00pm CT",
+   "matchup": "Bulls @ Bucks",
+   "bet": "Bulls +1.5",
+   "price": "-98",
+   "pinnacle": null,
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Bulls $44K vs Bucks $37K near the top",
+    "line2": "Single $12K order on the Bulls; the Bucks side also has a $12K order lower in the book."
+   },
+   "record_label": "NOVIG STRONG (SINGLE ORDER) RECORD",
+   "record": "9-8 · -1.39u · -6.5% ROI",
+   "checked": "Checked 2:08pm CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Window summary",
+   "subtitle": "Fri 2:05pm CT window - Pinnacle checked 2:08 - Vegas 2:08 - Novig 2:10",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NBA - 3:00PM CT",
+     "picks": [
+      {
+       "bet": "Over 239.5",
+       "sub": "CHI @ MIL",
+       "price": -115,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $35K v $30K neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Bucks ML",
+       "sub": "CHI @ MIL",
+       "price": -121,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN Slight",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $84K v $67K · $11K single",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Bulls +1.5",
+       "sub": "CHI @ MIL",
+       "price": -98,
+       "book": "Novig",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN Slight other side",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $44K v $37K · $12K single",
+         "c": "green"
+        },
+        {
+         "t": "singles both sides",
+         "c": "orange"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Run notes",
+     "value": "• Only game in the 2:45-3:45pm CT window: Bulls @ Bucks (3:00pm). Other sports start 6:00pm CT or later.\n• Vegas signal list has no Bulls @ Bucks rows (Vegas 70+: none).\n• Bucks ML and Bulls +1.5 are Novig single-order triggers only (ratio 1.2x); both win if the Bucks win by exactly 1.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 2:08 · Vegas 2:08 · Novig 2:10pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}

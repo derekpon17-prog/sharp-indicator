@@ -1,0 +1,96 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Fri 2:05pm CT window** · NBA Bulls @ Bucks 3:00pm · Checked: Pinnacle 2:08 · Novig 2:10-2:14pm CT (261 reads, 2 failed)",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Fri 2:05pm CT window - Pinnacle checked 2:08 - Novig 2:10-2:14",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees · Showing 3 of 9 logged",
+   "sections": [
+    {
+     "heading": "NBA - CHI @ MIL 3:00PM CT",
+     "picks": [
+      {
+       "bet": "M. Turner O11.5 pts",
+       "sub": "CHI @ MIL",
+       "price": -114,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $722 v $3.0K No",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "C. Wilson O6.5 reb",
+       "sub": "CHI @ MIL",
+       "price": -111,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "+EV at 5 books",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $2.0K v $2.2K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "N. Powell O2.5 reb",
+       "sub": "CHI @ MIL",
+       "price": -146,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG $938 v $1.5K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "🏀 NBA - more logged (not shown, 3-per-game cap)",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "Logged",
+     "value": "• K. Kuzma O10.5 pts (-128) - Pinnacle STRONG flipped, Novig neutral\n• K. Ware O10.5 pts (Novig take -130) - Novig money $3.3K v $1.0K on a rung line\n• C. Wilson O17.5 pts (-128) STRONG flipped and O2.5 ast (Novig $1.1K v $168) - same player as the shown Wilson rebounds play\n• T. Herro U5.5 ast - Novig No $9.4K v $1.1K (default skew, rung line)",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "None this window. Only one game is in the window, and parlays allow at most 2 legs from one game.",
+   "footer": {
+    "text": "Leans, not guarantees · props record since Oct 21: 57-54, 51% · independent plays (111 graded, 144 raw rows)"
+   }
+  }
+ ]
+}
