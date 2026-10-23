@@ -1,0 +1,149 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Daily record Fri Oct 23** · graded Thu Oct 22 (1 NFL, 1 NBA, 6 NHL games with logged rows) · ESPN finals checked 9:15am CT",
+ "embeds": [
+  {
+   "title": "📊 Sharp Signals - Daily record Oct 23",
+   "color": 15844367,
+   "description": "Game lines, 1u flat. Small sample (day 2) - no bucket has 50+ graded rows yet. Last 7 days = season to date (tracking started Oct 21).\nYesterday all logged rows 15-9 (62%) · +2.22u. Pinnacle STRONG 1-1 (50%) · -0.33u, Vegas 70+ 1-0 (100%) · +1.00u, Novig STRONG 10-7 (59%) · -0.50u.\nSeason: Vegas Backed under 70 is still the best slice (9-4-1 (69%) · +4.62u); Novig STRONG 16-15 (52%) · -4.22u. NHL game lines 9-13 (41%) · -8.95u vs NBA 15-8-1 (65%) · +6.04u.\nGame lines are not deduped (ML and spread on one side move together).",
+   "footer": {
+    "text": "Leans, not guarantees · records since Oct 21"
+   }
+  },
+  {
+   "title": "🧮 Records by bucket (yesterday / season)",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "📌 Pinnacle STRONG/MAX",
+     "value": "Yesterday 1-1 (50%) · -0.33u\nSeason 5-5 (50%) · -1.58u\nMax-only: none yet\nSeason Stable 2-2 (50%) · -1.31u · Flipped 3-3 (50%) · -0.27u",
+     "inline": false
+    },
+    {
+     "name": "🎰 Vegas 70+",
+     "value": "Yesterday 1-0 (100%) · +1.00u\nSeason 2-3 (40%) · -1.15u",
+     "inline": true
+    },
+    {
+     "name": "🎰 Vegas Backed - all strengths",
+     "value": "Season all 11-7-1 (61%) · +3.47u\n70+ 2-3 (40%) · -1.15u · under 70 9-4-1 (69%) · +4.62u\nYesterday all 4-1 (80%) · +2.85u\nPressure Move (separate) yday 5-3 (62%) · -0.01u · season 7-5 (58%) · -1.11u",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig STRONG",
+     "value": "Yesterday 10-7 (59%) · -0.50u\nSeason 16-15 (52%) · -4.22u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig STRONG split",
+     "value": "Ratio yday 4-2 (67%) · +0.61u · season 7-7 (50%) · -2.83u\nSingle order yday 6-5 (55%) · -1.11u · season 9-8 (53%) · -1.39u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig LEAN",
+     "value": "Yesterday 0-1 (0%) · -1.13u\nSeason 1-2-1 (33%) · -1.25u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Aligned (Pin + Vegas 70+)",
+     "value": "Yesterday none · Season 1-2 (33%) · -1.15u",
+     "inline": true
+    },
+    {
+     "name": "✅ Pin + Novig",
+     "value": "Yesterday 1-1 (50%) · -0.33u\nSeason 2-3 (40%) · -2.43u",
+     "inline": true
+    },
+    {
+     "name": "✅ Vegas + Novig",
+     "value": "Yesterday none · Season 0-1 (0%) · -1.00u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Triple",
+     "value": "no rows yet",
+     "inline": true
+    },
+    {
+     "name": "⚠️ Novig against (fade check)",
+     "value": "no rows yet",
+     "inline": true
+    },
+    {
+     "name": "🔁 Flipped vs stable (Pinnacle STRONG)",
+     "value": "Stable 2-2 (50%) · -1.31u · Flipped 3-3 (50%) · -0.27u (tier x status rows start at 8+ graded)",
+     "inline": false
+    },
+    {
+     "name": "By sport (Pin STRONG or Vegas 70+, season)",
+     "value": "NBA 3-3 (50%) · -0.20u · NHL 1-3 (25%) · -3.38u · NFL 1-0 (100%) · +1.00u · CFB 1-0 (100%) · +1.00u\nAll logged rows: NBA 15-8-1 (65%) · +6.04u · NHL 9-13 (41%) · -8.95u · NFL 3-0 (100%) · +3.00u · CFB 2-1 (67%) · +1.00u",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "📝 Yesterday's graded plays (Pin STRONG / Vegas 70+)",
+   "color": 3447003,
+   "description": "✅ NFL NE@CHI Over 50.5 (-114) - PIN_STRONG/VEGAS_ALL/NOVIG_STRONG/PIN_NOVIG [SINGLE] - NE 24 - CHI 30 - +1.00u\n✅ NHL WPG@DAL Under 5.5 (-111) - VEGAS_70/VEGAS_ALL - WPG 2 - DAL 3 - +1.00u\n❌ NHL CAR@EDM CAR ML (-133) - PIN_STRONG/NOVIG_STRONG/PIN_NOVIG [SINGLE] - CAR 5 - EDM 6 - -1.33u"
+  },
+  {
+   "title": "📝 Other logged rows (Vegas under 70, Pressure Move, Novig-only)",
+   "color": 9807270,
+   "description": "✅ NHL VGK@STL STL ML (+106) - VEGAS_ALL - VGK 2 - STL 6 - +1.06u\n✅ NHL VGK@STL Over 6 (-114) - Pressure Move - VGK 2 - STL 6 - +1.00u\n✅ NFL NE@CHI CHI ML (-158) - NOVIG_STRONG [RATIO] - NE 24 - CHI 30 - +1.00u\n✅ NFL NE@CHI CHI -2.5 (-120) - NOVIG_STRONG [SINGLE] - NE 24 - CHI 30 - +1.00u\n✅ NHL VGK@STL STL +1.5 (-213) - NOVIG_STRONG [RATIO] - VGK 2 - STL 6 - +1.00u\n❌ NHL VGK@STL VGK ML (-127) - NOVIG_STRONG [SINGLE] - VGK 2 - STL 6 - -1.27u\n❌ NHL VGK@STL Under 6.5 (-127) - NOVIG_STRONG [RATIO] - VGK 2 - STL 6 - -1.27u\n✅ NHL WPG@DAL WPG +1.5 (-150) - NOVIG_STRONG [SINGLE] - WPG 2 - DAL 3 - +1.00u\n✅ NHL WPG@DAL DAL ML (-200) - NOVIG_STRONG [RATIO] - WPG 2 - DAL 3 - +1.00u\n✅ NHL CAR@EDM Over 6.5 (-118) - Pressure Move - CAR 5 - EDM 6 - +1.00u\n❌ NHL MIN@CGY MIN ML (-212) - NOVIG_STRONG [RATIO] - MIN 1 - CGY 2 - -2.12u\n❌ NHL MIN@CGY MIN -1.5 (+121) - NOVIG_STRONG [SINGLE] - MIN 1 - CGY 2 - -1.00u\n❌ NHL MIN@CGY Over 6 (-113) - NOVIG_LEAN - MIN 1 - CGY 2 - -1.13u\n✅ NBA DEN@OKC OKC ML (-327) - NOVIG_STRONG [RATIO] - DEN 84 - OKC 96 - +1.00u\n✅ NBA DEN@OKC OKC -8.0 (-109) - VEGAS_ALL/NOVIG_STRONG [SINGLE] - DEN 84 - OKC 96 - +1.00u\n✅ NBA DEN@OKC Under 236.5 (-102) - NOVIG_STRONG [SINGLE] - DEN 84 - OKC 96 - +1.00u\n✅ NHL DET@VAN DET ML (-167) - NOVIG_STRONG [SINGLE] - DET 5 - VAN 2 - +1.00u\n❌ NHL DET@VAN VAN +1.5 (-175) - NOVIG_STRONG [SINGLE] - DET 5 - VAN 2 - -1.75u\n❌ NHL DET@VAN Under 6.5 (-121) - VEGAS_ALL - DET 5 - VAN 2 - -1.21u\n❌ NHL UTA@SEA UTA ML (-176) - NOVIG_STRONG [SINGLE] - UTA 3 - SEA 5 - -1.76u\n✅ NHL UTA@SEA Over 6.5 (-108) - Pressure Move - UTA 3 - SEA 5 - +1.00u"
+  },
+  {
+   "title": "🧾 Your game-line bets",
+   "color": 3066993,
+   "description": "No new game-line bets logged for Oct 22.\nRunning: straights 1-0 +1.00u · by bucket PIN_STRONG/PIN_NOVIG 1-0"
+  },
+  {
+   "title": "📅 Today's slate (Fri Oct 23, CT)",
+   "color": 15105570,
+   "description": "🏈 NFL 0\n🏈 CFB 5 - DUKE @ UVA 6:00pm, MASS @ CONN 6:00pm, ARMY @ TLSA 7:30pm, AFA @ WYO 8:00pm, NCSU @ STAN 9:30pm\n🏀 NBA 12 - CHI @ MIL 3:00pm, then 5 at 6:00pm (NY@BOS, ATL@CHA, DAL@IND, MIN@ORL, TOR@WSH), DET @ MIA 7:00pm, HOU @ SA and NO @ UTAH 8:30pm, MEM @ GS, LAC @ LAL, POR @ SAC 9:00pm\n🏒 NHL 2 - MTL @ CHI 7:00pm, TB @ COL 8:00pm\n⚾ MLB 1 - TB @ MIL 7:00pm\n🏀 NCAAB 0 (season starts in November) · 🏀 WNBA 0\nNo games in the 9:05am window. First window with games: the 2:05pm run (CHI @ MIL 3:00pm). Betting Insider sports unchanged (MLB, NFL, CFB, NHL, NBA)."
+  }
+ ],
+ "summaries": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Game-line record",
+   "subtitle": "Since Oct 21 · W-L · units · 1u flat",
+   "sections": [
+    {
+     "heading": "BY SIGNAL",
+     "rows": [
+      {"label": "Pinnacle STRONG/MAX", "w": 5, "l": 5, "p": 0, "units": -1.58},
+      {"label": "Pin stable", "w": 2, "l": 2, "p": 0, "units": -1.31},
+      {"label": "Pin flipped", "w": 3, "l": 3, "p": 0, "units": -0.27},
+      {"label": "Vegas 70+", "w": 2, "l": 3, "p": 0, "units": -1.15},
+      {"label": "Vegas under 70", "w": 9, "l": 4, "p": 1, "units": 4.62},
+      {"label": "Vegas Backed all", "w": 11, "l": 7, "p": 1, "units": 3.47},
+      {"label": "Pressure Move", "w": 7, "l": 5, "p": 0, "units": -1.11},
+      {"label": "Novig STRONG", "w": 16, "l": 15, "p": 0, "units": -4.22},
+      {"label": "Novig STRONG ratio", "w": 7, "l": 7, "p": 0, "units": -2.83},
+      {"label": "Novig STRONG single", "w": 9, "l": 8, "p": 0, "units": -1.39},
+      {"label": "Novig LEAN", "w": 1, "l": 2, "p": 1, "units": -1.25}
+     ]
+    },
+    {
+     "heading": "ALIGNMENT",
+     "rows": [
+      {"label": "Pin + Vegas 70+", "w": 1, "l": 2, "p": 0, "units": -1.15},
+      {"label": "Pin + Novig", "w": 2, "l": 3, "p": 0, "units": -2.43},
+      {"label": "Vegas + Novig", "w": 0, "l": 1, "p": 0, "units": -1.0},
+      {"label": "Triple", "w": 0, "l": 0, "p": 0, "units": 0.0}
+     ]
+    },
+    {
+     "heading": "BY SPORT",
+     "rows": [
+      {"label": "NBA (all rows)", "w": 15, "l": 8, "p": 1, "units": 6.04},
+      {"label": "NHL (all rows)", "w": 9, "l": 13, "p": 0, "units": -8.95},
+      {"label": "NFL (all rows)", "w": 3, "l": 0, "p": 0, "units": 3.0},
+      {"label": "CFB (all rows)", "w": 2, "l": 1, "p": 0, "units": 1.0}
+     ]
+    }
+   ],
+   "footer": "Game lines not deduped · small sample until 50+ graded · leans, not guarantees"
+  }
+ ]
+}
