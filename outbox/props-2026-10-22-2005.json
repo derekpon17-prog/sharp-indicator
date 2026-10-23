@@ -1,0 +1,93 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Thu 8:05pm CT window** · NHL DET @ VAN 9:00pm, UTA @ SEA (catch-up, missed by the 7:05 run) · Pinnacle 8:09pm, Novig 8:12-8:20pm CT",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Thu 8:05pm CT window - Pinnacle checked 8:09 - Novig 8:12-8:20",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line (Novig take when no Pinnacle line)",
+   "footer": "Leans, not guarantees · Showing 4 of 4 logged · props record since Oct 21: 39-25, 61% · independent plays",
+   "sections": [
+    {
+     "heading": "NHL - UTA @ SEA (ESPN 8:40PM / books 9:00PM CT)",
+     "picks": [
+      {
+       "bet": "V. Trocheck O0.5 pts",
+       "sub": "UTA @ SEA",
+       "price": -100,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "+EV 3 books", "c": "green"},
+        {"t": "NOVIG $35 v $915 No (thin)", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "L. Cooley U2.5 SOG",
+       "sub": "UTA @ SEA",
+       "price": -189,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "NOVIG No $902 v $0 (thin)", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "M. Weegar U0.5 ast",
+       "sub": "UTA @ SEA",
+       "price": -248,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "+EV 1 book", "c": "green"},
+        {"t": "NOVIG No $298 v $22 (thin)", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "M. Beniers U0.5 goals",
+       "sub": "UTA @ SEA",
+       "price": -376,
+       "book": "Novig",
+       "sources": 1,
+       "chips": [
+        {"t": "NOVIG No $3.4K v $29", "c": "green"},
+        {"t": "default skew", "c": "orange"},
+        {"t": "PIN no lean", "c": "grey"}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📝 Run notes",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "DET @ VAN 9:00pm",
+     "value": "No Pinnacle STRONG/MAX prop leans (Lean only: Larkin, Arvidsson, Seider, Boeser O0.5 pts; Raymond O0.5 ast; Hronek U1.5 SOG) and no Novig prop book at the signal cutoff.",
+     "inline": false
+    },
+    {
+     "name": "UTA @ SEA catch-up",
+     "value": "ESPN lists 8:40pm CT (Novig and Betting Insider say 9:00pm), so it fell between the 7:05 and 8:05 windows. Covered here; check it has not started before betting.",
+     "inline": false
+    },
+    {
+     "name": "🧩 Suggested parlays",
+     "value": "None this window - every shown play is in one game (max 2 legs per game).",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Novig: 211 consensus prop books read (cap 300 not hit), 0 failed reads · leans, not guarantees"
+   }
+  }
+ ]
+}
