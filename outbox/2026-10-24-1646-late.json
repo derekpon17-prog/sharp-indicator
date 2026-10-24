@@ -1,0 +1,122 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 4:46pm CT** · TOR@EDM Maple Leafs ML, USC@WIS Over 50.5, GS@PHX Suns -9.5 · faded: Boise St ML, Colorado St ML, SYR@UNC Over 50.5, Bulls -1.5 · Pinnacle 4:44pm, Vegas 4:45pm CT, Novig from 3:16pm slate read",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "NHL",
+   "date": "Sat Oct 24",
+   "start": "6:00pm CT",
+   "matchup": "Maple Leafs @ Oilers",
+   "checked": "Checked Pinnacle 4:44pm CT",
+   "bet": "Maple Leafs ML",
+   "price": "+130",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from TOR +154 to +130 since open",
+    "line2": "Status: stable - new Strong since the 3:46 read, +EV at 2 books"
+   },
+   "vegas": {
+    "strength": 95,
+    "line1": "Vegas Backed: line moved to Toronto with a minority of bets",
+    "bets": 11,
+    "money": 16
+   },
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "EDM $42.0K vs TOR $20.6K near the top (3:16pm read)",
+    "line2": "2.0x on Edmonton with a $9.8K Oilers order at 60c."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21 (4-5, -1.49u)"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "6:30pm CT",
+   "matchup": "USC @ Wisconsin",
+   "checked": "Checked Pinnacle 4:44pm CT",
+   "bet": "Over 50.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 49.5 to 50.5 since open",
+    "line2": "Status: stable - new Strong since the 3:46 read"
+   },
+   "vegas": {
+    "strength": 27,
+    "line1": "Vegas Backed 27: weak, bets split 49%",
+    "bets": 49,
+    "money": 49
+   },
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Under $28.9K vs Over $25.2K near the top (3:16pm read)",
+    "line2": "$17.5K Under order at 49c."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "18-14-0 - +2.69u - 8% ROI"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sat Oct 24",
+   "start": "9:00pm CT",
+   "matchup": "Warriors @ Suns",
+   "checked": "Checked Pinnacle 4:44pm CT",
+   "bet": "Suns -9.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from PHX -10 to -9.5 since open",
+    "line2": "Status: flipped - new Strong since the 3:46 read"
+   },
+   "vegas": {
+    "strength": 73,
+    "line1": "Vegas Backed: line moved to Phoenix (-6.5 to -9.5) with a minority of bets",
+    "bets": 33,
+    "money": 40
+   },
+   "novig": {
+    "tier": "LEAN",
+    "line1": "PHX $19.5K vs GS $12.8K near the top (3:16pm read)",
+    "line2": "1.5x on Phoenix, no order over $3.0K."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21 (4-5, -1.49u)"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG plays that dropped below Strong at the 4:44pm CT read:",
+   "fields": [
+    {
+     "name": "CFB BOIS @ WSU - Boise State ML (-679) - 5:00pm CT",
+     "value": "Carded STRONG stable at 3:08pm, now LEAN (-675). Novig was 4.5x on Boise at 3:16.",
+     "inline": false
+    },
+    {
+     "name": "CFB SDSU @ CSU - Colorado State ML (-106) - 5:30pm CT",
+     "value": "Carded STRONG stable at 3:08pm, now LEAN stable (-105). Under 59 stays Strong.",
+     "inline": false
+    },
+    {
+     "name": "CFB SYR @ UNC - Over 50.5 (-110) - 6:30pm CT",
+     "value": "Carded STRONG stable at 3:08pm, now SLIGHT (mixed) on Over 49.5.",
+     "inline": false
+    },
+    {
+     "name": "NBA WSH @ CHI - Bulls -1.5 (-111) - 7:00pm CT",
+     "value": "Carded STRONG stable at 3:08pm, now LEAN stable. Bulls ML already faded at 3:46.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 4:44 · Vegas 4:45pm CT · Novig panels from the 3:16pm slate read (live read blocked) · leans, not guarantees"
+   }
+  }
+ ]
+}
