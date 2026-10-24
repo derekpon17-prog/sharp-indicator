@@ -1,0 +1,140 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Daily record Sat Oct 24** · graded Fri Oct 23 from ESPN box scores (checked 9:10am CT) · 78 queued rows merged (53 from manual_prop_rows, 25 from the 7:05pm run)",
+ "embeds": [
+  {
+   "title": "📊 Sharp Props - Daily record Oct 24",
+   "color": 15844367,
+   "description": "Independent plays (one per player per game), 1u flat. Yesterday 34-35 (49%) · -10.34u on 69 plays (raw 40-47 · -21.88u, 87 rows). NBA held up (27-22 (55%) · +1.45u); NHL sank the night again (2-10 (17%) · -11.28u), with SOG props 0-5.\nSeason 91-89 (51%) · -20.55u on 180 plays (raw 231 rows). Pinnacle STRONG/MAX now 71-68 (51%) · -10.56u; Max-only 9-4 (69%) · +4.08u; Pinnacle unders 52-39 (57%) · +4.75u vs overs 19-29 (40%) · -15.31u.\nNHL props season 11-26 (30%) · -24.48u vs NBA 71-53 (57%) · +8.67u - the split is getting hard to ignore. Small sample - only Pinnacle STRONG/MAX has 50+ graded plays.",
+   "footer": {
+    "text": "Leans, not guarantees · props record since Oct 21: 91-89 (51%) · -20.55u · independent plays"
+   }
+  },
+  {
+   "title": "🧮 Records by bucket (yesterday / season, independent)",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "📌 Pinnacle STRONG/MAX",
+     "value": "Yesterday 22-27 (45%) · -11.43u\nSeason 71-68 (51%) · -10.56u\nMax only: yday 1-1 (50%) · -0.11u · season 9-4 (69%) · +4.08u",
+     "inline": false
+    },
+    {
+     "name": "🔁 Flipped vs stable (Pinnacle)",
+     "value": "Stable: yday 9-15 (38%) · -8.74u · season 34-36 (49%) · -8.80u\nFlipped: yday 13-12 (52%) · -2.69u · season 37-32 (54%) · -1.76u\nSeason by tier: Strong stable 32-33 (49%) · -6.99u · Strong flipped 30-31 (49%) · -7.65u · Max flipped 7-1 (88%) · +5.89u (Max stable 2-3 (40%) · -1.81u - under 8 graded)",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig money (Yes/Over)",
+     "value": "Yesterday 5-4 (56%) · -0.29u · Season 14-17 (45%) · -7.24u (conflict rows counted on the Novig side)",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig No (default skew)",
+     "value": "Yesterday 7-4 (64%) · +1.38u · Season 8-8 (50%) · -5.19u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Pinnacle + Novig agree",
+     "value": "Yesterday none · Season 2-2 (50%) · -0.21u",
+     "inline": true
+    },
+    {
+     "name": "⚠️ Conflicts (fade check)",
+     "value": "Pinnacle side season 3-0 (100%) · +3.00u. Yesterday's only conflict (A. Thompson PRA U 27.5, 34) was a secondary row: Novig's Over side won.",
+     "inline": false
+    },
+    {
+     "name": "By sport (season)",
+     "value": "NBA 71-53 (57%) · +8.67u · NHL 11-26 (30%) · -24.48u · NFL 2-5 (29%) · -3.90u · MLB 5-3 (62%) · -0.51u · WNBA 2-2 (50%) · -0.33u",
+     "inline": false
+    },
+    {
+     "name": "By stat (season)",
+     "value": "3PM 10-6 (62%) · +1.74u\nAST 14-14 (50%) · -2.64u\nG 1-0 (100%) · +1.00u\nGOALS 0-1 (0%) · -3.76u\nH 1-2 (33%) · -2.58u\nHRR 1-0 (100%) · +1.00u\nPASS_YDS 0-1 (0%) · -1.02u\nPRA 8-8 (50%) · -0.98u\nPTS 33-34 (49%) · -7.17u\nREB 12-7 (63%) · +3.37u\nREC 1-2 (33%) · -1.77u\nRUSH_ATT 1-1 (50%) · -0.11u\nRUSH_YDS 0-1 (0%) · -1.00u\nSAVES 1-2 (33%) · -1.33u\nSOG 5-9 (36%) · -6.37u\nTB 3-1 (75%) · +1.07u",
+     "inline": true
+    },
+    {
+     "name": "Over vs Under (season)",
+     "value": "Over 31-43 (42%) · -21.17u\nUnder 60-46 (57%) · +0.62u\nPinnacle-only: Over 19-29 (40%) · -15.31u · Under 52-39 (57%) · +4.75u",
+     "inline": true
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "Yesterday 0-6 · -6.00u (season 0-12 · -12.00u). Every parlay had at least one losing leg:\n❌ 5:05pm CT (+753): J. Johnson U 6.5 AST (8) ❌ · P. George U 2.5 3PM (3) ❌ · C. Flagg O 6.5 REB (5) ❌\n❌ 5:05pm CT (+619): T. Haliburton U 32.5 PRA (31) ✅ · K. Towns U 3.5 AST (3) ✅ · W. Carter Jr. U 9.5 PTS (20) ❌\n❌ 6:05pm CT (+464): D. Mitchell U 9.5 PTS (18) ❌ · R. Kantserov U 1.5 SOG (4) ❌ · C. Yelich O 0.5 TB (1) ✅\n❌ 6:05pm CT (+372): C. Caufield U 0.5 AST (0) ✅ · K. Thompson U 10.5 PTS (6) ✅ · B. Turang O 0.5 TB (0) ❌\n❌ Fri 7:05pm CT (+510): Y. Missi U 7.5 PTS (6) ✅ · A. Sengun U 31.5 PRA (43) ❌ · C. Makar U 2.5 SOG (3) ❌\n❌ Fri 7:05pm CT (+492): K. George U 3.5 REB (1) ✅ · K. Durant U 32.5 PRA (33) ❌ · D. Toews U 1.5 SOG (2) ❌"
+  },
+  {
+   "title": "🧾 Your prop bets",
+   "color": 3066993,
+   "description": "No new prop bets logged for Oct 23.\nRunning: prop parlays 0-1 -1.00u · legs by bucket: PROP_ALIGNED 0-2, PROP_NOVIG_YES only 0-1"
+  },
+  {
+   "title": "📝 Yesterday's graded legs (1/2)",
+   "color": 9807270,
+   "description": "**CHI@MIL** 5-1 · +3.89u (independent)\n✅ M. Turner O 11.5 PTS (12) STRONG stable\n❌ C. Wilson O 6.5 REB (6) STRONG stable\n✅ C. Wilson O 17.5 PTS (21) STRONG flipped · dup\n❌ C. Wilson O 2.5 AST (1) NOVIG YES · dup\n✅ N. Powell O 2.5 REB (4) STRONG flipped\n✅ K. Kuzma O 10.5 PTS (14) STRONG flipped\n✅ K. Ware O 10.5 PTS (11) NOVIG YES\n❌ K. Ware O 18.5 PR (15) NOVIG YES · dup\n✅ T. Herro U 5.5 AST (4) NOVIG NO\n\n**NY@BOS** 3-3 · -0.44u (independent)\n✅ K. Towns U 3.5 AST (3) STRONG stable\n❌ P. George U 2.5 3PM (3) STRONG stable\n❌ O. Anunoby U 15.5 PTS (20) STRONG flipped\n✅ J. Hart U 11.5 PTS (10) STRONG flipped\n❌ J. Hart U 1.5 3PM (2) STRONG flipped · dup\n❌ M. Bridges O 11.5 PTS (0) STRONG stable\n✅ J. Brunson U 34.5 PRA (25) STRONG flipped\n\n**DAL@IND** 4-3 · +0.53u (independent)\n✅ A. Nembhard U 6.5 AST (5) STRONG stable\n❌ Z. Risacher U 8.5 PTS (11) STRONG flipped\n✅ K. Oubre Jr. U 9.5 PTS (3) STRONG flipped\n✅ T. Haliburton U 32.5 PRA (31) STRONG stable\n❌ N. Marshall U 13.5 PTS (15) STRONG flipped\n❌ A. Nembhard U 13.5 PTS (16) STRONG stable · dup\n✅ K. Irving U 4.5 AST (3) STRONG stable\n❌ C. Flagg O 6.5 REB (5) STRONG stable\n✅ K. Irving U 3.5 REB (1) NOVIG NO · dup\n\n**MIN@ORL** 3-3 · -0.77u (independent)\n✅ L. Ball U 7.5 AST (5) STRONG flipped\n❌ W. Carter Jr. U 9.5 PTS (20) STRONG stable\n❌ F. Wagner U 4.5 AST (5) STRONG flipped · dup\n❌ F. Wagner O 20.5 PTS (18) STRONG stable\n✅ A. Edwards U 3.5 3PM (2) STRONG flipped\n❌ J. McDaniels U 1.5 3PM (2) STRONG stable\n✅ J. Kuminga O 1.5 AST (5) NOVIG YES\n\n**ATL@CHA** 0-4 · -4.48u (independent)\n❌ J. Johnson U 6.5 AST (8) STRONG stable\n❌ J. Johnson O 20.5 PTS (19) STRONG stable · dup\n❌ M. Diabate O 9.5 PTS (5) STRONG flipped\n❌ N. Alexander-Walker O 18.5 PTS (14) STRONG flipped\n❌ G. Allen O 2.5 REB (2) NOVIG YES\n\n**TOR@WSH** 2-0 · +2.00u (independent)\n✅ A. Sarr U 6.5 REB (4) STRONG flipped\n✅ T. Young O 19.5 PTS (22) NOVIG YES"
+  },
+  {
+   "title": "📝 Yesterday's graded legs (2/2)",
+   "color": 9807270,
+   "description": "**DET@MIA** 4-3 · +0.67u (independent)\n✅ K. Thompson U 10.5 PTS (6) STRONG flipped\n❌ D. Mitchell U 9.5 PTS (18) STRONG stable\n❌ G. Antetokounmpo U 45.5 PRA (53) NOVIG NO\n✅ T. Hardaway Jr. U 8.5 PTS (8) NOVIG NO\n❌ T. Hardaway Jr. U 3.5 REB (4) NOVIG NO · dup\n✅ K. Thompson U 3.5 REB (2) NOVIG NO · dup\n❌ D. Jenkins U 2.5 AST (5) NOVIG NO\n✅ J. Collins U 1.5 AST (1) NOVIG NO\n✅ A. Thompson U 20.5 PRA (11) NOVIG NO\n\n**MTL@CHI** 1-4 · -5.08u (independent)\n❌ J. Slafkovsky O 0.5 PTS (0) STRONG flipped\n✅ C. Caufield U 0.5 AST (0) STRONG stable\n❌ R. Kantserov U 1.5 SOG (4) STRONG stable\n❌ C. Bedard O 2.5 SOG (1) NOVIG YES\n❌ O. Kapanen O 1.5 SOG (0) NOVIG YES\n\n**TB@MIL** 5-3 · -0.51u (independent)\n✅ C. Yelich O 0.5 TB (1) STRONG flipped\n✅ J. Bauers O 0.5 TB (1) STRONG flipped\n❌ B. Turang O 0.5 TB (0) STRONG flipped\n✅ J. Aranda O 0.5 HRR (4) NOVIG YES\n❌ J. Chourio U 1.5 H (2) NOVIG NO\n✅ L. Hicks U 0.5 H (0) NOVIG NO\n❌ D. Hamilton U 0.5 H (1) NOVIG NO\n✅ T. Walls U 1.5 TB (0) NOVIG NO\n✅ J. Bauers U 0.5 RBI (0) NOVIG NO · dup\n\n**TB@COL** 1-6 · -6.20u (independent)\n❌ M. Blackwood U 23.5 SAVES (31) STRONG flipped\n❌ C. Makar U 2.5 SOG (3) STRONG stable\n❌ A. Cirelli O 0.5 PTS (0) STRONG stable\n❌ N. MacKinnon U 1.5 PTS (4) STRONG flipped\n❌ D. Toews U 1.5 SOG (2) STRONG stable\n✅ N. MacKinnon O 3.5 SOG (4) NOVIG YES · dup\n❌ N. MacKinnon U 0.5 G (1) NOVIG NO · dup\n✅ N. Kucherov U 0.5 G (0) NOVIG NO\n❌ B. Nelson O 0.5 PTS (0) NOVIG YES\n\n**NO@UTAH** 3-1 · +1.94u (independent)\n✅ Y. Missi U 7.5 PTS (6) MAX flipped\n❌ D. Murray O 6.5 AST (6) STRONG flipped\n❌ L. Markkanen O 22.5 PTS (16) STRONG flipped · dup\n✅ K. George U 3.5 REB (1) STRONG stable\n❌ D. Murray O 17.5 PTS (16) STRONG flipped · dup\n✅ L. Markkanen O 2.5 3PM (4) STRONG stable\n✅ L. Markkanen U 31.5 PRA (25) NOVIG NO · dup\n\n**HOU@SA** 3-4 · -1.89u (independent)\n❌ A. Sengun U 31.5 PRA (43) MAX flipped\n❌ A. Sengun U 17.5 PTS (29) STRONG stable · dup\n❌ K. Durant U 32.5 PRA (33) STRONG stable\n❌ A. Thompson U 27.5 PRA (34) CONFLICT · dup\n❌ S. Castle U 5.5 REB (7) STRONG stable\n❌ D. Harper U 16.5 PTS (20) STRONG flipped\n✅ A. Thompson U 4.5 AST (4) STRONG flipped\n✅ D. Fox O 14.5 PTS (19) STRONG stable\n✅ V. Wembanyama O 1.5 3PM (2) NOVIG YES"
+  }
+ ],
+ "summaries": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Props record",
+   "subtitle": "Since Oct 21 · 180 independent plays (231 raw rows) · W-L · units · 1u flat",
+   "sections": [
+    {
+     "heading": "BY SIGNAL",
+     "rows": [
+      {"label": "Pinnacle STRONG/MAX", "w": 71, "l": 68, "p": 0, "units": -10.56},
+      {"label": "Max only", "w": 9, "l": 4, "p": 0, "units": 4.08},
+      {"label": "Stable", "w": 34, "l": 36, "p": 0, "units": -8.8},
+      {"label": "Flipped", "w": 37, "l": 32, "p": 0, "units": -1.76},
+      {"label": "Strong stable", "w": 32, "l": 33, "p": 0, "units": -6.99},
+      {"label": "Strong flipped", "w": 30, "l": 31, "p": 0, "units": -7.65},
+      {"label": "Max flipped", "w": 7, "l": 1, "p": 0, "units": 5.89},
+      {"label": "Novig money", "w": 14, "l": 17, "p": 0, "units": -7.24},
+      {"label": "Novig No", "w": 8, "l": 8, "p": 0, "units": -5.19},
+      {"label": "Pinnacle + Novig agree", "w": 2, "l": 2, "p": 0, "units": -0.21},
+      {"label": "Conflict - Pinnacle side", "w": 3, "l": 0, "p": 0, "units": 3.0}
+     ]
+    },
+    {
+     "heading": "OVER VS UNDER",
+     "rows": [
+      {"label": "Over", "w": 31, "l": 43, "p": 0, "units": -21.17},
+      {"label": "Under", "w": 60, "l": 46, "p": 0, "units": 0.62}
+     ]
+    },
+    {
+     "heading": "BY STAT",
+     "rows": [
+      {"label": "3PM", "w": 10, "l": 6, "p": 0, "units": 1.74},
+      {"label": "AST", "w": 14, "l": 14, "p": 0, "units": -2.64},
+      {"label": "PRA", "w": 8, "l": 8, "p": 0, "units": -0.98},
+      {"label": "PTS", "w": 33, "l": 34, "p": 0, "units": -7.17},
+      {"label": "REB", "w": 12, "l": 7, "p": 0, "units": 3.37},
+      {"label": "SOG", "w": 5, "l": 9, "p": 0, "units": -6.37},
+      {"label": "TB", "w": 3, "l": 1, "p": 0, "units": 1.07}
+     ]
+    },
+    {
+     "heading": "BY SPORT",
+     "rows": [
+      {"label": "NBA", "w": 71, "l": 53, "p": 0, "units": 8.67},
+      {"label": "NHL", "w": 11, "l": 26, "p": 0, "units": -24.48},
+      {"label": "NFL", "w": 2, "l": 5, "p": 0, "units": -3.9},
+      {"label": "MLB", "w": 5, "l": 3, "p": 0, "units": -0.51},
+      {"label": "WNBA", "w": 2, "l": 2, "p": 0, "units": -0.33}
+     ]
+    }
+   ],
+   "footer": "One play per player per game · small sample · leans, not guarantees"
+  }
+ ]
+}
