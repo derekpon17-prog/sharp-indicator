@@ -1,0 +1,112 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 3:49pm CT** · NDSU@UNM Under 39.5, MIN@SEA Wild ML, GS@PHX Over 221.5 · faded: TXST -14, Bulls ML · Pinnacle 3:46pm, Vegas 3:47pm, Novig 3:48pm CT",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "9:00pm CT",
+   "matchup": "North Dakota State @ New Mexico",
+   "checked": "Checked Pinnacle 3:46pm CT",
+   "bet": "Under 39.5",
+   "price": "-108",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 42.5 to 39.5 since open",
+    "line2": "Status: stable - new Strong since the 3:08 slate read"
+   },
+   "vegas": {
+    "strength": 88,
+    "line1": "Vegas Backed: line moved to the Under with a minority of bets",
+    "bets": 18,
+    "money": 36
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Under $27.0K vs Over $21.1K near the top",
+    "line2": "Balanced book, no order over $6.6K."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21 (4-5, -1.49u)"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NHL",
+   "date": "Sat Oct 24",
+   "start": "9:00pm CT",
+   "matchup": "Wild @ Kraken",
+   "checked": "Checked Pinnacle 3:46pm CT",
+   "bet": "Wild ML",
+   "price": "-174",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from MIN -151 to -171 since open",
+    "line2": "Status: stable - new Strong since the 3:08 slate read"
+   },
+   "vegas": {
+    "strength": 64,
+    "line1": "Pressure Move on Wild with 85% of bets (reported separately, does not count)",
+    "bets": 85,
+    "money": 89
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "MIN $49.0K vs SEA $21.4K near the top",
+    "line2": "2.3x with an $11.3K Wild order at 61c."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "5-6-0 - -2.74u - -25% ROI"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sat Oct 24",
+   "start": "9:00pm CT",
+   "matchup": "Warriors @ Suns",
+   "checked": "Checked Pinnacle 3:46pm CT",
+   "bet": "Over 221.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 219 to 222 since open",
+    "line2": "Status: flipped - new Strong since the 3:08 slate read"
+   },
+   "vegas": {
+    "strength": 93,
+    "line1": "AGAINST: Vegas Backed 93 is on Under 221.5 (Pinnacle column: against)",
+    "bets": 26,
+    "money": 22
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $17.9K vs Under $13.4K near the top",
+    "line2": "Slight Over tilt (1.3x), no order over $5.0K."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "18-14-0 - +2.69u - 8% ROI"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG plays that dropped below Strong at the 3:46pm CT read:",
+   "fields": [
+    {
+     "name": "CFB USU @ TXST - Texas State -14 (-110)",
+     "value": "Carded STRONG stable at 3:08pm, now LEAN stable. Novig still 2.1x on TXST; TXST ML stays Strong.",
+     "inline": false
+    },
+    {
+     "name": "NBA WSH @ CHI - Bulls ML (-124)",
+     "value": "Carded STRONG flipped at 3:08pm, now SLIGHT (mixed, flipped). Vegas pin column also Slight. Bulls -1.5 stays Strong.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 3:46 · Vegas 3:47 · Novig 3:48pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}
