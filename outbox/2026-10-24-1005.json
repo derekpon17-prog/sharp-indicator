@@ -1,0 +1,391 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sat 11:00am CT window (early run)** · CFB: PITT@MIA, CAL@SMU, RICE@FAU, TTU@CIN, WVU@TCU, IU@MICH, RUTG@NU, WMU@TOL, LSU@AUB · Pinnacle 9:54am, Vegas 9:56am, Novig 9:58am CT",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "11:00am CT",
+   "matchup": "West Virginia @ TCU",
+   "bet": "TCU -10.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from TCU -8 to -11 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 93,
+    "line1": "Vegas Backed: line moved from TCU -6.5 to -10.5 with a minority of bets",
+    "bets": 23,
+    "money": 26
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "TCU $72.9K vs WVU $52.1K near the top",
+    "line2": "One $12.9K TCU order at 49c; WVU also has a $12K order."
+   },
+   "record_label": "TRIPLE RECORD",
+   "record": "tracking started Oct 21 (0-1, -1.18u)",
+   "checked": "Checked Pinnacle 9:54am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "11:00am CT",
+   "matchup": "West Virginia @ TCU",
+   "bet": "TCU ML",
+   "price": "-403",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from TCU -312 to -394 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "TCU $114.3K vs WVU $30.2K near the top",
+    "line2": "Ratio 3.8x with a $29.6K TCU order at 76c. Vegas Pressure Move 84 is reported separately."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "5-6-0 - -2.74u - -25% ROI",
+   "checked": "Checked Pinnacle 9:54am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "11:00am CT",
+   "matchup": "Western Michigan @ Toledo",
+   "bet": "Over 47.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 45.5 to 47 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Over $59.8K vs Under $31.7K near the top",
+    "line2": "Ratio 1.9x with one $25.5K Over order at 51c."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "5-6-0 - -2.74u - -25% ROI",
+   "checked": "Checked Pinnacle 9:54am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "11:00am CT",
+   "matchup": "LSU @ Auburn",
+   "bet": "Over 51.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 50 to 52 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Over $38.6K vs Under $35.4K near the top (Novig line 52.5)",
+    "line2": "A $18.1K Over order at 47.5c, but the Under side has $19.2K too."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "5-6-0 - -2.74u - -25% ROI",
+   "checked": "Checked Pinnacle 9:54am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "11:00am CT",
+   "matchup": "Pittsburgh @ Miami",
+   "bet": "Pittsburgh +20.5",
+   "price": "-107",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread +21 at open, +21 now; lean direction flipped",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 65,
+    "line1": "Vegas Backed: line moved from PITT +22.5 to +20.5 (under 70, does not count)",
+    "bets": 48,
+    "money": 34
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "PITT $59.7K vs MIA $52.9K near the top",
+    "line2": "One $11.9K PITT order at 48c; MIA has a $12K order too, so it may be liquidity."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "5-6-0 - -2.74u - -25% ROI",
+   "checked": "Checked Pinnacle 9:54am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "11:00am CT",
+   "matchup": "Western Michigan @ Toledo",
+   "bet": "WMU ML",
+   "price": "+118",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from WMU +150 to +123 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "TOL $73.3K vs WMU $45.5K near the top",
+    "line2": "Novig money leans Toledo, with a $12.0K TOL order at 54.5c."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "18-14-0 - +2.69u - 8% ROI",
+   "checked": "Checked Pinnacle 9:54am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "11:00am CT",
+   "matchup": "Rice @ FAU",
+   "bet": "Rice +8",
+   "price": "-108",
+   "pinnacle": null,
+   "vegas": {
+    "strength": 75,
+    "line1": "Vegas Backed: line moved from RICE +10 to +8 with a minority of bets",
+    "bets": 35,
+    "money": 35
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "FAU $20.5K vs RICE $17.1K near the top (Novig line 9.5)",
+    "line2": "Balanced book. Pinnacle shows RICE +8 as a flipped Lean, below Strong."
+   },
+   "record_label": "VEGAS 70+ RECORD",
+   "record": "6-8-0 - -2.65u - -19% ROI",
+   "checked": "Checked Pinnacle 9:54am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "11:00am CT",
+   "matchup": "California @ SMU",
+   "bet": "Over 55.5",
+   "price": "-108",
+   "pinnacle": null,
+   "vegas": {
+    "strength": 71,
+    "line1": "Vegas Backed: total moved from 54.5 to 55.5 with a minority of bets",
+    "bets": 19,
+    "money": 26
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $43.1K vs Under $37.1K near the top",
+    "line2": "Balanced book. Pinnacle has this Over as a stable Lean, below Strong."
+   },
+   "record_label": "VEGAS 70+ RECORD",
+   "record": "6-8-0 - -2.65u - -19% ROI",
+   "checked": "Checked Pinnacle 9:54am CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Window summary",
+   "subtitle": "Sat 11:00am CT CFB window - Pinnacle checked 9:54am - Vegas 9:56am - Novig 9:58am",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "CFB - 11:00AM CT",
+     "picks": [
+      {
+       "bet": "TCU -10.5",
+       "sub": "WVU @ TCU",
+       "price": -111,
+       "sources": 3,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 93",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG $73K v $52K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "TCU ML",
+       "sub": "WVU @ TCU",
+       "price": -403,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS pressure 84",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $114K v $30K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Over 47.5",
+       "sub": "WMU @ TOL",
+       "price": -111,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $60K v $32K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Over 51.5",
+       "sub": "LSU @ AUB",
+       "price": -111,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $39K v $35K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "PITT +20.5",
+       "sub": "PITT @ MIA",
+       "price": -107,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS 65",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $60K v $53K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "WMU ML",
+       "sub": "WMU @ TOL",
+       "price": 118,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG against $46K v $73K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "RICE +8",
+       "sub": "RICE @ FAU",
+       "price": -108,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN lean flipped",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS 75",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Over 55.5",
+       "sub": "CAL @ SMU",
+       "price": -108,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS 71",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Novig-only money (no Pinnacle Strong or Vegas 70+)",
+     "value": "MIA ML ($129K v $21K) · LSU ML ($125K v $60K) · FAU ML ($70K v $20K) · SMU ML ($111K v $13K) · TTU ML ($116K v $30K) · IU ML ($161K v $51K) · TOL ML ($73K v $46K, against WMU ML above)\nSingle-order spreads/totals: AUB +7.5 · SMU -18.5 · CIN +11.5 · IU -7.5 · IU/MICH Under 42.5",
+     "inline": false
+    },
+    {
+     "name": "⚠️ Conflicts",
+     "value": "IU @ MICH Under 42.5: Novig money on the Under, Pinnacle leans Over (Lean). TTU @ CIN: Novig single order on CIN +11.5 while Pinnacle leans TTU -11.5 (Lean).",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 9:54am · Vegas 9:56am · Novig 9:58am CT · leans, not guarantees. RUTG @ NU not listed on Novig. No props posted for CFB."
+   }
+  }
+ ]
+}
