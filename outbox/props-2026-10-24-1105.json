@@ -1,0 +1,46 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Sat 12:00pm CT window** · NHL: ANA@PHI (CFB games have no props on Betting Insider or Novig) · Pinnacle 11:08am, Novig 11:11-11:12am CT",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Sat 12:00pm CT window - Pinnacle checked 11:08am - Novig 11:12am",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees · Showing 1 of 1 logged",
+   "sections": [
+    {
+     "heading": "NHL - ANA @ PHI 12:00PM CT",
+     "picks": [
+      {
+       "bet": "A. Bump U1.5 SOG",
+       "sub": "ANA @ PHI",
+       "price": 115,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG No $1.2K v $0.6K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "None this window - only one prop play qualified, not enough for a 3-leg parlay.",
+   "footer": {
+    "text": "Leans, not guarantees · props record since Oct 21: 91-89 (51%) · -20.55u · independent plays · Max-only 9-4 · Novig stopped after 92 reads (3 failed in a row)"
+   }
+  }
+ ]
+}

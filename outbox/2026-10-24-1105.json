@@ -1,0 +1,310 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sat 12:00pm CT window** · CFB: BAY@KU, AKR@KENT, M-OH@CMU · NHL: ANA@PHI · Pinnacle 11:08am, Vegas 11:10am, Novig 11:11am CT",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "12:00pm CT",
+   "matchup": "Miami (OH) @ Central Michigan",
+   "bet": "Under 40",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 43 to 40.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 94,
+    "line1": "Vegas Backed: total moved from 42.5 to 40 with a minority of bets",
+    "bets": 21,
+    "money": 26
+   },
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Under $18.4K vs Over $12.0K near the top (Novig line 40.5)",
+    "line2": "Ratio 1.5x on the Under; biggest order $5.8K."
+   },
+   "record_label": "TRIPLE RECORD",
+   "record": "tracking started Oct 21 (0-1, -1.18u)",
+   "checked": "Checked Pinnacle 11:08am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "12:00pm CT",
+   "matchup": "Miami (OH) @ Central Michigan",
+   "bet": "Miami (OH) ML",
+   "price": "-178",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from M-OH -119 to -171 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "M-OH $62.0K vs CMU $28.7K near the top",
+    "line2": "Ratio 2.2x with a $13.5K M-OH order at 61c. Vegas Pressure Move 58 is reported separately."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "5-6-0 - -2.74u - -25% ROI",
+   "checked": "Checked Pinnacle 11:08am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "12:00pm CT",
+   "matchup": "Baylor @ Kansas",
+   "bet": "Kansas ML",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from KU +104 to -107 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "KU $71.7K vs BAY $62.3K near the top",
+    "line2": "A $26.9K KU order at 49c, but BAY has a $26.4K order too, so it may be liquidity."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "5-6-0 - -2.74u - -25% ROI",
+   "checked": "Checked Pinnacle 11:08am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "12:00pm CT",
+   "matchup": "Miami (OH) @ Central Michigan",
+   "bet": "Miami (OH) -3.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from M-OH -2.5 to -3.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "M-OH $31.2K vs CMU $26.0K near the top",
+    "line2": "Balanced book."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "18-14-0 - +2.69u - 8% ROI",
+   "checked": "Checked Pinnacle 11:08am CT"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "12:00pm CT",
+   "matchup": "Akron @ Kent State",
+   "bet": "Over 47.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 45.5 to 47.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Under $22.0K vs Over $20.6K near the top",
+    "line2": "Balanced book, no order over $6.1K."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "18-14-0 - +2.69u - 8% ROI",
+   "checked": "Checked Pinnacle 11:08am CT"
+  },
+  {
+   "sport": "NHL",
+   "date": "Sat Oct 24",
+   "start": "12:00pm CT",
+   "matchup": "Ducks @ Flyers",
+   "bet": "Under 5.5",
+   "price": "+104",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 6 (-115) to 5.5 (+104) since open, +EV at 2 books",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 62,
+    "line1": "Vegas Backed: Under 5.5 with 5% of bets (under 70, does not count)",
+    "bets": 5,
+    "money": 5
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Under $24.1K vs Over $18.1K near the top",
+    "line2": "Leans Under at 1.3x, below the lean cutoff."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "18-14-0 - +2.69u - 8% ROI",
+   "checked": "Checked Pinnacle 11:08am CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Window summary",
+   "subtitle": "Sat 12:00pm CT window - Pinnacle checked 11:08am - Vegas 11:10am - Novig 11:11am",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "CFB - 12:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 40",
+       "sub": "M-OH @ CMU",
+       "price": -110,
+       "sources": 3,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 94",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG lean $18K v $12K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "M-OH ML",
+       "sub": "M-OH @ CMU",
+       "price": -178,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS pressure 58",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $62K v $29K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "KU ML",
+       "sub": "BAY @ KU",
+       "price": -110,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $72K v $62K single",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "M-OH -3.5",
+       "sub": "M-OH @ CMU",
+       "price": -113,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Over 47.5",
+       "sub": "AKR @ KENT",
+       "price": -112,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 12:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 5.5",
+       "sub": "ANA @ PHI",
+       "price": 104,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS 62",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Novig-only money (no Pinnacle Strong or Vegas 70+)",
+     "value": "NHL ANA +1.5 (-254) - Ducks $41.7K vs Flyers $16.4K, $12.3K order at 68c (thin $2.2K traded; Pinnacle Lean)",
+     "inline": false
+    },
+    {
+     "name": "Run notes",
+     "value": "First TRIPLE since the 11:00am TCU -10.5: M-OH @ CMU Under 40. WNBA GS @ ATL (12:00pm) not covered - Betting Insider has no WNBA tab. No Vegas 70+ rows for BAY@KU, AKR@KENT or ANA@PHI.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 11:08am · Vegas 11:10am · Novig 11:11am CT · leans, not guarantees"
+   }
+  }
+ ]
+}
