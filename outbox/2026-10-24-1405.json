@@ -1,0 +1,256 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sat 2:45pm CT window** · CFB: KSU@ASU (2:45), EMU@OHIO, ULM@TROY (3:00) · Pinnacle 2:07pm, Vegas 2:08pm, Novig 2:09pm CT",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "2:45pm CT",
+   "matchup": "Kansas State @ Arizona State",
+   "checked": "Checked Pinnacle 2:07pm CT",
+   "bet": "Arizona State +1",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from ASU +3.5 to +1 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 76,
+    "line1": "Vegas Backed: line moved to ASU with a minority of bets",
+    "bets": 35,
+    "money": 34
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "ASU $22.3K vs KSU $21.4K near the top (Novig line +1.5)",
+    "line2": "Balanced book, no order over $5.3K."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21 (4-5, -1.49u)"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "2:45pm CT",
+   "matchup": "Kansas State @ Arizona State",
+   "checked": "Checked Pinnacle 2:07pm CT",
+   "bet": "Arizona State ML",
+   "price": "-104",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from ASU +146 to +104 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "KSU $48.9K vs ASU $20.5K near the top",
+    "line2": "Novig money is on Kansas State: 2.4x with a $12.8K KSU order at 51c."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "18-14-0 - +2.69u - 8% ROI"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "2:45pm CT",
+   "matchup": "Kansas State @ Arizona State",
+   "checked": "Checked Pinnacle 2:07pm CT",
+   "bet": "Under 51.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 56 to 51.5 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 54,
+    "line1": "Pressure Move: Under 51.5 with 77% of bets (under 70, does not count)",
+    "bets": 77,
+    "money": 82
+   },
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Over $20.0K vs Under $13.6K near the top",
+    "line2": "Novig leans Over at 1.5x; biggest order $5.0K."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "18-14-0 - +2.69u - 8% ROI"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "3:00pm CT",
+   "matchup": "Eastern Michigan @ Ohio",
+   "checked": "Checked Pinnacle 2:07pm CT",
+   "bet": "Ohio ML",
+   "price": "-396",
+   "pinnacle": null,
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "OHIO $41.4K vs EMU $13.3K near the top",
+    "line2": "3.1x with a $15.0K Ohio order at 77.5c; favorite ML dollars skew by price."
+   },
+   "record_label": "NOVIG STRONG RECORD",
+   "record": "26-27-0 - -11.25u - -19% ROI"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "3:00pm CT",
+   "matchup": "UL Monroe @ Troy",
+   "checked": "Checked Pinnacle 2:07pm CT",
+   "bet": "Troy ML",
+   "price": "-488",
+   "pinnacle": null,
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "TROY $61.8K vs ULM $13.9K near the top",
+    "line2": "4.4x with a $15.0K Troy order at 82.5c; price is Novig's, favorite ML dollars skew by price."
+   },
+   "record_label": "NOVIG STRONG RECORD",
+   "record": "26-27-0 - -11.25u - -19% ROI"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Window summary",
+   "subtitle": "Sat 2:45-3:00pm CT window - Pinnacle checked 2:07pm - Vegas 2:08pm - Novig 2:09pm",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "CFB - 2:45-3:00PM CT",
+     "picks": [
+      {
+       "bet": "ASU +1",
+       "sub": "KSU @ ASU",
+       "price": -110,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 76",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "ASU ML",
+       "sub": "KSU @ ASU",
+       "price": -104,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG AGAINST $49K v $20K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Under 51.5",
+       "sub": "KSU @ ASU",
+       "price": -110,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS pressure 54",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG AGAINST lean Over",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "OHIO ML",
+       "sub": "EMU @ OHIO",
+       "price": -396,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN slight",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $41K v $13K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "TROY ML",
+       "sub": "ULM @ TROY",
+       "price": -488,
+       "book": "Novig",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN none",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $62K v $14K",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "⚠️ Conflicts",
+     "value": "KSU @ ASU: Novig money sits against two Pinnacle STRONG flips - KSU ML $48.9K vs $20.5K (against ASU ML) and Over 51.5 $20.0K vs $13.6K (against Under 51.5). ASU +1 is the clean play (Pinnacle STRONG stable + Vegas 76).",
+     "inline": false
+    },
+    {
+     "name": "Run notes",
+     "value": "Novig leans logged as data only: ULM +12.5 ($23.3K vs $15.5K) and ULM@TROY Under 50.5 ($13.9K vs $9.7K). No Pinnacle Strong or Vegas 70+ rows for EMU@OHIO or ULM@TROY. FCS games UTM@WIU and HCU@LAM (3:00pm) are not on Betting Insider. No props in this window.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 2:07 · Vegas 2:08 · Novig 2:09pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}
