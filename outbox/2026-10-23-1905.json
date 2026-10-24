@@ -1,0 +1,278 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Fri 7:05pm CT window** · NBA: Pelicans @ Jazz, Rockets @ Spurs (8:30pm CT) · NHL: Lightning @ Avalanche (8:00pm CT) · CFB: Air Force @ Wyoming (8:00pm CT)",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "8:30pm CT",
+   "matchup": "Rockets @ Spurs",
+   "bet": "Under 224.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 227.5 to 224.5 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: total moved from 227.5 to 224.5 with a minority of bets",
+    "bets": 18,
+    "money": 15
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Under $21K vs Over $22K near the top (Novig line 225.5)",
+    "line2": "Even book, $26K traded."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "1-2 · -1.15u · tracking started Oct 21 (3 graded)",
+   "checked": "Checked 7:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "8:30pm CT",
+   "matchup": "Pelicans @ Jazz",
+   "bet": "Under 238.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 241.5 to 239 since open",
+    "line2": "Status: stable, +EV at 1 book"
+   },
+   "vegas": {
+    "strength": 94,
+    "line1": "Vegas Backed: total moved from 241.5 to 238.5 with a minority of bets",
+    "bets": 24,
+    "money": 23
+   },
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Over $23K vs Under $14K near the top (Novig line 239.5)",
+    "line2": "Novig money leans Over 1.64x, one point higher than the consensus line."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "1-2 · -1.15u · tracking started Oct 21 (3 graded)",
+   "checked": "Checked 7:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "8:30pm CT",
+   "matchup": "Pelicans @ Jazz",
+   "bet": "Pelicans ML",
+   "price": "-103",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved the Pelicans from +139 to +102 since open",
+    "line2": "Status: stable, +EV at 1 book"
+   },
+   "vegas": {
+    "strength": 61,
+    "line1": "Vegas Backed 61 (below 70): line moved to the Pelicans from +136 to -103",
+    "bets": 44,
+    "money": 43
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Pelicans $90K vs Jazz $79K near the top",
+    "line2": "Single $30K order at the top backing the Pelicans; the Jazz side has a $29K order too."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "2-3 · -2.43u · tracking started Oct 21 (5 graded)",
+   "checked": "Checked 7:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "8:30pm CT",
+   "matchup": "Pelicans @ Jazz",
+   "bet": "Pelicans +1.5",
+   "price": "-118",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved the Pelicans from +4 to +1 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Jazz -1.5 $59K vs Pelicans +1.5 $47K near the top",
+    "line2": "A $26K order backs Jazz -1.5; the Pelicans side has a $29K order too."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 7:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Fri Oct 23",
+   "start": "8:30pm CT",
+   "matchup": "Rockets @ Spurs",
+   "bet": "Rockets ML",
+   "price": "+160",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved the Rockets from +211 to +173 since open",
+    "line2": "Status: stable, +EV at 1 book"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Spurs $93K vs Rockets $56K near the top",
+    "line2": "Novig money 1.66x on the Spurs with a $30K order at the top."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "5-5 · -1.58u · -12.9% ROI",
+   "checked": "Checked 7:08pm CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Window summary",
+   "subtitle": "Fri 7:05pm CT window - Pinnacle checked 7:08 - Vegas 7:10 - Novig 7:11",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NBA - 8:30PM CT",
+     "picks": [
+      {
+       "bet": "Under 224.5",
+       "sub": "HOU @ SA",
+       "price": -110,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS 100",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG $21K v $22K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Under 238.5",
+       "sub": "NO @ UTAH",
+       "price": -110,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 94",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG AGAINST O239.5 $23K v $14K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Pelicans ML",
+       "sub": "NO @ UTAH",
+       "price": -103,
+       "book": "",
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 61",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $30K single",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Pelicans +1.5",
+       "sub": "NO @ UTAH",
+       "price": -118,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG AGAINST $59K v $47K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Rockets ML",
+       "sub": "HOU @ SA",
+       "price": 160,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG AGAINST $93K v $56K",
+         "c": "red"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 More from this window",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "More game-line signals",
+     "value": "• Novig only (no Pinnacle Strong or Vegas 70+ on that side): Air Force ML (-239) $87K v $36K, 2.4x · Air Force -5.5 (take -115) $70K v $31K, 2.2x · Spurs ML (take -182) $30K single · Rockets +5.5 (-115) $14.5K single, 1.68x (Pinnacle Lean agrees) · Jazz -1.5 (take +104) $26K single\n• Vegas under 70 (logged only): Pelicans ML 61, Lightning ML 35, Wyoming +6 26; Pressure Move: Lightning @ Avalanche Over 6.5 49\n• Lightning @ Avalanche and Air Force @ Wyoming: no Pinnacle Strong/Max or Vegas 70+ game lines.",
+     "inline": false
+    },
+    {
+     "name": "⚠️ Conflicts",
+     "value": "• Pelicans @ Jazz Under 238.5: Pinnacle STRONG + Vegas 94, but Novig money leans Over 239.5 ($23K v $14K).\n• Pelicans +1.5 (-118): Pinnacle STRONG, Novig heavier on Jazz -1.5. The Pelicans ML has Novig support; the spread does not.\n• Rockets ML (+160): Pinnacle STRONG, Novig 1.66x on the Spurs with a $30K order. Rockets +5.5 has Novig support instead (Pinnacle only Lean there).",
+     "inline": false
+    },
+    {
+     "name": "Run notes",
+     "value": "• Window 7:45-8:45pm CT: NHL Lightning @ Avalanche, CFB Air Force @ Wyoming (8:00pm), NBA Pelicans @ Jazz, Rockets @ Spurs (8:30pm).\n• Both Vegas 70+ rows line up with Pinnacle STRONG unders (ALIGNED). No Pinnacle MAX game lines this window.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 7:08 · Vegas 7:10 · Novig 7:11pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}

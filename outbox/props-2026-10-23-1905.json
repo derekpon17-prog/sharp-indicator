@@ -1,0 +1,251 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Fri 7:05pm CT window** · NBA: Pelicans @ Jazz, Rockets @ Spurs (8:30pm) · NHL: Lightning @ Avalanche (8:00pm) · Checked: Pinnacle 7:08 · Novig 7:12-7:14pm CT (249 reads, 0 failed, cap not hit)",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Fri 7:05pm CT window - Pinnacle checked 7:08 - Novig 7:12-7:14",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees · Showing 9 of 25 logged (3-per-game cap)",
+   "sections": [
+    {
+     "heading": "NBA - NO @ UTAH 8:30PM CT",
+     "picks": [
+      {
+       "bet": "Y. Missi U7.5 pts",
+       "sub": "NO @ UTAH",
+       "price": -121,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG $1.0K v $589",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 9 books",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "L. Markkanen O2.5 3pm",
+       "sub": "NO @ UTAH",
+       "price": -104,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $675 v $786",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 8 books",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "K. George U3.5 reb",
+       "sub": "NO @ UTAH",
+       "price": -124,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $1.5K v $1.3K",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 1 book",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - HOU @ SA 8:30PM CT",
+     "picks": [
+      {
+       "bet": "A. Sengun U31.5 pra",
+       "sub": "HOU @ SA",
+       "price": -111,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG $902 v $817",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 7 books",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "D. Fox O14.5 pts",
+       "sub": "HOU @ SA",
+       "price": -107,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $1.3K v $1.5K",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 5 books",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "K. Durant U32.5 pra",
+       "sub": "HOU @ SA",
+       "price": -112,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $830 v $880",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 2 books",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - TB @ COL 8:00PM CT",
+     "picks": [
+      {
+       "bet": "C. Makar U2.5 sog",
+       "sub": "TB @ COL",
+       "price": -132,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $46 v $662",
+         "c": "grey"
+        },
+        {
+         "t": "+EV at 3 books",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "D. Toews U1.5 sog",
+       "sub": "TB @ COL",
+       "price": -137,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $644 v $240",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "A. Cirelli O0.5 pts",
+       "sub": "TB @ COL",
+       "price": 118,
+       "book": "",
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG No $1.2K v $20",
+         "c": "orange"
+        },
+        {
+         "t": "+EV at 1 book",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📌 More logged (not shown, card caps)",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "📌 Pinnacle STRONG (not shown)",
+     "value": "• Rockets @ Spurs: S. Castle U5.5 reb (-149) stable, D. Harper U16.5 pts (-117) flipped, Amen Thompson U4.5 ast (-145) flipped\n• Pelicans @ Jazz: D. Murray O6.5 ast (-106) flipped\n• Lightning @ Avalanche: M. Blackwood U23.5 saves (-120) flipped, N. MacKinnon U1.5 pts (-116) flipped",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig money",
+     "value": "• N. MacKinnon O3.5 sog (take -130) - Yes $4.8K v $1.1K with a $4.6K single order; Pinnacle Lean agrees (same player as his PTS row)\n• V. Wembanyama O1.5 3pm (take -127) - Yes $1.8K v $559; Pinnacle Slight agrees\n• B. Nelson O0.5 pts (take -115) - Yes $1.2K v $50\n• Default-skew No sides logged: MacKinnon U0.5 goals, Kucherov U0.5 goals, Markkanen U31.5 pra; Harper U16.5 pts No $4.2K is a bot-size order, not counted",
+     "inline": false
+    },
+    {
+     "name": "⚠️ Conflicts",
+     "value": "• Amen Thompson U27.5 pra (-120): Pinnacle STRONG Under, Novig Yes $1.1K v $210 on the Over. Not shown; his AST under is the logged primary.\n• L. Markkanen: Pinnacle STRONG Over 22.5 pts, Novig No $5.65K v $1.1K (5x, below the conflict cutoff). His 3PM over is shown instead.",
+     "inline": false
+    },
+    {
+     "name": "Notes",
+     "value": "• Two Pinnacle MAX props: Missi U7.5 pts and Sengun U31.5 pra. No Pinnacle + Novig agreements this window.\n• CFB Air Force @ Wyoming: no Pinnacle Strong props and no Novig prop markets.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "**1) Two MAX unders plus Makar, 3 games · ~+510**\n• Y. Missi U7.5 pts (-121) - PIN MAX flipped\n• A. Sengun U31.5 pra (-111) - PIN MAX flipped\n• C. Makar U2.5 sog (-132) - PIN STRONG stable\n\n**2) Stable unders, 3 games · ~+492**\n• K. George U3.5 reb (-124) - PIN STRONG stable\n• K. Durant U32.5 pra (-112) - PIN STRONG stable\n• D. Toews U1.5 sog (-137) - PIN STRONG stable",
+   "footer": {
+    "text": "Leans, not guarantees · props record since Oct 21: 57-54, 51% · independent plays (111 graded, 144 raw rows)"
+   }
+  }
+ ]
+}
