@@ -1,0 +1,431 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Sat SLATE · 4:00pm-9:15pm CT** · NBA 8, NHL 10 games with props · Pinnacle 3:08pm, Novig 3:17-3:19pm CT",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Sat 4:00-9:15pm CT slate - Pinnacle checked 3:08pm - Novig 3:17-3:19pm (499 reads)",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Showing 20 of 33 logged · leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NBA - BKN @ CLE - 6:30PM CT",
+     "picks": [
+      {
+       "bet": "M. Porter Jr. U6.5 reb",
+       "sub": "BKN @ CLE",
+       "price": -125,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $1.0K v $2.2K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "S. Merrill O1.5 3PM",
+       "sub": "BKN @ CLE",
+       "price": -185,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.2K v $2.1K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "P. Watson O12.5 pts",
+       "sub": "BKN @ CLE",
+       "price": -116,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.1K v $1.8K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - MIL @ PHI - 6:30PM CT",
+     "picks": [
+      {
+       "bet": "M. Turner O1.5 3PM",
+       "sub": "MIL @ PHI",
+       "price": -158,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG Yes $2.7K v $0.9K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "T. Maxey O35.5 PRA",
+       "sub": "MIL @ PHI",
+       "price": -115,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.5K v $1.2K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - SA @ DAL - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "S. Castle O5.5 ast",
+       "sub": "SA @ DAL",
+       "price": -146,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $1.2K v $0.5K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - WSH @ CHI - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "N. Powell O21.5 pts",
+       "sub": "WSH @ CHI",
+       "price": -111,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.7K v $1.6K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "J. Smith U13.5 pts",
+       "sub": "WSH @ CHI",
+       "price": -126,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.8K v $1.7K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - NO @ DEN - 8:00PM CT",
+     "picks": [
+      {
+       "bet": "Z. Williamson U18.5 pts",
+       "sub": "NO @ DEN",
+       "price": -115,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.2K v $2.1K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - GS @ PHX - 9:00PM CT",
+     "picks": [
+      {
+       "bet": "K. Maluach O9.5 reb",
+       "sub": "GS @ PHX",
+       "price": 101,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.6K v $1.1K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Sat 4:00-9:15pm CT slate - Pinnacle checked 3:08pm - Novig 3:17-3:19pm (499 reads)",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Showing 20 of 33 logged · leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NHL - BUF @ WSH - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "R. Leonard O0.5 pts",
+       "sub": "BUF @ WSH",
+       "price": 119,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.2K v $0.8K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - NSH @ PIT - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "D. Carlile U1.5 SOG",
+       "sub": "NSH @ PIT",
+       "price": -147,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.0K v $1.9K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "T. Novak U2.5 SOG",
+       "sub": "NSH @ PIT",
+       "price": -156,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG thin $0.0K v $0.5K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "R. Rakell U2.5 SOG",
+       "sub": "NSH @ PIT",
+       "price": 103,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.1K v $0.4K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - NYR @ OTT - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "J. Sanderson U2.5 SOG",
+       "sub": "NYR @ OTT",
+       "price": -167,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.2K v $1.4K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - SJ @ BOS - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "H. Lindholm U1.5 SOG",
+       "sub": "SJ @ BOS",
+       "price": -169,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.1K v $0.9K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - VGK @ CBJ - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "B. Howden U1.5 SOG",
+       "sub": "VGK @ CBJ",
+       "price": -131,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.1K v $1.5K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - TB @ UTA - 8:00PM CT",
+     "picks": [
+      {
+       "bet": "M. Weegar U0.5 pts",
+       "sub": "TB @ UTA",
+       "price": -173,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.1K v $1.3K",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "B. Hayton U1.5 SOG",
+       "sub": "TB @ UTA",
+       "price": 100,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.1K v $1.4K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - MIN @ SEA - 9:00PM CT",
+     "picks": [
+      {
+       "bet": "Q. Hughes O2.5 SOG",
+       "sub": "MIN @ SEA",
+       "price": -108,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin $0.1K v $0.4K",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "⚠️ Conflicts",
+   "color": 15158332,
+   "description": "None among shown plays. Novig prop books were thin on the Pinnacle sides (most under $2K a side); only M. Turner O1.5 3PM had Novig Yes money (3.0x) on the same side."
+  },
+  {
+   "title": "💰 Novig money (logged, not shown)",
+   "color": 3066993,
+   "description": "B. Miller O22.5 pts (MIA@CHA) - Yes $2.1K vs $0.7K. Default-skew No sides: G. Antetokounmpo U28.5 pts ($3.4K vs $0.1K), S. James U7.5 pts ($3.4K). Skipped 7 bot-pattern No books (repeated $3.0K orders: Embiid pts/reb, J. Brown, D. Brooks, A. Gordon, Schroder, Jokic ast)."
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "**Parlay 1 - Pinnacle core (4 legs, about +708)**\n- M. Turner O1.5 3PM (-158) - PROP_ALIGNED - MIL@PHI\n- S. Castle O5.5 AST (-146) - PIN MAX stable - SA@DAL\n- P. Watson O12.5 PTS (-116) - PIN STRONG stable - BKN@CLE\n- M. Weegar U0.5 PTS (-173) - PIN STRONG stable - TB@UTA\n\n**Parlay 2 - NHL shots unders (3 legs, about +374)**\n- D. Carlile U1.5 SOG (-147) - PIN MAX stable - NSH@PIT\n- B. Howden U1.5 SOG (-131) - PIN STRONG stable - VGK@CBJ\n- J. Sanderson U2.5 SOG (-167) - PIN STRONG stable - NYR@OTT\n\n**Parlay 3 - NBA scorers (3 legs, about +540)**\n- N. Powell O21.5 PTS (-111) - PIN STRONG stable - WSH@CHI\n- Z. Williamson U18.5 PTS (-115) - PIN STRONG stable - NO@DEN\n- M. Porter Jr. U6.5 REB (-125) - PIN STRONG stable - BKN@CLE\n\nNo two legs from one game in any parlay. NHL props are 11-26 season (-24.48u), so the NHL parlay is the riskier one."
+  },
+  {
+   "title": "Run notes",
+   "color": 9807270,
+   "description": "Not shown (cap 10 per sport, 4 per game): NHL R. Andersson, E. Karlsson, E. Lindholm, J. Zucker, F. Zetterlund (Strong stable), C. Graf and J. Chychrun (Strong flipped); NBA N. Jokic U50.5 PRA, F. VanVleet U5.5 ast (no Novig market). No CFB or MLB Strong props. Novig reads 499 of 500 cap (1 failed read, not consecutive)."
+  }
+ ]
+}
