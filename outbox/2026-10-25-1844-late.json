@@ -1,0 +1,27 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sun 6:45pm CT** · no new flips · faded: MEM@SAC Under 234.5, J. Smith-Njigba Under 6.5 recs (KC@SEA) · Pinnacle 6:45pm CT",
+ "scorecards": [],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG/MAX plays that dropped or reversed at the 6:45pm CT read:",
+   "fields": [
+    {
+     "name": "NBA MEM @ SAC - Under 234.5 (-111) - 8:00pm CT",
+     "value": "Carded TRIPLE (Pin Strong flipped + Vegas Backed 100 + Novig lean) at 3:06pm, still Strong at 5:45pm - now Lean Under 234.5, flipped (Pinnacle 237 -> 235).",
+     "inline": false
+    },
+    {
+     "name": "NFL KC @ SEA - J. Smith-Njigba Under 6.5 Recs (+114) - 7:20pm CT",
+     "value": "Carded Strong stable at 12:10pm (Max at 5:45pm) - now Lean; consensus moved to 7.5 (-143), Pinnacle 6.5 (+116) -> 6.5 (+125), +EV at 7 books.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 6:45pm CT · Vegas/Novig not re-read (no new sides) · still Strong: SEA -3, SEA ML, K. Walker III U79.5 rush yds, G. Holani U9.5 rush yds, F. Forsberg O2.5 SOG, J. Wells O11.5 pts / O1.5 3PM, Z. Buium U0.5 pts, F. Chytil O1.5 SOG · upgraded to MAX: G. Landeskog U1.5 SOG · back to Strong: E. Wilson rec yds Under, now 6.5 (faded at 5:45, row left as is) · leans, not guarantees"
+   }
+  }
+ ]
+}
