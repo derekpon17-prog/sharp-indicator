@@ -1,0 +1,628 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sun 5:45pm CT** · TOR@MIN MIN ML + MIN -3.5 (Pinnacle reversed off TOR) · 20 new Strong/Max props (Max: C. Wallace U8.5 pts, S. Skinner U25.5 saves) · faded: TOR ML, OKC -16.5, LAC@OKC Over + 6 props · Pinnacle 5:45pm CT",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Toronto @ Minnesota",
+   "checked": "Checked Pinnacle 5:45pm CT · Vegas 5:47pm CT",
+   "bet": "MIN ML",
+   "price": "-165",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline -130 -> -154 since open (consensus -165)",
+    "line2": "Status: flipped - REVERSED from the carded TOR ML Strong (3:06)"
+   },
+   "vegas": {
+    "strength": 62,
+    "line1": "Pressure Move 62 on Timberwolves ML (-129 -> -164) - public side, not Vegas Backed",
+    "bets": "81%",
+    "money": "84%"
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig game-line book not read this run",
+    "line2": "Tip-off 6:00pm CT - time"
+   },
+   "record_label": "PINNACLE STRONG",
+   "record": "see daily record card"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Toronto @ Minnesota",
+   "checked": "Checked Pinnacle 5:45pm CT · Vegas 5:47pm CT",
+   "bet": "MIN -3.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread -2.5 (-101) -> -3.5 (-109) since open",
+    "line2": "Status: flipped - new Strong; opposite the carded Vegas TOR +1"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "No Vegas spread row (TOR +1 Vegas Backed 75 row gone)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig game-line book not read this run",
+    "line2": "Tip-off 6:00pm CT - time"
+   },
+   "record_label": "PINNACLE STRONG",
+   "record": "see daily record card"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "LA Clippers @ Oklahoma City",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "C. Wallace Under 8.5 Points",
+   "price": "-120",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Points prop 8.5 (-108) -> 8.5 (-140) since open, +EV at 4 books",
+    "line2": "Status: stable - new Max since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NHL",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Montreal @ Winnipeg",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "S. Skinner Under 25.5 Saves",
+   "price": "-123",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Saves prop 25.5 (-126) -> 25.5 (-155) since open, +EV at 5 books",
+    "line2": "Status: stable - new Max since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Toronto @ Minnesota",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "L. Ball Under 18.5 Points",
+   "price": "-114",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 18.5 (-110) -> 18.5 (-128) since open, +EV at 5 books",
+    "line2": "Status: stable - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Toronto @ Minnesota",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "R. Barrett Over 19.5 Points",
+   "price": "-121",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 18.5 (-114) -> 19.5 (-134) since open, +EV at 3 books",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Toronto @ Minnesota",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "J. Shead Over 6.5 Points",
+   "price": "-107",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 5.5 (-118) -> 6.5 (-115) since open, +EV at 3 books",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Toronto @ Minnesota",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "C. Murray-Boyles Over 9.5 Points",
+   "price": "-125",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 8.5 (-132) -> 10.5 (-102) since open, +EV at 1 books",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Toronto @ Minnesota",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "S. Barnes Under 7.5 Rebounds",
+   "price": "-142",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Rebounds prop 7.5 (-118) -> 6.5 (+122) since open",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Orlando @ New York",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "O. Anunoby Under 23.5 Pts+Reb+Ast",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pts+Reb+Ast prop 23.5 (-114) -> 23.5 (-132) since open, +EV at 7 books",
+    "line2": "Status: stable - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Orlando @ New York",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "J. Hart Under 1.5 3-Pointers",
+   "price": "-164",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "3-Pointers prop 1.5 (-112) -> 1.5 (-160) since open",
+    "line2": "Status: stable - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Orlando @ New York",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "W. Carter Jr. Under 11.5 Points",
+   "price": "-120",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 11.5 (-106) -> 11.5 (-137) since open, +EV at 3 books",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Orlando @ New York",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "W. Carter Jr. Under 6.5 Rebounds",
+   "price": "+107",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Rebounds prop 7.5 (-118) -> 7.5 (-159) since open",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Orlando @ New York",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "F. Wagner Over 4.5 Assists",
+   "price": "-154",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Assists prop 4.5 (-140) -> 5.5 (+119) since open",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:30pm CT",
+   "matchup": "Detroit @ Philadelphia",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "C. Cunningham Under 25.5 Points",
+   "price": "-115",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 26.5 (-106) -> 26.5 (-174) since open, +EV at 3 books",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:30pm CT",
+   "matchup": "Detroit @ Philadelphia",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "C. Cunningham Under 9.5 Assists",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Assists prop 9.5 (+102) -> 9.5 (-118) since open, +EV at 2 books",
+    "line2": "Status: stable - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NHL",
+   "date": "Sun Oct 25",
+   "start": "7:00pm CT",
+   "matchup": "Colorado @ Nashville",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "G. Landeskog Under 1.5 Shots on Goal",
+   "price": "+102",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Shots on Goal prop 1.5 (+128) -> 1.5 (-108) since open, +EV at 1 books",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NHL",
+   "date": "Sun Oct 25",
+   "start": "7:00pm CT",
+   "matchup": "Colorado @ Nashville",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "F. Forsberg Over 2.5 Shots on Goal",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Shots on Goal prop 2.5 (+100) -> 2.5 (-118) since open, +EV at 1 books",
+    "line2": "Status: flipped - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "8:00pm CT",
+   "matchup": "Memphis @ Sacramento",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "J. Wells Over 11.5 Points",
+   "price": "-107",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 11.5 (-102) -> 11.5 (-121) since open, +EV at 3 books",
+    "line2": "Status: stable - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "8:00pm CT",
+   "matchup": "Memphis @ Sacramento",
+   "checked": "Checked Pinnacle 5:45pm CT",
+   "bet": "J. Wells Over 1.5 3-Pointers",
+   "price": "-136",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "3-Pointers prop 1.5 (-132) -> 1.5 (-155) since open, +EV at 4 books",
+    "line2": "Status: stable - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG/MAX plays that dropped or reversed at the 5:45pm CT read:",
+   "fields": [
+    {
+     "name": "NBA TOR @ MIN - TOR ML (-106) - 6:00pm CT",
+     "value": "Carded TRIPLE (Pin Strong stable + Vegas 83 + Novig) at 3:06pm - now REVERSED: Pinnacle Strong MIN ML. Vegas Backed TOR row gone; Timberwolves ML Pressure Move 62. See LATE FLIP above.",
+     "inline": false
+    },
+    {
+     "name": "NBA LAC @ OKC - OKC -16.5 (-110) - 6:00pm CT",
+     "value": "Carded Strong stable at 3:06pm, now Lean.",
+     "inline": false
+    },
+    {
+     "name": "NBA LAC @ OKC - Over 224.5 (-111) - 6:00pm CT",
+     "value": "Carded Strong stable at 3:06pm, now Slight Over 223.5 (mixed).",
+     "inline": false
+    },
+    {
+     "name": "NBA ORL @ NY - J. Brunson Over 25.5 Pts (-117) - 6:00pm CT",
+     "value": "Carded Strong (aligned with Novig) at 3:06pm, now Lean.",
+     "inline": false
+    },
+    {
+     "name": "NBA ORL @ NY - T. da Silva Under 2.5 3PM / Under 4.5 Reb - 6:00pm CT",
+     "value": "Carded Strong at 3:06pm; market moved to 1.5 / 3.5, Pinnacle now Slight.",
+     "inline": false
+    },
+    {
+     "name": "NBA DET @ PHI - C. Cunningham Under 5.5 Reb (-114) - 6:30pm CT",
+     "value": "Carded Strong at 3:06pm, now Lean (his PRA Under 41.5 is now Max).",
+     "inline": false
+    },
+    {
+     "name": "NBA DET @ PHI - L. James Under 33.5 PRA (-117) - 6:30pm CT",
+     "value": "Carded Strong flipped at 3:06pm, now Lean.",
+     "inline": false
+    },
+    {
+     "name": "NHL COL @ NSH - C. Makar Under 2.5 SOG (-107) - 7:00pm CT",
+     "value": "Carded Strong stable at 1:07pm, now Lean.",
+     "inline": false
+    },
+    {
+     "name": "NFL KC @ SEA - E. Wilson Under 7.5 Rec Yds (-118) - 7:20pm CT",
+     "value": "Carded Strong stable at 12:10pm, now Lean.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 5:45pm CT · Vegas NBA 5:47pm CT · Novig not read (tip-offs 6:00pm) · still Strong: SEA -3, SEA ML, ORL ML, DET -1.5, DET ML, MEM@SAC U234.5, TOR@MIN U228.5 · upgraded to MAX: C. Cunningham U41.5 PRA, J. Smith-Njigba U7.5 recs · leans, not guarantees"
+   }
+  },
+  {
+   "title": "More late flips",
+   "color": 15844367,
+   "description": "New Strong props not shown as scorecards (20-card limit):\nNBA TOR@MIN 6:00pm - I. Quickley Over 16.5 Pts (-115) - Strong flipped\nNBA TOR@MIN 6:00pm - S. Barnes Over 20.5 Pts (-115) - Strong flipped"
+  }
+ ]
+}
