@@ -1,0 +1,505 @@
+{
+ "route": "NFL Props",
+ "content": "**NFL Props Report - Sun 11am - Week 7**\nPropFinder: 41 players (CLE@TEN, MIA@NYJ re-run), pulled 10:55am CT",
+ "boards": [
+  {
+   "title": "Tier A picks",
+   "subtitle": "Week 7 · Sun 11am inactives card · 11 picks · PropFinder 41 players, pulled 10:55am CT",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "SUNDAY NOON CT · TIER A (FINAL)",
+     "picks": [
+      {
+       "player": "Quinshon Judkins",
+       "market": "rush",
+       "side": "U",
+       "line": 46.5,
+       "book": "Circa",
+       "price": -110,
+       "model": 78,
+       "pin": null,
+       "pf": "U74",
+       "novig": {
+        "pct": 50,
+        "state": "neutral"
+       },
+       "note": "re-run with Estime out"
+      },
+      {
+       "player": "KC Concepcion",
+       "market": "rec",
+       "side": "U",
+       "line": 4.5,
+       "book": "Betano",
+       "price": -108,
+       "model": 78,
+       "pin": "SLIGHT agrees",
+       "pf": "U70",
+       "novig": {
+        "pct": 54,
+        "state": "agree"
+       },
+       "note": null
+      },
+      {
+       "player": "Kenyon Sadiq",
+       "market": "rec",
+       "side": "U",
+       "line": 2.5,
+       "book": "Betano",
+       "price": -143,
+       "model": 77,
+       "pin": null,
+       "pf": "U73",
+       "novig": {
+        "pct": 60,
+        "state": "agree"
+       },
+       "note": "re-run, Breece Hall OUT"
+      },
+      {
+       "player": "Samaje Perine",
+       "market": "rec",
+       "side": "U",
+       "line": 1.5,
+       "book": "Betano",
+       "price": -108,
+       "model": 66,
+       "pin": "LEAN agrees",
+       "pf": "U67",
+       "novig": {
+        "pct": 53,
+        "state": "agree"
+       },
+       "note": "Huntley starts"
+      },
+      {
+       "player": "Laquon Treadwell",
+       "market": "rec",
+       "side": "O",
+       "line": 1.5,
+       "book": "Betano",
+       "price": -149,
+       "model": 73,
+       "pin": "STRONG O19.5 yds agrees",
+       "pf": "O63",
+       "novig": {
+        "pct": 60,
+        "state": "agree"
+       },
+       "note": "Warren out"
+      },
+      {
+       "player": "Xavier Hutchinson",
+       "market": "rec",
+       "side": "O",
+       "line": 1.5,
+       "book": "SugarHouse",
+       "price": 165,
+       "model": 57,
+       "pin": "SLIGHT agrees",
+       "pf": "O76",
+       "novig": {
+        "pct": 40,
+        "state": "agree"
+       },
+       "note": "Dell active"
+      },
+      {
+       "player": "Malik Nabers",
+       "market": "rec",
+       "side": "O",
+       "line": 5.5,
+       "book": "MGM",
+       "price": -120,
+       "model": 70,
+       "pin": "SLIGHT O68.5 yds agrees",
+       "pf": "O73",
+       "novig": {
+        "pct": 54,
+        "state": "neutral"
+       },
+       "note": null
+      },
+      {
+       "player": "Cam Skattebo",
+       "market": "rush",
+       "side": "O",
+       "line": 35.5,
+       "book": "Circa",
+       "price": -110,
+       "model": 65,
+       "pin": "STRONG O34.5 agrees",
+       "pf": "O64",
+       "novig": {
+        "pct": 49,
+        "state": "neutral"
+       },
+       "note": null
+      },
+      {
+       "player": "John Metchie III",
+       "market": "rec yds",
+       "side": "O",
+       "line": 11.5,
+       "book": "betJACK",
+       "price": -111,
+       "model": 66,
+       "pin": "STRONG O12.5 agrees",
+       "pf": "O72",
+       "novig": {
+        "pct": 57,
+        "state": "agree"
+       },
+       "note": "line 10.5 to 11.5, Egbuka out"
+      },
+      {
+       "player": "Ted Hurst III",
+       "market": "rec yds",
+       "side": "U",
+       "line": 39.5,
+       "book": "betJACK",
+       "price": -111,
+       "model": 69,
+       "pin": "LEAN U39.5 agrees",
+       "pf": "U72",
+       "novig": {
+        "pct": 54,
+        "state": "agree"
+       },
+       "note": "line 36.5 to 39.5"
+      },
+      {
+       "player": "Cade Otton",
+       "market": "rec yds",
+       "side": "U",
+       "line": 40.5,
+       "book": "betJACK",
+       "price": -111,
+       "model": 65,
+       "pin": "LEAN agrees",
+       "pf": "U75",
+       "novig": {
+        "pct": 54,
+        "state": "agree"
+       },
+       "note": "Mayfield active"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Tier A picks (late games)",
+   "subtitle": "Week 7 · Sun 11am · 2 picks · provisional until late inactives",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "SUNDAY 3PM CT · TIER A",
+     "picks": [
+      {
+       "player": "Jaylen Waddle",
+       "market": "rec",
+       "side": "U",
+       "line": 4.5,
+       "book": "MGM",
+       "price": -105,
+       "model": 72,
+       "pin": "STRONG agrees",
+       "pf": "U82",
+       "novig": {
+        "pct": 51,
+        "state": "neutral"
+       },
+       "note": "provisional, late inactives at ~1:35pm"
+      },
+      {
+       "player": "Courtland Sutton",
+       "market": "rec",
+       "side": "U",
+       "line": 2.5,
+       "book": "FD",
+       "price": 132,
+       "model": 54,
+       "pin": "LEAN U3.5 agrees",
+       "pf": "U82",
+       "novig": {
+        "pct": 44,
+        "state": "agree"
+       },
+       "note": "provisional"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "📋 Run notes",
+   "color": 15844367,
+   "description": "Data freshness: PropFinder team share, coverage and injury status 10:55am CT (live pull this run); PropFinder props (books, Novig, Pinnacle prices) 10:58am CT; Pinnacle leans checked 11:00am CT (BI Pinnacle Reports, NFL, Today): 11 of 11 Sunday games posted.\nInactives / new OUT since 9am (PropFinder injury status): Calvin Ridley, Tyjae Spears, Nicholas Singleton, Kylen Granson (TEN); Audric Estime (CLE); Breece Hall, Kene Nwangwu (NYJ); Jalen Tolbert (MIA); A.J. Dillon (CAR); Elijah Sarratt (BAL); Demond Claiborne (MIN); Marlin Klein (HOU). Zaccheaus (ATL) still Q. Late games: Puka (Q calf), Jonah Coleman, M. Washington still Q.\nModel re-run for CLE@TEN and MIA@NYJ with the new outs. Other noon games carried from the 9am model with current lines and prices.\nSample: 35-23, +7.08u (58 graded) - noise until 50+ per tier.\nRun reading: Sun 11am inactives card - final for noon games, provisional for 3pm games. Not swept this run: X NFL Beats list, CSI/Discord, Novig site ladders (Novig from PropFinder prices), alt lines. role_check: route data unchanged since the 8:58am pull, same tags as 9am. Pick log: saved as new_picks file; picks.json/tracker not refreshed this run (see Gmail)."
+  },
+  {
+   "title": "🔷 Sunday noon - Tier B",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "Gunnar Helm",
+     "value": "U1.5 rec Betano +150 · 46% · Pin LEAN U1.5 agrees · PF U72 · Novig 41% agree · line moved from 2.5",
+     "inline": false
+    },
+    {
+     "name": "Harold Fannin Jr.",
+     "value": "U29.5 rec yds Betano -110 · 67% · Pin SLIGHT agrees · PF U86 · Novig 51% neutral",
+     "inline": false
+    },
+    {
+     "name": "KC Concepcion",
+     "value": "U41.5 rec yds Borgata -111 · 68% · Pin SLIGHT agrees · PF U75 · Novig not posted",
+     "inline": false
+    },
+    {
+     "name": "Ollie Gordon II",
+     "value": "U7.5 rec yds Borgata -110 · 62% · Pin LEAN U8.5 agrees (we get 7.5) · PF U87 · Novig 51% neutral (was Tier A at 8.5)\nU1.5 rec betJACK -106 · 63% · PF U79 · Novig 50% neutral",
+     "inline": false
+    },
+    {
+     "name": "Braelon Allen",
+     "value": "U2.5 rec Betano -110 · 79% · PF U80 · Novig 52% neutral · new, Hall OUT",
+     "inline": false
+    },
+    {
+     "name": "Mason Taylor",
+     "value": "U2.5 rec Betano +107 · 61% · Pin STRONG agrees · Conflict PF (O58) · Novig 53% agree · up from C",
+     "inline": false
+    },
+    {
+     "name": "Jaylen Wright",
+     "value": "U15.5 rush FD -113 · 64% · PF U80 · Novig 50% neutral",
+     "inline": false
+    },
+    {
+     "name": "Kayshon Boutte",
+     "value": "O1.5 rec FAN +155 · 55% · Pin SLIGHT agrees · PF O74 · Novig 40% agree\nO10.5 rec yds DK -108 · 66% · PF O71 · Novig 52% agree",
+     "inline": false
+    },
+    {
+     "name": "Cam Skattebo",
+     "value": "O1.5 rec Betano +172 · 56% · PF O65 · Novig 36% neutral",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🔷 Sunday noon - Tier B (cont.)",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "Isaiah Likely",
+     "value": "O5.5 rec betJACK +110 · 55% · Pin LEAN agrees · PF O64 · Novig 48% agree",
+     "inline": false
+    },
+    {
+     "name": "Tyrone Tracy Jr.",
+     "value": "U8.5 rec yds Betano -108 · 57% (est, line 9.5 to 8.5) · Pin STRONG U8.5 agrees · PF U51 · Novig 51% neutral",
+     "inline": false
+    },
+    {
+     "name": "John Metchie III",
+     "value": "O1.5 rec Unibet +138 · 68% · Pin STRONG O12.5 yds agrees · PF O76 · Novig 43% agree",
+     "inline": false
+    },
+    {
+     "name": "Josh Cuevas",
+     "value": "O4.5 rec yds Hard Rock +100 · 67% (est, line 5.5 to 4.5) · PF O76 · Novig 51% agree",
+     "inline": false
+    },
+    {
+     "name": "Derrick Henry",
+     "value": "U1.5 rec Betano -161 · 72% · Pin STRONG U6.5 yds agrees · PF U51 · Novig 62% agree",
+     "inline": false
+    },
+    {
+     "name": "Justin Jefferson",
+     "value": "U5.5 rec Unibet +110 · 92% · PF U78 · Novig 47% neutral · injury-affected volume, model likely low\nU73.5 rec yds betJACK -112 · 85% · PF U74 · Novig 51% neutral",
+     "inline": false
+    },
+    {
+     "name": "T.J. Hockenson",
+     "value": "U4.5 rec Bovada -135 · 91% · Pin LEAN agrees · PF U52 · Novig 57% neutral\nU35.5 rec yds betJACK -110 · 82% (est) · PF U49 · Novig 51% neutral",
+     "inline": false
+    },
+    {
+     "name": "Jonathan Taylor",
+     "value": "U2.5 rec Borgata -120 · 63% · PF U81 · Novig 54% neutral",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🔷 Sunday late - Tier B (provisional, 9am prices)",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "Kyren Williams",
+     "value": "O3.5 rec MGM -120 · 73% · Pin LEAN O26.5 yds agrees · PF O71 · Novig 54% neutral · 84% if Puka out (Q calf)",
+     "inline": false
+    },
+    {
+     "name": "Jalen Nailor",
+     "value": "U1.5 rec FAN +105 · 59% · PF U82 · Novig not posted",
+     "inline": false
+    },
+    {
+     "name": "Jaylen Waddle",
+     "value": "U50.5 rec yds DK -112 · 62% · Pin STRONG U4.5 rec agrees · PF U79 · Novig 49% neutral",
+     "inline": false
+    },
+    {
+     "name": "Courtland Sutton",
+     "value": "U33.5 rec yds FD -113 · 62% · Pin LEAN U3.5 rec agrees · PF U79 · Novig 49% neutral",
+     "inline": false
+    },
+    {
+     "name": "Xavier Worthy",
+     "value": "U49.5 rec yds DK -111 · 65% · PF U83 · Novig 49% neutral",
+     "inline": false
+    },
+    {
+     "name": "Tory Horton",
+     "value": "U1.5 rec DK -163 · 68% · Pin SLIGHT U11.5 yds agrees · PF U88 · Novig 60% neutral",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "⚪ Sunday - Tier C",
+   "color": 9807270,
+   "description": "Garrett Wilson U5.5 rec WH +107 81% (Pin SLIGHT agrees; model low on Wilson) · Fannin U3.5 rec Betsafe -125 62% (new) · Braelon Allen U74.5 rush DK -111 62% (new, Hall out) · Josh Downs U4.5 rec FAN -110 72% · Jordan Addison U3.5 rec DK -140 72% · Bijan Robinson O89.5 rush DK -110 88% · Aaron Jones Sr. O39.5 rush DK +101 94% (artifact risk) · George Kittle U71.5 rec yds betJACK -114 67% (est; Pin SLIGHT agrees) · Jalen Coker U5.5 rec bwin -120 81% (Conflict PF) · Late (9am prices): MarShawn Lloyd O10.5 rush CZR -110 81% · Kenneth Walker III U3.5 rec CZR -135 77% · Jaxon Smith-Njigba U6.5 rec FD +116 54% (Conflict PF) · Amon-Ra St. Brown U80.5 rec yds CZR -115 63% · Brock Bowers U70.5 rec yds DK -112 76% (Conflict PF)\nAnytime TD: Ollie Gordon II DK +195 41% · MarShawn Lloyd b365 +450 32% · George Holani FD +430 27%"
+  },
+  {
+   "title": "📌 Pinnacle board (open -> now, 11:00am CT)",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "NYG@HOU (noon) - HOU -10.5 / 43.5",
+     "value": "Game: total flipped to Over 42.5 SLIGHT (was Under LEAN), NYG ML SLIGHT\nMAX: Tank Dell O1.5 rec\nSTRONG: Skattebo O34.5, Dell O8.5 yds, Marks O16.5 car + O63.5, Tracy U8.5 yds, Singletary U6.5 yds, Mooney O1.5 rec\nLEAN: Likely O5.5 rec, Singletary U1.5 rec, Marks O14.5 yds, Noel U2.5 rec, McCarthy U18.5 comp",
+     "inline": false
+    },
+    {
+     "name": "IND@MIN (noon) - MIN -7.5 / 41.5",
+     "value": "Game: MIN ML STRONG\nMAX: K. Murray U25.5 rush\nSTRONG: Mallory O2.5 rec, McGowan U13.5, Treadwell O19.5 yds (up from LEAN)\nLEAN: Jennings O7.5, K. Allen O40.5, Hockenson U4.5 rec, A. Jones O39.5, J. Mason O12.5 car",
+     "inline": false
+    },
+    {
+     "name": "SF@ATL (noon) - ATL +2.5 / 50",
+     "value": "Game: ATL ML STRONG, ATL +2.5 LEAN, Over 50 LEAN\nMAX: McCaffrey U56.5 rush\nSTRONG: CMC U14.5 car + O5.5 rec, J. Watkins O24.5/O1.5, Branch O10.5, Purdy O20.5 comp + rush, Bijan O29.5 rec yds, London O5.5 rec\nLEAN: Branch O1.5, Kirk U2.5/U24.5",
+     "inline": false
+    },
+    {
+     "name": "TB@CAR (noon) - CAR -3 / 45",
+     "value": "Game: TB +3 LEAN\nMAX: Hubbard U17.5 car\nSTRONG: Hubbard U65.5, Metchie O12.5 yds\nLEAN: Godwin O44.5, Otton U40.5, Hurst U39.5, Irving U2.5 rec, Gainwell U11.5, Coker O66.5 yds, Tremble O2.5",
+     "inline": false
+    },
+    {
+     "name": "CIN@BAL (noon) - CIN -3 / 46.5",
+     "value": "Game: CIN -3 STRONG, Under 46.5 STRONG, CIN ML STRONG\nMAX: Henry U18.5 car\nSTRONG: C. Brown U11.5 car, Perine O26.5 rush, Gesicki U2.5, Huntley O24.5, D. Meyers U1.5 rec, Henry U6.5 yds, Burrow O35.5 att\nLEAN: Perine U1.5 rec, Chase U7.5 rec + O79.5 yds, Higgins O4.5, Flowers O62.5",
+     "inline": false
+    },
+    {
+     "name": "MIA@NYJ (noon) - NYJ -3.5 / 39.5",
+     "value": "Game: MIA +3.5 STRONG, MIA ML STRONG\nSTRONG: Gordon O54.5 rush, M. Taylor U2.5 rec, M. Washington O4.5 rec\nLEAN: Gordon O14.5 car + U8.5 rec yds, A. Mitchell O27.5, O. Cooper O30.5, C. Bell U19.5, M. Washington O40.5",
+     "inline": false
+    },
+    {
+     "name": "CLE@TEN (noon) - TEN +1.5 / 37",
+     "value": "Game: CLE ML SLIGHT\nMAX: Boston U51.5 yds\nSTRONG: Ayomanor O1.5 rec, Ward U30.5 att\nLEAN: Helm U1.5 rec + O11.5 yds, Pollard O1.5 rec (new), Judkins U10.5 rec yds, Sampson O10.5, Watson O214.5",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "📌 Pinnacle board (cont.)",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "DEN@ARI (3:05) - ARI +4.5 / 43.5",
+     "value": "Game: total flipped to Over 43.5 LEAN (was Under)\nMAX: Engram O22.5, Nix U216.5 pass + U21.5 comp, McBride U64.5\nSTRONG: E. Higgins O12.5, Dobbins U4.5, Allgeier U2.5 + U10.5, Waddle U4.5 rec, Knight U38.5, Bourne U33.5\nLEAN: McBride O6.5 rec, Sutton U3.5 rec, Harvey O25.5",
+     "inline": false
+    },
+    {
+     "name": "LA@LV (3:25) - LV +3 / 48.5",
+     "value": "Game: LV +3 STRONG, Over 48.5 STRONG, LV ML STRONG\nSTRONG: Corum U9.5, Jeanty O55.5, Kyren O15.5 car, Stafford O265.5\nLEAN: Mayer U3.5, Kyren O67.5, Cousins U34.5 att",
+     "inline": false
+    },
+    {
+     "name": "GB@DET (3:25) - DET -3.5 / 55.5",
+     "value": "Game: DET -3.5 MAX, Over 55.5 STRONG\nSTRONG: Jacobs U48.5 + U12.5 car, Love U7.5, Savion Williams O23.5\nLEAN: Golden U5.5, C. Watson O4.5 rec + U76.5, Gibbs O4.5",
+     "inline": false
+    },
+    {
+     "name": "KC@SEA (SNF) - SEA -3 / 42",
+     "value": "Game: SEA -3 STRONG, SEA ML STRONG\nSTRONG: K. Walker U80.5, E. Wilson U7.5 yds, JSN U6.5 rec\nLEAN: E. Wilson U1.5 rec, Mahomes U17.5 rush",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🎰 Long shots",
+   "color": 10181046,
+   "description": "None qualify (no CSI/coach-speak sweep this run). Closest: MarShawn Lloyd ATD b365 +450 (model 32% vs 18% break-even, Novig 17%, Jacobs normal starter reps)."
+  },
+  {
+   "title": "🧩 Parlays and ladders",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "Parlays (bet only at or above fair)",
+     "value": "CLE@TEN SGP: Judkins U46.5 rush + Concepcion U4.5 rec + Fannin U29.5 rec yds - fair +147 (Pollard leg dropped)\nP4 (cross-game): Judkins U46.5 + Sadiq U2.5 rec + Otton U40.5 yds + Waddle U4.5 rec - fair +257\nTD3: Ollie Gordon + Lloyd + Holani ATD - fair +2743",
+     "inline": false
+    },
+    {
+     "name": "Ladder targets (model fair, no alt prices pulled)",
+     "value": "Unchanged from 9am: Puka (Q) 100+ +105, JSN 100+ +168, Nabers 100+ +174, London 100+ +171, C. Watson 100+ +223",
+     "inline": false
+    },
+    {
+     "name": "Conditional / watch",
+     "value": "Kyren O3.5 rec 84% if Puka out · Jeanty U55.5 - Pinnacle STRONG Over, pass · late inactives post ~1:35pm CT",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "⚠️ Passes, conflicts, news",
+   "color": 15158332,
+   "fields": [
+    {
+     "name": "Dropped since 9am",
+     "value": "Tony Pollard U6.5 rec yds (9am Tier A) and U1.5 rec - Pinnacle now LEAN Over 1.5 rec and Spears OUT (more passing-down work) · Tyjae Spears U11.5 rec yds - OUT, void · Gunnar Helm U2.5 rec and U13.5 yds - line moved to 1.5; Pinnacle LEAN O11.5 yds · Devin Singletary U15.5 rush - line moved to 9.5, can't re-price · Jerry Jeudy O1.5 rec - line now 2.5, PF Under 64, Pin SLIGHT U · Malik Washington unders - Pin STRONG O4.5 rec",
+     "inline": false
+    },
+    {
+     "name": "Passes / conflicts",
+     "value": "Wan'Dale Robinson O34.5 yds (model 62%, PF U73) · Sadiq U18.5 yds (PF O57) · Jeudy O21.5 yds (Pin SLIGHT U) · Pollard O65.5 rush (56%, thin edge) · all 9am Pinnacle-against drops still stand",
+     "inline": false
+    },
+    {
+     "name": "Role changes (role_check)",
+     "value": "Unchanged from 9am (same route data): Injury-affected Jefferson, Chase, Coker, Mumpfield · Role cut Boutte, Hurst · Role up Treadwell, Ollie Gordon, London, Royals, Higbee, Dohnte Meyers, Braelon Allen, Tremayne. New: TEN without Ridley, Spears, Granson - Tate, Ayomanor, Helm, Pollard absorb; NYJ without Hall - Allen lead back.",
+     "inline": false
+    },
+    {
+     "name": "News",
+     "value": "Market already moved on TEN news (Helm 2.5 to 1.5, Pollard rush 66.5 to 65.5). Singletary rush line 15.5 to 9.5. Metchie 10.5 to 11.5, Hurst 36.5 to 39.5, Jeudy 1.5 to 2.5 rec. Next: close run ~11:45am, late inactives card if scheduled.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Leans, not guarantees · model record 35-23, +7.08u (58 graded) · full report in Gmail"
+   }
+  }
+ ]
+}
