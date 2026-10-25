@@ -1,0 +1,122 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sun 1:44pm CT** · DEN@ARI J. Brissett Under 229.5 pass yds (MAX) · GB@DET J. Goff Over 25.5 comp · KC@SEA G. Holani Under 13.5 rush yds (MAX) · faded: MIN@VAN Over 6.5 + 3 props · Pinnacle 1:44pm CT",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:05pm CT",
+   "matchup": "Denver @ Arizona",
+   "checked": "Checked Pinnacle 1:44pm CT",
+   "bet": "J. Brissett Under 229.5 Pass Yds",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Passing yards prop 225.5 (-114) -> 225.5 (-123) since open, +EV at 5 books",
+    "line2": "Status: stable - new MAX since the 12:10 slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:25pm CT",
+   "matchup": "Green Bay @ Detroit",
+   "checked": "Checked Pinnacle 1:44pm CT",
+   "bet": "J. Goff Over 25.5 Completions",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Completions prop 25.5 (-113) -> 25.5 (-129) since open, +EV at 3 books",
+    "line2": "Status: flipped - new Strong since the 12:10 slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "7:20pm CT",
+   "matchup": "Kansas City @ Seattle",
+   "checked": "Checked Pinnacle 1:44pm CT",
+   "bet": "G. Holani Under 13.5 Rush Yds",
+   "price": "-116",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Rushing yards prop 13.5 (-112) -> 13.5 (-171) since open, +EV at 8 books",
+    "line2": "Status: stable - new MAX since the 12:10 slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG plays that dropped or reversed at the 1:44pm CT read:",
+   "fields": [
+    {
+     "name": "NHL MIN @ VAN - Over 6.5 (-107) - 9:00pm CT",
+     "value": "Carded STRONG stable at 1:07pm, now Lean (stable, +EV at 5 books). Novig still leaned Over at 1:07pm.",
+     "inline": false
+    },
+    {
+     "name": "NFL GB @ DET - S. Williams Over 23.5 Rec Yds (-117) - 3:25pm CT",
+     "value": "Carded STRONG stable at 12:10pm, now Lean Over 24.5 (line moved up).",
+     "inline": false
+    },
+    {
+     "name": "NFL GB @ DET - J. Jacobs Under 12.5 Carries (-114) - 3:25pm CT",
+     "value": "Carded STRONG flipped at 12:10pm, now Slight. His Rush Yds Under (now 46.5) is still Strong.",
+     "inline": false
+    },
+    {
+     "name": "NHL MTL @ WPG - G. Vilardi Under 0.5 AST (-216) - 6:00pm CT",
+     "value": "Carded STRONG flipped at 1:07pm, now Lean.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 1:44pm CT · game lines unchanged: DET -3.5 (MAX), GB@DET Over 55.5, DEN@ARI Over 43.5, LV +3, LV ML, LAR@LV Over 48.5, SEA -3, SEA ML, FLA@CHI Under 6.5 · leans, not guarantees"
+   }
+  }
+ ]
+}
