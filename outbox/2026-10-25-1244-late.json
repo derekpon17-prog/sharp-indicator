@@ -1,0 +1,51 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sun 12:44pm CT** · LAR@LV K. Williams Over 67.5 rush yds · faded: KC@SEA J. Smith-Njigba Under 93.5 rec yds · Pinnacle 12:44pm CT",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:25pm CT",
+   "matchup": "LA Rams @ Las Vegas",
+   "checked": "Checked Pinnacle 12:44pm CT",
+   "bet": "K. Williams Over 67.5 Rush Yds",
+   "price": "-116",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Rushing yards prop priced 63.5 (-141) -> 67.5 (-122) since open",
+    "line2": "Status: flipped - new Strong since the 12:10 slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG plays that dropped or reversed at the 12:44pm CT read:",
+   "fields": [
+    {
+     "name": "NFL KC @ SEA - J. Smith-Njigba Under 93.5 Rec Yds (-105) - 7:20pm CT",
+     "value": "Carded STRONG stable at 12:10pm, now Lean (stable). His Recs Under 6.5 is still Strong.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 12:44pm CT · game lines unchanged: DET -3.5 (MAX), GB@DET Over 55.5, DEN@ARI Over 43.5, LV +3, LV ML, LAR@LV Over 48.5, SEA -3, SEA ML · leans, not guarantees"
+   }
+  }
+ ]
+}
