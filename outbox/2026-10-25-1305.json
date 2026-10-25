@@ -1,0 +1,124 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sun SLATE · 2:00-9:00pm CT** · NHL full day, 5 games (FLA@CHI, NYI@DAL, MTL@WPG, COL@NSH, MIN@VAN)",
+ "scorecards": [
+  {
+   "sport": "NHL",
+   "date": "Sun Oct 25",
+   "start": "9:00pm CT",
+   "matchup": "Wild @ Canucks",
+   "bet": "Over 6.5",
+   "price": "-107",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Over 6.5 (-104) to -111 since open",
+    "line2": "Status: stable - +EV at 5 books"
+   },
+   "vegas": {
+    "strength": 27,
+    "line1": "Pressure Move only (27): 87% of bets / 89% of money on the Over",
+    "bets": 87,
+    "money": 89
+   },
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Over $23K vs Under $14K near the top",
+    "line2": "Novig money leans the Over (1.7x), no big single order."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "17-13 · -1.50u · ROI -5%",
+   "checked": "Checked 1:07pm CT",
+   "header": "TOP PLAY"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NHL full day",
+   "subtitle": "Sun full day NHL - Pinnacle checked 1:07 - Vegas 1:08 - Novig 1:09pm CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - no NHL Vegas row reached 70 today",
+   "sections": [
+    {
+     "heading": "NHL - 2:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 6.5",
+       "sub": "FLA @ CHI - 2:00pm",
+       "price": -126,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS 60", "c": "grey"},
+        {"t": "NOVIG neutral", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "Panthers -1.5",
+       "sub": "FLA @ CHI - 2:00pm",
+       "price": 131,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN slight", "c": "grey"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG $10K top order", "c": "green"},
+        {"t": "book leans CHI +1.5", "c": "orange"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 9:00PM CT (later)",
+     "picks": [
+      {
+       "bet": "Over 6.5",
+       "sub": "MIN @ VAN - 9:00pm (later)",
+       "price": -107,
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS PM 27", "c": "grey"},
+        {"t": "NOVIG $23K v $14K", "c": "green"}
+       ]
+      },
+      {
+       "bet": "Wild ML",
+       "sub": "MIN @ VAN - 9:00pm (later)",
+       "price": -195,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN slight", "c": "grey"},
+        {"t": "VEGAS PM 47", "c": "grey"},
+        {"t": "NOVIG $39K v $19K", "c": "green"}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NHL",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "🏒 NHL (5 today)",
+     "value": "2:00pm FLA @ CHI - GL 2 / P 1\n5:00pm NYI @ DAL (later) - GL - / P 2\n6:00pm MTL @ WPG (later) - GL - / P 1\n7:00pm COL @ NSH (later) - GL - / P 1\n9:00pm MIN @ VAN (later) - GL 2 / P 2",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "NFL full day - carded at 12:05pm (late games; noon games not carded)\nNBA full day - 7 games, first 4:00pm CT (3:05pm run)",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "📋 Run notes",
+   "color": 15844367,
+   "description": "NHL full-day first pull (1:05pm run), all 5 games.\nSources: Betting Insider Pinnacle (Sport All, Today) 1:07pm CT - 2 Strong NHL game lines (0 Max) · Vegas NHL tab 1:08pm (all 9 rows read: 5 Vegas Backed 53-63, 4 Pressure Moves 27-47; none 70+) · Novig game lines 1:09pm (5 games, 15 book reads, 0 failures).\nOther logged rows: Vegas Backed under 70 - NYI@DAL Under 5.5 (63), FLA@CHI Under 6.5 (60, with the Pinnacle STRONG), NYI ML (54), MTL@WPG Under 5.5 (53, Pinnacle against), COL@NSH Under 6.5 (53). Pressure Moves - MIN ML 47, COL ML 35, FLA ML 32, MIN@VAN Over 27.\nNovig-only prices are consensus lines; Panthers -1.5 is a single-order trigger in a book that leans CHI +1.5.",
+   "footer": {"text": "Checked: Pinnacle 1:07 · Vegas 1:08 · Novig 1:09pm CT · leans, not guarantees"}
+  }
+ ]
+}

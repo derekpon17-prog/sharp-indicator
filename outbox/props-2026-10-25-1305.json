@@ -1,0 +1,83 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Sun SLATE · 2:00-9:00pm CT** · NHL full day, 5 games",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Sun full day NHL - Pinnacle checked 1:07 - Novig 1:09-1:11pm CT (465 reads)",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees · props record since Oct 21: 106-108 (50%) · -29.11u · independent plays · Showing 7 of 7 logged",
+   "sections": [
+    {
+     "heading": "NHL - FLA @ CHI 2:00PM CT",
+     "picks": [
+      {"bet": "T. Teravainen U0.5 pts", "sub": "FLA @ CHI - 2:00pm", "price": -142, "sources": 1,
+       "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "NOVIG thin", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NHL - NYI @ DAL 5:00PM CT (later)",
+     "picks": [
+      {"bet": "B. Horvat O2.5 SOG", "sub": "NYI @ DAL - 5:00pm", "price": -116, "sources": 1,
+       "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "NOVIG neutral", "c": "grey"}]},
+      {"bet": "T. DeAngelo U0.5 pts", "sub": "NYI @ DAL - 5:00pm", "price": -250, "sources": 1,
+       "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "NOVIG No $0.9K (under cutoff)", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NHL - MTL @ WPG 6:00PM CT (later)",
+     "picks": [
+      {"bet": "G. Vilardi U0.5 ast", "sub": "MTL @ WPG - 6:00pm", "price": -216, "sources": 1,
+       "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "NOVIG No $1.2K (under cutoff)", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NHL - COL @ NSH 7:00PM CT (later)",
+     "picks": [
+      {"bet": "C. Makar U2.5 SOG", "sub": "COL @ NSH - 7:00pm", "price": -107, "sources": 1,
+       "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "NOVIG No $1.1K (under cutoff)", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NHL - MIN @ VAN 9:00PM CT (later)",
+     "picks": [
+      {"bet": "Z. Buium U0.5 pts", "sub": "MIN @ VAN - 9:00pm", "price": -230, "sources": 1,
+       "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "NOVIG thin", "c": "grey"}]},
+      {"bet": "F. Chytil O1.5 SOG", "sub": "MIN @ VAN - 9:00pm", "price": -165, "sources": 1,
+       "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "NOVIG thin", "c": "grey"}]}
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NHL",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "🏒 NHL (5 today)",
+     "value": "2:00pm FLA @ CHI - P 1 / GL 2\n5:00pm NYI @ DAL (later) - P 2 / GL -\n6:00pm MTL @ WPG (later) - P 1 / GL -\n7:00pm COL @ NSH (later) - P 1 / GL -\n9:00pm MIN @ VAN (later) - P 2 / GL 2",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "NFL full day - carded at 12:05pm\nNBA full day - 7 games, first 4:00pm CT (3:05pm run)",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "**Parlay 1 - stable shots leans** (~+479)\n• C. Makar U2.5 SOG (-107) - PIN STRONG stable\n• B. Horvat O2.5 SOG (-116) - PIN STRONG stable\n• F. Chytil O1.5 SOG (-165) - PIN STRONG stable\n\n**Parlay 2 - points/assists unders, 4 games** (~+401)\n• T. Teravainen U0.5 pts (-142) - PIN STRONG flipped\n• G. Vilardi U0.5 ast (-216) - PIN STRONG flipped\n• Z. Buium U0.5 pts (-230) - PIN STRONG stable\n• T. DeAngelo U0.5 pts (-250) - PIN STRONG stable\n\nOne leg per game in each parlay, no conflicts. Only NHL props in this pull (NBA comes at 3:05pm), so no cross-sport option."
+  },
+  {
+   "title": "📋 Run notes",
+   "color": 15844367,
+   "description": "Novig props: 465 reads of the 500 cap (all 7 Pinnacle lines first, then every consensus goals/SOG/points/assists/saves line in all 5 games; first-goal-scorer skipped), 7 failed reads (never 3 in a row). NHL prop books are thin today: no Yes side reached $1K at 3x. 22 anytime-goal No sides passed the $3K/8x test - default skew on every player, not logged (same rule as anytime TD). Repeated $1,000 No orders sit on many SOG unders (maker pattern).",
+   "footer": {"text": "Checked: Pinnacle 1:07 · Novig 1:09-1:11pm CT · leans, not guarantees"}
+  }
+ ]
+}
