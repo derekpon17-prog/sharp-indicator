@@ -1,0 +1,56 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 7:46pm CT** · HOU@UTAH Over 57.5 · faded: NO@DEN Over 239.5, Flames ML · Pinnacle 7:44pm, Vegas 7:45pm, Novig 7:46pm CT",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "CFB",
+   "date": "Sat Oct 24",
+   "start": "9:15pm CT",
+   "matchup": "Houston @ Utah",
+   "checked": "Checked Pinnacle 7:44pm CT",
+   "bet": "Over 57.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 56.5 to 57.5 since open",
+    "line2": "Status: stable - new Strong since the 3:08 slate read, +EV at 2 books"
+   },
+   "vegas": {
+    "strength": 75,
+    "line1": "Vegas Backed: total moved up with a minority of bets",
+    "bets": 12,
+    "money": 13
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $55.9K vs Under $52.4K near the top",
+    "line2": "Even book: $18K-$19K orders sit on both sides, $101K traded."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21 (4-5, -1.49u)"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG plays that dropped below Strong at the 7:44pm CT read:",
+   "fields": [
+    {
+     "name": "NBA NO @ DEN - Over 239.5 (-112) - 8:00pm CT",
+     "value": "Carded STRONG flipped at 3:08pm, now LEAN flipped.",
+     "inline": false
+    },
+    {
+     "name": "NHL DET @ CGY - Flames ML (+107) - 9:00pm CT",
+     "value": "Carded STRONG stable at 3:08pm, now LEAN stable (+109). Vegas Backed 86 was aligned.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 7:44 · Vegas 7:45 · Novig 7:46pm CT · still Strong: Suns -9.5, GS@PHX Over 221.5, NDSU@UNM Under 39.5, Wild ML · leans, not guarantees"
+   }
+  }
+ ]
+}
