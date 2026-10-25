@@ -1,0 +1,136 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Daily record Sun Oct 25** · graded Sat Oct 24 from ESPN box scores (checked 9:15am CT) · 37 rows from the Oct 24 runs",
+ "embeds": [
+  {
+   "title": "📊 Sharp Props - Daily record Oct 25",
+   "color": 15844367,
+   "description": "Independent plays (one per player per game), 1u flat. Yesterday 15-19 (44%) · -8.56u on 35 plays (raw 15-21 (42%) · -10.67u, 37 rows; F. VanVleet did not play - void).\nPinnacle STRONG/MAX 12-19 (39%) · -11.56u yesterday; Max 4-1 (80%) · +3.00u. Strong stable was the drag (6-17 (26%) · -14.98u), with NBA Pinnacle overs 1-5.\nSeason 106-108 (50%) · -29.11u on 215 plays (268 raw rows). Pinnacle STRONG/MAX 83-87 (49%) · -22.12u; Max-only 13-5 (72%) · +7.08u - the one prop slice clearly ahead. Unders 73-58 (56%) · -1.01u vs overs 33-50 (40%) · -28.10u.\nNHL SOG unders were 8-8 yesterday, NHL props overall still the weakest sport. Small sample - only Pinnacle STRONG/MAX has 50+ graded plays.",
+   "footer": {
+    "text": "Leans, not guarantees · props record since Oct 21: 106-108 (50%) · -29.11u · independent plays"
+   }
+  },
+  {
+   "title": "🧮 Records by bucket (yesterday / season, independent)",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "📌 Pinnacle STRONG/MAX",
+     "value": "Yesterday 12-19 (39%) · -11.56u\nSeason 83-87 (49%) · -22.12u\nMax only: yday 4-1 (80%) · +3.00u · season 13-5 (72%) · +7.08u",
+     "inline": false
+    },
+    {
+     "name": "🔁 Flipped vs stable (Pinnacle)",
+     "value": "Stable: yday 9-18 (33%) · -12.98u · season 43-54 (44%) · -21.78u\nFlipped: yday 3-1 (75%) · +1.42u · season 40-33 (55%) · -0.34u\nSeason by tier: Strong stable 38-50 (43%) · -21.97u · Strong flipped 32-32 (50%) · -7.23u · Max flipped 8-1 (89%) · +6.89u · Max stable 5-4 (56%) · +0.19u",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig money (Yes/Over)",
+     "value": "Yesterday 1-1 (50%) · -0.58u · Season 15-18 (45%) · -7.82u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig No (default skew)",
+     "value": "Yesterday 2-0 (100%) · +2.00u · Season 10-8 (56%) · -3.19u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Pinnacle + Novig agree",
+     "value": "Yesterday 0-1 (0%) · -1.58u (M. Turner O 1.5 3PM) · Season 2-3 (40%) · -1.79u",
+     "inline": true
+    },
+    {
+     "name": "⚠️ Conflicts (fade check)",
+     "value": "None yesterday · Pinnacle side season 3-0 (100%) · +3.00u",
+     "inline": true
+    },
+    {
+     "name": "By sport (season)",
+     "value": "NBA 78-61 (56%) · +5.21u · NHL 19-37 (34%) · -29.58u · NFL 2-5 (29%) · -3.90u · MLB 5-3 (62%) · -0.51u · WNBA 2-2 (50%) · -0.33u",
+     "inline": false
+    },
+    {
+     "name": "By stat (season)",
+     "value": "3PM 11-8 (58%) · -0.60u\nAST 15-15 (50%) · -3.31u\nPRA 8-10 (44%) · -3.32u\nPTS 38-39 (49%) · -8.43u\nREB 12-8 (60%) · +2.12u\nSOG 13-17 (43%) · -7.07u\nTB 3-1 (75%) · +1.07u",
+     "inline": true
+    },
+    {
+     "name": "Over vs Under (season)",
+     "value": "Over 33-50 (40%) · -28.10u\nUnder 73-58 (56%) · -1.01u\nPinnacle-only: Over 20-36 (36%) · -23.24u · Under 63-51 (55%) · +1.12u",
+     "inline": true
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "Yesterday 1-2 · +1.74u (season 1-14 · -10.26u) - first parlay win.\n✅ NHL shots unders (+374): D. Carlile U 1.5 SOG (1) ✅ · B. Howden U 1.5 SOG (0) ✅ · J. Sanderson U 2.5 SOG (2) ✅ · +3.74u\n❌ Pinnacle core (+708): M. Turner O 1.5 3PM (0) ❌ · S. Castle O 5.5 AST (8) ✅ · P. Watson O 12.5 PTS (11) ❌ · M. Weegar U 0.5 PTS (1) ❌\n❌ NBA scorers (+540): N. Powell O 21.5 PTS (18) ❌ · Z. Williamson U 18.5 PTS (17) ✅ · M. Porter Jr. U 6.5 REB (9) ❌"
+  },
+  {
+   "title": "🧾 Your prop bets",
+   "color": 3066993,
+   "description": "No new prop bets logged for Oct 24.\nRunning: prop parlays 0-1 -1.00u · legs by bucket: PROP_ALIGNED 0-2, PROP_NOVIG_YES only 0-1"
+  },
+  {
+   "title": "📝 Yesterday's graded legs (1/1)",
+   "color": 9807270,
+   "description": "**NBA BKN@CLE**\n❌ M. Porter Jr. U 6.5 REB (9) STRONG stable\n❌ S. Merrill O 1.5 3PM (1) STRONG stable\n❌ P. Watson O 12.5 PTS (11) STRONG stable\n❌ S. Merrill O 8.5 PTS (7) STRONG stable · dup\n\n**NBA GS@PHX**\n❌ K. Maluach O 9.5 REB (9) STRONG stable · faded · dup\n✅ K. Maluach U 9.5 PTS (9) MAX stable · late\n✅ D. Brooks U 1.5 3PM (1) STRONG flipped · late\n\n**NBA HOU@ATL**\n⚪ F. VanVleet U 5.5 AST (DNP) STRONG stable\n\n**NBA MIA@CHA**\n✅ B. Miller O 22.5 PTS (34) NOVIG YES\n✅ G. Antetokounmpo U 28.5 PTS (14) NOVIG NO\n✅ S. James U 7.5 PTS (0) NOVIG NO\n\n**NBA MIL@PHI**\n❌ M. Turner O 1.5 3PM (0) STRONG stable · agree\n❌ T. Maxey O 35.5 PRA (34) STRONG stable\n\n**NBA NO@DEN**\n✅ Z. Williamson U 18.5 PTS (17) STRONG stable\n❌ N. Jokic U 50.5 PRA (60) STRONG stable\n\n**NBA SA@DAL**\n✅ S. Castle O 5.5 AST (8) MAX stable\n\n**NBA WSH@CHI**\n❌ N. Powell O 21.5 PTS (18) STRONG stable\n❌ J. Smith U 13.5 PTS (14) STRONG stable\n\n**NHL ANA@PHI**\n❌ A. Bump U 1.5 SOG (3) MAX stable\n\n**NHL BUF@WSH**\n✅ J. Zucker U 1.5 SOG (0) STRONG stable\n❌ R. Leonard O 0.5 PTS (0) STRONG stable\n❌ J. Chychrun U 0.5 AST (2) STRONG flipped\n\n**NHL DET@CGY**\n❌ Z. Parekh U 1.5 SOG (2) STRONG stable · late\n\n**NHL MIN@SEA**\n❌ Q. Hughes O 2.5 SOG (1) STRONG stable\n\n**NHL NSH@PIT**\n✅ D. Carlile U 1.5 SOG (1) MAX stable\n✅ T. Novak U 2.5 SOG (2) MAX flipped\n❌ R. Rakell U 2.5 SOG (4) STRONG stable\n✅ E. Karlsson U 2.5 SOG (2) STRONG stable\n\n**NHL NYR@OTT**\n✅ J. Sanderson U 2.5 SOG (2) STRONG stable\n✅ F. Zetterlund U 1.5 SOG (0) STRONG stable\n\n**NHL SJ@BOS**\n✅ C. Graf U 1.5 SOG (1) STRONG flipped\n❌ E. Lindholm U 1.5 SOG (2) STRONG stable\n❌ H. Lindholm U 1.5 SOG (4) STRONG stable\n\n**NHL TB@UTA**\n❌ M. Weegar U 0.5 PTS (1) STRONG stable\n❌ B. Hayton U 1.5 SOG (3) STRONG stable\n\n**NHL VGK@CBJ**\n✅ B. Howden U 1.5 SOG (0) STRONG stable\n❌ R. Andersson U 1.5 SOG (2) STRONG stable"
+  }
+ ],
+ "summaries": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Props record",
+   "subtitle": "Since Oct 21 · 215 independent plays (268 raw rows) · W-L · units · 1u flat",
+   "sections": [
+    {
+     "heading": "BY SIGNAL",
+     "rows": [
+      {"label": "Pinnacle STRONG/MAX", "w": 83, "l": 87, "p": 0, "units": -22.12},
+      {"label": "Max only", "w": 13, "l": 5, "p": 0, "units": 7.08},
+      {"label": "Stable", "w": 43, "l": 54, "p": 0, "units": -21.78},
+      {"label": "Flipped", "w": 40, "l": 33, "p": 0, "units": -0.34},
+      {"label": "Strong stable", "w": 38, "l": 50, "p": 0, "units": -21.97},
+      {"label": "Strong flipped", "w": 32, "l": 32, "p": 0, "units": -7.23},
+      {"label": "Max flipped", "w": 8, "l": 1, "p": 0, "units": 6.89},
+      {"label": "Max stable", "w": 5, "l": 4, "p": 0, "units": 0.19},
+      {"label": "Novig money", "w": 15, "l": 18, "p": 0, "units": -7.82},
+      {"label": "Novig No", "w": 10, "l": 8, "p": 0, "units": -3.19},
+      {"label": "Pinnacle + Novig agree", "w": 2, "l": 3, "p": 0, "units": -1.79},
+      {"label": "Conflict - Pinnacle side", "w": 3, "l": 0, "p": 0, "units": 3.0}
+     ]
+    },
+    {
+     "heading": "OVER VS UNDER",
+     "rows": [
+      {"label": "Over", "w": 33, "l": 50, "p": 0, "units": -28.1},
+      {"label": "Under", "w": 73, "l": 58, "p": 0, "units": -1.01}
+     ]
+    },
+    {
+     "heading": "BY STAT",
+     "rows": [
+      {"label": "3PM", "w": 11, "l": 8, "p": 0, "units": -0.6},
+      {"label": "AST", "w": 15, "l": 15, "p": 0, "units": -3.31},
+      {"label": "PRA", "w": 8, "l": 10, "p": 0, "units": -3.32},
+      {"label": "PTS", "w": 38, "l": 39, "p": 0, "units": -8.43},
+      {"label": "REB", "w": 12, "l": 8, "p": 0, "units": 2.12},
+      {"label": "SOG", "w": 13, "l": 17, "p": 0, "units": -7.07},
+      {"label": "TB", "w": 3, "l": 1, "p": 0, "units": 1.07}
+     ]
+    },
+    {
+     "heading": "BY SPORT",
+     "rows": [
+      {"label": "NBA", "w": 78, "l": 61, "p": 0, "units": 5.21},
+      {"label": "NHL", "w": 19, "l": 37, "p": 0, "units": -29.58},
+      {"label": "NFL", "w": 2, "l": 5, "p": 0, "units": -3.9},
+      {"label": "MLB", "w": 5, "l": 3, "p": 0, "units": -0.51},
+      {"label": "WNBA", "w": 2, "l": 2, "p": 0, "units": -0.33}
+     ]
+    }
+   ],
+   "footer": "One play per player per game · small sample · leans, not guarantees"
+  }
+ ]
+}

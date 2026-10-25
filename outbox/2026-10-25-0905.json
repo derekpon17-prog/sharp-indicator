@@ -1,0 +1,234 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Daily record Sun Oct 25** · graded Sat Oct 24 (147 game-line rows, 66 games) · ESPN finals checked 9:15am CT",
+ "embeds": [
+  {
+   "title": "📊 Sharp Signals - Daily record Oct 25",
+   "color": 15844367,
+   "description": "Game lines, 1u flat. Yesterday all logged rows 88-57-2 (61%) · +5.02u. Pinnacle STRONG 27-16 (63%) · +6.80u (stable 22-9 (71%) · +9.55u, flipped 5-7 (42%) · -2.75u), Vegas 70+ 9-13-1 (41%) · -4.95u, Novig STRONG 44-28-1 (61%) · -6.23u.\nSeason: Pinnacle STRONG/MAX 45-30 (60%) · +9.49u - the big Saturday (CFB ML 8-2, CFB totals 8-4) pushed it clear. Stable leans 31-16 (66%) · +10.99u vs flipped 14-14 (50%) · -1.50u. Vegas 70+ 15-21-1 (42%) · -7.60u still trails Vegas Backed under 70 25-16-1 (61%) · +7.92u. Novig STRONG 70-55-1 (56%) · -17.48u keeps losing units: heavy-favorite ML money wins often but pays little.\nWhen Novig money sat against a Pinnacle/Vegas signal, the signal side went 11-5 (69%) · +7.17u season. TRIPLE yesterday 2-4 (33%) · -2.55u.\nSmall sample - no bucket except Novig STRONG has 50+ graded rows. Game lines are not deduped (ML and spread on one side move together).",
+   "footer": {
+    "text": "Leans, not guarantees · records since Oct 21"
+   }
+  },
+  {
+   "title": "🧮 Records by bucket (yesterday / season)",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "📌 Pinnacle STRONG/MAX",
+     "value": "Yesterday 27-16 (63%) · +6.80u\nSeason 45-30 (60%) · +9.49u\nMax-only: none yesterday · season 1-0 (100%) · +1.00u",
+     "inline": false
+    },
+    {
+     "name": "🔁 Flipped vs stable (Pinnacle)",
+     "value": "Stable yday 22-9 (71%) · +9.55u · season 31-16 (66%) · +10.99u\nFlipped yday 5-7 (42%) · -2.75u · season 14-14 (50%) · -1.50u\nStrong stable 31-16 (66%) · +10.99u · Strong flipped 13-14 (48%) · -2.50u (Max under 8 graded)",
+     "inline": false
+    },
+    {
+     "name": "🎰 Vegas 70+",
+     "value": "Yesterday 9-13-1 (41%) · -4.95u\nSeason 15-21-1 (42%) · -7.60u",
+     "inline": true
+    },
+    {
+     "name": "🎰 Vegas Backed - all strengths",
+     "value": "Season all 40-37-2 (52%) · +0.32u\n70+ 15-21-1 (42%) · -7.60u · under 70 25-16-1 (61%) · +7.92u\nYesterday all 22-21-1 (51%) · -0.50u\nPressure Move (separate) yday 22-10 (69%) · +0.66u · season 31-18 (63%) · -3.08u",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig STRONG",
+     "value": "Yesterday 44-28-1 (61%) · -6.23u\nSeason 70-55-1 (56%) · -17.48u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig STRONG split",
+     "value": "Ratio yday 27-10-1 (73%) · -2.25u · season 37-20-1 (65%) · -8.26u\nSingle order yday 17-18 (49%) · -3.98u · season 33-35 (49%) · -9.22u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig LEAN",
+     "value": "Yesterday 11-9-1 (55%) · -0.26u\nSeason 12-12-2 (50%) · -2.69u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Aligned (Pin + Vegas 70+)",
+     "value": "Yesterday 6-8 (43%) · -2.64u · Season 10-13 (43%) · -4.13u",
+     "inline": true
+    },
+    {
+     "name": "✅ Pin + Novig",
+     "value": "Yesterday 12-7 (63%) · +1.24u · Season 17-13 (57%) · -1.50u",
+     "inline": true
+    },
+    {
+     "name": "✅ Vegas + Novig",
+     "value": "Yesterday 2-5-1 (29%) · -3.65u · Season 2-7-1 (22%) · -5.83u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Triple",
+     "value": "Yesterday 2-4 (33%) · -2.55u · Season 2-5 (29%) · -3.73u",
+     "inline": true
+    },
+    {
+     "name": "⚠️ Novig against (fade check)",
+     "value": "Signal side yday 6-2 (75%) · +4.25u · season 11-5 (69%) · +7.17u",
+     "inline": true
+    },
+    {
+     "name": "⏱️ Late flips / faded (first day tracked)",
+     "value": "LATE_FLIP 4-3 (57%) · +0.98u · PIN_FADED rows 5-4 (56%) · +0.49u (graded at the captured side)",
+     "inline": false
+    },
+    {
+     "name": "By sport (Pin STRONG or Vegas 70+, season)",
+     "value": "NBA 19-15 (56%) · +3.04u · NHL 8-6-1 (57%) · +1.48u · NFL 1-0 (100%) · +1.00u · CFB 21-16 (57%) · +0.64u · MLB 1-1 (50%) · -0.14u\nAll logged rows: NBA 42-28-1 (60%) · +9.49u · NHL 33-28-1 (54%) · -5.29u · NFL 3-0 (100%) · +3.00u · CFB 58-45-1 (56%) · -8.85u · MLB 5-4 (56%) · +0.86u",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "📝 Yesterday's Pin STRONG / Vegas 70+ plays (1/2)",
+   "color": 3447003,
+   "description": "✅ CFB AKR@KENT Over 47.5 (-112) PIN · +1.00u\n✅ CFB BAY@KU KU ML (-110) PIN fl/NV · +1.00u\n✅ CFB BOIS@WSU BOIS ML (-679) PIN/NV/faded · +1.00u\n❌ CFB BOIS@WSU Over 52 (-110) V78 · -1.10u\n✅ CFB CAL@SMU Over 55.5 (-108) V71 · +1.00u\n✅ CFB GAST@ARST Over 58.5 (-110) PIN/V100/NV lean/TRIPLE · +1.00u\n❌ CFB HOU@UTAH Over 57.5 (-111) PIN/V75/late/faded · -1.11u\n✅ CFB KSU@ASU ASU +1 (-110) PIN/V76 · +1.00u\n✅ CFB KSU@ASU ASU ML (-104) PIN fl/NV against · +1.00u\n✅ CFB KSU@ASU Under 51.5 (-110) PIN fl/NV against · +1.00u\n✅ CFB LSU@AUB Over 51.5 (-111) PIN/NV · +1.00u\n❌ CFB M-OH@CMU Under 40 (-110) PIN/V94/NV lean/TRIPLE · -1.10u\n✅ CFB M-OH@CMU M-OH ML (-178) PIN/NV · +1.00u\n❌ CFB M-OH@CMU M-OH -3.5 (-113) PIN · -1.13u\n✅ CFB MISS@TEX Over 54 (-110) PIN/NV · +1.00u\n✅ CFB NDSU@UNM Under 39.5 (-107) PIN/V88/late · +1.00u\n✅ CFB ODU@LT LT ML (-602) PIN/NV · +1.00u\n❌ CFB PITT@MIA PITT +20.5 (-107) PIN fl/NV · -1.07u\n✅ CFB RICE@FAU RICE +8 (-108) V75 · +1.00u\n❌ CFB SDSU@CSU Under 59 (-110) PIN fl · -1.10u\n✅ CFB SDSU@CSU CSU ML (-106) PIN/faded · +1.00u\n✅ CFB SYR@UNC Over 50.5 (-110) PIN/NV against/faded · +1.00u\n❌ CFB USC@WIS Over 50.5 (-112) PIN/NV against/late · -1.12u\n❌ CFB USU@TXST TXST -14 (-111) PIN/NV/faded · -1.11u\n✅ CFB USU@TXST TXST ML (-579) PIN/NV · +1.00u\n❌ CFB USU@TXST Over 60.5 (-111) V75 · -1.11u"
+  },
+  {
+   "title": "📝 Yesterday's Pin STRONG / Vegas 70+ plays (2/2)",
+   "color": 3447003,
+   "description": "✅ CFB UTSA@TULN UTSA ML (-146) PIN/NV against · +1.00u\n✅ CFB WMU@TOL Over 47.5 (-111) PIN/NV · +1.00u\n❌ CFB WMU@TOL WMU ML (+118) PIN/NV against · -1.00u\n❌ CFB WVU@TCU TCU -10.5 (-111) PIN/V93/NV/TRIPLE · -1.11u\n❌ CFB WVU@TCU TCU ML (-403) PIN/NV · -4.03u\n❌ NBA BKN@CLE Under 228.5 (-111) PIN fl/V78 · -1.11u\n❌ NBA GS@PHX Under 222.5 (-110) V93/NV lean · -1.10u\n❌ NBA GS@PHX PHX -9.5 (-109) PIN fl/V73/NV lean/TRIPLE/late · -1.09u\n✅ NBA GS@PHX Over 221.5 (-112) PIN fl/late · +1.00u\n❌ NBA HOU@ATL Under 227.5 (-113) PIN fl/V100 · -1.13u\n✅ NBA MIA@CHA Under 228.5 (-111) PIN/V78/NV lean/TRIPLE · +1.00u\n✅ NBA MIL@PHI Over 235 (-108) PIN · +1.00u\n✅ NBA NO@DEN Over 239.5 (-112) PIN fl/faded · +1.00u\n✅ NBA SA@DAL SA -14.5 (-110) PIN · +1.00u\n✅ NBA SA@DAL SA ML (-795) PIN/NV · +1.00u\n❌ NBA WSH@CHI CHI -1.5 (-111) PIN/V80/faded · -1.11u\n❌ NBA WSH@CHI CHI ML (-125) PIN fl/V80/NV/TRIPLE/faded · -1.25u\n❌ NHL ANA@PHI Under 5.5 (+104) PIN fl · -1.00u\n✅ NHL BUF@WSH Over 6.5 (-122) PIN · +1.00u\n❌ NHL BUF@WSH BUF ML (+101) V76 · -1.00u\n✅ NHL DET@CGY CGY ML (+107) PIN/V86/NV against/faded · +1.07u\n➖ NHL MIN@SEA Under 6 (-102) V75/NV · +0.00u\n✅ NHL MIN@SEA MIN ML (-174) PIN/NV/late · +1.00u\n❌ NHL NSH@PIT NSH ML (+104) V73 · -1.00u\n✅ NHL TOR@EDM TOR ML (+130) PIN/V95/NV against/late · +1.30u\n✅ NHL VGK@CBJ Under 6 (-103) V75 · +1.00u"
+  },
+  {
+   "title": "📝 Other logged rows (Vegas under 70, Pressure Move, Novig-only)",
+   "color": 9807270,
+   "description": "95 rows, all in claude/signals/ledger_daily-2026-10-24.json. Novig-only STRONG: ratio trigger 27-10-1 (73%) · -2.25u and single-order 17-18 (49%) · -3.98u across all rows (mostly CFB/NHL heavy-favorite MLs and puck lines). Vegas Backed under 70 13-8 (62%) · +4.45u; Pressure Move 22-10 (69%) · +0.66u."
+  },
+  {
+   "title": "🧾 Your game-line bets",
+   "color": 3066993,
+   "description": "No new game-line bets logged for Oct 24.\nRunning: straights 1-0 +1.00u · by bucket PIN_STRONG/PIN_NOVIG 1-0"
+  },
+  {
+   "title": "📅 Today's slate by sport (Sun Oct 25, CT)",
+   "color": 15105570,
+   "description": "🏈 NFL 12 · PIT @ NO 8:30am (early game, started before the first hourly run - not carded) · main: 7 at 12:00pm (SF@ATL, CLE@TEN, IND@MIN, MIA@NYJ, TB@CAR, CIN@BAL, NYG@HOU), DEN@ARI 3:05pm, GB@DET and LAR@LV 3:25pm, KC@SEA 7:20pm\n   ↳ NFL full-day first pull: 11:05am run (all 11 games incl. late window and SNF)\n🏒 NHL 5 · FLA@CHI 2:00pm, NYI@DAL 5:00pm, MTL@WPG 6:00pm, COL@NSH 7:00pm, MIN@VAN 9:00pm\n   ↳ NHL full-day first pull: 1:05pm run\n🏀 NBA 7 · LAL@UTAH 4:00pm, IND@BKN 5:00pm, ORL@NY / TOR@MIN / LAC@OKC 6:00pm, DET@PHI 6:30pm, MEM@SAC 8:00pm\n   ↳ NBA full-day first pull: 3:05pm run\n🏈 CFB 0 · ⚾ MLB 0 (no game today) · 🏀 WNBA 0 · 🏀 NCAAB 0 (season starts in November)\nNo game in the 9:05am window (9:45-10:45am). Betting Insider Vegas tabs unchanged (NFL, MLB, NCAAF, NBA, NHL). Flips and fades on carded games at the :30 runs."
+  }
+ ],
+ "summaries": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Signal x sport x bet type",
+   "subtitle": "Since Oct 21 · W-L · units · 1u flat",
+   "sections": [
+    {
+     "heading": "PINNACLE STRONG · 44-30 · +8.49u",
+     "rows": [
+      {"label": "NBA ML", "w": 5, "l": 3, "p": 0, "units": 2.14},
+      {"label": "NBA ATS", "w": 5, "l": 3, "p": 0, "units": 1.74},
+      {"label": "NBA Totals", "w": 8, "l": 6, "p": 0, "units": 1.35},
+      {"label": "NHL ML", "w": 4, "l": 2, "p": 0, "units": 1.06},
+      {"label": "NHL ATS", "w": 1, "l": 0, "p": 0, "units": 1.49},
+      {"label": "NHL Totals", "w": 1, "l": 2, "p": 0, "units": -1.07},
+      {"label": "NFL Totals", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "CFB ML", "w": 8, "l": 3, "p": 0, "units": 1.97},
+      {"label": "CFB ATS", "w": 1, "l": 5, "p": 0, "units": -4.52},
+      {"label": "CFB Totals", "w": 9, "l": 5, "p": 0, "units": 3.47},
+      {"label": "MLB ML", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "MLB Totals", "w": 0, "l": 1, "p": 0, "units": -1.14}
+     ]
+    },
+    {
+     "heading": "PINNACLE MAX · 1-0 · +1.00u",
+     "rows": [
+      {"label": "NBA Totals", "w": 1, "l": 0, "p": 0, "units": 1.0}
+     ]
+    },
+    {
+     "heading": "VEGAS 70+ · 15-21-1 · -7.60u",
+     "rows": [
+      {"label": "NBA ML", "w": 0, "l": 3, "p": 0, "units": -3.43},
+      {"label": "NBA ATS", "w": 1, "l": 4, "p": 0, "units": -3.35},
+      {"label": "NBA Totals", "w": 4, "l": 5, "p": 0, "units": -1.52},
+      {"label": "NHL ML", "w": 2, "l": 2, "p": 0, "units": 0.37},
+      {"label": "NHL Totals", "w": 2, "l": 1, "p": 1, "units": 0.93},
+      {"label": "CFB ATS", "w": 2, "l": 2, "p": 0, "units": -0.18},
+      {"label": "CFB Totals", "w": 4, "l": 4, "p": 0, "units": -0.42}
+     ]
+    },
+    {
+     "heading": "NOVIG STRONG · 70-55-1 · -17.48u",
+     "rows": [
+      {"label": "NBA ML", "w": 13, "l": 9, "p": 0, "units": 0.52},
+      {"label": "NBA ATS", "w": 5, "l": 2, "p": 0, "units": 2.91},
+      {"label": "NBA Totals", "w": 2, "l": 0, "p": 0, "units": 2.0},
+      {"label": "NHL ML", "w": 5, "l": 8, "p": 0, "units": -7.86},
+      {"label": "NHL ATS", "w": 7, "l": 6, "p": 0, "units": -2.52},
+      {"label": "NHL Totals", "w": 1, "l": 2, "p": 1, "units": -1.39},
+      {"label": "NFL ML", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "NFL ATS", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "NFL Totals", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "CFB ML", "w": 20, "l": 12, "p": 0, "units": -10.97},
+      {"label": "CFB ATS", "w": 6, "l": 14, "p": 0, "units": -9.17},
+      {"label": "CFB Totals", "w": 5, "l": 0, "p": 0, "units": 5.0},
+      {"label": "MLB ML", "w": 0, "l": 2, "p": 0, "units": -2.0},
+      {"label": "MLB ATS", "w": 2, "l": 0, "p": 0, "units": 2.0},
+      {"label": "MLB Totals", "w": 1, "l": 0, "p": 0, "units": 1.0}
+     ]
+    }
+   ],
+   "footer": "Pinnacle MAX split out (counts as Strong elsewhere) · game lines not deduped · small sample until 50+ graded · leans, not guarantees"
+  },
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Alignment by sport and bet type",
+   "subtitle": "Since Oct 21 · Pin = Strong or Max · Novig = Strong or Lean · W-L · units",
+   "sections": [
+    {
+     "heading": "PIN + VEGAS 70+ · 10-13 · -4.13u",
+     "rows": [
+      {"label": "NBA ML", "w": 0, "l": 2, "p": 0, "units": -2.43},
+      {"label": "NBA ATS", "w": 1, "l": 3, "p": 0, "units": -2.26},
+      {"label": "NBA Totals", "w": 4, "l": 4, "p": 0, "units": -0.42},
+      {"label": "NHL ML", "w": 2, "l": 0, "p": 0, "units": 2.37},
+      {"label": "NHL Totals", "w": 0, "l": 1, "p": 0, "units": -1.07},
+      {"label": "CFB ATS", "w": 1, "l": 1, "p": 0, "units": -0.11},
+      {"label": "CFB Totals", "w": 2, "l": 2, "p": 0, "units": -0.21}
+     ]
+    },
+    {
+     "heading": "PIN + NOVIG · 17-13 · -1.50u",
+     "rows": [
+      {"label": "NBA ML", "w": 3, "l": 3, "p": 0, "units": -0.46},
+      {"label": "NBA ATS", "w": 1, "l": 1, "p": 0, "units": -0.09},
+      {"label": "NBA Totals", "w": 1, "l": 1, "p": 0, "units": -0.12},
+      {"label": "NHL ML", "w": 2, "l": 2, "p": 0, "units": -1.31},
+      {"label": "NFL Totals", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "CFB ML", "w": 5, "l": 1, "p": 0, "units": 0.97},
+      {"label": "CFB ATS", "w": 0, "l": 4, "p": 0, "units": -4.39},
+      {"label": "CFB Totals", "w": 4, "l": 1, "p": 0, "units": 2.9}
+     ]
+    },
+    {
+     "heading": "VEGAS 70+ + NOVIG · 2-7-1 · -5.83u",
+     "rows": [
+      {"label": "NBA ML", "w": 0, "l": 3, "p": 0, "units": -3.43},
+      {"label": "NBA ATS", "w": 0, "l": 1, "p": 0, "units": -1.09},
+      {"label": "NBA Totals", "w": 1, "l": 1, "p": 0, "units": -0.1},
+      {"label": "NHL Totals", "w": 0, "l": 0, "p": 1, "units": 0.0},
+      {"label": "CFB ATS", "w": 0, "l": 1, "p": 0, "units": -1.11},
+      {"label": "CFB Totals", "w": 1, "l": 1, "p": 0, "units": -0.1}
+     ]
+    },
+    {
+     "heading": "TRIPLE · 2-5 · -3.73u",
+     "rows": [
+      {"label": "NBA ML", "w": 0, "l": 2, "p": 0, "units": -2.43},
+      {"label": "NBA ATS", "w": 0, "l": 1, "p": 0, "units": -1.09},
+      {"label": "NBA Totals", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "CFB ATS", "w": 0, "l": 1, "p": 0, "units": -1.11},
+      {"label": "CFB Totals", "w": 1, "l": 1, "p": 0, "units": -0.1}
+     ]
+    }
+   ],
+   "footer": "Small sample · leans, not guarantees"
+  }
+ ]
+}
