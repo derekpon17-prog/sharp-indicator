@@ -1,0 +1,330 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Sun SLATE · 4:00-8:00pm CT** · NBA full day, 7 games",
+ "boards": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays",
+   "subtitle": "Sun full day NBA - Pinnacle checked 3:06 - Novig 3:09-3:20pm CT (500 reads)",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees · props record since Oct 21: 106-108 (50%) · -29.11u · independent plays · Showing 15 of 21 logged (25 raw)",
+   "sections": [
+    {
+     "heading": "NBA - LAL @ UTAH 4:00PM CT",
+     "picks": [
+      {
+       "bet": "J. Hayes U5.5 reb",
+       "sub": "LAL @ UTAH - 4:00pm",
+       "price": 107,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG No $2.8K (just under cutoff)",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "J. Jackson Jr. U5.5 reb",
+       "sub": "LAL @ UTAH - 4:00pm",
+       "price": 108,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG thin",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - IND @ BKN 5:00PM CT",
+     "picks": [
+      {
+       "bet": "T. Haliburton U9.5 ast",
+       "sub": "IND @ BKN - 5:00pm",
+       "price": -121,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG No $1.3K (under cutoff)",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "M. Porter Jr. U22.5 pts",
+       "sub": "IND @ BKN - 5:00pm",
+       "price": -118,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - TOR @ MIN 6:00PM CT (later)",
+     "picks": [
+      {
+       "bet": "A. Dosunmu U12.5 pts",
+       "sub": "TOR @ MIN - 6:00pm",
+       "price": -128,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG No $1.1K (under cutoff)",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "A. Edwards U27.5 pts",
+       "sub": "TOR @ MIN - 6:00pm",
+       "price": -119,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - LAC @ OKC 6:00PM CT (later)",
+     "picks": [
+      {
+       "bet": "K. Dunn U3.5 ast",
+       "sub": "LAC @ OKC - 6:00pm",
+       "price": 108,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - ORL @ NY 6:00PM CT (later)",
+     "picks": [
+      {
+       "bet": "J. Brunson O25.5 pts",
+       "sub": "ORL @ NY - 6:00pm",
+       "price": -117,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG $1.6K v $0.2K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "T. da Silva U2.5 3PM",
+       "sub": "ORL @ NY - 6:00pm",
+       "price": -179,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG No $1.7K (under cutoff)",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "J. Suggs U5.5 ast",
+       "sub": "ORL @ NY - 6:00pm",
+       "price": -116,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG thin",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "D. Bane U2.5 3PM",
+       "sub": "ORL @ NY - 6:00pm",
+       "price": -131,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG No $2.2K (under cutoff)",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "brand": "SHARP PROPS",
+   "title": "Top plays (2)",
+   "subtitle": "Sun full day NBA - Pinnacle checked 3:06 - Novig 3:09-3:20pm CT (500 reads)",
+   "legend": "Bars = sources agreeing (Pinnacle, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees · props record since Oct 21: 106-108 (50%) · -29.11u · independent plays · Showing 15 of 21 logged (25 raw)",
+   "sections": [
+    {
+     "heading": "NBA - DET @ PHI 6:30PM CT (later)",
+     "picks": [
+      {
+       "bet": "T. Maxey U5.5 ast",
+       "sub": "DET @ PHI - 6:30pm",
+       "price": -107,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG No $1.9K (under cutoff)",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "C. Cunningham U5.5 reb",
+       "sub": "DET @ PHI - 6:30pm",
+       "price": -114,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG thin",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "A. Thompson U7.5 reb",
+       "sub": "DET @ PHI - 6:30pm",
+       "price": -143,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG No $1.5K (under cutoff)",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "P. Reed O14.5 pts",
+       "sub": "DET @ PHI - 6:30pm",
+       "price": -110,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG leans Under $1.4K",
+         "c": "orange"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NBA",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "🏀 NBA (7 today)",
+     "value": "4:00pm LAL @ UTAH - P 2 / GL 2\n5:00pm IND @ BKN - P 4 / GL 2\n6:00pm ORL @ NY (later) - P 7 / GL 2\n6:00pm TOR @ MIN (later) - P 2 / GL 3\n6:00pm LAC @ OKC (later) - P 1 / GL 3\n6:30pm DET @ PHI (later) - P 6 / GL 2\n8:00pm MEM @ SAC (later) - P 3 / GL 1",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "NFL full day - carded at 12:05pm\nNHL full day - carded at 1:05pm",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "**Parlay 1 - aligned + Max + stable, 4 games** (~+1216)\n• J. Brunson O25.5 PTS (-117) - PIN STRONG stable + NOVIG (aligned)\n• J. Hayes U5.5 REB (+107) - PIN MAX stable\n• T. Haliburton U9.5 AST (-121) - PIN STRONG stable\n• C. Cunningham U5.5 REB (-114) - PIN STRONG stable\n\n**Parlay 2 - stable unders, 4 games** (~+801)\n• A. Edwards U27.5 PTS (-119) - PIN STRONG stable\n• A. Thompson U7.5 REB (-143) - PIN STRONG stable\n• T. da Silva U2.5 3PM (-179) - PIN STRONG stable\n• M. Porter Jr. U22.5 PTS (-118) - PIN STRONG stable\n\nOne leg per game in each parlay, no conflicts, no player twice. Only NBA props in this pull, so no cross-sport option."
+  },
+  {
+   "title": "➕ More props by game",
+   "color": 9807270,
+   "description": "5:00pm IND @ BKN - O. Toppin O1.5 3PM (-111) Novig Yes $2.5K v $52 · A. Nembhard U14.5 pts (-115) Novig No $3.0K default skew\n6:00pm ORL @ NY - M. McBride O1.5 3PM (+111) Novig Yes $1.8K v $77\n6:30pm DET @ PHI - L. James U33.5 PRA (-117) PIN STRONG flipped\n8:00pm MEM @ SAC - D. Acuff Jr. O4.5 ast (-104) Novig Yes $2.2K v $0.6K · C. Coward U3.5 ast (-150) Novig No $5.0K default skew\nNovig-only prices are Novig take prices."
+  },
+  {
+   "title": "📋 Run notes",
+   "color": 15844367,
+   "description": "Pinnacle props: 18 Strong/Max NBA props (1 Max: J. Hayes U5.5 reb). Novig props: 500 reads of the 500 cap (all 18 Pinnacle lines first, then consensus lines by market volume), 4 failed reads (never 3 in a row); 785 consensus lines listed, 285 lower-volume lines unread. Cunningham PRA read at Novig's 40.5. Repeated $3,000 No orders on Siakam pts, Porter PRA/3PM, Murray-Boyles PRA/ast and Kessler blk skipped as a maker pattern. Reed O14.5 has Novig money on the Under (below the No cutoff) - not a formal conflict.",
+   "footer": {
+    "text": "Checked: Pinnacle 3:06 · Novig 3:09-3:20pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}
