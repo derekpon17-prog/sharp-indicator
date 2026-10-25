@@ -1,0 +1,112 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 8:45pm CT** · GS@PHX K. Maluach Under 9.5 pts (MAX), D. Brooks Under 1.5 threes · DET@CGY Z. Parekh Under 1.5 SOG · faded: HOU@UTAH Over 57.5, Maluach Over 9.5 reb · Pinnacle 8:45pm CT",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sat Oct 24",
+   "start": "9:00pm CT",
+   "matchup": "Golden State @ Phoenix",
+   "checked": "Checked Pinnacle 8:45pm CT",
+   "bet": "K. Maluach Under 9.5 PTS",
+   "price": "-136",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Points prop priced 9.5 (-114) -> 9.5 (-166) since open",
+    "line2": "Status: stable - new MAX since the 3:19 slate props, +EV at 9 books"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sat Oct 24",
+   "start": "9:00pm CT",
+   "matchup": "Golden State @ Phoenix",
+   "checked": "Checked Pinnacle 8:45pm CT",
+   "bet": "D. Brooks Under 1.5 3PM",
+   "price": "+109",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Threes prop priced 1.5 (+132) -> 1.5 (+105) since open",
+    "line2": "Status: flipped - new Strong since the slate, +EV at 6 books"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NHL",
+   "date": "Sat Oct 24",
+   "start": "9:00pm CT",
+   "matchup": "Detroit @ Calgary",
+   "checked": "Checked Pinnacle 8:45pm CT",
+   "bet": "Z. Parekh Under 1.5 SOG",
+   "price": "-109",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Shots prop priced 1.5 (-130) -> 1.5 (-141) since open",
+    "line2": "Status: stable - new Strong since the slate, +EV at 1 book"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG plays that dropped or reversed at the 8:45pm CT read:",
+   "fields": [
+    {
+     "name": "CFB HOU @ UTAH - Over 57.5 (-111) - 9:15pm CT",
+     "value": "Late-flip STRONG at 7:44pm, now reversed: Slight Under 57.5 (mixed, flipped).",
+     "inline": false
+    },
+    {
+     "name": "NBA GS @ PHX - K. Maluach Over 9.5 REB (+101) - 9:00pm CT",
+     "value": "Carded STRONG stable at 3:19pm, now Slight (mixed).",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 8:45pm CT · still Strong: Suns -9.5, GS@PHX Over 221.5, NDSU@UNM Under 39.5, Wild ML, Q. Hughes Over 2.5 SOG · leans, not guarantees"
+   }
+  }
+ ]
+}
