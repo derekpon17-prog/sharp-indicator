@@ -1,0 +1,188 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sun 2:45pm CT** · LAR@LV A. Jeanty Under 55.5 rush yds (MAX, reversed) + Under 14.5 carries (MAX) · P. Nacua Under 7.5 rec · M. Mayer Under 3.5 rec · MTL@WPG K. Connor Under 3.5 SOG · faded: 6 props · Pinnacle 2:45pm CT",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:25pm CT",
+   "matchup": "Los Angeles Rams @ Las Vegas",
+   "checked": "Checked Pinnacle 2:45pm CT",
+   "bet": "A. Jeanty Under 55.5 Rush Yds",
+   "price": "-117",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Rushing yards prop 53.5 (-115) -> 51.5 (-132) since open, +EV at 7 books",
+    "line2": "Status: flipped - REVERSED from the carded Strong Over 55.5 (12:10)"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:25pm CT",
+   "matchup": "Los Angeles Rams @ Las Vegas",
+   "checked": "Checked Pinnacle 2:45pm CT",
+   "bet": "A. Jeanty Under 14.5 Carries",
+   "price": "-124",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Carries prop 15.5 (-152) -> 14.5 (-141) since open, +EV at 4 books",
+    "line2": "Status: flipped - new MAX, same read as his rush yds Under"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:25pm CT",
+   "matchup": "Los Angeles Rams @ Las Vegas",
+   "checked": "Checked Pinnacle 2:45pm CT",
+   "bet": "P. Nacua Under 7.5 Receptions",
+   "price": "-125",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Receptions prop 8.5 (-160) -> 7.5 (-120) since open",
+    "line2": "Status: flipped - new Strong since the 12:10 slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:25pm CT",
+   "matchup": "Los Angeles Rams @ Las Vegas",
+   "checked": "Checked Pinnacle 2:45pm CT",
+   "bet": "M. Mayer Under 3.5 Receptions",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Receptions prop 3.5 (-104) -> 3.5 (-119) since open, +EV at 4 books",
+    "line2": "Status: stable - new Strong since the 12:10 slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NHL",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Montreal @ Winnipeg",
+   "checked": "Checked Pinnacle 2:45pm CT",
+   "bet": "K. Connor Under 3.5 Shots on Goal",
+   "price": "-145",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "SOG prop 3.5 (-156) -> 2.5 (+140) since open (Pinnacle now hangs 2.5), +EV at 2 books",
+    "line2": "Status: flipped - new Strong since the 1:07 slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG/MAX plays that dropped or reversed at the 2:45pm CT read:",
+   "fields": [
+    {
+     "name": "NFL LAR @ LV - A. Jeanty Over 55.5 Rush Yds (-115) - 3:25pm CT",
+     "value": "Carded STRONG flipped at 12:10pm - now REVERSED: Pinnacle Max Under 55.5 (+EV at 7 books). See LATE FLIP above.",
+     "inline": false
+    },
+    {
+     "name": "NFL LAR @ LV - K. Williams Over 67.5 Rush Yds (-116) - 3:25pm CT",
+     "value": "Late-flip STRONG at 12:44pm, now Lean (flipped).",
+     "inline": false
+    },
+    {
+     "name": "NFL LAR @ LV - M. Stafford Over 265.5 Pass Yds (-118) - 3:25pm CT",
+     "value": "Carded STRONG flipped at 12:10pm, now Slight Over 267.5 (mixed).",
+     "inline": false
+    },
+    {
+     "name": "NFL DEN @ ARI - J. Brissett Under 229.5 Pass Yds (-112) - 3:05pm CT",
+     "value": "Late-flip MAX at 1:44pm, now Lean Under 225.5 (+EV at 6 books).",
+     "inline": false
+    },
+    {
+     "name": "NFL DEN @ ARI - E. Higgins Over 12.5 Rec Yds (-116) - 3:05pm CT",
+     "value": "Carded STRONG flipped at 12:10pm, now Lean (+EV at 1 book).",
+     "inline": false
+    },
+    {
+     "name": "NHL NYI @ DAL - B. Horvat Over 2.5 SOG (-116) - 5:00pm CT",
+     "value": "Carded STRONG stable at 1:07pm, now Lean.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 2:45pm CT · game lines unchanged: DET -3.5 (MAX), GB@DET Over 55.5, DEN@ARI Over 44, LV +3, LV ML, LAR@LV Over 48.5, SEA -3, SEA ML · upgraded to MAX: J. Love U6.5 rush yds, B. Nix U220.5 pass yds · leans, not guarantees"
+   }
+  }
+ ]
+}
