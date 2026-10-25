@@ -1,0 +1,406 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sun SLATE · 4:00-8:00pm CT** · NBA full day, 7 games (LAL@UTAH, IND@BKN, ORL@NY, TOR@MIN, LAC@OKC, DET@PHI, MEM@SAC)",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Raptors @ Timberwolves",
+   "bet": "Raptors ML",
+   "price": "-106",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Raptors +116 to -106 since open",
+    "line2": "Status: stable - +EV at 5 books"
+   },
+   "vegas": {
+    "strength": 83,
+    "line1": "Vegas Backed: line moved to the Raptors with a minority of bets",
+    "bets": 21,
+    "money": 14
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Raptors $48K vs Timberwolves $45K near the top",
+    "line2": "Strong on one $11.4K Raptors order at the top; the book itself is close to even."
+   },
+   "record_label": "PINNACLE + VEGAS 70+ + NOVIG (TRIPLE) RECORD",
+   "record": "2-5 · -3.73u · ROI -53%",
+   "checked": "Checked 3:06pm CT",
+   "header": "TOP PLAY"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:30pm CT",
+   "matchup": "Pistons @ 76ers",
+   "bet": "Pistons ML",
+   "price": "-114",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Pistons +120 to -110 since open",
+    "line2": "Status: flipped - +EV at 3 books"
+   },
+   "vegas": {
+    "strength": 76,
+    "line1": "Vegas Backed: line moved to the Pistons with a minority of bets",
+    "bets": 28,
+    "money": 41
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Pistons $62K vs 76ers $37K near the top",
+    "line2": "Pistons money leads 1.7x, with a $16.9K order at the best price; $209K traded."
+   },
+   "record_label": "PINNACLE + VEGAS 70+ + NOVIG (TRIPLE) RECORD",
+   "record": "2-5 · -3.73u · ROI -53%",
+   "checked": "Checked 3:06pm CT",
+   "header": "TOP PLAY"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "8:00pm CT",
+   "matchup": "Grizzlies @ Kings",
+   "bet": "Under 234.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 237 to 235 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: total dropped toward the Under with a minority of bets",
+    "bets": 12,
+    "money": 15
+   },
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Under $28K vs Over $17K near the top (Novig line 235.5)",
+    "line2": "Novig money leans the Under 1.6x; thin market so far ($6K traded)."
+   },
+   "record_label": "PINNACLE + VEGAS 70+ + NOVIG (TRIPLE) RECORD",
+   "record": "2-5 · -3.73u · ROI -53%",
+   "checked": "Checked 3:06pm CT",
+   "header": "TOP PLAY"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Raptors @ Timberwolves",
+   "bet": "Under 229.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 232.5 to 229.5 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: total dropped toward the Under with a minority of bets",
+    "bets": 9,
+    "money": 14
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $15K vs Under $13K near the top (Novig line 230.5)",
+    "line2": "No clear Novig money either way."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "10-13 · -4.13u · ROI -18%",
+   "checked": "Checked 3:06pm CT",
+   "header": "TOP PLAY"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "6:00pm CT",
+   "matchup": "Clippers @ Thunder",
+   "bet": "Thunder -16.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Thunder -14.5 to -16.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Thunder $32K vs Clippers $21K near the top",
+    "line2": "Novig money leans the Thunder 1.5x, no big single order."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "17-13 · -1.50u · ROI -5%",
+   "checked": "Checked 3:06pm CT",
+   "header": "TOP PLAY"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NBA full day",
+   "subtitle": "Sun full day NBA - Pinnacle checked 3:06 - Vegas 3:07 - Novig 3:08pm CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - 5 scorecard plays not repeated here",
+   "sections": [
+    {
+     "heading": "NBA - 4:00PM CT",
+     "picks": [
+      {
+       "bet": "Over 237.5",
+       "sub": "LAL @ UTAH - 4:00pm",
+       "price": -112,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Lakers ML",
+       "sub": "LAL @ UTAH - 4:00pm",
+       "price": -247,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $72K v $30K",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 5:00PM CT",
+     "picks": [
+      {
+       "bet": "Nets ML",
+       "sub": "IND @ BKN - 5:00pm",
+       "price": 196,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS 77",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG against $65K v $33K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Pacers -6.5",
+       "sub": "IND @ BKN - 5:00pm",
+       "price": -109,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $12K top order",
+         "c": "green"
+        },
+        {
+         "t": "book leans BKN +6.5",
+         "c": "orange"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:00-6:30PM CT (later)",
+     "picks": [
+      {
+       "bet": "Over 224.5",
+       "sub": "LAC @ OKC - 6:00pm",
+       "price": -111,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Raptors +1",
+       "sub": "TOR @ MIN - 6:00pm",
+       "price": -112,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS 75",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Magic ML",
+       "sub": "ORL @ NY - 6:00pm",
+       "price": 232,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG against $44K v $21K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Knicks ML",
+       "sub": "ORL @ NY - 6:00pm",
+       "price": -245,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN against",
+         "c": "red"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $44K v $21K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Thunder ML",
+       "sub": "LAC @ OKC - 6:00pm",
+       "price": -1341,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS PM 56",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $54K v $8K",
+         "c": "green"
+        },
+        {
+         "t": "heavy fav",
+         "c": "orange"
+        }
+       ]
+      },
+      {
+       "bet": "Pistons -1.5",
+       "sub": "DET @ PHI - 6:30pm",
+       "price": -103,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG line DET +1.5",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NBA",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "🏀 NBA (7 today)",
+     "value": "4:00pm LAL @ UTAH - GL 2 / P 2\n5:00pm IND @ BKN - GL 2 / P 4\n6:00pm ORL @ NY (later) - GL 2 / P 7\n6:00pm TOR @ MIN (later) - GL 3 / P 2\n6:00pm LAC @ OKC (later) - GL 3 / P 1\n6:30pm DET @ PHI (later) - GL 2 / P 6\n8:00pm MEM @ SAC (later) - GL 1 / P 3",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "NFL full day - carded at 12:05pm (late games; noon games not carded)\nNHL full day - carded at 1:05pm",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "⚠️ Conflicts",
+   "color": 15158332,
+   "description": "Magic ML (PIN STRONG flipped) - Novig money on the Knicks $43.8K vs $20.7K (2.12x).\nNets ML (Vegas 77) - Novig money on the Pacers $65.0K vs $33.4K (1.95x).\nKings ML (Vegas Backed 68, data only) - Novig leans the Grizzlies 1.5x.\nSeason fade check: when Novig sat against a Pinnacle/Vegas signal, the signal side went 11-5 (+7.17u)."
+  },
+  {
+   "title": "📋 Run notes",
+   "color": 15844367,
+   "description": "NBA full-day first pull (3:05pm run), all 7 games incl. MEM@SAC 8:00pm.\nSources: Betting Insider Pinnacle (Sport All, Today) 3:06pm CT - 9 Strong NBA game lines (0 Max) · Vegas NBA tab 3:07pm (all 11 rows read: 6 Vegas Backed 70+, 4 Vegas Backed 43-68, 1 Pressure Move 56) · Novig game lines 3:08pm (7 games, 21 book reads, 0 failures).\nThree TRIPLE plays (TOR ML, DET ML, MEM@SAC Under). TOR ML Novig Strong is a single-order trigger ($11.4K) in a near-even book. TOR ML, TOR +1 and the TOR@MIN Under move together.\nOther logged rows: Vegas Backed under 70 - Kings ML 68, IND@BKN Under 231.5 63, Magic +7.5 57, Kings +3.5 43 (Pinnacle against). Pressure Move - Thunder ML 56.\nNovig-only prices: Knicks ML and Pacers -6.5 are approximate (Novig take / mirror of consensus).",
+   "footer": {
+    "text": "Checked: Pinnacle 3:06 · Vegas 3:07 · Novig 3:08pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}
