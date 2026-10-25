@@ -1,0 +1,362 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sun SLATE · 3:05-7:20pm CT** · 4 NFL games (DEN@ARI, GB@DET, LAR@LV, KC@SEA) - catch-up after the 11:05 run left no card; noon games already started",
+ "scorecards": [
+  {
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:25pm CT",
+   "matchup": "Rams @ Raiders",
+   "bet": "Raiders ML",
+   "price": "+148",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Raiders +204 to +149 since open",
+    "line2": "Status: stable - +EV at 2 books"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: +223 to +148 toward the Raiders with a minority of bets",
+    "bets": 20,
+    "money": 17
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Raiders top-of-book orders $18K and $17K vs Rams $9.6K",
+    "line2": "Single-order trigger - near-top dollars overall lean Rams $251K vs $159K, so the book is mixed."
+   },
+   "record_label": "TRIPLE RECORD",
+   "record": "2-5 · -3.73u · small sample",
+   "checked": "Checked 12:07pm CT",
+   "header": "TOP PLAY"
+  },
+  {
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "7:20pm CT",
+   "matchup": "Chiefs @ Seahawks",
+   "bet": "Seahawks ML",
+   "price": "-148",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Seahawks -131 to -149 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 73,
+    "line1": "Vegas Backed: -137 to -148 toward the Seahawks with 27% of bets",
+    "bets": 27,
+    "money": 11
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Seahawks $350K vs Chiefs $299K near the top",
+    "line2": "Big orders on both sides - no clear Novig side."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "10-13 · -4.13u · ROI -18%",
+   "checked": "Checked 12:07pm CT",
+   "header": "TOP PLAY"
+  },
+  {
+   "sport": "NFL",
+   "date": "Sun Oct 25",
+   "start": "3:25pm CT",
+   "matchup": "Packers @ Lions",
+   "bet": "Lions -3.5",
+   "price": "-109",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Line moved from Lions -3 (-113) to -3.5 (-115) since open",
+    "line2": "Status: stable - +EV at 3 books"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Packers +3.5 $132K vs Lions $87K near the top",
+    "line2": "Novig money leans the other way (1.5x, $19K top order on the Packers)."
+   },
+   "record_label": "PINNACLE MAX RECORD",
+   "record": "1-0 · +1.00u · tracking started Oct 21",
+   "checked": "Checked 12:07pm CT",
+   "header": "SIGNAL"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NFL full day (late games)",
+   "subtitle": "Sun full day NFL (catch-up) - Pinnacle checked 12:07 - Vegas 12:08 - Novig 12:09pm CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - noon games had started before this run and are not carded",
+   "sections": [
+    {
+     "heading": "NFL - 3:05PM CT",
+     "picks": [
+      {
+       "bet": "Over 43.5",
+       "sub": "DEN @ ARI - 3:05pm",
+       "price": -110,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Broncos ML",
+       "sub": "DEN @ ARI - 3:05pm - Novig price",
+       "price": -208,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS PM 43",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $20K top order",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:25PM CT",
+     "picks": [
+      {
+       "bet": "Raiders ML",
+       "sub": "LAR @ LV - 3:25pm",
+       "price": 148,
+       "sources": 3,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 100",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG $18K top order",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Raiders +3",
+       "sub": "LAR @ LV - 3:25pm",
+       "price": -101,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Over 48.5",
+       "sub": "LAR @ LV - 3:25pm",
+       "price": -110,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Lions -3.5",
+       "sub": "GB @ DET - 3:25pm",
+       "price": -109,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN MAX stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG against $132K v $87K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Over 55.5",
+       "sub": "GB @ DET - 3:25pm",
+       "price": -110,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Lions ML",
+       "sub": "GB @ DET - 3:25pm - Novig price",
+       "price": -182,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $50K top order",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 7:20PM CT (SNF, later)",
+     "picks": [
+      {
+       "bet": "Seahawks ML",
+       "sub": "KC @ SEA - 7:20pm (later)",
+       "price": -148,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 73",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Seahawks -3",
+       "sub": "KC @ SEA - 7:20pm (later)",
+       "price": -103,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral (-2.5)",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Under 42.5",
+       "sub": "KC @ SEA - 7:20pm (later)",
+       "price": -109,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN slight",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS 83",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NFL",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "🏈 NFL (11 today - 7 noon games not carded)",
+     "value": "12:00pm SF @ ATL, CLE @ TEN, IND @ MIN, MIA @ NYJ, TB @ CAR, CIN @ BAL, NYG @ HOU - started before this run, not carded\n3:05pm DEN @ ARI - GL 2 / P 13\n3:25pm GB @ DET - GL 3 / P 5\n3:25pm LAR @ LV - GL 3 / P 4\n7:20pm KC @ SEA (later) - GL 3 / P 8",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "PIT @ NO 8:30am (early game, before the first hourly run)\nNHL full day - 5 games, first 2:00pm CT (1:05pm run)\nNBA full day - 7 games, first 4:00pm CT (3:05pm run)",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "⚠️ Conflicts",
+   "color": 15158332,
+   "description": "Lions -3.5 (Pinnacle MAX) - Novig money leans Packers +3.5 ($132K vs $87K near the top, $19K top order). Season: when Novig sat against a Pinnacle/Vegas signal, the signal side went 11-5 (+7.17u).\nRaiders ML - Novig's single-order trigger is on the Raiders, but total near-top dollars lean Rams 1.58x."
+  },
+  {
+   "title": "📋 Run notes",
+   "color": 15844367,
+   "description": "Catch-up run at 12:05pm: the 11:05am NFL full-day run left no card and no run-log entry, so this run pulled the unstarted NFL games. The 7 noon kickoffs had started (12:00pm CT) and are not carded.\nSources: Betting Insider Pinnacle (Sport All, Today) 12:07pm CT · Vegas NFL tab 12:08pm (all 14 rows read; 3 Vegas Backed 70+ on these games, 1 Pressure Move 43) · Novig game lines 12:09pm (4 games, 12 book reads, 0 failures) · Novig props 12:10-12:11pm (311 reads of the 500 cap, 0 failures).\nNovig-only ML prices are approximate take prices.",
+   "footer": {
+    "text": "Checked: Pinnacle 12:07 · Vegas 12:08 · Novig 12:09pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}
