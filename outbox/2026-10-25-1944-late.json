@@ -1,0 +1,163 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sun 7:44pm CT** · MEM@SAC (8:00pm CT): 5 new props (Max: C. Boozer U17.5 pts, D. Sabonis U18.5 pts) · faded: J. Wells Over 11.5 pts (reversed to Under) · Pinnacle 7:44pm CT",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "8:00pm CT",
+   "matchup": "Memphis @ Sacramento",
+   "checked": "Checked Pinnacle 7:44pm CT",
+   "bet": "C. Boozer Under 17.5 Points",
+   "price": "-120",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Points prop 17.5 (-114) -> 17.5 (-153) since open, +EV at 10 books",
+    "line2": "Status: stable - new Max since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "8:00pm CT",
+   "matchup": "Memphis @ Sacramento",
+   "checked": "Checked Pinnacle 7:44pm CT",
+   "bet": "D. Sabonis Under 18.5 Points",
+   "price": "-118",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Points prop 18.5 (-125) -> 18.5 (-147) since open, +EV at 10 books",
+    "line2": "Status: stable - new Max since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "8:00pm CT",
+   "matchup": "Memphis @ Sacramento",
+   "checked": "Checked Pinnacle 7:44pm CT",
+   "bet": "K. Murray Under 11.5 Points",
+   "price": "-115",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 11.5 (-122) -> 11.5 (-137) since open, +EV at 6 books",
+    "line2": "Status: stable - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "8:00pm CT",
+   "matchup": "Memphis @ Sacramento",
+   "checked": "Checked Pinnacle 7:44pm CT",
+   "bet": "J. Wells Under 11.5 Points",
+   "price": "-127",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Points prop 11.5 (-130) -> 11.5 (-148) since open, +EV at 2 books",
+    "line2": "Status: flipped - REVERSED from the carded Wells Over 11.5 (5:45)"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  },
+  {
+   "header": "LATE FLIP",
+   "sport": "NBA",
+   "date": "Sun Oct 25",
+   "start": "8:00pm CT",
+   "matchup": "Memphis @ Sacramento",
+   "checked": "Checked Pinnacle 7:44pm CT",
+   "bet": "C. Boozer Under 1.5 3-Pointers",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "3-Pointers prop 1.5 (-118) -> 1.5 (-132) since open, +EV at 6 books",
+    "line2": "Status: stable - new Strong since the slate props"
+   },
+   "vegas": {
+    "strength": null,
+    "line1": "Vegas signals: game lines only (n/a for props)",
+    "bets": null,
+    "money": null
+   },
+   "novig": {
+    "tier": "NOT READ",
+    "line1": "Novig prop book not checked this run",
+    "line2": "Pinnacle-only prop signal"
+   },
+   "record_label": "PINNACLE STRONG/MAX PROPS",
+   "record": "tracking started Oct 21"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle STRONG/MAX plays that dropped or reversed at the 7:44pm CT read:",
+   "fields": [
+    {
+     "name": "NBA MEM @ SAC - J. Wells Over 11.5 Pts (-107) - 8:00pm CT",
+     "value": "Carded Strong stable at 5:45pm - now REVERSED: Pinnacle Strong Under 11.5 (flipped, +EV at 2 books). See LATE FLIP above.",
+     "inline": false
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 7:44pm CT · Vegas NBA tab locked at 7:44pm (n/a for props) · Novig not read (tip-off 8:00pm) · no Strong/Max game lines on MEM@SAC or MIN@VAN · still Strong: J. Wells O1.5 3PM, Z. Buium U0.5 pts, F. Chytil O1.5 SOG (MIN@VAN 9:00pm CT) · leans, not guarantees"
+   }
+  }
+ ]
+}
