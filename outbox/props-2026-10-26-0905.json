@@ -1,0 +1,141 @@
+{
+ "route": "Sharp Props",
+ "content": "**Sharp Props · Daily record Mon Oct 26** · graded Sun Oct 25 from ESPN box scores (checked 9:10am CT) · 96 rows from the Oct 25 runs",
+ "embeds": [
+  {
+   "title": "📊 Sharp Props - Daily record Oct 26",
+   "color": 15844367,
+   "description": "Independent plays (one per player per game), 1u flat. Yesterday 45-26 (63%) · +12.45u on 71 plays (raw 55-39 (59%) · +7.62u, 96 rows; A. Thompson and K. Murray did not play - void).\nPinnacle STRONG/MAX 41-23 (64%) · +11.53u yesterday; Max 8-1 (89%) · +6.95u. Unders carried it again: 33-18 (65%) · +9.34u vs overs 12-8 (60%) · +3.11u.\nSeason 151-134 (53%) · -16.66u on 286 plays (364 raw rows). Pinnacle STRONG/MAX 124-110 (53%) · -10.59u; Max-only 21-6 (78%) · +14.03u. Unders 106-76 (58%) · +8.33u vs overs 45-58 (44%) · -24.99u.\nLate-flip props went 17-8 (68%) · +6.99u. Small sample - only Pinnacle STRONG/MAX has 50+ graded plays.",
+   "footer": {
+    "text": "Leans, not guarantees · props record since Oct 21: 151-134 (53%) · -16.66u · independent plays"
+   }
+  },
+  {
+   "title": "🧮 Records by bucket (yesterday / season, independent)",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "📌 Pinnacle STRONG/MAX",
+     "value": "Yesterday 41-23 (64%) · +11.53u\nSeason 124-110 (53%) · -10.59u\nMax only: yday 8-1 (89%) · +6.95u · season 21-6 (78%) · +14.03u",
+     "inline": false
+    },
+    {
+     "name": "🔁 Flipped vs stable (Pinnacle)",
+     "value": "Stable: yday 23-11 (68%) · +8.63u · season 66-65 (50%) · -13.15u\nFlipped: yday 18-12 (60%) · +2.90u · season 58-45 (56%) · +2.56u\nSeason by tier: Strong stable 54-60 (47%) · -19.29u · Strong flipped 49-44 (53%) · -5.33u · Max flipped 9-1 (90%) · +7.89u · Max stable 12-5 (71%) · +6.14u",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig money (Yes/Over)",
+     "value": "Yesterday 3-2 (60%) · +1.00u · Season 18-20 (47%) · -6.82u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig No (default skew)",
+     "value": "Yesterday 3-1 (75%) · +1.92u · Season 13-9 (59%) · -1.27u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Pinnacle + Novig agree",
+     "value": "Yesterday 2-0 (100%) · +2.00u · Season 4-3 (57%) · +0.21u",
+     "inline": true
+    },
+    {
+     "name": "⚠️ Conflicts (fade check)",
+     "value": "Pinnacle side yday 0-1 (0%) · -1.00u (JSN U6.5 recs) · season 3-1 (75%) · +2.00u",
+     "inline": true
+    },
+    {
+     "name": "By sport (season)",
+     "value": "NBA 100-73 (58%) · +12.57u · NHL 27-40 (40%) · -26.33u · NFL 17-16 (52%) · -2.06u · MLB 5-3 (62%) · -0.51u · WNBA 2-2 (50%) · -0.33u",
+     "inline": false
+    },
+    {
+     "name": "By stat (season)",
+     "value": "3PM 12-12 (50%) · -5.34u\nAST 19-19 (50%) · -4.84u\nNFL (all stats) 17-16 (52%) · -2.06u\nPRA 9-11 (45%) · -3.44u\nPTS 54-42 (56%) · +4.15u\nREB 15-9 (62%) · +4.13u\nSOG 17-19 (47%) · -5.66u\nSaves 1-0 (100%) · +1.00u\nTB 3-1 (75%) · +1.07u",
+     "inline": true
+    },
+    {
+     "name": "Over vs Under (season)",
+     "value": "Over 45-58 (44%) · -24.99u\nUnder 106-76 (58%) · +8.33u\nPinnacle-only: Over 30-42 (42%) · -20.13u · Under 94-68 (58%) · +9.54u",
+     "inline": true
+    }
+   ]
+  },
+  {
+   "title": "🧩 Suggested parlays",
+   "color": 15844367,
+   "description": "Yesterday 1-5 · +0.54u (season 2-19 · -9.72u).\n❌ NFL best signals (+1056): B. Corum U9.5 Rec Yds ✅ · B. Nix U21.5 Comp ✅ · J. Love U7.5 Rush Yds ✅ · E. Wilson U7.5 Rec Yds ❌ · -1.00u\n✅ NFL stable leans (+554): J. Dobbins U4.5 Rec Yds ✅ · S. Williams O23.5 Rec Yds ✅ · K. Walker III U80.5 Rush Yds ✅ · +5.54u\n❌ NHL stable shots leans (+479): C. Makar U2.5 SOG ✅ · B. Horvat O2.5 SOG ❌ · F. Chytil O1.5 SOG ✅ · -1.00u\n❌ NHL points/assists unders (+401): T. Teravainen U0.5 PTS ✅ · G. Vilardi U0.5 AST ❌ · Z. Buium U0.5 PTS ✅ · T. DeAngelo U0.5 PTS ✅ · -1.00u\n❌ NBA aligned + Max + stable (+1216): J. Brunson O25.5 PTS ✅ · J. Hayes U5.5 REB ✅ · T. Haliburton U9.5 AST ❌ · C. Cunningham U5.5 REB ❌ · -1.00u\n❌ NBA stable unders (+801): A. Edwards U27.5 PTS ✅ · A. Thompson U7.5 REB ⚪ · T. da Silva U2.5 3PM ❌ · M. Porter Jr. U22.5 PTS ✅ · -1.00u"
+  },
+  {
+   "title": "🧾 Your prop bets",
+   "color": 3066993,
+   "description": "None logged for Oct 25 · running: prop parlays 0-1 -1.00u"
+  },
+  {
+   "title": "📝 Yesterday's graded legs (1/1)",
+   "color": 9807270,
+   "description": "**DET@PHI**\n✅ T. Maxey U5.5 AST (4) S\n❌ C. Cunningham U5.5 REB (8) S/fd\n⚪ A. Thompson U7.5 REB (DNP) S\n❌ P. Reed O14.5 PTS (8) S fl\n✅ L. James U33.5 PRA (25) S fl/fd\n\n**IND@BKN**\n❌ T. Haliburton U9.5 AST (10) S\n✅ M. Porter Jr. U22.5 PTS (10) S\n✅ O. Toppin O1.5 3PM (4) NV yes\n✅ A. Nembhard U14.5 PTS (14) NV no\n\n**LAC@OKC**\n❌ K. Dunn U3.5 AST (6) S fl\n✅ C. Wallace U8.5 PTS (4) MAX/late\n\n**LAL@UTAH**\n✅ J. Hayes U5.5 REB (5) MAX\n✅ J. Jackson Jr. U5.5 REB (2) S fl\n\n**MEM@SAC**\n✅ D. Acuff Jr. O4.5 AST (7) NV yes\n✅ C. Coward U3.5 AST (2) NV no\n✅ J. Wells O11.5 PTS (16) S/late/fd\n✅ C. Boozer U17.5 PTS (16) MAX/late\n✅ D. Sabonis U18.5 PTS (15) MAX/late\n⚪ K. Murray U11.5 PTS (DNP) S/late\n\n**ORL@NY**\n✅ J. Brunson O25.5 PTS (28) S/agree/fd\n❌ T. da Silva U2.5 3PM (5) S/fd\n❌ J. Suggs U5.5 AST (6) S fl\n❌ D. Bane U2.5 3PM (4) S fl\n❌ M. McBride O1.5 3PM (0) NV yes\n❌ O. Anunoby U23.5 PRA (27) S/late\n❌ J. Hart U1.5 3PM (3) S/late\n✅ W. Carter Jr. U11.5 PTS (9) S fl/late\n✅ F. Wagner O4.5 AST (9) S fl/late\n\n**TOR@MIN**\n✅ A. Dosunmu U12.5 PTS (9) S\n✅ A. Edwards U27.5 PTS (26) S\n✅ L. Ball U18.5 PTS (15) S/late\n✅ R. Barrett O19.5 PTS (20) S fl/late\n❌ J. Shead O6.5 PTS (4) S fl/late\n❌ C. Murray-Boyles O9.5 PTS (3) S fl/late\n✅ S. Barnes U7.5 REB (3) S fl/late\n✅ I. Quickley O16.5 PTS (19) S fl/late\n\n**DEN@ARI**\n✅ B. Nix U21.5 Comp (15) MAX\n❌ T. Allgeier U2.5 Recs (3) S\n✅ J. Brooks U1.5 Recs (1) S fl\n✅ J. Dobbins U4.5 Rec Yds (0) S\n✅ K. Bourne U34.5 Rec Yds (9) S\n✅ E. Higgins O12.5 Rec Yds (17) S fl/fd\n❌ T. McBride U63.5 Rec Yds (111) S\n✅ J. Waddle U4.5 Recs (4) S fl\n❌ B. Knight U38.5 Rush Yds (48) S fl\n❌ J. Brissett U229.5 Pass Yds (272) MAX/late/fd\n\n**GB@DET**\n✅ J. Jacobs U48.5 Rush Yds (36) S fl\n✅ J. Love U7.5 Rush Yds (0) S\n✅ S. Williams O23.5 Rec Yds (47) S/fd\n❌ J. Goff O25.5 Comp (22) S fl/late\n\n**KC@SEA**\n✅ K. Walker III U80.5 Rush Yds (36) S fl\n❌ E. Wilson U7.5 Rec Yds (15) S/fd\n❌ J. Smith-Njigba U93.5 Rec Yds (150) S/fd\n❌ P. Mahomes O3.5 Rush Att (2) NV yes\n❌ S. Darnold U225.5 Pass Yds (257) NV no\n✅ G. Holani U13.5 Rush Yds (11) MAX/late\n\n**LAR@LV**\n✅ B. Corum U9.5 Rec Yds (8) S fl/agree\n❌ M. Stafford O265.5 Pass Yds (195) S fl/fd\n✅ K. Williams O67.5 Rush Yds (99) S fl/late/fd\n✅ A. Jeanty U55.5 Rush Yds (15) MAX fl/late\n❌ P. Nacua U7.5 Recs (8) S fl/late\n✅ M. Mayer U3.5 Recs (3) S/late\n\n**COL@NSH**\n✅ C. Makar U2.5 SOG (1) S/fd\n✅ G. Landeskog U1.5 SOG (0) S fl/late\n✅ F. Forsberg O2.5 SOG (3) S fl/late\n\n**FLA@CHI**\n✅ T. Teravainen U0.5 PTS (0) S fl\n\n**MIN@VAN**\n✅ Z. Buium U0.5 PTS (0) S\n✅ F. Chytil O1.5 SOG (3) S\n\n**MTL@WPG**\n❌ G. Vilardi U0.5 AST (1) S fl/fd\n❌ K. Connor U3.5 SOG (5) S fl/late\n✅ S. Skinner U25.5 Saves (19) MAX/late\n\n**NYI@DAL**\n❌ B. Horvat O2.5 SOG (2) S/fd\n✅ T. DeAngelo U0.5 PTS (0) S",
+   "footer": {
+    "text": "S Strong · fl flipped · NV Novig · fd faded"
+   }
+  }
+ ],
+ "summaries": [
+  {
+   "brand": "SHARP PROPS",
+   "title": "Props record",
+   "subtitle": "Since Oct 21 · 286 independent plays (364 raw rows) · W-L · units · 1u flat",
+   "sections": [
+    {
+     "heading": "BY SIGNAL",
+     "rows": [
+      {"label": "Pinnacle STRONG/MAX", "w": 124, "l": 110, "p": 0, "units": -10.59},
+      {"label": "Max only", "w": 21, "l": 6, "p": 0, "units": 14.03},
+      {"label": "Stable", "w": 66, "l": 65, "p": 0, "units": -13.15},
+      {"label": "Flipped", "w": 58, "l": 45, "p": 0, "units": 2.56},
+      {"label": "Strong stable", "w": 54, "l": 60, "p": 0, "units": -19.29},
+      {"label": "Strong flipped", "w": 49, "l": 44, "p": 0, "units": -5.33},
+      {"label": "Max flipped", "w": 9, "l": 1, "p": 0, "units": 7.89},
+      {"label": "Max stable", "w": 12, "l": 5, "p": 0, "units": 6.14},
+      {"label": "Novig money", "w": 18, "l": 20, "p": 0, "units": -6.82},
+      {"label": "Novig No", "w": 13, "l": 9, "p": 0, "units": -1.27},
+      {"label": "Pinnacle + Novig agree", "w": 4, "l": 3, "p": 0, "units": 0.21},
+      {"label": "Conflict - Pinnacle side", "w": 3, "l": 1, "p": 0, "units": 2.0}
+     ]
+    },
+    {
+     "heading": "OVER VS UNDER",
+     "rows": [
+      {"label": "Over", "w": 45, "l": 58, "p": 0, "units": -24.99},
+      {"label": "Under", "w": 106, "l": 76, "p": 0, "units": 8.33}
+     ]
+    },
+    {
+     "heading": "BY STAT",
+     "rows": [
+      {"label": "3PM", "w": 12, "l": 12, "p": 0, "units": -5.34},
+      {"label": "AST", "w": 19, "l": 19, "p": 0, "units": -4.84},
+      {"label": "NFL (all stats)", "w": 17, "l": 16, "p": 0, "units": -2.06},
+      {"label": "PRA", "w": 9, "l": 11, "p": 0, "units": -3.44},
+      {"label": "PTS", "w": 54, "l": 42, "p": 0, "units": 4.15},
+      {"label": "REB", "w": 15, "l": 9, "p": 0, "units": 4.13},
+      {"label": "SOG", "w": 17, "l": 19, "p": 0, "units": -5.66},
+      {"label": "Saves", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "TB", "w": 3, "l": 1, "p": 0, "units": 1.07}
+     ]
+    },
+    {
+     "heading": "BY SPORT",
+     "rows": [
+      {"label": "NBA", "w": 100, "l": 73, "p": 0, "units": 12.57},
+      {"label": "NHL", "w": 27, "l": 40, "p": 0, "units": -26.33},
+      {"label": "NFL", "w": 17, "l": 16, "p": 0, "units": -2.06},
+      {"label": "MLB", "w": 5, "l": 3, "p": 0, "units": -0.51},
+      {"label": "WNBA", "w": 2, "l": 2, "p": 0, "units": -0.33}
+     ]
+    }
+   ],
+   "footer": "One play per player per game · NFL stats grouped · small sample · leans, not guarantees"
+  }
+ ]
+}
