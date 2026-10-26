@@ -1,0 +1,334 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Mon SLATE · 6:00-9:00pm CT** · NBA full day, 9 games + NHL, 3 games (STRONG/MAX only)",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Mon Oct 26",
+   "start": "7:00pm CT",
+   "matchup": "Pacers @ Bucks",
+   "bet": "Under 238.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 240.5 to 239 since open",
+    "line2": "Status: flipped"
+   },
+   "vegas": {
+    "strength": 75,
+    "line1": "Vegas Backed: total dropped toward the Under with a minority of bets",
+    "bets": 18,
+    "money": 18
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $23K vs Under $22K near the top (Novig line 238.5)",
+    "line2": "No clear Novig money either way."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking - see the 9:05am daily record card",
+   "checked": "Checked 5:07pm CT",
+   "header": "TOP PLAY"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NBA full day",
+   "subtitle": "Mon full day NBA - Pinnacle checked 5:07 - Vegas 5:08 - Novig 5:09pm CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - Novig-only prices are approximate (Novig take)",
+   "sections": [
+    {
+     "heading": "NBA - 6:00-8:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 238.5",
+       "sub": "IND @ MIL - 7:00pm",
+       "price": -110,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS 75",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Under 228.5",
+       "sub": "WSH @ CHA - 6:00pm",
+       "price": -115,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS 64",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Over 240.5",
+       "sub": "DAL @ MIA - 6:30pm",
+       "price": -114,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG against $48K v $24K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Mavericks ML",
+       "sub": "DAL @ MIA - 6:30pm",
+       "price": 226,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS 68",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG against $74K v $25K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Heat ML",
+       "sub": "DAL @ MIA - 6:30pm",
+       "price": -251,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN against",
+         "c": "red"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $74K v $25K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Under 241.5",
+       "sub": "DAL @ MIA - 6:30pm",
+       "price": -111,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN against",
+         "c": "red"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $48K v $24K + $26K order",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Celtics ML",
+       "sub": "CHI @ BOS - 6:30pm",
+       "price": -661,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN slight",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $70K v $18K",
+         "c": "green"
+        },
+        {
+         "t": "heavy fav",
+         "c": "orange"
+        }
+       ]
+      },
+      {
+       "bet": "Pacers ML",
+       "sub": "IND @ MIL - 7:00pm",
+       "price": -153,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN against (lean)",
+         "c": "red"
+        },
+        {
+         "t": "VEGAS PM 19",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $65K v $28K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Thunder ML",
+       "sub": "PHX @ OKC - 7:00pm",
+       "price": -292,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN slight",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $55K v $27K",
+         "c": "green"
+        },
+        {
+         "t": "heavy fav",
+         "c": "orange"
+        }
+       ]
+      },
+      {
+       "bet": "Under 237.5",
+       "sub": "MEM @ UTAH - 8:00pm",
+       "price": -111,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS 67",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG against $15K v $7K",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Over 237.5",
+       "sub": "MEM @ UTAH - 8:00pm",
+       "price": -100,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN against",
+         "c": "red"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $15K v $7K",
+         "c": "green"
+        }
+       ]
+      },
+      {
+       "bet": "Jazz +1.5",
+       "sub": "MEM @ UTAH - 8:00pm",
+       "price": -108,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN lean MEM -1",
+         "c": "red"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG $25K v $10K",
+         "c": "green"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NBA, NHL",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "🏀 NBA (9 today)",
+     "value": "6:00pm MIN @ CLE - GL -\n6:00pm WSH @ CHA - GL 1\n6:30pm CHI @ BOS - GL 1\n6:30pm DAL @ MIA - GL 4\n7:00pm IND @ MIL - GL 2\n7:00pm PHX @ OKC - GL 1\n7:30pm ATL @ HOU - GL -\n8:00pm MEM @ UTAH - GL 3\n9:00pm GS @ DEN (later) - GL -",
+     "inline": false
+    },
+    {
+     "name": "🏒 NHL (3 today, Novig-only plays logged, not carded)",
+     "value": "6:00pm LA @ NYR - GL 1\n7:30pm TOR @ CGY - GL 1\n8:30pm DET @ EDM (later) - GL 1",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "6:05 run (STRONG/MAX only): NFL DAL @ PHI 7:15pm, MLB MIL @ TB 7:00pm, WNBA ATL @ GS 7:00pm. Pinnacle already shows NFL Under 44 Strong stable.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "⚠️ Conflicts",
+   "color": 15158332,
+   "description": "DAL@MIA total: Pinnacle Over 240.5 STRONG vs Novig Under (48K v 24K, plus a 26K order at the best price).\nDAL@MIA ML: Pinnacle Mavericks STRONG flipped (Vegas 68) vs Novig Heat 2.97x.\nMEM@UTAH total: Pinnacle Under 237.5 STRONG (Vegas 67) vs Novig Over 2.2x. Also Pinnacle MEM -1 Lean vs Novig Jazz +1.5 2.6x.\nIND@MIL: Pinnacle MIL ML Lean flipped vs Novig Pacers ML 2.4x (Pinnacle Under 238.5 play is clean)."
+  },
+  {
+   "title": "📋 Run notes",
+   "color": 15844367,
+   "description": "NBA + NHL full-day first pull (5:05pm run). Props paused (RUNBOOK_SLATE section 9).\nSources: Betting Insider Pinnacle (Sport All, Today) 5:07pm CT - NBA 4 Strong game lines (0 Max), NHL 0 Strong/Max · Vegas NBA 5:08pm (13 rows, 1 at 70+: IND@MIL Under 238.5 75) and NHL (6 rows, none 70+) · Novig game lines 5:09pm (12 games, 36 book reads, 0 failures).\nNHL has 3 games so only STRONG/MAX is carded; no NHL Pinnacle Strong/Max. Novig-only NHL: EDM ML, TOR ML, LA +1.5 (logged).\nGL count in the directory = Pinnacle STRONG/MAX + Vegas 70+ + Novig STRONG plays on that game. Sub-70 Vegas rows and Novig Lean sides are logged as data.\nNovig-only prices are approximate (Novig take).",
+   "footer": {
+    "text": "Checked: Pinnacle 5:07 · Vegas 5:08 · Novig 5:09pm CT · leans, not guarantees"
+   }
+  }
+ ]
+}
