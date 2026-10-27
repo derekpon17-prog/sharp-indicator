@@ -1,0 +1,71 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Tue 6:45pm CT** · NBA DET @ NY Over 220.5 now Strong · NHL NYI @ NSH Over 5.5 now Max · Pinnacle 6:45pm CT",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Tue Oct 27",
+   "start": "7:00pm CT",
+   "matchup": "Pistons @ Knicks",
+   "bet": "Over 220.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 219 to 220.5 since open",
+    "line2": "Status: flipped earlier. New Strong side on a carded game (Lean on Over at 5:08pm)"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "5:11pm read (not re-read): Under $34K vs Over $21K",
+    "line2": "Novig leaned the other way earlier. Conflict, treat with caution."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "56-38 · +13.25u through Oct 25",
+   "checked": "Checked 6:45pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NHL",
+   "date": "Tue Oct 27",
+   "start": "7:00pm CT",
+   "matchup": "Islanders @ Predators",
+   "bet": "Over 5.5",
+   "price": "-120",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Pinnacle total 5.5 (-119) to 6 (+105), +EV at 16 books",
+    "line2": "Status: stable. Upgraded from Strong (carded 5:08pm) to Max"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "5:11pm read (not re-read): Under $30.1K vs Over $29.7K",
+    "line2": "No clear Novig money either way."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "56-38 · +13.25u through Oct 25",
+   "checked": "Checked 6:45pm CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded Pinnacle Strong plays that dropped below Strong (Pinnacle 6:45pm CT):",
+   "fields": [
+    {
+     "name": "NHL MTL @ STL 7:00pm",
+     "value": "Canadiens ML (-115) was Strong flipped, now Lean flipped",
+     "inline": false
+    },
+    {
+     "name": "NHL BUF @ SJ 9:30pm",
+     "value": "Sabres ML (-147) was Strong (late flip 5:44pm), now Lean stable",
+     "inline": false
+    }
+   ]
+  }
+ ]
+}
