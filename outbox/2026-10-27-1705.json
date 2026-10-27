@@ -1,0 +1,384 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Tue FULL DAY · 6:00pm-10:00pm CT** · 17 games: NBA 4, NHL 11, CFB 2",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Tue Oct 27",
+   "start": "6:00pm CT",
+   "matchup": "Delaware @ Western Kentucky",
+   "bet": "WKU ML",
+   "price": "-130",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from -102 to -126 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "LEAN",
+    "line1": "WKU $94K vs DEL $63K near the top",
+    "line2": "Novig money leans WKU 1.5 to 1, same side as Pinnacle."
+   },
+   "record_label": "PINNACLE + NOVIG RECORD",
+   "record": "18-18 · -5.84u · -16% ROI",
+   "checked": "Checked 5:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Tue Oct 27",
+   "start": "10:00pm CT",
+   "matchup": "Trail Blazers @ Lakers",
+   "bet": "Under 233.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 237.5 to 233.5 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: total dropped 3 points with a minority of bets",
+    "bets": 15,
+    "money": 13
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $22K vs Under $20K near the top",
+    "line2": "Novig is even on this total, no extra confirmation."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "14-16 · -3.30u · -11% ROI",
+   "checked": "Checked 5:08pm CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - Tue full day",
+   "subtitle": "Tue Oct 27 - CFB, NBA | Pinnacle checked 5:08pm - Vegas 5:10pm - Novig 5:11pm CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - game lines only (props paused)",
+   "sections": [
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "WKU -2.5",
+       "sub": "DEL @ WKU",
+       "price": -113,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Under 55.5",
+       "sub": "DEL @ WKU",
+       "price": -112,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:30-10:00PM CT",
+     "picks": [
+      {
+       "bet": "Celtics ML",
+       "sub": "BKN @ BOS",
+       "price": -671,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "NOVIG $108K v $31K",
+         "c": "green"
+        },
+        {
+         "t": "PIN slight",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS PM 58",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Over 232.5",
+       "sub": "SAC @ SA",
+       "price": -109,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Spurs ML",
+       "sub": "SAC @ SA",
+       "price": -1809,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "NOVIG $130K v $13K",
+         "c": "green"
+        },
+        {
+         "t": "heavy favorite skew",
+         "c": "orange"
+        },
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Trail Blazers ML",
+       "sub": "POR @ LAL",
+       "price": 107,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - Tue full day",
+   "subtitle": "Tue Oct 27 - NHL | Pinnacle checked 5:08pm - Vegas 5:10pm - Novig 5:11pm CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - game lines only (props paused)",
+   "sections": [
+    {
+     "heading": "NHL - 6:00-7:00PM CT",
+     "picks": [
+      {
+       "bet": "Flyers +1.5",
+       "sub": "CBJ @ PHI",
+       "price": -261,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "NOVIG $58K v $25K",
+         "c": "green"
+        },
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Kings +1.5",
+       "sub": "LA @ CHI",
+       "price": -256,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "NOVIG single $13K",
+         "c": "green"
+        },
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Canadiens ML",
+       "sub": "MTL @ STL",
+       "price": -114,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Over 5.5",
+       "sub": "NYI @ NSH",
+       "price": -122,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Devils ML",
+       "sub": "NJ @ DAL",
+       "price": -103,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "VEGAS 89",
+         "c": "blue"
+        },
+        {
+         "t": "PIN slight",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG neutral",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Jets +1.5",
+       "sub": "FLA @ WPG",
+       "price": -231,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "NOVIG single $17K",
+         "c": "green"
+        },
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Under 6.5",
+       "sub": "FLA @ WPG",
+       "price": -115,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "NOVIG $34K v $16K",
+         "c": "green"
+        },
+        {
+         "t": "PIN over 6 slight",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS PM over",
+         "c": "orange"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Slate directory - Full day - NBA, NHL, CFB",
+   "color": 3447003,
+   "description": "GL = Pinnacle STRONG/MAX + Vegas 70+ + Novig STRONG game-line plays on the game (shown or not). Props paused.",
+   "fields": [
+    {
+     "name": "CFB (2)",
+     "value": "6:00pm DEL @ WKU - GL 3\n7:00pm SHSU @ MOST - GL -\n(2 games: STRONG/MAX only carded)",
+     "inline": false
+    },
+    {
+     "name": "NBA (4)",
+     "value": "6:30pm BKN @ BOS - GL 1\n7:00pm DET @ NY - GL -\n7:00pm SAC @ SA - GL 2\n10:00pm POR @ LAL - GL 2 (later)",
+     "inline": false
+    },
+    {
+     "name": "NHL (11)",
+     "value": "6:00pm CBJ @ PHI - GL 1\n7:00pm BOS @ CAR - GL -\n7:00pm LA @ CHI - GL 1\n7:00pm MTL @ STL - GL 1\n7:00pm NYI @ NSH - GL 1\n7:00pm NJ @ DAL - GL 1\n7:00pm FLA @ WPG - GL 2\n8:00pm MIN @ UTA - GL -\n9:00pm OTT @ VGK - GL -\n9:00pm VAN @ ANA - GL -\n9:30pm BUF @ SJ - GL -",
+     "inline": false
+    },
+    {
+     "name": "Later / not in this card",
+     "value": "MLB 7:00pm MIL @ TB - first pull 6:05pm run (STRONG/MAX only). Props paused. All 17 games are on Betting Insider and Novig.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "Run notes",
+   "color": 15844367,
+   "description": "Pinnacle Reports (All, Today) 5:08pm CT: 8 Strong game lines on NBA/NHL/CFB (0 Max). Vegas tabs NBA, NHL, NCAAF 5:10pm CT: 2 rows 70+ (POR@LAL Under 233.5 100, NJ Devils ML 89), all other rows logged as data. Novig game-line books 5:11pm CT: 17 games, 51 book reads, 0 failures; 6 Novig STRONG, 15 LEAN. No conflicts: Novig was never against a Pinnacle STRONG side. Late flips and fades on carded games at the :30 runs."
+  }
+ ]
+}
