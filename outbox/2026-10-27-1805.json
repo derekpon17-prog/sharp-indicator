@@ -1,0 +1,27 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Tue MLB OUTLIER · 7:00pm CT** · 1 game: MIL @ TB (STRONG/MAX only)",
+ "scorecards": [
+  {
+   "sport": "MLB",
+   "date": "Tue Oct 27",
+   "start": "7:00pm CT",
+   "matchup": "Brewers @ Rays",
+   "bet": "Rays ML",
+   "price": "+103",
+   "pinnacle": {"tier": "STRONG", "line1": "Line moved from +124 to +106 since open", "line2": "Status: flipped today"},
+   "vegas": {"strength": 37, "line1": "Vegas Backed: below the 70 cutoff, does not count", "bets": 32, "money": 45},
+   "novig": {"tier": "AGAINST", "line1": "Brewers $129K vs Rays $81K near the top", "line2": "Novig money leans the Brewers 1.6 to 1, opposite side to Pinnacle."},
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "tracking started Oct 21 (see daily record card)",
+   "checked": "Checked 6:09pm CT"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Run notes - MLB MIL @ TB",
+   "color": 15844367,
+   "description": "Pinnacle Reports (All, Today) 6:09pm CT: Rays ML Strong flipped; Rays +1.5 Lean and Over 7 Lean (not carded). Vegas MLB tab: Rays ML 37, Rays +1.5 57 (both under 70). Novig game-line books: ML Brewers $129K v Rays $81K (lean Brewers, against the Pinnacle side), spread Rays +1.5 $55K v $29K (lean), total even. Conflict: Novig leans against the only Strong play. Props paused. Late flips at the :30 run."
+  }
+ ]
+}
