@@ -1,0 +1,239 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Daily record Tue Oct 27** · graded Mon Oct 26 (29 game-line rows, 13 games) · ESPN finals checked 9:55am CT",
+ "embeds": [
+  {
+   "title": "📊 Sharp Signals - Daily record Oct 27",
+   "color": 15844367,
+   "description": "Game lines, 1u flat. Yesterday all logged rows 16-13 (55%) · +1.10u. Pinnacle STRONG/MAX 5-1 (83%) · +5.12u (stable 0-1 (0%) · -1.14u, flipped 5-0 (100%) · +6.26u), Vegas 70+ 1-0 (100%) · +1.00u, Novig STRONG 4-6 (40%) · -4.90u.\nSeason: Pinnacle STRONG/MAX 62-40 (61%) · +18.28u. Stable 36-25 (59%) · +6.31u vs flipped 26-15 (63%) · +11.97u. Vegas 70+ 20-26-1 (43%) · -7.89u vs Vegas Backed under 70 36-26-1 (58%) · +11.25u. Novig STRONG 81-65-1 (55%) · -20.89u: heavy-favorite ML money (BOS, OKC) won but DAL/IND/EDM/TOR lost.\nFade warnings: the 3 carded Pinnacle sides that later dipped to Lean (WSH Under, IND Under, DAL ML) all won (3-0 (100%) · +4.26u), a bad day for the fade signal; the MEM ML late flip also won. Season PIN_FADED rows 8-9 (47%) · -0.70u. No TRIPLE, PIN+NOVIG or VEGAS+NOVIG plays yesterday (Novig was against 3 of 6 Pinnacle sides, and those went 2-1).\nProps are paused (RUNBOOK_SLATE section 9), so there is no Sharp Props record card today and no new prop rows. Small sample - only Novig STRONG has 50+ graded rows. Game lines are not deduped.",
+   "footer": {
+    "text": "Leans, not guarantees · records since Oct 21"
+   }
+  },
+  {
+   "title": "🧮 Records by bucket (yesterday / season)",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "📌 Pinnacle STRONG/MAX",
+     "value": "Yesterday 5-1 (83%) · +5.12u\nSeason 62-40 (61%) · +18.28u\nMax-only: yday 0-0 · season 1-1 (50%) · -0.09u",
+     "inline": false
+    },
+    {
+     "name": "🔁 Flipped vs stable (Pinnacle)",
+     "value": "Stable yday 0-1 (0%) · -1.14u · season 36-25 (59%) · +6.31u\nFlipped yday 5-0 (100%) · +6.26u · season 26-15 (63%) · +11.97u",
+     "inline": false
+    },
+    {
+     "name": "🎰 Vegas 70+",
+     "value": "Yesterday 1-0 (100%) · +1.00u\nSeason 20-26-1 (43%) · -7.89u",
+     "inline": true
+    },
+    {
+     "name": "🎰 Vegas Backed - all strengths",
+     "value": "Season all 56-52-2 (52%) · +3.36u\n70+ 20-26-1 (43%) · -7.89u · under 70 36-26-1 (58%) · +11.25u\nYesterday all 9-4 (69%) · +7.81u\nPressure Move (separate) yday 0-2 (0%) · -2.81u · season 36-22 (62%) · -4.30u",
+     "inline": false
+    },
+    {
+     "name": "💰 Novig STRONG",
+     "value": "Yesterday 4-6 (40%) · -4.90u\nSeason 81-65-1 (55%) · -20.89u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig STRONG split",
+     "value": "Ratio yday 3-6 (33%) · -5.90u · season 43-27-1 (61%) · -13.61u\nSingle order yday 1-0 (100%) · +1.00u · season 38-38 (50%) · -7.28u",
+     "inline": true
+    },
+    {
+     "name": "💰 Novig LEAN",
+     "value": "Yesterday 4-1 (80%) · +1.61u\nSeason 18-17-2 (51%) · -4.64u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Aligned (Pin + Vegas 70+)",
+     "value": "Yesterday 1-0 (100%) · +1.00u · Season 14-16 (47%) · -3.30u",
+     "inline": true
+    },
+    {
+     "name": "✅ Pin + Novig",
+     "value": "Yesterday none · Season 18-18 (50%) · -5.84u",
+     "inline": true
+    },
+    {
+     "name": "✅ Vegas + Novig",
+     "value": "Yesterday none · Season 3-10-1 (23%) · -8.00u",
+     "inline": true
+    },
+    {
+     "name": "🎯 Triple",
+     "value": "Yesterday none · Season 3-8 (27%) · -5.90u",
+     "inline": true
+    },
+    {
+     "name": "⚠️ Novig against (fade check)",
+     "value": "Signal side yday 2-1 (67%) · +2.12u · season 14-8 (64%) · +9.52u",
+     "inline": true
+    },
+    {
+     "name": "⏱️ Late flips / faded",
+     "value": "LATE_FLIP yday 1-0 (100%) · +1.00u · season 7-3 (70%) · +3.98u\nPIN_FADED rows yday 3-0 (100%) · +4.26u · season 8-9 (47%) · -0.70u (graded at the captured side)",
+     "inline": false
+    },
+    {
+     "name": "By sport (Pin STRONG or Vegas 70+, season)",
+     "value": "NBA 31-22 (58%) · +9.98u · NHL 9-7-1 (56%) · +1.41u · NFL 6-4 (60%) · +1.80u · CFB 21-16 (57%) · +0.64u · MLB 1-1 (50%) · -0.14u\nAll logged rows: NBA 67-47-1 (59%) · +13.28u · NHL 39-38-1 (51%) · -11.50u · NFL 10-4 (71%) · +5.80u · CFB 58-45-1 (56%) · -8.85u · MLB 5-4 (56%) · +0.86u",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "📝 Yesterday's Pin STRONG / Vegas 70+ plays",
+   "color": 3447003,
+   "description": "✅ NBA DAL@MIA DAL ML (+226) PIN fl/V68/NV against/faded · +2.26u\n❌ NBA DAL@MIA Over 240.5 (-114) PIN/NV against · -1.14u\n✅ NBA IND@MIL Under 238.5 (-110) PIN fl/V75/faded · +1.00u\n✅ NBA MEM@UTAH MEM ML (-113) PIN fl/V30/late · +1.00u\n✅ NBA MEM@UTAH Under 237.5 (-111) PIN fl/V67/NV against · +1.00u\n✅ NBA WSH@CHA Under 228.5 (-115) PIN fl/V64/faded · +1.00u"
+  },
+  {
+   "title": "📝 Other logged rows (Vegas under 70, Pressure Move, Novig-only)",
+   "color": 9807270,
+   "description": "23 rows 11-12 (48%) · -4.02u, all in claude/signals/ledger_daily-2026-10-26.json. Novig-only STRONG (no Pinnacle side): 4-6 (40%) · -4.90u. Novig LEAN data rows 4-1 (80%) · +1.61u."
+  },
+  {
+   "title": "🧾 Your game-line bets",
+   "color": 3066993,
+   "description": "No new game-line bets logged for Oct 26.\nRunning: straights 1-0 +1.00u · by bucket PIN_STRONG/PIN_NOVIG 1-0"
+  },
+  {
+   "title": "📅 Today's slate by sport (Tue Oct 27, CT)",
+   "color": 15105570,
+   "description": "🏀 NBA 4 · BKN@BOS 6:30pm, DET@NY, SAC@SA 7:00pm, POR@LAL 10:00pm\n   ↳ NBA full-day first pull: 5:05pm run\n🏒 NHL 11 · CBJ@PHI 6:00pm, BOS@CAR, LA@CHI, MTL@STL, NYI@NSH, NJ@DAL, FLA@WPG 7:00pm, MIN@UTA 8:00pm, OTT@VGK, VAN@ANA 9:00pm, BUF@SJ 9:30pm\n   ↳ NHL full-day first pull: 5:05pm run (with NBA and CFB, one card)\n🏈 CFB 2 · DEL@WKU 6:00pm, SHSU@MOST 7:00pm (2 games, so STRONG/MAX only; first pull 5:05pm run)\n⚾ MLB 1 · MIL@TB 7:00pm (1 game, STRONG/MAX only; first pull 6:05pm run)\n🏈 NFL 0 · 🏀 WNBA 0 · NCAAB 0 (season starts in November)\nNo game in the 9:05am window (9:45-10:45am) and no early outliers. Betting Insider Vegas tabs unchanged (NFL, MLB, NCAAF, NBA, NHL). Props paused. Flips and fades on carded games at the :30 runs."
+  }
+ ],
+ "summaries": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Signal x sport x bet type",
+   "subtitle": "Since Oct 21 · W-L · units · 1u flat",
+   "sections": [
+    {
+     "heading": "PINNACLE STRONG · 61-39 · +18.37u",
+     "rows": [
+      {"label": "NBA ML", "w": 10, "l": 4, "p": 0, "units": 8.66},
+      {"label": "NBA ATS", "w": 7, "l": 4, "p": 0, "units": 2.64},
+      {"label": "NBA Totals", "w": 13, "l": 9, "p": 0, "units": 2.99},
+      {"label": "NHL ML", "w": 4, "l": 2, "p": 0, "units": 1.06},
+      {"label": "NHL ATS", "w": 1, "l": 0, "p": 0, "units": 1.49},
+      {"label": "NHL Totals", "w": 2, "l": 3, "p": 0, "units": -1.14},
+      {"label": "NFL ML", "w": 1, "l": 1, "p": 0, "units": 0.0},
+      {"label": "NFL ATS", "w": 1, "l": 1, "p": 0, "units": -0.01},
+      {"label": "NFL Totals", "w": 3, "l": 1, "p": 0, "units": 1.9},
+      {"label": "CFB ML", "w": 8, "l": 3, "p": 0, "units": 1.97},
+      {"label": "CFB ATS", "w": 1, "l": 5, "p": 0, "units": -4.52},
+      {"label": "CFB Totals", "w": 9, "l": 5, "p": 0, "units": 3.47},
+      {"label": "MLB ML", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "MLB Totals", "w": 0, "l": 1, "p": 0, "units": -1.14}
+     ]
+    },
+    {
+     "heading": "PINNACLE MAX · 1-1 · -0.09u",
+     "rows": [
+      {"label": "NBA Totals", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "NFL ATS", "w": 0, "l": 1, "p": 0, "units": -1.09}
+     ]
+    },
+    {
+     "heading": "VEGAS 70+ · 20-26-1 · -7.89u",
+     "rows": [
+      {"label": "NBA ML", "w": 1, "l": 5, "p": 0, "units": -4.49},
+      {"label": "NBA ATS", "w": 1, "l": 5, "p": 0, "units": -4.47},
+      {"label": "NBA Totals", "w": 6, "l": 6, "p": 0, "units": -0.63},
+      {"label": "NHL ML", "w": 2, "l": 2, "p": 0, "units": 0.37},
+      {"label": "NHL Totals", "w": 2, "l": 1, "p": 1, "units": 0.93},
+      {"label": "NFL ML", "w": 1, "l": 1, "p": 0, "units": 0.0},
+      {"label": "NFL Totals", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "CFB ATS", "w": 2, "l": 2, "p": 0, "units": -0.18},
+      {"label": "CFB Totals", "w": 4, "l": 4, "p": 0, "units": -0.42}
+     ]
+    },
+    {
+     "heading": "NOVIG STRONG · 81-65-1 · -20.89u",
+     "rows": [
+      {"label": "NBA ML", "w": 18, "l": 13, "p": 0, "units": -2.03},
+      {"label": "NBA ATS", "w": 6, "l": 3, "p": 0, "units": 2.83},
+      {"label": "NBA Totals", "w": 3, "l": 1, "p": 0, "units": 2.0},
+      {"label": "NHL ML", "w": 6, "l": 10, "p": 0, "units": -9.64},
+      {"label": "NHL ATS", "w": 8, "l": 7, "p": 0, "units": -2.52},
+      {"label": "NHL Totals", "w": 1, "l": 2, "p": 1, "units": -1.39},
+      {"label": "NFL ML", "w": 3, "l": 1, "p": 0, "units": 2.0},
+      {"label": "NFL ATS", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "NFL Totals", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "CFB ML", "w": 20, "l": 12, "p": 0, "units": -10.97},
+      {"label": "CFB ATS", "w": 6, "l": 14, "p": 0, "units": -9.17},
+      {"label": "CFB Totals", "w": 5, "l": 0, "p": 0, "units": 5.0},
+      {"label": "MLB ML", "w": 0, "l": 2, "p": 0, "units": -2.0},
+      {"label": "MLB ATS", "w": 2, "l": 0, "p": 0, "units": 2.0},
+      {"label": "MLB Totals", "w": 1, "l": 0, "p": 0, "units": 1.0}
+     ]
+    }
+   ],
+   "footer": "Pinnacle MAX split out (counts as Strong elsewhere) · game lines not deduped · small sample until 50+ graded · leans, not guarantees"
+  },
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Alignment by sport and bet type",
+   "subtitle": "Since Oct 21 · Pin = Strong or Max · Novig = Strong or Lean · W-L · units",
+   "sections": [
+    {
+     "heading": "PIN + VEGAS 70+ · 14-16 · -3.30u",
+     "rows": [
+      {"label": "NBA ML", "w": 1, "l": 3, "p": 0, "units": -2.49},
+      {"label": "NBA ATS", "w": 1, "l": 3, "p": 0, "units": -2.26},
+      {"label": "NBA Totals", "w": 6, "l": 5, "p": 0, "units": 0.47},
+      {"label": "NHL ML", "w": 2, "l": 0, "p": 0, "units": 2.37},
+      {"label": "NHL Totals", "w": 0, "l": 1, "p": 0, "units": -1.07},
+      {"label": "NFL ML", "w": 1, "l": 1, "p": 0, "units": 0.0},
+      {"label": "CFB ATS", "w": 1, "l": 1, "p": 0, "units": -0.11},
+      {"label": "CFB Totals", "w": 2, "l": 2, "p": 0, "units": -0.21}
+     ]
+    },
+    {
+     "heading": "PIN + NOVIG · 18-18 · -5.84u",
+     "rows": [
+      {"label": "NBA ML", "w": 4, "l": 4, "p": 0, "units": -0.52},
+      {"label": "NBA ATS", "w": 1, "l": 2, "p": 0, "units": -1.19},
+      {"label": "NBA Totals", "w": 1, "l": 2, "p": 0, "units": -1.23},
+      {"label": "NHL ML", "w": 2, "l": 2, "p": 0, "units": -1.31},
+      {"label": "NHL Totals", "w": 0, "l": 1, "p": 0, "units": -1.07},
+      {"label": "NFL ML", "w": 0, "l": 1, "p": 0, "units": -1.0},
+      {"label": "NFL Totals", "w": 1, "l": 0, "p": 0, "units": 1.0},
+      {"label": "CFB ML", "w": 5, "l": 1, "p": 0, "units": 0.97},
+      {"label": "CFB ATS", "w": 0, "l": 4, "p": 0, "units": -4.39},
+      {"label": "CFB Totals", "w": 4, "l": 1, "p": 0, "units": 2.9}
+     ]
+    },
+    {
+     "heading": "VEGAS 70+ + NOVIG · 3-10-1 · -8.00u",
+     "rows": [
+      {"label": "NBA ML", "w": 1, "l": 4, "p": 0, "units": -3.49},
+      {"label": "NBA ATS", "w": 0, "l": 1, "p": 0, "units": -1.09},
+      {"label": "NBA Totals", "w": 1, "l": 2, "p": 0, "units": -1.21},
+      {"label": "NHL Totals", "w": 0, "l": 0, "p": 1, "units": 0.0},
+      {"label": "NFL ML", "w": 0, "l": 1, "p": 0, "units": -1.0},
+      {"label": "CFB ATS", "w": 0, "l": 1, "p": 0, "units": -1.11},
+      {"label": "CFB Totals", "w": 1, "l": 1, "p": 0, "units": -0.1}
+     ]
+    },
+    {
+     "heading": "TRIPLE · 3-8 · -5.90u",
+     "rows": [
+      {"label": "NBA ML", "w": 1, "l": 3, "p": 0, "units": -2.49},
+      {"label": "NBA ATS", "w": 0, "l": 1, "p": 0, "units": -1.09},
+      {"label": "NBA Totals", "w": 1, "l": 1, "p": 0, "units": -0.11},
+      {"label": "NFL ML", "w": 0, "l": 1, "p": 0, "units": -1.0},
+      {"label": "CFB ATS", "w": 0, "l": 1, "p": 0, "units": -1.11},
+      {"label": "CFB Totals", "w": 1, "l": 1, "p": 0, "units": -0.1}
+     ]
+    }
+   ],
+   "footer": "Small sample · leans, not guarantees"
+  }
+ ]
+}
