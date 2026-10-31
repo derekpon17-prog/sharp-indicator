@@ -1,0 +1,171 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 2:46pm CT** · UNM@SJSU, NEV@UCLA, GT@PITT, MSST@TEX, MIZ@ARK, PIT@MTL, TOR@VAN",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 31",
+   "start": "3:00pm CT",
+   "matchup": "New Mexico @ San Jose St",
+   "bet": "Over 42.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total 41.5 to 42.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 2:46pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 31",
+   "start": "3:15pm CT",
+   "matchup": "Nevada @ UCLA",
+   "bet": "Under 42.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total 44 to 43 since open",
+    "line2": "Status: flipped earlier"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Under $9K vs Over $6K near the top",
+    "line2": "Novig leans Under 42.5 (read 10:25am CT)."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 2:46pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 31",
+   "start": "6:30pm CT",
+   "matchup": "Georgia Tech @ Pittsburgh",
+   "bet": "Pittsburgh -7.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle spread -7 to -7.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 2:46pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 31",
+   "start": "6:30pm CT",
+   "matchup": "Mississippi St @ Texas",
+   "bet": "Mississippi St +20.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle spread +21 to +20 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 2:46pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 31",
+   "start": "6:45pm CT",
+   "matchup": "Missouri @ Arkansas",
+   "bet": "Missouri -10",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle spread -10, +EV at 1 book",
+    "line2": "Status: flipped earlier"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 2:46pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NHL",
+   "date": "Sat Oct 31",
+   "start": "6:00pm CT",
+   "matchup": "Penguins @ Canadiens",
+   "bet": "Penguins +1.5",
+   "price": "-232",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle PIT +1.5 at -222 now, -192 at open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Penguins $14.0K vs Canadiens $4.5K near the top",
+    "line2": "Novig backs Penguins +1.5 (read 11:17am CT)."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 2:46pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NHL",
+   "date": "Sat Oct 31",
+   "start": "6:00pm CT",
+   "matchup": "Maple Leafs @ Canucks",
+   "bet": "Maple Leafs -1.5",
+   "price": "+128",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle TOR -1.5 at +135 now, +159 at open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 2:46pm CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded plays that dropped or reversed (Pinnacle read 2:46pm CT)",
+   "fields": [
+    {
+     "name": "CFB APP @ GASO (5:30pm CT)",
+     "value": "Over 55.5 - carded STRONG at 10:09am, now no lean"
+    },
+    {
+     "name": "CFB ARMY @ MEM (7:00pm CT)",
+     "value": "Over 60 - carded STRONG at 10:09am, now Over 58.5 Lean (line moved to 59.5)"
+    },
+    {
+     "name": "NHL PIT @ MTL (6:00pm CT)",
+     "value": "Over 6.5 - late flip STRONG at 11:46am, now Lean (stable)"
+    }
+   ],
+   "footer": {
+    "text": "Vegas and Novig not re-read this run (earlier reads reused where shown). WSU ML is back to Strong after the 11:46 fade. Leans, not guarantees"
+   }
+  }
+ ]
+}
