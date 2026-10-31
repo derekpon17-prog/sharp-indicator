@@ -1,0 +1,133 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 11:46am CT** · MRSH@ODU, STL@DET, PIT@MTL, APP@GASO",
+ "scorecards": [
+  {
+   "sport": "NHL",
+   "date": "Sat Oct 31",
+   "start": "12:00pm CT",
+   "matchup": "Blues @ Red Wings",
+   "bet": "Red Wings ML",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line flipped today: DET ML now -112 (open +101 side STL)",
+    "line2": "Status: flipped"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Red Wings $18.9K vs Blues $13.3K near the top",
+    "line2": "Novig leans Detroit (read 11:17am CT)."
+   },
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NHL",
+   "date": "Sat Oct 31",
+   "start": "12:00pm CT",
+   "matchup": "Blues @ Red Wings",
+   "bet": "Under 5.5",
+   "price": "+101",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 6 to 5.5 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NHL",
+   "date": "Sat Oct 31",
+   "start": "6:00pm CT",
+   "matchup": "Penguins @ Canadiens",
+   "bet": "Over 6.5",
+   "price": "-114",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle Over 6.5 at -120 now, +EV at 5 books",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Over $8.9K vs Under $6.0K near the top",
+    "line2": "Novig leans Over 6.5 (read 11:17am CT)."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 31",
+   "start": "12:00pm CT",
+   "matchup": "Marshall @ Old Dominion",
+   "bet": "Under 45.5",
+   "price": "-109",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total 47 to 46.5, Under 45.5 +EV at 1 book",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Oct 31",
+   "start": "5:30pm CT",
+   "matchup": "Appalachian St @ Georgia Southern",
+   "bet": "Georgia Southern -6",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle spread moved from -4.5 to -5.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded plays that dropped or reversed (Pinnacle read 11:46am CT)",
+   "fields": [
+    {
+     "name": "NHL CHI @ BOS (12:00pm CT)",
+     "value": "Over 6 - carded MAX at 11:08am, now Lean (stable)"
+    },
+    {
+     "name": "CFB UTAH @ CIN (2:45pm CT)",
+     "value": "Utah -7 - carded STRONG at 10:09am, now Slight"
+    },
+    {
+     "name": "CFB WSU @ SDSU (6:00pm CT)",
+     "value": "WSU ML +116 - carded STRONG at 10:09am, now Lean"
+    }
+   ],
+   "footer": {
+    "text": "Vegas CFB tab members only, NHL Vegas from 11:10am read; Novig not re-read for CFB plays. Leans, not guarantees"
+   }
+  }
+ ]
+}
