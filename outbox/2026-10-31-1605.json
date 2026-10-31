@@ -1,0 +1,307 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sat SLATE · 5:00pm-7:30pm CT** · 6 games, NBA full day",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Sat Oct 31",
+   "start": "5:00pm CT",
+   "matchup": "76ers @ Hornets",
+   "bet": "Under 212.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 215.5 to 212",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 90,
+    "line1": "Vegas Backed: Under 217.5 to 212.5 with 24% of bets",
+    "bets": 24,
+    "money": 28
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "Over $30.1K vs Under $24.9K near the top",
+    "line2": "Novig line is 211.5; even book, no lean."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 4:07pm CT, Vegas 4:08pm CT, Novig 4:09pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sat Oct 31",
+   "start": "7:00pm CT",
+   "matchup": "Kings @ Grizzlies",
+   "bet": "Under 230.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 234 to 230.5",
+    "line2": "Status: flipped today"
+   },
+   "vegas": {
+    "strength": 98,
+    "line1": "Vegas Backed: Under 234.5 to 230.5 with 20% of bets",
+    "bets": 20,
+    "money": 23
+   },
+   "novig": {
+    "tier": "AGAINST",
+    "line1": "Over $19.9K vs Under $14.2K near the top",
+    "line2": "1.4x on the Over, so Novig leans the other way."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 4:07pm CT, Vegas 4:08pm CT, Novig 4:09pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sat Oct 31",
+   "start": "7:00pm CT",
+   "matchup": "Kings @ Grizzlies",
+   "bet": "Kings +8.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle moved from SAC +11 to +8.5",
+    "line2": "Status: flipped today"
+   },
+   "vegas": {
+    "strength": 83,
+    "line1": "Vegas Backed: line moved to the Kings (+10.5 to +8.5) with 22% of bets",
+    "bets": 22,
+    "money": 39
+   },
+   "novig": {
+    "tier": "NEUTRAL",
+    "line1": "MEM -8.5 $35.8K vs SAC +8.5 $26.6K near the top",
+    "line2": "1.35x on Memphis, just under the lean cutoff."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 4:07pm CT, Vegas 4:08pm CT, Novig 4:09pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sat Oct 31",
+   "start": "6:00pm CT",
+   "matchup": "Hawks @ Pelicans",
+   "bet": "Over 240.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 240 to 240.5",
+    "line2": "Status: flipped earlier"
+   },
+   "vegas": null,
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Over $37.9K vs Under $26.3K near the top",
+    "line2": "1.44x on the Over; single $10.2K Over order."
+   },
+   "record_label": "PINNACLE STRONG + NOVIG RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 4:07pm CT, Vegas 4:08pm CT, Novig 4:09pm CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NBA full day",
+   "subtitle": "Sat Oct 31 - Pinnacle checked 4:07pm - Vegas 4:08pm - Novig 4:09pm",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NBA - 5:00-7:30PM CT",
+     "picks": [
+      {
+       "bet": "Under 212.5",
+       "sub": "PHI @ CHA - 5:00pm",
+       "price": -113,
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS 90", "c": "blue"},
+        {"t": "NOVIG even", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "Over 240.5",
+       "sub": "ATL @ NO - 6:00pm",
+       "price": -112,
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "NOVIG LEAN $37.9K v $26.3K", "c": "green"},
+        {"t": "VEGAS none", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "Under 230.5",
+       "sub": "SAC @ MEM - 7:00pm",
+       "price": -111,
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS 98", "c": "blue"},
+        {"t": "NOVIG AGAINST Over $19.9K v $14.2K", "c": "red"}
+       ]
+      },
+      {
+       "bet": "SAC +8.5",
+       "sub": "SAC @ MEM - 7:00pm",
+       "price": -110,
+       "sources": 2,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS 83", "c": "blue"},
+        {"t": "NOVIG even", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "SAC ML",
+       "sub": "SAC @ MEM - 7:00pm",
+       "price": 286,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "NOVIG AGAINST MEM $62.9K v $27.2K", "c": "red"},
+        {"t": "favorite skew", "c": "orange"}
+       ]
+      },
+      {
+       "bet": "MEM ML",
+       "sub": "SAC @ MEM - 7:00pm",
+       "price": null,
+       "sources": 1,
+       "chips": [
+        {"t": "NOVIG $62.9K v $27.2K", "c": "green"},
+        {"t": "PIN says SAC", "c": "red"},
+        {"t": "favorite skew", "c": "orange"}
+       ]
+      },
+      {
+       "bet": "Under 235.5",
+       "sub": "CLE @ MIL - 7:00pm",
+       "price": -110,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS 55", "c": "grey"},
+        {"t": "NOVIG even", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "CLE ML",
+       "sub": "CLE @ MIL - 7:00pm",
+       "price": null,
+       "sources": 1,
+       "chips": [
+        {"t": "NOVIG $79.7K v $37.4K", "c": "green"},
+        {"t": "PIN Slight MIL", "c": "grey"},
+        {"t": "favorite skew", "c": "orange"}
+       ]
+      },
+      {
+       "bet": "SAS ML",
+       "sub": "MIN @ SA - 7:00pm",
+       "price": null,
+       "sources": 1,
+       "chips": [
+        {"t": "NOVIG $67.6K v $29.3K", "c": "green"},
+        {"t": "VEGAS PM against 27", "c": "grey"},
+        {"t": "favorite skew", "c": "orange"}
+       ]
+      },
+      {
+       "bet": "OKC +2.5",
+       "sub": "OKC @ HOU - 7:30pm",
+       "price": -110,
+       "sources": 1,
+       "chips": [
+        {"t": "VEGAS 83", "c": "blue"},
+        {"t": "PIN Lean flipped", "c": "grey"},
+        {"t": "NOVIG even", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "OKC ML",
+       "sub": "OKC @ HOU - 7:30pm",
+       "price": 118,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "NOVIG even", "c": "grey"},
+        {"t": "VEGAS none", "c": "grey"}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Slate directory - Full day - NBA",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "NBA games by start (CT) - GL = Pinnacle STRONG/MAX + Vegas 70+ + Novig STRONG game-line plays",
+     "value": "5:00pm PHI @ CHA - GL 1\n6:00pm ATL @ NO - GL 1\n7:00pm SAC @ MEM - GL 4\n7:00pm CLE @ MIL - GL 2\n7:00pm MIN @ SA - GL 1\n7:30pm OKC @ HOU - GL 2 (later)"
+    },
+    {
+     "name": "Other today",
+     "value": "NBA POR @ UTAH 2:00pm already played (1:05 outlier run). CFB full day and NHL full day carded earlier (10:05am, 11:05am). WNBA ATL @ GS 7:00pm waits for the 6:05 run (STRONG/MAX only)."
+    }
+   ]
+  },
+  {
+   "title": "More from this slate",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Novig LEAN (not on boards)",
+     "value": "PHI ML (PHI $91.6K v $51.5K, Pinnacle leans CHA), MIN @ SA Over 227.5 ($24.5K v $16.9K)."
+    },
+    {
+     "name": "Vegas / Pressure Move data",
+     "value": "Vegas Backed under 70: CHA +1.5 63, CHA ML 59. Pressure Move: ATL ML 49, CLE ML 49 (against), SAS ML 27 (against). SAS -12.5 Vegas Backed against 32."
+    }
+   ]
+  },
+  {
+   "title": "Conflicts",
+   "color": 15158332,
+   "fields": [
+    {
+     "name": "SAC @ MEM",
+     "value": "Pinnacle STRONG on the Kings (ML +286, +8.5) and Under 230.5, but Novig money is on MEM ML (2.3x) and the Over 230.5 (1.4x). Pinnacle and Vegas agree on the Kings +8.5 and the Under."
+    },
+    {
+     "name": "PHI @ CHA",
+     "value": "Pinnacle leans CHA ML and CHA +1.5 (Lean, flipped today) while Novig leans PHI ML (1.8x)."
+    }
+   ]
+  },
+  {
+   "title": "Run notes",
+   "color": 9807270,
+   "fields": [
+    {
+     "name": "Sources",
+     "value": "Pinnacle 4:07pm CT ok (all NBA games). Vegas NBA tab 4:08pm CT ok, all 13 rows read. Novig game lines 4:09pm CT ok, all 6 games, 18 book reads, 0 failures."
+    },
+    {
+     "name": "Scope",
+     "value": "NBA full day, 6 games 5:00pm-7:30pm CT. Props paused. Late flips watch carded games at :30."
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 4:07 - Vegas 4:08 - Novig 4:09pm CT - leans, not guarantees"
+   }
+  }
+ ]
+}
