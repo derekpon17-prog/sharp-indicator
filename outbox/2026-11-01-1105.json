@@ -1,0 +1,112 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sun FULL DAY · 12:00pm-7:20pm CT** · 17 games, NFL + NHL (Vegas source FAILED, Novig 16 of 17)",
+ "scorecards": [
+  {"sport": "NFL", "date": "Sun Nov 1", "start": "12:00pm CT", "matchup": "Cowboys vs Cardinals (ARI @ DAL)", "bet": "Cowboys ML", "price": "-362",
+   "pinnacle": {"tier": "STRONG", "line1": "Pinnacle moved from DAL -287 at open to -347", "line2": "Status: stable"},
+   "vegas": null,
+   "novig": {"tier": "STRONG", "line1": "DAL $180K vs ARI $87K near the top", "line2": "2.1x near-top money on DAL; favorite skew possible."},
+   "record_label": "PINNACLE STRONG + NOVIG RECORD", "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:07am CT, Novig 11:09am CT, Vegas FAILED", "header": "TOP PLAY"},
+  {"sport": "NFL", "date": "Sun Nov 1", "start": "12:00pm CT", "matchup": "Colts @ Jaguars", "bet": "Jaguars ML", "price": "-512",
+   "pinnacle": {"tier": "STRONG", "line1": "Pinnacle moved from JAX -375 at open to -473", "line2": "Status: stable"},
+   "vegas": null,
+   "novig": {"tier": "STRONG", "line1": "JAX $274K vs IND $103K near the top", "line2": "2.7x near-top money on JAX; favorite skew possible."},
+   "record_label": "PINNACLE STRONG + NOVIG RECORD", "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:07am CT, Novig 11:09am CT, Vegas FAILED", "header": "TOP PLAY"},
+  {"sport": "NFL", "date": "Sun Nov 1", "start": "12:00pm CT", "matchup": "Titans @ Bengals", "bet": "Bengals ML", "price": "-904",
+   "pinnacle": {"tier": "STRONG", "line1": "Pinnacle moved from CIN -550 at open to -892", "line2": "Status: stable"},
+   "vegas": null,
+   "novig": {"tier": "STRONG", "line1": "CIN $258K vs TEN $49K near the top", "line2": "5.2x near-top money on CIN; heavy favorite skew likely."},
+   "record_label": "PINNACLE STRONG + NOVIG RECORD", "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:07am CT, Novig 11:09am CT, Vegas FAILED", "header": "TOP PLAY"},
+  {"sport": "NHL", "date": "Sun Nov 1", "start": "3:00pm CT", "matchup": "Utah @ Flyers", "bet": "Utah ML", "price": "-174",
+   "pinnacle": {"tier": "STRONG", "line1": "Pinnacle moved from UTA -153 at open to -174", "line2": "Status: stable"},
+   "vegas": null,
+   "novig": {"tier": "LEAN", "line1": "UTA $33K vs PHI $23K near the top", "line2": "1.4x near-top money on UTA; modest lean."},
+   "record_label": "PINNACLE STRONG + NOVIG RECORD", "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:07am CT, Novig 11:09am CT, Vegas FAILED", "header": "TOP PLAY"}
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NFL + NHL full day (1 of 2)",
+   "subtitle": "Sun Nov 1 - Pinnacle checked 11:07am - Vegas FAILED (members only) - Novig 11:09am CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - Novig favorite skew likely on big-favorite ML",
+   "sections": [
+    {"heading": "NFL - 12:00PM CT", "picks": [
+     {"bet": "DAL -7.5", "sub": "ARI @ DAL - 12:00pm", "price": -107, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "JAX -10", "sub": "IND @ JAX - 12:00pm", "price": -111, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "CIN -13.5", "sub": "TEN @ CIN - 12:00pm", "price": -111, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "NYJ -1.5", "sub": "LV @ NYJ - 12:00pm", "price": -114, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "NYJ ML", "sub": "LV @ NYJ - 12:00pm", "price": -128, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG against LV lean 1.5x", "c": "red"}]},
+     {"bet": "Over 46.5", "sub": "LV @ NYJ - 12:00pm", "price": -109, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "Under 43", "sub": "ATL @ TB - 12:00pm", "price": -108, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]}
+    ]},
+    {"heading": "NFL - 3:05PM CT", "picks": [
+     {"bet": "Over 45.5", "sub": "LAC @ LAR - 3:05pm", "price": -111, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "LAR ML", "sub": "LAC @ LAR - 3:05pm", "price": null, "sources": 1, "chips": [{"t": "PIN no lean", "c": "grey"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 2.3x $173K v $74K", "c": "green"}]}
+    ]},
+    {"heading": "NFL - 3:25PM CT", "picks": [
+     {"bet": "MIA +7", "sub": "NE @ MIA - 3:25pm", "price": -112, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "Under 41.5", "sub": "NE @ MIA - 3:25pm", "price": -111, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "NE ML", "sub": "NE @ MIA - 3:25pm", "price": null, "sources": 1, "chips": [{"t": "PIN no lean", "c": "grey"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 2.3x $202K v $86K", "c": "green"}]}
+    ]}
+   ]
+  },
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NFL + NHL full day (2 of 2)",
+   "subtitle": "Sun Nov 1 - Pinnacle checked 11:07am - Vegas FAILED (members only) - Novig 11:09am CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - scorecard plays repeated at the bottom of this board",
+   "sections": [
+    {"heading": "NFL - 3:25PM-7:20PM CT", "picks": [
+     {"bet": "DEN +1", "sub": "KC @ DEN - 3:25pm", "price": -110, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "DEN ML", "sub": "KC @ DEN - 3:25pm", "price": -104, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG neutral", "c": "grey"}]},
+     {"bet": "WSH ML", "sub": "PHI @ WSH - 7:20pm", "price": null, "sources": 1, "chips": [{"t": "PIN no lean", "c": "grey"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 2.0x $196K v $96K", "c": "green"}]}
+    ]},
+    {"heading": "NHL - 12:00PM-7:00PM CT", "picks": [
+     {"bet": "CAR ML", "sub": "WPG @ CAR - 12:00pm", "price": null, "sources": 1, "chips": [{"t": "PIN Slight (below Strong)", "c": "grey"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 2.7x $56K v $20K", "c": "green"}]},
+     {"bet": "WSH +1.5", "sub": "MIN @ WSH - 2:30pm", "price": null, "sources": 1, "chips": [{"t": "PIN Slight (below Strong)", "c": "grey"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 2.7x $41K v $15K", "c": "green"}]},
+     {"bet": "UTA ML", "sub": "UTA @ PHI - 3:00pm", "price": -174, "sources": 2, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG lean $32K v $23K", "c": "green"}]},
+     {"bet": "ANA +1.5", "sub": "OTT @ ANA - 7:00pm", "price": null, "sources": 1, "chips": [{"t": "PIN no lean", "c": "grey"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 2.4x $37K v $15K", "c": "green"}]}
+    ]},
+    {"heading": "NFL - 12:00PM CT (scorecard plays)", "picks": [
+     {"bet": "DAL ML", "sub": "ARI @ DAL - 12:00pm", "price": -362, "sources": 2, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 2.1x $179K v $86K", "c": "green"}]},
+     {"bet": "JAX ML", "sub": "IND @ JAX - 12:00pm", "price": -512, "sources": 2, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 2.6x $273K v $103K", "c": "green"}]},
+     {"bet": "CIN ML", "sub": "TEN @ CIN - 12:00pm", "price": -904, "sources": 2, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS FAILED", "c": "grey"}, {"t": "NOVIG 5.2x $257K v $49K", "c": "green"}]}
+    ]}
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Slate directory - Full day - NFL, NHL",
+   "color": 3447003,
+   "fields": [
+    {"name": "NFL games by start (CT) - GL = Pinnacle STRONG + Novig STRONG game-line plays", "value": "12:00pm BAL @ BUF - GL -\n12:00pm TEN @ CIN - GL 2\n12:00pm ARI @ DAL - GL 2\n12:00pm MIN @ DET - GL -\n12:00pm LV @ NYJ - GL 3\n12:00pm CLE @ PIT - GL -\n12:00pm ATL @ TB - GL 1\n12:00pm IND @ JAX - GL 2\n3:05pm LAC @ LAR - GL 2\n3:25pm KC @ DEN - GL 2\n3:25pm NE @ MIA - GL 3\n7:20pm PHI @ WSH - GL 1"},
+    {"name": "NHL games by start (CT)", "value": "12:00pm WPG @ CAR - GL 1\n2:30pm MIN @ WSH - GL 1\n3:00pm UTA @ PHI - GL 1\n5:00pm EDM @ NYR - GL - (Novig not on ticker)\n7:00pm OTT @ ANA - GL 1"},
+    {"name": "Later today", "value": "NBA full day (BOS@ORL 2:30pm, BKN@IND 4:00pm, LAC@GS 7:30pm, TOR@LAL 8:00pm) is the 1:05pm run. Late flips watch every carded unstarted game at :30."}
+   ]
+  },
+  {
+   "title": "More from this slate",
+   "color": 15844367,
+   "fields": [
+    {"name": "Novig LEAN (1.4x-2.0x, not on boards)", "value": "BUF ML, BAL +3.5, PIT ML, CLE +3.5, DET ML, MIN +3.5, LV ML, TEN@CIN Over 45.5, IND@JAX Under 45.5, WPG@CAR Under 6.5, OTT@ANA OTT ML and Over 6.5, MIN@WSH Under 6."},
+    {"name": "Conflicts", "value": "LV@NYJ: Pinnacle NYJ ML Strong (-128) but Novig money leans LV ML ($241K v $161K, 1.5x). ATL@TB: Pinnacle Under 43 Strong but Novig money leans Over 43.5 (1.2x)."}
+   ]
+  },
+  {
+   "title": "Run notes",
+   "color": 9807270,
+   "fields": [
+    {"name": "Sources", "value": "Pinnacle 11:07am CT ok (all 17 games listed, 16 STRONG game lines, 0 MAX). Vegas NFL tab 11:08am CT FAILED: selections hidden behind Members only, so no Vegas signals. Novig game lines 11:09am CT: 16 of 17 games (EDM@NYR not on the live ticker), 48 book reads, 0 failures."},
+    {"name": "Scope", "value": "NFL 12 games + NHL 5, noon to 7:20pm CT. Props paused. 12 noon kickoffs/faceoffs are 40 minutes out. Novig STRONG on big-favorite ML is likely favorite skew."}
+   ],
+   "footer": {"text": "Checked: Pinnacle 11:07 - Vegas FAILED - Novig 11:09am CT - leans, not guarantees"}
+  }
+ ]
+}
