@@ -1,0 +1,17 @@
+{"route":"Sharp Signals","content":"**Sharp Signals · LATE FLIP · Sun 12:48pm CT** · KC@DEN, PHI@WSH (3 faded)","scorecards":[
+{"sport":"NFL","header":"LATE FLIP","date":"Sun Nov 1","start":"3:25pm CT","matchup":"Chiefs @ Broncos","bet":"Over 41.5","price":"-111",
+ "pinnacle":{"tier":"STRONG","line1":"Total moved from 40.5 to 41.5 since open","line2":"Status: flipped earlier, +EV at 5 books"},
+ "vegas":null,
+ "novig":{"tier":"NEUTRAL","line1":"Over $32K vs Under $37K near the top","line2":"Books are about even, so Novig does not back this side."},
+ "record_label":"PINNACLE STRONG LATE FLIP RECORD","record":"tracking started Oct 22","checked":"Checked Pinnacle 12:46pm CT"},
+{"sport":"NFL","header":"LATE FLIP","date":"Sun Nov 1","start":"7:20pm CT","matchup":"Eagles @ Commanders","bet":"Commanders -6","price":"-109",
+ "pinnacle":{"tier":"STRONG","line1":"Spread moved from Commanders -4 to -6 since open","line2":"Status: stable"},
+ "vegas":null,
+ "novig":{"tier":"NEUTRAL","line1":"Commanders $105K vs Eagles $119K near the top (Novig line -5.5)","line2":"Slightly more money on the Eagles, so Novig does not back this side."},
+ "record_label":"PINNACLE STRONG LATE FLIP RECORD","record":"tracking started Oct 22","checked":"Checked Pinnacle 12:46pm CT"}
+],
+"embeds":[{"title":"FADED","color":15158332,"description":"Carded at 11:07am CT as Pinnacle STRONG, now below Strong:","fields":[
+{"name":"NHL UTA @ PHI (3:00pm CT)","value":"Utah ML (-174) - carded STRONG, now LEAN (stable)","inline":false},
+{"name":"NFL NE @ MIA (3:25pm CT)","value":"Dolphins +7 (-112) - carded STRONG, now SLIGHT (stable)","inline":false},
+{"name":"NFL KC @ DEN (3:25pm CT)","value":"Broncos ML (-104) - carded STRONG, now LEAN (stable)","inline":false}],
+"footer":{"text":"Checked: Pinnacle 12:46pm · Vegas 12:47pm · Novig 12:49pm CT · leans, not guarantees"}}]}

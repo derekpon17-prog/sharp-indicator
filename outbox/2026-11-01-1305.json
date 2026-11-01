@@ -1,0 +1,208 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sun NBA FULL DAY · 2:30pm-8:00pm CT** · 4 games, NBA",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Sun Nov 1",
+   "start": "8:00pm CT",
+   "matchup": "Raptors @ Lakers",
+   "bet": "Under 224.5",
+   "price": "-108",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 227.5 at open to 224.5",
+    "line2": "Status: flipped today"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: total dropped 227.5 to 224.5 with a minority of bets",
+    "bets": 19,
+    "money": 15
+   },
+   "novig": {
+    "tier": "STRONG",
+    "line1": "Under $27.7K vs Over $10.1K near the top (Novig total 225.5)",
+    "line2": "2.7x near-top money on the Under."
+   },
+   "record_label": "PINNACLE STRONG + VEGAS 70+ + NOVIG (TRIPLE) RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 1:07pm CT, Vegas 1:08pm CT, Novig 1:09pm CT",
+   "header": "TOP PLAY"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sun Nov 1",
+   "start": "2:30pm CT",
+   "matchup": "Celtics @ Magic",
+   "bet": "Under 222.5",
+   "price": "-111",
+   "pinnacle": null,
+   "vegas": {
+    "strength": 75,
+    "line1": "Vegas Backed: total dropped 223.5 to 222.5 with a minority of bets",
+    "bets": 12,
+    "money": 13
+   },
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Under $37.1K vs Over $20.6K near the top",
+    "line2": "1.8x near-top money on the Under. Pinnacle only Slight on this side."
+   },
+   "record_label": "VEGAS 70+ + NOVIG RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 1:07pm CT, Vegas 1:08pm CT, Novig 1:09pm CT",
+   "header": "TOP PLAY"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NBA full day",
+   "subtitle": "Sun Nov 1 - Pinnacle checked 1:07pm - Vegas 1:08pm - Novig 1:09pm CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - Novig favorite skew likely on big-favorite ML",
+   "sections": [
+    {
+     "heading": "NBA - 2:30PM CT",
+     "picks": [
+      {
+       "bet": "Under 222.5",
+       "sub": "BOS @ ORL - 2:30pm",
+       "price": -111,
+       "sources": 2,
+       "chips": [
+        {"t": "PIN Slight (below Strong)", "c": "grey"},
+        {"t": "VEGAS 75", "c": "blue"},
+        {"t": "NOVIG lean $37K v $21K", "c": "green"}
+       ]
+      },
+      {
+       "bet": "BOS -7.5",
+       "sub": "BOS @ ORL - 2:30pm",
+       "price": -113,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG neutral", "c": "grey"}
+       ]
+      },
+      {
+       "bet": "BOS ML",
+       "sub": "BOS @ ORL - 2:30pm",
+       "price": -296,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN Slight (below Strong)", "c": "grey"},
+        {"t": "VEGAS pressure 63", "c": "grey"},
+        {"t": "NOVIG 2.7x $77K v $29K", "c": "green"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 4:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 230.5",
+       "sub": "BKN @ IND - 4:00pm",
+       "price": -114,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS 58 (below 70)", "c": "grey"},
+        {"t": "NOVIG neutral", "c": "grey"}
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 8:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 224.5",
+       "sub": "TOR @ LAL - 8:00pm",
+       "price": -108,
+       "sources": 3,
+       "chips": [
+        {"t": "PIN STRONG flipped", "c": "orange"},
+        {"t": "VEGAS 100", "c": "blue"},
+        {"t": "NOVIG 2.7x $28K v $10K", "c": "green"}
+       ]
+      },
+      {
+       "bet": "TOR +2.5",
+       "sub": "TOR @ LAL - 8:00pm",
+       "price": -107,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG against LAL 1.6x", "c": "red"}
+       ]
+      },
+      {
+       "bet": "TOR ML",
+       "sub": "TOR @ LAL - 8:00pm",
+       "price": 125,
+       "sources": 1,
+       "chips": [
+        {"t": "PIN STRONG stable", "c": "green"},
+        {"t": "VEGAS none", "c": "grey"},
+        {"t": "NOVIG against LAL 1.5x", "c": "red"}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Slate directory - Full day - NBA",
+   "color": 3447003,
+   "fields": [
+    {
+     "name": "NBA games by start (CT) - GL = Pinnacle STRONG + Vegas 70+ + Novig STRONG game-line plays",
+     "value": "2:30pm BOS @ ORL - GL 3\n4:00pm BKN @ IND - GL 1\n7:30pm LAC @ GS - GL - (later)\n8:00pm TOR @ LAL - GL 3 (later)"
+    },
+    {
+     "name": "Other sports",
+     "value": "NFL + NHL full day were carded at 11:05am; late flips watch every carded unstarted game at :30. College basketball not covered by Betting Insider."
+    }
+   ]
+  },
+  {
+   "title": "More from this slate",
+   "color": 15844367,
+   "fields": [
+    {
+     "name": "Novig LEAN (1.4x-2.0x, not on boards)",
+     "value": "IND ML (1.7x $54K v $32K), LAC +2.5 (1.6x $36K v $23K)."
+    },
+    {
+     "name": "Conflicts",
+     "value": "TOR@LAL: Pinnacle TOR +2.5 and TOR ML Strong, but Novig money leans LAL on spread (1.6x) and ML (1.5x). Pinnacle and Vegas agree on the Under, so the total is the cleaner side."
+    }
+   ]
+  },
+  {
+   "title": "Run notes",
+   "color": 9807270,
+   "fields": [
+    {
+     "name": "Sources",
+     "value": "Pinnacle 1:07pm CT ok (all 4 games listed). Vegas NBA tab 1:08pm CT ok, all 5 rows read (2 at 70+, Under 230.5 at 58, Celtics ML pressure move 63). Novig game lines 1:09pm CT: 4 of 4 games, 12 book reads, 0 failures."
+    },
+    {
+     "name": "Scope",
+     "value": "NBA 4 games, 2:30pm to 8:00pm CT. Props paused. Novig STRONG on BOS ML is likely favorite skew. No Pinnacle Max on NBA game lines."
+    }
+   ],
+   "footer": {
+    "text": "Checked: Pinnacle 1:07 - Vegas 1:08 - Novig 1:09pm CT - leans, not guarantees"
+   }
+  }
+ ]
+}
