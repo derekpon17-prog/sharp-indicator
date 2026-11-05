@@ -84,39 +84,70 @@ function classify(sport, s, cand) {
   return { bucket: 'eval', row };
 }
 
+/* PERSISTENCE TEST. Every wallet is judged on bets settled BEFORE the cutoff only, then checked on bets
+   settled AFTER it. A wallet is "confirmed" only if the edge held out of sample. */
+const CUTOFF_DAYS = parseInt(process.env.CUTOFF_DAYS || '45', 10);
+function leg(p) {
+  const cp = parseFloat(p.curPrice), px = parseFloat(p.avgPrice), sh = parseFloat(p.totalBought), pnl = parseFloat(p.realizedPnl);
+  if (!isFinite(cp) || !isFinite(px) || !isFinite(sh) || !isFinite(pnl) || sh <= 0) return null;
+  const win = cp >= 0.99, loss = cp <= 0.01;
+  if (!win && !loss) return null;
+  return { win, cost: px * sh, pnl, ts: parseFloat(p.lastEventAt) || 0 };
+}
+function agg(legs) {
+  const n = legs.length;
+  if (!n) return { n: 0, roi: null, wr: null, pnl: 0, staked: 0, implied: null };
+  const cost = legs.reduce((a, l) => a + l.cost, 0), pnl = legs.reduce((a, l) => a + l.pnl, 0);
+  const wins = legs.filter(l => l.win).length;
+  return { n, roi: cost > 0 ? Math.round(pnl / cost * 1000) / 10 : null, wr: Math.round(wins / n * 1000) / 10,
+           pnl: Math.round(pnl), staked: Math.round(cost) };
+}
+
 (async () => {
   const t0 = Date.now();
   const { cands, feedPages } = await collectCandidates();
-  let list = Object.values(cands).sort((a, b) => (b.usd - a.usd) || (b.src.size - a.src.size)).slice(0, MAX_WALLETS);
-  console.log('candidates', Object.keys(cands).length, 'evaluating', list.length, 'feedPages', feedPages);
-  const out = { log: LOG, generatedAt: new Date().toISOString(), candidates: Object.keys(cands).length, evaluated: 0, feedPages,
-                sports: Object.fromEntries(SPORTS.map(s => [s, { sharp: [], loser: [], unproven: [] }])) };
+  const list = Object.values(cands).sort((a, b) => (b.usd - a.usd) || (b.src.size - a.src.size)).slice(0, MAX_WALLETS);
+  const cutoff = Math.floor(Date.now() / 1000) - CUTOFF_DAYS * 86400;
+  console.log('candidates', Object.keys(cands).length, 'evaluating', list.length, 'feedPages', feedPages, 'cutoffDays', CUTOFF_DAYS);
+  const out = { log: LOG, generatedAt: new Date().toISOString(), cutoffDays: CUTOFF_DAYS, candidates: Object.keys(cands).length, evaluated: 0, feedPages,
+                sports: Object.fromEntries(SPORTS.map(s => [s, { confirmed_sharp: [], failed_sharp: [], confirmed_loser: [], failed_loser: [], watch: [], groups: null }])) };
+  const allRows = Object.fromEntries(SPORTS.map(s => [s, []]));
   let idx = 0;
   async function worker() {
     while (idx < list.length) {
       const c = list[idx++];
-      const s = await stats.getTraderStats(c.wallet, { fresh: true });
-      if (!s || !s.ok || s.sampleBiased) continue;
+      const r = await stats.fetchClosedPositions(c.wallet);
+      if (!r || !r.ok || !r.positions.length) continue;
       out.evaluated++;
-      for (const sport of SPORTS) {
-        const cl = classify(sport, s, c);
-        if (!cl) continue;
-        if (cl.bucket === 'unproven') { if (cl.row.markets >= 5) out.sports[sport].unproven.push(cl.row); continue; }
-        const verdict = await discover.evaluateCandidate({ wallet: c.wallet, sport }, { fresh: false });
-        const row = cl.row;
-        if (verdict.verdict === 'promote') { row.reason = verdict.reason; out.sports[sport].sharp.push(row); }
-        else if ((row.roiPct != null && row.roiPct <= LOSER_ROI) && row.pnl < 0) { row.reason = verdict.reason; out.sports[sport].loser.push(row); }
-        else { row.reason = verdict.reason; out.sports[sport].unproven.push(row); }
+      const by = {};
+      r.positions.forEach(p => {
+        const sp = stats.sportOf(p).sport;
+        if (!sp || !SPORTS.includes(sp)) return;
+        const l = leg(p); if (!l) return;
+        (by[sp] || (by[sp] = [])).push(l);
+      });
+      for (const sport of Object.keys(by)) {
+        const legs = by[sport];
+        const pre = agg(legs.filter(l => l.ts && l.ts < cutoff)), post = agg(legs.filter(l => l.ts >= cutoff));
+        allRows[sport].push({ wallet: c.wallet, name: c.name, src: [...c.src], pre, post });
       }
     }
   }
   await Promise.all(Array.from({ length: CONC }, worker));
+  const PRE_MIN = 40, POST_MIN = 10;
   for (const sp of SPORTS) {
-    const o = out.sports[sp];
-    o.sharp.sort((a, b) => b.roiPct - a.roiPct); o.loser.sort((a, b) => a.roiPct - b.roiPct);
-    o.unproven.sort((a, b) => b.markets - a.markets); o.unproven = o.unproven.slice(0, 25);
+    const o = out.sports[sp], rows = allRows[sp];
+    const preSharp = rows.filter(r => r.pre.n >= PRE_MIN && r.pre.roi >= 10);
+    const preLoser = rows.filter(r => r.pre.n >= PRE_MIN && r.pre.roi <= -4 && r.pre.pnl < 0);
+    const grp = (g) => { const legs = g.filter(r => r.post.n >= 1); const st = legs.reduce((a, r) => a + r.post.staked, 0), pn = legs.reduce((a, r) => a + r.post.pnl, 0); return { wallets: g.length, withPostBets: legs.length, postBets: legs.reduce((a, r) => a + r.post.n, 0), postStaked: st, postPnl: pn, postRoiPct: st > 0 ? Math.round(pn / st * 1000) / 10 : null }; };
+    o.groups = { preSharp: grp(preSharp), preLoser: grp(preLoser), everyone: grp(rows) };
+    preSharp.forEach(r => { (r.post.n >= POST_MIN ? (r.post.roi > 0 ? o.confirmed_sharp : o.failed_sharp) : o.watch).push(r); });
+    preLoser.forEach(r => { if (r.post.n >= POST_MIN) (r.post.roi < 0 ? o.confirmed_loser : o.failed_loser).push(r); });
+    o.confirmed_sharp.sort((a, b) => b.post.roi - a.post.roi);
+    o.confirmed_loser.sort((a, b) => a.post.roi - b.post.roi);
+    o.watch.sort((a, b) => b.pre.roi - a.pre.roi); o.watch = o.watch.slice(0, 25);
   }
   fs.mkdirSync('wallets', { recursive: true });
   fs.writeFileSync(path.join('wallets', 'wallets.json'), JSON.stringify(out, null, 1));
-  console.log('done in', Math.round((Date.now() - t0) / 1000) + 's', SPORTS.map(s => s + ' ' + out.sports[s].sharp.length + '/' + out.sports[s].loser.length).join(' | '));
+  console.log('done in', Math.round((Date.now() - t0) / 1000) + 's', SPORTS.map(s => s + ' ' + out.sports[s].confirmed_sharp.length + '/' + out.sports[s].confirmed_loser.length).join(' | '));
 })();

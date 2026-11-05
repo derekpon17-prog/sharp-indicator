@@ -84,7 +84,7 @@ function v2ToV1(p) {
     proxyWallet: p.proxy_wallet, conditionId: p.condition_id, slug: p.slug, title: p.title,
     outcome: p.outcome, endDate: p.end_date,
     avgPrice: p.avg_price, totalBought: p.total_size, curPrice: p.current_price,
-    realizedPnl: p.realized_pnl,
+    realizedPnl: p.realized_pnl, lastEventAt: p.last_event_at,
   };
 }
 async function fetchClosedPositions(wallet) {
