@@ -14,7 +14,13 @@ const LOSER_ROI = -4;      // settled ROI at or below this = loser
 const MIN_SETTLED = 20;
 
 async function j(url) {
-  try { const r = await fetch(url); if (!r.ok) return null; return await r.json(); } catch { return null; }
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0', Accept: 'application/json' } });
+    if (!r.ok) { console.log('HTTP', r.status, url.slice(0, 110), (await r.text()).slice(0, 160)); return null; }
+    const d = await r.json();
+    if (!Array.isArray(d) || !d.length) console.log('EMPTY', url.slice(0, 110), JSON.stringify(d).slice(0, 160));
+    return d;
+  } catch (e) { console.log('ERR', url.slice(0, 110), e.message, e.cause && e.cause.code); return null; }
 }
 
 async function collectCandidates() {
