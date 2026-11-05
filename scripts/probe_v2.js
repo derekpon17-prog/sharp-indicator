@@ -18,16 +18,17 @@ async function g(name, url) {
       const op = spec.paths[p] && spec.paths[p].get;
       if (op) out['params ' + p] = (op.parameters || []).map(x => `${x.name}${x.required ? '*' : ''}: ${JSON.stringify(x.schema || {}).slice(0, 140)} ${String(x.description || '').slice(0, 110)}`);
     }
-    out.schemas = Object.keys((spec.components && spec.components.schemas) || {}).slice(0, 80);
+    const sc = (spec.components && spec.components.schemas) || {};
+    for (const n of ['Position', 'UserStats', 'LeaderboardUserEntry']) if (sc[n]) out['schema ' + n] = Object.entries(sc[n].properties || {}).map(([k, v]) => `${k}: ${String(v.description || '').slice(0, 130)}`);
   }
   const lb = await g('leaderboard_sports', `${B}/leaderboard?category=SPORTS&limit=5`);
   const lb2 = await g('leaderboard_params2', `${B}/leaderboard?category=SPORTS&time_period=ALL&order_by=PNL&limit=3`);
   await g('trades', `${B}/trades?limit=3`);
   const rows = (lb && (lb.data || lb)) || [];
-  const w = rows[0] && (rows[0].proxy_wallet || rows[0].proxyWallet || rows[0].user || rows[0].address);
+  const w = rows[0] && (rows[0].user_id || rows[0].proxy_wallet || rows[0].user || rows[0].address);
   out.walletUsed = w || null;
   if (w) {
-    await g('closed_positions', `${B}/positions?user=${w}&status=CLOSED&limit=3`);
+    await g('closed_positions', `${B}/positions?user=${w}&status=CLOSED&limit=3&sort_by=TIMESTAMP`);
     await g('user_stats', `${B}/user-stats?user=${w}`);
   }
   fs.mkdirSync('wallets', { recursive: true });
