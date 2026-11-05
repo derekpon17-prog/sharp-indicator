@@ -92,7 +92,7 @@ function leg(p) {
   if (!isFinite(cp) || !isFinite(px) || !isFinite(sh) || !isFinite(pnl) || sh <= 0) return null;
   const win = cp >= 0.99, loss = cp <= 0.01;
   if (!win && !loss) return null;
-  return { win, cost: px * sh, pnl, ts: parseFloat(p.lastEventAt) || 0 };
+  return { win, cost: px * sh, pnl, ts: parseFloat(p.firstEntryAt) || parseFloat(p.lastEventAt) || 0 };
 }
 function agg(legs) {
   const n = legs.length;

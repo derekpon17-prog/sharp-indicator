@@ -84,14 +84,19 @@ function v2ToV1(p) {
     proxyWallet: p.proxy_wallet, conditionId: p.condition_id, slug: p.slug, title: p.title,
     outcome: p.outcome, endDate: p.end_date,
     avgPrice: p.avg_price, totalBought: p.total_size, curPrice: p.current_price,
-    realizedPnl: p.realized_pnl, lastEventAt: p.last_event_at,
+    // total_pnl = realized + unrealized: covers closed exits AND resolved-lost / unredeemed-won rows
+    realizedPnl: (p.total_pnl !== undefined && p.total_pnl !== null) ? p.total_pnl : p.realized_pnl,
+    lastEventAt: p.last_event_at, firstEntryAt: p.first_entry_at, status: p.status,
   };
 }
-async function fetchClosedPositions(wallet) {
-  let all = [], cursor = null, truncated = false;
+/* SETTLED SET = CLOSED (exited/redeemed) + REDEEMABLE (won, not yet redeemed) + REDEEMABLE_LOST (lost, held to 0).
+   Pulling CLOSED alone silently drops most losses and makes every wallet look sharp. */
+const SETTLED_STATUSES = ['CLOSED', 'REDEEMABLE', 'REDEEMABLE_LOST'];
+async function fetchStatus(wallet, status, pagesMax) {
+  let all = [], cursor = null, truncated = false, okAny = false;
   const PAGE = 500;
-  for (let page = 0; page < MAX_PAGES; page++) {
-    const url = `${DATA_API}/v2/positions?user=${wallet}&status=CLOSED&sort_by=TIMESTAMP&limit=${PAGE}`
+  for (let page = 0; page < pagesMax; page++) {
+    const url = `${DATA_API}/v2/positions?user=${wallet}&status=${status}&sort_by=TIMESTAMP&limit=${PAGE}`
               + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : '');
     let d = null;
     for (let attempt = 0; attempt < 3 && !d; attempt++) {
@@ -102,16 +107,24 @@ async function fetchClosedPositions(wallet) {
         d = await r.json();
       } catch { await new Promise(res => setTimeout(res, 500)); }
     }
-    if (!d || !Array.isArray(d.data)) {
-      if (page === 0) return { positions: [], ok: false, error: 'v2 positions unavailable', truncated: false };
-      break;
-    }
+    if (!d || !Array.isArray(d.data)) break;
+    okAny = true;
     all = all.concat(d.data.map(v2ToV1));
     cursor = d.pagination && d.pagination.next_cursor;
     if (!cursor) break;
-    if (page === MAX_PAGES - 1) truncated = true;
+    if (page === pagesMax - 1) truncated = true;
   }
-  return { positions: all, ok: true, error: null, truncated };
+  return { rows: all, ok: okAny, truncated };
+}
+async function fetchClosedPositions(wallet) {
+  const parts = await Promise.all(SETTLED_STATUSES.map(st => fetchStatus(wallet, st, MAX_PAGES)));
+  if (!parts[0].ok && !parts[2].ok) return { positions: [], ok: false, error: 'v2 positions unavailable', truncated: false };
+  const seen = new Set(), all = [];
+  parts.forEach(pt => pt.rows.forEach(r => {
+    const k = (r.conditionId || '') + '|' + (r.outcome || '') + '|' + r.status;
+    if (seen.has(k)) return; seen.add(k); all.push(r);
+  }));
+  return { positions: all, ok: true, error: null, truncated: parts.some(p => p.truncated) };
 }
 
 /* PnL FIELD RESOLUTION.
