@@ -6,7 +6,7 @@ const path = require('path');
 const stats = require('../api/trader-stats.js');
 const discover = require('../api/discover.js');
 
-const DATA = 'https://data-api.polymarket.com';
+const V2 = 'https://data-api.polymarket.com/v2';
 const SPORTS = ['NFL', 'NCAAF', 'NHL', 'NBA', 'NCAAB'];
 const MAX_WALLETS = parseInt(process.env.MAX_WALLETS || '300', 10);
 const CONC = 6;
@@ -21,7 +21,7 @@ async function j(url) {
     const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0', Accept: 'application/json' } });
     if (!r.ok) { console.log('HTTP', r.status, url.slice(0, 110), (await r.text()).slice(0, 160)); return null; }
     const d = await r.json();
-    if (!Array.isArray(d) || !d.length) console.log('EMPTY', url.slice(0, 110), JSON.stringify(d).slice(0, 160));
+    if (!d || !Array.isArray(d.data) || !d.data.length) console.log('EMPTY', url.slice(0, 110), JSON.stringify(d).slice(0, 160));
     return d;
   } catch (e) { console.log('ERR', url.slice(0, 110), e.message, e.cause && e.cause.code); return null; }
 }
@@ -30,27 +30,35 @@ async function collectCandidates() {
   const cands = {};   // wallet -> { name, sports:Set, src:Set, usd }
   const add = (w, name, sport, src, usd) => {
     if (!w) return;
+    w = String(w).toLowerCase();
     const c = cands[w] || (cands[w] = { wallet: w, name: name || null, sports: new Set(), src: new Set(), usd: 0 });
     if (name && !c.name) c.name = name;
     if (sport) c.sports.add(sport);
     c.src.add(src); c.usd += usd || 0;
   };
-  // 1) leaderboards (sports + overall, month and all-time)
-  for (const cat of ['SPORTS', 'OVERALL']) for (const tp of ['ALL', 'MONTH']) for (const off of [0, 50]) {
-    const d = await j(`${DATA}/v1/leaderboard?category=${cat}&timePeriod=${tp}&orderBy=PNL&limit=50&offset=${off}`);
-    (Array.isArray(d) ? d : []).forEach(t => add(t.proxyWallet, t.userName || t.pseudonym, null, 'lb-' + cat));
+  // 1) v2 leaderboards: sports category, all-time + month, plus overall all-time
+  for (const [cat, tp] of [['sports', 'all'], ['sports', 'month'], ['sports', 'week'], ['overall', 'all']]) {
+    let cursor = null;
+    for (let pg = 0; pg < 2; pg++) {
+      const d = await j(`${V2}/leaderboard?category=${cat}&time_period=${tp}&sort_by=PNL&limit=200` + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''));
+      (d && d.data || []).forEach(t => { if (t.pnl > 0) add(t.user_id, t.user_name, null, 'lb-' + cat + '-' + tp); });
+      cursor = d && d.pagination && d.pagination.next_cursor;
+      if (!cursor) break;
+    }
   }
-  // 2) global trade feed, large buys, paged
-  let pages = 0;
-  for (let off = 0; off < 3000; off += 500) {
-    const d = await j(`${DATA}/trades?limit=500&offset=${off}&takerOnly=true&side=BUY&filterType=CASH&filterAmount=500`);
-    if (!Array.isArray(d) || !d.length) break;
+  // 2) global trade feed, large buys, cursor paged
+  let pages = 0, cursor = null;
+  for (let pg = 0; pg < 8; pg++) {
+    const d = await j(`${V2}/trades?limit=1000&taker_only=true&side=BUY&filter_type=CASH&filter_amount=500` + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''));
+    if (!d || !Array.isArray(d.data) || !d.data.length) break;
     pages++;
-    d.forEach(t => {
+    d.data.forEach(t => {
       const sport = discover.sportOfTrade(t);
       if (!sport || !SPORTS.includes(sport)) return;
-      add(t.proxyWallet, t.name, sport, 'feed', (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0));
+      add(t.proxy_wallet, t.name, sport, 'feed', (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0));
     });
+    cursor = d.pagination && d.pagination.next_cursor;
+    if (!cursor) break;
   }
   // 3) optional: existing roster from KV if secrets are present
   try {

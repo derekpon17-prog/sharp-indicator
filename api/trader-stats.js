@@ -39,7 +39,7 @@ const POS_LIMITS = [500, 200, 100, 50];  // ladder, never assume
    showed only 1 MLB position, so nobody could ever reach the 20-position minimum and the
    gate permanently failed open — present but inert. Pages are sequential per wallet but
    wallets resolve in parallel, and results are cached for a day, so the cost lands once. */
-const MAX_PAGES  = 16;                    // up to 800 positions per wallet
+const MAX_PAGES  = 6;                     // up to 3000 positions per wallet (500 per page)
 const CACHE_TTL  = 86400;                 // PnL moves slowly; refresh daily
 
 async function kv(body) {
@@ -76,56 +76,40 @@ function sportOf(pos) {
 
 const diag = { limitUsed: null, offsetSupported: null };
 
+/* V2 PORT 2026-11-05: Polymarket retired the v1 Data API (HTTP 410). v2 uses
+   GET /v2/positions?status=CLOSED with cursor paging and snake_case rows inside {data, pagination}.
+   Rows are mapped back to the v1 camelCase shape this module's downstream logic expects. */
+function v2ToV1(p) {
+  return {
+    proxyWallet: p.proxy_wallet, conditionId: p.condition_id, slug: p.slug, title: p.title,
+    outcome: p.outcome, endDate: p.end_date,
+    avgPrice: p.avg_price, totalBought: p.total_size, curPrice: p.current_price,
+    realizedPnl: p.realized_pnl,
+  };
+}
 async function fetchClosedPositions(wallet) {
-  let limit = null, all = [], firstHash = null, truncated = false;
-
-  /* Find a limit the API actually honours.
-     CRITICAL: an empty array must NOT end the ladder. When Polymarket capped the
-     leaderboard it returned [] for over-sized requests instead of clamping, and treating
-     that as "no data" is precisely what blacked out alerts for 19 hours. An empty response
-     is ambiguous — it means either "wallet has no positions" or "your limit was too big" —
-     so keep laddering, and only conclude the wallet is genuinely empty after the SMALLEST
-     limit also comes back empty. (Caught by the e2e test reproducing the outage.) */
-  let sawEmpty = false;
-  for (const L of POS_LIMITS) {
-    try {
-      const r = await fetch(`${DATA_API}/closed-positions?user=${wallet}&limit=${L}&sortBy=TIMESTAMP`);
-      if (!r.ok) continue;
-      const d = await r.json();
-      if (!Array.isArray(d)) continue;
-      if (d.length) { limit = L; all = d; diag.limitUsed = L; break; }
-      sawEmpty = true;   // ambiguous — try a smaller limit before believing it
-    } catch {}
-  }
-  if (limit === null) {
-    if (sawEmpty) return { positions: [], ok: true, error: null, truncated: false }; // truly empty
-    return { positions: [], ok: false, error: 'all limits failed', truncated: false };
-  }
-
-  // Page deeper only if the first page came back full.
-  if (all.length === limit) {
-    /* Compare the WHOLE first row, not a guessed identity field. The earlier probe used
-       `conditionId || title`; on a payload carrying neither, both sides evaluated to
-       undefined, the probe concluded offset was unsupported, and pagination stopped dead
-       after one page — depth silently capped at 50. Schema-independent is the point. */
-    firstHash = JSON.stringify(all[0]);
-    for (let page = 1; page < MAX_PAGES; page++) {
-      let d;
+  let all = [], cursor = null, truncated = false;
+  const PAGE = 500;
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const url = `${DATA_API}/v2/positions?user=${wallet}&status=CLOSED&sort_by=TIMESTAMP&limit=${PAGE}`
+              + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : '');
+    let d = null;
+    for (let attempt = 0; attempt < 3 && !d; attempt++) {
       try {
-        const r = await fetch(`${DATA_API}/closed-positions?user=${wallet}&limit=${limit}&offset=${page * limit}&sortBy=TIMESTAMP`);
+        const r = await fetch(url, { headers: { Accept: 'application/json' } });
+        if (r.status === 429) { await new Promise(res => setTimeout(res, 1500 * (attempt + 1))); continue; }
         if (!r.ok) break;
         d = await r.json();
-      } catch { break; }
-      if (!Array.isArray(d) || !d.length) break;
-      if (JSON.stringify(d[0]) === firstHash) {
-        diag.offsetSupported = false;   // offset ignored — stop rather than duplicate
-        break;
-      }
-      diag.offsetSupported = true;
-      all = all.concat(d);
-      if (d.length < limit) break;
-      if (page === MAX_PAGES - 1) truncated = true;
+      } catch { await new Promise(res => setTimeout(res, 500)); }
     }
+    if (!d || !Array.isArray(d.data)) {
+      if (page === 0) return { positions: [], ok: false, error: 'v2 positions unavailable', truncated: false };
+      break;
+    }
+    all = all.concat(d.data.map(v2ToV1));
+    cursor = d.pagination && d.pagination.next_cursor;
+    if (!cursor) break;
+    if (page === MAX_PAGES - 1) truncated = true;
   }
   return { positions: all, ok: true, error: null, truncated };
 }
