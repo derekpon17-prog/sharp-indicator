@@ -10,6 +10,9 @@ const DATA = 'https://data-api.polymarket.com';
 const SPORTS = ['NFL', 'NCAAF', 'NHL', 'NBA', 'NCAAB'];
 const MAX_WALLETS = parseInt(process.env.MAX_WALLETS || '300', 10);
 const CONC = 6;
+const LOG = [];
+const _log = console.log;
+console.log = (...a) => { const m = a.join(' '); if (LOG.length < 60) LOG.push(m); _log(m); };
 const LOSER_ROI = -4;      // settled ROI at or below this = loser
 const MIN_SETTLED = 20;
 
@@ -78,7 +81,7 @@ function classify(sport, s, cand) {
   const { cands, feedPages } = await collectCandidates();
   let list = Object.values(cands).sort((a, b) => (b.usd - a.usd) || (b.src.size - a.src.size)).slice(0, MAX_WALLETS);
   console.log('candidates', Object.keys(cands).length, 'evaluating', list.length, 'feedPages', feedPages);
-  const out = { generatedAt: new Date().toISOString(), candidates: Object.keys(cands).length, evaluated: 0, feedPages,
+  const out = { log: LOG, generatedAt: new Date().toISOString(), candidates: Object.keys(cands).length, evaluated: 0, feedPages,
                 sports: Object.fromEntries(SPORTS.map(s => [s, { sharp: [], loser: [], unproven: [] }])) };
   let idx = 0;
   async function worker() {
