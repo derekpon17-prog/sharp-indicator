@@ -1,0 +1,150 @@
+{
+ "openapi": {
+  "url": "https://data-api.polymarket.com/v2/openapi.json",
+  "status": 200,
+  "body": "{\"openapi\":\"3.1.0\",\"info\":{\"title\":\"Polymarket Data API v2\",\"description\":\"The Polymarket Data API: wallet portfolios, trade and activity feeds, market state and ranked boards.\\n\\n## Conventions every endpoint shares\\n\\n- **Envelope**: every response wraps its payload in `data` (paged routes add `pagination`). A documented miss is `data: null` or an empty list, never an error.\\n- **Pagination is cursor-only**: follow `pagination.next_cursor` until `null`; `has_more` is exact, and there is no `offset` query parameter (sending one is a `400`). Cursors are signed, typed per endpoint, and opaque. The feeds (`trades`, `activity`, combo activity) are keyset walks, stable across concurrent writes; the boards, `holders` and most combo-position sorts are offset walks behind the opaque token, so a page taken across a data refresh can skip or repeat rows. Where a cursor binds its cohort (the boards, positions, combo positions), resuming bare is fine, restating the same values is fine, and contradicting them is a `400`. The `trades`/`activity` feed cursors carry only the seek anchor and page size (plus the sort direction on activity): re-send identical filters on every page, because changing one mid-walk re-anchors silently.\\n- **Rate limiting**: `429` with `Retry-After` is the busy signal for heavy queries. A heavy query may first be queued briefly for a capacity slot; the `429` arrives only if that short wait ends unserved. Each caller also has a per-client request allowance, and bursts past it get the same `429` with `Retry-After` sized to the remaining wait. Retry after the given delay. A request that could not get a database connection within its budget is NOT a `429`: it is a `503` `request_timeout` with `Retry-After`, because the shortage is on the server side, not in the caller's rate.\\n- **Identifiers**: `condition` (aliases `condition_id`, `conditionId`) is the unified query key for on-chain 0x condition ids; `market_id` fields carry Gamma's own market ids; `event_id` takes Gamma event ids; `token_id` is the CLOB asset id (the key on `/v2/prices-history`).\\n- **Params** accept both snake_case and camelCase spellings.\\n- **Units**: bare `volume`/`size` values are **shares**; `_usdc` suffixed fields are USD; `taker_` prefixed volumes are one-side.\\n- **Sentinels**: `outcome_index: 999` means the outcome could not be labeled; a missing or `null` numeric field means unavailable, never zero.\\n- **Windows on `/v2/trades?user=` and `/v2/activity`**: an omitted or `"
+ },
+ "paths": [
+  "/v2/activity",
+  "/v2/activity/combos",
+  "/v2/approvals",
+  "/v2/biggest-winners",
+  "/v2/builders/leaderboard",
+  "/v2/builders/volume",
+  "/v2/holders",
+  "/v2/leaderboard",
+  "/v2/live-volume",
+  "/v2/oi",
+  "/v2/positions",
+  "/v2/positions/combos",
+  "/v2/prices-history",
+  "/v2/resolutions",
+  "/v2/status",
+  "/v2/tokens",
+  "/v2/trades",
+  "/v2/user-pnl",
+  "/v2/user-stats",
+  "/v2/user-volume",
+  "/v2/value"
+ ],
+ "params /v2/leaderboard": [
+  "time_period: {\"type\":[\"string\",\"null\"]} Window: `day` | `week` | `month` | `all`. Defaults to `day`.",
+  "category: {\"type\":[\"string\",\"null\"]} `overall` (default), a Gamma market category (e.g. `sports`), or a\nsynthetic category: `combos` (combinatorial",
+  "sort_by: {\"type\":[\"string\",\"null\"]} Which board: `PNL` (default) or `VOLUME`.",
+  "user: {\"type\":[\"string\",\"null\"]} Look up one wallet's standing instead of reading the board. Returns a\nsingle object carrying both ranks, not a",
+  "limit: {\"type\":[\"integer\",\"null\"],\"format\":\"int32\",\"maximum\":1000,\"minimum\":0} First-page size. Ignored when `cursor` is supplied.",
+  "cursor: {\"type\":[\"string\",\"null\"]} Opaque pagination cursor from a prior response's `next_cursor`."
+ ],
+ "params /v2/positions": [
+  "user: {\"type\":[\"string\",\"null\"]} The wallet to anchor on. At least one of `user`/`condition` is required.",
+  "condition: {\"type\":[\"string\",\"null\"]} Condition id(s), comma-separated (at most 20 distinct values). With\n`user`, narrows that user's positions (all",
+  "limit: {\"type\":[\"integer\",\"null\"],\"format\":\"int32\",\"maximum\":1000,\"minimum\":0} First-page size. Ignored when `cursor` is supplied (the cursor's size wins).",
+  "cursor: {\"type\":[\"string\",\"null\"]} Opaque pagination cursor from a prior response's `next_cursor`. It\ncarries the page position, page size, and t",
+  "status: {\"type\":[\"string\",\"null\"]} One of `OPEN`, `REDEEMABLE`, `REDEEMABLE_LOST`, `MERGEABLE`, or `CLOSED`;\ndefaults to `OPEN`. `REDEEMABLE_LOST",
+  "event_id: {\"type\":[\"string\",\"null\"]} Event id(s), comma-separated (at most 20 distinct values).\nUser-anchored only.",
+  "title: {\"type\":[\"string\",\"null\"]} Case-insensitive market-title substring filter, honoured on every\nanchor and status. SQL LIKE wildcards (`%`, ",
+  "filter_type: {\"type\":[\"string\",\"null\"]} `CASH` or `TOKENS`; defaults to `TOKENS` (the /v2/trades-homogenized\nfilter pair, replacing the former `size_t",
+  "filter_amount: {\"type\":[\"number\",\"null\"],\"format\":\"double\"} The filter floor. `TOKENS`: minimum CURRENT holding in shares\n(defaults to the 0.1 dust floor; applies to `OPE",
+  "include_archived: {\"type\":[\"boolean\",\"null\"]} Also include positions on archived markets; defaults to `false`.\n`OPEN`/`REDEEMABLE`/`REDEEMABLE_LOST`/`MERGEA",
+  "sort_by: {\"type\":[\"string\",\"null\"]} One of `CURRENT_VALUE`, `PRICE`, `TOKENS`, `UNREALIZED_PNL`,\n`REALIZED_PNL`, `TOTAL_PNL`, or `TIMESTAMP` (the ",
+  "start: {\"type\":[\"integer\",\"null\"],\"format\":\"int64\"} Inclusive lower bound on `last_event_at`, epoch seconds; omit or `0` for\nunbounded (the `/v2/activity` + `/v2/",
+  "end: {\"type\":[\"integer\",\"null\"],\"format\":\"int64\"} Inclusive upper bound on `last_event_at`, epoch seconds; omit or `0` for\nunbounded.\n\nA position with no native",
+  "sort_direction: {\"type\":[\"string\",\"null\"]} `ASC` or `DESC`; defaults to `DESC`."
+ ],
+ "params /v2/trades": [
+  "user: {\"type\":[\"string\",\"null\"]} Address to filter by; omit for the market/event/global feed.",
+  "limit: {\"type\":[\"integer\",\"null\"],\"format\":\"int32\",\"maximum\":1000,\"minimum\":0} First-page size. Ignored when `cursor` is supplied (the cursor's size wins).",
+  "cursor: {\"type\":[\"string\",\"null\"]} Opaque pagination cursor from a prior response's `next_cursor`.",
+  "taker_only: {\"type\":[\"boolean\",\"null\"]} Defaults to `true`: each fill is served once, on its taker side.\n`false` includes the maker rows too.",
+  "filter_type: {\"type\":[\"string\",\"null\"]} CASH or TOKENS; defaults to TOKENS.",
+  "filter_amount: {\"type\":[\"number\",\"null\"],\"format\":\"double\"} Minimum trade size; defaults to 0.01, and 0 means the same.",
+  "start: {\"type\":[\"integer\",\"null\"],\"format\":\"int64\"} Window start on `block_timestamp`, epoch seconds (inclusive); honored\non the `user` shape only. Omitted or `0`",
+  "end: {\"type\":[\"integer\",\"null\"],\"format\":\"int64\"} Window end, epoch seconds (inclusive); honored on the `user` shape\nonly; omitted or `0` means now plus one day",
+  "condition: {\"type\":[\"string\",\"null\"]} Condition id(s), comma-separated (at most 20 distinct values).\n`condition_id` / `conditionId` are accepted ali",
+  "event_id: {\"type\":[\"string\",\"null\"]} Event id(s), comma-separated (at most 20 distinct values).",
+  "side: {\"type\":[\"string\",\"null\"]} BUY or SELL."
+ ],
+ "schema Position": [
+  "archived: Whether the market is archived; tells a caller using `includeArchived`\nwhich rows the flag surfaced.",
+  "avg_price: Weighted-average entry price per share, in USDC.",
+  "condition_id: The on-chain condition id.",
+  "current_price: Live mark per share, in USDC.",
+  "current_size: The CURRENT holding, in shares (~0 residual on the CLOSED arm).",
+  "current_value: `current_size × current_price`, in USDC.",
+  "end_date: Market end date, `YYYY-MM-DD`; `1970-01-01` when Gamma has none.",
+  "entry_cost_usdc: The fee-EXCLUSIVE entry basis.",
+  "entry_fees_usdc: Attributed BUY-fee total for the position. Disclosure only:\n`entry_cost_usdc` is already fee-exclusive, so never re-deduct this\nfr",
+  "event_id: Gamma event id of the parent event.",
+  "event_slug: Parent event slug.",
+  "first_entry_at: First acquisition of the position (buy, split, mint, transfer in), epoch seconds; 0 when no acquisition is recorded.",
+  "icon: Market icon URL.",
+  "last_event_at: The row's last economics event, epoch seconds; 0 without native state.",
+  "mergeable: Whether the wallet also holds the opposite outcome, so the pair can\nmerge back into collateral.",
+  "name: Profile display name of the wallet.",
+  "negative_risk: Whether the market belongs to a neg-risk group.",
+  "opposite_outcome: Label of the market's other outcome; what a merge pairs with.",
+  "opposite_token_id: Token id of the market's other outcome.",
+  "outcome: Label of the held outcome (e.g. `Yes`).",
+  "outcome_index: Index of the held outcome within the market; `999` means the outcome\ncould not be labeled.",
+  "percent_pnl: `(current_value - entry_cost_usdc) / entry_cost_usdc`, as a percent.\nFee-exclusive basis, and the numerator is `unrealized_pnl`; n",
+  "percent_realized_pnl: `(current_value - total_size × avg_price) / (total_size × avg_price)`,\nas a percent. A compatibility shape: despite the name, it i",
+  "profile_image: Profile image URL.",
+  "proxy_wallet: Proxy wallet holding the position.",
+  "realized_pnl: Realized PnL in USDC, cumulative for the position.",
+  "redeemable: Whether the position can be redeemed now: its market resolved and the\ntokens are still held (losing sides included; redeemable ≠ w",
+  "slug: Market slug; the URL segment on polymarket.com.",
+  "status: The row's actual state; can be narrower than the requested `status`,\nsince an `OPEN` request also returns `REDEEMABLE` rows.",
+  "title: Market question title (Gamma enrichment; empty when unenriched).",
+  "token_id: The outcome token id.",
+  "total_cost_usdc: Gross (fee-INCLUSIVE) basis. Always exactly\n`entry_cost_usdc + entry_fees_usdc`; the contract sums the two served\ncolumns, so the ",
+  "total_pnl: Always equals `realized_pnl + unrealized_pnl`.",
+  "total_size: LIFETIME bought shares (the WAC denominator), never the\ncurrent balance; that is `current_size`.",
+  "unrealized_pnl: Unrealized (mark-to-market) PnL: `current_value - entry_cost_usdc`.",
+  "verified: Profile verification badge."
+ ],
+ "schema UserStats": [
+  "all_time_pnl: ",
+  "biggest_win: Largest single resolved win, in USDC.",
+  "join_date: Epoch seconds, or `null` when the join date is unknown.",
+  "proxy_wallet: The proxy wallet these lifetime statistics describe.",
+  "trades: Distinct markets the wallet traded; an exact count.",
+  "views: Profile view count."
+ ],
+ "schema LeaderboardUserEntry": [
+  "pnl: Window PnL in USDC, same semantics as the board rows (finite windows\nmarked, `all` realized-only).",
+  "profile_image: Profile image URL.",
+  "rank_pnl: `None` when unranked on the PnL board.",
+  "rank_volume: `None` when unranked on the volume board.",
+  "user_id: The looked-up wallet.",
+  "user_name: Profile display name of the wallet.",
+  "verified: Profile verification badge.",
+  "volume: Both-sides traded volume in shares; never USD.",
+  "x_username: Linked X handle, when one exists."
+ ],
+ "leaderboard_sports": {
+  "url": "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&limit=5",
+  "status": 200,
+  "body": "{\"data\":[{\"rank\":1,\"user_id\":\"0x85f031d069de300055900c4055c1baeb6bde3f67\",\"pnl\":467249.87343937,\"volume\":0.0,\"user_name\":\"RJW1\",\"profile_image\":\"\",\"x_username\":\"\",\"verified\":false},{\"rank\":2,\"user_id\":\"0x5268527977f700f9bf9b6d5cd843859e4e70135d\",\"pnl\":119779.65962599406,\"volume\":722566.0423990004,\"user_name\":\"HomeRunHazard\",\"profile_image\":\"\",\"x_username\":\"\",\"verified\":false},{\"rank\":3,\"user_id\":\"0x684baa57c338c2549aec0aa3f034f695d72a8409\",\"pnl\":99810.44026557301,\"volume\":295127.04956500005,\"user_name\":\"monkeymashingkeyboard\",\"profile_image\":\"\",\"x_username\":\"\",\"verified\":false},{\"rank\":4,\"user_id\":\"0x67542c3219b37fd1610aad290676ff91cdbfe3bc\",\"pnl\":94235.10130434501,\"volume\":1368.251975,\"user_name\":\"gmpm2\",\"profile_image\":\"\",\"x_username\":\"\",\"verified\":false},{\"rank\":5,\"user_id\":\"0xbe23032d56a012c531b372c7739bc1dbd4dfb587\",\"pnl\":89841.25909462498,\"volume\":186729.18329699998,\"user_name\":\"Mastermoney\",\"profile_image\":\"\",\"x_username\":\"\",\"verified\":false}],\"pagination\":{\"limit\":5,\"offset\":0,\"has_more\":true,\"next_cursor\":\"eyJkYXRhIjp7InR5cGUiOiJsZWFkZXJib2FyZCIsInBhcmFtcyI6eyJsIjo1LCJvIjo1LCJzIjoiUE5MIiwidCI6ImRheSIsImMiOiJzcG9ydHMifX0sInNpZyI6ImQwYWIyNjMwYjliYjc3OWRlYTZmOGIyNzI1Yjk0OGZmIn0\"}}"
+ },
+ "leaderboard_params2": {
+  "url": "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&time_period=ALL&order_by=PNL&limit=3",
+  "status": 200,
+  "body": "{\"data\":[{\"rank\":1,\"user_id\":\"0x204f72f35326db932158cba6adff0b9a1da95e14\",\"pnl\":18482440.513563,\"volume\":1850584186.3012214,\"user_name\":\"swisstony\",\"profile_image\":\"\",\"x_username\":\"\",\"verified\":false},{\"rank\":2,\"user_id\":\"0x2005d16a84ceefa912d4e380cd32e7ff827875ea\",\"pnl\":12509352.352656,\"volume\":1365372192.6169882,\"user_name\":\"RN1\",\"profile_image\":\"https://polymarket-upload.s3.us-east-2.amazonaws.com/profile-image-1567750-84001aec-310a-470f-9584-67dfcaa61267.png\",\"x_username\":\"RN1polymarket\",\"verified\":false},{\"rank\":3,\"user_id\":\"0x6a72f61820b26b1fe4d956e17b6dc2a1ea3033ee\",\"pnl\":11449802.041254,\"volume\":292445592.05154574,\"user_name\":\"kch123\",\"profile_image\":\"\",\"x_username\":\"\",\"verified\":false}],\"pagination\":{\"limit\":3,\"offset\":0,\"has_more\":true,\"next_cursor\":\"eyJkYXRhIjp7InR5cGUiOiJsZWFkZXJib2FyZCIsInBhcmFtcyI6eyJsIjozLCJvIjozLCJzIjoiUE5MIiwidCI6ImFsbCIsImMiOiJzcG9ydHMifX0sInNpZyI6IjMyYmE0OTJmNWZkODkyNTY4ZmU3ZTQyMWRkYTI5Y2Y1In0\"}}"
+ },
+ "trades": {
+  "url": "https://data-api.polymarket.com/v2/trades?limit=3",
+  "status": 200,
+  "body": "{\"data\":[{\"proxy_wallet\":\"0x78f412ae0e9734a97d869dadc177955eeb944dfc\",\"side\":\"BUY\",\"token_id\":\"95787792115256776367543206403080022870009365292955460970758281344870632089008\",\"condition_id\":\"0xc1e2bc15f8e25c78273979b135502a2e3a9861fe4debfc2be3d8442595de6ee3\",\"size\":5.0,\"price\":0.99,\"timestamp\":1793987850,\"title\":\"Ethereum Up or Down - November 6, 12:45PM-1:00PM ET\",\"slug\":\"eth-updown-15m-1793987100\",\"icon\":\"https://polymarket-upload.s3.us-east-2.amazonaws.com/ETH+fullsize.jpg\",\"event_slug\":\"\",\"outcome\":\"Up\",\"outcome_index\":999,\"name\":\"\",\"pseudonym\":\"\",\"bio\":\"\",\"profile_image\":\"\",\"profile_image_optimized\":\"\",\"transaction_hash\":\"0x07d252cefb724db139320715e9e2cbe8535a15d831f146cfad5a9e179f4fac6d\"},{\"proxy_wallet\":\"0x576b0696fd5a9225d66fd9500fd98f5be10b0cab\",\"side\":\"BUY\",\"token_id\":\"60636067784299231195630720748496944786278007107165393930164659531328331884172\",\"condition_id\":\"0xd012c82c0df4ebdfadf8b18d6f7bacec9a066a31786e62ce7a9e560b5d92612f\",\"size\":35.0,\"price\":0.87,\"timestamp\":1793987850,\"title\":\"Bitcoin Up or Down - November 6, 12:45PM-1:00PM ET\",\"slug\":\"btc-updown-15m-1793987100\",\"icon\":\"https://polymarket-upload.s3.us-east-2.amazonaws.com/BTC+fullsize.png\",\"event_slug\":\"\",\"outcome\":\"Up\",\"outcome_index\":999,\"name\":\"Hcrystallash\",\"pseudonym\":\"Moral-Roof\",\"bio\":\"\",\"profile_image\":\"\",\"profile_image_optimized\":\"\",\"transaction_hash\":\"0xd1c3c78a72350b5db93a6fa0577898b257673e39a935f2b807cc3b47b63f4d62\"},{\"proxy_wallet\":\"0x98954db4fbb8c6b1b77d952a8cc686084bf9e3eb\",\"side\":\"BUY\",\"token_id\":\"105490009258166278419065477416122649254729108213379636219530389666709919804969\",\"condition_id\":\"0x3c2d62793cce3ddd6b340de882fb7b430e266a4582e54b69c510c81dc300485b\",\"size\":5.0404,\"price\":0.99,\"timestamp\":1793987850,\"title\":\"Dogecoin Up or Down - November 6, 12:55PM-1:00PM ET\",\"slug\":\"doge-updown-5m-1793987700\",\"icon\":\"https://polymarket-upload.s3.us-east-2.amazonaws.com/dogecoin-9ae840dfa3.png\",\"event_slug\":\"\",\"outcome\":\"Up\",\"outcome_index\":999,\"name\":\"hubastank\",\"pseudonym\":\"Well-Lit-Apprehension-Pastry\",\"bio\":\"\",\"profile_image\":\"\",\"profile_image_optimized\":\"\",\"transaction_hash\":\"0x9afa25effc74b8a2c718a74cbfc2bbdc88ae1a971ab299daefbc56cda97ad5f2\"}],\"pagination\":{\"limit\":3,\"offset\":0,\"has_more\":true,\"next_cursor\":\"eyJkYXRhIjp7InR5cGUiOiJ0cmFkZXMiLCJwYXJhbXMiOnsibCI6MywidHMiOjE3OTM5ODc4NTAsInNxIjoiOTY4NTQ5MjkwMDA1NDA4NDgwIiwiZCI6M319LCJzaWciOiJiNjVmY2E5YmQ2N2Y1MTU2NzRhMTQzNzNlMDFjZDliNiJ9\"}}"
+ },
+ "walletUsed": "0x85f031d069de300055900c4055c1baeb6bde3f67",
+ "closed_positions": {
+  "url": "https://data-api.polymarket.com/v2/positions?user=0x85f031d069de300055900c4055c1baeb6bde3f67&status=CLOSED&limit=3&sort_by=TIMESTAMP",
+  "status": 200,
+  "body": "{\"data\":[{\"proxy_wallet\":\"0x85f031d069de300055900c4055c1baeb6bde3f67\",\"token_id\":\"54591484346361105979591677922339605649154093006654192817509363693717451396372\",\"condition_id\":\"0xa9da50cfadec09d2ec7f212adfdb28d27ee26bf28c20285cc5d6959041fd001f\",\"current_size\":0.0,\"avg_price\":0.5239,\"entry_cost_usdc\":0.0,\"entry_fees_usdc\":0.0,\"total_cost_usdc\":0.0,\"current_price\":1.0,\"current_value\":0.0,\"total_size\":499999.919,\"realized_pnl\":238014.9614,\"unrealized_pnl\":0.0,\"total_pnl\":238014.9614,\"percent_pnl\":0.0,\"percent_realized_pnl\":90.8506,\"status\":\"CLOSED\",\"redeemable\":false,\"mergeable\":false,\"negative_risk\":false,\"archived\":false,\"title\":\"Spread: Warriors (-6.5)\",\"slug\":\"nba-mia-gsw-2026-11-05-spread-home-6pt5\",\"icon\":\"https://polymarket-upload.s3.us-east-2.amazonaws.com/super+cool+basketball+in+red+and+blue+wow.png\",\"event_id\":\"1281828\",\"event_slug\":\"nba-mia-gsw-2026-11-05\",\"outcome\":\"Warriors\",\"outcome_index\":0,\"opposite_outcome\":\"Heat\",\"opposite_token_id\":\"107782479915435327184272318166287238311367293707743818156353992782598740322733\",\"end_date\":\"2026-11-06\",\"last_event_at\":1793944372,\"first_entry_at\":1793865003,\"name\":\"RJW1\",\"profile_image\":\"\",\"verified\":false},{\"proxy_wallet\":\"0x85f031d069de300055900c4055c1baeb6bde3f67\",\"token_id\":\"2727622494561404319244818650615757454969991264309205671550670581399644237779\",\"condition_id\":\"0x93458cdb046d83ab182e03834645e71b3d519ffde35e8decb48e122af749e8ad\",\"current_size\":0.0,\"avg_price\":0.5159,\"entry_cost_usdc\":0.0,\"entry_fees_usdc\":87.83074,\"total_cost_usdc\":87.83074,\"current_price\":1.0,\"current_value\":0.0,\"total_size\":349999.8383,\"realized_pnl\":169416.3717,\"unrealized_pnl\":0.0,\"total_pnl\":169416.3717,\"percent_pnl\":0.0,\"percent_realized_pnl\":93.8161,\"status\":\"CLOSED\",\"redeemable\":false,\"mergeable\":false,\"negative_risk\":false,\"archived\":false,\"title\":\"Magic vs. Suns\",\"slug\":\"nba-orl-phx-2026-11-05\",\"icon\":\"https://polymarket-upload.s3.us-east-2.amazonaws.com/super+cool+basketball+in+red+and+blue+wow.png\",\"event_id\":\"1281827\",\"event_slug\":\"nba-orl-phx-2026-11-05\",\"outcome\":\"Suns\",\"outcome_index\":1,\"opposite_outcome\":\"Magic\",\"opposite_token_id\":\"99297519891545885362760554328112599904669784637913361291049204260896812777303\",\"end_date\":\"2026-11-06\",\"last_event_at\":1793940084,\"first_entry_at\":1793873784,\"name\":\"RJW1\",\"profile_image\":\"\",\"verified\":false},{\"proxy_wallet\":\"0x85f031d069de300055900c4055c1baeb6bde3f67\",\"token_id\":\"50234235839840778865449147440291284525343432143971279697700230596963018144668\",\"condition_id\":\"0x48482991402"
+ },
+ "user_stats": {
+  "url": "https://data-api.polymarket.com/v2/user-stats?user=0x85f031d069de300055900c4055c1baeb6bde3f67",
+  "status": 200,
+  "body": "{\"data\":{\"proxy_wallet\":\"0x85f031d069de300055900c4055c1baeb6bde3f67\",\"trades\":318,\"biggest_win\":692404.003694,\"views\":23222,\"join_date\":1774787435,\"all_time_pnl\":{\"timestamp\":1793944609,\"source_block\":96826102,\"realized_market_pnl\":-8102.308383,\"realized_lp_pnl\":0.0,\"realized_combo_pnl\":0.0,\"unrealized_pnl\":-203889.026907,\"fees_refunded\":209509.808465,\"maker_rebate\":65750.8532,\"taker_rebate\":3094.8735,\"reward_income\":3423.9526,\"yield_income\":2457.2573,\"referral_income\":0.0,\"deposits\":null,\"withdrawals\":null,\"realized_pnl\":-8102.308383,\"wallet_income\":74726.9366,\"position_pnl\":-211991.33529,\"settled_pnl\":66624.628217,\"economic_pnl\":-137264.39869,\"trade_pnl\":-160521.842992,\"sponsored_income\":5881.2099,\"fees\":-260979.300763,\"fees_paid\":-51469.492298,\"cashflow_net\":null,\"volume\":50599358.152948,\"volume_usdc\":21504927.338631,\"trade_count\":57484}}}"
+ }
+}

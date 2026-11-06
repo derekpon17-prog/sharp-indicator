@@ -1,0 +1,177 @@
+{
+ "log": [
+  "candidates 1339 evaluating 300 feedPages 8 cutoffDays 45"
+ ],
+ "generatedAt": "2026-11-06T17:57:36.420Z",
+ "cutoffDays": 45,
+ "candidates": 1339,
+ "evaluated": 0,
+ "feedPages": 8,
+ "sports": {
+  "NFL": {
+   "confirmed_sharp": [],
+   "failed_sharp": [],
+   "confirmed_loser": [],
+   "failed_loser": [],
+   "watch": [],
+   "groups": {
+    "preSharp": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "preLoser": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "everyone": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    }
+   }
+  },
+  "NCAAF": {
+   "confirmed_sharp": [],
+   "failed_sharp": [],
+   "confirmed_loser": [],
+   "failed_loser": [],
+   "watch": [],
+   "groups": {
+    "preSharp": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "preLoser": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "everyone": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    }
+   }
+  },
+  "NHL": {
+   "confirmed_sharp": [],
+   "failed_sharp": [],
+   "confirmed_loser": [],
+   "failed_loser": [],
+   "watch": [],
+   "groups": {
+    "preSharp": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "preLoser": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "everyone": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    }
+   }
+  },
+  "NBA": {
+   "confirmed_sharp": [],
+   "failed_sharp": [],
+   "confirmed_loser": [],
+   "failed_loser": [],
+   "watch": [],
+   "groups": {
+    "preSharp": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "preLoser": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "everyone": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    }
+   }
+  },
+  "NCAAB": {
+   "confirmed_sharp": [],
+   "failed_sharp": [],
+   "confirmed_loser": [],
+   "failed_loser": [],
+   "watch": [],
+   "groups": {
+    "preSharp": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "preLoser": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "everyone": {
+     "wallets": 0,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    }
+   }
+  }
+ }
+}
