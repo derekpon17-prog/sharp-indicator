@@ -1,0 +1,67 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sat OUTLIER · 4:00pm CT** · DEN@IND (NBA), NYR@SEA (NHL) · Pinnacle 3:08pm CT; Vegas tabs locked/unreadable; Novig not read",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Sat Nov 7",
+   "start": "4:00pm CT",
+   "matchup": "Nuggets @ Pacers",
+   "bet": "Nuggets -7.5",
+   "price": "-116",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Nuggets -7 to -8 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "see ledger (tracking)",
+   "checked": "Checked Pinnacle 3:08pm CT"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sat Nov 7",
+   "start": "4:00pm CT",
+   "matchup": "Nuggets @ Pacers",
+   "bet": "Nuggets ML",
+   "price": "-324",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from -265 to -311 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "see ledger (tracking)",
+   "checked": "Checked Pinnacle 3:08pm CT"
+  },
+  {
+   "sport": "NHL",
+   "date": "Sat Nov 7",
+   "start": "4:00pm CT",
+   "matchup": "Rangers @ Kraken",
+   "bet": "Over 6.5",
+   "price": "+101",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 6 to 6.5 since open",
+    "line2": "Status: stable, +EV at 5 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "see ledger (tracking)",
+   "checked": "Checked Pinnacle 3:08pm CT"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Run notes",
+   "color": 15844367,
+   "description": "Outlier run, STRONG/MAX only. Pinnacle read 3:08pm CT. Vegas signal tabs showed no selections (members only), so no Vegas panel. Novig not read (usage). No prop plays (props off). SuperContest CFB not cached: Westgate standings fetch failed."
+  }
+ ]
+}
