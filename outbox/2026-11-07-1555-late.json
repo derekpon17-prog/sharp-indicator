@@ -1,0 +1,70 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 3:57pm CT** · PROV@NEB, BCU@GCU, UTM@IUIN (faded: UTM@IUIN ML)",
+ "scorecards": [
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "6:00pm CT",
+   "matchup": "Providence @ Nebraska",
+   "bet": "PROV ML",
+   "price": "+123",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline moved from PROV +127 to +117 since open",
+    "line2": "Status: flipped today, +EV at 6 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 3:57pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "7:00pm CT",
+   "matchup": "Bethune-Cookman @ Grand Canyon",
+   "bet": "GCU -22.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from GCU -21 to -22 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 3:57pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "4:00pm CT",
+   "matchup": "UT Martin @ Indiana St",
+   "bet": "Over 171.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 162.5 to 171 since open (back to Strong after fading to Slight at 2:46pm)",
+    "line2": "Status: stable; game starts at 4:00pm CT"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 3:57pm CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded STRONG earlier today, now Lean at Pinnacle 3:57pm CT: UTM@IUIN IUIN ML (4:00pm CT, +107). Novig not read; NCAAB Vegas tab locked."
+  }
+ ]
+}
