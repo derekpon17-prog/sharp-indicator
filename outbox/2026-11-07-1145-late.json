@@ -1,0 +1,294 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 11:45am CT** · OKST@KSU, ALA@LSU, CIN@HOU, LT@TROY, OMA@USU, LAF@JOES, SHSU@JXST, IOWA@NU, OU@FLA, USI@EVAN, LIB@NMSU, WYO@UNLV",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "12:00pm CT",
+   "matchup": "Oklahoma St @ Kansas St",
+   "bet": "Over 63.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total now 63.5 (-110), +EV at 1 book",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 75,
+    "line1": "Vegas Backed 75 (10:20am read)",
+    "bets": 14,
+    "money": 24
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "2:30pm CT",
+   "matchup": "Alabama @ LSU",
+   "bet": "LSU -6",
+   "price": "-109",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from LSU -4.5 to -6 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 80,
+    "line1": "Vegas Backed 80 (10:20am read)",
+    "bets": 21,
+    "money": 43
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "2:30pm CT",
+   "matchup": "Cincinnati @ Houston",
+   "bet": "Under 61",
+   "price": "-108",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total 61 (-108) on the Under",
+    "line2": "Status: stable. Vegas Whale Respect 75 sits on the Over 61 (opposite side)"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "3:00pm CT",
+   "matchup": "Louisiana Tech @ Troy",
+   "bet": "LT -6.5",
+   "price": "-114",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from LT -5.5 to -6.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "3:00pm CT",
+   "matchup": "Louisiana Tech @ Troy",
+   "bet": "Over 47.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total 47.5 (-110) on the Over",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "3:00pm CT",
+   "matchup": "Louisiana Tech @ Troy",
+   "bet": "LT ML",
+   "price": "-256",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline LT -256",
+    "line2": "Status: flipped earlier"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "3:00pm CT",
+   "matchup": "Omaha @ Utah St",
+   "bet": "USU -29.5",
+   "price": "-114",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from USU -27 to -29 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "3:00pm CT",
+   "matchup": "Lafayette @ Saint Joseph's",
+   "bet": "LAF +16.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from LAF +17.5 to +16.5 since open",
+    "line2": "Status: stable, +EV at 2 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "6:00pm CT",
+   "matchup": "Sam Houston @ Jacksonville St",
+   "bet": "JVST -16.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread steady at JVST -16.5, price -108 to -116",
+    "line2": "Status: stable, +EV at 1 book"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "6:30pm CT",
+   "matchup": "Iowa @ Nebraska",
+   "bet": "IOWA -3",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from IOWA +1.5 to -3 since open",
+    "line2": "Status: flipped earlier"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "6:45pm CT",
+   "matchup": "Oklahoma @ Florida",
+   "bet": "OU +4.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from OU +7 to +4.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "7:00pm CT",
+   "matchup": "Southern Indiana @ Evansville",
+   "bet": "USI ML",
+   "price": "+265",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline USI +265",
+    "line2": "Status: stable, +EV at 1 book"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "7:00pm CT",
+   "matchup": "Liberty @ New Mexico St",
+   "bet": "NMSU +15.5",
+   "price": "-109",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from NMSU +17 to +15 since open",
+    "line2": "Status: stable, +EV at 5 books"
+   },
+   "vegas": {
+    "strength": 63,
+    "line1": "Vegas Backed 63 (10:20am read)",
+    "bets": 40,
+    "money": 30
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "9:30pm CT",
+   "matchup": "Wyoming @ UNLV",
+   "bet": "WYO ML",
+   "price": "+141",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline WYO +141",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 11:46am CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded STRONG earlier today, now below Strong at Pinnacle 11:46am CT: STL@NSH Under 5.5 TOTAL (12:00 CT) now Lean; ODU@CCU ODU ML (12:00 CT) now Lean; CSUF@SDAK CSUF 1.5 SPREAD (13:00 CT) now No lean; CSUF@SDAK CSUF ML (13:00 CT) now No lean; VCU@MEM MEM ML (14:00 CT) now Lean; UK@TENN Under 49.5 TOTAL (17:15 CT) now Lean; MD@GTWN MD -2.5 SPREAD (18:30 CT) now Lean; PAC@BRAD Under 140.5 TOTAL (19:00 CT) now Slight. Novig not read; Vegas rows from the 10:20am read."
+  }
+ ]
+}
