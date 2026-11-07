@@ -1,0 +1,246 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 10:45am CT** · FLA@WSH, STL@NSH, LAM@ACU, CSUF@SDAK, LBSU@MTST, LIU@LAS, OAK@UCSB, WCU@UNCA, NIU@DAY, DEN@UCR, MD@GTWN",
+ "scorecards": [
+  {
+   "sport": "NHL",
+   "date": "Sat Nov 7",
+   "start": "11:30am CT",
+   "matchup": "Panthers @ Capitals",
+   "bet": "Under 6.5",
+   "price": "-131",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Total moved from 6.5 to 6 (Pinnacle +100/-112) since open",
+    "line2": "Status: flipped today, +EV at 6 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NHL",
+   "date": "Sat Nov 7",
+   "start": "12:00pm CT",
+   "matchup": "Blues @ Predators",
+   "bet": "Under 5.5",
+   "price": "+100",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 6 to 5.5 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": {
+    "strength": 62,
+    "line1": "Vegas Backed 62: line moved to Under with a minority of bets",
+    "bets": 19,
+    "money": 16
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "1:00pm CT",
+   "matchup": "Lamar @ Abilene Christian",
+   "bet": "Under 166.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "MAX",
+    "line1": "Total moved from 167 to 165 since open",
+    "line2": "Status: stable, +EV at 11 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "1:00pm CT",
+   "matchup": "Cal St Fullerton @ South Dakota",
+   "bet": "CSUF +1.5",
+   "price": "-114",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from CSUF +1 to SDAK -1 since open",
+    "line2": "Status: stable, +EV at 2 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "1:00pm CT",
+   "matchup": "Cal St Fullerton @ South Dakota",
+   "bet": "CSUF ML",
+   "price": "-102",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Moneyline from -101 to -110 / -106 since open",
+    "line2": "Status: stable, +EV at 17 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "2:00pm CT",
+   "matchup": "Long Beach St @ Montana St",
+   "bet": "Under 145.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 147 to 145.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "2:30pm CT",
+   "matchup": "LIU @ Las Vegas (LAS)",
+   "bet": "Over 150.5",
+   "price": "-105",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 149.5 to 150.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "3:00pm CT",
+   "matchup": "Oakland @ UC Santa Barbara",
+   "bet": "Under 149.5",
+   "price": "-115",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 150 to 149 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "4:30pm CT",
+   "matchup": "Western Carolina @ UNC Asheville",
+   "bet": "Over 152.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 150 to 152 since open",
+    "line2": "Status: stable, +EV at 5 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "6:00pm CT",
+   "matchup": "Northern Iowa @ Dayton",
+   "bet": "Over 148.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 147 to 149.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "6:30pm CT",
+   "matchup": "Denver @ UC Riverside",
+   "bet": "Over 156",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 154 to 156 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "6:30pm CT",
+   "matchup": "Maryland @ Georgetown",
+   "bet": "MD -2.5",
+   "price": "-113",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread steady at MD -3, price -104 to -111 since open",
+    "line2": "Status: stable, +EV at 6 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 10:44am CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "UVU@WEB Over 156.5 (8:00pm CT) - carded STRONG at the 10:05 run, now LEAN at Pinnacle 10:44am CT. Pinnacle checked 10:44am CT; Vegas NHL 10:45am; Novig and NCAAB Vegas not read."
+  }
+ ]
+}
