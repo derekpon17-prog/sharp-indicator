@@ -1,0 +1,32 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 1:50pm CT** · SBU@CAN (faded: VMI@UTSA, NMSU@GONZ)",
+ "scorecards": [
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "6:00pm CT",
+   "matchup": "St Bonaventure @ Canisius",
+   "bet": "Over 148.5",
+   "price": "-116",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Pinnacle total moved from 148 to 148.5 since open (adds to the SBU -9.5 Strong already carded)",
+    "line2": "Status: stable, +EV at 1 book"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 1:50pm CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded STRONG earlier today, now below Strong at Pinnacle 1:50pm CT: VMI@UTSA UTSA -4.5 SPREAD (16:00 CT) now Lean at -5.5; NMSU@GONZ GONZ -29.5 SPREAD (16:00 CT) now Lean. Novig not read; Vegas not re-read."
+  }
+ ]
+}
