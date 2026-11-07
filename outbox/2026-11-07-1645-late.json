@@ -1,0 +1,75 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 4:50pm CT** · MSU@MICH, COLO@ASU, SELA@LR (faded: PROV@NEB ML, HCU@WIU HCU -9.5)",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "6:30pm CT",
+   "matchup": "Michigan State @ Michigan",
+   "bet": "MICH -14",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from MICH -13 to -14 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 4:50pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "6:30pm CT",
+   "matchup": "Colorado @ Arizona State",
+   "bet": "Under 47.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 49 to 47 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "label": "VEGAS BACKED",
+    "strength": 48,
+    "line": "Under 48.5 at 10:20am snapshot",
+    "bets": "29% bets / 29% money"
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 4:50pm CT",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "7:00pm CT",
+   "matchup": "Southeastern Louisiana @ Little Rock",
+   "bet": "Under 145.5",
+   "price": "-112",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 147 to 145.5 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 4:50pm CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded STRONG earlier today, now Lean at Pinnacle 4:50pm CT: PROV@NEB PROV ML (6:00pm CT, +123, flipped today); HCU@WIU HCU -9.5 (6:00pm CT). Novig not read; NCAAB Vegas tab locked."
+  }
+ ]
+}

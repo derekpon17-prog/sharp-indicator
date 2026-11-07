@@ -1,0 +1,78 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · Sat SLATE · 6:00-9:00pm CT** · 15 games, NBA + NHL",
+ "scorecards": [
+  {
+   "sport": "NHL",
+   "date": "Sat Nov 7",
+   "start": "7:00pm CT",
+   "matchup": "San Jose @ Dallas",
+   "bet": "Under 6",
+   "price": "-104",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 6.5 (-127) to 6 (-104) since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 75,
+    "line1": "Vegas Backed: line moved to the Under with a minority of bets",
+    "bets": 15,
+    "money": 16
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 5:06pm CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NBA + NHL full day",
+   "subtitle": "Sat 5:08pm CT - Pinnacle checked 5:06pm - Vegas 5:07pm - Novig not checked",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NBA - 6:30-9:00PM CT",
+     "picks": [
+      {"bet": "Over 226.5", "sub": "BKN @ ATL 6:30pm", "price": -111, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS no row", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Under 223.5", "sub": "NY @ CLE 7:00pm", "price": -112, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS 68 (under 70)", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Over 223.5", "sub": "WSH @ OKC 7:00pm", "price": -110, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS no row", "c": "grey"}]},
+      {"bet": "GS -7.5", "sub": "ORL @ GS 7:30pm", "price": -106, "sources": 1, "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "GS ML VEGAS 80", "c": "blue"}]},
+      {"bet": "GS ML", "sub": "ORL @ GS 7:30pm", "price": -280, "sources": 1, "chips": [{"t": "VEGAS 80 pressure", "c": "blue"}, {"t": "PIN LEAN flipped", "c": "orange"}]},
+      {"bet": "Over 223.5", "sub": "HOU @ PHX 8:00pm", "price": -114, "sources": 1, "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "VEGAS no row", "c": "grey"}]},
+      {"bet": "Spurs ML", "sub": "SA @ POR 9:00pm", "price": -211, "sources": 1, "chips": [{"t": "VEGAS 78 pressure", "c": "blue"}, {"t": "PIN no lean", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NHL - 6:00-9:00PM CT",
+     "picks": [
+      {"bet": "Over 6.5", "sub": "UTA @ OTT 6:00pm", "price": -110, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS 61 (under 70)", "c": "grey"}]},
+      {"bet": "Over 5.5", "sub": "NJ @ NYI 6:00pm", "price": -134, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS 54 (under 70)", "c": "grey"}]},
+      {"bet": "Under 6", "sub": "SJ @ DAL 7:00pm", "price": -104, "sources": 2, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS 75 backed", "c": "blue"}]},
+      {"bet": "DAL -1.5", "sub": "SJ @ DAL 7:00pm", "price": -120, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS no row", "c": "grey"}]},
+      {"bet": "Over 6.5", "sub": "TB @ MIN 7:00pm", "price": -107, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS 69 (under 70)", "c": "grey"}]}
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NBA, NHL",
+   "color": 3447003,
+   "fields": [
+    {"name": "NBA", "value": "6:30 BKN @ ATL - GL 1\n7:00 NY @ CLE - GL 1\n7:00 WSH @ OKC - GL 1\n7:30 ORL @ GS - GL 2\n8:00 HOU @ PHX - GL 1\n9:00 SA @ POR - GL 1", "inline": false},
+    {"name": "NHL", "value": "6:00 MTL @ TOR - -\n6:00 UTA @ OTT - GL 1\n6:00 NJ @ NYI - GL 1\n7:00 CHI @ CAR - -\n7:00 SJ @ DAL - GL 2\n7:00 TB @ MIN - GL 1\n8:00 DET @ COL - -\n8:00 PIT @ LA - -\n9:00 VAN @ EDM - -", "inline": false},
+    {"name": "Not in this card", "value": "DEN @ IND (NBA, 4:00pm, started) and NYR @ SEA (NHL, 4:00pm, started) were the 3:05 outlier run. CFB and NCAAB full day carded at 10:05am; flips at :30 runs.", "inline": false}
+   ]
+  },
+  {
+   "title": "Run notes",
+   "color": 15844367,
+   "description": "Games covered: 6 NBA + 9 NHL (all on Betting Insider). Pinnacle 5:06pm CT, Vegas NBA + NHL tabs 5:07pm CT (all rows read), Novig game lines not read (usage). Strong/Max game lines: 10 (0 Max). Vegas 70+: 3 (SJ@DAL U6 75 aligned, GS ML 80, SA ML 78 pressure moves). Conflicts: none. Pin flipped today: ORL@GS GS -7.5, HOU@PHX Over 223.5. Props off."
+  }
+ ]
+}
