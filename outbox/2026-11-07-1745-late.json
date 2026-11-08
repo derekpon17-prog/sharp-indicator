@@ -1,0 +1,37 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 5:55pm CT** · AFA@ARMY (faded: SHSU@JXST JVST -16.5, USI@EVAN USI ML)",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "6:30pm CT",
+   "matchup": "Air Force @ Army",
+   "bet": "ARMY -4",
+   "price": "-109",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from ARMY -3.5 to -4 since open",
+    "line2": "Status: stable, +EV at 1 book"
+   },
+   "vegas": {
+    "label": "VEGAS AGAINST",
+    "strength": 84,
+    "line": "Vegas Backed 84 is on Air Force +4 (opposite side)",
+    "bets": "28% bets / 31% money"
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 5:48pm CT, Vegas 5:53pm CT",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded STRONG earlier today, now below Strong at Pinnacle 5:48pm CT: SHSU@JXST JVST -16.5 (6:00pm CT, now Lean); USI@EVAN USI ML (7:00pm CT, +265, now Slight). Novig not read."
+  }
+ ]
+}
