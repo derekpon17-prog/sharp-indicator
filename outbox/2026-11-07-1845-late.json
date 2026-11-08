@@ -1,0 +1,94 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Sat 6:55pm CT** · WSH@OKC, ORL@GS, SELA@LR, WYO@UNLV (faded: ORL@GS GS -7.5, HOU@PHX Over 223.5, SJ@DAL DAL -1.5)",
+ "scorecards": [
+  {
+   "sport": "NBA",
+   "date": "Sat Nov 7",
+   "start": "7:00pm CT",
+   "matchup": "Wizards @ Thunder",
+   "bet": "OKC -12.5",
+   "price": "-111",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from OKC -11.5 to -12.5 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 6:48pm CT, Vegas 6:53pm CT (Novig not read)",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NBA",
+   "date": "Sat Nov 7",
+   "start": "7:30pm CT",
+   "matchup": "Magic @ Warriors",
+   "bet": "GS ML",
+   "price": "-304",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "ML moved from GS -252 to -301 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": {
+    "strength": 90,
+    "line1": "Pressure Move: GS ML -238 to -303, 95% of bets / 96% of money",
+    "bets": 95,
+    "money": 96
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG + VEGAS 70+ LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 6:48pm CT, Vegas 6:53pm CT (Novig not read)",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "NCAAB",
+   "date": "Sat Nov 7",
+   "start": "7:00pm CT",
+   "matchup": "SE Louisiana @ Little Rock",
+   "bet": "LR -10.5",
+   "price": "+105",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Spread moved from LR -9 to -10 since open",
+    "line2": "Status: stable, +EV at 3 books"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 6:48pm CT, Vegas 6:53pm CT (Novig not read)",
+   "header": "LATE FLIP"
+  },
+  {
+   "sport": "CFB",
+   "date": "Sat Nov 7",
+   "start": "9:30pm CT",
+   "matchup": "Wyoming @ UNLV",
+   "bet": "Over 49.5",
+   "price": "-110",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 48 to 49 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG LATE FLIP RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 6:48pm CT, Vegas 6:53pm CT (Novig not read)",
+   "header": "LATE FLIP"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15158332,
+   "description": "Carded STRONG earlier today, now Lean at Pinnacle 6:48pm CT: ORL@GS GS -7.5 (7:30pm CT, flipped today); HOU@PHX Over 223.5 (8:00pm CT, flipped today); SJ@DAL DAL -1.5 (7:00pm CT). Novig not read."
+  }
+ ]
+}
