@@ -109,6 +109,22 @@ async function connect(url) {
   const sizedUp = tickets.filter(x => (x.vsUsual || 0) > 1 && x.dollars >= 1000)
     .map(x => ({ matchup: x.matchup, market: x.market, pick: x.pick, kickoffEt: x.kickoffEt, sport: x.sport, dollars: x.dollars, price: x.price, vsUsual: x.vsUsual, size: x.size, form: x.form, l30Roi: x.l30Roi, mktRecord: x.mktRecord, mktRoi: x.mktRoi, opposed: x.opposed, fp: x.fp }))
     .sort((a, b) => b.vsUsual - a.vsUsual || b.dollars - a.dollars);
+  // Called-out log: first time each flagged side appeared today (price and time frozen at first sight), for grading by sport.
+  try {
+    fs.mkdirSync(path.join(OUT, 'flaglog'), { recursive: true });
+    const lf = path.join(OUT, 'flaglog', date + '.json');
+    let lg = { date, sides: {} }; try { lg = JSON.parse(fs.readFileSync(lf, 'utf8')); } catch {}
+    const upd = (x, tag, extra) => {
+      const key = [x.matchup, x.market, x.pick].join('|');
+      const r = lg.sides[key] || (lg.sides[key] = { sport: x.sport, matchup: x.matchup, market: x.market, pick: x.pick, kickoffEt: x.kickoffEt, firstSeenAt: new Date().toISOString(), firstPrice: x.price || x.bestPrice || null, tags: [], maxVsUsual: 0, maxDollars: 0, opposedSeen: false, snapshots: 0 });
+      if (!r.tags.includes(tag)) r.tags.push(tag);
+      r.maxVsUsual = Math.max(r.maxVsUsual, extra.vs || 0); r.maxDollars = Math.max(r.maxDollars, extra.d || 0); r.snapshots++;
+      if (extra.opp) r.opposedSeen = true;
+    };
+    for (const fl of flags) upd(fl, fl.type, { vs: fl.maxVsUsual, d: fl.strongDollars, opp: fl.type !== 'STRONG_UNOPPOSED' });
+    for (const z of sizedUp) upd(z, z.vsUsual >= 2 ? 'SIZED_2X' : z.vsUsual >= 1.5 ? 'SIZED_15X' : 'SIZED_UP', { vs: z.vsUsual, d: z.dollars, opp: z.opposed === 'contested' });
+    fs.writeFileSync(lf, JSON.stringify(lg, null, 1));
+  } catch (e) { console.log('flaglog error', e.message); }
   fs.writeFileSync(path.join(OUT, 'flags.json'), JSON.stringify({ date, scannedAt: payload.scannedAt, flags, sizedUp }, null, 1));
   console.log('logged', date, 'tickets', tickets.length, 'plays', plays.length, 'snapshots', day.snapshots.length);
 })();
