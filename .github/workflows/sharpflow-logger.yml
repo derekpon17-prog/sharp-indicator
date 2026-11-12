@@ -2,6 +2,11 @@
 name: SharpFlow logger
 on:
   workflow_dispatch:
+    inputs:
+      force_post:
+        description: 'Post flags to Discord now (test)'
+        required: false
+        default: 'no'
   schedule:
     - cron: '7 15-23 * * *'
     - cron: '7 0-4 * * *'
@@ -28,6 +33,12 @@ jobs:
         env:
           SF_URL: ${{ vars.SF_URL }}
         run: node scripts/sharpflow_logger.js
+      - name: Post flags to Discord (Mon, Thu, Sat, Sun at 11am and 4pm CT)
+        continue-on-error: true
+        env:
+          HOOK_SIGNALS: ${{ secrets.DISCORD_SIGNALS }}
+          FORCE: ${{ github.event.inputs.force_post == 'yes' && '1' || '0' }}
+        run: node scripts/sharpflow_discord.js
       - name: Publish
         run: |
           cd sf_branch
