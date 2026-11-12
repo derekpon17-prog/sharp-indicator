@@ -64,6 +64,9 @@ async function connect(url) {
     size: a.sharp && a.sharp.size, vsUsual: a.sharp && a.sharp.vsUsual, form: a.sharp && a.sharp.form,
     l30Roi: a.sharp && a.sharp.l30 && a.sharp.l30.returnPct, mktRecord: a.sharp && a.sharp.market && a.sharp.market.record,
     mktRoi: a.sharp && a.sharp.market && a.sharp.market.returnPct, lineMove: a.lineMove || null,
+    l30Rec: a.sharp && a.sharp.l30 && a.sharp.l30.record, l30Dollars: a.sharp && a.sharp.l30 && a.sharp.l30.dollars,
+    mktL30Rec: a.sharp && a.sharp.market && a.sharp.market.l30 && a.sharp.market.l30.record, mktL30Dollars: a.sharp && a.sharp.market && a.sharp.market.l30 && a.sharp.market.l30.dollars,
+    fp: [a.sharp && a.sharp.l30 && a.sharp.l30.record, a.sharp && a.sharp.l30 && a.sharp.l30.dollars, a.sharp && a.sharp.market && a.sharp.market.record].join('|'),
   }));
   const plays = (payload.plays || []).map(p => ({
     sport: p.sport, matchup: p.matchup, kickoffEt: p.kickoffEt, market: p.market, side: p.side, pick: p.pick, line: p.line, units: p.units, odds: p.odds,
