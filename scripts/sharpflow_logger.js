@@ -103,6 +103,11 @@ async function connect(url) {
     }
   }
   flags.sort((a, b) => b.strongDollars - a.strongDollars);
-  fs.writeFileSync(path.join(OUT, 'flags.json'), JSON.stringify({ date, scannedAt: payload.scannedAt, flags }, null, 1));
+  for (const fl of flags) { const ts = (games[fl.matchup + '|' + fl.market] || {})[fl.pick] || []; fl.maxVsUsual = Math.max(0, ...ts.map(y => y.vsUsual || 0)); }
+  // Sized-up tickets: any confirmed wallet betting above its usual size (vsUsual > 1), $1K+
+  const sizedUp = tickets.filter(x => (x.vsUsual || 0) > 1 && x.dollars >= 1000)
+    .map(x => ({ matchup: x.matchup, market: x.market, pick: x.pick, kickoffEt: x.kickoffEt, sport: x.sport, dollars: x.dollars, price: x.price, vsUsual: x.vsUsual, size: x.size, form: x.form, l30Roi: x.l30Roi, mktRecord: x.mktRecord, mktRoi: x.mktRoi, opposed: x.opposed, fp: x.fp }))
+    .sort((a, b) => b.vsUsual - a.vsUsual || b.dollars - a.dollars);
+  fs.writeFileSync(path.join(OUT, 'flags.json'), JSON.stringify({ date, scannedAt: payload.scannedAt, flags, sizedUp }, null, 1));
   console.log('logged', date, 'tickets', tickets.length, 'plays', plays.length, 'snapshots', day.snapshots.length);
 })();

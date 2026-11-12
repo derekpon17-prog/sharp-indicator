@@ -27,14 +27,17 @@ const line = x => `**${x.pick}** ${x.market === 'ML' ? 'ML' : x.market} - ${x.ma
 const sw = live.filter(x => x.type === 'STRONG_VS_WEAK');
 const un = live.filter(x => x.type === 'STRONG_UNOPPOSED').slice(0, 10);
 const ss = live.filter(x => x.type === 'STRONG_VS_STRONG').slice(0, 4);
-if (!sw.length && !un.length) { console.log('nothing to post'); process.exit(0); }
+const sz = (f.sizedUp || []).map(x => ({ ...x, st: startUtc(x.kickoffEt) })).filter(x => !x.st || x.st > now).slice(0, 10);
+const szLine = x => `**${x.pick}** ${x.market === 'ML' ? 'ML' : x.market} ${x.price || ''} - ${x.matchup} ${ctStr(x.st)} CT - **${x.vsUsual}x usual**, ${k(x.dollars)}${x.opposed === 'contested' ? ' (contested)' : ''}${x.mktRecord ? ' - mkt ' + x.mktRecord : ''}`;
+if (!sw.length && !un.length && !sz.length) { console.log('nothing to post'); process.exit(0); }
 const fields = [];
 if (sw.length) fields.push({ name: 'Strong vs weak', value: sw.map(line).join('\n').slice(0, 1000) });
 if (un.length) fields.push({ name: 'Strong, unopposed', value: un.map(line).join('\n').slice(0, 1000) });
+if (sz.length) fields.unshift({ name: 'Sized up (above their usual bet)', value: sz.map(szLine).join('\n').slice(0, 1000) });
 if (ss.length) fields.push({ name: 'Good wallets on both sides (no play)', value: ss.map(line).join('\n').slice(0, 1000) });
 const snapCt = new Date(f.scannedAt).toLocaleString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit' }).replace(' ', '').toLowerCase();
-const payload = { content: `**SharpFlow flags** - ${dow} ${snapCt} CT snapshot`, embeds: [{ title: 'SharpFlow strong vs weak', color: 3447003, fields,
-  description: 'Strong = wallet with 30-day ROI 25%+ and market ROI 20%+, $1K+. Weak = colder wallet inside SharpFlow\'s sharp pool (not true losers). Pinnacle and Vegas alignment is added in the hourly run logs. Tracking only, not a recommendation.',
+const payload = { content: `**SharpFlow flags** - ${dow} ${snapCt} CT snapshot`, embeds: [{ title: 'SharpFlow sharp money', color: 3447003, fields,
+  description: 'Sized up = a wallet betting more than its usual size (2.5x = two and a half times its normal bet). Strong = wallet with 30-day ROI 25%+ and market ROI 20%+, $1K+. Weak = colder wallet inside SharpFlow\'s sharp pool (not true losers). Pinnacle and Vegas alignment is added in the hourly run logs. Tracking only, not a recommendation.',
   footer: { text: 'Source: SharpFlow (NHL Savant), self-reported. Games already started are hidden.' } }] };
 fetch(HOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
   .then(r => console.log('discord', r.status)).catch(e => console.log('discord error', e.message));
