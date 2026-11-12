@@ -95,6 +95,11 @@ for path in sorted(glob.glob("outbox/*.json")):
         scorecards = card.get("scorecards")
         summaries = card.get("summaries")
         boards = card.get("boards")
+        # an empty list means "none" (cards with only boards or embeds often carry scorecards: [])
+        scorecards = scorecards or None
+        summaries = summaries or None
+        boards = boards or None
+        embeds = embeds or None
         if boards is not None and (not isinstance(boards, list) or not 1 <= len(boards) <= 3):
             raise ValueError("boards must be a list of 1-3 board cards")
         if summaries is not None and (not isinstance(summaries, list) or not 1 <= len(summaries) <= 5):
