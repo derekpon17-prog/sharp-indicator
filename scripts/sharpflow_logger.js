@@ -58,7 +58,8 @@ async function connect(url) {
   fs.writeFileSync(path.join(OUT, 'probe.json'), JSON.stringify(probe, null, 1));
   if (!payload) { console.log('no payload', JSON.stringify(probe).slice(0, 600)); return; }
 
-  const tickets = (payload.actionTab || []).map(a => ({
+  const KEEP = new Set(['NFL', 'NBA', 'NHL', 'CFB', 'CBB', 'WNBA', 'MLB']); // NFL, NBA, NHL, NCAAF, NCAAB, WNBA, MLB only
+  const tickets = (payload.actionTab || []).filter(a => KEEP.has(String(a.sport || '').toUpperCase())).map(a => ({
     sport: a.sport, matchup: a.matchup, kickoffEt: a.kickoffEt, market: a.market, pick: a.pick, line: a.line == null ? null : a.line,
     opposed: a.opposed, opposedBy: a.opposedBy, recordOf: a.recordOf, wallet: a.sameNight, dollars: a.dollars, price: a.price,
     size: a.sharp && a.sharp.size, vsUsual: a.sharp && a.sharp.vsUsual, form: a.sharp && a.sharp.form,
@@ -68,7 +69,7 @@ async function connect(url) {
     mktL30Rec: a.sharp && a.sharp.market && a.sharp.market.l30 && a.sharp.market.l30.record, mktL30Dollars: a.sharp && a.sharp.market && a.sharp.market.l30 && a.sharp.market.l30.dollars,
     fp: [a.sharp && a.sharp.l30 && a.sharp.l30.record, a.sharp && a.sharp.l30 && a.sharp.l30.dollars, a.sharp && a.sharp.market && a.sharp.market.record].join('|'),
   }));
-  const plays = (payload.plays || []).map(p => ({
+  const plays = (payload.plays || []).filter(p => KEEP.has(String(p.sport || '').toUpperCase())).map(p => ({
     sport: p.sport, matchup: p.matchup, kickoffEt: p.kickoffEt, market: p.market, side: p.side, pick: p.pick, line: p.line, units: p.units, odds: p.odds,
     status: p.status, score: p.score, alignment: p.alignment,
     money: p.money ? { dollars: p.money.dollars, confirmed: p.money.confirmed, record: p.money.record, opposed: p.money.opposed } : null,
