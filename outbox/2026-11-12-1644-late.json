@@ -1,0 +1,35 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Thu 16:44 CT** · NCAAB MORG @ UMBC (5:00pm CT)",
+ "scorecards": [
+  {
+   "sport": "NCAAB",
+   "date": "Thu Nov 12",
+   "start": "5:00pm CT",
+   "matchup": "Morgan State @ UMBC",
+   "bet": "Under 160.5",
+   "price": "-114",
+   "header": "LATE FLIP",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 162.5 to 160.5 since open",
+    "line2": "Status: flipped today"
+   },
+   "vegas": null,
+   "novig": null,
+   "record_label": "PINNACLE STRONG TOTAL RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 16:44 CT - Vegas CBB 16:44 - Novig not read - SF: no ticket on this game"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15548997,
+   "description": "BRAD -12.5 (BRAD @ COPP, 5:00pm CT) - carded Strong at 4:10pm, now Lean (stable). Price and result unchanged in the ledger. Same game: Under 131.5 is still Strong.",
+   "footer": {
+    "text": "Leans, not guarantees"
+   }
+  }
+ ]
+}

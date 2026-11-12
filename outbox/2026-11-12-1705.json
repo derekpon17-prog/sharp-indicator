@@ -1,0 +1,366 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals - Thu NBA + NHL FULL DAY - 6:00-9:00pm CT** - 4 NBA, 10 NHL games (Pinnacle 5:10pm, Vegas 5:12pm, SF 4:13pm CT)",
+ "scorecards": [
+  {
+   "sport": "NHL",
+   "date": "Thu Nov 12",
+   "start": "8:00pm CT",
+   "matchup": "Blues @ Utah",
+   "bet": "Blues ML",
+   "price": "-128",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Line moved from Blues +103 to -129 since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 100,
+    "line1": "Vegas Backed: line moved to the Blues with a minority of bets",
+    "bets": 14,
+    "money": 12
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking since Oct 21 - see ledger",
+   "checked": "Checked Pinnacle 5:10pm CT, Vegas 5:12pm CT"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Top plays - Thu Nov 12 NBA + NHL",
+   "subtitle": "Pinnacle 5:10pm - Vegas NBA+NHL 5:12pm - SharpFlow 4:13pm CT (no SF points) - Novig not read",
+   "legend": "Score = Pinnacle + Vegas points (SharpFlow points not available this pull). 70+ TOP PLAY, 50-69 STRONG, 30-49 LEAN. Untested weights.",
+   "footer": "Only 1 play scored 30+ today. Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "TOP PLAYS",
+     "picks": [
+      {
+       "bet": "Blues ML",
+       "sub": "STL @ UTA - 8:00pm CT",
+       "price": -128,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 100",
+         "c": "blue"
+        },
+        {
+         "t": "no SF ticket",
+         "c": "grey"
+        }
+       ],
+       "score": 41
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NBA + NHL full day",
+   "subtitle": "Pinnacle 5:10pm - Vegas NBA+NHL 5:12pm - SharpFlow 4:13pm CT (no SF points) - Novig not read",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "NBA - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "TOR +7.5",
+       "sub": "TOR @ PHI - 6:00pm",
+       "price": -113,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "SF $11.7K light",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "TOR ML",
+       "sub": "TOR @ PHI - 6:00pm",
+       "price": 219,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "contested $2.0K vs $1.6K",
+         "c": "orange"
+        }
+       ]
+      },
+      {
+       "bet": "Over 222.5",
+       "sub": "DET @ WSH - 6:00pm",
+       "price": -111,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG flipped",
+         "c": "orange"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG not read",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 8:00PM CT",
+     "picks": [
+      {
+       "bet": "CHA ML",
+       "sub": "CHA @ PHX - 8:00pm",
+       "price": 192,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 59 (under 70)",
+         "c": "grey"
+        },
+        {
+         "t": "SF vs PIN: SHARP $293K on PHX",
+         "c": "red"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "OTT ML",
+       "sub": "COL @ OTT - 6:00pm",
+       "price": -112,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG not read",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Under 6",
+       "sub": "WSH @ NJ - 6:00pm",
+       "price": -104,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN AGAINST (slight Over)",
+         "c": "red"
+        },
+        {
+         "t": "VEGAS 75",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG not read",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:30PM CT",
+     "picks": [
+      {
+       "bet": "Over 5.5",
+       "sub": "DET @ FLA - 6:30pm",
+       "price": -136,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS Under 56 against",
+         "c": "red"
+        },
+        {
+         "t": "NOVIG not read",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "WPG ML",
+       "sub": "WPG @ DAL - 7:00pm",
+       "price": 137,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN lean flipped",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS 81",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG not read",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 8:00PM CT",
+     "picks": [
+      {
+       "bet": "Blues ML",
+       "sub": "STL @ UTA - 8:00pm",
+       "price": -128,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 100",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG not read",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Under 5.5",
+       "sub": "STL @ UTA - 8:00pm",
+       "price": 109,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        },
+        {
+         "t": "VEGAS 100",
+         "c": "blue"
+        },
+        {
+         "t": "NOVIG not read",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 9:00PM CT",
+     "picks": [
+      {
+       "bet": "Over 5.5",
+       "sub": "NYI @ LA - 9:00pm",
+       "price": -134,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS PM 36 (under 70)",
+         "c": "grey"
+        },
+        {
+         "t": "NOVIG not read",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NBA, NHL",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "NBA (GL = Pin STRONG/MAX + Vegas 70+ plays)",
+     "value": "6:00pm TOR @ PHI - GL 2\n6:00pm DET @ WSH - GL 1\n7:00pm DAL @ MIN - - (SF $2.6K MIN ML)\n8:00pm CHA @ PHX - GL 1 (SF $293K Suns ML, vs PIN)",
+     "inline": false
+    },
+    {
+     "name": "NHL",
+     "value": "6:00pm MTL @ BOS - -\n6:00pm MIN @ TOR - -\n6:00pm COL @ OTT - GL 1\n6:00pm WSH @ NJ - GL 1\n6:00pm TB @ CBJ - -\n6:30pm DET @ FLA - GL 1\n7:00pm BUF @ CHI - -\n7:00pm WPG @ DAL - GL 1\n8:00pm STL @ UTA - GL 2\n9:00pm NYI @ LA - GL 1",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "NFL WSH@NYG 7:15pm, CFB MEM@USF 7:00pm and UL@ULM 8:00pm: 6:05 slate run. NCAAB: carded at 4:05 and 4:44 runs.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "Conflicts",
+   "color": 15158332,
+   "description": "CHA ML: Pin STRONG stable (+192) and Vegas 59 are on Charlotte, but SharpFlow has $293K on Phoenix ML (4.1x the wallet's usual, unopposed) - SF vs PIN, scored 10.\nDET@FLA: Pin STRONG Over 5.5, but Vegas Backed 56 is on the Under.\nWSH@NJ: Vegas 75 Under 6, Pinnacle Slight lean is Over."
+  },
+  {
+   "title": "Run notes",
+   "color": 15844367,
+   "description": "SharpFlow snapshot scanned 4:13pm CT, current. flags.json had no sides[] list, so no SF points and no Top plays SF component; SF dollars shown as chips only. Novig not read. Props off. Sharp Score weights are a first guess; 1 play scores 30+ (Blues ML 41).",
+   "footer": {
+    "text": "Checked: Pinnacle 5:10 - Vegas 5:12pm CT - SF 4:13pm CT - Novig not read - leans, not guarantees"
+   }
+  }
+ ]
+}
