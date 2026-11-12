@@ -1,0 +1,25 @@
+{
+ "at": "2026-11-12T17:13:26.431Z",
+ "tried": [
+  {
+   "url": "https://sharpflowmcp-lviwud3q2q-uc.a.run.app/mcp",
+   "init": {
+    "status": 200,
+    "ct": "text/event-stream; charset=utf-8",
+    "head": "event: message\ndata: {\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{\"tools\":{\"listChanged\":false}},\"serverInfo\":{\"name\":\"NHL Savant - Sharpflow\",\"version\":\"1.0.0\"},\"instructions\":\"Call today or locked_card once. The payload is the whole day. Locks with confirmed mon",
+    "ok": true
+   },
+   "tools": [
+    "today",
+    "locked_card",
+    "game_action",
+    "sport_action"
+   ]
+  }
+ ],
+ "call": {
+  "status": 200,
+  "head": "event: message\ndata: {\"jsonrpc\":\"2.0\",\"id\":3,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\\n  \\\"source\\\": \\\"Sharp Flow day. plays are staked locks, same-side money first. That order is agreement then "
+ },
+ "ok": true
+}
