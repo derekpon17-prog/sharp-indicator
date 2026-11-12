@@ -1,0 +1,129 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals - Thu NCAAB FULL DAY - 5:00-9:00pm CT** - 24 games read (Pinnacle 4:10pm, Vegas CBB 4:12pm CT)",
+ "scorecards": [],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NCAAB full day (1/3)",
+   "subtitle": "Thu NCAAB - Pinnacle checked 4:10pm - Vegas CBB 4:12pm - Novig not read - SharpFlow not current CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - no 2-source plays this slate",
+   "sections": [
+    {
+     "heading": "NCAAB - 5:00PM CT",
+     "picks": [
+      {"bet": "BRAD -12.5", "sub": "BRAD @ COPP - 5:00pm", "price": -107, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Under 132.5", "sub": "BRAD @ COPP - 5:00pm", "price": -113, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "BRAD ML", "sub": "BRAD @ COPP - 5:00pm", "price": -919, "sources": 1, "chips": [{"t": "PIN slight", "c": "grey"}, {"t": "VEGAS 90 PM", "c": "blue"}, {"t": "NOVIG not read", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NCAAB - 5:30PM CT",
+     "picks": [
+      {"bet": "Over 148.5", "sub": "MERC @ PSU - 5:30pm", "price": -112, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NCAAB - 6:00PM CT",
+     "picks": [
+      {"bet": "SHU -6.5", "sub": "CCSU @ SHU - 6:00pm", "price": -110, "sources": 1, "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "VEGAS 50 (under 70)", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Under 144.5", "sub": "CCSU @ SHU - 6:00pm", "price": -110, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "SHU ML", "sub": "CCSU @ SHU - 6:00pm", "price": -265, "sources": 1, "chips": [{"t": "PIN lean", "c": "grey"}, {"t": "VEGAS 77 PM", "c": "blue"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "CSUB -9.5", "sub": "CSUB @ WIU - 6:00pm", "price": -103, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Under 147.5", "sub": "CSUB @ WIU - 6:00pm", "price": -114, "sources": 1, "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "CSUB ML", "sub": "CSUB @ WIU - 6:00pm", "price": -443, "sources": 1, "chips": [{"t": "PIN lean", "c": "grey"}, {"t": "VEGAS 92 PM", "c": "blue"}, {"t": "NOVIG not read", "c": "grey"}]}
+     ]
+    }
+   ]
+  },
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NCAAB full day (2/3)",
+   "subtitle": "Thu NCAAB - Pinnacle checked 4:10pm - Vegas CBB 4:12pm - Novig not read - SharpFlow not current CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - no 2-source plays this slate",
+   "sections": [
+    {
+     "heading": "NCAAB - 6:00PM CT",
+     "picks": [
+      {"bet": "Under 144.5", "sub": "MONM @ QUIN - 6:00pm", "price": -112, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "STET +9.5", "sub": "STET @ HOW - 6:00pm", "price": -107, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Under 149.5", "sub": "STET @ HOW - 6:00pm", "price": -116, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Over 158.5", "sub": "SUU @ HPU - 6:00pm", "price": -109, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "UMES +23.5", "sub": "UMES @ URI - 6:00pm", "price": -116, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Under 137.5", "sub": "UMES @ URI - 6:00pm", "price": -115, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Over 153.5", "sub": "WMU @ PFW - 6:00pm", "price": -110, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "PFW ML", "sub": "WMU @ PFW - 6:00pm", "price": 113, "sources": 1, "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NCAAB - 7:00PM CT",
+     "picks": [
+      {"bet": "TA&M ML", "sub": "OKST @ TA&M - 7:00pm", "price": -378, "sources": 1, "chips": [{"t": "PIN no lean", "c": "grey"}, {"t": "VEGAS 75 PM", "c": "blue"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "SIU +2.5", "sub": "RICH @ SIU - 7:00pm", "price": -111, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS 48 (under 70)", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]}
+     ]
+    }
+   ]
+  },
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NCAAB full day (3/3)",
+   "subtitle": "Thu NCAAB - Pinnacle checked 4:10pm - Vegas CBB 4:12pm - Novig not read - SharpFlow not current CT",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line",
+   "footer": "Leans, not guarantees - no 2-source plays this slate",
+   "sections": [
+    {
+     "heading": "NCAAB - 7:00PM CT",
+     "picks": [
+      {"bet": "Under 150.5", "sub": "RICH @ SIU - 7:00pm", "price": -113, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "SIU ML", "sub": "RICH @ SIU - 7:00pm", "price": 123, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "WEST +5.5", "sub": "WEST @ AAMU - 7:00pm", "price": -107, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Under 146.5", "sub": "WEST @ AAMU - 7:00pm", "price": -112, "sources": 1, "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "WEST ML", "sub": "WEST @ AAMU - 7:00pm", "price": 195, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]}
+     ]
+    },
+    {
+     "heading": "NCAAB - 8:00PM CT",
+     "picks": [
+      {"bet": "Under 162.5", "sub": "MTST @ BYU - 8:00pm", "price": -109, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "UTEP -4.5", "sub": "NMSU @ UTEP - 8:00pm", "price": -117, "sources": 1, "chips": [{"t": "PIN STRONG flipped", "c": "orange"}, {"t": "VEGAS 53 (under 70)", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "Over 144.5", "sub": "NMSU @ UTEP - 8:00pm", "price": -111, "sources": 1, "chips": [{"t": "PIN STRONG stable", "c": "green"}, {"t": "VEGAS none", "c": "grey"}, {"t": "NOVIG not read", "c": "grey"}]},
+      {"bet": "UTEP ML", "sub": "NMSU @ UTEP - 8:00pm", "price": -218, "sources": 1, "chips": [{"t": "PIN lean", "c": "grey"}, {"t": "VEGAS 84 PM", "c": "blue"}, {"t": "NOVIG not read", "c": "grey"}]}
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NCAAB",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "NCAAB (games with plays; rest = no Strong/70+)",
+     "value": "5:00pm BRAD @ COPP - GL 3\n5:30pm MERC @ PSU - GL 1\n6:00pm CCSU @ SHU - GL 3\n6:00pm CSUB @ WIU - GL 3\n6:00pm MONM @ QUIN - GL 1\n6:00pm STET @ HOW - GL 2\n6:00pm SUU @ HPU - GL 1\n6:00pm UMES @ URI - GL 2\n6:00pm WMU @ PFW - GL 2\n7:00pm OKST @ TA&M - GL 1\n7:00pm RICH @ SIU - GL 3\n7:00pm WEST @ AAMU - GL 3\n8:00pm MTST @ BYU - GL 1\n8:00pm NMSU @ UTEP - GL 3",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "KC @ GMU 2:00pm (GMU -15.5 Pin Strong, logged by 1:05 run, started). NCAAB games Betting Insider does not list: JWU@BU, LNCA@CSUF, GRCU@CSUN and others on the plan - not covered. NBA/NHL 5:05pm run, MEM@USF/WSH@NYG/UL@ULM 6:05pm run.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "SharpFlow strong vs weak",
+   "color": 10181046,
+   "description": "SF not current: latest snapshot 12:28pm CT (over 3 hours old) and no flags.json on the branch. No SF chips, buckets or lists for this run."
+  },
+  {
+   "title": "Run notes",
+   "color": 15844367,
+   "description": "No scorecards: no play has two agreeing sources in the same market. Same-team cross-market support: Bradley (spread -12.5 Pin Strong + ML Vegas 90), CSUB (spread -9.5 + ML 92), Sacred Heart (spread -6.5 flipped today + ML 77, Whale Respect 50 on the spread), UTEP (spread -4.5 + ML 84, Vegas Backed 53 on the spread). Vegas ML rows are Pressure Moves; Pinnacle is Slight/Lean on those MLs. Novig not read. Props off.",
+   "footer": {
+    "text": "Checked: Pinnacle 4:10 - Vegas 4:12pm CT - Novig not read - SF not current - leans, not guarantees"
+   }
+  }
+ ]
+}
