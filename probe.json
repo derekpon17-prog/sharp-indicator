@@ -1,5 +1,5 @@
 {
- "at": "2026-11-12T18:28:01.918Z",
+ "at": "2026-11-12T22:27:06.824Z",
  "tried": [
   {
    "url": "https://sharpflowmcp-lviwud3q2q-uc.a.run.app/mcp",
@@ -13,7 +13,9 @@
     "today",
     "locked_card",
     "game_action",
-    "sport_action"
+    "sport_action",
+    "wallet_profile",
+    "find_specialists"
    ]
   }
  ],
