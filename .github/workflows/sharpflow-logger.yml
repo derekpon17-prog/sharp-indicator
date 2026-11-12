@@ -8,8 +8,8 @@ on:
         required: false
         default: 'no'
   schedule:
-    - cron: '7 15-23 * * *'
-    - cron: '7 0-4 * * *'
+    - cron: '7,37 15-23 * * *'
+    - cron: '7,37 0-4 * * *'
 permissions:
   contents: write
 concurrency:

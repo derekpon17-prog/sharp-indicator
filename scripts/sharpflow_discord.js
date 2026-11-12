@@ -7,7 +7,11 @@ const force = process.env.FORCE === '1';
 const now = new Date();
 const ct = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(now);
 const dow = ct.find(p => p.type === 'weekday').value, hr = +ct.find(p => p.type === 'hour').value % 24;
-if (!force && (!['Mon', 'Thu', 'Sat', 'Sun'].includes(dow) || ![11, 16].includes(hr))) { console.log('not a post slot', dow, hr); process.exit(0); }
+const slot = hr >= 11 && hr <= 12 ? 'am' : hr >= 16 && hr <= 17 ? 'pm' : null; // GitHub cron can run late, so each slot is a 2-hour window, posted once
+if (!force && (!['Mon', 'Thu', 'Sat', 'Sun'].includes(dow) || !slot)) { console.log('not a post slot', dow, hr); process.exit(0); }
+const dayKey = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(now) + '-' + (slot || 'force');
+let posted = {}; try { posted = JSON.parse(fs.readFileSync(OUT + '/posted.json', 'utf8')); } catch {}
+if (!force && posted[dayKey]) { console.log('already posted', dayKey); process.exit(0); }
 if (!HOOK) { console.log('no webhook secret DISCORD_SIGNALS'); process.exit(0); }
 let f; try { f = JSON.parse(fs.readFileSync(OUT + '/flags.json', 'utf8')); } catch (e) { console.log('no flags.json'); process.exit(0); }
 const ageMin = (now - new Date(f.scannedAt)) / 60000;
@@ -40,4 +44,4 @@ const payload = { content: `**SharpFlow flags** - ${dow} ${snapCt} CT snapshot`,
   description: 'Sized up = a wallet betting more than its usual size (2.5x = two and a half times its normal bet). Strong = wallet with 30-day ROI 25%+ and market ROI 20%+, $1K+. Weak = colder wallet inside SharpFlow\'s sharp pool (not true losers). Pinnacle and Vegas alignment is added in the hourly run logs. Tracking only, not a recommendation.',
   footer: { text: 'Source: SharpFlow (NHL Savant), self-reported. Games already started are hidden.' } }] };
 fetch(HOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-  .then(r => console.log('discord', r.status)).catch(e => console.log('discord error', e.message));
+  .then(r => { console.log('discord', r.status); if (r.ok && !force) { posted[dayKey] = new Date().toISOString(); fs.writeFileSync(OUT + '/posted.json', JSON.stringify(posted)); } }).catch(e => console.log('discord error', e.message));
