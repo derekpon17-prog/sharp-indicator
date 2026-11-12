@@ -83,5 +83,26 @@ async function connect(url) {
   if (!last || last.scannedAt !== snap.scannedAt) day.snapshots.push(snap);
   fs.writeFileSync(f, JSON.stringify(day));
   fs.writeFileSync(path.join(OUT, 'latest.json'), JSON.stringify({ date, ...snap }));
+  // Strong-vs-weak flags: strong = confirmed wallet with hot 30-day and market stats; weak = confirmed wallet with cold stats. Not true losers (the feed has none).
+  const strong = x => x.dollars >= 1000 && (x.l30Roi || 0) >= 25 && (x.mktRoi == null || x.mktRoi >= 20);
+  const weak = x => x.dollars >= 500 && ((x.l30Roi != null && x.l30Roi <= 8) || (x.mktRoi != null && x.mktRoi < 0));
+  const games = {};
+  for (const x of tickets) { const k = x.matchup + '|' + x.market; (games[k] = games[k] || {})[x.pick] = (games[k][x.pick] || []).concat(x); }
+  const flags = [];
+  for (const k of Object.keys(games)) {
+    const sides = Object.keys(games[k]);
+    for (const sd of sides) {
+      const mine = games[k][sd], strongT = mine.filter(strong);
+      if (!strongT.length) continue;
+      const other = sides.filter(o => o !== sd).flatMap(o => games[k][o]);
+      const weakOpp = other.filter(weak), strongOpp = other.filter(strong);
+      const sum = a => a.reduce((n, y) => n + y.dollars, 0);
+      flags.push({ matchup: k.split('|')[0], market: k.split('|')[1], pick: sd, kickoffEt: mine[0].kickoffEt, sport: mine[0].sport,
+        type: strongOpp.length ? 'STRONG_VS_STRONG' : weakOpp.length ? 'STRONG_VS_WEAK' : other.length ? 'STRONG_VS_OTHER' : 'STRONG_UNOPPOSED',
+        strongDollars: sum(strongT), oppDollars: sum(other), oppWeakDollars: sum(weakOpp), fp: strongT.map(y => y.fp), bestPrice: strongT[0].price });
+    }
+  }
+  flags.sort((a, b) => b.strongDollars - a.strongDollars);
+  fs.writeFileSync(path.join(OUT, 'flags.json'), JSON.stringify({ date, scannedAt: payload.scannedAt, flags }, null, 1));
   console.log('logged', date, 'tickets', tickets.length, 'plays', plays.length, 'snapshots', day.snapshots.length);
 })();
