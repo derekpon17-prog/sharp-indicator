@@ -1,5 +1,5 @@
 /* Posts the SharpFlow strong-vs-weak list to Discord (Sharp Signals channel) from flags.json. No Claude.
-   Runs on Mon, Thu, Sat, Sun (Central) at the 11am and 4pm CT snapshots. FORCE=1 posts anyway (test). */
+   Runs on Mon, Thu, Sat, Sun (Central) after the 10am and 4pm CT pulls. FORCE=1 posts anyway (test). */
 const fs = require('fs');
 const OUT = process.env.OUT_DIR || 'sf_branch';
 const HOOK = process.env.HOOK_SIGNALS;
@@ -7,7 +7,7 @@ const force = process.env.FORCE === '1';
 const now = new Date();
 const ct = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(now);
 const dow = ct.find(p => p.type === 'weekday').value, hr = +ct.find(p => p.type === 'hour').value % 24;
-const slot = hr >= 11 && hr <= 12 ? 'am' : hr >= 16 && hr <= 17 ? 'pm' : null; // GitHub cron can run late, so each slot is a 2-hour window, posted once
+const slot = hr >= 10 && hr <= 11 ? 'am' : hr >= 16 && hr <= 17 ? 'pm' : null; // GitHub cron can run late, so each slot is a 2-hour window, posted once
 if (!force && (!['Mon', 'Thu', 'Sat', 'Sun'].includes(dow) || !slot)) { console.log('not a post slot', dow, hr); process.exit(0); }
 const dayKey = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(now) + '-' + (slot || 'force');
 let posted = {}; try { posted = JSON.parse(fs.readFileSync(OUT + '/posted.json', 'utf8')); } catch {}

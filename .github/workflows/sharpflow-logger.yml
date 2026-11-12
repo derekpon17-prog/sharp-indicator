@@ -8,8 +8,8 @@ on:
         required: false
         default: 'no'
   schedule:
-    - cron: '7,37 15-23 * * *'
-    - cron: '7,37 0-4 * * *'
+    - cron: '7,37 16,20,22 * * *'   # 10:07am, 2:07pm, 4:07pm CT (+ :37 backups)
+    - cron: '7,37 0 * * *'          # 6:07pm CT
 permissions:
   contents: write
 concurrency:
@@ -33,7 +33,7 @@ jobs:
         env:
           SF_URL: ${{ vars.SF_URL }}
         run: node scripts/sharpflow_logger.js
-      - name: Post flags to Discord (Mon, Thu, Sat, Sun at 11am and 4pm CT)
+      - name: Post flags to Discord (Mon, Thu, Sat, Sun after the 10am and 4pm pulls)
         continue-on-error: true
         env:
           HOOK_SIGNALS: ${{ secrets.DISCORD_SIGNALS }}
