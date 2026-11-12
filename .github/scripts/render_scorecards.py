@@ -206,16 +206,29 @@ def board_html(c):
                 cols = {"green": GREEN, "red": RED, "blue": BLUE, "grey": GREY, "orange": ORANGE, "gold": GOLD}
                 cs = "".join(chip(ch.get("t"), cols.get(ch.get("c"), GREY)) for ch in p.get("chips", []))
                 n = int(p.get("sources") or 0)
+                sc = p.get("score")
                 segs = "".join(f'<div class="sg" style="background:{GREEN if k < n else "#1B212B"}"></div>' for k in range(3))
                 pr = p.get("price")
                 ptxt = "" if pr in (None, "") else f'{float(pr):+.0f}'
+                if sc is not None:
+                    # Sharp Score mode: big number is the 0-100 score, price moves to the small label, bar = score
+                    scn = max(0, min(100, float(sc)))
+                    scol = GOLD if scn >= 70 else GREEN if scn >= 50 else GREY
+                    segs = "".join(f'<div class="sg" style="background:{scol if scn >= t else "#1B212B"}"></div>' for t in (30, 50, 70))
+                    n_txt = f'SHARP SCORE {scn:.0f}'
+                    big = f'<span class="mp" style="color:{scol}">{scn:.0f}</span>'
+                    bk = f'{e(p.get("book") or "")} {ptxt}'.strip()
+                else:
+                    n_txt = f'{n} of 3 sources'
+                    big = f'<span class="mp">{ptxt}</span>'
+                    bk = e(p.get("book") or "")
                 sub = p.get("sub") or ""
                 rows += (f'<div class="pr"><div class="pn">{i}</div>'
                          f'<div><div class="pt">{e(p.get("bet"))} <span class="pp">{e(sub)}</span></div>'
                          f'<div class="cs">{cs}</div></div>'
-                         f'<div><div class="pm"><span class="bk">{e(p.get("book") or "")}</span><span class="mp">{ptxt}</span></div>'
+                         f'<div><div class="pm"><span class="bk">{bk}</span>{big}</div>'
                          f'<div class="sgs">{segs}</div>'
-                         f'<div class="ed">{n} of 3 sources</div></div></div>')
+                         f'<div class="ed">{n_txt}</div></div></div>')
                 continue
             price = float(p.get("price"))
             m = float(p.get("model") or 0)
