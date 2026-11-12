@@ -1,0 +1,38 @@
+# Logs SharpFlow (NHL Savant) MCP tickets and locks to the `sharpflow` branch. No Claude usage.
+name: SharpFlow logger
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 15-23 * * *'
+    - cron: '7 0-4 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: sharpflow-logger
+  cancel-in-progress: false
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Prepare sharpflow branch
+        run: |
+          mkdir sf_branch && cd sf_branch && git init -q
+          git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          if git fetch -q --depth 20 origin sharpflow; then git checkout -q -B sharpflow FETCH_HEAD; else git checkout -q --orphan sharpflow; fi
+      - name: Pull SharpFlow
+        env:
+          SF_URL: ${{ vars.SF_URL }}
+        run: node scripts/sharpflow_logger.js
+      - name: Publish
+        run: |
+          cd sf_branch
+          git config user.name "sharpflow-logger"; git config user.email "sharpflow-logger@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "nothing new"; exit 0; }
+          git commit -q -m "sharpflow $(date -u +%F-%H%M)"
+          git push -q origin sharpflow || { git pull -q --rebase origin sharpflow && git push -q origin sharpflow; }
