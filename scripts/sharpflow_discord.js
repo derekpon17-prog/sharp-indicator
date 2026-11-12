@@ -4,6 +4,7 @@ const fs = require('fs');
 const OUT = process.env.OUT_DIR || 'sf_branch';
 const HOOK = process.env.HOOK_SIGNALS;
 const force = process.env.FORCE === '1';
+if (!force && process.env.POST_TEXT !== '1') { console.log('text post disabled (cards carry SharpFlow)'); process.exit(0); }
 const now = new Date();
 const ct = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(now);
 const dow = ct.find(p => p.type === 'weekday').value, hr = +ct.find(p => p.type === 'hour').value % 24;

@@ -125,6 +125,28 @@ async function connect(url) {
     for (const z of sizedUp) upd(z, z.vsUsual >= 2 ? 'SIZED_2X' : z.vsUsual >= 1.5 ? 'SIZED_15X' : 'SIZED_UP', { vs: z.vsUsual, d: z.dollars, opp: z.opposed === 'contested' });
     fs.writeFileSync(lf, JSON.stringify(lg, null, 1));
   } catch (e) { console.log('flaglog error', e.message); }
-  fs.writeFileSync(path.join(OUT, 'flags.json'), JSON.stringify({ date, scannedAt: payload.scannedAt, flags, sizedUp }, null, 1));
+  // SF points (0-45): money tier (max 20) + sizing vs usual (12) + wallet quality (6) + pooled wallets (4) + unopposed (3); contested -8.
+  const nBets = r => (String(r || '').match(/\d+/g) || []).reduce((a, b) => a + (+b), 0);
+  const sidesMap = {};
+  for (const x of tickets) { if (x.dollars < 500) continue; const key = [x.matchup, x.market, x.pick].join('|'); (sidesMap[key] = sidesMap[key] || []).push(x); }
+  const sides = [];
+  for (const key of Object.keys(sidesMap)) {
+    const ts = sidesMap[key]; const total = ts.reduce((n, y) => n + y.dollars, 0); if (total < 1000) continue;
+    const mkt = key.split('|').slice(0, 2).join('|');
+    const oppT = Object.keys(sidesMap).filter(k2 => k2.startsWith(mkt + '|') && k2 !== key).flatMap(k2 => sidesMap[k2]);
+    const opp = oppT.reduce((n, y) => n + y.dollars, 0);
+    const maxVs = Math.max(0, ...ts.filter(y => y.dollars >= total * 0.25).map(y => y.vsUsual || 0)); // sizing of the tickets that carry the money
+    const wallets = new Set(ts.map(y => y.fp)).size;
+    const bestQ = Math.max(0, ...ts.map(y => (y.mktRoi != null && y.mktRoi >= 30 && nBets(y.mktRecord) >= 10) ? 6 : (y.mktRoi != null && y.mktRoi >= 20 && (y.l30Roi || 0) >= 25) ? 4 : 0));
+    const money = total >= 30000 ? 20 : total >= 15000 ? 16 : total >= 5000 ? 12 : total >= 2000 ? 8 : 4;
+    const sizing = maxVs >= 2.5 ? 12 : maxVs >= 2 ? 10 : maxVs >= 1.5 ? 7 : maxVs > 1 ? 4 : 0;
+    const contested = opp >= total * 0.5;
+    const pts = Math.max(0, Math.min(45, money + sizing + bestQ + (wallets >= 2 ? 4 : 0) + (opp === 0 ? 3 : 0) - (contested ? 8 : 0)));
+    const top = ts.slice().sort((a, b) => b.dollars - a.dollars)[0];
+    sides.push({ sport: top.sport, matchup: top.matchup, market: top.market, pick: top.pick, kickoffEt: top.kickoffEt, dollars: total, oppDollars: opp, wallets, maxVsUsual: maxVs,
+      price: top.price, size: top.size, mktRecord: top.mktRecord, mktRoi: top.mktRoi, l30Roi: top.l30Roi, contested, sfPoints: pts, parts: { money, sizing, quality: bestQ, pooled: wallets >= 2 ? 4 : 0, unopposed: opp === 0 ? 3 : 0, contested: contested ? -8 : 0 } });
+  }
+  sides.sort((a, b) => b.sfPoints - a.sfPoints || b.dollars - a.dollars);
+  fs.writeFileSync(path.join(OUT, 'flags.json'), JSON.stringify({ date, scannedAt: payload.scannedAt, sides, flags, sizedUp }, null, 1));
   console.log('logged', date, 'tickets', tickets.length, 'plays', plays.length, 'snapshots', day.snapshots.length);
 })();
