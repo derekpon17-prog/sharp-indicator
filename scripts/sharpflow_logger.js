@@ -11,7 +11,7 @@ const probe = { at: new Date().toISOString(), tried: [] };
 async function rpc(url, body, sid) {
   const headers = { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream', 'MCP-Protocol-Version': '2025-03-26' };
   if (sid) headers['mcp-session-id'] = sid;
-  const r = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
+  const r = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body), signal: AbortSignal.timeout(40000) });
   const text = await r.text();
   let json = null;
   const ct = r.headers.get('content-type') || '';
