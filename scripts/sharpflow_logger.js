@@ -143,7 +143,11 @@ async function connect(url) {
     const contested = opp >= total * 0.5;
     const pts = Math.max(0, Math.min(45, money + sizing + bestQ + (wallets >= 2 ? 4 : 0) + (opp === 0 ? 3 : 0) - (contested ? 8 : 0)));
     const top = ts.slice().sort((a, b) => b.dollars - a.dollars)[0];
-    sides.push({ sport: top.sport, matchup: top.matchup, market: top.market, pick: top.pick, kickoffEt: top.kickoffEt, dollars: total, oppDollars: opp, wallets, maxVsUsual: maxVs,
+    // Good tail (star): real money, other side small, above-usual size or a proven wallet, price you can still take, not a thin/steep line.
+    const am = parseInt(String(top.price || '').replace('+', ''), 10);
+    const priceOk = !isNaN(am) && am >= -190 && am <= 300;
+    const tail = pts >= 26 && total >= 5000 && opp < total * 0.25 && (maxVs >= 1.5 || bestQ >= 4) && priceOk;
+    sides.push({ tail, sport: top.sport, matchup: top.matchup, market: top.market, pick: top.pick, kickoffEt: top.kickoffEt, dollars: total, oppDollars: opp, wallets, maxVsUsual: maxVs,
       price: top.price, size: top.size, mktRecord: top.mktRecord, mktRoi: top.mktRoi, l30Roi: top.l30Roi, contested, sfPoints: pts, parts: { money, sizing, quality: bestQ, pooled: wallets >= 2 ? 4 : 0, unopposed: opp === 0 ? 3 : 0, contested: contested ? -8 : 0 } });
   }
   sides.sort((a, b) => b.sfPoints - a.sfPoints || b.dollars - a.dollars);
