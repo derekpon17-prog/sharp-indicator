@@ -122,6 +122,7 @@ def classify(rows, sf_current=True):
         if vegas_ok(r): bits.append(f"Vegas {int(r['vegas_strength'])} agrees")
         if sf_agrees(r): bits.append(f"sharp wallets {money(sf_in(r))} agree")
         r["why"] = ", ".join(bits) + (". " + r["vb_note"] + "." if r.get("vb_note") else ". Nothing against it.")
+        if r.get("vb"): r["star"] = True
         if r.get("vb"): r["why"] = "Pinnacle and Vegas 80+ agree. " + r["why"]
         r["chips"] = chips(r)
     seen = {r["game"] for r in plays} | {r["game"] for r in passes}
