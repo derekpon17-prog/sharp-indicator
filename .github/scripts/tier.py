@@ -3,6 +3,8 @@ Rules are frozen until ~200 graded plays per tier. Never tune from one day."""
 import re
 
 PLAY_CAP, LEAN_CAP, PASS_CAP, PER_GAME_PLAYS = 5, 3, 3, 2
+VEGAS_BEST = 80        # Pinnacle STRONG/MAX + Vegas 80+ is always a best play ...
+TON = 25000            # ... unless sharp wallets have this much (and 2x our own side) on the other side
 
 def money(n):
     n = float(n or 0)
@@ -87,6 +89,12 @@ def classify(rows, sf_current=True):
     for r in recs:
         if has_pin(r):
             c = conflict_row(r, recs)
+            vb = (r.get("vegas_strength") or 0) >= VEGAS_BEST
+            if c is not None and vb:
+                opp = sf_in(c) if c else float(r.get("sf_opp") or 0)
+                if not (opp >= TON and opp >= 2 * max(sf_in(r), 1)):
+                    c = None   # not a ton of money against it: stays a best play
+                    r["vb_note"] = "Sharp wallets disagree a little, not enough to stop it"
             if c is not None:
                 o = c or {}
                 r["tier"] = "PASS"
@@ -95,23 +103,26 @@ def classify(rows, sf_current=True):
                             + (f" at {float(o['sf_max_vs_usual']):.1f}x their usual" if o.get("sf_max_vs_usual") else "") + ". Pass.")
                 r["chips"] = chips(r)[:2] + [(f"WALLETS {money(o.get('sf_dollars') or r.get('sf_opp'))} on {o.get('bet') or 'other side'}", "r")]
                 passes.append(r)
-            elif r.get("pin_status") == "Stable":
+            elif r.get("pin_status") == "Stable" or vb:
                 r["agree"] = int(vegas_ok(r)) + int(sf_agrees(r))
+                r["vb"] = vb
                 plays.append(r)
-    plays.sort(key=lambda r: (0 if r["pin_tier"] == "Max" else 1, -r["agree"], r.get("first_seen") or "99"))
+    plays.sort(key=lambda r: (0 if r.get("vb") else 1, 0 if r["pin_tier"] == "Max" else 1, -r["agree"], r.get("first_seen") or "99"))
     kept, per = [], {}
     for r in plays:
         if per.get(r["game"], 0) >= PER_GAME_PLAYS:
             continue
         per[r["game"]] = per.get(r["game"], 0) + 1
         kept.append(r)
-    plays = kept[:PLAY_CAP]
+    nvb = sum(1 for r in kept if r.get('vb'))
+    plays = kept[:max(PLAY_CAP, nvb)]
     for r in plays:
         r["tier"] = "PLAY"
-        bits = [f"Pinnacle {r['pin_tier']} and steady"]
+        bits = [f"Pinnacle {r['pin_tier']}" + (" and steady" if r.get("pin_status") == "Stable" else ", moved since open")]
         if vegas_ok(r): bits.append(f"Vegas {int(r['vegas_strength'])} agrees")
         if sf_agrees(r): bits.append(f"sharp wallets {money(sf_in(r))} agree")
-        r["why"] = ", ".join(bits) + ". Nothing against it."
+        r["why"] = ", ".join(bits) + (". " + r["vb_note"] + "." if r.get("vb_note") else ". Nothing against it.")
+        if r.get("vb"): r["why"] = "Pinnacle and Vegas 80+ agree. " + r["why"]
         r["chips"] = chips(r)
     seen = {r["game"] for r in plays} | {r["game"] for r in passes}
     tails = {}

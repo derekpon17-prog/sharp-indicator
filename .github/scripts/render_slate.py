@@ -11,7 +11,7 @@ CSS = """*{box-sizing:border-box}body{margin:0;background:#0b0f17;font-family:In
 .sec small{font-weight:600;letter-spacing:.08em;font-size:12px;opacity:.85}
 .s-play{background:#0f3a2a;color:#5be3a0;border-left:6px solid #36c77d;font-size:19px}.s-lean{background:#3a2f12;color:#f0c75a;border-left:6px solid #e6b93a}.s-pass{background:#232c3b;color:#aab3c2;border-left:6px solid #5a6578}
 .row{display:grid;grid-template-columns:1fr 90px 110px;gap:10px;align-items:center;padding:15px 0;border-top:1px solid #232c3b}
-.b{font-size:22px;font-weight:800}.b .ln{color:#5be3a0}.lean .b .ln{color:#f0c75a}.pass .b .ln{color:#aab3c2}
+.b{font-size:22px;font-weight:800}.star{color:#ffd23f;font-size:26px;text-shadow:0 0 12px #ffb300;margin-right:4px}.lean .b.st{color:#ffd23f;font-weight:900;font-size:24px}.b .ln{color:#5be3a0}.lean .b .ln{color:#f0c75a}.pass .b .ln{color:#aab3c2}
 .s{font-size:14px;color:#e8ecf3;margin-top:4px;font-weight:700}
 .proof{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.dot{font-size:12px;border-radius:8px;padding:3px 9px;font-weight:600}
 .d-g{background:#12352a;color:#36c77d}.d-b{background:#14263f;color:#6aa7ff}.d-n{background:#1c2331;color:#7d879a}.d-r{background:#3a1a1e;color:#ef6a6a}.d-a{background:#3a2f12;color:#e6b93a}
@@ -27,7 +27,7 @@ def esc(x): return html.escape(str(x if x is not None else ""))
 
 def bet_html(r):
     b = str(r.get("bet") or "")
-    star = "★ " if r.get("star") else ""
+    star = '<span class="star">★</span>' if r.get("star") else ""
     import re
     m = re.search(r"([+-]?\d+(\.\d+)?)$", b)
     if m and ("Over" in b or "Under" in b or re.search(r"[+-]\d", b)):
@@ -37,7 +37,7 @@ def bet_html(r):
 def play_row(r, cls, verdict, vcls):
     ds = "".join(f'<span class="dot d-{c}">{esc(t)}</span>' for t, c in r.get("chips", []))
     p = r.get("sf_first_price", r.get("price"))
-    return (f'<div class="row {cls}"><div><div class="b">{bet_html(r)}</div><div class="s">{esc(r.get("matchup") or r.get("game"))}</div>'
+    return (f'<div class="row {cls}"><div><div class="b{' st' if r.get('star') else ''}">{bet_html(r)}</div><div class="s">{esc(r.get("matchup") or r.get("game"))}</div>'
             f'<div class="proof">{ds}</div><div class="why">{esc(r.get("why"))}</div></div>'
             f'<div class="num">{esc(price_txt(p))}</div><div class="vh {vcls}">{verdict}</div></div>')
 
@@ -89,7 +89,7 @@ def returns_html(c):
             res = r.get("result"); tag = ("tg", "WIN") if res == "W" else ("tr", "LOSS") if res == "L" else ("tx", "PUSH")
             note = " (skipped, no bet)" if name == "PASS" else ""
             risk = f"risk {abs(p)/100:.2f}u to win 1u" if p < 0 else "risk 1u"
-            body += (f'<div class="row {name.lower()}" style="grid-template-columns:1fr 90px 110px"><div><div class="b">{"★ " if r.get("star") else ""}{bet_html(r) if not r.get("star") else bet_html(dict(r, star=False))}</div>'
+            body += (f'<div class="row {name.lower()}" style="grid-template-columns:1fr 90px 110px"><div><div class="b{' st' if r.get('star') else ''}">{bet_html(r)}</div>'
                      f'<div class="s">{esc(r.get("matchup") or r.get("game"))}</div><div class="sub">{name} · {esc(price_txt(p))} · {risk} · final {esc(r.get("final"))}{note}</div></div>'
                      f'<div><span class="vh {tag[0]}">{tag[1]}</span></div><div class="num {"g" if u>0 else "r" if u<0 else "m"}">{u:+.2f}u</div></div>')
     body += '<div class="sec s-pass"><span>Same rules, everything else</span><small>W-L - units</small></div>'
