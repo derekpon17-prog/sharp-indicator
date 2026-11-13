@@ -8,8 +8,12 @@ on:
         required: false
         default: 'no'
   schedule:
-    - cron: '7,37 16,20,22 * * *'   # 10:07am, 2:07pm, 4:07pm CT (+ :37 backups)
-    - cron: '7,37 0 * * *'          # 6:07pm CT
+    # Pulls land before each Sharp Slate read (CT = UTC-6): 8:45am, 10:30am, 1:00pm, 3:30pm, 5:40pm (+15 min backups)
+    - cron: '45,59 14 * * *'   # 8:45am CT (+ backup)
+    - cron: '30,45 16 * * *'   # 10:30am CT (+ backup)
+    - cron: '0,15 19 * * *'    # 1:00pm CT (+ backup)
+    - cron: '30,45 21 * * *'   # 3:30pm CT (+ backup)
+    - cron: '40,55 23 * * *'   # 5:40pm CT (+ backup)
 permissions:
   contents: write
 concurrency:
