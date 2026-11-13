@@ -11,7 +11,7 @@ CSS = """*{box-sizing:border-box}body{margin:0;background:#0b0f17;font-family:In
 .sec small{font-weight:600;letter-spacing:.08em;font-size:12px;opacity:.85}
 .s-play{background:#0f3a2a;color:#5be3a0;border-left:6px solid #36c77d;font-size:19px}.s-lean{background:#3a2f12;color:#f0c75a;border-left:6px solid #e6b93a}.s-pass{background:#232c3b;color:#aab3c2;border-left:6px solid #5a6578}
 .row{display:grid;grid-template-columns:1fr 90px 110px;gap:10px;align-items:center;padding:15px 0;border-top:1px solid #232c3b}
-.b{font-size:22px;font-weight:800}.star{color:#ffd23f;font-size:26px;text-shadow:0 0 12px #ffb300;margin-right:4px}.lean .b.st{color:#ffd23f;font-weight:900;font-size:24px}.b .ln{color:#5be3a0}.lean .b .ln{color:#f0c75a}.pass .b .ln{color:#aab3c2}
+.b{font-size:22px;font-weight:800}.star{color:#ffd23f;font-size:26px;text-shadow:0 0 12px #ffb300;margin-right:4px}.b.st,.b.st .ln{color:#ffd23f;font-weight:900}.b.st{font-size:24px}.b .ln{color:#5be3a0}.lean .b .ln{color:#f0c75a}.pass .b .ln{color:#aab3c2}
 .s{font-size:14px;color:#e8ecf3;margin-top:4px;font-weight:700}
 .proof{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.dot{font-size:12px;border-radius:8px;padding:3px 9px;font-weight:600}
 .d-g{background:#12352a;color:#36c77d}.d-b{background:#14263f;color:#6aa7ff}.d-n{background:#1c2331;color:#7d879a}.d-r{background:#3a1a1e;color:#ef6a6a}.d-a{background:#3a2f12;color:#e6b93a}
