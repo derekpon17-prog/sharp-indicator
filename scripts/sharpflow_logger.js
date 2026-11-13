@@ -67,6 +67,7 @@ async function connect(url) {
     mktRoi: a.sharp && a.sharp.market && a.sharp.market.returnPct, lineMove: a.lineMove || null,
     l30Rec: a.sharp && a.sharp.l30 && a.sharp.l30.record, l30Dollars: a.sharp && a.sharp.l30 && a.sharp.l30.dollars,
     mktL30Rec: a.sharp && a.sharp.market && a.sharp.market.l30 && a.sharp.market.l30.record, mktL30Dollars: a.sharp && a.sharp.market && a.sharp.market.l30 && a.sharp.market.l30.dollars,
+    wid: a.id || (a.sharp && a.sharp.id) || null, usualSport: a.sharp && a.sharp.usualSport, usualAll: a.sharp && a.sharp.usualAll,
     fp: [a.sharp && a.sharp.l30 && a.sharp.l30.record, a.sharp && a.sharp.l30 && a.sharp.l30.dollars, a.sharp && a.sharp.market && a.sharp.market.record].join('|'),
   }));
   const plays = (payload.plays || []).filter(p => KEEP.has(String(p.sport || '').toUpperCase())).map(p => ({
