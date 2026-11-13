@@ -1,0 +1,1998 @@
+{
+ "log": [
+  "candidates 1174 evaluating 300 feedPages 8 cutoffDays 45"
+ ],
+ "generatedAt": "2026-11-13T18:31:53.116Z",
+ "cutoffDays": 45,
+ "candidates": 1174,
+ "evaluated": 285,
+ "feedPages": 8,
+ "sports": {
+  "NFL": {
+   "confirmed_sharp": [
+    {
+     "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+     "name": "BreakTheBank",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 95,
+      "roi": 13.4,
+      "wr": 51.6,
+      "pnl": 884747,
+      "staked": 6586937
+     },
+     "post": {
+      "n": 242,
+      "roi": 30.9,
+      "wr": 54.5,
+      "pnl": 7725285,
+      "staked": 24994725
+     }
+    },
+    {
+     "wallet": "0xabea08725590a4c6ae7c8e63214c9628bbc772ae",
+     "name": "0xaBea08725590a4C6Ae7c8E63214C9628BbC772AE-1781431873018",
+     "src": [
+      "lb-sports-month",
+      "feed"
+     ],
+     "pre": {
+      "n": 42,
+      "roi": 23.7,
+      "wr": 64.3,
+      "pnl": 20913,
+      "staked": 88227
+     },
+     "post": {
+      "n": 48,
+      "roi": 14.3,
+      "wr": 64.6,
+      "pnl": 45791,
+      "staked": 319357
+     }
+    }
+   ],
+   "failed_sharp": [
+    {
+     "wallet": "0xbc43c8bfbc4d77c2fc9011adad38ba43b88996d3",
+     "name": "0xBc43c8bfBC4d77c2FC9011adaD38Ba43b88996d3-1765231687816",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 89,
+      "roi": 27,
+      "wr": 53.9,
+      "pnl": 1066641,
+      "staked": 3955277
+     },
+     "post": {
+      "n": 239,
+      "roi": -17.1,
+      "wr": 41.8,
+      "pnl": -1230091,
+      "staked": 7176413
+     }
+    },
+    {
+     "wallet": "0xd38b71f3e8ed1af71983e5c309eac3dfa9b35029",
+     "name": "primm",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "lb-overall-all",
+      "feed"
+     ],
+     "pre": {
+      "n": 515,
+      "roi": 35.8,
+      "wr": 52,
+      "pnl": 2756247,
+      "staked": 7708515
+     },
+     "post": {
+      "n": 1086,
+      "roi": -3.3,
+      "wr": 45.7,
+      "pnl": -115677,
+      "staked": 3500766
+     }
+    },
+    {
+     "wallet": "0x924379a79c64b77ad5816ad362122a5f6228658e",
+     "name": "Kch-Temp",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 42,
+      "roi": 44.6,
+      "wr": 69,
+      "pnl": 1465599,
+      "staked": 3285150
+     },
+     "post": {
+      "n": 59,
+      "roi": -18.3,
+      "wr": 40.7,
+      "pnl": -1098786,
+      "staked": 6005414
+     }
+    },
+    {
+     "wallet": "0xfea31bc088000ff909be1dfd8d0e3f2c7ef2d227",
+     "name": "ndb1",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 96,
+      "roi": 17.6,
+      "wr": 47.9,
+      "pnl": 237829,
+      "staked": 1349191
+     },
+     "post": {
+      "n": 67,
+      "roi": -11.4,
+      "wr": 61.2,
+      "pnl": -191889,
+      "staked": 1680360
+     }
+    }
+   ],
+   "confirmed_loser": [
+    {
+     "wallet": "0xa38a455bbdd4b68486548b7e19da99903f4f821d",
+     "name": "takeormake",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 65,
+      "roi": -100,
+      "wr": 0,
+      "pnl": -411824,
+      "staked": 411697
+     },
+     "post": {
+      "n": 699,
+      "roi": -29.5,
+      "wr": 15.3,
+      "pnl": -478243,
+      "staked": 1619766
+     }
+    },
+    {
+     "wallet": "0x56acab44cfca2e88bb9b3406890aea7bfa0cd77e",
+     "name": "dv-pm",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 62,
+      "roi": -22.5,
+      "wr": 50,
+      "pnl": -10720,
+      "staked": 47611
+     },
+     "post": {
+      "n": 51,
+      "roi": -23.8,
+      "wr": 41.2,
+      "pnl": -5594,
+      "staked": 23478
+     }
+    },
+    {
+     "wallet": "0x2b51107e8d030397ea728a794405ffbcf1d2e165",
+     "name": "aaabbb",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 298,
+      "roi": -4.8,
+      "wr": 55.7,
+      "pnl": -16762,
+      "staked": 349447
+     },
+     "post": {
+      "n": 30,
+      "roi": -19.2,
+      "wr": 53.3,
+      "pnl": -4171,
+      "staked": 21774
+     }
+    },
+    {
+     "wallet": "0x73e83485b8e20b70c53c27bef8ba4c62575dcd6f",
+     "name": "betabot",
+     "src": [
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 43,
+      "roi": -14.9,
+      "wr": 41.9,
+      "pnl": -5828,
+      "staked": 39088
+     },
+     "post": {
+      "n": 43,
+      "roi": -19,
+      "wr": 51.2,
+      "pnl": -13063,
+      "staked": 68639
+     }
+    },
+    {
+     "wallet": "0x39d3c773be30fcc73161fc6768f46d563a779ef0",
+     "name": "matanovik",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 56,
+      "roi": -40.8,
+      "wr": 28.6,
+      "pnl": -265844,
+      "staked": 650865
+     },
+     "post": {
+      "n": 31,
+      "roi": -11.3,
+      "wr": 29,
+      "pnl": -26271,
+      "staked": 231942
+     }
+    },
+    {
+     "wallet": "0xf28e42d20e4826f2b10a24bc952001697947cab2",
+     "name": "ethanaz",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 170,
+      "roi": -4.1,
+      "wr": 60,
+      "pnl": -127387,
+      "staked": 3137776
+     },
+     "post": {
+      "n": 182,
+      "roi": -11.1,
+      "wr": 50.5,
+      "pnl": -581611,
+      "staked": 5220033
+     }
+    },
+    {
+     "wallet": "0x9703676286b93c2eca71ca96e8757104519a69c2",
+     "name": "AnonymousUsername",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week"
+     ],
+     "pre": {
+      "n": 75,
+      "roi": -77.6,
+      "wr": 0,
+      "pnl": -578943,
+      "staked": 746016
+     },
+     "post": {
+      "n": 267,
+      "roi": -9.6,
+      "wr": 40.1,
+      "pnl": -221306,
+      "staked": 2316911
+     }
+    },
+    {
+     "wallet": "0xe8c4d68aff65b38cac46987b9b65e01eb47d395d",
+     "name": "JAMJAMJAM4",
+     "src": [
+      "lb-sports-month",
+      "feed"
+     ],
+     "pre": {
+      "n": 116,
+      "roi": -5.6,
+      "wr": 51.7,
+      "pnl": -6415,
+      "staked": 113652
+     },
+     "post": {
+      "n": 111,
+      "roi": -7.5,
+      "wr": 48.6,
+      "pnl": -12241,
+      "staked": 163814
+     }
+    }
+   ],
+   "failed_loser": [
+    {
+     "wallet": "0x684baa57c338c2549aec0aa3f034f695d72a8409",
+     "name": "monkeymashingkeyboard",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "lb-overall-all",
+      "feed"
+     ],
+     "pre": {
+      "n": 95,
+      "roi": -13.4,
+      "wr": 50.5,
+      "pnl": -174292,
+      "staked": 1295949
+     },
+     "post": {
+      "n": 121,
+      "roi": 9.3,
+      "wr": 57,
+      "pnl": 173503,
+      "staked": 1858976
+     }
+    },
+    {
+     "wallet": "0x67542c3219b37fd1610aad290676ff91cdbfe3bc",
+     "name": "gmpm2",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "lb-overall-all",
+      "feed"
+     ],
+     "pre": {
+      "n": 128,
+      "roi": -8.1,
+      "wr": 49.2,
+      "pnl": -558167,
+      "staked": 6871872
+     },
+     "post": {
+      "n": 226,
+      "roi": 13.3,
+      "wr": 56.2,
+      "pnl": 1475088,
+      "staked": 11089382
+     }
+    },
+    {
+     "wallet": "0x032eb1bc893940263ad0b01889f262fc232f2a9e",
+     "name": "purplegatto",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 156,
+      "roi": -26.5,
+      "wr": 41,
+      "pnl": -40217,
+      "staked": 151755
+     },
+     "post": {
+      "n": 343,
+      "roi": 5,
+      "wr": 48.7,
+      "pnl": 32161,
+      "staked": 639065
+     }
+    },
+    {
+     "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
+     "name": "justwins",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 62,
+      "roi": -11,
+      "wr": 50,
+      "pnl": -178052,
+      "staked": 1618244
+     },
+     "post": {
+      "n": 21,
+      "roi": 63.5,
+      "wr": 66.7,
+      "pnl": 705264,
+      "staked": 1110898
+     }
+    },
+    {
+     "wallet": "0x3832289e6aca6b9444f6d9a4a2a8392f434535e1",
+     "name": "Aurelius7",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 174,
+      "roi": -14,
+      "wr": 52.9,
+      "pnl": -6632,
+      "staked": 47466
+     },
+     "post": {
+      "n": 96,
+      "roi": 2.7,
+      "wr": 56.3,
+      "pnl": 1138,
+      "staked": 41791
+     }
+    },
+    {
+     "wallet": "0x32ed517a571c01b6e9adecf61ba81ca48ff2f960",
+     "name": "sportmaster777",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 43,
+      "roi": -13.2,
+      "wr": 51.2,
+      "pnl": -3808,
+      "staked": 28767
+     },
+     "post": {
+      "n": 70,
+      "roi": 9.1,
+      "wr": 70,
+      "pnl": 6646,
+      "staked": 72795
+     }
+    },
+    {
+     "wallet": "0x4df332e27f9ee3224f52ce30e3ce15c1075e788f",
+     "name": "SunlineTicker",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week"
+     ],
+     "pre": {
+      "n": 399,
+      "roi": -4.9,
+      "wr": 49.6,
+      "pnl": -37783,
+      "staked": 768937
+     },
+     "post": {
+      "n": 453,
+      "roi": 0.9,
+      "wr": 52.3,
+      "pnl": 4029,
+      "staked": 457501
+     }
+    },
+    {
+     "wallet": "0x0235dc24b38772bf3339a9e5ec5db3d3a05fcee5",
+     "name": "darkumbreon88",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week"
+     ],
+     "pre": {
+      "n": 107,
+      "roi": -9.2,
+      "wr": 57,
+      "pnl": -16153,
+      "staked": 176400
+     },
+     "post": {
+      "n": 168,
+      "roi": 23,
+      "wr": 71.4,
+      "pnl": 54151,
+      "staked": 235778
+     }
+    }
+   ],
+   "watch": [
+    {
+     "wallet": "0x57cd939930fd119067ca9dc42b22b3e15708a0fb",
+     "name": "Supah9ga",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 48,
+      "roi": 37.1,
+      "wr": 77.1,
+      "pnl": 163189,
+      "staked": 440263
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x054964a95e2cb3fc2105a62a1edf3da44979c052",
+     "name": "COMEONDUDE",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 68,
+      "roi": 27.7,
+      "wr": 60.3,
+      "pnl": 531071,
+      "staked": 1917288
+     },
+     "post": {
+      "n": 6,
+      "roi": -58.7,
+      "wr": 33.3,
+      "pnl": -220334,
+      "staked": 375325
+     }
+    },
+    {
+     "wallet": "0x212954857f5efc138748c33d032a93bf95974222",
+     "name": "3bpatgs",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 204,
+      "roi": 21.8,
+      "wr": 54.4,
+      "pnl": 206682,
+      "staked": 946598
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0xdb27bf2ac5d428a9c63dbc914611036855a6c56e",
+     "name": "DrPufferfish",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 89,
+      "roi": 21.4,
+      "wr": 57.3,
+      "pnl": 1571690,
+      "staked": 7338378
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    }
+   ],
+   "groups": {
+    "preSharp": {
+     "wallets": 10,
+     "withPostBets": 7,
+     "postBets": 1747,
+     "postStaked": 44052360,
+     "postPnl": 4914299,
+     "postRoiPct": 11.2
+    },
+    "preLoser": {
+     "wallets": 21,
+     "withPostBets": 16,
+     "postBets": 2912,
+     "postStaked": 25172543,
+     "postPnl": 1109480,
+     "postRoiPct": 4.4
+    },
+    "everyone": {
+     "wallets": 170,
+     "withPostBets": 120,
+     "postBets": 16343,
+     "postStaked": 118296900,
+     "postPnl": 5419128,
+     "postRoiPct": 4.6
+    }
+   }
+  },
+  "NCAAF": {
+   "confirmed_sharp": [
+    {
+     "wallet": "0x67542c3219b37fd1610aad290676ff91cdbfe3bc",
+     "name": "gmpm2",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "lb-overall-all",
+      "feed"
+     ],
+     "pre": {
+      "n": 110,
+      "roi": 10.3,
+      "wr": 52.7,
+      "pnl": 152618,
+      "staked": 1483823
+     },
+     "post": {
+      "n": 144,
+      "roi": 22.6,
+      "wr": 54.2,
+      "pnl": 390728,
+      "staked": 1731648
+     }
+    },
+    {
+     "wallet": "0x20d6436849f930584892730c7f96ebb2ac763856",
+     "name": "0x20D6436849F930584892730C7F96eBB2Ac763856-1768642056357",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 41,
+      "roi": 15.2,
+      "wr": 56.1,
+      "pnl": 23814,
+      "staked": 157174
+     },
+     "post": {
+      "n": 47,
+      "roi": 17.3,
+      "wr": 42.6,
+      "pnl": 43373,
+      "staked": 251179
+     }
+    },
+    {
+     "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+     "name": "ic4cream",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 240,
+      "roi": 30.3,
+      "wr": 52.1,
+      "pnl": 199587,
+      "staked": 659658
+     },
+     "post": {
+      "n": 365,
+      "roi": 12.2,
+      "wr": 55.9,
+      "pnl": 113582,
+      "staked": 931597
+     }
+    },
+    {
+     "wallet": "0x746e936f43ff75bf508cf8375b7a8e2515ef68ca",
+     "name": "tomb2456",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 60,
+      "roi": 33.6,
+      "wr": 65,
+      "pnl": 16297,
+      "staked": 48532
+     },
+     "post": {
+      "n": 125,
+      "roi": 8.2,
+      "wr": 59.2,
+      "pnl": 11516,
+      "staked": 140435
+     }
+    }
+   ],
+   "failed_sharp": [],
+   "confirmed_loser": [
+    {
+     "wallet": "0xa38a455bbdd4b68486548b7e19da99903f4f821d",
+     "name": "takeormake",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 40,
+      "roi": -100,
+      "wr": 0,
+      "pnl": -5259,
+      "staked": 5259
+     },
+     "post": {
+      "n": 657,
+      "roi": -13,
+      "wr": 30.3,
+      "pnl": -40115,
+      "staked": 308312
+     }
+    },
+    {
+     "wallet": "0x4df332e27f9ee3224f52ce30e3ce15c1075e788f",
+     "name": "SunlineTicker",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week"
+     ],
+     "pre": {
+      "n": 57,
+      "roi": -5.2,
+      "wr": 59.6,
+      "pnl": -2620,
+      "staked": 50839
+     },
+     "post": {
+      "n": 76,
+      "roi": -5,
+      "wr": 56.6,
+      "pnl": -3042,
+      "staked": 61256
+     }
+    }
+   ],
+   "failed_loser": [
+    {
+     "wallet": "0x032eb1bc893940263ad0b01889f262fc232f2a9e",
+     "name": "purplegatto",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 121,
+      "roi": -57.5,
+      "wr": 40.5,
+      "pnl": -27623,
+      "staked": 48061
+     },
+     "post": {
+      "n": 562,
+      "roi": 12.1,
+      "wr": 49.8,
+      "pnl": 93119,
+      "staked": 769039
+     }
+    },
+    {
+     "wallet": "0xbfdfe31978b9ba79056b884ccf3bbc9225718e02",
+     "name": "jole24",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 109,
+      "roi": -5.4,
+      "wr": 39.4,
+      "pnl": -2883,
+      "staked": 53255
+     },
+     "post": {
+      "n": 65,
+      "roi": 3.5,
+      "wr": 46.2,
+      "pnl": 2325,
+      "staked": 66884
+     }
+    },
+    {
+     "wallet": "0xf28e42d20e4826f2b10a24bc952001697947cab2",
+     "name": "ethanaz",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 78,
+      "roi": -14.1,
+      "wr": 47.4,
+      "pnl": -314734,
+      "staked": 2225199
+     },
+     "post": {
+      "n": 142,
+      "roi": 9.7,
+      "wr": 55.6,
+      "pnl": 512005,
+      "staked": 5252075
+     }
+    },
+    {
+     "wallet": "0xf68a281980f8c13828e84e147e3822381d6e5b1b",
+     "name": "CUTJALENHURTS",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 204,
+      "roi": -5,
+      "wr": 52.5,
+      "pnl": -59933,
+      "staked": 1192796
+     },
+     "post": {
+      "n": 634,
+      "roi": 4,
+      "wr": 55.8,
+      "pnl": 201481,
+      "staked": 5018766
+     }
+    },
+    {
+     "wallet": "0x9703676286b93c2eca71ca96e8757104519a69c2",
+     "name": "AnonymousUsername",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week"
+     ],
+     "pre": {
+      "n": 50,
+      "roi": -58.2,
+      "wr": 0,
+      "pnl": -58032,
+      "staked": 99691
+     },
+     "post": {
+      "n": 325,
+      "roi": 2.1,
+      "wr": 40.6,
+      "pnl": 4613,
+      "staked": 222703
+     }
+    },
+    {
+     "wallet": "0x0235dc24b38772bf3339a9e5ec5db3d3a05fcee5",
+     "name": "darkumbreon88",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week"
+     ],
+     "pre": {
+      "n": 60,
+      "roi": -24,
+      "wr": 70,
+      "pnl": -3144,
+      "staked": 13120
+     },
+     "post": {
+      "n": 120,
+      "roi": 10,
+      "wr": 57.5,
+      "pnl": 9613,
+      "staked": 96412
+     }
+    }
+   ],
+   "watch": [
+    {
+     "wallet": "0x006cc834cc092684f1b56626e23bedb3835c16ea",
+     "name": "0x006cc834Cc092684F1B56626E23BEdB3835c16ea-1729683673397",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 82,
+      "roi": 25.7,
+      "wr": 34.1,
+      "pnl": 578247,
+      "staked": 2253591
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x3e04fbc51adb75418129f6ce2091ae633070564d",
+     "name": "roldy",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 68,
+      "roi": 25.1,
+      "wr": 55.9,
+      "pnl": 14514,
+      "staked": 57853
+     },
+     "post": {
+      "n": 6,
+      "roi": -91.1,
+      "wr": 16.7,
+      "pnl": -4088,
+      "staked": 4486
+     }
+    },
+    {
+     "wallet": "0xee00ba338c59557141789b127927a55f5cc5cea1",
+     "name": "S-Works",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 61,
+      "roi": 20.9,
+      "wr": 55.7,
+      "pnl": 176481,
+      "staked": 843693
+     },
+     "post": {
+      "n": 1,
+      "roi": 81.8,
+      "wr": 100,
+      "pnl": 48150,
+      "staked": 58850
+     }
+    },
+    {
+     "wallet": "0xa9878e59934ab507f9039bcb917c1bae0451141d",
+     "name": "ilovecircle",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 159,
+      "roi": 13.2,
+      "wr": 84.3,
+      "pnl": 242013,
+      "staked": 1832796
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    }
+   ],
+   "groups": {
+    "preSharp": {
+     "wallets": 8,
+     "withPostBets": 6,
+     "postBets": 688,
+     "postStaked": 3118195,
+     "postPnl": 603261,
+     "postRoiPct": 19.3
+    },
+    "preLoser": {
+     "wallets": 14,
+     "withPostBets": 9,
+     "postBets": 2587,
+     "postStaked": 11902099,
+     "postPnl": 737489,
+     "postRoiPct": 6.2
+    },
+    "everyone": {
+     "wallets": 142,
+     "withPostBets": 108,
+     "postBets": 20276,
+     "postStaked": 56266283,
+     "postPnl": 1160998,
+     "postRoiPct": 2.1
+    }
+   }
+  },
+  "NHL": {
+   "confirmed_sharp": [],
+   "failed_sharp": [],
+   "confirmed_loser": [
+    {
+     "wallet": "0xaebf3acc7c9add4928bd218f96de5cf64987e1ca",
+     "name": "12monkeys",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 64,
+      "roi": -43,
+      "wr": 37.5,
+      "pnl": -68180,
+      "staked": 158735
+     },
+     "post": {
+      "n": 19,
+      "roi": -58.3,
+      "wr": 31.6,
+      "pnl": -7249,
+      "staked": 12440
+     }
+    }
+   ],
+   "failed_loser": [
+    {
+     "wallet": "0x032eb1bc893940263ad0b01889f262fc232f2a9e",
+     "name": "purplegatto",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 57,
+      "roi": -28.8,
+      "wr": 54.4,
+      "pnl": -4065,
+      "staked": 14106
+     },
+     "post": {
+      "n": 211,
+      "roi": 0.8,
+      "wr": 52.6,
+      "pnl": 1080,
+      "staked": 140888
+     }
+    },
+    {
+     "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+     "name": "ic4cream",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 102,
+      "roi": -78.8,
+      "wr": 23.5,
+      "pnl": -262804,
+      "staked": 333519
+     },
+     "post": {
+      "n": 54,
+      "roi": 38.1,
+      "wr": 57.4,
+      "pnl": 56878,
+      "staked": 149158
+     }
+    },
+    {
+     "wallet": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+     "name": "one8tyfive",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 114,
+      "roi": -11.2,
+      "wr": 34.2,
+      "pnl": -67846,
+      "staked": 606264
+     },
+     "post": {
+      "n": 13,
+      "roi": 39.3,
+      "wr": 69.2,
+      "pnl": 21048,
+      "staked": 53580
+     }
+    }
+   ],
+   "watch": [
+    {
+     "wallet": "0x212954857f5efc138748c33d032a93bf95974222",
+     "name": "3bpatgs",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 157,
+      "roi": 44.5,
+      "wr": 52.9,
+      "pnl": 180343,
+      "staked": 405185
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0xf195721ad850377c96cd634457c70cd9e8308057",
+     "name": "lo34567Taipe",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 51,
+      "roi": 18.9,
+      "wr": 54.9,
+      "pnl": 1077737,
+      "staked": 5715043
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x9b3dcd99eec7fe11602e6534e6302c0f318d7422",
+     "name": "ErnstBlofeld",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 137,
+      "roi": 15.4,
+      "wr": 57.7,
+      "pnl": 1058085,
+      "staked": 6890342
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0xee613b3fc183ee44f9da9c05f53e2da107e3debf",
+     "name": "sovereign2013",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 220,
+      "roi": 13.8,
+      "wr": 50,
+      "pnl": 43125,
+      "staked": 311921
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    }
+   ],
+   "groups": {
+    "preSharp": {
+     "wallets": 4,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "preLoser": {
+     "wallets": 21,
+     "withPostBets": 6,
+     "postBets": 302,
+     "postStaked": 360466,
+     "postPnl": 67709,
+     "postRoiPct": 18.8
+    },
+    "everyone": {
+     "wallets": 151,
+     "withPostBets": 94,
+     "postBets": 8414,
+     "postStaked": 21663703,
+     "postPnl": 745052,
+     "postRoiPct": 3.4
+    }
+   }
+  },
+  "NBA": {
+   "confirmed_sharp": [
+    {
+     "wallet": "0xbbf379252411511adab081f016dc991aa6bbaa3a",
+     "name": "0xbbf379252411511ADAb081F016Dc991aA6bbAA3A-1768154730738",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 94,
+      "roi": 26.4,
+      "wr": 48.9,
+      "pnl": 14260,
+      "staked": 54093
+     },
+     "post": {
+      "n": 10,
+      "roi": 8.2,
+      "wr": 60,
+      "pnl": 138,
+      "staked": 1693
+     }
+    },
+    {
+     "wallet": "0x6db568e61e5e3de7d87f831431b673f38ce2e279",
+     "name": "PowerSupplyUnit",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 112,
+      "roi": 17.6,
+      "wr": 50.9,
+      "pnl": 1849670,
+      "staked": 10482112
+     },
+     "post": {
+      "n": 84,
+      "roi": 5.1,
+      "wr": 50,
+      "pnl": 90139,
+      "staked": 1784106
+     }
+    }
+   ],
+   "failed_sharp": [
+    {
+     "wallet": "0xa71093cafc0c099b4ccab24c3cb8018d817923c4",
+     "name": "Talvez10",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 331,
+      "roi": 13,
+      "wr": 53.8,
+      "pnl": 1414907,
+      "staked": 10850562
+     },
+     "post": {
+      "n": 27,
+      "roi": -36.7,
+      "wr": 40.7,
+      "pnl": -423038,
+      "staked": 1153016
+     }
+    }
+   ],
+   "confirmed_loser": [
+    {
+     "wallet": "0xf4218246dfefc5bdce904a73b2ec4d8366f5cff4",
+     "name": "mhhsw966",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 46,
+      "roi": -26.1,
+      "wr": 37,
+      "pnl": -39687,
+      "staked": 151838
+     },
+     "post": {
+      "n": 123,
+      "roi": -17.2,
+      "wr": 42.3,
+      "pnl": -38498,
+      "staked": 223311
+     }
+    },
+    {
+     "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
+     "name": "justwins",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 165,
+      "roi": -16.4,
+      "wr": 47.3,
+      "pnl": -601417,
+      "staked": 3656859
+     },
+     "post": {
+      "n": 49,
+      "roi": -7.6,
+      "wr": 49,
+      "pnl": -114519,
+      "staked": 1500322
+     }
+    },
+    {
+     "wallet": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+     "name": "one8tyfive",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 537,
+      "roi": -8.1,
+      "wr": 45.4,
+      "pnl": -603812,
+      "staked": 7479243
+     },
+     "post": {
+      "n": 40,
+      "roi": -7,
+      "wr": 42.5,
+      "pnl": -12135,
+      "staked": 172898
+     }
+    },
+    {
+     "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
+     "name": "nehcnehc",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 57,
+      "roi": -88.3,
+      "wr": 1.8,
+      "pnl": -386068,
+      "staked": 437168
+     },
+     "post": {
+      "n": 370,
+      "roi": -3.5,
+      "wr": 50.5,
+      "pnl": -41455,
+      "staked": 1184929
+     }
+    },
+    {
+     "wallet": "0x09f49ea10004f323a40cc1e21f4cd8759c14dac0",
+     "name": "0x09f49ea10004f323A40cC1e21f4CD8759C14DAc0-1774360824881",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 177,
+      "roi": -5.4,
+      "wr": 47.5,
+      "pnl": -6653,
+      "staked": 122953
+     },
+     "post": {
+      "n": 230,
+      "roi": -3,
+      "wr": 49.1,
+      "pnl": -3407,
+      "staked": 113484
+     }
+    },
+    {
+     "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+     "name": "ic4cream",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 193,
+      "roi": -37.6,
+      "wr": 24.4,
+      "pnl": -632299,
+      "staked": 1679884
+     },
+     "post": {
+      "n": 341,
+      "roi": -2.8,
+      "wr": 54,
+      "pnl": -23967,
+      "staked": 850476
+     }
+    },
+    {
+     "wallet": "0xdc5bd11896bfb0fb335dad88d99a7e9a6bc3f102",
+     "name": "ztao",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 218,
+      "roi": -15.3,
+      "wr": 52.3,
+      "pnl": -11268,
+      "staked": 73639
+     },
+     "post": {
+      "n": 170,
+      "roi": -2.6,
+      "wr": 77.1,
+      "pnl": -4245,
+      "staked": 165835
+     }
+    },
+    {
+     "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+     "name": "BreakTheBank",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 70,
+      "roi": -15.1,
+      "wr": 42.9,
+      "pnl": -559797,
+      "staked": 3703721
+     },
+     "post": {
+      "n": 260,
+      "roi": -2,
+      "wr": 42.3,
+      "pnl": -448121,
+      "staked": 22489734
+     }
+    }
+   ],
+   "failed_loser": [
+    {
+     "wallet": "0x0d135b516fbbed454a43de121e24a914759d92f3",
+     "name": "739633786",
+     "src": [
+      "lb-sports-month",
+      "feed"
+     ],
+     "pre": {
+      "n": 749,
+      "roi": -6.5,
+      "wr": 46.6,
+      "pnl": -76301,
+      "staked": 1181860
+     },
+     "post": {
+      "n": 220,
+      "roi": 4.2,
+      "wr": 50.9,
+      "pnl": 8672,
+      "staked": 206603
+     }
+    },
+    {
+     "wallet": "0x73533101b2276cd08ec3d281f81bfc6b86944b0d",
+     "name": "ruben899889",
+     "src": [
+      "feed"
+     ],
+     "pre": {
+      "n": 65,
+      "roi": -6.9,
+      "wr": 60,
+      "pnl": -2582,
+      "staked": 37597
+     },
+     "post": {
+      "n": 28,
+      "roi": 5.5,
+      "wr": 50,
+      "pnl": 1811,
+      "staked": 32657
+     }
+    },
+    {
+     "wallet": "0x0c154c190e293b7e5f8d453b5f690c4dc9599a45",
+     "name": "0x0c154c190E293B7e5F8D453b5F690C4dC9599A45-1775083003603",
+     "src": [
+      "lb-sports-month",
+      "lb-sports-week",
+      "feed"
+     ],
+     "pre": {
+      "n": 113,
+      "roi": -17.3,
+      "wr": 39.8,
+      "pnl": -840912,
+      "staked": 4874682
+     },
+     "post": {
+      "n": 23,
+      "roi": 50.5,
+      "wr": 43.5,
+      "pnl": 58211,
+      "staked": 115343
+     }
+    },
+    {
+     "wallet": "0xfea31bc088000ff909be1dfd8d0e3f2c7ef2d227",
+     "name": "ndb1",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 196,
+      "roi": -11.8,
+      "wr": 52,
+      "pnl": -762527,
+      "staked": 6453044
+     },
+     "post": {
+      "n": 13,
+      "roi": 19.7,
+      "wr": 38.5,
+      "pnl": 146095,
+      "staked": 740356
+     }
+    },
+    {
+     "wallet": "0x32ed517a571c01b6e9adecf61ba81ca48ff2f960",
+     "name": "sportmaster777",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 189,
+      "roi": -78.5,
+      "wr": 1.6,
+      "pnl": -215801,
+      "staked": 274890
+     },
+     "post": {
+      "n": 403,
+      "roi": 0.5,
+      "wr": 48.4,
+      "pnl": 658,
+      "staked": 133976
+     }
+    },
+    {
+     "wallet": "0x20d6436849f930584892730c7f96ebb2ac763856",
+     "name": "0x20D6436849F930584892730C7F96eBB2Ac763856-1768642056357",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 480,
+      "roi": -9.9,
+      "wr": 47.1,
+      "pnl": -515653,
+      "staked": 5219927
+     },
+     "post": {
+      "n": 27,
+      "roi": 28.9,
+      "wr": 55.6,
+      "pnl": 59466,
+      "staked": 205779
+     }
+    },
+    {
+     "wallet": "0x4df332e27f9ee3224f52ce30e3ce15c1075e788f",
+     "name": "SunlineTicker",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-sports-week"
+     ],
+     "pre": {
+      "n": 1131,
+      "roi": -78.2,
+      "wr": 0,
+      "pnl": -1297407,
+      "staked": 1659457
+     },
+     "post": {
+      "n": 1642,
+      "roi": 1,
+      "wr": 51.5,
+      "pnl": 24301,
+      "staked": 2318401
+     }
+    }
+   ],
+   "watch": [
+    {
+     "wallet": "0x876426b52898c295848f56760dd24b55eda2604a",
+     "name": "0x876426B52898C295848f56760dd24B55Eda2604a-1770663426746",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 76,
+      "roi": 39.6,
+      "wr": 68.4,
+      "pnl": 1554381,
+      "staked": 3926943
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0xc8ec6d4cef5c5fe8409ef69303c37f05b678e8f1",
+     "name": "Hugewinner",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 243,
+      "roi": 24.5,
+      "wr": 31.3,
+      "pnl": 471732,
+      "staked": 1928566
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x03e8a544e97eeff5753bc1e90d46e5ef22af1697",
+     "name": "weflyhigh",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 51,
+      "roi": 12.1,
+      "wr": 54.9,
+      "pnl": 854167,
+      "staked": 7033998
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x006cc834cc092684f1b56626e23bedb3835c16ea",
+     "name": "0x006cc834Cc092684F1B56626E23BEdB3835c16ea-1729683673397",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 66,
+      "roi": 11,
+      "wr": 48.5,
+      "pnl": 512182,
+      "staked": 4662429
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x5350afcd8bd8ceffdf4da32420d6d31be0822fda",
+     "name": "simonbanza",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 140,
+      "roi": 10.5,
+      "wr": 50.7,
+      "pnl": 600615,
+      "staked": 5701886
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    }
+   ],
+   "groups": {
+    "preSharp": {
+     "wallets": 8,
+     "withPostBets": 3,
+     "postBets": 121,
+     "postStaked": 2938815,
+     "postPnl": -332761,
+     "postRoiPct": -11.3
+    },
+    "preLoser": {
+     "wallets": 23,
+     "withPostBets": 17,
+     "postBets": 3952,
+     "postStaked": 30464316,
+     "postPnl": -391873,
+     "postRoiPct": -1.3
+    },
+    "everyone": {
+     "wallets": 206,
+     "withPostBets": 158,
+     "postBets": 41874,
+     "postStaked": 163085055,
+     "postPnl": 802122,
+     "postRoiPct": 0.5
+    }
+   }
+  },
+  "NCAAB": {
+   "confirmed_sharp": [],
+   "failed_sharp": [],
+   "confirmed_loser": [],
+   "failed_loser": [],
+   "watch": [
+    {
+     "wallet": "0x51393c00184b39182f09a8a62b8549642e69a8db",
+     "name": "4-seas",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 165,
+      "roi": 50.9,
+      "wr": 52.1,
+      "pnl": 96562,
+      "staked": 189717
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x20d6436849f930584892730c7f96ebb2ac763856",
+     "name": "0x20D6436849F930584892730C7F96eBB2Ac763856-1768642056357",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-month",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 241,
+      "roi": 38.3,
+      "wr": 62.2,
+      "pnl": 877195,
+      "staked": 2292388
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x2b3ff45c91540e46fae1e0c72f61f4b049453446",
+     "name": "Mentallyillgambld",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 57,
+      "roi": 27.9,
+      "wr": 68.4,
+      "pnl": 1122049,
+      "staked": 4018224
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x93abbc022ce98d6f45d4444b594791cc4b7a9723",
+     "name": "gatorr",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 68,
+      "roi": 23.4,
+      "wr": 54.4,
+      "pnl": 337442,
+      "staked": 1442963
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0x6a72f61820b26b1fe4d956e17b6dc2a1ea3033ee",
+     "name": "kch123",
+     "src": [
+      "lb-sports-all",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 234,
+      "roi": 19.4,
+      "wr": 54.7,
+      "pnl": 4484568,
+      "staked": 23115566
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    },
+    {
+     "wallet": "0xf28e42d20e4826f2b10a24bc952001697947cab2",
+     "name": "ethanaz",
+     "src": [
+      "lb-sports-all",
+      "lb-sports-week",
+      "lb-overall-all"
+     ],
+     "pre": {
+      "n": 263,
+      "roi": 12.6,
+      "wr": 44.1,
+      "pnl": 104356,
+      "staked": 827296
+     },
+     "post": {
+      "n": 0,
+      "roi": null,
+      "wr": null,
+      "pnl": 0,
+      "staked": 0,
+      "implied": null
+     }
+    }
+   ],
+   "groups": {
+    "preSharp": {
+     "wallets": 6,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "preLoser": {
+     "wallets": 5,
+     "withPostBets": 0,
+     "postBets": 0,
+     "postStaked": 0,
+     "postPnl": 0,
+     "postRoiPct": null
+    },
+    "everyone": {
+     "wallets": 107,
+     "withPostBets": 53,
+     "postBets": 5735,
+     "postStaked": 2344181,
+     "postPnl": -7257,
+     "postRoiPct": -0.3
+    }
+   }
+  }
+ }
+}
