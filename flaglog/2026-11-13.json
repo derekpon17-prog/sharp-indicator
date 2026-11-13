@@ -16,7 +16,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 13250,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Northwestern at Ohio State|SPREAD|Ohio State -12.5": {
    "sport": "CFB",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Patriots at Lions|SPREAD|Lions -2.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 16240,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Wisconsin at Maryland|ML|Maryland": {
    "sport": "CFB",
@@ -81,7 +81,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Illinois at UCLA|SPREAD|UCLA -10.5": {
    "sport": "CFB",
@@ -114,7 +114,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3541,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Grizzlies at Pelicans|ML|Grizzlies": {
    "sport": "NBA",
@@ -131,7 +131,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 7500,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Dolphins at Colts|SPREAD|Colts -3.5": {
    "sport": "NFL",
@@ -148,7 +148,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2720,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Knicks at Pacers|ML|Knicks": {
    "sport": "NBA",
@@ -166,6 +166,105 @@
    "maxDollars": 1666,
    "opposedSeen": false,
    "snapshots": 2
+  },
+  "Illinois at UCLA|SPREAD|UCLA": {
+   "sport": "CFB",
+   "matchup": "Illinois at UCLA",
+   "market": "SPREAD",
+   "pick": "UCLA",
+   "kickoffEt": "Fri, Nov 13, 9:00 PM",
+   "firstSeenAt": "2026-11-13T22:04:13.326Z",
+   "firstPrice": "+108",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 2.1,
+   "maxDollars": 14338,
+   "opposedSeen": true,
+   "snapshots": 4
+  },
+  "Jazz at Rockets|ML|Jazz": {
+   "sport": "NBA",
+   "matchup": "Jazz at Rockets",
+   "market": "ML",
+   "pick": "Jazz",
+   "kickoffEt": "Fri, Nov 13, 8:40 PM",
+   "firstSeenAt": "2026-11-13T22:04:13.326Z",
+   "firstPrice": "+900",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.4,
+   "maxDollars": 2000,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Jazz at Rockets|SPREAD|Jazz +15.5": {
+   "sport": "NBA",
+   "matchup": "Jazz at Rockets",
+   "market": "SPREAD",
+   "pick": "Jazz +15.5",
+   "kickoffEt": "Fri, Nov 13, 8:40 PM",
+   "firstSeenAt": "2026-11-13T22:04:13.326Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 4,
+   "maxDollars": 2344,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Appalachian State at Marshall|TOTAL|Over 53.5": {
+   "sport": "CFB",
+   "matchup": "Appalachian State at Marshall",
+   "market": "TOTAL",
+   "pick": "Over 53.5",
+   "kickoffEt": "Sat, Nov 14, 6:00 PM",
+   "firstSeenAt": "2026-11-13T22:04:13.326Z",
+   "firstPrice": "-113",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 3000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Utah State at San Diego State|TOTAL|Over 41.5": {
+   "sport": "CFB",
+   "matchup": "Utah State at San Diego State",
+   "market": "TOTAL",
+   "pick": "Over 41.5",
+   "kickoffEt": "Sat, Nov 14, 9:30 PM",
+   "firstSeenAt": "2026-11-13T22:04:13.326Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 3000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Vikings at Packers|SPREAD|Packers": {
+   "sport": "NFL",
+   "matchup": "Vikings at Packers",
+   "market": "SPREAD",
+   "pick": "Packers",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "firstSeenAt": "2026-11-13T22:04:13.326Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 5500,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }
