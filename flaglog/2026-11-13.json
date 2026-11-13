@@ -16,7 +16,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 13250,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Northwestern at Ohio State|SPREAD|Ohio State -12.5": {
    "sport": "CFB",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Patriots at Lions|SPREAD|Lions -2.5": {
    "sport": "NFL",
@@ -60,12 +60,14 @@
    "firstSeenAt": "2026-11-13T06:24:41.039Z",
    "firstPrice": "-163",
    "tags": [
-    "SIZED_15X"
+    "SIZED_15X",
+    "STRONG_VS_WEAK",
+    "SIZED_UP"
    ],
    "maxVsUsual": 1.5,
    "maxDollars": 16240,
-   "opposedSeen": false,
-   "snapshots": 3
+   "opposedSeen": true,
+   "snapshots": 6
   },
   "Wisconsin at Maryland|ML|Maryland": {
    "sport": "CFB",
@@ -81,7 +83,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Illinois at UCLA|SPREAD|UCLA -10.5": {
    "sport": "CFB",
@@ -114,7 +116,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3541,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Grizzlies at Pelicans|ML|Grizzlies": {
    "sport": "NBA",
@@ -130,8 +132,8 @@
    ],
    "maxVsUsual": 1.1,
    "maxDollars": 7500,
-   "opposedSeen": false,
-   "snapshots": 4
+   "opposedSeen": true,
+   "snapshots": 6
   },
   "Dolphins at Colts|SPREAD|Colts -3.5": {
    "sport": "NFL",
@@ -148,7 +150,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2720,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Knicks at Pacers|ML|Knicks": {
    "sport": "NBA",
@@ -183,7 +185,7 @@
    "maxVsUsual": 2.1,
    "maxDollars": 14338,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 8
   },
   "Jazz at Rockets|ML|Jazz": {
    "sport": "NBA",
@@ -215,8 +217,8 @@
    ],
    "maxVsUsual": 4,
    "maxDollars": 2344,
-   "opposedSeen": false,
-   "snapshots": 1
+   "opposedSeen": true,
+   "snapshots": 2
   },
   "Appalachian State at Marshall|TOTAL|Over 53.5": {
    "sport": "CFB",
@@ -232,7 +234,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Utah State at San Diego State|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -248,7 +250,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Vikings at Packers|SPREAD|Packers": {
    "sport": "NFL",
@@ -263,6 +265,71 @@
    ],
    "maxVsUsual": 1.3,
    "maxDollars": 5500,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Jazz at Rockets|SPREAD|Rockets -15.5": {
+   "sport": "NBA",
+   "matchup": "Jazz at Rockets",
+   "market": "SPREAD",
+   "pick": "Rockets -15.5",
+   "kickoffEt": "Fri, Nov 13, 8:40 PM",
+   "firstSeenAt": "2026-11-13T23:59:25.382Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.1,
+   "maxDollars": 2999,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Auburn at Mississippi State|SPREAD|Mississippi State +3.5": {
+   "sport": "CFB",
+   "matchup": "Auburn at Mississippi State",
+   "market": "SPREAD",
+   "pick": "Mississippi State +3.5",
+   "kickoffEt": "Sat, Nov 14, 12:00 PM",
+   "firstSeenAt": "2026-11-13T23:59:25.382Z",
+   "firstPrice": "-132",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 6391,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Florida State at Pittsburgh|ML|Florida State": {
+   "sport": "CFB",
+   "matchup": "Florida State at Pittsburgh",
+   "market": "ML",
+   "pick": "Florida State",
+   "kickoffEt": "Fri, Nov 13, 7:00 PM",
+   "firstSeenAt": "2026-11-13T23:59:25.382Z",
+   "firstPrice": "+138",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 10620,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Florida State at Pittsburgh|TOTAL|Under 53.5": {
+   "sport": "CFB",
+   "matchup": "Florida State at Pittsburgh",
+   "market": "TOTAL",
+   "pick": "Under 53.5",
+   "kickoffEt": "Fri, Nov 13, 7:00 PM",
+   "firstSeenAt": "2026-11-13T23:59:25.382Z",
+   "firstPrice": "-115",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 4810,
    "opposedSeen": false,
    "snapshots": 1
   }
