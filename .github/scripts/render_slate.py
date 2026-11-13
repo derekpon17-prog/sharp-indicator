@@ -52,7 +52,7 @@ def slate_html(c):
         body += "".join(play_row(r, "lean", "LEAN", "ta") for r in t["leans"])
     if t["passes"]:
         body += '<div class="sec s-pass"><span>Pass - sources disagree</span><small>no bet</small></div>'
-        body += "".join(play_row(r, "pass", "PASS", "tx") for r in t["passes"])
+        body += "".join(play_row(r, "pass", r.get("tier", "PASS"), "tx") for r in t["passes"])
     body += f'<div class="foot"><span>{esc(c.get("footer") or "Tier rules are fixed until 200 graded plays per tier. Star is a rule-based screen, not a prediction.")}</span><span>Leans, not guarantees</span></div>'
     return f"<html><head><style>{CSS}</style></head><body><div class='card'>{body}</div></body></html>"
 

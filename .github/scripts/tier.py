@@ -2,7 +2,8 @@
 Rules are frozen until ~200 graded plays per tier. Never tune from one day."""
 import re
 
-PLAY_CAP, LEAN_CAP, PASS_CAP, PER_GAME_PLAYS = 5, 3, 3, 2
+PLAY_CAP, LEAN_CAP, PASS_CAP, PER_GAME_PLAYS = 5, 3, 5, 2
+MIXED_MIN = 5000       # sharp wallet money on the OTHER team in the same game (any team market) turns a play into MIXED
 VEGAS_BEST = 80        # Pinnacle STRONG/MAX + Vegas 80+ is always a best play ...
 TON = 25000            # ... unless sharp wallets have this much (and 2x our own side) on the other side
 
@@ -124,6 +125,27 @@ def classify(rows, sf_current=True):
         if r.get("vb"): r["star"] = True
         if r.get("vb"): r["why"] = "Pinnacle and Vegas 80+ agree. " + r["why"]
         r["chips"] = chips(r)
+    # one verdict per game: opposing wallet money in another market moves a play to MIXED (disagree section), no star
+    final = []
+    pass_by_game = {p["game"]: p for p in passes}
+    for r in plays:
+        opp = None
+        if r.get("market") in ("ML", "SPREAD"):
+            for x in recs:
+                if (x.get("game") == r["game"] and not has_pin(x) and x.get("market") in ("ML", "SPREAD")
+                        and x.get("side") != r.get("side") and x.get("side") not in ("Over", "Under")
+                        and sf_in(x) >= MIXED_MIN and (opp is None or sf_in(x) > sf_in(opp))):
+                    opp = x
+        if opp is None:
+            final.append(r); continue
+        r["tier"] = "MIXED"; r["star"] = False; r["vb"] = False
+        r["why"] = (f"Pinnacle" + (f" and Vegas {int(r['vegas_strength'])}" if vegas_ok(r) else "") + f" like {r.get('bet')}, "
+                    f"but sharp wallets have {money(sf_in(opp))} on {opp.get('bet') or 'the other team'}"
+                    + (f" at {float(opp['sf_max_vs_usual']):.1f}x their usual" if opp.get("sf_max_vs_usual") else "") + ". Mixed, no bet.")
+        r["chips"] = chips(r)[:2] + [(f"WALLETS {money(sf_in(opp))} on {opp.get('bet') or 'other team'}", "r")]
+        pass_by_game[r["game"]] = r      # replaces any separate PASS row for the same game
+    plays = final
+    passes = list(pass_by_game.values())
     seen = {r["game"] for r in plays} | {r["game"] for r in passes}
     tails = {}
     for r in recs:
