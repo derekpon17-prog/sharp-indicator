@@ -45,7 +45,7 @@ def slate_html(c):
     t = classify(c.get("rows", []), sf_current=c.get("sf_current", True))
     body = f'<div class="top"><div><div class="kick">Sharp Slate</div><h1>{esc(c.get("title") or "Tonight\'s plays")}</h1></div><div class="pill">{esc(c.get("stamp"))}</div></div>'
     body += f'<div class="src">{esc(c.get("sources"))}</div>'
-    body += '<div class="sec s-play"><span>Best plays</span><small>★ = Pinnacle + Vegas 80+ - max 5 - ranked</small></div>'
+    body += '<div class="sec s-play"><span>Best plays</span><small>★ = PINNACLE + VEGAS 80+ ALWAYS SHOWN - PLUS TOP 5 OTHERS</small></div>'
     body += "".join(play_row(r, "play", "PLAY", "tg") for r in t["plays"]) or '<div class="why">No Pinnacle STRONG/MAX play passes the rules this slot.</div>'
     if t["leans"]:
         body += '<div class="sec s-lean"><span>Lean - sharp wallets</span><small>★ = good tail (2x+ their usual)</small></div>'

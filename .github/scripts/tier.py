@@ -114,8 +114,7 @@ def classify(rows, sf_current=True):
             continue
         per[r["game"]] = per.get(r["game"], 0) + 1
         kept.append(r)
-    nvb = sum(1 for r in kept if r.get('vb'))
-    plays = kept[:max(PLAY_CAP, nvb)]
+    plays = [r for r in kept if r.get('vb')] + [r for r in kept if not r.get('vb')][:PLAY_CAP]
     for r in plays:
         r["tier"] = "PLAY"
         bits = [f"Pinnacle {r['pin_tier']}" + (" and steady" if r.get("pin_status") == "Stable" else ", moved since open")]
@@ -132,7 +131,7 @@ def classify(rows, sf_current=True):
             continue
         d, o, vs = sf_in(r), float(r.get("sf_opp") or 0), float(r.get("sf_max_vs_usual") or 0)
         p = r.get("sf_first_price", r.get("price"))
-        if d >= 5000 and o < 0.25 * d and vs >= 1.5 and p is not None and -190 <= p <= 300:
+        if d >= 5000 and o < 0.25 * d and (vs >= 1.5 or r.get('sf_tail')) and p is not None and -190 <= p <= 300:
             if r["game"] not in tails or d > sf_in(tails[r["game"]]):
                 tails[r["game"]] = r
     leans = sorted(tails.values(), key=sf_in, reverse=True)[:LEAN_CAP]
