@@ -13,10 +13,10 @@
     "STRONG_UNOPPOSED",
     "SIZED_UP"
    ],
-   "maxVsUsual": 1.2,
+   "maxVsUsual": 1.3,
    "maxDollars": 13250,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Northwestern at Ohio State|SPREAD|Ohio State -12.5": {
    "sport": "CFB",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Patriots at Lions|SPREAD|Lions -2.5": {
    "sport": "NFL",
@@ -49,7 +49,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1590,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Florida State at Pittsburgh|ML|Pittsburgh": {
    "sport": "CFB",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 16240,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Wisconsin at Maryland|ML|Maryland": {
    "sport": "CFB",
@@ -81,7 +81,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Illinois at UCLA|SPREAD|UCLA -10.5": {
    "sport": "CFB",
@@ -92,12 +92,13 @@
    "firstSeenAt": "2026-11-13T06:24:41.039Z",
    "firstPrice": "+108",
    "tags": [
-    "SIZED_UP"
+    "SIZED_UP",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 1.3,
    "maxDollars": 14338,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 3
   },
   "Vikings at Packers|ML|Packers": {
    "sport": "NFL",
@@ -112,8 +113,59 @@
    ],
    "maxVsUsual": 1.2,
    "maxDollars": 3541,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Grizzlies at Pelicans|ML|Grizzlies": {
+   "sport": "NBA",
+   "matchup": "Grizzlies at Pelicans",
+   "market": "ML",
+   "pick": "Grizzlies",
+   "kickoffEt": "Fri, Nov 13, 8:10 PM",
+   "firstSeenAt": "2026-11-13T14:22:05.588Z",
+   "firstPrice": "-150",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 7500,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
+  },
+  "Dolphins at Colts|SPREAD|Colts -3.5": {
+   "sport": "NFL",
+   "matchup": "Dolphins at Colts",
+   "market": "SPREAD",
+   "pick": "Colts -3.5",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "firstSeenAt": "2026-11-13T14:22:05.588Z",
+   "firstPrice": "-115",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 2720,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Knicks at Pacers|ML|Knicks": {
+   "sport": "NBA",
+   "matchup": "Knicks at Pacers",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Fri, Nov 13, 7:10 PM",
+   "firstSeenAt": "2026-11-13T14:22:05.588Z",
+   "firstPrice": "-283",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.1,
+   "maxDollars": 1666,
+   "opposedSeen": false,
+   "snapshots": 2
   }
  }
 }

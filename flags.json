@@ -1,7 +1,34 @@
 {
  "date": "2026-11-13",
- "scannedAt": "2026-11-13T06:18:53.075Z",
+ "scannedAt": "2026-11-13T14:15:03.814Z",
  "sides": [
+  {
+   "tail": true,
+   "sport": "CFB",
+   "matchup": "Illinois at UCLA",
+   "market": "SPREAD",
+   "pick": "UCLA -10.5",
+   "kickoffEt": "Fri, Nov 13, 9:00 PM",
+   "dollars": 24336,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 1.3,
+   "price": "+108",
+   "size": "1x",
+   "mktRecord": "13-8",
+   "mktRoi": 2.9,
+   "l30Roi": 7.6,
+   "contested": false,
+   "sfPoints": 33,
+   "parts": {
+    "money": 16,
+    "sizing": 4,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
   {
    "tail": true,
    "sport": "CFB",
@@ -12,12 +39,12 @@
    "dollars": 15429,
    "oppDollars": 0,
    "wallets": 2,
-   "maxVsUsual": 1.2,
+   "maxVsUsual": 1.3,
    "price": "-113",
    "size": "1x",
-   "mktRecord": "12-3",
-   "mktRoi": 68.3,
-   "l30Roi": 66.1,
+   "mktRecord": "13-3",
+   "mktRoi": 69.4,
+   "l30Roi": 66.2,
    "contested": false,
    "sfPoints": 33,
    "parts": {
@@ -42,15 +69,69 @@
    "maxVsUsual": 1.5,
    "price": "-163",
    "size": "1x",
-   "mktRecord": "1-0",
-   "mktRoi": 81.8,
-   "l30Roi": 6.1,
+   "mktRecord": "2-0",
+   "mktRoi": 78,
+   "l30Roi": 7.6,
    "contested": false,
    "sfPoints": 26,
    "parts": {
     "money": 16,
     "sizing": 7,
     "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Grizzlies at Pelicans",
+   "market": "ML",
+   "pick": "Grizzlies",
+   "kickoffEt": "Fri, Nov 13, 8:10 PM",
+   "dollars": 7500,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.1,
+   "price": "-150",
+   "size": "1x",
+   "mktRecord": "15-1",
+   "mktRoi": 60.6,
+   "l30Roi": 26.2,
+   "contested": false,
+   "sfPoints": 25,
+   "parts": {
+    "money": 12,
+    "sizing": 4,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Knicks at Pacers",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Fri, Nov 13, 7:10 PM",
+   "dollars": 1666,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 2.1,
+   "price": "-283",
+   "size": "1.5x and up",
+   "mktRecord": "9-1",
+   "mktRoi": 49.7,
+   "l30Roi": 26.7,
+   "contested": false,
+   "sfPoints": 23,
+   "parts": {
+    "money": 4,
+    "sizing": 10,
+    "quality": 6,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -85,26 +166,26 @@
   },
   {
    "tail": false,
-   "sport": "CFB",
-   "matchup": "Illinois at UCLA",
+   "sport": "NFL",
+   "matchup": "Dolphins at Colts",
    "market": "SPREAD",
-   "pick": "UCLA -10.5",
-   "kickoffEt": "Fri, Nov 13, 9:00 PM",
-   "dollars": 14338,
+   "pick": "Colts -3.5",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "dollars": 2720,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 1.3,
-   "price": "+108",
-   "size": "1x",
-   "mktRecord": "13-8",
-   "mktRoi": 2.9,
-   "l30Roi": 6.1,
+   "maxVsUsual": 1.5,
+   "price": "-115",
+   "size": "1.5x and up",
+   "mktRecord": "4-2",
+   "mktRoi": 32.3,
+   "l30Roi": 44.2,
    "contested": false,
-   "sfPoints": 19,
+   "sfPoints": 22,
    "parts": {
-    "money": 12,
-    "sizing": 4,
-    "quality": 0,
+    "money": 8,
+    "sizing": 7,
+    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -152,65 +233,12 @@
    "size": "0.5x",
    "mktRecord": "13-8",
    "mktRoi": 2.9,
-   "l30Roi": 6.1,
+   "l30Roi": 7.6,
    "contested": false,
    "sfPoints": 15,
    "parts": {
     "money": 12,
     "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Vikings at Packers",
-   "market": "TOTAL",
-   "pick": "Under",
-   "kickoffEt": "Sun, Nov 15, 1:00 PM",
-   "dollars": 5149,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1,
-   "size": "0.5x",
-   "mktRecord": "8-10",
-   "mktRoi": -11.4,
-   "l30Roi": 0,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Vikings at Packers",
-   "market": "ML",
-   "pick": "Packers",
-   "kickoffEt": "Sun, Nov 15, 1:00 PM",
-   "dollars": 3541,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.2,
-   "price": "-175",
-   "size": "1x",
-   "mktRecord": "6-3",
-   "mktRoi": -12.7,
-   "l30Roi": 0,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 8,
-    "sizing": 4,
     "quality": 0,
     "pooled": 0,
     "unopposed": 3,
@@ -232,7 +260,34 @@
    "size": "under 0.5x",
    "mktRecord": "13-8",
    "mktRoi": 2.9,
-   "l30Roi": 6.1,
+   "l30Roi": 7.6,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Vikings at Packers",
+   "market": "TOTAL",
+   "pick": "Under 42.5",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "dollars": 2749,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1,
+   "price": "-122",
+   "size": "0.5x",
+   "mktRecord": "8-10",
+   "mktRoi": -11.4,
+   "l30Roi": 0,
    "contested": false,
    "sfPoints": 11,
    "parts": {
@@ -338,9 +393,9 @@
    "maxVsUsual": 0.5,
    "price": "-111",
    "size": "under 0.5x",
-   "mktRecord": "7-6",
-   "mktRoi": 26,
-   "l30Roi": 14.8,
+   "mktRecord": "7-7",
+   "mktRoi": 12.2,
+   "l30Roi": 17.5,
    "contested": false,
    "sfPoints": 7,
    "parts": {
@@ -376,6 +431,60 @@
     "unopposed": 3,
     "contested": 0
    }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Vikings at Packers",
+   "market": "ML",
+   "pick": "Packers",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "dollars": 3541,
+   "oppDollars": 4249,
+   "wallets": 1,
+   "maxVsUsual": 1.2,
+   "price": "-175",
+   "size": "1x",
+   "mktRecord": "6-3",
+   "mktRoi": -12.7,
+   "l30Roi": 0,
+   "contested": true,
+   "sfPoints": 4,
+   "parts": {
+    "money": 8,
+    "sizing": 4,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Vikings at Packers",
+   "market": "ML",
+   "pick": "Vikings",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "dollars": 4249,
+   "oppDollars": 3541,
+   "wallets": 1,
+   "maxVsUsual": 0,
+   "price": "+144",
+   "size": "under 0.5x",
+   "mktRecord": "0-1",
+   "mktRoi": -100,
+   "l30Roi": 62.3,
+   "contested": true,
+   "sfPoints": 0,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
   }
  ],
  "flags": [
@@ -390,10 +499,42 @@
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
-    "17-6|161230|12-3"
+    "18-7|169346|13-3"
    ],
    "bestPrice": "-113",
-   "maxVsUsual": 1.2
+   "maxVsUsual": 1.3
+  },
+  {
+   "matchup": "Illinois at UCLA",
+   "market": "SPREAD",
+   "pick": "UCLA -10.5",
+   "kickoffEt": "Fri, Nov 13, 9:00 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 9998,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "18-7|169346|13-3"
+   ],
+   "bestPrice": "+108",
+   "maxVsUsual": 1.3
+  },
+  {
+   "matchup": "Grizzlies at Pelicans",
+   "market": "ML",
+   "pick": "Grizzlies",
+   "kickoffEt": "Fri, Nov 13, 8:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 7500,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "24-14|66418|15-1"
+   ],
+   "bestPrice": "-150",
+   "maxVsUsual": 1.1
   },
   {
    "matchup": "Northwestern at Ohio State",
@@ -410,6 +551,38 @@
    ],
    "bestPrice": "-113",
    "maxVsUsual": 1.5
+  },
+  {
+   "matchup": "Dolphins at Colts",
+   "market": "SPREAD",
+   "pick": "Colts -3.5",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "sport": "NFL",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 2720,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "7-3|9195|4-2"
+   ],
+   "bestPrice": "-115",
+   "maxVsUsual": 1.5
+  },
+  {
+   "matchup": "Knicks at Pacers",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Fri, Nov 13, 7:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 1666,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "11-4|3126|9-1"
+   ],
+   "bestPrice": "-283",
+   "maxVsUsual": 2.1
   },
   {
    "matchup": "Patriots at Lions",
@@ -430,6 +603,23 @@
  ],
  "sizedUp": [
   {
+   "matchup": "Knicks at Pacers",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Fri, Nov 13, 7:10 PM",
+   "sport": "NBA",
+   "dollars": 1666,
+   "price": "-283",
+   "vsUsual": 2.1,
+   "size": "1.5x and up",
+   "form": "L10 7-3",
+   "l30Roi": 26.7,
+   "mktRecord": "9-1",
+   "mktRoi": 49.7,
+   "opposed": "unopposed",
+   "fp": "11-4|3126|9-1"
+  },
+  {
    "matchup": "Florida State at Pittsburgh",
    "market": "ML",
    "pick": "Pittsburgh",
@@ -440,11 +630,11 @@
    "vsUsual": 1.5,
    "size": "1x",
    "form": "L10 6-4",
-   "l30Roi": 6.1,
-   "mktRecord": "1-0",
-   "mktRoi": 81.8,
+   "l30Roi": 7.6,
+   "mktRecord": "2-0",
+   "mktRoi": 78,
    "opposed": "unopposed",
-   "fp": "19-13|21803|1-0"
+   "fp": "20-13|27749|2-0"
   },
   {
    "matchup": "Wisconsin at Maryland",
@@ -481,6 +671,23 @@
    "fp": "36-19|30628|38-21"
   },
   {
+   "matchup": "Dolphins at Colts",
+   "market": "SPREAD",
+   "pick": "Colts -3.5",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "sport": "NFL",
+   "dollars": 2720,
+   "price": "-115",
+   "vsUsual": 1.5,
+   "size": "1.5x and up",
+   "form": "L10 7-3",
+   "l30Roi": 44.2,
+   "mktRecord": "4-2",
+   "mktRoi": 32.3,
+   "opposed": "unopposed",
+   "fp": "7-3|9195|4-2"
+  },
+  {
    "matchup": "Illinois at UCLA",
    "market": "SPREAD",
    "pick": "UCLA -10.5",
@@ -491,11 +698,11 @@
    "vsUsual": 1.3,
    "size": "1x",
    "form": "L10 6-4",
-   "l30Roi": 6.1,
+   "l30Roi": 7.6,
    "mktRecord": "13-8",
    "mktRoi": 2.9,
    "opposed": "unopposed",
-   "fp": "19-13|21803|13-8"
+   "fp": "20-13|27749|13-8"
   },
   {
    "matchup": "Baylor at BYU",
@@ -505,14 +712,14 @@
    "sport": "CFB",
    "dollars": 13250,
    "price": "-113",
-   "vsUsual": 1.2,
+   "vsUsual": 1.3,
    "size": "1x",
-   "form": "L10 10-0",
-   "l30Roi": 66.1,
-   "mktRecord": "12-3",
-   "mktRoi": 68.3,
+   "form": "L10 9-1",
+   "l30Roi": 66.2,
+   "mktRecord": "13-3",
+   "mktRoi": 69.4,
    "opposed": "unopposed",
-   "fp": "17-6|161230|12-3"
+   "fp": "18-7|169346|13-3"
   },
   {
    "matchup": "Vikings at Packers",
@@ -528,8 +735,25 @@
    "l30Roi": 0,
    "mktRecord": "6-3",
    "mktRoi": -12.7,
-   "opposed": "unopposed",
+   "opposed": "contested",
    "fp": "24-16|32|6-3"
+  },
+  {
+   "matchup": "Grizzlies at Pelicans",
+   "market": "ML",
+   "pick": "Grizzlies",
+   "kickoffEt": "Fri, Nov 13, 8:10 PM",
+   "sport": "NBA",
+   "dollars": 7500,
+   "price": "-150",
+   "vsUsual": 1.1,
+   "size": "1x",
+   "form": "L10 6-4",
+   "l30Roi": 26.2,
+   "mktRecord": "15-1",
+   "mktRoi": 60.6,
+   "opposed": "unopposed",
+   "fp": "24-14|66418|15-1"
   }
  ]
 }
