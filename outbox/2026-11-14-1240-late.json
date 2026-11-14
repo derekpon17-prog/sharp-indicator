@@ -1,0 +1,18 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · SATURDAY LATE UPDATE · Nov 14** · 5 new Pinnacle Strong sides",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "SAT NOV 14 · 12:40PM",
+  "sources": "Pinnacle 12:40pm CT - Vegas 12:40pm CT - SharpFlow not current (Nov 13 9:32pm CT) - Novig not read",
+  "sf_current": false,
+  "footer": "New Pinnacle Strong sides on games that have not started. No posted play has faded. Wallet conflict not checked (SharpFlow not current). Tier rules are fixed.",
+  "rows": [
+   {"sport": "CFB","game": "CAL@UVA","market": "SPREAD","side": "CAL","line": 11.5,"price": -111,"bet": "CAL +11.5","matchup": "CFB · CAL @ UVA · 2:30pm CT","pin_tier": "Strong","pin_status": "Stable","first_seen": "12:40","vegas_strength": null,"buckets": ["PIN_STRONG","LATE_FLIP"]},
+   {"sport": "NCAAB","game": "WYO@DEN","market": "TOTAL","side": "Over","line": 149.5,"price": -120,"bet": "Over 149.5","matchup": "NCAAB · WYO @ DEN · 2:00pm CT","pin_tier": "Strong","pin_status": "Stable","first_seen": "12:40","vegas_strength": null,"buckets": ["PIN_STRONG","LATE_FLIP"]},
+   {"sport": "NCAAB","game": "WOF@QUC","market": "TOTAL","side": "Over","line": 176.5,"price": -114,"bet": "Over 176.5","matchup": "NCAAB · WOF @ QUC · 1:00pm CT","pin_tier": "Strong","pin_status": "Stable","first_seen": "12:40","vegas_strength": null,"buckets": ["PIN_STRONG","LATE_FLIP"]},
+   {"sport": "NCAAB","game": "LSU@GONZ","market": "ML","side": "LSU","line": null,"price": 186,"bet": "LSU ML","matchup": "NCAAB · LSU @ Gonzaga · 2:30pm CT","pin_tier": "Strong","pin_status": "Stable","first_seen": "12:40","vegas_strength": null,"buckets": ["PIN_STRONG","LATE_FLIP"]},
+   {"sport": "NHL","game": "WPG@CHI","market": "TOTAL","side": "Over","line": 6.5,"price": 107,"bet": "Over 6.5","matchup": "NHL · WPG @ CHI · 2:30pm CT","pin_tier": "Strong","pin_status": "Stable","first_seen": "12:40","vegas_strength": 31,"buckets": ["PIN_STRONG","LATE_FLIP"]}
+  ]
+ }
+}
