@@ -1,0 +1,249 @@
+{
+ "date": "2026-11-14",
+ "sides": {
+  "Arkansas State at Coastal Carolina|ML|Arkansas State": {
+   "sport": "CFB",
+   "matchup": "Arkansas State at Coastal Carolina",
+   "market": "ML",
+   "pick": "Arkansas State",
+   "kickoffEt": "Sat, Nov 14, 1:03 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "+106",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 50676,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Tennessee at Texas A&M|ML|Tennessee": {
+   "sport": "CFB",
+   "matchup": "Tennessee at Texas A&M",
+   "market": "ML",
+   "pick": "Tennessee",
+   "kickoffEt": "Sat, Nov 14, 3:00 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-108",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 47179,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Baylor at BYU|SPREAD|Baylor +7.5": {
+   "sport": "CFB",
+   "matchup": "Baylor at BYU",
+   "market": "SPREAD",
+   "pick": "Baylor +7.5",
+   "kickoffEt": "Sat, Nov 14, 7:00 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-113",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 13250,
+   "opposedSeen": false,
+   "snapshots": 3
+  },
+  "Arkansas State at Coastal Carolina|SPREAD|Coastal Carolina -1.5": {
+   "sport": "CFB",
+   "matchup": "Arkansas State at Coastal Carolina",
+   "market": "SPREAD",
+   "pick": "Coastal Carolina -1.5",
+   "kickoffEt": "Sat, Nov 14, 1:03 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 10000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "San Jose State at Air Force|SPREAD|Air Force -12.5": {
+   "sport": "CFB",
+   "matchup": "San Jose State at Air Force",
+   "market": "SPREAD",
+   "pick": "Air Force -12.5",
+   "kickoffEt": "Sat, Nov 14, 7:00 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-127",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 6616,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Nevada at Northern Illinois|SPREAD|Northern Illinois": {
+   "sport": "CFB",
+   "matchup": "Nevada at Northern Illinois",
+   "market": "SPREAD",
+   "pick": "Northern Illinois",
+   "kickoffEt": "Sat, Nov 14, 3:30 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 5.9,
+   "maxDollars": 8613,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Mavericks at Cavaliers|ML|Mavericks": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Cavaliers",
+   "market": "ML",
+   "pick": "Mavericks",
+   "kickoffEt": "Sat, Nov 14, 7:40 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "+111",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.7,
+   "maxDollars": 7138,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Duke at Miami (FL)|SPREAD|Duke +13.5": {
+   "sport": "CFB",
+   "matchup": "Duke at Miami (FL)",
+   "market": "SPREAD",
+   "pick": "Duke +13.5",
+   "kickoffEt": "Sat, Nov 14, 12:07 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_2X",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 2.4,
+   "maxDollars": 29200,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Kraken at Hurricanes|ML|Hurricanes": {
+   "sport": "NHL",
+   "matchup": "Kraken at Hurricanes",
+   "market": "ML",
+   "pick": "Hurricanes",
+   "kickoffEt": "Sat, Nov 14, 1:14 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-350",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2,
+   "maxDollars": 7026,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Fresno State at Texas State|SPREAD|Texas State -9.5": {
+   "sport": "CFB",
+   "matchup": "Fresno State at Texas State",
+   "market": "SPREAD",
+   "pick": "Texas State -9.5",
+   "kickoffEt": "Sat, Nov 14, 4:00 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 14595,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Kansas at West Virginia|SPREAD|West Virginia": {
+   "sport": "CFB",
+   "matchup": "Kansas at West Virginia",
+   "market": "SPREAD",
+   "pick": "West Virginia",
+   "kickoffEt": "Sat, Nov 14, 3:30 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 3286,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "UAB at Temple|TOTAL|Under 49.5": {
+   "sport": "CFB",
+   "matchup": "UAB at Temple",
+   "market": "TOTAL",
+   "pick": "Under 49.5",
+   "kickoffEt": "Sat, Nov 14, 1:00 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-127",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 6526,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Auburn at Mississippi State|SPREAD|Mississippi State +3.5": {
+   "sport": "CFB",
+   "matchup": "Auburn at Mississippi State",
+   "market": "SPREAD",
+   "pick": "Mississippi State +3.5",
+   "kickoffEt": "Sat, Nov 14, 4:15 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-132",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 6391,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Vikings at Packers|SPREAD|Packers": {
+   "sport": "NFL",
+   "matchup": "Vikings at Packers",
+   "market": "SPREAD",
+   "pick": "Packers",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 5500,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Vikings at Packers|ML|Packers": {
+   "sport": "NFL",
+   "matchup": "Vikings at Packers",
+   "market": "ML",
+   "pick": "Packers",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "firstSeenAt": "2026-11-14T19:28:36.044Z",
+   "firstPrice": "-175",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 3541,
+   "opposedSeen": true,
+   "snapshots": 1
+  }
+ }
+}
