@@ -1,0 +1,574 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 AFTERNOON \u00b7 Sat Nov 14** \u00b7 games 3:00pm to 5:59pm CT",
+ "slate": {
+  "title": "Afternoon plays",
+  "stamp": "SAT NOV 14 \u00b7 1:45PM",
+  "sources": "Pinnacle 1:35pm CT - Vegas 1:40pm CT - SharpFlow 1:14pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "Afternoon window: games starting 3:00 to 5:59pm CT. Built by hand because scheduled runs have no browser. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "CFB",
+    "game": "FRES@TXST",
+    "market": "SPREAD",
+    "side": "TXST",
+    "line": -10,
+    "price": -112,
+    "bet": "TXST -10",
+    "matchup": "CFB \u00b7 FRES @ TXST \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "SF_SIDE"
+    ],
+    "sf_dollars": 14595,
+    "sf_opp": 0,
+    "sf_max_vs_usual": 1.7,
+    "sf_wallets": 1
+   },
+   {
+    "sport": "CFB",
+    "game": "FRES@TXST",
+    "market": "ML",
+    "side": "TXST",
+    "line": null,
+    "price": -378,
+    "bet": "TXST ML",
+    "matchup": "CFB \u00b7 FRES @ TXST \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 66,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LAF@SBU",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 143.5,
+    "price": -114,
+    "bet": "Over 143.5",
+    "matchup": "NCAAB \u00b7 LAF @ SBU \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "SDST@UNCO",
+    "market": "SPREAD",
+    "side": "UNCO",
+    "line": 2.5,
+    "price": -110,
+    "bet": "UNCO +2.5",
+    "matchup": "NCAAB \u00b7 SDST @ UNCO \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "SDST@UNCO",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 150.5,
+    "price": -113,
+    "bet": "Under 150.5",
+    "matchup": "NCAAB \u00b7 SDST @ UNCO \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "sf_dollars": 1450,
+    "sf_opp": 0,
+    "sf_max_vs_usual": 2.5,
+    "sf_wallets": 1
+   },
+   {
+    "sport": "NCAAB",
+    "game": "SDST@UNCO",
+    "market": "ML",
+    "side": "UNCO",
+    "line": null,
+    "price": 124,
+    "bet": "UNCO ML",
+    "matchup": "NCAAB \u00b7 SDST @ UNCO \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "SUU@WAKE",
+    "market": "SPREAD",
+    "side": "SUU",
+    "line": 18.5,
+    "price": -114,
+    "bet": "SUU +18.5",
+    "matchup": "NCAAB \u00b7 SUU @ WAKE \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "SUU@WAKE",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 154.5,
+    "price": -114,
+    "bet": "Under 154.5",
+    "matchup": "NCAAB \u00b7 SUU @ WAKE \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LONG@ODU",
+    "market": "SPREAD",
+    "side": "LONG",
+    "line": 6.5,
+    "price": -109,
+    "bet": "LONG +6.5",
+    "matchup": "NCAAB \u00b7 LONG @ ODU \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LONG@ODU",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 136.5,
+    "price": -110,
+    "bet": "Under 136.5",
+    "matchup": "NCAAB \u00b7 LONG @ ODU \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 100,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_80"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "TOL@DETM",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 153.5,
+    "price": -113,
+    "bet": "Over 153.5",
+    "matchup": "NCAAB \u00b7 TOL @ DETM \u00b7 3:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "first_seen": "13:35",
+    "vegas_strength": 36,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "TULN@RICE",
+    "market": "SPREAD",
+    "side": "RICE",
+    "line": -4,
+    "price": -111,
+    "bet": "RICE -4",
+    "matchup": "CFB \u00b7 TULN @ RICE \u00b7 3:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 53,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "TULN@RICE",
+    "market": "ML",
+    "side": "RICE",
+    "line": null,
+    "price": -178,
+    "bet": "RICE ML",
+    "matchup": "CFB \u00b7 TULN @ RICE \u00b7 3:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UTU@CAL",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 160.5,
+    "price": -110,
+    "bet": "Over 160.5",
+    "matchup": "NCAAB \u00b7 UTU @ CAL \u00b7 4:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 73,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_70"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "USM@LT",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 55.5,
+    "price": -110,
+    "bet": "Over 55.5",
+    "matchup": "CFB \u00b7 USM @ LT \u00b7 4:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "WASH@MSU",
+    "market": "SPREAD",
+    "side": "MSU",
+    "line": 2.5,
+    "price": -110,
+    "bet": "MSU +2.5",
+    "matchup": "CFB \u00b7 WASH @ MSU \u00b7 4:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 49,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "WASH@MSU",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 43.5,
+    "price": -112,
+    "bet": "Over 43.5",
+    "matchup": "CFB \u00b7 WASH @ MSU \u00b7 4:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 23,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "WASH@MSU",
+    "market": "ML",
+    "side": "MSU",
+    "line": null,
+    "price": 111,
+    "bet": "MSU ML",
+    "matchup": "CFB \u00b7 WASH @ MSU \u00b7 4:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "ASU@UCF",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 46.5,
+    "price": -109,
+    "bet": "Under 46.5",
+    "matchup": "CFB \u00b7 ASU @ UCF \u00b7 4:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 84,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_80"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MAN@LEM",
+    "market": "ML",
+    "side": "MAN",
+    "line": null,
+    "price": 112,
+    "bet": "MAN ML",
+    "matchup": "NCAAB \u00b7 MAN @ LEM \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USA@UNT",
+    "market": "SPREAD",
+    "side": "UNT",
+    "line": -8.5,
+    "price": -119,
+    "bet": "UNT -8.5",
+    "matchup": "NCAAB \u00b7 USA @ UNT \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USA@UNT",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 133.5,
+    "price": -113,
+    "bet": "Under 133.5",
+    "matchup": "NCAAB \u00b7 USA @ UNT \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 70,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_70"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USA@UNT",
+    "market": "ML",
+    "side": "UNT",
+    "line": null,
+    "price": -470,
+    "bet": "UNT ML",
+    "matchup": "NCAAB \u00b7 USA @ UNT \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UCR@FRES",
+    "market": "SPREAD",
+    "side": "UCR",
+    "line": 3.5,
+    "price": -108,
+    "bet": "UCR +3.5",
+    "matchup": "NCAAB \u00b7 UCR @ FRES \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UCR@FRES",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 147.5,
+    "price": -112,
+    "bet": "Under 147.5",
+    "matchup": "NCAAB \u00b7 UCR @ FRES \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UCR@FRES",
+    "market": "ML",
+    "side": "UCR",
+    "line": null,
+    "price": 149,
+    "bet": "UCR ML",
+    "matchup": "NCAAB \u00b7 UCR @ FRES \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "COLO@PROV",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 155.5,
+    "price": -110,
+    "bet": "Under 155.5",
+    "matchup": "NCAAB \u00b7 COLO @ PROV \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "ORST@BOIS",
+    "market": "SPREAD",
+    "side": "BOIS",
+    "line": -16.5,
+    "price": -111,
+    "bet": "BOIS -16.5",
+    "matchup": "CFB \u00b7 ORST @ BOIS \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "ORST@BOIS",
+    "market": "ML",
+    "side": "BOIS",
+    "line": null,
+    "price": -770,
+    "bet": "BOIS ML",
+    "matchup": "CFB \u00b7 ORST @ BOIS \u00b7 5:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": 98,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_80"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "PENN@JOES",
+    "market": "SPREAD",
+    "side": "JOES",
+    "line": -4.5,
+    "price": -112,
+    "bet": "JOES -4.5",
+    "matchup": "CFB \u00b7 PENN @ JOES \u00b7 5:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "PENN@JOES",
+    "market": "ML",
+    "side": "JOES",
+    "line": null,
+    "price": -202,
+    "bet": "JOES ML",
+    "matchup": "CFB \u00b7 PENN @ JOES \u00b7 5:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "13:35",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "sport": "CFB",
+    "game": "AUB@MSST",
+    "market": "SPREAD",
+    "side": "MSST",
+    "line": 3.5,
+    "price": -132,
+    "bet": "Mississippi St +3.5",
+    "matchup": "CFB \u00b7 AUB @ MSST \u00b7 3:15pm CT",
+    "sf_dollars": 6391,
+    "sf_opp": 620,
+    "sf_max_vs_usual": 1.5,
+    "sf_wallets": 1,
+    "buckets": [
+     "SF_SIDE"
+    ]
+   }
+  ]
+ }
+}
