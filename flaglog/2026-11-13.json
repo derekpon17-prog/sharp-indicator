@@ -16,7 +16,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 13250,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 12
   },
   "Northwestern at Ohio State|SPREAD|Ohio State -12.5": {
    "sport": "CFB",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 12
   },
   "Patriots at Lions|SPREAD|Lions -2.5": {
    "sport": "NFL",
@@ -68,7 +68,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 16240,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Wisconsin at Maryland|ML|Maryland": {
    "sport": "CFB",
@@ -84,7 +84,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Illinois at UCLA|SPREAD|UCLA -10.5": {
    "sport": "CFB",
@@ -117,7 +117,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3541,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Grizzlies at Pelicans|ML|Grizzlies": {
    "sport": "NBA",
@@ -181,12 +181,13 @@
    "tags": [
     "STRONG_UNOPPOSED",
     "SIZED_2X",
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_15X"
    ],
    "maxVsUsual": 2.1,
-   "maxDollars": 14338,
+   "maxDollars": 15119,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 15
   },
   "Jazz at Rockets|ML|Jazz": {
    "sport": "NBA",
@@ -235,7 +236,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Utah State at San Diego State|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -251,7 +252,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Vikings at Packers|SPREAD|Packers": {
    "sport": "NFL",
@@ -266,8 +267,8 @@
    ],
    "maxVsUsual": 1.3,
    "maxDollars": 5500,
-   "opposedSeen": false,
-   "snapshots": 3
+   "opposedSeen": true,
+   "snapshots": 4
   },
   "Jazz at Rockets|SPREAD|Rockets -15.5": {
    "sport": "NBA",
@@ -300,7 +301,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 6391,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Florida State at Pittsburgh|ML|Florida State": {
    "sport": "CFB",
@@ -348,6 +349,140 @@
    "maxVsUsual": 1.2,
    "maxDollars": 5400,
    "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Bills at Jets|ML|Bills": {
+   "sport": "NFL",
+   "matchup": "Bills at Jets",
+   "market": "ML",
+   "pick": "Bills",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "firstSeenAt": "2026-11-14T03:32:23.573Z",
+   "firstPrice": "-405",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 9.1,
+   "maxDollars": 22458,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Patriots at Lions|ML|Lions": {
+   "sport": "NFL",
+   "matchup": "Patriots at Lions",
+   "market": "ML",
+   "pick": "Lions",
+   "kickoffEt": "Sun, Nov 15, 9:30 AM",
+   "firstSeenAt": "2026-11-14T03:32:23.573Z",
+   "firstPrice": "-138",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 4.8,
+   "maxDollars": 11759,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "49ers at Cowboys|ML|49ers": {
+   "sport": "NFL",
+   "matchup": "49ers at Cowboys",
+   "market": "ML",
+   "pick": "49ers",
+   "kickoffEt": "Sun, Nov 15, 4:25 PM",
+   "firstSeenAt": "2026-11-14T03:32:23.573Z",
+   "firstPrice": "-203",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.4,
+   "maxDollars": 8403,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Chiefs at Falcons|ML|Chiefs": {
+   "sport": "NFL",
+   "matchup": "Chiefs at Falcons",
+   "market": "ML",
+   "pick": "Chiefs",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "firstSeenAt": "2026-11-14T03:32:23.573Z",
+   "firstPrice": "-170",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.3,
+   "maxDollars": 8155,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Georgia Southern at Georgia State|ML|Georgia Southern": {
+   "sport": "CFB",
+   "matchup": "Georgia Southern at Georgia State",
+   "market": "ML",
+   "pick": "Georgia Southern",
+   "kickoffEt": "Sat, Nov 14, 3:30 PM",
+   "firstSeenAt": "2026-11-14T03:32:23.573Z",
+   "firstPrice": "-203",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.7,
+   "maxDollars": 3263,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Jazz at Rockets|SPREAD|Rockets": {
+   "sport": "NBA",
+   "matchup": "Jazz at Rockets",
+   "market": "SPREAD",
+   "pick": "Rockets",
+   "kickoffEt": "Fri, Nov 13, 8:42 PM",
+   "firstSeenAt": "2026-11-14T03:32:23.573Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 2.1,
+   "maxDollars": 5400,
+   "opposedSeen": true,
+   "snapshots": 3
+  },
+  "Thunder at Clippers|ML|Thunder": {
+   "sport": "NBA",
+   "matchup": "Thunder at Clippers",
+   "market": "ML",
+   "pick": "Thunder",
+   "kickoffEt": "Fri, Nov 13, 10:40 PM",
+   "firstSeenAt": "2026-11-14T03:32:23.573Z",
+   "firstPrice": "-245",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 4.9,
+   "maxDollars": 273035,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Trail Blazers at Kings|ML|Trail Blazers": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Kings",
+   "market": "ML",
+   "pick": "Trail Blazers",
+   "kickoffEt": "Fri, Nov 13, 10:11 PM",
+   "firstSeenAt": "2026-11-14T03:32:23.574Z",
+   "firstPrice": "-400",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 10000,
+   "opposedSeen": false,
    "snapshots": 1
   }
  }
