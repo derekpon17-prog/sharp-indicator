@@ -16,7 +16,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 50676,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Tennessee at Texas A&M|ML|Tennessee": {
    "sport": "CFB",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 47179,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Baylor at BYU|SPREAD|Baylor +7.5": {
    "sport": "CFB",
@@ -50,7 +50,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 13250,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Arkansas State at Coastal Carolina|SPREAD|Coastal Carolina -1.5": {
    "sport": "CFB",
@@ -66,7 +66,7 @@
    "maxVsUsual": 1,
    "maxDollars": 10000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "San Jose State at Air Force|SPREAD|Air Force -12.5": {
    "sport": "CFB",
@@ -82,7 +82,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 6616,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Nevada at Northern Illinois|SPREAD|Northern Illinois": {
    "sport": "CFB",
@@ -114,7 +114,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 7138,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Duke at Miami (FL)|SPREAD|Duke +13.5": {
    "sport": "CFB",
@@ -163,7 +163,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 14595,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Kansas at West Virginia|SPREAD|West Virginia": {
    "sport": "CFB",
@@ -179,7 +179,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 3286,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "UAB at Temple|TOTAL|Under 49.5": {
    "sport": "CFB",
@@ -211,7 +211,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 6391,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Vikings at Packers|SPREAD|Packers": {
    "sport": "NFL",
@@ -227,7 +227,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 5500,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Vikings at Packers|ML|Packers": {
    "sport": "NFL",
@@ -243,6 +243,104 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3541,
    "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Washington at Michigan State|ML|Washington": {
+   "sport": "CFB",
+   "matchup": "Washington at Michigan State",
+   "market": "ML",
+   "pick": "Washington",
+   "kickoffEt": "Sat, Nov 14, 5:30 PM",
+   "firstSeenAt": "2026-11-14T20:50:21.020Z",
+   "firstPrice": "-131",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 51160,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Nevada at Northern Illinois|SPREAD|Nevada": {
+   "sport": "CFB",
+   "matchup": "Nevada at Northern Illinois",
+   "market": "SPREAD",
+   "pick": "Nevada",
+   "kickoffEt": "Sat, Nov 14, 3:35 PM",
+   "firstSeenAt": "2026-11-14T20:50:21.020Z",
+   "firstPrice": "-113",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 3000,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Nevada at Northern Illinois|SPREAD|Northern Illinois +5.5": {
+   "sport": "CFB",
+   "matchup": "Nevada at Northern Illinois",
+   "market": "SPREAD",
+   "pick": "Northern Illinois +5.5",
+   "kickoffEt": "Sat, Nov 14, 3:35 PM",
+   "firstSeenAt": "2026-11-14T20:50:21.020Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 5.9,
+   "maxDollars": 8613,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Appalachian State at Marshall|TOTAL|Over 53.5": {
+   "sport": "CFB",
+   "matchup": "Appalachian State at Marshall",
+   "market": "TOTAL",
+   "pick": "Over 53.5",
+   "kickoffEt": "Sat, Nov 14, 6:00 PM",
+   "firstSeenAt": "2026-11-14T20:50:21.020Z",
+   "firstPrice": "-113",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 3000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Utah State at San Diego State|TOTAL|Over 41.5": {
+   "sport": "CFB",
+   "matchup": "Utah State at San Diego State",
+   "market": "TOTAL",
+   "pick": "Over 41.5",
+   "kickoffEt": "Sat, Nov 14, 9:30 PM",
+   "firstSeenAt": "2026-11-14T20:50:21.020Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 3000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Florida Atlantic at Tulsa|TOTAL|Under 75.5": {
+   "sport": "CFB",
+   "matchup": "Florida Atlantic at Tulsa",
+   "market": "TOTAL",
+   "pick": "Under 75.5",
+   "kickoffEt": "Sat, Nov 14, 7:15 PM",
+   "firstSeenAt": "2026-11-14T20:50:21.020Z",
+   "firstPrice": "-130",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 2999,
+   "opposedSeen": false,
    "snapshots": 1
   }
  }
