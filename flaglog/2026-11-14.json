@@ -51,7 +51,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 13250,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 15
   },
   "Arkansas State at Coastal Carolina|SPREAD|Coastal Carolina -1.5": {
    "sport": "CFB",
@@ -83,7 +83,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 6616,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Nevada at Northern Illinois|SPREAD|Northern Illinois": {
    "sport": "CFB",
@@ -111,12 +111,13 @@
    "firstPrice": "+111",
    "tags": [
     "SIZED_2X",
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "STRONG_VS_STRONG"
    ],
-   "maxVsUsual": 4.5,
-   "maxDollars": 14798,
+   "maxVsUsual": 6.1,
+   "maxDollars": 25142,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 7
   },
   "Duke at Miami (FL)|SPREAD|Duke +13.5": {
    "sport": "CFB",
@@ -229,7 +230,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 5500,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Vikings at Packers|ML|Packers": {
    "sport": "NFL",
@@ -245,7 +246,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3541,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Washington at Michigan State|ML|Washington": {
    "sport": "CFB",
@@ -327,7 +328,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Florida Atlantic at Tulsa|TOTAL|Under 75.5": {
    "sport": "CFB",
@@ -355,12 +356,13 @@
    "firstPrice": "-167",
    "tags": [
     "STRONG_UNOPPOSED",
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.1,
-   "maxDollars": 35255,
+   "maxVsUsual": 2,
+   "maxDollars": 41627,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 7
   },
   "Louisville at North Carolina|ML|Louisville": {
    "sport": "CFB",
@@ -376,7 +378,7 @@
    "maxVsUsual": 0.3,
    "maxDollars": 9912,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Bills at Jets|TOTAL|Over 50.5": {
    "sport": "NFL",
@@ -392,7 +394,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Seahawks at Raiders|SPREAD|Raiders": {
    "sport": "NFL",
@@ -408,7 +410,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Nets at Grizzlies|ML|Grizzlies": {
    "sport": "NBA",
@@ -460,7 +462,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2720,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Nets at Grizzlies|ML|Nets": {
    "sport": "NBA",
@@ -471,12 +473,13 @@
    "firstSeenAt": "2026-11-15T01:13:27.351Z",
    "firstPrice": "+170",
    "tags": [
-    "SIZED_2X"
+    "SIZED_2X",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 2.3,
    "maxDollars": 18448,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 3
   },
   "Nets at Grizzlies|TOTAL|Under 224.5": {
    "sport": "NBA",
@@ -508,7 +511,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Texas Tech at Oklahoma State|SPREAD|Texas Tech +4.5": {
    "sport": "CFB",
@@ -519,11 +522,93 @@
    "firstSeenAt": "2026-11-15T01:13:27.351Z",
    "firstPrice": "-113",
    "tags": [
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.3,
-   "maxDollars": 5300,
+   "maxVsUsual": 4.7,
+   "maxDollars": 19660,
    "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Mavericks at Cavaliers|ML|Cavaliers": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Cavaliers",
+   "market": "ML",
+   "pick": "Cavaliers",
+   "kickoffEt": "Sat, Nov 14, 7:41 PM",
+   "firstSeenAt": "2026-11-15T03:03:53.254Z",
+   "firstPrice": "-123",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 4680,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Patriots at Lions|SPREAD|Lions -2.5": {
+   "sport": "NFL",
+   "matchup": "Patriots at Lions",
+   "market": "SPREAD",
+   "pick": "Lions -2.5",
+   "kickoffEt": "Sun, Nov 15, 9:30 AM",
+   "firstSeenAt": "2026-11-15T03:03:53.254Z",
+   "firstPrice": "-111",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 2630,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Islanders at Ducks|ML|Ducks": {
+   "sport": "NHL",
+   "matchup": "Islanders at Ducks",
+   "market": "ML",
+   "pick": "Ducks",
+   "kickoffEt": "Sat, Nov 14, 10:10 PM",
+   "firstSeenAt": "2026-11-15T03:03:53.254Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.4,
+   "maxDollars": 1797,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Bills at Jets|ML|Bills": {
+   "sport": "NFL",
+   "matchup": "Bills at Jets",
+   "market": "ML",
+   "pick": "Bills",
+   "kickoffEt": "Sun, Nov 15, 1:00 PM",
+   "firstSeenAt": "2026-11-15T03:03:53.254Z",
+   "firstPrice": "-376",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 4.1,
+   "maxDollars": 44994,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Stanford at Virginia Tech|SPREAD|Stanford +16.5": {
+   "sport": "CFB",
+   "matchup": "Stanford at Virginia Tech",
+   "market": "SPREAD",
+   "pick": "Stanford +16.5",
+   "kickoffEt": "Sat, Nov 14, 7:30 PM",
+   "firstSeenAt": "2026-11-15T03:03:53.254Z",
+   "firstPrice": "+108",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.9,
+   "maxDollars": 1934,
+   "opposedSeen": false,
    "snapshots": 1
   }
  }
