@@ -14,9 +14,9 @@
     "SIZED_2X"
    ],
    "maxVsUsual": 5.1,
-   "maxDollars": 798581,
+   "maxDollars": 803580,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Chiefs at Falcons|ML|Chiefs": {
    "sport": "NFL",
@@ -77,12 +77,13 @@
    "firstSeenAt": "2026-11-15T19:57:36.916Z",
    "firstPrice": null,
    "tags": [
-    "STRONG_VS_WEAK"
+    "STRONG_VS_WEAK",
+    "SIZED_15X"
    ],
-   "maxVsUsual": 0.8,
-   "maxDollars": 132450,
+   "maxVsUsual": 1.5,
+   "maxDollars": 135170,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 3
   },
   "Chiefs at Falcons|SPREAD|Chiefs": {
    "sport": "NFL",
@@ -114,7 +115,7 @@
    "maxVsUsual": 0.7,
    "maxDollars": 114208,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "49ers at Cowboys|ML|Cowboys": {
    "sport": "NFL",
@@ -128,10 +129,10 @@
     "STRONG_VS_STRONG",
     "SIZED_2X"
    ],
-   "maxVsUsual": 2.7,
-   "maxDollars": 87142,
+   "maxVsUsual": 4,
+   "maxDollars": 632616,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 5
   },
   "Dolphins at Colts|ML|Colts": {
    "sport": "NFL",
@@ -142,12 +143,13 @@
    "firstSeenAt": "2026-11-15T19:57:36.916Z",
    "firstPrice": "-203",
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 0.4,
+   "maxVsUsual": 2.8,
    "maxDollars": 66980,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 3
   },
   "Bills at Jets|ML|Bills": {
    "sport": "NFL",
@@ -198,7 +200,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 17057,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "49ers at Cowboys|ML|49ers": {
    "sport": "NFL",
@@ -212,10 +214,10 @@
     "STRONG_VS_STRONG",
     "SIZED_2X"
    ],
-   "maxVsUsual": 6,
-   "maxDollars": 14785,
+   "maxVsUsual": 19.3,
+   "maxDollars": 47694,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 7
   },
   "49ers at Cowboys|SPREAD|Cowboys": {
    "sport": "NFL",
@@ -229,9 +231,9 @@
     "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 0,
-   "maxDollars": 8748,
+   "maxDollars": 9185,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Texans at Browns|ML|Texans": {
    "sport": "NFL",
@@ -248,7 +250,7 @@
    "maxVsUsual": 2.4,
    "maxDollars": 6004,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Vikings at Packers|SPREAD|Packers -2.5": {
    "sport": "NFL",
@@ -282,7 +284,7 @@
    "maxVsUsual": 0.5,
    "maxDollars": 5355,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Vikings at Packers|ML|Packers": {
    "sport": "NFL",
@@ -331,7 +333,7 @@
    "maxVsUsual": 3.5,
    "maxDollars": 38627,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Dolphins at Colts|SPREAD|Dolphins +10.5": {
    "sport": "NFL",
@@ -347,7 +349,7 @@
    "maxVsUsual": 2.9,
    "maxDollars": 32315,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Panthers at Saints|SPREAD|Saints -1.5": {
    "sport": "NFL",
@@ -363,7 +365,7 @@
    "maxVsUsual": 2.1,
    "maxDollars": 23458,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Bills at Jets|SPREAD|Bills -3.5": {
    "sport": "NFL",
@@ -378,6 +380,119 @@
    ],
    "maxVsUsual": 1.7,
    "maxDollars": 19633,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Spurs at Jazz|TOTAL|Under": {
+   "sport": "NBA",
+   "matchup": "Spurs at Jazz",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Sun, Nov 15, 5:10 PM",
+   "firstSeenAt": "2026-11-15T21:08:18.254Z",
+   "firstPrice": "+105",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 2926,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Seahawks at Raiders|SPREAD|Seahawks": {
+   "sport": "NFL",
+   "matchup": "Seahawks at Raiders",
+   "market": "SPREAD",
+   "pick": "Seahawks",
+   "kickoffEt": "Sun, Nov 15, 4:05 PM",
+   "firstSeenAt": "2026-11-15T21:08:18.254Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 2571,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Lakers at Suns|ML|Lakers": {
+   "sport": "NBA",
+   "matchup": "Lakers at Suns",
+   "market": "ML",
+   "pick": "Lakers",
+   "kickoffEt": "Sun, Nov 15, 4:10 PM",
+   "firstSeenAt": "2026-11-15T21:08:18.254Z",
+   "firstPrice": "-144",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.3,
+   "maxDollars": 2500,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Lakers at Suns|ML|Suns": {
+   "sport": "NBA",
+   "matchup": "Lakers at Suns",
+   "market": "ML",
+   "pick": "Suns",
+   "kickoffEt": "Sun, Nov 15, 4:10 PM",
+   "firstSeenAt": "2026-11-15T21:08:18.254Z",
+   "firstPrice": "+148",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 7.4,
+   "maxDollars": 8598,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Knicks at Raptors|SPREAD|Knicks -4.5": {
+   "sport": "NBA",
+   "matchup": "Knicks at Raptors",
+   "market": "SPREAD",
+   "pick": "Knicks -4.5",
+   "kickoffEt": "Sun, Nov 15, 6:10 PM",
+   "firstSeenAt": "2026-11-15T21:08:18.254Z",
+   "firstPrice": "-104",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.6,
+   "maxDollars": 2999,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Bills at Jets|SPREAD|Bills": {
+   "sport": "NFL",
+   "matchup": "Bills at Jets",
+   "market": "SPREAD",
+   "pick": "Bills",
+   "kickoffEt": "Sun, Nov 15, 1:03 PM",
+   "firstSeenAt": "2026-11-15T21:08:18.254Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 19633,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Seahawks at Raiders|SPREAD|Raiders": {
+   "sport": "NFL",
+   "matchup": "Seahawks at Raiders",
+   "market": "SPREAD",
+   "pick": "Raiders",
+   "kickoffEt": "Sun, Nov 15, 4:05 PM",
+   "firstSeenAt": "2026-11-15T21:08:18.254Z",
+   "firstPrice": "+104",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 2999,
    "opposedSeen": true,
    "snapshots": 1
   }
