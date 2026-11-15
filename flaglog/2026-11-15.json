@@ -129,10 +129,10 @@
     "STRONG_VS_STRONG",
     "SIZED_2X"
    ],
-   "maxVsUsual": 4,
-   "maxDollars": 632616,
+   "maxVsUsual": 8.5,
+   "maxDollars": 1330415,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 7
   },
   "Dolphins at Colts|ML|Colts": {
    "sport": "NFL",
@@ -215,9 +215,9 @@
     "SIZED_2X"
    ],
    "maxVsUsual": 19.3,
-   "maxDollars": 47694,
+   "maxDollars": 56006,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 12
   },
   "49ers at Cowboys|SPREAD|Cowboys": {
    "sport": "NFL",
@@ -228,12 +228,13 @@
    "firstSeenAt": "2026-11-15T19:57:36.917Z",
    "firstPrice": null,
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "STRONG_VS_OTHER"
    ],
    "maxVsUsual": 0,
-   "maxDollars": 9185,
-   "opposedSeen": false,
-   "snapshots": 2
+   "maxDollars": 9484,
+   "opposedSeen": true,
+   "snapshots": 3
   },
   "Texans at Browns|ML|Texans": {
    "sport": "NFL",
@@ -284,7 +285,7 @@
    "maxVsUsual": 0.5,
    "maxDollars": 5355,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Vikings at Packers|ML|Packers": {
    "sport": "NFL",
@@ -333,7 +334,7 @@
    "maxVsUsual": 3.5,
    "maxDollars": 38627,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Dolphins at Colts|SPREAD|Dolphins +10.5": {
    "sport": "NFL",
@@ -408,12 +409,13 @@
    "firstSeenAt": "2026-11-15T21:08:18.254Z",
    "firstPrice": "-100",
    "tags": [
-    "STRONG_VS_WEAK"
+    "STRONG_VS_WEAK",
+    "SIZED_15X"
    ],
-   "maxVsUsual": 1,
+   "maxVsUsual": 1.6,
    "maxDollars": 2571,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 3
   },
   "Lakers at Suns|ML|Lakers": {
    "sport": "NBA",
@@ -493,6 +495,231 @@
    ],
    "maxVsUsual": 1.5,
    "maxDollars": 2999,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Rams at Cardinals|SPREAD|Rams": {
+   "sport": "NFL",
+   "matchup": "Rams at Cardinals",
+   "market": "SPREAD",
+   "pick": "Rams",
+   "kickoffEt": "Sun, Nov 15, 4:05 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 0.2,
+   "maxDollars": 31630,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Rockets at Wizards|TOTAL|Over": {
+   "sport": "NBA",
+   "matchup": "Rockets at Wizards",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Sun, Nov 15, 7:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "+102",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 4146,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Mavericks at Celtics|TOTAL|Over 217.5": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Celtics",
+   "market": "TOTAL",
+   "pick": "Over 217.5",
+   "kickoffEt": "Sun, Nov 15, 6:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 3227,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Knicks at Raptors|TOTAL|Over 218.5": {
+   "sport": "NBA",
+   "matchup": "Knicks at Raptors",
+   "market": "TOTAL",
+   "pick": "Over 218.5",
+   "kickoffEt": "Sun, Nov 15, 6:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.5,
+   "maxDollars": 1764,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Hawks at Bucks|TOTAL|Under 234.5": {
+   "sport": "NBA",
+   "matchup": "Hawks at Bucks",
+   "market": "TOTAL",
+   "pick": "Under 234.5",
+   "kickoffEt": "Sun, Nov 15, 8:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "-108",
+   "tags": [
+    "STRONG_VS_OTHER",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 1700,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Mavericks at Celtics|TOTAL|Under 219.5": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Celtics",
+   "market": "TOTAL",
+   "pick": "Under 219.5",
+   "kickoffEt": "Sun, Nov 15, 6:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 1000,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Knicks at Raptors|SPREAD|Knicks": {
+   "sport": "NBA",
+   "matchup": "Knicks at Raptors",
+   "market": "SPREAD",
+   "pick": "Knicks",
+   "kickoffEt": "Sun, Nov 15, 6:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "+104",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3,
+   "maxDollars": 4998,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Rockets at Wizards|ML|Rockets": {
+   "sport": "NBA",
+   "matchup": "Rockets at Wizards",
+   "market": "ML",
+   "pick": "Rockets",
+   "kickoffEt": "Sun, Nov 15, 7:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "-285",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.3,
+   "maxDollars": 7400,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Hornets at Clippers|ML|Clippers": {
+   "sport": "NBA",
+   "matchup": "Hornets at Clippers",
+   "market": "ML",
+   "pick": "Clippers",
+   "kickoffEt": "Sun, Nov 15, 4:41 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "-104",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 2000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Seahawks at Raiders|SPREAD|Raiders +6.5": {
+   "sport": "NFL",
+   "matchup": "Seahawks at Raiders",
+   "market": "SPREAD",
+   "pick": "Raiders +6.5",
+   "kickoffEt": "Sun, Nov 15, 4:05 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "+104",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 2999,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Spurs at Jazz|SPREAD|Jazz": {
+   "sport": "NBA",
+   "matchup": "Spurs at Jazz",
+   "market": "SPREAD",
+   "pick": "Jazz",
+   "kickoffEt": "Sun, Nov 15, 5:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "-138",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 6380,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Knicks at Raptors|ML|Knicks": {
+   "sport": "NBA",
+   "matchup": "Knicks at Raptors",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Sun, Nov 15, 6:10 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "-170",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 1111,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Rams at Cardinals|SPREAD|Cardinals +9.5": {
+   "sport": "NFL",
+   "matchup": "Rams at Cardinals",
+   "market": "SPREAD",
+   "pick": "Cardinals +9.5",
+   "kickoffEt": "Sun, Nov 15, 4:05 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "+108",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 1200,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "49ers at Cowboys|SPREAD|49ers +3.5": {
+   "sport": "NFL",
+   "matchup": "49ers at Cowboys",
+   "market": "SPREAD",
+   "pick": "49ers +3.5",
+   "kickoffEt": "Sun, Nov 15, 4:25 PM",
+   "firstSeenAt": "2026-11-15T23:13:37.711Z",
+   "firstPrice": "-355",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1550,
    "opposedSeen": true,
    "snapshots": 1
   }
