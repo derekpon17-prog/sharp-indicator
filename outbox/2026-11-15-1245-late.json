@@ -1,0 +1,157 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · SUNDAY LATE UPDATE · Nov 15** · 8 new Pinnacle Strong sides",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "SUN NOV 15 · 12:45PM",
+  "sources": "Pinnacle 12:45pm CT - Vegas not read (NCAAB tab members-only) - SharpFlow not current (Nov 14 9:03pm CT) - Novig not read",
+  "sf_current": false,
+  "footer": "New Pinnacle Strong sides on games starting 1:00-2:00pm CT that were not carded earlier. No posted play has faded. Wallet conflict not checked (SharpFlow not current). Tier rules are fixed.",
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "WASH@UTAH",
+    "market": "SPREAD",
+    "side": "WASH",
+    "line": 2,
+    "price": -109,
+    "bet": "WASH +2",
+    "matchup": "NCAAB · WASH @ UTAH · 1:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "12:45",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "WASH@UTAH",
+    "market": "ML",
+    "side": "WASH",
+    "line": null,
+    "price": 107,
+    "bet": "WASH ML",
+    "matchup": "NCAAB · WASH @ UTAH · 1:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "12:45",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "CSUB@NDSU",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 151.5,
+    "price": -114,
+    "bet": "Under 151.5",
+    "matchup": "NCAAB · CSUB @ NDSU · 1:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "12:45",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MIZ@MARQ",
+    "market": "ML",
+    "side": "MARQ",
+    "line": null,
+    "price": -138,
+    "bet": "MARQ ML",
+    "matchup": "NCAAB · MIZ @ MARQ · 1:30pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "12:45",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "HPU@SLU",
+    "market": "SPREAD",
+    "side": "SLU",
+    "line": -7.5,
+    "price": -114,
+    "bet": "SLU -7.5",
+    "matchup": "NCAAB · HPU @ SLU · 2:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "12:45",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "BAY@TEX",
+    "market": "SPREAD",
+    "side": "BAY",
+    "line": 3.5,
+    "price": -111,
+    "bet": "BAY +3.5",
+    "matchup": "NCAAB · BAY @ TEX · 2:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "12:45",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "BAY@TEX",
+    "market": "ML",
+    "side": "BAY",
+    "line": null,
+    "price": 139,
+    "bet": "BAY ML",
+    "matchup": "NCAAB · BAY @ TEX · 2:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "12:45",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ]
+   },
+   {
+    "sport": "NCAAB",
+    "game": "PFW@EIU",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 144.5,
+    "price": -111,
+    "bet": "Under 144.5",
+    "matchup": "NCAAB · PFW @ EIU · 2:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "12:45",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ]
+   }
+  ]
+ }
+}
