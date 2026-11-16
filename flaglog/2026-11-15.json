@@ -733,12 +733,13 @@
    "firstSeenAt": "2026-11-16T01:19:10.104Z",
    "firstPrice": "+194",
    "tags": [
-    "STRONG_VS_WEAK"
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 0.2,
-   "maxDollars": 25950,
+   "maxVsUsual": 2.3,
+   "maxDollars": 353369,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 3
   },
   "Steelers at Bengals|TOTAL|Over 48.5": {
    "sport": "NFL",
