@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NFL - first game 7:15pm CT** - 2 sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "NFL - sharp wallets",
+   "subtitle": "Confirmed wallet money, $2K+ per side - SharpFlow snapshot 8:28am CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:15PM CT",
+     "picks": [
+      {
+       "bet": "Ravens ML",
+       "sub": "Chargers at Ravens - 7:15pm",
+       "price": -213,
+       "chips": [
+        {
+         "t": "SHARP $17K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "1.4x their usual bet",
+         "c": "grey"
+        },
+        {
+         "t": "30-day 11-6 (+32% ROI)",
+         "c": "green"
+        }
+       ],
+       "usual": 1.4
+      },
+      {
+       "bet": "★ Ravens -2.5",
+       "sub": "Chargers at Ravens - 7:15pm",
+       "price": -170,
+       "chips": [
+        {
+         "t": "SHARP $9.4K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "2.6x their usual bet",
+         "c": "gold"
+        },
+        {
+         "t": "30-day 13-10 (+13% ROI)",
+         "c": "grey"
+        },
+        {
+         "t": "wallet 15-7 here",
+         "c": "grey"
+        }
+       ],
+       "usual": 2.6
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 6:30pm CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Confirmed wallet money, $2K+ per side - SharpFlow snapshot 8:28am CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:30PM CT",
+     "picks": [
+      {
+       "bet": "Canadiens ML",
+       "sub": "Canadiens at Rangers - 6:30pm",
+       "price": -104,
+       "chips": [
+        {
+         "t": "SHARP $10K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.6x their usual bet",
+         "c": "grey"
+        },
+        {
+         "t": "30-day 21-7 (+38% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "wallet 12-5 here",
+         "c": "grey"
+        }
+       ],
+       "usual": 0.6
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
