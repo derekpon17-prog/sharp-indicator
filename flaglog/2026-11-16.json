@@ -16,7 +16,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 17427,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Canadiens at Rangers|ML|Canadiens": {
    "sport": "NHL",
@@ -49,7 +49,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1904,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Chargers at Ravens|SPREAD|Ravens -2.5": {
    "sport": "NFL",
@@ -60,12 +60,13 @@
    "firstSeenAt": "2026-11-16T14:12:01.980Z",
    "firstPrice": "-170",
    "tags": [
-    "SIZED_2X"
+    "SIZED_2X",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 2.6,
-   "maxDollars": 9448,
+   "maxDollars": 9685,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Grizzlies at Wizards|SPREAD|Wizards +7.5": {
    "sport": "NBA",
@@ -81,7 +82,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1593,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Magic at Celtics|ML|Celtics": {
    "sport": "NBA",
@@ -97,7 +98,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 1530,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Bulls at Cavaliers|ML|Cavaliers": {
    "sport": "NBA",
@@ -108,11 +109,158 @@
    "firstSeenAt": "2026-11-16T14:38:45.637Z",
    "firstPrice": "-317",
    "tags": [
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_15X"
    ],
-   "maxVsUsual": 1.1,
-   "maxDollars": 3615,
+   "maxVsUsual": 1.8,
+   "maxDollars": 4607,
    "opposedSeen": false,
+   "snapshots": 3
+  },
+  "76ers at Nets|TOTAL|Over 224.5": {
+   "sport": "NBA",
+   "matchup": "76ers at Nets",
+   "market": "TOTAL",
+   "pick": "Over 224.5",
+   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_VS_STRONG",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 4821,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Magic at Celtics|TOTAL|Over": {
+   "sport": "NBA",
+   "matchup": "Magic at Celtics",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": "+117",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 3146,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Trail Blazers at Timberwolves|TOTAL|Over 226.5": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "TOTAL",
+   "pick": "Over 226.5",
+   "kickoffEt": "Mon, Nov 16, 8:10 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": "-117",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.8,
+   "maxDollars": 2521,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Magic at Celtics|SPREAD|Celtics": {
+   "sport": "NBA",
+   "matchup": "Magic at Celtics",
+   "market": "SPREAD",
+   "pick": "Celtics",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.5,
+   "maxDollars": 2279,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Abilene Christian Wildcats at Missouri State Bears|TOTAL|Over": {
+   "sport": "CBB",
+   "matchup": "Abilene Christian Wildcats at Missouri State Bears",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Mon, Nov 16, 8:00 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 1785,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "76ers at Nets|TOTAL|Under 226.5": {
+   "sport": "NBA",
+   "matchup": "76ers at Nets",
+   "market": "TOTAL",
+   "pick": "Under 226.5",
+   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": "-105",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 1000,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Rockets at Heat|ML|Heat": {
+   "sport": "NBA",
+   "matchup": "Rockets at Heat",
+   "market": "ML",
+   "pick": "Heat",
+   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": "+127",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Canucks at Utah|ML|Utah": {
+   "sport": "NHL",
+   "matchup": "Canucks at Utah",
+   "market": "ML",
+   "pick": "Utah",
+   "kickoffEt": "Mon, Nov 16, 9:30 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": "-317",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.2,
+   "maxDollars": 2280,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Magic at Celtics|ML|Magic": {
+   "sport": "NBA",
+   "matchup": "Magic at Celtics",
+   "market": "ML",
+   "pick": "Magic",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-16T20:52:34.516Z",
+   "firstPrice": "+300",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.2,
+   "maxDollars": 5855,
+   "opposedSeen": true,
    "snapshots": 1
   }
  }
