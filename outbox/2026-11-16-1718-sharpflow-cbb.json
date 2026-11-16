@@ -1,0 +1,89 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CBB - first game 5:30pm CT** - 2 sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "CBB - sharp wallets",
+   "subtitle": "Wallets with positive CBB ROI in that market, $1K+ per side - SharpFlow snapshot 5:03pm CT",
+   "sections": [
+    {
+     "heading": "CBB - 6:30PM CT",
+     "picks": [
+      {
+       "bet": "Drake Bulldogs ML",
+       "sub": "Tarleton State Texans at Drake Bulldogs - 6:30pm",
+       "price": -400,
+       "chips": [
+        {
+         "t": "TOP CBB WALLET: 10-2 CBB vs 75-37 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $1.9K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "CBB ML: 9-1 (+27% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 9-1",
+         "c": "grey"
+        },
+        {
+         "t": "1.8x their usual CBB bet",
+         "c": "blue"
+        },
+        {
+         "t": "0.5x their all-sport usual",
+         "c": "orange"
+        }
+       ],
+       "usual": 1.8
+      }
+     ]
+    },
+    {
+     "heading": "CBB - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "Over spread",
+       "sub": "Abilene Christian Wildcats at Missouri State Bears - 7:00pm",
+       "price": null,
+       "chips": [
+        {
+         "t": "TOP CBB WALLET: 13-7 CBB vs 71-71 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $2.6K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "CBB total: 12-6 (+45% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 12-6",
+         "c": "grey"
+        },
+        {
+         "t": "1.5x their usual CBB bet",
+         "c": "blue"
+        },
+        {
+         "t": "2.3x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 1.5
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 6:30pm CT** - 3 sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Wallets with positive NHL ROI in that market, $1K+ per side - SharpFlow snapshot 5:03pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:30PM CT",
+     "picks": [
+      {
+       "bet": "Canadiens ML",
+       "sub": "Canadiens at Rangers - 6:30pm",
+       "price": -104,
+       "chips": [
+        {
+         "t": "TOP NHL WALLET: 31-16 NHL vs 62-45 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $1K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NHL ML: 17-10 (+11% ROI)",
+         "c": "grey"
+        },
+        {
+         "t": "30d here 12-7",
+         "c": "grey"
+        },
+        {
+         "t": "1.1x their usual NHL bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.5x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 1.1
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 8:30PM CT",
+     "picks": [
+      {
+       "bet": "Utah ML",
+       "sub": "Canucks at Utah - 8:30pm",
+       "price": -317,
+       "chips": [
+        {
+         "t": "TOP NHL WALLET: 26-20 NHL vs 49-46 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $2.3K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NHL ML: 18-17 (+2% ROI)",
+         "c": "grey"
+        },
+        {
+         "t": "30d here 13-9",
+         "c": "grey"
+        },
+        {
+         "t": "3.2x their usual NHL bet",
+         "c": "gold"
+        },
+        {
+         "t": "1.0x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 3.2
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:10PM CT",
+     "picks": [
+      {
+       "bet": "Bruins ML",
+       "sub": "Kings at Bruins - 6:10pm",
+       "price": -145,
+       "chips": [
+        {
+         "t": "TOP NHL WALLET: 20-9 NHL vs 447-442 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $1.3K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NHL ML: 10-1 (+17% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 10-0",
+         "c": "grey"
+        },
+        {
+         "t": "0.4x their usual NHL bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.1x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 0.4
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
