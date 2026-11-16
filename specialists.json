@@ -1,6 +1,6 @@
 {
  "date": "2026-11-16",
- "scannedAt": "2026-11-16T22:29:25.990Z",
+ "scannedAt": "2026-11-16T23:03:44.916Z",
  "sports": {
   "NFL": [
    {
@@ -10,7 +10,7 @@
     "sport": "17-9",
     "returnPct": 42.2,
     "last10": "7-3",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Chargers at Ravens",
@@ -21,6 +21,16 @@
       "dollars": 17427,
       "vsUsual": 1.4,
       "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Chargers at Ravens",
+      "market": "SPREAD",
+      "pick": "Chargers",
+      "line": 3.5,
+      "price": "+117",
+      "dollars": 22908,
+      "vsUsual": 1.8,
+      "vsUsualAll": 2.2
      },
      {
       "matchup": "Chargers at Ravens",
@@ -46,7 +56,7 @@
      {
       "matchup": "Chargers at Ravens",
       "market": "SPREAD",
-      "pick": "Chargers +4.5",
+      "pick": "Chargers",
       "line": 4.5,
       "price": "-100",
       "dollars": 1631,
@@ -69,10 +79,10 @@
       "market": "SPREAD",
       "pick": "Ravens -2.5",
       "line": -2.5,
-      "price": "-177",
-      "dollars": 9685,
-      "vsUsual": 2.4,
-      "vsUsualAll": 3.4
+      "price": "-175",
+      "dollars": 11660,
+      "vsUsual": 2.8,
+      "vsUsualAll": 4
      }
     ]
    },
@@ -91,7 +101,7 @@
       "pick": "Ravens -2.5",
       "line": -2.5,
       "price": "-170",
-      "dollars": 10282,
+      "dollars": 10287,
       "vsUsual": 2.8,
       "vsUsualAll": 3.1
      }
@@ -178,7 +188,7 @@
     "sport": "14-7",
     "returnPct": 30,
     "last10": "7-3",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Trail Blazers at Timberwolves",
@@ -186,9 +196,9 @@
       "pick": "Timberwolves",
       "line": null,
       "price": "-122",
-      "dollars": 600,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.2
+      "dollars": 1201,
+      "vsUsual": 1.5,
+      "vsUsualAll": 0.5
      }
     ]
    },
@@ -323,6 +333,16 @@
       "vsUsualAll": 0.5
      },
      {
+      "matchup": "Rockets at Heat",
+      "market": "TOTAL",
+      "pick": "Over 234.5",
+      "line": 234.5,
+      "price": "+122",
+      "dollars": 1254,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.3
+     },
+     {
       "matchup": "Grizzlies at Wizards",
       "market": "ML",
       "pick": "Grizzlies",
@@ -447,6 +467,27 @@
       "line": null,
       "price": "-104",
       "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.5
+     }
+    ]
+   },
+   {
+    "id": "5c2194",
+    "gap": 7.2,
+    "overall": "70-56",
+    "sport": "32-19",
+    "returnPct": 26.3,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Canadiens at Rangers",
+      "market": "TOTAL",
+      "pick": "Under 6.5",
+      "line": 6.5,
+      "price": "-122",
+      "dollars": 770,
       "vsUsual": 1.1,
       "vsUsualAll": 0.5
      }

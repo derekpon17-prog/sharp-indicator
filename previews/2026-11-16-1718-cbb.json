@@ -1,0 +1,46 @@
+{
+ "date": "2026-11-16",
+ "posted_ct": "1718",
+ "sport": "CBB",
+ "first_start": "2026-11-16T23:30:00.000Z",
+ "snapshot": "2026-11-16T23:03:44.916Z",
+ "sides": [
+  {
+   "game": "Tarleton State Texans at Drake Bulldogs",
+   "market": "ML",
+   "pick": "Drake Bulldogs",
+   "start_utc": "2026-11-17T00:30:00.000Z",
+   "dollars": 1904,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.8,
+   "all_sport_ratio": 0.46,
+   "price": "-400",
+   "line": null,
+   "l30_rec": "10-2",
+   "l30_roi": 25.7,
+   "mkt_rec": "9-1",
+   "mkt_roi": 27.2,
+   "mkt_l30_rec": "9-1",
+   "tail": false
+  },
+  {
+   "game": "Abilene Christian Wildcats at Missouri State Bears",
+   "market": "TOTAL",
+   "pick": "Over",
+   "start_utc": "2026-11-17T01:00:00.000Z",
+   "dollars": 2565,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.5,
+   "all_sport_ratio": 2.3,
+   "line": null,
+   "l30_rec": "13-7",
+   "l30_roi": 44.5,
+   "mkt_rec": "12-6",
+   "mkt_roi": 45.2,
+   "mkt_l30_rec": "12-6",
+   "tail": false
+  }
+ ]
+}
