@@ -461,10 +461,10 @@
    "tags": [
     "SIZED_2X"
    ],
-   "maxVsUsual": 2.6,
-   "maxDollars": 2999,
+   "maxVsUsual": 3,
+   "maxDollars": 5998,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 3
   },
   "Bills at Jets|SPREAD|Bills": {
    "sport": "NFL",
@@ -577,7 +577,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 1700,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Mavericks at Celtics|TOTAL|Under 219.5": {
    "sport": "NBA",
@@ -684,12 +684,13 @@
    "firstSeenAt": "2026-11-15T23:13:37.711Z",
    "firstPrice": "-170",
    "tags": [
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.3,
-   "maxDollars": 1111,
+   "maxVsUsual": 2,
+   "maxDollars": 1666,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Rams at Cardinals|SPREAD|Cardinals +9.5": {
    "sport": "NFL",
@@ -721,6 +722,54 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1550,
    "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Steelers at Bengals|ML|Steelers": {
+   "sport": "NFL",
+   "matchup": "Steelers at Bengals",
+   "market": "ML",
+   "pick": "Steelers",
+   "kickoffEt": "Sun, Nov 15, 8:22 PM",
+   "firstSeenAt": "2026-11-16T01:19:10.104Z",
+   "firstPrice": "+194",
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 0.2,
+   "maxDollars": 25950,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Steelers at Bengals|TOTAL|Over 48.5": {
+   "sport": "NFL",
+   "matchup": "Steelers at Bengals",
+   "market": "TOTAL",
+   "pick": "Over 48.5",
+   "kickoffEt": "Sun, Nov 15, 8:22 PM",
+   "firstSeenAt": "2026-11-16T01:19:10.104Z",
+   "firstPrice": "-115",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.8,
+   "maxDollars": 36417,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Thunder at Kings|ML|Thunder": {
+   "sport": "NBA",
+   "matchup": "Thunder at Kings",
+   "market": "ML",
+   "pick": "Thunder",
+   "kickoffEt": "Sun, Nov 15, 9:10 PM",
+   "firstSeenAt": "2026-11-16T01:19:10.104Z",
+   "firstPrice": "-400",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.7,
+   "maxDollars": 8769,
+   "opposedSeen": false,
    "snapshots": 1
   }
  }
