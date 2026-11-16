@@ -218,6 +218,14 @@ def board_html(c):
                     n_txt = f'SHARP SCORE {scn:.0f}'
                     big = f'<span class="mp" style="color:{scol}">{scn:.0f}</span>'
                     bk = f'{e(p.get("book") or "")} {ptxt}'.strip()
+                elif p.get("usual") is not None:
+                    # Sharp Flow mode: big number is the biggest bet vs that wallet's usual size (2.3x = 2.3 times normal)
+                    u = float(p["usual"])
+                    ucol = GOLD if u >= 2 else GREEN if u >= 1.5 else GREY
+                    segs = "".join(f'<div class="sg" style="background:{ucol if u >= t else "#1B212B"}"></div>' for t in (1.0, 1.5, 2.0))
+                    n_txt = "vs their usual bet"
+                    big = f'<span class="mp" style="color:{ucol}">{u:.1f}x</span>'
+                    bk = ptxt
                 else:
                     n_txt = f'{n} of 3 sources'
                     big = f'<span class="mp">{ptxt}</span>'
