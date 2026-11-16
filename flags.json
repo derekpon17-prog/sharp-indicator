@@ -1,13 +1,13 @@
 {
  "date": "2026-11-16",
- "scannedAt": "2026-11-16T20:36:11.099Z",
+ "scannedAt": "2026-11-16T20:55:51.778Z",
  "sides": [
   {
    "tail": true,
    "sport": "NFL",
    "matchup": "Chargers at Ravens",
    "market": "SPREAD",
-   "pick": "Ravens -2.5",
+   "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
    "dollars": 19133,
    "oppDollars": 0,
@@ -36,9 +36,9 @@
    "market": "ML",
    "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
-   "dollars": 17427,
+   "dollars": 18632,
    "oppDollars": 0,
-   "wallets": 1,
+   "wallets": 2,
    "maxVsUsual": 1.4,
    "price": "-213",
    "size": "1x",
@@ -46,12 +46,12 @@
    "mktRoi": 35.5,
    "l30Roi": 32.2,
    "contested": false,
-   "sfPoints": 27,
+   "sfPoints": 31,
    "parts": {
     "money": 16,
     "sizing": 4,
     "quality": 4,
-    "pooled": 0,
+    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -301,33 +301,6 @@
   {
    "tail": false,
    "sport": "NBA",
-   "matchup": "Trail Blazers at Timberwolves",
-   "market": "TOTAL",
-   "pick": "Over 226.5",
-   "kickoffEt": "Mon, Nov 16, 8:10 PM",
-   "dollars": 2521,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.8,
-   "price": "-117",
-   "size": "0.5x",
-   "mktRecord": "17-14",
-   "mktRoi": 28.4,
-   "l30Roi": 36.5,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
    "matchup": "Grizzlies at Wizards",
    "market": "SPREAD",
    "pick": "Wizards +7.5",
@@ -408,26 +381,26 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Rockets at Heat",
+   "sport": "NHL",
+   "matchup": "Canadiens at Rangers",
    "market": "ML",
-   "pick": "Heat",
-   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "pick": "Canadiens",
+   "kickoffEt": "Mon, Nov 16, 7:30 PM",
    "dollars": 1000,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 0.9,
-   "price": "+127",
-   "size": "0.5x",
-   "mktRecord": "7-2",
-   "mktRoi": 49.6,
-   "l30Roi": 52,
+   "maxVsUsual": 1.1,
+   "price": "-104",
+   "size": "1x",
+   "mktRecord": "17-10",
+   "mktRoi": 11.1,
+   "l30Roi": 10.1,
    "contested": false,
    "sfPoints": 11,
    "parts": {
     "money": 4,
-    "sizing": 0,
-    "quality": 4,
+    "sizing": 4,
+    "quality": 0,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -604,11 +577,12 @@
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 17427,
+   "strongDollars": 18632,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
-    "11-6|70353|5-3"
+    "11-6|70353|5-3",
+    "7-0|75849|4-0"
    ],
    "bestPrice": "-213",
    "maxVsUsual": 1.4
@@ -616,7 +590,7 @@
   {
    "matchup": "Chargers at Ravens",
    "market": "SPREAD",
-   "pick": "Ravens -2.5",
+   "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
@@ -661,22 +635,6 @@
    ],
    "bestPrice": "+117",
    "maxVsUsual": 0.9
-  },
-  {
-   "matchup": "Trail Blazers at Timberwolves",
-   "market": "TOTAL",
-   "pick": "Over 226.5",
-   "kickoffEt": "Mon, Nov 16, 8:10 PM",
-   "sport": "NBA",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 2521,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "26-17|42188|17-14"
-   ],
-   "bestPrice": "-117",
-   "maxVsUsual": 0.8
   },
   {
    "matchup": "Magic at Celtics",
@@ -740,22 +698,6 @@
    ],
    "bestPrice": "-105",
    "maxVsUsual": 0.9
-  },
-  {
-   "matchup": "Rockets at Heat",
-   "market": "ML",
-   "pick": "Heat",
-   "kickoffEt": "Mon, Nov 16, 7:40 PM",
-   "sport": "NBA",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 1000,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "11-5|9547|7-2"
-   ],
-   "bestPrice": "+127",
-   "maxVsUsual": 0.9
   }
  ],
  "sizedUp": [
@@ -779,7 +721,7 @@
   {
    "matchup": "Chargers at Ravens",
    "market": "SPREAD",
-   "pick": "Ravens -2.5",
+   "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
    "sport": "NFL",
    "dollars": 9448,
@@ -796,7 +738,7 @@
   {
    "matchup": "Chargers at Ravens",
    "market": "SPREAD",
-   "pick": "Ravens -2.5",
+   "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
    "sport": "NFL",
    "dollars": 9685,
@@ -961,6 +903,23 @@
    "mktRoi": 35.5,
    "opposed": "unopposed",
    "fp": "11-6|70353|5-3"
+  },
+  {
+   "matchup": "Canadiens at Rangers",
+   "market": "ML",
+   "pick": "Canadiens",
+   "kickoffEt": "Mon, Nov 16, 7:30 PM",
+   "sport": "NHL",
+   "dollars": 1000,
+   "price": "-104",
+   "vsUsual": 1.1,
+   "size": "1x",
+   "form": "L10 6-4",
+   "l30Roi": 10.1,
+   "mktRecord": "17-10",
+   "mktRoi": 11.1,
+   "opposed": "unopposed",
+   "fp": "22-13|3584|17-10"
   }
  ]
 }
