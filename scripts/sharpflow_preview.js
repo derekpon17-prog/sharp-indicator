@@ -111,7 +111,7 @@ function buildCards(sp, latest, flags) {
     const nb = bets(s.big.mktRecord);
     if (s.big.mktRecord && s.big.mktRoi != null) chips.push({ t: `${sp} ${mk}: ${s.big.mktRecord} (${s.big.mktRoi >= 0 ? '+' : ''}${Math.round(s.big.mktRoi)}% ROI)`, c: nb < 5 ? 'orange' : s.big.mktRoi >= 15 ? 'green' : 'grey' });
     else chips.push({ t: `no ${sp} ${mk} record`, c: 'orange' });
-    if (nb > 0 && nb < 5) chips.push({ t: `only ${nb} bets here`, c: 'orange' });
+    if (nb > 0 && nb < 5) chips.push({ t: `only ${nb} bet${nb === 1 ? "" : "s"} here`, c: 'orange' });
     if (s.big.mktL30Rec) chips.push({ t: `30d here ${s.big.mktL30Rec}`, c: 'grey' });
     chips.push({ t: `${(+s.vs).toFixed(1)}x their usual ${sp} bet`, c: s.vs >= 2 ? 'gold' : s.vs >= 1.5 ? 'blue' : 'grey' });
     if (s.big.usualAll) { const r = s.big.dollars / s.big.usualAll; chips.push({ t: `${r.toFixed(1)}x their all-sport usual`, c: r < 0.75 && s.vs >= 1.5 ? 'orange' : 'grey' }); }
