@@ -72,7 +72,7 @@ async function connect(url) {
   }));
   // Top wallets per sport (find_specialists: tonight's wallets whose sport record beats their overall record). Derek, Nov 16.
   try {
-    const sfTool = conn.tools.find(n => /find_specialists$/.test(n));
+    const sfTool = (conn.tools.find(n => /find_specialists$/.test(n.name || n)) || {}).name || "find_specialists";
     if (sfTool) {
       const sports = [...new Set(tickets.map(t => String(t.sport).toUpperCase()))];
       const spec = { date: payload.date, scannedAt: payload.scannedAt, sports: {} };
