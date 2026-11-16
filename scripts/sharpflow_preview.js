@@ -118,7 +118,9 @@ function buildCards(sp, latest, flags) {
     cards.push({ brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Confirmed wallet money, $${MIN_DOLLARS / 1000}K+ per side - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
       sections: secs, legend: 'Big number = biggest bet vs that wallet’s usual size. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
   }
-  return { cards, n: rows.length };
+  const data = sides.map(s => ({ game: s.matchup, market: s.market, pick: s.pick, start_utc: s.st.toISOString(), dollars: s.dollars, opp_dollars: s.oppD, wallets: s.wallets,
+    max_vs_usual: +s.vs, price: s.big.price, line: s.big.line ?? null, l30_rec: s.big.l30Rec || null, l30_roi: s.big.l30Roi ?? null, mkt_rec: s.big.mktRecord || null, mkt_roi: s.big.mktRoi ?? null, tail: s.tail }));
+  return { cards, n: rows.length, data };
 }
 
 (async () => {
@@ -145,7 +147,8 @@ function buildCards(sp, latest, flags) {
     const first = starts[sp] ? ctTime(starts[sp]) : '';
     const card = { route: 'Sharp Signals', content: `**Sharp Flow - ${sp} - first game ${first} CT** - ${res.n} sharp-money side${res.n === 1 ? '' : 's'}`, boards: res.cards };
     const f = `${CARD_DIR}/${today}-${hhmm}-sharpflow-${sp.toLowerCase()}.json`;
-    fs.writeFileSync(f, JSON.stringify(card, null, 1)); wrote.push(sp); console.log('wrote', f, res.n, 'sides');
+    fs.writeFileSync(f, JSON.stringify(card, null, 1)); wrote.push(sp);
+    if (!process.env.NO_MARK) { fs.mkdirSync(OUT + '/previews', { recursive: true }); fs.writeFileSync(`${OUT}/previews/${today}-${hhmm}-${sp.toLowerCase()}.json`, JSON.stringify({ date: today, posted_ct: hhmm, sport: sp, first_start: starts[sp] ? starts[sp].toISOString() : null, snapshot: latest.scannedAt, sides: res.data }, null, 1)); } console.log('wrote', f, res.n, 'sides');
   }
   if (wrote.length && !process.env.NO_MARK) { posted[today] = [...done, ...wrote]; for (const d of Object.keys(posted)) if (d < today) delete posted[d]; fs.writeFileSync(OUT + '/previews.json', JSON.stringify(posted)); }
   if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `wrote=${wrote.length}\n`);
