@@ -16,7 +16,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 38695,
    "opposedSeen": false,
-   "snapshots": 19
+   "snapshots": 22
   },
   "Canadiens at Rangers|ML|Canadiens": {
    "sport": "NHL",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 10290,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Tarleton State Texans at Drake Bulldogs|ML|Drake Bulldogs": {
    "sport": "CBB",
@@ -50,7 +50,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1904,
    "opposedSeen": false,
-   "snapshots": 18
+   "snapshots": 20
   },
   "Chargers at Ravens|SPREAD|Ravens -2.5": {
    "sport": "NFL",
@@ -68,7 +68,7 @@
    "maxVsUsual": 2.8,
    "maxDollars": 12625,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 12
   },
   "Grizzlies at Wizards|SPREAD|Wizards +7.5": {
    "sport": "NBA",
@@ -84,7 +84,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1593,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Magic at Celtics|ML|Celtics": {
    "sport": "NBA",
@@ -100,7 +100,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 1530,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Bulls at Cavaliers|ML|Cavaliers": {
    "sport": "NBA",
@@ -117,7 +117,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 4607,
    "opposedSeen": false,
-   "snapshots": 13
+   "snapshots": 15
   },
   "76ers at Nets|TOTAL|Over 224.5": {
    "sport": "NBA",
@@ -134,7 +134,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 4821,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Magic at Celtics|TOTAL|Over": {
    "sport": "NBA",
@@ -151,7 +151,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3268,
    "opposedSeen": false,
-   "snapshots": 7
+   "snapshots": 9
   },
   "Trail Blazers at Timberwolves|TOTAL|Over 226.5": {
    "sport": "NBA",
@@ -183,7 +183,7 @@
    "maxVsUsual": 0.5,
    "maxDollars": 2279,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Abilene Christian Wildcats at Missouri State Bears|TOTAL|Over": {
    "sport": "CBB",
@@ -200,7 +200,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2565,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 14
   },
   "76ers at Nets|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -216,7 +216,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1000,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Rockets at Heat|ML|Heat": {
    "sport": "NBA",
@@ -232,7 +232,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Canucks at Utah|ML|Utah": {
    "sport": "NHL",
@@ -248,7 +248,7 @@
    "maxVsUsual": 3.2,
    "maxDollars": 2280,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Magic at Celtics|ML|Magic": {
    "sport": "NBA",
@@ -264,7 +264,7 @@
    "maxVsUsual": 2.2,
    "maxDollars": 5855,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Chargers at Ravens|SPREAD|Ravens": {
    "sport": "NFL",
@@ -298,7 +298,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Chargers at Ravens|SPREAD|Chargers +4.5": {
    "sport": "NFL",
@@ -314,7 +314,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 1631,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Chargers at Ravens|TOTAL|Under 40.5": {
    "sport": "NFL",
@@ -330,7 +330,7 @@
    "maxVsUsual": 0.3,
    "maxDollars": 3819,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Trail Blazers at Timberwolves|ML|Trail Blazers": {
    "sport": "NBA",
@@ -346,7 +346,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3195,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Suns at Nuggets|SPREAD|Nuggets -9.5": {
    "sport": "NBA",
@@ -362,7 +362,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   }
  }
 }
