@@ -23,6 +23,7 @@ function startUtc(k) { // "Sun, Nov 15, 8:22 PM" (ET)
 }
 const ctTime = d => d.toLocaleString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', minute: '2-digit' }).replace(' ', '').toLowerCase();
 const k = n => n >= 1000 ? '$' + (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'K' : '$' + Math.round(n);
+let SPEC = {}; try { SPEC = JSON.parse(fs.readFileSync(OUT + '/specialists.json', 'utf8')).sports || {}; } catch {}
 let posted = {}; try { posted = JSON.parse(fs.readFileSync(OUT + '/previews.json', 'utf8')); } catch {}
 const done = new Set(posted[today] || []);
 
@@ -92,7 +93,7 @@ function buildCards(sp, latest, flags) {
       const gt = ts.filter(t => !cold(t));
       const big = gt.slice().sort((a, b) => b.dollars - a.dollars)[0];
       const wallets = new Set(gt.map(t => t.wallet)).size;
-      sides.push({ ts: gt, pick, dollars: good, oppD, big, wallets, vs: Math.max(...gt.map(t => t.vsUsual || 0)), st: ts[0].st, matchup: ts[0].matchup, market: ts[0].market,
+      sides.push({ byPick, ts: gt, pick, dollars: good, oppD, big, wallets, vs: Math.max(...gt.map(t => t.vsUsual || 0)), st: ts[0].st, matchup: ts[0].matchup, market: ts[0].market,
         tail: tails.has([ts[0].matchup, ts[0].market, pick].join('|')) });
     }
   }
@@ -116,6 +117,12 @@ function buildCards(sp, latest, flags) {
     chips.push({ t: `${(+s.vs).toFixed(1)}x their usual ${sp} bet`, c: s.vs >= 2 ? 'gold' : s.vs >= 1.5 ? 'blue' : 'grey' });
     if (s.big.usualAll) { const r = s.big.dollars / s.big.usualAll; chips.push({ t: `${r.toFixed(1)}x their all-sport usual`, c: r < 0.75 && s.vs >= 1.5 ? 'orange' : 'grey' }); }
     if (s.wallets > 1) chips.push({ t: `${s.wallets} wallets`, c: 'blue' });
+    const specOf = (ts) => { const ids = new Set(ts.map(t => t.wid).filter(Boolean)); return (SPEC[sp] || []).filter(x => x.gap > 0 && ids.has(x.id)).sort((a, b) => b.gap - a.gap)[0]; };
+    const sp1 = specOf(s.ts);
+    if (sp1) chips.unshift({ t: `TOP ${sp} WALLET: ${sp1.sport} ${sp} vs ${sp1.overall} overall`, c: 'gold' });
+    const oppTs = Object.entries(s.byPick || {}).filter(([p]) => p !== s.pick && opp(s.pick, p, s.market)).flatMap(([, x]) => x).filter(t => !cold(t));
+    const sp2 = specOf(oppTs);
+    if (sp2) chips.push({ t: `top ${sp} wallet on the other side (${sp2.sport})`, c: 'red' });
     const price = num(s.big.price);
     return { st: s.st, bet: (s.tail ? '★ ' : '') + bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: Number.isFinite(price) ? price : null, chips, usual: +s.vs };
   });

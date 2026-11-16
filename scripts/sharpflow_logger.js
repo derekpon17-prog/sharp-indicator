@@ -70,6 +70,25 @@ async function connect(url) {
     wid: a.id || (a.sharp && a.sharp.id) || null, usualSport: a.sharp && a.sharp.usualSport, usualAll: a.sharp && a.sharp.usualAll,
     fp: [a.sharp && a.sharp.l30 && a.sharp.l30.record, a.sharp && a.sharp.l30 && a.sharp.l30.dollars, a.sharp && a.sharp.market && a.sharp.market.record].join('|'),
   }));
+  // Top wallets per sport (find_specialists: tonight's wallets whose sport record beats their overall record). Derek, Nov 16.
+  try {
+    const sfTool = conn.tools.find(n => /find_specialists$/.test(n));
+    if (sfTool) {
+      const sports = [...new Set(tickets.map(t => String(t.sport).toUpperCase()))];
+      const spec = { date: payload.date, scannedAt: payload.scannedAt, sports: {} };
+      for (const sp of sports) {
+        const r = await rpc(conn.url, { jsonrpc: '2.0', id: 10 + sports.indexOf(sp), method: 'tools/call', params: { name: sfTool, arguments: { sport: sp } } }, conn.sid);
+        try {
+          const txt = r.json.result.content.map(x => x.text || '').join('');
+          const j = JSON.parse(txt.slice(txt.indexOf('{')));
+          spec.sports[sp] = (j.specialists || []).map(x => ({ id: x.id, gap: x.gap, overall: x.overall, sport: x.sport, returnPct: x.returnPct, last10: x.last10, bettingBig: x.bettingBig,
+            tonight: (x.tonight || []).map(t => ({ matchup: t.matchup, market: t.market, pick: t.pick, line: t.line, price: t.price, dollars: t.dollars, vsUsual: t.vsUsual, vsUsualAll: t.vsUsualAll })) }));
+        } catch (e) { spec.sports[sp] = []; }
+      }
+      fs.writeFileSync(path.join(OUT, 'specialists.json'), JSON.stringify(spec, null, 1));
+      console.log('specialists', Object.entries(spec.sports).map(([k, v]) => k + ':' + v.length).join(' '));
+    }
+  } catch (e) { console.log('specialists failed', e.message); }
   const plays = (payload.plays || []).filter(p => KEEP.has(String(p.sport || '').toUpperCase())).map(p => ({
     sport: p.sport, matchup: p.matchup, kickoffEt: p.kickoffEt, market: p.market, side: p.side, pick: p.pick, line: p.line, units: p.units, odds: p.odds,
     status: p.status, score: p.score, alignment: p.alignment,
