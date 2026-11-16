@@ -1,6 +1,6 @@
 {
  "date": "2026-11-16",
- "scannedAt": "2026-11-16T21:20:20.543Z",
+ "scannedAt": "2026-11-16T22:29:25.990Z",
  "sports": {
   "NFL": [
    {
@@ -21,6 +21,16 @@
       "dollars": 17427,
       "vsUsual": 1.4,
       "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Chargers at Ravens",
+      "market": "TOTAL",
+      "pick": "Under 40.5",
+      "line": 40.5,
+      "price": "-122",
+      "dollars": 3819,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.4
      }
     ]
    },
@@ -57,7 +67,7 @@
      {
       "matchup": "Chargers at Ravens",
       "market": "SPREAD",
-      "pick": "Ravens",
+      "pick": "Ravens -2.5",
       "line": -2.5,
       "price": "-177",
       "dollars": 9685,
@@ -78,12 +88,12 @@
      {
       "matchup": "Chargers at Ravens",
       "market": "SPREAD",
-      "pick": "Ravens",
+      "pick": "Ravens -2.5",
       "line": -2.5,
       "price": "-170",
-      "dollars": 9454,
-      "vsUsual": 2.6,
-      "vsUsualAll": 2.9
+      "dollars": 10282,
+      "vsUsual": 2.8,
+      "vsUsualAll": 3.1
      }
     ]
    }
@@ -303,6 +313,16 @@
       "vsUsualAll": 1
      },
      {
+      "matchup": "Rockets at Heat",
+      "market": "SPREAD",
+      "pick": "Heat -1.5",
+      "line": -1.5,
+      "price": "+144",
+      "dollars": 2494,
+      "vsUsual": 0.8,
+      "vsUsualAll": 0.5
+     },
+     {
       "matchup": "Grizzlies at Wizards",
       "market": "ML",
       "pick": "Grizzlies",
@@ -331,16 +351,6 @@
       "dollars": 759,
       "vsUsual": 0.2,
       "vsUsualAll": 0.2
-     },
-     {
-      "matchup": "Trail Blazers at Timberwolves",
-      "market": "TOTAL",
-      "pick": "Over 226.5",
-      "line": 226.5,
-      "price": "-117",
-      "dollars": 2521,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.5
      },
      {
       "matchup": "Suns at Nuggets",
