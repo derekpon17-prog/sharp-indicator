@@ -1,6 +1,6 @@
 {
  "date": "2026-11-16",
- "scannedAt": "2026-11-16T13:55:35.428Z",
+ "scannedAt": "2026-11-16T14:28:14.836Z",
  "sides": [
   {
    "tail": true,
@@ -79,6 +79,33 @@
     "sizing": 0,
     "quality": 6,
     "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Bulls at Cavaliers",
+   "market": "ML",
+   "pick": "Cavaliers",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "dollars": 4806,
+   "oppDollars": 0,
+   "wallets": 3,
+   "maxVsUsual": 1.1,
+   "price": "-317",
+   "size": "1x",
+   "mktRecord": "23-16",
+   "mktRoi": 18.6,
+   "l30Roi": 36.5,
+   "contested": false,
+   "sfPoints": 19,
+   "parts": {
+    "money": 8,
+    "sizing": 4,
+    "quality": 0,
+    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -244,6 +271,33 @@
     "unopposed": 3,
     "contested": 0
    }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Hornets at Lakers",
+   "market": "ML",
+   "pick": "Lakers",
+   "kickoffEt": null,
+   "dollars": 1200,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.2,
+   "price": "-376",
+   "size": "under 0.5x",
+   "mktRecord": "57-47",
+   "mktRoi": 27.1,
+   "l30Roi": 1.9,
+   "contested": false,
+   "sfPoints": 7,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
   }
  ],
  "flags": [
@@ -381,6 +435,23 @@
    "mktRoi": 35.5,
    "opposed": "unopposed",
    "fp": "11-6|70353|5-3"
+  },
+  {
+   "matchup": "Bulls at Cavaliers",
+   "market": "ML",
+   "pick": "Cavaliers",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "sport": "NBA",
+   "dollars": 3615,
+   "price": "-317",
+   "vsUsual": 1.1,
+   "size": "1x",
+   "form": "L10 5-5",
+   "l30Roi": 36.5,
+   "mktRecord": "23-16",
+   "mktRoi": 18.6,
+   "opposed": "unopposed",
+   "fp": "26-17|42188|23-16"
   }
  ]
 }

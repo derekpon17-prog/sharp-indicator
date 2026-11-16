@@ -16,7 +16,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 17427,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Canadiens at Rangers|ML|Canadiens": {
    "sport": "NHL",
@@ -32,7 +32,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 10290,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Tarleton State Texans at Drake Bulldogs|ML|Drake Bulldogs": {
    "sport": "CBB",
@@ -49,7 +49,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1904,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Chargers at Ravens|SPREAD|Ravens -2.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 9448,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Grizzlies at Wizards|SPREAD|Wizards +7.5": {
    "sport": "NBA",
@@ -81,7 +81,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1593,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Magic at Celtics|ML|Celtics": {
    "sport": "NBA",
@@ -97,7 +97,23 @@
    "maxVsUsual": 1.7,
    "maxDollars": 1530,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
+  },
+  "Bulls at Cavaliers|ML|Cavaliers": {
+   "sport": "NBA",
+   "matchup": "Bulls at Cavaliers",
+   "market": "ML",
+   "pick": "Cavaliers",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-16T14:38:45.637Z",
+   "firstPrice": "-317",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 3615,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }
