@@ -1,6 +1,6 @@
 {
  "date": "2026-11-16",
- "scannedAt": "2026-11-16T20:55:51.778Z",
+ "scannedAt": "2026-11-16T21:20:20.543Z",
  "sports": {
   "NFL": [
    {
@@ -21,6 +21,27 @@
       "dollars": 17427,
       "vsUsual": 1.4,
       "vsUsualAll": 1.6
+     }
+    ]
+   },
+   {
+    "id": "8d3672",
+    "gap": 14.1,
+    "overall": "95-68",
+    "sport": "21-8",
+    "returnPct": 24.5,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Chargers at Ravens",
+      "market": "SPREAD",
+      "pick": "Chargers +4.5",
+      "line": 4.5,
+      "price": "-100",
+      "dollars": 1631,
+      "vsUsual": 1.6,
+      "vsUsualAll": 0.8
      }
     ]
    },
@@ -60,7 +81,7 @@
       "pick": "Ravens",
       "line": -2.5,
       "price": "-170",
-      "dollars": 9448,
+      "dollars": 9454,
       "vsUsual": 2.6,
       "vsUsualAll": 2.9
      }
@@ -312,6 +333,16 @@
       "vsUsualAll": 0.2
      },
      {
+      "matchup": "Trail Blazers at Timberwolves",
+      "market": "TOTAL",
+      "pick": "Over 226.5",
+      "line": 226.5,
+      "price": "-117",
+      "dollars": 2521,
+      "vsUsual": 0.8,
+      "vsUsualAll": 0.5
+     },
+     {
       "matchup": "Suns at Nuggets",
       "market": "ML",
       "pick": "Nuggets",
@@ -320,6 +351,50 @@
       "dollars": 2151,
       "vsUsual": 0.7,
       "vsUsualAll": 0.4
+     }
+    ]
+   }
+  ],
+  "CBB": [
+   {
+    "id": "c6c4d6",
+    "gap": 16.4,
+    "overall": "75-37",
+    "sport": "10-2",
+    "returnPct": 25.7,
+    "last10": "9-1",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Tarleton State Texans at Drake Bulldogs",
+      "market": "ML",
+      "pick": "Drake Bulldogs",
+      "line": null,
+      "price": "-400",
+      "dollars": 1904,
+      "vsUsual": 1.8,
+      "vsUsualAll": 0.5
+     }
+    ]
+   },
+   {
+    "id": "ef68ca",
+    "gap": 15,
+    "overall": "71-71",
+    "sport": "13-7",
+    "returnPct": 44.5,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Abilene Christian Wildcats at Missouri State Bears",
+      "market": "TOTAL",
+      "pick": "Over",
+      "line": null,
+      "price": null,
+      "dollars": 2565,
+      "vsUsual": 1.5,
+      "vsUsualAll": 0.9
      }
     ]
    }
@@ -385,50 +460,6 @@
       "dollars": 2280,
       "vsUsual": 3.2,
       "vsUsualAll": 1
-     }
-    ]
-   }
-  ],
-  "CBB": [
-   {
-    "id": "c6c4d6",
-    "gap": 16.4,
-    "overall": "75-37",
-    "sport": "10-2",
-    "returnPct": 25.7,
-    "last10": "9-1",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Tarleton State Texans at Drake Bulldogs",
-      "market": "ML",
-      "pick": "Drake Bulldogs",
-      "line": null,
-      "price": "-400",
-      "dollars": 1904,
-      "vsUsual": 1.8,
-      "vsUsualAll": 0.5
-     }
-    ]
-   },
-   {
-    "id": "ef68ca",
-    "gap": 15,
-    "overall": "71-71",
-    "sport": "13-7",
-    "returnPct": 44.5,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Abilene Christian Wildcats at Missouri State Bears",
-      "market": "TOTAL",
-      "pick": "Over",
-      "line": null,
-      "price": null,
-      "dollars": 1785,
-      "vsUsual": 1.5,
-      "vsUsualAll": 0.9
      }
     ]
    }

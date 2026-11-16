@@ -14,9 +14,9 @@
     "SIZED_UP"
    ],
    "maxVsUsual": 1.4,
-   "maxDollars": 18632,
+   "maxDollars": 19875,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Canadiens at Rangers|ML|Canadiens": {
    "sport": "NHL",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 10290,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Tarleton State Texans at Drake Bulldogs|ML|Drake Bulldogs": {
    "sport": "CBB",
@@ -50,7 +50,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1904,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Chargers at Ravens|SPREAD|Ravens -2.5": {
    "sport": "NFL",
@@ -83,7 +83,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1593,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Magic at Celtics|ML|Celtics": {
    "sport": "NBA",
@@ -99,7 +99,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 1530,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Bulls at Cavaliers|ML|Cavaliers": {
    "sport": "NBA",
@@ -116,7 +116,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 4607,
    "opposedSeen": false,
-   "snapshots": 7
+   "snapshots": 9
   },
   "76ers at Nets|TOTAL|Over 224.5": {
    "sport": "NBA",
@@ -133,7 +133,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 4821,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Magic at Celtics|TOTAL|Over": {
    "sport": "NBA",
@@ -149,7 +149,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 3146,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Trail Blazers at Timberwolves|TOTAL|Over 226.5": {
    "sport": "NBA",
@@ -165,7 +165,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 2521,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Magic at Celtics|SPREAD|Celtics": {
    "sport": "NBA",
@@ -181,7 +181,7 @@
    "maxVsUsual": 0.5,
    "maxDollars": 2279,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Abilene Christian Wildcats at Missouri State Bears|TOTAL|Over": {
    "sport": "CBB",
@@ -196,9 +196,9 @@
     "SIZED_15X"
    ],
    "maxVsUsual": 1.5,
-   "maxDollars": 1785,
+   "maxDollars": 2565,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "76ers at Nets|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -214,7 +214,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1000,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Rockets at Heat|ML|Heat": {
    "sport": "NBA",
@@ -230,7 +230,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Canucks at Utah|ML|Utah": {
    "sport": "NHL",
@@ -246,7 +246,7 @@
    "maxVsUsual": 3.2,
    "maxDollars": 2280,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Magic at Celtics|ML|Magic": {
    "sport": "NBA",
@@ -262,7 +262,7 @@
    "maxVsUsual": 2.2,
    "maxDollars": 5855,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Chargers at Ravens|SPREAD|Ravens": {
    "sport": "NFL",
@@ -274,12 +274,45 @@
    "firstPrice": "-177",
    "tags": [
     "STRONG_UNOPPOSED",
-    "SIZED_2X"
+    "SIZED_2X",
+    "STRONG_VS_OTHER"
    ],
    "maxVsUsual": 2.6,
    "maxDollars": 9685,
+   "opposedSeen": true,
+   "snapshots": 9
+  },
+  "Grizzlies at Wizards|ML|Grizzlies": {
+   "sport": "NBA",
+   "matchup": "Grizzlies at Wizards",
+   "market": "ML",
+   "pick": "Grizzlies",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-16T21:35:47.092Z",
+   "firstPrice": "-150",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 1
+  },
+  "Chargers at Ravens|SPREAD|Chargers +4.5": {
+   "sport": "NFL",
+   "matchup": "Chargers at Ravens",
+   "market": "SPREAD",
+   "pick": "Chargers +4.5",
+   "kickoffEt": "Mon, Nov 16, 8:15 PM",
+   "firstSeenAt": "2026-11-16T21:35:47.092Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 1631,
+   "opposedSeen": true,
+   "snapshots": 1
   }
  }
 }

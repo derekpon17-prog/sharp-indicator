@@ -1,6 +1,6 @@
 {
  "date": "2026-11-16",
- "scannedAt": "2026-11-16T20:55:51.778Z",
+ "scannedAt": "2026-11-16T21:20:20.543Z",
  "sides": [
   {
    "tail": true,
@@ -9,8 +9,8 @@
    "market": "SPREAD",
    "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
-   "dollars": 19133,
-   "oppDollars": 0,
+   "dollars": 19139,
+   "oppDollars": 1631,
    "wallets": 2,
    "maxVsUsual": 2.6,
    "price": "-177",
@@ -19,13 +19,13 @@
    "mktRoi": 56.1,
    "l30Roi": 40.8,
    "contested": false,
-   "sfPoints": 41,
+   "sfPoints": 38,
    "parts": {
     "money": 16,
     "sizing": 12,
     "quality": 6,
     "pooled": 4,
-    "unopposed": 3,
+    "unopposed": 0,
     "contested": 0
    }
   },
@@ -36,7 +36,7 @@
    "market": "ML",
    "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
-   "dollars": 18632,
+   "dollars": 19875,
    "oppDollars": 0,
    "wallets": 2,
    "maxVsUsual": 1.4,
@@ -79,6 +79,32 @@
     "sizing": 7,
     "quality": 0,
     "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CBB",
+   "matchup": "Abilene Christian Wildcats at Missouri State Bears",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Mon, Nov 16, 8:00 PM",
+   "dollars": 2565,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.5,
+   "size": "1.5x and up",
+   "mktRecord": "12-6",
+   "mktRoi": 45.2,
+   "l30Roi": 44.5,
+   "contested": false,
+   "sfPoints": 24,
+   "parts": {
+    "money": 8,
+    "sizing": 7,
+    "quality": 6,
+    "pooled": 0,
     "unopposed": 3,
     "contested": 0
    }
@@ -134,32 +160,6 @@
     "quality": 0,
     "pooled": 0,
     "unopposed": 0,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CBB",
-   "matchup": "Abilene Christian Wildcats at Missouri State Bears",
-   "market": "TOTAL",
-   "pick": "Over",
-   "kickoffEt": "Mon, Nov 16, 8:00 PM",
-   "dollars": 1785,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.5,
-   "size": "1.5x and up",
-   "mktRecord": "12-6",
-   "mktRoi": 45.2,
-   "l30Roi": 44.5,
-   "contested": false,
-   "sfPoints": 20,
-   "parts": {
-    "money": 4,
-    "sizing": 7,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 3,
     "contested": 0
    }
   },
@@ -273,6 +273,33 @@
   },
   {
    "tail": false,
+   "sport": "NBA",
+   "matchup": "Grizzlies at Wizards",
+   "market": "ML",
+   "pick": "Grizzlies",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "dollars": 2491,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 0.9,
+   "price": "-156",
+   "size": "under 0.5x",
+   "mktRecord": "23-16",
+   "mktRoi": 18.6,
+   "l30Roi": 36.5,
+   "contested": false,
+   "sfPoints": 19,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "CBB",
    "matchup": "Tarleton State Texans at Drake Bulldogs",
    "market": "ML",
@@ -292,6 +319,33 @@
    "parts": {
     "money": 4,
     "sizing": 7,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "TOTAL",
+   "pick": "Over 226.5",
+   "kickoffEt": "Mon, Nov 16, 8:10 PM",
+   "dollars": 2521,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.8,
+   "price": "-117",
+   "size": "0.5x",
+   "mktRecord": "17-14",
+   "mktRoi": 28.4,
+   "l30Roi": 36.5,
+   "contested": false,
+   "sfPoints": 15,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
     "quality": 4,
     "pooled": 0,
     "unopposed": 3,
@@ -409,6 +463,33 @@
   {
    "tail": false,
    "sport": "NBA",
+   "matchup": "Rockets at Heat",
+   "market": "ML",
+   "pick": "Heat",
+   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "dollars": 1000,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.9,
+   "price": "+127",
+   "size": "0.5x",
+   "mktRecord": "7-2",
+   "mktRoi": 49.6,
+   "l30Roi": 52,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
    "matchup": "Hornets at Lakers",
    "market": "ML",
    "pick": "Lakers",
@@ -422,33 +503,6 @@
    "mktRecord": "57-47",
    "mktRoi": 27.1,
    "l30Roi": 1.9,
-   "contested": false,
-   "sfPoints": 7,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Grizzlies at Wizards",
-   "market": "ML",
-   "pick": "Grizzlies",
-   "kickoffEt": "Mon, Nov 16, 7:10 PM",
-   "dollars": 1491,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.5,
-   "price": "-156",
-   "size": "under 0.5x",
-   "mktRecord": "23-16",
-   "mktRoi": 18.6,
-   "l30Roi": 36.5,
    "contested": false,
    "sfPoints": 7,
    "parts": {
@@ -516,6 +570,33 @@
   },
   {
    "tail": false,
+   "sport": "NFL",
+   "matchup": "Chargers at Ravens",
+   "market": "SPREAD",
+   "pick": "Chargers +4.5",
+   "kickoffEt": "Mon, Nov 16, 8:15 PM",
+   "dollars": 1631,
+   "oppDollars": 19139,
+   "wallets": 1,
+   "maxVsUsual": 1.6,
+   "price": "-100",
+   "size": "1.5x and up",
+   "mktRecord": "9-3",
+   "mktRoi": 26.5,
+   "l30Roi": 11.9,
+   "contested": true,
+   "sfPoints": 3,
+   "parts": {
+    "money": 4,
+    "sizing": 7,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
    "sport": "NBA",
    "matchup": "Magic at Celtics",
    "market": "ML",
@@ -577,7 +658,7 @@
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 18632,
+   "strongDollars": 19875,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -593,9 +674,9 @@
    "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
    "sport": "NFL",
-   "type": "STRONG_UNOPPOSED",
+   "type": "STRONG_VS_OTHER",
    "strongDollars": 9685,
-   "oppDollars": 0,
+   "oppDollars": 1631,
    "oppWeakDollars": 0,
    "fp": [
     "8-4|20133|5-2"
@@ -637,6 +718,37 @@
    "maxVsUsual": 0.9
   },
   {
+   "matchup": "Abilene Christian Wildcats at Missouri State Bears",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Mon, Nov 16, 8:00 PM",
+   "sport": "CBB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 2565,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "13-7|5758|12-6"
+   ],
+   "maxVsUsual": 1.5
+  },
+  {
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "TOTAL",
+   "pick": "Over 226.5",
+   "kickoffEt": "Mon, Nov 16, 8:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 2521,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "26-17|42188|17-14"
+   ],
+   "bestPrice": "-117",
+   "maxVsUsual": 0.8
+  },
+  {
    "matchup": "Magic at Celtics",
    "market": "SPREAD",
    "pick": "Celtics",
@@ -669,21 +781,6 @@
    "maxVsUsual": 1.8
   },
   {
-   "matchup": "Abilene Christian Wildcats at Missouri State Bears",
-   "market": "TOTAL",
-   "pick": "Over",
-   "kickoffEt": "Mon, Nov 16, 8:00 PM",
-   "sport": "CBB",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 1785,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "13-7|5758|12-6"
-   ],
-   "maxVsUsual": 1.5
-  },
-  {
    "matchup": "76ers at Nets",
    "market": "TOTAL",
    "pick": "Under 226.5",
@@ -697,6 +794,38 @@
     "11-5|9547|3-1"
    ],
    "bestPrice": "-105",
+   "maxVsUsual": 0.9
+  },
+  {
+   "matchup": "Grizzlies at Wizards",
+   "market": "ML",
+   "pick": "Grizzlies",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 1000,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "11-5|9547|7-2"
+   ],
+   "bestPrice": "-150",
+   "maxVsUsual": 0.9
+  },
+  {
+   "matchup": "Rockets at Heat",
+   "market": "ML",
+   "pick": "Heat",
+   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 1000,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "11-5|9547|7-2"
+   ],
+   "bestPrice": "+127",
    "maxVsUsual": 0.9
   }
  ],
@@ -724,7 +853,7 @@
    "pick": "Ravens",
    "kickoffEt": "Mon, Nov 16, 8:15 PM",
    "sport": "NFL",
-   "dollars": 9448,
+   "dollars": 9454,
    "price": "-170",
    "vsUsual": 2.6,
    "size": "1.5x and up",
@@ -732,7 +861,7 @@
    "l30Roi": 12.5,
    "mktRecord": "15-7",
    "mktRoi": 31.1,
-   "opposed": "unopposed",
+   "opposed": "contested",
    "fp": "13-10|13754|15-7"
   },
   {
@@ -749,7 +878,7 @@
    "l30Roi": 40.8,
    "mktRecord": "5-2",
    "mktRoi": 56.1,
-   "opposed": "unopposed",
+   "opposed": "contested",
    "fp": "8-4|20133|5-2"
   },
   {
@@ -838,6 +967,23 @@
    "fp": "12-6|1434|9-3"
   },
   {
+   "matchup": "Chargers at Ravens",
+   "market": "SPREAD",
+   "pick": "Chargers +4.5",
+   "kickoffEt": "Mon, Nov 16, 8:15 PM",
+   "sport": "NFL",
+   "dollars": 1631,
+   "price": "-100",
+   "vsUsual": 1.6,
+   "size": "1.5x and up",
+   "form": "L10 7-3",
+   "l30Roi": 11.9,
+   "mktRecord": "9-3",
+   "mktRoi": 26.5,
+   "opposed": "contested",
+   "fp": "8-4|1652|9-3"
+  },
+  {
    "matchup": "76ers at Nets",
    "market": "TOTAL",
    "pick": "Over 224.5",
@@ -877,7 +1023,7 @@
    "pick": "Over",
    "kickoffEt": "Mon, Nov 16, 8:00 PM",
    "sport": "CBB",
-   "dollars": 1785,
+   "dollars": 2565,
    "vsUsual": 1.5,
    "size": "1.5x and up",
    "form": "L10 7-3",
