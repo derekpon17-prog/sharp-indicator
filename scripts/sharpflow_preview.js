@@ -134,7 +134,7 @@ function buildCards(sp, latest, flags) {
   const dueIn = (process.env.DUE || '').split(',').filter(Boolean);
   if (!latest) { console.log('no latest.json'); return; }
   const age = (now - new Date(latest.scannedAt)) / 60000;
-  if (!process.env.FAKE_NOW && age > 45) { console.log('snapshot too old', Math.round(age), 'min - skipping'); return; }
+  if (!process.env.FAKE_NOW && age > 180) { console.log('snapshot too old', Math.round(age), 'min - skipping'); return; }
   let flags = {}; try { flags = JSON.parse(fs.readFileSync(OUT + '/flags.json', 'utf8')); } catch {}
   fs.mkdirSync(CARD_DIR, { recursive: true });
   const hhmm = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');
