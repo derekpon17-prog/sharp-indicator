@@ -14,7 +14,7 @@ on:
         required: false
         default: 'no'
   schedule:
-    - cron: '*/15 12-23,0-3 * * *'   # every 15 min, 6am-10pm CT
+    - cron: '7,22,37,52 12-23,0-3 * * *'   # every 15 min, 6am-10pm CT
 permissions:
   contents: write
   actions: write
