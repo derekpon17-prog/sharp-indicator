@@ -1,0 +1,85 @@
+# Sharp Flow preview: one Discord card per sport about 60 minutes before that sport's first game of the day (CT). No Claude usage.
+# Every 15 minutes this checks ESPN for each sport's first start; only when a sport is due does it pull SharpFlow fresh,
+# build the board card (scripts/sharpflow_preview.js), push it to the `outbox` branch and trigger "Discord outbox" to post it.
+name: SharpFlow preview
+on:
+  workflow_dispatch:
+    inputs:
+      force_sports:
+        description: 'Test: build cards now for these sports (e.g. NBA,NHL) ignoring the time window'
+        required: false
+        default: ''
+      dry_run:
+        description: 'yes = build the card and show it in the log, do not post and do not mark as posted'
+        required: false
+        default: 'no'
+  schedule:
+    - cron: '*/15 12-23,0-3 * * *'   # every 15 min, 6am-10pm CT
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: sharpflow-logger
+  cancel-in-progress: false
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Prepare sharpflow branch
+        run: |
+          mkdir sf_branch && cd sf_branch && git init -q
+          git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          if git fetch -q --depth 20 origin sharpflow; then git checkout -q -B sharpflow FETCH_HEAD; else git checkout -q --orphan sharpflow; fi
+      - name: Which sports are due
+        id: plan
+        env:
+          MODE: plan
+        run: node scripts/sharpflow_preview.js
+      - name: Decide
+        id: go
+        run: |
+          DUE="${{ github.event.inputs.force_sports }}"
+          [ -z "$DUE" ] && DUE="${{ steps.plan.outputs.due }}"
+          echo "due=$DUE" >> "$GITHUB_OUTPUT"
+      - name: Pull SharpFlow fresh
+        if: steps.go.outputs.due != ''
+        env:
+          SF_URL: ${{ vars.SF_URL }}
+        run: node scripts/sharpflow_logger.js
+      - name: Build cards
+        if: steps.go.outputs.due != ''
+        env:
+          MODE: build
+          DUE: ${{ steps.go.outputs.due }}
+          NO_MARK: ${{ (github.event.inputs.dry_run == 'yes' || github.event.inputs.force_sports != '') && '1' || '' }}
+        run: |
+          node scripts/sharpflow_preview.js
+          for f in cards/*.json; do [ -f "$f" ] && { echo "== $f"; head -c 3000 "$f"; echo; }; done; true
+      - name: Publish sharpflow branch (snapshot + posted marker)
+        if: steps.go.outputs.due != ''
+        run: |
+          cd sf_branch
+          git config user.name "sharpflow-logger"; git config user.email "sharpflow-logger@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "nothing new"; exit 0; }
+          git commit -q -m "sharpflow preview $(date -u +%F-%H%M)"
+          git push -q origin sharpflow || { git pull -q --rebase origin sharpflow && git push -q origin sharpflow; }
+      - name: Send cards to Discord outbox
+        if: steps.go.outputs.due != '' && github.event.inputs.dry_run != 'yes'
+        run: |
+          ls cards/*.json >/dev/null 2>&1 || { echo "no cards to send"; exit 0; }
+          git clone -q --depth 1 -b outbox "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ob
+          cp cards/*.json ob/outbox/
+          cd ob
+          git config user.name "sharpflow-preview"; git config user.email "sharpflow-preview@users.noreply.github.com"
+          git add outbox
+          git commit -q -m "Sharp Flow preview cards"
+          git push -q origin outbox || { git pull -q --rebase origin outbox && git push -q origin outbox; }
+          gh workflow run discord-outbox.yml --ref outbox -R "${{ github.repository }}"
