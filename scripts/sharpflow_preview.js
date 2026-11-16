@@ -9,7 +9,7 @@ const CARD_DIR = process.env.CARD_DIR || 'cards';
 const MODE = process.env.MODE || 'plan';
 const now = process.env.FAKE_NOW ? new Date(process.env.FAKE_NOW) : new Date();
 const LEAD_MAX = +(process.env.LEAD_MAX || 75), LEAD_MIN = +(process.env.LEAD_MIN || 3); // post when first start is 3-75 min away
-const MIN_DOLLARS = +(process.env.MIN_DOLLARS || 2000);
+const MIN_DOLLARS = +(process.env.MIN_DOLLARS || 1000);
 const ESPN = { NFL: 'football/nfl', CFB: 'football/college-football', NBA: 'basketball/nba', WNBA: 'basketball/wnba',
   CBB: 'basketball/mens-college-basketball', NHL: 'hockey/nhl', MLB: 'baseball/mlb' };
 const ctDay = d => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(d);
