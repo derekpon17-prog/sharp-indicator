@@ -39,8 +39,13 @@ def merge(rows):
 def has_pin(r):
     return r.get("pin_tier") in ("Strong", "Max")
 
+def sf_cold(r):
+    """Derek, Nov 16: wallet money from a wallet with negative all-time ROI in THIS sport and market does not count."""
+    roi = r.get("sf_mkt_roi")
+    return roi is not None and float(roi) < 0
+
 def sf_in(r):
-    return float(r.get("sf_dollars") or 0)
+    return 0.0 if sf_cold(r) else float(r.get("sf_dollars") or 0)
 
 def vegas_ok(r):
     return (r.get("vegas_strength") or 0) >= 70
@@ -67,12 +72,19 @@ def chips(r):
     v = r.get("vegas_strength")
     out.append((f"VEGAS {int(v)}", "b") if v and v >= 70 else (f"VEGAS {int(v)} (under 70)", "n") if v else ("VEGAS none", "n"))
     d = sf_in(r)
+    if sf_cold(r):
+        out.append((f"COLD WALLET {r.get('sf_mkt_rec') or ''} here ({float(r['sf_mkt_roi']):+.0f}% ROI), not counted".replace("  ", " "), "r"))
     if d >= 1000:
         o = float(r.get("sf_opp") or 0)
         out.append((f"WALLETS {money(d)} vs {money(o)}", "a" if o >= 0.5 * d else "g" if has_pin(r) else "b"))
         vs = float(r.get("sf_max_vs_usual") or 0)
         if vs > 1:
             out.append((f"{vs:.1f}x their usual", "a"))
+        if r.get("sf_all_ratio") is not None:
+            out.append((f"{float(r['sf_all_ratio']):.1f}x their all-sport usual", "n"))
+        if r.get("sf_mkt_rec"):
+            roi = r.get("sf_mkt_roi")
+            out.append((f"here {r['sf_mkt_rec']}" + (f" ({float(roi):+.0f}% ROI)" if roi is not None else ""), "g" if (roi or 0) >= 15 else "n"))
         if (r.get("sf_wallets") or 0) >= 2:
             out.append((f"{int(r['sf_wallets'])} wallets", "b"))
     else:
