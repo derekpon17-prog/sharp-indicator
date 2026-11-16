@@ -1,0 +1,103 @@
+{
+ "date": "2026-11-16",
+ "sides": {
+  "Chargers at Ravens|ML|Ravens": {
+   "sport": "NFL",
+   "matchup": "Chargers at Ravens",
+   "market": "ML",
+   "pick": "Ravens",
+   "kickoffEt": "Mon, Nov 16, 8:15 PM",
+   "firstSeenAt": "2026-11-16T14:12:01.980Z",
+   "firstPrice": "-213",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 17427,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Canadiens at Rangers|ML|Canadiens": {
+   "sport": "NHL",
+   "matchup": "Canadiens at Rangers",
+   "market": "ML",
+   "pick": "Canadiens",
+   "kickoffEt": "Mon, Nov 16, 7:30 PM",
+   "firstSeenAt": "2026-11-16T14:12:01.980Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 10290,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Tarleton State Texans at Drake Bulldogs|ML|Drake Bulldogs": {
+   "sport": "CBB",
+   "matchup": "Tarleton State Texans at Drake Bulldogs",
+   "market": "ML",
+   "pick": "Drake Bulldogs",
+   "kickoffEt": "Mon, Nov 16, 7:30 PM",
+   "firstSeenAt": "2026-11-16T14:12:01.980Z",
+   "firstPrice": "-400",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 1904,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Chargers at Ravens|SPREAD|Ravens -2.5": {
+   "sport": "NFL",
+   "matchup": "Chargers at Ravens",
+   "market": "SPREAD",
+   "pick": "Ravens -2.5",
+   "kickoffEt": "Mon, Nov 16, 8:15 PM",
+   "firstSeenAt": "2026-11-16T14:12:01.980Z",
+   "firstPrice": "-170",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.6,
+   "maxDollars": 9448,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Grizzlies at Wizards|SPREAD|Wizards +7.5": {
+   "sport": "NBA",
+   "matchup": "Grizzlies at Wizards",
+   "market": "SPREAD",
+   "pick": "Wizards +7.5",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-16T14:12:01.980Z",
+   "firstPrice": "-175",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 1593,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Magic at Celtics|ML|Celtics": {
+   "sport": "NBA",
+   "matchup": "Magic at Celtics",
+   "market": "ML",
+   "pick": "Celtics",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-16T14:12:01.980Z",
+   "firstPrice": "-335",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 1530,
+   "opposedSeen": true,
+   "snapshots": 1
+  }
+ }
+}
