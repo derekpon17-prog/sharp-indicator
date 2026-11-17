@@ -1,0 +1,47 @@
+{
+ "date": "2026-11-17",
+ "posted_ct": "1554",
+ "sport": "CFB",
+ "first_start": "2026-11-17T23:00:00.000Z",
+ "snapshot": "2026-11-17T21:38:16.405Z",
+ "sides": [
+  {
+   "game": "Eastern Michigan at Western Michigan",
+   "market": "SPREAD",
+   "pick": "Western Michigan -13.5",
+   "start_utc": "2026-11-17T23:00:00.000Z",
+   "dollars": 8026,
+   "opp_dollars": 0,
+   "wallets": 2,
+   "max_vs_usual": 1.7,
+   "all_sport_ratio": 2.34,
+   "price": "-137",
+   "line": -13.5,
+   "l30_rec": "45-24",
+   "l30_roi": 17.6,
+   "mkt_rec": "29-13",
+   "mkt_roi": 23,
+   "mkt_l30_rec": "29-13",
+   "tail": true
+  },
+  {
+   "game": "Miami (OH) at Kent State",
+   "market": "TOTAL",
+   "pick": "Under 45.5",
+   "start_utc": "2026-11-18T00:00:00.000Z",
+   "dollars": 10400,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1,
+   "all_sport_ratio": 2.09,
+   "price": "-108",
+   "line": 45.5,
+   "l30_rec": "21-10",
+   "l30_roi": 47.6,
+   "mkt_rec": "2-2",
+   "mkt_roi": 54.4,
+   "mkt_l30_rec": "2-2",
+   "tail": false
+  }
+ ]
+}
