@@ -1,0 +1,101 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CFB - first game 5:00pm CT** - 2 sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "CFB - sharp wallets",
+   "subtitle": "Wallets with positive CFB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:38pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 5:00PM CT",
+     "picks": [
+      {
+       "bet": "★ Western Michigan -13.5",
+       "sub": "Eastern Michigan at Western Michigan - 5:00pm",
+       "price": -137,
+       "chips": [
+        {
+         "t": "TOP CFB WALLET: 21-10 CFB vs 57-60 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $8K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "CFB spread: 29-13 (+23% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 29-13",
+         "c": "grey"
+        },
+        {
+         "t": "1.7x their usual CFB bet",
+         "c": "blue"
+        },
+        {
+         "t": "2.3x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "2 wallets (same-side, not independent)",
+         "c": "grey"
+        },
+        {
+         "t": "spreads: lower confidence",
+         "c": "orange"
+        }
+       ],
+       "usual": 1.7
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 45.5",
+       "sub": "Miami (OH) at Kent State - 6:00pm",
+       "price": -108,
+       "chips": [
+        {
+         "t": "TOP CFB WALLET: 21-10 CFB vs 57-60 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $10K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "CFB total: 2-2 (+54% ROI)",
+         "c": "orange"
+        },
+        {
+         "t": "only 4 bets here",
+         "c": "orange"
+        },
+        {
+         "t": "30d here 2-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.0x their usual CFB bet",
+         "c": "grey"
+        },
+        {
+         "t": "2.1x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 1
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
