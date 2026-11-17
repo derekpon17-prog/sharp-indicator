@@ -48,7 +48,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 5999,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Illinois Fighting Illini at Duke Blue Devils|ML|Duke Blue Devils": {
    "sport": "CBB",
@@ -64,7 +64,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 1522,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Knicks at Raptors|ML|Knicks": {
    "sport": "NBA",
@@ -80,7 +80,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Trail Blazers at Timberwolves|ML|Trail Blazers": {
    "sport": "NBA",
@@ -96,7 +96,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   }
  }
 }
