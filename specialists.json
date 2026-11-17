@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T22:39:43.877Z",
+ "scannedAt": "2026-11-17T22:50:30.752Z",
  "sports": {
   "NHL": [
    {
@@ -184,10 +184,10 @@
       "market": "ML",
       "pick": "Knicks",
       "line": null,
-      "price": "-155",
-      "dollars": 725,
-      "vsUsual": 1.7,
-      "vsUsualAll": 0.5
+      "price": "-149",
+      "dollars": 1495,
+      "vsUsual": 3.6,
+      "vsUsualAll": 1
      },
      {
       "matchup": "Knicks at Raptors",
@@ -222,6 +222,27 @@
     ]
    },
    {
+    "id": "0889ba",
+    "gap": 6.4,
+    "overall": "33-7",
+    "sport": "8-1",
+    "returnPct": 49.4,
+    "last10": "8-1",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Knicks at Raptors",
+      "market": "ML",
+      "pick": "Knicks",
+      "line": null,
+      "price": "-144",
+      "dollars": 1534,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.4
+     }
+    ]
+   },
+   {
     "id": "bc35e3",
     "gap": 6,
     "overall": "408-403",
@@ -235,10 +256,10 @@
       "market": "ML",
       "pick": "Knicks",
       "line": null,
-      "price": "-150",
-      "dollars": 777,
-      "vsUsual": 0.3,
-      "vsUsualAll": 0.2
+      "price": "-145",
+      "dollars": 3419,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.7
      },
      {
       "matchup": "Knicks at Raptors",
@@ -331,47 +352,6 @@
       "vsUsualAll": 0.6
      }
     ]
-   },
-   {
-    "id": "f9bdb3",
-    "gap": 5.1,
-    "overall": "25-14",
-    "sport": "9-4",
-    "returnPct": 40.4,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Knicks at Raptors",
-      "market": "SPREAD",
-      "pick": "Raptors +5.5",
-      "line": null,
-      "price": null,
-      "dollars": 27436,
-      "vsUsual": 1.4,
-      "vsUsualAll": 6
-     },
-     {
-      "matchup": "Knicks at Raptors",
-      "market": "TOTAL",
-      "pick": "Over 216.5",
-      "line": 216.5,
-      "price": "+104",
-      "dollars": 987,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.5
-     },
-     {
-      "matchup": "Trail Blazers at Timberwolves",
-      "market": "SPREAD",
-      "pick": "Trail Blazers",
-      "line": 4.5,
-      "price": "-122",
-      "dollars": 4941,
-      "vsUsual": 0.6,
-      "vsUsualAll": 2.6
-     }
-    ]
    }
   ],
   "CFB": [
@@ -441,10 +421,10 @@
       "market": "SPREAD",
       "pick": "Western Michigan -13.5",
       "line": -13.5,
-      "price": "-139",
-      "dollars": 7756,
-      "vsUsual": 1.9,
-      "vsUsualAll": 2.6
+      "price": "-149",
+      "dollars": 14076,
+      "vsUsual": 3.4,
+      "vsUsualAll": 4.7
      }
     ]
    }
