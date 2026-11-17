@@ -1,0 +1,52 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Non-negative market ROI and last-30 form, $1K+ per side (more for NHL and spreads) - SharpFlow snapshot 1:40pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "bet": "Over 226.5",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": -100,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 71-55 NBA vs 408-403 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $1.7K vs $1K",
+         "c": "orange"
+        },
+        {
+         "t": "NBA total: 22-17 (+27% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 11-9",
+         "c": "grey"
+        },
+        {
+         "t": "0.6x their usual NBA bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.4x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 0.6
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
