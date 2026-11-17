@@ -1,0 +1,100 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Non-negative market ROI and last-30 form, $1K+ per side (more for NHL and spreads) - SharpFlow snapshot 11:38am CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "bet": "Raptors +5.5",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": null,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 71-55 NBA vs 408-403 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $29K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NBA spread: 1-1 (+94% ROI)",
+         "c": "orange"
+        },
+        {
+         "t": "only 2 bets here",
+         "c": "orange"
+        },
+        {
+         "t": "30d here 1-1",
+         "c": "grey"
+        },
+        {
+         "t": "1.4x their usual NBA bet",
+         "c": "grey"
+        },
+        {
+         "t": "14.6x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "2 wallets (same-side, not independent)",
+         "c": "grey"
+        },
+        {
+         "t": "spreads: lower confidence",
+         "c": "orange"
+        }
+       ],
+       "usual": 1.4
+      },
+      {
+       "bet": "Raptors ML",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": 146,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 71-55 NBA vs 408-403 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $1.6K vs $2K",
+         "c": "orange"
+        },
+        {
+         "t": "NBA ML: 29-20 (+17% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 14-10",
+         "c": "grey"
+        },
+        {
+         "t": "0.5x their usual NBA bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.3x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "top NBA wallet on the other side (14-6)",
+         "c": "red"
+        }
+       ],
+       "usual": 0.5
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
