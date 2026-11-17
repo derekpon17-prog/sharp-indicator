@@ -1,0 +1,55 @@
+# Sharp Flow live alerts: after a fresh SharpFlow pull, post any NEW or GROWN sharp side ($1K+, positive-ROI wallets only) to Discord.
+# First run of each CT day records the board silently; the pre-game cards already cover it. No Claude usage.
+name: SharpFlow alerts
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '11,26,41,56 12-23,0-3 * * *'
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: sharpflow-logger
+  cancel-in-progress: false
+jobs:
+  alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Prepare sharpflow branch
+        run: |
+          mkdir sf_branch && cd sf_branch && git init -q
+          git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          if git fetch -q --depth 20 origin sharpflow; then git checkout -q -B sharpflow FETCH_HEAD; else git checkout -q --orphan sharpflow; fi
+      - name: Pull SharpFlow fresh
+        env:
+          SF_URL: ${{ vars.SF_URL }}
+        run: node scripts/sharpflow_logger.js
+      - name: Build alerts
+        id: alerts
+        run: node scripts/sharpflow_alerts.js
+      - name: Publish sharpflow branch
+        run: |
+          cd sf_branch
+          git config user.name "sharpflow-logger"; git config user.email "sharpflow-logger@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "nothing new"; exit 0; }
+          git commit -q -m "sharpflow alerts $(date -u +%F-%H%M)"
+          git push -q origin sharpflow || { git pull -q --rebase origin sharpflow && git push -q origin sharpflow; }
+      - name: Send alert card to Discord outbox
+        if: steps.alerts.outputs.wrote != '' && steps.alerts.outputs.wrote != '0'
+        run: |
+          git clone -q --depth 1 -b outbox "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ob
+          cp cards/*.json ob/outbox/
+          cd ob
+          git config user.name "sharpflow-alerts"; git config user.email "sharpflow-alerts@users.noreply.github.com"
+          git add outbox
+          git commit -q -m "Sharp Flow alert"
+          git push -q origin outbox || { git pull -q --rebase origin outbox && git push -q origin outbox; }
+          gh workflow run discord-outbox.yml --ref outbox -R "${{ github.repository }}"
