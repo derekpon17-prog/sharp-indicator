@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T22:28:56.194Z",
+ "scannedAt": "2026-11-17T22:39:43.877Z",
  "sides": [
   {
    "tail": true,
@@ -36,11 +36,11 @@
    "market": "SPREAD",
    "pick": "Western Michigan -13.5",
    "kickoffEt": "Tue, Nov 17, 6:00 PM",
-   "dollars": 8026,
+   "dollars": 8851,
    "oppDollars": 0,
    "wallets": 2,
-   "maxVsUsual": 1.7,
-   "price": "-137",
+   "maxVsUsual": 1.9,
+   "price": "-139",
    "size": "1.5x and up",
    "mktRecord": "29-13",
    "mktRoi": 23,
@@ -63,7 +63,7 @@
    "market": "ML",
    "pick": "Kings",
    "kickoffEt": "Tue, Nov 17, 7:10 PM",
-   "dollars": 53487,
+   "dollars": 53563,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 1.4,
@@ -144,7 +144,7 @@
    "pick": "Knicks",
    "kickoffEt": "Tue, Nov 17, 7:40 PM",
    "dollars": 5333,
-   "oppDollars": 3887,
+   "oppDollars": 4159,
    "wallets": 3,
    "maxVsUsual": 1.8,
    "price": "-138",
@@ -158,6 +158,33 @@
     "money": 12,
     "sizing": 7,
     "quality": 6,
+    "pooled": 4,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Knicks at Raptors",
+   "market": "ML",
+   "pick": "Raptors",
+   "kickoffEt": "Tue, Nov 17, 7:40 PM",
+   "dollars": 4159,
+   "oppDollars": 5333,
+   "wallets": 3,
+   "maxVsUsual": 2.5,
+   "price": "+146",
+   "size": "0.5x",
+   "mktRecord": "29-20",
+   "mktRoi": 16.6,
+   "l30Roi": 27.4,
+   "contested": true,
+   "sfPoints": 20,
+   "parts": {
+    "money": 8,
+    "sizing": 12,
+    "quality": 4,
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
@@ -242,33 +269,6 @@
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Knicks at Raptors",
-   "market": "ML",
-   "pick": "Raptors",
-   "kickoffEt": "Tue, Nov 17, 7:40 PM",
-   "dollars": 3887,
-   "oppDollars": 5333,
-   "wallets": 3,
-   "maxVsUsual": 1.9,
-   "price": "+146",
-   "size": "0.5x",
-   "mktRecord": "29-20",
-   "mktRoi": 16.6,
-   "l30Roi": 27.4,
-   "contested": true,
-   "sfPoints": 15,
-   "parts": {
-    "money": 8,
-    "sizing": 7,
-    "quality": 4,
-    "pooled": 4,
-    "unopposed": 0,
-    "contested": -8
    }
   },
   {
@@ -577,7 +577,7 @@
    "kickoffEt": "Tue, Nov 17, 7:10 PM",
    "sport": "NHL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 53487,
+   "strongDollars": 53563,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -689,7 +689,7 @@
    "sport": "NBA",
    "type": "STRONG_VS_STRONG",
    "strongDollars": 2000,
-   "oppDollars": 3887,
+   "oppDollars": 4159,
    "oppWeakDollars": 0,
    "fp": [
     "14-6|11488|9-2"
@@ -743,7 +743,7 @@
     "17-7|8011|7-1"
    ],
    "bestPrice": "+156",
-   "maxVsUsual": 1.9
+   "maxVsUsual": 2.5
   },
   {
    "matchup": "Eastern Michigan at Western Michigan",
@@ -759,7 +759,7 @@
     "21-10|148757|15-5"
    ],
    "bestPrice": "-138",
-   "maxVsUsual": 1.7
+   "maxVsUsual": 1.9
   },
   {
    "matchup": "Pistons at Spurs",
@@ -835,6 +835,40 @@
    "pick": "Raptors",
    "kickoffEt": "Tue, Nov 17, 7:40 PM",
    "sport": "NBA",
+   "dollars": 1058,
+   "price": "+147",
+   "vsUsual": 2.5,
+   "size": "1.5x and up",
+   "form": "L10 5-5",
+   "l30Roi": 10.1,
+   "mktRecord": "11-8",
+   "mktRoi": 1.5,
+   "opposed": "contested",
+   "fp": "23-18|1528|11-8"
+  },
+  {
+   "matchup": "Eastern Michigan at Western Michigan",
+   "market": "SPREAD",
+   "pick": "Western Michigan -13.5",
+   "kickoffEt": "Tue, Nov 17, 6:00 PM",
+   "sport": "CFB",
+   "dollars": 7756,
+   "price": "-139",
+   "vsUsual": 1.9,
+   "size": "1.5x and up",
+   "form": "L10 6-4",
+   "l30Roi": 17.6,
+   "mktRecord": "29-13",
+   "mktRoi": 23,
+   "opposed": "unopposed",
+   "fp": "45-24|50215|29-13"
+  },
+  {
+   "matchup": "Knicks at Raptors",
+   "market": "ML",
+   "pick": "Raptors",
+   "kickoffEt": "Tue, Nov 17, 7:40 PM",
+   "sport": "NBA",
    "dollars": 1500,
    "price": "+156",
    "vsUsual": 1.9,
@@ -864,29 +898,12 @@
    "fp": "14-6|11488|9-2"
   },
   {
-   "matchup": "Eastern Michigan at Western Michigan",
-   "market": "SPREAD",
-   "pick": "Western Michigan -13.5",
-   "kickoffEt": "Tue, Nov 17, 6:00 PM",
-   "sport": "CFB",
-   "dollars": 6931,
-   "price": "-137",
-   "vsUsual": 1.7,
-   "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 17.6,
-   "mktRecord": "29-13",
-   "mktRoi": 23,
-   "opposed": "unopposed",
-   "fp": "45-24|50215|29-13"
-  },
-  {
    "matchup": "Kings at Bruins",
    "market": "ML",
    "pick": "Kings",
    "kickoffEt": "Tue, Nov 17, 7:10 PM",
    "sport": "NHL",
-   "dollars": 53487,
+   "dollars": 53563,
    "price": "+144",
    "vsUsual": 1.4,
    "size": "1x",

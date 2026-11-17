@@ -1,0 +1,47 @@
+{
+ "date": "2026-11-17",
+ "posted_ct": "1654",
+ "sport": "NHL",
+ "first_start": "2026-11-18T00:00:00.000Z",
+ "snapshot": "2026-11-17T22:39:43.877Z",
+ "sides": [
+  {
+   "game": "Kings at Bruins",
+   "market": "ML",
+   "pick": "Kings",
+   "start_utc": "2026-11-18T00:10:00.000Z",
+   "dollars": 53563,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.4,
+   "all_sport_ratio": 2.35,
+   "price": "+144",
+   "line": null,
+   "l30_rec": "4-2",
+   "l30_roi": 41.4,
+   "mkt_rec": "3-2",
+   "mkt_roi": 34.7,
+   "mkt_l30_rec": "3-2",
+   "tail": true
+  },
+  {
+   "game": "Capitals at Lightning",
+   "market": "TOTAL",
+   "pick": "Over 5.5",
+   "start_utc": "2026-11-18T00:40:00.000Z",
+   "dollars": 1868,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.2,
+   "all_sport_ratio": 0.62,
+   "price": "-161",
+   "line": 5.5,
+   "l30_rec": "11-5",
+   "l30_roi": 33.1,
+   "mkt_rec": "18-9",
+   "mkt_roi": 20.9,
+   "mkt_l30_rec": "10-5",
+   "tail": false
+  }
+ ]
+}

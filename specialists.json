@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T22:28:56.194Z",
+ "scannedAt": "2026-11-17T22:39:43.877Z",
  "sports": {
   "NHL": [
    {
@@ -194,10 +194,10 @@
       "market": "ML",
       "pick": "Raptors",
       "line": null,
-      "price": "+142",
-      "dollars": 786,
-      "vsUsual": 1.9,
-      "vsUsualAll": 0.5
+      "price": "+147",
+      "dollars": 1058,
+      "vsUsual": 2.5,
+      "vsUsualAll": 0.7
      },
      {
       "matchup": "Trail Blazers at Timberwolves",
@@ -441,10 +441,10 @@
       "market": "SPREAD",
       "pick": "Western Michigan -13.5",
       "line": -13.5,
-      "price": "-137",
-      "dollars": 6931,
-      "vsUsual": 1.7,
-      "vsUsualAll": 2.3
+      "price": "-139",
+      "dollars": 7756,
+      "vsUsual": 1.9,
+      "vsUsualAll": 2.6
      }
     ]
    }
