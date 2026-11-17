@@ -1,0 +1,37 @@
+{
+ "date": "2026-11-17",
+ "sides": {
+  "Canucks at Utah|ML|Utah": {
+   "sport": "NHL",
+   "matchup": "Canucks at Utah",
+   "market": "ML",
+   "pick": "Utah",
+   "kickoffEt": "Mon, Nov 16, 9:40 PM",
+   "firstSeenAt": "2026-11-17T05:13:47.183Z",
+   "firstPrice": "-317",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.2,
+   "maxDollars": 2280,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Hornets at Lakers|ML|Lakers": {
+   "sport": "NBA",
+   "matchup": "Hornets at Lakers",
+   "market": "ML",
+   "pick": "Lakers",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "firstSeenAt": "2026-11-17T05:13:47.183Z",
+   "firstPrice": "-333",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 7774,
+   "opposedSeen": true,
+   "snapshots": 1
+  }
+ }
+}
