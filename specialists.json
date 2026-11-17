@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T22:50:30.752Z",
+ "scannedAt": "2026-11-17T23:28:56.456Z",
  "sports": {
   "NHL": [
    {
@@ -25,6 +25,27 @@
     ]
    },
    {
+    "id": "8b0e4c",
+    "gap": 7.7,
+    "overall": "62-47",
+    "sport": "31-17",
+    "returnPct": 8.2,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Oilers at Panthers",
+      "market": "ML",
+      "pick": "Oilers",
+      "line": null,
+      "price": "+113",
+      "dollars": 686,
+      "vsUsual": 0.8,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
     "id": "5c2194",
     "gap": 7.6,
     "overall": "71-56",
@@ -39,8 +60,8 @@
       "pick": "Under 6.5",
       "line": 6.5,
       "price": "-100",
-      "dollars": 874,
-      "vsUsual": 1.2,
+      "dollars": 913,
+      "vsUsual": 1.3,
       "vsUsualAll": 0.6
      }
     ]
@@ -103,10 +124,10 @@
       "market": "ML",
       "pick": "Knicks",
       "line": null,
-      "price": "-138",
-      "dollars": 2000,
-      "vsUsual": 1.2,
-      "vsUsualAll": 2
+      "price": "-135",
+      "dollars": 4083,
+      "vsUsual": 2.4,
+      "vsUsualAll": 4
      },
      {
       "matchup": "Trail Blazers at Timberwolves",
@@ -422,9 +443,30 @@
       "pick": "Western Michigan -13.5",
       "line": -13.5,
       "price": "-149",
-      "dollars": 14076,
+      "dollars": 14129,
       "vsUsual": 3.4,
-      "vsUsualAll": 4.7
+      "vsUsualAll": 4.8
+     }
+    ]
+   },
+   {
+    "id": "51176e",
+    "gap": 1.7,
+    "overall": "229-193",
+    "sport": "66-52",
+    "returnPct": 11.1,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Miami (OH) at Kent State",
+      "market": "TOTAL",
+      "pick": "Over 45.5",
+      "line": 45.5,
+      "price": "-103",
+      "dollars": 3000,
+      "vsUsual": 1.4,
+      "vsUsualAll": 2.7
      }
     ]
    }
