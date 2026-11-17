@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T19:40:52.120Z",
+ "scannedAt": "2026-11-17T20:46:03.084Z",
  "sides": [
   {
    "tail": true,
@@ -62,7 +62,7 @@
    "market": "ML",
    "pick": "Kings",
    "kickoffEt": "Tue, Nov 17, 7:10 PM",
-   "dollars": 33456,
+   "dollars": 33606,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 0.9,
@@ -111,27 +111,54 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Pistons at Spurs",
+   "sport": "CFB",
+   "matchup": "Miami (OH) at Kent State",
    "market": "TOTAL",
-   "pick": "Under 222.5",
-   "kickoffEt": "Tue, Nov 17, 8:10 PM",
-   "dollars": 3799,
+   "pick": "Under 45.5",
+   "kickoffEt": "Tue, Nov 17, 7:00 PM",
+   "dollars": 10400,
    "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 0.9,
-   "price": "+104",
-   "size": "0.5x",
-   "mktRecord": "22-17",
-   "mktRoi": 26.7,
-   "l30Roi": 27.4,
+   "wallets": 1,
+   "maxVsUsual": 1,
+   "price": "-108",
+   "size": "1x",
+   "mktRecord": "2-2",
+   "mktRoi": 54.4,
+   "l30Roi": 47.6,
    "contested": false,
-   "sfPoints": 21,
+   "sfPoints": 19,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Colts at Texans",
+   "market": "ML",
+   "pick": "Texans",
+   "kickoffEt": "Thu, Nov 19, 8:15 PM",
+   "dollars": 4672,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1,
+   "price": "-456",
+   "size": "1x",
+   "mktRecord": "21-4",
+   "mktRoi": 34.7,
+   "l30Roi": 33.7,
+   "contested": false,
+   "sfPoints": 17,
    "parts": {
     "money": 8,
     "sizing": 0,
     "quality": 6,
-    "pooled": 4,
+    "pooled": 0,
     "unopposed": 3,
     "contested": 0
    }
@@ -193,6 +220,33 @@
   {
    "tail": false,
    "sport": "NBA",
+   "matchup": "Pistons at Spurs",
+   "market": "TOTAL",
+   "pick": "Under 222.5",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "dollars": 2799,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.9,
+   "price": "+104",
+   "size": "0.5x",
+   "mktRecord": "22-17",
+   "mktRoi": 26.7,
+   "l30Roi": 27.4,
+   "contested": false,
+   "sfPoints": 15,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
    "matchup": "Trail Blazers at Timberwolves",
    "market": "ML",
    "pick": "Trail Blazers",
@@ -246,6 +300,33 @@
   },
   {
    "tail": false,
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "TOTAL",
+   "pick": "Over 226.5",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "dollars": 1711,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "-100",
+   "size": "0.5x",
+   "mktRecord": "22-17",
+   "mktRoi": 26.7,
+   "l30Roi": 27.4,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "CBB",
    "matchup": "Illinois Fighting Illini at Duke Blue Devils",
    "market": "ML",
@@ -276,7 +357,7 @@
    "sport": "NBA",
    "matchup": "Pistons at Spurs",
    "market": "SPREAD",
-   "pick": "Pistons +9.5",
+   "pick": "Pistons",
    "kickoffEt": "Tue, Nov 17, 8:10 PM",
    "dollars": 1799,
    "oppDollars": 0,
@@ -297,60 +378,6 @@
     "unopposed": 3,
     "contested": 0
    }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Trail Blazers at Timberwolves",
-   "market": "TOTAL",
-   "pick": "Over 226.5",
-   "kickoffEt": "Tue, Nov 17, 8:10 PM",
-   "dollars": 1711,
-   "oppDollars": 1000,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "-100",
-   "size": "0.5x",
-   "mktRecord": "22-17",
-   "mktRoi": 26.7,
-   "l30Roi": 27.4,
-   "contested": true,
-   "sfPoints": 0,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Trail Blazers at Timberwolves",
-   "market": "TOTAL",
-   "pick": "Under 226.5",
-   "kickoffEt": "Tue, Nov 17, 8:10 PM",
-   "dollars": 1000,
-   "oppDollars": 1711,
-   "wallets": 1,
-   "maxVsUsual": 0.9,
-   "price": "+101",
-   "size": "0.5x",
-   "mktRecord": "4-2",
-   "mktRoi": 44.5,
-   "l30Roi": 51.4,
-   "contested": true,
-   "sfPoints": 0,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
   }
  ],
  "flags": [
@@ -361,7 +388,7 @@
    "kickoffEt": "Tue, Nov 17, 7:10 PM",
    "sport": "NHL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 33456,
+   "strongDollars": 33606,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -384,6 +411,38 @@
     "9-4|42802|1-1"
    ],
    "maxVsUsual": 1.4
+  },
+  {
+   "matchup": "Miami (OH) at Kent State",
+   "market": "TOTAL",
+   "pick": "Under 45.5",
+   "kickoffEt": "Tue, Nov 17, 7:00 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 10400,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "21-10|148757|2-2"
+   ],
+   "bestPrice": "-108",
+   "maxVsUsual": 1
+  },
+  {
+   "matchup": "Colts at Texans",
+   "market": "ML",
+   "pick": "Texans",
+   "kickoffEt": "Thu, Nov 19, 8:15 PM",
+   "sport": "NFL",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 4672,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "31-10|62756|21-4"
+   ],
+   "bestPrice": "-456",
+   "maxVsUsual": 1
   },
   {
    "matchup": "Hornets at Lakers",
@@ -439,9 +498,9 @@
    "pick": "Over 226.5",
    "kickoffEt": "Tue, Nov 17, 8:10 PM",
    "sport": "NBA",
-   "type": "STRONG_VS_STRONG",
+   "type": "STRONG_UNOPPOSED",
    "strongDollars": 1711,
-   "oppDollars": 1000,
+   "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
     "41-27|51398|22-17"
@@ -464,22 +523,6 @@
    ],
    "bestPrice": "+156",
    "maxVsUsual": 1.9
-  },
-  {
-   "matchup": "Trail Blazers at Timberwolves",
-   "market": "TOTAL",
-   "pick": "Under 226.5",
-   "kickoffEt": "Tue, Nov 17, 8:10 PM",
-   "sport": "NBA",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 1000,
-   "oppDollars": 1711,
-   "oppWeakDollars": 0,
-   "fp": [
-    "14-6|11488|4-2"
-   ],
-   "bestPrice": "+101",
-   "maxVsUsual": 0.9
   }
  ],
  "sizedUp": [

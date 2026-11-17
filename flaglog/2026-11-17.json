@@ -49,7 +49,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 5999,
    "opposedSeen": false,
-   "snapshots": 22
+   "snapshots": 26
   },
   "Illinois Fighting Illini at Duke Blue Devils|ML|Duke Blue Devils": {
    "sport": "CBB",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 1522,
    "opposedSeen": false,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Knicks at Raptors|ML|Knicks": {
    "sport": "NBA",
@@ -85,7 +85,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 15
+   "snapshots": 18
   },
   "Trail Blazers at Timberwolves|ML|Trail Blazers": {
    "sport": "NBA",
@@ -101,7 +101,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Pistons at Spurs|TOTAL|Under 222.5": {
    "sport": "NBA",
@@ -118,7 +118,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 2799,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Pistons at Spurs|TOTAL|Over 222.5": {
    "sport": "NBA",
@@ -168,7 +168,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 27436,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Kings at Bruins|ML|Kings": {
    "sport": "NHL",
@@ -182,9 +182,9 @@
     "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 0.9,
-   "maxDollars": 33456,
+   "maxDollars": 33606,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Knicks at Raptors|ML|Raptors": {
    "sport": "NBA",
@@ -201,7 +201,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 1500,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Eastern Michigan at Western Michigan|SPREAD|Western Michigan -13.5": {
    "sport": "CFB",
@@ -217,7 +217,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 6931,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Trail Blazers at Timberwolves|TOTAL|Over 226.5": {
    "sport": "NBA",
@@ -228,11 +228,44 @@
    "firstSeenAt": "2026-11-17T19:54:40.955Z",
    "firstPrice": "-100",
    "tags": [
-    "STRONG_VS_STRONG"
+    "STRONG_VS_STRONG",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 0.6,
    "maxDollars": 1711,
    "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Miami (OH) at Kent State|TOTAL|Under 45.5": {
+   "sport": "CFB",
+   "matchup": "Miami (OH) at Kent State",
+   "market": "TOTAL",
+   "pick": "Under 45.5",
+   "kickoffEt": "Tue, Nov 17, 7:00 PM",
+   "firstSeenAt": "2026-11-17T20:54:57.420Z",
+   "firstPrice": "-108",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 10400,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Colts at Texans|ML|Texans": {
+   "sport": "NFL",
+   "matchup": "Colts at Texans",
+   "market": "ML",
+   "pick": "Texans",
+   "kickoffEt": "Thu, Nov 19, 8:15 PM",
+   "firstSeenAt": "2026-11-17T20:54:57.420Z",
+   "firstPrice": "-456",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 4672,
+   "opposedSeen": false,
    "snapshots": 1
   }
  }

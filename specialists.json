@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T19:40:52.120Z",
+ "scannedAt": "2026-11-17T20:46:03.084Z",
  "sports": {
   "NHL": [
    {
@@ -18,9 +18,9 @@
       "pick": "Under 6.5",
       "line": 6.5,
       "price": "-100",
-      "dollars": 509,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.3
+      "dollars": 663,
+      "vsUsual": 0.9,
+      "vsUsualAll": 0.4
      }
     ]
    },
@@ -197,6 +197,16 @@
       "dollars": 511,
       "vsUsual": 1.2,
       "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Pistons at Spurs",
+      "market": "SPREAD",
+      "pick": "Pistons",
+      "line": 8.5,
+      "price": "+122",
+      "dollars": 514,
+      "vsUsual": 1.2,
+      "vsUsualAll": 0.3
      }
     ]
    },
@@ -209,6 +219,16 @@
     "last10": "5-5",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Knicks at Raptors",
+      "market": "ML",
+      "pick": "Knicks",
+      "line": null,
+      "price": "-150",
+      "dollars": 777,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.2
+     },
      {
       "matchup": "Knicks at Raptors",
       "market": "ML",
@@ -228,6 +248,16 @@
       "dollars": 1524,
       "vsUsual": 0.5,
       "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Knicks at Raptors",
+      "market": "TOTAL",
+      "pick": "Under 214.5",
+      "line": 214.5,
+      "price": "+104",
+      "dollars": 722,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.1
      },
      {
       "matchup": "Trail Blazers at Timberwolves",
@@ -272,7 +302,7 @@
      {
       "matchup": "Pistons at Spurs",
       "market": "SPREAD",
-      "pick": "Pistons +9.5",
+      "pick": "Pistons",
       "line": 9.5,
       "price": "-100",
       "dollars": 1799,
@@ -339,9 +369,9 @@
       "pick": "Western Michigan -13.5",
       "line": -13.5,
       "price": "-138",
-      "dollars": 675,
+      "dollars": 1080,
       "vsUsual": 0.1,
-      "vsUsualAll": 0.1
+      "vsUsualAll": 0.2
      },
      {
       "matchup": "Miami (OH) at Kent State",
@@ -349,9 +379,9 @@
       "pick": "Under 45.5",
       "line": 45.5,
       "price": "-108",
-      "dollars": 608,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.1
+      "dollars": 10400,
+      "vsUsual": 1,
+      "vsUsualAll": 2.1
      }
     ]
    },
@@ -394,6 +424,29 @@
       "dollars": 6931,
       "vsUsual": 1.7,
       "vsUsualAll": 2.3
+     }
+    ]
+   }
+  ],
+  "NFL": [
+   {
+    "id": "5fcee5",
+    "gap": 9.2,
+    "overall": "225-114",
+    "sport": "31-10",
+    "returnPct": 33.7,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Colts at Texans",
+      "market": "ML",
+      "pick": "Texans",
+      "line": null,
+      "price": "-456",
+      "dollars": 4672,
+      "vsUsual": 1,
+      "vsUsualAll": 5
      }
     ]
    }
