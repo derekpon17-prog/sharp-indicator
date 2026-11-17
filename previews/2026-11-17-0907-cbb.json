@@ -1,0 +1,28 @@
+{
+ "date": "2026-11-17",
+ "posted_ct": "0907",
+ "sport": "CBB",
+ "first_start": "2026-11-17T16:00:00.000Z",
+ "snapshot": "2026-11-17T14:59:38.364Z",
+ "sides": [
+  {
+   "game": "Illinois Fighting Illini at Duke Blue Devils",
+   "market": "ML",
+   "pick": "Duke Blue Devils",
+   "start_utc": "2026-11-18T00:00:00.000Z",
+   "dollars": 1522,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.4,
+   "all_sport_ratio": 0.37,
+   "price": "-335",
+   "line": null,
+   "l30_rec": "10-3",
+   "l30_roi": 9.2,
+   "mkt_rec": "9-2",
+   "mkt_roi": 9.4,
+   "mkt_l30_rec": "9-2",
+   "tail": false
+  }
+ ]
+}

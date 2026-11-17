@@ -32,6 +32,71 @@
    "maxDollars": 7774,
    "opposedSeen": true,
    "snapshots": 1
+  },
+  "Hornets at Lakers|SPREAD|Lakers -7.5": {
+   "sport": "NBA",
+   "matchup": "Hornets at Lakers",
+   "market": "SPREAD",
+   "pick": "Lakers -7.5",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "firstSeenAt": "2026-11-17T15:07:54.839Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_2X",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 3.6,
+   "maxDollars": 5999,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Illinois Fighting Illini at Duke Blue Devils|ML|Duke Blue Devils": {
+   "sport": "CBB",
+   "matchup": "Illinois Fighting Illini at Duke Blue Devils",
+   "market": "ML",
+   "pick": "Duke Blue Devils",
+   "kickoffEt": "Tue, Nov 17, 7:00 PM",
+   "firstSeenAt": "2026-11-17T15:07:54.839Z",
+   "firstPrice": "-335",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 1522,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Knicks at Raptors|ML|Knicks": {
+   "sport": "NBA",
+   "matchup": "Knicks at Raptors",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Tue, Nov 17, 7:40 PM",
+   "firstSeenAt": "2026-11-17T15:07:54.839Z",
+   "firstPrice": "-138",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 2000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Trail Blazers at Timberwolves|ML|Trail Blazers": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "ML",
+   "pick": "Trail Blazers",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "firstSeenAt": "2026-11-17T15:07:54.839Z",
+   "firstPrice": "+119",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 2000,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }
