@@ -1,0 +1,134 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Non-negative market ROI and last-30 form, $1K+ per side (more for NHL and spreads) - SharpFlow snapshot 12:39pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 5:00PM CT",
+     "picks": [
+      {
+       "bet": "Western Michigan -13.5",
+       "sub": "Eastern Michigan at Western Michigan - 5:00pm",
+       "price": -137,
+       "chips": [
+        {
+         "t": "TOP CFB WALLET: 45-24 CFB vs 62-37 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $6.9K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "CFB spread: 29-13 (+23% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 29-13",
+         "c": "grey"
+        },
+        {
+         "t": "1.7x their usual CFB bet",
+         "c": "blue"
+        },
+        {
+         "t": "2.3x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "spreads: lower confidence",
+         "c": "orange"
+        }
+       ],
+       "usual": 1.7
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:10PM CT",
+     "picks": [
+      {
+       "bet": "Kings ML",
+       "sub": "Kings at Bruins - 6:10pm",
+       "price": 144,
+       "chips": [
+        {
+         "t": "NEW $29K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NHL ML: 3-2 (+35% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 3-2",
+         "c": "grey"
+        },
+        {
+         "t": "0.8x their usual NHL bet",
+         "c": "grey"
+        },
+        {
+         "t": "1.3x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "NHL sharps cold lately - higher floor",
+         "c": "orange"
+        }
+       ],
+       "usual": 0.8
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "bet": "Raptors ML",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": 146,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 17-7 NBA vs 47-41 overall",
+         "c": "gold"
+        },
+        {
+         "t": "GREW $1.6K to $3.1K",
+         "c": "orange"
+        },
+        {
+         "t": "NBA ML: 29-20 (+17% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 14-10",
+         "c": "grey"
+        },
+        {
+         "t": "1.9x their usual NBA bet",
+         "c": "blue"
+        },
+        {
+         "t": "0.3x their all-sport usual",
+         "c": "orange"
+        },
+        {
+         "t": "2 wallets (same-side, not independent)",
+         "c": "grey"
+        }
+       ],
+       "usual": 1.9
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
