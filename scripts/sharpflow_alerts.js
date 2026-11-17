@@ -28,7 +28,8 @@ const k = n => n >= 1000 ? '$' + (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(
 const team = p => p.replace(/\s*[+-]?\d+(\.\d+)?$/, '').trim();
 const opp = (a, b, market) => market === 'TOTAL' ? /^over/i.test(a) !== /^over/i.test(b) : team(a) !== team(b);
 const bets = rec => { const m = String(rec || '').match(/^(\d+)-(\d+)/); return m ? +m[1] + +m[2] : 0; };
-const cold = t => t.mktRoi != null && t.mktRoi < 0;
+const R = require('./sf_rules.js');
+const cold = R.cold;
 const readJson = (f, d) => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return d; } };
 
 const latest = readJson(OUT + '/latest.json', null);
@@ -54,7 +55,7 @@ for (const arr of Object.values(groups)) {
   for (const [pick, ts] of Object.entries(byPick)) {
     const gt = ts.filter(t => !cold(t));
     const good = gt.reduce((a, t) => a + t.dollars, 0);
-    if (good < MIN_DOLLARS) continue;
+    if (good < R.floorFor(MIN_DOLLARS, ts[0].sport, ts[0].market)) continue;
     const oppTs = Object.entries(byPick).filter(([p]) => p !== pick && opp(pick, p, ts[0].market)).flatMap(([, x]) => x).filter(t => !cold(t));
     sides.push({ key: key(ts[0].sport, ts[0].matchup, ts[0].market, pick), sp: ts[0].sport, matchup: ts[0].matchup, market: ts[0].market, pick, ts: gt, oppTs,
       good, oppD: oppTs.reduce((a, t) => a + t.dollars, 0), st: ts[0].st, big: gt.slice().sort((a, b) => b.dollars - a.dollars)[0],
@@ -109,9 +110,10 @@ const rows = send.map(s => {
   else chips.push({ t: `no ${s.sp} ${mk} record`, c: 'orange' });
   if (nb > 0 && nb < 5) chips.push({ t: `only ${nb} bet${nb === 1 ? '' : 's'} here`, c: 'orange' });
   if (s.big.mktL30Rec) chips.push({ t: `30d here ${s.big.mktL30Rec}`, c: 'grey' });
-  chips.push({ t: `${(+s.vs).toFixed(1)}x their usual ${s.sp} bet`, c: s.vs >= 2 ? 'gold' : s.vs >= 1.5 ? 'blue' : 'grey' });
+  chips.push(R.sizeChip(s.sp, s.vs, s.big.form));
   if (s.big.usualAll) { const r = s.big.dollars / s.big.usualAll; chips.push({ t: `${r.toFixed(1)}x their all-sport usual`, c: r < 0.75 && s.vs >= 1.5 ? 'orange' : 'grey' }); }
-  if (s.wallets > 1) chips.push({ t: `${s.wallets} wallets`, c: 'blue' });
+  if (s.wallets > 1) chips.push({ t: `${s.wallets} wallets (same-side, not independent)`, c: 'grey' });
+  chips.push(...R.segmentChips(s.sp, s.market));
   const sp1 = specOf(s.sp, s.ts); if (sp1) chips.unshift({ t: `TOP ${s.sp} WALLET: ${sp1.sport} ${s.sp} vs ${sp1.overall} overall`, c: 'gold' });
   const sp2 = specOf(s.sp, s.oppTs); if (sp2) chips.push({ t: `top ${s.sp} wallet on the other side (${sp2.sport})`, c: 'red' });
   const price = parseFloat(String(s.big.price).replace('+', ''));
@@ -125,8 +127,8 @@ for (const r of rows) {
 }
 const snap = ctTime(new Date(latest.scannedAt));
 const card = { route: 'Sharp Signals', content: `**Sharp Flow alert** - ${rows.length} new sharp-money side${rows.length === 1 ? '' : 's'}`,
-  boards: [{ brand: 'SHARP FLOW ALERT', title: 'New sharp money', subtitle: `Wallets with positive ROI in that sport and market, $${MIN_DOLLARS / 1000}K+ per side - SharpFlow snapshot ${snap} CT`,
-    sections: secs, legend: 'Big number = biggest bet vs that wallet’s usual size in this sport. Negative-ROI wallets are not counted', footer: 'Wallet money, not a pick. Leans, not guarantees' }] };
+  boards: [{ brand: 'SHARP FLOW ALERT', title: 'New sharp money', subtitle: `Non-negative market ROI and last-30 form, $${MIN_DOLLARS / 1000}K+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT`,
+    sections: secs, legend: 'Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted', footer: 'Wallet money, not a pick. Leans, not guarantees' }] };
 fs.mkdirSync(CARD_DIR, { recursive: true });
 const hhmm = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');
 const f = `${CARD_DIR}/${today}-${hhmm}-sharpflow-alert.json`;

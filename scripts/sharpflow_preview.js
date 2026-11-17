@@ -70,7 +70,8 @@ const opp = (a, b, market) => market === 'TOTAL' ? /^over/i.test(a) !== /^over/i
 const num = s => parseFloat(String(s).replace('+', ''));
 const bets = rec => { const m = String(rec || '').match(/^(\d+)-(\d+)/); return m ? +m[1] + +m[2] : 0; };
 
-const cold = t => t.mktRoi != null && t.mktRoi < 0; // Derek, Nov 16: negative ROI in this sport+market = money does not count
+const R = require('./sf_rules.js');
+const cold = R.cold; // Nov 16 ROI rule plus Nov 17 form gate (see sf_rules.js)
 function buildCards(sp, latest, flags) {
   const tickets = (latest.tickets || []).filter(t => t.sport === sp).map(t => ({ ...t, st: startUtc(t.kickoffEt) })).filter(t => t.st && t.st > now);
   const games = {};
@@ -84,12 +85,13 @@ function buildCards(sp, latest, flags) {
     for (const [pick, ts] of Object.entries(byPick)) {
       const all = sum(ts, () => true), good = sum(ts, t => !cold(t));
       const oppD = Object.entries(byPick).filter(([p]) => p !== pick && opp(pick, p, ts[0].market)).reduce((a, [, x]) => a + sum(x, t => !cold(t)), 0);
-      if (all >= MIN_DOLLARS && good < MIN_DOLLARS) {
+      const FL = R.floorFor(MIN_DOLLARS, sp, ts[0].market);
+      if (all >= FL && good < FL) {
         const cb = ts.filter(cold).sort((a, b) => b.dollars - a.dollars)[0];
-        if (cb) coldSides.push({ txt: `${pick}${ts[0].market === 'ML' ? ' ML' : ''} ${k(all)} (${cb.mktRecord} here, ${Math.round(cb.mktRoi)}% ROI)`, dollars: all });
+        if (cb) coldSides.push({ txt: `${pick}${ts[0].market === 'ML' ? ' ML' : ''} ${k(all)} (${R.coldWhy(cb)})`, dollars: all });
         continue;
       }
-      if (good < MIN_DOLLARS) continue;
+      if (good < FL) continue;
       const gt = ts.filter(t => !cold(t));
       const big = gt.slice().sort((a, b) => b.dollars - a.dollars)[0];
       const wallets = new Set(gt.map(t => t.wallet)).size;
@@ -114,9 +116,10 @@ function buildCards(sp, latest, flags) {
     else chips.push({ t: `no ${sp} ${mk} record`, c: 'orange' });
     if (nb > 0 && nb < 5) chips.push({ t: `only ${nb} bet${nb === 1 ? "" : "s"} here`, c: 'orange' });
     if (s.big.mktL30Rec) chips.push({ t: `30d here ${s.big.mktL30Rec}`, c: 'grey' });
-    chips.push({ t: `${(+s.vs).toFixed(1)}x their usual ${sp} bet`, c: s.vs >= 2 ? 'gold' : s.vs >= 1.5 ? 'blue' : 'grey' });
+    chips.push(R.sizeChip(sp, s.vs, s.big.form));
     if (s.big.usualAll) { const r = s.big.dollars / s.big.usualAll; chips.push({ t: `${r.toFixed(1)}x their all-sport usual`, c: r < 0.75 && s.vs >= 1.5 ? 'orange' : 'grey' }); }
-    if (s.wallets > 1) chips.push({ t: `${s.wallets} wallets`, c: 'blue' });
+    if (s.wallets > 1) chips.push({ t: `${s.wallets} wallets (same-side, not independent)`, c: 'grey' });
+    chips.push(...R.segmentChips(sp, s.market));
     const specOf = (ts) => { const ids = new Set(ts.map(t => t.wid).filter(Boolean)); return (SPEC[sp] || []).filter(x => x.gap > 0 && ids.has(x.id)).sort((a, b) => b.gap - a.gap)[0]; };
     const sp1 = specOf(s.ts);
     if (sp1) chips.unshift({ t: `TOP ${sp} WALLET: ${sp1.sport} ${sp} vs ${sp1.overall} overall`, c: 'gold' });
@@ -140,8 +143,8 @@ function buildCards(sp, latest, flags) {
       const { st, ...pk } = r; s.picks.push(pk);
     }
     const last = i + 12 >= rows.length || cards.length === 2;
-    const coldTxt = last && coldSides.length ? 'Not counted (negative ROI in this market): ' + coldSides.slice(0, 3).map(c => c.txt).join('; ') : '';
-    cards.push({ brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with positive ${sp} ROI in that market, $${MIN_DOLLARS / 1000}K+ per side - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
+    const coldTxt = last && coldSides.length ? 'Not counted (negative market ROI or cold last 30 days): ' + coldSides.slice(0, 3).map(c => c.txt).join('; ') : '';
+    cards.push({ brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with non-negative ${sp} market ROI and last-30 form, $${MIN_DOLLARS / 1000}K+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
       sections: secs, legend: coldTxt || 'Big number = biggest bet vs that wallet’s usual size in this sport. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
   }
   return { cards, n: rows.length, data, cold: coldSides };
