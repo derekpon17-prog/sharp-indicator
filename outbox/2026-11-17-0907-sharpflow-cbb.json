@@ -1,0 +1,52 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CBB - first game 10:00am CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "CBB - sharp wallets",
+   "subtitle": "Wallets with positive CBB ROI in that market, $1K+ per side - SharpFlow snapshot 8:59am CT",
+   "sections": [
+    {
+     "heading": "CBB - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "Duke Blue Devils ML",
+       "sub": "Illinois Fighting Illini at Duke Blue Devils - 6:00pm",
+       "price": -335,
+       "chips": [
+        {
+         "t": "TOP CBB WALLET: 10-3 CBB vs 78-39 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $1.5K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "CBB ML: 9-2 (+9% ROI)",
+         "c": "grey"
+        },
+        {
+         "t": "30d here 9-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.4x their usual CBB bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.4x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 1.4
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
