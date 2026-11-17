@@ -43,7 +43,7 @@ def sf_cold(r):
     """Derek, Nov 16: wallet money from a wallet with negative all-time ROI in THIS sport and market does not count."""
     roi = r.get("sf_mkt_roi")
     l30 = r.get("sf_l30_roi")  # Nov 17 form gate: a wallet cold over the last 30 days does not count either
-    return (roi is not None and float(roi) < 0) or (l30 is not None and float(l30) < 0)
+    return (roi is not None and float(roi) <= 0) or (l30 is not None and float(l30) <= 0)
 
 def mkt_bets(r):
     import re
@@ -63,7 +63,7 @@ def vegas_ok(r):
 
 def sf_agrees(r):
     d, o = sf_in(r), float(r.get("sf_opp") or 0)
-    floor = 2000 * (2.5 if r.get("sport") == "NHL" else 1) * (1.5 if r.get("market") == "SPREAD" else 1)  # Nov 17 segment floors
+    floor = 1000 * (2.5 if r.get("sport") == "NHL" else 1) * (1.5 if r.get("market") == "SPREAD" else 1)  # Nov 17 segment floors
     return d >= floor and o < 0.5 * d
 
 def conflict_row(r, recs):
