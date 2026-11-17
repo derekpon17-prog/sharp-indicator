@@ -4,8 +4,8 @@
    2. Size-ups: a big bet vs the wallet's usual size is NOT extra strength. Sizing up while hot (L10 8+ wins) is flagged, never gold.
    3. Wallet count is shown but not treated as extra confirmation (several sharps pile onto the same side together).
    4. Floors by segment: base $1K; NHL x2.5 (cold); spreads x1.5 (our spreads ran 12-18). NBA ML and NFL keep the base floor. */
-const coldMkt = t => t.mktRoi != null && t.mktRoi < 0;
-const coldForm = t => t.l30Roi != null && t.l30Roi < 0;
+const coldMkt = t => t.mktRoi != null && t.mktRoi <= 0;
+const coldForm = t => t.l30Roi != null && t.l30Roi <= 0;
 const cold = t => coldMkt(t) || coldForm(t);
 const coldWhy = t => coldMkt(t) ? `${t.mktRecord} here, ${Math.round(t.mktRoi)}% ROI` : `cold form ${t.l30Rec || ''} L30, ${Math.round(t.l30Roi)}% ROI`;
 const hotWins = f => { const m = String(f || '').match(/L10 (\d+)-(\d+)/); return m ? +m[1] : null; };

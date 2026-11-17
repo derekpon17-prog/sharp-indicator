@@ -1,7 +1,7 @@
 /* Sharp Flow live alerts. No Claude. Runs after a fresh SharpFlow pull (sf_branch/latest.json).
    Posts one Discord card (outbox) with every NEW or GROWN sharp side since the last run.
    A side = sport|matchup|market|pick. Counts only wallets with non-negative ROI in that sport+market (Derek, Nov 16 rule).
-   Floor $1,000 per side (MIN_DOLLARS). Follow-up alert only when the side grew by 1.5x and $1,000 or more.
+   Floor $500 per side (MIN_DOLLARS). Follow-up alert only when the side grew by 1.5x and $500 or more.
    First run of a CT day only records the board silently (the pre-game cards already show it); alerts start after that.
    Seeds from today's pre-game card files in sf_branch/previews so a side already carded is not re-announced.
    Caps: MAX_PER_RUN rows per card, MAX_PER_HOUR rows per hour.
@@ -10,7 +10,7 @@ const fs = require('fs');
 const OUT = process.env.OUT_DIR || 'sf_branch';
 const CARD_DIR = process.env.CARD_DIR || 'cards';
 const now = process.env.FAKE_NOW ? new Date(process.env.FAKE_NOW) : new Date();
-const MIN_DOLLARS = +(process.env.MIN_DOLLARS || 1000);
+const MIN_DOLLARS = +(process.env.MIN_DOLLARS || 500);
 const MAX_PER_RUN = +(process.env.MAX_PER_RUN || 8);
 const MAX_PER_HOUR = +(process.env.MAX_PER_HOUR || 12);
 const SPORTS = new Set((process.env.SPORTS || 'NFL,NBA,NHL,CBB,CFB,MLB,WNBA').split(','));
@@ -127,7 +127,7 @@ for (const r of rows) {
 }
 const snap = ctTime(new Date(latest.scannedAt));
 const card = { route: 'Sharp Signals', content: `**Sharp Flow alert** - ${rows.length} new sharp-money side${rows.length === 1 ? '' : 's'}`,
-  boards: [{ brand: 'SHARP FLOW ALERT', title: 'New sharp money', subtitle: `Non-negative market ROI and last-30 form, $${MIN_DOLLARS / 1000}K+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT`,
+  boards: [{ brand: 'SHARP FLOW ALERT', title: 'New sharp money', subtitle: `Positive market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT`,
     sections: secs, legend: 'Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted', footer: 'Wallet money, not a pick. Leans, not guarantees' }] };
 fs.mkdirSync(CARD_DIR, { recursive: true });
 const hhmm = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');

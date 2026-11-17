@@ -9,7 +9,7 @@ const CARD_DIR = process.env.CARD_DIR || 'cards';
 const MODE = process.env.MODE || 'plan';
 const now = process.env.FAKE_NOW ? new Date(process.env.FAKE_NOW) : new Date();
 const LEAD_MAX = +(process.env.LEAD_MAX || 75), LEAD_MIN = +(process.env.LEAD_MIN || 3); // post when first start is 3-75 min away
-const MIN_DOLLARS = +(process.env.MIN_DOLLARS || 1000);
+const MIN_DOLLARS = +(process.env.MIN_DOLLARS || 500);
 const ESPN = { NFL: 'football/nfl', CFB: 'football/college-football', NBA: 'basketball/nba', WNBA: 'basketball/wnba',
   CBB: 'basketball/mens-college-basketball', NHL: 'hockey/nhl', MLB: 'baseball/mlb' };
 const ctDay = d => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(d);
@@ -144,7 +144,7 @@ function buildCards(sp, latest, flags) {
     }
     const last = i + 12 >= rows.length || cards.length === 2;
     const coldTxt = last && coldSides.length ? 'Not counted (negative market ROI or cold last 30 days): ' + coldSides.slice(0, 3).map(c => c.txt).join('; ') : '';
-    cards.push({ brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with non-negative ${sp} market ROI and last-30 form, $${MIN_DOLLARS / 1000}K+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
+    cards.push({ brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with positive ${sp} market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
       sections: secs, legend: coldTxt || 'Big number = biggest bet vs that wallet’s usual size in this sport. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
   }
   return { cards, n: rows.length, data, cold: coldSides };
