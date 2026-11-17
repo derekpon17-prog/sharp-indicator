@@ -1,0 +1,210 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 5 new sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Wallets with positive ROI in that sport and market, $1K+ per side - SharpFlow snapshot 10:40am CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "bet": "Knicks ML",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": -138,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 14-6 NBA vs 17-9 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $2K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NBA ML: 9-2 (+56% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 9-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.8x their usual NBA bet",
+         "c": "blue"
+        },
+        {
+         "t": "1.0x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 1.8
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "bet": "Under 222.5",
+       "sub": "Pistons at Spurs - 7:10pm",
+       "price": 104,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 20-9 NBA vs 28-24 overall",
+         "c": "gold"
+        },
+        {
+         "t": "GREW $1K to $3.8K",
+         "c": "blue"
+        },
+        {
+         "t": "NBA total: 22-17 (+27% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 11-9",
+         "c": "grey"
+        },
+        {
+         "t": "0.9x their usual NBA bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.6x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "2 wallets",
+         "c": "blue"
+        },
+        {
+         "t": "top NBA wallet on the other side (14-6)",
+         "c": "red"
+        }
+       ],
+       "usual": 0.9
+      },
+      {
+       "bet": "Over 222.5",
+       "sub": "Pistons at Spurs - 7:10pm",
+       "price": -104,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 14-6 NBA vs 17-9 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $1K vs $3.8K",
+         "c": "orange"
+        },
+        {
+         "t": "NBA total: 4-2 (+45% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 4-2",
+         "c": "grey"
+        },
+        {
+         "t": "0.9x their usual NBA bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.5x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "top NBA wallet on the other side (20-9)",
+         "c": "red"
+        }
+       ],
+       "usual": 0.9
+      },
+      {
+       "bet": "Under 226.5",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": 101,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 14-6 NBA vs 17-9 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $1K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NBA total: 4-2 (+45% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 4-2",
+         "c": "grey"
+        },
+        {
+         "t": "0.9x their usual NBA bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.5x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 0.9
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 10:10PM CT",
+     "picks": [
+      {
+       "bet": "Lakers -7.5",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": -104,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 14-6 NBA vs 17-9 overall",
+         "c": "gold"
+        },
+        {
+         "t": "GREW $1.1K to $4.1K",
+         "c": "blue"
+        },
+        {
+         "t": "NBA spread: 1-2 (+41% ROI)",
+         "c": "orange"
+        },
+        {
+         "t": "only 3 bets here",
+         "c": "orange"
+        },
+        {
+         "t": "30d here 1-2",
+         "c": "grey"
+        },
+        {
+         "t": "2.7x their usual NBA bet",
+         "c": "gold"
+        },
+        {
+         "t": "1.5x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "2 wallets",
+         "c": "blue"
+        }
+       ],
+       "usual": 2.7
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Negative-ROI wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
