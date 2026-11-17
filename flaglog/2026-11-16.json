@@ -12,12 +12,13 @@
    "tags": [
     "STRONG_UNOPPOSED",
     "SIZED_UP",
-    "SIZED_15X"
+    "SIZED_15X",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.5,
-   "maxDollars": 42215,
+   "maxVsUsual": 6.4,
+   "maxDollars": 122962,
    "opposedSeen": false,
-   "snapshots": 25
+   "snapshots": 29
   },
   "Canadiens at Rangers|ML|Canadiens": {
    "sport": "NHL",
@@ -29,12 +30,13 @@
    "firstPrice": "-104",
    "tags": [
     "STRONG_UNOPPOSED",
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_15X"
    ],
-   "maxVsUsual": 1.1,
+   "maxVsUsual": 1.7,
    "maxDollars": 10290,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Tarleton State Texans at Drake Bulldogs|ML|Drake Bulldogs": {
    "sport": "CBB",
@@ -51,7 +53,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1904,
    "opposedSeen": false,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Chargers at Ravens|SPREAD|Ravens -2.5": {
    "sport": "NFL",
@@ -65,12 +67,13 @@
     "SIZED_2X",
     "STRONG_UNOPPOSED",
     "STRONG_VS_OTHER",
-    "STRONG_VS_STRONG"
+    "STRONG_VS_STRONG",
+    "SIZED_15X"
    ],
    "maxVsUsual": 2.8,
-   "maxDollars": 15951,
+   "maxDollars": 50540,
    "opposedSeen": true,
-   "snapshots": 15
+   "snapshots": 19
   },
   "Grizzlies at Wizards|SPREAD|Wizards +7.5": {
    "sport": "NBA",
@@ -97,12 +100,14 @@
    "firstSeenAt": "2026-11-16T14:12:01.980Z",
    "firstPrice": "-335",
    "tags": [
-    "SIZED_15X"
+    "SIZED_15X",
+    "SIZED_2X",
+    "SIZED_UP"
    ],
-   "maxVsUsual": 1.7,
-   "maxDollars": 1530,
+   "maxVsUsual": 2.4,
+   "maxDollars": 8444,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 13
   },
   "Bulls at Cavaliers|ML|Cavaliers": {
    "sport": "NBA",
@@ -114,12 +119,14 @@
    "firstPrice": "-317",
    "tags": [
     "SIZED_UP",
-    "SIZED_15X"
+    "SIZED_15X",
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.8,
-   "maxDollars": 4607,
+   "maxVsUsual": 6.2,
+   "maxDollars": 27165,
    "opposedSeen": false,
-   "snapshots": 17
+   "snapshots": 20
   },
   "76ers at Nets|TOTAL|Over 224.5": {
    "sport": "NBA",
@@ -131,12 +138,13 @@
    "firstPrice": "-104",
    "tags": [
     "STRONG_VS_STRONG",
-    "SIZED_15X"
+    "SIZED_15X",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 1.5,
    "maxDollars": 4821,
    "opposedSeen": true,
-   "snapshots": 16
+   "snapshots": 18
   },
   "Magic at Celtics|TOTAL|Over": {
    "sport": "NBA",
@@ -153,7 +161,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3268,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 13
   },
   "Trail Blazers at Timberwolves|TOTAL|Over 226.5": {
    "sport": "NBA",
@@ -185,7 +193,7 @@
    "maxVsUsual": 0.5,
    "maxDollars": 2279,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Abilene Christian Wildcats at Missouri State Bears|TOTAL|Over": {
    "sport": "CBB",
@@ -202,7 +210,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2565,
    "opposedSeen": false,
-   "snapshots": 16
+   "snapshots": 18
   },
   "76ers at Nets|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -250,7 +258,7 @@
    "maxVsUsual": 3.2,
    "maxDollars": 2280,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Magic at Celtics|ML|Magic": {
    "sport": "NBA",
@@ -266,7 +274,7 @@
    "maxVsUsual": 2.2,
    "maxDollars": 5855,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Chargers at Ravens|SPREAD|Ravens": {
    "sport": "NFL",
@@ -332,7 +340,7 @@
    "maxVsUsual": 0.3,
    "maxDollars": 3819,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Trail Blazers at Timberwolves|ML|Trail Blazers": {
    "sport": "NBA",
@@ -348,7 +356,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3195,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Suns at Nuggets|SPREAD|Nuggets -9.5": {
    "sport": "NBA",
@@ -364,7 +372,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Chargers at Ravens|SPREAD|Chargers": {
    "sport": "NFL",
@@ -381,7 +389,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 22908,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Rockets at Heat|TOTAL|Over 234.5": {
    "sport": "NBA",
@@ -415,6 +423,120 @@
    "maxDollars": 1201,
    "opposedSeen": true,
    "snapshots": 2
+  },
+  "Rockets at Heat|TOTAL|Over": {
+   "sport": "NBA",
+   "matchup": "Rockets at Heat",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "firstSeenAt": "2026-11-17T00:10:19.370Z",
+   "firstPrice": "-106",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.6,
+   "maxDollars": 25700,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Grizzlies at Wizards|TOTAL|Under 231.5": {
+   "sport": "NBA",
+   "matchup": "Grizzlies at Wizards",
+   "market": "TOTAL",
+   "pick": "Under 231.5",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-17T00:10:19.370Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 4900,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Rockets at Heat|ML|Rockets": {
+   "sport": "NBA",
+   "matchup": "Rockets at Heat",
+   "market": "ML",
+   "pick": "Rockets",
+   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "firstSeenAt": "2026-11-17T00:10:19.370Z",
+   "firstPrice": "-127",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 22.9,
+   "maxDollars": 20000,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Grizzlies at Wizards|SPREAD|Wizards": {
+   "sport": "NBA",
+   "matchup": "Grizzlies at Wizards",
+   "market": "SPREAD",
+   "pick": "Wizards",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-17T00:10:19.370Z",
+   "firstPrice": "-175",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 1593,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "76ers at Nets|ML|76ers": {
+   "sport": "NBA",
+   "matchup": "76ers at Nets",
+   "market": "ML",
+   "pick": "76ers",
+   "kickoffEt": "Mon, Nov 16, 7:40 PM",
+   "firstSeenAt": "2026-11-17T00:10:19.370Z",
+   "firstPrice": "-205",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 8090,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Grizzlies at Wizards|ML|Wizards": {
+   "sport": "NBA",
+   "matchup": "Grizzlies at Wizards",
+   "market": "ML",
+   "pick": "Wizards",
+   "kickoffEt": "Mon, Nov 16, 7:10 PM",
+   "firstSeenAt": "2026-11-17T00:10:19.370Z",
+   "firstPrice": "+144",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 4100,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Warriors at Pelicans|ML|Pelicans": {
+   "sport": "NBA",
+   "matchup": "Warriors at Pelicans",
+   "market": "ML",
+   "pick": "Pelicans",
+   "kickoffEt": "Mon, Nov 16, 8:10 PM",
+   "firstSeenAt": "2026-11-17T00:10:19.370Z",
+   "firstPrice": "+148",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 3608,
+   "opposedSeen": true,
+   "snapshots": 1
   }
  }
 }
