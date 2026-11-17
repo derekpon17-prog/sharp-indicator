@@ -1,0 +1,93 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 6:00pm CT** - 2 sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Wallets with positive NHL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:39pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:10PM CT",
+     "picks": [
+      {
+       "bet": "★ Kings ML",
+       "sub": "Kings at Bruins - 6:10pm",
+       "price": 144,
+       "chips": [
+        {
+         "t": "SHARP $54K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NHL ML: 3-2 (+35% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 3-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.4x their usual NHL bet",
+         "c": "grey"
+        },
+        {
+         "t": "2.3x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "NHL sharps cold lately - higher floor",
+         "c": "orange"
+        }
+       ],
+       "usual": 1.4
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:40PM CT",
+     "picks": [
+      {
+       "bet": "Over 5.5",
+       "sub": "Capitals at Lightning - 6:40pm",
+       "price": -161,
+       "chips": [
+        {
+         "t": "TOP NHL WALLET: 19-9 NHL vs 39-26 overall",
+         "c": "gold"
+        },
+        {
+         "t": "SHARP $1.9K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NHL total: 18-9 (+21% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 10-5",
+         "c": "grey"
+        },
+        {
+         "t": "1.2x their usual NHL bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.6x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "NHL sharps cold lately - higher floor",
+         "c": "orange"
+        }
+       ],
+       "usual": 1.2
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
