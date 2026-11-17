@@ -1,0 +1,97 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Non-negative market ROI and last-30 form, $1K+ per side (more for NHL and spreads) - SharpFlow snapshot 2:46pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 45.5",
+       "sub": "Miami (OH) at Kent State - 6:00pm",
+       "price": -108,
+       "chips": [
+        {
+         "t": "TOP CFB WALLET: 21-10 CFB vs 57-60 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $10K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "CFB total: 2-2 (+54% ROI)",
+         "c": "orange"
+        },
+        {
+         "t": "only 4 bets here",
+         "c": "orange"
+        },
+        {
+         "t": "30d here 2-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.0x their usual CFB bet",
+         "c": "grey"
+        },
+        {
+         "t": "2.1x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 1
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "bet": "Pistons +9.5",
+       "sub": "Pistons at Spurs - 7:10pm",
+       "price": -100,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 71-55 NBA vs 408-403 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $1.8K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NBA spread: 20-18 (+7% ROI)",
+         "c": "grey"
+        },
+        {
+         "t": "30d here 16-8",
+         "c": "grey"
+        },
+        {
+         "t": "0.6x their usual NBA bet",
+         "c": "grey"
+        },
+        {
+         "t": "0.4x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "spreads: lower confidence",
+         "c": "orange"
+        }
+       ],
+       "usual": 0.6
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
