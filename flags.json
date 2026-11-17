@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T17:38:23.787Z",
+ "scannedAt": "2026-11-17T18:39:48.116Z",
  "sides": [
   {
    "tail": true,
@@ -57,28 +57,55 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Knicks at Raptors",
+   "sport": "NHL",
+   "matchup": "Kings at Bruins",
    "market": "ML",
-   "pick": "Knicks",
-   "kickoffEt": "Tue, Nov 17, 7:40 PM",
-   "dollars": 4000,
-   "oppDollars": 1601,
-   "wallets": 2,
-   "maxVsUsual": 1.8,
-   "price": "-138",
-   "size": "1x",
-   "mktRecord": "3-3",
-   "mktRoi": -18.4,
-   "l30Roi": 13.6,
+   "pick": "Kings",
+   "kickoffEt": "Tue, Nov 17, 7:10 PM",
+   "dollars": 28813,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.8,
+   "price": "+144",
+   "size": "0.5x",
+   "mktRecord": "3-2",
+   "mktRoi": 34.7,
+   "l30Roi": 41.4,
    "contested": false,
-   "sfPoints": 25,
+   "sfPoints": 23,
    "parts": {
-    "money": 8,
+    "money": 16,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "Eastern Michigan at Western Michigan",
+   "market": "SPREAD",
+   "pick": "Western Michigan -13.5",
+   "kickoffEt": "Tue, Nov 17, 6:00 PM",
+   "dollars": 6931,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.7,
+   "price": "-137",
+   "size": "1.5x and up",
+   "mktRecord": "29-13",
+   "mktRoi": 23,
+   "l30Roi": 17.6,
+   "contested": false,
+   "sfPoints": 22,
+   "parts": {
+    "money": 12,
     "sizing": 7,
-    "quality": 6,
-    "pooled": 4,
-    "unopposed": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
     "contested": 0
    }
   },
@@ -107,6 +134,60 @@
     "pooled": 4,
     "unopposed": 0,
     "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Knicks at Raptors",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Tue, Nov 17, 7:40 PM",
+   "dollars": 4000,
+   "oppDollars": 3101,
+   "wallets": 2,
+   "maxVsUsual": 1.8,
+   "price": "-138",
+   "size": "1x",
+   "mktRecord": "3-3",
+   "mktRoi": -18.4,
+   "l30Roi": 13.6,
+   "contested": true,
+   "sfPoints": 17,
+   "parts": {
+    "money": 8,
+    "sizing": 7,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Knicks at Raptors",
+   "market": "ML",
+   "pick": "Raptors",
+   "kickoffEt": "Tue, Nov 17, 7:40 PM",
+   "dollars": 3101,
+   "oppDollars": 4000,
+   "wallets": 2,
+   "maxVsUsual": 1.9,
+   "price": "+146",
+   "size": "0.5x",
+   "mktRecord": "29-20",
+   "mktRoi": 16.6,
+   "l30Roi": 27.4,
+   "contested": true,
+   "sfPoints": 15,
+   "parts": {
+    "money": 8,
+    "sizing": 7,
+    "quality": 4,
+    "pooled": 4,
+    "unopposed": 0,
+    "contested": -8
    }
   },
   {
@@ -301,60 +382,6 @@
   {
    "tail": false,
    "sport": "NBA",
-   "matchup": "Warriors at Mavericks",
-   "market": "ML",
-   "pick": "Mavericks",
-   "kickoffEt": null,
-   "dollars": 1000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "-194",
-   "size": "0.5x",
-   "mktRecord": "3-3",
-   "mktRoi": -18.4,
-   "l30Roi": 13.6,
-   "contested": false,
-   "sfPoints": 7,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Knicks at Raptors",
-   "market": "ML",
-   "pick": "Raptors",
-   "kickoffEt": "Tue, Nov 17, 7:40 PM",
-   "dollars": 1601,
-   "oppDollars": 4000,
-   "wallets": 1,
-   "maxVsUsual": 0.5,
-   "price": "+146",
-   "size": "0.5x",
-   "mktRecord": "29-20",
-   "mktRoi": 16.6,
-   "l30Roi": 27.4,
-   "contested": true,
-   "sfPoints": 0,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
    "matchup": "Pistons at Spurs",
    "market": "TOTAL",
    "pick": "Over 222.5",
@@ -381,6 +408,22 @@
   }
  ],
  "flags": [
+  {
+   "matchup": "Kings at Bruins",
+   "market": "ML",
+   "pick": "Kings",
+   "kickoffEt": "Tue, Nov 17, 7:10 PM",
+   "sport": "NHL",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 28813,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "4-2|93085|3-2"
+   ],
+   "bestPrice": "+144",
+   "maxVsUsual": 0.8
+  },
   {
    "matchup": "Knicks at Raptors",
    "market": "SPREAD",
@@ -434,15 +477,31 @@
    "pick": "Knicks",
    "kickoffEt": "Tue, Nov 17, 7:40 PM",
    "sport": "NBA",
-   "type": "STRONG_VS_OTHER",
+   "type": "STRONG_VS_STRONG",
    "strongDollars": 2000,
-   "oppDollars": 1601,
+   "oppDollars": 3101,
    "oppWeakDollars": 0,
    "fp": [
     "14-6|11488|9-2"
    ],
    "bestPrice": "-138",
    "maxVsUsual": 1.8
+  },
+  {
+   "matchup": "Knicks at Raptors",
+   "market": "ML",
+   "pick": "Raptors",
+   "kickoffEt": "Tue, Nov 17, 7:40 PM",
+   "sport": "NBA",
+   "type": "STRONG_VS_STRONG",
+   "strongDollars": 1500,
+   "oppDollars": 4000,
+   "oppWeakDollars": 2000,
+   "fp": [
+    "17-7|8011|7-1"
+   ],
+   "bestPrice": "+156",
+   "maxVsUsual": 1.9
   },
   {
    "matchup": "Pistons at Spurs",
@@ -515,6 +574,23 @@
   {
    "matchup": "Knicks at Raptors",
    "market": "ML",
+   "pick": "Raptors",
+   "kickoffEt": "Tue, Nov 17, 7:40 PM",
+   "sport": "NBA",
+   "dollars": 1500,
+   "price": "+156",
+   "vsUsual": 1.9,
+   "size": "1.5x and up",
+   "form": "L10 8-2",
+   "l30Roi": 42.3,
+   "mktRecord": "7-1",
+   "mktRoi": 75.3,
+   "opposed": "contested",
+   "fp": "17-7|8011|7-1"
+  },
+  {
+   "matchup": "Knicks at Raptors",
+   "market": "ML",
    "pick": "Knicks",
    "kickoffEt": "Tue, Nov 17, 7:40 PM",
    "sport": "NBA",
@@ -528,6 +604,23 @@
    "mktRoi": 56.2,
    "opposed": "contested",
    "fp": "14-6|11488|9-2"
+  },
+  {
+   "matchup": "Eastern Michigan at Western Michigan",
+   "market": "SPREAD",
+   "pick": "Western Michigan -13.5",
+   "kickoffEt": "Tue, Nov 17, 6:00 PM",
+   "sport": "CFB",
+   "dollars": 6931,
+   "price": "-137",
+   "vsUsual": 1.7,
+   "size": "1.5x and up",
+   "form": "L10 6-4",
+   "l30Roi": 17.6,
+   "mktRecord": "29-13",
+   "mktRoi": 23,
+   "opposed": "unopposed",
+   "fp": "45-24|50215|29-13"
   },
   {
    "matchup": "Knicks at Raptors",

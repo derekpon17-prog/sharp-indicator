@@ -1,8 +1,52 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T17:38:23.787Z",
+ "scannedAt": "2026-11-17T18:39:48.116Z",
  "sports": {
+  "NHL": [
+   {
+    "id": "d64855",
+    "gap": 4.3,
+    "overall": "49-47",
+    "sport": "26-21",
+    "returnPct": 4.2,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Kings at Bruins",
+      "market": "ML",
+      "pick": "Kings",
+      "line": null,
+      "price": "+144",
+      "dollars": 615,
+      "vsUsual": 0.8,
+      "vsUsualAll": 0.3
+     }
+    ]
+   }
+  ],
   "NBA": [
+   {
+    "id": "cbff8c",
+    "gap": 17.4,
+    "overall": "47-41",
+    "sport": "17-7",
+    "returnPct": 42.3,
+    "last10": "8-2",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Knicks at Raptors",
+      "market": "ML",
+      "pick": "Raptors",
+      "line": null,
+      "price": "+156",
+      "dollars": 1500,
+      "vsUsual": 1.9,
+      "vsUsualAll": 0.6
+     }
+    ]
+   },
    {
     "id": "10395c",
     "gap": 15.1,
@@ -33,21 +77,21 @@
       "vsUsualAll": 5.9
      },
      {
-      "matchup": "Jazz at Clippers",
-      "market": "ML",
-      "pick": "Jazz",
-      "line": null,
-      "price": "+213",
-      "dollars": 1000,
-      "vsUsual": 0.6,
-      "vsUsualAll": 1
-     },
-     {
       "matchup": "Pistons at Spurs",
       "market": "TOTAL",
       "pick": "Under 222.5",
       "line": 222.5,
       "price": "-104",
+      "dollars": 1000,
+      "vsUsual": 0.6,
+      "vsUsualAll": 1
+     },
+     {
+      "matchup": "Jazz at Clippers",
+      "market": "ML",
+      "pick": "Jazz",
+      "line": null,
+      "price": "+213",
       "dollars": 1000,
       "vsUsual": 0.6,
       "vsUsualAll": 1
@@ -93,6 +137,16 @@
     "last10": "5-5",
     "bettingBig": true,
     "tonight": [
+     {
+      "matchup": "Knicks at Raptors",
+      "market": "ML",
+      "pick": "Knicks",
+      "line": null,
+      "price": "-155",
+      "dollars": 576,
+      "vsUsual": 1.4,
+      "vsUsualAll": 0.4
+     },
      {
       "matchup": "Knicks at Raptors",
       "market": "ML",
@@ -206,55 +260,69 @@
       "vsUsualAll": 0.5
      }
     ]
+   }
+  ],
+  "CFB": [
+   {
+    "id": "3a72c1",
+    "gap": 19,
+    "overall": "57-60",
+    "sport": "21-10",
+    "returnPct": 47.6,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Miami (OH) at Kent State",
+      "market": "TOTAL",
+      "pick": "Under 45.5",
+      "line": 45.5,
+      "price": "-108",
+      "dollars": 608,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.1
+     }
+    ]
    },
    {
-    "id": "a87a20",
-    "gap": 4.6,
-    "overall": "17-9",
-    "sport": "14-6",
-    "returnPct": 51.4,
-    "last10": "9-1",
+    "id": "bc44b0",
+    "gap": 5.7,
+    "overall": "254-219",
+    "sport": "38-26",
+    "returnPct": 21.5,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Colorado State at Fresno State",
+      "market": "TOTAL",
+      "pick": "Over 65.5",
+      "line": 65.5,
+      "price": "+112",
+      "dollars": 810,
+      "vsUsual": 0.2,
+      "vsUsualAll": 1
+     }
+    ]
+   },
+   {
+    "id": "858392",
+    "gap": 2.6,
+    "overall": "62-37",
+    "sport": "45-24",
+    "returnPct": 17.6,
+    "last10": "6-4",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Knicks at Raptors",
-      "market": "ML",
-      "pick": "Knicks",
-      "line": null,
-      "price": "-138",
-      "dollars": 2000,
-      "vsUsual": 1.8,
-      "vsUsualAll": 1
-     },
-     {
-      "matchup": "Hornets at Lakers",
+      "matchup": "Eastern Michigan at Western Michigan",
       "market": "SPREAD",
-      "pick": "Lakers -7.5",
-      "line": -7.5,
-      "price": "-104",
-      "dollars": 3000,
-      "vsUsual": 2.7,
-      "vsUsualAll": 1.5
-     },
-     {
-      "matchup": "Pistons at Spurs",
-      "market": "TOTAL",
-      "pick": "Over 222.5",
-      "line": 222.5,
-      "price": "-104",
-      "dollars": 1000,
-      "vsUsual": 0.9,
-      "vsUsualAll": 0.5
-     },
-     {
-      "matchup": "Trail Blazers at Timberwolves",
-      "market": "TOTAL",
-      "pick": "Under 226.5",
-      "line": 226.5,
-      "price": "+101",
-      "dollars": 1000,
-      "vsUsual": 0.9,
-      "vsUsualAll": 0.5
+      "pick": "Western Michigan -13.5",
+      "line": -13.5,
+      "price": "-137",
+      "dollars": 6931,
+      "vsUsual": 1.7,
+      "vsUsualAll": 2.3
      }
     ]
    }
