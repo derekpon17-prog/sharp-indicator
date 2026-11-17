@@ -1,0 +1,56 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:38pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "bet": "Knicks ML",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": -138,
+       "chips": [
+        {
+         "t": "GREW $2K to $3.3K",
+         "c": "orange"
+        },
+        {
+         "t": "NBA ML: 9-2 (+56% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 9-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.8x their usual NBA bet - sized up while hot",
+         "c": "orange"
+        },
+        {
+         "t": "1.0x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "2 wallets (same-side, not independent)",
+         "c": "grey"
+        },
+        {
+         "t": "top NBA wallet on the other side (17-7)",
+         "c": "red"
+        }
+       ],
+       "usual": 1.8
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
