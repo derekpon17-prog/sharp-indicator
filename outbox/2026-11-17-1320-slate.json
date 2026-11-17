@@ -1,0 +1,16 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · AFTERNOON · Tue Nov 17** · games 3:00pm to 5:59pm CT",
+ "slate": {
+  "title": "Afternoon plays",
+  "stamp": "TUE NOV 17 · 1:35PM",
+  "sources": "Pinnacle 1:27pm CT - Vegas 1:29pm CT (CBB only; CFB tab members-only) - SharpFlow 12:39pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "Afternoon window: games starting 3:00 to 5:59pm CT. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {"sport": "NCAAB","game": "MRST@ARMY","market": "SPREAD","side": "ARMY","line": -1.5,"price": -110,"bet": "ARMY -1.5","matchup": "NCAAB - MRST @ ARMY - 5:00pm CT","pin_tier": "Strong","pin_status": "Stable","first_seen": "13:30","vegas_strength": null,"buckets": ["PIN_STRONG"]},
+   {"sport": "NCAAB","game": "MRST@ARMY","market": "ML","side": "ARMY","line": null,"price": -128,"bet": "ARMY ML","matchup": "NCAAB - MRST @ ARMY - 5:00pm CT","pin_tier": "Strong","pin_status": "Stable","first_seen": "13:30","vegas_strength": null,"buckets": ["PIN_STRONG"]},
+   {"sport": "CFB","game": "EMU@WMU","market": "SPREAD","side": "WMU","line": -13.5,"price": -137,"bet": "Western Michigan -13.5","matchup": "CFB - EMU @ WMU - 5:00pm CT","first_seen": "13:30","buckets": ["SF_SIDE"],"sf_dollars": 6931,"sf_opp": 0,"sf_max_vs_usual": 1.7,"sf_wallets": 1,"sf_first_price": -137,"sf_mkt_roi": 23,"sf_mkt_rec": "29-13","sf_all_ratio": 2.34}
+  ]
+ }
+}
