@@ -49,7 +49,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 5999,
    "opposedSeen": false,
-   "snapshots": 42
+   "snapshots": 46
   },
   "Illinois Fighting Illini at Duke Blue Devils|ML|Duke Blue Devils": {
    "sport": "CBB",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 1522,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Knicks at Raptors|ML|Knicks": {
    "sport": "NBA",
@@ -85,7 +85,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 34
+   "snapshots": 38
   },
   "Trail Blazers at Timberwolves|ML|Trail Blazers": {
    "sport": "NBA",
@@ -101,7 +101,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Pistons at Spurs|TOTAL|Under 222.5": {
    "sport": "NBA",
@@ -118,7 +118,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 2799,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Pistons at Spurs|TOTAL|Over 222.5": {
    "sport": "NBA",
@@ -134,7 +134,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1000,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Trail Blazers at Timberwolves|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -151,7 +151,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1000,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Knicks at Raptors|SPREAD|Raptors +5.5": {
    "sport": "NBA",
@@ -168,7 +168,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 27436,
    "opposedSeen": false,
-   "snapshots": 16
+   "snapshots": 18
   },
   "Kings at Bruins|ML|Kings": {
    "sport": "NHL",
@@ -185,7 +185,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 53563,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 11
   },
   "Knicks at Raptors|ML|Raptors": {
    "sport": "NBA",
@@ -203,7 +203,7 @@
    "maxVsUsual": 2.5,
    "maxDollars": 1500,
    "opposedSeen": true,
-   "snapshots": 15
+   "snapshots": 18
   },
   "Eastern Michigan at Western Michigan|SPREAD|Western Michigan -13.5": {
    "sport": "CFB",
@@ -220,7 +220,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7756,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 13
   },
   "Trail Blazers at Timberwolves|TOTAL|Over 226.5": {
    "sport": "NBA",
@@ -237,7 +237,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 1711,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Miami (OH) at Kent State|TOTAL|Under 45.5": {
    "sport": "CFB",
@@ -253,7 +253,7 @@
    "maxVsUsual": 1,
    "maxDollars": 10400,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Colts at Texans|ML|Texans": {
    "sport": "NFL",
@@ -269,7 +269,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Trail Blazers at Timberwolves|SPREAD|Trail Blazers": {
    "sport": "NBA",
@@ -285,7 +285,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 4941,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Capitals at Lightning|TOTAL|Over 5.5": {
    "sport": "NHL",
@@ -302,7 +302,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 1868,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   }
  }
 }
