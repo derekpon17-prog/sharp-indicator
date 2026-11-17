@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T15:30:22.363Z",
+ "scannedAt": "2026-11-17T16:40:58.893Z",
  "sports": {
   "NBA": [
    {
@@ -133,6 +133,16 @@
       "dollars": 1799,
       "vsUsual": 0.6,
       "vsUsualAll": 0.4
+     },
+     {
+      "matchup": "Pistons at Spurs",
+      "market": "TOTAL",
+      "pick": "Under 222.5",
+      "line": 222.5,
+      "price": "+104",
+      "dollars": 2799,
+      "vsUsual": 0.9,
+      "vsUsualAll": 0.6
      }
     ]
    },
@@ -158,13 +168,13 @@
     ]
    },
    {
-    "id": "cc63b8",
-    "gap": 4,
-    "overall": "162-132",
-    "sport": "26-18",
-    "returnPct": 3.1,
-    "last10": "5-5",
-    "bettingBig": false,
+    "id": "a87a20",
+    "gap": 4.6,
+    "overall": "17-9",
+    "sport": "14-6",
+    "returnPct": 51.4,
+    "last10": "9-1",
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Hornets at Lakers",
@@ -172,9 +182,39 @@
       "pick": "Lakers -7.5",
       "line": -7.5,
       "price": "-104",
-      "dollars": 1133,
-      "vsUsual": 1.1,
-      "vsUsualAll": 0.9
+      "dollars": 3000,
+      "vsUsual": 2.7,
+      "vsUsualAll": 1.5
+     },
+     {
+      "matchup": "Pistons at Spurs",
+      "market": "TOTAL",
+      "pick": "Over 222.5",
+      "line": 222.5,
+      "price": "-104",
+      "dollars": 1000,
+      "vsUsual": 0.9,
+      "vsUsualAll": 0.5
+     },
+     {
+      "matchup": "Knicks at Raptors",
+      "market": "ML",
+      "pick": "Knicks",
+      "line": null,
+      "price": "-138",
+      "dollars": 2000,
+      "vsUsual": 1.8,
+      "vsUsualAll": 1
+     },
+     {
+      "matchup": "Trail Blazers at Timberwolves",
+      "market": "TOTAL",
+      "pick": "Under 226.5",
+      "line": 226.5,
+      "price": "+101",
+      "dollars": 1000,
+      "vsUsual": 0.9,
+      "vsUsualAll": 0.5
      }
     ]
    }
@@ -198,6 +238,27 @@
       "dollars": 847,
       "vsUsual": 1.2,
       "vsUsualAll": 1
+     }
+    ]
+   },
+   {
+    "id": "ef68ca",
+    "gap": 12.6,
+    "overall": "71-73",
+    "sport": "13-8",
+    "returnPct": 41,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Fordham Rams at Manhattan Jaspers",
+      "market": "TOTAL",
+      "pick": "Over 142.5",
+      "line": 142.5,
+      "price": "-117",
+      "dollars": 773,
+      "vsUsual": 1.2,
+      "vsUsualAll": 0.7
      }
     ]
    },
