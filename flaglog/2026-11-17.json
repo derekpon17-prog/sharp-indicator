@@ -49,7 +49,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 5999,
    "opposedSeen": false,
-   "snapshots": 18
+   "snapshots": 22
   },
   "Illinois Fighting Illini at Duke Blue Devils|ML|Duke Blue Devils": {
    "sport": "CBB",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 1522,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Knicks at Raptors|ML|Knicks": {
    "sport": "NBA",
@@ -85,7 +85,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 15
   },
   "Trail Blazers at Timberwolves|ML|Trail Blazers": {
    "sport": "NBA",
@@ -100,8 +100,8 @@
    ],
    "maxVsUsual": 1.2,
    "maxDollars": 2000,
-   "opposedSeen": false,
-   "snapshots": 6
+   "opposedSeen": true,
+   "snapshots": 7
   },
   "Pistons at Spurs|TOTAL|Under 222.5": {
    "sport": "NBA",
@@ -112,12 +112,13 @@
    "firstSeenAt": "2026-11-17T16:54:57.907Z",
    "firstPrice": "+104",
    "tags": [
-    "STRONG_VS_STRONG"
+    "STRONG_VS_STRONG",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 0.9,
    "maxDollars": 2799,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Pistons at Spurs|TOTAL|Over 222.5": {
    "sport": "NBA",
@@ -144,12 +145,13 @@
    "firstSeenAt": "2026-11-17T16:54:57.907Z",
    "firstPrice": "+101",
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "STRONG_VS_STRONG"
    ],
    "maxVsUsual": 0.9,
    "maxDollars": 1000,
-   "opposedSeen": false,
-   "snapshots": 3
+   "opposedSeen": true,
+   "snapshots": 4
   },
   "Knicks at Raptors|SPREAD|Raptors +5.5": {
    "sport": "NBA",
@@ -166,7 +168,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 27436,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Kings at Bruins|ML|Kings": {
    "sport": "NHL",
@@ -179,10 +181,10 @@
    "tags": [
     "STRONG_UNOPPOSED"
    ],
-   "maxVsUsual": 0.8,
-   "maxDollars": 28813,
+   "maxVsUsual": 0.9,
+   "maxDollars": 33456,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Knicks at Raptors|ML|Raptors": {
    "sport": "NBA",
@@ -199,7 +201,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 1500,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Eastern Michigan at Western Michigan|SPREAD|Western Michigan -13.5": {
    "sport": "CFB",
@@ -215,6 +217,22 @@
    "maxVsUsual": 1.7,
    "maxDollars": 6931,
    "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Trail Blazers at Timberwolves|TOTAL|Over 226.5": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "TOTAL",
+   "pick": "Over 226.5",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "firstSeenAt": "2026-11-17T19:54:40.955Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 1711,
+   "opposedSeen": true,
    "snapshots": 1
   }
  }

@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-17T18:39:48.116Z",
+ "scannedAt": "2026-11-17T19:40:52.120Z",
  "sides": [
   {
    "tail": true,
@@ -56,25 +56,25 @@
    }
   },
   {
-   "tail": false,
+   "tail": true,
    "sport": "NHL",
    "matchup": "Kings at Bruins",
    "market": "ML",
    "pick": "Kings",
    "kickoffEt": "Tue, Nov 17, 7:10 PM",
-   "dollars": 28813,
+   "dollars": 33456,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 0.8,
+   "maxVsUsual": 0.9,
    "price": "+144",
    "size": "0.5x",
    "mktRecord": "3-2",
    "mktRoi": 34.7,
    "l30Roi": 41.4,
    "contested": false,
-   "sfPoints": 23,
+   "sfPoints": 27,
    "parts": {
-    "money": 16,
+    "money": 20,
     "sizing": 0,
     "quality": 4,
     "pooled": 0,
@@ -117,7 +117,7 @@
    "pick": "Under 222.5",
    "kickoffEt": "Tue, Nov 17, 8:10 PM",
    "dollars": 3799,
-   "oppDollars": 1000,
+   "oppDollars": 0,
    "wallets": 2,
    "maxVsUsual": 0.9,
    "price": "+104",
@@ -126,13 +126,13 @@
    "mktRoi": 26.7,
    "l30Roi": 27.4,
    "contested": false,
-   "sfPoints": 18,
+   "sfPoints": 21,
    "parts": {
     "money": 8,
     "sizing": 0,
     "quality": 6,
     "pooled": 4,
-    "unopposed": 0,
+    "unopposed": 3,
     "contested": 0
    }
   },
@@ -274,33 +274,6 @@
   {
    "tail": false,
    "sport": "NBA",
-   "matchup": "Trail Blazers at Timberwolves",
-   "market": "TOTAL",
-   "pick": "Under 226.5",
-   "kickoffEt": "Tue, Nov 17, 8:10 PM",
-   "dollars": 1000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.9,
-   "price": "+101",
-   "size": "0.5x",
-   "mktRecord": "4-2",
-   "mktRoi": 44.5,
-   "l30Roi": 51.4,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
    "matchup": "Pistons at Spurs",
    "market": "SPREAD",
    "pick": "Pistons +9.5",
@@ -328,69 +301,42 @@
   {
    "tail": false,
    "sport": "NBA",
-   "matchup": "Jazz at Clippers",
-   "market": "ML",
-   "pick": "Jazz",
-   "kickoffEt": "Tue, Nov 17, 10:40 PM",
-   "dollars": 1000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "+213",
-   "size": "0.5x",
-   "mktRecord": "3-3",
-   "mktRoi": -18.4,
-   "l30Roi": 13.6,
-   "contested": false,
-   "sfPoints": 7,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "76ers at Magic",
-   "market": "ML",
-   "pick": "76ers",
-   "kickoffEt": null,
-   "dollars": 1000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "-144",
-   "size": "0.5x",
-   "mktRecord": "3-3",
-   "mktRoi": -18.4,
-   "l30Roi": 13.6,
-   "contested": false,
-   "sfPoints": 7,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Pistons at Spurs",
+   "matchup": "Trail Blazers at Timberwolves",
    "market": "TOTAL",
-   "pick": "Over 222.5",
+   "pick": "Over 226.5",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "dollars": 1711,
+   "oppDollars": 1000,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "-100",
+   "size": "0.5x",
+   "mktRecord": "22-17",
+   "mktRoi": 26.7,
+   "l30Roi": 27.4,
+   "contested": true,
+   "sfPoints": 0,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "TOTAL",
+   "pick": "Under 226.5",
    "kickoffEt": "Tue, Nov 17, 8:10 PM",
    "dollars": 1000,
-   "oppDollars": 3799,
+   "oppDollars": 1711,
    "wallets": 1,
    "maxVsUsual": 0.9,
-   "price": "-104",
+   "price": "+101",
    "size": "0.5x",
    "mktRecord": "4-2",
    "mktRoi": 44.5,
@@ -415,14 +361,14 @@
    "kickoffEt": "Tue, Nov 17, 7:10 PM",
    "sport": "NHL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 28813,
+   "strongDollars": 33456,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
     "4-2|93085|3-2"
    ],
    "bestPrice": "+144",
-   "maxVsUsual": 0.8
+   "maxVsUsual": 0.9
   },
   {
    "matchup": "Knicks at Raptors",
@@ -461,9 +407,9 @@
    "pick": "Under 222.5",
    "kickoffEt": "Tue, Nov 17, 8:10 PM",
    "sport": "NBA",
-   "type": "STRONG_VS_STRONG",
+   "type": "STRONG_UNOPPOSED",
    "strongDollars": 2799,
-   "oppDollars": 1000,
+   "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
     "41-27|51398|22-17"
@@ -488,6 +434,22 @@
    "maxVsUsual": 1.8
   },
   {
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "TOTAL",
+   "pick": "Over 226.5",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_VS_STRONG",
+   "strongDollars": 1711,
+   "oppDollars": 1000,
+   "oppWeakDollars": 0,
+   "fp": [
+    "41-27|51398|22-17"
+   ],
+   "bestPrice": "-100",
+   "maxVsUsual": 0.6
+  },
+  {
    "matchup": "Knicks at Raptors",
    "market": "ML",
    "pick": "Raptors",
@@ -504,30 +466,14 @@
    "maxVsUsual": 1.9
   },
   {
-   "matchup": "Pistons at Spurs",
-   "market": "TOTAL",
-   "pick": "Over 222.5",
-   "kickoffEt": "Tue, Nov 17, 8:10 PM",
-   "sport": "NBA",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 1000,
-   "oppDollars": 3799,
-   "oppWeakDollars": 0,
-   "fp": [
-    "14-6|11488|4-2"
-   ],
-   "bestPrice": "-104",
-   "maxVsUsual": 0.9
-  },
-  {
    "matchup": "Trail Blazers at Timberwolves",
    "market": "TOTAL",
    "pick": "Under 226.5",
    "kickoffEt": "Tue, Nov 17, 8:10 PM",
    "sport": "NBA",
-   "type": "STRONG_UNOPPOSED",
+   "type": "STRONG_VS_STRONG",
    "strongDollars": 1000,
-   "oppDollars": 0,
+   "oppDollars": 1711,
    "oppWeakDollars": 0,
    "fp": [
     "14-6|11488|4-2"
@@ -686,7 +632,7 @@
    "l30Roi": 13.6,
    "mktRecord": "3-3",
    "mktRoi": -18.4,
-   "opposed": "unopposed",
+   "opposed": "contested",
    "fp": "20-9|6646|3-3"
   },
   {
