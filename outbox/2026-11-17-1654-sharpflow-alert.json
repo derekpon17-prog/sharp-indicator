@@ -1,0 +1,138 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:39pm CT",
+   "sections": [
+    {
+     "heading": "CBB - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 150.5",
+       "sub": "Rider Broncs at Miami Hurricanes - 6:00pm",
+       "price": -112,
+       "chips": [
+        {
+         "t": "TOP CBB WALLET: 13-5 CBB vs 254-219 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $847 vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "CBB total: 10-2 (+61% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 10-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.2x their usual CBB bet",
+         "c": "grey"
+        },
+        {
+         "t": "1.0x their all-sport usual",
+         "c": "grey"
+        }
+       ],
+       "usual": 1.2
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:10PM CT",
+     "picks": [
+      {
+       "bet": "Kings ML",
+       "sub": "Kings at Bruins - 6:10pm",
+       "price": 144,
+       "chips": [
+        {
+         "t": "GREW $34K to $54K",
+         "c": "blue"
+        },
+        {
+         "t": "NHL ML: 3-2 (+35% ROI)",
+         "c": "green"
+        },
+        {
+         "t": "30d here 3-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.4x their usual NHL bet",
+         "c": "grey"
+        },
+        {
+         "t": "2.3x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "NHL sharps cold lately - higher floor",
+         "c": "orange"
+        }
+       ],
+       "usual": 1.4
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "bet": "Trail Blazers +4.5",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": -122,
+       "chips": [
+        {
+         "t": "TOP NBA WALLET: 71-55 NBA vs 408-403 overall",
+         "c": "gold"
+        },
+        {
+         "t": "NEW $5.9K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "NBA spread: 1-1 (+94% ROI)",
+         "c": "orange"
+        },
+        {
+         "t": "only 2 bets here",
+         "c": "orange"
+        },
+        {
+         "t": "30d here 1-1",
+         "c": "grey"
+        },
+        {
+         "t": "0.6x their usual NBA bet",
+         "c": "grey"
+        },
+        {
+         "t": "2.6x their all-sport usual",
+         "c": "grey"
+        },
+        {
+         "t": "2 wallets (same-side, not independent)",
+         "c": "grey"
+        },
+        {
+         "t": "spreads: lower confidence",
+         "c": "orange"
+        }
+       ],
+       "usual": 0.6
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
