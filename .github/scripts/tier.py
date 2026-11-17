@@ -42,7 +42,18 @@ def has_pin(r):
 def sf_cold(r):
     """Derek, Nov 16: wallet money from a wallet with negative all-time ROI in THIS sport and market does not count."""
     roi = r.get("sf_mkt_roi")
-    return roi is not None and float(roi) < 0
+    l30 = r.get("sf_l30_roi")  # Nov 17 form gate: a wallet cold over the last 30 days does not count either
+    return (roi is not None and float(roi) < 0) or (l30 is not None and float(l30) < 0)
+
+def mkt_bets(r):
+    import re
+    m = re.match(r"(\d+)-(\d+)", str(r.get("sf_mkt_rec") or ""))
+    return int(m.group(1)) + int(m.group(2)) if m else 0
+
+def proven(r):
+    """Nov 17: a star or lean must rest on a proven record in this market (10+ bets, +15% ROI), not on a big bet vs usual size."""
+    roi = r.get("sf_mkt_roi")
+    return mkt_bets(r) >= 10 and roi is not None and float(roi) >= 15
 
 def sf_in(r):
     return 0.0 if sf_cold(r) else float(r.get("sf_dollars") or 0)
@@ -52,7 +63,8 @@ def vegas_ok(r):
 
 def sf_agrees(r):
     d, o = sf_in(r), float(r.get("sf_opp") or 0)
-    return d >= 2000 and o < 0.5 * d
+    floor = 2000 * (2.5 if r.get("sport") == "NHL" else 1) * (1.5 if r.get("market") == "SPREAD" else 1)  # Nov 17 segment floors
+    return d >= floor and o < 0.5 * d
 
 def conflict_row(r, recs):
     """The SharpFlow-side record that opposes this Pinnacle record, if any."""
@@ -73,20 +85,21 @@ def chips(r):
     out.append((f"VEGAS {int(v)}", "b") if v and v >= 70 else (f"VEGAS {int(v)} (under 70)", "n") if v else ("VEGAS none", "n"))
     d = sf_in(r)
     if sf_cold(r):
-        out.append((f"COLD WALLET {r.get('sf_mkt_rec') or ''} here ({float(r['sf_mkt_roi']):+.0f}% ROI), not counted".replace("  ", " "), "r"))
+        why = (f"{r.get('sf_mkt_rec') or ''} here ({float(r['sf_mkt_roi']):+.0f}% ROI)" if (r.get("sf_mkt_roi") is not None and float(r["sf_mkt_roi"]) < 0) else f"cold last 30 days ({float(r['sf_l30_roi']):+.0f}% ROI)")
+        out.append((f"COLD WALLET {why}, not counted".replace("  ", " "), "r"))
     if d >= 1000:
         o = float(r.get("sf_opp") or 0)
         out.append((f"WALLETS {money(d)} vs {money(o)}", "a" if o >= 0.5 * d else "g" if has_pin(r) else "b"))
         vs = float(r.get("sf_max_vs_usual") or 0)
         if vs > 1:
-            out.append((f"{vs:.1f}x their usual", "a"))
+            out.append((f"{vs:.1f}x their usual" + (" - size-up is not extra strength" if vs >= 1.5 else ""), "a" if vs >= 1.5 else "n"))
         if r.get("sf_all_ratio") is not None:
             out.append((f"{float(r['sf_all_ratio']):.1f}x their all-sport usual", "n"))
         if r.get("sf_mkt_rec"):
             roi = r.get("sf_mkt_roi")
             out.append((f"here {r['sf_mkt_rec']}" + (f" ({float(roi):+.0f}% ROI)" if roi is not None else ""), "g" if (roi or 0) >= 15 else "n"))
         if (r.get("sf_wallets") or 0) >= 2:
-            out.append((f"{int(r['sf_wallets'])} wallets", "b"))
+            out.append((f"{int(r['sf_wallets'])} wallets (same-side, not independent)", "n"))
     else:
         out.append(("WALLETS none", "n"))
     return out
@@ -165,14 +178,14 @@ def classify(rows, sf_current=True):
             continue
         d, o, vs = sf_in(r), float(r.get("sf_opp") or 0), float(r.get("sf_max_vs_usual") or 0)
         p = r.get("sf_first_price", r.get("price"))
-        if d >= 5000 and o < 0.25 * d and (vs >= 1.5 or r.get('sf_tail')) and p is not None and -190 <= p <= 300:
+        if d >= 5000 and o < 0.25 * d and proven(r) and p is not None and -190 <= p <= 300:
             if r["game"] not in tails or d > sf_in(tails[r["game"]]):
                 tails[r["game"]] = r
     leans = sorted(tails.values(), key=sf_in, reverse=True)[:LEAN_CAP]
     for r in leans:
         r["tier"] = "LEAN"
-        r["star"] = float(r.get("sf_max_vs_usual") or 0) >= 2.0
-        r["why"] = ("Real money, little against it, bigger than their usual bet, price still takeable."
-                    if r["star"] else "Sharp money is real and mostly unopposed. Sizing under 2x, so no star.")
+        r["star"] = proven(r) and (r.get("sf_l30_roi") is None or float(r["sf_l30_roi"]) >= 10)
+        r["why"] = ("Real money, little against it, proven wallet in this market, price still takeable."
+                    if r["star"] else "Sharp money is real and mostly unopposed, wallet record here is decent but not top form. No star.")
         r["chips"] = chips(r)
     return {"plays": plays, "leans": leans, "passes": passes[:PASS_CAP], "all": recs}
