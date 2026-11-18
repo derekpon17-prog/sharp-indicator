@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-18T04:02:09.344Z",
+ "scannedAt": "2026-11-18T04:33:19.045Z",
  "sports": {
   "NBA": [
    {
@@ -10,18 +10,8 @@
     "sport": "15-6",
     "returnPct": 45.9,
     "last10": "8-2",
-    "bettingBig": true,
+    "bettingBig": false,
     "tonight": [
-     {
-      "matchup": "Jazz at Clippers",
-      "market": "TOTAL",
-      "pick": "Over 226.5",
-      "line": 226.5,
-      "price": "-102",
-      "dollars": 621,
-      "vsUsual": 1.6,
-      "vsUsualAll": 1.2
-     },
      {
       "matchup": "Rockets at Pacers",
       "market": "TOTAL",
@@ -128,22 +118,22 @@
     ]
    },
    {
-    "id": "5b1e50",
-    "gap": 8.6,
-    "overall": "405-399",
-    "sport": "36-25",
-    "returnPct": 22.1,
+    "id": "aa738b",
+    "gap": 6.3,
+    "overall": "154-133",
+    "sport": "24-16",
+    "returnPct": 16,
     "last10": "5-5",
     "bettingBig": false,
     "tonight": [
      {
       "matchup": "Hornets at Lakers",
-      "market": "ML",
-      "pick": "Lakers",
-      "line": null,
-      "price": "-317",
-      "dollars": 511,
-      "vsUsual": 1.2,
+      "market": "TOTAL",
+      "pick": "Over",
+      "line": 218.5,
+      "price": "-130",
+      "dollars": 602,
+      "vsUsual": 1,
       "vsUsualAll": 0.3
      }
     ]

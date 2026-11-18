@@ -275,7 +275,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 16
+   "snapshots": 17
   },
   "Trail Blazers at Timberwolves|SPREAD|Trail Blazers": {
    "sport": "NBA",
@@ -623,7 +623,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 1200,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Jazz at Clippers|TOTAL|Over 226.5": {
    "sport": "NBA",
@@ -658,7 +658,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 13200,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 8
   },
   "Hornets at Lakers|TOTAL|Over": {
    "sport": "NBA",
@@ -669,12 +669,13 @@
    "firstSeenAt": "2026-11-18T04:12:52.187Z",
    "firstPrice": "-100",
    "tags": [
-    "STRONG_VS_STRONG"
+    "STRONG_VS_STRONG",
+    "STRONG_UNOPPOSED"
    ],
-   "maxVsUsual": 0.8,
+   "maxVsUsual": 1,
    "maxDollars": 10000,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Flames at Sharks|ML|Sharks": {
    "sport": "NHL",
@@ -690,7 +691,7 @@
    "maxVsUsual": 1,
    "maxDollars": 3780,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Jazz at Clippers|SPREAD|Jazz +7.5": {
    "sport": "NBA",
@@ -705,6 +706,38 @@
    ],
    "maxVsUsual": 1.6,
    "maxDollars": 7150,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Bulls at Nets|TOTAL|Under 238.5": {
+   "sport": "NBA",
+   "matchup": "Bulls at Nets",
+   "market": "TOTAL",
+   "pick": "Under 238.5",
+   "kickoffEt": "Wed, Nov 18, 7:40 PM",
+   "firstSeenAt": "2026-11-18T04:41:49.115Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.4,
+   "maxDollars": 1110,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "76ers at Magic|TOTAL|Over 221.5": {
+   "sport": "NBA",
+   "matchup": "76ers at Magic",
+   "market": "TOTAL",
+   "pick": "Over 221.5",
+   "kickoffEt": "Wed, Nov 18, 7:10 PM",
+   "firstSeenAt": "2026-11-18T04:41:49.115Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.3,
+   "maxDollars": 1029,
    "opposedSeen": false,
    "snapshots": 1
   }
