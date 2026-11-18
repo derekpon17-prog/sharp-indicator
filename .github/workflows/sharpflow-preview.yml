@@ -13,8 +13,9 @@ on:
         description: 'yes = build the card and show it in the log, do not post and do not mark as posted'
         required: false
         default: 'no'
-  schedule:
-    - cron: '7,22,37,52 12-23,0-3 * * *'   # every 15 min, 6am-10pm CT
+  # schedule disabled 2026-11-18: old SharpFlow MCP's free trial ended, every call was
+  # just logging "the free testing period is over" for nothing. dispatch-only until
+  # the new SharpFlow MCP connector is wired into this script.
 permissions:
   contents: write
   actions: write

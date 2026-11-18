@@ -3,8 +3,9 @@
 name: SharpFlow alerts
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '11,26,41,56 12-23,0-3 * * *'
+  # schedule disabled 2026-11-18: old SharpFlow MCP's free trial ended, every call was
+  # just logging "the free testing period is over" for nothing. dispatch-only until
+  # the new SharpFlow MCP connector is wired into this script.
 permissions:
   contents: write
   actions: write
