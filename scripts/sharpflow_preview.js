@@ -103,19 +103,16 @@ function buildCards(sp, latest, flags) {
   sides.sort((a, b) => a.st - b.st || b.dollars - a.dollars);
   coldSides.sort((a, b) => b.dollars - a.dollars);
   if (!sides.length) return [];
-  const rows = sides.map(s => {
-    const line = s.big.line != null ? s.big.line : null;
-    let bet;
-    if (s.market === 'ML') bet = s.pick + ' ML';
-    else if (/\d/.test(s.pick)) bet = s.pick;
-    else bet = s.pick + (line != null ? ' ' + (s.market === 'SPREAD' && line > 0 ? '+' : '') + line : ' spread');
-    const mk = s.market === 'ML' ? 'ML' : s.market === 'SPREAD' ? 'spread' : 'total';
-    const specOf = (ts) => { const ids = new Set(ts.map(t => t.wid).filter(Boolean)); return (SPEC[sp] || []).filter(x => x.gap > 0 && ids.has(x.id)).sort((a, b) => b.gap - a.gap)[0]; };
-    const sp1 = specOf(s.ts);
-    const chips = R.simpleChips({ sp, mk, moneyTxt: `${k(s.dollars)} vs ${k(s.oppD)}`, orange: s.oppD >= s.dollars / 2, vs: s.vs, big: s.big, sportRec: sp1 ? sp1.sport : null, opp: s.oppAll });
-    const price = num(s.big.price);
-    return { st: s.st, bet: (s.tail ? '★ ' : '') + bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: Number.isFinite(price) ? price : null, chips, usual: +s.vs };
-  });
+  const grpOf = m => m === 'TOTAL' ? 'total' : 'team';
+  const gseen = {}, rows = [];
+  for (const s of sides) {
+    const gk = s.matchup + '|' + grpOf(s.market); if (gseen[gk]) continue; gseen[gk] = 1;
+    const tix = tickets.filter(t => t.matchup === s.matchup && grpOf(t.market) === grpOf(s.market));
+    const r = R.matchupRow(sp, tix, grpOf(s.market)); if (!r) continue;
+    const star = sides.some(x => x.matchup === s.matchup && grpOf(x.market) === grpOf(s.market) && x.tail);
+    const top = r.sides[0] && r.sides[0].top;
+    rows.push({ st: s.st, bet: (star ? '★ ' : '') + r.bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: null, chips: r.chips, usual: top ? +top.vsUsual || 0 : 0 });
+  }
   const data = sides.map(s => ({ game: s.matchup, market: s.market, pick: s.pick, start_utc: s.st.toISOString(), dollars: s.dollars, opp_dollars: s.oppD, wallets: s.wallets,
     max_vs_usual: +s.vs, all_sport_ratio: s.big.usualAll ? +(s.big.dollars / s.big.usualAll).toFixed(2) : null, price: s.big.price, line: s.big.line ?? null,
     l30_rec: s.big.l30Rec || null, l30_roi: s.big.l30Roi ?? null, mkt_rec: s.big.mktRecord || null, mkt_roi: s.big.mktRoi ?? null, mkt_l30_rec: s.big.mktL30Rec || null, tail: s.tail }));
@@ -132,7 +129,7 @@ function buildCards(sp, latest, flags) {
     const last = i + 12 >= rows.length || cards.length === 2;
     const coldTxt = last && coldSides.length ? 'Not counted (negative market ROI or cold last 30 days): ' + coldSides.slice(0, 3).map(c => c.txt).join('; ') : '';
     cards.push({ brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with positive ${sp} market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
-      sections: secs, legend: coldTxt || 'Money for vs against. HOT = last 10 8+ wins. GOOD = positive ROI. COLD = poor recent form. THIN = under 5 bets. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
+      sections: secs, legend: coldTxt || 'Quality wallet = 10+ bets here at +15% ROI. HOT = last 10 8+ wins. THIN = under 5 bets. COLD = negative ROI or cold form, never counted. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
   }
   return { cards, n: rows.length, data, cold: coldSides };
 }

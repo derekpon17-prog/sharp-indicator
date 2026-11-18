@@ -67,4 +67,43 @@ function againstChips(opp) {
   }
   return chips;
 }
-module.exports = { isOpposed, againstChips,  status, simpleChips,  cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };
+
+/* Matchup row (Derek, Nov 17 9:03pm CT: "format is busy", "I especially want to know if there are quality records on one side and cold or
+   negative ROI on the other"). One row per game group (ML and spread together, totals on their own): a verdict, then each side's top wallet
+   with its record, and a red chip when cold money sits on a side. Quality wallet = 10+ bets here at +15% ROI or better, not cold. */
+const wordOf = t => cold(t) ? 'COLD' : status(t).t.split(/[ (]/)[0];
+const walletTxt = t => kk(t.dollars) + ' ' + (+t.vsUsual || 0).toFixed(1) + 'x ' + mkName(t.market) + ' ' + recTxt(t) + ' ' + wordOf(t);
+const isQuality = t => !cold(t) && betsOf(t.mktRecord) >= 10 && t.mktRoi != null && t.mktRoi >= 15;
+const sumD = a => a.reduce((x, t) => x + t.dollars, 0);
+function matchupRow(sp, tix, grp) {
+  const bySide = {};
+  for (const t of tix) {
+    const key = grp === 'total' ? (/^over/i.test(t.pick) ? 'Over' : 'Under') : teamOf(t.pick);
+    (bySide[key] ||= []).push(t);
+  }
+  const sides = Object.entries(bySide).map(([name, ts]) => {
+    const good = ts.filter(t => !cold(t)).sort((a, b) => b.dollars - a.dollars), bad = ts.filter(cold).sort((a, b) => b.dollars - a.dollars);
+    const q = good.filter(isQuality);
+    return { name, good, bad, q, goodD: sumD(good), badD: sumD(bad), thinD: sumD(good.filter(t => betsOf(t.mktRecord) < 5)), top: q[0] || good[0] };
+  }).sort((a, b) => b.goodD - a.goodD || b.badD - a.badD);
+  const A = sides[0], B = sides[1];
+  if (!A) return null;
+  const nm = x => grp === 'total' ? x.name : x.name.toUpperCase();
+  let verdict;
+  if (!B) verdict = { t: 'CLEAN: nothing against', c: 'blue' };
+  else {
+    const qa = A.q.length > 0, qb = B.q.length > 0;
+    const why = x => x.badD > 0 ? 'cold' : x.thinD > 0 ? 'thin' : 'weaker';
+    if (qa && qb) { const ia = new Set(A.q.map(t => t.wallet)); const same = B.q.every(t => ia.has(t.wallet)); verdict = same ? { t: 'NO READ: same wallet on both sides', c: 'grey' } : { t: 'SPLIT: quality wallets on both sides', c: 'orange' }; }
+    else if (qa || qb) { const w = qa ? A : B, l = qa ? B : A; verdict = { t: 'EDGE ' + nm(w) + ': quality wallets vs ' + why(l) + ' on ' + nm(l), c: 'gold' }; }
+    else verdict = { t: 'NO READ: no quality wallet on either side', c: 'grey' };
+  }
+  const chips = [verdict];
+  for (const x of sides.slice(0, 2)) {
+    if (x.top) chips.push({ t: nm(x) + ' ' + kk(x.goodD) + ' - ' + x.good.slice(0, 2).map(walletTxt).join('; '), c: x.top.mktRoi != null && isQuality(x.top) ? (hotWins(x.top.form) >= 8 ? 'gold' : 'green') : 'grey' });
+    if (x.bad.length) chips.push({ t: nm(x) + ' COLD ' + kk(x.badD) + ' - ' + walletTxt(x.bad[0]) + ' - not counted', c: 'red' });
+  }
+  const bet = grp === 'total' ? 'Total ' + (((A.top || A.bad[0] || {}).line) ?? '') : sides.map(x => x.name).join(' vs ');
+  return { bet, chips, goodD: A.goodD, sides };
+}
+module.exports = { matchupRow,  isOpposed, againstChips,  status, simpleChips,  cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };

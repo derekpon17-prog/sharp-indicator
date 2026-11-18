@@ -100,15 +100,16 @@ if (!send.length) { console.log('hourly cap reached;', fresh.length, 'held'); fi
 for (const s of fresh.slice(room)) { if (st.sides[s.key]) { if (s.prev == null) delete st.sides[s.key]; else st.sides[s.key].d = s.prev; } }
 
 const specOf = (sp, ts) => { const ids = new Set(ts.map(t => t.wid).filter(Boolean)); return (SPEC[sp] || []).filter(x => x.gap > 0 && ids.has(x.id)).sort((a, b) => b.gap - a.gap)[0]; };
-const rows = send.map(s => {
-  const mk = s.market === 'ML' ? 'ML' : s.market === 'SPREAD' ? 'spread' : 'total';
-  const line = s.big.line != null ? s.big.line : null;
-  let bet = s.market === 'ML' ? s.pick + ' ML' : /\d/.test(s.pick) ? s.pick : s.pick + (line != null ? ' ' + (s.market === 'SPREAD' && line > 0 ? '+' : '') + line : ' spread');
-  const sp1 = specOf(s.sp, s.ts);
-  const chips = R.simpleChips({ sp: s.sp, mk, moneyTxt: s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)} vs ${k(s.oppD)}` : `NEW ${k(s.good)} vs ${k(s.oppD)}`, orange: s.oppD >= s.good / 2, vs: s.vs, big: s.big, sportRec: sp1 ? sp1.sport : null, opp: s.oppAll });
-  const price = parseFloat(String(s.big.price).replace('+', ''));
-  return { st: s.st, sp: s.sp, bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: Number.isFinite(price) ? price : null, chips, usual: +s.vs };
-});
+const grpOf = m => m === 'TOTAL' ? 'total' : 'team';
+const gseen = {}, rows = [];
+for (const s of send) {
+  const gk = s.sp + '|' + s.matchup + '|' + grpOf(s.market); if (gseen[gk]) continue; gseen[gk] = 1;
+  const tix = (latest.tickets || []).filter(t => t.sport === s.sp && t.matchup === s.matchup && grpOf(t.market) === grpOf(s.market));
+  const r = R.matchupRow(s.sp, tix, grpOf(s.market)); if (!r) continue;
+  const top = r.sides[0] && r.sides[0].top;
+  r.chips.unshift({ t: s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)}` : `NEW ${k(s.good)} on ${s.pick}`, c: 'blue' });
+  rows.push({ st: s.st, sp: s.sp, bet: r.bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: null, chips: r.chips, usual: top ? +top.vsUsual || 0 : 0 });
+}
 const secs = [];
 for (const r of rows) {
   const h = `${r.sp} - ${ctTime(r.st).toUpperCase()} CT`;
