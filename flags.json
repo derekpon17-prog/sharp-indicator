@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-18T01:44:02.529Z",
+ "scannedAt": "2026-11-18T02:31:12.315Z",
  "sides": [
   {
    "tail": true,
@@ -31,41 +31,14 @@
   },
   {
    "tail": true,
-   "sport": "CFB",
-   "matchup": "Eastern Michigan at Western Michigan",
-   "market": "SPREAD",
-   "pick": "Western Michigan -13.5",
-   "kickoffEt": "Tue, Nov 17, 6:08 PM",
-   "dollars": 15224,
-   "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 3.4,
-   "price": "-149",
-   "size": "1.5x and up",
-   "mktRecord": "29-13",
-   "mktRoi": 23,
-   "l30Roi": 17.6,
-   "contested": false,
-   "sfPoints": 41,
-   "parts": {
-    "money": 16,
-    "sizing": 12,
-    "quality": 6,
-    "pooled": 4,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": true,
    "sport": "NBA",
    "matchup": "Hornets at Lakers",
    "market": "SPREAD",
    "pick": "Lakers -7.5",
    "kickoffEt": "Tue, Nov 17, 11:10 PM",
-   "dollars": 10132,
+   "dollars": 11132,
    "oppDollars": 0,
-   "wallets": 3,
+   "wallets": 4,
    "maxVsUsual": 3.6,
    "price": "-108",
    "size": "1.5x and up",
@@ -138,27 +111,27 @@
   },
   {
    "tail": false,
-   "sport": "NHL",
-   "matchup": "Blue Jackets at Islanders",
+   "sport": "NBA",
+   "matchup": "Hornets at Lakers",
    "market": "ML",
-   "pick": "Islanders",
-   "kickoffEt": "Tue, Nov 17, 7:08 PM",
-   "dollars": 1019,
+   "pick": "Hornets",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "dollars": 2085,
    "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 3.1,
-   "price": "-652",
+   "wallets": 2,
+   "maxVsUsual": 1.5,
+   "price": "+270",
    "size": "1.5x and up",
-   "mktRecord": "13-5",
-   "mktRoi": 35.9,
-   "l30Roi": 37.4,
+   "mktRecord": "7-1",
+   "mktRoi": 75.3,
+   "l30Roi": 42.3,
    "contested": false,
-   "sfPoints": 25,
+   "sfPoints": 26,
    "parts": {
-    "money": 4,
-    "sizing": 12,
-    "quality": 6,
-    "pooled": 0,
+    "money": 8,
+    "sizing": 7,
+    "quality": 4,
+    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -273,33 +246,6 @@
   {
    "tail": false,
    "sport": "NHL",
-   "matchup": "Predators at Wild",
-   "market": "ML",
-   "pick": "Predators",
-   "kickoffEt": "Tue, Nov 17, 8:08 PM",
-   "dollars": 27240,
-   "oppDollars": 2889,
-   "wallets": 1,
-   "maxVsUsual": 0.7,
-   "price": "+186",
-   "size": "0.5x",
-   "mktRecord": "3-2",
-   "mktRoi": 34.7,
-   "l30Roi": 41.4,
-   "contested": false,
-   "sfPoints": 20,
-   "parts": {
-    "money": 16,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NHL",
    "matchup": "Capitals at Lightning",
    "market": "ML",
    "pick": "Lightning",
@@ -322,33 +268,6 @@
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Trail Blazers at Timberwolves",
-   "market": "TOTAL",
-   "pick": "Over 225.5",
-   "kickoffEt": "Tue, Nov 17, 8:11 PM",
-   "dollars": 5802,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.5,
-   "price": "-100",
-   "size": "under 0.5x",
-   "mktRecord": "2-1",
-   "mktRoi": 54.2,
-   "l30Roi": 70.1,
-   "contested": false,
-   "sfPoints": 19,
-   "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
    }
   },
   {
@@ -408,79 +327,25 @@
   {
    "tail": false,
    "sport": "NBA",
-   "matchup": "Pistons at Spurs",
+   "matchup": "Hornets at Lakers",
    "market": "TOTAL",
-   "pick": "Under 222.5",
-   "kickoffEt": "Tue, Nov 17, 8:13 PM",
-   "dollars": 1000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "-104",
-   "size": "0.5x",
-   "mktRecord": "11-3",
-   "mktRoi": 65.8,
-   "l30Roi": 13.6,
-   "contested": false,
-   "sfPoints": 13,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NHL",
-   "matchup": "Oilers at Panthers",
-   "market": "ML",
-   "pick": "Oilers",
-   "kickoffEt": "Tue, Nov 17, 7:08 PM",
-   "dollars": 1737,
+   "pick": "Under 220.5",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "dollars": 1418,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 0.5,
-   "price": "+117",
+   "price": "+113",
    "size": "under 0.5x",
-   "mktRecord": "6-2",
-   "mktRoi": 22.2,
-   "l30Roi": 63.4,
+   "mktRecord": "22-17",
+   "mktRoi": 26.7,
+   "l30Roi": 27.4,
    "contested": false,
    "sfPoints": 11,
    "parts": {
     "money": 4,
     "sizing": 0,
     "quality": 4,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CBB",
-   "matchup": "Illinois Fighting Illini at Duke Blue Devils",
-   "market": "ML",
-   "pick": "Duke Blue Devils",
-   "kickoffEt": "Tue, Nov 17, 7:02 PM",
-   "dollars": 1522,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.4,
-   "price": "-335",
-   "size": "1x",
-   "mktRecord": "9-2",
-   "mktRoi": 9.4,
-   "l30Roi": 9.2,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 4,
-    "sizing": 4,
-    "quality": 0,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -569,29 +434,83 @@
   },
   {
    "tail": false,
-   "sport": "NHL",
-   "matchup": "Predators at Wild",
+   "sport": "NBA",
+   "matchup": "Jazz at Clippers",
    "market": "ML",
-   "pick": "Wild",
-   "kickoffEt": "Tue, Nov 17, 8:08 PM",
-   "dollars": 2889,
-   "oppDollars": 27240,
+   "pick": "Jazz",
+   "kickoffEt": "Tue, Nov 17, 10:40 PM",
+   "dollars": 1000,
+   "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 0.8,
-   "price": "-186",
+   "maxVsUsual": 0.6,
+   "price": "+213",
    "size": "0.5x",
-   "mktRecord": "6-2",
-   "mktRoi": 22.2,
-   "l30Roi": 63.4,
-   "contested": true,
-   "sfPoints": 4,
+   "mktRecord": "3-3",
+   "mktRoi": -18.4,
+   "l30Roi": 13.6,
+   "contested": false,
+   "sfPoints": 7,
    "parts": {
-    "money": 8,
+    "money": 4,
     "sizing": 0,
-    "quality": 4,
+    "quality": 0,
     "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "76ers at Magic",
+   "market": "ML",
+   "pick": "76ers",
+   "kickoffEt": "Wed, Nov 18, 7:10 PM",
+   "dollars": 1000,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "-144",
+   "size": "0.5x",
+   "mktRecord": "3-3",
+   "mktRoi": -18.4,
+   "l30Roi": 13.6,
+   "contested": false,
+   "sfPoints": 7,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Warriors at Mavericks",
+   "market": "ML",
+   "pick": "Mavericks",
+   "kickoffEt": "Wed, Nov 18, 9:40 PM",
+   "dollars": 1000,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "-194",
+   "size": "0.5x",
+   "mktRecord": "3-3",
+   "mktRoi": -18.4,
+   "l30Roi": 13.6,
+   "contested": false,
+   "sfPoints": 7,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
    }
   },
   {
@@ -672,22 +591,6 @@
    "maxVsUsual": 1.4
   },
   {
-   "matchup": "Predators at Wild",
-   "market": "ML",
-   "pick": "Predators",
-   "kickoffEt": "Tue, Nov 17, 8:08 PM",
-   "sport": "NHL",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 27240,
-   "oppDollars": 2889,
-   "oppWeakDollars": 0,
-   "fp": [
-    "4-2|93085|3-2"
-   ],
-   "bestPrice": "+186",
-   "maxVsUsual": 0.7
-  },
-  {
    "matchup": "Trail Blazers at Timberwolves",
    "market": "SPREAD",
    "pick": "Trail Blazers",
@@ -702,22 +605,6 @@
     "15-6|3628|6-2"
    ],
    "maxVsUsual": 1.9
-  },
-  {
-   "matchup": "Trail Blazers at Timberwolves",
-   "market": "TOTAL",
-   "pick": "Over 225.5",
-   "kickoffEt": "Tue, Nov 17, 8:11 PM",
-   "sport": "NBA",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 5802,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "5-2|58215|2-1"
-   ],
-   "bestPrice": "-100",
-   "maxVsUsual": 0.5
   },
   {
    "matchup": "Trail Blazers at Timberwolves",
@@ -817,22 +704,6 @@
    "maxVsUsual": 3.6
   },
   {
-   "matchup": "Predators at Wild",
-   "market": "ML",
-   "pick": "Wild",
-   "kickoffEt": "Tue, Nov 17, 8:08 PM",
-   "sport": "NHL",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 2889,
-   "oppDollars": 27240,
-   "oppWeakDollars": 0,
-   "fp": [
-    "3-1|6809|6-2"
-   ],
-   "bestPrice": "-186",
-   "maxVsUsual": 0.8
-  },
-  {
    "matchup": "Trail Blazers at Timberwolves",
    "market": "ML",
    "pick": "Trail Blazers",
@@ -881,22 +752,6 @@
    "maxVsUsual": 0.9
   },
   {
-   "matchup": "Oilers at Panthers",
-   "market": "ML",
-   "pick": "Oilers",
-   "kickoffEt": "Tue, Nov 17, 7:08 PM",
-   "sport": "NHL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 1737,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "3-1|6809|6-2"
-   ],
-   "bestPrice": "+117",
-   "maxVsUsual": 0.5
-  },
-  {
    "matchup": "Knicks at Raptors",
    "market": "ML",
    "pick": "Raptors",
@@ -913,36 +768,36 @@
    "maxVsUsual": 1.9
   },
   {
-   "matchup": "Eastern Michigan at Western Michigan",
-   "market": "SPREAD",
-   "pick": "Western Michigan -13.5",
-   "kickoffEt": "Tue, Nov 17, 6:08 PM",
-   "sport": "CFB",
+   "matchup": "Hornets at Lakers",
+   "market": "TOTAL",
+   "pick": "Under 220.5",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "sport": "NBA",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 1095,
+   "strongDollars": 1418,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
-    "21-10|148757|15-5"
+    "41-27|51398|22-17"
    ],
-   "bestPrice": "-138",
-   "maxVsUsual": 3.4
+   "bestPrice": "+113",
+   "maxVsUsual": 0.5
   },
   {
-   "matchup": "Blue Jackets at Islanders",
+   "matchup": "Hornets at Lakers",
    "market": "ML",
-   "pick": "Islanders",
-   "kickoffEt": "Tue, Nov 17, 7:08 PM",
-   "sport": "NHL",
+   "pick": "Hornets",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "sport": "NBA",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 1019,
+   "strongDollars": 1200,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
-    "9-3|1817|13-5"
+    "17-7|8011|7-1"
    ],
-   "bestPrice": "-652",
-   "maxVsUsual": 3.1
+   "bestPrice": "+270",
+   "maxVsUsual": 1.5
   }
  ],
  "sizedUp": [
@@ -962,40 +817,6 @@
    "mktRoi": -7.5,
    "opposed": "unopposed",
    "fp": "20-9|6646|6-3"
-  },
-  {
-   "matchup": "Eastern Michigan at Western Michigan",
-   "market": "SPREAD",
-   "pick": "Western Michigan -13.5",
-   "kickoffEt": "Tue, Nov 17, 6:08 PM",
-   "sport": "CFB",
-   "dollars": 14129,
-   "price": "-149",
-   "vsUsual": 3.4,
-   "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 17.6,
-   "mktRecord": "29-13",
-   "mktRoi": 23,
-   "opposed": "unopposed",
-   "fp": "45-24|50215|29-13"
-  },
-  {
-   "matchup": "Blue Jackets at Islanders",
-   "market": "ML",
-   "pick": "Islanders",
-   "kickoffEt": "Tue, Nov 17, 7:08 PM",
-   "sport": "NHL",
-   "dollars": 1019,
-   "price": "-652",
-   "vsUsual": 3.1,
-   "size": "1.5x and up",
-   "form": "L10 7-3",
-   "l30Roi": 37.4,
-   "mktRecord": "13-5",
-   "mktRoi": 35.9,
-   "opposed": "unopposed",
-   "fp": "9-3|1817|13-5"
   },
   {
    "matchup": "Hornets at Lakers",
@@ -1099,6 +920,23 @@
    "fp": "14-6|11488|9-2"
   },
   {
+   "matchup": "Hornets at Lakers",
+   "market": "ML",
+   "pick": "Hornets",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "sport": "NBA",
+   "dollars": 1200,
+   "price": "+270",
+   "vsUsual": 1.5,
+   "size": "1.5x and up",
+   "form": "L10 8-2",
+   "l30Roi": 42.3,
+   "mktRecord": "7-1",
+   "mktRoi": 75.3,
+   "opposed": "contested",
+   "fp": "17-7|8011|7-1"
+  },
+  {
    "matchup": "Knicks at Raptors",
    "market": "SPREAD",
    "pick": "Raptors",
@@ -1113,23 +951,6 @@
    "mktRoi": 94.2,
    "opposed": "contested",
    "fp": "9-4|42802|1-1"
-  },
-  {
-   "matchup": "Illinois Fighting Illini at Duke Blue Devils",
-   "market": "ML",
-   "pick": "Duke Blue Devils",
-   "kickoffEt": "Tue, Nov 17, 7:02 PM",
-   "sport": "CBB",
-   "dollars": 1522,
-   "price": "-335",
-   "vsUsual": 1.4,
-   "size": "1x",
-   "form": "L10 8-2",
-   "l30Roi": 9.2,
-   "mktRecord": "9-2",
-   "mktRoi": 9.4,
-   "opposed": "unopposed",
-   "fp": "10-3|1326|9-2"
   },
   {
    "matchup": "Knicks at Raptors",

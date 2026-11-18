@@ -49,7 +49,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 5999,
    "opposedSeen": false,
-   "snapshots": 73
+   "snapshots": 77
   },
   "Illinois Fighting Illini at Duke Blue Devils|ML|Duke Blue Devils": {
    "sport": "CBB",
@@ -86,7 +86,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 4184,
    "opposedSeen": true,
-   "snapshots": 74
+   "snapshots": 78
   },
   "Trail Blazers at Timberwolves|ML|Trail Blazers": {
    "sport": "NBA",
@@ -103,7 +103,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2395,
    "opposedSeen": true,
-   "snapshots": 23
+   "snapshots": 25
   },
   "Pistons at Spurs|TOTAL|Under 222.5": {
    "sport": "NBA",
@@ -189,7 +189,7 @@
    "maxVsUsual": 2,
    "maxDollars": 75126,
    "opposedSeen": false,
-   "snapshots": 25
+   "snapshots": 27
   },
   "Knicks at Raptors|ML|Raptors": {
    "sport": "NBA",
@@ -207,7 +207,7 @@
    "maxVsUsual": 2.5,
    "maxDollars": 1500,
    "opposedSeen": true,
-   "snapshots": 36
+   "snapshots": 38
   },
   "Eastern Michigan at Western Michigan|SPREAD|Western Michigan -13.5": {
    "sport": "CFB",
@@ -275,7 +275,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 13
+   "snapshots": 14
   },
   "Trail Blazers at Timberwolves|SPREAD|Trail Blazers": {
    "sport": "NBA",
@@ -294,7 +294,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 24423,
    "opposedSeen": true,
-   "snapshots": 13
+   "snapshots": 16
   },
   "Capitals at Lightning|TOTAL|Over 5.5": {
    "sport": "NHL",
@@ -327,7 +327,7 @@
    "maxVsUsual": 0.3,
    "maxDollars": 2056,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Miami (OH) at Kent State|TOTAL|Over 45.5": {
    "sport": "CFB",
@@ -359,7 +359,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 1213,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Capitals at Lightning|ML|Capitals": {
    "sport": "NHL",
@@ -375,7 +375,7 @@
    "maxVsUsual": 1,
    "maxDollars": 36819,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Knicks at Raptors|SPREAD|Raptors": {
    "sport": "NBA",
@@ -392,7 +392,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 27436,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Trail Blazers at Timberwolves|SPREAD|Trail Blazers +1.5": {
    "sport": "NBA",
@@ -442,7 +442,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 11798,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 12
   },
   "Senators at Jets|ML|Jets": {
    "sport": "NHL",
@@ -458,7 +458,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 3475,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Oilers at Panthers|ML|Oilers": {
    "sport": "NHL",
@@ -539,7 +539,7 @@
    "maxVsUsual": 0.4,
    "maxDollars": 5300,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Predators at Wild|ML|Wild": {
    "sport": "NHL",
@@ -571,7 +571,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 2005,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Blue Jackets at Islanders|ML|Islanders": {
    "sport": "NHL",
@@ -588,6 +588,39 @@
    "maxVsUsual": 3.1,
    "maxDollars": 1019,
    "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Hornets at Lakers|TOTAL|Under 220.5": {
+   "sport": "NBA",
+   "matchup": "Hornets at Lakers",
+   "market": "TOTAL",
+   "pick": "Under 220.5",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "firstSeenAt": "2026-11-18T02:54:54.748Z",
+   "firstPrice": "+113",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.5,
+   "maxDollars": 1418,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Hornets at Lakers|ML|Hornets": {
+   "sport": "NBA",
+   "matchup": "Hornets at Lakers",
+   "market": "ML",
+   "pick": "Hornets",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "firstSeenAt": "2026-11-18T02:54:54.748Z",
+   "firstPrice": "+270",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 1200,
+   "opposedSeen": true,
    "snapshots": 2
   }
  }
