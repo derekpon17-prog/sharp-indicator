@@ -295,6 +295,122 @@ body{{margin:0;background:#0B0E13}}
 <div class="foot"><div>{e(c.get("legend") or "Gold tick = break-even at the book price · model % is our win probability")}</div><div>{e(c.get("footer") or "Leans, not guarantees")}</div></div>
 </div></body></html>'''
 
+def sharpflow_html(c):
+    """Sharp Flow matchup board (design D, Nov 18 - Derek picked the "For it / Against it" reference card: wallet rows
+    grouped by side with why, a sharp-money split bar, and a separate cold-money split bar). Card dict:
+    {"brand","title","subtitle","sections":[{"heading","picks":[{"eyebrow","bet","price","verdict":{"t","c"},
+      "for":[{"team","line","note","right"}],"against":[{"team","line","note","right"}],
+      "moneyBar":[{"team","pct","dollars","c"}],"coldBar":[{"team","pct","dollars"}]}]}],"legend","footer"}
+    Falls back to the chip layout (board_html) for any pick that has no "for" key, so older cards still render."""
+    VCOL = {"gold": GOLD, "orange": ORANGE, "blue": BLUE, "grey": GREY, "green": GREEN, "red": RED}
+
+    def row(r, tint):
+        return (
+            '<div class="row" style="background:' + tint + '12">'
+            + '<div><div class="rl">' + e(r.get("line")) + '</div>'
+            + ('<div class="rn">' + e(r.get("note")) + '</div>' if r.get("note") else '') + '</div>'
+            + '<div class="rr" style="color:' + tint + '">' + e(r.get("right")) + '</div></div>'
+        )
+
+    def bar(segs, empty_txt):
+        segs = [s for s in (segs or []) if s]
+        if not segs:
+            return '<div class="barempty">' + e(empty_txt) + '</div>'
+        total = sum(max(0, s.get("pct") or 0) for s in segs) or 1
+        parts = ""
+        for s in segs:
+            w = max(0, s.get("pct") or 0) / total * 100
+            col = VCOL.get(s.get("c"), GREY)
+            d = s.get("dollars")
+            dtxt = (f' · ${d / 1000:.0f}K' if isinstance(d, (int, float)) and d >= 1000
+                    else (f' · ${d:.0f}' if isinstance(d, (int, float)) else ""))
+            if w < 1:
+                continue
+            label = e(s.get("team")) + " " + f'{s.get("pct") or 0:.0f}%' + dtxt if w >= 16 else ""
+            parts += (f'<div class="seg" style="width:{w:.2f}%;background:{col}22;border-color:{col}55;color:{col}">'
+                      + label + '</div>')
+        return '<div class="bar">' + parts + '</div>'
+
+    secs = ""
+    for sec in c.get("sections", []):
+        cards_html = ""
+        for p in sec.get("picks", []):
+            if "for" not in p:
+                return board_html(c)  # mixed/old-shape card - use the chip renderer for the whole thing
+            v = p.get("verdict") or {}
+            vcol = VCOL.get(v.get("c"), GREY)
+            forrows = "".join(row(r, GREEN) for r in (p.get("for") or [])[:3])
+            agrows = "".join(row(r, RED) for r in (p.get("against") or [])[:3])
+            forsec = ('<div class="grp"><div class="gh" style="color:' + GREEN + '">✅ For it</div>' + forrows + '</div>') if forrows else ""
+            agsec = ('<div class="grp"><div class="gh" style="color:' + RED + '">\U0001F6A9 Against it</div>' + agrows + '</div>') if agrows else ""
+            price = p.get("price")
+            pricechip = ('<span class="price">' + e(price) + '</span>') if price else ""
+            sigs = p.get("signals") or []
+            sigrow = ""
+            if sigs:
+                chips = "".join(
+                    '<span class="schip" style="color:' + VCOL.get(sg.get("c"), GREY) + ';border-color:'
+                    + VCOL.get(sg.get("c"), GREY) + '55;background:' + VCOL.get(sg.get("c"), GREY) + '14">'
+                    + e(sg.get("t")) + '</span>' for sg in sigs
+                )
+                sigrow = '<div class="sigrow">' + chips + '</div>'
+            cards_html += (
+                '<div class="gm"><div class="eyebrow">' + e(p.get("eyebrow")) + '</div>'
+                + '<div class="gt">' + e(p.get("bet")) + '</div>' + pricechip
+                + sigrow
+                + '<div class="verdict" style="color:' + vcol + '">' + e(v.get("t")) + '</div>'
+                + forsec + agsec
+                + '<div class="bl">Sharp money split</div>' + bar(p.get("moneyBar"), "no counted money either side")
+                + '<div class="bl">Cold money split (not counted)</div>' + bar(p.get("coldBar"), "no cold money either side")
+                + '</div>'
+            )
+        secs += '<div class="sec"><div class="sh">' + e(sec.get("heading")) + '</div>' + cards_html + '</div>'
+    head = (
+        '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+        '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">'
+        '<style>'
+        'body{margin:0;background:#0B0E1A}'
+        '#card{width:800px;box-sizing:border-box;background:radial-gradient(1200px 500px at 70% -10%,#162038,#0B0E1A 60%);'
+        'font-family:Inter,system-ui,sans-serif;color:#E8ECF2;padding:40px;display:flex;flex-direction:column;gap:22px}'
+        '.brandrow{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:1.5px;color:#C7CEDA}'
+        '.dot{width:7px;height:7px;border-radius:50%;background:' + GOLD + '}'
+        '.ttl{font-size:30px;font-weight:900;letter-spacing:-.5px;line-height:1.1}'
+        '.sub{font-size:14px;color:' + GREY + ';margin-top:4px}'
+        '.sec{display:flex;flex-direction:column;gap:14px}'
+        '.sh{font-size:12px;font-weight:700;letter-spacing:2px;color:' + GREY + ';margin-bottom:-2px}'
+        '.gm{background:#121828;border:1px solid #232B3D;border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}'
+        '.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.5px;color:' + GREY + '}'
+        '.gt{font-weight:800;font-size:22px;margin-top:-2px}'
+        '.price{display:inline-block;font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700;'
+        'background:#1C2434;border:1px solid #2E3850;color:#C7CEDA;border-radius:6px;padding:2px 8px;margin-top:2px}'
+        '.sigrow{display:flex;gap:6px;flex-wrap:wrap}'
+        '.schip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.3px;border:1px solid;border-radius:6px;'
+        'padding:3px 8px}'
+        '.verdict{font-weight:800;font-size:15px}'
+        '.grp{display:flex;flex-direction:column;gap:6px}'
+        '.gh{font-size:12px;font-weight:800;letter-spacing:.4px}'
+        '.row{display:flex;justify-content:space-between;align-items:center;gap:12px;border-radius:10px;padding:10px 12px}'
+        '.rl{font-weight:700;font-size:14px}'
+        '.rn{font-size:12px;color:' + GREY + ';margin-top:2px}'
+        '.rr{font-weight:800;font-size:14px;white-space:nowrap}'
+        '.bl{font-size:11px;font-weight:700;letter-spacing:1px;color:' + GREY + ';margin-top:4px}'
+        '.bar{display:flex;height:34px;border-radius:8px;overflow:hidden;background:#0F1420}'
+        '.seg{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;border:1px solid;'
+        'white-space:nowrap;overflow:hidden}'
+        '.barempty{height:34px;border-radius:8px;background:#0F1420;display:flex;align-items:center;justify-content:center;'
+        f'font-size:12px;color:{GREY}}}'
+        '.foot{display:flex;justify-content:space-between;font-size:11px;color:#7D8796;border-top:1px solid #222936;padding-top:12px}'
+        '</style></head><body><div id="card">'
+        '<div class="brandrow"><span class="dot"></span>' + e(c.get("brand") or "SHARP FLOW") + '</div>'
+        '<div><div class="ttl">' + e(c.get("title") or "") + '</div><div class="sub">' + e(c.get("subtitle")) + '</div></div>'
+        + secs +
+        '<div class="foot"><div>' + e(c.get("legend") or "") + '</div><div>'
+        + e(c.get("footer") or "Wallet money, not a pick. Leans, not guarantees") + '</div></div>'
+        '</div></body></html>'
+    )
+    return head
+
+
 def render_boards(cards, out_dir):
     from playwright.sync_api import sync_playwright
     os.makedirs(out_dir, exist_ok=True)
@@ -303,7 +419,7 @@ def render_boards(cards, out_dir):
         browser = pw.chromium.launch()
         page = browser.new_page(viewport={"width": 800, "height": 1400}, device_scale_factor=1.5)
         for i, c in enumerate(cards):
-            page.set_content(board_html(c), wait_until="networkidle")
+            page.set_content((sharpflow_html(c) if c.get("design") == "sharpflow" else board_html(c)), wait_until="networkidle")
             path = os.path.join(out_dir, f"board_{i + 1}.png")
             page.locator("#card").screenshot(path=path)
             paths.append(path)
