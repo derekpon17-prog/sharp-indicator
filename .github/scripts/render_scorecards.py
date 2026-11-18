@@ -303,7 +303,8 @@ def sharpflow_html(c):
       "eyebrow" (e.g. "NBA - WED NOV 18"), "time" (e.g. "10:10 PM CT", optional pill),
       "tag":{"t","icon"} (orange label above the headline, e.g. "EDGE - HORNETS"),
       "bet" (huge headline - the play), "price" (grey pill, optional),
-      "for":[{"line","note","right"}], "against":[{"line","note","right"}] (right is colored red, e.g. a team name),
+      "for":{"team","rows":[{"wallet","market","record","roi","dollars","note","status":{"t","c"}}]},
+      "against":{"team","rows":[...]} (same row shape; every row always shows team/record/roi/dollars/status - never implied),
       "moneyBar":[{"team","pct","dollars","c":"grey"|"red"|"green"|...}],
       "confidence": 0-10 (optional gauge), "callout":{"plain","highlight"} (optional dark footer line),
       "footerLabel" (optional small centered caption)
@@ -311,12 +312,25 @@ def sharpflow_html(c):
     VCOL = {"gold": "#D9770A", "orange": "#D9770A", "blue": "#3B6FD9", "grey": "#8A8F9E", "green": "#1E8E5A", "red": "#D23C3C"}
     NAVY = "#1B2238"
 
-    def row(r, bg, fg):
+    def row(r, fg):
+        roi = r.get("roi")
+        roitxt = (f'{roi:+.0f}%' if isinstance(roi, (int, float)) else (roi or ""))
+        d = r.get("dollars")
+        dtxt = (f'${d / 1000:.1f}K' if isinstance(d, (int, float)) and d >= 1000
+                else (f'${d:.0f}' if isinstance(d, (int, float)) else ""))
+        st = r.get("status") or {}
+        stcol = VCOL.get(st.get("c"), "#6B7280")
+        note = " · ".join(x for x in [dtxt, r.get("note")] if x)
         return (
-            '<div class="row" style="background:' + bg + '">'
-            + '<div><div class="rl">' + e(r.get("line")) + '</div>'
-            + ('<div class="rn">' + e(r.get("note")) + '</div>' if r.get("note") else '') + '</div>'
-            + '<div class="rr" style="color:' + fg + '">' + e(r.get("right")) + '</div></div>'
+            '<div class="row2">'
+            + '<div class="rtop"><span class="rteam">' + e(r.get("team")) + '</span>'
+            + '<span class="rwal">' + e(r.get("wallet")) + '</span>'
+            + '<span class="rmk">' + e(r.get("market")) + '</span>'
+            + '<span class="rrec">' + e(r.get("record")) + '</span></div>'
+            + ('<div class="rn">' + e(note) + '</div>' if note else '')
+            + '<div class="rbot"><span class="rroi" style="color:' + fg + '">' + e(roitxt) + '</span>'
+            + ('<span class="rstatus" style="color:' + stcol + '">' + e(st.get("t")) + '</span>' if st.get("t") else '')
+            + '</div></div>'
         )
 
     def bar(segs, empty_txt):
@@ -344,10 +358,17 @@ def sharpflow_html(c):
         for p in sec.get("picks", []):
             if "for" not in p:
                 return board_html(c)  # mixed/old-shape card - use the chip renderer for the whole thing
-            forrows = "".join(row(r, "#E7F4EC", "#1E8E5A") for r in (p.get("for") or [])[:3])
-            agrows = "".join(row(r, "#FDECEC", "#D23C3C") for r in (p.get("against") or [])[:3])
-            forsec = ('<div class="grp"><div class="gh" style="color:#1E8E5A">For it ✅</div>' + forrows + '</div>') if forrows else ""
-            agsec = ('<div class="grp"><div class="gh" style="color:#D23C3C">Against it \U0001F6A9</div>' + agrows + '</div>') if agrows else ""
+            forblk, agblk = p.get("for") or {}, p.get("against") or {}
+            forrows = "".join(row(r, "#1E8E5A") for r in (forblk.get("rows") or [])[:3])
+            agrows = "".join(row(r, "#D23C3C") for r in (agblk.get("rows") or [])[:3])
+            forsec = (
+                '<div class="grp forgrp"><div class="gh" style="color:#1E8E5A">For it ✅'
+                + ('<span class="gteam">' + e(forblk.get("team")) + '</span>' if forblk.get("team") else '') + '</div>' + forrows + '</div>'
+            ) if forrows else ""
+            agsec = (
+                '<div class="grp aggrp"><div class="gh" style="color:#D23C3C">Against it \U0001F6A9'
+                + ('<span class="gteam">' + e(agblk.get("team")) + '</span>' if agblk.get("team") else '') + '</div>' + agrows + '</div>'
+            ) if agrows else ""
             price = p.get("price")
             pricechip = ('<span class="price">' + e(price) + '</span>') if price else ""
             timepill = ('<span class="time">' + e(p.get("time")) + '</span>') if p.get("time") else ""
@@ -398,11 +419,21 @@ def sharpflow_html(c):
         '.price{display:inline-block;background:#ECE8DD;color:#4B5366;font-weight:700;font-size:15px;'
         'border-radius:10px;padding:6px 14px;width:fit-content}'
         '.grp{display:flex;flex-direction:column;gap:8px}'
-        '.gh{font-size:17px;font-weight:800}'
-        '.row{display:flex;justify-content:space-between;align-items:center;gap:14px;border-radius:12px;padding:14px 16px}'
-        '.rl{font-weight:800;font-size:16px}'
-        '.rn{font-size:13px;color:#6B7280;margin-top:2px}'
-        '.rr{font-weight:900;font-size:19px;white-space:nowrap}'
+        '.gh{font-size:17px;font-weight:800;display:flex;align-items:baseline;gap:8px}'
+        '.gteam{font-size:12px;font-weight:800;letter-spacing:.5px;color:#6B7280;background:#ECE8DD;border-radius:999px;'
+        'padding:2px 10px}'
+        '.forgrp .row2{background:#E7F4EC}'
+        '.aggrp .row2{background:#FDECEC}'
+        '.row2{border-radius:12px;padding:12px 16px;display:flex;flex-direction:column;gap:4px}'
+        '.rtop{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}'
+        '.rteam{font-weight:900;font-size:13px;letter-spacing:.4px}'
+        '.rwal{font-family:ui-monospace,monospace;font-size:13px;font-weight:700;color:#4B5366}'
+        '.rmk{font-size:13px;color:#6B7280}'
+        '.rrec{font-weight:900;font-size:18px;margin-left:auto}'
+        '.rn{font-size:13px;color:#6B7280}'
+        '.rbot{display:flex;align-items:baseline;gap:10px}'
+        '.rroi{font-weight:900;font-size:17px}'
+        '.rstatus{font-size:12px;font-weight:800;letter-spacing:.4px}'
         '.bl{font-size:16px;font-weight:800;margin-top:2px}'
         '.bar{display:flex;height:48px;border-radius:10px;overflow:hidden}'
         '.seg{display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden}'
