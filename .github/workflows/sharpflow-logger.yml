@@ -1,19 +1,20 @@
 # Logs SharpFlow (NHL Savant) MCP tickets and locks to the `sharpflow` branch. No Claude usage.
+# Scheduled pulls are RETIRED (Nov 18) - SF_URL is dead now that the account moved to the
+# authenticated NHL_Savant_-_Sharp_Flow MCP connector, which GitHub Actions can't reach.
+# A Claude scheduled task ("SharpFlow MCP puller + watchdog") now does the pull+push instead.
+# This workflow is kept dispatch-only, for manual Discord test posts and as a connectivity probe.
 name: SharpFlow logger
 on:
   workflow_dispatch:
     inputs:
       force_post:
-        description: 'Post flags to Discord now (test)'
+        description: 'Post flags to Discord now, old format (test)'
         required: false
         default: 'no'
-  schedule:
-    # Pulls land before each Sharp Slate read (CT = UTC-6): 8:45am, 10:30am, 1:00pm, 3:30pm, 5:40pm (+15 min backups)
-    - cron: '41,53 14 * * *'   # 8:45am CT (+ backup)
-    - cron: '27,43 16 * * *'   # 10:30am CT (+ backup)
-    - cron: '3,17 19 * * *'    # 1:00pm CT (+ backup)
-    - cron: '29,47 21 * * *'   # 3:30pm CT (+ backup)
-    - cron: '37,51 23 * * *'   # 5:40pm CT (+ backup)
+      force_post_v2:
+        description: 'Post flags to Discord now, new format with wallet/momentum checks (test)'
+        required: false
+        default: 'no'
 permissions:
   contents: write
 concurrency:
@@ -43,6 +44,13 @@ jobs:
           HOOK_SIGNALS: ${{ secrets.DISCORD_SIGNALS }}
           FORCE: ${{ github.event.inputs.force_post == 'yes' && '1' || '0' }}
         run: node scripts/sharpflow_discord.js
+      - name: Post flags to Discord, v2 format with checks (manual test only)
+        if: github.event.inputs.force_post_v2 == 'yes'
+        continue-on-error: true
+        env:
+          HOOK_SIGNALS: ${{ secrets.DISCORD_SIGNALS }}
+          FORCE: '1'
+        run: node scripts/sharpflow_discord_v2.js
       - name: Publish
         run: |
           cd sf_branch
