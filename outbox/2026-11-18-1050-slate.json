@@ -1,0 +1,30 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · MIDDAY · Wed Nov 18** · games 12:00pm to 2:59pm CT · SF not current",
+ "slate": {
+  "title": "Midday plays",
+  "stamp": "WED NOV 18 · 10:52AM",
+  "sources": "Pinnacle 10:51am CT - Vegas not readable (CBB tab members-only, selections hidden) - SharpFlow not current (snapshot 10:33pm CT Nov 17, probe failed) - Novig not read",
+  "sf_current": false,
+  "footer": "Midday window: games starting 12:00 to 2:59pm CT. SF not current, so no SharpFlow chips. Vegas could not be read today. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "RUTG@ND",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 149.5,
+    "price": -116,
+    "bet": "Over 149.5",
+    "matchup": "NCAAB - RUTG @ ND - 1:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "10:55",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   }
+  ]
+ }
+}
