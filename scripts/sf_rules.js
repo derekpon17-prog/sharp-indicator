@@ -77,6 +77,22 @@ const wordOf = t => cold(t) ? 'COLD' : status(t).t.split(/[ (]/)[0];
 const walletTxt = t => kk(t.dollars) + ' ' + (+t.vsUsual || 0).toFixed(1) + 'x ' + mkName(t.market) + ' ' + recTxt(t) + ' ' + wordOf(t);
 const isQuality = t => !cold(t) && betsOf(t.mktRecord) >= 10 && t.mktRoi != null && t.mktRoi >= 15;
 const sumD = a => a.reduce((x, t) => x + t.dollars, 0);
+// The specific bet the recommended wallet actually has - team/pick, market label if the pick text doesn't already carry a line
+// (ML tickets are usually just the team name), and price when we have it. e.g. "Hornets ML +145" or "Western Michigan -15.5".
+const recPlay = t => {
+  if (!t) return null;
+  const hasLine = /[+-]?\d/.test(t.pick);
+  const base = hasLine ? t.pick : t.pick + ' ' + mkName(t.market).toUpperCase();
+  return base + (t.price != null ? ' ' + (t.price > 0 ? '+' : '') + t.price : '');
+};
+/* Confidence (Derek, Nov 18: "I like confidence as well"): 0-9, built only from what we already know - the quality wallet's
+   ROI size and sample size, and whether the signal is one-sided or contradicted. Not a win probability, just how clean the
+   read is. EDGE starts at 6 (one side has a real quality wallet, nothing of substance against it) and climbs with a bigger
+   ROI edge (+1 at 30%+, +1 more at 50%+) and a deeper sample (+1 at 15+ bets here), capped at 9 - no play is a lock.
+   SPLIT (quality wallets disagree) sits at 4, CLEAN-but-thin (nothing against, but no real quality wallet either) at 3,
+   NO READ (nothing to lean on, or the same wallet on both sides) at 2. */
+const confFor = q => Math.min(9, 6 + (q.mktRoi >= 30 ? 1 : 0) + (q.mktRoi >= 50 ? 1 : 0) + (betsOf(q.mktRecord) >= 15 ? 1 : 0));
+const CONF_LEGEND = 'Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.';
 function matchupRow(sp, tix, grp) {
   const bySide = {};
   for (const t of tix) {
@@ -94,14 +110,25 @@ function matchupRow(sp, tix, grp) {
   const A = sides[0], B = sides[1];
   if (!A) return null;
   const nm = x => grp === 'total' ? x.name : x.name.toUpperCase();
-  let verdict;
-  if (!B) verdict = { t: 'CLEAN: nothing against', c: 'blue' };
-  else {
+  // Default headline is just the matchup (or the total); only an EDGE verdict earns a specific recommended play up top.
+  let bet = grp === 'total' ? 'Total ' + (((A.top || A.bad[0] || {}).line) ?? '') : sides.map(x => x.name).join(' vs ');
+  let verdict, confidence, rec = null;
+  if (!B) {
+    verdict = { t: 'CLEAN: nothing against', c: 'blue' };
+    if (A.q[0]) { confidence = confFor(A.q[0]); rec = recPlay(A.q[0]); bet = rec; } else confidence = 3;
+  } else {
     const qa = A.q.length > 0, qb = B.q.length > 0;
     const why = x => x.badD > 0 ? 'cold' : x.thinD > 0 ? 'thin' : 'weaker';
-    if (qa && qb) { const ia = new Set(A.q.map(t => t.wallet)); const same = B.q.every(t => ia.has(t.wallet)); verdict = same ? { t: 'NO READ: same wallet on both sides', c: 'grey' } : { t: 'SPLIT: quality wallets on both sides', c: 'orange' }; }
-    else if (qa || qb) { const w = qa ? A : B, l = qa ? B : A; verdict = { t: 'EDGE ' + nm(w) + ': quality wallets vs ' + why(l) + ' on ' + nm(l), c: 'gold' }; }
-    else verdict = { t: 'NO READ: no quality wallet on either side', c: 'grey' };
+    if (qa && qb) {
+      const ia = new Set(A.q.map(t => t.wallet)); const same = B.q.every(t => ia.has(t.wallet));
+      verdict = same ? { t: 'NO READ: same wallet on both sides', c: 'grey' } : { t: 'SPLIT: quality wallets on both sides', c: 'orange' };
+      confidence = same ? 2 : 4;
+    } else if (qa || qb) {
+      const w = qa ? A : B, l = qa ? B : A;
+      verdict = { t: 'EDGE ' + nm(w) + ': quality wallets vs ' + why(l) + ' on ' + nm(l), c: 'gold' };
+      confidence = confFor(w.q[0]);
+      rec = recPlay(w.q[0]); bet = rec;
+    } else { verdict = { t: 'NO READ: no quality wallet on either side', c: 'grey' }; confidence = 2; }
   }
   const chips = [verdict];
   if (twoSided.size) chips.push({ t: 'TWO-SIDED: ' + [...twoSided].join(', ') + ' bet both sides - never counted as quality', c: 'grey' });
@@ -109,7 +136,6 @@ function matchupRow(sp, tix, grp) {
     if (x.top) chips.push({ t: nm(x) + ' ' + kk(x.goodD) + ' - ' + x.good.slice(0, 2).map(walletTxt).join('; '), c: x.top.mktRoi != null && isQuality(x.top) && !twoSided.has(x.top.wid) ? (hotWins(x.top.form) >= 8 ? 'gold' : 'green') : 'grey' });
     if (x.bad.length) chips.push({ t: nm(x) + ' COLD ' + kk(x.badD) + ' - ' + walletTxt(x.bad[0]) + ' - not counted', c: 'red' });
   }
-  const bet = grp === 'total' ? 'Total ' + (((A.top || A.bad[0] || {}).line) ?? '') : sides.map(x => x.name).join(' vs ');
-  return { bet, chips, goodD: A.goodD, sides };
+  return { bet, rec, confidence, chips, goodD: A.goodD, sides };
 }
-module.exports = { formRoi, matchupRow,  isOpposed, againstChips,  status, simpleChips,  cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };
+module.exports = { formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };
