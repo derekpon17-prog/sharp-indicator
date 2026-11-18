@@ -103,19 +103,8 @@ const rows = send.map(s => {
   const mk = s.market === 'ML' ? 'ML' : s.market === 'SPREAD' ? 'spread' : 'total';
   const line = s.big.line != null ? s.big.line : null;
   let bet = s.market === 'ML' ? s.pick + ' ML' : /\d/.test(s.pick) ? s.pick : s.pick + (line != null ? ' ' + (s.market === 'SPREAD' && line > 0 ? '+' : '') + line : ' spread');
-  const chips = [];
-  chips.push({ t: s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)}` : `NEW ${k(s.good)} vs ${k(s.oppD)}`, c: s.oppD >= s.good / 2 ? 'orange' : 'blue' });
-  const nb = bets(s.big.mktRecord);
-  if (s.big.mktRecord && s.big.mktRoi != null) chips.push({ t: `${s.sp} ${mk}: ${s.big.mktRecord} (${s.big.mktRoi >= 0 ? '+' : ''}${Math.round(s.big.mktRoi)}% ROI)`, c: nb < 5 ? 'orange' : s.big.mktRoi >= 15 ? 'green' : 'grey' });
-  else chips.push({ t: `no ${s.sp} ${mk} record`, c: 'orange' });
-  if (nb > 0 && nb < 5) chips.push({ t: `only ${nb} bet${nb === 1 ? '' : 's'} here`, c: 'orange' });
-  if (s.big.mktL30Rec) chips.push({ t: `30d here ${s.big.mktL30Rec}`, c: 'grey' });
-  chips.push(R.sizeChip(s.sp, s.vs, s.big.form));
-  if (s.big.usualAll) { const r = s.big.dollars / s.big.usualAll; chips.push({ t: `${r.toFixed(1)}x their all-sport usual`, c: r < 0.75 && s.vs >= 1.5 ? 'orange' : 'grey' }); }
-  if (s.wallets > 1) chips.push({ t: `${s.wallets} wallets (same-side, not independent)`, c: 'grey' });
-  chips.push(...R.segmentChips(s.sp, s.market));
-  const sp1 = specOf(s.sp, s.ts); if (sp1) chips.unshift({ t: `TOP ${s.sp} WALLET: ${sp1.sport} ${s.sp} vs ${sp1.overall} overall`, c: 'gold' });
-  const sp2 = specOf(s.sp, s.oppTs); if (sp2) chips.push({ t: `top ${s.sp} wallet on the other side (${sp2.sport})`, c: 'red' });
+  const sp1 = specOf(s.sp, s.ts);
+  const chips = R.simpleChips({ sp: s.sp, mk, moneyTxt: s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)} vs ${k(s.oppD)}` : `NEW ${k(s.good)} vs ${k(s.oppD)}`, orange: s.oppD >= s.good / 2, vs: s.vs, big: s.big, sportRec: sp1 ? sp1.sport : null });
   const price = parseFloat(String(s.big.price).replace('+', ''));
   return { st: s.st, sp: s.sp, bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: Number.isFinite(price) ? price : null, chips, usual: +s.vs };
 });

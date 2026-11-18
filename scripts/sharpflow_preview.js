@@ -108,24 +108,10 @@ function buildCards(sp, latest, flags) {
     if (s.market === 'ML') bet = s.pick + ' ML';
     else if (/\d/.test(s.pick)) bet = s.pick;
     else bet = s.pick + (line != null ? ' ' + (s.market === 'SPREAD' && line > 0 ? '+' : '') + line : ' spread');
-    const chips = [];
-    chips.push({ t: `SHARP ${k(s.dollars)} vs ${k(s.oppD)}`, c: s.oppD >= s.dollars / 2 ? 'orange' : 'blue' });
     const mk = s.market === 'ML' ? 'ML' : s.market === 'SPREAD' ? 'spread' : 'total';
-    const nb = bets(s.big.mktRecord);
-    if (s.big.mktRecord && s.big.mktRoi != null) chips.push({ t: `${sp} ${mk}: ${s.big.mktRecord} (${s.big.mktRoi >= 0 ? '+' : ''}${Math.round(s.big.mktRoi)}% ROI)`, c: nb < 5 ? 'orange' : s.big.mktRoi >= 15 ? 'green' : 'grey' });
-    else chips.push({ t: `no ${sp} ${mk} record`, c: 'orange' });
-    if (nb > 0 && nb < 5) chips.push({ t: `only ${nb} bet${nb === 1 ? "" : "s"} here`, c: 'orange' });
-    if (s.big.mktL30Rec) chips.push({ t: `30d here ${s.big.mktL30Rec}`, c: 'grey' });
-    chips.push(R.sizeChip(sp, s.vs, s.big.form));
-    if (s.big.usualAll) { const r = s.big.dollars / s.big.usualAll; chips.push({ t: `${r.toFixed(1)}x their all-sport usual`, c: r < 0.75 && s.vs >= 1.5 ? 'orange' : 'grey' }); }
-    if (s.wallets > 1) chips.push({ t: `${s.wallets} wallets (same-side, not independent)`, c: 'grey' });
-    chips.push(...R.segmentChips(sp, s.market));
     const specOf = (ts) => { const ids = new Set(ts.map(t => t.wid).filter(Boolean)); return (SPEC[sp] || []).filter(x => x.gap > 0 && ids.has(x.id)).sort((a, b) => b.gap - a.gap)[0]; };
     const sp1 = specOf(s.ts);
-    if (sp1) chips.unshift({ t: `TOP ${sp} WALLET: ${sp1.sport} ${sp} vs ${sp1.overall} overall`, c: 'gold' });
-    const oppTs = Object.entries(s.byPick || {}).filter(([p]) => p !== s.pick && opp(s.pick, p, s.market)).flatMap(([, x]) => x).filter(t => !cold(t));
-    const sp2 = specOf(oppTs);
-    if (sp2) chips.push({ t: `top ${sp} wallet on the other side (${sp2.sport})`, c: 'red' });
+    const chips = R.simpleChips({ sp, mk, moneyTxt: `${k(s.dollars)} vs ${k(s.oppD)}`, orange: s.oppD >= s.dollars / 2, vs: s.vs, big: s.big, sportRec: sp1 ? sp1.sport : null });
     const price = num(s.big.price);
     return { st: s.st, bet: (s.tail ? '★ ' : '') + bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: Number.isFinite(price) ? price : null, chips, usual: +s.vs };
   });
@@ -145,7 +131,7 @@ function buildCards(sp, latest, flags) {
     const last = i + 12 >= rows.length || cards.length === 2;
     const coldTxt = last && coldSides.length ? 'Not counted (negative market ROI or cold last 30 days): ' + coldSides.slice(0, 3).map(c => c.txt).join('; ') : '';
     cards.push({ brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with positive ${sp} market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
-      sections: secs, legend: coldTxt || 'Big number = biggest bet vs that wallet’s usual size in this sport. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
+      sections: secs, legend: coldTxt || 'Money for vs against. HOT = last 10 8+ wins. GOOD = positive ROI. COLD = poor recent form. THIN = under 5 bets. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
   }
   return { cards, n: rows.length, data, cold: coldSides };
 }

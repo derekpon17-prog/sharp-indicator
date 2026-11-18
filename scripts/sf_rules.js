@@ -22,4 +22,24 @@ function segmentChips(sp, mk) {
   if (mk === 'SPREAD') out.push({ t: 'spreads: lower confidence', c: 'orange' });
   return out;
 }
-module.exports = { cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };
+
+/* Simple card view (Derek, Nov 17 6:25pm CT: "too much noise"): four chips per play.
+   1 money for vs against, 2 x their usual bet, 3 sport record plus market record, 4 form label HOT / GOOD / COLD / THIN. */
+const betsOf = rec => { const m = String(rec || '').match(/^(\d+)-(\d+)/); return m ? +m[1] + +m[2] : 0; };
+function status(t) {
+  const nb = betsOf(t.mktRecord), w = hotWins(t.form), l = (String(t.form || '').match(/L10 \d+-(\d+)/) || [])[1];
+  if (nb < 5) return { t: 'THIN - ' + nb + ' bet' + (nb === 1 ? '' : 's') + ' here', c: 'grey' };
+  if ((t.mktRoi != null && t.mktRoi <= 0) || (t.l30Roi != null && t.l30Roi <= 0) || (w != null && w <= 3)) return { t: 'COLD', c: 'red' };
+  if (w != null && w >= 8) return { t: 'HOT (last 10: ' + w + '-' + l + ')', c: 'gold' };
+  return { t: 'GOOD', c: 'green' };
+}
+function simpleChips({ sp, mk, moneyTxt, orange, vs, big, sportRec }) {
+  const chips = [{ t: moneyTxt, c: orange ? 'orange' : 'blue' }];
+  chips.push({ t: (+vs).toFixed(1) + 'x their bet', c: 'grey' });
+  const mrec = big.mktRecord ? mk + ' ' + big.mktRecord + (big.mktRoi != null ? ' (' + (big.mktRoi >= 0 ? '+' : '') + Math.round(big.mktRoi) + '%)' : '') : 'no ' + mk + ' record';
+  const srec = sportRec ? sp + ' ' + sportRec + ' | ' : big.l30Rec ? sp + ' L30 ' + big.l30Rec + ' | ' : '';
+  chips.push({ t: srec + mrec, c: 'grey' });
+  chips.push(status(big));
+  return chips;
+}
+module.exports = { status, simpleChips,  cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };
