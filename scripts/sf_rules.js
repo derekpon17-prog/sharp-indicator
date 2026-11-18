@@ -33,13 +33,38 @@ function status(t) {
   if (w != null && w >= 8) return { t: 'HOT (last 10: ' + w + '-' + l + ')', c: 'gold' };
   return { t: 'GOOD', c: 'green' };
 }
-function simpleChips({ sp, mk, moneyTxt, orange, vs, big, sportRec }) {
+function simpleChips({ sp, mk, moneyTxt, orange, vs, big, sportRec, opp }) {
   const chips = [{ t: moneyTxt, c: orange ? 'orange' : 'blue' }];
   chips.push({ t: (+vs).toFixed(1) + 'x their bet', c: 'grey' });
   const mrec = big.mktRecord ? mk + ' ' + big.mktRecord + (big.mktRoi != null ? ' (' + (big.mktRoi >= 0 ? '+' : '') + Math.round(big.mktRoi) + '%)' : '') : 'no ' + mk + ' record';
   const srec = sportRec ? sp + ' ' + sportRec + ' | ' : big.l30Rec ? sp + ' L30 ' + big.l30Rec + ' | ' : '';
   chips.push({ t: srec + mrec, c: 'grey' });
   chips.push(status(big));
+  if (opp) chips.push(...againstChips(opp));
   return chips;
 }
-module.exports = { status, simpleChips,  cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };
+
+/* Opposed money (Derek, Nov 17 8:58pm CT): show who is on the other side, with records, and flag a COLD wallet against. ML and spread
+   both count as team-sided, so Lakers -7.5 is against Hornets ML. Totals only oppose the other total side. */
+const teamOf = p => String(p).replace(/\s*[+-]?\d+(\.\d+)?$/, '').trim();
+function isOpposed(pickA, mkA, pickB, mkB) {
+  if (mkA === 'TOTAL' || mkB === 'TOTAL') return mkA === mkB && /^over/i.test(pickA) !== /^over/i.test(pickB);
+  return teamOf(pickA) !== teamOf(pickB);
+}
+const mkName = m => m === 'ML' ? 'ML' : m === 'SPREAD' ? 'spread' : 'total';
+const kk = n => n >= 1000 ? '$' + (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'K' : '$' + Math.round(n);
+const recTxt = t => (t.mktRecord || 'no record') + (t.mktRoi != null ? ' (' + (t.mktRoi >= 0 ? '+' : '') + Math.round(t.mktRoi) + '%)' : '');
+function againstChips(opp) {
+  const good = opp.filter(t => !cold(t)).sort((a, b) => b.dollars - a.dollars), bad = opp.filter(cold).sort((a, b) => b.dollars - a.dollars);
+  const chips = [];
+  if (good.length) {
+    const b = good[0], st = status(b), tot = good.reduce((a, t) => a + t.dollars, 0);
+    chips.push({ t: 'AGAINST ' + kk(tot) + ': ' + kk(b.dollars) + ' ' + mkName(b.market) + ' ' + recTxt(b) + ' - ' + st.t, c: st.c === 'red' || st.c === 'grey' ? 'grey' : 'orange' });
+  }
+  if (bad.length) {
+    const b = bad[0], tot = bad.reduce((a, t) => a + t.dollars, 0);
+    chips.push({ t: 'COLD wallet against: ' + kk(tot) + ' (' + kk(b.dollars) + ' ' + mkName(b.market) + ' ' + recTxt(b) + ') - not counted', c: 'red' });
+  }
+  return chips;
+}
+module.exports = { isOpposed, againstChips,  status, simpleChips,  cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };

@@ -84,7 +84,8 @@ function buildCards(sp, latest, flags) {
     for (const t of arr) (byPick[t.pick] ||= []).push(t);
     for (const [pick, ts] of Object.entries(byPick)) {
       const all = sum(ts, () => true), good = sum(ts, t => !cold(t));
-      const oppD = Object.entries(byPick).filter(([p]) => p !== pick && opp(pick, p, ts[0].market)).reduce((a, [, x]) => a + sum(x, t => !cold(t)), 0);
+      const oppAll = tickets.filter(t => t.matchup === ts[0].matchup && R.isOpposed(pick, ts[0].market, t.pick, t.market));
+      const oppD = oppAll.filter(t => !cold(t)).reduce((a, t) => a + t.dollars, 0);
       const FL = R.floorFor(MIN_DOLLARS, sp, ts[0].market);
       if (all >= FL && good < FL) {
         const cb = ts.filter(cold).sort((a, b) => b.dollars - a.dollars)[0];
@@ -95,7 +96,7 @@ function buildCards(sp, latest, flags) {
       const gt = ts.filter(t => !cold(t));
       const big = gt.slice().sort((a, b) => b.dollars - a.dollars)[0];
       const wallets = new Set(gt.map(t => t.wallet)).size;
-      sides.push({ byPick, ts: gt, pick, dollars: good, oppD, big, wallets, vs: Math.max(...gt.map(t => t.vsUsual || 0)), st: ts[0].st, matchup: ts[0].matchup, market: ts[0].market,
+      sides.push({ byPick, ts: gt, pick, dollars: good, oppD, oppAll, big, wallets, vs: Math.max(...gt.map(t => t.vsUsual || 0)), st: ts[0].st, matchup: ts[0].matchup, market: ts[0].market,
         tail: tails.has([ts[0].matchup, ts[0].market, pick].join('|')) });
     }
   }
@@ -111,7 +112,7 @@ function buildCards(sp, latest, flags) {
     const mk = s.market === 'ML' ? 'ML' : s.market === 'SPREAD' ? 'spread' : 'total';
     const specOf = (ts) => { const ids = new Set(ts.map(t => t.wid).filter(Boolean)); return (SPEC[sp] || []).filter(x => x.gap > 0 && ids.has(x.id)).sort((a, b) => b.gap - a.gap)[0]; };
     const sp1 = specOf(s.ts);
-    const chips = R.simpleChips({ sp, mk, moneyTxt: `${k(s.dollars)} vs ${k(s.oppD)}`, orange: s.oppD >= s.dollars / 2, vs: s.vs, big: s.big, sportRec: sp1 ? sp1.sport : null });
+    const chips = R.simpleChips({ sp, mk, moneyTxt: `${k(s.dollars)} vs ${k(s.oppD)}`, orange: s.oppD >= s.dollars / 2, vs: s.vs, big: s.big, sportRec: sp1 ? sp1.sport : null, opp: s.oppAll });
     const price = num(s.big.price);
     return { st: s.st, bet: (s.tail ? '★ ' : '') + bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: Number.isFinite(price) ? price : null, chips, usual: +s.vs };
   });

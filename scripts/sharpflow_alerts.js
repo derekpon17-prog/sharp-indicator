@@ -56,8 +56,9 @@ for (const arr of Object.values(groups)) {
     const gt = ts.filter(t => !cold(t));
     const good = gt.reduce((a, t) => a + t.dollars, 0);
     if (good < R.floorFor(MIN_DOLLARS, ts[0].sport, ts[0].market)) continue;
-    const oppTs = Object.entries(byPick).filter(([p]) => p !== pick && opp(pick, p, ts[0].market)).flatMap(([, x]) => x).filter(t => !cold(t));
-    sides.push({ key: key(ts[0].sport, ts[0].matchup, ts[0].market, pick), sp: ts[0].sport, matchup: ts[0].matchup, market: ts[0].market, pick, ts: gt, oppTs,
+    const oppAll = (latest.tickets || []).filter(t => t.sport === ts[0].sport && t.matchup === ts[0].matchup && R.isOpposed(pick, ts[0].market, t.pick, t.market));
+    const oppTs = oppAll.filter(t => !cold(t));
+    sides.push({ key: key(ts[0].sport, ts[0].matchup, ts[0].market, pick), sp: ts[0].sport, matchup: ts[0].matchup, market: ts[0].market, pick, ts: gt, oppTs, oppAll,
       good, oppD: oppTs.reduce((a, t) => a + t.dollars, 0), st: ts[0].st, big: gt.slice().sort((a, b) => b.dollars - a.dollars)[0],
       wallets: new Set(gt.map(t => t.wallet)).size, vs: Math.max(...gt.map(t => t.vsUsual || 0)) });
   }
@@ -104,7 +105,7 @@ const rows = send.map(s => {
   const line = s.big.line != null ? s.big.line : null;
   let bet = s.market === 'ML' ? s.pick + ' ML' : /\d/.test(s.pick) ? s.pick : s.pick + (line != null ? ' ' + (s.market === 'SPREAD' && line > 0 ? '+' : '') + line : ' spread');
   const sp1 = specOf(s.sp, s.ts);
-  const chips = R.simpleChips({ sp: s.sp, mk, moneyTxt: s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)} vs ${k(s.oppD)}` : `NEW ${k(s.good)} vs ${k(s.oppD)}`, orange: s.oppD >= s.good / 2, vs: s.vs, big: s.big, sportRec: sp1 ? sp1.sport : null });
+  const chips = R.simpleChips({ sp: s.sp, mk, moneyTxt: s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)} vs ${k(s.oppD)}` : `NEW ${k(s.good)} vs ${k(s.oppD)}`, orange: s.oppD >= s.good / 2, vs: s.vs, big: s.big, sportRec: sp1 ? sp1.sport : null, opp: s.oppAll });
   const price = parseFloat(String(s.big.price).replace('+', ''));
   return { st: s.st, sp: s.sp, bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: Number.isFinite(price) ? price : null, chips, usual: +s.vs };
 });
