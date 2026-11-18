@@ -5,9 +5,11 @@
    3. Wallet count is shown but not treated as extra confirmation (several sharps pile onto the same side together).
    4. Floors by segment: base $1K; NHL x2.5 (cold); spreads x1.5 (our spreads ran 12-18). NBA ML and NFL keep the base floor. */
 const coldMkt = t => t.mktRoi != null && t.mktRoi <= 0;
-const coldForm = t => t.l30Roi != null && t.l30Roi <= 0;
+// Nov 18 (owner's point: wallet + market): last-30 ROI in THIS market when known, else the sport-wide last-30 ROI.
+const formRoi = t => t.mktL30Roi != null ? t.mktL30Roi : t.l30Roi;
+const coldForm = t => formRoi(t) != null && formRoi(t) <= 0;
 const cold = t => coldMkt(t) || coldForm(t);
-const coldWhy = t => coldMkt(t) ? `${t.mktRecord} here, ${Math.round(t.mktRoi)}% ROI` : `cold form ${t.l30Rec || ''} L30, ${Math.round(t.l30Roi)}% ROI`;
+const coldWhy = t => coldMkt(t) ? `${t.mktRecord} here, ${Math.round(t.mktRoi)}% ROI` : `cold form ${t.mktL30Roi != null ? (t.mktL30Rec || '') + ' L30 here' : (t.l30Rec || '') + ' L30'}, ${Math.round(formRoi(t))}% ROI`;
 const hotWins = f => { const m = String(f || '').match(/L10 (\d+)-(\d+)/); return m ? +m[1] : null; };
 const SPORT_MULT = { NHL: 2.5 }, MARKET_MULT = { SPREAD: 1.5 };
 const floorFor = (base, sp, mk) => Math.round(base * (SPORT_MULT[sp] || 1) * (MARKET_MULT[mk] || 1));
@@ -29,7 +31,7 @@ const betsOf = rec => { const m = String(rec || '').match(/^(\d+)-(\d+)/); retur
 function status(t) {
   const nb = betsOf(t.mktRecord), w = hotWins(t.form), l = (String(t.form || '').match(/L10 \d+-(\d+)/) || [])[1];
   if (nb < 5) return { t: 'THIN - ' + nb + ' bet' + (nb === 1 ? '' : 's') + ' here', c: 'grey' };
-  if ((t.mktRoi != null && t.mktRoi <= 0) || (t.l30Roi != null && t.l30Roi <= 0) || (w != null && w <= 3)) return { t: 'COLD', c: 'red' };
+  if ((t.mktRoi != null && t.mktRoi <= 0) || (formRoi(t) != null && formRoi(t) <= 0) || (w != null && w <= 3)) return { t: 'COLD', c: 'red' };
   if (w != null && w >= 8) return { t: 'HOT (last 10: ' + w + '-' + l + ')', c: 'gold' };
   return { t: 'GOOD', c: 'green' };
 }
@@ -81,9 +83,12 @@ function matchupRow(sp, tix, grp) {
     const key = grp === 'total' ? (/^over/i.test(t.pick) ? 'Over' : 'Under') : teamOf(t.pick);
     (bySide[key] ||= []).push(t);
   }
+  const widsOf = ts => new Set(ts.map(t => t.wid).filter(Boolean));
+  const keys = Object.keys(bySide), twoSided = new Set();
+  if (keys.length > 1) for (const w of widsOf(bySide[keys[0]])) if (keys.slice(1).some(k2 => widsOf(bySide[k2]).has(w))) twoSided.add(w);
   const sides = Object.entries(bySide).map(([name, ts]) => {
     const good = ts.filter(t => !cold(t)).sort((a, b) => b.dollars - a.dollars), bad = ts.filter(cold).sort((a, b) => b.dollars - a.dollars);
-    const q = good.filter(isQuality);
+    const q = good.filter(t => isQuality(t) && !twoSided.has(t.wid));
     return { name, good, bad, q, goodD: sumD(good), badD: sumD(bad), thinD: sumD(good.filter(t => betsOf(t.mktRecord) < 5)), top: q[0] || good[0] };
   }).sort((a, b) => b.goodD - a.goodD || b.badD - a.badD);
   const A = sides[0], B = sides[1];
@@ -99,11 +104,12 @@ function matchupRow(sp, tix, grp) {
     else verdict = { t: 'NO READ: no quality wallet on either side', c: 'grey' };
   }
   const chips = [verdict];
+  if (twoSided.size) chips.push({ t: 'TWO-SIDED: ' + [...twoSided].join(', ') + ' bet both sides - never counted as quality', c: 'grey' });
   for (const x of sides.slice(0, 2)) {
-    if (x.top) chips.push({ t: nm(x) + ' ' + kk(x.goodD) + ' - ' + x.good.slice(0, 2).map(walletTxt).join('; '), c: x.top.mktRoi != null && isQuality(x.top) ? (hotWins(x.top.form) >= 8 ? 'gold' : 'green') : 'grey' });
+    if (x.top) chips.push({ t: nm(x) + ' ' + kk(x.goodD) + ' - ' + x.good.slice(0, 2).map(walletTxt).join('; '), c: x.top.mktRoi != null && isQuality(x.top) && !twoSided.has(x.top.wid) ? (hotWins(x.top.form) >= 8 ? 'gold' : 'green') : 'grey' });
     if (x.bad.length) chips.push({ t: nm(x) + ' COLD ' + kk(x.badD) + ' - ' + walletTxt(x.bad[0]) + ' - not counted', c: 'red' });
   }
   const bet = grp === 'total' ? 'Total ' + (((A.top || A.bad[0] || {}).line) ?? '') : sides.map(x => x.name).join(' vs ');
   return { bet, chips, goodD: A.goodD, sides };
 }
-module.exports = { matchupRow,  isOpposed, againstChips,  status, simpleChips,  cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };
+module.exports = { formRoi, matchupRow,  isOpposed, againstChips,  status, simpleChips,  cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips };
