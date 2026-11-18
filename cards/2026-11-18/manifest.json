@@ -1,0 +1,182 @@
+[
+ {
+  "file": "01-nba-raptors.png",
+  "sfPoints": 33,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Wizards at Raptors",
+  "pick": "Raptors",
+  "market": "ML"
+ },
+ {
+  "file": "02-nba-celtics.png",
+  "sfPoints": 28,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Celtics at Nuggets",
+  "pick": "Celtics",
+  "market": "ML"
+ },
+ {
+  "file": "03-nba-raptors-6-5.png",
+  "sfPoints": 27,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Wizards at Raptors",
+  "pick": "Raptors -6.5",
+  "market": "SPREAD"
+ },
+ {
+  "file": "04-nba-over-222-5.png",
+  "sfPoints": 25,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Warriors at Mavericks",
+  "pick": "Over 222.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "05-nba-lakers.png",
+  "sfPoints": 25,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Jazz at Lakers",
+  "pick": "Lakers",
+  "market": "ML"
+ },
+ {
+  "file": "06-nba-76ers.png",
+  "sfPoints": 19,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "76ers at Magic",
+  "pick": "76ers",
+  "market": "ML"
+ },
+ {
+  "file": "07-nba-suns.png",
+  "sfPoints": 19,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Suns at Kings",
+  "pick": "Suns",
+  "market": "ML"
+ },
+ {
+  "file": "08-nfl-texans.png",
+  "sfPoints": 17,
+  "verdict": "clear",
+  "sport": "NFL",
+  "matchup": "Colts at Texans",
+  "pick": "Texans",
+  "market": "ML"
+ },
+ {
+  "file": "09-cbb-over.png",
+  "sfPoints": 17,
+  "verdict": "clear",
+  "sport": "CBB",
+  "matchup": "Tennessee Tech Golden Eagles at UNC Asheville Bulldogs",
+  "pick": "Over",
+  "market": "TOTAL"
+ },
+ {
+  "file": "10-nba-under-238-5.png",
+  "sfPoints": 13,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Bulls at Nets",
+  "pick": "Under 238.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "11-nba-over-221-5.png",
+  "sfPoints": 13,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "76ers at Magic",
+  "pick": "Over 221.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "12-nba-heat.png",
+  "sfPoints": 11,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Bucks at Heat",
+  "pick": "Heat",
+  "market": "ML"
+ },
+ {
+  "file": "13-nhl-over-5-5.png",
+  "sfPoints": 11,
+  "verdict": "caution",
+  "sport": "NHL",
+  "matchup": "Avalanche at Utah",
+  "pick": "Over 5.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "14-nba-bucks-11-5.png",
+  "sfPoints": 7,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Bucks at Heat",
+  "pick": "Bucks +11.5",
+  "market": "SPREAD"
+ },
+ {
+  "file": "15-nba-mavericks-6-5.png",
+  "sfPoints": 7,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Warriors at Mavericks",
+  "pick": "Mavericks -6.5",
+  "market": "SPREAD"
+ },
+ {
+  "file": "16-nba-rockets.png",
+  "sfPoints": 7,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Rockets at Pacers",
+  "pick": "Rockets",
+  "market": "ML"
+ },
+ {
+  "file": "17-nba-pistons.png",
+  "sfPoints": 7,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Pistons at Pelicans",
+  "pick": "Pistons",
+  "market": "ML"
+ },
+ {
+  "file": "18-nba-mavericks.png",
+  "sfPoints": 7,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Warriors at Mavericks",
+  "pick": "Mavericks",
+  "market": "ML"
+ },
+ {
+  "file": "19-nba-under-224-5.png",
+  "sfPoints": 6,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Warriors at Mavericks",
+  "pick": "Under 224.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "20-nba-heat.png",
+  "sfPoints": 0,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Bucks at Heat",
+  "pick": "Heat",
+  "market": "SPREAD"
+ }
+]
