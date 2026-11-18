@@ -1,0 +1,28 @@
+name: PM probe (temp)
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe time windows and ordering
+        run: |
+          echo "---SPORTS timePeriod=WEEK---"
+          curl -sS "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&timePeriod=WEEK&orderBy=PNL&limit=3" | head -c 1200
+          echo
+          echo "---SPORTS timePeriod=MONTH---"
+          curl -sS "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&timePeriod=MONTH&orderBy=PNL&limit=3" | head -c 1200
+          echo
+          echo "---ascending via orderDirection=ASC---"
+          curl -sS "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&timePeriod=WEEK&orderBy=PNL&orderDirection=ASC&limit=5" | head -c 1500
+          echo
+          echo "---ascending via order=asc---"
+          curl -sS "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&timePeriod=WEEK&orderBy=PNL&order=asc&limit=5" | head -c 1500
+          echo
+          echo "---ascending via sortDirection=asc---"
+          curl -sS "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&timePeriod=WEEK&orderBy=PNL&sortDirection=asc&limit=5" | head -c 1500
+          echo
+          echo "---negative orderBy -PNL---"
+          curl -sS "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&timePeriod=WEEK&orderBy=-PNL&limit=5" | head -c 1500
