@@ -1,20 +1,34 @@
-/* Sharp Flow preview card: one card per sport, about 60 minutes before that sport's first game of the day. No Claude.
-   MODE=plan  -> checks ESPN for each sport's first start; writes due sports to $GITHUB_OUTPUT (due=NFL,NBA ...). Cheap, no SharpFlow call.
-   MODE=build -> reads the fresh sf_branch/latest.json + flags.json, writes one outbox card per due sport into CARD_DIR,
-                 records the sport as posted in sf_branch/previews.json (only when a card was written).
+/* Sharp Flow preview card: one card per sport, built for that sport's MAIN SLATE (the cluster of
+   games most of the day's action falls in), not just the single earliest game.
+   Deadline rule (Derek, Nov 18 2026): post at least MIN_LEAD minutes before the main slate's first
+   kickoff, but never later than DEADLINE_HOUR CT (default 5pm) even if the slate itself starts well
+   after that - whichever is earlier. A one-off game that starts OUTLIER_GAP+ minutes before the rest
+   of that sport's slate (e.g. an NFL London game on a Sunday morning) is treated separately: it gets
+   its own early card (scoped to just the games before the main cluster) and its own "posted" flag, so
+   it never consumes the main slate's flag and the main slate still gets its own card later.
+   MODE=plan  -> checks ESPN for each sport's games today; writes due tokens to $GITHUB_OUTPUT
+                 (due=NFL,NBA_OUTLIER,...). A "_OUTLIER" suffix means the one-off card, not the main slate.
+                 Cheap, no SharpFlow call.
+   MODE=build -> reads the fresh sf_branch/latest.json + flags.json, writes one outbox card per due
+                 token into CARD_DIR, records it as posted in sf_branch/previews.json (only when a
+                 card was actually written).
    Test: FAKE_NOW=2026-11-15T23:00:00Z, SPORTS=NFL, OUT_DIR=/tmp/sf, CARD_DIR=/tmp/cards, ESPN_OFF=1 (use ticket times instead of ESPN). */
 const fs = require('fs');
 const OUT = process.env.OUT_DIR || 'sf_branch';
 const CARD_DIR = process.env.CARD_DIR || 'cards';
 const MODE = process.env.MODE || 'plan';
 const now = process.env.FAKE_NOW ? new Date(process.env.FAKE_NOW) : new Date();
-const LEAD_MAX = +(process.env.LEAD_MAX || 75), LEAD_MIN = +(process.env.LEAD_MIN || 3); // post when first start is 3-75 min away
+const MIN_LEAD = +(process.env.MIN_LEAD || 60);          // post no later than this many minutes before kickoff
+const RETRY_WINDOW = +(process.env.RETRY_WINDOW || 70);  // start trying this many minutes before the deadline, and keep retrying every run up to kickoff if missed
+const DEADLINE_HOUR = +(process.env.DEADLINE_HOUR || 17); // wall-clock cap, CT, 24h (17 = 5pm) - main slate only
+const OUTLIER_GAP = +(process.env.OUTLIER_GAP || 120);    // minutes of gap that marks a game as a one-off ahead of the main slate
 const MIN_DOLLARS = +(process.env.MIN_DOLLARS || 500);
 const ESPN = { NFL: 'football/nfl', CFB: 'football/college-football', NBA: 'basketball/nba', WNBA: 'basketball/wnba',
   CBB: 'basketball/mens-college-basketball', NHL: 'hockey/nhl', MLB: 'baseball/mlb' };
 const ctDay = d => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' }).format(d);
 const today = ctDay(now);
 const etOffset = (() => { const s = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', timeZoneName: 'shortOffset' }).format(now); const m = s.match(/GMT([+-]\d+)/); return m ? -parseInt(m[1], 10) : 5; })();
+const ctOffset = (() => { const s = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', timeZoneName: 'shortOffset' }).format(now); const m = s.match(/GMT([+-]\d+)/); return m ? -parseInt(m[1], 10) : 6; })();
 function startUtc(k) { // "Sun, Nov 15, 8:22 PM" (ET)
   const m = (k || '').match(/(\w+), (\w+) (\d+), (\d+):(\d+) (AM|PM)/); if (!m) return null;
   const h = +m[4] % 12 + (m[6] === 'PM' ? 12 : 0);
@@ -26,8 +40,10 @@ const k = n => n >= 1000 ? '$' + (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(
 let SPEC = {}; try { SPEC = JSON.parse(fs.readFileSync(OUT + '/specialists.json', 'utf8')).sports || {}; } catch {}
 let posted = {}; try { posted = JSON.parse(fs.readFileSync(OUT + '/previews.json', 'utf8')); } catch {}
 const done = new Set(posted[today] || []);
+// 5pm (DEADLINE_HOUR) CT today, as a real UTC Date, same trick as startUtc's ET offset above.
+const deadlineToday = new Date(new Date(`${today}T${String(DEADLINE_HOUR).padStart(2, '0')}:00:00Z`).getTime() + ctOffset * 3600000);
 
-async function firstStarts() { // sport -> Date of the first game that has not started, today (CT)
+async function allStarts() { // sport -> sorted array of today's not-yet-started game Dates
   const out = {};
   const ymd = today.replace(/-/g, '');
   const want = (process.env.SPORTS ? process.env.SPORTS.split(',') : Object.keys(ESPN));
@@ -38,29 +54,50 @@ async function firstStarts() { // sport -> Date of the first game that has not s
         const r = await fetch(`https://site.api.espn.com/apis/site/v2/sports/${ESPN[sp]}/scoreboard?dates=${ymd}${extra}`, { signal: AbortSignal.timeout(20000) });
         const j = await r.json();
         const ts = (j.events || []).filter(e => e.status?.type?.state === 'pre').map(e => new Date(e.date)).filter(d => ctDay(d) === today && d > now).sort((a, b) => a - b);
-        if (ts.length) out[sp] = ts[0];
+        if (ts.length) out[sp] = ts;
       } catch (e) { console.log('espn failed', sp, e.message); }
     }));
   }
   return { out, want };
 }
 
-function ticketStarts(latest, want) { // fallback / test: first start seen on SharpFlow tickets
+function ticketStarts(latest, want) { // fallback / test: every start seen on SharpFlow tickets
   const out = {};
   for (const t of latest.tickets || []) {
     if (!want.includes(t.sport)) continue;
     const st = startUtc(t.kickoffEt); if (!st || st <= now || ctDay(st) !== today) continue;
-    if (!out[t.sport] || st < out[t.sport]) out[t.sport] = st;
+    (out[t.sport] ||= []).push(st);
   }
+  for (const sp of Object.keys(out)) out[sp].sort((a, b) => a - b);
   return out;
 }
 
-function dueList(starts) {
+// Splits today's sorted start times into { mainStart, outliers }. outliers are games that sit
+// OUTLIER_GAP+ minutes ahead of the next game - a one-off slate (e.g. an early-morning game) that
+// shouldn't anchor, or get bundled into, the main slate's own deadline.
+function clusterStarts(times) {
+  if (!times.length) return null;
+  let i = 0;
+  while (i < times.length - 1 && (times[i + 1] - times[i]) / 60000 > OUTLIER_GAP) i++;
+  return { mainStart: times[i], outliers: times.slice(0, i) };
+}
+
+function dueList(startsAll) {
   const due = [];
-  for (const [sp, st] of Object.entries(starts)) {
-    const lead = (st - now) / 60000;
-    if (done.has(sp)) continue;
-    if (lead <= LEAD_MAX && lead >= LEAD_MIN) due.push(sp);
+  for (const [sp, times] of Object.entries(startsAll)) {
+    const cluster = clusterStarts(times);
+    if (!cluster) continue;
+    if (!done.has(sp) && cluster.mainStart > now) {
+      const mainDeadline = new Date(Math.min(cluster.mainStart.getTime() - MIN_LEAD * 60000, deadlineToday.getTime()));
+      if (now >= new Date(mainDeadline.getTime() - RETRY_WINDOW * 60000)) due.push(sp);
+    }
+    if (cluster.outliers.length && !done.has(sp + '_OUTLIER')) {
+      const earliestOutlier = cluster.outliers[0];
+      if (earliestOutlier > now) {
+        const outlierDeadline = new Date(earliestOutlier.getTime() - MIN_LEAD * 60000);
+        if (now >= new Date(outlierDeadline.getTime() - RETRY_WINDOW * 60000)) due.push(sp + '_OUTLIER');
+      }
+    }
   }
   return due;
 }
@@ -72,8 +109,8 @@ const bets = rec => { const m = String(rec || '').match(/^(\d+)-(\d+)/); return 
 
 const R = require('./sf_rules.js');
 const cold = R.cold; // Nov 16 ROI rule plus Nov 17 form gate (see sf_rules.js)
-function buildCards(sp, latest, flags) {
-  const tickets = (latest.tickets || []).filter(t => t.sport === sp).map(t => ({ ...t, st: startUtc(t.kickoffEt) })).filter(t => t.st && t.st > now);
+function buildCards(sp, latest, flags, before) { // before: optional Date - only include tickets starting earlier than this (for an outlier/one-off card, so it doesn't swallow the main slate too)
+  const tickets = (latest.tickets || []).filter(t => t.sport === sp).map(t => ({ ...t, st: startUtc(t.kickoffEt) })).filter(t => t.st && t.st > now && (!before || t.st < before));
   const games = {};
   for (const t of tickets) (games[t.matchup + '|' + t.market] ||= []).push(t);
   const tails = new Set((flags.sides || []).filter(s => s.tail).map(s => [s.matchup, s.market, s.pick].join('|')));
@@ -137,10 +174,14 @@ function buildCards(sp, latest, flags) {
 
 (async () => {
   let latest = null; try { latest = JSON.parse(fs.readFileSync(OUT + '/latest.json', 'utf8')); } catch {}
-  let { out: starts, want } = await firstStarts();
-  if (process.env.ESPN_OFF || !Object.keys(starts).length) { if (latest) Object.assign(starts, Object.fromEntries(Object.entries(ticketStarts(latest, want)).filter(([s]) => !starts[s]))); }
-  const due = dueList(starts);
-  console.log('first starts (CT):', Object.entries(starts).map(([s, d]) => s + ' ' + ctTime(d)).join(', ') || 'none', '| posted today:', [...done].join(',') || 'none', '| due:', due.join(',') || 'none');
+  let { out: startsAll, want } = await allStarts();
+  if (process.env.ESPN_OFF || !Object.keys(startsAll).length) { if (latest) Object.assign(startsAll, Object.fromEntries(Object.entries(ticketStarts(latest, want)).filter(([s]) => !startsAll[s]))); }
+  const due = dueList(startsAll);
+  const summary = Object.entries(startsAll).map(([s, ts]) => {
+    const c = clusterStarts(ts);
+    return s + ' main ' + ctTime(c.mainStart) + (c.outliers.length ? ` (+${c.outliers.length} outlier ${ctTime(c.outliers[0])})` : '');
+  }).join(', ');
+  console.log('today (CT):', summary || 'none', '| posted today:', [...done].join(',') || 'none', '| due:', due.join(',') || 'none');
   if (MODE === 'plan') {
     if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `due=${due.join(',')}\n`);
     return;
@@ -153,14 +194,20 @@ function buildCards(sp, latest, flags) {
   fs.mkdirSync(CARD_DIR, { recursive: true });
   const hhmm = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');
   const wrote = [];
-  for (const sp of dueIn) {
-    const res = buildCards(sp, latest, flags);
-    if (!res || !res.cards || !res.cards.length) { console.log(sp, 'no sides over threshold yet - will retry next run'); continue; }
-    const first = starts[sp] ? ctTime(starts[sp]) : '';
-    const card = { route: 'Sharp Signals', content: `**Sharp Flow - ${sp} - first game ${first} CT** - ${res.n} sharp-money side${res.n === 1 ? '' : 's'}`, boards: res.cards };
-    const f = `${CARD_DIR}/${today}-${hhmm}-sharpflow-${sp.toLowerCase()}.json`;
-    fs.writeFileSync(f, JSON.stringify(card, null, 1)); wrote.push(sp);
-    if (!process.env.NO_MARK) { fs.mkdirSync(OUT + '/previews', { recursive: true }); fs.writeFileSync(`${OUT}/previews/${today}-${hhmm}-${sp.toLowerCase()}.json`, JSON.stringify({ date: today, posted_ct: hhmm, sport: sp, first_start: starts[sp] ? starts[sp].toISOString() : null, snapshot: latest.scannedAt, sides: res.data }, null, 1)); } console.log('wrote', f, res.n, 'sides');
+  for (const token of dueIn) {
+    const outlier = token.endsWith('_OUTLIER');
+    const sp = outlier ? token.slice(0, -'_OUTLIER'.length) : token;
+    const cluster = clusterStarts(startsAll[sp] || []);
+    const before = outlier ? cluster.mainStart : null;
+    const res = buildCards(sp, latest, flags, before);
+    if (!res || !res.cards || !res.cards.length) { console.log(token, 'no sides over threshold yet - will retry next run'); continue; }
+    const firstSt = outlier ? cluster.outliers[0] : cluster.mainStart;
+    const first = firstSt ? ctTime(firstSt) : '';
+    const label = outlier ? `${sp} one-off` : sp;
+    const card = { route: 'Sharp Signals', content: `**Sharp Flow - ${label} - first game ${first} CT** - ${res.n} sharp-money side${res.n === 1 ? '' : 's'}`, boards: res.cards };
+    const f = `${CARD_DIR}/${today}-${hhmm}-sharpflow-${sp.toLowerCase()}${outlier ? '-outlier' : ''}.json`;
+    fs.writeFileSync(f, JSON.stringify(card, null, 1)); wrote.push(token);
+    if (!process.env.NO_MARK) { fs.mkdirSync(OUT + '/previews', { recursive: true }); fs.writeFileSync(`${OUT}/previews/${today}-${hhmm}-${sp.toLowerCase()}${outlier ? '-outlier' : ''}.json`, JSON.stringify({ date: today, posted_ct: hhmm, sport: sp, outlier, first_start: firstSt ? firstSt.toISOString() : null, snapshot: latest.scannedAt, sides: res.data }, null, 1)); } console.log('wrote', f, res.n, 'sides');
   }
   if (wrote.length && !process.env.NO_MARK) { posted[today] = [...done, ...wrote]; for (const d of Object.keys(posted)) if (d < today) delete posted[d]; fs.writeFileSync(OUT + '/previews.json', JSON.stringify(posted)); }
   if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `wrote=${wrote.length}\n`);
