@@ -49,7 +49,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 5999,
    "opposedSeen": false,
-   "snapshots": 65
+   "snapshots": 69
   },
   "Illinois Fighting Illini at Duke Blue Devils|ML|Duke Blue Devils": {
    "sport": "CBB",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 1522,
    "opposedSeen": false,
-   "snapshots": 18
+   "snapshots": 19
   },
   "Knicks at Raptors|ML|Knicks": {
    "sport": "NBA",
@@ -84,9 +84,9 @@
     "SIZED_2X"
    ],
    "maxVsUsual": 3.6,
-   "maxDollars": 4083,
+   "maxDollars": 4184,
    "opposedSeen": true,
-   "snapshots": 66
+   "snapshots": 70
   },
   "Trail Blazers at Timberwolves|ML|Trail Blazers": {
    "sport": "NBA",
@@ -103,7 +103,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2395,
    "opposedSeen": true,
-   "snapshots": 19
+   "snapshots": 21
   },
   "Pistons at Spurs|TOTAL|Under 222.5": {
    "sport": "NBA",
@@ -189,7 +189,7 @@
    "maxVsUsual": 2,
    "maxDollars": 75126,
    "opposedSeen": false,
-   "snapshots": 21
+   "snapshots": 23
   },
   "Knicks at Raptors|ML|Raptors": {
    "sport": "NBA",
@@ -207,7 +207,7 @@
    "maxVsUsual": 2.5,
    "maxDollars": 1500,
    "opposedSeen": true,
-   "snapshots": 32
+   "snapshots": 34
   },
   "Eastern Michigan at Western Michigan|SPREAD|Western Michigan -13.5": {
    "sport": "CFB",
@@ -225,7 +225,7 @@
    "maxVsUsual": 3.4,
    "maxDollars": 14129,
    "opposedSeen": false,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Trail Blazers at Timberwolves|TOTAL|Over 226.5": {
    "sport": "NBA",
@@ -275,7 +275,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Trail Blazers at Timberwolves|SPREAD|Trail Blazers": {
    "sport": "NBA",
@@ -286,12 +286,15 @@
    "firstSeenAt": "2026-11-17T22:40:35.211Z",
    "firstPrice": "-122",
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "STRONG_VS_STRONG",
+    "SIZED_15X",
+    "SIZED_UP"
    ],
-   "maxVsUsual": 0.6,
-   "maxDollars": 4941,
-   "opposedSeen": false,
-   "snapshots": 7
+   "maxVsUsual": 1.9,
+   "maxDollars": 24423,
+   "opposedSeen": true,
+   "snapshots": 10
   },
   "Capitals at Lightning|TOTAL|Over 5.5": {
    "sport": "NHL",
@@ -324,7 +327,7 @@
    "maxVsUsual": 0.3,
    "maxDollars": 2056,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Miami (OH) at Kent State|TOTAL|Over 45.5": {
    "sport": "CFB",
@@ -356,7 +359,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 1213,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Capitals at Lightning|ML|Capitals": {
    "sport": "NHL",
@@ -372,7 +375,7 @@
    "maxVsUsual": 1,
    "maxDollars": 36819,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Knicks at Raptors|SPREAD|Raptors": {
    "sport": "NBA",
@@ -389,7 +392,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 27436,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Trail Blazers at Timberwolves|SPREAD|Trail Blazers +1.5": {
    "sport": "NBA",
@@ -439,7 +442,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 11798,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Senators at Jets|ML|Jets": {
    "sport": "NHL",
@@ -455,7 +458,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 3475,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Oilers at Panthers|ML|Oilers": {
    "sport": "NHL",
@@ -471,7 +474,7 @@
    "maxVsUsual": 0.5,
    "maxDollars": 1737,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Lamar Cardinals at Omaha Mavericks|TOTAL|Over 158.5": {
    "sport": "CBB",
@@ -486,9 +489,89 @@
     "SIZED_15X"
    ],
    "maxVsUsual": 1.9,
-   "maxDollars": 1173,
+   "maxDollars": 1185,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
+  },
+  "Predators at Wild|ML|Predators": {
+   "sport": "NHL",
+   "matchup": "Predators at Wild",
+   "market": "ML",
+   "pick": "Predators",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "firstSeenAt": "2026-11-18T01:32:38.667Z",
+   "firstPrice": "+186",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.7,
+   "maxDollars": 27240,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Trail Blazers at Timberwolves|TOTAL|Over 225.5": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "TOTAL",
+   "pick": "Over 225.5",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "firstSeenAt": "2026-11-18T01:32:38.667Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.5,
+   "maxDollars": 5802,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Trail Blazers at Timberwolves|SPREAD|Timberwolves -3.5": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Timberwolves",
+   "market": "SPREAD",
+   "pick": "Timberwolves -3.5",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "firstSeenAt": "2026-11-18T01:32:38.667Z",
+   "firstPrice": "-113",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.4,
+   "maxDollars": 5300,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Predators at Wild|ML|Wild": {
+   "sport": "NHL",
+   "matchup": "Predators at Wild",
+   "market": "ML",
+   "pick": "Wild",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "firstSeenAt": "2026-11-18T01:32:38.668Z",
+   "firstPrice": "-186",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.8,
+   "maxDollars": 2889,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Ducks at Blues|ML|Ducks": {
+   "sport": "NHL",
+   "matchup": "Ducks at Blues",
+   "market": "ML",
+   "pick": "Ducks",
+   "kickoffEt": "Tue, Nov 17, 8:10 PM",
+   "firstSeenAt": "2026-11-18T01:32:38.668Z",
+   "firstPrice": "+122",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 2005,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }
