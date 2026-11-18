@@ -1,6 +1,8 @@
 # Sharp Flow preview: one Discord card per sport about 60 minutes before that sport's first game of the day (CT). No Claude usage.
-# Every 15 minutes this checks ESPN for each sport's first start; only when a sport is due does it pull SharpFlow fresh,
+# Checks ESPN for each sport's first start; only when a sport is due does it read the latest SharpFlow snapshot
+# (sharpflow branch, kept fresh by the "SharpFlow MCP puller" scheduled task - this workflow no longer pulls data itself),
 # build the board card (scripts/sharpflow_preview.js), push it to the `outbox` branch and trigger "Discord outbox" to post it.
+# Dispatch-only - see 2026-11-18 note below.
 name: SharpFlow preview
 on:
   workflow_dispatch:
@@ -49,11 +51,6 @@ jobs:
           DUE="${{ github.event.inputs.force_sports }}"
           [ -z "$DUE" ] && DUE="${{ steps.plan.outputs.due }}"
           echo "due=$DUE" >> "$GITHUB_OUTPUT"
-      - name: Pull SharpFlow fresh
-        if: steps.go.outputs.due != ''
-        env:
-          SF_URL: ${{ vars.SF_URL }}
-        run: node scripts/sharpflow_logger.js
       - name: Build cards
         if: steps.go.outputs.due != ''
         env:

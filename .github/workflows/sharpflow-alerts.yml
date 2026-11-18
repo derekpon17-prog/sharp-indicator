@@ -1,5 +1,7 @@
-# Sharp Flow live alerts: after a fresh SharpFlow pull, post any NEW or GROWN sharp side ($1K+, positive-ROI wallets only) to Discord.
-# First run of each CT day records the board silently; the pre-game cards already cover it. No Claude usage.
+# Sharp Flow live alerts: reads the latest SharpFlow snapshot (sharpflow branch, kept fresh by the "SharpFlow MCP puller"
+# scheduled task - this workflow no longer pulls data itself) and posts any NEW or GROWN sharp side ($1K+, positive-ROI
+# wallets only) to Discord. First run of each CT day records the board silently; the pre-game cards already cover it.
+# No Claude usage. Dispatch-only - see 2026-11-18 note below.
 name: SharpFlow alerts
 on:
   workflow_dispatch:
@@ -28,10 +30,6 @@ jobs:
           mkdir sf_branch && cd sf_branch && git init -q
           git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           if git fetch -q --depth 20 origin sharpflow; then git checkout -q -B sharpflow FETCH_HEAD; else git checkout -q --orphan sharpflow; fi
-      - name: Pull SharpFlow fresh
-        env:
-          SF_URL: ${{ vars.SF_URL }}
-        run: node scripts/sharpflow_logger.js
       - name: Build alerts
         id: alerts
         run: node scripts/sharpflow_alerts.js
