@@ -1,7 +1,21 @@
 {
- "at": "2026-11-18T19:01:06.275669Z",
- "ok": true,
- "method": "mcp-session-puller",
- "note": "Old public SF_URL endpoint is dead (free testing period over). This probe is now written by a Claude-scheduled-task puller calling the authenticated NHL_Savant_-_Sharp_Flow MCP connector directly, not by sharpflow_logger.js over HTTP.",
- "tool": "mcp__NHL_Savant_-_Sharp_Flow__today + find_specialists per sport"
+ "at": "2026-11-18T19:21:25.181Z",
+ "tried": [
+  {
+   "url": "https://sharpflowmcp-lviwud3q2q-uc.a.run.app/mcp",
+   "init": {
+    "status": 200,
+    "ct": "text/event-stream; charset=utf-8",
+    "head": "event: message\ndata: {\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{\"tools\":{\"listChanged\":false}},\"serverInfo\":{\"name\":\"NHL Savant - Sharpflow\",\"version\":\"1.0.0\"},\"instructions\":\"The free testing period is over. New connection instructions are on the account settin",
+    "ok": true
+   },
+   "tools": []
+  }
+ ],
+ "call": {
+  "status": 200,
+  "head": "event: message\ndata: {\"jsonrpc\":\"2.0\",\"id\":3,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"The free testing period is over. New connection instructions are on the account settings page.\"}]}}\n\n"
+ },
+ "parseError": "Unexpected token '.', \".\" is not valid JSON",
+ "ok": false
 }
