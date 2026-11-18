@@ -275,7 +275,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 15
+   "snapshots": 16
   },
   "Trail Blazers at Timberwolves|SPREAD|Trail Blazers": {
    "sport": "NBA",
@@ -599,12 +599,13 @@
    "firstSeenAt": "2026-11-18T02:54:54.748Z",
    "firstPrice": "+113",
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "STRONG_VS_STRONG"
    ],
    "maxVsUsual": 0.5,
    "maxDollars": 1418,
-   "opposedSeen": false,
-   "snapshots": 2
+   "opposedSeen": true,
+   "snapshots": 3
   },
   "Hornets at Lakers|ML|Hornets": {
    "sport": "NBA",
@@ -616,12 +617,96 @@
    "firstPrice": "+270",
    "tags": [
     "STRONG_UNOPPOSED",
-    "SIZED_15X"
+    "SIZED_15X",
+    "STRONG_VS_OTHER"
    ],
    "maxVsUsual": 1.5,
    "maxDollars": 1200,
    "opposedSeen": true,
+   "snapshots": 6
+  },
+  "Jazz at Clippers|TOTAL|Over 226.5": {
+   "sport": "NBA",
+   "matchup": "Jazz at Clippers",
+   "market": "TOTAL",
+   "pick": "Over 226.5",
+   "kickoffEt": "Tue, Nov 17, 10:41 PM",
+   "firstSeenAt": "2026-11-18T04:12:52.186Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 20000,
+   "opposedSeen": false,
+   "snapshots": 3
+  },
+  "Hornets at Lakers|SPREAD|Lakers": {
+   "sport": "NBA",
+   "matchup": "Hornets at Lakers",
+   "market": "SPREAD",
+   "pick": "Lakers",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "firstSeenAt": "2026-11-18T04:12:52.187Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 3.6,
+   "maxDollars": 13200,
+   "opposedSeen": true,
    "snapshots": 4
+  },
+  "Hornets at Lakers|TOTAL|Over": {
+   "sport": "NBA",
+   "matchup": "Hornets at Lakers",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Tue, Nov 17, 11:10 PM",
+   "firstSeenAt": "2026-11-18T04:12:52.187Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.8,
+   "maxDollars": 10000,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Flames at Sharks|ML|Sharks": {
+   "sport": "NHL",
+   "matchup": "Flames at Sharks",
+   "market": "ML",
+   "pick": "Sharks",
+   "kickoffEt": "Tue, Nov 17, 10:08 PM",
+   "firstSeenAt": "2026-11-18T04:12:52.187Z",
+   "firstPrice": "-117",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 3780,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Jazz at Clippers|SPREAD|Jazz +7.5": {
+   "sport": "NBA",
+   "matchup": "Jazz at Clippers",
+   "market": "SPREAD",
+   "pick": "Jazz +7.5",
+   "kickoffEt": "Tue, Nov 17, 10:41 PM",
+   "firstSeenAt": "2026-11-18T04:12:52.187Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 7150,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }
