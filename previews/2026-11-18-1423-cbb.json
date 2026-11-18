@@ -1,0 +1,27 @@
+{
+ "date": "2026-11-18",
+ "posted_ct": "1423",
+ "sport": "CBB",
+ "first_start": "2026-11-18T21:30:00.000Z",
+ "snapshot": "2026-11-18T19:35:01.950Z",
+ "sides": [
+  {
+   "game": "Tennessee Tech Golden Eagles at UNC Asheville Bulldogs",
+   "market": "TOTAL",
+   "pick": "Over",
+   "start_utc": "2026-11-18T23:30:00.000Z",
+   "dollars": 1349,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.1,
+   "all_sport_ratio": 1.21,
+   "line": null,
+   "l30_rec": "15-9",
+   "l30_roi": 45,
+   "mkt_rec": "14-8",
+   "mkt_roi": 45.8,
+   "mkt_l30_rec": "14-8",
+   "tail": false
+  }
+ ]
+}
