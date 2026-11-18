@@ -1,0 +1,77 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · AFTERNOON · Wed Nov 18** · games 3:00pm to 5:59pm CT",
+ "slate": {
+  "title": "Afternoon plays",
+  "stamp": "WED NOV 18 · 1:23PM",
+  "sources": "Pinnacle 1:21pm CT - Vegas 1:22pm CT (CBB) - SharpFlow 12:42pm CT (no window side of $1K+) - Novig not read",
+  "sf_current": true,
+  "footer": "Afternoon window: games starting 3:00 to 5:59pm CT. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "HOU@FLA",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 145.5,
+    "price": -113,
+    "bet": "Under 145.5",
+    "matchup": "NCAAB - HOU @ FLA - 3:30pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "13:21",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NAVY@GTWN",
+    "market": "SPREAD",
+    "side": "NAVY",
+    "line": 20.5,
+    "price": -109,
+    "bet": "NAVY +20.5",
+    "matchup": "NCAAB - NAVY @ GTWN - 5:30pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "13:21",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NAVY@GTWN",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 139.5,
+    "price": -117,
+    "bet": "Under 139.5",
+    "matchup": "NCAAB - NAVY @ GTWN - 5:30pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "13:21",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "DETM@EMU",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 140.5,
+    "price": -112,
+    "bet": "Under 140.5",
+    "matchup": "NCAAB - DETM @ EMU - 5:30pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "13:21",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   }
+  ]
+ }
+}
