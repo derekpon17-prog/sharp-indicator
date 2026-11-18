@@ -27,6 +27,17 @@
     "pooled": 4,
     "unopposed": 3,
     "contested": 0
+   },
+   "checks": {
+    "walletId": "bc35e3",
+    "walletCheck": {
+     "pass": true,
+     "text": "NBA 79-62 (+19.3% ROI) all-time, 49-34 (+31%) last 30. In the 1.5x+ bucket this bet falls in: 20-14 NBA all-time, 87-71 all-sports all-time - in line with overall record, not an outlier bucket."
+    },
+    "momentumCheck": {
+     "pass": true,
+     "text": "Hot on basketball spread (18-10, +62.4% last 30d). Slipping on college basketball totals (3-9, -18.8%) - different sport/market, does not touch this ML side."
+    }
    }
   },
   {
