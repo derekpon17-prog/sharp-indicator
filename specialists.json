@@ -1,8 +1,29 @@
 {
  "date": "2026-11-17",
- "scannedAt": "2026-11-18T01:14:31.370Z",
+ "scannedAt": "2026-11-18T01:44:02.529Z",
  "sports": {
   "NHL": [
+   {
+    "id": "69f882",
+    "gap": 20.5,
+    "overall": "829-730",
+    "sport": "14-5",
+    "returnPct": 36.6,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Blue Jackets at Islanders",
+      "market": "ML",
+      "pick": "Islanders",
+      "line": null,
+      "price": "-652",
+      "dollars": 1019,
+      "vsUsual": 3.1,
+      "vsUsualAll": 0.8
+     }
+    ]
+   },
    {
     "id": "32e7e0",
     "gap": 18.6,
@@ -401,18 +422,8 @@
     "sport": "13-8",
     "returnPct": 41,
     "last10": "6-4",
-    "bettingBig": true,
+    "bettingBig": false,
     "tonight": [
-     {
-      "matchup": "Lamar Cardinals at Omaha Mavericks",
-      "market": "TOTAL",
-      "pick": "Over 158.5",
-      "line": 158.5,
-      "price": "-106",
-      "dollars": 1185,
-      "vsUsual": 1.9,
-      "vsUsualAll": 1.1
-     },
      {
       "matchup": "Fordham Rams at Manhattan Jaspers",
       "market": "TOTAL",
