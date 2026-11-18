@@ -296,20 +296,27 @@ body{{margin:0;background:#0B0E13}}
 </div></body></html>'''
 
 def sharpflow_html(c):
-    """Sharp Flow matchup board (design D, Nov 18 - Derek picked the "For it / Against it" reference card: wallet rows
-    grouped by side with why, a sharp-money split bar, and a separate cold-money split bar). Card dict:
-    {"brand","title","subtitle","sections":[{"heading","picks":[{"eyebrow","bet","price","verdict":{"t","c"},
-      "for":[{"team","line","note","right"}],"against":[{"team","line","note","right"}],
-      "moneyBar":[{"team","pct","dollars","c"}],"coldBar":[{"team","pct","dollars"}]}]}],"legend","footer"}
-    Falls back to the chip layout (board_html) for any pick that has no "for" key, so older cards still render."""
-    VCOL = {"gold": GOLD, "orange": ORANGE, "blue": BLUE, "grey": GREY, "green": GREEN, "red": RED}
+    """Sharp Flow matchup board (design E, Nov 18 - Derek asked to copy his light-theme reference card almost exactly:
+    cream card, orange tag line above a huge play headline, grey price pill, green "For it" rows, red "Against it"
+    rows with a team label, one "where the sharp money went" bar, a confidence bar, and a dark callout footer line).
+    Card dict: {"brand","title","subtitle","sections":[{"heading","picks":[
+      "eyebrow" (e.g. "NBA - WED NOV 18"), "time" (e.g. "10:10 PM CT", optional pill),
+      "tag":{"t","icon"} (orange label above the headline, e.g. "EDGE - HORNETS"),
+      "bet" (huge headline - the play), "price" (grey pill, optional),
+      "for":[{"line","note","right"}], "against":[{"line","note","right"}] (right is colored red, e.g. a team name),
+      "moneyBar":[{"team","pct","dollars","c":"grey"|"red"|"green"|...}],
+      "confidence": 0-10 (optional gauge), "callout":{"plain","highlight"} (optional dark footer line),
+      "footerLabel" (optional small centered caption)
+    ]}]}],"legend","footer"}. Falls back to board_html for any pick with no "for" key, so older cards still render."""
+    VCOL = {"gold": "#D9770A", "orange": "#D9770A", "blue": "#3B6FD9", "grey": "#8A8F9E", "green": "#1E8E5A", "red": "#D23C3C"}
+    NAVY = "#1B2238"
 
-    def row(r, tint):
+    def row(r, bg, fg):
         return (
-            '<div class="row" style="background:' + tint + '12">'
+            '<div class="row" style="background:' + bg + '">'
             + '<div><div class="rl">' + e(r.get("line")) + '</div>'
             + ('<div class="rn">' + e(r.get("note")) + '</div>' if r.get("note") else '') + '</div>'
-            + '<div class="rr" style="color:' + tint + '">' + e(r.get("right")) + '</div></div>'
+            + '<div class="rr" style="color:' + fg + '">' + e(r.get("right")) + '</div></div>'
         )
 
     def bar(segs, empty_txt):
@@ -320,15 +327,15 @@ def sharpflow_html(c):
         parts = ""
         for s in segs:
             w = max(0, s.get("pct") or 0) / total * 100
-            col = VCOL.get(s.get("c"), GREY)
+            col = VCOL.get(s.get("c"), "#8A8F9E")
             d = s.get("dollars")
             dtxt = (f' · ${d / 1000:.0f}K' if isinstance(d, (int, float)) and d >= 1000
                     else (f' · ${d:.0f}' if isinstance(d, (int, float)) else ""))
             if w < 1:
                 continue
-            label = e(s.get("team")) + " " + f'{s.get("pct") or 0:.0f}%' + dtxt if w >= 16 else ""
-            parts += (f'<div class="seg" style="width:{w:.2f}%;background:{col}22;border-color:{col}55;color:{col}">'
-                      + label + '</div>')
+            txtcol = "#fff" if w >= 30 else NAVY
+            label = e(s.get("team")) + " " + f'{s.get("pct") or 0:.0f}%' + (dtxt if w >= 30 else "")
+            parts += (f'<div class="seg" style="width:{w:.2f}%;background:{col};color:{txtcol}">' + label + '</div>')
         return '<div class="bar">' + parts + '</div>'
 
     secs = ""
@@ -337,72 +344,80 @@ def sharpflow_html(c):
         for p in sec.get("picks", []):
             if "for" not in p:
                 return board_html(c)  # mixed/old-shape card - use the chip renderer for the whole thing
-            v = p.get("verdict") or {}
-            vcol = VCOL.get(v.get("c"), GREY)
-            forrows = "".join(row(r, GREEN) for r in (p.get("for") or [])[:3])
-            agrows = "".join(row(r, RED) for r in (p.get("against") or [])[:3])
-            forsec = ('<div class="grp"><div class="gh" style="color:' + GREEN + '">✅ For it</div>' + forrows + '</div>') if forrows else ""
-            agsec = ('<div class="grp"><div class="gh" style="color:' + RED + '">\U0001F6A9 Against it</div>' + agrows + '</div>') if agrows else ""
+            forrows = "".join(row(r, "#E7F4EC", "#1E8E5A") for r in (p.get("for") or [])[:3])
+            agrows = "".join(row(r, "#FDECEC", "#D23C3C") for r in (p.get("against") or [])[:3])
+            forsec = ('<div class="grp"><div class="gh" style="color:#1E8E5A">For it ✅</div>' + forrows + '</div>') if forrows else ""
+            agsec = ('<div class="grp"><div class="gh" style="color:#D23C3C">Against it \U0001F6A9</div>' + agrows + '</div>') if agrows else ""
             price = p.get("price")
             pricechip = ('<span class="price">' + e(price) + '</span>') if price else ""
-            sigs = p.get("signals") or []
-            sigrow = ""
-            if sigs:
-                chips = "".join(
-                    '<span class="schip" style="color:' + VCOL.get(sg.get("c"), GREY) + ';border-color:'
-                    + VCOL.get(sg.get("c"), GREY) + '55;background:' + VCOL.get(sg.get("c"), GREY) + '14">'
-                    + e(sg.get("t")) + '</span>' for sg in sigs
+            timepill = ('<span class="time">' + e(p.get("time")) + '</span>') if p.get("time") else ""
+            tag = p.get("tag") or {}
+            tagrow = (
+                '<div class="tag">' + (e(tag.get("icon")) + ' ' if tag.get("icon") else '⚠️ ') + e(tag.get("t")) + '</div>'
+            ) if tag.get("t") else ""
+            conf = p.get("confidence")
+            confrow = ""
+            if conf is not None:
+                pct = max(0, min(10, float(conf))) * 10
+                confrow = (
+                    '<div class="confrow"><div class="confl">CONFIDENCE</div>'
+                    '<div class="conftrack"><div class="conffill" style="width:' + f'{pct:.0f}' + '%"></div></div>'
+                    '<div class="confn">' + f'{conf:g}' + '/10</div></div>'
                 )
-                sigrow = '<div class="sigrow">' + chips + '</div>'
+            callout = p.get("callout")
+            calloutrow = (
+                '<div class="callout">' + e(callout.get("plain")) + '<span class="hi">' + e(callout.get("highlight")) + '</span></div>'
+            ) if callout else ""
+            footlabel = ('<div class="footlabel">' + e(p.get("footerLabel")) + '</div>') if p.get("footerLabel") else ""
             cards_html += (
-                '<div class="gm"><div class="eyebrow">' + e(p.get("eyebrow")) + '</div>'
+                '<div class="gm"><div class="ghead"><div class="eyebrow">' + e(p.get("eyebrow")) + '</div>' + timepill + '</div>'
+                + tagrow
                 + '<div class="gt">' + e(p.get("bet")) + '</div>' + pricechip
-                + sigrow
-                + '<div class="verdict" style="color:' + vcol + '">' + e(v.get("t")) + '</div>'
                 + forsec + agsec
-                + '<div class="bl">Sharp money split</div>' + bar(p.get("moneyBar"), "no counted money either side")
-                + '<div class="bl">Cold money split (not counted)</div>' + bar(p.get("coldBar"), "no cold money either side")
+                + '<div class="bl">Where the sharp money went</div>' + bar(p.get("moneyBar"), "no counted money either side")
+                + confrow + calloutrow + footlabel
                 + '</div>'
             )
         secs += '<div class="sec"><div class="sh">' + e(sec.get("heading")) + '</div>' + cards_html + '</div>'
     head = (
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
-        '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">'
+        '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">'
         '<style>'
-        'body{margin:0;background:#0B0E1A}'
-        '#card{width:800px;box-sizing:border-box;background:radial-gradient(1200px 500px at 70% -10%,#162038,#0B0E1A 60%);'
-        'font-family:Inter,system-ui,sans-serif;color:#E8ECF2;padding:40px;display:flex;flex-direction:column;gap:22px}'
-        '.brandrow{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:1.5px;color:#C7CEDA}'
-        '.dot{width:7px;height:7px;border-radius:50%;background:' + GOLD + '}'
-        '.ttl{font-size:30px;font-weight:900;letter-spacing:-.5px;line-height:1.1}'
-        '.sub{font-size:14px;color:' + GREY + ';margin-top:4px}'
-        '.sec{display:flex;flex-direction:column;gap:14px}'
-        '.sh{font-size:12px;font-weight:700;letter-spacing:2px;color:' + GREY + ';margin-bottom:-2px}'
-        '.gm{background:#121828;border:1px solid #232B3D;border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}'
-        '.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.5px;color:' + GREY + '}'
-        '.gt{font-weight:800;font-size:22px;margin-top:-2px}'
-        '.price{display:inline-block;font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700;'
-        'background:#1C2434;border:1px solid #2E3850;color:#C7CEDA;border-radius:6px;padding:2px 8px;margin-top:2px}'
-        '.sigrow{display:flex;gap:6px;flex-wrap:wrap}'
-        '.schip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.3px;border:1px solid;border-radius:6px;'
-        'padding:3px 8px}'
-        '.verdict{font-weight:800;font-size:15px}'
-        '.grp{display:flex;flex-direction:column;gap:6px}'
-        '.gh{font-size:12px;font-weight:800;letter-spacing:.4px}'
-        '.row{display:flex;justify-content:space-between;align-items:center;gap:12px;border-radius:10px;padding:10px 12px}'
-        '.rl{font-weight:700;font-size:14px}'
-        '.rn{font-size:12px;color:' + GREY + ';margin-top:2px}'
-        '.rr{font-weight:800;font-size:14px;white-space:nowrap}'
-        '.bl{font-size:11px;font-weight:700;letter-spacing:1px;color:' + GREY + ';margin-top:4px}'
-        '.bar{display:flex;height:34px;border-radius:8px;overflow:hidden;background:#0F1420}'
-        '.seg{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;border:1px solid;'
-        'white-space:nowrap;overflow:hidden}'
-        '.barempty{height:34px;border-radius:8px;background:#0F1420;display:flex;align-items:center;justify-content:center;'
-        f'font-size:12px;color:{GREY}}}'
-        '.foot{display:flex;justify-content:space-between;font-size:11px;color:#7D8796;border-top:1px solid #222936;padding-top:12px}'
+        'body{margin:0;background:#15110A}'
+        '#card{width:800px;box-sizing:border-box;background:radial-gradient(1000px 500px at 50% -10%,#241C10,#15110A 65%);'
+        'font-family:Inter,system-ui,sans-serif;padding:36px;display:flex;flex-direction:column;gap:18px}'
+        '.sec{display:flex;flex-direction:column;gap:18px}'
+        '.sh{font-size:11px;font-weight:700;letter-spacing:2px;color:#9A9480;padding:0 6px}'
+        '.gm{background:#FBF7EE;border-radius:26px;padding:34px 32px;display:flex;flex-direction:column;gap:16px;'
+        'box-shadow:0 10px 40px rgba(0,0,0,.35);color:' + NAVY + '}'
+        '.ghead{display:flex;justify-content:space-between;align-items:flex-start}'
+        '.eyebrow{font-size:13px;font-weight:700;letter-spacing:2px;color:#6B7280}'
+        '.time{background:' + NAVY + ';color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:7px 14px;white-space:nowrap}'
+        '.tag{color:#D9770A;font-size:16px;font-weight:800;letter-spacing:.5px}'
+        '.gt{font-weight:900;font-size:40px;line-height:1.05;letter-spacing:-.5px;margin-top:-4px}'
+        '.price{display:inline-block;background:#ECE8DD;color:#4B5366;font-weight:700;font-size:15px;'
+        'border-radius:10px;padding:6px 14px;width:fit-content}'
+        '.grp{display:flex;flex-direction:column;gap:8px}'
+        '.gh{font-size:17px;font-weight:800}'
+        '.row{display:flex;justify-content:space-between;align-items:center;gap:14px;border-radius:12px;padding:14px 16px}'
+        '.rl{font-weight:800;font-size:16px}'
+        '.rn{font-size:13px;color:#6B7280;margin-top:2px}'
+        '.rr{font-weight:900;font-size:19px;white-space:nowrap}'
+        '.bl{font-size:16px;font-weight:800;margin-top:2px}'
+        '.bar{display:flex;height:48px;border-radius:10px;overflow:hidden}'
+        '.seg{display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden}'
+        '.barempty{height:40px;border-radius:10px;background:#ECE8DD;display:flex;align-items:center;justify-content:center;'
+        'font-size:13px;color:#6B7280}'
+        '.confrow{display:flex;align-items:center;gap:14px;margin-top:4px}'
+        '.confl{font-size:12px;font-weight:800;letter-spacing:1px;color:#6B7280;white-space:nowrap}'
+        '.conftrack{flex:1;height:10px;border-radius:5px;background:#E7E3D8}'
+        '.conffill{height:10px;border-radius:5px;background:linear-gradient(90deg,#B98A3C,#E0932C)}'
+        '.confn{font-weight:900;font-size:22px;white-space:nowrap}'
+        '.callout{background:' + NAVY + ';color:#fff;font-weight:700;font-size:16px;border-radius:14px;padding:16px 18px}'
+        '.callout .hi{color:#E0A64E}'
+        '.footlabel{text-align:center;font-size:11px;font-weight:700;letter-spacing:2px;color:#A9A08C;margin-top:2px}'
+        '.foot{display:flex;justify-content:space-between;font-size:11px;color:#9A9480;padding:0 6px}'
         '</style></head><body><div id="card">'
-        '<div class="brandrow"><span class="dot"></span>' + e(c.get("brand") or "SHARP FLOW") + '</div>'
-        '<div><div class="ttl">' + e(c.get("title") or "") + '</div><div class="sub">' + e(c.get("subtitle")) + '</div></div>'
         + secs +
         '<div class="foot"><div>' + e(c.get("legend") or "") + '</div><div>'
         + e(c.get("footer") or "Wallet money, not a pick. Leans, not guarantees") + '</div></div>'
