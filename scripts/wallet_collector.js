@@ -8,7 +8,7 @@ const discover = require('../api/discover.js');
 
 const V2 = 'https://data-api.polymarket.com/v2';
 const SPORTS = ['NFL', 'NCAAF', 'NHL', 'NBA', 'NCAAB', 'WNBA', 'MLB'];
-const MAX_WALLETS = parseInt(process.env.MAX_WALLETS || '300', 10);
+const MAX_WALLETS = parseInt(process.env.MAX_WALLETS || '600', 10);
 const CONC = 6;
 const LOG = [];
 const _log = console.log;
@@ -37,9 +37,12 @@ async function collectCandidates() {
     c.src.add(src); c.usd += usd || 0;
   };
   // 1) v2 leaderboards: sports category, all-time + month, plus overall all-time
+  // Widened Nov 18 (Derek: build a deeper good/bad pool per sport) -- 2 pages/combo -> 3,
+  // and the trade-feed net below went 8 pages -> 24, so thin sports (NCAAB, NHL) get more
+  // candidates to evaluate against, not just the easy NFL/NBA volume.
   for (const [cat, tp] of [['sports', 'all'], ['sports', 'month'], ['sports', 'week'], ['overall', 'all']]) {
     let cursor = null;
-    for (let pg = 0; pg < 2; pg++) {
+    for (let pg = 0; pg < 3; pg++) {
       const d = await j(`${V2}/leaderboard?category=${cat}&time_period=${tp}&sort_by=PNL&limit=200` + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''));
       (d && d.data || []).forEach(t => { if (t.pnl > 0) add(t.user_id, t.user_name, null, 'lb-' + cat + '-' + tp); });
       cursor = d && d.pagination && d.pagination.next_cursor;
@@ -48,7 +51,7 @@ async function collectCandidates() {
   }
   // 2) global trade feed, large buys, cursor paged
   let pages = 0, cursor = null;
-  for (let pg = 0; pg < 8; pg++) {
+  for (let pg = 0; pg < 24; pg++) {
     const d = await j(`${V2}/trades?limit=1000&taker_only=true&side=BUY&filter_type=CASH&filter_amount=500` + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''));
     if (!d || !Array.isArray(d.data) || !d.data.length) break;
     pages++;
