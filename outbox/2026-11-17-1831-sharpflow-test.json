@@ -1,0 +1,404 @@
+{
+ "route": "Sharp Signals",
+ "content": "**TEST - new simple Sharp Flow layout** - NBA data from the 4:18pm CT pull, layout check only, not a current board",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:18pm CT - board 1",
+   "sections": [
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "bet": "Raptors +5.5",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": null,
+       "chips": [
+        {
+         "t": "$29K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "1.4x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 9-4 | spread 1-1 (+94%)",
+         "c": "grey"
+        },
+        {
+         "t": "THIN - 2 bets here",
+         "c": "grey"
+        }
+       ],
+       "usual": 1.4
+      },
+      {
+       "bet": "Knicks ML",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": -138,
+       "chips": [
+        {
+         "t": "$5.5K vs $3.9K",
+         "c": "orange"
+        },
+        {
+         "t": "1.8x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 14-6 | ML 9-2 (+56%)",
+         "c": "grey"
+        },
+        {
+         "t": "HOT (last 10: 9-1)",
+         "c": "gold"
+        }
+       ],
+       "usual": 1.8
+      },
+      {
+       "bet": "Raptors ML",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": 146,
+       "chips": [
+        {
+         "t": "$3.9K vs $5.5K",
+         "c": "orange"
+        },
+        {
+         "t": "1.9x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | ML 29-20 (+17%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 1.9
+      },
+      {
+       "bet": "Under 214.5",
+       "sub": "Knicks at Raptors - 6:40pm",
+       "price": 104,
+       "chips": [
+        {
+         "t": "$722 vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.2x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | total 22-17 (+27%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.2
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "bet": "Trail Blazers +4.5",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": -122,
+       "chips": [
+        {
+         "t": "$5.9K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.6x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 9-4 | spread 1-1 (+94%)",
+         "c": "grey"
+        },
+        {
+         "t": "THIN - 2 bets here",
+         "c": "grey"
+        }
+       ],
+       "usual": 0.6
+      },
+      {
+       "bet": "Under 222.5",
+       "sub": "Pistons at Spurs - 7:10pm",
+       "price": 104,
+       "chips": [
+        {
+         "t": "$3.8K vs $1K",
+         "c": "blue"
+        },
+        {
+         "t": "0.9x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | total 22-17 (+27%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.9
+      },
+      {
+       "bet": "Pistons ML",
+       "sub": "Pistons at Spurs - 7:10pm",
+       "price": 376,
+       "chips": [
+        {
+         "t": "$2.1K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.7x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | ML 29-20 (+17%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.7
+      },
+      {
+       "bet": "Pistons +9.5",
+       "sub": "Pistons at Spurs - 7:10pm",
+       "price": -100,
+       "chips": [
+        {
+         "t": "$1.8K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.6x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | spread 20-18 (+7%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.6
+      },
+      {
+       "bet": "Over 226.5",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": -100,
+       "chips": [
+        {
+         "t": "$1.7K vs $1K",
+         "c": "orange"
+        },
+        {
+         "t": "0.6x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | total 22-17 (+27%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.6
+      },
+      {
+       "bet": "Under 226.5",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": 101,
+       "chips": [
+        {
+         "t": "$1K vs $1.7K",
+         "c": "orange"
+        },
+        {
+         "t": "0.9x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 14-6 | total 4-2 (+45%)",
+         "c": "grey"
+        },
+        {
+         "t": "HOT (last 10: 9-1)",
+         "c": "gold"
+        }
+       ],
+       "usual": 0.9
+      },
+      {
+       "bet": "Over 222.5",
+       "sub": "Pistons at Spurs - 7:10pm",
+       "price": -104,
+       "chips": [
+        {
+         "t": "$1K vs $3.8K",
+         "c": "orange"
+        },
+        {
+         "t": "0.9x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 14-6 | total 4-2 (+45%)",
+         "c": "grey"
+        },
+        {
+         "t": "HOT (last 10: 9-1)",
+         "c": "gold"
+        }
+       ],
+       "usual": 0.9
+      },
+      {
+       "bet": "Timberwolves ML",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": -129,
+       "chips": [
+        {
+         "t": "$760 vs $549",
+         "c": "orange"
+        },
+        {
+         "t": "1.8x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 23-18 | ML 11-8 (+2%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 1.8
+      }
+     ]
+    }
+   ],
+   "legend": "Money for vs against. HOT = last 10 8+ wins. GOOD = positive ROI. COLD = poor recent form. THIN = under 5 bets. \u2605 = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  },
+  {
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:18pm CT - board 2",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "bet": "Trail Blazers ML",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": 122,
+       "chips": [
+        {
+         "t": "$549 vs $760",
+         "c": "orange"
+        },
+        {
+         "t": "0.2x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | ML 29-20 (+17%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.2
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 10:10PM CT",
+     "picks": [
+      {
+       "bet": "Lakers -7.5",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": -104,
+       "chips": [
+        {
+         "t": "$4.1K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "2.7x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 14-6 | spread 1-2 (+41%)",
+         "c": "grey"
+        },
+        {
+         "t": "THIN - 3 bets here",
+         "c": "grey"
+        }
+       ],
+       "usual": 2.7
+      },
+      {
+       "bet": "Lakers ML",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": -317,
+       "chips": [
+        {
+         "t": "$511 vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "1.2x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 23-18 | ML 11-8 (+2%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 1.2
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Jazz ML $1K (3-3 here, -18% ROI)",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
