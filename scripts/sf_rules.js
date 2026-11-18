@@ -93,6 +93,20 @@ const recPlay = t => {
    NO READ (nothing to lean on, or the same wallet on both sides) at 2. */
 const confFor = q => Math.min(9, 6 + (q.mktRoi >= 30 ? 1 : 0) + (q.mktRoi >= 50 ? 1 : 0) + (betsOf(q.mktRecord) >= 15 ? 1 : 0));
 const CONF_LEGEND = 'Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.';
+// One row for the image card (Nov 18 design): team/wallet/market/record always shown, ROI% + status on their own line, dollars
+// and context (x usual, sample size, form) as a note. Never implies a number - Derek's rule after the Hornets/Lakers mix-up.
+const noteOf = t => {
+  const parts = [(+t.vsUsual || 0).toFixed(1) + 'x usual'];
+  const nb = betsOf(t.mktRecord);
+  if (nb < 5) parts.push('only ' + nb + ' bet' + (nb === 1 ? '' : 's') + ' here');
+  else if (t.form) parts.push(t.form);
+  return parts.join(', ');
+};
+const rowOf = t => {
+  const st = status(t);
+  return { team: teamOf(t.pick) || t.pick, wallet: t.wallet, market: mkName(t.market).toUpperCase(), record: t.mktRecord,
+    roi: t.mktRoi, dollars: t.dollars, note: noteOf(t), status: cold(t) ? { t: st.t + ' - not counted', c: 'red' } : st };
+};
 function matchupRow(sp, tix, grp) {
   const bySide = {};
   for (const t of tix) {
@@ -112,7 +126,7 @@ function matchupRow(sp, tix, grp) {
   const nm = x => grp === 'total' ? x.name : x.name.toUpperCase();
   // Default headline is just the matchup (or the total); only an EDGE verdict earns a specific recommended play up top.
   let bet = grp === 'total' ? 'Total ' + (((A.top || A.bad[0] || {}).line) ?? '') : sides.map(x => x.name).join(' vs ');
-  let verdict, confidence, rec = null;
+  let verdict, confidence, rec = null, forSide = A, againstSide = B || null;
   if (!B) {
     verdict = { t: 'CLEAN: nothing against', c: 'blue' };
     if (A.q[0]) { confidence = confFor(A.q[0]); rec = recPlay(A.q[0]); bet = rec; } else confidence = 3;
@@ -128,6 +142,7 @@ function matchupRow(sp, tix, grp) {
       verdict = { t: 'EDGE ' + nm(w) + ': quality wallets vs ' + why(l) + ' on ' + nm(l), c: 'gold' };
       confidence = confFor(w.q[0]);
       rec = recPlay(w.q[0]); bet = rec;
+      forSide = w; againstSide = l;
     } else { verdict = { t: 'NO READ: no quality wallet on either side', c: 'grey' }; confidence = 2; }
   }
   const chips = [verdict];
@@ -136,6 +151,28 @@ function matchupRow(sp, tix, grp) {
     if (x.top) chips.push({ t: nm(x) + ' ' + kk(x.goodD) + ' - ' + x.good.slice(0, 2).map(walletTxt).join('; '), c: x.top.mktRoi != null && isQuality(x.top) && !twoSided.has(x.top.wid) ? (hotWins(x.top.form) >= 8 ? 'gold' : 'green') : 'grey' });
     if (x.bad.length) chips.push({ t: nm(x) + ' COLD ' + kk(x.badD) + ' - ' + walletTxt(x.bad[0]) + ' - not counted', c: 'red' });
   }
-  return { bet, rec, confidence, chips, goodD: A.goodD, sides };
+
+  /* Image-card view (Nov 18): tag/for/against/moneyBar/price/callout ready for sharpflow_html. "For it" is always the side the
+     headline backs (the quality wallet's side on an EDGE/CLEAN read, else the bigger-money side); "Against it" is the other side,
+     when there is one. Rows always carry team/wallet/market/record/ROI/dollars/status - never implied (Derek, Nov 18). */
+  const tag = rec ? { t: 'EDGE - ' + nm(forSide), icon: '\u{1F3AF}' }
+    : verdict.t.startsWith('SPLIT') ? { t: 'SPLIT - BOTH SIDES', icon: '⚖️' }
+    : verdict.t.startsWith('NO READ') ? { t: 'NO READ', icon: '⚠️' }
+    : { t: 'LIGHT SIGNAL - ' + nm(A), icon: '\u{1F440}' };
+  const rowsOf = x => !x ? null : { team: nm(x), rows: x.good.concat(x.bad).sort((a, b) => b.dollars - a.dollars).slice(0, 4).map(rowOf) };
+  const forView = rowsOf(forSide), againstView = rowsOf(againstSide);
+  const totalD = sides.reduce((a, x) => a + x.goodD + x.badD, 0) || 1;
+  const moneyBar = sides.slice(0, 2).map(x => ({ team: nm(x), dollars: x.goodD + x.badD, pct: Math.round(((x.goodD + x.badD) / totalD) * 100),
+    c: x === forSide ? (hotWins((x.top || {}).form) >= 8 ? 'gold' : 'green') : (x.badD > 0 ? 'red' : 'grey') }));
+  const rq = rec ? (forSide.q[0] || forSide.top) : null;
+  const price = rq && rq.price != null ? (rq.price > 0 ? '+' : '') + rq.price : null;
+  let callout = null;
+  if (rec) {
+    const base = 'Quality wallet ' + rq.mktRecord + ' (' + (rq.mktRoi >= 0 ? '+' : '') + Math.round(rq.mktRoi) + '% ROI) on ' + nm(forSide);
+    callout = (againstSide && againstSide.bad.length) ? { plain: base + ' vs a cold wallet on ' + nm(againstSide) + ' - ', highlight: 'nothing quality against it.' }
+      : { plain: base + ' - ', highlight: 'nothing quality against it.' };
+  } else if (verdict.t.startsWith('SPLIT')) callout = { plain: 'Quality wallets on both sides - ', highlight: 'no clean lean here.' };
+
+  return { bet, rec, confidence, chips, goodD: A.goodD, sides, tag, for: forView, against: againstView, moneyBar, price, callout };
 }
 module.exports = { formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };

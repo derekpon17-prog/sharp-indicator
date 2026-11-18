@@ -106,9 +106,9 @@ for (const s of send) {
   const gk = s.sp + '|' + s.matchup + '|' + grpOf(s.market); if (gseen[gk]) continue; gseen[gk] = 1;
   const tix = (latest.tickets || []).filter(t => t.sport === s.sp && t.matchup === s.matchup && grpOf(t.market) === grpOf(s.market));
   const r = R.matchupRow(s.sp, tix, grpOf(s.market)); if (!r) continue;
-  const top = r.sides[0] && r.sides[0].top;
-  r.chips.unshift({ t: s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)}` : `NEW ${k(s.good)} on ${s.pick}`, c: 'blue' });
-  rows.push({ st: s.st, sp: s.sp, bet: r.bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: null, chips: r.chips, usual: top ? +top.vsUsual || 0 : 0 });
+  const growTxt = s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)}` : `NEW ${k(s.good)} on ${s.pick}`;
+  rows.push({ st: s.st, sp: s.sp, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, bet: r.bet, price: r.price,
+    for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: growTxt });
 }
 const secs = [];
 for (const r of rows) {
@@ -118,8 +118,8 @@ for (const r of rows) {
 }
 const snap = ctTime(new Date(latest.scannedAt));
 const card = { route: 'Sharp Signals', content: `**Sharp Flow alert** - ${rows.length} new sharp-money side${rows.length === 1 ? '' : 's'}`,
-  boards: [{ brand: 'SHARP FLOW ALERT', title: 'New sharp money', subtitle: `Positive market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT`,
-    sections: secs, legend: 'Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted', footer: 'Wallet money, not a pick. Leans, not guarantees' }] };
+  boards: [{ design: 'sharpflow', brand: 'SHARP FLOW ALERT', title: 'New sharp money', subtitle: `Positive market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT`,
+    sections: secs, legend: R.CONF_LEGEND, footer: 'Wallet money, not a pick. Leans, not guarantees' }] };
 fs.mkdirSync(CARD_DIR, { recursive: true });
 const hhmm = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');
 const f = `${CARD_DIR}/${today}-${hhmm}-sharpflow-alert.json`;

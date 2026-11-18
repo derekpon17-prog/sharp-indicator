@@ -110,8 +110,9 @@ function buildCards(sp, latest, flags) {
     const tix = tickets.filter(t => t.matchup === s.matchup && grpOf(t.market) === grpOf(s.market));
     const r = R.matchupRow(sp, tix, grpOf(s.market)); if (!r) continue;
     const star = sides.some(x => x.matchup === s.matchup && grpOf(x.market) === grpOf(s.market) && x.tail);
-    const top = r.sides[0] && r.sides[0].top;
-    rows.push({ st: s.st, bet: (star ? '★ ' : '') + r.bet, sub: `${s.matchup} - ${ctTime(s.st)}`, price: null, chips: r.chips, usual: top ? +top.vsUsual || 0 : 0 });
+    rows.push({ st: s.st, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, bet: (star ? '★ ' : '') + r.bet,
+      price: r.price, for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout,
+      footerLabel: 'SHARP FLOW READ' });
   }
   const data = sides.map(s => ({ game: s.matchup, market: s.market, pick: s.pick, start_utc: s.st.toISOString(), dollars: s.dollars, opp_dollars: s.oppD, wallets: s.wallets,
     max_vs_usual: +s.vs, all_sport_ratio: s.big.usualAll ? +(s.big.dollars / s.big.usualAll).toFixed(2) : null, price: s.big.price, line: s.big.line ?? null,
@@ -128,8 +129,8 @@ function buildCards(sp, latest, flags) {
     }
     const last = i + 12 >= rows.length || cards.length === 2;
     const coldTxt = last && coldSides.length ? 'Not counted (negative market ROI or cold last 30 days): ' + coldSides.slice(0, 3).map(c => c.txt).join('; ') : '';
-    cards.push({ brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with positive ${sp} market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
-      sections: secs, legend: coldTxt || 'Quality wallet = 10+ bets here at +15% ROI. HOT = last 10 8+ wins. THIN = under 5 bets. COLD = negative ROI or cold form, never counted. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
+    cards.push({ design: 'sharpflow', brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with positive ${sp} market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
+      sections: secs, legend: (coldTxt ? coldTxt + ' | ' : '') + R.CONF_LEGEND + ' Quality wallet = 10+ bets here at +15% ROI. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
   }
   return { cards, n: rows.length, data, cold: coldSides };
 }
