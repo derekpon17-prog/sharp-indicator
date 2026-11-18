@@ -1,0 +1,164 @@
+{
+ "route": "Sharp Signals",
+ "content": "**TEST - opposed money on the card** - Hornets at Lakers and NBA data from the 9:31pm CT pull, layout check only, not a current board",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:31pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 10:10PM CT",
+     "picks": [
+      {
+       "bet": "Lakers -7.5",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": -104,
+       "chips": [
+        {
+         "t": "$5.1K vs $2.1K",
+         "c": "blue"
+        },
+        {
+         "t": "2.7x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 14-6 | spread 1-2 (+41%)",
+         "c": "grey"
+        },
+        {
+         "t": "THIN - 3 bets here",
+         "c": "grey"
+        },
+        {
+         "t": "AGAINST $2.1K: $1.2K ML 7-1 (+75%) - HOT (last 10: 8-2)",
+         "c": "orange"
+        }
+       ],
+       "usual": 2.7
+      },
+      {
+       "bet": "Hornets ML",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": 270,
+       "chips": [
+        {
+         "t": "$2.1K vs $5.6K",
+         "c": "orange"
+        },
+        {
+         "t": "1.5x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 17-7 | ML 7-1 (+75%)",
+         "c": "grey"
+        },
+        {
+         "t": "HOT (last 10: 8-2)",
+         "c": "gold"
+        },
+        {
+         "t": "AGAINST $5.6K: $3K spread 1-2 (+41%) - THIN - 3 bets here",
+         "c": "grey"
+        },
+        {
+         "t": "COLD wallet against: $6K ($6K spread 6-3 (-7%)) - not counted",
+         "c": "red"
+        }
+       ],
+       "usual": 1.5
+      },
+      {
+       "bet": "Under 220.5",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": 113,
+       "chips": [
+        {
+         "t": "$1.4K vs $570",
+         "c": "blue"
+        },
+        {
+         "t": "0.5x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | total 22-17 (+27%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        },
+        {
+         "t": "AGAINST $570: $570 total 22-17 (+27%) - GOOD",
+         "c": "orange"
+        }
+       ],
+       "usual": 0.5
+      },
+      {
+       "bet": "Over 220.5",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": -108,
+       "chips": [
+        {
+         "t": "$570 vs $1.4K",
+         "c": "orange"
+        },
+        {
+         "t": "0.2x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | total 22-17 (+27%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        },
+        {
+         "t": "AGAINST $1.4K: $1.4K total 22-17 (+27%) - GOOD",
+         "c": "orange"
+        }
+       ],
+       "usual": 0.2
+      },
+      {
+       "bet": "Lakers ML",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": -317,
+       "chips": [
+        {
+         "t": "$511 vs $2.1K",
+         "c": "orange"
+        },
+        {
+         "t": "1.2x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 23-18 | ML 11-8 (+2%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        },
+        {
+         "t": "AGAINST $2.1K: $1.2K ML 7-1 (+75%) - HOT (last 10: 8-2)",
+         "c": "orange"
+        }
+       ],
+       "usual": 1.2
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Jazz ML $1K (3-3 here, -18% ROI); 76ers ML $1K (3-3 here, -18% ROI); Mavericks ML $1K (3-3 here, -18% ROI)",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
