@@ -1,0 +1,31 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Wed Nov 18** · 1 faded play",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "WED NOV 18 · 12:46PM",
+  "sources": "Pinnacle 12:46pm CT - Vegas not read - SharpFlow not current - Novig not read",
+  "sf_current": false,
+  "footer": "Pinnacle no longer leans Over 149.5 in RUTG @ ND (total now 150.5, no lean). Original play and price stand as posted; this is a fade notice. Tier rules are fixed.",
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "RUTG@ND",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 149.5,
+    "price": -116,
+    "bet": "Over 149.5",
+    "matchup": "NCAAB · RUTG @ ND · 1:00pm CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "10:55",
+    "vegas_strength": null,
+    "tier_override": "PASS",
+    "pass_reason": "Pinnacle total faded from Strong to No lean (now 150.5). No longer a play.",
+    "buckets": ["PIN_STRONG", "PIN_FADED"],
+    "late_pin": "No lean 12:46"
+   }
+  ]
+ }
+}
