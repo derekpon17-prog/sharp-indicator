@@ -1,0 +1,15 @@
+name: PM probe (temp)
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Leaderboard overall
+        run: |
+          curl -sS "https://data-api.polymarket.com/v1/leaderboard?category=OVERALL&timePeriod=ALL&orderBy=PNL&limit=5" | head -c 3000
+          echo
+          echo "---SPORTS---"
+          curl -sS "https://data-api.polymarket.com/v1/leaderboard?category=SPORTS&timePeriod=ALL&orderBy=PNL&limit=8" | head -c 4000
