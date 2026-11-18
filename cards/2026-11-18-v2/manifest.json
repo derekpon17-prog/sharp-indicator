@@ -1,0 +1,101 @@
+[
+ {
+  "file": "01-nba-raptors.png",
+  "sfPoints": 33,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Wizards at Raptors",
+  "pick": "Raptors",
+  "market": "ML"
+ },
+ {
+  "file": "02-nba-celtics.png",
+  "sfPoints": 28,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Celtics at Nuggets",
+  "pick": "Celtics",
+  "market": "ML"
+ },
+ {
+  "file": "03-nba-raptors-6-5.png",
+  "sfPoints": 27,
+  "verdict": "caution",
+  "sport": "NBA",
+  "matchup": "Wizards at Raptors",
+  "pick": "Raptors -6.5",
+  "market": "SPREAD"
+ },
+ {
+  "file": "04-nba-over-222-5.png",
+  "sfPoints": 25,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Warriors at Mavericks",
+  "pick": "Over 222.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "05-nfl-texans.png",
+  "sfPoints": 17,
+  "verdict": "clear",
+  "sport": "NFL",
+  "matchup": "Colts at Texans",
+  "pick": "Texans",
+  "market": "ML"
+ },
+ {
+  "file": "06-cbb-over.png",
+  "sfPoints": 17,
+  "verdict": "clear",
+  "sport": "CBB",
+  "matchup": "Tennessee Tech Golden Eagles at UNC Asheville Bulldogs",
+  "pick": "Over",
+  "market": "TOTAL"
+ },
+ {
+  "file": "07-nba-under-238-5.png",
+  "sfPoints": 13,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Bulls at Nets",
+  "pick": "Under 238.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "08-nba-over-221-5.png",
+  "sfPoints": 13,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "76ers at Magic",
+  "pick": "Over 221.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "09-nba-rockets.png",
+  "sfPoints": 7,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Rockets at Pacers",
+  "pick": "Rockets",
+  "market": "ML"
+ },
+ {
+  "file": "10-nba-under-224-5.png",
+  "sfPoints": 6,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Warriors at Mavericks",
+  "pick": "Under 224.5",
+  "market": "TOTAL"
+ },
+ {
+  "file": "11-nba-heat.png",
+  "sfPoints": 0,
+  "verdict": "clear",
+  "sport": "NBA",
+  "matchup": "Bucks at Heat",
+  "pick": "Heat",
+  "market": "SPREAD"
+ }
+]
