@@ -7,7 +7,7 @@ const stats = require('../api/trader-stats.js');
 const discover = require('../api/discover.js');
 
 const V2 = 'https://data-api.polymarket.com/v2';
-const SPORTS = ['NFL', 'NCAAF', 'NHL', 'NBA', 'NCAAB'];
+const SPORTS = ['NFL', 'NCAAF', 'NHL', 'NBA', 'NCAAB', 'WNBA', 'MLB'];
 const MAX_WALLETS = parseInt(process.env.MAX_WALLETS || '300', 10);
 const CONC = 6;
 const LOG = [];

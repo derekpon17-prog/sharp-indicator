@@ -1,9 +1,10 @@
-# Daily Polymarket wallet vetting per sport. No Claude usage. Writes wallets/wallets.json to the `wallets` branch.
+# Polymarket wallet vetting per sport, every 4h (was once/day). No Claude usage. Writes wallets/wallets.json to the `wallets` branch.
+# Each run recomputes the pre/post cutoff off the current time, so grading recalibrates every run, not just daily.
 name: Wallet collector
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 11 * * *'
+    - cron: '17 */4 * * *'
 permissions:
   contents: write
 concurrency:
