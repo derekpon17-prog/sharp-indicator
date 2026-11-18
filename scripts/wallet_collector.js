@@ -87,20 +87,40 @@ function classify(sport, s, cand) {
 /* PERSISTENCE TEST. Every wallet is judged on bets settled BEFORE the cutoff only, then checked on bets
    settled AFTER it. A wallet is "confirmed" only if the edge held out of sample. */
 const CUTOFF_DAYS = parseInt(process.env.CUTOFF_DAYS || '45', 10);
+/* Per-market breakdown (Derek, Nov 18): same heuristic as sportOfTrade's title patterns.
+   ": O/U" -> TOTAL, "Spread" or a parenthesised +/-line in the title -> SPREAD, else ML. */
+function marketOf(p) {
+  const t = String((p && (p.title || p.question)) || '');
+  if (/:\s*O\/U|over\/under/i.test(t)) return 'TOTAL';
+  if (/spread/i.test(t) || /\([+-]\d+(\.\d+)?\)/.test(t)) return 'SPREAD';
+  return 'ML';
+}
 function leg(p) {
   const cp = parseFloat(p.curPrice), px = parseFloat(p.avgPrice), sh = parseFloat(p.totalBought), pnl = parseFloat(p.realizedPnl);
   if (!isFinite(cp) || !isFinite(px) || !isFinite(sh) || !isFinite(pnl) || sh <= 0) return null;
   const win = cp >= 0.99, loss = cp <= 0.01;
   if (!win && !loss) return null;
-  return { win, cost: px * sh, pnl, ts: parseFloat(p.firstEntryAt) || parseFloat(p.lastEventAt) || 0 };
+  return { win, cost: px * sh, pnl, ts: parseFloat(p.firstEntryAt) || parseFloat(p.lastEventAt) || 0, market: marketOf(p) };
 }
 function agg(legs) {
   const n = legs.length;
-  if (!n) return { n: 0, roi: null, wr: null, pnl: 0, staked: 0, implied: null };
+  if (!n) return { n: 0, roi: null, wr: null, pnl: 0, staked: 0, implied: null, record: null };
   const cost = legs.reduce((a, l) => a + l.cost, 0), pnl = legs.reduce((a, l) => a + l.pnl, 0);
   const wins = legs.filter(l => l.win).length;
   return { n, roi: cost > 0 ? Math.round(pnl / cost * 1000) / 10 : null, wr: Math.round(wins / n * 1000) / 10,
-           pnl: Math.round(pnl), staked: Math.round(cost) };
+           pnl: Math.round(pnl), staked: Math.round(cost), record: wins + '-' + (n - wins) };
+}
+const MARKETS = ['ML', 'SPREAD', 'TOTAL'];
+/* Same pre/post split as agg(), broken out per market type, so a wallet's row can show
+   e.g. NFL ML 12-1 / NFL SPREAD 4-6, not just one blended sport-level record. */
+function byMarket(legs, cutoff) {
+  const out = {};
+  for (const m of MARKETS) {
+    const ls = legs.filter(l => l.market === m);
+    if (!ls.length) continue;
+    out[m] = { pre: agg(ls.filter(l => l.ts && l.ts < cutoff)), post: agg(ls.filter(l => l.ts >= cutoff)) };
+  }
+  return out;
 }
 
 (async () => {
@@ -129,7 +149,7 @@ function agg(legs) {
       for (const sport of Object.keys(by)) {
         const legs = by[sport];
         const pre = agg(legs.filter(l => l.ts && l.ts < cutoff)), post = agg(legs.filter(l => l.ts >= cutoff));
-        allRows[sport].push({ wallet: c.wallet, name: c.name, src: [...c.src], pre, post });
+        allRows[sport].push({ wallet: c.wallet, name: c.name, src: [...c.src], pre, post, byMarket: byMarket(legs, cutoff) });
       }
     }
   }
