@@ -42,7 +42,7 @@ def has_pin(r):
 def sf_cold(r):
     """Derek, Nov 16: wallet money from a wallet with negative all-time ROI in THIS sport and market does not count."""
     roi = r.get("sf_mkt_roi")
-    l30 = r.get("sf_l30_roi")  # Nov 17 form gate: a wallet cold over the last 30 days does not count either
+    l30 = r.get("sf_mkt_l30_roi") if r.get("sf_mkt_l30_roi") is not None else r.get("sf_l30_roi")  # Nov 17 form gate; Nov 18: last 30 days in THIS market when logged, else sport-wide
     return (roi is not None and float(roi) <= 0) or (l30 is not None and float(l30) <= 0)
 
 def mkt_bets(r):
