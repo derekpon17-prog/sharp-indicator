@@ -110,6 +110,7 @@ for (const s of send) {
   rows.push({ st: s.st, sp: s.sp, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, bet: r.bet, price: r.price,
     for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: growTxt });
 }
+rows.sort((a, b) => b.confidence - a.confidence || a.st - b.st); // Derek, Nov 18: order by confidence, not kickoff time
 const secs = [];
 for (const r of rows) {
   const h = `${r.sp} - ${ctTime(r.st).toUpperCase()} CT`;

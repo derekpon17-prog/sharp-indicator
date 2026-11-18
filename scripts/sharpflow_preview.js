@@ -151,6 +151,7 @@ function buildCards(sp, latest, flags, before) { // before: optional Date - only
       price: r.price, for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout,
       footerLabel: 'SHARP FLOW READ' });
   }
+  rows.sort((a, b) => b.confidence - a.confidence || a.st - b.st); // Derek, Nov 18: order by confidence, not kickoff time
   const data = sides.map(s => ({ game: s.matchup, market: s.market, pick: s.pick, start_utc: s.st.toISOString(), dollars: s.dollars, opp_dollars: s.oppD, wallets: s.wallets,
     max_vs_usual: +s.vs, all_sport_ratio: s.big.usualAll ? +(s.big.dollars / s.big.usualAll).toFixed(2) : null, price: s.big.price, line: s.big.line ?? null,
     l30_rec: s.big.l30Rec || null, l30_roi: s.big.l30Roi ?? null, mkt_rec: s.big.mktRecord || null, mkt_roi: s.big.mktRoi ?? null, mkt_l30_rec: s.big.mktL30Rec || null, tail: s.tail }));
