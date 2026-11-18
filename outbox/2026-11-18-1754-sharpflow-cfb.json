@@ -1,0 +1,146 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CFB - first game 6:00pm CT** - 3 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CFB - sharp wallets",
+   "subtitle": "Wallets with positive CFB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 5:06pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Akron at UMass",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - UMASS",
+        "icon": "👀"
+       },
+       "bet": "UMass",
+       "price": null,
+       "for": {
+        "team": "UMASS",
+        "rows": [
+         {
+          "team": "UMass",
+          "wallet": "S",
+          "market": "SPREAD",
+          "record": "2-1",
+          "roi": 27.8,
+          "dollars": 2000,
+          "note": "0.6x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "UMASS",
+         "dollars": 2000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Akron at UMass",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total 47.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "S",
+          "market": "TOTAL",
+          "record": "2-1",
+          "roi": 70.7,
+          "dollars": 2000,
+          "note": "0.6x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 2000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 6:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Central Michigan at Buffalo",
+       "time": "6:30pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total 45.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "S",
+          "market": "TOTAL",
+          "record": "2-1",
+          "roi": 70.7,
+          "dollars": 2000,
+          "note": "0.6x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 2000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
