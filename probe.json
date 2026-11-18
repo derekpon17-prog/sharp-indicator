@@ -1,21 +1,8 @@
 {
- "at": "2026-11-18T20:54:16.310Z",
- "tried": [
-  {
-   "url": "https://sharpflowmcp-lviwud3q2q-uc.a.run.app/mcp",
-   "init": {
-    "status": 200,
-    "ct": "text/event-stream; charset=utf-8",
-    "head": "event: message\ndata: {\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{\"tools\":{\"listChanged\":false}},\"serverInfo\":{\"name\":\"NHL Savant - Sharpflow\",\"version\":\"1.0.0\"},\"instructions\":\"The free testing period is over. New connection instructions are on the account settin",
-    "ok": true
-   },
-   "tools": []
-  }
- ],
- "call": {
-  "status": 200,
-  "head": "event: message\ndata: {\"jsonrpc\":\"2.0\",\"id\":3,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"The free testing period is over. New connection instructions are on the account settings page.\"}]}}\n\n"
- },
- "parseError": "Unexpected token '.', \".\" is not valid JSON",
- "ok": false
+  "at": "2026-11-18T22:26:56Z",
+  "ok": true,
+  "method": "mcp-session-puller",
+  "scannedAt": "2026-11-18T22:02:59.814Z",
+  "tickets": 29,
+  "sides": 22
 }
