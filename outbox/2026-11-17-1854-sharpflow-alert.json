@@ -1,0 +1,121 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 4 new sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:39pm CT",
+   "sections": [
+    {
+     "heading": "CBB - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "Over 158.5",
+       "sub": "Lamar Cardinals at Omaha Mavericks - 7:00pm",
+       "price": -106,
+       "chips": [
+        {
+         "t": "NEW $1.2K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "1.9x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "CBB 13-8 | total 12-7 (+41%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 1.9
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "bet": "Trail Blazers +1.5",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": null,
+       "chips": [
+        {
+         "t": "NEW $26K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "1.2x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 9-4 | spread 1-1 (+94%)",
+         "c": "grey"
+        },
+        {
+         "t": "THIN - 2 bets here",
+         "c": "grey"
+        }
+       ],
+       "usual": 1.2
+      },
+      {
+       "bet": "Over 225.5",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": -100,
+       "chips": [
+        {
+         "t": "NEW $7.5K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.6x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 5-2 | total 2-1 (+54%)",
+         "c": "grey"
+        },
+        {
+         "t": "THIN - 3 bets here",
+         "c": "grey"
+        }
+       ],
+       "usual": 0.6
+      },
+      {
+       "bet": "Trail Blazers ML",
+       "sub": "Trail Blazers at Timberwolves - 7:10pm",
+       "price": 127,
+       "chips": [
+        {
+         "t": "NEW $4.3K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.6x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 9-4 | ML 5-0 (+43%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.6
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
