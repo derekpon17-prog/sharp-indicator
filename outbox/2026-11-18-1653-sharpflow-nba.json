@@ -1,0 +1,758 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NBA - first game 6:00pm CT** - 12 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:02pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bucks at Heat",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Heat vs Bucks",
+       "price": null,
+       "for": {
+        "team": "HEAT",
+        "rows": [
+         {
+          "team": "Heat",
+          "wallet": "F",
+          "market": "SPREAD",
+          "record": "28-21",
+          "roi": 10.5,
+          "dollars": 2134,
+          "note": "0.8x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         },
+         {
+          "team": "Heat",
+          "wallet": "E",
+          "market": "ML",
+          "record": "23-9",
+          "roi": 4.3,
+          "dollars": 1620,
+          "note": "1.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "BUCKS",
+        "rows": [
+         {
+          "team": "Bucks",
+          "wallet": "J",
+          "market": "SPREAD",
+          "record": "1-3",
+          "roi": -26.3,
+          "dollars": 2000,
+          "note": "1.6x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "HEAT",
+         "dollars": 3754,
+         "pct": 65,
+         "c": "gold"
+        },
+        {
+         "team": "BUCKS",
+         "dollars": 2000,
+         "pct": 35,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "76ers at Magic",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - 76ERS",
+        "icon": "👀"
+       },
+       "bet": "76ers",
+       "price": null,
+       "for": {
+        "team": "76ERS",
+        "rows": [
+         {
+          "team": "76ers",
+          "wallet": "E",
+          "market": "ML",
+          "record": "23-9",
+          "roi": 4.3,
+          "dollars": 1826,
+          "note": "1.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "76ERS",
+         "dollars": 1826,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Rockets at Pacers",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - ROCKETS",
+        "icon": "🎯"
+       },
+       "bet": "Rockets ML -233",
+       "price": "-233",
+       "for": {
+        "team": "ROCKETS",
+        "rows": [
+         {
+          "team": "Rockets",
+          "wallet": "O",
+          "market": "ML",
+          "record": "31-23",
+          "roi": 18.8,
+          "dollars": 1319,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "ROCKETS",
+         "dollars": 1319,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 31-23 (+19% ROI) on ROCKETS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Wizards at Raptors",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "EDGE - RAPTORS",
+        "icon": "🎯"
+       },
+       "bet": "Raptors ML -202",
+       "price": "-202",
+       "for": {
+        "team": "RAPTORS",
+        "rows": [
+         {
+          "team": "Raptors",
+          "wallet": "W",
+          "market": "SPREAD",
+          "record": "3-2",
+          "roi": 32.2,
+          "dollars": 18421,
+          "note": "0.6x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Raptors",
+          "wallet": "O",
+          "market": "ML",
+          "record": "31-23",
+          "roi": 18.8,
+          "dollars": 6885,
+          "note": "2.3x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Raptors",
+          "wallet": "W",
+          "market": "ML",
+          "record": "5-1",
+          "roi": 38.4,
+          "dollars": 4997,
+          "note": "0.7x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Raptors",
+          "wallet": "J",
+          "market": "SPREAD",
+          "record": "1-3",
+          "roi": -26.3,
+          "dollars": 2000,
+          "note": "1.6x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "RAPTORS",
+         "dollars": 32303,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 31-23 (+19% ROI) on RAPTORS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Pelicans",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - PISTONS",
+        "icon": "🎯"
+       },
+       "bet": "Pistons ML -213",
+       "price": "-213",
+       "for": {
+        "team": "PISTONS",
+        "rows": [
+         {
+          "team": "Pistons",
+          "wallet": "O",
+          "market": "ML",
+          "record": "31-23",
+          "roi": 18.8,
+          "dollars": 6800,
+          "note": "2.3x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Pistons",
+          "wallet": "F",
+          "market": "ML",
+          "record": "52-44",
+          "roi": 2.9,
+          "dollars": 1944,
+          "note": "0.7x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         },
+         {
+          "team": "Pistons",
+          "wallet": "E",
+          "market": "ML",
+          "record": "23-9",
+          "roi": 4.3,
+          "dollars": 1800,
+          "note": "1.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "PELICANS",
+        "rows": [
+         {
+          "team": "Pelicans",
+          "wallet": "F",
+          "market": "SPREAD",
+          "record": "28-21",
+          "roi": 10.5,
+          "dollars": 5913,
+          "note": "2.2x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         },
+         {
+          "team": "Pelicans",
+          "wallet": "F",
+          "market": "ML",
+          "record": "52-44",
+          "roi": 2.9,
+          "dollars": 3700,
+          "note": "1.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PISTONS",
+         "dollars": 10544,
+         "pct": 52,
+         "c": "green"
+        },
+        {
+         "team": "PELICANS",
+         "dollars": 9613,
+         "pct": 48,
+         "c": "grey"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 31-23 (+19% ROI) on PISTONS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Warriors at Mavericks",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Total 222.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "O",
+          "market": "TOTAL",
+          "record": "26-19",
+          "roi": 30.1,
+          "dollars": 5433,
+          "note": "1.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "O",
+          "market": "TOTAL",
+          "record": "26-19",
+          "roi": 30.1,
+          "dollars": 2199,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 5433,
+         "pct": 71,
+         "c": "green"
+        },
+        {
+         "team": "Under",
+         "dollars": 2199,
+         "pct": 29,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Pistons at Pelicans",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "bet": "Over 228.5 ++108",
+       "price": "++108",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "W",
+          "market": "TOTAL",
+          "record": "4-4",
+          "roi": 34.9,
+          "dollars": 1854,
+          "note": "0.3x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Over",
+          "wallet": "O",
+          "market": "TOTAL",
+          "record": "26-19",
+          "roi": 30.1,
+          "dollars": 1133,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 2987,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 26-19 (+30% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Warriors at Mavericks",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - MAVERICKS",
+        "icon": "👀"
+       },
+       "bet": "Mavericks",
+       "price": null,
+       "for": {
+        "team": "MAVERICKS",
+        "rows": [
+         {
+          "team": "Mavericks",
+          "wallet": "O",
+          "market": "SPREAD",
+          "record": "22-20",
+          "roi": 9.4,
+          "dollars": 1792,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MAVERICKS",
+         "dollars": 1792,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Hawks at Thunder",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - THUNDER",
+        "icon": "👀"
+       },
+       "bet": "Thunder",
+       "price": null,
+       "for": {
+        "team": "THUNDER",
+        "rows": [
+         {
+          "team": "Thunder",
+          "wallet": "E",
+          "market": "ML",
+          "record": "23-9",
+          "roi": 4.3,
+          "dollars": 1151,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "THUNDER",
+         "dollars": 1151,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 8:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Celtics at Nuggets",
+       "time": "8:10pm CT",
+       "tag": {
+        "t": "EDGE - CELTICS",
+        "icon": "🎯"
+       },
+       "bet": "Celtics ML -127",
+       "price": "-127",
+       "for": {
+        "team": "CELTICS",
+        "rows": [
+         {
+          "team": "Celtics",
+          "wallet": "J",
+          "market": "ML",
+          "record": "10-2",
+          "roi": 58.2,
+          "dollars": 2000,
+          "note": "1.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Celtics",
+          "wallet": "E",
+          "market": "ML",
+          "record": "23-9",
+          "roi": 4.3,
+          "dollars": 1690,
+          "note": "1.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CELTICS",
+         "dollars": 3690,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 10-2 (+58% ROI) on CELTICS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Jazz at Lakers",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Lakers vs Jazz",
+       "price": null,
+       "for": {
+        "team": "LAKERS",
+        "rows": [
+         {
+          "team": "Lakers",
+          "wallet": "E",
+          "market": "ML",
+          "record": "23-9",
+          "roi": 4.3,
+          "dollars": 2868,
+          "note": "1.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Lakers",
+          "wallet": "T",
+          "market": "ML",
+          "record": "15-9",
+          "roi": 4.7,
+          "dollars": 1682,
+          "note": "2.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "JAZZ",
+        "rows": [
+         {
+          "team": "Jazz",
+          "wallet": "B",
+          "market": "SPREAD",
+          "record": "3-1",
+          "roi": 20.3,
+          "dollars": 1633,
+          "note": "1.0x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "LAKERS",
+         "dollars": 4550,
+         "pct": 74,
+         "c": "green"
+        },
+        {
+         "team": "JAZZ",
+         "dollars": 1633,
+         "pct": 26,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Suns at Kings",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - SUNS",
+        "icon": "👀"
+       },
+       "bet": "Suns",
+       "price": null,
+       "for": {
+        "team": "SUNS",
+        "rows": [
+         {
+          "team": "Suns",
+          "wallet": "E",
+          "market": "ML",
+          "record": "23-9",
+          "roi": 4.3,
+          "dollars": 1119,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "SUNS",
+         "dollars": 1119,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Bucks +11.5 $2K (1-3 here, -26% ROI) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
