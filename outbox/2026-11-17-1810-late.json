@@ -1,0 +1,181 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · TUESDAY LATE UPDATE · Nov 17** · 6 new Pinnacle Strong/Max sides, 1 faded",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "TUE NOV 17 · 6:10PM",
+  "sources": "Pinnacle 6:10pm CT - Vegas 6:14pm CT (CBB, NBA, NHL) - SharpFlow 5:54pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "FADED, PASS: NY@TOR Under 214.5 (6:30pm CT) - Pinnacle lean is gone and Vegas fell from 100 to 75. No bet. | New Pinnacle Strong/Max sides on unstarted games that were not carded at 3:55pm; no wallet money against any of them. Wallet money counts only from wallets with positive ROI in that sport and market. Tier rules are fixed.",
+  "rows": [
+   {
+    "date": "2026-11-17",
+    "sport": "NHL",
+    "game": "TOR@CHI",
+    "start_ct": "6:30pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 6.5,
+    "price": -104,
+    "bet": "Over 6.5",
+    "matchup": "NHL - TOR @ CHI - 6:30pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "buckets": [
+     "PIN_STABLE",
+     "PIN_STRONG",
+     "LATE_FLIP",
+     "VEGAS_ALL"
+    ],
+    "sf_snapshot": "17:54",
+    "vegas_strength": 23,
+    "vegas_type": "Pressure Move",
+    "notes": "Pinnacle Strong stable, confirmed; not carded at 3:55pm; no SF tickets on game"
+   },
+   {
+    "date": "2026-11-17",
+    "sport": "NCAAB",
+    "game": "JXST@LT",
+    "start_ct": "6:30pm",
+    "market": "SPREAD",
+    "side": "JXST",
+    "line": 1.5,
+    "price": -109,
+    "bet": "JXST +1.5",
+    "matchup": "NCAAB - JXST @ LT - 6:30pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "buckets": [
+     "PIN_STABLE",
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "sf_snapshot": "17:54",
+    "notes": "new since 3:53pm read"
+   },
+   {
+    "date": "2026-11-17",
+    "sport": "NCAAB",
+    "game": "LAM@OMA",
+    "start_ct": "7:00pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 158.5,
+    "price": -115,
+    "bet": "Over 158.5",
+    "matchup": "NCAAB - LAM @ OMA - 7:00pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Max",
+    "pin_status": "Stable",
+    "buckets": [
+     "PIN_STABLE",
+     "PIN_STRONG",
+     "PIN_MAX",
+     "LATE_FLIP"
+    ],
+    "sf_snapshot": "17:54",
+    "notes": "new since 3:53pm read"
+   },
+   {
+    "date": "2026-11-17",
+    "sport": "NCAAB",
+    "game": "SIUE@UND",
+    "start_ct": "7:00pm",
+    "market": "ML",
+    "side": "SIUE",
+    "line": null,
+    "price": 116,
+    "bet": "SIUE ML",
+    "matchup": "NCAAB - SIUE @ UND - 7:00pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "buckets": [
+     "PIN_STABLE",
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "sf_snapshot": "17:54",
+    "notes": "new since 3:53pm read"
+   },
+   {
+    "date": "2026-11-17",
+    "sport": "NCAAB",
+    "game": "EIU@VAN",
+    "start_ct": "7:00pm",
+    "market": "SPREAD",
+    "side": "EIU",
+    "line": 40.5,
+    "price": -106,
+    "bet": "EIU +40.5",
+    "matchup": "NCAAB - EIU @ VAN - 7:00pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "buckets": [
+     "PIN_STABLE",
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "sf_snapshot": "17:54",
+    "notes": "new since 3:53pm read; same game Over 147.5 was flipped Strong at 3:53pm"
+   },
+   {
+    "date": "2026-11-17",
+    "sport": "NCAAB",
+    "game": "NICH@MISS",
+    "start_ct": "7:30pm",
+    "market": "SPREAD",
+    "side": "NICH",
+    "line": 27.5,
+    "price": -109,
+    "bet": "NICH +27.5",
+    "matchup": "NCAAB - NICH @ MISS - 7:30pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "buckets": [
+     "PIN_STABLE",
+     "PIN_STRONG",
+     "LATE_FLIP",
+     "ALIGNED",
+     "VEGAS_70",
+     "VEGAS_ALL"
+    ],
+    "sf_snapshot": "17:54",
+    "vegas_strength": 70,
+    "vegas_type": "Vegas Backed",
+    "notes": "new since 3:53pm read; Vegas Backed 70, +EV 1 book"
+   },
+   {
+    "date": "2026-11-17",
+    "sport": "NBA",
+    "game": "NY@TOR",
+    "start_ct": "6:30pm",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 214.5,
+    "price": -111,
+    "bet": "Under 214.5",
+    "matchup": "NBA - NY @ TOR - 6:30pm CT",
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "late_pin": "No lean (6:10pm CT read; total now O/U 215.5, spread TOR +2.5, both no lean)",
+    "buckets": [
+     "PIN_FADED",
+     "PIN_FLIPPED",
+     "PIN_STRONG",
+     "VEGAS80_FLIPPED"
+    ],
+    "vegas_strength": 75,
+    "vegas_type": "Vegas Backed",
+    "tier": "PASS",
+    "why": "Pinnacle lean on Under 214.5 is gone (no lean now) and Vegas fell from 100 to 75. Faded, no bet.",
+    "notes": "FADE update to the 15:53 row: original price/line/result unchanged, add late_pin + PIN_FADED"
+   }
+  ]
+ }
+}
