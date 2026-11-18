@@ -7,19 +7,13 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe endpoints
+      - name: Probe endpoints 2
         run: |
-          echo "---v2 root---"
-          curl -sS "https://data-api.polymarket.com/v2/" | head -c 1500
+          echo "---v2 leaderboard SPORTS---"
+          curl -sS "https://data-api.polymarket.com/v2/leaderboard?category=SPORTS&timePeriod=ALL&orderBy=PNL&limit=5" | head -c 2500
           echo
-          echo "---v2 leaderboard---"
-          curl -sS "https://data-api.polymarket.com/v2/leaderboard?category=OVERALL&timePeriod=ALL&orderBy=PNL&limit=5" | head -c 2500
+          echo "---v2 trades---"
+          curl -sS "https://data-api.polymarket.com/v2/trades?limit=3" | head -c 2000
           echo
-          echo "---v2 leaderboard no category---"
-          curl -sS "https://data-api.polymarket.com/v2/leaderboard?limit=5" | head -c 2000
-          echo
-          echo "---trades (unversioned)---"
-          curl -sS "https://data-api.polymarket.com/trades?limit=3" | head -c 1500
-          echo
-          echo "---docs overview page text---"
-          curl -sS "https://docs.polymarket.com/api-reference/data-api/overview" | head -c 3000
+          echo "---v2 trades by user---"
+          curl -sS "https://data-api.polymarket.com/v2/trades?user=0x204f72f35326db932158cba6adff0b9a1da95e14&side=BUY&limit=5" | head -c 2500
