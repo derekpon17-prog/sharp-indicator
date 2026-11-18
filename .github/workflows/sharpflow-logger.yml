@@ -15,6 +15,14 @@ on:
         description: 'Post flags to Discord now, new format with wallet/momentum checks (test)'
         required: false
         default: 'no'
+      post_cards:
+        description: 'Post pre-rendered card images from cards/<date>/ to Discord (yes/no)'
+        required: false
+        default: 'no'
+      card_date:
+        description: 'Date folder under cards/ to post (YYYY-MM-DD), defaults to today'
+        required: false
+        default: ''
 permissions:
   contents: write
 concurrency:
@@ -51,6 +59,13 @@ jobs:
           HOOK_SIGNALS: ${{ secrets.DISCORD_SIGNALS }}
           FORCE: '1'
         run: node scripts/sharpflow_discord_v2.js
+      - name: Post card images to Discord (manual, from cards/<date>/)
+        if: github.event.inputs.post_cards == 'yes'
+        continue-on-error: true
+        env:
+          HOOK_SIGNALS: ${{ secrets.DISCORD_SIGNALS }}
+          CARD_DATE: ${{ github.event.inputs.card_date }}
+        run: node scripts/sharpflow_discord_cards.js
       - name: Publish
         run: |
           cd sf_branch
