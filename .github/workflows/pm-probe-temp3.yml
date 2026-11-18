@@ -18,4 +18,4 @@ jobs:
       - name: Run matcher
         run: node scripts/pm_tonight_probe_temp.js
       - name: Show output
-        run: cat tonight_hits.json | head -c 6000
+        run: cat tonight_hits2.json | head -c 8000
