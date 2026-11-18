@@ -1,0 +1,30 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · MORNING · Wed Nov 18** · games before 12:00pm CT · SF not current",
+ "slate": {
+  "title": "Morning plays",
+  "stamp": "WED NOV 18 · 9:20AM",
+  "sources": "Pinnacle 9:14am CT - Vegas 9:16am CT (CBB tab, no signal on JKST@BAY) - SharpFlow not current (snapshot 10:33pm CT Nov 17, probe 8:54am failed) - Novig not read",
+  "sf_current": false,
+  "footer": "Morning window: games starting before 12:00pm CT. SF not current, so no SharpFlow chips. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "JKST@BAY",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 156.5,
+    "price": -114,
+    "bet": "Under 156.5",
+    "matchup": "NCAAB - JKST @ BAY - 11:00am CT",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "first_seen": "09:14",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   }
+  ]
+ }
+}
