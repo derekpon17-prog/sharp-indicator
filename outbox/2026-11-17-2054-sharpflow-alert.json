@@ -1,0 +1,68 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:31pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 10:10PM CT",
+     "picks": [
+      {
+       "bet": "Hornets ML",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": 270,
+       "chips": [
+        {
+         "t": "NEW $2.1K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "1.5x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA 17-7 | ML 7-1 (+75%)",
+         "c": "grey"
+        },
+        {
+         "t": "HOT (last 10: 8-2)",
+         "c": "gold"
+        }
+       ],
+       "usual": 1.5
+      },
+      {
+       "bet": "Under 220.5",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": 113,
+       "chips": [
+        {
+         "t": "NEW $1.4K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.5x their bet",
+         "c": "grey"
+        },
+        {
+         "t": "NBA L30 41-27 | total 22-17 (+27%)",
+         "c": "grey"
+        },
+        {
+         "t": "GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.5
+      }
+     ]
+    }
+   ],
+   "legend": "Big number = biggest bet vs that wallet’s usual size in this sport. Cold wallets are not counted",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
