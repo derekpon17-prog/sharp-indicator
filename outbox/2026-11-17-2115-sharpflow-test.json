@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**TEST - one row per game, verdict first** - Hornets at Lakers from the 9:31pm CT pull, layout check only, not a current board",
+ "boards": [
+  {
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:31pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 10:10PM CT",
+     "picks": [
+      {
+       "bet": "Lakers vs Hornets",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": null,
+       "chips": [
+        {
+         "t": "EDGE HORNETS: quality wallets vs cold on LAKERS",
+         "c": "gold"
+        },
+        {
+         "t": "LAKERS $5.6K - $3K 2.7x spread 1-2 (+41%) THIN; $1.1K 1.1x spread 4-2 (+30%) GOOD",
+         "c": "grey"
+        },
+        {
+         "t": "LAKERS COLD $6K - $6K 3.6x spread 6-3 (-7%) COLD - not counted",
+         "c": "red"
+        },
+        {
+         "t": "HORNETS $2.1K - $1.2K 1.5x ML 7-1 (+75%) HOT; $885 0.3x ML 29-20 (+17%) GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 2.7
+      },
+      {
+       "bet": "Total 220.5",
+       "sub": "Hornets at Lakers - 10:10pm",
+       "price": null,
+       "chips": [
+        {
+         "t": "NO READ: same wallet on both sides",
+         "c": "grey"
+        },
+        {
+         "t": "Under $1.4K - $1.4K 0.5x total 22-17 (+27%) GOOD",
+         "c": "green"
+        },
+        {
+         "t": "Over $570 - $570 0.2x total 22-17 (+27%) GOOD",
+         "c": "green"
+        }
+       ],
+       "usual": 0.5
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Jazz ML $1K (3-3 here, -18% ROI); 76ers ML $1K (3-3 here, -18% ROI); Mavericks ML $1K (3-3 here, -18% ROI)",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
