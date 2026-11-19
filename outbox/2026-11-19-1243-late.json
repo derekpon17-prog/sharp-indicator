@@ -1,0 +1,14 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Thu Nov 19** · 1 faded play",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "THU NOV 19 · 12:45PM",
+  "sources": "Pinnacle 12:45pm CT - Vegas not read - SharpFlow not needed (no new side) - Novig not read",
+  "sf_current": true,
+  "footer": "Late update: only a faded play or a new Strong/Max side is posted. Tier rules are fixed.",
+  "rows": [
+   {"sport": "NCAAB", "game": "FLA@WVU", "market": "ML", "side": "WVU", "line": null, "price": 296, "bet": "WVU ML", "matchup": "NCAAB - FLA @ WVU - 1:30pm CT", "buckets": ["PIN_STRONG", "PIN_FADED"], "first_seen": "10:55", "pin_tier": "Strong", "pin_status": "Stable", "late_pin": "Slight", "tier_override": "PASS", "reason": "Pinnacle ML lean dropped from Strong to Slight at 12:45pm CT. Pass. Spread and total leans unchanged."}
+  ]
+ }
+}
