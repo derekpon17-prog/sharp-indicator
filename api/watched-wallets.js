@@ -25,11 +25,19 @@ async function upstash(body) {
   const url   = process.env.KV_REST_API_URL;
   const token = process.env.KV_REST_API_TOKEN;
   if (!url || !token) throw new Error('KV_NOT_CONFIGURED');
-  const r = await fetch(url, {
-    method:  'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body:    JSON.stringify(body),
-  });
+  // (2026-11-18) See the matching note in trader-records.js - a bare "fetch failed"
+  // here means the Upstash database itself is gone (archived for inactivity), not a
+  // code or credentials bug. Re-thrown with that context.
+  let r;
+  try {
+    r = await fetch(url, {
+      method:  'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body:    JSON.stringify(body),
+    });
+  } catch (err) {
+    throw new Error(`KV_UNREACHABLE: could not connect to the Upstash store (${err.message}). Check Vercel → Storage for an "archived due to inactivity" notice — that's the known cause as of 2026-11-18.`);
+  }
   const d = await r.json();
   if (d.error) throw new Error(d.error);
   return d.result;

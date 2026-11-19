@@ -9,14 +9,27 @@ const DATA_API = 'https://data-api.polymarket.com';
 const TRADES_PER_WALLET = 15;
 const LEADERBOARD_SIZE = 20;
 
+// (2026-11-18) fetchLeaderboard/fetchWalletBuys used to swallow every failure as a bare
+// [] - that's why the leaderboard going empty could never be told apart from Polymarket
+// itself having nothing to show. Now each one records what actually happened (HTTP
+// status, non-JSON body, network error) on the array it returns, via a non-enumerable
+// _err/_status so it doesn't leak into the JSON responses that iterate these arrays.
+function tag(arr, info) { Object.defineProperty(arr, '_diag', { value: info, enumerable: false }); return arr; }
+
 async function fetchLeaderboard(category) {
   const url = `${DATA_API}/v1/leaderboard?category=${category}&timePeriod=ALL&orderBy=PNL&limit=${LEADERBOARD_SIZE}`;
   try {
     const r = await fetch(url);
-    if (!r.ok) return [];
+    if (!r.ok) {
+      const body = await r.text().catch(() => '');
+      return tag([], { ok: false, status: r.status, body: body.slice(0, 300) });
+    }
     const data = await r.json();
-    return Array.isArray(data) ? data : [];
-  } catch { return []; }
+    if (!Array.isArray(data)) return tag([], { ok: false, status: r.status, body: 'response was not an array', shape: typeof data });
+    return tag(data, { ok: true, count: data.length });
+  } catch (err) {
+    return tag([], { ok: false, networkError: err.message });
+  }
 }
 
 async function fetchWalletBuys(wallet) {
@@ -105,6 +118,13 @@ module.exports = async function handler(req, res) {
       leaderboard: {
         overall: formatLeaderboard(overallLB, 'OVERALL'),
         sports:  formatLeaderboard(sportsLB,  'SPORTS'),
+      },
+      // Diagnostics only (2026-11-18): why each leaderboard pull came back the way it
+      // did, so an empty leaderboard is never silently indistinguishable from a real
+      // zero. Safe to ignore in normal use.
+      leaderboardDiag: {
+        overall: overallLB._diag || null,
+        sports:  sportsLB._diag || null,
       },
       fetchedAt: Date.now(),
     });

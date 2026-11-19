@@ -26,11 +26,21 @@ async function upstash(body) {
   const url   = process.env.KV_REST_API_URL;
   const token = process.env.KV_REST_API_TOKEN;
   if (!url || !token) throw new Error('KV_NOT_CONFIGURED');
-  const r = await fetch(url, {
-    method:  'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body:    JSON.stringify(body),
-  });
+  // (2026-11-18) The bare "fetch failed" this threw before is Node's generic message for
+  // "couldn't even open a connection" - it looks identical whether the URL is wrong, the
+  // token is wrong, or (what actually happened here) the Upstash database itself was
+  // archived by Vercel for inactivity and no longer exists behind that URL. Re-thrown with
+  // that context so it isn't mistaken for a code bug again.
+  let r;
+  try {
+    r = await fetch(url, {
+      method:  'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body:    JSON.stringify(body),
+    });
+  } catch (err) {
+    throw new Error(`KV_UNREACHABLE: could not connect to the Upstash store (${err.message}). Check Vercel → Storage for an "archived due to inactivity" notice — that's the known cause as of 2026-11-18.`);
+  }
   const d = await r.json();
   if (d.error) throw new Error(d.error);
   return d.result;
