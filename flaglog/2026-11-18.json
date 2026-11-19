@@ -51,7 +51,7 @@
    "maxVsUsual": 3.8,
    "maxDollars": 11505,
    "opposedSeen": true,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Colts at Texans|ML|Texans": {
    "sport": "NFL",
@@ -67,7 +67,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Warriors at Mavericks|TOTAL|Under 224.5": {
    "sport": "NBA",
@@ -101,7 +101,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2000,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Tennessee Tech Golden Eagles at UNC Asheville Bulldogs|TOTAL|Over": {
    "sport": "CBB",
@@ -183,7 +183,7 @@
    "maxVsUsual": 2,
    "maxDollars": 2868,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Bucks at Heat|SPREAD|Bucks +11.5": {
    "sport": "NBA",
@@ -232,7 +232,7 @@
    "maxVsUsual": 4.3,
    "maxDollars": 12825,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Bucks at Heat|ML|Heat": {
    "sport": "NBA",
@@ -281,7 +281,7 @@
    "maxVsUsual": 2.3,
    "maxDollars": 6800,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Pistons at Pelicans|SPREAD|Pelicans +6.5": {
    "sport": "NBA",
@@ -347,7 +347,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 2590,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Suns at Kings|TOTAL|Over 225.5": {
    "sport": "NBA",
@@ -375,12 +375,13 @@
    "firstSeenAt": "2026-11-18T23:26:08.383Z",
    "firstPrice": "-125",
    "tags": [
-    "SIZED_2X"
+    "SIZED_2X",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 2.2,
    "maxDollars": 5913,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "76ers at Magic|SPREAD|76ers -2.5": {
    "sport": "NBA",
@@ -413,7 +414,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 21945,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Wizards at Raptors|SPREAD|Raptors": {
    "sport": "NBA",
@@ -430,7 +431,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 18421,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Rockets at Pacers|TOTAL|Over 224.5": {
    "sport": "NBA",
@@ -446,7 +447,7 @@
    "maxVsUsual": 0.7,
    "maxDollars": 7919,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Bucks at Heat|SPREAD|Bucks": {
    "sport": "NBA",
@@ -463,7 +464,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 4335,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Warriors at Mavericks|TOTAL|Over 225.5": {
    "sport": "NBA",
@@ -496,7 +497,7 @@
    "maxVsUsual": 7.3,
    "maxDollars": 7777,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Bucks at Heat|TOTAL|Under 236.5": {
    "sport": "NBA",
@@ -527,6 +528,70 @@
    ],
    "maxVsUsual": 1.1,
    "maxDollars": 2000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Warriors at Mavericks|TOTAL|Under 223.5": {
+   "sport": "NBA",
+   "matchup": "Warriors at Mavericks",
+   "market": "TOTAL",
+   "pick": "Under 223.5",
+   "kickoffEt": "Wed, Nov 18, 8:10 PM",
+   "firstSeenAt": "2026-11-19T01:25:37.772Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 10000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Hawks at Thunder|TOTAL|Under 229.5": {
+   "sport": "NBA",
+   "matchup": "Hawks at Thunder",
+   "market": "TOTAL",
+   "pick": "Under 229.5",
+   "kickoffEt": "Wed, Nov 18, 8:11 PM",
+   "firstSeenAt": "2026-11-19T01:25:37.772Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 10000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Bulls at Nets|TOTAL|Over 239.5": {
+   "sport": "NBA",
+   "matchup": "Bulls at Nets",
+   "market": "TOTAL",
+   "pick": "Over 239.5",
+   "kickoffEt": "Wed, Nov 18, 7:41 PM",
+   "firstSeenAt": "2026-11-19T01:25:37.772Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 9800,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Hawks at Thunder|SPREAD|Hawks": {
+   "sport": "NBA",
+   "matchup": "Hawks at Thunder",
+   "market": "SPREAD",
+   "pick": "Hawks",
+   "kickoffEt": "Wed, Nov 18, 8:11 PM",
+   "firstSeenAt": "2026-11-19T01:25:37.772Z",
+   "firstPrice": "-113",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.3,
+   "maxDollars": 2855,
    "opposedSeen": false,
    "snapshots": 1
   }

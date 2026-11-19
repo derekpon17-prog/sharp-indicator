@@ -1,227 +1,7 @@
 {
  "date": "2026-11-18",
- "scannedAt": "2026-11-19T00:15:48.212Z",
+ "scannedAt": "2026-11-19T01:14:44.878Z",
  "sports": {
-  "NFL": [
-   {
-    "id": "5fcee5",
-    "gap": 9.4,
-    "overall": "227-116",
-    "sport": "31-10",
-    "returnPct": 33.7,
-    "last10": "6-4",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Colts at Texans",
-      "market": "ML",
-      "pick": "Texans",
-      "line": null,
-      "price": "-456",
-      "dollars": 4672,
-      "vsUsual": 1,
-      "vsUsualAll": 4.9
-     }
-    ]
-   }
-  ],
-  "NBA": [
-   {
-    "id": "f2f960",
-    "gap": 15.1,
-    "overall": "83-89",
-    "sport": "19-11",
-    "returnPct": 35.4,
-    "last10": "5-5",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Wizards at Raptors",
-      "market": "ML",
-      "pick": "Raptors",
-      "line": null,
-      "price": "-203",
-      "dollars": 620,
-      "vsUsual": 1.7,
-      "vsUsualAll": 1.2
-     },
-     {
-      "matchup": "Pistons at Pelicans",
-      "market": "TOTAL",
-      "pick": "Over 228.5",
-      "line": 228.5,
-      "price": "+102",
-      "dollars": 589,
-      "vsUsual": 1.6,
-      "vsUsualAll": 1.1
-     }
-    ]
-   },
-   {
-    "id": "10395c",
-    "gap": 13.3,
-    "overall": "31-26",
-    "sport": "23-11",
-    "returnPct": 7.6,
-    "last10": "8-2",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "76ers at Magic",
-      "market": "ML",
-      "pick": "76ers",
-      "line": null,
-      "price": "+102",
-      "dollars": 1463,
-      "vsUsual": 0.8,
-      "vsUsualAll": 1.4
-     },
-     {
-      "matchup": "Wizards at Raptors",
-      "market": "SPREAD",
-      "pick": "Raptors",
-      "line": -4.5,
-      "price": "+105",
-      "dollars": 3200,
-      "vsUsual": 1.7,
-      "vsUsualAll": 3.1
-     },
-     {
-      "matchup": "Grizzlies at Cavaliers",
-      "market": "TOTAL",
-      "pick": "Under 237.5",
-      "line": 237.5,
-      "price": "-100",
-      "dollars": 2000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 2
-     },
-     {
-      "matchup": "Bucks at Heat",
-      "market": "TOTAL",
-      "pick": "Under 236.5",
-      "line": null,
-      "price": null,
-      "dollars": 11998,
-      "vsUsual": 3.8,
-      "vsUsualAll": 6.8
-     },
-     {
-      "matchup": "Warriors at Mavericks",
-      "market": "ML",
-      "pick": "Mavericks",
-      "line": null,
-      "price": "-194",
-      "dollars": 1000,
-      "vsUsual": 0.5,
-      "vsUsualAll": 1
-     },
-     {
-      "matchup": "Bulls at Nets",
-      "market": "ML",
-      "pick": "Nets",
-      "line": null,
-      "price": "-117",
-      "dollars": 600,
-      "vsUsual": 0.3,
-      "vsUsualAll": 0.6
-     },
-     {
-      "matchup": "Bulls at Nets",
-      "market": "TOTAL",
-      "pick": "Under 238.5",
-      "line": 238.5,
-      "price": "+104",
-      "dollars": 1700,
-      "vsUsual": 0.9,
-      "vsUsualAll": 1.7
-     }
-    ]
-   },
-   {
-    "id": "cbff8c",
-    "gap": 13.2,
-    "overall": "48-44",
-    "sport": "17-9",
-    "returnPct": 24.5,
-    "last10": "6-4",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Suns at Kings",
-      "market": "SPREAD",
-      "pick": "Kings +6.5",
-      "line": 6.5,
-      "price": "+104",
-      "dollars": 660,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.3
-     }
-    ]
-   },
-   {
-    "id": "61526f",
-    "gap": 10.9,
-    "overall": "23-17",
-    "sport": "13-6",
-    "returnPct": 11.7,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "76ers at Magic",
-      "market": "ML",
-      "pick": "76ers",
-      "line": null,
-      "price": "+135",
-      "dollars": 1500,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.2
-     },
-     {
-      "matchup": "Warriors at Mavericks",
-      "market": "ML",
-      "pick": "Mavericks",
-      "line": null,
-      "price": "-178",
-      "dollars": 5500,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.7
-     },
-     {
-      "matchup": "Bulls at Nets",
-      "market": "ML",
-      "pick": "Bulls",
-      "line": null,
-      "price": "+113",
-      "dollars": 1000,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.1
-     }
-    ]
-   },
-   {
-    "id": "0889ba",
-    "gap": 9,
-    "overall": "34-8",
-    "sport": "9-1",
-    "returnPct": 50.8,
-    "last10": "9-1",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "76ers at Magic",
-      "market": "ML",
-      "pick": "76ers",
-      "line": null,
-      "price": "+127",
-      "dollars": 1496,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.4
-     }
-    ]
-   }
-  ],
   "CFB": [
    {
     "id": "bc44b0",
@@ -282,6 +62,196 @@
       "dollars": 2000,
       "vsUsual": 0.6,
       "vsUsualAll": 0.3
+     }
+    ]
+   }
+  ],
+  "NBA": [
+   {
+    "id": "f2f960",
+    "gap": 15.1,
+    "overall": "83-89",
+    "sport": "19-11",
+    "returnPct": 35.4,
+    "last10": "5-5",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Pistons at Pelicans",
+      "market": "ML",
+      "pick": "Pistons",
+      "line": null,
+      "price": "-178",
+      "dollars": 549,
+      "vsUsual": 1.5,
+      "vsUsualAll": 1.1
+     }
+    ]
+   },
+   {
+    "id": "10395c",
+    "gap": 13.3,
+    "overall": "31-26",
+    "sport": "23-11",
+    "returnPct": 7.6,
+    "last10": "8-2",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "76ers at Magic",
+      "market": "ML",
+      "pick": "76ers",
+      "line": null,
+      "price": "+102",
+      "dollars": 1463,
+      "vsUsual": 0.8,
+      "vsUsualAll": 1.4
+     },
+     {
+      "matchup": "Bulls at Nets",
+      "market": "ML",
+      "pick": "Nets",
+      "line": null,
+      "price": "-117",
+      "dollars": 600,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.6
+     },
+     {
+      "matchup": "Bulls at Nets",
+      "market": "TOTAL",
+      "pick": "Under 238.5",
+      "line": 238.5,
+      "price": "+104",
+      "dollars": 1700,
+      "vsUsual": 0.9,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Wizards at Raptors",
+      "market": "SPREAD",
+      "pick": "Raptors",
+      "line": -4.5,
+      "price": "+105",
+      "dollars": 3200,
+      "vsUsual": 1.7,
+      "vsUsualAll": 3.1
+     },
+     {
+      "matchup": "Warriors at Mavericks",
+      "market": "ML",
+      "pick": "Mavericks",
+      "line": null,
+      "price": "-194",
+      "dollars": 1000,
+      "vsUsual": 0.5,
+      "vsUsualAll": 1
+     }
+    ]
+   },
+   {
+    "id": "cbff8c",
+    "gap": 13.2,
+    "overall": "48-44",
+    "sport": "17-9",
+    "returnPct": 24.5,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Suns at Kings",
+      "market": "SPREAD",
+      "pick": "Kings",
+      "line": null,
+      "price": null,
+      "dollars": 1567,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.4
+     }
+    ]
+   },
+   {
+    "id": "61526f",
+    "gap": 10.9,
+    "overall": "23-17",
+    "sport": "13-6",
+    "returnPct": 11.7,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "76ers at Magic",
+      "market": "ML",
+      "pick": "76ers",
+      "line": null,
+      "price": "+135",
+      "dollars": 1500,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.2
+     },
+     {
+      "matchup": "Bulls at Nets",
+      "market": "ML",
+      "pick": "Bulls",
+      "line": null,
+      "price": "-101",
+      "dollars": 4167,
+      "vsUsual": 0.5,
+      "vsUsualAll": 0.6
+     },
+     {
+      "matchup": "Warriors at Mavericks",
+      "market": "ML",
+      "pick": "Mavericks",
+      "line": null,
+      "price": "-178",
+      "dollars": 5500,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.7
+     }
+    ]
+   },
+   {
+    "id": "0889ba",
+    "gap": 9,
+    "overall": "34-8",
+    "sport": "9-1",
+    "returnPct": 50.8,
+    "last10": "9-1",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "76ers at Magic",
+      "market": "ML",
+      "pick": "76ers",
+      "line": null,
+      "price": "+127",
+      "dollars": 1496,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.4
+     }
+    ]
+   }
+  ],
+  "NFL": [
+   {
+    "id": "5fcee5",
+    "gap": 9.4,
+    "overall": "227-116",
+    "sport": "31-10",
+    "returnPct": 33.7,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Colts at Texans",
+      "market": "ML",
+      "pick": "Texans",
+      "line": null,
+      "price": "-456",
+      "dollars": 4672,
+      "vsUsual": 1,
+      "vsUsualAll": 4.9
      }
     ]
    }
