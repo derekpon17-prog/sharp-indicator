@@ -1,6 +1,6 @@
 {
  "date": "2026-11-19",
- "scannedAt": "2026-11-19T20:14:15.368Z",
+ "scannedAt": "2026-11-19T21:15:59.587Z",
  "sports": {
   "NFL": [
    {
@@ -12,6 +12,16 @@
     "last10": "9-1",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Jets at Chargers",
+      "market": "SPREAD",
+      "pick": "Chargers -2.5",
+      "line": -2.5,
+      "price": "-113",
+      "dollars": 1311,
+      "vsUsual": 0.7,
+      "vsUsualAll": 4.1
+     },
      {
       "matchup": "Saints at Bears",
       "market": "SPREAD",
@@ -55,14 +65,24 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Buccaneers at Lions",
+      "matchup": "Jets at Chargers",
+      "market": "ML",
+      "pick": "Chargers",
+      "line": null,
+      "price": "-179",
+      "dollars": 566,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.2
+     },
+     {
+      "matchup": "Jets at Chargers",
       "market": "SPREAD",
-      "pick": "Lions -6.5",
-      "line": -6.5,
-      "price": "+104",
-      "dollars": 3961,
-      "vsUsual": 0.7,
-      "vsUsualAll": 1.7
+      "pick": "Chargers -2.5",
+      "line": null,
+      "price": null,
+      "dollars": 3667,
+      "vsUsual": 0.5,
+      "vsUsualAll": 1.3
      },
      {
       "matchup": "Buccaneers at Lions",
@@ -73,67 +93,16 @@
       "dollars": 6789,
       "vsUsual": 1.1,
       "vsUsualAll": 2.8
-     }
-    ]
-   },
-   {
-    "id": "5fcee5",
-    "gap": 10.3,
-    "overall": "232-123",
-    "sport": "31-10",
-    "returnPct": 33.7,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Titans at Cowboys",
-      "market": "ML",
-      "pick": "Cowboys",
-      "line": null,
-      "price": "-355",
-      "dollars": 30225,
-      "vsUsual": 6.6,
-      "vsUsualAll": 31.6
-     },
-     {
-      "matchup": "Colts at Texans",
-      "market": "ML",
-      "pick": "Texans",
-      "line": null,
-      "price": "-456",
-      "dollars": 4672,
-      "vsUsual": 1,
-      "vsUsualAll": 4.9
-     },
-     {
-      "matchup": "Dolphins at Bills",
-      "market": "ML",
-      "pick": "Bills",
-      "line": null,
-      "price": "-1011",
-      "dollars": 16675,
-      "vsUsual": 3.7,
-      "vsUsualAll": 17.4
      },
      {
       "matchup": "Buccaneers at Lions",
       "market": "SPREAD",
       "pick": "Lions -6.5",
       "line": -6.5,
-      "price": "-105",
-      "dollars": 8071,
-      "vsUsual": 1.8,
-      "vsUsualAll": 8.4
-     },
-     {
-      "matchup": "Cardinals at Chiefs",
-      "market": "ML",
-      "pick": "Chiefs",
-      "line": null,
-      "price": "-999",
-      "dollars": 19934,
-      "vsUsual": 4.4,
-      "vsUsualAll": 20.9
+      "price": "+104",
+      "dollars": 3961,
+      "vsUsual": 0.7,
+      "vsUsualAll": 1.7
      }
     ]
    }
@@ -157,6 +126,27 @@
       "dollars": 751,
       "vsUsual": 0.9,
       "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "8d3672",
+    "gap": 8.5,
+    "overall": "96-69",
+    "sport": "14-7",
+    "returnPct": 19.1,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Knicks at Timberwolves",
+      "market": "ML",
+      "pick": "Knicks",
+      "line": null,
+      "price": "-100",
+      "dollars": 1690,
+      "vsUsual": 3.4,
+      "vsUsualAll": 0.8
      }
     ]
    },
@@ -195,9 +185,9 @@
       "pick": "Clippers +15.5",
       "line": 15.5,
       "price": "-100",
-      "dollars": 722,
+      "dollars": 1117,
       "vsUsual": 0.1,
-      "vsUsualAll": 0.3
+      "vsUsualAll": 0.4
      },
      {
       "matchup": "Warriors at Grizzlies",
@@ -222,10 +212,10 @@
      {
       "matchup": "Warriors at Grizzlies",
       "market": "TOTAL",
-      "pick": "Under 225.5",
-      "line": 225.5,
-      "price": "-110",
-      "dollars": 5667,
+      "pick": "Under",
+      "line": null,
+      "price": null,
+      "dollars": 8061,
       "vsUsual": 0.7,
       "vsUsualAll": 2.1
      },
@@ -290,37 +280,6 @@
       "dollars": 4905,
       "vsUsual": 3.7,
       "vsUsualAll": 2.4
-     }
-    ]
-   },
-   {
-    "id": "51176e",
-    "gap": 1.5,
-    "overall": "237-197",
-    "sport": "60-47",
-    "returnPct": 12.1,
-    "last10": "9-1",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Clippers at Spurs",
-      "market": "TOTAL",
-      "pick": "Under",
-      "line": null,
-      "price": null,
-      "dollars": 5999,
-      "vsUsual": 1.3,
-      "vsUsualAll": 2.6
-     },
-     {
-      "matchup": "Warriors at Grizzlies",
-      "market": "SPREAD",
-      "pick": "Warriors +7.5",
-      "line": 7.5,
-      "price": "-108",
-      "dollars": 3000,
-      "vsUsual": 1.3,
-      "vsUsualAll": 2.6
      }
     ]
    }
@@ -427,7 +386,7 @@
     "sport": "5-4",
     "returnPct": 29.3,
     "last10": "5-4",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Canadiens at Hurricanes",
@@ -445,9 +404,9 @@
       "pick": "Kraken",
       "line": null,
       "price": "-150",
-      "dollars": 2569,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.9
+      "dollars": 44923,
+      "vsUsual": 10.3,
+      "vsUsualAll": 16.6
      },
      {
       "matchup": "Ducks at Avalanche",
@@ -458,6 +417,49 @@
       "dollars": 1248,
       "vsUsual": 0.3,
       "vsUsualAll": 0.5
+     }
+    ]
+   }
+  ],
+  "CFB": [
+   {
+    "id": "bc44b0",
+    "gap": 5.4,
+    "overall": "259-221",
+    "sport": "38-26",
+    "returnPct": 21.5,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Texas Tech at Baylor",
+      "market": "ML",
+      "pick": "Texas Tech",
+      "line": null,
+      "price": "-182",
+      "dollars": 8210,
+      "vsUsual": 1.7,
+      "vsUsualAll": 3.4
+     },
+     {
+      "matchup": "Rice at Temple",
+      "market": "SPREAD",
+      "pick": "Rice +4.5",
+      "line": 4.5,
+      "price": "-155",
+      "dollars": 608,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Colorado State at Fresno State",
+      "market": "TOTAL",
+      "pick": "Over 65.5",
+      "line": 65.5,
+      "price": "+112",
+      "dollars": 810,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.3
      }
     ]
    }
