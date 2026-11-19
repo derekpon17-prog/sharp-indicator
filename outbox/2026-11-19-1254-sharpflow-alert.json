@@ -1,0 +1,109 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 12:10pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Kings at Maple Leafs",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - MAPLE LEAFS",
+        "icon": "🎯"
+       },
+       "bet": "Maple Leafs ML -104",
+       "price": "-104",
+       "for": {
+        "team": "MAPLE LEAFS",
+        "rows": [
+         {
+          "team": "Maple Leafs",
+          "wallet": "C",
+          "market": "ML",
+          "record": "12-7",
+          "roi": 21.2,
+          "dollars": 11901,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MAPLE LEAFS",
+         "dollars": 11901,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 12-7 (+21% ROI) on MAPLE LEAFS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $12K on Maple Leafs"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Oilers at Lightning",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - OILERS",
+        "icon": "👀"
+       },
+       "bet": "Oilers",
+       "price": null,
+       "for": {
+        "team": "OILERS",
+        "rows": [
+         {
+          "team": "Oilers",
+          "wallet": "X",
+          "market": "ML",
+          "record": "5-4",
+          "roi": 14.9,
+          "dollars": 3943,
+          "note": "0.4x usual, L10 5-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "OILERS",
+         "dollars": 3943,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $3.9K on Oilers"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
