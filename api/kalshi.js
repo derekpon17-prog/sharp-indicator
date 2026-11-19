@@ -72,6 +72,61 @@ function normTeam(s) {
   return String(s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
 }
 
+// FIX 2026-11-18 (per Derek, found live during the Pistons/Pelicans demo): matchGame()
+// below only ever matched against whatever string the caller passed. That's fine when
+// the caller already knows Kalshi's convention, but every other source feeding this
+// pipeline (Pinnacle, Vegas, SharpFlow) identifies games by team NICKNAME ("Pistons",
+// "Pelicans"), while Kalshi's own market titles use the CITY/market name ("Detroit",
+// "New Orleans") with no nickname anywhere in the string -- so a nickname query matched
+// nothing, not because the matcher was broken, but because the word it was looking for
+// genuinely isn't in Kalshi's text. This table lets a caller pass either one.
+const NICKNAME_TO_CITY = {
+  // NFL
+  cardinals: 'arizona', falcons: 'atlanta', ravens: 'baltimore', bills: 'buffalo',
+  panthers: 'carolina', bears: 'chicago', bengals: 'cincinnati', browns: 'cleveland',
+  cowboys: 'dallas', broncos: 'denver', lions: 'detroit', packers: 'green bay',
+  texans: 'houston', colts: 'indianapolis', jaguars: 'jacksonville', chiefs: 'kansas city',
+  raiders: 'las vegas', chargers: 'los angeles', rams: 'los angeles', dolphins: 'miami',
+  vikings: 'minnesota', patriots: 'new england', saints: 'new orleans', giants: 'new york',
+  jets: 'new york', eagles: 'philadelphia', steelers: 'pittsburgh', niners: 'san francisco',
+  seahawks: 'seattle', buccaneers: 'tampa bay', titans: 'tennessee', commanders: 'washington',
+  // NBA / WNBA (nickname collisions like "Knicks" only exist in one league, safe to merge)
+  hawks: 'atlanta', celtics: 'boston', nets: 'brooklyn', hornets: 'charlotte', bulls: 'chicago',
+  cavaliers: 'cleveland', mavericks: 'dallas', nuggets: 'denver', pistons: 'detroit',
+  warriors: 'golden state', rockets: 'houston', pacers: 'indiana', clippers: 'los angeles',
+  lakers: 'los angeles', grizzlies: 'memphis', heat: 'miami', bucks: 'milwaukee',
+  timberwolves: 'minnesota', pelicans: 'new orleans', knicks: 'new york', thunder: 'oklahoma city',
+  magic: 'orlando', suns: 'phoenix', trailblazers: 'portland', blazers: 'portland',
+  kings: 'sacramento', spurs: 'san antonio', raptors: 'toronto', jazz: 'utah', wizards: 'washington',
+  mystics: 'washington', liberty: 'new york', sparks: 'los angeles', sky: 'chicago',
+  dream: 'atlanta', wings: 'dallas', fever: 'indiana', aces: 'las vegas', mercury: 'phoenix',
+  storm: 'seattle', valkyries: 'golden state',
+  // NHL
+  ducks: 'anaheim', coyotes: 'arizona', bruins: 'boston', sabres: 'buffalo', flames: 'calgary',
+  hurricanes: 'carolina', blackhawks: 'chicago', avalanche: 'colorado', bluejackets: 'columbus',
+  stars: 'dallas', redwings: 'detroit', oilers: 'edmonton', panthersnhl: 'florida', kingsnhl: 'los angeles',
+  wild: 'minnesota', canadiens: 'montreal', predators: 'nashville', devils: 'new jersey',
+  islanders: 'new york', rangers: 'new york', senators: 'ottawa', flyers: 'philadelphia',
+  penguins: 'pittsburgh', sharks: 'san jose', kraken: 'seattle', blues: 'st louis',
+  lightning: 'tampa bay', mapleleafs: 'toronto', canucks: 'vancouver', goldenknights: 'vegas',
+  capitals: 'washington', jets2: 'winnipeg', utahhc: 'utah',
+  // MLB
+  diamondbacks: 'arizona', braves: 'atlanta', orioles: 'baltimore', redsox: 'boston',
+  whitesox: 'chicago', cubs: 'chicago', reds: 'cincinnati', guardians: 'cleveland',
+  rockies: 'colorado', tigers: 'detroit', astros: 'houston', royals: 'kansas city',
+  angels: 'los angeles', dodgers: 'los angeles', marlins: 'miami', brewers: 'milwaukee',
+  twins: 'minnesota', mets: 'new york', yankees: 'new york', athletics: 'oakland',
+  phillies: 'philadelphia', pirates: 'pittsburgh', padres: 'san diego', giantsmlb: 'san francisco',
+  mariners: 'seattle', rays: 'tampa bay', rangersmlb: 'texas', bluejays: 'toronto',
+  nationals: 'washington',
+};
+
+function teamAliases(name) {
+  const n = normTeam(name);
+  const alias = NICKNAME_TO_CITY[n.replace(/\s/g, '')];
+  return alias ? [n, alias] : [n];
+}
+
 /* Ladder the base URL. Kalshi has moved hosts before and the correct one is unverified
    from this environment, so try each and record which answered rather than hardcoding a
    guess that fails silently. */
@@ -140,12 +195,16 @@ function normalizeMarket(m) {
    than parsed from the ticker, because the ticker encoding is unverified and a name match
    degrades gracefully where a format assumption would break outright. */
 function matchGame(markets, away, home) {
-  const a = normTeam(away), h = normTeam(home);
-  if (a.length < 3 || h.length < 3) return [];
-  const aLast = a.split(' ').pop(), hLast = h.split(' ').pop();
+  if (normTeam(away).length < 3 || normTeam(home).length < 3) return [];
+  // Try the caller's string AND its known nickname<->city alias (see NICKNAME_TO_CITY
+  // above) since Kalshi market text uses city/market names while every other source
+  // here (Pinnacle, Vegas, SharpFlow) hands this function team nicknames.
+  const aOpts = teamAliases(away), hOpts = teamAliases(home);
   return markets.filter(m => {
     const t = normTeam((m.title || '') + ' ' + (m.yesSubTitle || '') + ' ' + (m.ticker || ''));
-    return (t.includes(aLast) || t.includes(a)) && (t.includes(hLast) || t.includes(h));
+    const aHit = aOpts.some(opt => t.includes(opt) || t.includes(opt.split(' ').pop()));
+    const hHit = hOpts.some(opt => t.includes(opt) || t.includes(opt.split(' ').pop()));
+    return aHit && hHit;
   });
 }
 
