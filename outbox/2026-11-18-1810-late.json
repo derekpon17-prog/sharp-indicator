@@ -1,0 +1,33 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Wed Nov 18** · 1 new play",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "WED NOV 18 - 6:15PM",
+  "sources": "Pinnacle 6:12pm CT - Vegas not read - SharpFlow 5:26pm CT - Novig not read",
+  "sf_current": true,
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "TXSO@SDSU",
+    "market": "SPREAD",
+    "side": "TXSO",
+    "line": 25.5,
+    "price": -112,
+    "bet": "TXSO +25.5",
+    "matchup": "NCAAB - TXSO @ SDSU - 9:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "first_seen": "18:15",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "start_ct": "9:00pm",
+    "date": "2026-11-18",
+    "notes": "New Strong stable after 3:53pm read; no SharpFlow ticket on game; Vegas not read (CBB tab members-only)"
+   }
+  ]
+ }
+}
