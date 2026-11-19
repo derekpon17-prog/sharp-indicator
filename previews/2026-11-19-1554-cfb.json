@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-19",
+ "posted_ct": "1554",
+ "sport": "CFB",
+ "outlier": false,
+ "first_start": "2026-11-20T00:30:00.000Z",
+ "snapshot": "2026-11-19T21:15:59.587Z",
+ "sides": [
+  {
+   "game": "Texas Tech at Baylor",
+   "market": "ML",
+   "pick": "Texas Tech",
+   "start_utc": "2026-11-21T20:30:00.000Z",
+   "dollars": 8210,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.7,
+   "all_sport_ratio": 3.43,
+   "price": "-182",
+   "line": null,
+   "l30_rec": "21-11",
+   "l30_roi": 37.8,
+   "mkt_rec": "10-8",
+   "mkt_roi": 35,
+   "mkt_l30_rec": "5-1",
+   "tail": true
+  }
+ ]
+}
