@@ -102,6 +102,30 @@ def chips(r):
             out.append((f"{int(r['sf_wallets'])} wallets (same-side, not independent)", "n"))
     else:
         out.append(("WALLETS none", "n"))
+    # Polymarket (Nov 18 addition, display only - real on-chain wallets, NOT the SharpFlow "wallet"
+    # terminology corrected in RUNBOOK section 11). Never affects PLAY/LEAN/PASS.
+    poly_d = float(r.get("poly_dollars") or 0)
+    poly_agree = False
+    if poly_d >= 1000:
+        poly_o = float(r.get("poly_opp") or 0)
+        poly_agree = poly_o < 0.5 * poly_d
+        out.append((f"POLY {money(poly_d)} vs {money(poly_o)}", "a" if not poly_agree else "g" if has_pin(r) else "b"))
+        if (r.get("poly_wallets") or 0) >= 2:
+            out.append((f"{int(r['poly_wallets'])} Poly wallets", "n"))
+    # Kalshi (shadow only per the Aug 28 2026 council ruling in odds.js - thin graded sample,
+    # never blended into a real score. Always grey/informational, never a counted source below.)
+    if r.get("kalshi_prob") is not None:
+        kp = float(r["kalshi_prob"])
+        kp = kp * 100 if kp <= 1 else kp
+        steam = r.get("kalshi_steam") or {}
+        txt = f"KALSHI {kp:.0f}%" + (f" + steam {steam.get('movePP', 0):+.0f}pp" if steam.get("movePP") else "")
+        out.append((txt, "n"))
+    # Overlap count (Nov 18, display only): how many of Pinnacle/Vegas/SharpFlow/Polymarket independently
+    # agree on this side. Kalshi is shadow and never counted. Never moves a row between tiers - section 14's
+    # classify() stays exactly as frozen.
+    agree = int(has_pin(r) and r.get("pin_status") != "Flipped") + int(vegas_ok(r)) + int(sf_agrees(r)) + int(poly_agree)
+    if agree >= 2:
+        out.append((f"{agree}/4 sources agree", "g" if agree >= 3 else "n"))
     return out
 
 def classify(rows, sf_current=True):
