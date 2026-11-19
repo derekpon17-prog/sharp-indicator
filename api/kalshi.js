@@ -31,6 +31,7 @@ const BASE_CANDIDATES = [
   'https://api.elections.kalshi.com/trade-api/v2',
   'https://api.kalshi.com/trade-api/v2',
   'https://trading-api.kalshi.com/trade-api/v2',
+  'https://external-api.kalshi.com/trade-api/v2', // docs.kalshi.com's documented production host (added 2026-11-18)
 ];
 
 // Series tickers confirmed from Kalshi's own volume reporting and market pages.
@@ -176,15 +177,20 @@ function median(nums) {
   return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
 }
 
+// FIX 2026-11-18 (per Derek, verified against Kalshi's own published docs before shipping,
+// not guessed like the rest of this file's defensive laddering): the endpoint is
+// /historical/trades, not /markets/trades, and fields are count_fp (not count),
+// yes_price_dollars/no_price_dollars (not yes_price), taker_outcome_side (taker_side is
+// deprecated). Confirmed via docs.kalshi.com/api-reference/historical/get-historical-trades.
 async function fetchTrades(ticker, limit) {
   for (const base of BASE_CANDIDATES) {
-    const url = `${base}/markets/trades?ticker=${encodeURIComponent(ticker)}&limit=${limit}`;
+    const url = `${base}/historical/trades?ticker=${encodeURIComponent(ticker)}&limit=${limit}`;
     try {
       const r = await fetch(url, { headers: { Accept: 'application/json' } });
       if (!r.ok) continue;
       const d = await r.json();
-      const trades = (d && (d.trades || d.data)) || [];
-      if (Array.isArray(trades)) return trades;
+      const trades = (d && d.trades) || [];
+      if (Array.isArray(trades) && trades.length) return trades;
     } catch { /* try next base */ }
   }
   return [];
@@ -207,15 +213,15 @@ async function detectBigTrades(sport) {
     batch.forEach((m, j) => {
       const trades = results[j];
       if (trades.length < MIN_TRADES_FOR_MEDIAN) return;
-      const sizes = trades.map(t => parseFloat(t.count ?? t.size) || 0).filter(n => n > 0);
+      const sizes = trades.map(t => parseFloat(t.count_fp) || 0).filter(n => n > 0);
       if (sizes.length < MIN_TRADES_FOR_MEDIAN) return;
       const typical = median(sizes);
       if (typical <= 0) return;
       for (const t of trades) {
-        const sz = parseFloat(t.count ?? t.size) || 0;
+        const sz = parseFloat(t.count_fp) || 0;
         if (sz <= 0) continue;
-        const priceRaw = parseFloat(t.yes_price_dollars ?? t.yes_price);
-        const price = isFinite(priceRaw) ? (priceRaw > 1 ? priceRaw / 100 : priceRaw) : (m.impliedProb || 0);
+        const priceRaw = parseFloat(t.yes_price_dollars);
+        const price = isFinite(priceRaw) ? priceRaw : (m.impliedProb || 0);
         const notional = sz * price;
         const mult = sz / typical;
         if (mult >= BIG_MIN_MULT && notional >= BIG_MIN_DOLLARS) {
@@ -224,7 +230,7 @@ async function detectBigTrades(sport) {
             tradeSize: sz, typicalSize: Math.round(typical * 10) / 10,
             timesTypical: Math.round(mult * 10) / 10,
             notionalUsd: Math.round(notional),
-            takerSide: t.taker_side || null,
+            takerSide: t.taker_outcome_side || t.taker_side || null,
             createdTime: t.created_time || null,
             pctOf24hVolume: m.volume ? Math.round((sz / m.volume) * 1000) / 10 : null,
           });
