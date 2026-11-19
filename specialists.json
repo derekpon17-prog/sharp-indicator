@@ -1,12 +1,12 @@
 {
- "date": "2026-11-18",
- "scannedAt": "2026-11-19T03:11:43.771Z",
+ "date": "2026-11-19",
+ "scannedAt": "2026-11-19T12:10:40.810Z",
  "sports": {
   "NFL": [
    {
     "id": "5fcee5",
-    "gap": 9.4,
-    "overall": "227-116",
+    "gap": 10.3,
+    "overall": "232-123",
     "sport": "31-10",
     "returnPct": 33.7,
     "last10": "6-4",
@@ -27,196 +27,53 @@
   ],
   "NBA": [
    {
-    "id": "4ab0f8",
-    "gap": 17.1,
-    "overall": "29-6",
-    "sport": "10-0",
-    "returnPct": 29.9,
-    "last10": "10-0",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Jazz at Lakers",
-      "market": "ML",
-      "pick": "Lakers",
-      "line": null,
-      "price": "-488",
-      "dollars": 1000,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.4
-     }
-    ]
-   },
-   {
-    "id": "f2f960",
-    "gap": 15.1,
-    "overall": "83-89",
-    "sport": "19-11",
-    "returnPct": 35.4,
+    "id": "a87a20",
+    "gap": 2.4,
+    "overall": "20-13",
+    "sport": "17-10",
+    "returnPct": 22.5,
     "last10": "5-5",
     "bettingBig": true,
     "tonight": [
-     {
-      "matchup": "Pistons at Pelicans",
-      "market": "ML",
-      "pick": "Pistons",
-      "line": null,
-      "price": "-178",
-      "dollars": 549,
-      "vsUsual": 1.5,
-      "vsUsualAll": 1.1
-     }
-    ]
-   },
-   {
-    "id": "cbff8c",
-    "gap": 13.2,
-    "overall": "48-44",
-    "sport": "17-9",
-    "returnPct": 24.5,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Celtics at Nuggets",
-      "market": "ML",
-      "pick": "Nuggets",
-      "line": null,
-      "price": "+127",
-      "dollars": 900,
-      "vsUsual": 1.1,
-      "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Jazz at Lakers",
-      "market": "SPREAD",
-      "pick": "Lakers -11.5",
-      "line": -11.5,
-      "price": "-100",
-      "dollars": 1800,
-      "vsUsual": 2.2,
-      "vsUsualAll": 0.7
-     },
-     {
-      "matchup": "Suns at Kings",
-      "market": "SPREAD",
-      "pick": "Kings",
-      "line": null,
-      "price": null,
-      "dollars": 1567,
-      "vsUsual": 1.1,
-      "vsUsualAll": 0.4
-     }
-    ]
-   },
-   {
-    "id": "aa9fb4",
-    "gap": 8.6,
-    "overall": "33-27",
-    "sport": "7-4",
-    "returnPct": 41.1,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Jazz at Lakers",
-      "market": "TOTAL",
-      "pick": "Over",
-      "line": 229.5,
-      "price": "-104",
-      "dollars": 15942,
-      "vsUsual": 1.4,
-      "vsUsualAll": 2.6
-     }
-    ]
-   },
-   {
-    "id": "8fda40",
-    "gap": 8.1,
-    "overall": "44-25",
-    "sport": "23-9",
-    "returnPct": 4.3,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Hawks at Thunder",
-      "market": "ML",
-      "pick": "Thunder",
-      "line": null,
-      "price": "-230",
-      "dollars": 1151,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.3
-     },
-     {
-      "matchup": "Pistons at Pelicans",
-      "market": "ML",
-      "pick": "Pistons",
-      "line": null,
-      "price": "-227",
-      "dollars": 1800,
-      "vsUsual": 1.2,
-      "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Celtics at Nuggets",
-      "market": "ML",
-      "pick": "Celtics",
-      "line": null,
-      "price": "-143",
-      "dollars": 1800,
-      "vsUsual": 1.2,
-      "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Jazz at Lakers",
-      "market": "ML",
-      "pick": "Lakers",
-      "line": null,
-      "price": "-468",
-      "dollars": 2868,
-      "vsUsual": 1.9,
-      "vsUsualAll": 0.6
-     },
-     {
-      "matchup": "Clippers at Spurs",
-      "market": "ML",
-      "pick": "Spurs",
-      "line": null,
-      "price": "-630",
-      "dollars": 2590,
-      "vsUsual": 1.7,
-      "vsUsualAll": 0.6
-     },
-     {
-      "matchup": "Suns at Kings",
-      "market": "ML",
-      "pick": "Suns",
-      "line": null,
-      "price": "-265",
-      "dollars": 1119,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.2
-     },
      {
       "matchup": "Knicks at Timberwolves",
       "market": "ML",
       "pick": "Knicks",
       "line": null,
-      "price": "-111",
-      "dollars": 1050,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.2
-     },
+      "price": "-108",
+      "dollars": 4905,
+      "vsUsual": 3.7,
+      "vsUsualAll": 2.4
+     }
+    ]
+   },
+   {
+    "id": "955c26",
+    "gap": -0.2,
+    "overall": "203-158",
+    "sport": "111-87",
+    "returnPct": 9.9,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
      {
       "matchup": "Warriors at Grizzlies",
       "market": "ML",
       "pick": "Grizzlies",
       "line": null,
-      "price": "-167",
-      "dollars": 688,
-      "vsUsual": 0.4,
+      "price": "-285",
+      "dollars": 1392,
+      "vsUsual": 0.5,
+      "vsUsualAll": 0.2
+     },
+     {
+      "matchup": "Trail Blazers at Bucks",
+      "market": "ML",
+      "pick": "Bucks",
+      "line": null,
+      "price": "+357",
+      "dollars": 1818,
+      "vsUsual": 0.7,
       "vsUsualAll": 0.2
      }
     ]
@@ -224,64 +81,22 @@
   ],
   "NHL": [
    {
-    "id": "e51246",
-    "gap": 8.4,
-    "overall": "40-26",
-    "sport": "20-9",
-    "returnPct": 28.2,
-    "last10": "7-3",
+    "id": "3bdd7e",
+    "gap": 1.2,
+    "overall": "273-229",
+    "sport": "5-4",
+    "returnPct": 29.3,
+    "last10": "5-4",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Avalanche at Utah",
-      "market": "TOTAL",
-      "pick": "Over 5.5",
-      "line": 5.5,
-      "price": "-150",
-      "dollars": 1225,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.4
-     }
-    ]
-   },
-   {
-    "id": "8b0e4c",
-    "gap": 8,
-    "overall": "63-47",
-    "sport": "32-17",
-    "returnPct": 9.8,
-    "last10": "5-5",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Avalanche at Utah",
+      "matchup": "Canadiens at Hurricanes",
       "market": "ML",
-      "pick": "Utah",
+      "pick": "Hurricanes",
       "line": null,
-      "price": "-104",
-      "dollars": 989,
-      "vsUsual": 1.1,
-      "vsUsualAll": 0.5
-     }
-    ]
-   },
-   {
-    "id": "d64855",
-    "gap": 4.7,
-    "overall": "50-47",
-    "sport": "27-21",
-    "returnPct": 6.6,
-    "last10": "6-4",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Avalanche at Utah",
-      "market": "ML",
-      "pick": "Avalanche",
-      "line": null,
-      "price": "-100",
-      "dollars": 1000,
-      "vsUsual": 1.3,
+      "price": "-233",
+      "dollars": 1208,
+      "vsUsual": 0.3,
       "vsUsualAll": 0.4
      }
     ]
@@ -291,7 +106,7 @@
    {
     "id": "bc44b0",
     "gap": 5.4,
-    "overall": "258-220",
+    "overall": "259-221",
     "sport": "38-26",
     "returnPct": 21.5,
     "last10": "6-4",

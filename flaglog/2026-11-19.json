@@ -1,0 +1,53 @@
+{
+ "date": "2026-11-19",
+ "sides": {
+  "Colts at Texans|ML|Texans": {
+   "sport": "NFL",
+   "matchup": "Colts at Texans",
+   "market": "ML",
+   "pick": "Texans",
+   "kickoffEt": "Thu, Nov 19, 8:15 PM",
+   "firstSeenAt": "2026-11-19T12:24:52.340Z",
+   "firstPrice": "-456",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 4672,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Canadiens at Hurricanes|ML|Hurricanes": {
+   "sport": "NHL",
+   "matchup": "Canadiens at Hurricanes",
+   "market": "ML",
+   "pick": "Hurricanes",
+   "kickoffEt": "Thu, Nov 19, 7:10 PM",
+   "firstSeenAt": "2026-11-19T12:24:52.340Z",
+   "firstPrice": "-233",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.3,
+   "maxDollars": 1208,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Knicks at Timberwolves|ML|Knicks": {
+   "sport": "NBA",
+   "matchup": "Knicks at Timberwolves",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Thu, Nov 19, 8:10 PM",
+   "firstSeenAt": "2026-11-19T12:24:52.340Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.7,
+   "maxDollars": 4905,
+   "opposedSeen": false,
+   "snapshots": 1
+  }
+ }
+}
