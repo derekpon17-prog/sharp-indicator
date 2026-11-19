@@ -1,6 +1,6 @@
 {
  "date": "2026-11-19",
- "scannedAt": "2026-11-19T12:10:40.810Z",
+ "scannedAt": "2026-11-19T13:13:25.591Z",
  "sides": [
   {
    "tail": false,
@@ -51,6 +51,33 @@
     "money": 8,
     "sizing": 0,
     "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Warriors at Grizzlies",
+   "market": "SPREAD",
+   "pick": "Warriors +7.5",
+   "kickoffEt": "Thu, Nov 19, 8:10 PM",
+   "dollars": 3000,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.3,
+   "price": "-108",
+   "size": "1x",
+   "mktRecord": "24-15",
+   "mktRoi": 20.7,
+   "l30Roi": 11.2,
+   "contested": false,
+   "sfPoints": 15,
+   "parts": {
+    "money": 8,
+    "sizing": 4,
+    "quality": 0,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -189,6 +216,23 @@
    "mktRoi": 40.9,
    "opposed": "unopposed",
    "fp": "17-10|7946|10-3"
+  },
+  {
+   "matchup": "Warriors at Grizzlies",
+   "market": "SPREAD",
+   "pick": "Warriors +7.5",
+   "kickoffEt": "Thu, Nov 19, 8:10 PM",
+   "sport": "NBA",
+   "dollars": 3000,
+   "price": "-108",
+   "vsUsual": 1.3,
+   "size": "1x",
+   "form": "L10 9-1",
+   "l30Roi": 11.2,
+   "mktRecord": "24-15",
+   "mktRoi": 20.7,
+   "opposed": "unopposed",
+   "fp": "57-46|26298|24-15"
   }
  ]
 }

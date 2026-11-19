@@ -15,7 +15,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Canadiens at Hurricanes|ML|Hurricanes": {
    "sport": "NHL",
@@ -31,7 +31,7 @@
    "maxVsUsual": 0.3,
    "maxDollars": 1208,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Knicks at Timberwolves|ML|Knicks": {
    "sport": "NBA",
@@ -46,6 +46,22 @@
    ],
    "maxVsUsual": 3.7,
    "maxDollars": 4905,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Warriors at Grizzlies|SPREAD|Warriors +7.5": {
+   "sport": "NBA",
+   "matchup": "Warriors at Grizzlies",
+   "market": "SPREAD",
+   "pick": "Warriors +7.5",
+   "kickoffEt": "Thu, Nov 19, 8:10 PM",
+   "firstSeenAt": "2026-11-19T13:25:46.046Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 3000,
    "opposedSeen": false,
    "snapshots": 1
   }
