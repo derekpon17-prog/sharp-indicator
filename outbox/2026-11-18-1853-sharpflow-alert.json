@@ -1,0 +1,189 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:15pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Pelicans",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - PISTONS",
+        "icon": "🎯"
+       },
+       "bet": "Pistons ML -213",
+       "price": "-213",
+       "for": {
+        "team": "PISTONS",
+        "rows": [
+         {
+          "team": "Pistons",
+          "wallet": "T",
+          "market": "ML",
+          "record": "31-23",
+          "roi": 18.8,
+          "dollars": 6800,
+          "note": "2.3x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Pistons",
+          "wallet": "J",
+          "market": "ML",
+          "record": "52-44",
+          "roi": 2.9,
+          "dollars": 1944,
+          "note": "0.7x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         },
+         {
+          "team": "Pistons",
+          "wallet": "H",
+          "market": "ML",
+          "record": "23-9",
+          "roi": 4.3,
+          "dollars": 1800,
+          "note": "1.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "PELICANS",
+        "rows": [
+         {
+          "team": "Pelicans",
+          "wallet": "J",
+          "market": "SPREAD",
+          "record": "28-21",
+          "roi": 10.5,
+          "dollars": 5913,
+          "note": "2.2x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         },
+         {
+          "team": "Pelicans",
+          "wallet": "J",
+          "market": "ML",
+          "record": "52-44",
+          "roi": 2.9,
+          "dollars": 5447,
+          "note": "2.1x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PELICANS",
+         "dollars": 11360,
+         "pct": 52,
+         "c": "grey"
+        },
+        {
+         "team": "PISTONS",
+         "dollars": 10544,
+         "pct": 48,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 31-23 (+19% ROI) on PISTONS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $5.9K on Pelicans"
+      },
+      {
+       "eyebrow": "Warriors at Mavericks",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Total 225.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "T",
+          "market": "TOTAL",
+          "record": "26-19",
+          "roi": 30.1,
+          "dollars": 3672,
+          "note": "1.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "T",
+          "market": "TOTAL",
+          "record": "26-19",
+          "roi": 30.1,
+          "dollars": 2199,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 3672,
+         "pct": 63,
+         "c": "green"
+        },
+        {
+         "team": "Under",
+         "dollars": 2199,
+         "pct": 37,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $3.7K on Over 225.5"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
