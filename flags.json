@@ -1,6 +1,6 @@
 {
  "date": "2026-11-19",
- "scannedAt": "2026-11-19T21:15:59.587Z",
+ "scannedAt": "2026-11-19T22:10:47.347Z",
  "sides": [
   {
    "tail": true,
@@ -405,6 +405,33 @@
   },
   {
    "tail": false,
+   "sport": "NHL",
+   "matchup": "Ducks at Avalanche",
+   "market": "ML",
+   "pick": "Ducks",
+   "kickoffEt": "Thu, Nov 19, 9:10 PM",
+   "dollars": 1248,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.3,
+   "price": "+122",
+   "size": "under 0.5x",
+   "mktRecord": "3-2",
+   "mktRoi": 43.7,
+   "l30Roi": 29.3,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Buccaneers at Lions",
    "market": "SPREAD",
@@ -601,6 +628,22 @@
     "12-3|12751|6-1"
    ],
    "maxVsUsual": 0.6
+  },
+  {
+   "matchup": "Ducks at Avalanche",
+   "market": "ML",
+   "pick": "Ducks",
+   "kickoffEt": "Thu, Nov 19, 9:10 PM",
+   "sport": "NHL",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 1248,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "5-4|11492|3-2"
+   ],
+   "bestPrice": "+122",
+   "maxVsUsual": 0.3
   }
  ],
  "sizedUp": [
