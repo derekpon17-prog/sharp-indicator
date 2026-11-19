@@ -1,0 +1,65 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · AFTERNOON · Thu Nov 19** · games 3:00pm to 5:59pm CT (2 games)",
+ "slate": {
+  "title": "Afternoon plays",
+  "stamp": "THU NOV 19 · 1:25PM",
+  "sources": "Pinnacle 1:25pm CT - Vegas 1:26pm CT (CBB) - SharpFlow 12:10pm CT (no ticket in window) - Novig not read",
+  "sf_current": true,
+  "footer": "Afternoon window: games starting 3:00 to 5:59pm CT. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "NCSU@MUR",
+    "matchup": "NCAAB - NCSU @ Murray State - 5:00pm CT",
+    "first_seen": "13:21",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 164.5,
+    "price": -113,
+    "bet": "Over 164.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NCSU@MUR",
+    "matchup": "NCAAB - NCSU @ Murray State - 5:00pm CT",
+    "first_seen": "13:21",
+    "market": "SPREAD",
+    "side": "MUR",
+    "line": 3.5,
+    "price": -112,
+    "bet": "MUR +3.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 43
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NCSU@MUR",
+    "matchup": "NCAAB - NCSU @ Murray State - 5:00pm CT",
+    "first_seen": "13:21",
+    "market": "ML",
+    "side": "MUR",
+    "line": null,
+    "price": 135,
+    "bet": "MUR ML",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   }
+  ]
+ }
+}
