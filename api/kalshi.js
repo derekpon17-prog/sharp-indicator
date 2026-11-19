@@ -148,6 +148,94 @@ function matchGame(markets, away, home) {
   });
 }
 
+/* ─── KALSHI BIG TRADES (added 2026-11-18, per Derek) ────────────────────────
+   WHY. Derek saw a third-party account (Parlay Pirates) flag a single Kalshi trade as
+   "18295x typical order, 90% of 24h volume" with zero price impact -- a large trade that
+   filled entirely against a resting limit order. detectSteam() below only catches a PRICE
+   move backed by volume between two snapshots; it misses a single big print that moved
+   no price at all. This reads Kalshi's public /trades endpoint (per-market, no auth, same
+   no-identity caveat as the rest of this file) directly, so it catches that case too.
+
+   HOW. For each of this sport's open, actually-traded markets, pull its most recent trades,
+   take the MEDIAN trade size (contracts) as "typical order", and flag any trade that is
+   BIG_MIN_MULT times that or more AND at least BIG_MIN_DOLLARS notional (price x size), so a
+   market with one or two tiny trades can't fake a huge multiple. Markets with under
+   MIN_TRADES_FOR_MEDIAN trades are skipped -- too thin to have a real "typical" to compare
+   against. Only markets with nonzero volume are checked, to keep this fast and avoid paying
+   a /trades call for a market nothing has traded on. */
+const BIG_MIN_MULT = 10;
+const BIG_MIN_DOLLARS = 1000;
+const MIN_TRADES_FOR_MEDIAN = 3;
+const TRADES_PER_MARKET = 50;
+const MAX_MARKETS_CHECKED = 30;   // top markets by volume, so a big sport doesn't time out
+
+function median(nums) {
+  if (!nums.length) return 0;
+  const s = nums.slice().sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+}
+
+async function fetchTrades(ticker, limit) {
+  for (const base of BASE_CANDIDATES) {
+    const url = `${base}/markets/trades?ticker=${encodeURIComponent(ticker)}&limit=${limit}`;
+    try {
+      const r = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (!r.ok) continue;
+      const d = await r.json();
+      const trades = (d && (d.trades || d.data)) || [];
+      if (Array.isArray(trades)) return trades;
+    } catch { /* try next base */ }
+  }
+  return [];
+}
+
+async function detectBigTrades(sport) {
+  const data = await getKalshi(sport);
+  if (!data.ok) return { ok: false, sport, error: data.error, bigTrades: [] };
+
+  const candidates = data.markets.filter(m => m.ticker && (m.volume || 0) > 0)
+    .sort((a, b) => (b.volume || 0) - (a.volume || 0)).slice(0, MAX_MARKETS_CHECKED);
+
+  const bigTrades = [];
+  // Small concurrency batches, not one giant Promise.all -- a sport with many thin markets
+  // could otherwise fire 30 simultaneous upstream calls and get rate-limited.
+  const BATCH = 5;
+  for (let i = 0; i < candidates.length; i += BATCH) {
+    const batch = candidates.slice(i, i + BATCH);
+    const results = await Promise.all(batch.map(m => fetchTrades(m.ticker, TRADES_PER_MARKET)));
+    batch.forEach((m, j) => {
+      const trades = results[j];
+      if (trades.length < MIN_TRADES_FOR_MEDIAN) return;
+      const sizes = trades.map(t => parseFloat(t.count ?? t.size) || 0).filter(n => n > 0);
+      if (sizes.length < MIN_TRADES_FOR_MEDIAN) return;
+      const typical = median(sizes);
+      if (typical <= 0) return;
+      for (const t of trades) {
+        const sz = parseFloat(t.count ?? t.size) || 0;
+        if (sz <= 0) continue;
+        const priceRaw = parseFloat(t.yes_price_dollars ?? t.yes_price);
+        const price = isFinite(priceRaw) ? (priceRaw > 1 ? priceRaw / 100 : priceRaw) : (m.impliedProb || 0);
+        const notional = sz * price;
+        const mult = sz / typical;
+        if (mult >= BIG_MIN_MULT && notional >= BIG_MIN_DOLLARS) {
+          bigTrades.push({
+            ticker: m.ticker, title: m.title, yesSubTitle: m.yesSubTitle,
+            tradeSize: sz, typicalSize: Math.round(typical * 10) / 10,
+            timesTypical: Math.round(mult * 10) / 10,
+            notionalUsd: Math.round(notional),
+            takerSide: t.taker_side || null,
+            createdTime: t.created_time || null,
+            pctOf24hVolume: m.volume ? Math.round((sz / m.volume) * 1000) / 10 : null,
+          });
+        }
+      }
+    });
+  }
+  bigTrades.sort((a, b) => b.timesTypical - a.timesTypical);
+  return { ok: true, sport, marketsChecked: candidates.length, count: bigTrades.length, bigTrades, checkedAt: Date.now() };
+}
+
 /* PROVIDER INTERFACE. Returns normalised Kalshi markets for a sport, KV-cached. */
 async function getKalshi(sport) {
   const key = 'kalshi:' + sport;
@@ -454,6 +542,15 @@ module.exports = async function handler(req, res) {
   }
   res.setHeader('Access-Control-Allow-Origin', '*');
 
+  if (req.query && req.query.bigtrades) {
+    const sport = String(req.query.bigtrades).toUpperCase();
+    try {
+      return res.status(200).json(await detectBigTrades(sport));
+    } catch (err) {
+      return res.status(200).json({ ok: false, sport, error: err.message, bigTrades: [] });
+    }
+  }
+
   if (req.query && req.query.steam) {
     const sport = String(req.query.steam).toUpperCase();
     try {
@@ -484,3 +581,4 @@ module.exports.compareToPinnacle = compareToPinnacle;
 module.exports.kalshiFee = kalshiFee;
 module.exports.SERIES = SERIES;
 module.exports.detectSteam = detectSteam;
+module.exports.detectBigTrades = detectBigTrades;
