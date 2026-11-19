@@ -1,6 +1,6 @@
 {
  "date": "2026-11-19",
- "scannedAt": "2026-11-19T13:13:25.591Z",
+ "scannedAt": "2026-11-19T14:03:45.466Z",
  "sports": {
   "NFL": [
    {
@@ -56,6 +56,16 @@
     "last10": "9-1",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Clippers at Spurs",
+      "market": "TOTAL",
+      "pick": "Under",
+      "line": null,
+      "price": null,
+      "dollars": 5999,
+      "vsUsual": 1.3,
+      "vsUsualAll": 2.7
+     },
      {
       "matchup": "Warriors at Grizzlies",
       "market": "SPREAD",
