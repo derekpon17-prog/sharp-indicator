@@ -1,36 +1,26 @@
 {
  "date": "2026-11-19",
- "scannedAt": "2026-11-19T16:10:26.731Z",
+ "scannedAt": "2026-11-19T17:03:05.280Z",
  "sports": {
-  "CFB": [
+  "NFL": [
    {
-    "id": "bc44b0",
-    "gap": 5.4,
-    "overall": "259-221",
-    "sport": "38-26",
-    "returnPct": 21.5,
+    "id": "5fcee5",
+    "gap": 10.3,
+    "overall": "232-123",
+    "sport": "31-10",
+    "returnPct": 33.7,
     "last10": "6-4",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Rice at Temple",
-      "market": "SPREAD",
-      "pick": "Rice +4.5",
-      "line": 4.5,
-      "price": "-155",
-      "dollars": 608,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.3
-     },
-     {
-      "matchup": "Colorado State at Fresno State",
-      "market": "TOTAL",
-      "pick": "Over 65.5",
-      "line": 65.5,
-      "price": "+112",
-      "dollars": 810,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.3
+      "matchup": "Colts at Texans",
+      "market": "ML",
+      "pick": "Texans",
+      "line": null,
+      "price": "-456",
+      "dollars": 4672,
+      "vsUsual": 1,
+      "vsUsualAll": 4.9
      }
     ]
    }
@@ -151,30 +141,28 @@
     ]
    }
   ],
-  "NFL": [
+  "NHL": [
    {
-    "id": "5fcee5",
-    "gap": 10.3,
-    "overall": "232-123",
-    "sport": "31-10",
-    "returnPct": 33.7,
-    "last10": "6-4",
+    "id": "85aa98",
+    "gap": 18.4,
+    "overall": "68-67",
+    "sport": "22-10",
+    "returnPct": 21.2,
+    "last10": "5-5",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Colts at Texans",
+      "matchup": "Kings at Maple Leafs",
       "market": "ML",
-      "pick": "Texans",
+      "pick": "Maple Leafs",
       "line": null,
-      "price": "-456",
-      "dollars": 4672,
-      "vsUsual": 1,
-      "vsUsualAll": 4.9
+      "price": "-104",
+      "dollars": 11901,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.6
      }
     ]
-   }
-  ],
-  "NHL": [
+   },
    {
     "id": "3bdd7e",
     "gap": 1.2,
@@ -193,6 +181,39 @@
       "dollars": 1208,
       "vsUsual": 0.3,
       "vsUsualAll": 0.4
+     }
+    ]
+   }
+  ],
+  "CFB": [
+   {
+    "id": "bc44b0",
+    "gap": 5.4,
+    "overall": "259-221",
+    "sport": "38-26",
+    "returnPct": 21.5,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Rice at Temple",
+      "market": "SPREAD",
+      "pick": "Rice +4.5",
+      "line": 4.5,
+      "price": "-155",
+      "dollars": 608,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Colorado State at Fresno State",
+      "market": "TOTAL",
+      "pick": "Over 65.5",
+      "line": 65.5,
+      "price": "+112",
+      "dollars": 810,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.3
      }
     ]
    }

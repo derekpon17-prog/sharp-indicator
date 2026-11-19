@@ -1,6 +1,6 @@
 {
  "date": "2026-11-19",
- "scannedAt": "2026-11-19T16:10:26.731Z",
+ "scannedAt": "2026-11-19T17:03:05.280Z",
  "sides": [
   {
    "tail": false,
@@ -77,6 +77,33 @@
     "money": 8,
     "sizing": 0,
     "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NHL",
+   "matchup": "Kings at Maple Leafs",
+   "market": "ML",
+   "pick": "Maple Leafs",
+   "kickoffEt": "Thu, Nov 19, 7:10 PM",
+   "dollars": 11901,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "-104",
+   "size": "0.5x",
+   "mktRecord": "12-7",
+   "mktRoi": 21.2,
+   "l30Roi": 21.2,
+   "contested": false,
+   "sfPoints": 15,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 0,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
