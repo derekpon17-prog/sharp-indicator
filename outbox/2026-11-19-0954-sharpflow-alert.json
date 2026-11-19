@@ -1,0 +1,130 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 9:14am CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Clippers at Spurs",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "bet": "Under TOTAL",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "C",
+          "market": "TOTAL",
+          "record": "25-17",
+          "roi": 18.8,
+          "dollars": 5999,
+          "note": "1.3x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 5999,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 25-17 (+19% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $6K on Under"
+      },
+      {
+       "eyebrow": "Warriors at Grizzlies",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "bet": "Under 227.5 -116",
+       "price": "-116",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "C",
+          "market": "TOTAL",
+          "record": "25-17",
+          "roi": 18.8,
+          "dollars": 2999,
+          "note": "1.3x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "L",
+          "market": "TOTAL",
+          "record": "9-8",
+          "roi": 11.1,
+          "dollars": 518,
+          "note": "1.5x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 2999,
+         "pct": 85,
+         "c": "gold"
+        },
+        {
+         "team": "Over",
+         "dollars": 518,
+         "pct": 15,
+         "c": "grey"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 25-17 (+19% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $3K on Under 227.5"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
