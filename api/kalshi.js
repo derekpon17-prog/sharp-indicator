@@ -548,6 +548,17 @@ module.exports = async function handler(req, res) {
   }
   res.setHeader('Access-Control-Allow-Origin', '*');
 
+  if (req.query && req.query.rawtrades) {
+    // TEMP DEBUG (2026-11-18, remove once bigtrades is verified live): raw /historical/trades
+    // passthrough for one ticker, so a schema mismatch is visible in one call instead of six.
+    try {
+      const trades = await fetchTrades(String(req.query.rawtrades), 10);
+      return res.status(200).json({ ticker: req.query.rawtrades, tradeCount: trades.length, sample: trades.slice(0, 3) });
+    } catch (err) {
+      return res.status(200).json({ error: err.message });
+    }
+  }
+
   if (req.query && req.query.bigtrades) {
     const sport = String(req.query.bigtrades).toUpperCase();
     try {
