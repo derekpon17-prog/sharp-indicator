@@ -1,0 +1,198 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 2:14pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Warriors at Grizzlies",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - WARRIORS",
+        "icon": "🎯"
+       },
+       "bet": "Warriors +7.5 -108",
+       "price": "-108",
+       "for": {
+        "team": "WARRIORS",
+        "rows": [
+         {
+          "team": "Warriors",
+          "wallet": "A",
+          "market": "ML",
+          "record": "5-3",
+          "roi": -5.3,
+          "dollars": 5290,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Warriors",
+          "wallet": "A",
+          "market": "SPREAD",
+          "record": "5-3",
+          "roi": -11.7,
+          "dollars": 4844,
+          "note": "0.5x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Warriors",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "24-15",
+          "roi": 20.7,
+          "dollars": 3000,
+          "note": "1.3x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "GRIZZLIES",
+        "rows": [
+         {
+          "team": "Grizzlies",
+          "wallet": "W",
+          "market": "SPREAD",
+          "record": "6-1",
+          "roi": 59.9,
+          "dollars": 1984,
+          "note": "0.6x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "WARRIORS",
+         "dollars": 13134,
+         "pct": 87,
+         "c": "gold"
+        },
+        {
+         "team": "GRIZZLIES",
+         "dollars": 1984,
+         "pct": 13,
+         "c": "grey"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 24-15 (+21% ROI) on WARRIORS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $2K on Grizzlies"
+      },
+      {
+       "eyebrow": "Warriors at Grizzlies",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total 225.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "A",
+          "market": "TOTAL",
+          "record": "5-3",
+          "roi": 73.2,
+          "dollars": 5667,
+          "note": "0.7x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 5667,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $5.7K on Under 225.5"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 8:50PM CT",
+     "picks": [
+      {
+       "eyebrow": "Canucks at Kraken",
+       "time": "8:50pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - KRAKEN",
+        "icon": "👀"
+       },
+       "bet": "Kraken",
+       "price": null,
+       "for": {
+        "team": "KRAKEN",
+        "rows": [
+         {
+          "team": "Kraken",
+          "wallet": "A",
+          "market": "ML",
+          "record": "3-2",
+          "roi": 43.7,
+          "dollars": 2569,
+          "note": "0.6x usual, L10 5-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "KRAKEN",
+         "dollars": 2569,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $2.6K on Kraken"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
