@@ -51,7 +51,7 @@
    "maxVsUsual": 3.8,
    "maxDollars": 11505,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Colts at Texans|ML|Texans": {
    "sport": "NFL",
@@ -67,7 +67,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Warriors at Mavericks|TOTAL|Under 224.5": {
    "sport": "NBA",
@@ -100,8 +100,8 @@
    ],
    "maxVsUsual": 1.6,
    "maxDollars": 2000,
-   "opposedSeen": false,
-   "snapshots": 14
+   "opposedSeen": true,
+   "snapshots": 17
   },
   "Tennessee Tech Golden Eagles at UNC Asheville Bulldogs|TOTAL|Over": {
    "sport": "CBB",
@@ -183,7 +183,7 @@
    "maxVsUsual": 2,
    "maxDollars": 2868,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 12
   },
   "Bucks at Heat|SPREAD|Bucks +11.5": {
    "sport": "NBA",
@@ -232,7 +232,7 @@
    "maxVsUsual": 4.3,
    "maxDollars": 12825,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Bucks at Heat|ML|Heat": {
    "sport": "NBA",
@@ -281,7 +281,7 @@
    "maxVsUsual": 2.3,
    "maxDollars": 6800,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Pistons at Pelicans|SPREAD|Pelicans +6.5": {
    "sport": "NBA",
@@ -330,7 +330,7 @@
    "maxVsUsual": 1,
    "maxDollars": 1633,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Clippers at Spurs|ML|Spurs": {
    "sport": "NBA",
@@ -347,7 +347,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 2590,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Suns at Kings|TOTAL|Over 225.5": {
    "sport": "NBA",
@@ -381,7 +381,7 @@
    "maxVsUsual": 2.2,
    "maxDollars": 5913,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "76ers at Magic|SPREAD|76ers -2.5": {
    "sport": "NBA",
@@ -414,7 +414,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 21945,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 9
   },
   "Wizards at Raptors|SPREAD|Raptors": {
    "sport": "NBA",
@@ -431,7 +431,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 18421,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 9
   },
   "Rockets at Pacers|TOTAL|Over 224.5": {
    "sport": "NBA",
@@ -464,7 +464,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 4335,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Warriors at Mavericks|TOTAL|Over 225.5": {
    "sport": "NBA",
@@ -497,7 +497,7 @@
    "maxVsUsual": 7.3,
    "maxDollars": 7777,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Bucks at Heat|TOTAL|Under 236.5": {
    "sport": "NBA",
@@ -545,7 +545,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 10000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Hawks at Thunder|TOTAL|Under 229.5": {
    "sport": "NBA",
@@ -590,8 +590,24 @@
    "tags": [
     "STRONG_UNOPPOSED"
    ],
-   "maxVsUsual": 0.3,
-   "maxDollars": 2855,
+   "maxVsUsual": 1,
+   "maxDollars": 4525,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Celtics at Nuggets|TOTAL|Over 219.5": {
+   "sport": "NBA",
+   "matchup": "Celtics at Nuggets",
+   "market": "TOTAL",
+   "pick": "Over 219.5",
+   "kickoffEt": "Wed, Nov 18, 9:10 PM",
+   "firstSeenAt": "2026-11-19T02:25:33.850Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 1707,
    "opposedSeen": false,
    "snapshots": 1
   }
