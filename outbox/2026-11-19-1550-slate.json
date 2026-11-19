@@ -1,0 +1,954 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · TONIGHT · Thu Nov 19** · games 6:00pm CT and later",
+ "slate": {
+  "title": "Tonight's plays",
+  "stamp": "THU NOV 19 · 3:53PM",
+  "sources": "Pinnacle 3:51pm CT - Vegas 3:52pm CT (NBA, NHL, NFL, CBB) - SharpFlow 3:15pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "Tonight window: games starting 6:00pm CT and later. Vegas counts Vegas Backed and Pressure Move only. Wallet money counts only from wallets with positive all-time ROI in this sport and market. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NHL",
+    "game": "LA@TOR",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 6.5,
+    "price": -130,
+    "bet": "Under 6.5",
+    "matchup": "NHL - LA @ TOR - 6:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 60
+   },
+   {
+    "sport": "NHL",
+    "game": "NYI@WPG",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 6.5,
+    "price": -105,
+    "bet": "Over 6.5",
+    "matchup": "NHL - NYI @ WPG - 6:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 70
+   },
+   {
+    "sport": "NHL",
+    "game": "PHI@OTT",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 6,
+    "price": -116,
+    "bet": "Over 6",
+    "matchup": "NHL - PHI @ OTT - 6:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 37
+   },
+   {
+    "sport": "NHL",
+    "game": "PHI@OTT",
+    "market": "ML",
+    "side": "PHI",
+    "line": null,
+    "price": 132,
+    "bet": "PHI ML",
+    "matchup": "NHL - PHI @ OTT - 6:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 83
+   },
+   {
+    "sport": "NHL",
+    "game": "MTL@CAR",
+    "market": "SPREAD",
+    "side": "CAR",
+    "line": -1.5,
+    "price": -125,
+    "bet": "CAR -1.5",
+    "matchup": "NHL - MTL @ CAR - 6:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NHL",
+    "game": "EDM@TB",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 6.5,
+    "price": -129,
+    "bet": "Under 6.5",
+    "matchup": "NHL - EDM @ TB - 6:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 75
+   },
+   {
+    "sport": "NHL",
+    "game": "MIN@CGY",
+    "market": "ML",
+    "side": "MIN",
+    "line": null,
+    "price": -235,
+    "bet": "MIN ML",
+    "matchup": "NHL - MIN @ CGY - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 77
+   },
+   {
+    "sport": "NHL",
+    "game": "DAL@VGK",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 5.5,
+    "price": -105,
+    "bet": "Under 5.5",
+    "matchup": "NHL - DAL @ VGK - 9:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 80
+   },
+   {
+    "sport": "NBA",
+    "game": "POR@MIL",
+    "market": "SPREAD",
+    "side": "POR",
+    "line": -11.5,
+    "price": -109,
+    "bet": "POR -11.5",
+    "matchup": "NBA - POR @ MIL - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NBA",
+    "game": "POR@MIL",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 230.5,
+    "price": -110,
+    "bet": "Over 230.5",
+    "matchup": "NBA - POR @ MIL - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NBA",
+    "game": "NY@MIN",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 216.5,
+    "price": -113,
+    "bet": "Under 216.5",
+    "matchup": "NBA - NY @ MIN - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 71
+   },
+   {
+    "sport": "NBA",
+    "game": "GS@MEM",
+    "market": "SPREAD",
+    "side": "GS",
+    "line": 5.5,
+    "price": -110,
+    "bet": "GS +5.5",
+    "matchup": "NBA - GS @ MEM - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 94
+   },
+   {
+    "sport": "NBA",
+    "game": "GS@MEM",
+    "market": "ML",
+    "side": "GS",
+    "line": null,
+    "price": 177,
+    "bet": "GS ML",
+    "matchup": "NBA - GS @ MEM - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NFL",
+    "game": "IND@HOU",
+    "market": "SPREAD",
+    "side": "HOU",
+    "line": -12.5,
+    "price": -108,
+    "bet": "HOU -12.5",
+    "matchup": "NFL - IND @ HOU - 7:15pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NFL",
+    "game": "IND@HOU",
+    "market": "ML",
+    "side": "HOU",
+    "line": null,
+    "price": -747,
+    "bet": "HOU ML",
+    "matchup": "NFL - IND @ HOU - 7:15pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 83
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UMBC@OSU",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 156.5,
+    "price": -112,
+    "bet": "Under 156.5",
+    "matchup": "NCAAB - UMBC @ OSU - 6:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "ME@QUIN",
+    "market": "SPREAD",
+    "side": "ME",
+    "line": 8.5,
+    "price": -111,
+    "bet": "ME +8.5",
+    "matchup": "NCAAB - ME @ QUIN - 6:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "CFB",
+    "game": "RICE@TEM",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 51.5,
+    "price": -111,
+    "bet": "Over 51.5",
+    "matchup": "CFB - RICE @ TEM - 6:30pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "CFB",
+    "game": "RICE@TEM",
+    "market": "ML",
+    "side": "RICE",
+    "line": null,
+    "price": 120,
+    "bet": "RICE ML",
+    "matchup": "CFB - RICE @ TEM - 6:30pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "TULN@LT",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 142.5,
+    "price": -113,
+    "bet": "Under 142.5",
+    "matchup": "NCAAB - TULN @ LT - 6:30pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "SUU@TEX",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 156.5,
+    "price": -114,
+    "bet": "Under 156.5",
+    "matchup": "NCAAB - SUU @ TEX - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "GASO@HCU",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 152.5,
+    "price": -112,
+    "bet": "Over 152.5",
+    "matchup": "NCAAB - GASO @ HCU - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "GASO@HCU",
+    "market": "ML",
+    "side": "HCU",
+    "line": null,
+    "price": -168,
+    "bet": "HCU ML",
+    "matchup": "NCAAB - GASO @ HCU - 7:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "HALL@WIS",
+    "market": "SPREAD",
+    "side": "WIS",
+    "line": -5.5,
+    "price": -108,
+    "bet": "WIS -5.5",
+    "matchup": "NCAAB - HALL @ WIS - 7:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 27
+   },
+   {
+    "sport": "NCAAB",
+    "game": "HALL@WIS",
+    "market": "ML",
+    "side": "WIS",
+    "line": null,
+    "price": -218,
+    "bet": "WIS ML",
+    "matchup": "NCAAB - HALL @ WIS - 7:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 47
+   },
+   {
+    "sport": "NCAAB",
+    "game": "RUTG@UNLV",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 157.5,
+    "price": -111,
+    "bet": "Over 157.5",
+    "matchup": "NCAAB - RUTG @ UNLV - 7:30pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USM@GRAM",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 145.5,
+    "price": -112,
+    "bet": "Under 145.5",
+    "matchup": "NCAAB - USM @ GRAM - 8:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "ORST@ORE",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 160.5,
+    "price": -112,
+    "bet": "Under 160.5",
+    "matchup": "NCAAB - ORST @ ORE - 8:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UTEP@NMSU",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 132.5,
+    "price": -110,
+    "bet": "Under 132.5",
+    "matchup": "NCAAB - UTEP @ NMSU - 8:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UTU@WASH",
+    "market": "SPREAD",
+    "side": "UTU",
+    "line": 17.5,
+    "price": -110,
+    "bet": "UTU +17.5",
+    "matchup": "NCAAB - UTU @ WASH - 8:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UTU@WASH",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 155.5,
+    "price": -110,
+    "bet": "Under 155.5",
+    "matchup": "NCAAB - UTU @ WASH - 8:00pm CT",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "HOU@KU",
+    "market": "SPREAD",
+    "side": "HOU",
+    "line": -3.5,
+    "price": -109,
+    "bet": "HOU -3.5",
+    "matchup": "NCAAB - HOU @ KU - 10:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "HOU@KU",
+    "market": "ML",
+    "side": "HOU",
+    "line": null,
+    "price": -166,
+    "bet": "HOU ML",
+    "matchup": "NCAAB - HOU @ KU - 10:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL"
+    ],
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 66
+   },
+   {
+    "sport": "NHL",
+    "game": "MTL@CAR",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 6.5,
+    "price": -117,
+    "bet": "Under 6.5",
+    "matchup": "NHL - MTL @ CAR - 6:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 87
+   },
+   {
+    "sport": "NHL",
+    "game": "MTL@CAR",
+    "market": "ML",
+    "side": "CAR",
+    "line": null,
+    "price": -316,
+    "bet": "CAR ML",
+    "matchup": "NHL - MTL @ CAR - 6:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 77
+   },
+   {
+    "sport": "NHL",
+    "game": "MIN@CGY",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 6,
+    "price": -100,
+    "bet": "Under 6",
+    "matchup": "NHL - MIN @ CGY - 7:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 75
+   },
+   {
+    "sport": "NHL",
+    "game": "VAN@SEA",
+    "market": "ML",
+    "side": "VAN",
+    "line": null,
+    "price": 140,
+    "bet": "VAN ML",
+    "matchup": "NHL - VAN @ SEA - 8:40pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "SF_VS_VEGAS"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 77
+   },
+   {
+    "sport": "NHL",
+    "game": "ANA@COL",
+    "market": "ML",
+    "side": "ANA",
+    "line": null,
+    "price": 107,
+    "bet": "ANA ML",
+    "matchup": "NHL - ANA @ COL - 8:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 92
+   },
+   {
+    "sport": "NBA",
+    "game": "POR@MIL",
+    "market": "ML",
+    "side": "POR",
+    "line": null,
+    "price": -515,
+    "bet": "POR ML",
+    "matchup": "NBA - POR @ MIL - 7:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 80
+   },
+   {
+    "sport": "NBA",
+    "game": "GS@MEM",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 224.5,
+    "price": -110,
+    "bet": "Under 224.5",
+    "matchup": "NBA - GS @ MEM - 7:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "SF_SIDE"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 60,
+    "sf_dollars": 8061,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_max_vs_usual": 0.7,
+    "sf_size": "0.5x",
+    "sf_l30_roi": 8.5,
+    "sf_mkt_roi": 73.2,
+    "sf_mkt_rec": "5-3",
+    "sf_all_ratio": 2.97,
+    "sf_price": -110,
+    "sf_first_price": -110
+   },
+   {
+    "sport": "NBA",
+    "game": "LAC@SA",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 224.5,
+    "price": -110,
+    "bet": "Under 224.5",
+    "matchup": "NBA - LAC @ SA - 7:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "SF_SIDE",
+     "SF_SIZEDUP"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 70,
+    "sf_dollars": 5999,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_max_vs_usual": 1.3,
+    "sf_size": "1x",
+    "sf_l30_roi": 11.2,
+    "sf_mkt_roi": 18.8,
+    "sf_mkt_rec": "25-17",
+    "sf_all_ratio": 5.22,
+    "sf_price": -110,
+    "sf_first_price": -110
+   },
+   {
+    "sport": "NCAAB",
+    "game": "ME@QUIN",
+    "market": "ML",
+    "side": "ME",
+    "line": null,
+    "price": 344,
+    "bet": "ME ML",
+    "matchup": "NCAAB - ME @ QUIN - 6:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 96
+   },
+   {
+    "sport": "NCAAB",
+    "game": "BUF@SBU",
+    "market": "ML",
+    "side": "SBU",
+    "line": null,
+    "price": -884,
+    "bet": "SBU ML",
+    "matchup": "NCAAB - BUF @ SBU - 6:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 96
+   },
+   {
+    "sport": "NCAAB",
+    "game": "SUU@TEX",
+    "market": "SPREAD",
+    "side": "SUU",
+    "line": 35.5,
+    "price": -107,
+    "bet": "SUU +35.5",
+    "matchup": "NCAAB - SUU @ TEX - 7:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 86
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LR@JAX",
+    "market": "ML",
+    "side": "LR",
+    "line": null,
+    "price": 108,
+    "bet": "LR ML",
+    "matchup": "NCAAB - LR @ JAX - 6:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 80
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UCSB@PEPP",
+    "market": "SPREAD",
+    "side": "PEPP",
+    "line": 1.5,
+    "price": -109,
+    "bet": "PEPP +1.5",
+    "matchup": "NCAAB - UCSB @ PEPP - 8:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 74
+   },
+   {
+    "sport": "NCAAB",
+    "game": "TA&M@TCU",
+    "market": "SPREAD",
+    "side": "TCU",
+    "line": 0.5,
+    "price": -119,
+    "bet": "TCU +0.5",
+    "matchup": "NCAAB - TA&M @ TCU - 7:00pm CT",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "15:53",
+    "vegas_strength": 100
+   },
+   {
+    "sport": "NHL",
+    "game": "VAN@SEA",
+    "market": "ML",
+    "side": "SEA",
+    "line": null,
+    "price": -150,
+    "bet": "SEA ML",
+    "matchup": "NHL - VAN @ SEA - 8:40pm CT",
+    "buckets": [
+     "SF_SIDE",
+     "SF_VS_VEGAS",
+     "SF_SIZEDUP",
+     "SF_SIZED_15",
+     "SF_SIZED_2"
+    ],
+    "first_seen": "15:53",
+    "sf_dollars": 44923,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_max_vs_usual": 10.3,
+    "sf_size": "1.5x and up",
+    "sf_l30_roi": 29.3,
+    "sf_mkt_roi": 43.7,
+    "sf_mkt_rec": "3-2",
+    "sf_all_ratio": 16.56,
+    "sf_price": -150,
+    "sf_first_price": -150
+   },
+   {
+    "sport": "NHL",
+    "game": "LA@TOR",
+    "market": "ML",
+    "side": "TOR",
+    "line": null,
+    "price": -104,
+    "bet": "TOR ML",
+    "matchup": "NHL - LA @ TOR - 6:00pm CT",
+    "buckets": [
+     "SF_SIDE",
+     "SF_LOCK"
+    ],
+    "first_seen": "15:53",
+    "sf_dollars": 11901,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_max_vs_usual": 0.6,
+    "sf_size": "0.5x",
+    "sf_l30_roi": 21.2,
+    "sf_mkt_roi": 21.2,
+    "sf_mkt_rec": "12-7",
+    "sf_all_ratio": 4.55,
+    "sf_price": -104,
+    "sf_first_price": -104
+   },
+   {
+    "sport": "NHL",
+    "game": "EDM@TB",
+    "market": "ML",
+    "side": "EDM",
+    "line": null,
+    "price": 138,
+    "bet": "EDM ML",
+    "matchup": "NHL - EDM @ TB - 6:30pm CT",
+    "buckets": [
+     "SF_SIDE",
+     "SF_LOCK"
+    ],
+    "first_seen": "15:53",
+    "sf_dollars": 3943,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_max_vs_usual": 0.4,
+    "sf_size": "under 0.5x",
+    "sf_l30_roi": 14.9,
+    "sf_mkt_roi": 14.9,
+    "sf_mkt_rec": "5-4",
+    "sf_all_ratio": 0.83,
+    "sf_price": 138,
+    "sf_first_price": 138
+   },
+   {
+    "sport": "NBA",
+    "game": "NY@MIN",
+    "market": "ML",
+    "side": "NY",
+    "line": null,
+    "price": -108,
+    "bet": "NY ML",
+    "matchup": "NBA - NY @ MIN - 7:00pm CT",
+    "buckets": [
+     "SF_SIDE",
+     "SF_POOLED",
+     "SF_SIZEDUP",
+     "SF_SIZED_15",
+     "SF_SIZED_2"
+    ],
+    "first_seen": "15:53",
+    "sf_dollars": 6595,
+    "sf_opp": 0,
+    "sf_wallets": 2,
+    "sf_max_vs_usual": 3.7,
+    "sf_size": "1.5x and up",
+    "sf_l30_roi": 22.5,
+    "sf_mkt_roi": 40.9,
+    "sf_mkt_rec": "2-3",
+    "sf_all_ratio": 2.4,
+    "sf_price": -108
+   }
+  ]
+ }
+}
