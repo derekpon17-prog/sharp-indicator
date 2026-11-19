@@ -1,0 +1,16 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · MIDDAY · Thu Nov 19** · games 12:00pm to 2:59pm CT (1 game)",
+ "slate": {
+  "title": "Midday plays",
+  "stamp": "THU NOV 19 · 10:55AM",
+  "sources": "Pinnacle 10:55am CT - Vegas 10:56am CT (CBB) - SharpFlow 10:10am CT (no ticket on this game) - Novig not read",
+  "sf_current": true,
+  "footer": "Midday window: games starting 12:00 to 2:59pm CT. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {"sport": "NCAAB", "game": "FLA@WVU", "market": "SPREAD", "side": "WVU", "line": 7.5, "price": -109, "bet": "WVU +7.5", "matchup": "NCAAB - FLA @ WVU - 1:30pm CT", "buckets": ["PIN_STRONG", "VEGAS_ALL"], "first_seen": "10:55", "pin_tier": "Strong", "pin_status": "Stable", "vegas_strength": 57},
+   {"sport": "NCAAB", "game": "FLA@WVU", "market": "TOTAL", "side": "Under", "line": 147.5, "price": -112, "bet": "Under 147.5", "matchup": "NCAAB - FLA @ WVU - 1:30pm CT", "buckets": ["PIN_STRONG"], "first_seen": "10:55", "pin_tier": "Strong", "pin_status": "Stable"},
+   {"sport": "NCAAB", "game": "FLA@WVU", "market": "ML", "side": "WVU", "line": null, "price": 296, "bet": "WVU ML", "matchup": "NCAAB - FLA @ WVU - 1:30pm CT", "buckets": ["PIN_STRONG"], "first_seen": "10:55", "pin_tier": "Strong", "pin_status": "Stable"}
+  ]
+ }
+}
