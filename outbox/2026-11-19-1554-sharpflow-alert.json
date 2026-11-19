@@ -1,0 +1,61 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:15pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 8:50PM CT",
+     "picks": [
+      {
+       "eyebrow": "Canucks at Kraken",
+       "time": "8:50pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - KRAKEN",
+        "icon": "👀"
+       },
+       "bet": "Kraken",
+       "price": null,
+       "for": {
+        "team": "KRAKEN",
+        "rows": [
+         {
+          "team": "Kraken",
+          "wallet": "A",
+          "market": "ML",
+          "record": "3-2",
+          "roi": 43.7,
+          "dollars": 44923,
+          "note": "10.3x usual, L10 5-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "KRAKEN",
+         "dollars": 44923,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "GREW $2.6K to $45K"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
