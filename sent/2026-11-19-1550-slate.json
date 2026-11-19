@@ -945,9 +945,10 @@
     "sf_size": "1.5x and up",
     "sf_l30_roi": 22.5,
     "sf_mkt_roi": 40.9,
-    "sf_mkt_rec": "2-3",
+    "sf_mkt_rec": "10-3",
     "sf_all_ratio": 2.4,
-    "sf_price": -108
+    "sf_price": -108,
+    "sf_first_price": -108
    }
   ]
  }
