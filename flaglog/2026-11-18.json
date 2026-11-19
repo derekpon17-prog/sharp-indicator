@@ -67,7 +67,7 @@
    "maxVsUsual": 1,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Warriors at Mavericks|TOTAL|Under 224.5": {
    "sport": "NBA",
@@ -96,12 +96,13 @@
    "tags": [
     "STRONG_UNOPPOSED",
     "SIZED_15X",
-    "SIZED_UP"
+    "SIZED_UP",
+    "STRONG_VS_OTHER"
    ],
    "maxVsUsual": 1.6,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 17
+   "snapshots": 20
   },
   "Tennessee Tech Golden Eagles at UNC Asheville Bulldogs|TOTAL|Over": {
    "sport": "CBB",
@@ -132,9 +133,9 @@
     "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 0.8,
-   "maxDollars": 1210,
+   "maxDollars": 1225,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Bulls at Nets|TOTAL|Under 238.5": {
    "sport": "NBA",
@@ -178,12 +179,13 @@
    "firstPrice": "-355",
    "tags": [
     "SIZED_2X",
-    "SIZED_15X"
+    "SIZED_15X",
+    "STRONG_UNOPPOSED"
    ],
-   "maxVsUsual": 2,
+   "maxVsUsual": 9.6,
    "maxDollars": 2868,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 15
   },
   "Bucks at Heat|SPREAD|Bucks +11.5": {
    "sport": "NBA",
@@ -215,7 +217,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 1057,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "76ers at Magic|ML|76ers": {
    "sport": "NBA",
@@ -281,7 +283,7 @@
    "maxVsUsual": 2.3,
    "maxDollars": 6800,
    "opposedSeen": true,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Pistons at Pelicans|SPREAD|Pelicans +6.5": {
    "sport": "NBA",
@@ -325,12 +327,13 @@
    "firstSeenAt": "2026-11-18T22:26:52.403Z",
    "firstPrice": "+113",
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "STRONG_VS_OTHER"
    ],
    "maxVsUsual": 1,
    "maxDollars": 1633,
-   "opposedSeen": false,
-   "snapshots": 3
+   "opposedSeen": true,
+   "snapshots": 4
   },
   "Clippers at Spurs|ML|Spurs": {
    "sport": "NBA",
@@ -347,7 +350,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 2590,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Suns at Kings|TOTAL|Over 225.5": {
    "sport": "NBA",
@@ -381,7 +384,7 @@
    "maxVsUsual": 2.2,
    "maxDollars": 5913,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "76ers at Magic|SPREAD|76ers -2.5": {
    "sport": "NBA",
@@ -545,7 +548,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 10000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Hawks at Thunder|TOTAL|Under 229.5": {
    "sport": "NBA",
@@ -608,6 +611,71 @@
    ],
    "maxVsUsual": 1,
    "maxDollars": 1707,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Jazz at Lakers|TOTAL|Over": {
+   "sport": "NBA",
+   "matchup": "Jazz at Lakers",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Wed, Nov 18, 10:10 PM",
+   "firstSeenAt": "2026-11-19T03:25:52.660Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 15942,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Jazz at Lakers|SPREAD|Lakers -11.5": {
+   "sport": "NBA",
+   "matchup": "Jazz at Lakers",
+   "market": "SPREAD",
+   "pick": "Lakers -11.5",
+   "kickoffEt": "Wed, Nov 18, 10:10 PM",
+   "firstSeenAt": "2026-11-19T03:25:52.660Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.2,
+   "maxDollars": 1800,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Avalanche at Utah|ML|Avalanche": {
+   "sport": "NHL",
+   "matchup": "Avalanche at Utah",
+   "market": "ML",
+   "pick": "Avalanche",
+   "kickoffEt": "Wed, Nov 18, 10:10 PM",
+   "firstSeenAt": "2026-11-19T03:25:52.660Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 1000,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Suns at Kings|SPREAD|Kings": {
+   "sport": "NBA",
+   "matchup": "Suns at Kings",
+   "market": "SPREAD",
+   "pick": "Kings",
+   "kickoffEt": "Wed, Nov 18, 10:10 PM",
+   "firstSeenAt": "2026-11-19T03:25:52.660Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1567,
    "opposedSeen": false,
    "snapshots": 1
   }
