@@ -1,6 +1,6 @@
 {
  "date": "2026-11-19",
- "scannedAt": "2026-11-19T14:03:45.466Z",
+ "scannedAt": "2026-11-19T15:14:29.821Z",
  "sports": {
   "NFL": [
    {
@@ -26,6 +26,27 @@
    }
   ],
   "NBA": [
+   {
+    "id": "f2f960",
+    "gap": 12.7,
+    "overall": "91-96",
+    "sport": "27-17",
+    "returnPct": 25.6,
+    "last10": "4-6",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Warriors at Grizzlies",
+      "market": "TOTAL",
+      "pick": "Over 227.5",
+      "line": 227.5,
+      "price": "+117",
+      "dollars": 518,
+      "vsUsual": 1.5,
+      "vsUsualAll": 1
+     }
+    ]
+   },
    {
     "id": "a87a20",
     "gap": 2.4,
@@ -73,6 +94,16 @@
       "line": 7.5,
       "price": "-108",
       "dollars": 3000,
+      "vsUsual": 1.3,
+      "vsUsualAll": 2.7
+     },
+     {
+      "matchup": "Warriors at Grizzlies",
+      "market": "TOTAL",
+      "pick": "Under 227.5",
+      "line": 227.5,
+      "price": "-116",
+      "dollars": 2999,
       "vsUsual": 1.3,
       "vsUsualAll": 2.7
      }
@@ -143,6 +174,16 @@
     "last10": "6-4",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Rice at Temple",
+      "market": "SPREAD",
+      "pick": "Rice +4.5",
+      "line": 4.5,
+      "price": "-155",
+      "dollars": 608,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.3
+     },
      {
       "matchup": "Colorado State at Fresno State",
       "market": "TOTAL",
