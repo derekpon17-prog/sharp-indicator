@@ -1,0 +1,354 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NBA - first game 7:00pm CT** - 5 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:15pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Knicks at Timberwolves",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - KNICKS",
+        "icon": "🎯"
+       },
+       "bet": "★ Knicks ML -108",
+       "price": "-108",
+       "for": {
+        "team": "KNICKS",
+        "rows": [
+         {
+          "team": "Knicks",
+          "wallet": "G",
+          "market": "ML",
+          "record": "10-3",
+          "roi": 40.9,
+          "dollars": 4905,
+          "note": "3.7x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Knicks",
+          "wallet": "A",
+          "market": "ML",
+          "record": "5-3",
+          "roi": -5.3,
+          "dollars": 2351,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Knicks",
+          "wallet": "N",
+          "market": "ML",
+          "record": "11-5",
+          "roi": 29.6,
+          "dollars": 1690,
+          "note": "3.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "KNICKS",
+         "dollars": 8946,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 10-3 (+41% ROI) on KNICKS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Clippers at Spurs",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "bet": "Under TOTAL",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "D",
+          "market": "TOTAL",
+          "record": "25-17",
+          "roi": 18.8,
+          "dollars": 5999,
+          "note": "1.3x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 5999,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 25-17 (+19% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Warriors at Grizzlies",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - WARRIORS",
+        "icon": "🎯"
+       },
+       "bet": "Warriors +7.5 -108",
+       "price": "-108",
+       "for": {
+        "team": "WARRIORS",
+        "rows": [
+         {
+          "team": "Warriors",
+          "wallet": "A",
+          "market": "ML",
+          "record": "5-3",
+          "roi": -5.3,
+          "dollars": 5290,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Warriors",
+          "wallet": "A",
+          "market": "SPREAD",
+          "record": "5-3",
+          "roi": -11.7,
+          "dollars": 4844,
+          "note": "0.5x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Warriors",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "24-15",
+          "roi": 20.7,
+          "dollars": 3000,
+          "note": "1.3x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "GRIZZLIES",
+        "rows": [
+         {
+          "team": "Grizzlies",
+          "wallet": "W",
+          "market": "SPREAD",
+          "record": "6-1",
+          "roi": 59.9,
+          "dollars": 1984,
+          "note": "0.6x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         },
+         {
+          "team": "Grizzlies",
+          "wallet": "E",
+          "market": "ML",
+          "record": "54-45",
+          "roi": 1.7,
+          "dollars": 1392,
+          "note": "0.5x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "GRIZZLIES",
+         "dollars": 3376,
+         "pct": 20,
+         "c": "grey"
+        },
+        {
+         "team": "WARRIORS",
+         "dollars": 13134,
+         "pct": 80,
+         "c": "gold"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 24-15 (+21% ROI) on WARRIORS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Warriors at Grizzlies",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total ",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "A",
+          "market": "TOTAL",
+          "record": "5-3",
+          "roi": 73.2,
+          "dollars": 8061,
+          "note": "0.7x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 8061,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Trail Blazers at Bucks",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Bucks vs Trail Blazers",
+       "price": null,
+       "for": {
+        "team": "BUCKS",
+        "rows": [
+         {
+          "team": "Bucks",
+          "wallet": "A",
+          "market": "SPREAD",
+          "record": "5-3",
+          "roi": -11.7,
+          "dollars": 5200,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Bucks",
+          "wallet": "E",
+          "market": "ML",
+          "record": "54-45",
+          "roi": 1.7,
+          "dollars": 1818,
+          "note": "0.7x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "TRAIL BLAZERS",
+        "rows": [
+         {
+          "team": "Trail Blazers",
+          "wallet": "A",
+          "market": "ML",
+          "record": "5-3",
+          "roi": -5.3,
+          "dollars": 2597,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BUCKS",
+         "dollars": 7018,
+         "pct": 73,
+         "c": "green"
+        },
+        {
+         "team": "TRAIL BLAZERS",
+         "dollars": 2597,
+         "pct": 27,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Warriors ML $5.3K (5-3 here, -5% ROI); Bucks +11.5 $5.2K (5-3 here, -12% ROI); Clippers ML $2.7K (5-3 here, -5% ROI) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

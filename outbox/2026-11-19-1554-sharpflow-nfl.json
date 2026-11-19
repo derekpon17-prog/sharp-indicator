@@ -1,0 +1,159 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NFL - first game 7:15pm CT** - 3 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NFL - sharp wallets",
+   "subtitle": "Wallets with positive NFL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:15pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Buccaneers at Lions",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "bet": "Total 46.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "M",
+          "market": "TOTAL",
+          "record": "6-3",
+          "roi": 46.5,
+          "dollars": 2940,
+          "note": "1.6x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 2940,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Saints at Bears",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - SAINTS",
+        "icon": "👀"
+       },
+       "bet": "Saints",
+       "price": null,
+       "for": {
+        "team": "SAINTS",
+        "rows": [
+         {
+          "team": "Saints",
+          "wallet": "C",
+          "market": "SPREAD",
+          "record": "6-0",
+          "roi": 37.1,
+          "dollars": 2534,
+          "note": "1.3x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "SAINTS",
+         "dollars": 2534,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:05PM CT",
+     "picks": [
+      {
+       "eyebrow": "Jets at Chargers",
+       "time": "3:05pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - CHARGERS",
+        "icon": "👀"
+       },
+       "bet": "Chargers",
+       "price": null,
+       "for": {
+        "team": "CHARGERS",
+        "rows": [
+         {
+          "team": "Chargers",
+          "wallet": "Q",
+          "market": "SPREAD",
+          "record": "9-3",
+          "roi": 53.9,
+          "dollars": 3667,
+          "note": "0.5x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Chargers",
+          "wallet": "C",
+          "market": "SPREAD",
+          "record": "6-0",
+          "roi": 37.1,
+          "dollars": 1311,
+          "note": "0.7x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CHARGERS",
+         "dollars": 4978,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Buccaneers +6.5 $6.8K (cold form 2-2 L30 here, -19% ROI); Lions -6.5 $4K (cold form 2-2 L30 here, -19% ROI) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

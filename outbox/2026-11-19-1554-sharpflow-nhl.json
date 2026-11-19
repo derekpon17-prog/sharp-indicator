@@ -1,0 +1,154 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 6:00pm CT** - 3 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Wallets with positive NHL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:15pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Kings at Maple Leafs",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - MAPLE LEAFS",
+        "icon": "🎯"
+       },
+       "bet": "Maple Leafs ML -104",
+       "price": "-104",
+       "for": {
+        "team": "MAPLE LEAFS",
+        "rows": [
+         {
+          "team": "Maple Leafs",
+          "wallet": "B",
+          "market": "ML",
+          "record": "12-7",
+          "roi": 21.2,
+          "dollars": 11901,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MAPLE LEAFS",
+         "dollars": 11901,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 12-7 (+21% ROI) on MAPLE LEAFS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Oilers at Lightning",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - OILERS",
+        "icon": "👀"
+       },
+       "bet": "Oilers",
+       "price": null,
+       "for": {
+        "team": "OILERS",
+        "rows": [
+         {
+          "team": "Oilers",
+          "wallet": "U",
+          "market": "ML",
+          "record": "5-4",
+          "roi": 14.9,
+          "dollars": 3943,
+          "note": "0.4x usual, L10 5-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "OILERS",
+         "dollars": 3943,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 8:50PM CT",
+     "picks": [
+      {
+       "eyebrow": "Canucks at Kraken",
+       "time": "8:50pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - KRAKEN",
+        "icon": "👀"
+       },
+       "bet": "★ Kraken",
+       "price": null,
+       "for": {
+        "team": "KRAKEN",
+        "rows": [
+         {
+          "team": "Kraken",
+          "wallet": "A",
+          "market": "ML",
+          "record": "3-2",
+          "roi": 43.7,
+          "dollars": 44923,
+          "note": "10.3x usual, L10 5-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "KRAKEN",
+         "dollars": 44923,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

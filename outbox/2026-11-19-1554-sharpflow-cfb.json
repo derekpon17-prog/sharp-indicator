@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CFB - first game 6:30pm CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CFB - sharp wallets",
+   "subtitle": "Wallets with positive CFB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:15pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Texas Tech at Baylor",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "EDGE - TEXAS TECH",
+        "icon": "🎯"
+       },
+       "bet": "★ Texas Tech ML -182",
+       "price": "-182",
+       "for": {
+        "team": "TEXAS TECH",
+        "rows": [
+         {
+          "team": "Texas Tech",
+          "wallet": "Q",
+          "market": "ML",
+          "record": "10-8",
+          "roi": 35,
+          "dollars": 8210,
+          "note": "1.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TEXAS TECH",
+         "dollars": 8210,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 10-8 (+35% ROI) on TEXAS TECH - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
