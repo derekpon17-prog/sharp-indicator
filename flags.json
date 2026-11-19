@@ -1,6 +1,6 @@
 {
  "date": "2026-11-19",
- "scannedAt": "2026-11-19T18:10:13.698Z",
+ "scannedAt": "2026-11-19T19:03:51.972Z",
  "sides": [
   {
    "tail": false,
@@ -105,33 +105,6 @@
     "money": 8,
     "sizing": 12,
     "quality": 6,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "TOTAL",
-   "pick": "Over 46.5",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "dollars": 2940,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.6,
-   "price": "+104",
-   "size": "1.5x and up",
-   "mktRecord": "6-3",
-   "mktRoi": 46.5,
-   "l30Roi": 46.1,
-   "contested": false,
-   "sfPoints": 22,
-   "parts": {
-    "money": 8,
-    "sizing": 7,
-    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -381,16 +354,43 @@
   },
   {
    "tail": false,
-   "sport": "NHL",
-   "matchup": "Canadiens at Hurricanes",
+   "sport": "NBA",
+   "matchup": "Clippers at Spurs",
    "market": "ML",
-   "pick": "Hurricanes",
-   "kickoffEt": "Thu, Nov 19, 7:10 PM",
-   "dollars": 1208,
+   "pick": "Clippers",
+   "kickoffEt": "Thu, Nov 19, 8:10 PM",
+   "dollars": 2749,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 0.3,
-   "price": "-233",
+   "price": "+726",
+   "size": "under 0.5x",
+   "mktRecord": "5-3",
+   "mktRoi": -5.3,
+   "l30Roi": 8.5,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NHL",
+   "matchup": "Ducks at Avalanche",
+   "market": "ML",
+   "pick": "Ducks",
+   "kickoffEt": "Thu, Nov 19, 9:10 PM",
+   "dollars": 1248,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.3,
+   "price": "+122",
    "size": "under 0.5x",
    "mktRecord": "3-2",
    "mktRoi": 43.7,
@@ -543,35 +543,19 @@
    "maxVsUsual": 1
   },
   {
-   "matchup": "Buccaneers at Lions",
-   "market": "TOTAL",
-   "pick": "Over 46.5",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "sport": "NFL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 2940,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "9-3|12622|6-3"
-   ],
-   "bestPrice": "+104",
-   "maxVsUsual": 1.6
-  },
-  {
-   "matchup": "Canadiens at Hurricanes",
+   "matchup": "Ducks at Avalanche",
    "market": "ML",
-   "pick": "Hurricanes",
-   "kickoffEt": "Thu, Nov 19, 7:10 PM",
+   "pick": "Ducks",
+   "kickoffEt": "Thu, Nov 19, 9:10 PM",
    "sport": "NHL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 1208,
+   "strongDollars": 1248,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
     "5-4|11492|3-2"
    ],
-   "bestPrice": "-233",
+   "bestPrice": "+122",
    "maxVsUsual": 0.3
   }
  ],
@@ -662,23 +646,6 @@
    "fp": "31-10|62756|9-6"
   },
   {
-   "matchup": "Buccaneers at Lions",
-   "market": "TOTAL",
-   "pick": "Over 46.5",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "sport": "NFL",
-   "dollars": 2940,
-   "price": "+104",
-   "vsUsual": 1.6,
-   "size": "1.5x and up",
-   "form": "L10 8-2",
-   "l30Roi": 46.1,
-   "mktRecord": "6-3",
-   "mktRoi": 46.5,
-   "opposed": "unopposed",
-   "fp": "9-3|12622|6-3"
-  },
-  {
    "matchup": "Clippers at Spurs",
    "market": "TOTAL",
    "pick": "Under",
@@ -708,7 +675,7 @@
    "l30Roi": 11.2,
    "mktRecord": "24-15",
    "mktRoi": 20.7,
-   "opposed": "unopposed",
+   "opposed": "contested",
    "fp": "57-46|26298|24-15"
   },
   {
