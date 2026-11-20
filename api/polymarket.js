@@ -1,8 +1,26 @@
 /* ═══════════════════════════════════════════════════════════
-   api/polymarket.js  (updated)
-   Now returns leaderboard data alongside buys so the site
-   can render the HOT section and full leaderboard without
-   extra API calls.
+   api/polymarket.js
+   Returns leaderboard data alongside buys so the site can render the
+   HOT section and full leaderboard without extra API calls.
+
+   FIX 2026-11-20 (per Derek, found live while building the per-wallet
+   lookup below - a real, confirmed-live bug, not a guess): Polymarket's
+   Data API v1 was retired on 2026-10-24. Every call this file made
+   (/v1/leaderboard, /trades) has been returning HTTP 410 since that date
+   - "walletsTracked: 0" and an empty leaderboard were NOT this file
+   failing, they were the v1 diag fix from Nov 18 correctly reporting a
+   real external failure that nobody had looked at since. Confirmed via
+   docs.polymarket.com/migrate/data-api-v1-to-v2 and the v2 endpoint pages
+   (get-leaderboard, get-trades). Migrated both calls to v2:
+     - /v1/leaderboard?category=X&timePeriod=ALL&orderBy=PNL -> /v2/leaderboard?category=x&time_period=all&sort_by=PNL
+       (category is lowercase in v2: overall/sports, not OVERALL/SPORTS)
+     - /trades?user=X&side=BUY&takerOnly=true -> /v2/trades?user=X&side=BUY&taker_only=true
+     - Response shape changed too: both now wrap rows in {data, pagination}
+       instead of returning a bare array, and trade/leaderboard field names
+       moved from camelCase to snake_case (proxyWallet -> proxy_wallet,
+       userName -> user_name, eventSlug -> event_slug, etc). v2 leaderboard
+       rows also dropped `pseudonym` entirely - user_name is now the only
+       name field (falls back to a shortened wallet elsewhere in this file).
 ═══════════════════════════════════════════════════════════ */
 
 const DATA_API = 'https://data-api.polymarket.com';
@@ -17,15 +35,18 @@ const LEADERBOARD_SIZE = 20;
 function tag(arr, info) { Object.defineProperty(arr, '_diag', { value: info, enumerable: false }); return arr; }
 
 async function fetchLeaderboard(category) {
-  const url = `${DATA_API}/v1/leaderboard?category=${category}&timePeriod=ALL&orderBy=PNL&limit=${LEADERBOARD_SIZE}`;
+  // v2: category is lowercase (overall/sports), param is time_period/sort_by not
+  // timePeriod/orderBy, response is {data, pagination} not a bare array.
+  const url = `${DATA_API}/v2/leaderboard?category=${category.toLowerCase()}&time_period=all&sort_by=PNL&limit=${LEADERBOARD_SIZE}`;
   try {
     const r = await fetch(url);
     if (!r.ok) {
       const body = await r.text().catch(() => '');
       return tag([], { ok: false, status: r.status, body: body.slice(0, 300) });
     }
-    const data = await r.json();
-    if (!Array.isArray(data)) return tag([], { ok: false, status: r.status, body: 'response was not an array', shape: typeof data });
+    const json = await r.json();
+    const data = json && Array.isArray(json.data) ? json.data : null;
+    if (!data) return tag([], { ok: false, status: r.status, body: 'response had no data[] array', shape: typeof json });
     return tag(data, { ok: true, count: data.length });
   } catch (err) {
     return tag([], { ok: false, networkError: err.message });
@@ -33,21 +54,21 @@ async function fetchLeaderboard(category) {
 }
 
 async function fetchWalletBuys(wallet) {
-  const url = `${DATA_API}/trades?user=${wallet}&side=BUY&takerOnly=true&limit=${TRADES_PER_WALLET}`;
+  const url = `${DATA_API}/v2/trades?user=${wallet}&side=BUY&taker_only=true&limit=${TRADES_PER_WALLET}`;
   try {
     const r = await fetch(url);
     if (!r.ok) return [];
-    const data = await r.json();
-    return Array.isArray(data) ? data : [];
+    const json = await r.json();
+    return json && Array.isArray(json.data) ? json.data : [];
   } catch { return []; }
 }
 
 function formatLeaderboard(lb, category) {
   return lb.map(t => ({
     rank:    t.rank,
-    wallet:  t.proxyWallet,
-    name:    t.userName || t.pseudonym || null,
-    image:   t.profileImageOptimized || t.profileImage || null,
+    wallet:  t.user_id,
+    name:    t.user_name || null,
+    image:   t.profile_image || null,
     pnl:     parseFloat(t.pnl) || 0,
     vol:     parseFloat(t.volume) || 0,
     category,
@@ -58,8 +79,8 @@ function formatLeaderboard(lb, category) {
 // the Hobby plan caps Vercel at 12 Serverless Functions per deployment and this repo's
 // api/ directory was already at exactly 12 - a 13th file (api/poly-wallet-buys.js,
 // tried first) made every deploy error with exceeded_serverless_functions_per_deployment.
-// That is also the likely real cause behind main sitting un-deployed for the last few
-// commits (see RUNBOOK_SLATE.md) - worth a from-scratch check once this ships clean.
+// That is also the likely real cause behind main sitting un-deployed for several prior
+// commits.
 //
 // WHY. The leaderboard-based fetchWalletBuys above only ever covers the top-20
 // OVERALL/SPORTS wallets. There was no way to ask "what has THIS SPECIFIC wallet
@@ -77,21 +98,22 @@ const MAX_WALLETS_LOOKUP = 40;
 const WALLET_BATCH = 6;
 
 async function fetchWalletBuysByWallet(wallet, limit) {
-  const url = `${DATA_API}/trades?user=${wallet}&side=BUY&takerOnly=true&limit=${limit}`;
+  const url = `${DATA_API}/v2/trades?user=${wallet}&side=BUY&taker_only=true&limit=${limit}`;
   try {
     const r = await fetch(url);
     if (!r.ok) {
       const body = await r.text().catch(() => '');
       return { ok: false, status: r.status, body: body.slice(0, 300), buys: [] };
     }
-    const data = await r.json();
-    if (!Array.isArray(data)) return { ok: false, status: r.status, body: 'response was not an array', buys: [] };
+    const json = await r.json();
+    const data = json && Array.isArray(json.data) ? json.data : null;
+    if (!data) return { ok: false, status: r.status, body: 'response had no data[] array', buys: [] };
     const buys = data.map(t => ({
-      title: t.title || null, slug: t.slug || null, eventSlug: t.eventSlug || null,
+      title: t.title || null, slug: t.slug || null, eventSlug: t.event_slug || null,
       outcome: t.outcome || null, side: t.side || null, size: t.size, price: t.price,
       usdValue: (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0),
-      timestamp: t.timestamp, conditionId: t.conditionId || null,
-      transactionHash: t.transactionHash || null,
+      timestamp: t.timestamp, conditionId: t.condition_id || null,
+      transactionHash: t.transaction_hash || null,
     }));
     return { ok: true, status: r.status, buys };
   } catch (err) {
@@ -133,14 +155,14 @@ module.exports = async function handler(req, res) {
     // Merge + dedupe wallets
     const walletMap = {};
     overallLB.forEach(t => {
-      walletMap[t.proxyWallet] = walletMap[t.proxyWallet] ||
-        { wallet: t.proxyWallet, name: t.userName || t.pseudonym, image: t.profileImageOptimized || t.profileImage, categories: [] };
-      walletMap[t.proxyWallet].categories.push({ category: 'OVERALL', rank: t.rank, pnl: parseFloat(t.pnl)||0 });
+      walletMap[t.user_id] = walletMap[t.user_id] ||
+        { wallet: t.user_id, name: t.user_name, image: t.profile_image, categories: [] };
+      walletMap[t.user_id].categories.push({ category: 'OVERALL', rank: t.rank, pnl: parseFloat(t.pnl)||0 });
     });
     sportsLB.forEach(t => {
-      walletMap[t.proxyWallet] = walletMap[t.proxyWallet] ||
-        { wallet: t.proxyWallet, name: t.userName || t.pseudonym, image: t.profileImageOptimized || t.profileImage, categories: [] };
-      walletMap[t.proxyWallet].categories.push({ category: 'SPORTS', rank: t.rank, pnl: parseFloat(t.pnl)||0 });
+      walletMap[t.user_id] = walletMap[t.user_id] ||
+        { wallet: t.user_id, name: t.user_name, image: t.profile_image, categories: [] };
+      walletMap[t.user_id].categories.push({ category: 'SPORTS', rank: t.rank, pnl: parseFloat(t.pnl)||0 });
     });
 
     const wallets = Object.values(walletMap);
@@ -155,20 +177,20 @@ module.exports = async function handler(req, res) {
         const usdValue = (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0);
         allBuys.push({
           wallet:       w.wallet,
-          traderName:   t.name || t.pseudonym || w.name || (w.wallet.slice(0,6)+'…'+w.wallet.slice(-4)),
-          profileImage: t.profileImageOptimized || t.profileImage || w.image || null,
+          traderName:   t.name || w.name || (w.wallet.slice(0,6)+'…'+w.wallet.slice(-4)),
+          profileImage: t.profile_image || w.image || null,
           categories:   w.categories,
           title:        t.title,
           slug:         t.slug,
-          eventSlug:    t.eventSlug,
+          eventSlug:    t.event_slug,
           outcome:      t.outcome,
           side:         t.side,
           size:         t.size,
           price:        t.price,
           usdValue,
           timestamp:    t.timestamp,
-          transactionHash: t.transactionHash,
-          conditionId:  t.conditionId,
+          transactionHash: t.transaction_hash,
+          conditionId:  t.condition_id,
         });
       });
     });
