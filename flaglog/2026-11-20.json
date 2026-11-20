@@ -16,7 +16,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8210,
    "opposedSeen": false,
-   "snapshots": 26
+   "snapshots": 28
   },
   "Buccaneers at Lions|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": false,
-   "snapshots": 26
+   "snapshots": 28
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -49,7 +49,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2534,
    "opposedSeen": false,
-   "snapshots": 13
+   "snapshots": 14
   },
   "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 13
+   "snapshots": 14
   },
   "Iowa State at UCF|ML|Iowa State": {
    "sport": "CFB",
@@ -83,7 +83,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Wizards at Bulls|SPREAD|Bulls -3.5": {
    "sport": "NBA",
@@ -115,7 +115,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Bakersfield Roadrunners at Idaho Vandals|TOTAL|Over": {
    "sport": "CBB",
@@ -133,7 +133,7 @@
    "maxVsUsual": 2.4,
    "maxDollars": 2702,
    "opposedSeen": false,
-   "snapshots": 18
+   "snapshots": 20
   },
   "Green Bay Phoenix at Florida State Seminoles|ML|Florida State Seminoles": {
    "sport": "CBB",
@@ -166,7 +166,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 3023,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Iowa State at UCF|SPREAD|UCF +1.5": {
    "sport": "CFB",
@@ -183,7 +183,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 11676,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Colorado at Cincinnati|ML|Colorado": {
    "sport": "CFB",
@@ -199,7 +199,7 @@
    "maxVsUsual": 0.2,
    "maxDollars": 1624,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Raptors at Pistons|TOTAL|Over 217.5": {
    "sport": "NBA",
@@ -212,10 +212,10 @@
    "tags": [
     "STRONG_UNOPPOSED"
    ],
-   "maxVsUsual": 0.6,
-   "maxDollars": 1077,
+   "maxVsUsual": 0.7,
+   "maxDollars": 1082,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Wizards at Bulls|ML|Wizards": {
    "sport": "NBA",
@@ -231,8 +231,74 @@
    ],
    "maxVsUsual": 1.9,
    "maxDollars": 1039,
+   "opposedSeen": true,
+   "snapshots": 4
+  },
+  "UTEP at Air Force|SPREAD|Air Force -21.5": {
+   "sport": "CFB",
+   "matchup": "UTEP at Air Force",
+   "market": "SPREAD",
+   "pick": "Air Force -21.5",
+   "kickoffEt": "Fri, Nov 20, 8:00 PM",
+   "firstSeenAt": "2026-11-20T23:26:10.753Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 3000,
    "opposedSeen": false,
    "snapshots": 2
+  },
+  "Campbell Fighting Camels at Kansas State Wildcats|TOTAL|Over 156.5": {
+   "sport": "CBB",
+   "matchup": "Campbell Fighting Camels at Kansas State Wildcats",
+   "market": "TOTAL",
+   "pick": "Over 156.5",
+   "kickoffEt": "Fri, Nov 20, 8:00 PM",
+   "firstSeenAt": "2026-11-20T23:26:10.753Z",
+   "firstPrice": "+117",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.6,
+   "maxDollars": 1610,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "New Mexico at Wyoming|SPREAD|New Mexico -8.5": {
+   "sport": "CFB",
+   "matchup": "New Mexico at Wyoming",
+   "market": "SPREAD",
+   "pick": "New Mexico -8.5",
+   "kickoffEt": "Fri, Nov 20, 9:00 PM",
+   "firstSeenAt": "2026-11-20T23:26:10.753Z",
+   "firstPrice": "-117",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.1,
+   "maxDollars": 3067,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Oregon at Michigan State|SPREAD|Michigan State +17.5": {
+   "sport": "CFB",
+   "matchup": "Oregon at Michigan State",
+   "market": "SPREAD",
+   "pick": "Michigan State +17.5",
+   "kickoffEt": "Fri, Nov 20, 8:00 PM",
+   "firstSeenAt": "2026-11-20T23:26:10.753Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.6,
+   "maxDollars": 2513,
+   "opposedSeen": true,
+   "snapshots": 1
   }
  }
 }
