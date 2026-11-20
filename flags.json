@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T16:05:22.200Z",
+ "scannedAt": "2026-11-20T17:13:23.317Z",
  "sides": [
   {
    "tail": true,
@@ -36,20 +36,47 @@
    "market": "TOTAL",
    "pick": "Over",
    "kickoffEt": null,
-   "dollars": 2702,
+   "dollars": 2517,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 1.7,
+   "maxVsUsual": 2.4,
    "size": "1.5x and up",
    "mktRecord": "17-9",
    "mktRoi": 44.3,
    "l30Roi": 43.8,
    "contested": false,
-   "sfPoints": 24,
+   "sfPoints": 27,
    "parts": {
     "money": 8,
-    "sizing": 7,
+    "sizing": 10,
     "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CBB",
+   "matchup": "Green Bay Phoenix at Florida State Seminoles",
+   "market": "ML",
+   "pick": "Florida State Seminoles",
+   "kickoffEt": "Fri, Nov 20, 12:00 PM",
+   "dollars": 4103,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 9.3,
+   "price": "-3471",
+   "size": "1.5x and up",
+   "mktRecord": "11-4",
+   "mktRoi": -7.5,
+   "l30Roi": 32.3,
+   "contested": false,
+   "sfPoints": 23,
+   "parts": {
+    "money": 8,
+    "sizing": 12,
+    "quality": 0,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -246,6 +273,33 @@
   {
    "tail": false,
    "sport": "NBA",
+   "matchup": "Suns at Jazz",
+   "market": "TOTAL",
+   "pick": "Under 226.5",
+   "kickoffEt": "Fri, Nov 20, 9:40 PM",
+   "dollars": 3773,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.5,
+   "price": "-108",
+   "size": "0.5x",
+   "mktRecord": "6-3",
+   "mktRoi": 74.1,
+   "l30Roi": 7.3,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
    "matchup": "Pelicans at Thunder",
    "market": "SPREAD",
    "pick": "Thunder -11.5",
@@ -381,13 +435,13 @@
    "kickoffEt": null,
    "sport": "CBB",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 2702,
+   "strongDollars": 2517,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
     "18-10|7729|17-9"
    ],
-   "maxVsUsual": 1.7
+   "maxVsUsual": 2.4
   },
   {
    "matchup": "Wizards at Bulls",
@@ -408,6 +462,39 @@
  ],
  "sizedUp": [
   {
+   "matchup": "Green Bay Phoenix at Florida State Seminoles",
+   "market": "ML",
+   "pick": "Florida State Seminoles",
+   "kickoffEt": "Fri, Nov 20, 12:00 PM",
+   "sport": "CBB",
+   "dollars": 4103,
+   "price": "-3471",
+   "vsUsual": 9.3,
+   "size": "1.5x and up",
+   "form": "L10 8-2",
+   "l30Roi": 32.3,
+   "mktRecord": "11-4",
+   "mktRoi": -7.5,
+   "opposed": "unopposed",
+   "fp": "25-20|6427|11-4"
+  },
+  {
+   "matchup": "Bakersfield Roadrunners at Idaho Vandals",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": null,
+   "sport": "CBB",
+   "dollars": 2517,
+   "vsUsual": 2.4,
+   "size": "1.5x and up",
+   "form": "L10 7-3",
+   "l30Roi": 43.8,
+   "mktRecord": "17-9",
+   "mktRoi": 44.3,
+   "opposed": "unopposed",
+   "fp": "18-10|7729|17-9"
+  },
+  {
    "matchup": "Texas Tech at Baylor",
    "market": "ML",
    "pick": "Texas Tech",
@@ -423,22 +510,6 @@
    "mktRoi": 35,
    "opposed": "unopposed",
    "fp": "22-11|23241|10-8"
-  },
-  {
-   "matchup": "Bakersfield Roadrunners at Idaho Vandals",
-   "market": "TOTAL",
-   "pick": "Over",
-   "kickoffEt": null,
-   "sport": "CBB",
-   "dollars": 2702,
-   "vsUsual": 1.7,
-   "size": "1.5x and up",
-   "form": "L10 7-3",
-   "l30Roi": 43.8,
-   "mktRecord": "17-9",
-   "mktRoi": 44.3,
-   "opposed": "unopposed",
-   "fp": "18-10|7729|17-9"
   },
   {
    "matchup": "Buccaneers at Lions",
@@ -471,7 +542,7 @@
    "l30Roi": 38.6,
    "mktRecord": "6-8",
    "mktRoi": 20.6,
-   "opposed": "unopposed",
+   "opposed": "contested",
    "fp": "31-12|38166|6-8"
   },
   {
