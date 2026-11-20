@@ -329,7 +329,10 @@ def sharpflow_html(c):
             + '<div class="rtop">' + srcpill + '<span class="rteam">' + e(r.get("team")) + '</span>'
             + '<span class="rwal">' + e(r.get("wallet")) + '</span>'
             + '<span class="rmk">' + e(r.get("market")) + '</span>'
-            + '<span class="rrec">' + e(r.get("record")) + '</span></div>'
+            + '<span class="rrecw"><span class="rrec">' + e(r.get("record")) + '</span>'
+            # Label under the record (Derek, Nov 20 2026): which sport, bet type and window the record is for.
+            + ('<span class="rrecl">' + e(r.get("recLabel") or ((r.get("market") or "") + " record")) + '</span>' if r.get("record") else '')
+            + '</span></div>'
             + ('<div class="rn">' + e(note) + '</div>' if note else '')
             + '<div class="rbot"><span class="rroi" style="color:' + fg + '">' + e(roitxt) + '</span>'
             + ('<span class="rstatus" style="color:' + stcol + '">' + e(st.get("t")) + '</span>' if st.get("t") else '')
@@ -442,7 +445,9 @@ def sharpflow_html(c):
         '.rteam{font-weight:900;font-size:13px;letter-spacing:.4px}'
         '.rwal{font-family:ui-monospace,monospace;font-size:13px;font-weight:700;color:#4B5366}'
         '.rmk{font-size:13px;color:#6B7280}'
-        '.rrec{font-weight:900;font-size:18px;margin-left:auto}'
+        '.rrecw{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}'
+        '.rrec{font-weight:900;font-size:18px}'
+        '.rrecl{font-size:10px;font-weight:800;letter-spacing:.5px;color:#8A8F9E;text-transform:uppercase;margin-top:2px;white-space:nowrap}'
         '.rn{font-size:13px;color:#6B7280}'
         '.rbot{display:flex;align-items:baseline;gap:10px}'
         '.rroi{font-weight:900;font-size:17px}'
