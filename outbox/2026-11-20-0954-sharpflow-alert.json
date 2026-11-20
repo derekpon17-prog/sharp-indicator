@@ -1,0 +1,294 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 5 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 9:12am CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Hornets at Hawks",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - HAWKS",
+        "icon": "🎯"
+       },
+       "bet": "Hawks ML -203",
+       "price": "-203",
+       "for": {
+        "team": "HAWKS",
+        "rows": [
+         {
+          "team": "Hawks",
+          "wallet": "O",
+          "market": "ML",
+          "record": "71-56",
+          "roi": 38.2,
+          "dollars": 1940,
+          "note": "0.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "HAWKS",
+         "dollars": 1940,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 71-56 (+38% ROI) on HAWKS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $1.9K on Hawks"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pacers at Cavaliers",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "EDGE - CAVALIERS",
+        "icon": "🎯"
+       },
+       "bet": "Cavaliers ML -245",
+       "price": "-245",
+       "for": {
+        "team": "CAVALIERS",
+        "rows": [
+         {
+          "team": "Cavaliers",
+          "wallet": "N",
+          "market": "ML",
+          "record": "9-3",
+          "roi": 32.9,
+          "dollars": 741,
+          "note": "2.2x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Cavaliers",
+          "wallet": "I",
+          "market": "ML",
+          "record": "27-19",
+          "roi": 10.2,
+          "dollars": 583,
+          "note": "1.7x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CAVALIERS",
+         "dollars": 1324,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 9-3 (+33% ROI) on CAVALIERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $741 to $1.3K"
+      },
+      {
+       "eyebrow": "Raptors at Pistons",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "bet": "Total 217.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "D",
+          "market": "TOTAL",
+          "record": "6-3",
+          "roi": 20.7,
+          "dollars": 940,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Over",
+          "wallet": "N",
+          "market": "TOTAL",
+          "record": "11-11",
+          "roi": 1.6,
+          "dollars": 561,
+          "note": "1.6x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 1501,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "GREW $561 to $1.5K"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 5:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Iowa State at UCF",
+       "time": "5:00pm CT",
+       "tag": {
+        "t": "EDGE - IOWA STATE",
+        "icon": "🎯"
+       },
+       "bet": "Iowa State ML -100",
+       "price": "-100",
+       "for": {
+        "team": "IOWA STATE",
+        "rows": [
+         {
+          "team": "Iowa State",
+          "wallet": "S",
+          "market": "ML",
+          "record": "6-8",
+          "roi": 20.6,
+          "dollars": 3000,
+          "note": "1.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "IOWA STATE",
+         "dollars": 3000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 6-8 (+21% ROI) on IOWA STATE - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $3K on Iowa State"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Wizards at Bulls",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Bulls vs Wizards",
+       "price": null,
+       "for": {
+        "team": "BULLS",
+        "rows": [
+         {
+          "team": "Bulls",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 1023,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "WIZARDS",
+        "rows": [
+         {
+          "team": "Wizards",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 980,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BULLS",
+         "dollars": 1023,
+         "pct": 51,
+         "c": "green"
+        },
+        {
+         "team": "WIZARDS",
+         "dollars": 980,
+         "pct": 49,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $1K on Bulls -3.5"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
