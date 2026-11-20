@@ -1,5 +1,5 @@
 {
- "at": "2026-11-20T21:00:55.879Z",
+ "at": "2026-11-20T21:07:40.907Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -10,6 +10,13 @@
    "side": "Under",
    "market": "TOTAL",
    "cls": "HOT",
+   "startUtc": "2026-11-20T22:00:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x9fd52ead48856a342a657f91d4484aaa6358fec8daad53e699d5ba6ef8b8729d",
+   "outcome": "Under",
+   "gradeTitle": "Iowa State vs. UCF: O/U 49.5",
+   "gradePrice": 0.5172,
+   "onCard": false,
    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
    "name": "ic4cream",
    "usd": 2111,
@@ -22,7 +29,13 @@
    "n": 76,
    "recScope": "NCAAF TOTAL, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 4,
+    "l": 6,
+    "n": 10,
+    "txt": "L10 NCAAF 4-6"
+   }
   },
   {
    "sport": "CFB",
@@ -31,6 +44,13 @@
    "side": "Texas Tech",
    "market": "ML",
    "cls": "HOT",
+   "startUtc": "2026-11-21T19:30:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0x97ebb93c49e7a34c4b8581db493385933d1820f067589cc1d6e08f2b5c9a66c5",
+   "outcome": "Texas Tech",
+   "gradeTitle": "Texas Tech vs. Baylor",
+   "gradePrice": 0.6456,
+   "onCard": true,
    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
    "name": "ic4cream",
    "usd": 8211,
@@ -46,6 +66,12 @@
    "sameAsSF": {
     "sfWallet": "K",
     "sfDollars": 8210
+   },
+   "l10": {
+    "w": 4,
+    "l": 6,
+    "n": 10,
+    "txt": "L10 NCAAF 4-6"
    }
   },
   {
@@ -55,6 +81,13 @@
    "side": "Under",
    "market": "TOTAL",
    "cls": "HOT",
+   "startUtc": "2026-11-22T17:00:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x75114f8113a409b54939b4f881ff75b30930a0bc839d5fc217af5a287fc968ec",
+   "outcome": "Under",
+   "gradeTitle": "Buccaneers vs. Lions: O/U 44.5",
+   "gradePrice": 0.4832,
+   "onCard": true,
    "wallet": "0x0944e4da1f949b201a136d73f488d03c0c506771",
    "name": "twotontony",
    "usd": 891,
@@ -67,7 +100,13 @@
    "n": 12,
    "recScope": "NFL TOTAL, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 7,
+    "l": 3,
+    "n": 10,
+    "txt": "L10 NFL 7-3"
+   }
   },
   {
    "sport": "NFL",
@@ -76,6 +115,13 @@
    "side": "Lions",
    "market": "ML",
    "cls": "HOT",
+   "startUtc": "2026-11-22T17:00:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x8c9d3ab12a472949eb6852326bfe6004883b2670884035c6c5d2b8a05c0dd99b",
+   "outcome": "Lions",
+   "gradeTitle": "Buccaneers vs. Lions",
+   "gradePrice": 0.6937,
+   "onCard": true,
    "wallet": "0x0944e4da1f949b201a136d73f488d03c0c506771",
    "name": "twotontony",
    "usd": 914,
@@ -88,7 +134,13 @@
    "n": 21,
    "recScope": "NFL ML, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 7,
+    "l": 3,
+    "n": 10,
+    "txt": "L10 NFL 7-3"
+   }
   },
   {
    "sport": "NFL",
@@ -97,6 +149,13 @@
    "side": "Over",
    "market": "TOTAL",
    "cls": "COLD",
+   "startUtc": "2026-11-22T17:00:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x75114f8113a409b54939b4f881ff75b30930a0bc839d5fc217af5a287fc968ec",
+   "outcome": "Over",
+   "gradeTitle": "Buccaneers vs. Lions: O/U 44.5",
+   "gradePrice": 0.5476,
+   "onCard": true,
    "wallet": "0x853212cd809da6acc458021c106af749b7aa738b",
    "name": "Mr.Kirk",
    "usd": 1659,
@@ -109,7 +168,13 @@
    "n": 45,
    "recScope": "NFL TOTAL, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 8,
+    "l": 2,
+    "n": 10,
+    "txt": "L10 NFL 8-2"
+   }
   },
   {
    "sport": "NBA",
@@ -118,6 +183,13 @@
    "side": "Wizards",
    "market": "ML",
    "cls": "COLD",
+   "startUtc": "2026-11-21T00:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0xa79a100781ef911fdb98a31872e523fb6948eb64808a4839b018467be9979cc1",
+   "outcome": "Wizards",
+   "gradeTitle": "Wizards vs. Bulls",
+   "gradePrice": 0.43,
+   "onCard": true,
    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
    "name": "ic4cream",
    "usd": 13621,
@@ -130,7 +202,13 @@
    "n": 97,
    "recScope": "NBA ML, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 5,
+    "l": 5,
+    "n": 10,
+    "txt": "L10 NBA 5-5"
+   }
   },
   {
    "sport": "NBA",
@@ -139,6 +217,13 @@
    "side": "Under",
    "market": "TOTAL",
    "cls": "COLD",
+   "startUtc": "2026-11-21T00:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x1d7c33e74f40c73d288fb974c6185933a1c10099b941d6d39a25068d69427f42",
+   "outcome": "Under",
+   "gradeTitle": "Wizards vs. Bulls: O/U 237.5",
+   "gradePrice": 0.49,
+   "onCard": false,
    "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
    "name": "nehcnehc",
    "usd": 905,
@@ -151,7 +236,13 @@
    "n": 233,
    "recScope": "NBA TOTAL, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 3,
+    "l": 7,
+    "n": 10,
+    "txt": "L10 NBA 3-7"
+   }
   },
   {
    "sport": "NBA",
@@ -160,6 +251,13 @@
    "side": "Over",
    "market": "TOTAL",
    "cls": "COLD",
+   "startUtc": "2026-11-21T00:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x9a1079cb0da5201e37bd77a4c519dba398a1180cdc4bc50d8fde264ea54aaccd",
+   "outcome": "Over",
+   "gradeTitle": "Wizards vs. Bulls: O/U 239.5",
+   "gradePrice": 0.47,
+   "onCard": false,
    "wallet": "0x09f49ea10004f323a40cc1e21f4cd8759c14dac0",
    "name": "0x09f4…dac0",
    "usd": 574,
@@ -172,7 +270,13 @@
    "n": 101,
    "recScope": "NBA TOTAL, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 10,
+    "l": 0,
+    "n": 10,
+    "txt": "L10 NBA 10-0"
+   }
   },
   {
    "sport": "NFL",
@@ -181,6 +285,13 @@
    "side": "Jets",
    "market": "ML",
    "cls": "COLD",
+   "startUtc": "2026-11-22T20:05:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0xeb0627e2db47f132eb6fc19150580aafe384ee8ef62b21725b80dc5e549ba9ac",
+   "outcome": "Jets",
+   "gradeTitle": "Jets vs. Chargers",
+   "gradePrice": 0.39,
+   "onCard": true,
    "wallet": "0x9f2fe025f84839ca81dd8e0338892605702d2ca8",
    "name": "surfandturf",
    "usd": 2633,
@@ -193,7 +304,13 @@
    "n": 43,
    "recScope": "NFL ML, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 8,
+    "l": 2,
+    "n": 10,
+    "txt": "L10 NFL 8-2"
+   }
   },
   {
    "sport": "NBA",
@@ -202,6 +319,13 @@
    "side": "Magic",
    "market": "ML",
    "cls": "COLD",
+   "startUtc": "2026-11-20T23:40:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x18e150597c8306aa03c0142dffe805e34acab4fd431f219d2b68a01d295bcefa",
+   "outcome": "Magic",
+   "gradeTitle": "Magic vs. Nets",
+   "gradePrice": 0.65,
+   "onCard": false,
    "wallet": "0xd70b975d2d2eb3e5f9e7c07ffe2fda8265d9dcb1",
    "name": "QWUERHAIUKSJNFSNCF",
    "usd": 696,
@@ -214,7 +338,13 @@
    "n": 90,
    "recScope": "NBA ML, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 9,
+    "l": 1,
+    "n": 10,
+    "txt": "L10 NBA 9-1"
+   }
   },
   {
    "sport": "NBA",
@@ -223,6 +353,13 @@
    "side": "Thunder",
    "market": "ML",
    "cls": "COLD",
+   "startUtc": "2026-11-21T00:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0xa23a00cde01ce10a8423cac639fe3ef1de2751072b67cd8da5dc9b640447045b",
+   "outcome": "Thunder",
+   "gradeTitle": "Pelicans vs. Thunder",
+   "gradePrice": 0.84,
+   "onCard": true,
    "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
    "name": "nehcnehc",
    "usd": 6200,
@@ -235,7 +372,13 @@
    "n": 76,
    "recScope": "NBA ML, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 3,
+    "l": 7,
+    "n": 10,
+    "txt": "L10 NBA 3-7"
+   }
   },
   {
    "sport": "NBA",
@@ -244,6 +387,13 @@
    "side": "Over",
    "market": "TOTAL",
    "cls": "COLD",
+   "startUtc": "2026-11-21T00:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0xad0b2d49fb7b39f54d510bbab39dcacb5e4d850333b50c5d40d0a271b127bfd4",
+   "outcome": "Over",
+   "gradeTitle": "Pelicans vs. Thunder: O/U 229.5",
+   "gradePrice": 0.49,
+   "onCard": true,
    "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
    "name": "nehcnehc",
    "usd": 3049,
@@ -256,7 +406,13 @@
    "n": 233,
    "recScope": "NBA TOTAL, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 3,
+    "l": 7,
+    "n": 10,
+    "txt": "L10 NBA 3-7"
+   }
   },
   {
    "sport": "NBA",
@@ -265,6 +421,13 @@
    "side": "Under",
    "market": "TOTAL",
    "cls": "COLD",
+   "startUtc": "2026-11-20T23:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x3c4dafee18b643d3912d4312600fd9d4883c34eb4659b2f7f0875c821354927d",
+   "outcome": "Under",
+   "gradeTitle": "Hornets vs. Hawks: O/U 218.5",
+   "gradePrice": 0.48,
+   "onCard": false,
    "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
    "name": "justwins",
    "usd": 20615,
@@ -277,7 +440,13 @@
    "n": 35,
    "recScope": "NBA TOTAL, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 4,
+    "l": 6,
+    "n": 10,
+    "txt": "L10 NBA 4-6"
+   }
   },
   {
    "sport": "NBA",
@@ -286,6 +455,13 @@
    "side": "Under",
    "market": "TOTAL",
    "cls": "COLD",
+   "startUtc": "2026-11-20T23:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0xc0dc562eb8c2b60d415420fe0f79469e80df85edbad3dc9cd1d95a502453e09f",
+   "outcome": "Under",
+   "gradeTitle": "Hornets vs. Hawks: O/U 219.5",
+   "gradePrice": 0.51,
+   "onCard": false,
    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
    "name": "ic4cream",
    "usd": 1441,
@@ -298,7 +474,13 @@
    "n": 127,
    "recScope": "NBA TOTAL, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 5,
+    "l": 5,
+    "n": 10,
+    "txt": "L10 NBA 5-5"
+   }
   },
   {
    "sport": "NBA",
@@ -307,6 +489,13 @@
    "side": "Hawks",
    "market": "ML",
    "cls": "COLD",
+   "startUtc": "2026-11-20T23:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x8045cbc5e564fb705352aaf4421544f346851009cfae0b0d94e44005d095d499",
+   "outcome": "Hawks",
+   "gradeTitle": "Hornets vs. Hawks",
+   "gradePrice": 0.65,
+   "onCard": true,
    "wallet": "0xd70b975d2d2eb3e5f9e7c07ffe2fda8265d9dcb1",
    "name": "QWUERHAIUKSJNFSNCF",
    "usd": 650,
@@ -319,7 +508,13 @@
    "n": 90,
    "recScope": "NBA ML, last 45 days",
    "twoSided": false,
-   "sameAsSF": null
+   "sameAsSF": null,
+   "l10": {
+    "w": 9,
+    "l": 1,
+    "n": 10,
+    "txt": "L10 NBA 9-1"
+   }
   }
  ],
  "errors": [],

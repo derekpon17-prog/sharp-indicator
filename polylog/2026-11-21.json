@@ -1,0 +1,32 @@
+{
+ "date": "2026-11-21",
+ "entries": {
+  "CFB|Texas Tech at Baylor|ML|Texas Tech|0x27f738fe203827445690339104aae35b20bc44b0": {
+   "sport": "CFB",
+   "matchup": "Texas Tech at Baylor",
+   "market": "ML",
+   "side": "Texas Tech",
+   "grp": "team",
+   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "name": "ic4cream",
+   "cls": "HOT",
+   "startUtc": "2026-11-21T19:30:00.000Z",
+   "conditionId": "0x97ebb93c49e7a34c4b8581db493385933d1820f067589cc1d6e08f2b5c9a66c5",
+   "outcome": "Texas Tech",
+   "title": "Texas Tech vs. Baylor",
+   "firstSeenAt": "2026-11-20T21:07:40.907Z",
+   "firstPrice": 0.6456,
+   "firstUsd": 8211,
+   "maxUsd": 8211,
+   "lastSeenAt": "2026-11-20T21:07:40.907Z",
+   "rec": "30-20",
+   "roi": 13.2,
+   "n": 50,
+   "recScope": "NCAAF ML, last 45 days",
+   "l10": "L10 NCAAF 4-6",
+   "onCard": true,
+   "sameAsSF": true,
+   "twoSided": false
+  }
+ }
+}
