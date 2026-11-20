@@ -119,7 +119,7 @@ function polyFor(sp, matchup, grp, r) {
   const ms = POLY.filter(m => m.sport === sp && m.matchup === matchup && m.grp === grp);
   if (!ms.length) return { for: r.for, against: r.against, sources: ['SHARP FLOW'] };
   const label = side => grp === 'total' ? side : String(side).toUpperCase();
-  const row = m => ({ src: 'POLYMARKET', team: m.side, wallet: m.name, market: m.market, record: m.rec, roi: m.roi, dollars: m.usd,
+  const row = m => ({ src: 'POLYMARKET', team: m.side, wallet: m.name, market: m.market, record: m.rec, recLabel: m.recScope ? m.recScope.replace(/, last (\d+) days/, ' · last $1d') + ' record' : null, roi: m.roi, dollars: m.usd,
     note: ['Polymarket', m.recScope, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' · '),
     status: m.twoSided ? { t: 'POLY TWO-SIDED - not counted', c: 'grey' }
       : m.cls === 'HOT' ? (m.sameAsSF ? { t: 'POLY HOT - same wallet, not a 2nd source', c: 'grey' } : { t: 'POLY HOT', c: 'green' })
@@ -172,6 +172,10 @@ function buildCards(sp, latest, flags, before) { // before: optional Date - only
     const tix = tickets.filter(t => t.matchup === s.matchup && grpOf(t.market) === grpOf(s.market));
     const r = R.matchupRow(sp, tix, grpOf(s.market)); if (!r) continue;
     const star = sides.some(x => x.matchup === s.matchup && grpOf(x.market) === grpOf(s.market) && x.tail);
+    // Record label (Derek, Nov 20 2026): the number on the right of each row is that wallet's record in THIS sport and
+    // bet type - all-time for SharpFlow rows (mktRecord), last 45 days for Poly rows. Say so under the number.
+    const lab = v => v && v.rows ? { ...v, rows: v.rows.map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.market} · all-time record` })) } : v;
+    r.for = lab(r.for); r.against = lab(r.against);
     const pv = polyFor(sp, s.matchup, grpOf(s.market), r);
     rows.push({ st: s.st, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, sources: pv.sources, bet: (star ? '★ ' : '') + r.bet,
       price: r.price, for: pv.for, against: pv.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout,
