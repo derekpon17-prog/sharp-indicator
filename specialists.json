@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T19:11:46.167Z",
+ "scannedAt": "2026-11-20T20:14:59.418Z",
  "sports": {
   "NFL": [
    {
@@ -153,7 +153,7 @@
       "pick": "Under 229.5",
       "line": 229.5,
       "price": "-108",
-      "dollars": 2757,
+      "dollars": 2763,
       "vsUsual": 0.4,
       "vsUsualAll": 1
      },
@@ -330,8 +330,8 @@
       "pick": "Wild",
       "line": null,
       "price": "-270",
-      "dollars": 1056,
-      "vsUsual": 0.3,
+      "dollars": 1254,
+      "vsUsual": 0.4,
       "vsUsualAll": 0.1
      }
     ]
@@ -356,6 +356,16 @@
       "dollars": 11676,
       "vsUsual": 1.2,
       "vsUsualAll": 2.5
+     },
+     {
+      "matchup": "Syracuse at Boston College",
+      "market": "SPREAD",
+      "pick": "Syracuse -2.5",
+      "line": -2.5,
+      "price": "-113",
+      "dollars": 659,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.1
      }
     ]
    },
@@ -500,7 +510,7 @@
       "pick": "Over 156.5",
       "line": 156.5,
       "price": "+117",
-      "dollars": 854,
+      "dollars": 862,
       "vsUsual": 1.4,
       "vsUsualAll": 0.8
      }
