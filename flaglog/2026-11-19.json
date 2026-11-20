@@ -16,7 +16,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 4672,
    "opposedSeen": false,
-   "snapshots": 13
+   "snapshots": 14
   },
   "Canadiens at Hurricanes|ML|Hurricanes": {
    "sport": "NHL",
@@ -50,7 +50,7 @@
    "maxVsUsual": 3.7,
    "maxDollars": 4905,
    "opposedSeen": true,
-   "snapshots": 22
+   "snapshots": 25
   },
   "Warriors at Grizzlies|SPREAD|Warriors +7.5": {
    "sport": "NBA",
@@ -66,7 +66,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 14
+   "snapshots": 15
   },
   "Clippers at Spurs|TOTAL|Under": {
    "sport": "NBA",
@@ -183,7 +183,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": false,
-   "snapshots": 16
+   "snapshots": 18
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -199,7 +199,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2534,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
    "sport": "NFL",
@@ -215,7 +215,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Ducks at Avalanche|ML|Ducks": {
    "sport": "NHL",
@@ -249,7 +249,7 @@
    "maxVsUsual": 19.2,
    "maxDollars": 83575,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 13
   },
   "Warriors at Grizzlies|SPREAD|Grizzlies": {
    "sport": "NBA",
@@ -283,7 +283,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 8210,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Trail Blazers at Bucks|SPREAD|Bucks +11.5": {
    "sport": "NBA",
@@ -295,12 +295,14 @@
    "firstPrice": "-100",
    "tags": [
     "STRONG_UNOPPOSED",
-    "SIZED_15X"
+    "SIZED_15X",
+    "STRONG_VS_STRONG",
+    "SIZED_UP"
    ],
    "maxVsUsual": 1.9,
-   "maxDollars": 3151,
-   "opposedSeen": false,
-   "snapshots": 4
+   "maxDollars": 9509,
+   "opposedSeen": true,
+   "snapshots": 7
   },
   "Clippers at Spurs|TOTAL|Under 225.5": {
    "sport": "NBA",
@@ -425,12 +427,13 @@
    "firstSeenAt": "2026-11-20T01:26:33.761Z",
    "firstPrice": "-108",
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
    ],
-   "maxVsUsual": 1,
+   "maxVsUsual": 1.3,
    "maxDollars": 10400,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Trail Blazers at Bucks|SPREAD|Bucks": {
    "sport": "NBA",
@@ -465,7 +468,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 7410,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 9
   },
   "Clippers at Spurs|ML|Spurs": {
    "sport": "NBA",
@@ -482,7 +485,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2759,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Oilers at Lightning|ML|Oilers": {
    "sport": "NHL",
@@ -514,7 +517,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 1782,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Ducks at Avalanche|ML|Avalanche": {
    "sport": "NHL",
@@ -531,7 +534,39 @@
    "maxVsUsual": 5.8,
    "maxDollars": 25199,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
+  },
+  "Trail Blazers at Bucks|SPREAD|Trail Blazers -10.5": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Bucks",
+   "market": "SPREAD",
+   "pick": "Trail Blazers -10.5",
+   "kickoffEt": "Thu, Nov 19, 8:11 PM",
+   "firstSeenAt": "2026-11-20T03:26:27.121Z",
+   "firstPrice": "+117",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.5,
+   "maxDollars": 1610,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Canucks at Kraken|TOTAL|Over 6.5": {
+   "sport": "NHL",
+   "matchup": "Canucks at Kraken",
+   "market": "TOTAL",
+   "pick": "Over 6.5",
+   "kickoffEt": "Thu, Nov 19, 9:48 PM",
+   "firstSeenAt": "2026-11-20T03:26:27.121Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 1357,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }
