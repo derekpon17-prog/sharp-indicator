@@ -109,6 +109,31 @@ const bets = rec => { const m = String(rec || '').match(/^(\d+)-(\d+)/); return 
 
 const R = require('./sf_rules.js');
 const cold = R.cold; // Nov 16 ROI rule plus Nov 17 form gate (see sf_rules.js)
+
+/* Polymarket wallet rows (Derek, Nov 20 2026). poly_matches.json is written by scripts/poly_match.js earlier in the same
+   workflow run: classified Polymarket wallets (wallets.json HOT/COLD, judged only in the sport they are classified in)
+   that bought one side of a game on this card. Shown ONLY when a match exists - no match, no Poly row and no
+   POLYMARKET tag. Display only: never changes the verdict, confidence or money bar, which stay Sharp Flow's. */
+let POLY = []; try { POLY = JSON.parse(fs.readFileSync(OUT + '/poly_matches.json', 'utf8')).matches || []; } catch {}
+function polyFor(sp, matchup, grp, r) {
+  const ms = POLY.filter(m => m.sport === sp && m.matchup === matchup && m.grp === grp);
+  if (!ms.length) return { for: r.for, against: r.against, sources: ['SHARP FLOW'] };
+  const label = side => grp === 'total' ? side : String(side).toUpperCase();
+  const row = m => ({ src: 'POLYMARKET', team: m.side, wallet: m.name, market: m.market, record: m.rec, roi: m.roi, dollars: m.usd,
+    note: ['Polymarket', m.recScope, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' · '),
+    status: m.twoSided ? { t: 'POLY TWO-SIDED - not counted', c: 'grey' }
+      : m.cls === 'HOT' ? (m.sameAsSF ? { t: 'POLY HOT - same wallet, not a 2nd source', c: 'grey' } : { t: 'POLY HOT', c: 'green' })
+      : { t: 'POLY COLD - fade flag', c: 'red' } });
+  const f = r.for ? { ...r.for, rows: [...(r.for.rows || [])] } : null;
+  let a = r.against ? { ...r.against, rows: [...(r.against.rows || [])] } : null;
+  for (const m of ms.sort((x, y) => y.usd - x.usd)) {
+    const t = label(m.side);
+    if (f && f.team === t) f.rows.push(row(m));
+    else if (a && a.team === t) a.rows.push(row(m));
+    else if (!a) a = { team: t, rows: [row(m)] };
+  }
+  return { for: f, against: a, sources: ['SHARP FLOW', 'POLYMARKET'] };
+}
 function buildCards(sp, latest, flags, before) { // before: optional Date - only include tickets starting earlier than this (for an outlier/one-off card, so it doesn't swallow the main slate too)
   const tickets = (latest.tickets || []).filter(t => t.sport === sp).map(t => ({ ...t, st: startUtc(t.kickoffEt) })).filter(t => t.st && t.st > now && (!before || t.st < before));
   const games = {};
@@ -147,9 +172,10 @@ function buildCards(sp, latest, flags, before) { // before: optional Date - only
     const tix = tickets.filter(t => t.matchup === s.matchup && grpOf(t.market) === grpOf(s.market));
     const r = R.matchupRow(sp, tix, grpOf(s.market)); if (!r) continue;
     const star = sides.some(x => x.matchup === s.matchup && grpOf(x.market) === grpOf(s.market) && x.tail);
-    rows.push({ st: s.st, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, bet: (star ? '★ ' : '') + r.bet,
-      price: r.price, for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout,
-      footerLabel: 'SHARP FLOW READ' });
+    const pv = polyFor(sp, s.matchup, grpOf(s.market), r);
+    rows.push({ st: s.st, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, sources: pv.sources, bet: (star ? '★ ' : '') + r.bet,
+      price: r.price, for: pv.for, against: pv.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout,
+      footerLabel: pv.sources.length > 1 ? 'SHARP FLOW + POLYMARKET READ' : 'SHARP FLOW READ' });
   }
   rows.sort((a, b) => b.confidence - a.confidence || a.st - b.st); // Derek, Nov 18: order by confidence, not kickoff time
   const data = sides.map(s => ({ game: s.matchup, market: s.market, pick: s.pick, start_utc: s.st.toISOString(), dollars: s.dollars, opp_dollars: s.oppD, wallets: s.wallets,

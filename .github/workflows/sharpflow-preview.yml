@@ -40,6 +40,14 @@ jobs:
           mkdir sf_branch && cd sf_branch && git init -q
           git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           if git fetch -q --depth 20 origin sharpflow; then git checkout -q -B sharpflow FETCH_HEAD; else git checkout -q --orphan sharpflow; fi
+      - name: Polymarket wallet matches (Derek, Nov 20 2026)
+        # Classified Polymarket wallets (wallets branch, wallets.json HOT/COLD per sport) that bought a side of a game
+        # on today's SharpFlow snapshot -> sf_branch/poly_matches.json. Read by the card build below and by the
+        # Sharp Signals window tasks for the slate card. Never fails the run: on any error the file records it.
+        continue-on-error: true
+        run: |
+          git fetch -q --depth 1 origin wallets && git show FETCH_HEAD:wallets/wallets.json > wallets.json || echo '{}' > wallets.json
+          node scripts/poly_match.js sf_branch wallets.json sf_branch/poly_matches.json
       - name: Which sports are due
         id: plan
         env:
@@ -60,8 +68,9 @@ jobs:
         run: |
           node scripts/sharpflow_preview.js
           for f in cards/*.json; do [ -f "$f" ] && { echo "== $f"; head -c 3000 "$f"; echo; }; done; true
-      - name: Publish sharpflow branch (snapshot + posted marker)
-        if: steps.go.outputs.due != ''
+      - name: Publish sharpflow branch (snapshot + posted marker + poly_matches.json)
+        # Runs every time now (not only when a card was due) so poly_matches.json stays fresh for the window tasks.
+        if: always() && github.event.inputs.dry_run != 'yes'
         run: |
           cd sf_branch
           git config user.name "sharpflow-logger"; git config user.email "sharpflow-logger@users.noreply.github.com"
