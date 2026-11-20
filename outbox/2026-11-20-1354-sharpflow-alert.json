@@ -1,0 +1,279 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 4 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 1:11pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 5:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Iowa State at UCF",
+       "time": "5:00pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "bet": "UCF vs Iowa State",
+       "price": null,
+       "for": {
+        "team": "UCF",
+        "rows": [
+         {
+          "team": "UCF",
+          "wallet": "AC",
+          "market": "SPREAD",
+          "record": "15-6",
+          "roi": 48.5,
+          "dollars": 11676,
+          "note": "1.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "IOWA STATE",
+        "rows": [
+         {
+          "team": "Iowa State",
+          "wallet": "AB",
+          "market": "ML",
+          "record": "6-8",
+          "roi": 20.6,
+          "dollars": 3000,
+          "note": "1.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "UCF",
+         "dollars": 11676,
+         "pct": 80,
+         "c": "green"
+        },
+        {
+         "team": "IOWA STATE",
+         "dollars": 3000,
+         "pct": 20,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "NEW $12K on UCF +1.5"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Magic at Nets",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total 225.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "O",
+          "market": "TOTAL",
+          "record": "6-3",
+          "roi": 74.1,
+          "dollars": 2800,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 2800,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $2.8K on Under 225.5"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pelicans at Thunder",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total 229.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "O",
+          "market": "TOTAL",
+          "record": "6-3",
+          "roi": 74.1,
+          "dollars": 2757,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 2757,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $2.8K on Under 229.5"
+      },
+      {
+       "eyebrow": "Wizards at Bulls",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Bulls vs Wizards",
+       "price": null,
+       "for": {
+        "team": "BULLS",
+        "rows": [
+         {
+          "team": "Bulls",
+          "wallet": "R",
+          "market": "SPREAD",
+          "record": "2-0",
+          "roi": 109.4,
+          "dollars": 2000,
+          "note": "0.9x usual, only 2 bets here",
+          "status": {
+           "t": "THIN - 2 bets here",
+           "c": "grey"
+          }
+         },
+         {
+          "team": "Bulls",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 1023,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "WIZARDS",
+        "rows": [
+         {
+          "team": "Wizards",
+          "wallet": "O",
+          "market": "SPREAD",
+          "record": "7-4",
+          "roi": -3,
+          "dollars": 5100,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Wizards",
+          "wallet": "O",
+          "market": "ML",
+          "record": "7-5",
+          "roi": -8.2,
+          "dollars": 4178,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Wizards",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 980,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BULLS",
+         "dollars": 3023,
+         "pct": 23,
+         "c": "green"
+        },
+        {
+         "team": "WIZARDS",
+         "dollars": 10258,
+         "pct": 77,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $3K on Bulls"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
