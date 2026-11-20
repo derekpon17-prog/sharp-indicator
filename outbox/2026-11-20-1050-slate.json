@@ -1,0 +1,14 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · MIDDAY · Fri Nov 20** · games 12:00pm to 2:59pm CT (4 games)",
+ "slate": {
+  "title": "Midday plays",
+  "stamp": "FRI NOV 20 · 10:52AM",
+  "sources": "Pinnacle 10:50am CT - Vegas 10:51am CT (CBB) - SharpFlow 10:05am CT (no ticket on these games) - Novig not read",
+  "sf_current": true,
+  "footer": "Midday window: games starting 12:00 to 2:59pm CT. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {"sport": "NCAAB", "game": "GW@UAB", "market": "SPREAD", "side": "UAB", "line": 9.5, "price": -115, "bet": "UAB +9.5", "matchup": "NCAAB - GW @ UAB - 1:00pm CT", "buckets": ["PIN_STRONG"], "first_seen": "10:50", "pin_tier": "Strong", "pin_status": "Stable"}
+  ]
+ }
+}
