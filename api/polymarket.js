@@ -54,10 +54,74 @@ function formatLeaderboard(lb, category) {
   }));
 }
 
+// FEATURE 2026-11-20 (per Derek): folded in here rather than a new api/ file, because
+// the Hobby plan caps Vercel at 12 Serverless Functions per deployment and this repo's
+// api/ directory was already at exactly 12 - a 13th file (api/poly-wallet-buys.js,
+// tried first) made every deploy error with exceeded_serverless_functions_per_deployment.
+// That is also the likely real cause behind main sitting un-deployed for the last few
+// commits (see RUNBOOK_SLATE.md) - worth a from-scratch check once this ships clean.
+//
+// WHY. The leaderboard-based fetchWalletBuys above only ever covers the top-20
+// OVERALL/SPORTS wallets. There was no way to ask "what has THIS SPECIFIC wallet
+// bought recently" - needed to check whether one of our classified HOT wallets
+// (wallets branch, wallets.json confirmed_sharp per sport) is on one of tonight's
+// SharpFlow sides.
+//
+// GET /api/polymarket?wallets=0xabc,0xdef&limit=25
+//   -> { results: [{ wallet, ok, buys: [...], error? }], fetchedAt }
+// Each buy: { title, slug, eventSlug, outcome, side, size, price, usdValue, timestamp,
+//             conditionId, transactionHash }. Matching these against SharpFlow team
+// names is the caller's job, not this endpoint's - same split as api/kalshi.js's
+// matchGame() being separate from fetchSeries().
+const MAX_WALLETS_LOOKUP = 40;
+const WALLET_BATCH = 6;
+
+async function fetchWalletBuysByWallet(wallet, limit) {
+  const url = `${DATA_API}/trades?user=${wallet}&side=BUY&takerOnly=true&limit=${limit}`;
+  try {
+    const r = await fetch(url);
+    if (!r.ok) {
+      const body = await r.text().catch(() => '');
+      return { ok: false, status: r.status, body: body.slice(0, 300), buys: [] };
+    }
+    const data = await r.json();
+    if (!Array.isArray(data)) return { ok: false, status: r.status, body: 'response was not an array', buys: [] };
+    const buys = data.map(t => ({
+      title: t.title || null, slug: t.slug || null, eventSlug: t.eventSlug || null,
+      outcome: t.outcome || null, side: t.side || null, size: t.size, price: t.price,
+      usdValue: (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0),
+      timestamp: t.timestamp, conditionId: t.conditionId || null,
+      transactionHash: t.transactionHash || null,
+    }));
+    return { ok: true, status: r.status, buys };
+  } catch (err) {
+    return { ok: false, networkError: err.message, buys: [] };
+  }
+}
+
+async function handleWalletLookup(req, res) {
+  const raw = String(req.query.wallets || '').trim();
+  const wallets = raw.split(',').map(w => w.trim()).filter(Boolean).slice(0, MAX_WALLETS_LOOKUP);
+  const limit = Math.max(1, Math.min(100, parseInt(req.query.limit, 10) || 25));
+
+  const results = [];
+  for (let i = 0; i < wallets.length; i += WALLET_BATCH) {
+    const batch = wallets.slice(i, i + WALLET_BATCH);
+    const batchResults = await Promise.all(batch.map(w => fetchWalletBuysByWallet(w, limit)));
+    batch.forEach((w, j) => {
+      const r = batchResults[j];
+      results.push({ wallet: w, ok: r.ok, buys: r.buys, ...(r.ok ? {} : { error: r.networkError || `HTTP ${r.status}: ${r.body}` }) });
+    });
+  }
+  res.status(200).json({ results, walletsRequested: wallets.length, fetchedAt: Date.now() });
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
+
+  if (req.query.wallets) return handleWalletLookup(req, res);
 
   try {
     // Pull both leaderboards in parallel
