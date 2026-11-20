@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T15:12:26.688Z",
+ "scannedAt": "2026-11-20T16:05:22.200Z",
  "sides": [
   {
    "tail": true,
@@ -31,27 +31,26 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Pacers at Cavaliers",
-   "market": "ML",
-   "pick": "Cavaliers",
-   "kickoffEt": "Fri, Nov 20, 7:40 PM",
-   "dollars": 1324,
+   "sport": "CBB",
+   "matchup": "Bakersfield Roadrunners at Idaho Vandals",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": null,
+   "dollars": 2702,
    "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 2.2,
-   "price": "-245",
+   "wallets": 1,
+   "maxVsUsual": 1.7,
    "size": "1.5x and up",
-   "mktRecord": "9-3",
-   "mktRoi": 32.9,
-   "l30Roi": 21.3,
+   "mktRecord": "17-9",
+   "mktRoi": 44.3,
+   "l30Roi": 43.8,
    "contested": false,
-   "sfPoints": 27,
+   "sfPoints": 24,
    "parts": {
-    "money": 4,
-    "sizing": 10,
+    "money": 8,
+    "sizing": 7,
     "quality": 6,
-    "pooled": 4,
+    "pooled": 0,
     "unopposed": 3,
     "contested": 0
    }
@@ -79,33 +78,6 @@
     "sizing": 7,
     "quality": 4,
     "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Raptors at Pistons",
-   "market": "TOTAL",
-   "pick": "Over 217.5",
-   "kickoffEt": "Fri, Nov 20, 7:40 PM",
-   "dollars": 1501,
-   "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 1.6,
-   "price": "+113",
-   "size": "0.5x",
-   "mktRecord": "6-3",
-   "mktRoi": 20.7,
-   "l30Roi": 46.3,
-   "contested": false,
-   "sfPoints": 22,
-   "parts": {
-    "money": 4,
-    "sizing": 7,
-    "quality": 4,
-    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -403,6 +375,21 @@
    "maxVsUsual": 1.6
   },
   {
+   "matchup": "Bakersfield Roadrunners at Idaho Vandals",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": null,
+   "sport": "CBB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 2702,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "18-10|7729|17-9"
+   ],
+   "maxVsUsual": 1.7
+  },
+  {
    "matchup": "Wizards at Bulls",
    "market": "SPREAD",
    "pick": "Bulls -3.5",
@@ -436,6 +423,22 @@
    "mktRoi": 35,
    "opposed": "unopposed",
    "fp": "22-11|23241|10-8"
+  },
+  {
+   "matchup": "Bakersfield Roadrunners at Idaho Vandals",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": null,
+   "sport": "CBB",
+   "dollars": 2702,
+   "vsUsual": 1.7,
+   "size": "1.5x and up",
+   "form": "L10 7-3",
+   "l30Roi": 43.8,
+   "mktRecord": "17-9",
+   "mktRoi": 44.3,
+   "opposed": "unopposed",
+   "fp": "18-10|7729|17-9"
   },
   {
    "matchup": "Buccaneers at Lions",
