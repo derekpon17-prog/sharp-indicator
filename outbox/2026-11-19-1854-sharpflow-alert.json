@@ -1,0 +1,264 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 4 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:14pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Warriors at Grizzlies",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "bet": "Under 227.5 -116",
+       "price": "-116",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "A",
+          "market": "TOTAL",
+          "record": "5-3",
+          "roi": 73.2,
+          "dollars": 8061,
+          "note": "0.7x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Under",
+          "wallet": "E",
+          "market": "TOTAL",
+          "record": "25-17",
+          "roi": 18.8,
+          "dollars": 2999,
+          "note": "1.3x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 11060,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 25-17 (+19% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $3K to $11K"
+      },
+      {
+       "eyebrow": "Clippers at Spurs",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "bet": "Under 225.5 -106",
+       "price": "-106",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "E",
+          "market": "TOTAL",
+          "record": "25-17",
+          "roi": 18.8,
+          "dollars": 2999,
+          "note": "1.3x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 2999,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 25-17 (+19% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $3K on Under 225.5"
+      },
+      {
+       "eyebrow": "Trail Blazers at Bucks",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Bucks vs Trail Blazers",
+       "price": null,
+       "for": {
+        "team": "BUCKS",
+        "rows": [
+         {
+          "team": "Bucks",
+          "wallet": "A",
+          "market": "SPREAD",
+          "record": "5-3",
+          "roi": -11.7,
+          "dollars": 5200,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Bucks",
+          "wallet": "AA",
+          "market": "SPREAD",
+          "record": "6-1",
+          "roi": 59.9,
+          "dollars": 3151,
+          "note": "1.9x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "TRAIL BLAZERS",
+        "rows": [
+         {
+          "team": "Trail Blazers",
+          "wallet": "A",
+          "market": "ML",
+          "record": "5-3",
+          "roi": -5.3,
+          "dollars": 2597,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BUCKS",
+         "dollars": 8351,
+         "pct": 76,
+         "c": "gold"
+        },
+        {
+         "team": "TRAIL BLAZERS",
+         "dollars": 2597,
+         "pct": 24,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $3.2K on Bucks +11.5"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 8:50PM CT",
+     "picks": [
+      {
+       "eyebrow": "Canucks at Kraken",
+       "time": "8:50pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Kraken vs Canucks",
+       "price": null,
+       "for": {
+        "team": "KRAKEN",
+        "rows": [
+         {
+          "team": "Kraken",
+          "wallet": "A",
+          "market": "ML",
+          "record": "3-2",
+          "roi": 43.7,
+          "dollars": 83575,
+          "note": "19.2x usual, L10 5-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "CANUCKS",
+        "rows": [
+         {
+          "team": "Canucks",
+          "wallet": "I",
+          "market": "ML",
+          "record": "4-4",
+          "roi": 33,
+          "dollars": 25906,
+          "note": "0.6x usual, L10 5-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "KRAKEN",
+         "dollars": 83575,
+         "pct": 76,
+         "c": "green"
+        },
+        {
+         "team": "CANUCKS",
+         "dollars": 25906,
+         "pct": 24,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "GREW $45K to $84K"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
