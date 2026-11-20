@@ -1,5 +1,5 @@
 {
- "at": "2026-11-20T22:54:13.722Z",
+ "at": "2026-11-20T23:53:39.159Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -10,7 +10,7 @@
    "side": "Under",
    "market": "TOTAL",
    "cls": "HOT",
-   "startUtc": "2026-11-20T22:00:00.000Z",
+   "startUtc": "2026-11-20T22:05:00.000Z",
    "gameDate": "2026-11-20",
    "conditionId": "0x9fd52ead48856a342a657f91d4484aaa6358fec8daad53e699d5ba6ef8b8729d",
    "outcome": "Under",
@@ -28,13 +28,47 @@
    "roi": 38.3,
    "n": 76,
    "recScope": "NCAAF TOTAL, last 45 days",
-   "twoSided": false,
+   "twoSided": true,
    "sameAsSF": null,
    "l10": {
     "w": 4,
     "l": 6,
     "n": 10,
     "txt": "L10 NCAAF 4-6"
+   }
+  },
+  {
+   "sport": "CFB",
+   "matchup": "Iowa State at UCF",
+   "grp": "total",
+   "side": "Under",
+   "market": "TOTAL",
+   "cls": "COLD",
+   "startUtc": "2026-11-20T22:05:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x9fd52ead48856a342a657f91d4484aaa6358fec8daad53e699d5ba6ef8b8729d",
+   "outcome": "Under",
+   "gradeTitle": "Iowa State vs. UCF: O/U 49.5",
+   "gradePrice": 0.48,
+   "onCard": false,
+   "wallet": "0x4bff30af91642dc7d2b19a8664378fe55c45fc26",
+   "name": "Sassy-Bucket",
+   "usd": 8501,
+   "fills": 1,
+   "avgPrice": 0.48,
+   "lastBuyUtc": "2026-11-20T22:55:47.000Z",
+   "title": "Iowa State vs. UCF: O/U 49.5",
+   "rec": "9-16",
+   "roi": -40.7,
+   "n": 25,
+   "recScope": "NCAAF TOTAL, last 45 days",
+   "twoSided": false,
+   "sameAsSF": null,
+   "l10": {
+    "w": 3,
+    "l": 7,
+    "n": 10,
+    "txt": "L10 NCAAF 3-7"
    }
   },
   {
@@ -64,7 +98,7 @@
    "recScope": "NCAAF ML, last 45 days",
    "twoSided": false,
    "sameAsSF": {
-    "sfWallet": "K",
+    "sfWallet": "L",
     "sfDollars": 8210
    },
    "l10": {
@@ -359,7 +393,7 @@
    "outcome": "Under",
    "gradeTitle": "Hornets vs. Hawks: O/U 218.5",
    "gradePrice": 0.48,
-   "onCard": true,
+   "onCard": false,
    "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
    "name": "justwins",
    "usd": 20615,
@@ -393,7 +427,7 @@
    "outcome": "Under",
    "gradeTitle": "Hornets vs. Hawks: O/U 219.5",
    "gradePrice": 0.51,
-   "onCard": true,
+   "onCard": false,
    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
    "name": "ic4cream",
    "usd": 1441,
@@ -713,7 +747,7 @@
    "recScope": "NBA TOTAL, last 45 days",
    "twoSided": false,
    "sameAsSF": {
-    "sfWallet": "D",
+    "sfWallet": "E",
     "sfDollars": 937
    },
    "l10": {
@@ -722,48 +756,11 @@
     "n": 10,
     "txt": "L10 NBA 10-0"
    }
-  },
-  {
-   "sport": "CFB",
-   "matchup": "Colorado State at Fresno State",
-   "grp": "total",
-   "side": "Over",
-   "market": "TOTAL",
-   "cls": "HOT",
-   "startUtc": "2026-11-21T23:30:00.000Z",
-   "gameDate": "2026-11-21",
-   "conditionId": "0x50f570c8c6b15d2bf396a7cfb12f80a22395cdeeccb231f62f4a2ed08f57c56d",
-   "outcome": "Over",
-   "gradeTitle": "Colorado State vs. Fresno State: O/U 65.5",
-   "gradePrice": 0.4706,
-   "onCard": true,
-   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "name": "ic4cream",
-   "usd": 810,
-   "fills": 1,
-   "avgPrice": 0.471,
-   "lastBuyUtc": "2026-11-16T20:39:43.000Z",
-   "title": "Colorado State vs. Fresno State: O/U 65.5",
-   "rec": "44-32",
-   "roi": 38.3,
-   "n": 76,
-   "recScope": "NCAAF TOTAL, last 45 days",
-   "twoSided": false,
-   "sameAsSF": {
-    "sfWallet": "K",
-    "sfDollars": 810
-   },
-   "l10": {
-    "w": 4,
-    "l": 6,
-    "n": 10,
-    "txt": "L10 NCAAF 4-6"
-   }
   }
  ],
  "errors": [],
  "rosterGeneratedAt": "2026-11-20T22:50:55.252Z",
- "sfScannedAt": "2026-11-20T22:12:07.691Z",
- "games": 15,
+ "sfScannedAt": "2026-11-20T23:02:34.154Z",
+ "games": 17,
  "walletsChecked": 66
 }
