@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T20:14:59.418Z",
+ "scannedAt": "2026-11-20T20:41:50.656Z",
  "sides": [
   {
    "tail": true,
@@ -354,33 +354,6 @@
   {
    "tail": false,
    "sport": "NBA",
-   "matchup": "Magic at Nets",
-   "market": "TOTAL",
-   "pick": "Under 225.5",
-   "kickoffEt": "Fri, Nov 20, 7:40 PM",
-   "dollars": 2800,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.4,
-   "price": "-127",
-   "size": "under 0.5x",
-   "mktRecord": "6-3",
-   "mktRoi": 74.1,
-   "l30Roi": 7.3,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
    "matchup": "Pelicans at Thunder",
    "market": "TOTAL",
    "pick": "Under 229.5",
@@ -434,6 +407,60 @@
   },
   {
    "tail": false,
+   "sport": "CFB",
+   "matchup": "Colorado at Cincinnati",
+   "market": "ML",
+   "pick": "Colorado",
+   "kickoffEt": "Sat, Nov 21, 12:00 PM",
+   "dollars": 1624,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.2,
+   "price": "+144",
+   "size": "under 0.5x",
+   "mktRecord": "4-3",
+   "mktRoi": 34.9,
+   "l30Roi": 48.6,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Raptors at Pistons",
+   "market": "TOTAL",
+   "pick": "Over 217.5",
+   "kickoffEt": "Fri, Nov 20, 7:40 PM",
+   "dollars": 1077,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "+113",
+   "size": "0.5x",
+   "mktRecord": "6-3",
+   "mktRoi": 20.7,
+   "l30Roi": 46.3,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NBA",
    "matchup": "Wizards at Bulls",
    "market": "SPREAD",
@@ -466,15 +493,42 @@
    "market": "ML",
    "pick": "Wild",
    "kickoffEt": "Sat, Nov 21, 10:00 PM",
-   "dollars": 1254,
+   "dollars": 1480,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 0.4,
+   "maxVsUsual": 0.5,
    "price": "-270",
    "size": "under 0.5x",
    "mktRecord": "10-2",
    "mktRoi": 12.3,
    "l30Roi": 24.3,
+   "contested": false,
+   "sfPoints": 7,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Magic at Nets",
+   "market": "TOTAL",
+   "pick": "Under 222.5",
+   "kickoffEt": "Fri, Nov 20, 7:40 PM",
+   "dollars": 1076,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.1,
+   "price": "+104",
+   "size": "under 0.5x",
+   "mktRecord": "6-3",
+   "mktRoi": 74.1,
+   "l30Roi": 7.3,
    "contested": false,
    "sfPoints": 7,
    "parts": {
@@ -610,6 +664,38 @@
     "18-10|7729|17-9"
    ],
    "maxVsUsual": 2.4
+  },
+  {
+   "matchup": "Colorado at Cincinnati",
+   "market": "ML",
+   "pick": "Colorado",
+   "kickoffEt": "Sat, Nov 21, 12:00 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 1624,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "22-11|157262|4-3"
+   ],
+   "bestPrice": "+144",
+   "maxVsUsual": 0.2
+  },
+  {
+   "matchup": "Raptors at Pistons",
+   "market": "TOTAL",
+   "pick": "Over 217.5",
+   "kickoffEt": "Fri, Nov 20, 7:40 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 1077,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "14-5|14645|6-3"
+   ],
+   "bestPrice": "+113",
+   "maxVsUsual": 0.6
   }
  ],
  "sizedUp": [
