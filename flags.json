@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T13:15:34.031Z",
+ "scannedAt": "2026-11-20T14:07:16.870Z",
  "sides": [
   {
    "tail": true,
@@ -84,6 +84,33 @@
   },
   {
    "tail": false,
+   "sport": "CFB",
+   "matchup": "Iowa State at UCF",
+   "market": "ML",
+   "pick": "Iowa State",
+   "kickoffEt": "Fri, Nov 20, 6:00 PM",
+   "dollars": 3000,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.4,
+   "price": "-100",
+   "size": "1x",
+   "mktRecord": "6-8",
+   "mktRoi": 20.6,
+   "l30Roi": 38.6,
+   "contested": false,
+   "sfPoints": 19,
+   "parts": {
+    "money": 8,
+    "sizing": 4,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Saints at Bears",
    "market": "SPREAD",
@@ -139,6 +166,33 @@
   {
    "tail": false,
    "sport": "NBA",
+   "matchup": "Hornets at Hawks",
+   "market": "ML",
+   "pick": "Hawks",
+   "kickoffEt": "Fri, Nov 20, 7:10 PM",
+   "dollars": 1940,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.4,
+   "price": "-203",
+   "size": "under 0.5x",
+   "mktRecord": "71-56",
+   "mktRoi": 38.2,
+   "l30Roi": 15.8,
+   "contested": false,
+   "sfPoints": 13,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
    "matchup": "Pelicans at Thunder",
    "market": "SPREAD",
    "pick": "Thunder -11.5",
@@ -189,6 +243,33 @@
     "unopposed": 0,
     "contested": -8
    }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Wizards at Bulls",
+   "market": "SPREAD",
+   "pick": "Bulls -3.5",
+   "kickoffEt": "Fri, Nov 20, 8:10 PM",
+   "dollars": 1023,
+   "oppDollars": 980,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "+113",
+   "size": "0.5x",
+   "mktRecord": "8-2",
+   "mktRoi": 61.7,
+   "l30Roi": 46.3,
+   "contested": true,
+   "sfPoints": 2,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
   }
  ],
  "flags": [
@@ -209,6 +290,22 @@
    "maxVsUsual": 1.8
   },
   {
+   "matchup": "Iowa State at UCF",
+   "market": "ML",
+   "pick": "Iowa State",
+   "kickoffEt": "Fri, Nov 20, 6:00 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 3000,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "31-12|38166|6-8"
+   ],
+   "bestPrice": "-100",
+   "maxVsUsual": 1.4
+  },
+  {
    "matchup": "Buccaneers at Lions",
    "market": "TOTAL",
    "pick": "Over 46.5",
@@ -223,6 +320,22 @@
    ],
    "bestPrice": "+104",
    "maxVsUsual": 1.6
+  },
+  {
+   "matchup": "Wizards at Bulls",
+   "market": "SPREAD",
+   "pick": "Bulls -3.5",
+   "kickoffEt": "Fri, Nov 20, 8:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_VS_OTHER",
+   "strongDollars": 1023,
+   "oppDollars": 980,
+   "oppWeakDollars": 0,
+   "fp": [
+    "14-5|14645|8-2"
+   ],
+   "bestPrice": "+113",
+   "maxVsUsual": 0.6
   }
  ],
  "sizedUp": [
@@ -259,6 +372,23 @@
    "mktRoi": 46.5,
    "opposed": "unopposed",
    "fp": "9-3|12622|6-3"
+  },
+  {
+   "matchup": "Iowa State at UCF",
+   "market": "ML",
+   "pick": "Iowa State",
+   "kickoffEt": "Fri, Nov 20, 6:00 PM",
+   "sport": "CFB",
+   "dollars": 3000,
+   "price": "-100",
+   "vsUsual": 1.4,
+   "size": "1x",
+   "form": "L10 6-4",
+   "l30Roi": 38.6,
+   "mktRecord": "6-8",
+   "mktRoi": 20.6,
+   "opposed": "unopposed",
+   "fp": "31-12|38166|6-8"
   },
   {
    "matchup": "Saints at Bears",
