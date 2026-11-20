@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T14:07:16.870Z",
+ "scannedAt": "2026-11-20T15:12:26.688Z",
  "sides": [
   {
    "tail": true,
@@ -31,6 +31,33 @@
   },
   {
    "tail": false,
+   "sport": "NBA",
+   "matchup": "Pacers at Cavaliers",
+   "market": "ML",
+   "pick": "Cavaliers",
+   "kickoffEt": "Fri, Nov 20, 7:40 PM",
+   "dollars": 1324,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 2.2,
+   "price": "-245",
+   "size": "1.5x and up",
+   "mktRecord": "9-3",
+   "mktRoi": 32.9,
+   "l30Roi": 21.3,
+   "contested": false,
+   "sfPoints": 27,
+   "parts": {
+    "money": 4,
+    "sizing": 10,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Buccaneers at Lions",
    "market": "TOTAL",
@@ -52,6 +79,33 @@
     "sizing": 7,
     "quality": 4,
     "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Raptors at Pistons",
+   "market": "TOTAL",
+   "pick": "Over 217.5",
+   "kickoffEt": "Fri, Nov 20, 7:40 PM",
+   "dollars": 1501,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 1.6,
+   "price": "+113",
+   "size": "0.5x",
+   "mktRecord": "6-3",
+   "mktRoi": 20.7,
+   "l30Roi": 46.3,
+   "contested": false,
+   "sfPoints": 22,
+   "parts": {
+    "money": 4,
+    "sizing": 7,
+    "quality": 4,
+    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -104,6 +158,33 @@
     "money": 8,
     "sizing": 4,
     "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "Bowling Green at Toledo",
+   "market": "TOTAL",
+   "pick": "Under 47.5",
+   "kickoffEt": "Fri, Nov 20, 7:30 PM",
+   "dollars": 2999,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.4,
+   "price": "-112",
+   "size": "1x",
+   "mktRecord": "21-23",
+   "mktRoi": -8.9,
+   "l30Roi": 38.6,
+   "contested": false,
+   "sfPoints": 15,
+   "parts": {
+    "money": 8,
+    "sizing": 4,
+    "quality": 0,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -389,6 +470,23 @@
    "mktRoi": 20.6,
    "opposed": "unopposed",
    "fp": "31-12|38166|6-8"
+  },
+  {
+   "matchup": "Bowling Green at Toledo",
+   "market": "TOTAL",
+   "pick": "Under 47.5",
+   "kickoffEt": "Fri, Nov 20, 7:30 PM",
+   "sport": "CFB",
+   "dollars": 2999,
+   "price": "-112",
+   "vsUsual": 1.4,
+   "size": "1x",
+   "form": "L10 6-4",
+   "l30Roi": 38.6,
+   "mktRecord": "21-23",
+   "mktRoi": -8.9,
+   "opposed": "unopposed",
+   "fp": "31-12|38166|21-23"
   },
   {
    "matchup": "Saints at Bears",

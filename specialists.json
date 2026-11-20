@@ -1,7 +1,238 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T14:07:16.870Z",
+ "scannedAt": "2026-11-20T15:12:26.688Z",
  "sports": {
+  "CFB": [
+   {
+    "id": "bc44b0",
+    "gap": 6.1,
+    "overall": "260-222",
+    "sport": "39-26",
+    "returnPct": 21.6,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Texas Tech at Baylor",
+      "market": "ML",
+      "pick": "Texas Tech",
+      "line": null,
+      "price": "-182",
+      "dollars": 8210,
+      "vsUsual": 1.8,
+      "vsUsualAll": 3.4
+     },
+     {
+      "matchup": "Colorado State at Fresno State",
+      "market": "TOTAL",
+      "pick": "Over 65.5",
+      "line": 65.5,
+      "price": "+112",
+      "dollars": 810,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "51176e",
+    "gap": 1,
+    "overall": "238-199",
+    "sport": "66-53",
+    "returnPct": 9.8,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Iowa State at UCF",
+      "market": "ML",
+      "pick": "Iowa State",
+      "line": null,
+      "price": "-100",
+      "dollars": 3000,
+      "vsUsual": 1.4,
+      "vsUsualAll": 2.6
+     },
+     {
+      "matchup": "Bowling Green at Toledo",
+      "market": "TOTAL",
+      "pick": "Under 47.5",
+      "line": 47.5,
+      "price": "-112",
+      "dollars": 2999,
+      "vsUsual": 1.4,
+      "vsUsualAll": 2.6
+     }
+    ]
+   }
+  ],
+  "NBA": [
+   {
+    "id": "f2f960",
+    "gap": 10.9,
+    "overall": "96-101",
+    "sport": "31-21",
+    "returnPct": 21.3,
+    "last10": "4-6",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Hornets at Hawks",
+      "market": "TOTAL",
+      "pick": "Over 219.5",
+      "line": 219.5,
+      "price": "+106",
+      "dollars": 606,
+      "vsUsual": 1.8,
+      "vsUsualAll": 1.2
+     },
+     {
+      "matchup": "Wizards at Bulls",
+      "market": "TOTAL",
+      "pick": "Over 240.5",
+      "line": 240.5,
+      "price": "+104",
+      "dollars": 875,
+      "vsUsual": 2.6,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Pacers at Cavaliers",
+      "market": "ML",
+      "pick": "Cavaliers",
+      "line": null,
+      "price": "-245",
+      "dollars": 741,
+      "vsUsual": 2.2,
+      "vsUsualAll": 1.4
+     },
+     {
+      "matchup": "Raptors at Pistons",
+      "market": "TOTAL",
+      "pick": "Over 217.5",
+      "line": 217.5,
+      "price": "+108",
+      "dollars": 561,
+      "vsUsual": 1.6,
+      "vsUsualAll": 1.1
+     }
+    ]
+   },
+   {
+    "id": "3bdd7e",
+    "gap": 8.1,
+    "overall": "282-236",
+    "sport": "20-12",
+    "returnPct": 7.3,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Pelicans at Thunder",
+      "market": "SPREAD",
+      "pick": "Thunder -11.5",
+      "line": -11.5,
+      "price": "+104",
+      "dollars": 2217,
+      "vsUsual": 0.3,
+      "vsUsualAll": 25.2
+     }
+    ]
+   },
+   {
+    "id": "5b1e50",
+    "gap": 4.9,
+    "overall": "449-438",
+    "sport": "75-60",
+    "returnPct": 19.5,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Pacers at Cavaliers",
+      "market": "ML",
+      "pick": "Cavaliers",
+      "line": null,
+      "price": "-234",
+      "dollars": 583,
+      "vsUsual": 1.7,
+      "vsUsualAll": 0.4
+     },
+     {
+      "matchup": "Raptors at Pistons",
+      "market": "ML",
+      "pick": "Pistons",
+      "line": null,
+      "price": "-252",
+      "dollars": 625,
+      "vsUsual": 1.8,
+      "vsUsualAll": 0.5
+     }
+    ]
+   },
+   {
+    "id": "f9f262",
+    "gap": 2.3,
+    "overall": "15-6",
+    "sport": "14-5",
+    "returnPct": 46.3,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Wizards at Bulls",
+      "market": "SPREAD",
+      "pick": "Bulls -3.5",
+      "line": -3.5,
+      "price": "+113",
+      "dollars": 1023,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.4
+     },
+     {
+      "matchup": "Wizards at Bulls",
+      "market": "SPREAD",
+      "pick": "Wizards +2.5",
+      "line": 2.5,
+      "price": "+104",
+      "dollars": 980,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.4
+     },
+     {
+      "matchup": "Raptors at Pistons",
+      "market": "TOTAL",
+      "pick": "Over 217.5",
+      "line": 217.5,
+      "price": "+113",
+      "dollars": 940,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.4
+     }
+    ]
+   },
+   {
+    "id": "c911a4",
+    "gap": 0.1,
+    "overall": "300-237",
+    "sport": "75-59",
+    "returnPct": 37.5,
+    "last10": "8-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Hornets at Hawks",
+      "market": "ML",
+      "pick": "Hawks",
+      "line": null,
+      "price": "-203",
+      "dollars": 1940,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.2
+     }
+    ]
+   }
+  ],
   "NFL": [
    {
     "id": "bf28eb",
@@ -103,207 +334,6 @@
       "dollars": 3961,
       "vsUsual": 0.7,
       "vsUsualAll": 1.7
-     }
-    ]
-   }
-  ],
-  "NBA": [
-   {
-    "id": "f2f960",
-    "gap": 10.9,
-    "overall": "96-101",
-    "sport": "31-21",
-    "returnPct": 21.3,
-    "last10": "4-6",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Hornets at Hawks",
-      "market": "TOTAL",
-      "pick": "Over 219.5",
-      "line": 219.5,
-      "price": "+106",
-      "dollars": 606,
-      "vsUsual": 1.8,
-      "vsUsualAll": 1.2
-     },
-     {
-      "matchup": "Wizards at Bulls",
-      "market": "TOTAL",
-      "pick": "Over 240.5",
-      "line": 240.5,
-      "price": "+104",
-      "dollars": 875,
-      "vsUsual": 2.6,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Pacers at Cavaliers",
-      "market": "ML",
-      "pick": "Cavaliers",
-      "line": null,
-      "price": "-245",
-      "dollars": 741,
-      "vsUsual": 2.2,
-      "vsUsualAll": 1.4
-     },
-     {
-      "matchup": "Raptors at Pistons",
-      "market": "TOTAL",
-      "pick": "Over 217.5",
-      "line": 217.5,
-      "price": "+108",
-      "dollars": 561,
-      "vsUsual": 1.6,
-      "vsUsualAll": 1.1
-     }
-    ]
-   },
-   {
-    "id": "3bdd7e",
-    "gap": 8.1,
-    "overall": "282-236",
-    "sport": "20-12",
-    "returnPct": 7.3,
-    "last10": "6-4",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Pelicans at Thunder",
-      "market": "SPREAD",
-      "pick": "Thunder -11.5",
-      "line": -11.5,
-      "price": "+104",
-      "dollars": 2217,
-      "vsUsual": 0.3,
-      "vsUsualAll": 25.2
-     }
-    ]
-   },
-   {
-    "id": "5b1e50",
-    "gap": 4.9,
-    "overall": "449-438",
-    "sport": "75-60",
-    "returnPct": 19.5,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Raptors at Pistons",
-      "market": "ML",
-      "pick": "Pistons",
-      "line": null,
-      "price": "-252",
-      "dollars": 625,
-      "vsUsual": 1.8,
-      "vsUsualAll": 0.5
-     }
-    ]
-   },
-   {
-    "id": "f9f262",
-    "gap": 2.3,
-    "overall": "15-6",
-    "sport": "14-5",
-    "returnPct": 46.3,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Wizards at Bulls",
-      "market": "SPREAD",
-      "pick": "Bulls -3.5",
-      "line": -3.5,
-      "price": "+113",
-      "dollars": 1023,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Wizards at Bulls",
-      "market": "SPREAD",
-      "pick": "Wizards +2.5",
-      "line": 2.5,
-      "price": "+104",
-      "dollars": 980,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.4
-     }
-    ]
-   },
-   {
-    "id": "c911a4",
-    "gap": 0.1,
-    "overall": "300-237",
-    "sport": "75-59",
-    "returnPct": 37.5,
-    "last10": "8-2",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Hornets at Hawks",
-      "market": "ML",
-      "pick": "Hawks",
-      "line": null,
-      "price": "-203",
-      "dollars": 1940,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.2
-     }
-    ]
-   }
-  ],
-  "CFB": [
-   {
-    "id": "bc44b0",
-    "gap": 6.1,
-    "overall": "260-222",
-    "sport": "39-26",
-    "returnPct": 21.6,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Texas Tech at Baylor",
-      "market": "ML",
-      "pick": "Texas Tech",
-      "line": null,
-      "price": "-182",
-      "dollars": 8210,
-      "vsUsual": 1.8,
-      "vsUsualAll": 3.4
-     },
-     {
-      "matchup": "Colorado State at Fresno State",
-      "market": "TOTAL",
-      "pick": "Over 65.5",
-      "line": 65.5,
-      "price": "+112",
-      "dollars": 810,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.3
-     }
-    ]
-   },
-   {
-    "id": "51176e",
-    "gap": 1,
-    "overall": "238-199",
-    "sport": "66-53",
-    "returnPct": 9.8,
-    "last10": "6-4",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Iowa State at UCF",
-      "market": "ML",
-      "pick": "Iowa State",
-      "line": null,
-      "price": "-100",
-      "dollars": 3000,
-      "vsUsual": 1.4,
-      "vsUsualAll": 2.6
      }
     ]
    }
