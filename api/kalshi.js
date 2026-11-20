@@ -653,6 +653,11 @@ module.exports.getKalshi = getKalshi;
 module.exports.kalshiSharpSignals = kalshiSharpSignals;
 module.exports.matchGame = matchGame;
 module.exports.normalizeMarket = normalizeMarket;
+// Exported 2026-11-20 (per Derek) so api/poly-wallet-buys.js callers can match Polymarket
+// market titles/slugs against SharpFlow team names without duplicating this table.
+module.exports.normTeam = normTeam;
+module.exports.teamAliases = teamAliases;
+module.exports.NICKNAME_TO_CITY = NICKNAME_TO_CITY;
 module.exports.compareToPinnacle = compareToPinnacle;
 module.exports.kalshiFee = kalshiFee;
 module.exports.SERIES = SERIES;
