@@ -1,0 +1,190 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 11:13am CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Wizards at Bulls",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - WIZARDS",
+        "icon": "🎯"
+       },
+       "bet": "Wizards ML ++133",
+       "price": "++133",
+       "for": {
+        "team": "WIZARDS",
+        "rows": [
+         {
+          "team": "Wizards",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 980,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Wizards",
+          "wallet": "V",
+          "market": "ML",
+          "record": "8-4",
+          "roi": 23.9,
+          "dollars": 750,
+          "note": "0.9x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "BULLS",
+        "rows": [
+         {
+          "team": "Bulls",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 1023,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "WIZARDS",
+         "dollars": 1730,
+         "pct": 63,
+         "c": "green"
+        },
+        {
+         "team": "BULLS",
+         "dollars": 1023,
+         "pct": 37,
+         "c": "grey"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 8-4 (+24% ROI) on WIZARDS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $750 on Wizards"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pacers at Cavaliers",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "bet": "Total 233.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "D",
+          "market": "TOTAL",
+          "record": "6-3",
+          "roi": 20.7,
+          "dollars": 937,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 937,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $937 on Over 233.5"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 8:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Suns at Jazz",
+       "time": "8:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total 226.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "O",
+          "market": "TOTAL",
+          "record": "6-3",
+          "roi": 74.1,
+          "dollars": 3773,
+          "note": "0.5x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 3773,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $3.8K on Under 226.5"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
