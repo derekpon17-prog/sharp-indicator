@@ -1,0 +1,363 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NBA - first game 6:00pm CT** - 4 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:04pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Hornets at Hawks",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - HAWKS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Hawks ML -203",
+       "price": "-203",
+       "for": {
+        "team": "HAWKS",
+        "rows": [
+         {
+          "team": "Hawks",
+          "wallet": "R",
+          "market": "ML",
+          "record": "71-56",
+          "roi": 38.2,
+          "dollars": 1945,
+          "note": "0.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Hawks",
+          "wallet": "QWUERHAIUKSJNFSNCF",
+          "market": "ML",
+          "record": "54-36",
+          "recLabel": "NBA ML · last 45d record",
+          "roi": 2.3,
+          "dollars": 650,
+          "note": "Polymarket · L10 NBA 9-1",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "HAWKS",
+         "dollars": 1945,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 71-56 (+38% ROI) on HAWKS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Wizards at Bulls",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - WIZARDS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Wizards ML ++133",
+       "price": "++133",
+       "for": {
+        "team": "WIZARDS",
+        "rows": [
+         {
+          "team": "Wizards",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 980,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Wizards",
+          "wallet": "V",
+          "market": "ML",
+          "record": "8-4",
+          "roi": 23.9,
+          "dollars": 750,
+          "note": "0.9x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Wizards",
+          "wallet": "ic4cream",
+          "market": "ML",
+          "record": "62-35",
+          "recLabel": "NBA ML · last 45d record",
+          "roi": -14.5,
+          "dollars": 13621,
+          "note": "Polymarket · L10 NBA 5-5",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "BULLS",
+        "rows": [
+         {
+          "team": "Bulls",
+          "wallet": "Q",
+          "market": "SPREAD",
+          "record": "2-0",
+          "roi": 109.4,
+          "dollars": 2000,
+          "note": "0.9x usual, only 2 bets here",
+          "status": {
+           "t": "THIN - 2 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Bulls",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 1023,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BULLS",
+         "dollars": 3023,
+         "pct": 64,
+         "c": "grey"
+        },
+        {
+         "team": "WIZARDS",
+         "dollars": 1730,
+         "pct": 36,
+         "c": "green"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 8-4 (+24% ROI) on WIZARDS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Raptors at Pistons",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Total 217.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "D",
+          "market": "TOTAL",
+          "record": "6-3",
+          "roi": 20.7,
+          "dollars": 1077,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Over",
+          "wallet": "nehcnehc",
+          "market": "TOTAL",
+          "record": "102-131",
+          "recLabel": "NBA TOTAL · last 45d record",
+          "roi": -10,
+          "dollars": 611,
+          "note": "Polymarket · L10 NBA 3-7",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 1077,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      },
+      {
+       "eyebrow": "Pacers at Cavaliers",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Total 233.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "D",
+          "market": "TOTAL",
+          "record": "6-3",
+          "roi": 20.7,
+          "dollars": 937,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Over",
+          "wallet": "0x09f4…dac0",
+          "market": "TOTAL",
+          "record": "59-42",
+          "recLabel": "NBA TOTAL · last 45d record",
+          "roi": 25,
+          "dollars": 921,
+          "note": "Polymarket · L10 NBA 10-0 · same wallet as Sharp Flow D above",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "Under",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Under",
+          "wallet": "nehcnehc",
+          "market": "TOTAL",
+          "record": "102-131",
+          "recLabel": "NBA TOTAL · last 45d record",
+          "roi": -10,
+          "dollars": 1885,
+          "note": "Polymarket · L10 NBA 3-7",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Under",
+          "wallet": "mhhsw966",
+          "market": "TOTAL",
+          "record": "26-32",
+          "recLabel": "NBA TOTAL · last 45d record",
+          "roi": -19.6,
+          "dollars": 1446,
+          "note": "Polymarket · L10 NBA 5-5",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 937,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Over 218.5 $750 (3-3 here, -9% ROI) | Poly record building: 0 graded since Nov 20 | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
