@@ -1,0 +1,209 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CFB - first game 5:00pm CT** - 3 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CFB - sharp wallets",
+   "subtitle": "Wallets with positive CFB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 2:41pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Texas Tech at Baylor",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "EDGE - TEXAS TECH",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "★ Texas Tech ML -182",
+       "price": "-182",
+       "for": {
+        "team": "TEXAS TECH",
+        "rows": [
+         {
+          "team": "Texas Tech",
+          "wallet": "K",
+          "market": "ML",
+          "record": "10-8",
+          "roi": 35,
+          "dollars": 8210,
+          "note": "1.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Texas Tech",
+          "wallet": "ic4cream",
+          "market": "ML",
+          "record": "30-20",
+          "recLabel": "NCAAF ML · last 45d record",
+          "roi": 13.2,
+          "dollars": 8211,
+          "note": "Polymarket · L10 NCAAF 4-6 · same wallet as Sharp Flow K above",
+          "status": {
+           "t": "POLY HOT - same wallet, not a 2nd source",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TEXAS TECH",
+         "dollars": 8210,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 10-8 (+35% ROI) on TEXAS TECH - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 5:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Iowa State at UCF",
+       "time": "5:00pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "UCF vs Iowa State",
+       "price": null,
+       "for": {
+        "team": "UCF",
+        "rows": [
+         {
+          "team": "UCF",
+          "wallet": "AA",
+          "market": "SPREAD",
+          "record": "15-6",
+          "roi": 48.5,
+          "dollars": 11676,
+          "note": "1.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "IOWA STATE",
+        "rows": [
+         {
+          "team": "Iowa State",
+          "wallet": "Z",
+          "market": "ML",
+          "record": "6-8",
+          "roi": 20.6,
+          "dollars": 3000,
+          "note": "1.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "UCF",
+         "dollars": 11676,
+         "pct": 80,
+         "c": "green"
+        },
+        {
+         "team": "IOWA STATE",
+         "dollars": 3000,
+         "pct": 20,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 11:00AM CT",
+     "picks": [
+      {
+       "eyebrow": "Colorado at Cincinnati",
+       "time": "11:00am CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - COLORADO",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Colorado",
+       "price": null,
+       "for": {
+        "team": "COLORADO",
+        "rows": [
+         {
+          "team": "Colorado",
+          "wallet": "AA",
+          "market": "ML",
+          "record": "4-3",
+          "roi": 34.9,
+          "dollars": 1624,
+          "note": "0.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "COLORADO",
+         "dollars": 1624,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Under 47.5 $3K (21-23 here, -9% ROI) | Poly record building: 0 graded since Nov 20 | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
