@@ -1,0 +1,258 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:12pm CT",
+   "sections": [
+    {
+     "heading": "CBB - 7:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Campbell Fighting Camels at Kansas State Wildcats",
+       "time": "7:00pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "bet": "Over 156.5 ++117",
+       "price": "++117",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "S",
+          "market": "TOTAL",
+          "record": "17-9",
+          "roi": 44.3,
+          "dollars": 879,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 879,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 17-9 (+44% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $879 on Over 156.5"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Wizards at Bulls",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - WIZARDS",
+        "icon": "🎯"
+       },
+       "bet": "Wizards ML ++122",
+       "price": "++122",
+       "for": {
+        "team": "WIZARDS",
+        "rows": [
+         {
+          "team": "Wizards",
+          "wallet": "B",
+          "market": "ML",
+          "record": "12-5",
+          "roi": 41.2,
+          "dollars": 1039,
+          "note": "1.9x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Wizards",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 980,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Wizards",
+          "wallet": "T",
+          "market": "ML",
+          "record": "8-4",
+          "roi": 23.9,
+          "dollars": 750,
+          "note": "0.9x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "BULLS",
+        "rows": [
+         {
+          "team": "Bulls",
+          "wallet": "P",
+          "market": "SPREAD",
+          "record": "2-0",
+          "roi": 109.4,
+          "dollars": 2000,
+          "note": "0.9x usual, only 2 bets here",
+          "status": {
+           "t": "THIN - 2 bets here",
+           "c": "grey"
+          }
+         },
+         {
+          "team": "Bulls",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 1023,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BULLS",
+         "dollars": 3023,
+         "pct": 52,
+         "c": "grey"
+        },
+        {
+         "team": "WIZARDS",
+         "dollars": 2769,
+         "pct": 48,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 12-5 (+41% ROI) on WIZARDS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $750 to $1.8K"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 5:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Iowa State at UCF",
+       "time": "5:00pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "bet": "UCF vs Iowa State",
+       "price": null,
+       "for": {
+        "team": "UCF",
+        "rows": [
+         {
+          "team": "UCF",
+          "wallet": "X",
+          "market": "SPREAD",
+          "record": "15-6",
+          "roi": 48.5,
+          "dollars": 11676,
+          "note": "1.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "UCF",
+          "wallet": "N",
+          "market": "ML",
+          "record": "8-1",
+          "roi": 53.2,
+          "dollars": 705,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "IOWA STATE",
+        "rows": [
+         {
+          "team": "Iowa State",
+          "wallet": "W",
+          "market": "ML",
+          "record": "6-8",
+          "roi": 20.6,
+          "dollars": 3000,
+          "note": "1.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "UCF",
+         "dollars": 12381,
+         "pct": 80,
+         "c": "green"
+        },
+        {
+         "team": "IOWA STATE",
+         "dollars": 3000,
+         "pct": 20,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "NEW $705 on UCF"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
