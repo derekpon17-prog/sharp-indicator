@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T17:13:23.317Z",
+ "scannedAt": "2026-11-20T18:08:49.878Z",
  "sports": {
   "NFL": [
    {
@@ -118,6 +118,36 @@
     "bettingBig": false,
     "tonight": [
      {
+      "matchup": "Wizards at Bulls",
+      "market": "ML",
+      "pick": "Wizards",
+      "line": null,
+      "price": "+127",
+      "dollars": 4178,
+      "vsUsual": 0.6,
+      "vsUsualAll": 1.5
+     },
+     {
+      "matchup": "Wizards at Bulls",
+      "market": "SPREAD",
+      "pick": "Wizards +2.5",
+      "line": 2.5,
+      "price": "-104",
+      "dollars": 5100,
+      "vsUsual": 0.7,
+      "vsUsualAll": 1.8
+     },
+     {
+      "matchup": "Magic at Nets",
+      "market": "TOTAL",
+      "pick": "Under 225.5",
+      "line": 225.5,
+      "price": "-127",
+      "dollars": 2800,
+      "vsUsual": 0.4,
+      "vsUsualAll": 1
+     },
+     {
       "matchup": "Pelicans at Thunder",
       "market": "SPREAD",
       "pick": "Thunder -11.5",
@@ -125,7 +155,7 @@
       "price": "+104",
       "dollars": 2217,
       "vsUsual": 0.3,
-      "vsUsualAll": 25.2
+      "vsUsualAll": 0.8
      },
      {
       "matchup": "Suns at Jazz",
@@ -135,7 +165,7 @@
       "price": "-108",
       "dollars": 3773,
       "vsUsual": 0.5,
-      "vsUsualAll": 42.9
+      "vsUsualAll": 1.3
      }
     ]
    },
@@ -149,21 +179,21 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Hornets at Hawks",
-      "market": "TOTAL",
-      "pick": "Over 218.5",
-      "line": 218.5,
-      "price": "-108",
-      "dollars": 750,
-      "vsUsual": 0.9,
-      "vsUsualAll": 0.3
-     },
-     {
       "matchup": "Wizards at Bulls",
       "market": "ML",
       "pick": "Wizards",
       "line": null,
       "price": "+133",
+      "dollars": 750,
+      "vsUsual": 0.9,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Hornets at Hawks",
+      "market": "TOTAL",
+      "pick": "Over 218.5",
+      "line": 218.5,
+      "price": "-108",
       "dollars": 750,
       "vsUsual": 0.9,
       "vsUsualAll": 0.3
@@ -211,19 +241,19 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Pacers at Cavaliers",
-      "market": "TOTAL",
-      "pick": "Over 233.5",
-      "line": 233.5,
-      "price": "-100",
-      "dollars": 937,
+      "matchup": "Wizards at Bulls",
+      "market": "SPREAD",
+      "pick": "Wizards +2.5",
+      "line": 2.5,
+      "price": "+104",
+      "dollars": 980,
       "vsUsual": 0.6,
       "vsUsualAll": 0.4
      },
      {
       "matchup": "Wizards at Bulls",
       "market": "SPREAD",
-      "pick": "Bulls -3.5",
+      "pick": "Bulls",
       "line": -3.5,
       "price": "+113",
       "dollars": 1023,
@@ -231,12 +261,12 @@
       "vsUsualAll": 0.4
      },
      {
-      "matchup": "Wizards at Bulls",
-      "market": "SPREAD",
-      "pick": "Wizards +2.5",
-      "line": 2.5,
-      "price": "+104",
-      "dollars": 980,
+      "matchup": "Pacers at Cavaliers",
+      "market": "TOTAL",
+      "pick": "Over 233.5",
+      "line": 233.5,
+      "price": "-100",
+      "dollars": 937,
       "vsUsual": 0.6,
       "vsUsualAll": 0.4
      },
@@ -290,9 +320,9 @@
       "pick": "Wild",
       "line": null,
       "price": "-270",
-      "dollars": 816,
+      "dollars": 997,
       "vsUsual": 0.3,
-      "vsUsualAll": 0.7
+      "vsUsualAll": 0.1
      }
     ]
    }
@@ -316,6 +346,27 @@
       "dollars": 705,
       "vsUsual": 0.7,
       "vsUsualAll": 1.3
+     }
+    ]
+   },
+   {
+    "id": "4c8ed9",
+    "gap": 6.3,
+    "overall": "291-272",
+    "sport": "69-50",
+    "returnPct": 21,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "New Mexico at Wyoming",
+      "market": "SPREAD",
+      "pick": "Wyoming +14.5",
+      "line": 14.5,
+      "price": "-186",
+      "dollars": 833,
+      "vsUsual": 0.8,
+      "vsUsualAll": 2.9
      }
     ]
    },
@@ -411,37 +462,6 @@
       "dollars": 2517,
       "vsUsual": 2.4,
       "vsUsualAll": 1.4
-     }
-    ]
-   },
-   {
-    "id": "aaedcd",
-    "gap": 1.1,
-    "overall": "147-123",
-    "sport": "25-20",
-    "returnPct": 32.3,
-    "last10": "8-2",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Oklahoma State Cowboys at Minnesota Golden Gophers",
-      "market": "TOTAL",
-      "pick": "Under 148.5",
-      "line": 148.5,
-      "price": "+122",
-      "dollars": 723,
-      "vsUsual": 1.6,
-      "vsUsualAll": 1.5
-     },
-     {
-      "matchup": "Green Bay Phoenix at Florida State Seminoles",
-      "market": "ML",
-      "pick": "Florida State Seminoles",
-      "line": null,
-      "price": "-3471",
-      "dollars": 4103,
-      "vsUsual": 9.3,
-      "vsUsualAll": 8.7
      }
     ]
    }
