@@ -1,0 +1,77 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 7:17pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 8:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Ducks at Avalanche",
+       "time": "8:10pm CT",
+       "tag": {
+        "t": "EDGE - AVALANCHE",
+        "icon": "🎯"
+       },
+       "bet": "Avalanche ML -117",
+       "price": "-117",
+       "for": {
+        "team": "AVALANCHE",
+        "rows": [
+         {
+          "team": "Avalanche",
+          "wallet": "B",
+          "market": "ML",
+          "record": "12-7",
+          "roi": 21.2,
+          "dollars": 16302,
+          "note": "0.9x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Avalanche",
+          "wallet": "B",
+          "market": "SPREAD",
+          "record": "9-3",
+          "roi": 20,
+          "dollars": 10594,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "AVALANCHE",
+         "dollars": 26896,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 12-7 (+21% ROI) on AVALANCHE - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $16K on Avalanche"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
