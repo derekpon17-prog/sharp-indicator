@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T21:04:22.024Z",
+ "scannedAt": "2026-11-20T22:12:07.691Z",
  "sides": [
   {
    "tail": true,
@@ -84,6 +84,33 @@
   },
   {
    "tail": false,
+   "sport": "NBA",
+   "matchup": "Wizards at Bulls",
+   "market": "ML",
+   "pick": "Wizards",
+   "kickoffEt": "Fri, Nov 20, 8:10 PM",
+   "dollars": 1789,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 1.9,
+   "price": "+122",
+   "size": "1.5x and up",
+   "mktRecord": "12-5",
+   "mktRoi": 41.2,
+   "l30Roi": 34.7,
+   "contested": false,
+   "sfPoints": 24,
+   "parts": {
+    "money": 4,
+    "sizing": 7,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Buccaneers at Lions",
    "market": "TOTAL",
@@ -137,33 +164,6 @@
   },
   {
    "tail": false,
-   "sport": "CFB",
-   "matchup": "Iowa State at UCF",
-   "market": "ML",
-   "pick": "Iowa State",
-   "kickoffEt": "Fri, Nov 20, 6:00 PM",
-   "dollars": 3000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.4,
-   "price": "-100",
-   "size": "1x",
-   "mktRecord": "6-8",
-   "mktRoi": 20.6,
-   "l30Roi": 38.6,
-   "contested": false,
-   "sfPoints": 19,
-   "parts": {
-    "money": 8,
-    "sizing": 4,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "NBA",
    "matchup": "Wizards at Bulls",
    "market": "SPREAD",
@@ -185,6 +185,33 @@
     "sizing": 0,
     "quality": 6,
     "pooled": 4,
+    "unopposed": 0,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "Iowa State at UCF",
+   "market": "ML",
+   "pick": "Iowa State",
+   "kickoffEt": "Fri, Nov 20, 6:00 PM",
+   "dollars": 3000,
+   "oppDollars": 705,
+   "wallets": 1,
+   "maxVsUsual": 1.4,
+   "price": "-100",
+   "size": "1x",
+   "mktRecord": "6-8",
+   "mktRoi": 20.6,
+   "l30Roi": 38.6,
+   "contested": false,
+   "sfPoints": 16,
+   "parts": {
+    "money": 8,
+    "sizing": 4,
+    "quality": 4,
+    "pooled": 0,
     "unopposed": 0,
     "contested": 0
    }
@@ -462,9 +489,9 @@
    "pick": "Iowa State",
    "kickoffEt": "Fri, Nov 20, 6:00 PM",
    "sport": "CFB",
-   "type": "STRONG_UNOPPOSED",
+   "type": "STRONG_VS_OTHER",
    "strongDollars": 3000,
-   "oppDollars": 0,
+   "oppDollars": 705,
    "oppWeakDollars": 0,
    "fp": [
     "31-12|38166|6-8"
@@ -534,6 +561,22 @@
    ],
    "bestPrice": "+113",
    "maxVsUsual": 0.6
+  },
+  {
+   "matchup": "Wizards at Bulls",
+   "market": "ML",
+   "pick": "Wizards",
+   "kickoffEt": "Fri, Nov 20, 8:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 1039,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "14-6|3921|12-5"
+   ],
+   "bestPrice": "+122",
+   "maxVsUsual": 1.9
   }
  ],
  "sizedUp": [
@@ -552,6 +595,23 @@
    "mktRoi": 44.3,
    "opposed": "unopposed",
    "fp": "18-10|7729|17-9"
+  },
+  {
+   "matchup": "Wizards at Bulls",
+   "market": "ML",
+   "pick": "Wizards",
+   "kickoffEt": "Fri, Nov 20, 8:10 PM",
+   "sport": "NBA",
+   "dollars": 1039,
+   "price": "+122",
+   "vsUsual": 1.9,
+   "size": "1.5x and up",
+   "form": "L10 7-3",
+   "l30Roi": 34.7,
+   "mktRecord": "12-5",
+   "mktRoi": 41.2,
+   "opposed": "unopposed",
+   "fp": "14-6|3921|12-5"
   },
   {
    "matchup": "Texas Tech at Baylor",
