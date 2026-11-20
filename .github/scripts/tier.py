@@ -120,13 +120,15 @@ def chips(r):
         same = bool(w.get("same_as_sf"))
         rec = f' {w["rec"]}' if w.get("rec") else ""
         roi = f' ({float(w["roi"]):+.0f}% ROI' + (f', {w.get("scope")})' if w.get("scope") else ")") if w.get("roi") is not None else ""
-        out.append((f'POLY HOT {w.get("name")} {money(float(w.get("usd") or 0))}{rec}{roi}' + (" - same wallet as SF, not a 2nd source" if same else ""), "n" if same else "g"))
+        l10 = f' - {w["l10"]}' if w.get("l10") else ""   # recent form, e.g. "L10 NBA 4-6" (Nov 20)
+        out.append((f'POLY HOT {w.get("name")} {money(float(w.get("usd") or 0))}{rec}{roi}{l10}' + (" - same wallet as SF, not a 2nd source" if same else ""), "n" if same else "g"))
         if not same:
             poly_agree = True
     for w in (r.get("poly_cold") or []):
         rec = f' {w["rec"]}' if w.get("rec") else ""
         roi = f' ({float(w["roi"]):+.0f}% ROI' + (f', {w.get("scope")})' if w.get("scope") else ")") if w.get("roi") is not None else ""
-        out.append((f'POLY COLD {w.get("name")} {money(float(w.get("usd") or 0))}{rec}{roi} - fade flag', "r"))
+        l10 = f' - {w["l10"]}' if w.get("l10") else ""
+        out.append((f'POLY COLD {w.get("name")} {money(float(w.get("usd") or 0))}{rec}{roi}{l10} - fade flag', "r"))
     # Kalshi (shadow only per the Aug 28 2026 council ruling in odds.js - thin graded sample,
     # never blended into a real score. Always grey/informational, never a counted source below.)
     if r.get("kalshi_prob") is not None:
