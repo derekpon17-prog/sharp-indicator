@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-20T18:08:49.878Z",
+ "scannedAt": "2026-11-20T19:11:46.167Z",
  "sides": [
   {
    "tail": true,
@@ -49,6 +49,33 @@
    "parts": {
     "money": 8,
     "sizing": 10,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "Iowa State at UCF",
+   "market": "SPREAD",
+   "pick": "UCF +1.5",
+   "kickoffEt": "Fri, Nov 20, 6:00 PM",
+   "dollars": 11676,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.2,
+   "price": "-104",
+   "size": "1x",
+   "mktRecord": "15-6",
+   "mktRoi": 48.5,
+   "l30Roi": 48.6,
+   "contested": false,
+   "sfPoints": 25,
+   "parts": {
+    "money": 12,
+    "sizing": 4,
     "quality": 6,
     "pooled": 0,
     "unopposed": 3,
@@ -250,7 +277,7 @@
    "market": "ML",
    "pick": "Hawks",
    "kickoffEt": "Fri, Nov 20, 7:10 PM",
-   "dollars": 1940,
+   "dollars": 1945,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 0.4,
@@ -304,7 +331,7 @@
    "market": "TOTAL",
    "pick": "Under 226.5",
    "kickoffEt": "Fri, Nov 20, 9:40 PM",
-   "dollars": 3773,
+   "dollars": 3796,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 0.5,
@@ -336,6 +363,33 @@
    "wallets": 1,
    "maxVsUsual": 0.4,
    "price": "-127",
+   "size": "under 0.5x",
+   "mktRecord": "6-3",
+   "mktRoi": 74.1,
+   "l30Roi": 7.3,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Pelicans at Thunder",
+   "market": "TOTAL",
+   "pick": "Under 229.5",
+   "kickoffEt": "Fri, Nov 20, 8:10 PM",
+   "dollars": 2757,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.4,
+   "price": "-108",
    "size": "under 0.5x",
    "mktRecord": "6-3",
    "mktRoi": 74.1,
@@ -407,6 +461,33 @@
   },
   {
    "tail": false,
+   "sport": "NHL",
+   "matchup": "Wild at Canucks",
+   "market": "ML",
+   "pick": "Wild",
+   "kickoffEt": "Sat, Nov 21, 10:00 PM",
+   "dollars": 1056,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.3,
+   "price": "-270",
+   "size": "under 0.5x",
+   "mktRecord": "10-2",
+   "mktRoi": 12.3,
+   "l30Roi": 24.3,
+   "contested": false,
+   "sfPoints": 7,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Buccaneers at Lions",
    "market": "SPREAD",
@@ -434,6 +515,22 @@
   }
  ],
  "flags": [
+  {
+   "matchup": "Iowa State at UCF",
+   "market": "SPREAD",
+   "pick": "UCF +1.5",
+   "kickoffEt": "Fri, Nov 20, 6:00 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 11676,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "22-11|157262|15-6"
+   ],
+   "bestPrice": "-104",
+   "maxVsUsual": 1.2
+  },
   {
    "matchup": "Texas Tech at Baylor",
    "market": "ML",
@@ -616,6 +713,23 @@
    "mktRoi": 37.1,
    "opposed": "unopposed",
    "fp": "9-1|4472|6-0"
+  },
+  {
+   "matchup": "Iowa State at UCF",
+   "market": "SPREAD",
+   "pick": "UCF +1.5",
+   "kickoffEt": "Fri, Nov 20, 6:00 PM",
+   "sport": "CFB",
+   "dollars": 11676,
+   "price": "-104",
+   "vsUsual": 1.2,
+   "size": "1x",
+   "form": "L10 5-5",
+   "l30Roi": 48.6,
+   "mktRecord": "15-6",
+   "mktRoi": 48.5,
+   "opposed": "unopposed",
+   "fp": "22-11|157262|15-6"
   },
   {
    "matchup": "Buccaneers at Lions",
