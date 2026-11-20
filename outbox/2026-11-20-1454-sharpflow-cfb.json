@@ -1,0 +1,135 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CFB - first game 5:00pm CT** - 2 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CFB - sharp wallets",
+   "subtitle": "Wallets with positive CFB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 2:14pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Texas Tech at Baylor",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "EDGE - TEXAS TECH",
+        "icon": "🎯"
+       },
+       "bet": "★ Texas Tech ML -182",
+       "price": "-182",
+       "for": {
+        "team": "TEXAS TECH",
+        "rows": [
+         {
+          "team": "Texas Tech",
+          "wallet": "K",
+          "market": "ML",
+          "record": "10-8",
+          "roi": 35,
+          "dollars": 8210,
+          "note": "1.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TEXAS TECH",
+         "dollars": 8210,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 10-8 (+35% ROI) on TEXAS TECH - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 5:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Iowa State at UCF",
+       "time": "5:00pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "bet": "UCF vs Iowa State",
+       "price": null,
+       "for": {
+        "team": "UCF",
+        "rows": [
+         {
+          "team": "UCF",
+          "wallet": "AB",
+          "market": "SPREAD",
+          "record": "15-6",
+          "roi": 48.5,
+          "dollars": 11676,
+          "note": "1.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "IOWA STATE",
+        "rows": [
+         {
+          "team": "Iowa State",
+          "wallet": "AA",
+          "market": "ML",
+          "record": "6-8",
+          "roi": 20.6,
+          "dollars": 3000,
+          "note": "1.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "UCF",
+         "dollars": 11676,
+         "pct": 80,
+         "c": "green"
+        },
+        {
+         "team": "IOWA STATE",
+         "dollars": 3000,
+         "pct": 20,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Under 47.5 $3K (21-23 here, -9% ROI) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
