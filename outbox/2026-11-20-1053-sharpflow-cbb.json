@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CBB - first game 11:00am CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CBB - sharp wallets",
+   "subtitle": "Wallets with positive CBB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 10:05am CT",
+   "sections": [
+    {
+     "heading": "CBB - 11:30AM CT",
+     "picks": [
+      {
+       "eyebrow": "Oklahoma State Cowboys at Minnesota Golden Gophers",
+       "time": "11:30am CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "bet": "Under 148.5 ++122",
+       "price": "++122",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "V",
+          "market": "TOTAL",
+          "record": "13-14",
+          "roi": 47.3,
+          "dollars": 723,
+          "note": "1.6x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 723,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 13-14 (+47% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
