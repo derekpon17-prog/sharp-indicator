@@ -1,5 +1,5 @@
 {
- "at": "2026-11-20T21:54:26.303Z",
+ "at": "2026-11-20T22:54:13.722Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -315,6 +315,40 @@
   {
    "sport": "NBA",
    "matchup": "Hornets at Hawks",
+   "grp": "team",
+   "side": "Hawks",
+   "market": "ML",
+   "cls": "COLD",
+   "startUtc": "2026-11-20T23:10:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x8045cbc5e564fb705352aaf4421544f346851009cfae0b0d94e44005d095d499",
+   "outcome": "Hawks",
+   "gradeTitle": "Hornets vs. Hawks",
+   "gradePrice": 0.7,
+   "onCard": true,
+   "wallet": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+   "name": "one8tyfive",
+   "usd": 7700,
+   "fills": 1,
+   "avgPrice": 0.7,
+   "lastBuyUtc": "2026-11-20T21:35:43.000Z",
+   "title": "Hornets vs. Hawks",
+   "rec": "14-13",
+   "roi": -8.6,
+   "n": 27,
+   "recScope": "NBA ML, last 45 days",
+   "twoSided": false,
+   "sameAsSF": null,
+   "l10": {
+    "w": 4,
+    "l": 6,
+    "n": 10,
+    "txt": "L10 NBA 4-6"
+   }
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Hornets at Hawks",
    "grp": "total",
    "side": "Under",
    "market": "TOTAL",
@@ -553,6 +587,40 @@
   {
    "sport": "NBA",
    "matchup": "Pacers at Cavaliers",
+   "grp": "team",
+   "side": "Cavaliers",
+   "market": "ML",
+   "cls": "COLD",
+   "startUtc": "2026-11-20T23:40:00.000Z",
+   "gameDate": "2026-11-20",
+   "conditionId": "0x6ad48f25a9bead17075c5e0b48465666fed02a82ad934e04af0d9a756f20c006",
+   "outcome": "Cavaliers",
+   "gradeTitle": "Pacers vs. Cavaliers",
+   "gradePrice": 0.68,
+   "onCard": false,
+   "wallet": "0x163eff4d251df4bfc95c49f4d90cd1bf224edc5b",
+   "name": "0x163e…dc5b",
+   "usd": 3400,
+   "fills": 1,
+   "avgPrice": 0.68,
+   "lastBuyUtc": "2026-11-20T22:41:35.000Z",
+   "title": "Pacers vs. Cavaliers",
+   "rec": "31-23",
+   "roi": -12.9,
+   "n": 54,
+   "recScope": "NBA ML, last 45 days",
+   "twoSided": false,
+   "sameAsSF": null,
+   "l10": {
+    "w": 5,
+    "l": 5,
+    "n": 10,
+    "txt": "L10 NBA 5-5"
+   }
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Pacers at Cavaliers",
    "grp": "total",
    "side": "Under",
    "market": "TOTAL",
@@ -694,8 +762,8 @@
   }
  ],
  "errors": [],
- "rosterGeneratedAt": "2026-11-20T21:15:32.796Z",
- "sfScannedAt": "2026-11-20T21:04:22.024Z",
+ "rosterGeneratedAt": "2026-11-20T22:50:55.252Z",
+ "sfScannedAt": "2026-11-20T22:12:07.691Z",
  "games": 15,
- "walletsChecked": 63
+ "walletsChecked": 66
 }
