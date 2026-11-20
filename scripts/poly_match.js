@@ -153,7 +153,54 @@ function matchPoly(games, roster, buysByWallet, now = new Date()) {
   return out;
 }
 
-module.exports = { matchPoly, teamHit, marketOf, SPORT_KEY };
+/* L10 form (Derek, Nov 20 2026 - "like Sharp Flow, L10 4-6"): the wallet's last 10 SETTLED game-line bets in this
+   sport, newest resolution first. Win = the held outcome resolved at 1 (current_price >= 0.99), loss = resolved at 0
+   (<= 0.01); exits before settlement have no verdict and are skipped (same rule as api/trader-stats.js). A market
+   where the wallet held both outcomes is skipped (market making, not a pick). Sport-specific, unlike SharpFlow's
+   all-sports L10, because our HOT/COLD classification is per sport. Only fetched for wallets that matched a side. */
+const SLUG_PREFIX = { NBA: ['nba'], NFL: ['nfl'], NHL: ['nhl'], MLB: ['mlb'], WNBA: ['wnba'], CFB: ['cfb', 'ncaaf'], CBB: ['cbb', 'ncaab'] };
+async function fetchSettled(wallet) {
+  const rows = [];
+  for (const status of ['CLOSED', 'REDEEMABLE', 'REDEEMABLE_LOST']) {
+    try {
+      const r = await fetch(`${DATA_API}/v2/positions?user=${wallet}&status=${status}&sort_by=TIMESTAMP&limit=200`, { signal: AbortSignal.timeout(20000) });
+      if (!r.ok) continue;
+      const j = await r.json();
+      for (const p of (j && j.data) || []) rows.push(p);
+    } catch { /* one status failing just narrows the sample */ }
+  }
+  return rows;
+}
+function l10For(positions, sport) {
+  const pre = SLUG_PREFIX[sport] || [];
+  const byCond = {};
+  for (const p of positions) {
+    const slug = String(p.slug || p.event_slug || '').toLowerCase();
+    if (!pre.some(x => slug.startsWith(x + '-'))) continue;
+    if (!marketOf(p.title)) continue;
+    const cp = parseFloat(p.current_price ?? p.cur_price);
+    if (!(cp >= 0.99 || cp <= 0.01)) continue;
+    const k = p.condition_id || slug + '|' + p.title;
+    (byCond[k] ||= []).push({ win: cp >= 0.99, outcome: p.outcome, end: p.end_date || p.timestamp || '' });
+  }
+  const settled = Object.values(byCond).filter(a => new Set(a.map(x => x.outcome)).size === 1).map(a => a[0])
+    .sort((a, b) => String(b.end).localeCompare(String(a.end))).slice(0, 10);
+  if (!settled.length) return null;
+  const w = settled.filter(x => x.win).length;
+  return { w, l: settled.length - w, n: settled.length, txt: `L${settled.length} ${sport === 'CFB' ? 'NCAAF' : sport === 'CBB' ? 'NCAAB' : sport} ${w}-${settled.length - w}` };
+}
+async function addL10(matches) {
+  const ws = [...new Set(matches.map(m => m.wallet))], cache = {};
+  for (let i = 0; i < ws.length; i += BATCH) {
+    const batch = ws.slice(i, i + BATCH);
+    const res = await Promise.all(batch.map(fetchSettled));
+    batch.forEach((w, j) => { cache[w] = res[j]; });
+  }
+  for (const m of matches) m.l10 = l10For(cache[m.wallet] || [], m.sport);
+  return matches;
+}
+
+module.exports = { matchPoly, teamHit, marketOf, SPORT_KEY, l10For };
 
 if (require.main === module) {
   (async () => {
@@ -187,12 +234,12 @@ if (require.main === module) {
         batch.forEach((w, j) => { buysByWallet[w] = res[j].buys; if (!res[j].ok) result.errors.push(w + ': ' + res[j].err); });
       }
       result.games = games.length; result.walletsChecked = list.length;
-      result.matches = matchPoly(games, roster, buysByWallet, now);
+      result.matches = await addL10(matchPoly(games, roster, buysByWallet, now));
       result.ok = result.errors.length < list.length || !list.length;
     } catch (e) { result.errors.push(e.message); }
     fs.writeFileSync(outFile, JSON.stringify(result, null, 1));
     console.log(`poly_match: ${result.games || 0} games, ${result.walletsChecked || 0} wallets, ${result.matches.length} matches, ${result.errors.length} errors`);
-    for (const m of result.matches) console.log(`  ${m.cls} ${m.name} ${m.matchup} ${m.market} ${m.side} $${m.usd}${m.twoSided ? ' TWO-SIDED' : ''}${m.sameAsSF ? ' SAME-AS-SF ' + m.sameAsSF.sfWallet : ''}`);
+    for (const m of result.matches) console.log(`  ${m.cls} ${m.name} ${m.matchup} ${m.market} ${m.side} $${m.usd} ${m.l10 ? m.l10.txt : 'L10 n/a'}${m.twoSided ? ' TWO-SIDED' : ''}${m.sameAsSF ? ' SAME-AS-SF ' + m.sameAsSF.sfWallet : ''}`);
     // games carry their tickets only for matching; keep the file small
     
   })();
