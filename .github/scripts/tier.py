@@ -112,6 +112,21 @@ def chips(r):
         out.append((f"POLY {money(poly_d)} vs {money(poly_o)}", "a" if not poly_agree else "g" if has_pin(r) else "b"))
         if (r.get("poly_wallets") or 0) >= 2:
             out.append((f"{int(r['poly_wallets'])} Poly wallets", "n"))
+    # Polymarket classified wallets (Derek, Nov 20 2026): set by the window tasks from sharpflow/poly_matches.json,
+    # only when a classified wallet actually bought THIS side. poly_hot / poly_cold = [{name, usd, rec, roi, n,
+    # scope, same_as_sf}]. Display only - never moves a row between tiers. A HOT wallet that is the same bettor as a
+    # SharpFlow ticket (same_as_sf) is shown grey and never counted as a second source.
+    for w in (r.get("poly_hot") or []):
+        same = bool(w.get("same_as_sf"))
+        rec = f' {w["rec"]}' if w.get("rec") else ""
+        roi = f' ({float(w["roi"]):+.0f}% ROI' + (f', {w.get("scope")})' if w.get("scope") else ")") if w.get("roi") is not None else ""
+        out.append((f'POLY HOT {w.get("name")} {money(float(w.get("usd") or 0))}{rec}{roi}' + (" - same wallet as SF, not a 2nd source" if same else ""), "n" if same else "g"))
+        if not same:
+            poly_agree = True
+    for w in (r.get("poly_cold") or []):
+        rec = f' {w["rec"]}' if w.get("rec") else ""
+        roi = f' ({float(w["roi"]):+.0f}% ROI' + (f', {w.get("scope")})' if w.get("scope") else ")") if w.get("roi") is not None else ""
+        out.append((f'POLY COLD {w.get("name")} {money(float(w.get("usd") or 0))}{rec}{roi} - fade flag', "r"))
     # Kalshi (shadow only per the Aug 28 2026 council ruling in odds.js - thin graded sample,
     # never blended into a real score. Always grey/informational, never a counted source below.)
     if r.get("kalshi_prob") is not None:

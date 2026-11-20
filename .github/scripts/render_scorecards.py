@@ -321,9 +321,12 @@ def sharpflow_html(c):
         st = r.get("status") or {}
         stcol = VCOL.get(st.get("c"), "#6B7280")
         note = " · ".join(x for x in [dtxt, r.get("note")] if x)
+        # Source pill (Derek, Nov 20 2026): Polymarket wallet rows sit in the same For it / Against it boxes as
+        # Sharp Flow rows, so each one carries a POLYMARKET pill to say where it came from.
+        srcpill = ('<span class="src">' + e(r.get("src")) + '</span>') if r.get("src") else ''
         return (
             '<div class="row2">'
-            + '<div class="rtop"><span class="rteam">' + e(r.get("team")) + '</span>'
+            + '<div class="rtop">' + srcpill + '<span class="rteam">' + e(r.get("team")) + '</span>'
             + '<span class="rwal">' + e(r.get("wallet")) + '</span>'
             + '<span class="rmk">' + e(r.get("market")) + '</span>'
             + '<span class="rrec">' + e(r.get("record")) + '</span></div>'
@@ -359,8 +362,11 @@ def sharpflow_html(c):
             if "for" not in p:
                 return board_html(c)  # mixed/old-shape card - use the chip renderer for the whole thing
             forblk, agblk = p.get("for") or {}, p.get("against") or {}
-            forrows = "".join(row(r, "#1E8E5A") for r in (forblk.get("rows") or [])[:3])
-            agrows = "".join(row(r, "#D23C3C") for r in (agblk.get("rows") or [])[:3])
+            # Sharp Flow rows keep their top-3 cap; Polymarket rows (src set) are added after them, up to 2,
+            # so a big Sharp Flow board can never push a Poly match off the card.
+            pick_rows = lambda rs: [r for r in rs if not r.get("src")][:3] + [r for r in rs if r.get("src")][:2]
+            forrows = "".join(row(r, "#1E8E5A") for r in pick_rows(forblk.get("rows") or []))
+            agrows = "".join(row(r, "#D23C3C") for r in pick_rows(agblk.get("rows") or []))
             forsec = (
                 '<div class="grp forgrp"><div class="gh" style="color:#1E8E5A">For it ✅'
                 + ('<span class="gteam">' + e(forblk.get("team")) + '</span>' if forblk.get("team") else '') + '</div>' + forrows + '</div>'
@@ -373,8 +379,12 @@ def sharpflow_html(c):
             pricechip = ('<span class="price">' + e(price) + '</span>') if price else ""
             timepill = ('<span class="time">' + e(p.get("time")) + '</span>') if p.get("time") else ""
             tag = p.get("tag") or {}
+            # Source tags next to the verdict (Derek, Nov 20 2026): SHARP FLOW, plus POLYMARKET only when a classified
+            # Polymarket wallet is on one of this game's sides. Older cards without "sources" show SHARP FLOW.
+            srcs = p.get("sources") or ["SHARP FLOW"]
+            srctags = "".join('<span class="srctag' + (' poly' if s_ == "POLYMARKET" else '') + '">' + e(s_) + '</span>' for s_ in srcs)
             tagrow = (
-                '<div class="tag">' + (e(tag.get("icon")) + ' ' if tag.get("icon") else '⚠️ ') + e(tag.get("t")) + '</div>'
+                '<div class="tag">' + (e(tag.get("icon")) + ' ' if tag.get("icon") else '⚠️ ') + e(tag.get("t")) + srctags + '</div>'
             ) if tag.get("t") else ""
             conf = p.get("confidence")
             confrow = ""
@@ -414,7 +424,10 @@ def sharpflow_html(c):
         '.ghead{display:flex;justify-content:space-between;align-items:flex-start}'
         '.eyebrow{font-size:13px;font-weight:700;letter-spacing:2px;color:#6B7280}'
         '.time{background:' + NAVY + ';color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:7px 14px;white-space:nowrap}'
-        '.tag{color:#D9770A;font-size:16px;font-weight:800;letter-spacing:.5px}'
+        '.tag{color:#D9770A;font-size:16px;font-weight:800;letter-spacing:.5px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}'
+        '.srctag{font-size:11px;font-weight:800;letter-spacing:.8px;color:#fff;background:' + NAVY + ';border-radius:6px;padding:3px 8px}'
+        '.srctag.poly{background:#2E5BFF}'
+        '.src{font-size:10px;font-weight:800;letter-spacing:.8px;color:#fff;background:#2E5BFF;border-radius:5px;padding:2px 6px}'
         '.gt{font-weight:900;font-size:40px;line-height:1.05;letter-spacing:-.5px;margin-top:-4px}'
         '.price{display:inline-block;background:#ECE8DD;color:#4B5366;font-weight:700;font-size:15px;'
         'border-radius:10px;padding:6px 14px;width:fit-content}'
