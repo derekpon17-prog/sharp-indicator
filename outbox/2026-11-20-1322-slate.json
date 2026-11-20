@@ -1,0 +1,233 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · AFTERNOON · Fri Nov 20** · games 3:00pm to 5:59pm CT (9 games)",
+ "slate": {
+  "title": "Afternoon plays",
+  "stamp": "FRI NOV 20 · 1:22PM",
+  "sources": "Pinnacle ~1:22pm CT - Vegas ~1:22pm CT (CBB, NCAAF) - SharpFlow 12:08pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "Afternoon window: games starting 3:00 to 5:59pm CT. Vegas counts Vegas Backed and Pressure Move only. Wallet money counts only from wallets with positive all-time ROI in this sport and market (Iowa State ML wallet is CFB ML 6-8, +20.6%, 2.6x their usual all-sport bet). Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "SDST@IDST",
+    "matchup": "NCAAB - SDST @ Idaho State - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 142.5,
+    "price": -114,
+    "bet": "Under 142.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "URI@LIB",
+    "matchup": "NCAAB - URI @ Liberty - 3:30pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "LIB",
+    "line": -1,
+    "price": -108,
+    "bet": "LIB -1",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "URI@LIB",
+    "matchup": "NCAAB - URI @ Liberty - 3:30pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "LIB",
+    "line": null,
+    "price": -113,
+    "bet": "LIB ML",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MAN@MIA",
+    "matchup": "NCAAB - MAN @ Miami FL - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "MAN",
+    "line": 36.5,
+    "price": -116,
+    "bet": "MAN +36.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 57
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MAN@MIA",
+    "matchup": "NCAAB - MAN @ Miami FL - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 150.5,
+    "price": -114,
+    "bet": "Over 150.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UTM@SIU",
+    "matchup": "NCAAB - UTM @ Southern Illinois - 4:30pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "SIU",
+    "line": null,
+    "price": -142,
+    "bet": "SIU ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 29
+   },
+   {
+    "sport": "NCAAB",
+    "game": "DEL@CSUN",
+    "matchup": "NCAAB - DEL @ Cal State Northridge - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 151.5,
+    "price": -110,
+    "bet": "Over 151.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "DEL@CSUN",
+    "matchup": "NCAAB - DEL @ Cal State Northridge - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "CSUN",
+    "line": null,
+    "price": -345,
+    "bet": "CSUN ML",
+    "buckets": [
+     "VEGAS_70",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 87
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ISU@UCF",
+    "matchup": "NCAAF - Iowa State @ UCF - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "ISU",
+    "line": -1.5,
+    "price": -107,
+    "bet": "ISU -1.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ISU@UCF",
+    "matchup": "NCAAF - Iowa State @ UCF - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 49,
+    "price": -109,
+    "bet": "Under 49",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 56
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ISU@UCF",
+    "matchup": "NCAAF - Iowa State @ UCF - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "ISU",
+    "line": null,
+    "price": -116,
+    "bet": "Iowa State ML",
+    "buckets": [
+     "PIN_STRONG",
+     "SF_SIDE",
+     "SF_PIN",
+     "SF_SIZEDUP",
+     "SF_CALLED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "sf_dollars": 3000,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_size": "1x",
+    "sf_max_vs_usual": 1.4,
+    "sf_mkt_roi": 20.6,
+    "sf_mkt_rec": "6-8",
+    "sf_all_ratio": 2.6,
+    "sf_l30_roi": 38.6,
+    "sf_l30_rec": "31-12",
+    "sf_l30_dollars": 38166,
+    "sf_fp": "31-12|38166|6-8",
+    "sf_first_price": -100,
+    "sf_snapshot": "12:08"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UNT@APP",
+    "matchup": "NCAAB - UNT @ Appalachian State - 5:30pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 131.5,
+    "price": -115,
+    "bet": "Over 131.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   }
+  ]
+ }
+}
