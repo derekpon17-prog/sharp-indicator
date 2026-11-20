@@ -48,6 +48,8 @@ jobs:
         run: |
           git fetch -q --depth 1 origin wallets && git show FETCH_HEAD:wallets/wallets.json > wallets.json || echo '{}' > wallets.json
           node scripts/poly_match.js sf_branch wallets.json sf_branch/poly_matches.json
+          # Grade logged Poly calls whose games have finished, rebuild sf_branch/poly_record.json (running record).
+          node scripts/poly_grade.js sf_branch || true
       - name: Which sports are due
         id: plan
         env:

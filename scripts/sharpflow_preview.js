@@ -115,6 +115,19 @@ const cold = R.cold; // Nov 16 ROI rule plus Nov 17 form gate (see sf_rules.js)
    that bought one side of a game on this card. Shown ONLY when a match exists - no match, no Poly row and no
    POLYMARKET tag. Display only: never changes the verdict, confidence or money bar, which stay Sharp Flow's. */
 let POLY = []; try { POLY = JSON.parse(fs.readFileSync(OUT + '/poly_matches.json', 'utf8')).matches || []; } catch {}
+// Running Poly record (scripts/poly_grade.js -> poly_record.json): one legend line on every Sharp Flow card.
+let POLYREC = null; try { POLYREC = JSON.parse(fs.readFileSync(OUT + '/poly_record.json', 'utf8')); } catch {}
+function polyRecordLine() {
+  if (!POLYREC || !POLYREC.buckets) return '';
+  const b = POLYREC.buckets, n = Object.values(b).reduce((a, x) => a + x.all.n, 0);
+  const since = POLYREC.since ? new Date(POLYREC.since + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }) : '';
+  if (n < 10) return `Poly record building: ${n} graded${since ? ' since ' + since : ''}`;
+  const u = x => (x >= 0 ? '+' : '') + x.toFixed(1) + 'u';
+  const parts = [];
+  if (b.HOT) parts.push(`HOT ${b.HOT.all.w}-${b.HOT.all.l} ${u(b.HOT.all.u)}`);
+  if (b.COLD) parts.push(`COLD sides ${b.COLD.all.w}-${b.COLD.all.l} (fading ${u(b.COLD.all.fadeU)})`);
+  return `Poly calls since ${since} at Polymarket prices: ${parts.join(', ')}`;
+}
 function polyFor(sp, matchup, grp, r) {
   const ms = POLY.filter(m => m.sport === sp && m.matchup === matchup && m.grp === grp);
   if (!ms.length) return { for: r.for, against: r.against, sources: ['SHARP FLOW'] };
@@ -198,7 +211,7 @@ function buildCards(sp, latest, flags, before) { // before: optional Date - only
     const last = i + 12 >= rows.length || cards.length === 2;
     const coldTxt = last && coldSides.length ? 'Not counted (negative market ROI or cold last 30 days): ' + coldSides.slice(0, 3).map(c => c.txt).join('; ') : '';
     cards.push({ design: 'sharpflow', brand: 'SHARP FLOW', title: `${sp} - sharp wallets`, subtitle: `Wallets with positive ${sp} market ROI and last-30 ROI, $${MIN_DOLLARS}+ per side (more for NHL and spreads) - SharpFlow snapshot ${snap} CT${rows.length > 12 ? ` - board ${cards.length + 1}` : ''}`,
-      sections: secs, legend: (coldTxt ? coldTxt + ' | ' : '') + R.CONF_LEGEND + ' Quality wallet = 10+ bets here at +15% ROI. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
+      sections: secs, legend: (coldTxt ? coldTxt + ' | ' : '') + (polyRecordLine() ? polyRecordLine() + ' | ' : '') + R.CONF_LEGEND + ' Quality wallet = 10+ bets here at +15% ROI. ★ = good tail', footer: 'Wallet money, not a pick. Leans, not guarantees' });
   }
   return { cards, n: rows.length, data, cold: coldSides };
 }

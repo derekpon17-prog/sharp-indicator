@@ -123,9 +123,14 @@ function matchPoly(games, roster, buysByWallet, now = new Date()) {
           if (!side) continue;
           const grp = mkt === 'TOTAL' ? 'total' : 'team';
           const k2 = grp + '|' + side + '|' + mkt;
-          const a = (agg[k2] ||= { grp, side, market: mkt, usd: 0, fills: 0, lastTs: 0, title, prices: [] });
+          const a = (agg[k2] ||= { grp, side, market: mkt, usd: 0, fills: 0, lastTs: 0, title, prices: [], conds: {} });
           const usd = (+b.size || 0) * (+b.price || 0);
           a.usd += usd; a.fills += 1; a.lastTs = Math.max(a.lastTs, +b.timestamp || 0); a.prices.push(+b.price || 0);
+          // Per market (condition) totals, so the record can grade the exact market the wallet bought (the biggest one
+          // when a wallet bought two lines of the same total, e.g. O/U 218.5 and 219.5).
+          const ck = b.condition_id || b.conditionId || title;
+          const c = (a.conds[ck] ||= { conditionId: b.condition_id || b.conditionId || null, outcome: b.outcome || null, title, usd: 0, shares: 0 });
+          c.usd += usd; c.shares += (+b.size || 0);
         }
         const sidesByGrp = {};
         for (const a of Object.values(agg)) (sidesByGrp[a.grp] ||= new Set()).add(a.side);
@@ -137,8 +142,13 @@ function matchPoly(games, roster, buysByWallet, now = new Date()) {
           // $8,211 on Texas Tech ML vs a SharpFlow ticket of $8,210) - shown, but never counted as a second source.
           const sameT = (g.tickets || []).find(t => t.market === a.market && (a.grp === 'total' ? (/^over/i.test(t.pick) ? 'Over' : 'Under') === a.side : teamHit(t.pick, a.side))
             && Math.abs((t.dollars || 0) - a.usd) <= 0.03 * a.usd);
+          const main = Object.values(a.conds).sort((x, y) => y.usd - x.usd)[0] || {};
+          const onCard = (g.tickets || []).some(t => (t.market === 'TOTAL' ? 'total' : 'team') === a.grp);
           out.push({
             sport: g.sport, matchup: g.matchup, grp: a.grp, side: a.side, market: a.market, cls,
+            startUtc: g.start ? new Date(g.start).toISOString() : null, gameDate: gd,
+            conditionId: main.conditionId || null, outcome: main.outcome || null, gradeTitle: main.title || a.title,
+            gradePrice: main.shares ? +(main.usd / main.shares).toFixed(4) : null, onCard,
             wallet: entry.wallet, name: shortName(entry.name, entry.wallet),
             usd: Math.round(a.usd), fills: a.fills, avgPrice: +(a.prices.reduce((x, y) => x + y, 0) / a.prices.length).toFixed(3),
             lastBuyUtc: a.lastTs ? new Date(a.lastTs * 1000).toISOString() : null, title: a.title,
@@ -200,7 +210,39 @@ async function addL10(matches) {
   return matches;
 }
 
-module.exports = { matchPoly, teamHit, marketOf, SPORT_KEY, l10For };
+/* Running record (Derek, Nov 20 2026 - "track their bets"). Every match is logged once per game date in
+   <sf>/polylog/<gameDate ET>.json, keyed sport|matchup|market|side|wallet. First sighting is frozen (firstSeenAt,
+   firstPrice = the wallet's average fill price for the graded market at that time, firstUsd, cls at that time); later
+   runs only raise maxUsd and lastSeenAt, so a reclassified wallet keeps the class it had when we called it.
+   scripts/poly_grade.js grades these once the market settles on Polymarket. */
+function logMatches(sfDir, matches, at) {
+  const byDate = {};
+  for (const m of matches) if (m.gameDate) (byDate[m.gameDate] ||= []).push(m);
+  fs.mkdirSync(sfDir + '/polylog', { recursive: true });
+  for (const [d, ms] of Object.entries(byDate)) {
+    const f = `${sfDir}/polylog/${d}.json`;
+    let log = { date: d, entries: {} };
+    try { log = JSON.parse(fs.readFileSync(f, 'utf8')); } catch {}
+    for (const m of ms) {
+      const k = [m.sport, m.matchup, m.market, m.side, m.wallet].join('|');
+      const e = log.entries[k];
+      if (!e) {
+        log.entries[k] = { sport: m.sport, matchup: m.matchup, market: m.market, side: m.side, grp: m.grp, wallet: m.wallet, name: m.name,
+          cls: m.cls, startUtc: m.startUtc, conditionId: m.conditionId, outcome: m.outcome, title: m.gradeTitle,
+          firstSeenAt: at, firstPrice: m.gradePrice ?? m.avgPrice, firstUsd: m.usd, maxUsd: m.usd, lastSeenAt: at,
+          rec: m.rec, roi: m.roi, n: m.n, recScope: m.recScope, l10: m.l10 ? m.l10.txt : null,
+          onCard: !!m.onCard, sameAsSF: !!m.sameAsSF, twoSided: !!m.twoSided };
+      } else {
+        e.maxUsd = Math.max(e.maxUsd || 0, m.usd); e.lastSeenAt = at;
+        if (m.twoSided) e.twoSided = true;   // once seen on both sides, never counted
+        if (!e.conditionId && m.conditionId) { e.conditionId = m.conditionId; e.outcome = m.outcome; e.title = m.gradeTitle; }
+      }
+    }
+    fs.writeFileSync(f, JSON.stringify(log, null, 1));
+  }
+}
+
+module.exports = { matchPoly, teamHit, marketOf, SPORT_KEY, l10For, fetchSettled, logMatches };
 
 if (require.main === module) {
   (async () => {
@@ -238,6 +280,7 @@ if (require.main === module) {
       result.ok = result.errors.length < list.length || !list.length;
     } catch (e) { result.errors.push(e.message); }
     fs.writeFileSync(outFile, JSON.stringify(result, null, 1));
+    try { logMatches(sfDir, result.matches, result.at); } catch (e) { console.log('polylog write failed:', e.message); }
     console.log(`poly_match: ${result.games || 0} games, ${result.walletsChecked || 0} wallets, ${result.matches.length} matches, ${result.errors.length} errors`);
     for (const m of result.matches) console.log(`  ${m.cls} ${m.name} ${m.matchup} ${m.market} ${m.side} $${m.usd} ${m.l10 ? m.l10.txt : 'L10 n/a'}${m.twoSided ? ' TWO-SIDED' : ''}${m.sameAsSF ? ' SAME-AS-SF ' + m.sameAsSF.sfWallet : ''}`);
     // games carry their tickets only for matching; keep the file small
