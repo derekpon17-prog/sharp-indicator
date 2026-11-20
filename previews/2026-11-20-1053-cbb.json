@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-20",
+ "posted_ct": "1053",
+ "sport": "CBB",
+ "outlier": false,
+ "first_start": "2026-11-20T17:00:00.000Z",
+ "snapshot": "2026-11-20T16:05:22.200Z",
+ "sides": [
+  {
+   "game": "Oklahoma State Cowboys at Minnesota Golden Gophers",
+   "market": "TOTAL",
+   "pick": "Under 148.5",
+   "start_utc": "2026-11-20T17:30:00.000Z",
+   "dollars": 723,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.6,
+   "all_sport_ratio": 1.54,
+   "price": "+122",
+   "line": 148.5,
+   "l30_rec": "25-20",
+   "l30_roi": 32.3,
+   "mkt_rec": "13-14",
+   "mkt_roi": 47.3,
+   "mkt_l30_rec": "13-14",
+   "tail": false
+  }
+ ]
+}
