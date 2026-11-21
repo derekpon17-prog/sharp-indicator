@@ -16,7 +16,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8210,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Buccaneers at Lions|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Colorado at Cincinnati|ML|Colorado": {
    "sport": "CFB",
@@ -65,7 +65,7 @@
    "maxVsUsual": 2.4,
    "maxDollars": 10054,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Vanderbilt at Florida|TOTAL|Over 45.5": {
    "sport": "CFB",
@@ -81,7 +81,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 7392,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "LSU at Tennessee|SPREAD|Tennessee +1.5": {
    "sport": "CFB",
@@ -97,7 +97,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 5826,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Clippers at Mavericks|TOTAL|Over 229.5": {
    "sport": "NBA",
@@ -112,8 +112,8 @@
    ],
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
-   "opposedSeen": false,
-   "snapshots": 1
+   "opposedSeen": true,
+   "snapshots": 2
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -145,6 +145,106 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Islanders at Red Wings|SPREAD|Red Wings +1.5": {
+   "sport": "NHL",
+   "matchup": "Islanders at Red Wings",
+   "market": "SPREAD",
+   "pick": "Red Wings +1.5",
+   "kickoffEt": "Sat, Nov 21, 7:00 PM",
+   "firstSeenAt": "2026-11-21T16:27:14.780Z",
+   "firstPrice": "-213",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 20697,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "North Carolina at Virginia|SPREAD|North Carolina +1.5": {
+   "sport": "CFB",
+   "matchup": "North Carolina at Virginia",
+   "market": "SPREAD",
+   "pick": "North Carolina +1.5",
+   "kickoffEt": "Sat, Nov 21, 12:30 PM",
+   "firstSeenAt": "2026-11-21T16:27:14.780Z",
+   "firstPrice": "-110",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 2999,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "San Diego State at Boise State|SPREAD|Boise State -17.5": {
+   "sport": "CFB",
+   "matchup": "San Diego State at Boise State",
+   "market": "SPREAD",
+   "pick": "Boise State -17.5",
+   "kickoffEt": "Sat, Nov 21, 9:30 PM",
+   "firstSeenAt": "2026-11-21T16:27:14.780Z",
+   "firstPrice": "-111",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 2999,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Arizona at Kansas State|SPREAD|Arizona -7.5": {
+   "sport": "CFB",
+   "matchup": "Arizona at Kansas State",
+   "market": "SPREAD",
+   "pick": "Arizona -7.5",
+   "kickoffEt": "Sat, Nov 21, 7:00 PM",
+   "firstSeenAt": "2026-11-21T16:27:14.780Z",
+   "firstPrice": "-106",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 2999,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "BYU at Kansas|SPREAD|Kansas +5.5": {
+   "sport": "CFB",
+   "matchup": "BYU at Kansas",
+   "market": "SPREAD",
+   "pick": "Kansas +5.5",
+   "kickoffEt": "Sat, Nov 21, 12:00 PM",
+   "firstSeenAt": "2026-11-21T16:27:14.780Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.1,
+   "maxDollars": 2952,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Arkansas at Texas|TOTAL|Under 47.5": {
+   "sport": "CFB",
+   "matchup": "Arkansas at Texas",
+   "market": "TOTAL",
+   "pick": "Under 47.5",
+   "kickoffEt": "Sat, Nov 21, 3:30 PM",
+   "firstSeenAt": "2026-11-21T16:27:14.780Z",
+   "firstPrice": "-113",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 3000,
+   "opposedSeen": false,
    "snapshots": 1
   }
  }
