@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:55pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Arkansas State at Louisiana Tech",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - ARKANSAS STATE",
+        "icon": "🎯"
+       },
+       "bet": "Arkansas State +17.5 -122",
+       "price": "-122",
+       "for": {
+        "team": "ARKANSAS STATE",
+        "rows": [
+         {
+          "team": "Arkansas State",
+          "wallet": "AD",
+          "market": "SPREAD",
+          "record": "24-15",
+          "roi": 46.6,
+          "dollars": 10720,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "ARKANSAS STATE",
+         "dollars": 10720,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 24-15 (+47% ROI) on ARKANSAS STATE - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $5.2K to $11K - kickoff in 1h 54m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
