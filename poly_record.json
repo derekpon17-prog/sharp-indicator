@@ -1,7 +1,7 @@
 {
- "updated": "2026-11-21T18:28:39.700Z",
+ "updated": "2026-11-21T19:29:20.094Z",
  "since": "2026-11-20",
- "pending": 39,
+ "pending": 43,
  "na": 0,
  "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
