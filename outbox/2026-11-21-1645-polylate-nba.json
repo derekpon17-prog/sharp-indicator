@@ -1,0 +1,53 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket late money - NBA** - 1 HOT wallet move since the NBA Polymarket report",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NBA - Polymarket late money",
+   "subtitle": "HOT wallets that bought (or doubled up) after the NBA report posted, games not started. Buys checked 4:44pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "bet": "Clippers ML",
+       "sub": "Clippers at Mavericks - 7:10pm CT - last buy 4:41pm CT",
+       "chips": [
+        {
+         "t": "HOT surfandturf $18k",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "NBA ML 32-25 (+39%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 4-6",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.19x their usual $8.1k",
+         "c": "green"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 186,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    }
+   ],
+   "legend": "Price = their average Polymarket price as American odds. In-game buys are not counted.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
