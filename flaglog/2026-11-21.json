@@ -16,7 +16,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8210,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Buccaneers at Lions|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 3,
    "maxDollars": 12518,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Vanderbilt at Florida|TOTAL|Over 45.5": {
    "sport": "CFB",
@@ -97,7 +97,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 5826,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Clippers at Mavericks|TOTAL|Over 229.5": {
    "sport": "NBA",
@@ -145,7 +145,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Islanders at Red Wings|SPREAD|Red Wings +1.5": {
    "sport": "NHL",
@@ -162,7 +162,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 25175,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "North Carolina at Virginia|SPREAD|North Carolina +1.5": {
    "sport": "CFB",
@@ -262,7 +262,7 @@
    "maxVsUsual": 7.3,
    "maxDollars": 33394,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Titans at Cowboys|ML|Cowboys": {
    "sport": "NFL",
@@ -279,7 +279,7 @@
    "maxVsUsual": 6.7,
    "maxDollars": 30536,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Cardinals at Chiefs|ML|Chiefs": {
    "sport": "NFL",
@@ -296,7 +296,7 @@
    "maxVsUsual": 4.5,
    "maxDollars": 20658,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Dolphins at Bills|ML|Bills": {
    "sport": "NFL",
@@ -313,7 +313,7 @@
    "maxVsUsual": 3.7,
    "maxDollars": 17034,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Cardinals at Chiefs|TOTAL|Over 40.5": {
    "sport": "NFL",
@@ -330,7 +330,7 @@
    "maxVsUsual": 2.1,
    "maxDollars": 9636,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Steelers at Eagles|TOTAL|Over 38.5": {
    "sport": "NFL",
@@ -347,7 +347,7 @@
    "maxVsUsual": 2,
    "maxDollars": 9255,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Buccaneers at Lions|SPREAD|Lions -6.5": {
    "sport": "NFL",
@@ -364,7 +364,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8071,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Jets at Chargers|ML|Chargers": {
    "sport": "NFL",
@@ -381,7 +381,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 6982,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Sabres at Panthers|SPREAD|Panthers -1.5": {
    "sport": "NHL",
@@ -397,7 +397,7 @@
    "maxVsUsual": 0.4,
    "maxDollars": 6457,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Ohio State at Nebraska|ML|Ohio State": {
    "sport": "CFB",
@@ -446,7 +446,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 4303,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Colorado at Cincinnati|SPREAD|Cincinnati -2.5": {
    "sport": "CFB",
@@ -494,7 +494,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 6462,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Bucks at 76ers|ML|76ers": {
    "sport": "NBA",
@@ -527,7 +527,7 @@
    "maxVsUsual": 4.2,
    "maxDollars": 13534,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Texas Tech at Baylor|TOTAL|Over 55.5": {
    "sport": "CFB",
@@ -544,7 +544,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 6000,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "LSU at Tennessee|SPREAD|LSU -1.5": {
    "sport": "CFB",
@@ -573,10 +573,27 @@
    "tags": [
     "SIZED_2X"
    ],
-   "maxVsUsual": 2.7,
-   "maxDollars": 51948,
+   "maxVsUsual": 4.8,
+   "maxDollars": 93184,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
+  },
+  "Blue Jackets at Maple Leafs|ML|Maple Leafs": {
+   "sport": "NHL",
+   "matchup": "Blue Jackets at Maple Leafs",
+   "market": "ML",
+   "pick": "Maple Leafs",
+   "kickoffEt": "Sat, Nov 21, 7:00 PM",
+   "firstSeenAt": "2026-11-21T21:04:45.703Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 21384,
+   "opposedSeen": false,
+   "snapshots": 2
   }
  }
 }
