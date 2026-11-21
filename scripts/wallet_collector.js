@@ -63,12 +63,40 @@ async function collectCandidates() {
     cursor = d.pagination && d.pagination.next_cursor;
     if (!cursor) break;
   }
-  // 3) optional: existing roster from KV if secrets are present
+  // 3) PER-SPORT HARVEST (Derek, Nov 20 2026 - "can we harvest more in NCAAF, NHL, NCAAB?"). Sources 1-2 are
+  // dominated by NFL/NBA volume, so thin sports barely get candidates. This pulls the buyers straight out of each
+  // thin sport's recently SETTLED game markets: Gamma closed events for the league's series (ids from
+  // api/discover.js SERIES_IDS), then v2 /trades?event_id= for each event ($100+ buys). Every buyer found is tagged
+  // with that sport so the reserved evaluation slots below can find them.
+  const SERIES_IDS = { NHL: '4', NCAAF: '10002', NCAAB: '10012' };
+  const HARVEST = (process.env.HARVEST_SPORTS || 'NCAAF,NHL,NCAAB').split(',').map(x => x.trim()).filter(x => SERIES_IDS[x]);
+  const HARVEST_EVENTS = parseInt(process.env.HARVEST_EVENTS || '200', 10);
+  const harvest = {};
+  for (const sport of HARVEST) {
+    const events = [];
+    for (let off = 0; off < HARVEST_EVENTS; off += 100) {
+      try {
+        const r = await fetch(`https://gamma-api.polymarket.com/events?series_id=${SERIES_IDS[sport]}&closed=true&order=startDate&ascending=false&limit=100&offset=${off}`, { headers: { Accept: 'application/json' } });
+        const ev = r.ok ? await r.json() : [];
+        if (!Array.isArray(ev) || !ev.length) break;
+        events.push(...ev);
+      } catch (e) { console.log('harvest events ERR', sport, e.message); break; }
+    }
+    let buyers = 0;
+    for (let i = 0; i < events.length; i += CONC) {
+      const batch = events.slice(i, i + CONC);
+      const res = await Promise.all(batch.map(ev => j(`${V2}/trades?event_id=${ev.id}&limit=500&taker_only=true&side=BUY&filter_type=CASH&filter_amount=100`)));
+      res.forEach(d => (d && d.data || []).forEach(t => { add(t.proxy_wallet, t.name, sport, 'harvest-' + sport.toLowerCase(), (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0)); buyers++; }));
+    }
+    harvest[sport] = { events: events.length, buys: buyers };
+    console.log('harvest', sport, 'events', events.length, 'buys', buyers);
+  }
+  // 4) optional: existing roster from KV if secrets are present
   try {
     const roster = await discover.getRoster(null);
     (roster || []).forEach(e => add(e.wallet, e.name, e.sport, 'roster'));
   } catch {}
-  return { cands, feedPages: pages };
+  return { cands, feedPages: pages, harvest };
 }
 
 function classify(sport, s, cand) {
@@ -128,11 +156,23 @@ function byMarket(legs, cutoff) {
 
 (async () => {
   const t0 = Date.now();
-  const { cands, feedPages } = await collectCandidates();
-  const list = Object.values(cands).sort((a, b) => (b.usd - a.usd) || (b.src.size - a.src.size)).slice(0, MAX_WALLETS);
+  const { cands, feedPages, harvest } = await collectCandidates();
+  const ranked = Object.values(cands).sort((a, b) => (b.usd - a.usd) || (b.src.size - a.src.size));
+  const list = ranked.slice(0, MAX_WALLETS);
+  // RESERVED SLOTS (Derek, Nov 20 2026): the top-MAX_WALLETS-by-dollars cut was dropping almost every thin-sport
+  // candidate (2,107 found, 598 evaluated, NFL/NBA dollars first). Each harvest sport now gets up to RESERVE extra
+  // evaluations of its own candidates that missed the cut. A run of 600 took ~4 minutes, so this fits the 40-minute cap.
+  const RESERVE = parseInt(process.env.RESERVE_PER_SPORT || '200', 10);
+  const inList = new Set(list.map(c => c.wallet)), reserved = {};
+  for (const sport of Object.keys(harvest || {})) {
+    const extra = ranked.filter(c => !inList.has(c.wallet) && c.sports.has(sport)).slice(0, RESERVE);
+    extra.forEach(c => { inList.add(c.wallet); list.push(c); });
+    reserved[sport] = extra.length;
+  }
+  console.log('reserved extra evaluations', JSON.stringify(reserved));
   const cutoff = Math.floor(Date.now() / 1000) - CUTOFF_DAYS * 86400;
   console.log('candidates', Object.keys(cands).length, 'evaluating', list.length, 'feedPages', feedPages, 'cutoffDays', CUTOFF_DAYS);
-  const out = { log: LOG, generatedAt: new Date().toISOString(), cutoffDays: CUTOFF_DAYS, candidates: Object.keys(cands).length, evaluated: 0, feedPages,
+  const out = { log: LOG, generatedAt: new Date().toISOString(), cutoffDays: CUTOFF_DAYS, candidates: Object.keys(cands).length, evaluated: 0, feedPages, harvest, reserved,
                 sports: Object.fromEntries(SPORTS.map(s => [s, { confirmed_sharp: [], failed_sharp: [], confirmed_loser: [], failed_loser: [], watch: [], groups: null }])) };
   const allRows = Object.fromEntries(SPORTS.map(s => [s, []]));
   let idx = 0;

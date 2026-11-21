@@ -133,10 +133,10 @@ function polyFor(sp, matchup, grp, r) {
   if (!ms.length) return { for: r.for, against: r.against, sources: ['SHARP FLOW'] };
   const label = side => grp === 'total' ? side : String(side).toUpperCase();
   const row = m => ({ src: 'POLYMARKET', team: m.side, wallet: m.name, market: m.market, record: m.rec, recLabel: m.recScope ? m.recScope.replace(/, last (\d+) days/, ' · last $1d') + ' record' : null, roi: m.roi, dollars: m.usd,
-    note: ['Polymarket', m.l10 ? m.l10.txt : null, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' · '),
+    note: ['Polymarket', m.gateNote && m.sportCls !== m.cls ? m.gateNote : null, m.l10 ? m.l10.txt : null, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' · '),
     status: m.twoSided ? { t: 'POLY TWO-SIDED - not counted', c: 'grey' }
       : m.cls === 'HOT' ? (m.sameAsSF ? { t: 'POLY HOT - same wallet, not a 2nd source', c: 'grey' } : { t: 'POLY HOT', c: 'green' })
-      : { t: 'POLY COLD - fade flag', c: 'red' } });
+      : m.sportCls === 'HOT' ? { t: 'POLY COLD in this bet type - not counted', c: 'red' } : { t: 'POLY COLD - fade flag', c: 'red' } });
   const f = r.for ? { ...r.for, rows: [...(r.for.rows || [])] } : null;
   let a = r.against ? { ...r.against, rows: [...(r.against.rows || [])] } : null;
   for (const m of ms.sort((x, y) => y.usd - x.usd)) {

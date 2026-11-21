@@ -90,6 +90,25 @@ function recFor(entry, mkt) {
   return { rec: src.record || null, roi: src.roi ?? null, n: src.n || 0, scope: bm && bm.n ? mkt : 'all markets' };
 }
 
+/* BET-TYPE CHECK (Derek, Nov 20 2026 - "add bet type check", same rule as SharpFlow: money only counts from a wallet
+   that is profitable in THIS sport AND THIS bet type). The sport class comes from wallets.json; this narrows it to the
+   market actually bet, using the wallet's last-45-day record in that market (byMarket[mkt].post):
+   - sport HOT: HOT only with 5+ bets in this market at positive ROI. Losing in this market (5+ bets) = COLD here
+     (shown like SharpFlow's "COLD - not counted"). Under 5 bets in this market = not shown (unproven in this bet type).
+   - sport COLD: stays COLD unless the wallet is profitable in this market with 5+ bets (then not shown). Under 5
+     bets in this market falls back to the sport verdict. */
+const MKT_MIN = 5;
+function betTypeClass(sportCls, entry, mkt) {
+  const p = ((entry.byMarket || {})[mkt] || {}).post;
+  const n = (p && p.n) || 0, roi = p ? p.roi : null;
+  if (sportCls === 'HOT') {
+    if (n < MKT_MIN) return { cls: null, note: `HOT overall, only ${n} ${mkt} bets` };
+    return roi > 0 ? { cls: 'HOT', note: null } : { cls: 'COLD', note: `HOT overall but cold in ${mkt} (${p.record}, ${roi}% ROI)` };
+  }
+  if (n >= MKT_MIN && roi > 0) return { cls: null, note: `COLD overall but profitable in ${mkt}` };
+  return { cls: 'COLD', note: n < MKT_MIN ? `COLD overall, thin in ${mkt} (${n} bets)` : null };
+}
+
 /* games: [{sport, matchup, start}] ; roster: wallets.json ; buysByWallet: {wallet: [v2 trade rows]} */
 function matchPoly(games, roster, buysByWallet, now = new Date()) {
   const out = [];
@@ -101,18 +120,26 @@ function matchPoly(games, roster, buysByWallet, now = new Date()) {
     if (!away || !home) continue;
     const gd = g.start ? etDate(g.start) : null;
     const classes = [['HOT', sp.confirmed_sharp || []], ['COLD', sp.confirmed_loser || []]];
-    for (const [cls, list] of classes) {
+    for (const [sportCls, list] of classes) {
       for (const entry of list) {
         const buys = buysByWallet[entry.wallet] || [];
         const agg = {};
         for (const b of buys) {
           const title = b.title || '';
-          if (!(teamHit(title, away) && teamHit(title, home))) continue;
           const mkt = marketOf(title);
           if (!mkt) continue;
           const sd = slugDate(b);
-          if (sd && gd) { if (Math.abs(new Date(sd) - new Date(gd)) > 86400000) continue; }
-          else if (now / 1000 - (+b.timestamp || 0) > 48 * 3600) continue;
+          // FIX Nov 20: Polymarket spread titles name ONE team ("Spread: UCF (-1.5)"), so the both-teams test never
+          // matched a spread. A spread now matches on that team plus the slug's game date (a team plays once a day);
+          // ML and totals still need both teams in the title.
+          if (mkt === 'SPREAD') {
+            if (!(teamHit(title, away) || teamHit(title, home))) continue;
+            if (!sd || !gd || Math.abs(new Date(sd) - new Date(gd)) > 86400000) continue;
+          } else {
+            if (!(teamHit(title, away) && teamHit(title, home))) continue;
+            if (sd && gd) { if (Math.abs(new Date(sd) - new Date(gd)) > 86400000) continue; }
+            else if (now / 1000 - (+b.timestamp || 0) > 48 * 3600) continue;
+          }
           let side;
           if (mkt === 'TOTAL') side = /^over/i.test(b.outcome) ? 'Over' : /^under/i.test(b.outcome) ? 'Under' : null;
           else {
@@ -136,6 +163,9 @@ function matchPoly(games, roster, buysByWallet, now = new Date()) {
         for (const a of Object.values(agg)) (sidesByGrp[a.grp] ||= new Set()).add(a.side);
         for (const a of Object.values(agg)) {
           if (a.usd < MIN_USD) continue;
+          const gate = betTypeClass(sportCls, entry, a.market);
+          if (!gate.cls) continue;
+          const cls = gate.cls;
           const r = recFor(entry, a.market);
           // Same bettor check: SharpFlow tracks on-chain wallets too, many of them Polymarket. A SharpFlow ticket on the
           // same game/side/market within 3% of this wallet's dollars is almost surely the same wallet (Nov 20: ic4cream
@@ -153,7 +183,7 @@ function matchPoly(games, roster, buysByWallet, now = new Date()) {
             usd: Math.round(a.usd), fills: a.fills, avgPrice: +(a.prices.reduce((x, y) => x + y, 0) / a.prices.length).toFixed(3),
             lastBuyUtc: a.lastTs ? new Date(a.lastTs * 1000).toISOString() : null, title: a.title,
             rec: r.rec, roi: r.roi, n: r.n, recScope: `${key} ${r.scope}, last ${roster.cutoffDays || 45} days`,
-            twoSided: sidesByGrp[a.grp].size > 1,
+            twoSided: sidesByGrp[a.grp].size > 1, sportCls, gateNote: gate.note,
             sameAsSF: sameT ? { sfWallet: sameT.wallet, sfDollars: sameT.dollars } : null,
           });
         }
@@ -228,7 +258,7 @@ function logMatches(sfDir, matches, at) {
       const e = log.entries[k];
       if (!e) {
         log.entries[k] = { sport: m.sport, matchup: m.matchup, market: m.market, side: m.side, grp: m.grp, wallet: m.wallet, name: m.name,
-          cls: m.cls, startUtc: m.startUtc, conditionId: m.conditionId, outcome: m.outcome, title: m.gradeTitle,
+          cls: m.cls, sportCls: m.sportCls || m.cls, gateNote: m.gateNote || null, startUtc: m.startUtc, conditionId: m.conditionId, outcome: m.outcome, title: m.gradeTitle,
           firstSeenAt: at, firstPrice: m.gradePrice ?? m.avgPrice, firstUsd: m.usd, maxUsd: m.usd, lastSeenAt: at,
           rec: m.rec, roi: m.roi, n: m.n, recScope: m.recScope, l10: m.l10 ? m.l10.txt : null,
           onCard: !!m.onCard, sameAsSF: !!m.sameAsSF, twoSided: !!m.twoSided };
