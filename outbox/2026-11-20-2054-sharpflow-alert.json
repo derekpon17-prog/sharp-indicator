@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:10pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Kings at Lakers",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - LAKERS",
+        "icon": "🎯"
+       },
+       "bet": "Lakers -14.5 ++104",
+       "price": "++104",
+       "for": {
+        "team": "LAKERS",
+        "rows": [
+         {
+          "team": "Lakers",
+          "wallet": "E",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 1653,
+          "note": "1.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "LAKERS",
+         "dollars": 1653,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 8-2 (+62% ROI) on LAKERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $1.7K on Lakers -14.5"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
