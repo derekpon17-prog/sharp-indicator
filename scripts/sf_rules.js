@@ -82,7 +82,9 @@ const sumD = a => a.reduce((x, t) => x + t.dollars, 0);
 const recPlay = t => {
   if (!t) return null;
   const hasLine = /[+-]?\d/.test(t.pick);
-  const base = hasLine ? t.pick : t.pick + ' ' + mkName(t.market).toUpperCase();
+  // Spreads: show the signed line (Derek, Nov 21: "Michigan SPREAD -124" hid the spread). Ticket line is signed (+4.5 dog, -3.5 fav).
+  const lineTxt = t.market === 'SPREAD' && t.line != null && !isNaN(+t.line) ? (+t.line > 0 ? '+' : '') + (+t.line) : null;
+  const base = hasLine ? t.pick : lineTxt ? t.pick + ' ' + lineTxt : t.pick + ' ' + mkName(t.market).toUpperCase();
   return base + (t.price != null ? ' ' + (t.price > 0 ? '+' : '') + t.price : '');
 };
 /* Confidence (Derek, Nov 18: "I like confidence as well"): 0-9, built only from what we already know - the quality wallet's
