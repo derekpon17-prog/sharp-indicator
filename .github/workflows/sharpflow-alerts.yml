@@ -33,6 +33,11 @@ jobs:
       - name: Build alerts
         id: alerts
         run: node scripts/sharpflow_alerts.js
+      - name: Site lock gap alert (locks on the Sharp Flow site that no card of ours has)
+        id: locks
+        run: |
+          git clone -q --depth 1 -b outbox "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ob_read || mkdir -p ob_read
+          node scripts/site_lock_alert.js sf_branch ob_read cards || echo "locks_wrote=0" >> "$GITHUB_OUTPUT"
       - name: Publish sharpflow branch
         run: |
           cd sf_branch
@@ -42,7 +47,7 @@ jobs:
           git commit -q -m "sharpflow alerts $(date -u +%F-%H%M)"
           git push -q origin sharpflow || { git pull -q --rebase origin sharpflow && git push -q origin sharpflow; }
       - name: Send alert card to Discord outbox
-        if: steps.alerts.outputs.wrote != '' && steps.alerts.outputs.wrote != '0'
+        if: (steps.alerts.outputs.wrote != '' && steps.alerts.outputs.wrote != '0') || steps.locks.outputs.locks_wrote == '1'
         run: |
           git clone -q --depth 1 -b outbox "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ob
           cp cards/*.json ob/outbox/
