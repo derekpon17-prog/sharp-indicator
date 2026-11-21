@@ -1,0 +1,330 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - CFB - first game 11:00am CT** - 10 sides (5 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "CFB - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in CFB and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 6:40am CT, buys checked 10:27am CT",
+   "sections": [
+    {
+     "heading": "CFB - 11:00AM CT",
+     "picks": [
+      {
+       "bet": "Purdue +5.5",
+       "sub": "Wisconsin at Purdue - 11:00am CT",
+       "chips": [
+        {
+         "t": "HOT justwins $5.8K",
+         "c": "green"
+        },
+        {
+         "t": "CFB SPREAD 21-17 (+14%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 1-9",
+         "c": "grey"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF same side $7.8K",
+         "c": "blue"
+        }
+       ],
+       "price": -104,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Ohio State -3.5",
+       "sub": "Ohio State at Nebraska - 11:00am CT",
+       "chips": [
+        {
+         "t": "HOT justwins $2.2K",
+         "c": "green"
+        },
+        {
+         "t": "CFB SPREAD 21-17 (+14%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 1-9",
+         "c": "grey"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -100,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Over 53.5",
+       "sub": "Syracuse at Boston College - 11:00am CT",
+       "chips": [
+        {
+         "t": "HOT ic4cream $729",
+         "c": "green"
+        },
+        {
+         "t": "CFB TOTAL 46-33 (+37%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 113,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Ohio State ML",
+       "sub": "Ohio State at Nebraska - 11:00am CT",
+       "chips": [
+        {
+         "t": "COLD dinimami $4K",
+         "c": "red"
+        },
+        {
+         "t": "CFB ML 14-18 (-18%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -170,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "East Carolina +5.5",
+       "sub": "East Carolina at Army - 11:00am CT",
+       "chips": [
+        {
+         "t": "COLD in this bet type ic4cream $660",
+         "c": "red"
+        },
+        {
+         "t": "CFB SPREAD 64-58 (-22%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "not counted",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -100,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 1:30PM CT",
+     "picks": [
+      {
+       "bet": "Illinois +7.5",
+       "sub": "Iowa at Illinois - 1:30pm CT",
+       "chips": [
+        {
+         "t": "COLD in this bet type ic4cream $558",
+         "c": "red"
+        },
+        {
+         "t": "CFB SPREAD 64-58 (-22%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "not counted",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 113,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "bet": "Texas Tech ML",
+       "sub": "Texas Tech at Baylor - 2:30pm CT",
+       "chips": [
+        {
+         "t": "HOT ic4cream $8.2K",
+         "c": "grey"
+        },
+        {
+         "t": "CFB ML 30-20 (+13%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "same wallet as SF AL - not a 2nd source",
+         "c": "grey"
+        },
+        {
+         "t": "SF same side $8.2K",
+         "c": "blue"
+        }
+       ],
+       "price": -178,
+       "polyHot": 0,
+       "polyCold": 0
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 8:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 47.5",
+       "sub": "Utah at TCU - 8:00pm CT",
+       "chips": [
+        {
+         "t": "HOT ic4cream $2.4K",
+         "c": "green"
+        },
+        {
+         "t": "CFB TOTAL 46-33 (+37%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -113,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Utah ML",
+       "sub": "Utah at TCU - 8:00pm CT",
+       "chips": [
+        {
+         "t": "HOT ic4cream $879",
+         "c": "green"
+        },
+        {
+         "t": "CFB ML 30-20 (+13%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -270,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 9:30PM CT",
+     "picks": [
+      {
+       "bet": "Utah State +7.5",
+       "sub": "Utah State at Oregon State - 9:30pm CT",
+       "chips": [
+        {
+         "t": "COLD in this bet type ic4cream $3.4K",
+         "c": "red"
+        },
+        {
+         "t": "CFB SPREAD 64-58 (-22%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "not counted",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $3.4K",
+         "c": "blue"
+        }
+       ],
+       "price": -106,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 5-3 -0.2u, COLD sides 25-20 (fading -5.1u) | Price = their average Polymarket price as American odds. COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NHL one-off - first game 12:00pm CT** - 2 sides (0 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NHL - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NHL and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 6:40am CT, buys checked 10:27am CT",
+   "sections": [
+    {
+     "heading": "NHL - 12:00PM CT",
+     "picks": [
+      {
+       "bet": "Hurricanes ML",
+       "sub": "Oilers at Hurricanes - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD 0xf62b…844a $950",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 51-36 (-7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 3-7",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -194,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Over 5.5",
+       "sub": "Oilers at Hurricanes - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD 0xf62b…844a $950",
+         "c": "red"
+        },
+        {
+         "t": "NHL TOTAL 16-10 (-5%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 3-7",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -142,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "1 two-sided position left out | Poly calls since Nov 20 at Polymarket prices: HOT 5-3 -0.2u, COLD sides 25-20 (fading -5.1u) | Price = their average Polymarket price as American odds. COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

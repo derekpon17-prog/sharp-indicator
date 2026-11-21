@@ -1,0 +1,74 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket late money - CFB** - 2 HOT wallet moves since the CFB Polymarket report",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "CFB - Polymarket late money",
+   "subtitle": "HOT wallets that bought (or doubled up) after the CFB report posted, games not started. Buys checked 10:27am CT",
+   "sections": [
+    {
+     "heading": "CFB - 11:00AM CT",
+     "picks": [
+      {
+       "bet": "Purdue +5.5",
+       "sub": "Wisconsin at Purdue - 11:00am CT - last buy 8:39am CT",
+       "chips": [
+        {
+         "t": "HOT justwins $5.8k",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "CFB SPREAD 21-17 (+14%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 1-9",
+         "c": "grey"
+        }
+       ],
+       "price": -104,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Over 53.5",
+       "sub": "Syracuse at Boston College - 11:00am CT - last buy 9:37am CT",
+       "chips": [
+        {
+         "t": "HOT ic4cream $729",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "CFB TOTAL 46-33 (+37%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 113,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    }
+   ],
+   "legend": "Price = their average Polymarket price as American odds. In-game buys are not counted.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
