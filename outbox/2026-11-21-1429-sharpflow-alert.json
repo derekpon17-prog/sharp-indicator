@@ -1,0 +1,77 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 2:08pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "UCLA at Michigan",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "EDGE - MICHIGAN",
+        "icon": "🎯"
+       },
+       "bet": "Michigan SPREAD -124",
+       "price": "-124",
+       "for": {
+        "team": "MICHIGAN",
+        "rows": [
+         {
+          "team": "Michigan",
+          "wallet": "AF",
+          "market": "SPREAD",
+          "record": "29-14",
+          "roi": 17.2,
+          "dollars": 7918,
+          "note": "1.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Michigan",
+          "wallet": "AC",
+          "market": "SPREAD",
+          "record": "10-9",
+          "roi": 17.4,
+          "dollars": 6069,
+          "note": "4.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MICHIGAN",
+         "dollars": 13987,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 29-14 (+17% ROI) on MICHIGAN - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $14K on Michigan"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
