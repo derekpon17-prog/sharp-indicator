@@ -1,20 +1,20 @@
 {
- "updated": "2026-11-21T20:27:57.097Z",
+ "updated": "2026-11-21T20:45:15.137Z",
  "since": "2026-11-20",
- "pending": 47,
+ "pending": 46,
  "na": 0,
  "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
   "COLD": {
    "all": {
-    "w": 25,
+    "w": 26,
     "l": 20,
-    "n": 45,
-    "u": 5.07,
-    "fadeU": -5.07,
-    "clvN": 29,
-    "clvAvg": -0.0077,
-    "clvPos": 10
+    "n": 46,
+    "u": 6.07,
+    "fadeU": -6.07,
+    "clvN": 30,
+    "clvAvg": -0.0066,
+    "clvPos": 11
    },
    "onCard": {
     "w": 14,
@@ -27,14 +27,14 @@
     "clvPos": 5
    },
    "offCard": {
-    "w": 11,
+    "w": 12,
     "l": 11,
-    "n": 22,
-    "u": 0.29,
-    "fadeU": -0.29,
-    "clvN": 16,
-    "clvAvg": -0.0033,
-    "clvPos": 5
+    "n": 23,
+    "u": 1.29,
+    "fadeU": -1.29,
+    "clvN": 17,
+    "clvAvg": -0.0016,
+    "clvPos": 6
    },
    "bySport": {
     "NBA": {
@@ -48,14 +48,14 @@
      "clvPos": 10
     },
     "CFB": {
-     "w": 1,
+     "w": 2,
      "l": 3,
-     "n": 4,
-     "u": 0.58,
-     "fadeU": -0.58,
-     "clvN": 3,
-     "clvAvg": -0.0125,
-     "clvPos": 0
+     "n": 5,
+     "u": 1.58,
+     "fadeU": -1.58,
+     "clvN": 4,
+     "clvAvg": -0.0031,
+     "clvPos": 1
     }
    },
    "byMarket": {
@@ -80,14 +80,14 @@
      "clvPos": 3
     },
     "SPREAD": {
-     "w": 5,
+     "w": 6,
      "l": 6,
-     "n": 11,
-     "u": -1.61,
-     "fadeU": 1.61,
-     "clvN": 10,
-     "clvAvg": 0.0015,
-     "clvPos": 5
+     "n": 12,
+     "u": -0.61,
+     "fadeU": 0.61,
+     "clvN": 11,
+     "clvAvg": 0.0036,
+     "clvPos": 6
     }
    },
    "byTiming": {
@@ -112,14 +112,14 @@
      "clvPos": 0
     },
     "1-6h before": {
-     "w": 3,
+     "w": 4,
      "l": 3,
-     "n": 6,
-     "u": 0.09,
-     "fadeU": -0.09,
-     "clvN": 6,
-     "clvAvg": -0.0073,
-     "clvPos": 2
+     "n": 7,
+     "u": 1.09,
+     "fadeU": -1.09,
+     "clvN": 7,
+     "clvAvg": -0.0027,
+     "clvPos": 3
     },
     "under 1h before": {
      "w": 3,
@@ -142,29 +142,39 @@
      "clvN": 29,
      "clvAvg": -0.0077,
      "clvPos": 10
+    },
+    "BIG (1.5x+ usual)": {
+     "w": 1,
+     "l": 0,
+     "n": 1,
+     "u": 1,
+     "fadeU": -1,
+     "clvN": 1,
+     "clvAvg": 0.025,
+     "clvPos": 1
     }
    }
   },
   "HOT": {
    "all": {
     "w": 5,
-    "l": 3,
-    "n": 8,
-    "u": -0.17,
-    "fadeU": 0.17,
-    "clvN": 4,
-    "clvAvg": -0.0025,
-    "clvPos": 1
+    "l": 4,
+    "n": 9,
+    "u": -1.21,
+    "fadeU": 1.21,
+    "clvN": 5,
+    "clvAvg": 0.003,
+    "clvPos": 2
    },
    "onCard": {
     "w": 5,
-    "l": 2,
-    "n": 7,
-    "u": 0.83,
-    "fadeU": -0.83,
-    "clvN": 3,
-    "clvAvg": -0.0017,
-    "clvPos": 1
+    "l": 3,
+    "n": 8,
+    "u": -0.21,
+    "fadeU": 0.21,
+    "clvN": 4,
+    "clvAvg": 0.005,
+    "clvPos": 2
    },
    "offCard": {
     "w": 0,
@@ -185,6 +195,16 @@
      "fadeU": 0.17,
      "clvN": 4,
      "clvAvg": -0.0025,
+     "clvPos": 1
+    },
+    "CFB": {
+     "w": 0,
+     "l": 1,
+     "n": 1,
+     "u": -1.04,
+     "fadeU": 1.04,
+     "clvN": 1,
+     "clvAvg": 0.025,
      "clvPos": 1
     }
    },
@@ -208,6 +228,16 @@
      "clvN": 1,
      "clvAvg": -0.005,
      "clvPos": 0
+    },
+    "SPREAD": {
+     "w": 0,
+     "l": 1,
+     "n": 1,
+     "u": -1.04,
+     "fadeU": 1.04,
+     "clvN": 1,
+     "clvAvg": 0.025,
+     "clvPos": 1
     }
    },
    "byTiming": {
@@ -230,6 +260,16 @@
      "clvN": 4,
      "clvAvg": -0.0025,
      "clvPos": 1
+    },
+    "1-6h before": {
+     "w": 0,
+     "l": 1,
+     "n": 1,
+     "u": -1.04,
+     "fadeU": 1.04,
+     "clvN": 1,
+     "clvAvg": 0.025,
+     "clvPos": 1
     }
    },
    "bySize": {
@@ -241,6 +281,16 @@
      "fadeU": 0.17,
      "clvN": 4,
      "clvAvg": -0.0025,
+     "clvPos": 1
+    },
+    "BIG (1.5x+ usual)": {
+     "w": 0,
+     "l": 1,
+     "n": 1,
+     "u": -1.04,
+     "fadeU": 1.04,
+     "clvN": 1,
+     "clvAvg": 0.025,
      "clvPos": 1
     }
    }
