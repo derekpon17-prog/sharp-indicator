@@ -1,0 +1,479 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 AFTERNOON \u00b7 Sat Nov 21** \u00b7 games 3:00-5:59pm CT (19 games with Pinnacle lines: NCAAF 6, NCAAB 11, NHL 2)",
+ "slate": {
+  "title": "Afternoon plays (3:00-5:59pm CT)",
+  "stamp": "SAT NOV 21 \u00b7 1:22PM",
+  "sources": "Pinnacle ~1:21pm CT - Vegas ~1:22pm CT (NCAAF, NCAAB, NHL) - SharpFlow 12:27pm CT - Polymarket 12:28pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "Window: every game starting 3:00-5:59pm CT. Vegas counts Vegas Backed and Pressure Move only. Wallet money counts only from wallets with positive ROI in this sport and market. No Polymarket HOT/COLD wallet matched a game in this window. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NCAAF",
+    "game": "GASO@TROY",
+    "matchup": "NCAAF - Georgia Southern @ Troy - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 47.5,
+    "price": -112,
+    "bet": "Under 47.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS80_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 100,
+    "note": "Pinnacle Strong flipped earlier; Vegas Backed 100 (VEGAS 80 rule)"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "GAST@MRSH",
+    "matchup": "NCAAF - Georgia State @ Marshall - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "MRSH",
+    "line": -3,
+    "price": -105,
+    "bet": "Marshall -3",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "GAST@MRSH",
+    "matchup": "NCAAF - Georgia State @ Marshall - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 56.5,
+    "price": -111,
+    "bet": "Under 56.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "GAST@MRSH",
+    "matchup": "NCAAF - Georgia State @ Marshall - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "MRSH",
+    "line": null,
+    "price": -145,
+    "bet": "Marshall ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 52
+   },
+   {
+    "sport": "NCAAF",
+    "game": "USA@USM",
+    "matchup": "NCAAF - South Alabama @ Southern Miss - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 65.5,
+    "price": -110,
+    "bet": "Over 65.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 89,
+    "note": "Vegas Backed 89; Pinnacle Slight Mixed (not Strong)"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "WSU@TXST",
+    "matchup": "NCAAF - Washington St @ Texas State - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "TXST",
+    "line": -13.5,
+    "price": -114,
+    "bet": "Texas State -13.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "WSU@TXST",
+    "matchup": "NCAAF - Washington St @ Texas State - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "TXST",
+    "line": null,
+    "price": -588,
+    "bet": "Texas State ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 64
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UALB@CAN",
+    "matchup": "NCAAB - UAlbany @ Canisius - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 140.5,
+    "price": -110,
+    "bet": "Under 140.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "PENN@LAS",
+    "matchup": "NCAAB - Penn @ La Salle - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "LAS",
+    "line": null,
+    "price": -138,
+    "bet": "La Salle ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS80_STABLE"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 80
+   },
+   {
+    "sport": "NCAAB",
+    "game": "CARK@JAX",
+    "matchup": "NCAAB - Central Arkansas @ Jacksonville - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 145.5,
+    "price": -111,
+    "bet": "Over 145.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USF@GMU",
+    "matchup": "NCAAB - South Florida @ George Mason - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "GMU",
+    "line": -3.5,
+    "price": -113,
+    "bet": "George Mason -3.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USF@GMU",
+    "matchup": "NCAAB - South Florida @ George Mason - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "GMU",
+    "line": null,
+    "price": -172,
+    "bet": "George Mason ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 63
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USF@GMU",
+    "matchup": "NCAAB - South Florida @ George Mason - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 148.5,
+    "price": -110,
+    "bet": "Over 148.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LONG@ETSU",
+    "matchup": "NCAAB - Longwood @ ETSU - 3:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "LONG",
+    "line": null,
+    "price": 185,
+    "bet": "Longwood ML",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 85,
+    "note": "Vegas Backed 85; Pinnacle Slight"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UCI@USD",
+    "matchup": "NCAAB - UC Irvine @ San Diego - 3:30pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 133.5,
+    "price": -108,
+    "bet": "Under 133.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "WIN@WOF",
+    "matchup": "NCAAB - Winthrop @ Wofford - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 163.5,
+    "price": -111,
+    "bet": "Under 163.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "WIN@WOF",
+    "matchup": "NCAAB - Winthrop @ Wofford - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "WOF",
+    "line": null,
+    "price": -293,
+    "bet": "Wofford ML",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 96,
+    "note": "Pressure Move 96; Pinnacle no lean on ML"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USM@NICH",
+    "matchup": "NCAAB - Southern Miss @ Nicholls - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "NICH",
+    "line": 2.5,
+    "price": -107,
+    "bet": "Nicholls +2.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USM@NICH",
+    "matchup": "NCAAB - Southern Miss @ Nicholls - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 141.5,
+    "price": -113,
+    "bet": "Under 141.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "USM@NICH",
+    "matchup": "NCAAB - Southern Miss @ Nicholls - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "NICH",
+    "line": null,
+    "price": 126,
+    "bet": "Nicholls ML",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NE@STO",
+    "matchup": "NCAAB - Northeastern @ Stonehill - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "NE",
+    "line": -9.5,
+    "price": -107,
+    "bet": "Northeastern -9.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NE@STO",
+    "matchup": "NCAAB - Northeastern @ Stonehill - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "NE",
+    "line": null,
+    "price": -455,
+    "bet": "Northeastern ML",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 96,
+    "note": "Pressure Move 96; Pinnacle Lean flipped today (not Strong)"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "AF@UTSA",
+    "matchup": "NCAAB - Air Force @ UTSA - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "AF",
+    "line": 5.5,
+    "price": -110,
+    "bet": "Air Force +5.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "AF@UTSA",
+    "matchup": "NCAAB - Air Force @ UTSA - 4:00pm CT",
+    "first_seen": "13:22",
+    "market": "ML",
+    "side": "AF",
+    "line": null,
+    "price": 193,
+    "bet": "Air Force ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS80_STABLE"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 88
+   },
+   {
+    "sport": "NHL",
+    "game": "PIT@NSH",
+    "matchup": "NHL - Pittsburgh @ Nashville - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 6.5,
+    "price": -103,
+    "bet": "Over 6.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NHL",
+    "game": "BUF@FLA",
+    "matchup": "NHL - Buffalo @ Florida - 5:00pm CT",
+    "first_seen": "13:22",
+    "market": "SPREAD",
+    "side": "FLA",
+    "line": -1.5,
+    "price": 194,
+    "bet": "Panthers -1.5",
+    "buckets": [
+     "SF_SIDE",
+     "SF_POOLED"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "sf_dollars": 6457,
+    "sf_opp": 0,
+    "sf_wallets": 2,
+    "sf_size": "under 0.5x",
+    "sf_max_vs_usual": 0.4,
+    "sf_mkt_roi": 29.2,
+    "sf_mkt_rec": "10-3",
+    "sf_all_ratio": 2.8,
+    "sf_l30_roi": 27.4,
+    "sf_l30_rec": "26-11",
+    "sf_l30_dollars": 178442,
+    "sf_fp": "26-11|178442|10-3",
+    "sf_first_price": 194,
+    "sf_snapshot": "12:27",
+    "note": "SharpFlow only: $6.5K, 2 wallets pooled, NHL spread record 10-3 (+29%), but sized 0.4x their usual bet (under the 1.5x lean bar); Pinnacle no lean on this game's sides"
+   }
+  ]
+ }
+}
