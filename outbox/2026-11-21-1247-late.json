@@ -1,0 +1,180 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Sat Nov 21** · 7 new Strong plays on unstarted games · FADED, no bet: Penn St -26.5 (Pinnacle dropped to Slight)",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "SAT NOV 21 · 12:47PM",
+  "sources": "Pinnacle 12:46pm CT - Vegas 12:50pm CT (CFB, CBB) - SharpFlow 12:09pm CT - Polymarket 12:28pm CT - SuperContest not read - Novig not read",
+  "sf_current": true,
+  "footer": "Late update: only fades and new Strong/Max sides on games not yet started. FADED, no bet: Penn St -26.5 (posted this morning, Pinnacle now Slight). Also off Strong: Little Rock/North Florida Under, Drake/Missouri State Under. No new wallet or Poly matches on these sides. Tier rules are fixed.",
+  "rows": [
+   {
+    "sport": "NCAAF",
+    "game": "IOWA@ILL",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 40.5,
+    "price": -107,
+    "bet": "Under 40.5",
+    "matchup": "NCAAF - Iowa @ Illinois - 1:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "12:47",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 86
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UCLA@MICH",
+    "market": "SPREAD",
+    "side": "MICH",
+    "line": 3.5,
+    "price": -111,
+    "bet": "Michigan +3.5",
+    "matchup": "NCAAF - UCLA @ Michigan - 2:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80"
+    ],
+    "first_seen": "12:47",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 99
+   },
+   {
+    "sport": "NCAAF",
+    "game": "TA&M@OU",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 36.5,
+    "price": -108,
+    "bet": "Under 36.5",
+    "matchup": "NCAAF - Texas A&M @ Oklahoma - 2:45pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "first_seen": "12:47",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "CCU@UL",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 49.5,
+    "price": -112,
+    "bet": "Under 49.5",
+    "matchup": "NCAAF - Coastal Carolina @ Louisiana - 2:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "first_seen": "12:47",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NAVY@RID",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 133.5,
+    "price": -115,
+    "bet": "Under 133.5",
+    "matchup": "NCAAB - Navy @ Rider - 1:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "first_seen": "12:47",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LAF@SYR",
+    "market": "SPREAD",
+    "side": "LAF",
+    "line": 24.5,
+    "price": -105,
+    "bet": "Lafayette +24.5",
+    "matchup": "NCAAB - Lafayette @ Syracuse - 1:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "first_seen": "12:47",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MTSU@INST",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 148.5,
+    "price": -114,
+    "bet": "Under 148.5",
+    "matchup": "NCAAB - Middle Tenn @ Indiana St - 2:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "first_seen": "12:47",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "ARMY@BING",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 137.5,
+    "price": -110,
+    "bet": "Over 137.5",
+    "matchup": "NCAAB - Army @ Binghamton - 2:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "first_seen": "12:47",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "RUTG@PSU",
+    "market": "SPREAD",
+    "side": "PSU",
+    "line": -26.5,
+    "price": -110,
+    "bet": "Penn St -26.5",
+    "matchup": "NCAAF - Rutgers @ Penn State - 2:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "PIN_FADED"
+    ],
+    "first_seen": "09:49",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 73,
+    "late_pin": "Slight",
+    "tier_override": "PASS",
+    "reason": "FADED, no bet: Pinnacle dropped Penn St -26.5 from Strong to Slight at 12:46pm CT. Drop the earlier play."
+   }
+  ]
+ }
+}
