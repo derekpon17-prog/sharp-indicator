@@ -16,7 +16,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8210,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Buccaneers at Lions|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -49,7 +49,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2534,
    "opposedSeen": false,
-   "snapshots": 17
+   "snapshots": 18
   },
   "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 17
+   "snapshots": 18
   },
   "Iowa State at UCF|ML|Iowa State": {
    "sport": "CFB",
@@ -167,7 +167,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 3023,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Iowa State at UCF|SPREAD|UCF +1.5": {
    "sport": "CFB",
@@ -200,7 +200,7 @@
    "maxVsUsual": 0.2,
    "maxDollars": 1624,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Raptors at Pistons|TOTAL|Over 217.5": {
    "sport": "NBA",
@@ -250,7 +250,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 13198,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Campbell Fighting Camels at Kansas State Wildcats|TOTAL|Over 156.5": {
    "sport": "CBB",
@@ -283,7 +283,7 @@
    "maxVsUsual": 3.1,
    "maxDollars": 3077,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Oregon at Michigan State|SPREAD|Michigan State +17.5": {
    "sport": "CFB",
@@ -299,7 +299,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 2513,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Campbell Fighting Camels at Kansas State Wildcats|TOTAL|Over": {
    "sport": "CBB",
@@ -430,7 +430,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 5994,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 5
   },
   "Kings at Lakers|SPREAD|Lakers -14.5": {
    "sport": "NBA",
@@ -462,6 +462,87 @@
    "maxVsUsual": 1.5,
    "maxDollars": 1501,
    "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Suns at Jazz|SPREAD|Suns": {
+   "sport": "NBA",
+   "matchup": "Suns at Jazz",
+   "market": "SPREAD",
+   "pick": "Suns",
+   "kickoffEt": "Fri, Nov 20, 9:42 PM",
+   "firstSeenAt": "2026-11-21T03:26:24.936Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 17448,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Kings at Lakers|SPREAD|Lakers": {
+   "sport": "NBA",
+   "matchup": "Kings at Lakers",
+   "market": "SPREAD",
+   "pick": "Lakers",
+   "kickoffEt": "Fri, Nov 20, 10:10 PM",
+   "firstSeenAt": "2026-11-21T03:26:24.936Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 1653,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Rockets at Nuggets|TOTAL|Under 227.5": {
+   "sport": "NBA",
+   "matchup": "Rockets at Nuggets",
+   "market": "TOTAL",
+   "pick": "Under 227.5",
+   "kickoffEt": "Fri, Nov 20, 10:10 PM",
+   "firstSeenAt": "2026-11-21T03:26:24.936Z",
+   "firstPrice": "-106",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.9,
+   "maxDollars": 1597,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Wizards at Bulls|ML|Bulls": {
+   "sport": "NBA",
+   "matchup": "Wizards at Bulls",
+   "market": "ML",
+   "pick": "Bulls",
+   "kickoffEt": "Fri, Nov 20, 8:11 PM",
+   "firstSeenAt": "2026-11-21T03:26:24.936Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 1238,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Suns at Jazz|ML|Jazz": {
+   "sport": "NBA",
+   "matchup": "Suns at Jazz",
+   "market": "ML",
+   "pick": "Jazz",
+   "kickoffEt": "Fri, Nov 20, 9:42 PM",
+   "firstSeenAt": "2026-11-21T03:26:24.936Z",
+   "firstPrice": "+167",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 1050,
+   "opposedSeen": false,
    "snapshots": 1
   }
  }

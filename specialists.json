@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-21T02:10:46.646Z",
+ "scannedAt": "2026-11-21T03:13:33.907Z",
  "sports": {
   "NFL": [
    {
@@ -119,27 +119,6 @@
   ],
   "NBA": [
    {
-    "id": "8d3672",
-    "gap": 9.7,
-    "overall": "97-69",
-    "sport": "15-7",
-    "returnPct": 30.4,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Wizards at Bulls",
-      "market": "ML",
-      "pick": "Wizards",
-      "line": null,
-      "price": "+122",
-      "dollars": 1039,
-      "vsUsual": 1.9,
-      "vsUsualAll": 0.5
-     }
-    ]
-   },
-   {
     "id": "cbff8c",
     "gap": 7,
     "overall": "50-48",
@@ -177,7 +156,7 @@
     "sport": "26-19",
     "returnPct": 10.3,
     "last10": "5-5",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Wizards at Bulls",
@@ -195,9 +174,9 @@
       "pick": "Over 228.5",
       "line": 228.5,
       "price": "-108",
-      "dollars": 572,
-      "vsUsual": 1,
-      "vsUsualAll": 0.3
+      "dollars": 910,
+      "vsUsual": 1.6,
+      "vsUsualAll": 0.4
      }
     ]
    },
@@ -211,16 +190,6 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Raptors at Pistons",
-      "market": "SPREAD",
-      "pick": "Pistons -6.5",
-      "line": -6.5,
-      "price": "-104",
-      "dollars": 550,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.3
-     },
-     {
       "matchup": "Wizards at Bulls",
       "market": "ML",
       "pick": "Bulls",
@@ -233,7 +202,7 @@
      {
       "matchup": "Kings at Lakers",
       "market": "SPREAD",
-      "pick": "Lakers -14.5",
+      "pick": "Lakers",
       "line": -14.5,
       "price": "+104",
       "dollars": 700,
@@ -274,7 +243,7 @@
      {
       "matchup": "Suns at Jazz",
       "market": "SPREAD",
-      "pick": "Suns -5.5",
+      "pick": "Suns",
       "line": -5.5,
       "price": "+113",
       "dollars": 1551,
@@ -282,24 +251,35 @@
       "vsUsualAll": 0.6
      },
      {
-      "matchup": "Suns at Jazz",
-      "market": "TOTAL",
-      "pick": "Under 225.5",
-      "line": 225.5,
-      "price": "+104",
-      "dollars": 1519,
-      "vsUsual": 0.9,
-      "vsUsualAll": 0.6
-     },
-     {
       "matchup": "Kings at Lakers",
       "market": "SPREAD",
-      "pick": "Lakers -14.5",
+      "pick": "Lakers",
       "line": -14.5,
       "price": "+104",
       "dollars": 1653,
       "vsUsual": 1,
       "vsUsualAll": 0.7
+     }
+    ]
+   },
+   {
+    "id": "af9367",
+    "gap": 0.7,
+    "overall": "25-15",
+    "sport": "24-14",
+    "returnPct": 7.8,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Pelicans at Thunder",
+      "market": "SPREAD",
+      "pick": "Thunder",
+      "line": -9.5,
+      "price": "-122",
+      "dollars": 5994,
+      "vsUsual": 1.2,
+      "vsUsualAll": 1.5
      }
     ]
    }
@@ -338,27 +318,6 @@
    }
   ],
   "CFB": [
-   {
-    "id": "332c23",
-    "gap": 20.7,
-    "overall": "46-12",
-    "sport": "15-0",
-    "returnPct": 9.6,
-    "last10": "10-0",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Bowling Green at Toledo",
-      "market": "ML",
-      "pick": "Toledo",
-      "line": null,
-      "price": "-669",
-      "dollars": 7101,
-      "vsUsual": 0.3,
-      "vsUsualAll": 0.7
-     }
-    ]
-   },
    {
     "id": "3a72c1",
     "gap": 18.8,
@@ -409,16 +368,6 @@
     "last10": "6-4",
     "bettingBig": true,
     "tonight": [
-     {
-      "matchup": "New Mexico at Wyoming",
-      "market": "SPREAD",
-      "pick": "Wyoming",
-      "line": 14.5,
-      "price": "-186",
-      "dollars": 833,
-      "vsUsual": 0.8,
-      "vsUsualAll": 2.9
-     },
      {
       "matchup": "South Dakota at Illinois State",
       "market": "ML",
@@ -492,16 +441,6 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Oregon at Michigan State",
-      "market": "SPREAD",
-      "pick": "Michigan State +17.5",
-      "line": 17.5,
-      "price": "-100",
-      "dollars": 2513,
-      "vsUsual": 2.6,
-      "vsUsualAll": 2.5
-     },
-     {
       "matchup": "New Mexico at Wyoming",
       "market": "SPREAD",
       "pick": "New Mexico -8.5",
@@ -510,70 +449,37 @@
       "dollars": 3077,
       "vsUsual": 3.1,
       "vsUsualAll": 3.1
-     }
-    ]
-   }
-  ],
-  "CBB": [
-   {
-    "id": "ef68ca",
-    "gap": 13.4,
-    "overall": "85-82",
-    "sport": "18-10",
-    "returnPct": 43.8,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Bakersfield Roadrunners at Idaho Vandals",
-      "market": "ML",
-      "pick": "Idaho Vandals",
-      "line": null,
-      "price": "-122",
-      "dollars": 950,
-      "vsUsual": 1.5,
-      "vsUsualAll": 0.9
      },
      {
-      "matchup": "Bakersfield Roadrunners at Idaho Vandals",
-      "market": "TOTAL",
-      "pick": "Over",
-      "line": null,
-      "price": null,
-      "dollars": 1644,
-      "vsUsual": 1.6,
-      "vsUsualAll": 0.9
-     },
-     {
-      "matchup": "Campbell Fighting Camels at Kansas State Wildcats",
-      "market": "TOTAL",
-      "pick": "Over",
-      "line": null,
-      "price": null,
-      "dollars": 2650,
+      "matchup": "Oregon at Michigan State",
+      "market": "SPREAD",
+      "pick": "Michigan State +17.5",
+      "line": 17.5,
+      "price": "-100",
+      "dollars": 2513,
       "vsUsual": 2.6,
-      "vsUsualAll": 1.4
+      "vsUsualAll": 2.5
      }
     ]
    },
    {
-    "id": "e11302",
-    "gap": -4.8,
-    "overall": "47-28",
-    "sport": "11-8",
-    "returnPct": 7.2,
-    "last10": "4-6",
+    "id": "aa738b",
+    "gap": 2.7,
+    "overall": "158-140",
+    "sport": "88-70",
+    "returnPct": 7.5,
+    "last10": "6-4",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Iowa Hawkeyes at Xavier Musketeers",
+      "matchup": "Oregon at Michigan State",
       "market": "SPREAD",
-      "pick": "Iowa Hawkeyes +3.5",
-      "line": 3.5,
-      "price": "-105",
-      "dollars": 560,
-      "vsUsual": 1.1,
-      "vsUsualAll": 0.2
+      "pick": "Oregon -17.5",
+      "line": -17.5,
+      "price": "-104",
+      "dollars": 561,
+      "vsUsual": 0.9,
+      "vsUsualAll": 0.3
      }
     ]
    }
