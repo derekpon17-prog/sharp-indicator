@@ -1058,7 +1058,12 @@
    "firstBuyUtc": "2026-11-21T02:29:26.000Z",
    "hoursBeforeStart": 0.7,
    "closePrice": 0.625,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1.703,
+   "fadeU": 1.703,
+   "gradedAt": "2026-11-21T11:29:08.861Z",
+   "gradedBy": "positions"
   },
   "NBA|Rockets at Nuggets|TOTAL|Under|0x7b2366f7beb62405184e5cb40889cb0aa3cfe20f": {
    "sport": "NBA",
@@ -1092,7 +1097,12 @@
    "firstBuyUtc": "2026-11-20T04:56:29.000Z",
    "hoursBeforeStart": 22.2,
    "closePrice": 0.445,
-   "clv": -0.065
+   "clv": -0.065,
+   "result": "L",
+   "u": -1.041,
+   "fadeU": 1.041,
+   "gradedAt": "2026-11-21T11:29:08.861Z",
+   "gradedBy": "positions"
   },
   "NBA|Wizards at Bulls|ML|Bulls|0xa8a1b285090a97de8901ac8079d20d202e492974": {
    "sport": "NBA",
@@ -1345,7 +1355,12 @@
    "firstBuyUtc": "2026-11-21T02:06:19.000Z",
    "hoursBeforeStart": 1.1,
    "closePrice": 0.505,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1.041,
+   "fadeU": 1.041,
+   "gradedAt": "2026-11-21T11:29:08.861Z",
+   "gradedBy": "positions"
   },
   "NBA|Suns at Jazz|SPREAD|Suns|0xf4218246dfefc5bdce904a73b2ec4d8366f5cff4": {
    "sport": "NBA",
@@ -1379,7 +1394,12 @@
    "firstBuyUtc": "2026-11-21T00:23:07.000Z",
    "hoursBeforeStart": 2.3,
    "closePrice": 0.475,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1.128,
+   "fadeU": -1.128,
+   "gradedAt": "2026-11-21T11:29:08.861Z",
+   "gradedBy": "positions"
   },
   "CFB|Bowling Green at Toledo|SPREAD|Bowling Green|0x27f738fe203827445690339104aae35b20bc44b0": {
    "sport": "CFB",
@@ -1526,7 +1546,12 @@
    "hoursBeforeStart": 11.2,
    "gameSource": "sharpflow",
    "closePrice": 0.36,
-   "clv": -0.104
+   "clv": -0.104,
+   "result": "W",
+   "u": 1.155,
+   "fadeU": -1.155,
+   "gradedAt": "2026-11-21T11:29:08.861Z",
+   "gradedBy": "positions"
   },
   "NBA|Wizards at Bulls|TOTAL|Under|0xb8c4482802bbc9256926cde54b3daa03ee8e7385": {
    "sport": "NBA",
@@ -1601,7 +1626,12 @@
    "hoursBeforeStart": 0.1,
    "gameSource": "sharpflow",
    "closePrice": 0.495,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-21T11:29:08.861Z",
+   "gradedBy": "positions"
   },
   "NBA|Kings at Lakers|TOTAL|Under|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1636,7 +1666,12 @@
    "hoursBeforeStart": 11.2,
    "gameSource": "sharpflow",
    "closePrice": 0.455,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1.174,
+   "fadeU": -1.174,
+   "gradedAt": "2026-11-21T11:29:08.861Z",
+   "gradedBy": "positions"
   },
   "CFB|Clemson at Duke|TOTAL|Over|0x4bff30af91642dc7d2b19a8664378fe55c45fc26": {
    "sport": "CFB",
@@ -1951,7 +1986,12 @@
    "hoursBeforeStart": 0,
    "gameSource": "sharpflow",
    "closePrice": 0.515,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1.083,
+   "fadeU": 1.083,
+   "gradedAt": "2026-11-21T11:29:08.861Z",
+   "gradedBy": "positions"
   }
  }
 }
