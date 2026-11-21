@@ -129,6 +129,11 @@ def chips(r):
         roi = f' ({float(w["roi"]):+.0f}% ROI' + (f', {w.get("scope")})' if w.get("scope") else ")") if w.get("roi") is not None else ""
         l10 = f' - {w["l10"]}' if w.get("l10") else ""
         out.append((f'POLY COLD {w.get("name")} {money(float(w.get("usd") or 0))}{rec}{roi}{l10} - fade flag', "r"))
+    # Sharp Flow site lock (Derek, Nov 21 2026, council COUNCIL_2026-11-21_site-locks): set by the window tasks from the
+    # `plays` list in sharpflow/latest.json when the site has an open staked lock on this game. site_lock = free text such as
+    # "Texas Tech ML 2u - wallet money behind it". Display only: never moves a row between tiers, never counted as a source.
+    if r.get("site_lock"):
+        out.append(("SITE LOCK " + str(r["site_lock"]), "n"))
     # Kalshi (shadow only per the Aug 28 2026 council ruling in odds.js - thin graded sample,
     # never blended into a real score. Always grey/informational, never a counted source below.)
     if r.get("kalshi_prob") is not None:
