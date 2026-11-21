@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T22:36:38.149Z",
+ "scannedAt": "2026-11-21T22:48:13.877Z",
  "sides": [
   {
    "tail": false,
@@ -134,6 +134,33 @@
     "quality": 0,
     "pooled": 4,
     "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Knicks",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Sat, Nov 21, 7:40 PM",
+   "dollars": 10453,
+   "oppDollars": 5118,
+   "wallets": 2,
+   "maxVsUsual": 2.8,
+   "price": "-100",
+   "size": "0.5x",
+   "mktRecord": "12-4",
+   "mktRoi": 5.8,
+   "l30Roi": 16.7,
+   "contested": false,
+   "sfPoints": 34,
+   "parts": {
+    "money": 12,
+    "sizing": 12,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 0,
     "contested": 0
    }
   },
@@ -294,33 +321,6 @@
     "money": 12,
     "sizing": 10,
     "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "TOTAL",
-   "pick": "Over 46.5",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "dollars": 2940,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.6,
-   "price": "+104",
-   "size": "1.5x and up",
-   "mktRecord": "6-3",
-   "mktRoi": 46.5,
-   "l30Roi": 46.1,
-   "contested": false,
-   "sfPoints": 22,
-   "parts": {
-    "money": 8,
-    "sizing": 7,
-    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -513,33 +513,6 @@
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Trail Blazers at Knicks",
-   "market": "ML",
-   "pick": "Knicks",
-   "kickoffEt": "Sat, Nov 21, 7:40 PM",
-   "dollars": 3453,
-   "oppDollars": 5118,
-   "wallets": 1,
-   "maxVsUsual": 2.8,
-   "price": "-148",
-   "size": "1.5x and up",
-   "mktRecord": "12-5",
-   "mktRoi": 47.1,
-   "l30Roi": 22.9,
-   "contested": true,
-   "sfPoints": 18,
-   "parts": {
-    "money": 8,
-    "sizing": 12,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
    }
   },
   {
@@ -760,33 +733,6 @@
   {
    "tail": false,
    "sport": "CFB",
-   "matchup": "LSU at Tennessee",
-   "market": "SPREAD",
-   "pick": "Tennessee +1.5",
-   "kickoffEt": "Sat, Nov 21, 3:45 PM",
-   "dollars": 4185,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1,
-   "price": "+100",
-   "size": "0.5x",
-   "mktRecord": "29-14",
-   "mktRoi": 17.2,
-   "l30Roi": 14,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
    "matchup": "Utah State at Oregon State",
    "market": "SPREAD",
    "pick": "Utah State +7.5",
@@ -839,6 +785,33 @@
   },
   {
    "tail": false,
+   "sport": "CFB",
+   "matchup": "LSU at Tennessee",
+   "market": "SPREAD",
+   "pick": "Tennessee +1.5",
+   "kickoffEt": "Sat, Nov 21, 3:45 PM",
+   "dollars": 3181,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.8,
+   "price": "+100",
+   "size": "0.5x",
+   "mktRecord": "29-14",
+   "mktRoi": 17.2,
+   "l30Roi": 14,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NHL",
    "matchup": "Wild at Canucks",
    "market": "ML",
@@ -872,7 +845,7 @@
    "pick": "Trail Blazers",
    "kickoffEt": "Sat, Nov 21, 7:40 PM",
    "dollars": 5118,
-   "oppDollars": 3453,
+   "oppDollars": 10453,
    "wallets": 1,
    "maxVsUsual": 0.9,
    "price": "+129",
@@ -1116,22 +1089,6 @@
    ],
    "bestPrice": "-194",
    "maxVsUsual": 0.6
-  },
-  {
-   "matchup": "Buccaneers at Lions",
-   "market": "TOTAL",
-   "pick": "Over 46.5",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "sport": "NFL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 2940,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "9-3|12622|6-3"
-   ],
-   "bestPrice": "+104",
-   "maxVsUsual": 1.6
   }
  ],
  "sizedUp": [
@@ -1406,23 +1363,6 @@
    "mktRoi": 21.9,
    "opposed": "contested",
    "fp": "31-10|62756|9-6"
-  },
-  {
-   "matchup": "Buccaneers at Lions",
-   "market": "TOTAL",
-   "pick": "Over 46.5",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "sport": "NFL",
-   "dollars": 2940,
-   "price": "+104",
-   "vsUsual": 1.6,
-   "size": "1.5x and up",
-   "form": "L10 8-2",
-   "l30Roi": 46.1,
-   "mktRecord": "6-3",
-   "mktRoi": 46.5,
-   "opposed": "unopposed",
-   "fp": "9-3|12622|6-3"
   },
   {
    "matchup": "Jets at Chargers",
