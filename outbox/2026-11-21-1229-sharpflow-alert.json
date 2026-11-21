@@ -1,0 +1,172 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 12:09pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 5:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Sabres at Panthers",
+       "time": "5:00pm CT",
+       "tag": {
+        "t": "EDGE - PANTHERS",
+        "icon": "🎯"
+       },
+       "bet": "Panthers -1.5 ++194",
+       "price": "++194",
+       "for": {
+        "team": "PANTHERS",
+        "rows": [
+         {
+          "team": "Panthers",
+          "wallet": "C",
+          "market": "SPREAD",
+          "record": "10-3",
+          "roi": 29.2,
+          "dollars": 6457,
+          "note": "0.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "PANTHERS",
+         "dollars": 6457,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 10-3 (+29% ROI) on PANTHERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $6.5K on Panthers -1.5"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Indiana at Washington",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - WASHINGTON",
+        "icon": "👀"
+       },
+       "bet": "Washington",
+       "price": null,
+       "for": {
+        "team": "WASHINGTON",
+        "rows": [
+         {
+          "team": "Washington",
+          "wallet": "AL",
+          "market": "ML",
+          "record": "6-9",
+          "roi": 9.6,
+          "dollars": 2999,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "WASHINGTON",
+         "dollars": 2999,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $3K on Washington"
+      },
+      {
+       "eyebrow": "Texas Tech at Baylor",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Texas Tech vs Baylor",
+       "price": null,
+       "for": {
+        "team": "TEXAS TECH",
+        "rows": [
+         {
+          "team": "Texas Tech",
+          "wallet": "AK",
+          "market": "ML",
+          "record": "10-8",
+          "roi": 35,
+          "dollars": 8210,
+          "note": "1.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "BAYLOR",
+        "rows": [
+         {
+          "team": "Baylor",
+          "wallet": "AK",
+          "market": "SPREAD",
+          "record": "21-12",
+          "roi": 10.4,
+          "dollars": 5011,
+          "note": "1.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "TEXAS TECH",
+         "dollars": 8210,
+         "pct": 62,
+         "c": "green"
+        },
+        {
+         "team": "BAYLOR",
+         "dollars": 5011,
+         "pct": 38,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $5K on Baylor"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
