@@ -16,7 +16,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8210,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Buccaneers at Lions|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -49,7 +49,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2534,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 15
   },
   "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 14
+   "snapshots": 15
   },
   "Iowa State at UCF|ML|Iowa State": {
    "sport": "CFB",
@@ -83,7 +83,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 24
+   "snapshots": 26
   },
   "Wizards at Bulls|SPREAD|Bulls -3.5": {
    "sport": "NBA",
@@ -115,7 +115,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Bakersfield Roadrunners at Idaho Vandals|TOTAL|Over": {
    "sport": "CBB",
@@ -133,7 +133,7 @@
    "maxVsUsual": 2.4,
    "maxDollars": 2702,
    "opposedSeen": false,
-   "snapshots": 20
+   "snapshots": 22
   },
   "Green Bay Phoenix at Florida State Seminoles|ML|Florida State Seminoles": {
    "sport": "CBB",
@@ -161,12 +161,13 @@
    "firstPrice": "+104",
    "tags": [
     "STRONG_VS_WEAK",
-    "STRONG_VS_OTHER"
+    "STRONG_VS_OTHER",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 0.9,
    "maxDollars": 3023,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Iowa State at UCF|SPREAD|UCF +1.5": {
    "sport": "CFB",
@@ -183,7 +184,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 11676,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Colorado at Cincinnati|ML|Colorado": {
    "sport": "CFB",
@@ -199,7 +200,7 @@
    "maxVsUsual": 0.2,
    "maxDollars": 1624,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Raptors at Pistons|TOTAL|Over 217.5": {
    "sport": "NBA",
@@ -215,7 +216,7 @@
    "maxVsUsual": 0.7,
    "maxDollars": 1082,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Wizards at Bulls|ML|Wizards": {
    "sport": "NBA",
@@ -232,7 +233,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 1039,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 6
   },
   "UTEP at Air Force|SPREAD|Air Force -21.5": {
    "sport": "CFB",
@@ -247,9 +248,9 @@
     "SIZED_UP"
    ],
    "maxVsUsual": 1.4,
-   "maxDollars": 3000,
+   "maxDollars": 13198,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Campbell Fighting Camels at Kansas State Wildcats|TOTAL|Over 156.5": {
    "sport": "CBB",
@@ -281,8 +282,8 @@
    ],
    "maxVsUsual": 3.1,
    "maxDollars": 3067,
-   "opposedSeen": false,
-   "snapshots": 1
+   "opposedSeen": true,
+   "snapshots": 2
   },
   "Oregon at Michigan State|SPREAD|Michigan State +17.5": {
    "sport": "CFB",
@@ -298,6 +299,71 @@
    "maxVsUsual": 2.6,
    "maxDollars": 2513,
    "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Campbell Fighting Camels at Kansas State Wildcats|TOTAL|Over": {
+   "sport": "CBB",
+   "matchup": "Campbell Fighting Camels at Kansas State Wildcats",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Fri, Nov 20, 8:00 PM",
+   "firstSeenAt": "2026-11-21T00:26:27.314Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.6,
+   "maxDollars": 2650,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Hornets at Hawks|ML|Hawks": {
+   "sport": "NBA",
+   "matchup": "Hornets at Hawks",
+   "market": "ML",
+   "pick": "Hawks",
+   "kickoffEt": "Fri, Nov 20, 7:10 PM",
+   "firstSeenAt": "2026-11-21T00:26:27.314Z",
+   "firstPrice": "-233",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 2240,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Suns at Jazz|TOTAL|Under 225.5": {
+   "sport": "NBA",
+   "matchup": "Suns at Jazz",
+   "market": "TOTAL",
+   "pick": "Under 225.5",
+   "kickoffEt": "Fri, Nov 20, 9:40 PM",
+   "firstSeenAt": "2026-11-21T00:26:27.314Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 1519,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Hornets at Hawks|TOTAL|Over": {
+   "sport": "NBA",
+   "matchup": "Hornets at Hawks",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Fri, Nov 20, 7:10 PM",
+   "firstSeenAt": "2026-11-21T00:26:27.314Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 5988,
+   "opposedSeen": false,
    "snapshots": 1
   }
  }
