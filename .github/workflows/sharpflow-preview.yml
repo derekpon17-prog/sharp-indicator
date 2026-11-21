@@ -54,6 +54,9 @@ jobs:
           node scripts/poly_match.js sf_branch wallets.json sf_branch/poly_matches.json
           # Grade logged Poly calls whose games have finished, rebuild sf_branch/poly_record.json (running record).
           node scripts/poly_grade.js sf_branch || true
+      - name: SharpFlow-vs-Polymarket twin test (every 2h, analysis only)
+        continue-on-error: true
+        run: node scripts/sf_twin.js sf_branch
       - name: Which sports are due
         id: plan
         env:
