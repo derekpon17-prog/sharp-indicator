@@ -1,96 +1,213 @@
 {
- "updated": "2026-11-21T02:56:41.939Z",
+ "updated": "2026-11-21T03:27:06.116Z",
  "since": "2026-11-20",
- "pending": 39,
+ "pending": 47,
  "na": 0,
- "note": "Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
+ "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
   "COLD": {
    "all": {
-    "w": 5,
-    "l": 2,
-    "n": 7,
-    "u": 3.08,
-    "fadeU": -3.08
+    "w": 11,
+    "l": 8,
+    "n": 19,
+    "u": 0.22,
+    "fadeU": -0.22,
+    "clvN": 8,
+    "clvAvg": -0.0013,
+    "clvPos": 4
    },
    "onCard": {
-    "w": 3,
-    "l": 1,
-    "n": 4,
-    "u": 2,
-    "fadeU": -2
+    "w": 6,
+    "l": 4,
+    "n": 10,
+    "u": 2.04,
+    "fadeU": -2.04,
+    "clvN": 4,
+    "clvAvg": -0.0025,
+    "clvPos": 2
+   },
+   "offCard": {
+    "w": 5,
+    "l": 4,
+    "n": 9,
+    "u": -1.82,
+    "fadeU": 1.82,
+    "clvN": 4,
+    "clvAvg": 0,
+    "clvPos": 2
    },
    "bySport": {
     "NBA": {
-     "w": 5,
-     "l": 1,
-     "n": 6,
-     "u": 4.08,
-     "fadeU": -4.08
+     "w": 11,
+     "l": 7,
+     "n": 18,
+     "u": 1.22,
+     "fadeU": -1.22,
+     "clvN": 8,
+     "clvAvg": -0.0013,
+     "clvPos": 4
     },
     "CFB": {
      "w": 0,
      "l": 1,
      "n": 1,
      "u": -1,
-     "fadeU": 1
+     "fadeU": 1,
+     "clvN": 0,
+     "clvAvg": null,
+     "clvPos": 0
     }
    },
    "byMarket": {
-    "TOTAL": {
-     "w": 2,
-     "l": 2,
-     "n": 4,
-     "u": 0.08,
-     "fadeU": -0.08
-    },
     "ML": {
+     "w": 7,
+     "l": 2,
+     "n": 9,
+     "u": 2.1,
+     "fadeU": -2.1,
+     "clvN": 3,
+     "clvAvg": -0.0017,
+     "clvPos": 1
+    },
+    "TOTAL": {
      "w": 3,
+     "l": 6,
+     "n": 9,
+     "u": -2.92,
+     "fadeU": 2.92,
+     "clvN": 4,
+     "clvAvg": -0.0075,
+     "clvPos": 2
+    },
+    "SPREAD": {
+     "w": 1,
      "l": 0,
-     "n": 3,
-     "u": 3,
-     "fadeU": -3
+     "n": 1,
+     "u": 1.04,
+     "fadeU": -1.04,
+     "clvN": 1,
+     "clvAvg": 0.025,
+     "clvPos": 1
+    }
+   },
+   "byTiming": {
+    "unknown": {
+     "w": 8,
+     "l": 3,
+     "n": 11,
+     "u": 3.63,
+     "fadeU": -3.63,
+     "clvN": 0,
+     "clvAvg": null,
+     "clvPos": 0
+    },
+    "over 6h before": {
+     "w": 2,
+     "l": 4,
+     "n": 6,
+     "u": -3.41,
+     "fadeU": 3.41,
+     "clvN": 6,
+     "clvAvg": -0.0017,
+     "clvPos": 3
+    },
+    "1-6h before": {
+     "w": 1,
+     "l": 0,
+     "n": 1,
+     "u": 1,
+     "fadeU": -1,
+     "clvN": 1,
+     "clvAvg": -0.005,
+     "clvPos": 0
+    },
+    "under 1h before": {
+     "w": 0,
+     "l": 1,
+     "n": 1,
+     "u": -1,
+     "fadeU": 1,
+     "clvN": 1,
+     "clvAvg": 0.005,
+     "clvPos": 1
     }
    }
   },
   "HOT": {
    "all": {
-    "w": 2,
+    "w": 3,
     "l": 0,
-    "n": 2,
-    "u": 2.04,
-    "fadeU": -2.04
+    "n": 3,
+    "u": 3.04,
+    "fadeU": -3.04,
+    "clvN": 0,
+    "clvAvg": null,
+    "clvPos": 0
    },
    "onCard": {
-    "w": 2,
+    "w": 3,
     "l": 0,
-    "n": 2,
-    "u": 2.04,
-    "fadeU": -2.04
+    "n": 3,
+    "u": 3.04,
+    "fadeU": -3.04,
+    "clvN": 0,
+    "clvAvg": null,
+    "clvPos": 0
+   },
+   "offCard": {
+    "w": 0,
+    "l": 0,
+    "n": 0,
+    "u": 0,
+    "fadeU": 0,
+    "clvN": 0,
+    "clvAvg": null,
+    "clvPos": 0
    },
    "bySport": {
     "NBA": {
-     "w": 2,
+     "w": 3,
      "l": 0,
-     "n": 2,
-     "u": 2.04,
-     "fadeU": -2.04
+     "n": 3,
+     "u": 3.04,
+     "fadeU": -3.04,
+     "clvN": 0,
+     "clvAvg": null,
+     "clvPos": 0
     }
    },
    "byMarket": {
     "ML": {
-     "w": 1,
+     "w": 2,
      "l": 0,
-     "n": 1,
-     "u": 1,
-     "fadeU": -1
+     "n": 2,
+     "u": 2,
+     "fadeU": -2,
+     "clvN": 0,
+     "clvAvg": null,
+     "clvPos": 0
     },
     "TOTAL": {
      "w": 1,
      "l": 0,
      "n": 1,
      "u": 1.04,
-     "fadeU": -1.04
+     "fadeU": -1.04,
+     "clvN": 0,
+     "clvAvg": null,
+     "clvPos": 0
+    }
+   },
+   "byTiming": {
+    "unknown": {
+     "w": 3,
+     "l": 0,
+     "n": 3,
+     "u": 3.04,
+     "fadeU": -3.04,
+     "clvN": 0,
+     "clvAvg": null,
+     "clvPos": 0
     }
    }
   }
