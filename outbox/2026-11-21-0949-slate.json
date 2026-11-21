@@ -1,0 +1,1427 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 SATURDAY MERGED \u00b7 Sat Nov 21** \u00b7 games before 3:00pm CT (60 games: CFB, NCAAB, NHL, NBA)",
+ "slate": {
+  "title": "Saturday plays (before 3:00pm CT)",
+  "stamp": "SAT NOV 21 \u00b7 9:49AM",
+  "sources": "Pinnacle ~9:47am CT - Vegas ~9:48am CT (NCAAF, NBA, NHL, CBB) - SharpFlow 8:26am CT - Polymarket 8:27am CT - SuperContest not read - Novig not read",
+  "sf_current": true,
+  "footer": "Window: every game starting before 3:00pm CT. Vegas counts Vegas Backed and Pressure Move only. Wallet money counts only from wallets with positive all-time ROI in this sport and market (Tennessee ML wallet is 5-2, -9.5% in CFB ML, so it is not shown as sharp money). Poly chips are display only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NCAAF",
+    "game": "BYU@KU",
+    "matchup": "NCAAF - BYU @ Kansas - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 47,
+    "price": -111,
+    "bet": "Under 47",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 73
+   },
+   {
+    "sport": "NCAAF",
+    "game": "COLO@CIN",
+    "matchup": "NCAAF - Colorado @ Cincinnati - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 56.5,
+    "price": -109,
+    "bet": "Under 56.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "WIS@PUR",
+    "matchup": "NCAAF - Wisconsin @ Purdue - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 46.5,
+    "price": -110,
+    "bet": "Over 46.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "MEM@NAVY",
+    "matchup": "NCAAF - Memphis @ Navy - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 67.5,
+    "price": -112,
+    "bet": "Over 67.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "OSU@NEB",
+    "matchup": "NCAAF - Ohio State @ Nebraska - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "OSU",
+    "line": -3.5,
+    "price": -112,
+    "bet": "Ohio St -3.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "poly_hot": [
+     {
+      "name": "justwins",
+      "usd": 2225,
+      "rec": "21-17",
+      "roi": 13.5,
+      "n": 38,
+      "scope": "NCAAF SPREAD, last 45 days",
+      "l10": "L10 NCAAF 1-9",
+      "same_as_sf": false
+     }
+    ],
+    "note": "Vegas Backed 75 is on NEB +3.5 (Pinnacle Strong is OSU -3.5)"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "OSU@NEB",
+    "matchup": "NCAAF - Ohio State @ Nebraska - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 41.5,
+    "price": -111,
+    "bet": "Under 41.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 78
+   },
+   {
+    "sport": "NCAAF",
+    "game": "OSU@NEB",
+    "matchup": "NCAAF - Ohio State @ Nebraska - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "OSU",
+    "line": null,
+    "price": -176,
+    "bet": "Ohio State ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 41
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UNC@UVA",
+    "matchup": "NCAAF - UNC @ Virginia - 11:30am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 42.5,
+    "price": -111,
+    "bet": "Under 42.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 68
+   },
+   {
+    "sport": "NHL",
+    "game": "EDM@CAR",
+    "matchup": "NHL - Edmonton @ Carolina - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "CAR",
+    "line": -1.5,
+    "price": 122,
+    "bet": "Hurricanes -1.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NHL",
+    "game": "EDM@CAR",
+    "matchup": "NHL - Edmonton @ Carolina - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "CAR",
+    "line": null,
+    "price": -206,
+    "bet": "Hurricanes ML",
+    "buckets": [
+     "PIN_STRONG",
+     "SF_LOCK"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "poly_cold": [
+     {
+      "name": "taylorsversion",
+      "usd": 40647,
+      "rec": "64-47",
+      "roi": -0.7,
+      "n": 111,
+      "scope": "NHL ML, last 45 days",
+      "l10": "L10 NHL 8-2",
+      "same_as_sf": false
+     },
+     {
+      "name": "0xf62b...844a",
+      "usd": 950,
+      "rec": "51-36",
+      "roi": -6.8,
+      "n": 87,
+      "scope": "NHL ML, last 45 days",
+      "l10": "L10 NHL 3-7",
+      "same_as_sf": false
+     }
+    ],
+    "note": "SharpFlow own lock on Hurricanes ML"
+   },
+   {
+    "sport": "NBA",
+    "game": "MIL@PHI",
+    "matchup": "NBA - Milwaukee @ Philadelphia - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "MIL",
+    "line": 11,
+    "price": -109,
+    "bet": "Bucks +11",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "KENT@CLE",
+    "matchup": "NCAAB - Kent State @ Cleveland State - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 146.5,
+    "price": -113,
+    "bet": "Under 146.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MERC@WIU",
+    "matchup": "NCAAB - Mercer @ Western Illinois - 12:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 129.5,
+    "price": -113,
+    "bet": "Over 129.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "WCU@WAKE",
+    "matchup": "NCAAB - W Carolina @ Wake Forest - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "WCU",
+    "line": 14.5,
+    "price": -114,
+    "bet": "W Carolina +14.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LR@UNF",
+    "matchup": "NCAAB - Little Rock @ North Florida - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 158.5,
+    "price": -109,
+    "bet": "Under 158.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UNM@WICH",
+    "matchup": "NCAAB - New Mexico @ Wichita State - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 157.5,
+    "price": -113,
+    "bet": "Under 157.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "USF@FAU",
+    "matchup": "NCAAF - South Florida @ FAU - 1:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 64,
+    "price": -111,
+    "bet": "Under 64",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "IOWA@ILL",
+    "matchup": "NCAAF - Iowa @ Illinois - 1:30pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "IOWA",
+    "line": -8.5,
+    "price": -112,
+    "bet": "Iowa -8.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "note": "Poly COLD (ic4cream, bet-type check) is on Illinois +7.5, the other side"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "IOWA@ILL",
+    "matchup": "NCAAF - Iowa @ Illinois - 1:30pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "IOWA",
+    "line": null,
+    "price": -349,
+    "bet": "Iowa ML",
+    "buckets": [
+     "PIN_STRONG",
+     "SF_LOCK",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 94,
+    "note": "SharpFlow own lock on Iowa ML (no $2K ticket side)"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "FIU@KENN",
+    "matchup": "NCAAF - FIU @ Kennesaw State - 2:00pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "FIU",
+    "line": 2.5,
+    "price": -107,
+    "bet": "FIU +2.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 38
+   },
+   {
+    "sport": "NCAAF",
+    "game": "FIU@KENN",
+    "matchup": "NCAAF - FIU @ Kennesaw State - 2:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "FIU",
+    "line": null,
+    "price": 114,
+    "bet": "FIU ML",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "DRKE@MOST",
+    "matchup": "NCAAB - Drake @ Missouri State - 2:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 141.5,
+    "price": -112,
+    "bet": "Under 141.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "RGV@APSU",
+    "matchup": "NCAAB - UTRGV @ Austin Peay - 2:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 144.5,
+    "price": -112,
+    "bet": "Under 144.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "NCSU@FSU",
+    "matchup": "NCAAF - NC State @ Florida State - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "FSU",
+    "line": -10.5,
+    "price": -109,
+    "bet": "Florida St -10.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 93
+   },
+   {
+    "sport": "NCAAF",
+    "game": "TTU@BAY",
+    "matchup": "NCAAF - Texas Tech @ Baylor - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "TTU",
+    "line": -5,
+    "price": -112,
+    "bet": "Texas Tech -5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "TTU@BAY",
+    "matchup": "NCAAF - Texas Tech @ Baylor - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "TTU",
+    "line": null,
+    "price": -207,
+    "bet": "Texas Tech ML",
+    "buckets": [
+     "PIN_STRONG",
+     "SF_SIDE",
+     "SF_PIN",
+     "SF_SIZEDUP",
+     "SF_SIZED_15",
+     "SF_LOCK",
+     "SF_TAIL",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 94,
+    "sf_dollars": 8210,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_size": "1.5x and up",
+    "sf_max_vs_usual": 1.8,
+    "sf_mkt_roi": 35,
+    "sf_mkt_rec": "10-8",
+    "sf_all_ratio": 3.45,
+    "sf_l30_roi": 38,
+    "sf_l30_rec": "22-11",
+    "sf_l30_dollars": 23241,
+    "sf_fp": "22-11|23241|10-8",
+    "sf_first_price": -182,
+    "sf_snapshot": "08:26",
+    "poly_hot": [
+     {
+      "name": "ic4cream",
+      "usd": 8211,
+      "rec": "30-20",
+      "roi": 13.2,
+      "n": 50,
+      "scope": "NCAAF ML, last 45 days",
+      "l10": "L10 NCAAF 5-5",
+      "same_as_sf": true
+     }
+    ]
+   },
+   {
+    "sport": "NCAAF",
+    "game": "RUTG@PSU",
+    "matchup": "NCAAF - Rutgers @ Penn State - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "PSU",
+    "line": -26.5,
+    "price": -110,
+    "bet": "Penn St -26.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 73
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ARK@TEX",
+    "matchup": "NCAAF - Arkansas @ Texas - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "ARK",
+    "line": 20.5,
+    "price": -112,
+    "bet": "Arkansas +20.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UCLA@MICH",
+    "matchup": "NCAAF - UCLA @ Michigan - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 37,
+    "price": -111,
+    "bet": "Under 37",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 63
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UCLA@MICH",
+    "matchup": "NCAAF - UCLA @ Michigan - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "MICH",
+    "line": null,
+    "price": 150,
+    "bet": "Michigan ML",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "NU@MINN",
+    "matchup": "NCAAF - Northwestern @ Minnesota - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 41.5,
+    "price": -110,
+    "bet": "Under 41.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 100,
+    "note": "Pinnacle Lean stable"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "SYR@BC",
+    "matchup": "NCAAF - Syracuse @ Boston College - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 52.5,
+    "price": -108,
+    "bet": "Over 52.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 100,
+    "note": "Pinnacle Lean flipped earlier"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UCLA@MICH",
+    "matchup": "NCAAF - UCLA @ Michigan - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "MICH",
+    "line": 3.5,
+    "price": -110,
+    "bet": "Michigan +3.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 100,
+    "note": "Pinnacle Lean on same side"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "IOWA@ILL",
+    "matchup": "NCAAF - Iowa @ Illinois - 1:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 40.5,
+    "price": -106,
+    "bet": "Under 40.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 90,
+    "note": "Pinnacle Lean"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "LSU@TENN",
+    "matchup": "NCAAF - LSU @ Tennessee - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 45.5,
+    "price": -111,
+    "bet": "Under 45.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 90,
+    "note": "Pinnacle Slight"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "TA&M@OU",
+    "matchup": "NCAAF - Texas A&M @ Oklahoma - 2:45pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 38,
+    "price": -111,
+    "bet": "Under 38",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 88,
+    "note": "Pinnacle Lean"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "IU@WASH",
+    "matchup": "NCAAF - Indiana @ Washington - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "IU",
+    "line": null,
+    "price": -355,
+    "bet": "Indiana ML",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 76,
+    "note": "Pinnacle Slight"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "OSU@NEB",
+    "matchup": "NCAAF - Ohio State @ Nebraska - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "NEB",
+    "line": 3.5,
+    "price": -109,
+    "bet": "Nebraska +3.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 75,
+    "note": "Pinnacle Strong is on OSU -3.5 (Vegas against Pinnacle)"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "BYU@KU",
+    "matchup": "NCAAF - BYU @ Kansas - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "KU",
+    "line": 5.5,
+    "price": -111,
+    "bet": "Kansas +5.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 73,
+    "note": "Pinnacle Slight flipped earlier; SharpFlow own play is BYU -5.5"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "STBK@SPU",
+    "matchup": "NCAAB - Stony Brook @ Saint Peter's - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "STBK",
+    "line": null,
+    "price": -235,
+    "bet": "Stony Brook ML",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 70,
+    "note": "Pinnacle Slight Mixed"
+   },
+   {
+    "sport": "NHL",
+    "game": "CHI@CGY",
+    "matchup": "NHL - Chicago @ Calgary - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 5.5,
+    "price": 104,
+    "bet": "Under 5.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 100,
+    "note": "Vegas says Pinnacle against (Pinnacle Over 5.5 Lean)"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "VAN@FLA",
+    "matchup": "NCAAF - Vanderbilt @ Florida - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 47.5,
+    "price": -114,
+    "bet": "Under 47.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 66
+   },
+   {
+    "sport": "NCAAF",
+    "game": "MEM@NAVY",
+    "matchup": "NCAAF - Memphis @ Navy - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "NAVY",
+    "line": 2.5,
+    "price": -106,
+    "bet": "Navy +2.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 60
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UNT@TULN",
+    "matchup": "NCAAF - North Texas @ Tulane - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "TULN",
+    "line": 7.5,
+    "price": -112,
+    "bet": "Tulane +7.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 59
+   },
+   {
+    "sport": "NCAAF",
+    "game": "RUTG@PSU",
+    "matchup": "NCAAF - Rutgers @ Penn State - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "PSU",
+    "line": null,
+    "price": -3824,
+    "bet": "Penn St ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 59
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ECU@ARMY",
+    "matchup": "NCAAF - East Carolina @ Army - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "ARMY",
+    "line": null,
+    "price": -234,
+    "bet": "Army ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 56
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ODU@CONN",
+    "matchup": "NCAAF - Old Dominion @ UConn - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 47.5,
+    "price": -110,
+    "bet": "Under 47.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 56
+   },
+   {
+    "sport": "NCAAF",
+    "game": "WKU@LIB",
+    "matchup": "NCAAF - W Kentucky @ Liberty - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 53.5,
+    "price": -109,
+    "bet": "Over 53.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 55
+   },
+   {
+    "sport": "NCAAF",
+    "game": "HOU@WVU",
+    "matchup": "NCAAF - Houston @ West Virginia - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "HOU",
+    "line": null,
+    "price": -275,
+    "bet": "Houston ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 50
+   },
+   {
+    "sport": "NCAAF",
+    "game": "WKU@LIB",
+    "matchup": "NCAAF - W Kentucky @ Liberty - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "LIB",
+    "line": -17.5,
+    "price": -109,
+    "bet": "Liberty -17.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 50
+   },
+   {
+    "sport": "NCAAF",
+    "game": "WAKE@GT",
+    "matchup": "NCAAF - Wake Forest @ Georgia Tech - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "WAKE",
+    "line": null,
+    "price": -1772,
+    "bet": "Wake Forest ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 49
+   },
+   {
+    "sport": "NCAAF",
+    "game": "COLO@CIN",
+    "matchup": "NCAAF - Colorado @ Cincinnati - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "COLO",
+    "line": 3,
+    "price": -106,
+    "bet": "Colorado +3",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 43
+   },
+   {
+    "sport": "NCAAF",
+    "game": "NU@MINN",
+    "matchup": "NCAAF - Northwestern @ Minnesota - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "MINN",
+    "line": 2.5,
+    "price": -104,
+    "bet": "Minnesota +2.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 43
+   },
+   {
+    "sport": "NCAAF",
+    "game": "TA&M@OU",
+    "matchup": "NCAAF - Texas A&M @ Oklahoma - 2:45pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "TAMU",
+    "line": 7,
+    "price": -108,
+    "bet": "Texas A&M +7",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 38
+   },
+   {
+    "sport": "NCAAF",
+    "game": "NCSU@FSU",
+    "matchup": "NCAAF - NC State @ Florida State - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 56.5,
+    "price": -110,
+    "bet": "Over 56.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 35
+   },
+   {
+    "sport": "NCAAF",
+    "game": "USF@FAU",
+    "matchup": "NCAAF - South Florida @ FAU - 1:30pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "FAU",
+    "line": 1,
+    "price": -110,
+    "bet": "FAU +1",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 58
+   },
+   {
+    "sport": "NCAAF",
+    "game": "IU@WASH",
+    "matchup": "NCAAF - Indiana @ Washington - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 44,
+    "price": -109,
+    "bet": "Over 44",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 25
+   },
+   {
+    "sport": "NCAAF",
+    "game": "VAN@FLA",
+    "matchup": "NCAAF - Vanderbilt @ Florida - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "VAN",
+    "line": 13.5,
+    "price": -110,
+    "bet": "Vanderbilt +13.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 23
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ULM@APP",
+    "matchup": "NCAAF - ULM @ Appalachian State - 1:30pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 50.5,
+    "price": -112,
+    "bet": "Under 50.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 9
+   },
+   {
+    "sport": "NCAAF",
+    "game": "DEL@NMSU",
+    "matchup": "NCAAF - Delaware @ New Mexico State - 2:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 53.5,
+    "price": -112,
+    "bet": "Over 53.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 19
+   },
+   {
+    "sport": "NCAAF",
+    "game": "MTSU@SHSU",
+    "matchup": "NCAAF - Middle Tenn @ Sam Houston - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "SHSU",
+    "line": 6,
+    "price": -109,
+    "bet": "Sam Houston +6",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 47
+   },
+   {
+    "sport": "NCAAF",
+    "game": "MTSU@SHSU",
+    "matchup": "NCAAF - Middle Tenn @ Sam Houston - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 48,
+    "price": -110,
+    "bet": "Under 48",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 31
+   },
+   {
+    "sport": "NCAAF",
+    "game": "MOST@JVST",
+    "matchup": "NCAAF - Missouri State @ Jax State - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "JVST",
+    "line": null,
+    "price": -423,
+    "bet": "Jax State ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 50
+   },
+   {
+    "sport": "NCAAF",
+    "game": "CLT@TLSA",
+    "matchup": "NCAAF - Charlotte @ Tulsa - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "TLSA",
+    "line": null,
+    "price": -2166,
+    "bet": "Tulsa ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 68
+   },
+   {
+    "sport": "NCAAF",
+    "game": "CLT@TLSA",
+    "matchup": "NCAAF - Charlotte @ Tulsa - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 51.5,
+    "price": -108,
+    "bet": "Under 51.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 51
+   },
+   {
+    "sport": "NCAAF",
+    "game": "CCU@UL",
+    "matchup": "NCAAF - Coastal Carolina @ Louisiana - 2:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "UL",
+    "line": null,
+    "price": -408,
+    "bet": "Louisiana ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 52
+   },
+   {
+    "sport": "NCAAF",
+    "game": "FIU@KENN",
+    "matchup": "NCAAF - FIU @ Kennesaw State - 2:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 44.5,
+    "price": -111,
+    "bet": "Under 44.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 53
+   },
+   {
+    "sport": "NHL",
+    "game": "EDM@CAR",
+    "matchup": "NHL - Edmonton @ Carolina - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 6.5,
+    "price": -128,
+    "bet": "Under 6.5",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 55
+   },
+   {
+    "sport": "NHL",
+    "game": "CHI@CGY",
+    "matchup": "NHL - Chicago @ Calgary - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "CHI",
+    "line": null,
+    "price": 133,
+    "bet": "Blackhawks ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 59
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UNM@WICH",
+    "matchup": "NCAAB - New Mexico @ Wichita State - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "UNM",
+    "line": null,
+    "price": -138,
+    "bet": "New Mexico ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 39
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LR@UNF",
+    "matchup": "NCAAB - Little Rock @ North Florida - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "LR",
+    "line": null,
+    "price": -227,
+    "bet": "Little Rock ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 43
+   },
+   {
+    "sport": "NCAAB",
+    "game": "DRKE@MOST",
+    "matchup": "NCAAB - Drake @ Missouri State - 2:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "DRKE",
+    "line": null,
+    "price": -171,
+    "bet": "Drake ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 37
+   },
+   {
+    "sport": "NCAAB",
+    "game": "LAF@SYR",
+    "matchup": "NCAAB - Lafayette @ Syracuse - 1:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "SYR",
+    "line": null,
+    "price": -12509,
+    "bet": "Syracuse ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 49
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UNH@NHVN",
+    "matchup": "NCAAB - New Hampshire @ New Haven - 12:00pm CT",
+    "first_seen": "09:49",
+    "market": "ML",
+    "side": "UNH",
+    "line": null,
+    "price": -143,
+    "bet": "New Hampshire ML",
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 25
+   },
+   {
+    "sport": "NCAAF",
+    "game": "VAN@FLA",
+    "matchup": "NCAAF - Vanderbilt @ Florida - 11:00am CT",
+    "first_seen": "09:49",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 45.5,
+    "price": -108,
+    "bet": "Over 45.5",
+    "buckets": [
+     "SF_SIDE",
+     "SF_SIZEDUP",
+     "SF_SIZED_15"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "sf_dollars": 7392,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_size": "1.5x and up",
+    "sf_max_vs_usual": 1.8,
+    "sf_mkt_roi": 20.7,
+    "sf_mkt_rec": "11-9",
+    "sf_all_ratio": 2.57,
+    "sf_l30_roi": 14,
+    "sf_l30_rec": "45-25",
+    "sf_l30_dollars": 41228,
+    "sf_fp": "45-25|41228|11-9",
+    "sf_first_price": -108,
+    "sf_snapshot": "08:26",
+    "note": "Ticket flagged contested by a small opposite ticket under $1K; Pinnacle Under 47.5 Slight, Vegas Under 66 (not Strong/Max)"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "LSU@TENN",
+    "matchup": "NCAAF - LSU @ Tennessee - 2:30pm CT",
+    "first_seen": "09:49",
+    "market": "SPREAD",
+    "side": "TENN",
+    "line": 1.5,
+    "price": -107,
+    "bet": "Tennessee +1.5",
+    "buckets": [
+     "SF_SIDE",
+     "SF_POOLED"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "sf_dollars": 7356,
+    "sf_opp": 0,
+    "sf_wallets": 2,
+    "sf_size": "1x",
+    "sf_max_vs_usual": 1.4,
+    "sf_mkt_roi": 17.2,
+    "sf_mkt_rec": "29-14",
+    "sf_all_ratio": 2.03,
+    "sf_l30_roi": 14,
+    "sf_l30_rec": "45-25",
+    "sf_l30_dollars": 41228,
+    "sf_fp": "45-25|41228|29-14",
+    "sf_first_price": -107,
+    "sf_snapshot": "08:26",
+    "note": "Pooled 2 wallets, sized 1.4x (under the 1.5x lean bar)"
+   }
+  ]
+ }
+}
