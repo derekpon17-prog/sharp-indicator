@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T22:07:27.797Z",
+ "scannedAt": "2026-11-21T22:36:38.149Z",
  "sides": [
   {
    "tail": false,
@@ -219,33 +219,6 @@
    }
   },
   {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Trail Blazers at Knicks",
-   "market": "ML",
-   "pick": "Knicks",
-   "kickoffEt": "Sat, Nov 21, 7:40 PM",
-   "dollars": 3453,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 2.8,
-   "price": "-148",
-   "size": "1.5x and up",
-   "mktRecord": "12-5",
-   "mktRoi": 47.1,
-   "l30Roi": 22.9,
-   "contested": false,
-   "sfPoints": 29,
-   "parts": {
-    "money": 8,
-    "sizing": 12,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
    "tail": true,
    "sport": "CFB",
    "matchup": "Texas Tech at Baylor",
@@ -320,33 +293,6 @@
    "parts": {
     "money": 12,
     "sizing": 10,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
-   "matchup": "LSU at Tennessee",
-   "market": "SPREAD",
-   "pick": "Tennessee +1.5",
-   "kickoffEt": "Sat, Nov 21, 3:45 PM",
-   "dollars": 6644,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.6,
-   "price": "+100",
-   "size": "1.5x and up",
-   "mktRecord": "29-14",
-   "mktRoi": 17.2,
-   "l30Roi": 14,
-   "contested": false,
-   "sfPoints": 22,
-   "parts": {
-    "money": 12,
-    "sizing": 7,
     "quality": 0,
     "pooled": 0,
     "unopposed": 3,
@@ -571,6 +517,33 @@
   },
   {
    "tail": false,
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Knicks",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Sat, Nov 21, 7:40 PM",
+   "dollars": 3453,
+   "oppDollars": 5118,
+   "wallets": 1,
+   "maxVsUsual": 2.8,
+   "price": "-148",
+   "size": "1.5x and up",
+   "mktRecord": "12-5",
+   "mktRoi": 47.1,
+   "l30Roi": 22.9,
+   "contested": true,
+   "sfPoints": 18,
+   "parts": {
+    "money": 8,
+    "sizing": 12,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Bengals at Commanders",
    "market": "ML",
@@ -706,33 +679,6 @@
   {
    "tail": false,
    "sport": "CFB",
-   "matchup": "Arkansas at Texas",
-   "market": "TOTAL",
-   "pick": "Under 47.5",
-   "kickoffEt": "Sat, Nov 21, 3:36 PM",
-   "dollars": 3000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.4,
-   "price": "-113",
-   "size": "1x",
-   "mktRecord": "22-23",
-   "mktRoi": -5.9,
-   "l30Roi": 36.7,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 8,
-    "sizing": 4,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
    "matchup": "Indiana at Washington",
    "market": "ML",
    "pick": "Washington",
@@ -814,6 +760,33 @@
   {
    "tail": false,
    "sport": "CFB",
+   "matchup": "LSU at Tennessee",
+   "market": "SPREAD",
+   "pick": "Tennessee +1.5",
+   "kickoffEt": "Sat, Nov 21, 3:45 PM",
+   "dollars": 4185,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1,
+   "price": "+100",
+   "size": "0.5x",
+   "mktRecord": "29-14",
+   "mktRoi": 17.2,
+   "l30Roi": 14,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
    "matchup": "Utah State at Oregon State",
    "market": "SPREAD",
    "pick": "Utah State +7.5",
@@ -866,33 +839,6 @@
   },
   {
    "tail": false,
-   "sport": "CFB",
-   "matchup": "South Florida at Florida Atlantic",
-   "market": "ML",
-   "pick": "South Florida",
-   "kickoffEt": "Sat, Nov 21, 2:30 PM",
-   "dollars": 2972,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.2,
-   "price": "-113",
-   "size": "under 0.5x",
-   "mktRecord": "20-12",
-   "mktRoi": -5,
-   "l30Roi": 26.4,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "NHL",
    "matchup": "Wild at Canucks",
    "market": "ML",
@@ -916,6 +862,33 @@
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Knicks",
+   "market": "ML",
+   "pick": "Trail Blazers",
+   "kickoffEt": "Sat, Nov 21, 7:40 PM",
+   "dollars": 5118,
+   "oppDollars": 3453,
+   "wallets": 1,
+   "maxVsUsual": 0.9,
+   "price": "+129",
+   "size": "0.5x",
+   "mktRecord": "61-50",
+   "mktRoi": 27.3,
+   "l30Roi": -3.2,
+   "contested": true,
+   "sfPoints": 4,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
    }
   }
  ],
@@ -1435,23 +1408,6 @@
    "fp": "31-10|62756|9-6"
   },
   {
-   "matchup": "LSU at Tennessee",
-   "market": "SPREAD",
-   "pick": "Tennessee +1.5",
-   "kickoffEt": "Sat, Nov 21, 3:45 PM",
-   "sport": "CFB",
-   "dollars": 6644,
-   "price": "+100",
-   "vsUsual": 1.6,
-   "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 14,
-   "mktRecord": "29-14",
-   "mktRoi": 17.2,
-   "opposed": "unopposed",
-   "fp": "45-25|41228|29-14"
-  },
-  {
    "matchup": "Buccaneers at Lions",
    "market": "TOTAL",
    "pick": "Over 46.5",
@@ -1501,23 +1457,6 @@
    "mktRoi": 10.4,
    "opposed": "unopposed",
    "fp": "22-11|23241|21-12"
-  },
-  {
-   "matchup": "Arkansas at Texas",
-   "market": "TOTAL",
-   "pick": "Under 47.5",
-   "kickoffEt": "Sat, Nov 21, 3:36 PM",
-   "sport": "CFB",
-   "dollars": 3000,
-   "price": "-113",
-   "vsUsual": 1.4,
-   "size": "1x",
-   "form": "L10 7-3",
-   "l30Roi": 36.7,
-   "mktRecord": "22-23",
-   "mktRoi": -5.9,
-   "opposed": "unopposed",
-   "fp": "32-13|38944|22-23"
   },
   {
    "matchup": "Indiana at Washington",

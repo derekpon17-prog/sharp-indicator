@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T22:07:27.797Z",
+ "scannedAt": "2026-11-21T22:36:38.149Z",
  "sports": {
   "NFL": [
    {
@@ -181,7 +181,7 @@
       "pick": "Panthers",
       "line": null,
       "price": "-133",
-      "dollars": 520,
+      "dollars": 521,
       "vsUsual": 0.1,
       "vsUsualAll": 0.5
      },
@@ -211,7 +211,7 @@
       "pick": "Jaguars",
       "line": null,
       "price": "-245",
-      "dollars": 1360,
+      "dollars": 1370,
       "vsUsual": 0.3,
       "vsUsualAll": 1.4
      },
@@ -402,6 +402,16 @@
       "vsUsualAll": 0.3
      },
      {
+      "matchup": "Trail Blazers at Knicks",
+      "market": "ML",
+      "pick": "Trail Blazers",
+      "line": null,
+      "price": "+129",
+      "dollars": 5118,
+      "vsUsual": 0.9,
+      "vsUsualAll": 0.5
+     },
+     {
       "matchup": "Pelicans at Spurs",
       "market": "ML",
       "pick": "Pelicans",
@@ -499,6 +509,27 @@
     ]
    },
    {
+    "id": "3102d7",
+    "gap": 13.5,
+    "overall": "55-40",
+    "sport": "10-4",
+    "returnPct": 51.8,
+    "last10": "8-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Sabres at Panthers",
+      "market": "ML",
+      "pick": "Panthers",
+      "line": null,
+      "price": "-127",
+      "dollars": 636,
+      "vsUsual": 0.9,
+      "vsUsualAll": 1.2
+     }
+    ]
+   },
+   {
     "id": "5c2194",
     "gap": 5.4,
     "overall": "79-62",
@@ -507,6 +538,16 @@
     "last10": "6-4",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Sabres at Panthers",
+      "market": "ML",
+      "pick": "Panthers",
+      "line": null,
+      "price": "-127",
+      "dollars": 1008,
+      "vsUsual": 1.4,
+      "vsUsualAll": 0.7
+     },
      {
       "matchup": "Islanders at Red Wings",
       "market": "ML",
