@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T19:08:45.872Z",
+ "scannedAt": "2026-11-21T20:08:57.858Z",
  "sides": [
   {
    "tail": false,
@@ -117,7 +117,7 @@
    "market": "ML",
    "pick": "76ers",
    "kickoffEt": "Sat, Nov 21, 1:11 PM",
-   "dollars": 13351,
+   "dollars": 13302,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 2.9,
@@ -133,6 +133,33 @@
     "sizing": 12,
     "quality": 6,
     "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": true,
+   "sport": "CFB",
+   "matchup": "UCLA at Michigan",
+   "market": "SPREAD",
+   "pick": "Michigan",
+   "kickoffEt": "Sat, Nov 21, 3:30 PM",
+   "dollars": 13987,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 4.2,
+   "price": "-124",
+   "size": "1.5x and up",
+   "mktRecord": "29-14",
+   "mktRoi": 17.2,
+   "l30Roi": 14,
+   "contested": false,
+   "sfPoints": 31,
+   "parts": {
+    "money": 12,
+    "sizing": 12,
+    "quality": 0,
+    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -240,33 +267,6 @@
     "money": 12,
     "sizing": 7,
     "quality": 6,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NHL",
-   "matchup": "Islanders at Red Wings",
-   "market": "SPREAD",
-   "pick": "Red Wings +1.5",
-   "kickoffEt": "Sat, Nov 21, 7:00 PM",
-   "dollars": 25175,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.4,
-   "price": "-211",
-   "size": "1x",
-   "mktRecord": "10-3",
-   "mktRoi": 29.2,
-   "l30Roi": 27.4,
-   "contested": false,
-   "sfPoints": 27,
-   "parts": {
-    "money": 16,
-    "sizing": 4,
-    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -402,33 +402,6 @@
     "money": 12,
     "sizing": 4,
     "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NHL",
-   "matchup": "Sabres at Panthers",
-   "market": "SPREAD",
-   "pick": "Panthers -1.5",
-   "kickoffEt": "Sat, Nov 21, 6:00 PM",
-   "dollars": 6457,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.4,
-   "price": "+194",
-   "size": "under 0.5x",
-   "mktRecord": "10-3",
-   "mktRoi": 29.2,
-   "l30Roi": 27.4,
-   "contested": false,
-   "sfPoints": 19,
-   "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -677,38 +650,11 @@
   {
    "tail": false,
    "sport": "CFB",
-   "matchup": "Florida International at Kennesaw State",
-   "market": "SPREAD",
-   "pick": "Florida International +2.5",
-   "kickoffEt": "Sat, Nov 21, 3:00 PM",
-   "dollars": 4236,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.5,
-   "price": "-104",
-   "size": "under 0.5x",
-   "mktRecord": "41-26",
-   "mktRoi": 19.5,
-   "l30Roi": -8.8,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
    "matchup": "Arkansas at Texas",
    "market": "ML",
    "pick": "Texas",
    "kickoffEt": "Sat, Nov 21, 3:30 PM",
-   "dollars": 3465,
+   "dollars": 3910,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 0.2,
@@ -717,33 +663,6 @@
    "mktRecord": "16-0",
    "mktRoi": 9.7,
    "l30Roi": 16.6,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
-   "matchup": "Utah State at Oregon State",
-   "market": "SPREAD",
-   "pick": "Utah State +7.5",
-   "kickoffEt": "Sat, Nov 21, 10:30 PM",
-   "dollars": 3379,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.7,
-   "price": "-105",
-   "size": "0.5x",
-   "mktRecord": "21-12",
-   "mktRoi": 10.4,
-   "l30Roi": 38,
    "contested": false,
    "sfPoints": 11,
    "parts": {
@@ -788,22 +707,6 @@
    ],
    "bestPrice": "-355",
    "maxVsUsual": 6.7
-  },
-  {
-   "matchup": "Islanders at Red Wings",
-   "market": "SPREAD",
-   "pick": "Red Wings +1.5",
-   "kickoffEt": "Sat, Nov 21, 7:00 PM",
-   "sport": "NHL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 25175,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "26-11|178442|10-3"
-   ],
-   "bestPrice": "-211",
-   "maxVsUsual": 1.4
   },
   {
    "matchup": "Cardinals at Chiefs",
@@ -918,22 +821,6 @@
    "maxVsUsual": 1.5
   },
   {
-   "matchup": "Sabres at Panthers",
-   "market": "SPREAD",
-   "pick": "Panthers -1.5",
-   "kickoffEt": "Sat, Nov 21, 6:00 PM",
-   "sport": "NHL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 6457,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "26-11|178442|10-3"
-   ],
-   "bestPrice": "+194",
-   "maxVsUsual": 0.4
-  },
-  {
    "matchup": "Ohio State at Nebraska",
    "market": "ML",
    "pick": "Ohio State",
@@ -1035,6 +922,23 @@
    "fp": "31-10|62756|21-4"
   },
   {
+   "matchup": "UCLA at Michigan",
+   "market": "SPREAD",
+   "pick": "Michigan",
+   "kickoffEt": "Sat, Nov 21, 3:30 PM",
+   "sport": "CFB",
+   "dollars": 6069,
+   "price": "-104",
+   "vsUsual": 4.2,
+   "size": "1.5x and up",
+   "form": "L10 5-5",
+   "l30Roi": 32.1,
+   "mktRecord": "10-9",
+   "mktRoi": 17.4,
+   "opposed": "unopposed",
+   "fp": "5-3|6364|10-9"
+  },
+  {
    "matchup": "Dolphins at Bills",
    "market": "ML",
    "pick": "Bills",
@@ -1074,7 +978,7 @@
    "pick": "76ers",
    "kickoffEt": "Sat, Nov 21, 1:11 PM",
    "sport": "NBA",
-   "dollars": 13351,
+   "dollars": 13302,
    "price": "-333",
    "vsUsual": 2.9,
    "size": "1.5x and up",
@@ -1137,6 +1041,23 @@
    "fp": "31-10|62756|1-0"
   },
   {
+   "matchup": "UCLA at Michigan",
+   "market": "SPREAD",
+   "pick": "Michigan",
+   "kickoffEt": "Sat, Nov 21, 3:30 PM",
+   "sport": "CFB",
+   "dollars": 7918,
+   "price": "-124",
+   "vsUsual": 1.9,
+   "size": "1.5x and up",
+   "form": "L10 6-4",
+   "l30Roi": 14,
+   "mktRecord": "29-14",
+   "mktRoi": 17.2,
+   "opposed": "unopposed",
+   "fp": "45-25|41228|29-14"
+  },
+  {
    "matchup": "Texas Tech at Baylor",
    "market": "ML",
    "pick": "Texas Tech",
@@ -1186,23 +1107,6 @@
    "mktRoi": 34.7,
    "opposed": "unopposed",
    "fp": "31-10|62756|21-4"
-  },
-  {
-   "matchup": "Islanders at Red Wings",
-   "market": "SPREAD",
-   "pick": "Red Wings +1.5",
-   "kickoffEt": "Sat, Nov 21, 7:00 PM",
-   "sport": "NHL",
-   "dollars": 25175,
-   "price": "-211",
-   "vsUsual": 1.4,
-   "size": "1x",
-   "form": "L10 5-5",
-   "l30Roi": 27.4,
-   "mktRecord": "10-3",
-   "mktRoi": 29.2,
-   "opposed": "unopposed",
-   "fp": "26-11|178442|10-3"
   },
   {
    "matchup": "Texas Tech at Baylor",
