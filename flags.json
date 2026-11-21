@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T21:08:11.004Z",
+ "scannedAt": "2026-11-21T21:27:15.621Z",
  "sides": [
   {
    "tail": false,
@@ -145,7 +145,7 @@
    "pick": "LSU",
    "kickoffEt": "Sat, Nov 21, 3:45 PM",
    "dollars": 93117,
-   "oppDollars": 12518,
+   "oppDollars": 13757,
    "wallets": 1,
    "maxVsUsual": 4.8,
    "price": "-111",
@@ -301,6 +301,33 @@
   },
   {
    "tail": false,
+   "sport": "CFB",
+   "matchup": "LSU at Tennessee",
+   "market": "SPREAD",
+   "pick": "Tennessee +1.5",
+   "kickoffEt": "Sat, Nov 21, 3:45 PM",
+   "dollars": 6644,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.6,
+   "price": "+100",
+   "size": "1.5x and up",
+   "mktRecord": "29-14",
+   "mktRoi": 17.2,
+   "l30Roi": 14,
+   "contested": false,
+   "sfPoints": 22,
+   "parts": {
+    "money": 12,
+    "sizing": 7,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Buccaneers at Lions",
    "market": "SPREAD",
@@ -324,6 +351,33 @@
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "Arkansas State at Louisiana Tech",
+   "market": "SPREAD",
+   "pick": "Arkansas State +17.5",
+   "kickoffEt": "Sat, Nov 21, 7:00 PM",
+   "dollars": 5190,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.3,
+   "price": "-122",
+   "size": "under 0.5x",
+   "mktRecord": "24-15",
+   "mktRoi": 46.6,
+   "l30Roi": 26.4,
+   "contested": false,
+   "sfPoints": 21,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
    }
   },
   {
@@ -436,33 +490,6 @@
   },
   {
    "tail": false,
-   "sport": "CFB",
-   "matchup": "LSU at Tennessee",
-   "market": "SPREAD",
-   "pick": "Tennessee +1.5",
-   "kickoffEt": "Sat, Nov 21, 3:45 PM",
-   "dollars": 5826,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.4,
-   "price": "-107",
-   "size": "1x",
-   "mktRecord": "29-14",
-   "mktRoi": 17.2,
-   "l30Roi": 14,
-   "contested": false,
-   "sfPoints": 19,
-   "parts": {
-    "money": 12,
-    "sizing": 4,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "NFL",
    "matchup": "Bengals at Commanders",
    "market": "ML",
@@ -521,11 +548,11 @@
    "market": "ML",
    "pick": "Tennessee",
    "kickoffEt": "Sat, Nov 21, 3:45 PM",
-   "dollars": 12518,
+   "dollars": 13757,
    "oppDollars": 93117,
    "wallets": 1,
-   "maxVsUsual": 3,
-   "price": "+105",
+   "maxVsUsual": 3.3,
+   "price": "+109",
    "size": "1.5x and up",
    "mktRecord": "5-2",
    "mktRoi": -9.5,
@@ -849,6 +876,22 @@
    "maxVsUsual": 1.5
   },
   {
+   "matchup": "Arkansas State at Louisiana Tech",
+   "market": "SPREAD",
+   "pick": "Arkansas State +17.5",
+   "kickoffEt": "Sat, Nov 21, 7:00 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 5190,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "14-14|111605|24-15"
+   ],
+   "bestPrice": "-122",
+   "maxVsUsual": 0.3
+  },
+  {
    "matchup": "Bengals at Commanders",
    "market": "ML",
    "pick": "Bengals",
@@ -991,9 +1034,9 @@
    "pick": "Tennessee",
    "kickoffEt": "Sat, Nov 21, 3:45 PM",
    "sport": "CFB",
-   "dollars": 12518,
-   "price": "+105",
-   "vsUsual": 3,
+   "dollars": 13757,
+   "price": "+109",
+   "vsUsual": 3.3,
    "size": "1.5x and up",
    "form": "L10 6-4",
    "l30Roi": 14,
@@ -1122,6 +1165,23 @@
    "fp": "31-10|62756|9-6"
   },
   {
+   "matchup": "LSU at Tennessee",
+   "market": "SPREAD",
+   "pick": "Tennessee +1.5",
+   "kickoffEt": "Sat, Nov 21, 3:45 PM",
+   "sport": "CFB",
+   "dollars": 6644,
+   "price": "+100",
+   "vsUsual": 1.6,
+   "size": "1.5x and up",
+   "form": "L10 6-4",
+   "l30Roi": 14,
+   "mktRecord": "29-14",
+   "mktRoi": 17.2,
+   "opposed": "unopposed",
+   "fp": "45-25|41228|29-14"
+  },
+  {
    "matchup": "Jets at Chargers",
    "market": "ML",
    "pick": "Chargers",
@@ -1154,23 +1214,6 @@
    "mktRoi": 10.4,
    "opposed": "unopposed",
    "fp": "22-11|23241|21-12"
-  },
-  {
-   "matchup": "LSU at Tennessee",
-   "market": "SPREAD",
-   "pick": "Tennessee +1.5",
-   "kickoffEt": "Sat, Nov 21, 3:45 PM",
-   "sport": "CFB",
-   "dollars": 5826,
-   "price": "-107",
-   "vsUsual": 1.4,
-   "size": "1x",
-   "form": "L10 6-4",
-   "l30Roi": 14,
-   "mktRecord": "29-14",
-   "mktRoi": 17.2,
-   "opposed": "unopposed",
-   "fp": "45-25|41228|29-14"
   },
   {
    "matchup": "Arkansas at Texas",
