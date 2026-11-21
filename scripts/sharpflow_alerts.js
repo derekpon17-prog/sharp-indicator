@@ -101,6 +101,8 @@ for (const s of fresh.slice(room)) { if (st.sides[s.key]) { if (s.prev == null) 
 
 const specOf = (sp, ts) => { const ids = new Set(ts.map(t => t.wid).filter(Boolean)); return (SPEC[sp] || []).filter(x => x.gap > 0 && ids.has(x.id)).sort((a, b) => b.gap - a.gap)[0]; };
 const grpOf = m => m === 'TOTAL' ? 'total' : 'team';
+// Kickoff countdown (Derek, Nov 21): alerts can land minutes before the game, so say how long is left.
+const kickTxt = st => { const m = Math.round((st - now) / 60000); return m < 1 ? ' - KICKOFF NOW' : m <= 10 ? ' - LATE: kickoff in ' + m + ' min' : ' - kickoff in ' + (m >= 90 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + ' min'); };
 const gseen = {}, rows = [];
 for (const s of send) {
   const gk = s.sp + '|' + s.matchup + '|' + grpOf(s.market); if (gseen[gk]) continue; gseen[gk] = 1;
@@ -108,7 +110,7 @@ for (const s of send) {
   const r = R.matchupRow(s.sp, tix, grpOf(s.market)); if (!r) continue;
   const growTxt = s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)}` : `NEW ${k(s.good)} on ${s.pick}`;
   rows.push({ st: s.st, sp: s.sp, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, bet: r.bet, price: r.price,
-    for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: growTxt });
+    for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: growTxt + kickTxt(s.st) });
 }
 rows.sort((a, b) => b.confidence - a.confidence || a.st - b.st); // Derek, Nov 18: order by confidence, not kickoff time
 const secs = [];
