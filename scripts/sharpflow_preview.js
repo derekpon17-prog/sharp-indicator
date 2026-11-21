@@ -282,7 +282,7 @@ function buildPolyCard(sp, latest, before, firstStart, outlier) {
     const last = i + 12 >= picks.length || boards.length === 1;
     const rl = polyRecordLine();
     boards.push({ brand: 'POLYMARKET', title: `${sp} - Polymarket sharp wallets`,
-      subtitle: `Classified wallets with $${MIN_POLY}+ on a side. HOT = profitable in ${sp} and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster ${rosterAt} CT, buys checked ${checkedAt} CT${picks.length > 12 ? ` - board ${boards.length + 1}` : ''}`,
+      subtitle: `Classified wallets with $${MIN_POLY}+ on a side. HOT = profitable in ${sp} and this bet type (last 45 days, ${(POLYMETA.hotBar || {}).mktMin || 5}+ bets${(POLYMETA.hotBar || {}).roiMin ? `, +${POLYMETA.hotBar.roiMin}% ROI or better` : ''}); COLD = losing. Wallet roster ${rosterAt} CT, buys checked ${checkedAt} CT${picks.length > 12 ? ` - board ${boards.length + 1}` : ''}`,
       sections: secs,
       legend: [last && two ? `${two} two-sided position${two === 1 ? '' : 's'} left out` : '', last && picks.length > 24 ? `${picks.length - 24} more sides not shown (smallest wallet money)` : '', rl, 'Price = their average Polymarket price as American odds. COLD = fade flag. Same wallet as SF = not a second source.'].filter(Boolean).join(' | '),
       footer: 'Wallet money, not a pick. Leans, not guarantees' });

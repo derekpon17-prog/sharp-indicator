@@ -104,13 +104,26 @@ function recFor(entry, mkt) {
      (shown like SharpFlow's "COLD - not counted"). Under 5 bets in this market = not shown (unproven in this bet type).
    - sport COLD: stays COLD unless the wallet is profitable in this market with 5+ bets (then not shown). Under 5
      bets in this market falls back to the sport verdict. */
-const MKT_MIN = 5;
+let MKT_MIN = 5, HOT_ROI_MIN = 0;
+/* AUTO-RAISE (council Nov 20): once 40 independent Polymarket HOT calls are graded (poly_record.json, HOT bucket -
+   same-as-SharpFlow calls excluded), the HOT bar rises to SharpFlow's own quality bar: 10+ bets in this market at
+   +15% ROI or better over the last 45 days. Below 40 graded the starter bar (5+ bets, positive ROI) stays. */
+function setHotBar(sfDir) {
+  try {
+    const rec = JSON.parse(fs.readFileSync(sfDir + '/poly_record.json', 'utf8'));
+    const n = (((rec.buckets || {}).HOT || {}).all || {}).n || 0;
+    if (n >= 40) { MKT_MIN = 10; HOT_ROI_MIN = 15; }
+    return { graded: n, mktMin: MKT_MIN, roiMin: HOT_ROI_MIN };
+  } catch { return { graded: 0, mktMin: MKT_MIN, roiMin: HOT_ROI_MIN }; }
+}
 function betTypeClass(sportCls, entry, mkt) {
   const p = ((entry.byMarket || {})[mkt] || {}).post;
   const n = (p && p.n) || 0, roi = p ? p.roi : null;
   if (sportCls === 'HOT') {
     if (n < MKT_MIN) return { cls: null, note: `HOT overall, only ${n} ${mkt} bets` };
-    return roi > 0 ? { cls: 'HOT', note: null } : { cls: 'COLD', note: `HOT overall but cold in ${mkt} (${p.record}, ${roi}% ROI)` };
+    if (roi > HOT_ROI_MIN) return { cls: 'HOT', note: null };
+    if (roi > 0) return { cls: null, note: `HOT overall, ${mkt} ROI ${roi}% under the ${HOT_ROI_MIN}% bar` };
+    return { cls: 'COLD', note: `HOT overall but cold in ${mkt} (${p.record}, ${roi}% ROI)` };
   }
   if (n >= MKT_MIN && roi > 0) return { cls: null, note: `COLD overall but profitable in ${mkt}` };
   return { cls: 'COLD', note: n < MKT_MIN ? `COLD overall, thin in ${mkt} (${n} bets)` : null };
@@ -352,6 +365,7 @@ if (require.main === module) {
       const latest = JSON.parse(fs.readFileSync(sfDir + '/latest.json', 'utf8'));
       const roster = JSON.parse(fs.readFileSync(rosterFile, 'utf8'));
       result.rosterGeneratedAt = roster.generatedAt || null;
+      result.hotBar = setHotBar(sfDir);
       result.sfScannedAt = latest.scannedAt || null;
       const now = new Date();
       const seen = {}, games = [];
@@ -376,6 +390,7 @@ if (require.main === module) {
       result.espnAdded = espnAdded;
       // keep games that started in the last 3h so a late rerun still sees them (their in-game buys are dropped anyway)
       for (let i = games.length - 1; i >= 0; i--) if (!games[i].start || games[i].start < now - 3 * 3600000) games.splice(i, 1);
+      result.espnAdded = games.filter(g => g.source === 'espn').length;
       const wallets = new Set();
       for (const g of games) {
         const sp = (roster.sports || {})[SPORT_KEY[g.sport]];

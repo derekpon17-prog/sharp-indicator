@@ -47,6 +47,8 @@ jobs:
         continue-on-error: true
         run: |
           git fetch -q --depth 1 origin wallets && git show FETCH_HEAD:wallets/wallets.json > wallets.json || echo '{}' > wallets.json
+          # previous run's matches, for the late-money alert below
+          cp sf_branch/poly_matches.json poly_prev.json 2>/dev/null || true
           node scripts/poly_match.js sf_branch wallets.json sf_branch/poly_matches.json
           # Grade logged Poly calls whose games have finished, rebuild sf_branch/poly_record.json (running record).
           node scripts/poly_grade.js sf_branch || true
@@ -70,6 +72,13 @@ jobs:
         run: |
           node scripts/sharpflow_preview.js
           for f in cards/*.json; do [ -f "$f" ] && { echo "== $f"; head -c 3000 "$f"; echo; }; done; true
+      - name: Polymarket late money (HOT wallet new or doubled after the sport's report posted)
+        continue-on-error: true
+        env:
+          NO_MARK: ${{ github.event.inputs.dry_run == 'yes' && '1' || '' }}
+        run: |
+          node scripts/poly_alert.js sf_branch poly_prev.json cards
+          for f in cards/*polylate*.json; do [ -f "$f" ] && { echo "== $f"; head -c 2000 "$f"; echo; }; done; true
       - name: Publish sharpflow branch (snapshot + posted marker + poly_matches.json)
         # Runs every time now (not only when a card was due) so poly_matches.json stays fresh for the window tasks.
         if: always() && github.event.inputs.dry_run != 'yes'
@@ -81,7 +90,7 @@ jobs:
           git commit -q -m "sharpflow preview $(date -u +%F-%H%M)"
           git push -q origin sharpflow || { git pull -q --rebase origin sharpflow && git push -q origin sharpflow; }
       - name: Send cards to Discord outbox
-        if: steps.go.outputs.due != '' && github.event.inputs.dry_run != 'yes'
+        if: always() && github.event.inputs.dry_run != 'yes'
         run: |
           ls cards/*.json >/dev/null 2>&1 || { echo "no cards to send"; exit 0; }
           git clone -q --depth 1 -b outbox "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ob
