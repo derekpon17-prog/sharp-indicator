@@ -1,8 +1,98 @@
 {
- "updated": "2026-11-21T01:53:58.552Z",
+ "updated": "2026-11-21T02:53:43.068Z",
  "since": "2026-11-20",
- "pending": 35,
+ "pending": 37,
  "na": 0,
  "note": "Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
- "buckets": {}
+ "buckets": {
+  "COLD": {
+   "all": {
+    "w": 5,
+    "l": 2,
+    "n": 7,
+    "u": 3.08,
+    "fadeU": -3.08
+   },
+   "onCard": {
+    "w": 3,
+    "l": 1,
+    "n": 4,
+    "u": 2,
+    "fadeU": -2
+   },
+   "bySport": {
+    "NBA": {
+     "w": 5,
+     "l": 1,
+     "n": 6,
+     "u": 4.08,
+     "fadeU": -4.08
+    },
+    "CFB": {
+     "w": 0,
+     "l": 1,
+     "n": 1,
+     "u": -1,
+     "fadeU": 1
+    }
+   },
+   "byMarket": {
+    "TOTAL": {
+     "w": 2,
+     "l": 2,
+     "n": 4,
+     "u": 0.08,
+     "fadeU": -0.08
+    },
+    "ML": {
+     "w": 3,
+     "l": 0,
+     "n": 3,
+     "u": 3,
+     "fadeU": -3
+    }
+   }
+  },
+  "HOT": {
+   "all": {
+    "w": 2,
+    "l": 0,
+    "n": 2,
+    "u": 2.04,
+    "fadeU": -2.04
+   },
+   "onCard": {
+    "w": 2,
+    "l": 0,
+    "n": 2,
+    "u": 2.04,
+    "fadeU": -2.04
+   },
+   "bySport": {
+    "NBA": {
+     "w": 2,
+     "l": 0,
+     "n": 2,
+     "u": 2.04,
+     "fadeU": -2.04
+    }
+   },
+   "byMarket": {
+    "ML": {
+     "w": 1,
+     "l": 0,
+     "n": 1,
+     "u": 1,
+     "fadeU": -1
+    },
+    "TOTAL": {
+     "w": 1,
+     "l": 0,
+     "n": 1,
+     "u": 1.04,
+     "fadeU": -1.04
+    }
+   }
+  }
+ }
 }
