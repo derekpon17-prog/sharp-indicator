@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-21",
+ "posted_ct": "1605",
+ "sport": "NBA",
+ "outlier": false,
+ "first_start": "2026-11-22T00:30:00.000Z",
+ "snapshot": "2026-11-21T21:55:53.358Z",
+ "sides": [
+  {
+   "game": "Trail Blazers at Knicks",
+   "market": "ML",
+   "pick": "Knicks",
+   "start_utc": "2026-11-22T00:40:00.000Z",
+   "dollars": 3453,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 2.8,
+   "all_sport_ratio": 1.69,
+   "price": "-148",
+   "line": null,
+   "l30_rec": "20-16",
+   "l30_roi": 22.9,
+   "mkt_rec": "12-5",
+   "mkt_roi": 47.1,
+   "mkt_l30_rec": "12-5",
+   "tail": false
+  }
+ ]
+}
