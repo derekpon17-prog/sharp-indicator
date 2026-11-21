@@ -1,0 +1,1020 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 TONIGHT \u00b7 Sat Nov 21** \u00b7 games 6:00pm CT and later (30 games with signals: NBA, NHL, NCAAF, NCAAB)",
+ "slate": {
+  "title": "Tonight plays (6:00pm CT and later)",
+  "stamp": "SAT NOV 21 \u00b7 3:53PM",
+  "sources": "Pinnacle ~3:52pm CT - Vegas ~3:53pm CT (NBA, NHL, NCAAF, NCAAB) - SharpFlow 3:27pm CT - Polymarket 3:45pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "Window: every game starting 6:00pm CT and later today. Vegas counts Vegas Backed and Pressure Move only. Wallet money counts only from wallets with positive ROI in this sport and market (a $3.3K Over on Grizzlies at Timberwolves is from a cold wallet, so it is not counted). Polymarket HOT/COLD wallets are shown only where one is on the side; display only. Tier rules are fixed.",
+  "rows": [
+   {
+    "sport": "NHL",
+    "game": "LA@OTT",
+    "matchup": "NHL - Los Angeles @ Ottawa - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 5.5,
+    "price": -106,
+    "bet": "Under 5.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 74,
+    "poly_cold": [
+     {
+      "name": "taylorsversion",
+      "usd": 1633,
+      "rec": "34-30",
+      "roi": -3.1,
+      "n": 64,
+      "scope": "NHL TOTAL, last 45 days",
+      "same_as_sf": false
+     }
+    ],
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NHL",
+    "game": "LA@OTT",
+    "matchup": "NHL - Los Angeles @ Ottawa - 6:00pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "OTT",
+    "line": null,
+    "price": -181,
+    "bet": "Ottawa ML",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 72,
+    "poly_cold": [
+     {
+      "name": "taylorsversion",
+      "usd": 2727,
+      "rec": "64-47",
+      "roi": -0.7,
+      "n": 111,
+      "scope": "NHL ML, last 45 days",
+      "same_as_sf": false
+     }
+    ],
+    "note": "Vegas Pressure Move 72; Pinnacle Slight (not Strong)",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NHL",
+    "game": "NYI@DET",
+    "matchup": "NHL - NY Islanders @ Detroit - 6:00pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "NYI",
+    "line": null,
+    "price": -131,
+    "bet": "NY Islanders ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 43,
+    "poly_cold": [
+     {
+      "name": "taylorsversion",
+      "usd": 25214,
+      "rec": "64-47",
+      "roi": -0.7,
+      "n": 111,
+      "scope": "NHL ML, last 45 days",
+      "same_as_sf": false
+     },
+     {
+      "name": "0xf62b\u2026844a",
+      "usd": 1000,
+      "rec": "51-36",
+      "roi": -6.8,
+      "n": 87,
+      "scope": "NHL ML, last 45 days",
+      "same_as_sf": false
+     }
+    ],
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NHL",
+    "game": "CBJ@TOR",
+    "matchup": "NHL - Columbus @ Toronto - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 6.5,
+    "price": -129,
+    "bet": "Under 6.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 51,
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NHL",
+    "game": "NJ@STL",
+    "matchup": "NHL - New Jersey @ St. Louis - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 5.5,
+    "price": -111,
+    "bet": "Under 5.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 97,
+    "note": "Vegas Backed 97; Pinnacle Against (Over 5.5 Lean)",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NHL",
+    "game": "ANA@UTA",
+    "matchup": "NHL - Anaheim @ Utah - 8:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 6.5,
+    "price": 113,
+    "bet": "Under 6.5",
+    "buckets": [
+     "PIN_MAX",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Max",
+    "pin_status": "Flipped",
+    "note": "Pinnacle Max flipped today",
+    "date": "2026-11-21",
+    "start_ct": "8:00pm"
+   },
+   {
+    "sport": "NHL",
+    "game": "MIN@VAN",
+    "matchup": "NHL - Minnesota @ Vancouver - 9:00pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "MIN",
+    "line": -1.5,
+    "price": -119,
+    "bet": "Minnesota -1.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "9:00pm"
+   },
+   {
+    "sport": "NBA",
+    "game": "POR@NY",
+    "matchup": "NBA - Portland @ New York - 6:30pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "POR",
+    "line": 2.5,
+    "price": -106,
+    "bet": "Portland +2.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:30pm"
+   },
+   {
+    "sport": "NBA",
+    "game": "POR@NY",
+    "matchup": "NBA - Portland @ New York - 6:30pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "POR",
+    "line": null,
+    "price": 129,
+    "bet": "Portland ML",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "SF_VS_PIN"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "note": "Pinnacle Strong flipped earlier; SharpFlow wallet X has $3.5K on Knicks ML",
+    "date": "2026-11-21",
+    "start_ct": "6:30pm"
+   },
+   {
+    "sport": "NBA",
+    "game": "POR@NY",
+    "matchup": "NBA - Portland @ New York - 6:30pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "NY",
+    "line": null,
+    "price": -148,
+    "bet": "New York ML",
+    "buckets": [
+     "SF_SIDE",
+     "SF_VS_PIN"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "sf_dollars": 3453,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_max_vs_usual": 2.8,
+    "sf_mkt_roi": 47.1,
+    "sf_mkt_rec": "12-5",
+    "sf_all_ratio": 1.69,
+    "sf_l30_roi": 22.9,
+    "sf_first_price": -148,
+    "sf_snapshot": "15:27",
+    "note": "SharpFlow only: $3.5K Knicks ML, NBA ML record 12-5 (+47%), 2.8x usual; Pinnacle Strong (flipped) is on Portland ML",
+    "date": "2026-11-21",
+    "start_ct": "6:30pm"
+   },
+   {
+    "sport": "NBA",
+    "game": "LAC@DAL",
+    "matchup": "NBA - LA Clippers @ Dallas - 7:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 230.5,
+    "price": -110,
+    "bet": "Over 230.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "poly_cold": [
+     {
+      "name": "nehcnehc",
+      "usd": 5740,
+      "rec": "114-135",
+      "roi": -7.7,
+      "n": 249,
+      "scope": "NBA TOTAL, last 45 days",
+      "same_as_sf": false
+     }
+    ],
+    "date": "2026-11-21",
+    "start_ct": "7:00pm"
+   },
+   {
+    "sport": "NBA",
+    "game": "MEM@MIN",
+    "matchup": "NBA - Memphis @ Minnesota - 7:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 229.5,
+    "price": -110,
+    "bet": "Over 229.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "poly_cold": [
+     {
+      "name": "nehcnehc",
+      "usd": 5054,
+      "rec": "114-135",
+      "roi": -7.7,
+      "n": 249,
+      "scope": "NBA TOTAL, last 45 days",
+      "same_as_sf": false
+     }
+    ],
+    "note": "SharpFlow $3.3K Over 227.5 is from a cold wallet (NBA totals 1-1, -9%): not counted",
+    "date": "2026-11-21",
+    "start_ct": "7:00pm"
+   },
+   {
+    "sport": "NBA",
+    "game": "BOS@SAC",
+    "matchup": "NBA - Boston @ Sacramento - 9:00pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "SAC",
+    "line": 12,
+    "price": -110,
+    "bet": "Sacramento +12",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "date": "2026-11-21",
+    "start_ct": "9:00pm"
+   },
+   {
+    "sport": "NBA",
+    "game": "BOS@SAC",
+    "matchup": "NBA - Boston @ Sacramento - 9:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 216.5,
+    "price": -111,
+    "bet": "Under 216.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 77,
+    "note": "Vegas Backed 77; Pinnacle Lean flipped today (not Strong)",
+    "date": "2026-11-21",
+    "start_ct": "9:00pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ARST@LT",
+    "matchup": "NCAAF - Arkansas State @ Louisiana Tech - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 55,
+    "price": -111,
+    "bet": "Over 55",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "ARST@LT",
+    "matchup": "NCAAF - Arkansas State @ Louisiana Tech - 6:00pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "ARST",
+    "line": 17.5,
+    "price": -122,
+    "bet": "Arkansas State +17.5",
+    "buckets": [
+     "SF_SIDE"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "sf_dollars": 5190,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_max_vs_usual": 0.3,
+    "sf_mkt_roi": 46.6,
+    "sf_mkt_rec": "24-15",
+    "sf_all_ratio": 0.07,
+    "sf_l30_roi": 26.4,
+    "sf_first_price": -122,
+    "sf_snapshot": "15:27",
+    "note": "SharpFlow only: $5.2K, CFB spread record 24-15 (+47%) but sized only 0.3x usual (under the 1.5x lean bar); Pinnacle has LT -14.5 Slight, no Strong",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "CSU@FRES",
+    "matchup": "NCAAF - Colorado State @ Fresno State - 6:30pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 66.5,
+    "price": -111,
+    "bet": "Over 66.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 78,
+    "date": "2026-11-21",
+    "start_ct": "6:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "SMU@ND",
+    "matchup": "NCAAF - SMU @ Notre Dame - 6:30pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 55.5,
+    "price": -107,
+    "bet": "Under 55.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 60,
+    "date": "2026-11-21",
+    "start_ct": "6:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UGA@SC",
+    "matchup": "NCAAF - Georgia @ South Carolina - 6:30pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "SC",
+    "line": 14.5,
+    "price": -110,
+    "bet": "South Carolina +14.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 80,
+    "note": "Vegas Backed 80; Pinnacle Lean (not Strong)",
+    "date": "2026-11-21",
+    "start_ct": "6:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UGA@SC",
+    "matchup": "NCAAF - Georgia @ South Carolina - 6:30pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 51.5,
+    "price": -105,
+    "bet": "Over 51.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 71,
+    "note": "Vegas Backed 71; Pinnacle no lean",
+    "date": "2026-11-21",
+    "start_ct": "6:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UNLV@SJSU",
+    "matchup": "NCAAF - UNLV @ San Jose State - 6:00pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "UNLV",
+    "line": null,
+    "price": -245,
+    "bet": "UNLV ML",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 72,
+    "note": "Vegas Pressure Move 72; Pinnacle Slight (not Strong)",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UTSA@UAB",
+    "matchup": "NCAAF - UTSA @ UAB - 7:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 49.5,
+    "price": -112,
+    "bet": "Under 49.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 78,
+    "date": "2026-11-21",
+    "start_ct": "7:00pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UTSA@UAB",
+    "matchup": "NCAAF - UTSA @ UAB - 7:00pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "UAB",
+    "line": null,
+    "price": 159,
+    "bet": "UAB ML",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "date": "2026-11-21",
+    "start_ct": "7:00pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UTAH@TCU",
+    "matchup": "NCAAF - Utah @ TCU - 8:00pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "UTAH",
+    "line": null,
+    "price": -333,
+    "bet": "Utah ML",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS80_STABLE"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 98,
+    "poly_hot": [
+     {
+      "name": "ic4cream",
+      "usd": 879,
+      "rec": "30-20",
+      "roi": 13.2,
+      "n": 50,
+      "scope": "NCAAF ML, last 45 days",
+      "same_as_sf": false
+     }
+    ],
+    "date": "2026-11-21",
+    "start_ct": "8:00pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "UTAH@TCU",
+    "matchup": "NCAAF - Utah @ TCU - 8:00pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "UTAH",
+    "line": -8.5,
+    "price": -110,
+    "bet": "Utah -8.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 63,
+    "date": "2026-11-21",
+    "start_ct": "8:00pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "SDSU@BOIS",
+    "matchup": "NCAAF - San Diego State @ Boise State - 8:30pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "BOIS",
+    "line": -20.5,
+    "price": -112,
+    "bet": "Boise State -20.5",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 65,
+    "date": "2026-11-21",
+    "start_ct": "8:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "SDSU@BOIS",
+    "matchup": "NCAAF - San Diego State @ Boise State - 8:30pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 61.5,
+    "price": -114,
+    "bet": "Under 61.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "8:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "OKST@ASU",
+    "matchup": "NCAAF - Oklahoma State @ Arizona State - 9:15pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 59.5,
+    "price": -111,
+    "bet": "Under 59.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "9:15pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "USU@ORST",
+    "matchup": "NCAAF - Utah State @ Oregon State - 9:30pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "USU",
+    "line": 7,
+    "price": -108,
+    "bet": "Utah State +7",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "SF_SIDE"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "sf_dollars": 3379,
+    "sf_opp": 0,
+    "sf_wallets": 1,
+    "sf_max_vs_usual": 0.7,
+    "sf_mkt_roi": 10.4,
+    "sf_mkt_rec": "21-12",
+    "sf_all_ratio": 1.42,
+    "sf_l30_roi": 38,
+    "sf_first_price": -105,
+    "sf_snapshot": "15:27",
+    "poly_cold": [
+     {
+      "name": "ic4cream",
+      "usd": 3379,
+      "rec": "64-58",
+      "roi": -23.9,
+      "n": 122,
+      "scope": "NCAAF SPREAD, last 45 days",
+      "same_as_sf": true
+     }
+    ],
+    "note": "Pinnacle Strong flipped earlier; SharpFlow $3.4K (0.7x usual). Polymarket ic4cream is the same bettor and is COLD in NCAAF spreads",
+    "date": "2026-11-21",
+    "start_ct": "9:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "USU@ORST",
+    "matchup": "NCAAF - Utah State @ Oregon State - 9:30pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "USU",
+    "line": null,
+    "price": 227,
+    "bet": "Utah State ML",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "9:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "HAW@NEV",
+    "matchup": "NCAAF - Hawaii @ Nevada - 9:30pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "NEV",
+    "line": -7,
+    "price": -109,
+    "bet": "Nevada -7",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "9:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "HAW@NEV",
+    "matchup": "NCAAF - Hawaii @ Nevada - 9:30pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "NEV",
+    "line": null,
+    "price": -271,
+    "bet": "Nevada ML",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "9:30pm"
+   },
+   {
+    "sport": "NCAAF",
+    "game": "HAW@NEV",
+    "matchup": "NCAAF - Hawaii @ Nevada - 9:30pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 40.5,
+    "price": -109,
+    "bet": "Under 40.5",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 100,
+    "note": "Vegas Backed 100; Pinnacle Against (Over 40.5 Lean)",
+    "date": "2026-11-21",
+    "start_ct": "9:30pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "CBU@LMU",
+    "matchup": "NCAAB - Cal Baptist @ Loyola Marymount - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 135.5,
+    "price": -112,
+    "bet": "Under 135.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NAU@CP",
+    "matchup": "NCAAB - N. Arizona @ Cal Poly - 6:00pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "CP",
+    "line": -8.5,
+    "price": -107,
+    "bet": "Cal Poly -8.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NAU@CP",
+    "matchup": "NCAAB - N. Arizona @ Cal Poly - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 154.5,
+    "price": -111,
+    "bet": "Under 154.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "RAD@UTC",
+    "matchup": "NCAAB - Radford @ Chattanooga - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 151.5,
+    "price": -115,
+    "bet": "Under 151.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MORE@ELON",
+    "matchup": "NCAAB - Morehead St @ Elon - 6:00pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "MORE",
+    "line": 11.5,
+    "price": -109,
+    "bet": "Morehead St +11.5",
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MORE@ELON",
+    "matchup": "NCAAB - Morehead St @ Elon - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 144.5,
+    "price": -111,
+    "bet": "Over 144.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "MICH@VILL",
+    "matchup": "NCAAB - Michigan @ Villanova - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 159.5,
+    "price": -116,
+    "bet": "Over 159.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "BRWN@UVM",
+    "matchup": "NCAAB - Brown @ Vermont - 6:00pm",
+    "first_seen": "15:53",
+    "market": "SPREAD",
+    "side": "UVM",
+    "line": -4.5,
+    "price": -111,
+    "bet": "Vermont -4.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "BRWN@UVM",
+    "matchup": "NCAAB - Brown @ Vermont - 6:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 134.5,
+    "price": -110,
+    "bet": "Over 134.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "6:00pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "PRES@TNTC",
+    "matchup": "NCAAB - Presbyterian @ Tennessee Tech - 6:30pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "TNTC",
+    "line": null,
+    "price": -363,
+    "bet": "Tennessee Tech ML",
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 82,
+    "note": "Vegas Pressure Move 82; Pinnacle no lean on ML",
+    "date": "2026-11-21",
+    "start_ct": "6:30pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NOLA@TXSO",
+    "matchup": "NCAAB - New Orleans @ Texas Southern - 7:30pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 154.5,
+    "price": -111,
+    "bet": "Under 154.5",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "7:30pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "NOLA@TXSO",
+    "matchup": "NCAAB - New Orleans @ Texas Southern - 7:30pm",
+    "first_seen": "15:53",
+    "market": "ML",
+    "side": "NOLA",
+    "line": null,
+    "price": 101,
+    "bet": "New Orleans ML",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "7:30pm"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "BRAD@PAC",
+    "matchup": "NCAAB - Bradley @ Pacific - 9:00pm",
+    "first_seen": "15:53",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 130,
+    "price": -112,
+    "bet": "Over 130",
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "date": "2026-11-21",
+    "start_ct": "9:00pm"
+   }
+  ]
+ }
+}
