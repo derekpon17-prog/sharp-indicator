@@ -1,7 +1,7 @@
 {
- "updated": "2026-11-21T16:28:02.542Z",
+ "updated": "2026-11-21T18:27:16.693Z",
  "since": "2026-11-20",
- "pending": 35,
+ "pending": 39,
  "na": 0,
  "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
@@ -131,6 +131,18 @@
      "clvAvg": -0.0047,
      "clvPos": 2
     }
+   },
+   "bySize": {
+    "unknown": {
+     "w": 25,
+     "l": 20,
+     "n": 45,
+     "u": 5.07,
+     "fadeU": -5.07,
+     "clvN": 29,
+     "clvAvg": -0.0077,
+     "clvPos": 10
+    }
    }
   },
   "HOT": {
@@ -215,6 +227,18 @@
      "n": 4,
      "u": 0.14,
      "fadeU": -0.14,
+     "clvN": 4,
+     "clvAvg": -0.0025,
+     "clvPos": 1
+    }
+   },
+   "bySize": {
+    "unknown": {
+     "w": 5,
+     "l": 3,
+     "n": 8,
+     "u": -0.17,
+     "fadeU": 0.17,
      "clvN": 4,
      "clvAvg": -0.0025,
      "clvPos": 1

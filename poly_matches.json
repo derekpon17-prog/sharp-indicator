@@ -1,5 +1,5 @@
 {
- "at": "2026-11-21T16:27:53.204Z",
+ "at": "2026-11-21T18:27:07.588Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -16,14 +16,14 @@
    "outcome": "Islanders",
    "tokenId": "66645958636205572336895134231989122581219788278443769476805999447649794153000",
    "gradeTitle": "Islanders vs. Red Wings",
-   "gradePrice": 0.5426,
+   "gradePrice": 0.553,
    "onCard": true,
    "wallet": "0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade",
    "name": "taylorsversion",
-   "usd": 10031,
-   "fills": 3,
-   "avgPrice": 0.54,
-   "lastBuyUtc": "2026-11-21T15:20:53.000Z",
+   "usd": 25214,
+   "fills": 5,
+   "avgPrice": 0.548,
+   "lastBuyUtc": "2026-11-21T17:07:40.000Z",
    "firstBuyUtc": "2026-11-21T11:18:16.000Z",
    "hoursBeforeStart": 12.7,
    "gameSource": "sharpflow",
@@ -41,7 +41,105 @@
     "l": 2,
     "n": 10,
     "txt": "L10 NHL 8-2"
-   }
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
+  },
+  {
+   "sport": "CFB",
+   "matchup": "Texas Tech at Baylor",
+   "grp": "team",
+   "side": "Baylor",
+   "market": "SPREAD",
+   "cls": "COLD",
+   "startUtc": "2026-11-21T20:30:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0xbd8839a47fc78c1804b974581fd783073f18aad5c81ebfff6bc2edabcb52da0f",
+   "outcome": "Baylor",
+   "tokenId": "101967228372437531459870909778736832847697787837075420841275257956927085598091",
+   "gradeTitle": "Spread: Texas Tech (-4.5)",
+   "gradePrice": 0.4851,
+   "onCard": true,
+   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "name": "ic4cream",
+   "usd": 6462,
+   "fills": 4,
+   "avgPrice": 0.481,
+   "lastBuyUtc": "2026-11-21T18:22:43.000Z",
+   "firstBuyUtc": "2026-11-21T16:55:46.000Z",
+   "hoursBeforeStart": 3.6,
+   "gameSource": "sharpflow",
+   "title": "Spread: Texas Tech (-4.5)",
+   "rec": "64-58",
+   "roi": -21.7,
+   "n": 122,
+   "recScope": "NCAAF SPREAD, last 45 days",
+   "twoSided": true,
+   "sportCls": "HOT",
+   "gateNote": "HOT overall but cold in SPREAD (64-58, -21.7% ROI)",
+   "sameAsSF": null,
+   "l10": {
+    "w": 5,
+    "l": 5,
+    "n": 10,
+    "txt": "L10 NCAAF 5-5"
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 23.76,
+   "vsUsualAll": 13.46,
+   "sizeTier": "BIG"
+  },
+  {
+   "sport": "CFB",
+   "matchup": "Texas Tech at Baylor",
+   "grp": "total",
+   "side": "Under",
+   "market": "TOTAL",
+   "cls": "HOT",
+   "startUtc": "2026-11-21T20:30:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0x099f7751f220f395c91b8cbe9f4cb73ad9bc5d361892c9a93c87afdc21fb327a",
+   "outcome": "Under",
+   "tokenId": "71647151269977009090703730542609548824817437092403502097647994774324997555376",
+   "gradeTitle": "Texas Tech vs. Baylor: O/U 57.5",
+   "gradePrice": 0.5,
+   "onCard": false,
+   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "name": "ic4cream",
+   "usd": 750,
+   "fills": 1,
+   "avgPrice": 0.5,
+   "lastBuyUtc": "2026-11-21T18:20:35.000Z",
+   "firstBuyUtc": "2026-11-21T18:20:35.000Z",
+   "hoursBeforeStart": 2.2,
+   "gameSource": "sharpflow",
+   "title": "Texas Tech vs. Baylor: O/U 57.5",
+   "rec": "46-33",
+   "roi": 36.8,
+   "n": 79,
+   "recScope": "NCAAF TOTAL, last 45 days",
+   "twoSided": false,
+   "sportCls": "HOT",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 5,
+    "l": 5,
+    "n": 10,
+    "txt": "L10 NCAAF 5-5"
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 2.76,
+   "vsUsualAll": 1.56,
+   "sizeTier": "BIG"
   },
   {
    "sport": "CFB",
@@ -72,7 +170,7 @@
    "roi": 13.2,
    "n": 50,
    "recScope": "NCAAF ML, last 45 days",
-   "twoSided": false,
+   "twoSided": true,
    "sportCls": "HOT",
    "gateNote": null,
    "sameAsSF": {
@@ -84,7 +182,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NCAAF 5-5"
-   }
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 30.19,
+   "vsUsualAll": 17.11,
+   "sizeTier": "BIG"
   },
   {
    "sport": "CFB",
@@ -124,7 +228,13 @@
     "l": 9,
     "n": 10,
     "txt": "L10 NCAAF 1-9"
-   }
+   },
+   "usualMed": 3245,
+   "usualN": 46,
+   "usualScope": "CFB",
+   "vsUsual": 1.8,
+   "vsUsualAll": 0.91,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NFL",
@@ -164,7 +274,13 @@
     "l": 3,
     "n": 10,
     "txt": "L10 NFL 7-3"
-   }
+   },
+   "usualMed": 700,
+   "usualN": 59,
+   "usualScope": "NFL",
+   "vsUsual": 0.76,
+   "vsUsualAll": 0.97,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NFL",
@@ -204,7 +320,13 @@
     "l": 3,
     "n": 10,
     "txt": "L10 NFL 7-3"
-   }
+   },
+   "usualMed": 700,
+   "usualN": 59,
+   "usualScope": "NFL",
+   "vsUsual": 1.27,
+   "vsUsualAll": 1.61,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NFL",
@@ -244,7 +366,13 @@
     "l": 3,
     "n": 10,
     "txt": "L10 NFL 7-3"
-   }
+   },
+   "usualMed": 700,
+   "usualN": 59,
+   "usualScope": "NFL",
+   "vsUsual": 1.31,
+   "vsUsualAll": 1.66,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NFL",
@@ -284,7 +412,13 @@
     "l": 2,
     "n": 10,
     "txt": "L10 NFL 8-2"
-   }
+   },
+   "usualMed": 10283,
+   "usualN": 65,
+   "usualScope": "NFL",
+   "vsUsual": 0.26,
+   "vsUsualAll": 0.43,
+   "sizeTier": "SMALL"
   },
   {
    "sport": "CFB",
@@ -327,7 +461,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NCAAF 5-5"
-   }
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 12.42,
+   "vsUsualAll": 7.04,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NBA",
@@ -367,7 +507,13 @@
     "l": 7,
     "n": 10,
     "txt": "L10 NBA 3-7"
-   }
+   },
+   "usualMed": 285,
+   "usualN": 186,
+   "usualScope": "NBA",
+   "vsUsual": 6.26,
+   "vsUsualAll": 6.47,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NBA",
@@ -407,7 +553,59 @@
     "l": 2,
     "n": 10,
     "txt": "L10 NBA 8-2"
-   }
+   },
+   "usualMed": 722,
+   "usualN": 17,
+   "usualScope": "NBA",
+   "vsUsual": 1.61,
+   "vsUsualAll": 2.43,
+   "sizeTier": "BIG"
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Grizzlies at Timberwolves",
+   "grp": "total",
+   "side": "Over",
+   "market": "TOTAL",
+   "cls": "COLD",
+   "startUtc": "2026-11-22T01:10:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0x372333523b5c57992649bce3fca0c009a51d27b3a17b6b2b29a87c5933e150ca",
+   "outcome": "Over",
+   "tokenId": "46981981087262331886880405609751034723237717911096410282638075224126141698879",
+   "gradeTitle": "Grizzlies vs. Timberwolves: O/U 231.5",
+   "gradePrice": 0.47,
+   "onCard": true,
+   "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
+   "name": "nehcnehc",
+   "usd": 5054,
+   "fills": 2,
+   "avgPrice": 0.49,
+   "lastBuyUtc": "2026-11-21T17:22:11.000Z",
+   "firstBuyUtc": "2026-11-21T15:46:11.000Z",
+   "hoursBeforeStart": 9.4,
+   "gameSource": "sharpflow",
+   "title": "Grizzlies vs. Timberwolves: O/U 231.5",
+   "rec": "113-135",
+   "roi": -8.4,
+   "n": 248,
+   "recScope": "NBA TOTAL, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 0,
+    "l": 10,
+    "n": 10,
+    "txt": "L10 NBA 0-10"
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NBA",
@@ -447,7 +645,13 @@
     "l": 10,
     "n": 10,
     "txt": "L10 NBA 0-10"
-   }
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "CFB",
@@ -487,7 +691,13 @@
     "l": 9,
     "n": 10,
     "txt": "L10 NCAAF 1-9"
-   }
+   },
+   "usualMed": 3245,
+   "usualN": 46,
+   "usualScope": "CFB",
+   "vsUsual": 0.69,
+   "vsUsualAll": 0.35,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "CFB",
@@ -527,7 +737,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NCAAF 5-5"
-   }
+   },
+   "usualMed": 562,
+   "usualN": 26,
+   "usualScope": "CFB",
+   "vsUsual": 7.06,
+   "vsUsualAll": 6.08,
+   "sizeTier": "BIG"
   },
   {
    "sport": "CFB",
@@ -567,7 +783,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NCAAF 5-5"
-   }
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 2.68,
+   "vsUsualAll": 1.52,
+   "sizeTier": "BIG"
   },
   {
    "sport": "CFB",
@@ -607,7 +829,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NCAAF 5-5"
-   }
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 2.43,
+   "vsUsualAll": 1.38,
+   "sizeTier": "BIG"
   },
   {
    "sport": "CFB",
@@ -647,7 +875,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NCAAF 5-5"
-   }
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 2.05,
+   "vsUsualAll": 1.16,
+   "sizeTier": "BIG"
   },
   {
    "sport": "CFB",
@@ -687,7 +921,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NCAAF 5-5"
-   }
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 8.75,
+   "vsUsualAll": 4.96,
+   "sizeTier": "BIG"
   },
   {
    "sport": "CFB",
@@ -727,7 +967,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NCAAF 5-5"
-   }
+   },
+   "usualMed": 272,
+   "usualN": 8,
+   "usualScope": "CFB",
+   "vsUsual": 3.23,
+   "vsUsualAll": 1.83,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NBA",
@@ -767,7 +1013,13 @@
     "l": 10,
     "n": 10,
     "txt": "L10 NBA 0-10"
-   }
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NBA",
@@ -807,7 +1059,13 @@
     "l": 10,
     "n": 10,
     "txt": "L10 NBA 0-10"
-   }
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NBA",
@@ -847,37 +1105,43 @@
     "l": 7,
     "n": 10,
     "txt": "L10 NBA 3-7"
-   }
+   },
+   "usualMed": 285,
+   "usualN": 186,
+   "usualScope": "NBA",
+   "vsUsual": 5.72,
+   "vsUsualAll": 5.9,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "grp": "team",
-   "side": "Mavericks",
-   "market": "ML",
+   "matchup": "Pelicans at Spurs",
+   "grp": "total",
+   "side": "Under",
+   "market": "TOTAL",
    "cls": "COLD",
-   "startUtc": "2026-11-23T00:00:00.000Z",
-   "gameDate": "2026-11-22",
-   "conditionId": "0x779b874ed02642638f0cd5ed1a5f9aac390dae8e3fd5690f0141f6ac1f715e16",
-   "outcome": "Mavericks",
-   "tokenId": "31976321654204112623078902509775143695196644436624006858818703147856673222466",
-   "gradeTitle": "Mavericks vs. Jazz",
-   "gradePrice": 0.52,
+   "startUtc": "2026-11-22T01:00:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0xca80399fc83db51043d89b8336311a49c8fb7a785e7b17a0d8abd750ce5c0924",
+   "outcome": "Under",
+   "tokenId": "56583747573696636001719378408633525533961283414981162603510930497416387028897",
+   "gradeTitle": "Pelicans vs. Spurs: O/U 228.5",
+   "gradePrice": 0.5,
    "onCard": false,
    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
    "name": "ic4cream",
-   "usd": 981,
-   "fills": 1,
-   "avgPrice": 0.52,
-   "lastBuyUtc": "2026-11-21T16:16:43.000Z",
-   "firstBuyUtc": "2026-11-21T16:16:43.000Z",
-   "hoursBeforeStart": 31.7,
+   "usd": 5305,
+   "fills": 2,
+   "avgPrice": 0.5,
+   "lastBuyUtc": "2026-11-21T17:25:23.000Z",
+   "firstBuyUtc": "2026-11-21T17:25:23.000Z",
+   "hoursBeforeStart": 7.6,
    "gameSource": "espn",
-   "title": "Mavericks vs. Jazz",
-   "rec": "63-35",
-   "roi": -10.1,
-   "n": 98,
-   "recScope": "NBA ML, last 45 days",
+   "title": "Pelicans vs. Spurs: O/U 228.5",
+   "rec": "74-55",
+   "roi": -7.6,
+   "n": 129,
+   "recScope": "NBA TOTAL, last 45 days",
    "twoSided": false,
    "sportCls": "COLD",
    "gateNote": null,
@@ -887,7 +1151,13 @@
     "l": 2,
     "n": 10,
     "txt": "L10 NBA 8-2"
-   }
+   },
+   "usualMed": 722,
+   "usualN": 17,
+   "usualScope": "NBA",
+   "vsUsual": 7.35,
+   "vsUsualAll": 11.05,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NFL",
@@ -927,7 +1197,13 @@
     "l": 3,
     "n": 10,
     "txt": "L10 NFL 7-3"
-   }
+   },
+   "usualMed": 700,
+   "usualN": 59,
+   "usualScope": "NFL",
+   "vsUsual": 0.89,
+   "vsUsualAll": 1.13,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NFL",
@@ -967,7 +1243,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NFL 5-5"
-   }
+   },
+   "usualMed": 5108,
+   "usualN": 46,
+   "usualScope": "NFL",
+   "vsUsual": 0.65,
+   "vsUsualAll": 0.82,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NFL",
@@ -1007,7 +1289,13 @@
     "l": 3,
     "n": 10,
     "txt": "L10 NFL 7-3"
-   }
+   },
+   "usualMed": 700,
+   "usualN": 59,
+   "usualScope": "NFL",
+   "vsUsual": 1.43,
+   "vsUsualAll": 1.81,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NFL",
@@ -1047,7 +1335,13 @@
     "l": 5,
     "n": 10,
     "txt": "L10 NFL 5-5"
-   }
+   },
+   "usualMed": 5108,
+   "usualN": 46,
+   "usualScope": "NFL",
+   "vsUsual": 0.68,
+   "vsUsualAll": 0.86,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NFL",
@@ -1087,7 +1381,13 @@
     "l": 3,
     "n": 10,
     "txt": "L10 NFL 7-3"
-   }
+   },
+   "usualMed": 700,
+   "usualN": 59,
+   "usualScope": "NFL",
+   "vsUsual": 1.74,
+   "vsUsualAll": 2.21,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NFL",
@@ -1127,7 +1427,59 @@
     "l": 3,
     "n": 10,
     "txt": "L10 NFL 7-3"
-   }
+   },
+   "usualMed": 700,
+   "usualN": 59,
+   "usualScope": "NFL",
+   "vsUsual": 0.78,
+   "vsUsualAll": 0.98,
+   "sizeTier": "NORMAL"
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Oilers at Hurricanes",
+   "grp": "total",
+   "side": "Over",
+   "market": "TOTAL",
+   "cls": "COLD",
+   "startUtc": "2026-11-21T18:00:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0x2759809fb2805b10eead0726b3aba751ddf4826e61b29207404f96a7ac434448",
+   "outcome": "Over",
+   "tokenId": "72081011550529545302797627930032971589585872512611983846469889121290355121871",
+   "gradeTitle": "Oilers vs. Hurricanes: O/U 5.5",
+   "gradePrice": 0.5896,
+   "onCard": false,
+   "wallet": "0xf62b709646bdf9bc15bedb094ee6ac062857844a",
+   "name": "0xf62b…844a",
+   "usd": 3460,
+   "fills": 7,
+   "avgPrice": 0.691,
+   "lastBuyUtc": "2026-11-21T17:54:07.000Z",
+   "firstBuyUtc": "2026-11-21T13:05:28.000Z",
+   "hoursBeforeStart": 4.9,
+   "gameSource": "espn",
+   "title": "Oilers vs. Hurricanes: O/U 4.5",
+   "rec": "16-10",
+   "roi": -4.7,
+   "n": 26,
+   "recScope": "NHL TOTAL, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 3,
+    "l": 7,
+    "n": 10,
+    "txt": "L10 NHL 3-7"
+   },
+   "usualMed": 6374,
+   "usualN": 14,
+   "usualScope": "NHL",
+   "vsUsual": 0.54,
+   "vsUsualAll": 0.54,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NHL",
@@ -1167,47 +1519,13 @@
     "l": 7,
     "n": 10,
     "txt": "L10 NHL 3-7"
-   }
-  },
-  {
-   "sport": "NHL",
-   "matchup": "Oilers at Hurricanes",
-   "grp": "total",
-   "side": "Over",
-   "market": "TOTAL",
-   "cls": "COLD",
-   "startUtc": "2026-11-21T18:00:00.000Z",
-   "gameDate": "2026-11-21",
-   "conditionId": "0x2759809fb2805b10eead0726b3aba751ddf4826e61b29207404f96a7ac434448",
-   "outcome": "Over",
-   "tokenId": "72081011550529545302797627930032971589585872512611983846469889121290355121871",
-   "gradeTitle": "Oilers vs. Hurricanes: O/U 5.5",
-   "gradePrice": 0.5894,
-   "onCard": false,
-   "wallet": "0xf62b709646bdf9bc15bedb094ee6ac062857844a",
-   "name": "0xf62b…844a",
-   "usd": 950,
-   "fills": 2,
-   "avgPrice": 0.587,
-   "lastBuyUtc": "2026-11-21T13:09:08.000Z",
-   "firstBuyUtc": "2026-11-21T13:05:28.000Z",
-   "hoursBeforeStart": 4.9,
-   "gameSource": "espn",
-   "title": "Oilers vs. Hurricanes: O/U 5.5",
-   "rec": "16-10",
-   "roi": -4.7,
-   "n": 26,
-   "recScope": "NHL TOTAL, last 45 days",
-   "twoSided": false,
-   "sportCls": "COLD",
-   "gateNote": null,
-   "sameAsSF": null,
-   "l10": {
-    "w": 3,
-    "l": 7,
-    "n": 10,
-    "txt": "L10 NHL 3-7"
-   }
+   },
+   "usualMed": 6374,
+   "usualN": 14,
+   "usualScope": "NHL",
+   "vsUsual": 0.15,
+   "vsUsualAll": 0.15,
+   "sizeTier": "SMALL"
   },
   {
    "sport": "NHL",
@@ -1247,7 +1565,59 @@
     "l": 2,
     "n": 10,
     "txt": "L10 NHL 8-2"
-   }
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Blackhawks at Flames",
+   "grp": "total",
+   "side": "Over",
+   "market": "TOTAL",
+   "cls": "COLD",
+   "startUtc": "2026-11-21T20:30:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0xff1102d151c265c273d2b09ee3d41d364ec33de23d08c3d27b718a986bfd689e",
+   "outcome": "Over",
+   "tokenId": "3684621212577557242642218445715143461899335789909023163279261651628112925596",
+   "gradeTitle": "Blackhawks vs. Flames: O/U 6.5",
+   "gradePrice": 0.43,
+   "onCard": false,
+   "wallet": "0xe5f0ae9cc9aef77ae3c2a64c9e69caa3f335dc1d",
+   "name": "0xe5f0…dc1d",
+   "usd": 2967,
+   "fills": 1,
+   "avgPrice": 0.43,
+   "lastBuyUtc": "2026-11-21T18:15:56.000Z",
+   "firstBuyUtc": "2026-11-21T18:15:56.000Z",
+   "hoursBeforeStart": 2.2,
+   "gameSource": "espn",
+   "title": "Blackhawks vs. Flames: O/U 6.5",
+   "rec": "77-107",
+   "roi": -19.6,
+   "n": 184,
+   "recScope": "NHL TOTAL, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 3,
+    "l": 7,
+    "n": 10,
+    "txt": "L10 NHL 3-7"
+   },
+   "usualMed": 2404,
+   "usualN": 68,
+   "usualScope": "NHL",
+   "vsUsual": 1.23,
+   "vsUsualAll": 2.38,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NHL",
@@ -1262,14 +1632,14 @@
    "outcome": "Bruins",
    "tokenId": "65491970710225390408508625227977029405714692892141170967733367209175071832725",
    "gradeTitle": "Capitals vs. Bruins",
-   "gradePrice": 0.5305,
+   "gradePrice": 0.5514,
    "onCard": false,
    "wallet": "0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade",
    "name": "taylorsversion",
-   "usd": 3589,
-   "fills": 2,
-   "avgPrice": 0.535,
-   "lastBuyUtc": "2026-11-21T11:53:20.000Z",
+   "usd": 31480,
+   "fills": 6,
+   "avgPrice": 0.547,
+   "lastBuyUtc": "2026-11-21T17:14:28.000Z",
    "firstBuyUtc": "2026-11-21T09:40:43.000Z",
    "hoursBeforeStart": 14.3,
    "gameSource": "espn",
@@ -1287,7 +1657,59 @@
     "l": 2,
     "n": 10,
     "txt": "L10 NHL 8-2"
-   }
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Blue Jackets at Maple Leafs",
+   "grp": "team",
+   "side": "Maple Leafs",
+   "market": "ML",
+   "cls": "COLD",
+   "startUtc": "2026-11-22T00:00:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0x37ca77a1e69292e0f76fdb3b9df913d039f4c8d22f9ffb4c6e589333ddc68f8b",
+   "outcome": "Maple Leafs",
+   "tokenId": "59454341401320056616025990809383947134650489939755195691119958787515912327348",
+   "gradeTitle": "Blue Jackets vs. Maple Leafs",
+   "gradePrice": 0.51,
+   "onCard": false,
+   "wallet": "0x6a892a6e8f874b537cf20a2e013ebbe2d0ab2f26",
+   "name": "joino",
+   "usd": 1530,
+   "fills": 1,
+   "avgPrice": 0.51,
+   "lastBuyUtc": "2026-11-21T18:23:05.000Z",
+   "firstBuyUtc": "2026-11-21T18:23:05.000Z",
+   "hoursBeforeStart": 5.6,
+   "gameSource": "espn",
+   "title": "Blue Jackets vs. Maple Leafs",
+   "rec": "30-30",
+   "roi": -4,
+   "n": 60,
+   "recScope": "NHL ML, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 6,
+    "l": 4,
+    "n": 10,
+    "txt": "L10 NHL 6-4"
+   },
+   "usualMed": 306,
+   "usualN": 346,
+   "usualScope": "NHL",
+   "vsUsual": 5,
+   "vsUsualAll": 5.1,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NHL",
@@ -1302,14 +1724,14 @@
    "outcome": "Senators",
    "tokenId": "33465218783793564237263629784379744345705067133449157489818886771796342253212",
    "gradeTitle": "Kings vs. Senators",
-   "gradePrice": 0.62,
+   "gradePrice": 0.6213,
    "onCard": false,
    "wallet": "0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade",
    "name": "taylorsversion",
-   "usd": 2364,
-   "fills": 1,
-   "avgPrice": 0.62,
-   "lastBuyUtc": "2026-11-21T13:37:22.000Z",
+   "usd": 2727,
+   "fills": 2,
+   "avgPrice": 0.625,
+   "lastBuyUtc": "2026-11-21T17:28:50.000Z",
    "firstBuyUtc": "2026-11-21T13:37:22.000Z",
    "hoursBeforeStart": 10.4,
    "gameSource": "espn",
@@ -1327,7 +1749,13 @@
     "l": 2,
     "n": 10,
     "txt": "L10 NHL 8-2"
-   }
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NHL",
@@ -1367,7 +1795,59 @@
     "l": 2,
     "n": 10,
     "txt": "L10 NHL 8-2"
-   }
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Mavericks at Jazz",
+   "grp": "team",
+   "side": "Mavericks",
+   "market": "ML",
+   "cls": "COLD",
+   "startUtc": "2026-11-23T00:00:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x779b874ed02642638f0cd5ed1a5f9aac390dae8e3fd5690f0141f6ac1f715e16",
+   "outcome": "Mavericks",
+   "tokenId": "31976321654204112623078902509775143695196644436624006858818703147856673222466",
+   "gradeTitle": "Mavericks vs. Jazz",
+   "gradePrice": 0.52,
+   "onCard": false,
+   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "name": "ic4cream",
+   "usd": 981,
+   "fills": 1,
+   "avgPrice": 0.52,
+   "lastBuyUtc": "2026-11-21T16:16:43.000Z",
+   "firstBuyUtc": "2026-11-21T16:16:43.000Z",
+   "hoursBeforeStart": 31.7,
+   "gameSource": "espn",
+   "title": "Mavericks vs. Jazz",
+   "rec": "63-35",
+   "roi": -10.1,
+   "n": 98,
+   "recScope": "NBA ML, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 8,
+    "l": 2,
+    "n": 10,
+    "txt": "L10 NBA 8-2"
+   },
+   "usualMed": 722,
+   "usualN": 17,
+   "usualScope": "NBA",
+   "vsUsual": 1.36,
+   "vsUsualAll": 2.04,
+   "sizeTier": "NORMAL"
   }
  ],
  "errors": [],
@@ -1383,6 +1863,6 @@
  "espnAdded": 242,
  "games": 259,
  "walletsChecked": 136,
- "inGameSkipped": 0,
- "offCardMatches": 23
+ "inGameSkipped": 2129,
+ "offCardMatches": 26
 }

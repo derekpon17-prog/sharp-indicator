@@ -18,7 +18,7 @@
    "firstPrice": 0.4832,
    "firstUsd": 891,
    "maxUsd": 891,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "4-8",
    "roi": -34.2,
    "n": 12,
@@ -29,7 +29,11 @@
    "twoSided": false,
    "tokenId": "62368310751360909452198369140159242867835091797315230487431604230166378064964",
    "firstBuyUtc": "2026-11-17T17:30:46.000Z",
-   "hoursBeforeStart": 120.5
+   "hoursBeforeStart": 120.5,
+   "usualMed": 700,
+   "usualScope": "NFL",
+   "vsUsual": 1.27,
+   "sizeTier": "NORMAL"
   },
   "NFL|Buccaneers at Lions|ML|Lions|0x0944e4da1f949b201a136d73f488d03c0c506771": {
    "sport": "NFL",
@@ -48,7 +52,7 @@
    "firstPrice": 0.6937,
    "firstUsd": 914,
    "maxUsd": 914,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "14-7",
    "roi": 26.3,
    "n": 21,
@@ -59,7 +63,11 @@
    "twoSided": true,
    "tokenId": "28382476811739435193536891032516584331135673816219186779241924427965856878660",
    "firstBuyUtc": "2026-11-15T16:04:37.000Z",
-   "hoursBeforeStart": 169.9
+   "hoursBeforeStart": 169.9,
+   "usualMed": 700,
+   "usualScope": "NFL",
+   "vsUsual": 1.31,
+   "sizeTier": "NORMAL"
   },
   "NFL|Buccaneers at Lions|TOTAL|Over|0x853212cd809da6acc458021c106af749b7aa738b": {
    "sport": "NFL",
@@ -108,7 +116,7 @@
    "firstPrice": 0.39,
    "firstUsd": 2633,
    "maxUsd": 2633,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "23-20",
    "roi": -19.9,
    "n": 43,
@@ -119,7 +127,11 @@
    "twoSided": false,
    "tokenId": "81344676502650843287567158829925081886760336256751645678798613844627827398977",
    "firstBuyUtc": "2026-11-17T14:15:04.000Z",
-   "hoursBeforeStart": 126.8
+   "hoursBeforeStart": 126.8,
+   "usualMed": 10283,
+   "usualScope": "NFL",
+   "vsUsual": 0.26,
+   "sizeTier": "SMALL"
   },
   "NFL|Buccaneers at Lions|SPREAD|Buccaneers|0x0944e4da1f949b201a136d73f488d03c0c506771": {
    "sport": "NFL",
@@ -140,7 +152,7 @@
    "firstPrice": 0.51,
    "firstUsd": 534,
    "maxUsd": 534,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "11-8",
    "roi": 18.9,
    "n": 19,
@@ -151,7 +163,11 @@
    "twoSided": true,
    "tokenId": "107776594576568324141439077119198995354660331429305681412333604658518172960479",
    "firstBuyUtc": "2026-11-19T16:54:34.000Z",
-   "hoursBeforeStart": 73.1
+   "hoursBeforeStart": 73.1,
+   "usualMed": 700,
+   "usualScope": "NFL",
+   "vsUsual": 0.76,
+   "sizeTier": "NORMAL"
   },
   "NFL|Buccaneers at Lions|SPREAD|Buccaneers|0x853212cd809da6acc458021c106af749b7aa738b": {
    "sport": "NFL",
@@ -204,7 +220,7 @@
    "firstPrice": 0.52,
    "firstUsd": 624,
    "maxUsd": 624,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "4-8",
    "roi": -34.2,
    "n": 12,
@@ -216,7 +232,11 @@
    "tokenId": "1329045082124452935345089999242905322121839551695272852134859245594106920634",
    "firstBuyUtc": "2026-11-16T05:21:04.000Z",
    "hoursBeforeStart": 156.6,
-   "gameSource": "espn"
+   "gameSource": "espn",
+   "usualMed": 700,
+   "usualScope": "NFL",
+   "vsUsual": 0.89,
+   "sizeTier": "NORMAL"
   },
   "NFL|Titans at Cowboys|TOTAL|Over|0xabea08725590a4c6ae7c8e63214c9628bbc772ae": {
    "sport": "NFL",
@@ -237,7 +257,7 @@
    "firstPrice": 0.5335,
    "firstUsd": 3302,
    "maxUsd": 3302,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "3-2",
    "roi": 8,
    "n": 5,
@@ -249,7 +269,11 @@
    "tokenId": "8069049477120977028026904522526659960673712376203249628680186073953606735413",
    "firstBuyUtc": "2026-11-17T20:40:53.000Z",
    "hoursBeforeStart": 117.3,
-   "gameSource": "espn"
+   "gameSource": "espn",
+   "usualMed": 5108,
+   "usualScope": "NFL",
+   "vsUsual": 0.65,
+   "sizeTier": "NORMAL"
   },
   "NFL|Titans at Cowboys|TOTAL|Over|0x853212cd809da6acc458021c106af749b7aa738b": {
    "sport": "NFL",
@@ -336,7 +360,7 @@
    "firstPrice": 0.5,
    "firstUsd": 1000,
    "maxUsd": 1000,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "4-8",
    "roi": -34.2,
    "n": 12,
@@ -348,7 +372,11 @@
    "tokenId": "73506235329745050140070703771802182244361631869460110998481186351224492377614",
    "firstBuyUtc": "2026-11-18T17:31:32.000Z",
    "hoursBeforeStart": 96.5,
-   "gameSource": "espn"
+   "gameSource": "espn",
+   "usualMed": 700,
+   "usualScope": "NFL",
+   "vsUsual": 1.43,
+   "sizeTier": "NORMAL"
   },
   "NFL|Steelers at Eagles|TOTAL|Under|0xabea08725590a4c6ae7c8e63214c9628bbc772ae": {
    "sport": "NFL",
@@ -369,7 +397,7 @@
    "firstPrice": 0.5274,
    "firstUsd": 3320,
    "maxUsd": 3470,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "3-2",
    "roi": 8,
    "n": 5,
@@ -381,7 +409,11 @@
    "tokenId": "6115476163023360154355629972590262753524101115290830730112321387263118841813",
    "firstBuyUtc": "2026-11-17T20:37:10.000Z",
    "hoursBeforeStart": 117.4,
-   "gameSource": "espn"
+   "gameSource": "espn",
+   "usualMed": 5108,
+   "usualScope": "NFL",
+   "vsUsual": 0.68,
+   "sizeTier": "NORMAL"
   },
   "NFL|Ravens at Panthers|SPREAD|Panthers|0x0944e4da1f949b201a136d73f488d03c0c506771": {
    "sport": "NFL",
@@ -402,7 +434,7 @@
    "firstPrice": 0.5323,
    "firstUsd": 1219,
    "maxUsd": 1219,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "11-8",
    "roi": 18.9,
    "n": 19,
@@ -414,7 +446,11 @@
    "tokenId": "71500177721972598856295549218270123831655526580151203272186304198063854783660",
    "firstBuyUtc": "2026-11-17T01:30:50.000Z",
    "hoursBeforeStart": 136.5,
-   "gameSource": "espn"
+   "gameSource": "espn",
+   "usualMed": 700,
+   "usualScope": "NFL",
+   "vsUsual": 1.74,
+   "sizeTier": "BIG"
   },
   "NFL|Raiders at Broncos|SPREAD|Raiders|0x0944e4da1f949b201a136d73f488d03c0c506771": {
    "sport": "NFL",
@@ -435,7 +471,7 @@
    "firstPrice": 0.54,
    "firstUsd": 543,
    "maxUsd": 543,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "11-8",
    "roi": 18.9,
    "n": 19,
@@ -447,7 +483,11 @@
    "tokenId": "27300861541538186568603500597807643965708339046834937949388195824428915074402",
    "firstBuyUtc": "2026-11-16T13:07:38.000Z",
    "hoursBeforeStart": 152.3,
-   "gameSource": "espn"
+   "gameSource": "espn",
+   "usualMed": 700,
+   "usualScope": "NFL",
+   "vsUsual": 0.78,
+   "sizeTier": "NORMAL"
   },
   "NBA|Mavericks at Jazz|ML|Mavericks|0x27f738fe203827445690339104aae35b20bc44b0": {
    "sport": "NBA",
@@ -468,7 +508,7 @@
    "firstPrice": 0.52,
    "firstUsd": 981,
    "maxUsd": 981,
-   "lastSeenAt": "2026-11-21T16:27:53.204Z",
+   "lastSeenAt": "2026-11-21T18:27:07.588Z",
    "rec": "63-35",
    "roi": -10.1,
    "n": 98,
@@ -480,7 +520,11 @@
    "tokenId": "31976321654204112623078902509775143695196644436624006858818703147856673222466",
    "firstBuyUtc": "2026-11-21T16:16:43.000Z",
    "hoursBeforeStart": 31.7,
-   "gameSource": "espn"
+   "gameSource": "espn",
+   "usualMed": 722,
+   "usualScope": "NBA",
+   "vsUsual": 1.36,
+   "sizeTier": "NORMAL"
   }
  }
 }
