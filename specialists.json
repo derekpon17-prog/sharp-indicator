@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T23:11:20.206Z",
+ "scannedAt": "2026-11-21T23:29:25.703Z",
  "sports": {
   "NFL": [
    {
@@ -151,7 +151,7 @@
       "pick": "Cowboys",
       "line": null,
       "price": "-355",
-      "dollars": 30536,
+      "dollars": 30540,
       "vsUsual": 6.7,
       "vsUsualAll": 31.3
      },
@@ -181,7 +181,7 @@
       "pick": "Panthers",
       "line": null,
       "price": "-133",
-      "dollars": 523,
+      "dollars": 527,
       "vsUsual": 0.1,
       "vsUsualAll": 0.5
      },
@@ -191,7 +191,7 @@
       "pick": "Chargers",
       "line": null,
       "price": "-156",
-      "dollars": 6989,
+      "dollars": 6998,
       "vsUsual": 1.5,
       "vsUsualAll": 7.2
      },
@@ -455,23 +455,23 @@
     ]
    },
    {
-    "id": "a0cff6",
-    "gap": 3.1,
-    "overall": "827-767",
-    "sport": "381-312",
-    "returnPct": 6.7,
-    "last10": "5-5",
+    "id": "bbd49f",
+    "gap": 4.4,
+    "overall": "27-26",
+    "sport": "26-21",
+    "returnPct": 9.6,
+    "last10": "6-4",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Trail Blazers at Knicks",
+      "matchup": "Grizzlies at Timberwolves",
       "market": "ML",
-      "pick": "Trail Blazers",
+      "pick": "Timberwolves",
       "line": null,
-      "price": "-103",
-      "dollars": 2888,
-      "vsUsual": 3.7,
-      "vsUsualAll": 0.7
+      "price": "-203",
+      "dollars": 16750,
+      "vsUsual": 2.2,
+      "vsUsualAll": 1.7
      }
     ]
    }
@@ -649,6 +649,16 @@
       "pick": "Baylor",
       "line": 6.5,
       "price": "-108",
+      "dollars": 1000,
+      "vsUsual": 1,
+      "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Virginia Tech at Miami (FL)",
+      "market": "SPREAD",
+      "pick": "Virginia Tech +22.5",
+      "line": 22.5,
+      "price": "-122",
       "dollars": 1000,
       "vsUsual": 1,
       "vsUsualAll": 1.6

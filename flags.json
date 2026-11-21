@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T23:11:20.206Z",
+ "scannedAt": "2026-11-21T23:29:25.703Z",
  "sides": [
   {
    "tail": false,
@@ -36,7 +36,7 @@
    "market": "ML",
    "pick": "Cowboys",
    "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "dollars": 30536,
+   "dollars": 30540,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 6.7,
@@ -192,6 +192,33 @@
    }
   },
   {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Grizzlies at Timberwolves",
+   "market": "ML",
+   "pick": "Timberwolves",
+   "kickoffEt": "Sat, Nov 21, 8:10 PM",
+   "dollars": 16750,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 2.2,
+   "price": "-203",
+   "size": "1.5x and up",
+   "mktRecord": "2-4",
+   "mktRoi": -28.5,
+   "l30Roi": 29.4,
+   "contested": false,
+   "sfPoints": 29,
+   "parts": {
+    "money": 16,
+    "sizing": 10,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
    "tail": true,
    "sport": "NFL",
    "matchup": "Cardinals at Chiefs",
@@ -306,7 +333,7 @@
    "market": "ML",
    "pick": "Chargers",
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
-   "dollars": 6989,
+   "dollars": 6998,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 1.5,
@@ -355,6 +382,33 @@
   },
   {
    "tail": false,
+   "sport": "CFB",
+   "matchup": "Arkansas State at Louisiana Tech",
+   "market": "SPREAD",
+   "pick": "Arkansas State +17.5",
+   "kickoffEt": "Sat, Nov 21, 7:00 PM",
+   "dollars": 13757,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.7,
+   "price": "-122",
+   "size": "0.5x",
+   "mktRecord": "24-15",
+   "mktRoi": 46.6,
+   "l30Roi": 26.4,
+   "contested": false,
+   "sfPoints": 21,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Buccaneers at Lions",
    "market": "SPREAD",
@@ -378,60 +432,6 @@
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
-   "matchup": "Arkansas State at Louisiana Tech",
-   "market": "SPREAD",
-   "pick": "Arkansas State +17.5",
-   "kickoffEt": "Sat, Nov 21, 7:00 PM",
-   "dollars": 10720,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "-122",
-   "size": "0.5x",
-   "mktRecord": "24-15",
-   "mktRoi": 46.6,
-   "l30Roi": 26.4,
-   "contested": false,
-   "sfPoints": 21,
-   "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
-   "matchup": "Florida International at Kennesaw State",
-   "market": "SPREAD",
-   "pick": "Florida International +2.5",
-   "kickoffEt": "Sat, Nov 21, 3:03 PM",
-   "dollars": 3036,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 2.1,
-   "price": "-108",
-   "size": "1.5x and up",
-   "mktRecord": "10-9",
-   "mktRoi": 17.4,
-   "l30Roi": 32.1,
-   "contested": false,
-   "sfPoints": 21,
-   "parts": {
-    "money": 8,
-    "sizing": 10,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
    }
   },
   {
@@ -889,7 +889,7 @@
    "kickoffEt": "Sun, Nov 22, 1:00 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 30536,
+   "strongDollars": 30540,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -937,14 +937,14 @@
    "kickoffEt": "Sat, Nov 21, 7:00 PM",
    "sport": "CFB",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 10720,
+   "strongDollars": 13757,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
     "14-14|111605|24-15"
    ],
    "bestPrice": "-122",
-   "maxVsUsual": 0.6
+   "maxVsUsual": 0.7
   },
   {
    "matchup": "Cardinals at Chiefs",
@@ -1033,7 +1033,7 @@
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 6989,
+   "strongDollars": 6998,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -1131,7 +1131,7 @@
    "pick": "Cowboys",
    "kickoffEt": "Sun, Nov 22, 1:00 PM",
    "sport": "NFL",
-   "dollars": 30536,
+   "dollars": 30540,
    "price": "-355",
    "vsUsual": 6.7,
    "size": "1.5x and up",
@@ -1262,6 +1262,23 @@
    "fp": "20-16|10118|12-5"
   },
   {
+   "matchup": "Grizzlies at Timberwolves",
+   "market": "ML",
+   "pick": "Timberwolves",
+   "kickoffEt": "Sat, Nov 21, 8:10 PM",
+   "sport": "NBA",
+   "dollars": 16750,
+   "price": "-203",
+   "vsUsual": 2.2,
+   "size": "1.5x and up",
+   "form": "L10 6-4",
+   "l30Roi": 29.4,
+   "mktRecord": "2-4",
+   "mktRoi": -28.5,
+   "opposed": "unopposed",
+   "fp": "11-8|25458|2-4"
+  },
+  {
    "matchup": "Cardinals at Chiefs",
    "market": "TOTAL",
    "pick": "Over 40.5",
@@ -1277,23 +1294,6 @@
    "mktRoi": 75.5,
    "opposed": "unopposed",
    "fp": "31-10|62756|1-0"
-  },
-  {
-   "matchup": "Florida International at Kennesaw State",
-   "market": "SPREAD",
-   "pick": "Florida International +2.5",
-   "kickoffEt": "Sat, Nov 21, 3:03 PM",
-   "sport": "CFB",
-   "dollars": 3036,
-   "price": "-108",
-   "vsUsual": 2.1,
-   "size": "1.5x and up",
-   "form": "L10 5-5",
-   "l30Roi": 32.1,
-   "mktRecord": "10-9",
-   "mktRoi": 17.4,
-   "opposed": "unopposed",
-   "fp": "5-3|6364|10-9"
   },
   {
    "matchup": "Arkansas at Texas",
@@ -1403,7 +1403,7 @@
    "pick": "Chargers",
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
    "sport": "NFL",
-   "dollars": 6989,
+   "dollars": 6998,
    "price": "-156",
    "vsUsual": 1.5,
    "size": "1.5x and up",
