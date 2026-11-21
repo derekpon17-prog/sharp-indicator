@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-21T03:13:33.907Z",
+ "scannedAt": "2026-11-21T04:15:09.667Z",
  "sports": {
   "NFL": [
    {
@@ -128,16 +128,6 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Wizards at Bulls",
-      "market": "ML",
-      "pick": "Wizards",
-      "line": null,
-      "price": "+133",
-      "dollars": 750,
-      "vsUsual": 0.9,
-      "vsUsualAll": 0.3
-     },
-     {
       "matchup": "Suns at Jazz",
       "market": "ML",
       "pick": "Jazz",
@@ -158,16 +148,6 @@
     "last10": "5-5",
     "bettingBig": true,
     "tonight": [
-     {
-      "matchup": "Wizards at Bulls",
-      "market": "SPREAD",
-      "pick": "Wizards +2.5",
-      "line": 2.5,
-      "price": "-104",
-      "dollars": 510,
-      "vsUsual": 0.9,
-      "vsUsualAll": 0.2
-     },
      {
       "matchup": "Kings at Lakers",
       "market": "TOTAL",
@@ -190,16 +170,6 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Wizards at Bulls",
-      "market": "ML",
-      "pick": "Bulls",
-      "line": null,
-      "price": "-122",
-      "dollars": 550,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.3
-     },
-     {
       "matchup": "Kings at Lakers",
       "market": "SPREAD",
       "pick": "Lakers",
@@ -220,26 +190,6 @@
     "last10": "7-3",
     "bettingBig": false,
     "tonight": [
-     {
-      "matchup": "Wizards at Bulls",
-      "market": "SPREAD",
-      "pick": "Bulls",
-      "line": -3.5,
-      "price": "+113",
-      "dollars": 1023,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Wizards at Bulls",
-      "market": "SPREAD",
-      "pick": "Wizards +2.5",
-      "line": 2.5,
-      "price": "+104",
-      "dollars": 980,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.4
-     },
      {
       "matchup": "Suns at Jazz",
       "market": "SPREAD",
@@ -263,23 +213,33 @@
     ]
    },
    {
-    "id": "af9367",
-    "gap": 0.7,
-    "overall": "25-15",
-    "sport": "24-14",
-    "returnPct": 7.8,
-    "last10": "5-5",
-    "bettingBig": false,
+    "id": "e54fcb",
+    "gap": 0,
+    "overall": "13-9",
+    "sport": "13-9",
+    "returnPct": 41,
+    "last10": "6-4",
+    "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Pelicans at Thunder",
+      "matchup": "Suns at Jazz",
       "market": "SPREAD",
-      "pick": "Thunder",
-      "line": -9.5,
-      "price": "-122",
-      "dollars": 5994,
-      "vsUsual": 1.2,
-      "vsUsualAll": 1.5
+      "pick": "Suns",
+      "line": -4.5,
+      "price": "-104",
+      "dollars": 15897,
+      "vsUsual": 1.6,
+      "vsUsualAll": 3.5
+     },
+     {
+      "matchup": "Kings at Lakers",
+      "market": "SPREAD",
+      "pick": "Lakers",
+      "line": -13.5,
+      "price": "-108",
+      "dollars": 844,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.2
      }
     ]
    }
@@ -310,9 +270,9 @@
       "pick": "Wild",
       "line": null,
       "price": "-270",
-      "dollars": 1541,
+      "dollars": 1571,
       "vsUsual": 0.5,
-      "vsUsualAll": 0.1
+      "vsUsualAll": 0.2
      }
     ]
    }
@@ -338,16 +298,6 @@
       "vsUsualAll": 0.3
      },
      {
-      "matchup": "UTEP at Air Force",
-      "market": "SPREAD",
-      "pick": "Air Force -21.5",
-      "line": -21.5,
-      "price": "-104",
-      "dollars": 10198,
-      "vsUsual": 1,
-      "vsUsualAll": 2.2
-     },
-     {
       "matchup": "Syracuse at Boston College",
       "market": "SPREAD",
       "pick": "Syracuse -2.5",
@@ -369,16 +319,6 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "South Dakota at Illinois State",
-      "market": "ML",
-      "pick": "Illinois State",
-      "line": null,
-      "price": "+133",
-      "dollars": 880,
-      "vsUsual": 0.9,
-      "vsUsualAll": 3.1
-     },
-     {
       "matchup": "Iowa at Illinois",
       "market": "SPREAD",
       "pick": "Iowa -7.5",
@@ -387,6 +327,16 @@
       "dollars": 1501,
       "vsUsual": 1.5,
       "vsUsualAll": 5.3
+     },
+     {
+      "matchup": "South Dakota at Illinois State",
+      "market": "ML",
+      "pick": "Illinois State",
+      "line": null,
+      "price": "+133",
+      "dollars": 880,
+      "vsUsual": 0.9,
+      "vsUsualAll": 3.1
      }
     ]
    },
@@ -418,6 +368,16 @@
       "dollars": 558,
       "vsUsual": 0.1,
       "vsUsualAll": 0.2
+     },
+     {
+      "matchup": "Utah at TCU",
+      "market": "ML",
+      "pick": "Utah",
+      "line": null,
+      "price": "-270",
+      "dollars": 879,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.4
      },
      {
       "matchup": "Colorado State at Fresno State",

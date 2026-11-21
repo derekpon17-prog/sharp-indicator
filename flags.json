@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-21T03:13:33.907Z",
+ "scannedAt": "2026-11-21T04:15:09.667Z",
  "sides": [
   {
    "tail": true,
@@ -52,60 +52,6 @@
     "sizing": 7,
     "quality": 6,
     "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Pelicans at Thunder",
-   "market": "SPREAD",
-   "pick": "Thunder",
-   "kickoffEt": "Fri, Nov 20, 8:11 PM",
-   "dollars": 7404,
-   "oppDollars": 3580,
-   "wallets": 2,
-   "maxVsUsual": 1.2,
-   "price": "-122",
-   "size": "1x",
-   "mktRecord": "13-7",
-   "mktRoi": 8.9,
-   "l30Roi": 7.8,
-   "contested": false,
-   "sfPoints": 26,
-   "parts": {
-    "money": 12,
-    "sizing": 4,
-    "quality": 6,
-    "pooled": 4,
-    "unopposed": 0,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
-   "matchup": "UTEP at Air Force",
-   "market": "SPREAD",
-   "pick": "Air Force -21.5",
-   "kickoffEt": "Fri, Nov 20, 8:00 PM",
-   "dollars": 13198,
-   "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 1,
-   "price": "-104",
-   "size": "1x",
-   "mktRecord": "15-6",
-   "mktRoi": 48.5,
-   "l30Roi": 48.6,
-   "contested": false,
-   "sfPoints": 25,
-   "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 6,
-    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -192,6 +138,33 @@
   },
   {
    "tail": false,
+   "sport": "NBA",
+   "matchup": "Kings at Lakers",
+   "market": "SPREAD",
+   "pick": "Lakers",
+   "kickoffEt": "Fri, Nov 20, 10:13 PM",
+   "dollars": 2497,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 1,
+   "price": "+104",
+   "size": "0.5x",
+   "mktRecord": "8-2",
+   "mktRoi": 61.7,
+   "l30Roi": 46.3,
+   "contested": false,
+   "sfPoints": 21,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "CFB",
    "matchup": "New Mexico at Wyoming",
    "market": "SPREAD",
@@ -221,36 +194,9 @@
    "tail": false,
    "sport": "NBA",
    "matchup": "Rockets at Nuggets",
-   "market": "TOTAL",
-   "pick": "Under 227.5",
-   "kickoffEt": "Fri, Nov 20, 10:10 PM",
-   "dollars": 1597,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.9,
-   "price": "-106",
-   "size": "1.5x and up",
-   "mktRecord": "8-4",
-   "mktRoi": 42.7,
-   "l30Roi": 12.5,
-   "contested": false,
-   "sfPoints": 20,
-   "parts": {
-    "money": 4,
-    "sizing": 7,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Rockets at Nuggets",
    "market": "SPREAD",
    "pick": "Nuggets",
-   "kickoffEt": "Fri, Nov 20, 10:10 PM",
+   "kickoffEt": "Fri, Nov 20, 10:14 PM",
    "dollars": 16461,
    "oppDollars": 0,
    "wallets": 1,
@@ -292,33 +238,6 @@
     "money": 8,
     "sizing": 4,
     "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Wizards at Bulls",
-   "market": "SPREAD",
-   "pick": "Bulls",
-   "kickoffEt": "Fri, Nov 20, 8:11 PM",
-   "dollars": 2000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.9,
-   "price": "+104",
-   "size": "0.5x",
-   "mktRecord": "2-0",
-   "mktRoi": 109.4,
-   "l30Roi": 69.2,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -373,60 +292,6 @@
     "money": 4,
     "sizing": 7,
     "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Wizards at Bulls",
-   "market": "ML",
-   "pick": "Bulls",
-   "kickoffEt": "Fri, Nov 20, 8:11 PM",
-   "dollars": 1238,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.5,
-   "price": "-122",
-   "size": "1x",
-   "mktRecord": "4-4",
-   "mktRoi": -17,
-   "l30Roi": 12.5,
-   "contested": false,
-   "sfPoints": 14,
-   "parts": {
-    "money": 4,
-    "sizing": 7,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Kings at Lakers",
-   "market": "SPREAD",
-   "pick": "Lakers",
-   "kickoffEt": "Fri, Nov 20, 10:10 PM",
-   "dollars": 1653,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1,
-   "price": "+104",
-   "size": "0.5x",
-   "mktRecord": "8-2",
-   "mktRoi": 61.7,
-   "l30Roi": 46.3,
-   "contested": false,
-   "sfPoints": 13,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 6,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -493,7 +358,7 @@
    "market": "ML",
    "pick": "Wild",
    "kickoffEt": "Sat, Nov 21, 10:00 PM",
-   "dollars": 1541,
+   "dollars": 1571,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 0.5,
@@ -569,33 +434,6 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Pelicans at Thunder",
-   "market": "SPREAD",
-   "pick": "Pelicans +9.5",
-   "kickoffEt": "Fri, Nov 20, 8:11 PM",
-   "dollars": 3580,
-   "oppDollars": 7404,
-   "wallets": 1,
-   "maxVsUsual": 0.4,
-   "price": "+122",
-   "size": "under 0.5x",
-   "mktRecord": "12-11",
-   "mktRoi": -27.3,
-   "l30Roi": 8.4,
-   "contested": true,
-   "sfPoints": 0,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
    "sport": "CFB",
    "matchup": "New Mexico at Wyoming",
    "market": "SPREAD",
@@ -641,23 +479,6 @@
    "maxVsUsual": 1.6
   },
   {
-   "matchup": "UTEP at Air Force",
-   "market": "SPREAD",
-   "pick": "Air Force -21.5",
-   "kickoffEt": "Fri, Nov 20, 8:00 PM",
-   "sport": "CFB",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 13198,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "22-11|157262|15-6",
-    "31-12|38166|39-22"
-   ],
-   "bestPrice": "-104",
-   "maxVsUsual": 1.4
-  },
-  {
    "matchup": "Texas Tech at Baylor",
    "market": "ML",
    "pick": "Texas Tech",
@@ -690,26 +511,10 @@
    "maxVsUsual": 1.6
   },
   {
-   "matchup": "Wizards at Bulls",
-   "market": "SPREAD",
-   "pick": "Bulls",
-   "kickoffEt": "Fri, Nov 20, 8:11 PM",
-   "sport": "NBA",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 2000,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "5-1|9250|2-0"
-   ],
-   "bestPrice": "+104",
-   "maxVsUsual": 0.9
-  },
-  {
    "matchup": "Kings at Lakers",
    "market": "SPREAD",
    "pick": "Lakers",
-   "kickoffEt": "Fri, Nov 20, 10:10 PM",
+   "kickoffEt": "Fri, Nov 20, 10:13 PM",
    "sport": "NBA",
    "type": "STRONG_UNOPPOSED",
    "strongDollars": 1653,
@@ -736,22 +541,6 @@
    ],
    "bestPrice": "+144",
    "maxVsUsual": 0.2
-  },
-  {
-   "matchup": "Pelicans at Thunder",
-   "market": "SPREAD",
-   "pick": "Thunder",
-   "kickoffEt": "Fri, Nov 20, 8:11 PM",
-   "sport": "NBA",
-   "type": "STRONG_VS_WEAK",
-   "strongDollars": 1410,
-   "oppDollars": 3580,
-   "oppWeakDollars": 3580,
-   "fp": [
-    "13-9|91643|6-6"
-   ],
-   "bestPrice": "+113",
-   "maxVsUsual": 1.2
   }
  ],
  "sizedUp": [
@@ -788,23 +577,6 @@
    "mktRoi": 3.7,
    "opposed": "contested",
    "fp": "5-4|5453|4-4"
-  },
-  {
-   "matchup": "Rockets at Nuggets",
-   "market": "TOTAL",
-   "pick": "Under 227.5",
-   "kickoffEt": "Fri, Nov 20, 10:10 PM",
-   "sport": "NBA",
-   "dollars": 1597,
-   "price": "-106",
-   "vsUsual": 1.9,
-   "size": "1.5x and up",
-   "form": "L10 9-1",
-   "l30Roi": 12.5,
-   "mktRecord": "8-4",
-   "mktRoi": 42.7,
-   "opposed": "unopposed",
-   "fp": "15-9|2522|8-4"
   },
   {
    "matchup": "Texas Tech at Baylor",
@@ -875,40 +647,6 @@
    "fp": "23-17|9472|46-38"
   },
   {
-   "matchup": "Wizards at Bulls",
-   "market": "ML",
-   "pick": "Bulls",
-   "kickoffEt": "Fri, Nov 20, 8:11 PM",
-   "sport": "NBA",
-   "dollars": 1238,
-   "price": "-122",
-   "vsUsual": 1.5,
-   "size": "1x",
-   "form": "L10 9-1",
-   "l30Roi": 12.5,
-   "mktRecord": "4-4",
-   "mktRoi": -17,
-   "opposed": "contested",
-   "fp": "15-9|2522|4-4"
-  },
-  {
-   "matchup": "UTEP at Air Force",
-   "market": "SPREAD",
-   "pick": "Air Force -21.5",
-   "kickoffEt": "Fri, Nov 20, 8:00 PM",
-   "sport": "CFB",
-   "dollars": 3000,
-   "price": "-104",
-   "vsUsual": 1.4,
-   "size": "1x",
-   "form": "L10 6-4",
-   "l30Roi": 38.6,
-   "mktRecord": "39-22",
-   "mktRoi": 21.3,
-   "opposed": "unopposed",
-   "fp": "31-12|38166|39-22"
-  },
-  {
    "matchup": "Saints at Bears",
    "market": "SPREAD",
    "pick": "Saints +9.5",
@@ -924,23 +662,6 @@
    "mktRoi": 37.1,
    "opposed": "unopposed",
    "fp": "9-1|4472|6-0"
-  },
-  {
-   "matchup": "Pelicans at Thunder",
-   "market": "SPREAD",
-   "pick": "Thunder",
-   "kickoffEt": "Fri, Nov 20, 8:11 PM",
-   "sport": "NBA",
-   "dollars": 5994,
-   "price": "-122",
-   "vsUsual": 1.2,
-   "size": "1x",
-   "form": "L10 5-5",
-   "l30Roi": 7.8,
-   "mktRecord": "13-7",
-   "mktRoi": 8.9,
-   "opposed": "contested",
-   "fp": "24-14|14345|13-7"
   },
   {
    "matchup": "Suns at Jazz",

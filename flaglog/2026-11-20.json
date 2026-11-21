@@ -16,7 +16,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8210,
    "opposedSeen": false,
-   "snapshots": 36
+   "snapshots": 38
   },
   "Buccaneers at Lions|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": false,
-   "snapshots": 36
+   "snapshots": 38
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -49,7 +49,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2534,
    "opposedSeen": false,
-   "snapshots": 18
+   "snapshots": 19
   },
   "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 18
+   "snapshots": 19
   },
   "Iowa State at UCF|ML|Iowa State": {
    "sport": "CFB",
@@ -200,7 +200,7 @@
    "maxVsUsual": 0.2,
    "maxDollars": 1624,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Raptors at Pistons|TOTAL|Over 217.5": {
    "sport": "NBA",
@@ -283,7 +283,7 @@
    "maxVsUsual": 3.1,
    "maxDollars": 3077,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Oregon at Michigan State|SPREAD|Michigan State +17.5": {
    "sport": "CFB",
@@ -299,7 +299,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 2513,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Campbell Fighting Camels at Kansas State Wildcats|TOTAL|Over": {
    "sport": "CBB",
@@ -462,7 +462,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 1501,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Suns at Jazz|SPREAD|Suns": {
    "sport": "NBA",
@@ -479,7 +479,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 17448,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Kings at Lakers|SPREAD|Lakers": {
    "sport": "NBA",
@@ -495,7 +495,7 @@
    "maxVsUsual": 1,
    "maxDollars": 1653,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Rockets at Nuggets|TOTAL|Under 227.5": {
    "sport": "NBA",
@@ -543,7 +543,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 1050,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   }
  }
 }
