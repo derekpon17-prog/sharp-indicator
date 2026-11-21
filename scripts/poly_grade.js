@@ -127,12 +127,14 @@ async function closePrice(tokenId, startMs) {
     if (!e.result) { rec.pending++; continue; }
     if (e.result === 'NA') { rec.na++; continue; }
     const bk = e.cls === 'HOT' && e.sameAsSF ? 'HOT_SAME_SF' : e.cls;
-    const B = (rec.buckets[bk] ||= { all: blank(), onCard: blank(), offCard: blank(), bySport: {}, byMarket: {}, byTiming: {} });
+    const B = (rec.buckets[bk] ||= { all: blank(), onCard: blank(), offCard: blank(), bySport: {}, byMarket: {}, byTiming: {}, bySize: {} });
     add(B.all, e);
     if (e.onCard) add(B.onCard, e);
     add(B.bySport[e.sport] ||= blank(), e);
     add(B.byMarket[e.market] ||= blank(), e);
     if (!e.onCard) add(B.offCard, e);
+    // Size vs the wallet's own usual (Nov 21): does a BIG bet (1.5x+ usual) do better than a normal or small one?
+    add(B.bySize[e.sizeTier == null ? 'unknown' : e.sizeTier === 'BIG' ? 'BIG (1.5x+ usual)' : e.sizeTier === 'SMALL' ? 'SMALL (0.5x or less)' : 'NORMAL'] ||= blank(), e);
     // When the wallet first bought, hours before the start (council Nov 20): does early or late Polymarket money do better?
     const h = e.hoursBeforeStart;
     add(B.byTiming[h == null ? 'unknown' : h > 6 ? 'over 6h before' : h >= 1 ? '1-6h before' : 'under 1h before'] ||= blank(), e);

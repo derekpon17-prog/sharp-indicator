@@ -260,6 +260,7 @@ function buildPolyCard(sp, latest, before, firstStart, outlier) {
       chips.push({ t: `${gated ? 'COLD in this bet type' : m.cls} ${m.name} ${k(m.usd)}`, c });
       if (rec) chips.push({ t: rec, c: 'grey' });
       if (m.l10) chips.push({ t: m.l10.txt, c: 'grey' });
+      if (m.vsUsual != null) chips.push({ t: `${m.sizeTier === 'BIG' ? 'BIG ' : m.sizeTier === 'SMALL' ? 'small ' : ''}${m.vsUsual}x their usual ${k(m.usualMed)}${m.usualScope === 'all sports' ? ' (all sports)' : ''}`, c: m.sizeTier === 'BIG' ? (m.cls === 'HOT' && !same ? 'green' : m.cls === 'COLD' ? 'red' : 'grey') : 'grey' });
       chips.push({ t: same ? `same wallet as SF ${m.sameAsSF.sfWallet} - not a 2nd source` : gated ? 'not counted' : m.cls === 'COLD' ? 'fade flag' : 'counts', c: same ? 'grey' : c });
     }
     chips.push(sfFor(m0));
@@ -284,7 +285,7 @@ function buildPolyCard(sp, latest, before, firstStart, outlier) {
     boards.push({ brand: 'POLYMARKET', title: `${sp} - Polymarket sharp wallets`,
       subtitle: `Classified wallets with $${MIN_POLY}+ on a side. HOT = profitable in ${sp} and this bet type (last 45 days, ${(POLYMETA.hotBar || {}).mktMin || 5}+ bets${(POLYMETA.hotBar || {}).roiMin ? `, +${POLYMETA.hotBar.roiMin}% ROI or better` : ''}); COLD = losing. Wallet roster ${rosterAt} CT, buys checked ${checkedAt} CT${picks.length > 12 ? ` - board ${boards.length + 1}` : ''}`,
       sections: secs,
-      legend: [last && two ? `${two} two-sided position${two === 1 ? '' : 's'} left out` : '', last && picks.length > 24 ? `${picks.length - 24} more sides not shown (smallest wallet money)` : '', rl, 'Price = their average Polymarket price as American odds. COLD = fade flag. Same wallet as SF = not a second source.'].filter(Boolean).join(' | '),
+      legend: [last && two ? `${two} two-sided position${two === 1 ? '' : 's'} left out` : '', last && picks.length > 24 ? `${picks.length - 24} more sides not shown (smallest wallet money)` : '', rl, 'Price = their average Polymarket price as American odds. Usual = the wallet\'s median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.'].filter(Boolean).join(' | '),
       footer: 'Wallet money, not a pick. Leans, not guarantees' });
   }
   const nh = picks.filter(p => p.hotUsd > 0).length;

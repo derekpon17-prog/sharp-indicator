@@ -274,6 +274,80 @@ function matchPoly(games, roster, buysByWallet, now = new Date()) {
   return out;
 }
 
+/* USUAL SIZE (Derek, Nov 21 2026 - "unit sizing for Polymarket wallets, bigger bet vs their normal size, just like
+   SharpFlow"). Polymarket has no unit, so a wallet's normal size is inferred from its own history: the dollars it put on
+   each game-line position (fills added up per market + outcome) over its last ~600 buys. Usual = the MEDIAN position
+   (a few huge bets don't drag it up), in this sport (needs 5+ positions, else all sports is used and the scope says so).
+   vsUsual = this bet's dollars / usual. 1.5x+ = BIG, 0.5x or less = SMALL, in between NORMAL (SharpFlow's size buckets).
+   Positions under $25 are dust and skipped; the market(s) of the current matches are left out so today's bet can't
+   set its own baseline. Fetched only for wallets that matched a side. */
+const USUAL_MIN_N = 5, USUAL_DUST = 25;
+async function fetchHistory(wallet, pages = 6) {
+  const buys = []; let cursor = null;
+  for (let pg = 0; pg < pages; pg++) {
+    try {
+      const r = await fetch(`${DATA_API}/v2/trades?user=${wallet}&side=BUY&taker_only=true&limit=100` + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''), { signal: AbortSignal.timeout(20000) });
+      if (!r.ok) break;
+      const j = await r.json();
+      const rows = Array.isArray(j && j.data) ? j.data : [];
+      buys.push(...rows);
+      cursor = j && j.pagination && j.pagination.next_cursor;
+      if (!cursor || !rows.length) break;
+    } catch { break; }
+  }
+  return buys;
+}
+const median = a => { const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+function usualFor(buys, excludeConds = new Set()) {
+  const pos = {};
+  for (const b of buys) {
+    if (!marketOf(b.title)) continue;
+    const c = b.condition_id || b.conditionId || b.title;
+    if (excludeConds.has(c)) continue;
+    const slug = String(b.slug || b.event_slug || '').toLowerCase();
+    const pre = slug.split('-')[0];
+    const sport = Object.entries(SLUG_PREFIX).find(([, v]) => v.includes(pre));
+    const a = (pos[c + '|' + b.outcome] ||= { sport: sport ? sport[0] : null, usd: 0 });
+    a.usd += (+b.size || 0) * (+b.price || 0);
+  }
+  const rows = Object.values(pos).filter(a => a.usd >= USUAL_DUST);
+  const stat = xs => xs.length ? { med: Math.round(median(xs)), avg: Math.round(xs.reduce((x, y) => x + y, 0) / xs.length), n: xs.length } : { med: null, avg: null, n: 0 };
+  const out = { all: stat(rows.map(a => a.usd)), sports: {} };
+  for (const sp of Object.keys(SLUG_PREFIX)) out.sports[sp] = stat(rows.filter(a => a.sport === sp).map(a => a.usd));
+  return out;
+}
+function sizeFor(usual, sport, usd) {
+  const sp = (usual.sports || {})[sport] || { n: 0 };
+  const useSport = sp.n >= USUAL_MIN_N && sp.med;
+  const base = useSport ? sp : (usual.all.n >= USUAL_MIN_N ? usual.all : null);
+  if (!base || !base.med) return { usualMed: null, usualN: base ? base.n : 0, usualScope: null, vsUsual: null, vsUsualAll: usual.all.med ? +(usd / usual.all.med).toFixed(2) : null, sizeTier: null };
+  const vs = +(usd / base.med).toFixed(2);
+  return { usualMed: base.med, usualN: base.n, usualScope: useSport ? sport : 'all sports', vsUsual: vs,
+    vsUsualAll: usual.all.med ? +(usd / usual.all.med).toFixed(2) : null, sizeTier: vs >= 1.5 ? 'BIG' : vs <= 0.5 ? 'SMALL' : 'NORMAL' };
+}
+async function addUsual(matches, sfDir) {
+  const ws = [...new Set(matches.map(m => m.wallet))], cache = {};
+  for (let i = 0; i < ws.length; i += BATCH) {
+    const batch = ws.slice(i, i + BATCH);
+    const res = await Promise.all(batch.map(fetchHistory));
+    batch.forEach((w, j) => { cache[w] = res[j]; });
+  }
+  const book = {}, at = new Date().toISOString();
+  for (const w of ws) {
+    const ex = new Set(matches.filter(m => m.wallet === w && m.conditionId).map(m => m.conditionId));
+    const u = usualFor(cache[w] || [], ex);
+    book[w] = { name: (matches.find(m => m.wallet === w) || {}).name, buysRead: (cache[w] || []).length, at, ...u };
+  }
+  for (const m of matches) Object.assign(m, sizeFor(book[m.wallet] || { all: { n: 0 }, sports: {} }, m.sport, m.usd));
+  // keep the wallet book across runs: wallets not matched this time keep their last read
+  if (sfDir) {
+    const f = sfDir + '/poly_usual.json'; let old = {};
+    try { old = JSON.parse(fs.readFileSync(f, 'utf8')).wallets || {}; } catch {}
+    fs.writeFileSync(f, JSON.stringify({ updated: at, note: 'Usual = median game-line position dollars per wallet (this sport needs 5+ positions, else all sports), from the last ~600 Polymarket buys; today\'s own markets excluded.', wallets: { ...old, ...book } }, null, 1));
+  }
+  return matches;
+}
+
 /* L10 form (Derek, Nov 20 2026 - "like Sharp Flow, L10 4-6"): the wallet's last 10 SETTLED game-line bets in this
    sport, newest resolution first. Win = the held outcome resolved at 1 (current_price >= 0.99), loss = resolved at 0
    (<= 0.01); exits before settlement have no verdict and are skipped (same rule as api/trader-stats.js). A market
@@ -342,12 +416,14 @@ function logMatches(sfDir, matches, at) {
           firstSeenAt: at, firstPrice: m.gradePrice ?? m.avgPrice, firstUsd: m.usd, maxUsd: m.usd, lastSeenAt: at,
           rec: m.rec, roi: m.roi, n: m.n, recScope: m.recScope, l10: m.l10 ? m.l10.txt : null,
           onCard: !!m.onCard, sameAsSF: !!m.sameAsSF, twoSided: !!m.twoSided,
-          tokenId: m.tokenId || null, firstBuyUtc: m.firstBuyUtc || null, hoursBeforeStart: m.hoursBeforeStart ?? null, gameSource: m.gameSource || null };
+          tokenId: m.tokenId || null, firstBuyUtc: m.firstBuyUtc || null, hoursBeforeStart: m.hoursBeforeStart ?? null, gameSource: m.gameSource || null,
+          usualMed: m.usualMed ?? null, usualScope: m.usualScope || null, vsUsual: m.vsUsual ?? null, sizeTier: m.sizeTier || null };
       } else {
         e.maxUsd = Math.max(e.maxUsd || 0, m.usd); e.lastSeenAt = at;
         if (m.twoSided) e.twoSided = true;   // once seen on both sides, never counted
         if (!e.conditionId && m.conditionId) { e.conditionId = m.conditionId; e.outcome = m.outcome; e.title = m.gradeTitle; }
         if (!e.tokenId && m.tokenId) e.tokenId = m.tokenId;
+        if (e.vsUsual == null && m.vsUsual != null) { e.usualMed = m.usualMed; e.usualScope = m.usualScope; e.vsUsual = m.vsUsual; e.sizeTier = m.sizeTier; }   // frozen at first read
         if (!e.firstBuyUtc && m.firstBuyUtc) { e.firstBuyUtc = m.firstBuyUtc; e.hoursBeforeStart = m.hoursBeforeStart; }
       }
     }
@@ -355,7 +431,7 @@ function logMatches(sfDir, matches, at) {
   }
 }
 
-module.exports = { matchPoly, teamHit, marketOf, SPORT_KEY, l10For, fetchSettled, logMatches, espnGames, sameGame };
+module.exports = { usualFor, sizeFor, matchPoly, teamHit, marketOf, SPORT_KEY, l10For, fetchSettled, logMatches, espnGames, sameGame };
 
 if (require.main === module) {
   (async () => {
@@ -405,6 +481,7 @@ if (require.main === module) {
       }
       result.games = games.length; result.walletsChecked = list.length;
       result.matches = await addL10(matchPoly(games, roster, buysByWallet, now));
+      try { await addUsual(result.matches, sfDir); } catch (e) { result.errors.push('usual: ' + e.message); }
       result.inGameSkipped = inGameSkipped;
       result.offCardMatches = result.matches.filter(m => m.gameSource === 'espn').length;
       result.ok = result.errors.length < list.length || !list.length;
@@ -412,7 +489,7 @@ if (require.main === module) {
     fs.writeFileSync(outFile, JSON.stringify(result, null, 1));
     try { logMatches(sfDir, result.matches, result.at); } catch (e) { console.log('polylog write failed:', e.message); }
     console.log(`poly_match: ${result.games || 0} games (${result.espnAdded || 0} from ESPN only), ${result.walletsChecked || 0} wallets, ${result.matches.length} matches (${result.offCardMatches || 0} on games SharpFlow doesn't have), ${result.inGameSkipped || 0} in-game buys dropped, ${result.errors.length} errors`);
-    for (const m of result.matches) console.log(`  ${m.cls} ${m.name} ${m.matchup} ${m.market} ${m.side} $${m.usd} ${m.l10 ? m.l10.txt : 'L10 n/a'}${m.twoSided ? ' TWO-SIDED' : ''}${m.sameAsSF ? ' SAME-AS-SF ' + m.sameAsSF.sfWallet : ''}`);
+    for (const m of result.matches) console.log(`  ${m.cls} ${m.name} ${m.matchup} ${m.market} ${m.side} $${m.usd} ${m.l10 ? m.l10.txt : 'L10 n/a'} ${m.vsUsual != null ? m.vsUsual + 'x usual $' + m.usualMed + ' (' + m.usualScope + ', ' + m.usualN + ')' : 'usual n/a'}${m.twoSided ? ' TWO-SIDED' : ''}${m.sameAsSF ? ' SAME-AS-SF ' + m.sameAsSF.sfWallet : ''}`);
     // games carry their tickets only for matching; keep the file small
     
   })();

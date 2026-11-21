@@ -59,6 +59,7 @@ for (const [sp, hs] of Object.entries(bySport)) {
       { t: isNew ? 'NEW since the report' : `sized up from ${k(p.usd)}`, c: 'green' }];
     if (m.rec) chips.push({ t: `${sp} ${m.market} ${m.rec}${m.roi != null ? ` (${m.roi >= 0 ? '+' : ''}${Math.round(m.roi)}%)` : ''} last 45d`, c: 'grey' });
     if (m.l10) chips.push({ t: m.l10.txt, c: 'grey' });
+    if (m.vsUsual != null) chips.push({ t: `${m.sizeTier === 'BIG' ? 'BIG ' : ''}${m.vsUsual}x their usual ${k(m.usualMed)}`, c: m.sizeTier === 'BIG' ? 'green' : 'grey' });
     if (!m.onCard) chips.push({ t: 'SF no money here', c: 'grey' });
     sec.picks.push({ bet: bet(m), sub: `${m.matchup} - ${ctTime(st)} CT - last buy ${m.lastBuyUtc ? ctTime(new Date(m.lastBuyUtc)) : '?'} CT`, chips, price: amer(m.avgPrice), polyHot: 1, polyCold: 0 });
   }
