@@ -1,0 +1,238 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 5:00pm CT** - 3 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Wallets with positive NHL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 2:48pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Blue Jackets at Maple Leafs",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - MAPLE LEAFS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "★ Maple Leafs ML -104",
+       "price": "-104",
+       "for": {
+        "team": "MAPLE LEAFS",
+        "rows": [
+         {
+          "team": "Maple Leafs",
+          "wallet": "E",
+          "market": "ML",
+          "record": "15-8",
+          "roi": 26,
+          "dollars": 21384,
+          "note": "1.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Maple Leafs",
+          "wallet": "joino",
+          "market": "ML",
+          "record": "30-30",
+          "recLabel": "NHL ML · last 45d record",
+          "roi": -4,
+          "dollars": 1530,
+          "note": "Polymarket · L10 NHL 6-4",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MAPLE LEAFS",
+         "dollars": 21384,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 15-8 (+26% ROI) on MAPLE LEAFS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      },
+      {
+       "eyebrow": "Islanders at Red Wings",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - RED WINGS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Red Wings +1.5 -211",
+       "price": "-211",
+       "for": {
+        "team": "RED WINGS",
+        "rows": [
+         {
+          "team": "Red Wings",
+          "wallet": "E",
+          "market": "SPREAD",
+          "record": "10-3",
+          "roi": 29.2,
+          "dollars": 25175,
+          "note": "1.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL SPREAD · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Red Wings",
+          "wallet": "cocococococo",
+          "market": "ML",
+          "record": "109-91",
+          "recLabel": "NHL ML · last 45d record",
+          "roi": -1.6,
+          "dollars": 1500,
+          "note": "Polymarket · L10 NHL 5-5",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "ISLANDERS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Islanders",
+          "wallet": "taylorsversion",
+          "market": "ML",
+          "record": "64-47",
+          "recLabel": "NHL ML · last 45d record",
+          "roi": -0.7,
+          "dollars": 25214,
+          "note": "Polymarket · L10 NHL 8-2",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "RED WINGS",
+         "dollars": 25175,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 10-3 (+29% ROI) on RED WINGS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 5:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Sabres at Panthers",
+       "time": "5:00pm CT",
+       "tag": {
+        "t": "EDGE - PANTHERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Panthers -1.5 ++194",
+       "price": "++194",
+       "for": {
+        "team": "PANTHERS",
+        "rows": [
+         {
+          "team": "Panthers",
+          "wallet": "E",
+          "market": "SPREAD",
+          "record": "10-3",
+          "roi": 29.2,
+          "dollars": 6457,
+          "note": "0.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "SABRES",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Sabres",
+          "wallet": "0xf62b…844a",
+          "market": "ML",
+          "record": "51-36",
+          "recLabel": "NHL ML · last 45d record",
+          "roi": -6.8,
+          "dollars": 500,
+          "note": "Polymarket · L10 NHL 5-5",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PANTHERS",
+         "dollars": 6457,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 10-3 (+29% ROI) on PANTHERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 5-6 -3.2u, COLD sides 29-21 (fading -7.4u) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

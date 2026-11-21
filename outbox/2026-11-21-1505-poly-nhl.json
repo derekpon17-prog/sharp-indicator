@@ -1,0 +1,293 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NHL - first game 5:00pm CT** - 8 sides (0 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NHL - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NHL and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 2:41pm CT, buys checked 3:05pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 5:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 7.5",
+       "sub": "Penguins at Predators - 5:00pm CT",
+       "chips": [
+        {
+         "t": "COLD 0xf62b…844a $2K",
+         "c": "red"
+        },
+        {
+         "t": "NHL TOTAL 19-10 (-3%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "small 0.4x their usual $5K",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -158,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Sabres ML",
+       "sub": "Sabres at Panthers - 5:00pm CT",
+       "chips": [
+        {
+         "t": "COLD 0xf62b…844a $500",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 51-36 (-7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "small 0.1x their usual $5K",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 127,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "Bruins ML",
+       "sub": "Capitals at Bruins - 6:00pm CT",
+       "chips": [
+        {
+         "t": "COLD taylorsversion $31K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 64-47 (-1%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "COLD 0xf62b…844a $1K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 51-36 (-7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "small 0.2x their usual $5K",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -121,
+       "polyHot": 0,
+       "polyCold": 2
+      },
+      {
+       "bet": "Islanders ML",
+       "sub": "Islanders at Red Wings - 6:00pm CT",
+       "chips": [
+        {
+         "t": "COLD taylorsversion $25K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 64-47 (-1%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -121,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Senators ML",
+       "sub": "Kings at Senators - 6:00pm CT",
+       "chips": [
+        {
+         "t": "COLD taylorsversion $2.7K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 64-47 (-1%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -167,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Under 6.5",
+       "sub": "Kings at Senators - 6:00pm CT",
+       "chips": [
+        {
+         "t": "COLD taylorsversion $1.6K",
+         "c": "red"
+        },
+        {
+         "t": "NHL TOTAL 34-30 (-3%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -117,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Maple Leafs ML",
+       "sub": "Blue Jackets at Maple Leafs - 6:00pm CT",
+       "chips": [
+        {
+         "t": "COLD joino $1.5K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 30-30 (-4%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 6-4",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 30x their usual $51",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $21K",
+         "c": "blue"
+        }
+       ],
+       "price": -104,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Red Wings ML",
+       "sub": "Islanders at Red Wings - 6:00pm CT",
+       "chips": [
+        {
+         "t": "COLD cocococococo $1.5K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 109-91 (-2%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 3.49x their usual $430",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 122,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 5-6 -3.2u, COLD sides 29-21 (fading -7.4u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
