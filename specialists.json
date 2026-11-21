@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "scannedAt": "2026-11-21T00:04:41.486Z",
+ "scannedAt": "2026-11-21T01:16:48.925Z",
  "sports": {
   "CBB": [
    {
@@ -161,6 +161,47 @@
     ]
    },
    {
+    "id": "4c8ed9",
+    "gap": 6.2,
+    "overall": "292-272",
+    "sport": "69-50",
+    "returnPct": 21,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "New Mexico at Wyoming",
+      "market": "SPREAD",
+      "pick": "Wyoming",
+      "line": 14.5,
+      "price": "-186",
+      "dollars": 833,
+      "vsUsual": 0.8,
+      "vsUsualAll": 2.9
+     },
+     {
+      "matchup": "Iowa at Illinois",
+      "market": "SPREAD",
+      "pick": "Iowa -7.5",
+      "line": -7.5,
+      "price": "-113",
+      "dollars": 1501,
+      "vsUsual": 1.5,
+      "vsUsualAll": 5.3
+     },
+     {
+      "matchup": "South Dakota at Illinois State",
+      "market": "ML",
+      "pick": "Illinois State",
+      "line": null,
+      "price": "+133",
+      "dollars": 880,
+      "vsUsual": 0.9,
+      "vsUsualAll": 3.1
+     }
+    ]
+   },
+   {
     "id": "bc44b0",
     "gap": 6.1,
     "overall": "260-222",
@@ -180,6 +221,16 @@
       "vsUsualAll": 3.4
      },
      {
+      "matchup": "Iowa at Illinois",
+      "market": "SPREAD",
+      "pick": "Illinois +7.5",
+      "line": 7.5,
+      "price": "+113",
+      "dollars": 558,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.2
+     },
+     {
       "matchup": "Colorado State at Fresno State",
       "market": "TOTAL",
       "pick": "Over 65.5",
@@ -190,61 +241,9 @@
       "vsUsualAll": 0.3
      }
     ]
-   },
-   {
-    "id": "c3d209",
-    "gap": 3.6,
-    "overall": "13-12",
-    "sport": "5-4",
-    "returnPct": 61.6,
-    "last10": "5-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "New Mexico at Wyoming",
-      "market": "SPREAD",
-      "pick": "New Mexico -8.5",
-      "line": -8.5,
-      "price": "-117",
-      "dollars": 3067,
-      "vsUsual": 3.1,
-      "vsUsualAll": 3.1
-     },
-     {
-      "matchup": "Oregon at Michigan State",
-      "market": "SPREAD",
-      "pick": "Michigan State +17.5",
-      "line": 17.5,
-      "price": "-100",
-      "dollars": 2513,
-      "vsUsual": 2.6,
-      "vsUsualAll": 2.5
-     }
-    ]
    }
   ],
   "NBA": [
-   {
-    "id": "0889ba",
-    "gap": 10.1,
-    "overall": "37-8",
-    "sport": "12-1",
-    "returnPct": 55.4,
-    "last10": "9-1",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Hornets at Hawks",
-      "market": "ML",
-      "pick": "Hawks",
-      "line": null,
-      "price": "-233",
-      "dollars": 2240,
-      "vsUsual": 1,
-      "vsUsualAll": 0.6
-     }
-    ]
-   },
    {
     "id": "8d3672",
     "gap": 9.7,
@@ -267,6 +266,27 @@
     ]
    },
    {
+    "id": "0889ba",
+    "gap": 9.7,
+    "overall": "38-8",
+    "sport": "12-1",
+    "returnPct": 55.4,
+    "last10": "9-1",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Hornets at Hawks",
+      "market": "ML",
+      "pick": "Hawks",
+      "line": null,
+      "price": "-233",
+      "dollars": 2240,
+      "vsUsual": 1,
+      "vsUsualAll": 0.6
+     }
+    ]
+   },
+   {
     "id": "cbff8c",
     "gap": 7,
     "overall": "50-48",
@@ -278,7 +298,7 @@
      {
       "matchup": "Hornets at Hawks",
       "market": "TOTAL",
-      "pick": "Over",
+      "pick": "Over 218.5",
       "line": 218.5,
       "price": "-108",
       "dollars": 750,
@@ -294,57 +314,6 @@
       "dollars": 750,
       "vsUsual": 0.9,
       "vsUsualAll": 0.3
-     }
-    ]
-   },
-   {
-    "id": "5b1e50",
-    "gap": 4.9,
-    "overall": "449-438",
-    "sport": "75-60",
-    "returnPct": 19.5,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Pacers at Cavaliers",
-      "market": "ML",
-      "pick": "Cavaliers",
-      "line": null,
-      "price": "-234",
-      "dollars": 583,
-      "vsUsual": 1.7,
-      "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Pelicans at Thunder",
-      "market": "ML",
-      "pick": "Thunder",
-      "line": null,
-      "price": "-456",
-      "dollars": 820,
-      "vsUsual": 2.4,
-      "vsUsualAll": 0.6
-     },
-     {
-      "matchup": "Wizards at Bulls",
-      "market": "ML",
-      "pick": "Bulls",
-      "line": null,
-      "price": "-121",
-      "dollars": 513,
-      "vsUsual": 1.5,
-      "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Raptors at Pistons",
-      "market": "ML",
-      "pick": "Pistons",
-      "line": null,
-      "price": "-252",
-      "dollars": 625,
-      "vsUsual": 1.8,
-      "vsUsualAll": 0.5
      }
     ]
    },
@@ -375,6 +344,57 @@
       "price": "-108",
       "dollars": 572,
       "vsUsual": 1,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "a87a20",
+    "gap": 2.5,
+    "overall": "21-13",
+    "sport": "18-10",
+    "returnPct": 31,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Hornets at Hawks",
+      "market": "TOTAL",
+      "pick": "Over 218.5",
+      "line": 218.5,
+      "price": "-108",
+      "dollars": 700,
+      "vsUsual": 0.5,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Raptors at Pistons",
+      "market": "SPREAD",
+      "pick": "Pistons -6.5",
+      "line": -6.5,
+      "price": "-104",
+      "dollars": 550,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Wizards at Bulls",
+      "market": "ML",
+      "pick": "Bulls",
+      "line": null,
+      "price": "-122",
+      "dollars": 550,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Kings at Lakers",
+      "market": "SPREAD",
+      "pick": "Lakers -14.5",
+      "line": -14.5,
+      "price": "+104",
+      "dollars": 700,
+      "vsUsual": 0.5,
       "vsUsualAll": 0.3
      }
     ]
@@ -501,8 +521,8 @@
       "pick": "Hurricanes",
       "line": null,
       "price": "-163",
-      "dollars": 999,
-      "vsUsual": 0.3,
+      "dollars": 1069,
+      "vsUsual": 0.4,
       "vsUsualAll": 0.1
      },
      {
