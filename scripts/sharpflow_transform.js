@@ -32,7 +32,7 @@ function transform(payload, OUT, specialistsBySport) {
     fs.writeFileSync(path.join(OUT, 'specialists.json'), JSON.stringify(spec, null, 1));
   }
   const plays = (payload.plays || []).filter(p => KEEP.has(String(p.sport || '').toUpperCase())).map(p => ({
-    sport: p.sport, matchup: p.matchup, kickoffEt: p.kickoffEt, market: p.market, side: p.side, pick: p.pick, line: p.line, units: p.units, odds: p.odds,
+    sport: p.sport, matchup: p.matchup, kickoffEt: p.kickoffEt, market: p.market, side: p.side, pick: p.pick, line: p.line, units: p.units, odds: p.odds, toWin: p.toWin,
     status: p.status, score: p.score, alignment: p.alignment,
     money: p.money ? { dollars: p.money.dollars, confirmed: p.money.confirmed, record: p.money.record, opposed: p.money.opposed } : null,
     price: p.price ? { fair: p.price.fair, best: p.price.best, bestBook: p.price.bestBook, hitEdge: p.price.hitEdge, n: p.price.actualWinN } : null,

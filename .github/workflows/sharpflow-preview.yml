@@ -54,6 +54,8 @@ jobs:
           node scripts/poly_match.js sf_branch wallets.json sf_branch/poly_matches.json
           # Grade logged Poly calls whose games have finished, rebuild sf_branch/poly_record.json (running record).
           node scripts/poly_grade.js sf_branch || true
+          # Site locks (council Nov 21): log the Sharp Flow site's own staked locks and keep a display-only running record.
+          node scripts/site_lock_record.js sf_branch || true
       - name: SharpFlow-vs-Polymarket twin test (every 2h, analysis only)
         continue-on-error: true
         env:

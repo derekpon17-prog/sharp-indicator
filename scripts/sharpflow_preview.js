@@ -149,6 +149,7 @@ function polyFor(sp, matchup, grp, r) {
   }
   return { for: f, against: a, sources: ['SHARP FLOW', 'POLYMARKET'] };
 }
+const siteLockOf = (latest, sp, matchup, grp) => R.siteLockTxt(latest.plays, sp, matchup, grp);
 function buildCards(sp, latest, flags, before) { // before: optional Date - only include tickets starting earlier than this (for an outlier/one-off card, so it doesn't swallow the main slate too)
   const tickets = (latest.tickets || []).filter(t => t.sport === sp).map(t => ({ ...t, st: startUtc(t.kickoffEt) })).filter(t => t.st && t.st > now && (!before || t.st < before));
   const games = {};
@@ -191,10 +192,11 @@ function buildCards(sp, latest, flags, before) { // before: optional Date - only
     // bet type - all-time for SharpFlow rows (mktRecord), last 45 days for Poly rows. Say so under the number.
     const lab = v => v && v.rows ? { ...v, rows: v.rows.map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.market} · all-time record` })) } : v;
     r.for = lab(r.for); r.against = lab(r.against);
+    const siteLock = (a, b, c) => siteLockOf(latest, a, b, c);
     const pv = polyFor(sp, s.matchup, grpOf(s.market), r);
     rows.push({ st: s.st, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, sources: pv.sources, bet: (star ? '★ ' : '') + r.bet,
       price: r.price, for: pv.for, against: pv.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout,
-      footerLabel: pv.sources.length > 1 ? 'SHARP FLOW + POLYMARKET READ' : 'SHARP FLOW READ' });
+      footerLabel: (pv.sources.length > 1 ? 'SHARP FLOW + POLYMARKET READ' : 'SHARP FLOW READ') + (siteLock(sp, s.matchup, grpOf(s.market)) ? ' - ' + siteLock(sp, s.matchup, grpOf(s.market)) : '') });
   }
   rows.sort((a, b) => b.confidence - a.confidence || a.st - b.st); // Derek, Nov 18: order by confidence, not kickoff time
   const data = sides.map(s => ({ game: s.matchup, market: s.market, pick: s.pick, start_utc: s.st.toISOString(), dollars: s.dollars, opp_dollars: s.oppD, wallets: s.wallets,

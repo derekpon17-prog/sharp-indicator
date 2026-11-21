@@ -177,4 +177,10 @@ function matchupRow(sp, tix, grp) {
 
   return { bet, rec, confidence, chips, goodD: A.goodD, sides, tag, for: forView, against: againstView, moneyBar, price, callout };
 }
-module.exports = { formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };
+/* Site lock text (Derek, Nov 21: council COUNCIL_2026-11-21_site-locks). Display-only, never changes a tier.
+   grp: 'total' or 'team' (same split the cards use). Returns '' when the Sharp Flow site has no staked lock on that game and market group. */
+function siteLockTxt(plays, sport, matchup, grp) {
+  const hit = (plays || []).filter(p => p.sport === sport && p.matchup === matchup && (p.market === 'TOTAL' ? 'total' : 'team') === grp && p.status === 'locked');
+  return hit.map(p => 'SITE LOCK: ' + p.pick + (p.market === 'ML' ? ' ML' : '') + ' ' + p.units + 'u (' + (p.alignment === 'none' || !p.alignment ? 'no wallet money' : 'wallet money ' + (p.alignment === 'with' ? 'behind it' : 'AGAINST it')) + ')').join(' | ');
+}
+module.exports = { siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };

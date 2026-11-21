@@ -110,7 +110,7 @@ for (const s of send) {
   const r = R.matchupRow(s.sp, tix, grpOf(s.market)); if (!r) continue;
   const growTxt = s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)}` : `NEW ${k(s.good)} on ${s.pick}`;
   rows.push({ st: s.st, sp: s.sp, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, bet: r.bet, price: r.price,
-    for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: growTxt + kickTxt(s.st) });
+    for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: growTxt + kickTxt(s.st) + (R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) ? ' - ' + R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) : '') });
 }
 rows.sort((a, b) => b.confidence - a.confidence || a.st - b.st); // Derek, Nov 18: order by confidence, not kickoff time
 const secs = [];
