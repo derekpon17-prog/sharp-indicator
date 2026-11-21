@@ -1,0 +1,53 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket late money - CFB** - 1 HOT wallet move since the CFB Polymarket report",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "CFB - Polymarket late money",
+   "subtitle": "HOT wallets that bought (or doubled up) after the CFB report posted, games not started. Buys checked 12:27pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "bet": "Under 57.5",
+       "sub": "Texas Tech at Baylor - 2:30pm CT - last buy 12:20pm CT",
+       "chips": [
+        {
+         "t": "HOT ic4cream $750",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "CFB TOTAL 46-33 (+37%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAF 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.76x their usual $272",
+         "c": "green"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -100,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    }
+   ],
+   "legend": "Price = their average Polymarket price as American odds. In-game buys are not counted.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
