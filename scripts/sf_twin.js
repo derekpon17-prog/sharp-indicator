@@ -45,10 +45,12 @@ const get = async u => { try { const r = await fetch(u, { signal: AbortSignal.ti
     const [sp, matchup] = gk.split('|');
     const [away, home] = matchup.split(' at ');
     const ev = (evBySport[sp] || []).find(e => teamHit(e.title, away) && teamHit(e.title, home));
-    const minCash = Math.floor(Math.min(...ts.map(t => t.dollars)) * 0.5);
+    // FIX Nov 20: the cash filter applies per FILL, and a $8K position is often many small fills - so the filter
+    // stays at $100 and the fills are added up per wallet below (first version filtered at half the ticket and
+    // missed the known ic4cream $8,211 = SharpFlow $8,210 Texas Tech ML twin).
     let trades = [];
-    if (ev) for (let off = 0; off < 3000; off += 500) {
-      const d = await get(`https://data-api.polymarket.com/v2/trades?event_id=${ev.id}&side=BUY&taker_only=true&filter_type=CASH&filter_amount=${Math.max(100, minCash)}&limit=500&offset=${off}`);
+    if (ev) for (let off = 0; off < 5000; off += 500) {
+      const d = await get(`https://data-api.polymarket.com/v2/trades?event_id=${ev.id}&side=BUY&taker_only=true&filter_type=CASH&filter_amount=100&limit=500&offset=${off}`);
       const rows = (d && d.data) || [];
       trades.push(...rows);
       if (rows.length < 500) break;
@@ -69,7 +71,10 @@ const get = async u => { try { const r = await fetch(u, { signal: AbortSignal.ti
       const sideOk = a => a.market === t.market && (t.market === 'TOTAL' ? String(a.outcome).toLowerCase().startsWith(/^over/i.test(t.pick) ? 'over' : 'under') : teamHit(a.outcome, String(t.pick).replace(/\s[+-]?\d.*$/, '').replace(/\sML$/i, '')));
       const twin = Object.values(agg).filter(a => sideOk(a) && Math.abs(a.usd - t.dollars) <= 0.03 * t.dollars).sort((x, y) => Math.abs(x.usd - t.dollars) - Math.abs(y.usd - t.dollars))[0];
       if (twin) { S.twins++; pairs.push({ sport: sp, matchup, market: t.market, pick: t.pick, sfTag: t.wallet, sfUsd: t.dollars, polyWallet: twin.wallet, polyName: twin.name, polyUsd: Math.round(twin.usd) }); }
-      checked.push({ sfTag: t.wallet, sport: sp, matchup, market: t.market, pick: t.pick, usd: t.dollars, poly: twin ? twin.wallet : 'no twin', polyTrades: trades.length });
+      const near = Object.values(agg).filter(sideOk).sort((x, y) => Math.abs(x.usd - t.dollars) - Math.abs(y.usd - t.dollars))[0];
+      checked.push({ sfTag: t.wallet, sport: sp, matchup, market: t.market, pick: t.pick, usd: t.dollars, poly: twin ? twin.wallet : 'no twin', polyTrades: trades.length, event: ev.title,
+        closest: near ? { wallet: near.wallet, usd: Math.round(near.usd), outcome: near.outcome } : null });
+      if (process.env.TWIN_DEBUG) console.log(`  . ${sp} ${matchup} ${t.market} ${t.pick} $${t.dollars} | event "${ev.title}" ${trades.length} fills | closest ${near ? Math.round(near.usd) + ' ' + near.outcome : 'none'}`);
     }
   }
   for (const m of Object.values(stats)) for (const s of Object.values(m)) s.twinRate = s.onPoly ? +(s.twins / s.onPoly).toFixed(2) : null;

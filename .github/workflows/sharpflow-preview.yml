@@ -56,6 +56,9 @@ jobs:
           node scripts/poly_grade.js sf_branch || true
       - name: SharpFlow-vs-Polymarket twin test (every 2h, analysis only)
         continue-on-error: true
+        env:
+          TWIN_DEBUG: ${{ github.event.inputs.dry_run == 'yes' && '1' || '' }}
+          FORCE: ${{ github.event.inputs.dry_run == 'yes' && '1' || '' }}
         run: node scripts/sf_twin.js sf_branch
       - name: Which sports are due
         id: plan
