@@ -309,6 +309,26 @@ function buildPolyCard(sp, latest, before, firstStart, outlier) {
     if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `due=${due.join(',')}\n`);
     return;
   }
+  /* WATCHDOG (council Nov 20 - replaces the Claude "Sharp Flow dispatcher + watchdog" task's checks, no Claude usage):
+     remembers each sport's first start of the CT day (sf_branch/first_starts.json). A sport whose first game has
+     started without its Sharp Flow card is a GitHub warning (it can be legit: no sides over the threshold). A
+     SharpFlow snapshot older than 3 hours between 9am and 10pm CT FAILS the run, because it means the puller is down
+     and every card and alert is running blind - GitHub emails Derek on a failed scheduled run. */
+  if (MODE === 'watch') {
+    let fsj = {}; try { fsj = JSON.parse(fs.readFileSync(OUT + '/first_starts.json', 'utf8')); } catch {}
+    const day = (fsj[today] ||= {});
+    for (const [sp, ts] of Object.entries(startsAll)) if (ts.length && (!day[sp] || new Date(ts[0]) < new Date(day[sp]))) day[sp] = ts[0].toISOString();
+    for (const d of Object.keys(fsj)) if (d < today) delete fsj[d];
+    if (!process.env.NO_MARK) fs.writeFileSync(OUT + '/first_starts.json', JSON.stringify(fsj));
+    const missed = Object.entries(day).filter(([sp, iso]) => new Date(iso) < now && !done.has(sp)).map(([sp]) => sp);
+    if (missed.length) console.log(`::warning::MISSED Sharp Flow card (first game started, no card): ${missed.join(', ')}`);
+    const hr = +new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false }).format(now);
+    const ageMin = latest ? Math.round((now - new Date(latest.scannedAt)) / 60000) : null;
+    const polyAge = POLYMETA.at ? Math.round((now - new Date(POLYMETA.at)) / 60000) : null;
+    console.log(`watchdog: SharpFlow snapshot ${ageMin ?? 'missing'} min old, Poly matches ${polyAge ?? 'missing'} min old, missed: ${missed.join(',') || 'none'}`);
+    if (hr >= 9 && hr < 22 && (ageMin == null || ageMin > 180)) { console.log(`::error::SharpFlow snapshot is ${ageMin ?? 'missing'} min old - the SharpFlow MCP puller scheduled task is not landing data`); process.exitCode = 1; }
+    return;
+  }
   const dueIn = (process.env.DUE || '').split(',').filter(Boolean);
   if (!latest) { console.log('no latest.json'); return; }
   const age = (now - new Date(latest.scannedAt)) / 60000;

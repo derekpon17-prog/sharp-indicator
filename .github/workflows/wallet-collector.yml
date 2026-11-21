@@ -5,6 +5,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '17 */4 * * *'
+    # ~1 hour before each card window (8:50, 9:50, 12:50, 2:50, 4:50 CT) - replaces the Claude collector dispatcher (Nov 20)
+    - cron: '50 14,15,18,20,22 * * *'
 permissions:
   contents: write
 concurrency:

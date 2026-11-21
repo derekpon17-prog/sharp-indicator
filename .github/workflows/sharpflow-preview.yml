@@ -15,9 +15,11 @@ on:
         description: 'yes = build the card and show it in the log, do not post and do not mark as posted'
         required: false
         default: 'no'
-  # schedule disabled 2026-11-18: old SharpFlow MCP's free trial ended, every call was
-  # just logging "the free testing period is over" for nothing. dispatch-only until
-  # the new SharpFlow MCP connector is wired into this script.
+  # Schedule back on Nov 20 2026 (council): the data comes from the SharpFlow MCP puller scheduled task, which also
+  # dispatches this workflow after each push; this cron is the backup so a dropped dispatch only costs 20 minutes.
+  # Every 20 min, 8:00am-11:59pm CT (UTC 14-23 and 0-5; CST = UTC-6). Public repo, so Actions minutes are free.
+  schedule:
+    - cron: '7,27,47 14-23,0-5 * * *'
 permissions:
   contents: write
   actions: write
@@ -79,6 +81,12 @@ jobs:
         run: |
           node scripts/poly_alert.js sf_branch poly_prev.json cards
           for f in cards/*polylate*.json; do [ -f "$f" ] && { echo "== $f"; head -c 2000 "$f"; echo; }; done; true
+      - name: Watchdog (missed cards, stale SharpFlow snapshot)
+        if: always()
+        env:
+          MODE: watch
+          NO_MARK: ${{ github.event.inputs.dry_run == 'yes' && '1' || '' }}
+        run: node scripts/sharpflow_preview.js
       - name: Publish sharpflow branch (snapshot + posted marker + poly_matches.json)
         # Runs every time now (not only when a card was due) so poly_matches.json stays fresh for the window tasks.
         if: always() && github.event.inputs.dry_run != 'yes'
