@@ -1,0 +1,61 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 1:08pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Arkansas at Texas",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - TEXAS",
+        "icon": "👀"
+       },
+       "bet": "Texas",
+       "price": null,
+       "for": {
+        "team": "TEXAS",
+        "rows": [
+         {
+          "team": "Texas",
+          "wallet": "D",
+          "market": "ML",
+          "record": "16-0",
+          "roi": 9.7,
+          "dollars": 3465,
+          "note": "0.2x usual, L10 10-0",
+          "status": {
+           "t": "HOT (last 10: 10-0)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TEXAS",
+         "dollars": 3465,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $3.5K on Texas"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
