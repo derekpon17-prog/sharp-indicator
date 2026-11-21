@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 10:10am CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Islanders at Red Wings",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - RED WINGS",
+        "icon": "🎯"
+       },
+       "bet": "Red Wings +1.5 -213",
+       "price": "-213",
+       "for": {
+        "team": "RED WINGS",
+        "rows": [
+         {
+          "team": "Red Wings",
+          "wallet": "D",
+          "market": "SPREAD",
+          "record": "10-3",
+          "roi": 29.2,
+          "dollars": 20697,
+          "note": "1.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "RED WINGS",
+         "dollars": 20697,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 10-3 (+29% ROI) on RED WINGS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $21K on Red Wings +1.5"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
