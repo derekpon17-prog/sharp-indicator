@@ -1,5 +1,5 @@
 {
- "at": "2026-11-21T22:28:01.620Z",
+ "at": "2026-11-21T22:44:58.880Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -37,10 +37,10 @@
    "gateNote": "HOT overall but cold in SPREAD (64-58, -23.9% ROI)",
    "sameAsSF": null,
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NCAAF 6-4"
+    "txt": "L10 NCAAF 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -634,14 +634,14 @@
    "sportCls": "HOT",
    "gateNote": "HOT overall but cold in SPREAD (64-58, -23.9% ROI)",
    "sameAsSF": {
-    "sfWallet": "Z",
+    "sfWallet": "AA",
     "sfDollars": 6462
    },
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NCAAF 6-4"
+    "txt": "L10 NCAAF 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -684,10 +684,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NCAAF 6-4"
+    "txt": "L10 NCAAF 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -729,14 +729,14 @@
    "sportCls": "HOT",
    "gateNote": null,
    "sameAsSF": {
-    "sfWallet": "Z",
+    "sfWallet": "AA",
     "sfDollars": 8210
    },
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NCAAF 6-4"
+    "txt": "L10 NCAAF 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -825,10 +825,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 5,
-    "l": 5,
+    "w": 6,
+    "l": 4,
     "n": 10,
-    "txt": "L10 NHL 5-5"
+    "txt": "L10 NHL 6-4"
    },
    "usualMed": null,
    "usualN": 0,
@@ -836,6 +836,52 @@
    "vsUsual": null,
    "vsUsualAll": null,
    "sizeTier": null
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Knicks",
+   "grp": "team",
+   "side": "Knicks",
+   "market": "ML",
+   "cls": "HOT",
+   "startUtc": "2026-11-22T00:40:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0xf67a0d86970f6791f73ed28dc673221e22c0a9263af5a7f045fa4d40d917af01",
+   "outcome": "Knicks",
+   "tokenId": "23784158244112540541425091301927137817552820733062647808422624525335927076589",
+   "gradeTitle": "Trail Blazers vs. Knicks",
+   "gradePrice": 0.5,
+   "onCard": true,
+   "wallet": "0x49f724f2f9e6c7b8a1dc34513952035a4b3f4871",
+   "name": "DreamMoreOnE",
+   "usd": 500,
+   "fills": 1,
+   "avgPrice": 0.5,
+   "lastBuyUtc": "2026-11-21T22:30:07.000Z",
+   "firstBuyUtc": "2026-11-21T22:30:07.000Z",
+   "hoursBeforeStart": 2.2,
+   "gameSource": "sharpflow",
+   "title": "Trail Blazers vs. Knicks",
+   "rec": "38-69",
+   "roi": 3.7,
+   "n": 107,
+   "recScope": "NBA ML, last 45 days",
+   "twoSided": true,
+   "sportCls": "HOT",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 4,
+    "l": 6,
+    "n": 10,
+    "txt": "L10 NBA 4-6"
+   },
+   "usualMed": 295,
+   "usualN": 51,
+   "usualScope": "NBA",
+   "vsUsual": 1.69,
+   "vsUsualAll": 1.69,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NBA",
@@ -876,11 +922,11 @@
     "n": 10,
     "txt": "L10 NBA 2-8"
    },
-   "usualMed": 3651,
-   "usualN": 76,
+   "usualMed": 2788,
+   "usualN": 147,
    "usualScope": "NBA",
-   "vsUsual": 0.88,
-   "vsUsualAll": 0.9,
+   "vsUsual": 1.16,
+   "vsUsualAll": 1.26,
    "sizeTier": "NORMAL"
   },
   {
@@ -916,14 +962,14 @@
    "sportCls": "HOT",
    "gateNote": "HOT overall but cold in SPREAD (64-58, -23.9% ROI)",
    "sameAsSF": {
-    "sfWallet": "Z",
+    "sfWallet": "AA",
     "sfDollars": 3379
    },
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NCAAF 6-4"
+    "txt": "L10 NCAAF 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -975,7 +1021,7 @@
    "usualN": 104,
    "usualScope": "NBA",
    "vsUsual": 1.09,
-   "vsUsualAll": 1.24,
+   "vsUsualAll": 1.2,
    "sizeTier": "NORMAL"
   },
   {
@@ -1021,7 +1067,7 @@
    "usualN": 178,
    "usualScope": "NBA",
    "vsUsual": 6.26,
-   "vsUsualAll": 6.26,
+   "vsUsualAll": 6.38,
    "sizeTier": "BIG"
   },
   {
@@ -1110,10 +1156,10 @@
     "txt": "L10 NBA 9-1"
    },
    "usualMed": 500,
-   "usualN": 98,
+   "usualN": 126,
    "usualScope": "NBA",
    "vsUsual": 45.23,
-   "vsUsualAll": 45.23,
+   "vsUsualAll": 45.96,
    "sizeTier": "BIG"
   },
   {
@@ -1155,12 +1201,12 @@
     "n": 10,
     "txt": "L10 NBA 2-8"
    },
-   "usualMed": 3651,
-   "usualN": 76,
+   "usualMed": 2788,
+   "usualN": 147,
    "usualScope": "NBA",
-   "vsUsual": 1.38,
-   "vsUsualAll": 1.41,
-   "sizeTier": "NORMAL"
+   "vsUsual": 1.81,
+   "vsUsualAll": 1.97,
+   "sizeTier": "BIG"
   },
   {
    "sport": "CFB",
@@ -1223,12 +1269,58 @@
    "gradeTitle": "Clippers vs. Mavericks",
    "gradePrice": 0.35,
    "onCard": false,
+   "wallet": "0x9f2fe025f84839ca81dd8e0338892605702d2ca8",
+   "name": "surfandturf",
+   "usd": 17829,
+   "fills": 1,
+   "avgPrice": 0.35,
+   "lastBuyUtc": "2026-11-21T22:41:47.000Z",
+   "firstBuyUtc": "2026-11-21T22:41:47.000Z",
+   "hoursBeforeStart": 2.5,
+   "gameSource": "sharpflow",
+   "title": "Clippers vs. Mavericks",
+   "rec": "32-25",
+   "roi": 39.3,
+   "n": 57,
+   "recScope": "NBA ML, last 45 days",
+   "twoSided": false,
+   "sportCls": "HOT",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 4,
+    "l": 6,
+    "n": 10,
+    "txt": "L10 NBA 4-6"
+   },
+   "usualMed": 8143,
+   "usualN": 43,
+   "usualScope": "NBA",
+   "vsUsual": 2.19,
+   "vsUsualAll": 2.48,
+   "sizeTier": "BIG"
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Clippers at Mavericks",
+   "grp": "team",
+   "side": "Clippers",
+   "market": "ML",
+   "cls": "HOT",
+   "startUtc": "2026-11-22T01:10:00.000Z",
+   "gameDate": "2026-11-21",
+   "conditionId": "0x435b2c6481af246af6f219d8b968f0733a6050ebe3fc8c087bc58af1cac0681b",
+   "outcome": "Clippers",
+   "tokenId": "10099599657977772652796445413514395134948742660005183019983082361860830880778",
+   "gradeTitle": "Clippers vs. Mavericks",
+   "gradePrice": 0.3509,
+   "onCard": false,
    "wallet": "0x49f724f2f9e6c7b8a1dc34513952035a4b3f4871",
    "name": "DreamMoreOnE",
-   "usd": 1679,
-   "fills": 4,
-   "avgPrice": 0.35,
-   "lastBuyUtc": "2026-11-21T13:25:28.000Z",
+   "usd": 1859,
+   "fills": 5,
+   "avgPrice": 0.352,
+   "lastBuyUtc": "2026-11-21T22:30:31.000Z",
    "firstBuyUtc": "2026-11-21T05:38:28.000Z",
    "hoursBeforeStart": 19.5,
    "gameSource": "sharpflow",
@@ -1247,11 +1339,11 @@
     "n": 10,
     "txt": "L10 NBA 4-6"
    },
-   "usualMed": 250,
-   "usualN": 139,
+   "usualMed": 295,
+   "usualN": 51,
    "usualScope": "NBA",
-   "vsUsual": 6.72,
-   "vsUsualAll": 6.17,
+   "vsUsual": 6.3,
+   "vsUsualAll": 6.3,
    "sizeTier": "BIG"
   },
   {
@@ -1339,58 +1431,12 @@
     "n": 10,
     "txt": "L10 NBA 2-8"
    },
-   "usualMed": 3651,
-   "usualN": 76,
+   "usualMed": 2788,
+   "usualN": 147,
    "usualScope": "NBA",
-   "vsUsual": 1.57,
-   "vsUsualAll": 1.6,
+   "vsUsual": 2.06,
+   "vsUsualAll": 2.24,
    "sizeTier": "BIG"
-  },
-  {
-   "sport": "CFB",
-   "matchup": "South Florida at Florida Atlantic",
-   "grp": "team",
-   "side": "Florida Atlantic",
-   "market": "SPREAD",
-   "cls": "COLD",
-   "startUtc": "2026-11-21T19:30:00.000Z",
-   "gameDate": "2026-11-21",
-   "conditionId": "0xe61d3cd7587fade6d3abdeaa8685f1b5865ab6ad036dfd5962cd2dfa5a61a600",
-   "outcome": "Florida Atlantic",
-   "tokenId": "59910250776074027963616153207594889600434159702903034089207345701770681688790",
-   "gradeTitle": "Spread: South Florida (-2.5)",
-   "gradePrice": 0.5,
-   "onCard": true,
-   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "name": "ic4cream",
-   "usd": 9946,
-   "fills": 1,
-   "avgPrice": 0.5,
-   "lastBuyUtc": "2026-11-21T19:04:11.000Z",
-   "firstBuyUtc": "2026-11-21T19:04:11.000Z",
-   "hoursBeforeStart": 0.4,
-   "gameSource": "sharpflow",
-   "title": "Spread: South Florida (-2.5)",
-   "rec": "64-58",
-   "roi": -23.9,
-   "n": 122,
-   "recScope": "NCAAF SPREAD, last 45 days",
-   "twoSided": true,
-   "sportCls": "HOT",
-   "gateNote": "HOT overall but cold in SPREAD (64-58, -23.9% ROI)",
-   "sameAsSF": null,
-   "l10": {
-    "w": 6,
-    "l": 4,
-    "n": 10,
-    "txt": "L10 NCAAF 6-4"
-   },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
   },
   {
    "sport": "NFL",
@@ -1486,52 +1532,6 @@
   },
   {
    "sport": "CFB",
-   "matchup": "Iowa at Illinois",
-   "grp": "team",
-   "side": "Illinois",
-   "market": "SPREAD",
-   "cls": "COLD",
-   "startUtc": "2026-11-21T19:30:00.000Z",
-   "gameDate": "2026-11-21",
-   "conditionId": "0xffe2dd7dbb225148e5574ef2e769c2982bcfcd1009b4b16d216583da643d37c1",
-   "outcome": "Illinois",
-   "tokenId": "56148685922670395635226026549501179284107928033396683632183660918328589012563",
-   "gradeTitle": "Spread: Iowa (-7.5)",
-   "gradePrice": 0.47,
-   "onCard": false,
-   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "name": "ic4cream",
-   "usd": 558,
-   "fills": 3,
-   "avgPrice": 0.47,
-   "lastBuyUtc": "2026-11-21T01:03:28.000Z",
-   "firstBuyUtc": "2026-11-21T01:03:26.000Z",
-   "hoursBeforeStart": 18.4,
-   "gameSource": "espn",
-   "title": "Spread: Iowa (-7.5)",
-   "rec": "64-58",
-   "roi": -23.9,
-   "n": 122,
-   "recScope": "NCAAF SPREAD, last 45 days",
-   "twoSided": false,
-   "sportCls": "HOT",
-   "gateNote": "HOT overall but cold in SPREAD (64-58, -23.9% ROI)",
-   "sameAsSF": null,
-   "l10": {
-    "w": 6,
-    "l": 4,
-    "n": 10,
-    "txt": "L10 NCAAF 6-4"
-   },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
-  },
-  {
-   "sport": "CFB",
    "matchup": "Texas A&M at Oklahoma",
    "grp": "team",
    "side": "Texas A&M",
@@ -1610,10 +1610,10 @@
    "gateNote": "HOT overall but cold in SPREAD (64-58, -23.9% ROI)",
    "sameAsSF": null,
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NCAAF 6-4"
+    "txt": "L10 NCAAF 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -1656,10 +1656,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NCAAF 6-4"
+    "txt": "L10 NCAAF 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -1702,10 +1702,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NCAAF 6-4"
+    "txt": "L10 NCAAF 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -1799,11 +1799,11 @@
     "n": 10,
     "txt": "L10 NBA 7-3"
    },
-   "usualMed": 1932,
-   "usualN": 19,
+   "usualMed": 1643,
+   "usualN": 18,
    "usualScope": "NBA",
-   "vsUsual": 0.37,
-   "vsUsualAll": 0.45,
+   "vsUsual": 0.44,
+   "vsUsualAll": 0.53,
    "sizeTier": "SMALL"
   },
   {
@@ -1849,7 +1849,7 @@
    "usualN": 178,
    "usualScope": "NBA",
    "vsUsual": 6.19,
-   "vsUsualAll": 6.19,
+   "vsUsualAll": 6.3,
    "sizeTier": "BIG"
   },
   {
@@ -1938,10 +1938,10 @@
     "txt": "L10 NBA 9-1"
    },
    "usualMed": 500,
-   "usualN": 98,
+   "usualN": 126,
    "usualScope": "NBA",
    "vsUsual": 1.3,
-   "vsUsualAll": 1.3,
+   "vsUsualAll": 1.32,
    "sizeTier": "NORMAL"
   },
   {
@@ -1991,52 +1991,6 @@
    "sizeTier": "BIG"
   },
   {
-   "sport": "NHL",
-   "matchup": "Hurricanes at Rangers",
-   "grp": "team",
-   "side": "Hurricanes",
-   "market": "SPREAD",
-   "cls": "HOT",
-   "startUtc": "2026-11-22T17:30:00.000Z",
-   "gameDate": "2026-11-22",
-   "conditionId": "0x4817c431781263585afb4c7f6b56d8a43e0572501c2a0c808cb4f165bb29d1c2",
-   "outcome": "Hurricanes",
-   "tokenId": "60321880647936400621774760629408370027044370472047748383748520952795674209656",
-   "gradeTitle": "Spread: Hurricanes (-1.5)",
-   "gradePrice": 0.4499,
-   "onCard": false,
-   "wallet": "0x492442eab586f242b53bda933fd5de859c8a3782",
-   "name": "0x4924…3782",
-   "usd": 43437,
-   "fills": 1,
-   "avgPrice": 0.45,
-   "lastBuyUtc": "2026-11-21T17:47:59.000Z",
-   "firstBuyUtc": "2026-11-21T17:47:59.000Z",
-   "hoursBeforeStart": 23.7,
-   "gameSource": "espn",
-   "title": "Spread: Hurricanes (-1.5)",
-   "rec": "3-4",
-   "roi": 10.8,
-   "n": 7,
-   "recScope": "NHL SPREAD, last 45 days",
-   "twoSided": false,
-   "sportCls": "HOT",
-   "gateNote": null,
-   "sameAsSF": null,
-   "l10": {
-    "w": 6,
-    "l": 4,
-    "n": 10,
-    "txt": "L10 NHL 6-4"
-   },
-   "usualMed": 82229,
-   "usualN": 49,
-   "usualScope": "NHL",
-   "vsUsual": 0.53,
-   "vsUsualAll": 0.86,
-   "sizeTier": "NORMAL"
-  },
-  {
    "sport": "NBA",
    "matchup": "Mavericks at Jazz",
    "grp": "team",
@@ -2081,6 +2035,52 @@
    "vsUsual": null,
    "vsUsualAll": null,
    "sizeTier": null
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Hurricanes at Rangers",
+   "grp": "team",
+   "side": "Hurricanes",
+   "market": "SPREAD",
+   "cls": "HOT",
+   "startUtc": "2026-11-22T17:30:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x4817c431781263585afb4c7f6b56d8a43e0572501c2a0c808cb4f165bb29d1c2",
+   "outcome": "Hurricanes",
+   "tokenId": "60321880647936400621774760629408370027044370472047748383748520952795674209656",
+   "gradeTitle": "Spread: Hurricanes (-1.5)",
+   "gradePrice": 0.4499,
+   "onCard": false,
+   "wallet": "0x492442eab586f242b53bda933fd5de859c8a3782",
+   "name": "0x4924…3782",
+   "usd": 43437,
+   "fills": 1,
+   "avgPrice": 0.45,
+   "lastBuyUtc": "2026-11-21T17:47:59.000Z",
+   "firstBuyUtc": "2026-11-21T17:47:59.000Z",
+   "hoursBeforeStart": 23.7,
+   "gameSource": "espn",
+   "title": "Spread: Hurricanes (-1.5)",
+   "rec": "3-4",
+   "roi": 10.8,
+   "n": 7,
+   "recScope": "NHL SPREAD, last 45 days",
+   "twoSided": false,
+   "sportCls": "HOT",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 6,
+    "l": 4,
+    "n": 10,
+    "txt": "L10 NHL 6-4"
+   },
+   "usualMed": 77403,
+   "usualN": 50,
+   "usualScope": "NHL",
+   "vsUsual": 0.56,
+   "vsUsualAll": 0.86,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NHL",
@@ -2162,10 +2162,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 5,
-    "l": 5,
+    "w": 6,
+    "l": 4,
     "n": 10,
-    "txt": "L10 NHL 5-5"
+    "txt": "L10 NHL 6-4"
    },
    "usualMed": null,
    "usualN": 0,
@@ -2208,10 +2208,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 5,
-    "l": 5,
+    "w": 6,
+    "l": 4,
     "n": 10,
-    "txt": "L10 NHL 5-5"
+    "txt": "L10 NHL 6-4"
    },
    "usualMed": null,
    "usualN": 0,
@@ -2254,10 +2254,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 5,
-    "l": 5,
+    "w": 6,
+    "l": 4,
     "n": 10,
-    "txt": "L10 NHL 5-5"
+    "txt": "L10 NHL 6-4"
    },
    "usualMed": null,
    "usualN": 0,
@@ -2346,10 +2346,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 5,
-    "l": 5,
+    "w": 6,
+    "l": 4,
     "n": 10,
-    "txt": "L10 NHL 5-5"
+    "txt": "L10 NHL 6-4"
    },
    "usualMed": null,
    "usualN": 0,
@@ -2392,10 +2392,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 5,
-    "l": 5,
+    "w": 6,
+    "l": 4,
     "n": 10,
-    "txt": "L10 NHL 5-5"
+    "txt": "L10 NHL 6-4"
    },
    "usualMed": null,
    "usualN": 0,
@@ -2412,12 +2412,12 @@
   "mktMin": 5,
   "roiMin": 0
  },
- "sfScannedAt": "2026-11-21T22:07:27.797Z",
+ "sfScannedAt": "2026-11-21T22:36:38.149Z",
  "espnGames": 264,
  "espnErrors": [],
- "espnAdded": 192,
- "games": 216,
+ "espnAdded": 190,
+ "games": 213,
  "walletsChecked": 128,
- "inGameSkipped": 2074,
- "offCardMatches": 22
+ "inGameSkipped": 1702,
+ "offCardMatches": 21
 }
