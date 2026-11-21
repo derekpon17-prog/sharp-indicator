@@ -47,6 +47,21 @@ async function gammaResolution(conditionId) {
   } catch { return null; }
 }
 
+/* CLV (council Nov 20): the outcome token's last Polymarket price before the start vs the wallet's first-sighting
+   price, in probability points (+0.03 = the market moved 3 points toward the wallet by tip-off). Uses the CLOB
+   prices-history for the exact token the wallet bought; entries logged before tokenId was stored have no CLV. */
+const CLOB = 'https://clob.polymarket.com';
+async function closePrice(tokenId, startMs) {
+  try {
+    const q = `market=${tokenId}&startTs=${Math.floor(startMs / 1000) - 3 * 3600}&endTs=${Math.floor(startMs / 1000)}&fidelity=5`;
+    const r = await fetch(`${CLOB}/prices-history?${q}`, { signal: AbortSignal.timeout(20000) });
+    if (!r.ok) return null;
+    const h = ((await r.json()) || {}).history || [];
+    const last = h.filter(x => x.t * 1000 <= startMs).pop();
+    return last && last.p > 0 && last.p < 1 ? +(+last.p).toFixed(4) : null;
+  } catch { return null; }
+}
+
 (async () => {
   const sfDir = process.argv[2] || 'sf_branch';
   const dir = sfDir + '/polylog';
@@ -89,26 +104,41 @@ async function gammaResolution(conditionId) {
       e.result = 'NA'; e.gradedAt = new Date(now).toISOString();   // never resolved where we can see it - not counted
     }
   }
+  let clvDone = 0;
+  for (const { log } of logs) for (const e of Object.values(log.entries || {})) {
+    if (e.closePrice != null || e.clvTried || !e.tokenId || !e.startUtc) continue;
+    const st = Date.parse(e.startUtc);
+    if (now < st + 15 * 60000) continue;
+    const cp = await closePrice(e.tokenId, st);
+    if (cp != null && e.firstPrice > 0) { e.closePrice = cp; e.clv = +(cp - e.firstPrice).toFixed(4); clvDone++; }
+    else if (now - st > 2 * 24 * H) e.clvTried = true;   // history never came back - stop asking
+  }
   for (const { f, log } of logs) fs.writeFileSync(`${dir}/${f}`, JSON.stringify(log, null, 1));
 
   // 2) rebuild the record from every logged entry
-  const blank = () => ({ w: 0, l: 0, n: 0, u: 0, fadeU: 0 });
-  const add = (b, e) => { b.n++; e.result === 'W' ? b.w++ : b.l++; b.u = +(b.u + (e.u || 0)).toFixed(2); b.fadeU = +(b.fadeU + (e.fadeU || 0)).toFixed(2); };
+  const blank = () => ({ w: 0, l: 0, n: 0, u: 0, fadeU: 0, clvN: 0, clvAvg: null, clvPos: 0 });
+  const add = (b, e) => { b.n++; e.result === 'W' ? b.w++ : b.l++; b.u = +(b.u + (e.u || 0)).toFixed(2); b.fadeU = +(b.fadeU + (e.fadeU || 0)).toFixed(2);
+    if (e.clv != null) { b.clvAvg = +(((b.clvAvg || 0) * b.clvN + e.clv) / (b.clvN + 1)).toFixed(4); b.clvN++; if (e.clv > 0) b.clvPos++; } };
   const rec = { updated: new Date(now).toISOString(), since: files[0] ? files[0].slice(0, 10) : null, pending: 0, na: 0,
-    note: 'Graded at the wallet\'s own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet\'s own side; fadeU = taking the other side at 1-p, no vig.',
+    note: 'CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet\'s own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet\'s own side; fadeU = taking the other side at 1-p, no vig.',
     buckets: {} };
   for (const { log } of logs) for (const e of Object.values(log.entries || {})) {
     if (e.twoSided) continue;
     if (!e.result) { rec.pending++; continue; }
     if (e.result === 'NA') { rec.na++; continue; }
     const bk = e.cls === 'HOT' && e.sameAsSF ? 'HOT_SAME_SF' : e.cls;
-    const B = (rec.buckets[bk] ||= { all: blank(), onCard: blank(), bySport: {}, byMarket: {} });
+    const B = (rec.buckets[bk] ||= { all: blank(), onCard: blank(), offCard: blank(), bySport: {}, byMarket: {}, byTiming: {} });
     add(B.all, e);
     if (e.onCard) add(B.onCard, e);
     add(B.bySport[e.sport] ||= blank(), e);
     add(B.byMarket[e.market] ||= blank(), e);
+    if (!e.onCard) add(B.offCard, e);
+    // When the wallet first bought, hours before the start (council Nov 20): does early or late Polymarket money do better?
+    const h = e.hoursBeforeStart;
+    add(B.byTiming[h == null ? 'unknown' : h > 6 ? 'over 6h before' : h >= 1 ? '1-6h before' : 'under 1h before'] ||= blank(), e);
   }
   fs.writeFileSync(sfDir + '/poly_record.json', JSON.stringify(rec, null, 1));
   const line = Object.entries(rec.buckets).map(([k, b]) => `${k} ${b.all.w}-${b.all.l} (${b.all.u >= 0 ? '+' : ''}${b.all.u}u)`).join(', ');
+  console.log(`poly_grade: CLV added for ${clvDone}`);
   console.log(`poly_grade: graded ${graded} now, ${rec.pending} pending, ${rec.na} NA | ${line || 'nothing graded yet'}`);
 })();

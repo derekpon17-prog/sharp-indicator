@@ -79,11 +79,11 @@ async function collectCandidates() {
   // events with zero trades on Nov 20 - likely an old series), fall back to the league tag.
   const TAGS = { NHL: ['nhl'], NCAAF: ['cfb', 'ncaaf', 'college-football'], NCAAB: ['ncaab', 'cbb', 'college-basketball'] };
   const since = new Date(Date.now() - 30 * 86400000).toISOString();
-  async function eventsFor(q) {
+  async function eventsFor(q, dated = true) {
     const evs = [];
     for (let off = 0; off < HARVEST_EVENTS; off += 100) {
       try {
-        const r = await fetch(`https://gamma-api.polymarket.com/events?${q}&closed=true&end_date_min=${encodeURIComponent(since)}&order=endDate&ascending=false&limit=100&offset=${off}`, { headers: { Accept: 'application/json' } });
+        const r = await fetch(`https://gamma-api.polymarket.com/events?${q}&closed=true${dated ? `&end_date_min=${encodeURIComponent(since)}` : ''}&order=endDate&ascending=false&limit=100&offset=${off}`, { headers: { Accept: 'application/json' } });
         const ev = r.ok ? await r.json() : [];
         if (!Array.isArray(ev) || !ev.length) break;
         evs.push(...ev);
@@ -106,12 +106,28 @@ async function collectCandidates() {
     }
     return n;
   }
+  // FIX Nov 20 (NCAAB got 1 event / 16 buys): a source that returns *something* no longer stops the search. Every
+  // source is tried - series with the 30-day filter, series without it (some series ids ignore end_date_min), then
+  // each league tag - and the events are pooled (deduped by id, settled in the last 60 days, newest first) before the
+  // trades are pulled, so one thin source can't starve a sport.
+  const old = Date.now() - 60 * 86400000;
   for (const sport of HARVEST) {
-    let src = 'series ' + SERIES_IDS[sport], events = await eventsFor(`series_id=${SERIES_IDS[sport]}`), buys = await buyersOf(events, sport);
-    for (const tag of TAGS[sport] || []) {
-      if (buys > 0) break;
-      src = 'tag ' + tag; events = await eventsFor(`tag_slug=${tag}`); buys = await buyersOf(events, sport);
+    const pool = {}, used = [];
+    const tries = [[`series_id=${SERIES_IDS[sport]}`, true, 'series ' + SERIES_IDS[sport]], [`series_id=${SERIES_IDS[sport]}`, false, 'series ' + SERIES_IDS[sport] + ' undated'],
+      ...(TAGS[sport] || []).map(t => [`tag_slug=${t}`, true, 'tag ' + t])];
+    for (const [q, dated, label] of tries) {
+      if (Object.keys(pool).length >= HARVEST_EVENTS) break;
+      let got = 0;
+      for (const ev of await eventsFor(q, dated)) {
+        const end = Date.parse(ev.endDate || ev.end_date || '') || 0;
+        if (end && end < old) continue;
+        if (!pool[ev.id]) { pool[ev.id] = ev; got++; }
+      }
+      if (got) used.push(`${label} +${got}`);
     }
+    const events = Object.values(pool).sort((a, b) => (Date.parse(b.endDate || '') || 0) - (Date.parse(a.endDate || '') || 0)).slice(0, HARVEST_EVENTS);
+    const buys = await buyersOf(events, sport);
+    const src = used.join(', ') || 'none';
     const ex = events[0] ? `${events[0].title || events[0].slug} (${events[0].endDate || ''})` : 'none';
     harvest[sport] = { source: src, events: events.length, buys, example: ex };
     console.log('harvest', sport, 'via', src, 'events', events.length, 'buys', buys, 'e.g.', ex);
