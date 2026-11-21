@@ -49,12 +49,14 @@ const get = async u => { try { const r = await fetch(u, { signal: AbortSignal.ti
     // stays at $100 and the fills are added up per wallet below (first version filtered at half the ticket and
     // missed the known ic4cream $8,211 = SharpFlow $8,210 Texas Tech ML twin).
     let trades = [];
-    if (ev) for (let off = 0; off < 5000; off += 500) {
-      const d = await get(`https://data-api.polymarket.com/v2/trades?event_id=${ev.id}&side=BUY&taker_only=true&filter_type=CASH&filter_amount=100&limit=500&offset=${off}`);
+    // v2 pages with a cursor (pagination.next_cursor), not offset - an offset param returned nothing (Nov 20 run)
+    if (ev) { let cursor = null; for (let pg = 0; pg < 10; pg++) {
+      const d = await get(`https://data-api.polymarket.com/v2/trades?event_id=${ev.id}&side=BUY&taker_only=true&filter_type=CASH&filter_amount=100&limit=500` + (cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''));
       const rows = (d && d.data) || [];
       trades.push(...rows);
-      if (rows.length < 500) break;
-    }
+      cursor = d && d.pagination && d.pagination.next_cursor;
+      if (!cursor || !rows.length) break;
+    } }
     // add up fills per wallet, market and outcome
     const agg = {};
     for (const b of trades) {

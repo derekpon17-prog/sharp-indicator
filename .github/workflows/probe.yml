@@ -6,13 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          set +e
           G=https://gamma-api.polymarket.com
-          for t in cbb ncaab college-basketball ncaa-basketball ncaa-cbb mens-college-basketball basketball ncaam; do
-            n=$(curl -s "$G/events?tag_slug=$t&closed=false&limit=100" | jq 'length'); c=$(curl -s "$G/events?tag_slug=$t&closed=true&order=endDate&ascending=false&limit=100" | jq '[.[]|select(.slug|startswith("cbb"))]|length')
-            echo "tag $t open=$n closed_cbb_slugs=$c"
+          for t in cbb ncaab college-basketball ncaa-basketball mens-college-basketball ncaam; do
+            o=$(curl -s "$G/events?tag_slug=$t&closed=false&limit=100" | jq -r 'if type=="array" then (length|tostring) + " e.g. " + ((.[0].slug)//"-") else "ERR" end')
+            c=$(curl -s "$G/events?tag_slug=$t&closed=true&order=endDate&ascending=false&limit=100" | jq -r 'if type=="array" then (length|tostring) + " e.g. " + ((.[0].slug)//"-") else "ERR" end')
+            echo "tag $t | open $o | closed $c"
           done
-          echo "--- tags matching"; curl -s "$G/tags?limit=1000" | jq -r '.[]|select((.slug|test("bask|cbb|ncaa|college";"i")))|"\(.id) \(.slug) \(.label)"' | head -30
-          echo "--- sample cbb event from trades feed"; curl -s "https://data-api.polymarket.com/v2/trades?limit=500" | jq -r '.data[]|select((.slug // .event_slug // "")|startswith("cbb"))|"\(.event_slug) \(.slug) \(.title)"' | head -5
-          S=$(curl -s "https://data-api.polymarket.com/v2/trades?limit=1000" | jq -r '[.data[]|select((.event_slug // "")|startswith("cbb"))][0].event_slug'); echo "event slug $S"
-          [ "$S" != "null" ] && curl -s "$G/events?slug=$S" | jq '.[0]|{id,slug,title,endDate,closed,series:[.series[]?|{id,slug}],tags:[.tags[]?|{id,slug}]}'
-          echo "--- series 10012"; curl -s "$G/series?id=10012" | jq '.[0]|{id,slug,title}' ; curl -s "$G/events?series_id=10012&limit=3&order=endDate&ascending=false" | jq '[.[]|{slug,endDate,closed}]'
+          S=$(curl -s "https://data-api.polymarket.com/v2/trades?limit=1000&filter_type=CASH&filter_amount=50" | jq -r '[.data[]|select(((.event_slug // .slug) // "")|startswith("cbb"))][0]|(.event_slug // .slug)')
+          echo "cbb event slug from feed: $S"
+          curl -s "$G/events?slug=$S" | jq -c '.[0]|{id,slug,title,endDate,closed,series:[.series[]?|{id,slug}],tags:[.tags[]?|{id,slug}]}'
+          echo "series 10012:"; curl -s "$G/events?series_id=10012&limit=3&order=endDate&ascending=false" | jq -c '[.[]?|{slug,endDate,closed}]'
