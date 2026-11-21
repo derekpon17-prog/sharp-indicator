@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T18:09:28.688Z",
+ "scannedAt": "2026-11-21T19:08:45.872Z",
  "sports": {
   "NFL": [
    {
@@ -151,9 +151,9 @@
       "pick": "Cowboys",
       "line": null,
       "price": "-355",
-      "dollars": 30225,
-      "vsUsual": 6.6,
-      "vsUsualAll": 31
+      "dollars": 30536,
+      "vsUsual": 6.7,
+      "vsUsualAll": 31.3
      },
      {
       "matchup": "Steelers at Eagles",
@@ -180,10 +180,10 @@
       "market": "ML",
       "pick": "Chargers",
       "line": null,
-      "price": "-157",
-      "dollars": 6954,
+      "price": "-156",
+      "dollars": 6982,
       "vsUsual": 1.5,
-      "vsUsualAll": 7.1
+      "vsUsualAll": 7.2
      },
      {
       "matchup": "Dolphins at Bills",
@@ -201,9 +201,9 @@
       "pick": "Jaguars",
       "line": null,
       "price": "-245",
-      "dollars": 1022,
-      "vsUsual": 0.2,
-      "vsUsualAll": 1
+      "dollars": 1357,
+      "vsUsual": 0.3,
+      "vsUsualAll": 1.4
      },
      {
       "matchup": "Bengals at Commanders",
@@ -342,6 +342,16 @@
     "bettingBig": false,
     "tonight": [
      {
+      "matchup": "Bucks at 76ers",
+      "market": "ML",
+      "pick": "Bucks",
+      "line": null,
+      "price": "+506",
+      "dollars": 636,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.1
+     },
+     {
       "matchup": "Trail Blazers at Knicks",
       "market": "ML",
       "pick": "Knicks",
@@ -358,16 +368,6 @@
       "line": null,
       "price": "-562",
       "dollars": 732,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.1
-     },
-     {
-      "matchup": "Bucks at 76ers",
-      "market": "ML",
-      "pick": "Bucks",
-      "line": null,
-      "price": "+506",
-      "dollars": 636,
       "vsUsual": 0.1,
       "vsUsualAll": 0.1
      },
@@ -390,17 +390,17 @@
     "sport": "381-312",
     "returnPct": 6.7,
     "last10": "5-5",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Bucks at 76ers",
       "market": "ML",
       "pick": "76ers",
       "line": null,
-      "price": "-517",
-      "dollars": 1045,
-      "vsUsual": 1.3,
-      "vsUsualAll": 0.3
+      "price": "-342",
+      "dollars": 2192,
+      "vsUsual": 2.8,
+      "vsUsualAll": 0.5
      },
      {
       "matchup": "Bucks at 76ers",
@@ -432,16 +432,6 @@
       "dollars": 1013,
       "vsUsual": 0.7,
       "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Bucks at 76ers",
-      "market": "TOTAL",
-      "pick": "Under 229.5",
-      "line": 229.5,
-      "price": "+104",
-      "dollars": 1519,
-      "vsUsual": 1,
-      "vsUsualAll": 0.6
      },
      {
       "matchup": "Pelicans at Spurs",
@@ -593,6 +583,16 @@
       "vsUsualAll": 1.6
      },
      {
+      "matchup": "Wisconsin at Purdue",
+      "market": "SPREAD",
+      "pick": "Wisconsin -5.5",
+      "line": -5.5,
+      "price": "+113",
+      "dollars": 1000,
+      "vsUsual": 1,
+      "vsUsualAll": 1.6
+     },
+     {
       "matchup": "North Carolina at Virginia",
       "market": "ML",
       "pick": "Virginia",
@@ -613,21 +613,11 @@
       "vsUsualAll": 1.6
      },
      {
-      "matchup": "Wisconsin at Purdue",
+      "matchup": "Houston at West Virginia",
       "market": "SPREAD",
-      "pick": "Wisconsin -5.5",
-      "line": -5.5,
-      "price": "+113",
-      "dollars": 1000,
-      "vsUsual": 1,
-      "vsUsualAll": 1.6
-     },
-     {
-      "matchup": "North Texas at Tulane",
-      "market": "TOTAL",
-      "pick": "Over 55.5",
-      "line": 55.5,
-      "price": "-104",
+      "pick": "Houston -6.5",
+      "line": -6.5,
+      "price": "-113",
       "dollars": 1000,
       "vsUsual": 1,
       "vsUsualAll": 1.6
@@ -653,16 +643,6 @@
       "vsUsualAll": 1.6
      },
      {
-      "matchup": "Houston at West Virginia",
-      "market": "SPREAD",
-      "pick": "Houston -6.5",
-      "line": -6.5,
-      "price": "-113",
-      "dollars": 1000,
-      "vsUsual": 1,
-      "vsUsualAll": 1.6
-     },
-     {
       "matchup": "Iowa at Illinois",
       "market": "TOTAL",
       "pick": "Under 39.5",
@@ -681,6 +661,16 @@
       "dollars": 1000,
       "vsUsual": 1,
       "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "LSU at Tennessee",
+      "market": "TOTAL",
+      "pick": "Under 47.5",
+      "line": 47.5,
+      "price": "-113",
+      "dollars": 869,
+      "vsUsual": 0.9,
+      "vsUsualAll": 1.4
      },
      {
       "matchup": "Wake Forest at Georgia Tech",
@@ -756,6 +746,27 @@
     ]
    },
    {
+    "id": "332c23",
+    "gap": 20.3,
+    "overall": "47-12",
+    "sport": "16-0",
+    "returnPct": 9.7,
+    "last10": "10-0",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Arkansas at Texas",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-1011",
+      "dollars": 3465,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.4
+     }
+    ]
+   },
+   {
     "id": "3a72c1",
     "gap": 19.9,
     "overall": "71-75",
@@ -814,97 +825,6 @@
       "dollars": 550,
       "vsUsual": 0.9,
       "vsUsualAll": 0.2
-     }
-    ]
-   },
-   {
-    "id": "bc44b0",
-    "gap": 6,
-    "overall": "262-223",
-    "sport": "39-26",
-    "returnPct": 21.6,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "East Carolina at Army",
-      "market": "SPREAD",
-      "pick": "East Carolina +5.5",
-      "line": 5.5,
-      "price": "-100",
-      "dollars": 660,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.3
-     },
-     {
-      "matchup": "Texas Tech at Baylor",
-      "market": "ML",
-      "pick": "Texas Tech",
-      "line": null,
-      "price": "-182",
-      "dollars": 8210,
-      "vsUsual": 1.8,
-      "vsUsualAll": 3.4
-     },
-     {
-      "matchup": "Texas Tech at Baylor",
-      "market": "SPREAD",
-      "pick": "Baylor",
-      "line": 4.5,
-      "price": "+105",
-      "dollars": 5011,
-      "vsUsual": 1.1,
-      "vsUsualAll": 2.1
-     },
-     {
-      "matchup": "Iowa at Illinois",
-      "market": "SPREAD",
-      "pick": "Illinois +7.5",
-      "line": 7.5,
-      "price": "+113",
-      "dollars": 558,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.2
-     },
-     {
-      "matchup": "Utah at TCU",
-      "market": "ML",
-      "pick": "Utah",
-      "line": null,
-      "price": "-270",
-      "dollars": 879,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Colorado State at Fresno State",
-      "market": "TOTAL",
-      "pick": "Over 65.5",
-      "line": 65.5,
-      "price": "+112",
-      "dollars": 810,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.3
-     },
-     {
-      "matchup": "Syracuse at Boston College",
-      "market": "TOTAL",
-      "pick": "Over 53.5",
-      "line": 53.5,
-      "price": "+113",
-      "dollars": 729,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.3
-     },
-     {
-      "matchup": "Utah State at Oregon State",
-      "market": "SPREAD",
-      "pick": "Utah State +7.5",
-      "line": 7.5,
-      "price": "-105",
-      "dollars": 3379,
-      "vsUsual": 0.7,
-      "vsUsualAll": 1.4
      }
     ]
    }
