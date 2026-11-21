@@ -82,20 +82,21 @@ function clusterStarts(times) {
   return { mainStart: times[i], outliers: times.slice(0, i) };
 }
 
-function dueList(startsAll) {
+function dueList(startsAll, prefix = '', capAt5 = true) {
   const due = [];
   for (const [sp, times] of Object.entries(startsAll)) {
     const cluster = clusterStarts(times);
     if (!cluster) continue;
-    if (!done.has(sp) && cluster.mainStart > now) {
-      const mainDeadline = new Date(Math.min(cluster.mainStart.getTime() - MIN_LEAD * 60000, deadlineToday.getTime()));
-      if (now >= new Date(mainDeadline.getTime() - RETRY_WINDOW * 60000)) due.push(sp);
+    if (!done.has(prefix + sp) && cluster.mainStart > now) {
+      const lead = cluster.mainStart.getTime() - MIN_LEAD * 60000;
+      const mainDeadline = new Date(capAt5 ? Math.min(lead, deadlineToday.getTime()) : lead);
+      if (now >= new Date(mainDeadline.getTime() - RETRY_WINDOW * 60000)) due.push(prefix + sp);
     }
-    if (cluster.outliers.length && !done.has(sp + '_OUTLIER')) {
+    if (cluster.outliers.length && !done.has(prefix + sp + '_OUTLIER')) {
       const earliestOutlier = cluster.outliers[0];
       if (earliestOutlier > now) {
         const outlierDeadline = new Date(earliestOutlier.getTime() - MIN_LEAD * 60000);
-        if (now >= new Date(outlierDeadline.getTime() - RETRY_WINDOW * 60000)) due.push(sp + '_OUTLIER');
+        if (now >= new Date(outlierDeadline.getTime() - RETRY_WINDOW * 60000)) due.push(prefix + sp + '_OUTLIER');
       }
     }
   }
@@ -114,7 +115,8 @@ const cold = R.cold; // Nov 16 ROI rule plus Nov 17 form gate (see sf_rules.js)
    workflow run: classified Polymarket wallets (wallets.json HOT/COLD, judged only in the sport they are classified in)
    that bought one side of a game on this card. Shown ONLY when a match exists - no match, no Poly row and no
    POLYMARKET tag. Display only: never changes the verdict, confidence or money bar, which stay Sharp Flow's. */
-let POLY = []; try { POLY = JSON.parse(fs.readFileSync(OUT + '/poly_matches.json', 'utf8')).matches || []; } catch {}
+let POLY = [], POLYMETA = {}; try { POLYMETA = JSON.parse(fs.readFileSync(OUT + '/poly_matches.json', 'utf8')); POLY = POLYMETA.matches || []; } catch {}
+const MIN_POLY = +(process.env.POLY_MIN_USD || 500);
 // Running Poly record (scripts/poly_grade.js -> poly_record.json): one legend line on every Sharp Flow card.
 let POLYREC = null; try { POLYREC = JSON.parse(fs.readFileSync(OUT + '/poly_record.json', 'utf8')); } catch {}
 function polyRecordLine() {
@@ -216,11 +218,88 @@ function buildCards(sp, latest, flags, before) { // before: optional Date - only
   return { cards, n: rows.length, data, cold: coldSides };
 }
 
+/* Polymarket sharp-wallet report card (Derek, Nov 20 2026 - "post a Polymarket sharp wallet report an hour before
+   games ... I want to make sure I don't miss anything"). Every classified wallet position on this sport's slate from
+   poly_matches.json (bet-type check already applied), whether or not SharpFlow has a side - grouped by side, HOT
+   sides first. Two-sided wallets are left out (counted in the legend). Returns null when nothing qualifies, so the
+   run retries next hour until the games start. */
+function amer(p) { if (!(p > 0 && p < 1)) return null; return p >= 0.5 ? -100 * p / (1 - p) : 100 * (1 - p) / p; }
+function polyBet(m) {
+  if (m.market === 'TOTAL') { const l = String(m.title || '').match(/O\/U\s+([\d.]+)/i); return `${m.side}${l ? ' ' + l[1] : ''}`; }
+  if (m.market === 'SPREAD') { const l = String(m.title || '').match(/\(([+-][\d.]+)\)/); const fav = String(m.title || '').replace(/^spread:\s*/i, '').replace(/\(.*$/, '').trim();
+    if (l) { const v = parseFloat(l[1]); const mine = fav && m.side && fav.toLowerCase() === String(m.side).toLowerCase(); return `${m.side} ${mine ? (v > 0 ? '+' : '') + v : (v > 0 ? '-' : '+') + Math.abs(v)}`; } return `${m.side} spread`; }
+  return `${m.side} ML`;
+}
+function buildPolyCard(sp, latest, before, firstStart, outlier) {
+  const ms = POLY.filter(m => m.sport === sp && m.startUtc && new Date(m.startUtc) > now && (!before || new Date(m.startUtc) < before));
+  const two = ms.filter(m => m.twoSided).length;
+  const use = ms.filter(m => !m.twoSided);
+  if (!use.length) return null;
+  const tix = (latest && latest.tickets) || [];
+  const sideKey = m => [m.matchup, m.market, m.side].join('|');
+  const groups = {};
+  for (const m of use) (groups[sideKey(m)] ||= []).push(m);
+  const sfFor = m => {
+    const same = tix.filter(t => t.matchup === m.matchup && t.market === m.market && (m.market === 'TOTAL' ? (/^over/i.test(t.pick) ? 'Over' : 'Under') === m.side : t.pick.toLowerCase().startsWith(String(m.side).toLowerCase())));
+    const oth = tix.filter(t => t.matchup === m.matchup && t.market === m.market && !same.includes(t));
+    const sd = same.reduce((a, t) => a + t.dollars, 0), od = oth.reduce((a, t) => a + t.dollars, 0);
+    if (!sd && !od) return { t: 'SF no money here', c: 'grey' };
+    return sd >= od ? { t: `SF same side ${k(sd)}${od ? ' vs ' + k(od) : ''}`, c: 'blue' } : { t: `SF other side ${k(od)} vs ${k(sd)}`, c: 'orange' };
+  };
+  const picks = Object.values(groups).map(g => {
+    g.sort((a, b) => (a.cls === b.cls ? b.usd - a.usd : a.cls === 'HOT' ? -1 : 1));
+    const m0 = g[0], st = new Date(m0.startUtc);
+    const hot = g.filter(m => m.cls === 'HOT' && !m.sameAsSF), cold = g.filter(m => m.cls === 'COLD');
+    // Short chips per wallet so they wrap instead of running into the price column (Nov 20 render check):
+    // [verdict + name + $] [sport bet-type record, last 45d] [L10] [note]
+    const chips = [];
+    for (const m of g) {
+      const rec = m.rec ? `${sp} ${m.market} ${m.rec}${m.roi != null ? ` (${m.roi >= 0 ? '+' : ''}${Math.round(m.roi)}%)` : ''} last 45d` : null;
+      const same = m.cls === 'HOT' && m.sameAsSF, gated = m.cls === 'COLD' && m.sportCls === 'HOT';
+      const c = same ? 'grey' : m.cls === 'HOT' ? 'green' : 'red';
+      chips.push({ t: `${gated ? 'COLD in this bet type' : m.cls} ${m.name} ${k(m.usd)}`, c });
+      if (rec) chips.push({ t: rec, c: 'grey' });
+      if (m.l10) chips.push({ t: m.l10.txt, c: 'grey' });
+      chips.push({ t: same ? `same wallet as SF ${m.sameAsSF.sfWallet} - not a 2nd source` : gated ? 'not counted' : m.cls === 'COLD' ? 'fade flag' : 'counts', c: same ? 'grey' : c });
+    }
+    chips.push(sfFor(m0));
+    const px = amer(g.reduce((a, m) => a + (m.avgPrice || 0) * m.usd, 0) / g.reduce((a, m) => a + m.usd, 0));
+    return { st, hotUsd: hot.reduce((a, m) => a + m.usd, 0), coldUsd: cold.reduce((a, m) => a + m.usd, 0),
+      pick: { bet: polyBet(m0), sub: `${m0.matchup} - ${ctTime(st)} CT`, chips, price: px == null ? null : Math.round(px),
+        polyHot: hot.length, polyCold: cold.length } };
+  }).sort((a, b) => (b.hotUsd > 0) - (a.hotUsd > 0) || b.hotUsd - a.hotUsd || b.coldUsd - a.coldUsd);
+  const boards = [];
+  const rosterAt = POLYMETA.rosterGeneratedAt ? ctTime(new Date(POLYMETA.rosterGeneratedAt)) : 'n/a';
+  const checkedAt = POLYMETA.at ? ctTime(new Date(POLYMETA.at)) : 'n/a';
+  for (let i = 0; i < picks.length && boards.length < 2; i += 12) {
+    const chunk = picks.slice(i, i + 12);
+    const secs = [];
+    for (const p of chunk.slice().sort((a, b) => a.st - b.st)) {
+      const h = `${sp} - ${ctTime(p.st).toUpperCase()} CT`;
+      let sec = secs.find(x => x.heading === h); if (!sec) secs.push(sec = { heading: h, picks: [] });
+      sec.picks.push(p.pick);
+    }
+    const last = i + 12 >= picks.length || boards.length === 1;
+    const rl = polyRecordLine();
+    boards.push({ brand: 'POLYMARKET', title: `${sp} - Polymarket sharp wallets`,
+      subtitle: `Classified wallets with $${MIN_POLY}+ on a side. HOT = profitable in ${sp} and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster ${rosterAt} CT, buys checked ${checkedAt} CT${picks.length > 12 ? ` - board ${boards.length + 1}` : ''}`,
+      sections: secs,
+      legend: [last && two ? `${two} two-sided position${two === 1 ? '' : 's'} left out` : '', rl, 'Price = their average Polymarket price as American odds. COLD = fade flag. Same wallet as SF = not a second source.'].filter(Boolean).join(' | '),
+      footer: 'Wallet money, not a pick. Leans, not guarantees' });
+  }
+  const nh = picks.filter(p => p.hotUsd > 0).length;
+  const first = firstStart ? ctTime(firstStart) : '';
+  return { route: 'Sharp Signals', content: `**Polymarket sharp wallets - ${sp}${outlier ? ' one-off' : ''} - first game ${first} CT** - ${picks.length} side${picks.length === 1 ? '' : 's'} (${nh} with a HOT wallet)`, boards };
+}
+
 (async () => {
   let latest = null; try { latest = JSON.parse(fs.readFileSync(OUT + '/latest.json', 'utf8')); } catch {}
   let { out: startsAll, want } = await allStarts();
   if (process.env.ESPN_OFF || !Object.keys(startsAll).length) { if (latest) Object.assign(startsAll, Object.fromEntries(Object.entries(ticketStarts(latest, want)).filter(([s]) => !startsAll[s]))); }
-  const due = dueList(startsAll);
+  // Polymarket sharp-wallet report (Derek, Nov 20 2026): its own card per sport, an hour before that sport's games
+  // (no 5pm cap - it follows the games), tracked with its own POLY_<sport> posted flag. Runs alongside, not instead of,
+  // the Sharp Flow card.
+  const due = [...dueList(startsAll), ...dueList(startsAll, 'POLY_', false)];
   const summary = Object.entries(startsAll).map(([s, ts]) => {
     const c = clusterStarts(ts);
     return s + ' main ' + ctTime(c.mainStart) + (c.outliers.length ? ` (+${c.outliers.length} outlier ${ctTime(c.outliers[0])})` : '');
@@ -239,6 +318,16 @@ function buildCards(sp, latest, flags, before) { // before: optional Date - only
   const hhmm = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');
   const wrote = [];
   for (const token of dueIn) {
+    if (token.startsWith('POLY_')) {
+      const t2 = token.slice(5), outlierP = t2.endsWith('_OUTLIER'), spP = outlierP ? t2.slice(0, -'_OUTLIER'.length) : t2;
+      const clP = clusterStarts(startsAll[spP] || []);
+      const firstP = clP ? (outlierP ? clP.outliers[0] : clP.mainStart) : null;
+      const card = buildPolyCard(spP, latest, outlierP && clP ? clP.mainStart : null, firstP, outlierP);
+      if (!card) { console.log(token, 'no classified Polymarket wallet on this slate yet - will retry next run'); continue; }
+      const f = `${CARD_DIR}/${today}-${hhmm}-poly-${spP.toLowerCase()}${outlierP ? '-outlier' : ''}.json`;
+      fs.writeFileSync(f, JSON.stringify(card, null, 1)); wrote.push(token); console.log('wrote', f);
+      continue;
+    }
     const outlier = token.endsWith('_OUTLIER');
     const sp = outlier ? token.slice(0, -'_OUTLIER'.length) : token;
     const cluster = clusterStarts(startsAll[sp] || []);

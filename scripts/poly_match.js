@@ -57,17 +57,23 @@ function slugDate(b) {
   const m = String(b.slug || b.event_slug || '').match(/(\d{4}-\d{2}-\d{2})/);
   return m ? m[1] : null;
 }
-function startUtc(k) { // "Fri, Nov 20, 8:10 PM" (ET) - same parse as sharpflow_preview.js
+function startUtc(k) { // "Fri, Nov 20, 8:10 PM" (ET)
+  // FIX Nov 20: the first version accepted the first UTC offset whose ET *date* matched, which picked the
+  // daylight-time offset in November and put every start an hour early (a 9:10pm CT game looked started at 8:15).
+  // Now the candidate must read back as the same ET clock time, so EST/EDT is decided by the date itself.
   if (!k) return null;
   const m = String(k).match(/(\w{3}) (\d{1,2}), (\d{1,2}):(\d{2}) (AM|PM)/);
   if (!m) return null;
   const mon = 'JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[1]) / 3;
   let h = +m[3] % 12; if (m[5] === 'PM') h += 12;
+  const want = `${String(h).padStart(2, '0')}:${m[4]}`;
+  const etClock = d => new Intl.DateTimeFormat('en-GB', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: false }).format(d);
   const now = new Date(), y = now.getUTCFullYear();
   for (const yy of [y, y + 1, y - 1]) {
-    for (const off of [4, 5]) {
+    for (const off of [5, 4]) {
       const d = new Date(Date.UTC(yy, mon, +m[2], h + off, +m[4]));
-      if (etDate(d) === `${yy}-${String(mon + 1).padStart(2, '0')}-${String(m[2]).padStart(2, '0')}` && Math.abs(d - now) < 200 * 86400000) return d;
+      const ds = `${yy}-${String(mon + 1).padStart(2, '0')}-${String(m[2]).padStart(2, '0')}`;
+      if (etDate(d) === ds && etClock(d) === want && Math.abs(d - now) < 200 * 86400000) return d;
     }
   }
   return null;
