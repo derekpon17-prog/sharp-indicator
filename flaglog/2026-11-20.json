@@ -16,7 +16,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8210,
    "opposedSeen": false,
-   "snapshots": 32
+   "snapshots": 34
   },
   "Buccaneers at Lions|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -33,7 +33,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": false,
-   "snapshots": 32
+   "snapshots": 34
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -49,7 +49,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2534,
    "opposedSeen": false,
-   "snapshots": 16
+   "snapshots": 17
   },
   "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 16
+   "snapshots": 17
   },
   "Iowa State at UCF|ML|Iowa State": {
    "sport": "CFB",
@@ -115,7 +115,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 13
+   "snapshots": 14
   },
   "Bakersfield Roadrunners at Idaho Vandals|TOTAL|Over": {
    "sport": "CBB",
@@ -133,7 +133,7 @@
    "maxVsUsual": 2.4,
    "maxDollars": 2702,
    "opposedSeen": false,
-   "snapshots": 24
+   "snapshots": 26
   },
   "Green Bay Phoenix at Florida State Seminoles|ML|Florida State Seminoles": {
    "sport": "CBB",
@@ -167,7 +167,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 3023,
    "opposedSeen": true,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Iowa State at UCF|SPREAD|UCF +1.5": {
    "sport": "CFB",
@@ -200,7 +200,7 @@
    "maxVsUsual": 0.2,
    "maxDollars": 1624,
    "opposedSeen": false,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Raptors at Pistons|TOTAL|Over 217.5": {
    "sport": "NBA",
@@ -250,7 +250,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 13198,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Campbell Fighting Camels at Kansas State Wildcats|TOTAL|Over 156.5": {
    "sport": "CBB",
@@ -281,9 +281,9 @@
     "SIZED_2X"
    ],
    "maxVsUsual": 3.1,
-   "maxDollars": 3067,
+   "maxDollars": 3077,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Oregon at Michigan State|SPREAD|Michigan State +17.5": {
    "sport": "CFB",
@@ -299,7 +299,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 2513,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Campbell Fighting Camels at Kansas State Wildcats|TOTAL|Over": {
    "sport": "CBB",
@@ -316,7 +316,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 2650,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Hornets at Hawks|ML|Hawks": {
    "sport": "NBA",
@@ -348,7 +348,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1519,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Hornets at Hawks|TOTAL|Over": {
    "sport": "NBA",
@@ -397,7 +397,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 9600,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Suns at Jazz|SPREAD|Suns -5.5": {
    "sport": "NBA",
@@ -413,7 +413,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1551,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Pelicans at Thunder|SPREAD|Thunder": {
    "sport": "NBA",
@@ -424,10 +424,43 @@
    "firstSeenAt": "2026-11-21T01:26:48.373Z",
    "firstPrice": "-122",
    "tags": [
-    "SIZED_UP"
+    "SIZED_UP",
+    "STRONG_VS_WEAK"
    ],
    "maxVsUsual": 1.2,
    "maxDollars": 5994,
+   "opposedSeen": true,
+   "snapshots": 3
+  },
+  "Kings at Lakers|SPREAD|Lakers -14.5": {
+   "sport": "NBA",
+   "matchup": "Kings at Lakers",
+   "market": "SPREAD",
+   "pick": "Lakers -14.5",
+   "kickoffEt": "Fri, Nov 20, 10:10 PM",
+   "firstSeenAt": "2026-11-21T02:27:26.315Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 1653,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Iowa at Illinois|SPREAD|Iowa -7.5": {
+   "sport": "CFB",
+   "matchup": "Iowa at Illinois",
+   "market": "SPREAD",
+   "pick": "Iowa -7.5",
+   "kickoffEt": "Sat, Nov 21, 2:30 PM",
+   "firstSeenAt": "2026-11-21T02:27:26.315Z",
+   "firstPrice": "-113",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 1501,
    "opposedSeen": true,
    "snapshots": 1
   }
