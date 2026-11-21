@@ -1,0 +1,86 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket late money - NHL** - 2 HOT wallet moves since the NHL Polymarket report",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NHL - Polymarket late money",
+   "subtitle": "HOT wallets that bought (or doubled up) after the NHL report posted, games not started. Buys checked 5:43pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "Capitals ML",
+       "sub": "Capitals at Bruins - 6:00pm CT - last buy 5:30pm CT",
+       "chips": [
+        {
+         "t": "HOT 0x4924…3782 $50k",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "NHL ML 15-12 (+3%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 6-4",
+         "c": "grey"
+        },
+        {
+         "t": "0.58x their usual $87k",
+         "c": "grey"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 127,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Senators -1.5",
+       "sub": "Kings at Senators - 6:00pm CT - last buy 5:40pm CT",
+       "chips": [
+        {
+         "t": "HOT 0x4924…3782 $38k",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "NHL SPREAD 3-4 (+11%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 6-4",
+         "c": "grey"
+        },
+        {
+         "t": "0.44x their usual $87k",
+         "c": "grey"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 150,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    }
+   ],
+   "legend": "Price = their average Polymarket price as American odds. In-game buys are not counted.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
