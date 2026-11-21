@@ -63,7 +63,12 @@
    "firstBuyUtc": "2026-11-20T16:38:35.000Z",
    "hoursBeforeStart": 8.5,
    "closePrice": 0.455,
-   "clv": 0.025
+   "clv": 0.025,
+   "result": "W",
+   "u": 1.326,
+   "fadeU": -1.326,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Wizards at Bulls|TOTAL|Under|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -95,7 +100,12 @@
    "firstBuyUtc": "2026-11-20T15:56:19.000Z",
    "hoursBeforeStart": 9.2,
    "closePrice": 0.485,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1.041,
+   "fadeU": -1.041,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Wizards at Bulls|TOTAL|Over|0x09f49ea10004f323a40cc1e21f4cd8759c14dac0": {
    "sport": "NBA",
@@ -122,7 +132,12 @@
    "l10": "L10 NBA 10-0",
    "onCard": false,
    "sameAsSF": false,
-   "twoSided": false
+   "twoSided": false,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Magic at Nets|ML|Magic|0xd70b975d2d2eb3e5f9e7c07ffe2fda8265d9dcb1": {
    "sport": "NBA",
@@ -181,7 +196,12 @@
    "l10": "L10 NBA 3-7",
    "onCard": true,
    "sameAsSF": false,
-   "twoSided": false
+   "twoSided": false,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pelicans at Thunder|TOTAL|Over|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -213,7 +233,12 @@
    "firstBuyUtc": "2026-11-20T15:58:29.000Z",
    "hoursBeforeStart": 9.2,
    "closePrice": 0.495,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1.041,
+   "fadeU": -1.041,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Hornets at Hawks|TOTAL|Under|0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc": {
    "sport": "NBA",
@@ -787,7 +812,12 @@
    "firstBuyUtc": "2026-11-21T00:56:55.000Z",
    "hoursBeforeStart": 0.2,
    "closePrice": 0.455,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1.222,
+   "fadeU": -1.222,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Magic at Nets|TOTAL|Under|0x27f738fe203827445690339104aae35b20bc44b0": {
    "sport": "NBA",
@@ -856,7 +886,12 @@
    "firstBuyUtc": "2026-11-21T01:07:29.000Z",
    "hoursBeforeStart": 0.1,
    "closePrice": 0.805,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pelicans at Thunder|ML|Thunder|0x28059b3fb7af7ed76d83dc9121bbb72ec7cf76ed": {
    "sport": "NBA",
@@ -920,7 +955,12 @@
    "firstBuyUtc": "2026-11-20T02:57:55.000Z",
    "hoursBeforeStart": 22.2,
    "closePrice": 0.805,
-   "clv": -0.0226
+   "clv": -0.0226,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pelicans at Thunder|ML|Thunder|0x26910eb79ce05cf3a527dcac37394eed04416c3c": {
    "sport": "NBA",
@@ -1005,7 +1045,7 @@
    "firstPrice": 0.63,
    "firstUsd": 3150,
    "maxUsd": 3150,
-   "lastSeenAt": "2026-11-21T03:26:56.533Z",
+   "lastSeenAt": "2026-11-21T04:27:45.409Z",
    "rec": "36-26",
    "roi": -5,
    "n": 62,
@@ -1039,7 +1079,7 @@
    "firstPrice": 0.51,
    "firstUsd": 1640,
    "maxUsd": 1640,
-   "lastSeenAt": "2026-11-21T03:26:56.533Z",
+   "lastSeenAt": "2026-11-21T04:27:45.409Z",
    "rec": "2-2",
    "roi": -88.7,
    "n": 4,
@@ -1081,7 +1121,12 @@
    "l10": "L10 NBA 2-8",
    "onCard": true,
    "sameAsSF": false,
-   "twoSided": false
+   "twoSided": false,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Wizards at Bulls|SPREAD|Wizards|0xf4218246dfefc5bdce904a73b2ec4d8366f5cff4": {
    "sport": "NBA",
@@ -1149,7 +1194,12 @@
    "l10": "L10 NBA 5-5",
    "onCard": true,
    "sameAsSF": false,
-   "twoSided": false
+   "twoSided": false,
+   "result": "L",
+   "u": -3.348,
+   "fadeU": 3.348,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pelicans at Thunder|ML|Thunder|0xbbf379252411511adab081f016dc991aa6bbaa3a": {
    "sport": "NBA",
@@ -1178,7 +1228,12 @@
    "l10": "L8 NBA 5-3",
    "onCard": true,
    "sameAsSF": false,
-   "twoSided": false
+   "twoSided": false,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pelicans at Thunder|SPREAD|Thunder|0xf4218246dfefc5bdce904a73b2ec4d8366f5cff4": {
    "sport": "NBA",
@@ -1212,7 +1267,12 @@
    "firstBuyUtc": "2026-11-21T00:53:16.000Z",
    "hoursBeforeStart": 0.3,
    "closePrice": 0.465,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pelicans at Thunder|SPREAD|Thunder|0x09f49ea10004f323a40cc1e21f4cd8759c14dac0": {
    "sport": "NBA",
@@ -1246,7 +1306,12 @@
    "firstBuyUtc": "2026-11-20T19:45:32.000Z",
    "hoursBeforeStart": 5.4,
    "closePrice": 0.435,
-   "clv": -0.0443
+   "clv": -0.0443,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Kings at Lakers|TOTAL|Over|0x9f2fe025f84839ca81dd8e0338892605702d2ca8": {
    "sport": "NBA",
@@ -1267,7 +1332,7 @@
    "firstPrice": 0.51,
    "firstUsd": 6790,
    "maxUsd": 9183,
-   "lastSeenAt": "2026-11-21T03:26:56.533Z",
+   "lastSeenAt": "2026-11-21T04:27:45.409Z",
    "rec": "0-5",
    "roi": -100,
    "n": 5,
@@ -1301,7 +1366,7 @@
    "firstPrice": 0.47,
    "firstUsd": 2550,
    "maxUsd": 2550,
-   "lastSeenAt": "2026-11-21T03:26:56.533Z",
+   "lastSeenAt": "2026-11-21T04:27:45.409Z",
    "rec": "48-48",
    "roi": -2.9,
    "n": 96,
@@ -1348,7 +1413,12 @@
    "firstBuyUtc": "2026-11-21T00:28:25.000Z",
    "hoursBeforeStart": 0,
    "closePrice": 0.535,
-   "clv": -0.015
+   "clv": -0.015,
+   "result": "L",
+   "u": -1.222,
+   "fadeU": 1.222,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Magic at Nets|SPREAD|Nets|0xc6ae4cdece4be7f21b747eb11f6eaaa37972afe9": {
    "sport": "NBA",
@@ -1377,7 +1447,12 @@
    "l10": "L10 NBA 2-8",
    "onCard": true,
    "sameAsSF": false,
-   "twoSided": false
+   "twoSided": false,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Magic at Nets|SPREAD|Magic|0x09f49ea10004f323a40cc1e21f4cd8759c14dac0": {
    "sport": "NBA",
@@ -1411,7 +1486,12 @@
    "firstBuyUtc": "2026-11-20T16:18:50.000Z",
    "hoursBeforeStart": 8.2,
    "closePrice": 0.495,
-   "clv": -0.0144
+   "clv": -0.0144,
+   "result": "L",
+   "u": -1.038,
+   "fadeU": 1.038,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Rockets at Nuggets|TOTAL|Over|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1432,7 +1512,7 @@
    "firstPrice": 0.464,
    "firstUsd": 1480,
    "maxUsd": 1480,
-   "lastSeenAt": "2026-11-21T03:26:56.533Z",
+   "lastSeenAt": "2026-11-21T04:27:45.409Z",
    "rec": "102-133",
    "roi": -11.2,
    "n": 235,
@@ -1481,7 +1561,12 @@
    "hoursBeforeStart": 0.5,
    "gameSource": "sharpflow",
    "closePrice": 0.49,
-   "clv": 0
+   "clv": 0,
+   "result": "W",
+   "u": 1.041,
+   "fadeU": -1.041,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Kings at Lakers|TOTAL|Over|0x6157d529ae129fe08f22a27ed42e741d2eaa9fb4": {
    "sport": "NBA",
@@ -1502,7 +1587,7 @@
    "firstPrice": 0.5,
    "firstUsd": 7000,
    "maxUsd": 7000,
-   "lastSeenAt": "2026-11-21T03:26:56.533Z",
+   "lastSeenAt": "2026-11-21T04:27:45.409Z",
    "rec": "9-8",
    "roi": 17.6,
    "n": 17,
@@ -1537,7 +1622,7 @@
    "firstPrice": 0.46,
    "firstUsd": 5606,
    "maxUsd": 5606,
-   "lastSeenAt": "2026-11-21T03:26:56.533Z",
+   "lastSeenAt": "2026-11-21T04:27:45.409Z",
    "rec": "102-133",
    "roi": -11.2,
    "n": 235,
@@ -1586,7 +1671,12 @@
    "hoursBeforeStart": 0.8,
    "gameSource": "espn",
    "closePrice": 0.485,
-   "clv": -0.0199
+   "clv": -0.0199,
+   "result": "L",
+   "u": -1.02,
+   "fadeU": 1.02,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "CFB|Clemson at Duke|ML|Clemson|0x4bff30af91642dc7d2b19a8664378fe55c45fc26": {
    "sport": "CFB",
@@ -1621,7 +1711,12 @@
    "hoursBeforeStart": 0.4,
    "gameSource": "espn",
    "closePrice": 0.205,
-   "clv": -0.0026
+   "clv": -0.0026,
+   "result": "W",
+   "u": 3.817,
+   "fadeU": -3.817,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Magic at Nets|SPREAD|Nets|0xf0318c32136c2db7fec88b84869aee6a1106c80c": {
    "sport": "NBA",
@@ -1656,7 +1751,12 @@
    "hoursBeforeStart": 0.5,
    "gameSource": "espn",
    "closePrice": 0.455,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1.222,
+   "fadeU": -1.222,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pacers at Cavaliers|TOTAL|Under|0xb8c4482802bbc9256926cde54b3daa03ee8e7385": {
    "sport": "NBA",
@@ -1691,7 +1791,12 @@
    "hoursBeforeStart": 0.2,
    "gameSource": "espn",
    "closePrice": 0.485,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pacers at Cavaliers|SPREAD|Pacers|0xf4218246dfefc5bdce904a73b2ec4d8366f5cff4": {
    "sport": "NBA",
@@ -1726,7 +1831,12 @@
    "hoursBeforeStart": 12.4,
    "gameSource": "espn",
    "closePrice": 0.565,
-   "clv": 0.045
+   "clv": 0.045,
+   "result": "L",
+   "u": -1.083,
+   "fadeU": 1.083,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Pacers at Cavaliers|SPREAD|Pacers|0x09f49ea10004f323a40cc1e21f4cd8759c14dac0": {
    "sport": "NBA",
@@ -1761,7 +1871,12 @@
    "hoursBeforeStart": 2.7,
    "gameSource": "espn",
    "closePrice": 0.475,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
   },
   "NBA|Raptors at Pistons|SPREAD|Raptors|0x163eff4d251df4bfc95c49f4d90cd1bf224edc5b": {
    "sport": "NBA",
@@ -1796,7 +1911,47 @@
    "hoursBeforeStart": 1.8,
    "gameSource": "espn",
    "closePrice": 0.66,
-   "clv": 0.01
+   "clv": 0.01,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-21T04:27:53.987Z",
+   "gradedBy": "positions"
+  },
+  "NBA|Rockets at Nuggets|ML|Rockets|0x9f2fe025f84839ca81dd8e0338892605702d2ca8": {
+   "sport": "NBA",
+   "matchup": "Rockets at Nuggets",
+   "market": "ML",
+   "side": "Rockets",
+   "grp": "team",
+   "wallet": "0x9f2fe025f84839ca81dd8e0338892605702d2ca8",
+   "name": "surfandturf",
+   "cls": "HOT",
+   "sportCls": "HOT",
+   "gateNote": null,
+   "startUtc": "2026-11-21T03:14:00.000Z",
+   "conditionId": "0xd2ec06b5026f7da6ba5c3d71c50287854ecd72b0353524e641724e35c202bb6a",
+   "outcome": "Rockets",
+   "title": "Rockets vs. Nuggets",
+   "firstSeenAt": "2026-11-21T04:27:45.409Z",
+   "firstPrice": 0.52,
+   "firstUsd": 26000,
+   "maxUsd": 26000,
+   "lastSeenAt": "2026-11-21T04:27:45.409Z",
+   "rec": "30-24",
+   "roi": 39.6,
+   "n": 54,
+   "recScope": "NBA ML, last 45 days",
+   "l10": "L10 NBA 5-5",
+   "onCard": true,
+   "sameAsSF": false,
+   "twoSided": false,
+   "tokenId": "7260817806513642055136268483787778201469540463959966151165205688019988486133",
+   "firstBuyUtc": "2026-11-21T03:13:10.000Z",
+   "hoursBeforeStart": 0,
+   "gameSource": "sharpflow",
+   "closePrice": 0.515,
+   "clv": -0.005
   }
  }
 }
