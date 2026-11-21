@@ -1,0 +1,35 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE FLIP · Tue 8:50pm CT** · VAN @ ANA Over 6.5",
+ "scorecards": [
+  {
+   "header": "LATE FLIP",
+   "sport": "NHL",
+   "date": "Tue Oct 27",
+   "start": "9:00pm CT",
+   "matchup": "Canucks @ Ducks",
+   "checked": "Checked Pinnacle 8:47pm CT",
+   "bet": "Over 6.5",
+   "price": "-128",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total 6.5 (-121) to 6.5 (-131) since open, +EV at 5 books",
+    "line2": "Status: stable - new Strong since the 5:08pm read (was Slight)"
+   },
+   "vegas": {
+    "strength": 75,
+    "line1": "Pressure Move 75: 93% of bets and 96% of money on the Over, Pinnacle column Strong",
+    "bets": 93,
+    "money": 96
+   },
+   "novig": {
+    "tier": "LEAN",
+    "line1": "Over $32.6K vs Under $19.9K near the top (5:11pm read)",
+    "line2": "1.64x on the Over, same side as Pinnacle. Not re-read this run."
+   },
+   "record_label": "PINNACLE STRONG RECORD",
+   "record": "tracking started Oct 21"
+  }
+ ],
+ "embeds": []
+}

@@ -1,0 +1,39 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 LATE FLIP \u00b7 Thu 6:52pm CT** \u00b7 NHL BUF @ CHI (7:00pm CT) \u00b7 1 faded",
+ "scorecards": [
+  {
+   "sport": "NHL",
+   "date": "Thu Nov 12",
+   "start": "7:00pm CT",
+   "matchup": "Buffalo Sabres @ Chicago Blackhawks",
+   "bet": "Over 6.5",
+   "price": "-114",
+   "header": "LATE FLIP",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Consensus 6.5 (-114); Pinnacle price moved -101 to -114 since open",
+    "line2": "Status: stable - +EV at 8 books"
+   },
+   "vegas": {
+    "tier": "PRESSURE MOVE 62",
+    "line1": "Bets 87% / money 91% on the Over",
+    "line2": "Under the 70 cut, same side as Pinnacle"
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG TOTAL RECORD",
+   "record": "tracking started Oct 21",
+   "checked": "Checked Pinnacle 6:47pm CT - Vegas NHL 6:49pm CT - Novig not read - SF snapshot 4:13pm CT: no ticket of $1K+ on the total (Blackhawks ML $656 only)"
+  }
+ ],
+ "embeds": [
+  {
+   "title": "FADED",
+   "color": 15548997,
+   "description": "LMU Under 141.5 (LMU @ USA, 7:00pm CT) - late flip at 5:44pm, now no lean.\nPrice and result unchanged in the ledger.\nNote: WEST ML and MTST Under 162.5 (faded at 5:44pm) are Strong again at 6:47pm; no new rows.",
+   "footer": {
+    "text": "Leans, not guarantees"
+   }
+  }
+ ]
+}

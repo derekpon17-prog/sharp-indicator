@@ -1,0 +1,271 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals - Thu NFL + CFB FULL DAY - 7:00-8:00pm CT** - 1 NFL, 2 CFB games (Pinnacle 6:08pm, Vegas 6:10pm, SF 4:13pm CT)",
+ "scorecards": [
+  {
+   "sport": "CFB",
+   "date": "Thu Nov 12",
+   "start": "8:00pm CT",
+   "matchup": "Louisiana @ UL Monroe",
+   "bet": "Under 47.5",
+   "price": "-109",
+   "pinnacle": {
+    "tier": "STRONG",
+    "line1": "Total moved from 49 to 48 at Pinnacle since open",
+    "line2": "Status: stable"
+   },
+   "vegas": {
+    "strength": 75,
+    "line1": "Vegas Backed: total moved down 48.5 to 47.5 with a minority of bets",
+    "bets": 11,
+    "money": 21
+   },
+   "novig": null,
+   "record_label": "PINNACLE STRONG + VEGAS 70+ RECORD",
+   "record": "tracking since Oct 21 - see ledger",
+   "checked": "Checked Pinnacle 6:08pm CT, Vegas 6:10pm CT",
+   "header": "TOP PLAY"
+  }
+ ],
+ "boards": [
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Top plays - Thu Nov 12 NFL + CFB",
+   "subtitle": "Pinnacle 6:08pm - Vegas NFL+NCAAF 6:10pm - SharpFlow 4:13pm CT (no SF points) - Novig not read",
+   "legend": "Score = Pinnacle + Vegas points (SharpFlow points not available this pull). 70+ TOP PLAY, 50-69 STRONG, 30-49 LEAN. Untested weights.",
+   "footer": "Only 1 play scored 30+. Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "TOP PLAYS",
+     "picks": [
+      {
+       "bet": "Under 47.5",
+       "sub": "UL @ ULM - 8:00pm CT",
+       "price": -109,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 75",
+         "c": "blue"
+        },
+        {
+         "t": "no SF ticket",
+         "c": "grey"
+        }
+       ],
+       "score": 34
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "brand": "SHARP SIGNALS",
+   "title": "Slate summary - NFL + CFB full day",
+   "subtitle": "Pinnacle 6:08pm - Vegas 6:10pm - SharpFlow 4:13pm CT (no SF points) - Novig not read",
+   "legend": "Bars = sources agreeing (Pinnacle, Vegas 70+, Novig) - price is the consensus line. SF chip is display only on spreads and totals",
+   "footer": "Leans, not guarantees",
+   "sections": [
+    {
+     "heading": "CFB - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "Over 50.5",
+       "sub": "MEM @ USF - 7:00pm",
+       "price": -115,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "SF vs PIN: SHARP $9.1K on Under, 2.1x their usual bet",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Under 49.5",
+       "sub": "MEM @ USF - 7:00pm - SharpFlow only",
+       "price": 110,
+       "sources": 0,
+       "chips": [
+        {
+         "t": "SHARP $9.1K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "2.1x their usual bet",
+         "c": "gold"
+        },
+        {
+         "t": "SF vs PIN",
+         "c": "red"
+        }
+       ]
+      },
+      {
+       "bet": "Memphis ML",
+       "sub": "MEM @ USF - 7:00pm - SharpFlow only",
+       "price": -163,
+       "sources": 0,
+       "chips": [
+        {
+         "t": "SHARP $9.7K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "0.9x their usual bet",
+         "c": "grey"
+        },
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 7:15PM CT",
+     "picks": [
+      {
+       "bet": "Commanders ML",
+       "sub": "WSH @ NYG - 7:15pm - SharpFlow only",
+       "price": 117,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "SHARP $36.8K vs $0",
+         "c": "blue"
+        },
+        {
+         "t": "2.0x their usual bet",
+         "c": "gold"
+        },
+        {
+         "t": "2 wallets",
+         "c": "blue"
+        },
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Commanders +2.5",
+       "sub": "WSH @ NYG - 7:15pm - SharpFlow only",
+       "price": -112,
+       "sources": 0,
+       "chips": [
+        {
+         "t": "SHARP $27.8K vs $2.3K",
+         "c": "blue"
+        },
+        {
+         "t": "2.4x their usual bet",
+         "c": "gold"
+        },
+        {
+         "t": "PIN no lean",
+         "c": "grey"
+        }
+       ]
+      },
+      {
+       "bet": "Under 41",
+       "sub": "WSH @ NYG - 7:15pm",
+       "price": -109,
+       "sources": 1,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS none",
+         "c": "grey"
+        },
+        {
+         "t": "no SF ticket",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 8:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 47.5",
+       "sub": "UL @ ULM - 8:00pm",
+       "price": -109,
+       "sources": 2,
+       "chips": [
+        {
+         "t": "PIN STRONG stable",
+         "c": "green"
+        },
+        {
+         "t": "VEGAS 75",
+         "c": "blue"
+        },
+        {
+         "t": "no SF ticket",
+         "c": "grey"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "embeds": [
+  {
+   "title": "Full day - NFL, CFB",
+   "color": 15105570,
+   "fields": [
+    {
+     "name": "CFB (2 games)",
+     "value": "7:00pm MEM @ USF - GL 1 (SF $9.1K Under, vs PIN)\n8:00pm UL @ ULM - GL 2",
+     "inline": false
+    },
+    {
+     "name": "NFL (1 game)",
+     "value": "7:15pm WSH @ NYG - GL 1 (SF $36.8K Commanders ML)",
+     "inline": false
+    },
+    {
+     "name": "Not in this card",
+     "value": "CFB games on Saturday and NFL on Sunday: later slate runs. NBA, NHL, NCAAB: carded at the 4:05, 5:05 and 5:47 runs.",
+     "inline": false
+    }
+   ]
+  },
+  {
+   "title": "Conflicts",
+   "color": 15158332,
+   "description": "MEM@USF Over 50.5: Pin STRONG stable, but SharpFlow has $9.1K on the Under (unopposed, 2.1x their usual bet, 2 wallets) - SF vs PIN, scored 10.\nWSH@NYG: SharpFlow money is on the Commanders (ML $36.8K, +2.5 $27.8K vs $2.3K); Pinnacle's only lean is Under 41 and Vegas has the Giants -1.5 at 15 (under 70). Not a direct conflict."
+  },
+  {
+   "title": "Run notes",
+   "color": 15844367,
+   "description": "SharpFlow snapshot scanned 4:13pm CT, current. flags.json had no sides[] list, so no SF points; SF dollars shown as chips only. SF Memphis -2.5 ($15.6K, 4.1x) left off: ticket line does not match the market (USF +4.5). Novig not read. Props off. Sharp Score weights are a first guess.",
+   "footer": {
+    "text": "Checked: Pinnacle 6:08 - Vegas 6:10pm CT - SF 4:13pm CT - Novig not read - leans, not guarantees"
+   }
+  }
+ ]
+}
