@@ -71,13 +71,13 @@ async function collectCandidates() {
   // thin sport's recently SETTLED game markets: Gamma closed events for the league's series (ids from
   // api/discover.js SERIES_IDS), then v2 /trades?event_id= for each event ($100+ buys). Every buyer found is tagged
   // with that sport so the reserved evaluation slots below can find them.
-  const SERIES_IDS = { NHL: '4', NCAAF: '10002', NCAAB: '10012' };
+  const SERIES_IDS = { NHL: '4', NCAAF: '10002', NCAAB: '10470' };
   const HARVEST = (process.env.HARVEST_SPORTS || 'NCAAF,NHL,NCAAB').split(',').map(x => x.trim()).filter(x => SERIES_IDS[x]);
   const HARVEST_EVENTS = parseInt(process.env.HARVEST_EVENTS || '200', 10);
   const harvest = {};
   // Recent settled events only (last 30 days). Series id first; if it yields no trades (NHL's id '4' returned 200
   // events with zero trades on Nov 20 - likely an old series), fall back to the league tag.
-  const TAGS = { NHL: ['nhl'], NCAAF: ['cfb', 'ncaaf', 'college-football'], NCAAB: ['ncaab', 'cbb', 'college-basketball'] };
+  const TAGS = { NHL: ['nhl'], NCAAF: ['cfb', 'ncaaf', 'college-football'], NCAAB: ['ncaa-basketball', 'ncaab', 'cbb'] };
   const since = new Date(Date.now() - 30 * 86400000).toISOString();
   async function eventsFor(q, dated = true) {
     const evs = [];

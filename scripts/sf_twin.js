@@ -16,7 +16,7 @@ const { teamHit, marketOf } = require('./poly_match.js');
 const sfDir = process.argv[2] || 'sf_branch';
 const OUTF = sfDir + '/sf_twin.json';
 const now = new Date();
-const TAGS = { NBA: ['nba'], NFL: ['nfl'], NHL: ['nhl'], MLB: ['mlb'], WNBA: ['wnba'], CFB: ['cfb', 'ncaaf'], CBB: ['cbb', 'ncaab'] };
+const TAGS = { NBA: ['nba'], NFL: ['nfl'], NHL: ['nhl'], MLB: ['mlb'], WNBA: ['wnba'], CFB: ['cfb', 'ncaaf'], CBB: ['ncaa-basketball', 'cbb'] };
 const get = async u => { try { const r = await fetch(u, { signal: AbortSignal.timeout(20000) }); return r.ok ? await r.json() : null; } catch { return null; } };
 
 (async () => {
