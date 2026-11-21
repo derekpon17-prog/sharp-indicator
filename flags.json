@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T21:27:15.621Z",
+ "scannedAt": "2026-11-21T21:55:53.358Z",
  "sides": [
   {
    "tail": false,
@@ -279,7 +279,7 @@
    "market": "ML",
    "pick": "Chargers",
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
-   "dollars": 6982,
+   "dollars": 6989,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 1.5,
@@ -360,12 +360,12 @@
    "market": "SPREAD",
    "pick": "Arkansas State +17.5",
    "kickoffEt": "Sat, Nov 21, 7:00 PM",
-   "dollars": 5190,
+   "dollars": 10720,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 0.3,
+   "maxVsUsual": 0.6,
    "price": "-122",
-   "size": "under 0.5x",
+   "size": "0.5x",
    "mktRecord": "24-15",
    "mktRoi": 46.6,
    "l30Roi": 26.4,
@@ -437,33 +437,6 @@
   {
    "tail": false,
    "sport": "CFB",
-   "matchup": "Arkansas at Texas",
-   "market": "ML",
-   "pick": "Texas",
-   "kickoffEt": "Sat, Nov 21, 3:36 PM",
-   "dollars": 16597,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.7,
-   "price": "-1076",
-   "size": "0.5x",
-   "mktRecord": "16-0",
-   "mktRoi": 9.7,
-   "l30Roi": 16.6,
-   "contested": false,
-   "sfPoints": 19,
-   "parts": {
-    "money": 16,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
    "matchup": "Texas Tech at Baylor",
    "market": "SPREAD",
    "pick": "Baylor",
@@ -483,6 +456,33 @@
     "money": 12,
     "sizing": 4,
     "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "San Diego State at Boise State",
+   "market": "SPREAD",
+   "pick": "Boise State -17.5",
+   "kickoffEt": "Sat, Nov 21, 9:30 PM",
+   "dollars": 2999,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.4,
+   "price": "-111",
+   "size": "1x",
+   "mktRecord": "40-22",
+   "mktRoi": 23,
+   "l30Roi": 36.7,
+   "contested": false,
+   "sfPoints": 19,
+   "parts": {
+    "money": 8,
+    "sizing": 4,
+    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -796,6 +796,22 @@
    "maxVsUsual": 3.7
   },
   {
+   "matchup": "Arkansas State at Louisiana Tech",
+   "market": "SPREAD",
+   "pick": "Arkansas State +17.5",
+   "kickoffEt": "Sat, Nov 21, 7:00 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 10720,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "14-14|111605|24-15"
+   ],
+   "bestPrice": "-122",
+   "maxVsUsual": 0.6
+  },
+  {
    "matchup": "Cardinals at Chiefs",
    "market": "TOTAL",
    "pick": "Over 40.5",
@@ -866,7 +882,7 @@
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 6982,
+   "strongDollars": 6989,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -874,22 +890,6 @@
    ],
    "bestPrice": "-156",
    "maxVsUsual": 1.5
-  },
-  {
-   "matchup": "Arkansas State at Louisiana Tech",
-   "market": "SPREAD",
-   "pick": "Arkansas State +17.5",
-   "kickoffEt": "Sat, Nov 21, 7:00 PM",
-   "sport": "CFB",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 5190,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "14-14|111605|24-15"
-   ],
-   "bestPrice": "-122",
-   "maxVsUsual": 0.3
   },
   {
    "matchup": "Bengals at Commanders",
@@ -906,6 +906,22 @@
    ],
    "bestPrice": "-257",
    "maxVsUsual": 0.9
+  },
+  {
+   "matchup": "San Diego State at Boise State",
+   "market": "SPREAD",
+   "pick": "Boise State -17.5",
+   "kickoffEt": "Sat, Nov 21, 9:30 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 2999,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "32-13|38944|40-22"
+   ],
+   "bestPrice": "-111",
+   "maxVsUsual": 1.4
   }
  ],
  "sizedUp": [
@@ -1187,7 +1203,7 @@
    "pick": "Chargers",
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
    "sport": "NFL",
-   "dollars": 6982,
+   "dollars": 6989,
    "price": "-156",
    "vsUsual": 1.5,
    "size": "1.5x and up",
@@ -1248,6 +1264,23 @@
    "mktRoi": 9.6,
    "opposed": "unopposed",
    "fp": "32-13|38944|6-9"
+  },
+  {
+   "matchup": "San Diego State at Boise State",
+   "market": "SPREAD",
+   "pick": "Boise State -17.5",
+   "kickoffEt": "Sat, Nov 21, 9:30 PM",
+   "sport": "CFB",
+   "dollars": 2999,
+   "price": "-111",
+   "vsUsual": 1.4,
+   "size": "1x",
+   "form": "L10 7-3",
+   "l30Roi": 36.7,
+   "mktRecord": "40-22",
+   "mktRoi": 23,
+   "opposed": "contested",
+   "fp": "32-13|38944|40-22"
   },
   {
    "matchup": "Buccaneers at Lions",

@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T21:27:15.621Z",
+ "scannedAt": "2026-11-21T21:55:53.358Z",
  "sports": {
   "NFL": [
    {
@@ -181,7 +181,7 @@
       "pick": "Panthers",
       "line": null,
       "price": "-133",
-      "dollars": 513,
+      "dollars": 520,
       "vsUsual": 0.1,
       "vsUsualAll": 0.5
      },
@@ -191,7 +191,7 @@
       "pick": "Chargers",
       "line": null,
       "price": "-156",
-      "dollars": 6982,
+      "dollars": 6989,
       "vsUsual": 1.5,
       "vsUsualAll": 7.2
      },
@@ -406,10 +406,10 @@
       "market": "ML",
       "pick": "Pelicans",
       "line": null,
-      "price": "+900",
-      "dollars": 724,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.1
+      "price": "+1063",
+      "dollars": 2020,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.2
      }
     ]
    },
@@ -497,11 +497,21 @@
       "vsUsualAll": 1.6
      },
      {
-      "matchup": "Houston at West Virginia",
+      "matchup": "Coastal Carolina at Louisiana",
+      "market": "TOTAL",
+      "pick": "Over 49.5",
+      "line": 49.5,
+      "price": "+108",
+      "dollars": 1000,
+      "vsUsual": 1,
+      "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Maryland at USC",
       "market": "SPREAD",
-      "pick": "Houston -6.5",
-      "line": -6.5,
-      "price": "-113",
+      "pick": "Maryland +17.5",
+      "line": 17.5,
+      "price": "+108",
       "dollars": 1000,
       "vsUsual": 1,
       "vsUsualAll": 1.6
@@ -518,6 +528,16 @@
      },
      {
       "matchup": "UNLV at San Jose State",
+      "market": "SPREAD",
+      "pick": "UNLV -5.5",
+      "line": -5.5,
+      "price": "-108",
+      "dollars": 705,
+      "vsUsual": 0.7,
+      "vsUsualAll": 1.1
+     },
+     {
+      "matchup": "UNLV at San Jose State",
       "market": "TOTAL",
       "pick": "Under 45.5",
       "line": 45.5,
@@ -525,37 +545,6 @@
       "dollars": 1000,
       "vsUsual": 1,
       "vsUsualAll": 1.6
-     },
-     {
-      "matchup": "Coastal Carolina at Louisiana",
-      "market": "TOTAL",
-      "pick": "Over 49.5",
-      "line": 49.5,
-      "price": "+108",
-      "dollars": 1000,
-      "vsUsual": 1,
-      "vsUsualAll": 1.6
-     }
-    ]
-   },
-   {
-    "id": "332c23",
-    "gap": 20.3,
-    "overall": "47-12",
-    "sport": "16-0",
-    "returnPct": 9.7,
-    "last10": "10-0",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Arkansas at Texas",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-1076",
-      "dollars": 16597,
-      "vsUsual": 0.7,
-      "vsUsualAll": 1.7
      }
     ]
    },
@@ -659,6 +648,87 @@
       "dollars": 512,
       "vsUsual": 0.5,
       "vsUsualAll": 1.8
+     }
+    ]
+   },
+   {
+    "id": "bc44b0",
+    "gap": 6,
+    "overall": "262-223",
+    "sport": "39-26",
+    "returnPct": 21.6,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Texas Tech at Baylor",
+      "market": "ML",
+      "pick": "Texas Tech",
+      "line": null,
+      "price": "-182",
+      "dollars": 8210,
+      "vsUsual": 1.8,
+      "vsUsualAll": 3.4
+     },
+     {
+      "matchup": "Texas Tech at Baylor",
+      "market": "SPREAD",
+      "pick": "Baylor",
+      "line": 4.5,
+      "price": "+106",
+      "dollars": 6462,
+      "vsUsual": 1.4,
+      "vsUsualAll": 2.7
+     },
+     {
+      "matchup": "Iowa at Illinois",
+      "market": "SPREAD",
+      "pick": "Illinois +7.5",
+      "line": 7.5,
+      "price": "+113",
+      "dollars": 558,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.2
+     },
+     {
+      "matchup": "Georgia Southern at Troy",
+      "market": "SPREAD",
+      "pick": "Troy",
+      "line": null,
+      "price": null,
+      "dollars": 2801,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.7
+     },
+     {
+      "matchup": "Utah at TCU",
+      "market": "ML",
+      "pick": "Utah",
+      "line": null,
+      "price": "-270",
+      "dollars": 879,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.4
+     },
+     {
+      "matchup": "Colorado State at Fresno State",
+      "market": "TOTAL",
+      "pick": "Over 65.5",
+      "line": 65.5,
+      "price": "+112",
+      "dollars": 810,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Utah State at Oregon State",
+      "market": "SPREAD",
+      "pick": "Utah State +7.5",
+      "line": 7.5,
+      "price": "-105",
+      "dollars": 3379,
+      "vsUsual": 0.7,
+      "vsUsualAll": 1.4
      }
     ]
    }
