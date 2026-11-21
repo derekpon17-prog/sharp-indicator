@@ -1,0 +1,109 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 7:16pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 8:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Suns at Jazz",
+       "time": "8:40pm CT",
+       "tag": {
+        "t": "EDGE - SUNS",
+        "icon": "🎯"
+       },
+       "bet": "Suns -5.5 ++113",
+       "price": "++113",
+       "for": {
+        "team": "SUNS",
+        "rows": [
+         {
+          "team": "Suns",
+          "wallet": "E",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 61.7,
+          "dollars": 1551,
+          "note": "0.9x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "SUNS",
+         "dollars": 1551,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 8-2 (+62% ROI) on SUNS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $1.6K on Suns -5.5"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 8:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "New Mexico at Wyoming",
+       "time": "8:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - NEW MEXICO",
+        "icon": "👀"
+       },
+       "bet": "New Mexico",
+       "price": null,
+       "for": {
+        "team": "NEW MEXICO",
+        "rows": [
+         {
+          "team": "New Mexico",
+          "wallet": "Z",
+          "market": "SPREAD",
+          "record": "4-4",
+          "roi": 3.7,
+          "dollars": 3067,
+          "note": "3.1x usual, L10 5-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "NEW MEXICO",
+         "dollars": 3067,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $3.1K on New Mexico -8.5"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
