@@ -218,6 +218,15 @@ def board_html(c):
                     n_txt = f'SHARP SCORE {scn:.0f}'
                     big = f'<span class="mp" style="color:{scol}">{scn:.0f}</span>'
                     bk = f'{e(p.get("book") or "")} {ptxt}'.strip()
+                elif p.get("polyHot") is not None:
+                    # Polymarket sharp-wallet report (Nov 20 2026): big number = their average Polymarket price as
+                    # American odds; bars = HOT wallets (green) then COLD wallets (red) on this side, up to 3.
+                    hn, cn = int(p.get("polyHot") or 0), int(p.get("polyCold") or 0)
+                    cols_ = [GREEN] * min(hn, 3) + [RED] * min(cn, max(0, 3 - min(hn, 3)))
+                    segs = "".join(f'<div class="sg" style="background:{cols_[k] if k < len(cols_) else "#1B212B"}"></div>' for k in range(3))
+                    n_txt = f'{hn} HOT / {cn} COLD - Poly avg price'
+                    big = f'<span class="mp" style="color:{GREEN if hn else RED}">{ptxt or "-"}</span>'
+                    bk = ""
                 elif p.get("usual") is not None:
                     # Sharp Flow mode: big number is the biggest bet vs that wallet's usual size (2.3x = 2.3 times normal)
                     u = float(p["usual"])
