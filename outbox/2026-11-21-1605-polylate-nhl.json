@@ -1,0 +1,53 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket late money - NHL** - 1 HOT wallet move since the NHL Polymarket report",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NHL - Polymarket late money",
+   "subtitle": "HOT wallets that bought (or doubled up) after the NHL report posted, games not started. Buys checked 4:05pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 11:30AM CT",
+     "picks": [
+      {
+       "bet": "Hurricanes -1.5",
+       "sub": "Hurricanes at Rangers - 11:30am CT - last buy 11:47am CT",
+       "chips": [
+        {
+         "t": "HOT 0x4924…3782 $43k",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "NHL SPREAD 3-4 (+11%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 6-4",
+         "c": "grey"
+        },
+        {
+         "t": "0.39x their usual $111k",
+         "c": "grey"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 122,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    }
+   ],
+   "legend": "Price = their average Polymarket price as American odds. In-game buys are not counted.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NBA - first game 6:30pm CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:55pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Trail Blazers at Knicks",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "EDGE - KNICKS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Knicks ML -148",
+       "price": "-148",
+       "for": {
+        "team": "KNICKS",
+        "rows": [
+         {
+          "team": "Knicks",
+          "wallet": "X",
+          "market": "ML",
+          "record": "12-5",
+          "roi": 47.1,
+          "dollars": 3453,
+          "note": "2.8x usual, L10 3-7",
+          "status": {
+           "t": "COLD",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "KNICKS",
+         "dollars": 3453,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 12-5 (+47% ROI) on KNICKS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Over 227.5 $3.3K (1-1 here, -9% ROI) | Poly calls since Nov 20 at Polymarket prices: HOT 5-6 -3.2u, COLD sides 29-22 (fading -6.2u) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
