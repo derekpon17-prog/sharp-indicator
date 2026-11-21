@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T22:48:13.877Z",
+ "scannedAt": "2026-11-21T23:11:20.206Z",
  "sides": [
   {
    "tail": false,
@@ -261,6 +261,33 @@
    "mktRecord": "10-8",
    "mktRoi": 35,
    "l30Roi": 38,
+   "contested": false,
+   "sfPoints": 28,
+   "parts": {
+    "money": 12,
+    "sizing": 7,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "ML",
+   "pick": "Jaguars",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "dollars": 7940,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.7,
+   "price": "-245",
+   "size": "1.5x and up",
+   "mktRecord": "21-4",
+   "mktRoi": 34.7,
+   "l30Roi": 33.7,
    "contested": false,
    "sfPoints": 28,
    "parts": {
@@ -812,33 +839,6 @@
   },
   {
    "tail": false,
-   "sport": "NHL",
-   "matchup": "Wild at Canucks",
-   "market": "ML",
-   "pick": "Wild",
-   "kickoffEt": "Sat, Nov 21, 10:00 PM",
-   "dollars": 2953,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1,
-   "price": "-270",
-   "size": "0.5x",
-   "mktRecord": "10-2",
-   "mktRoi": 12.3,
-   "l30Roi": 24.3,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "NBA",
    "matchup": "Trail Blazers at Knicks",
    "market": "ML",
@@ -1009,6 +1009,22 @@
    ],
    "bestPrice": "-105",
    "maxVsUsual": 1.8
+  },
+  {
+   "matchup": "Jaguars at Giants",
+   "market": "ML",
+   "pick": "Jaguars",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "sport": "NFL",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 7940,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "31-10|62756|21-4"
+   ],
+   "bestPrice": "-245",
+   "maxVsUsual": 1.7
   },
   {
    "matchup": "Jets at Chargers",
@@ -1363,6 +1379,23 @@
    "mktRoi": 21.9,
    "opposed": "contested",
    "fp": "31-10|62756|9-6"
+  },
+  {
+   "matchup": "Jaguars at Giants",
+   "market": "ML",
+   "pick": "Jaguars",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "sport": "NFL",
+   "dollars": 7940,
+   "price": "-245",
+   "vsUsual": 1.7,
+   "size": "1.5x and up",
+   "form": "L10 6-4",
+   "l30Roi": 33.7,
+   "mktRecord": "21-4",
+   "mktRoi": 34.7,
+   "opposed": "unopposed",
+   "fp": "31-10|62756|21-4"
   },
   {
    "matchup": "Jets at Chargers",
