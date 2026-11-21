@@ -1,0 +1,151 @@
+{
+ "date": "2026-11-21",
+ "sides": {
+  "Texas Tech at Baylor|ML|Texas Tech": {
+   "sport": "CFB",
+   "matchup": "Texas Tech at Baylor",
+   "market": "ML",
+   "pick": "Texas Tech",
+   "kickoffEt": "Sat, Nov 21, 3:30 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "-182",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 8210,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Buccaneers at Lions|TOTAL|Over 46.5": {
+   "sport": "NFL",
+   "matchup": "Buccaneers at Lions",
+   "market": "TOTAL",
+   "pick": "Over 46.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 2940,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Colorado at Cincinnati|ML|Colorado": {
+   "sport": "CFB",
+   "matchup": "Colorado at Cincinnati",
+   "market": "ML",
+   "pick": "Colorado",
+   "kickoffEt": "Sat, Nov 21, 12:00 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "+144",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.2,
+   "maxDollars": 1624,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "LSU at Tennessee|ML|Tennessee": {
+   "sport": "CFB",
+   "matchup": "LSU at Tennessee",
+   "market": "ML",
+   "pick": "Tennessee",
+   "kickoffEt": "Sat, Nov 21, 3:30 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "+104",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.4,
+   "maxDollars": 10054,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Vanderbilt at Florida|TOTAL|Over 45.5": {
+   "sport": "CFB",
+   "matchup": "Vanderbilt at Florida",
+   "market": "TOTAL",
+   "pick": "Over 45.5",
+   "kickoffEt": "Sat, Nov 21, 12:00 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 7392,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "LSU at Tennessee|SPREAD|Tennessee +1.5": {
+   "sport": "CFB",
+   "matchup": "LSU at Tennessee",
+   "market": "SPREAD",
+   "pick": "Tennessee +1.5",
+   "kickoffEt": "Sat, Nov 21, 3:30 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "-107",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 5826,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Clippers at Mavericks|TOTAL|Over 229.5": {
+   "sport": "NBA",
+   "matchup": "Clippers at Mavericks",
+   "market": "TOTAL",
+   "pick": "Over 229.5",
+   "kickoffEt": "Sat, Nov 21, 8:10 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "-107",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 2999,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Saints at Bears|SPREAD|Saints +9.5": {
+   "sport": "NFL",
+   "matchup": "Saints at Bears",
+   "market": "SPREAD",
+   "pick": "Saints +9.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "+122",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 2534,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
+   "sport": "NFL",
+   "matchup": "Buccaneers at Lions",
+   "market": "SPREAD",
+   "pick": "Buccaneers +6.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-21T14:26:44.618Z",
+   "firstPrice": "+104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 6789,
+   "opposedSeen": true,
+   "snapshots": 1
+  }
+ }
+}
