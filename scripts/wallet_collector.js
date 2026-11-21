@@ -31,10 +31,13 @@ async function collectCandidates() {
   const add = (w, name, sport, src, usd) => {
     if (!w) return;
     w = String(w).toLowerCase();
-    const c = cands[w] || (cands[w] = { wallet: w, name: name || null, sports: new Set(), src: new Set(), usd: 0 });
+    const c = cands[w] || (cands[w] = { wallet: w, name: name || null, sports: new Set(), src: new Set(), usd: 0, baseUsd: 0 });
     if (name && !c.name) c.name = name;
     if (sport) c.sports.add(sport);
     c.src.add(src); c.usd += usd || 0;
+    // baseUsd = dollars from the leaderboard/feed only. The main top-MAX_WALLETS cut ranks on this, so harvested
+    // thin-sport dollars can never push NFL/NBA wallets out (Nov 20 regression: NFL HOT went 6 -> 3).
+    if (!String(src).startsWith('harvest-')) c.baseUsd += usd || 0;
   };
   // 1) v2 leaderboards: sports category, all-time + month, plus overall all-time
   // Widened Nov 18 (Derek: build a deeper good/bad pool per sport) -- 2 pages/combo -> 3,
@@ -72,24 +75,46 @@ async function collectCandidates() {
   const HARVEST = (process.env.HARVEST_SPORTS || 'NCAAF,NHL,NCAAB').split(',').map(x => x.trim()).filter(x => SERIES_IDS[x]);
   const HARVEST_EVENTS = parseInt(process.env.HARVEST_EVENTS || '200', 10);
   const harvest = {};
-  for (const sport of HARVEST) {
-    const events = [];
+  // Recent settled events only (last 30 days). Series id first; if it yields no trades (NHL's id '4' returned 200
+  // events with zero trades on Nov 20 - likely an old series), fall back to the league tag.
+  const TAGS = { NHL: ['nhl'], NCAAF: ['cfb', 'ncaaf', 'college-football'], NCAAB: ['ncaab', 'cbb', 'college-basketball'] };
+  const since = new Date(Date.now() - 30 * 86400000).toISOString();
+  async function eventsFor(q) {
+    const evs = [];
     for (let off = 0; off < HARVEST_EVENTS; off += 100) {
       try {
-        const r = await fetch(`https://gamma-api.polymarket.com/events?series_id=${SERIES_IDS[sport]}&closed=true&order=startDate&ascending=false&limit=100&offset=${off}`, { headers: { Accept: 'application/json' } });
+        const r = await fetch(`https://gamma-api.polymarket.com/events?${q}&closed=true&end_date_min=${encodeURIComponent(since)}&order=endDate&ascending=false&limit=100&offset=${off}`, { headers: { Accept: 'application/json' } });
         const ev = r.ok ? await r.json() : [];
         if (!Array.isArray(ev) || !ev.length) break;
-        events.push(...ev);
-      } catch (e) { console.log('harvest events ERR', sport, e.message); break; }
+        evs.push(...ev);
+        if (ev.length < 100) break;
+      } catch (e) { console.log('harvest events ERR', q, e.message); break; }
     }
-    let buyers = 0;
+    return evs;
+  }
+  async function buyersOf(events, sport) {
+    let n = 0;
     for (let i = 0; i < events.length; i += CONC) {
       const batch = events.slice(i, i + CONC);
-      const res = await Promise.all(batch.map(ev => j(`${V2}/trades?event_id=${ev.id}&limit=500&taker_only=true&side=BUY&filter_type=CASH&filter_amount=100`)));
-      res.forEach(d => (d && d.data || []).forEach(t => { add(t.proxy_wallet, t.name, sport, 'harvest-' + sport.toLowerCase(), (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0)); buyers++; }));
+      const res = await Promise.all(batch.map(async ev => {
+        try {
+          const r = await fetch(`${V2}/trades?event_id=${ev.id}&limit=500&taker_only=true&side=BUY&filter_type=CASH&filter_amount=100`, { headers: { Accept: 'application/json' } });
+          return r.ok ? await r.json() : null;
+        } catch { return null; }
+      }));
+      res.forEach(d => (d && d.data || []).forEach(t => { add(t.proxy_wallet, t.name, sport, 'harvest-' + sport.toLowerCase(), (parseFloat(t.size) || 0) * (parseFloat(t.price) || 0)); n++; }));
     }
-    harvest[sport] = { events: events.length, buys: buyers };
-    console.log('harvest', sport, 'events', events.length, 'buys', buyers);
+    return n;
+  }
+  for (const sport of HARVEST) {
+    let src = 'series ' + SERIES_IDS[sport], events = await eventsFor(`series_id=${SERIES_IDS[sport]}`), buys = await buyersOf(events, sport);
+    for (const tag of TAGS[sport] || []) {
+      if (buys > 0) break;
+      src = 'tag ' + tag; events = await eventsFor(`tag_slug=${tag}`); buys = await buyersOf(events, sport);
+    }
+    const ex = events[0] ? `${events[0].title || events[0].slug} (${events[0].endDate || ''})` : 'none';
+    harvest[sport] = { source: src, events: events.length, buys, example: ex };
+    console.log('harvest', sport, 'via', src, 'events', events.length, 'buys', buys, 'e.g.', ex);
   }
   // 4) optional: existing roster from KV if secrets are present
   try {
@@ -157,7 +182,7 @@ function byMarket(legs, cutoff) {
 (async () => {
   const t0 = Date.now();
   const { cands, feedPages, harvest } = await collectCandidates();
-  const ranked = Object.values(cands).sort((a, b) => (b.usd - a.usd) || (b.src.size - a.src.size));
+  const ranked = Object.values(cands).sort((a, b) => (b.baseUsd - a.baseUsd) || (b.src.size - a.src.size));
   const list = ranked.slice(0, MAX_WALLETS);
   // RESERVED SLOTS (Derek, Nov 20 2026): the top-MAX_WALLETS-by-dollars cut was dropping almost every thin-sport
   // candidate (2,107 found, 598 evaluated, NFL/NBA dollars first). Each harvest sport now gets up to RESERVE extra
@@ -165,7 +190,7 @@ function byMarket(legs, cutoff) {
   const RESERVE = parseInt(process.env.RESERVE_PER_SPORT || '200', 10);
   const inList = new Set(list.map(c => c.wallet)), reserved = {};
   for (const sport of Object.keys(harvest || {})) {
-    const extra = ranked.filter(c => !inList.has(c.wallet) && c.sports.has(sport)).slice(0, RESERVE);
+    const extra = ranked.filter(c => !inList.has(c.wallet) && c.sports.has(sport)).sort((a, b) => b.usd - a.usd).slice(0, RESERVE);
     extra.forEach(c => { inList.add(c.wallet); list.push(c); });
     reserved[sport] = extra.length;
   }
