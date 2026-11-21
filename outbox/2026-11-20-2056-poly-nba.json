@@ -1,0 +1,107 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NBA - first game 9:00pm CT** - 3 sides (0 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NBA - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NBA and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 7:31pm CT, buys checked 8:56pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "bet": "Over 228.5",
+       "sub": "Kings at Lakers - 9:10pm CT",
+       "chips": [
+        {
+         "t": "COLD in this bet type surfandturf $6.8K",
+         "c": "red"
+        },
+        {
+         "t": "NBA TOTAL 0-5 (-100%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 4-6",
+         "c": "grey"
+        },
+        {
+         "t": "not counted",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -104,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Rockets +4.5",
+       "sub": "Rockets at Nuggets - 9:10pm CT",
+       "chips": [
+        {
+         "t": "COLD 0x163e…dc5b $3.1K",
+         "c": "red"
+        },
+        {
+         "t": "NBA SPREAD 36-26 (-5%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 4-6",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF other side $11K vs $0",
+         "c": "orange"
+        }
+       ],
+       "price": -170,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Under 225.5",
+       "sub": "Rockets at Nuggets - 9:10pm CT",
+       "chips": [
+        {
+         "t": "COLD king997 $1.6K",
+         "c": "red"
+        },
+        {
+         "t": "NBA TOTAL 2-2 (-89%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -104,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "Poly record building: 9 graded since Nov 20 | Price = their average Polymarket price as American odds. COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
