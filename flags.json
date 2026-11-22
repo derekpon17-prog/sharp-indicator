@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T15:57:08.785Z",
+ "scannedAt": "2026-11-22T16:17:37.596Z",
  "sides": [
   {
    "tail": false,
@@ -64,7 +64,7 @@
    "pick": "Cowboys",
    "kickoffEt": "Sun, Nov 22, 1:00 PM",
    "dollars": 33998,
-   "oppDollars": 2300,
+   "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 7.5,
    "price": "-352",
@@ -73,13 +73,13 @@
    "mktRoi": 34.7,
    "l30Roi": 33.7,
    "contested": false,
-   "sfPoints": 38,
+   "sfPoints": 41,
    "parts": {
     "money": 20,
     "sizing": 12,
     "quality": 6,
     "pooled": 0,
-    "unopposed": 0,
+    "unopposed": 3,
     "contested": 0
    }
   },
@@ -351,6 +351,33 @@
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Dolphins at Bills",
+   "market": "TOTAL",
+   "pick": "Under 46.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "dollars": 7003,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0,
+   "price": "-127",
+   "size": "under 0.5x",
+   "mktRecord": "11-3",
+   "mktRoi": 58.2,
+   "l30Roi": 20.9,
+   "contested": false,
+   "sfPoints": 21,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
    }
   },
   {
@@ -756,33 +783,6 @@
     "unopposed": 0,
     "contested": -8
    }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Titans at Cowboys",
-   "market": "ML",
-   "pick": "Titans",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "dollars": 2300,
-   "oppDollars": 33998,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "+335",
-   "size": "0.5x",
-   "mktRecord": "7-11",
-   "mktRoi": -9.2,
-   "l30Roi": -18.3,
-   "contested": true,
-   "sfPoints": 0,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
   }
  ],
  "flags": [
@@ -825,10 +825,10 @@
    "pick": "Cowboys",
    "kickoffEt": "Sun, Nov 22, 1:00 PM",
    "sport": "NFL",
-   "type": "STRONG_VS_WEAK",
+   "type": "STRONG_UNOPPOSED",
    "strongDollars": 33998,
-   "oppDollars": 2300,
-   "oppWeakDollars": 2300,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
    "fp": [
     "31-10|62756|21-4"
    ],
