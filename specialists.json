@@ -1,47 +1,140 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T16:17:37.596Z",
+ "scannedAt": "2026-11-22T16:31:01.570Z",
  "sports": {
-  "CFB": [
+  "NFL": [
    {
-    "id": "aaedcd",
-    "gap": 7.8,
-    "overall": "153-128",
-    "sport": "33-20",
-    "returnPct": 25.7,
-    "last10": "6-4",
-    "bettingBig": true,
+    "id": "bf28eb",
+    "gap": 36.2,
+    "overall": "63-54",
+    "sport": "9-1",
+    "returnPct": 22.2,
+    "last10": "9-1",
+    "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Texas at Texas A&M",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-268",
-      "dollars": 687,
-      "vsUsual": 2.7,
-      "vsUsualAll": 1.5
+      "matchup": "Jets at Chargers",
+      "market": "SPREAD",
+      "pick": "Chargers -2.5",
+      "line": -2.5,
+      "price": "-113",
+      "dollars": 1311,
+      "vsUsual": 0.7,
+      "vsUsualAll": 4.1
+     },
+     {
+      "matchup": "Saints at Bears",
+      "market": "SPREAD",
+      "pick": "Saints",
+      "line": 9.5,
+      "price": "+122",
+      "dollars": 2534,
+      "vsUsual": 1.3,
+      "vsUsualAll": 8
      }
     ]
    },
    {
-    "id": "487b8b",
-    "gap": 3.1,
-    "overall": "522-439",
-    "sport": "77-57",
-    "returnPct": 4.2,
-    "last10": "6-4",
+    "id": "b77626",
+    "gap": 26,
+    "overall": "83-68",
+    "sport": "17-4",
+    "returnPct": 15.8,
+    "last10": "10-0",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Raiders at Broncos",
+      "market": "SPREAD",
+      "pick": "Raiders +17.5",
+      "line": 17.5,
+      "price": "-257",
+      "dollars": 1000,
+      "vsUsual": 0.8,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "411018",
+    "gap": 17,
+    "overall": "95-102",
+    "sport": "15-8",
+    "returnPct": 32.5,
+    "last10": "8-2",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Texas at Texas A&M",
+      "matchup": "Buccaneers at Lions",
+      "market": "TOTAL",
+      "pick": "Over 46.5",
+      "line": 46.5,
+      "price": "+104",
+      "dollars": 2940,
+      "vsUsual": 1.6,
+      "vsUsualAll": 3.5
+     }
+    ]
+   },
+   {
+    "id": "06c80c",
+    "gap": 13.9,
+    "overall": "156-165",
+    "sport": "55-33",
+    "returnPct": 27.4,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Ravens at Panthers",
       "market": "ML",
-      "pick": "Texas",
+      "pick": "Ravens",
       "line": null,
-      "price": "-238",
-      "dollars": 11663,
-      "vsUsual": 19.4,
-      "vsUsualAll": 25.5
+      "price": "+134",
+      "dollars": 27079,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.4
+     },
+     {
+      "matchup": "Dolphins at Bills",
+      "market": "TOTAL",
+      "pick": "Under 46.5",
+      "line": 46.5,
+      "price": "-127",
+      "dollars": 19541,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "918f62",
+    "gap": 13.5,
+    "overall": "16-11",
+    "sport": "16-6",
+    "returnPct": 48.2,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Ravens at Panthers",
+      "market": "ML",
+      "pick": "Ravens",
+      "line": null,
+      "price": "+127",
+      "dollars": 1000,
+      "vsUsual": 0.8,
+      "vsUsualAll": 1.3
+     },
+     {
+      "matchup": "Dolphins at Bills",
+      "market": "TOTAL",
+      "pick": "Under 46.5",
+      "line": 46.5,
+      "price": "-133",
+      "dollars": 2000,
+      "vsUsual": 1.5,
+      "vsUsualAll": 2.6
      }
     ]
    }
@@ -67,16 +160,6 @@
       "vsUsualAll": 4.8
      },
      {
-      "matchup": "Nuggets at Bulls",
-      "market": "SPREAD",
-      "pick": "Nuggets -8.5",
-      "line": -8.5,
-      "price": "-104",
-      "dollars": 932,
-      "vsUsual": 0.5,
-      "vsUsualAll": 1.5
-     },
-     {
       "matchup": "Magic at Wizards",
       "market": "ML",
       "pick": "Wizards",
@@ -85,6 +168,16 @@
       "dollars": 734,
       "vsUsual": 0.4,
       "vsUsualAll": 1.2
+     },
+     {
+      "matchup": "Nuggets at Bulls",
+      "market": "SPREAD",
+      "pick": "Nuggets -8.5",
+      "line": -8.5,
+      "price": "-104",
+      "dollars": 932,
+      "vsUsual": 0.5,
+      "vsUsualAll": 1.5
      },
      {
       "matchup": "Mavericks at Jazz",
@@ -193,129 +286,46 @@
     ]
    }
   ],
-  "NFL": [
+  "CFB": [
    {
-    "id": "bf28eb",
-    "gap": 36.2,
-    "overall": "63-54",
-    "sport": "9-1",
-    "returnPct": 22.2,
-    "last10": "9-1",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Jets at Chargers",
-      "market": "SPREAD",
-      "pick": "Chargers -2.5",
-      "line": -2.5,
-      "price": "-113",
-      "dollars": 1311,
-      "vsUsual": 0.7,
-      "vsUsualAll": 4.1
-     },
-     {
-      "matchup": "Saints at Bears",
-      "market": "SPREAD",
-      "pick": "Saints",
-      "line": 9.5,
-      "price": "+122",
-      "dollars": 2534,
-      "vsUsual": 1.3,
-      "vsUsualAll": 8
-     }
-    ]
-   },
-   {
-    "id": "b77626",
-    "gap": 26,
-    "overall": "83-68",
-    "sport": "17-4",
-    "returnPct": 15.8,
-    "last10": "10-0",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "SPREAD",
-      "pick": "Raiders +17.5",
-      "line": 17.5,
-      "price": "-257",
-      "dollars": 1000,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.3
-     }
-    ]
-   },
-   {
-    "id": "411018",
-    "gap": 17,
-    "overall": "95-102",
-    "sport": "15-8",
-    "returnPct": 32.5,
-    "last10": "8-2",
+    "id": "aaedcd",
+    "gap": 7.8,
+    "overall": "153-128",
+    "sport": "33-20",
+    "returnPct": 25.7,
+    "last10": "6-4",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Buccaneers at Lions",
-      "market": "TOTAL",
-      "pick": "Over 46.5",
-      "line": 46.5,
-      "price": "+104",
-      "dollars": 2940,
-      "vsUsual": 1.6,
-      "vsUsualAll": 3.5
-     }
-    ]
-   },
-   {
-    "id": "06c80c",
-    "gap": 13.9,
-    "overall": "156-165",
-    "sport": "55-33",
-    "returnPct": 27.4,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Ravens at Panthers",
+      "matchup": "Texas at Texas A&M",
       "market": "ML",
-      "pick": "Ravens",
+      "pick": "Texas",
       "line": null,
-      "price": "+138",
-      "dollars": 7889,
-      "vsUsual": 0,
-      "vsUsualAll": 0.1
-     },
-     {
-      "matchup": "Dolphins at Bills",
-      "market": "TOTAL",
-      "pick": "Under 46.5",
-      "line": 46.5,
-      "price": "-127",
-      "dollars": 7003,
-      "vsUsual": 0,
-      "vsUsualAll": 0.1
+      "price": "-268",
+      "dollars": 687,
+      "vsUsual": 2.7,
+      "vsUsualAll": 1.5
      }
     ]
    },
    {
-    "id": "918f62",
-    "gap": 13.5,
-    "overall": "16-11",
-    "sport": "16-6",
-    "returnPct": 48.2,
-    "last10": "7-3",
-    "bettingBig": false,
+    "id": "487b8b",
+    "gap": 3.1,
+    "overall": "522-439",
+    "sport": "77-57",
+    "returnPct": 4.2,
+    "last10": "6-4",
+    "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Dolphins at Bills",
-      "market": "TOTAL",
-      "pick": "Under 46.5",
-      "line": 46.5,
-      "price": "-133",
-      "dollars": 1000,
-      "vsUsual": 0.8,
-      "vsUsualAll": 1.3
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-238",
+      "dollars": 11663,
+      "vsUsual": 19.4,
+      "vsUsualAll": 25.5
      }
     ]
    }
