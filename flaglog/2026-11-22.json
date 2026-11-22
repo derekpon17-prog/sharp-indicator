@@ -1,0 +1,182 @@
+{
+ "date": "2026-11-22",
+ "sides": {
+  "Buccaneers at Lions|TOTAL|Over 46.5": {
+   "sport": "NFL",
+   "matchup": "Buccaneers at Lions",
+   "market": "TOTAL",
+   "pick": "Over 46.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 2940,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Cardinals at Chiefs|SPREAD|Cardinals +16.5": {
+   "sport": "NFL",
+   "matchup": "Cardinals at Chiefs",
+   "market": "SPREAD",
+   "pick": "Cardinals +16.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.8,
+   "maxDollars": 1038,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Cardinals at Chiefs|SPREAD|Chiefs -16.5": {
+   "sport": "NFL",
+   "matchup": "Cardinals at Chiefs",
+   "market": "SPREAD",
+   "pick": "Chiefs -16.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "+117",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.1,
+   "maxDollars": 1026,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Texas at Texas A&M|ML|Texas": {
+   "sport": "CFB",
+   "matchup": "Texas at Texas A&M",
+   "market": "ML",
+   "pick": "Texas",
+   "kickoffEt": "Fri, Nov 27, 7:30 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "-247",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 10.2,
+   "maxDollars": 6164,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Jazz",
+   "market": "SPREAD",
+   "pick": "Mavericks -1.5",
+   "kickoffEt": "Sun, Nov 22, 7:10 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 3000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Celtics at Warriors|SPREAD|Celtics -9.5": {
+   "sport": "NBA",
+   "matchup": "Celtics at Warriors",
+   "market": "SPREAD",
+   "pick": "Celtics -9.5",
+   "kickoffEt": "Sun, Nov 22, 8:40 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "+104",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 2940,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Buccaneers at Lions|SPREAD|Lions -3.5": {
+   "sport": "NFL",
+   "matchup": "Buccaneers at Lions",
+   "market": "SPREAD",
+   "pick": "Lions -3.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "-104",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 1632,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Magic at Wizards|ML|Wizards": {
+   "sport": "NBA",
+   "matchup": "Magic at Wizards",
+   "market": "ML",
+   "pick": "Wizards",
+   "kickoffEt": "Sun, Nov 22, 7:10 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "+190",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 2999,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Pistons at Hawks|ML|Hawks": {
+   "sport": "NBA",
+   "matchup": "Pistons at Hawks",
+   "market": "ML",
+   "pick": "Hawks",
+   "kickoffEt": "Sun, Nov 22, 3:40 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "+117",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 2999,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Saints at Bears|SPREAD|Saints +9.5": {
+   "sport": "NFL",
+   "matchup": "Saints at Bears",
+   "market": "SPREAD",
+   "pick": "Saints +9.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "+122",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 2534,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Ravens at Panthers|SPREAD|Panthers -2.5": {
+   "sport": "NFL",
+   "matchup": "Ravens at Panthers",
+   "market": "SPREAD",
+   "pick": "Panthers -2.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T14:25:42.258Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1196,
+   "opposedSeen": false,
+   "snapshots": 1
+  }
+ }
+}
