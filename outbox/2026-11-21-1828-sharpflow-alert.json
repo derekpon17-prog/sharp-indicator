@@ -1,0 +1,181 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:03pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Trail Blazers at Knicks",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "EDGE - KNICKS",
+        "icon": "🎯"
+       },
+       "bet": "Knicks ML -148",
+       "price": "-148",
+       "for": {
+        "team": "KNICKS",
+        "rows": [
+         {
+          "team": "Knicks",
+          "wallet": "F",
+          "market": "ML",
+          "record": "12-4",
+          "roi": 5.8,
+          "dollars": 7000,
+          "note": "0.9x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         },
+         {
+          "team": "Knicks",
+          "wallet": "AC",
+          "market": "ML",
+          "record": "12-5",
+          "roi": 47.1,
+          "dollars": 3453,
+          "note": "2.8x usual, L10 3-7",
+          "status": {
+           "t": "COLD",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "TRAIL BLAZERS",
+        "rows": [
+         {
+          "team": "Trail Blazers",
+          "wallet": "G",
+          "market": "SPREAD",
+          "record": "8-5",
+          "roi": 3.3,
+          "dollars": 27396,
+          "note": "1.1x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         },
+         {
+          "team": "Trail Blazers",
+          "wallet": "G",
+          "market": "ML",
+          "record": "8-5",
+          "roi": -4.5,
+          "dollars": 17602,
+          "note": "2.7x usual, L10 8-2",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "TRAIL BLAZERS",
+         "dollars": 44998,
+         "pct": 81,
+         "c": "red"
+        },
+        {
+         "team": "KNICKS",
+         "dollars": 10453,
+         "pct": 19,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 12-5 (+47% ROI) on KNICKS vs a cold wallet on TRAIL BLAZERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $27K on Trail Blazers - kickoff in 12 min"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pelicans at Spurs",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "bet": "Spurs vs Pelicans",
+       "price": null,
+       "for": {
+        "team": "SPURS",
+        "rows": [
+         {
+          "team": "Spurs",
+          "wallet": "G",
+          "market": "SPREAD",
+          "record": "8-5",
+          "roi": 3.3,
+          "dollars": 3024,
+          "note": "0.5x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "PELICANS",
+        "rows": [
+         {
+          "team": "Pelicans",
+          "wallet": "G",
+          "market": "ML",
+          "record": "8-5",
+          "roi": -4.5,
+          "dollars": 3000,
+          "note": "0.5x usual, L10 8-2",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "SPURS",
+         "dollars": 3024,
+         "pct": 50,
+         "c": "gold"
+        },
+        {
+         "team": "PELICANS",
+         "dollars": 3000,
+         "pct": 50,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $3K on Spurs -17.5 - kickoff in 42 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
