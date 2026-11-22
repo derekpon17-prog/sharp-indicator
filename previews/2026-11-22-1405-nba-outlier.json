@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-22",
+ "posted_ct": "1405",
+ "sport": "NBA",
+ "outlier": true,
+ "first_start": "2026-11-22T20:30:00.000Z",
+ "snapshot": "2026-11-22T19:51:24.289Z",
+ "sides": [
+  {
+   "game": "Pistons at Hawks",
+   "market": "ML",
+   "pick": "Pistons",
+   "start_utc": "2026-11-22T20:40:00.000Z",
+   "dollars": 3170,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.2,
+   "all_sport_ratio": 0.37,
+   "price": "-113",
+   "line": null,
+   "l30_rec": "64-43",
+   "l30_roi": 16.6,
+   "mkt_rec": "57-47",
+   "mkt_roi": 7.8,
+   "mkt_l30_rec": "25-18",
+   "tail": false
+  }
+ ]
+}
