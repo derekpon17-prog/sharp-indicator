@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 10:17am CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Dolphins at Bills",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "bet": "Under 46.5 -127",
+       "price": "-127",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "B",
+          "market": "TOTAL",
+          "record": "11-3",
+          "roi": 58.2,
+          "dollars": 7003,
+          "note": "0.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 7003,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 11-3 (+58% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $7K on Under 46.5 - kickoff in 1h 33m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
