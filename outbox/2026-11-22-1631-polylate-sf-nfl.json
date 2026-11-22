@@ -1,0 +1,152 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow + Polymarket late money - NFL** - 1 game",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW + POLYMARKET",
+   "title": "NFL - late Polymarket money on a Sharp Flow game",
+   "subtitle": "HOT Polymarket wallet bought after the NFL report posted - shown with the Sharp Flow read, games not started. Buys checked 4:31pm CT, SharpFlow snapshot 4:12pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:20PM CT",
+     "picks": [
+      {
+       "eyebrow": "Vikings at 49ers",
+       "time": "7:20pm CT",
+       "tag": {
+        "t": "EDGE - 49ERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "49ers -170",
+       "price": "-170",
+       "for": {
+        "team": "49ERS",
+        "rows": [
+         {
+          "team": "49ers",
+          "wallet": "A",
+          "market": "ML -170",
+          "mk": "ML",
+          "record": "24-18",
+          "roi": 25.7,
+          "dollars": 40277,
+          "note": "0.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "49ers",
+          "wallet": "E",
+          "market": "ML -156",
+          "mk": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 2380,
+          "note": "0.5x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "49ers",
+          "wallet": "N",
+          "market": "ML -178",
+          "mk": "ML",
+          "record": "11-3",
+          "roi": 61.9,
+          "dollars": 1000,
+          "note": "0.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "49ers",
+          "wallet": "BreakTheBank",
+          "market": "ML @ 63c (-170)",
+          "mk": "ML",
+          "record": "33-19",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": 28,
+          "dollars": 40283,
+          "note": "Polymarket · L10 NFL 5-5 · same wallet as Sharp Flow A above",
+          "status": {
+           "t": "POLY HOT - same wallet, not a 2nd source",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "VIKINGS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Vikings",
+          "wallet": "dinimami",
+          "market": "SPREAD +4.5 @ 52c (-108)",
+          "mk": "SPREAD",
+          "record": "12-8",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 26.3,
+          "dollars": 3348,
+          "note": "Polymarket · 3.9x usual · L10 NFL 5-5",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Vikings",
+          "wallet": "pijmoihjouih",
+          "market": "ML @ 36c (+178)",
+          "mk": "ML",
+          "record": "10-22",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -23.5,
+          "dollars": 647,
+          "note": "Polymarket · 0.5x usual · L10 NFL 4-6",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "49ERS",
+         "dollars": 43657,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 24-18 (+26% ROI) on 49ERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "POLY LATE: dinimami HOT $3.3k on Vikings +4.5 - kickoff in 2h 49m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

@@ -1,0 +1,137 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 6:00pm CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Wallets with positive NHL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:12pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Oilers at Blues",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - OILERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Oilers ML ++113",
+       "price": "++113",
+       "for": {
+        "team": "OILERS",
+        "rows": [
+         {
+          "team": "Oilers",
+          "wallet": "A",
+          "market": "ML +108",
+          "mk": "ML",
+          "record": "20-11",
+          "roi": 13.6,
+          "dollars": 1500,
+          "note": "1.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         },
+         {
+          "team": "Oilers",
+          "wallet": "C",
+          "market": "ML +113",
+          "mk": "ML",
+          "record": "18-9",
+          "roi": 33,
+          "dollars": 892,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Oilers",
+          "wallet": "0xe5f0…dc1d",
+          "market": "ML @ 48c (+108)",
+          "mk": "ML",
+          "record": "9-19",
+          "recLabel": "NHL ML · last 45d record",
+          "roi": -30.8,
+          "dollars": 7200,
+          "note": "Polymarket · 3.5x usual · L10 NHL 8-2",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Oilers",
+          "wallet": "12monkeys",
+          "market": "ML @ 48c (+111)",
+          "mk": "ML",
+          "record": "5-11",
+          "recLabel": "NHL ML · last 45d record",
+          "roi": -48.9,
+          "dollars": 758,
+          "note": "Polymarket · 2.2x usual · L10 NHL 2-8",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "BLUES",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Blues",
+          "wallet": "Painfulvoid",
+          "market": "ML @ 47c (+113)",
+          "mk": "ML",
+          "record": "5-5",
+          "recLabel": "NHL ML · last 45d record",
+          "roi": -8.8,
+          "dollars": 1494,
+          "note": "Polymarket · 1.4x usual · L10 NHL 5-5",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "OILERS",
+         "dollars": 2392,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 18-9 (+33% ROI) on OILERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 17-18 +1.1u, COLD sides 67-56 (fading -10.0u) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
