@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 22
+   "snapshots": 23
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -79,8 +79,8 @@
    ],
    "maxVsUsual": 1.6,
    "maxDollars": 3000,
-   "opposedSeen": false,
-   "snapshots": 14
+   "opposedSeen": true,
+   "snapshots": 15
   },
   "Celtics at Warriors|SPREAD|Celtics -9.5": {
    "sport": "NBA",
@@ -96,7 +96,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Buccaneers at Lions|SPREAD|Lions -3.5": {
    "sport": "NFL",
@@ -128,7 +128,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Pistons at Hawks|ML|Hawks": {
    "sport": "NBA",
@@ -144,7 +144,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
    "opposedSeen": true,
-   "snapshots": 13
+   "snapshots": 14
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -369,7 +369,7 @@
    "maxVsUsual": 5.2,
    "maxDollars": 95440,
    "opposedSeen": false,
-   "snapshots": 62
+   "snapshots": 65
   },
   "Bengals at Commanders|SPREAD|Bengals -6.5": {
    "sport": "NFL",
@@ -384,9 +384,9 @@
     "SIZED_15X"
    ],
    "maxVsUsual": 1.6,
-   "maxDollars": 7203,
+   "maxDollars": 7782,
    "opposedSeen": false,
-   "snapshots": 38
+   "snapshots": 39
   },
   "Jets at Chargers|ML|Chargers": {
    "sport": "NFL",
@@ -406,7 +406,7 @@
    "maxVsUsual": 4.3,
    "maxDollars": 19342,
    "opposedSeen": true,
-   "snapshots": 38
+   "snapshots": 40
   },
   "Bengals at Commanders|ML|Bengals": {
    "sport": "NFL",
@@ -418,12 +418,13 @@
    "firstPrice": "-257",
    "tags": [
     "STRONG_UNOPPOSED",
-    "SIZED_2X"
+    "SIZED_2X",
+    "SIZED_15X"
    ],
    "maxVsUsual": 3.3,
-   "maxDollars": 14849,
+   "maxDollars": 14878,
    "opposedSeen": false,
-   "snapshots": 32
+   "snapshots": 34
   },
   "Ravens at Panthers|ML|Panthers": {
    "sport": "NFL",
@@ -474,7 +475,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 3380,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Saints at Bears|SPREAD|Saints": {
    "sport": "NFL",
@@ -540,10 +541,10 @@
     "SIZED_15X",
     "STRONG_UNOPPOSED"
    ],
-   "maxVsUsual": 6.1,
+   "maxVsUsual": 6.3,
    "maxDollars": 282783,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 38
   },
   "Titans at Cowboys|SPREAD|Cowboys": {
    "sport": "NFL",
@@ -714,7 +715,7 @@
    "maxVsUsual": 4.8,
    "maxDollars": 1578,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Pistons at Hawks|SPREAD|Hawks +1.5": {
    "sport": "NBA",
@@ -730,7 +731,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 2128,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Mavericks at Jazz|SPREAD|Mavericks": {
    "sport": "NBA",
@@ -810,10 +811,10 @@
     "SIZED_15X",
     "SIZED_UP"
    ],
-   "maxVsUsual": 1.5,
-   "maxDollars": 246501,
+   "maxVsUsual": 1.9,
+   "maxDollars": 354280,
    "opposedSeen": true,
-   "snapshots": 10
+   "snapshots": 13
   },
   "Vikings at 49ers|ML|Vikings": {
    "sport": "NFL",
@@ -878,7 +879,7 @@
    "maxVsUsual": 1,
    "maxDollars": 1000,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Pistons at Hawks|TOTAL|Over 223.5": {
    "sport": "NBA",
@@ -926,7 +927,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2548,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Oilers at Blues|ML|Oilers": {
    "sport": "NHL",
@@ -941,6 +942,104 @@
    ],
    "maxVsUsual": 1.6,
    "maxDollars": 1500,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Raiders at Broncos|SPREAD|Broncos": {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Broncos",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "firstSeenAt": "2026-11-22T22:46:35.513Z",
+   "firstPrice": "-117",
+   "tags": [
+    "STRONG_VS_OTHER",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 2,
+   "maxDollars": 3240,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Thunder at Heat|SPREAD|Thunder +4.5": {
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Thunder +4.5",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "firstSeenAt": "2026-11-22T22:46:35.513Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_VS_STRONG",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 2881,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Thunder at Heat|SPREAD|Heat": {
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Heat",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "firstSeenAt": "2026-11-22T22:46:35.513Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_VS_STRONG"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 2765,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Mavericks at Jazz|SPREAD|Jazz +3.5": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Jazz",
+   "market": "SPREAD",
+   "pick": "Jazz +3.5",
+   "kickoffEt": "Sun, Nov 22, 7:10 PM",
+   "firstSeenAt": "2026-11-22T22:46:35.513Z",
+   "firstPrice": "-117",
+   "tags": [
+    "STRONG_VS_OTHER"
+   ],
+   "maxVsUsual": 0.8,
+   "maxDollars": 1500,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Jets at Chargers|SPREAD|Chargers -2.5": {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "SPREAD",
+   "pick": "Chargers -2.5",
+   "kickoffEt": "Sun, Nov 22, 4:05 PM",
+   "firstSeenAt": "2026-11-22T22:46:35.513Z",
+   "firstPrice": "-113",
+   "tags": [
+    "STRONG_VS_OTHER"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 1311,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Jaguars at Giants|SPREAD|Jaguars +3.5": {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "SPREAD",
+   "pick": "Jaguars +3.5",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "firstSeenAt": "2026-11-22T22:46:35.513Z",
+   "firstPrice": "-488",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.7,
+   "maxDollars": 46961,
    "opposedSeen": false,
    "snapshots": 1
   }

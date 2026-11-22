@@ -1,14 +1,14 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T22:12:12.680Z",
+ "scannedAt": "2026-11-22T22:37:23.469Z",
  "sports": {
   "NFL": [
    {
     "id": "bf28eb",
-    "gap": 36.2,
-    "overall": "63-54",
-    "sport": "9-1",
-    "returnPct": 22.2,
+    "gap": 36.7,
+    "overall": "64-54",
+    "sport": "10-1",
+    "returnPct": 33.4,
     "last10": "9-1",
     "bettingBig": false,
     "tonight": [
@@ -19,29 +19,8 @@
       "line": -2.5,
       "price": "-113",
       "dollars": 1311,
-      "vsUsual": 0.7,
+      "vsUsual": 0.6,
       "vsUsualAll": 4.1
-     }
-    ]
-   },
-   {
-    "id": "c911a4",
-    "gap": 34.5,
-    "overall": "310-249",
-    "sport": "9-1",
-    "returnPct": 16.1,
-    "last10": "9-1",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "ML",
-      "pick": "Broncos",
-      "line": null,
-      "price": "-658",
-      "dollars": 923,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.1
      }
     ]
    },
@@ -67,11 +46,32 @@
     ]
    },
    {
+    "id": "c911a4",
+    "gap": 29.1,
+    "overall": "314-252",
+    "sport": "11-2",
+    "returnPct": 10,
+    "last10": "9-1",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Raiders at Broncos",
+      "market": "ML",
+      "pick": "Broncos",
+      "line": null,
+      "price": "-658",
+      "dollars": 923,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.1
+     }
+    ]
+   },
+   {
     "id": "b77626",
-    "gap": 26,
-    "overall": "83-68",
-    "sport": "17-4",
-    "returnPct": 15.8,
+    "gap": 26.8,
+    "overall": "86-68",
+    "sport": "19-4",
+    "returnPct": 17.7,
     "last10": "10-0",
     "bettingBig": false,
     "tonight": [
@@ -82,28 +82,28 @@
       "line": 17.5,
       "price": "-257",
       "dollars": 1000,
-      "vsUsual": 0.8,
+      "vsUsual": 0.7,
       "vsUsualAll": 0.3
      }
     ]
    },
    {
     "id": "411018",
-    "gap": 17,
-    "overall": "95-102",
-    "sport": "15-8",
-    "returnPct": 32.5,
-    "last10": "8-2",
+    "gap": 19,
+    "overall": "98-102",
+    "sport": "17-8",
+    "returnPct": 40.2,
+    "last10": "9-1",
     "bettingBig": true,
     "tonight": [
      {
       "matchup": "Raiders at Broncos",
       "market": "SPREAD",
-      "pick": "Broncos -10.5",
+      "pick": "Broncos",
       "line": -10.5,
       "price": "-117",
       "dollars": 3240,
-      "vsUsual": 1.7,
+      "vsUsual": 1.6,
       "vsUsualAll": 3.9
      }
     ]
@@ -112,8 +112,8 @@
   "NBA": [
    {
     "id": "53f636",
-    "gap": 26.7,
-    "overall": "70-75",
+    "gap": 27,
+    "overall": "72-78",
     "sport": "6-2",
     "returnPct": 57.8,
     "last10": "6-2",
@@ -164,8 +164,8 @@
    },
    {
     "id": "40d814",
-    "gap": 8.1,
-    "overall": "96-107",
+    "gap": 7.8,
+    "overall": "97-107",
     "sport": "36-29",
     "returnPct": 12.1,
     "last10": "7-3",
@@ -185,8 +185,8 @@
    },
    {
     "id": "a0cff6",
-    "gap": 3.1,
-    "overall": "854-793",
+    "gap": 3.2,
+    "overall": "857-797",
     "sport": "391-320",
     "returnPct": 6.5,
     "last10": "5-5",
@@ -206,8 +206,8 @@
    },
    {
     "id": "7d395d",
-    "gap": 1.7,
-    "overall": "279-244",
+    "gap": 1.8,
+    "overall": "279-245",
     "sport": "55-45",
     "returnPct": 15.2,
     "last10": "9-1",
@@ -258,9 +258,30 @@
   ],
   "NHL": [
    {
+    "id": "2f2a9e",
+    "gap": 13.4,
+    "overall": "475-462",
+    "sport": "25-14",
+    "returnPct": 6.4,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Sabres at Lightning",
+      "market": "SPREAD",
+      "pick": "Lightning -1.5",
+      "line": -1.5,
+      "price": "+127",
+      "dollars": 1747,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.2
+     }
+    ]
+   },
+   {
     "id": "8b0e4c",
-    "gap": 8.6,
-    "overall": "67-51",
+    "gap": 9.1,
+    "overall": "67-52",
     "sport": "34-18",
     "returnPct": 11.3,
     "last10": "5-5",
@@ -324,8 +345,8 @@
   "CFB": [
    {
     "id": "aaedcd",
-    "gap": 7.8,
-    "overall": "153-128",
+    "gap": 7.4,
+    "overall": "157-129",
     "sport": "33-20",
     "returnPct": 25.7,
     "last10": "6-4",
@@ -345,8 +366,8 @@
    },
    {
     "id": "487b8b",
-    "gap": 3.1,
-    "overall": "522-439",
+    "gap": 3,
+    "overall": "528-441",
     "sport": "77-57",
     "returnPct": 4.2,
     "last10": "6-4",
@@ -360,7 +381,7 @@
       "price": "-238",
       "dollars": 11663,
       "vsUsual": 19.4,
-      "vsUsualAll": 25.5
+      "vsUsualAll": 25.4
      }
     ]
    }
