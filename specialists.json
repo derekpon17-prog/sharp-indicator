@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T20:28:48.554Z",
+ "scannedAt": "2026-11-22T20:41:05.751Z",
  "sports": {
   "NFL": [
    {
@@ -135,16 +135,6 @@
       "dollars": 3240,
       "vsUsual": 1.7,
       "vsUsualAll": 3.9
-     },
-     {
-      "matchup": "Buccaneers at Lions",
-      "market": "TOTAL",
-      "pick": "Over 46.5",
-      "line": 46.5,
-      "price": "+104",
-      "dollars": 2940,
-      "vsUsual": 1.6,
-      "vsUsualAll": 3.5
      }
     ]
    }
@@ -196,19 +186,9 @@
       "pick": "Pistons -5.5",
       "line": -5.5,
       "price": "+163",
-      "dollars": 556,
+      "dollars": 668,
       "vsUsual": 0.1,
-      "vsUsualAll": 0.2
-     },
-     {
-      "matchup": "Pistons at Hawks",
-      "market": "TOTAL",
-      "pick": "Over 221.5",
-      "line": 221.5,
-      "price": "-127",
-      "dollars": 584,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.2
+      "vsUsualAll": 0.3
      },
      {
       "matchup": "Thunder at Heat",
@@ -362,6 +342,29 @@
       "dollars": 3000,
       "vsUsual": 1.6,
       "vsUsualAll": 4.9
+     }
+    ]
+   }
+  ],
+  "NHL": [
+   {
+    "id": "8d3672",
+    "gap": 3.9,
+    "overall": "99-70",
+    "sport": "20-12",
+    "returnPct": 26.7,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Oilers at Blues",
+      "market": "ML",
+      "pick": "Oilers",
+      "line": null,
+      "price": "+113",
+      "dollars": 892,
+      "vsUsual": 1.4,
+      "vsUsualAll": 0.4
      }
     ]
    }
