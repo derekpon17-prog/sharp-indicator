@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-22",
+ "posted_ct": "1631",
+ "sport": "NHL",
+ "outlier": false,
+ "first_start": "2026-11-23T00:00:00.000Z",
+ "snapshot": "2026-11-22T22:12:12.680Z",
+ "sides": [
+  {
+   "game": "Oilers at Blues",
+   "market": "ML",
+   "pick": "Oilers",
+   "start_utc": "2026-11-23T00:10:00.000Z",
+   "dollars": 2392,
+   "opp_dollars": 0,
+   "wallets": 2,
+   "max_vs_usual": 1.6,
+   "all_sport_ratio": 0.7,
+   "price": "+108",
+   "line": null,
+   "l30_rec": "22-12",
+   "l30_roi": 11.4,
+   "mkt_rec": "20-11",
+   "mkt_roi": 13.6,
+   "mkt_l30_rec": "14-7",
+   "tail": false
+  }
+ ]
+}
