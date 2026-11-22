@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-22T03:11:39.965Z",
+ "scannedAt": "2026-11-22T03:26:09.655Z",
  "sports": {
   "NFL": [
    {
@@ -140,7 +140,7 @@
       "pick": "49ers",
       "line": null,
       "price": "-156",
-      "dollars": 1792,
+      "dollars": 1798,
       "vsUsual": 0.4,
       "vsUsualAll": 1.8
      },
@@ -150,7 +150,7 @@
       "pick": "Bills",
       "line": null,
       "price": "-1011",
-      "dollars": 17085,
+      "dollars": 17095,
       "vsUsual": 3.8,
       "vsUsualAll": 17.4
      },
@@ -253,10 +253,10 @@
       "market": "ML",
       "pick": "Kings",
       "line": null,
-      "price": "+488",
-      "dollars": 811,
-      "vsUsual": 1,
-      "vsUsualAll": 0.2
+      "price": "+529",
+      "dollars": 991,
+      "vsUsual": 1.3,
+      "vsUsualAll": 0.3
      },
      {
       "matchup": "Celtics at Kings",
@@ -480,16 +480,6 @@
       "dollars": 1000,
       "vsUsual": 1.1,
       "vsUsualAll": 1.6
-     },
-     {
-      "matchup": "UNLV at San Jose State",
-      "market": "SPREAD",
-      "pick": "UNLV -5.5",
-      "line": -5.5,
-      "price": "-108",
-      "dollars": 705,
-      "vsUsual": 0.8,
-      "vsUsualAll": 1.1
      }
     ]
    },
