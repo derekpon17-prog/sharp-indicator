@@ -1,0 +1,42 @@
+{
+ "date": "2026-11-27",
+ "entries": {
+  "CFB|Texas at Texas A&M|ML|Texas|0xa0f21e6d351baa9185716b5c00c2925ed9621848": {
+   "sport": "CFB",
+   "matchup": "Texas at Texas A&M",
+   "market": "ML",
+   "side": "Texas",
+   "grp": "team",
+   "wallet": "0xa0f21e6d351baa9185716b5c00c2925ed9621848",
+   "name": "0xa0f2…1848",
+   "cls": "COLD",
+   "sportCls": "COLD",
+   "gateNote": null,
+   "startUtc": "2026-11-28T00:30:00.000Z",
+   "conditionId": "0x11fd85dcd2d184307272b6f1a41998c9a79738958f205e3ea4cec969b6740448",
+   "outcome": "Texas",
+   "title": "Texas vs. Texas A&M",
+   "firstSeenAt": "2026-11-22T15:44:45.267Z",
+   "firstPrice": 0.7551,
+   "firstUsd": 835,
+   "maxUsd": 835,
+   "lastSeenAt": "2026-11-22T15:44:45.267Z",
+   "rec": "39-53",
+   "roi": -7,
+   "n": 92,
+   "recScope": "NCAAF ML, last 45 days",
+   "l10": null,
+   "onCard": true,
+   "sameAsSF": false,
+   "twoSided": false,
+   "tokenId": "52429724902997579720784424826080962043620585547083940083435803686416695281299",
+   "firstBuyUtc": "2026-11-22T15:26:59.000Z",
+   "hoursBeforeStart": 129.1,
+   "gameSource": "sharpflow",
+   "usualMed": 93,
+   "usualScope": "all sports",
+   "vsUsual": 8.98,
+   "sizeTier": "BIG"
+  }
+ }
+}
