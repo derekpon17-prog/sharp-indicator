@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 24
+   "snapshots": 25
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -80,7 +80,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 16
+   "snapshots": 17
   },
   "Celtics at Warriors|SPREAD|Celtics -9.5": {
    "sport": "NBA",
@@ -96,7 +96,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Buccaneers at Lions|SPREAD|Lions -3.5": {
    "sport": "NFL",
@@ -127,8 +127,8 @@
    ],
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
-   "opposedSeen": false,
-   "snapshots": 14
+   "opposedSeen": true,
+   "snapshots": 15
   },
   "Pistons at Hawks|ML|Hawks": {
    "sport": "NBA",
@@ -369,7 +369,7 @@
    "maxVsUsual": 5.2,
    "maxDollars": 95440,
    "opposedSeen": false,
-   "snapshots": 68
+   "snapshots": 71
   },
   "Bengals at Commanders|SPREAD|Bengals -6.5": {
    "sport": "NFL",
@@ -386,7 +386,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 7782,
    "opposedSeen": false,
-   "snapshots": 40
+   "snapshots": 41
   },
   "Jets at Chargers|ML|Chargers": {
    "sport": "NFL",
@@ -406,7 +406,7 @@
    "maxVsUsual": 4.3,
    "maxDollars": 19342,
    "opposedSeen": true,
-   "snapshots": 42
+   "snapshots": 44
   },
   "Bengals at Commanders|ML|Bengals": {
    "sport": "NFL",
@@ -424,7 +424,7 @@
    "maxVsUsual": 3.3,
    "maxDollars": 14880,
    "opposedSeen": false,
-   "snapshots": 36
+   "snapshots": 38
   },
   "Ravens at Panthers|ML|Panthers": {
    "sport": "NFL",
@@ -475,7 +475,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 3380,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Saints at Bears|SPREAD|Saints": {
    "sport": "NFL",
@@ -544,7 +544,7 @@
    "maxVsUsual": 6.3,
    "maxDollars": 282783,
    "opposedSeen": false,
-   "snapshots": 42
+   "snapshots": 46
   },
   "Titans at Cowboys|SPREAD|Cowboys": {
    "sport": "NFL",
@@ -715,7 +715,7 @@
    "maxVsUsual": 4.8,
    "maxDollars": 1578,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Pistons at Hawks|SPREAD|Hawks +1.5": {
    "sport": "NBA",
@@ -814,7 +814,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 354280,
    "opposedSeen": true,
-   "snapshots": 16
+   "snapshots": 19
   },
   "Vikings at 49ers|ML|Vikings": {
    "sport": "NFL",
@@ -879,7 +879,7 @@
    "maxVsUsual": 1,
    "maxDollars": 1000,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Pistons at Hawks|TOTAL|Over 223.5": {
    "sport": "NBA",
@@ -927,7 +927,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 2548,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Oilers at Blues|ML|Oilers": {
    "sport": "NHL",
@@ -943,7 +943,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 1500,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Raiders at Broncos|SPREAD|Broncos": {
    "sport": "NFL",
@@ -960,7 +960,7 @@
    "maxVsUsual": 2,
    "maxDollars": 3240,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Thunder at Heat|SPREAD|Thunder +4.5": {
    "sport": "NBA",
@@ -991,9 +991,9 @@
     "STRONG_VS_STRONG"
    ],
    "maxVsUsual": 0.6,
-   "maxDollars": 4083,
+   "maxDollars": 6961,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Mavericks at Jazz|SPREAD|Jazz +3.5": {
    "sport": "NBA",
@@ -1009,7 +1009,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 1500,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Jets at Chargers|SPREAD|Chargers -2.5": {
    "sport": "NFL",
@@ -1025,7 +1025,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 1311,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Jaguars at Giants|SPREAD|Jaguars +3.5": {
    "sport": "NFL",
@@ -1041,7 +1041,7 @@
    "maxVsUsual": 3.7,
    "maxDollars": 46961,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Thunder at Heat|SPREAD|Thunder": {
    "sport": "NBA",
@@ -1057,6 +1057,23 @@
    ],
    "maxVsUsual": 1.6,
    "maxDollars": 3171,
+   "opposedSeen": true,
+   "snapshots": 4
+  },
+  "Magic at Wizards|ML|Magic": {
+   "sport": "NBA",
+   "matchup": "Magic at Wizards",
+   "market": "ML",
+   "pick": "Magic",
+   "kickoffEt": "Sun, Nov 22, 7:10 PM",
+   "firstSeenAt": "2026-11-22T23:32:03.573Z",
+   "firstPrice": "-186",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.3,
+   "maxDollars": 3000,
    "opposedSeen": true,
    "snapshots": 2
   }

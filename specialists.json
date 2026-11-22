@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T22:49:53.077Z",
+ "scannedAt": "2026-11-22T23:22:59.548Z",
  "sports": {
   "NFL": [
    {
@@ -59,9 +59,9 @@
       "market": "ML",
       "pick": "Broncos",
       "line": null,
-      "price": "-658",
-      "dollars": 923,
-      "vsUsual": 0.4,
+      "price": "-663",
+      "dollars": 955,
+      "vsUsual": 0.5,
       "vsUsualAll": 0.1
      }
     ]
@@ -163,44 +163,73 @@
     ]
    },
    {
-    "id": "40d814",
-    "gap": 7.8,
-    "overall": "97-107",
-    "sport": "36-29",
-    "returnPct": 12.1,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Thunder at Heat",
-      "market": "ML",
-      "pick": "Thunder",
-      "line": null,
-      "price": "+233",
-      "dollars": 2548,
-      "vsUsual": 1.2,
-      "vsUsualAll": 1.1
-     }
-    ]
-   },
-   {
-    "id": "a0cff6",
-    "gap": 3.2,
-    "overall": "857-797",
-    "sport": "391-320",
-    "returnPct": 6.5,
-    "last10": "5-5",
+    "id": "f2f960",
+    "gap": 8.3,
+    "overall": "112-119",
+    "sport": "42-32",
+    "returnPct": 17.5,
+    "last10": "6-4",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Pistons at Hawks",
+      "matchup": "Mavericks at Jazz",
+      "market": "TOTAL",
+      "pick": "Under",
+      "line": null,
+      "price": null,
+      "dollars": 2156,
+      "vsUsual": 4.8,
+      "vsUsualAll": 3.2
+     },
+     {
+      "matchup": "Nuggets at Bulls",
+      "market": "ML",
+      "pick": "Nuggets",
+      "line": null,
+      "price": "-335",
+      "dollars": 1035,
+      "vsUsual": 3.1,
+      "vsUsualAll": 2.1
+     },
+     {
+      "matchup": "Nuggets at Bulls",
+      "market": "TOTAL",
+      "pick": "Under 236.5",
+      "line": 236.5,
+      "price": "+108",
+      "dollars": 1118,
+      "vsUsual": 3.4,
+      "vsUsualAll": 2.2
+     },
+     {
+      "matchup": "Celtics at Warriors",
       "market": "SPREAD",
-      "pick": "Hawks +1.5",
-      "line": 1.5,
+      "pick": "Celtics",
+      "line": -7.5,
       "price": "-104",
-      "dollars": 2128,
-      "vsUsual": 2.7,
-      "vsUsualAll": 0.5
+      "dollars": 630,
+      "vsUsual": 1.9,
+      "vsUsualAll": 1.3
+     },
+     {
+      "matchup": "Pacers at Knicks",
+      "market": "ML",
+      "pick": "Knicks",
+      "line": null,
+      "price": "-270",
+      "dollars": 850,
+      "vsUsual": 2.6,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Pacers at Knicks",
+      "market": "SPREAD",
+      "pick": "Knicks -8.5",
+      "line": -8.5,
+      "price": "+104",
+      "dollars": 578,
+      "vsUsual": 1.7,
+      "vsUsualAll": 1.2
      }
     ]
    },
@@ -214,6 +243,16 @@
     "bettingBig": true,
     "tonight": [
      {
+      "matchup": "Mavericks at Jazz",
+      "market": "SPREAD",
+      "pick": "Mavericks",
+      "line": -1.5,
+      "price": "-108",
+      "dollars": 3000,
+      "vsUsual": 1.6,
+      "vsUsualAll": 4.9
+     },
+     {
       "matchup": "Nuggets at Bulls",
       "market": "SPREAD",
       "pick": "Nuggets -8.5",
@@ -226,22 +265,12 @@
      {
       "matchup": "Celtics at Warriors",
       "market": "SPREAD",
-      "pick": "Celtics -9.5",
+      "pick": "Celtics",
       "line": -9.5,
       "price": "+104",
       "dollars": 2940,
       "vsUsual": 1.6,
       "vsUsualAll": 4.8
-     },
-     {
-      "matchup": "Mavericks at Jazz",
-      "market": "SPREAD",
-      "pick": "Mavericks -1.5",
-      "line": -1.5,
-      "price": "-108",
-      "dollars": 3000,
-      "vsUsual": 1.6,
-      "vsUsualAll": 4.9
      },
      {
       "matchup": "Magic at Wizards",
@@ -252,6 +281,27 @@
       "dollars": 734,
       "vsUsual": 0.4,
       "vsUsualAll": 1.2
+     }
+    ]
+   },
+   {
+    "id": "51176e",
+    "gap": 1.6,
+    "overall": "242-208",
+    "sport": "62-50",
+    "returnPct": 10,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Magic at Wizards",
+      "market": "ML",
+      "pick": "Wizards",
+      "line": null,
+      "price": "+190",
+      "dollars": 2999,
+      "vsUsual": 1.3,
+      "vsUsualAll": 2.6
      }
     ]
    }
