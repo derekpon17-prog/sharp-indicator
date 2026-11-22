@@ -1,5 +1,5 @@
 {
- "at": "2026-11-22T14:26:37.279Z",
+ "at": "2026-11-22T15:04:28.225Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -776,10 +776,7 @@
    "twoSided": false,
    "sportCls": "HOT",
    "gateNote": "HOT overall but cold in TOTAL (4-8, -34.2% ROI)",
-   "sameAsSF": {
-    "sfWallet": "F",
-    "sfDollars": 631
-   },
+   "sameAsSF": null,
    "l10": null,
    "usualMed": 506,
    "usualN": 12,
@@ -904,11 +901,11 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": null,
-   "usualMed": 82229,
+   "usualMed": 72576,
    "usualN": 63,
    "usualScope": "NHL",
-   "vsUsual": 0.53,
-   "vsUsualAll": 0.64,
+   "vsUsual": 0.6,
+   "vsUsualAll": 0.67,
    "sizeTier": "NORMAL"
   },
   {
@@ -1001,7 +998,7 @@
   "mktMin": 5,
   "roiMin": 0
  },
- "sfScannedAt": "2026-11-22T14:18:18.174Z",
+ "sfScannedAt": "2026-11-22T14:56:37.025Z",
  "espnGames": 222,
  "espnErrors": [],
  "espnAdded": 201,
