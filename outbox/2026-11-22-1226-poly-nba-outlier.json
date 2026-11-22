@@ -1,0 +1,61 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NBA one-off - first game 2:30pm CT** - 1 side (0 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NBA - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NBA and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 10:17am CT, buys checked 12:26pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 2:30PM CT",
+     "picks": [
+      {
+       "bet": "Hawks +19.5",
+       "sub": "Pistons at Hawks - 2:30pm CT",
+       "chips": [
+        {
+         "t": "COLD ztao $1.4K",
+         "c": "red"
+        },
+        {
+         "t": "NBA SPREAD 103-32 (-6%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.46x their usual $555",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "COLD mhhsw966 $1.4K",
+         "c": "red"
+        },
+        {
+         "t": "NBA SPREAD 50-50 (-3%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -224,
+       "polyHot": 0,
+       "polyCold": 2
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 12-12 +2.0u, COLD sides 53-47 (fading -5.5u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
