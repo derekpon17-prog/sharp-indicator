@@ -1,115 +1,115 @@
 {
- "updated": "2026-11-22T04:44:28.164Z",
+ "updated": "2026-11-22T07:29:20.678Z",
  "since": "2026-11-20",
- "pending": 27,
+ "pending": 17,
  "na": 0,
  "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
   "COLD": {
    "all": {
-    "w": 48,
-    "l": 45,
-    "n": 93,
-    "u": 2.42,
-    "fadeU": -2.42,
-    "clvN": 77,
-    "clvAvg": 0.0006,
-    "clvPos": 31
+    "w": 52,
+    "l": 47,
+    "n": 99,
+    "u": 4.55,
+    "fadeU": -4.55,
+    "clvN": 83,
+    "clvAvg": 0.0009,
+    "clvPos": 33
    },
    "onCard": {
-    "w": 17,
+    "w": 18,
     "l": 17,
-    "n": 34,
-    "u": -0.6,
-    "fadeU": 0.6,
-    "clvN": 24,
-    "clvAvg": -0.0022,
-    "clvPos": 7
+    "n": 35,
+    "u": 0.4,
+    "fadeU": -0.4,
+    "clvN": 25,
+    "clvAvg": -0.0004,
+    "clvPos": 8
    },
    "offCard": {
-    "w": 31,
-    "l": 28,
-    "n": 59,
-    "u": 3.02,
-    "fadeU": -3.02,
-    "clvN": 53,
-    "clvAvg": 0.0021,
-    "clvPos": 24
+    "w": 34,
+    "l": 30,
+    "n": 64,
+    "u": 4.15,
+    "fadeU": -4.15,
+    "clvN": 58,
+    "clvAvg": 0.0016,
+    "clvPos": 25
    },
    "bySport": {
     "NBA": {
-     "w": 33,
+     "w": 34,
      "l": 25,
-     "n": 58,
-     "u": 5.95,
-     "fadeU": -5.95,
-     "clvN": 43,
-     "clvAvg": -0.0056,
+     "n": 59,
+     "u": 10.21,
+     "fadeU": -10.21,
+     "clvN": 44,
+     "clvAvg": -0.006,
      "clvPos": 17
     },
     "CFB": {
-     "w": 4,
+     "w": 7,
      "l": 15,
-     "n": 19,
-     "u": -9.61,
-     "fadeU": 9.61,
-     "clvN": 18,
-     "clvAvg": 0.0097,
-     "clvPos": 6
+     "n": 22,
+     "u": -6.61,
+     "fadeU": 6.61,
+     "clvN": 21,
+     "clvAvg": 0.0104,
+     "clvPos": 8
     },
     "NHL": {
      "w": 11,
-     "l": 5,
-     "n": 16,
-     "u": 6.07,
-     "fadeU": -6.07,
-     "clvN": 16,
-     "clvAvg": 0.0077,
+     "l": 7,
+     "n": 18,
+     "u": 0.94,
+     "fadeU": -0.94,
+     "clvN": 18,
+     "clvAvg": 0.0066,
      "clvPos": 8
     }
    },
    "byMarket": {
     "ML": {
-     "w": 22,
-     "l": 14,
-     "n": 36,
-     "u": 7.29,
-     "fadeU": -7.29,
-     "clvN": 27,
-     "clvAvg": 0.0029,
+     "w": 24,
+     "l": 15,
+     "n": 39,
+     "u": 9.7,
+     "fadeU": -9.7,
+     "clvN": 30,
+     "clvAvg": 0.0015,
      "clvPos": 10
     },
     "TOTAL": {
-     "w": 16,
-     "l": 15,
-     "n": 31,
-     "u": 1.86,
-     "fadeU": -1.86,
-     "clvN": 25,
-     "clvAvg": -0.0092,
-     "clvPos": 8
+     "w": 17,
+     "l": 16,
+     "n": 33,
+     "u": 0.58,
+     "fadeU": -0.58,
+     "clvN": 27,
+     "clvAvg": -0.0084,
+     "clvPos": 9
     },
     "SPREAD": {
-     "w": 10,
+     "w": 11,
      "l": 16,
-     "n": 26,
-     "u": -6.73,
-     "fadeU": 6.73,
-     "clvN": 25,
-     "clvAvg": 0.0081,
-     "clvPos": 13
+     "n": 27,
+     "u": -5.73,
+     "fadeU": 5.73,
+     "clvN": 26,
+     "clvAvg": 0.0097,
+     "clvPos": 14
     }
    },
    "byTiming": {
     "over 6h before": {
-     "w": 17,
+     "w": 19,
      "l": 14,
-     "n": 31,
-     "u": 2.63,
-     "fadeU": -2.63,
-     "clvN": 31,
-     "clvAvg": -0.0066,
-     "clvPos": 15
+     "n": 33,
+     "u": 7.89,
+     "fadeU": -7.89,
+     "clvN": 33,
+     "clvAvg": -0.0056,
+     "clvPos": 16
     },
     "unknown": {
      "w": 11,
@@ -123,23 +123,23 @@
     },
     "1-6h before": {
      "w": 14,
-     "l": 11,
-     "n": 25,
-     "u": 2.38,
-     "fadeU": -2.38,
-     "clvN": 25,
-     "clvAvg": 0.0132,
+     "l": 13,
+     "n": 27,
+     "u": -2.75,
+     "fadeU": 2.75,
+     "clvN": 27,
+     "clvAvg": 0.012,
      "clvPos": 11
     },
     "under 1h before": {
-     "w": 6,
+     "w": 8,
      "l": 15,
-     "n": 21,
-     "u": -7.23,
-     "fadeU": 7.23,
-     "clvN": 21,
-     "clvAvg": -0.0032,
-     "clvPos": 5
+     "n": 23,
+     "u": -5.23,
+     "fadeU": 5.23,
+     "clvN": 23,
+     "clvAvg": -0.0029,
+     "clvPos": 6
     }
    },
    "bySize": {
@@ -154,88 +154,88 @@
      "clvPos": 10
     },
     "BIG (1.5x+ usual)": {
-     "w": 11,
+     "w": 13,
      "l": 13,
-     "n": 24,
-     "u": -2.7,
-     "fadeU": 2.7,
-     "clvN": 24,
-     "clvAvg": 0.0132,
-     "clvPos": 13
+     "n": 26,
+     "u": 2.56,
+     "fadeU": -2.56,
+     "clvN": 26,
+     "clvAvg": 0.0129,
+     "clvPos": 14
     },
     "NORMAL": {
-     "w": 8,
+     "w": 9,
      "l": 9,
-     "n": 17,
-     "u": -0.73,
-     "fadeU": 0.73,
-     "clvN": 17,
-     "clvAvg": -0.0035,
+     "n": 18,
+     "u": 0.27,
+     "fadeU": -0.27,
+     "clvN": 18,
+     "clvAvg": -0.0036,
      "clvPos": 5
     },
     "SMALL (0.5x or less)": {
-     "w": 4,
-     "l": 3,
-     "n": 7,
-     "u": 0.78,
-     "fadeU": -0.78,
-     "clvN": 7,
-     "clvAvg": 0.0036,
-     "clvPos": 3
+     "w": 5,
+     "l": 5,
+     "n": 10,
+     "u": -3.35,
+     "fadeU": 3.35,
+     "clvN": 10,
+     "clvAvg": 0.0025,
+     "clvPos": 4
     }
    }
   },
   "HOT": {
    "all": {
-    "w": 9,
-    "l": 11,
-    "n": 20,
-    "u": -3.71,
-    "fadeU": 3.71,
-    "clvN": 16,
-    "clvAvg": 0.0016,
-    "clvPos": 7
+    "w": 12,
+    "l": 12,
+    "n": 24,
+    "u": 2.04,
+    "fadeU": -2.04,
+    "clvN": 20,
+    "clvAvg": 0.0019,
+    "clvPos": 10
    },
    "onCard": {
-    "w": 6,
+    "w": 8,
     "l": 3,
-    "n": 9,
-    "u": 0.79,
-    "fadeU": -0.79,
-    "clvN": 5,
-    "clvAvg": 0.003,
-    "clvPos": 2
+    "n": 11,
+    "u": 6.67,
+    "fadeU": -6.67,
+    "clvN": 7,
+    "clvAvg": 0.0007,
+    "clvPos": 3
    },
    "offCard": {
-    "w": 3,
-    "l": 8,
-    "n": 11,
-    "u": -4.5,
-    "fadeU": 4.5,
-    "clvN": 11,
-    "clvAvg": 0.001,
-    "clvPos": 5
+    "w": 4,
+    "l": 9,
+    "n": 13,
+    "u": -4.63,
+    "fadeU": 4.63,
+    "clvN": 13,
+    "clvAvg": 0.0023,
+    "clvPos": 7
    },
    "bySport": {
     "NBA": {
-     "w": 5,
+     "w": 7,
      "l": 6,
-     "n": 11,
-     "u": -3.17,
-     "fadeU": 3.17,
-     "clvN": 7,
-     "clvAvg": -0.0007,
-     "clvPos": 3
+     "n": 13,
+     "u": 2.71,
+     "fadeU": -2.71,
+     "clvN": 9,
+     "clvAvg": -0.0017,
+     "clvPos": 4
     },
     "CFB": {
-     "w": 2,
-     "l": 4,
-     "n": 6,
-     "u": -2.04,
-     "fadeU": 2.04,
-     "clvN": 6,
-     "clvAvg": 0.0058,
-     "clvPos": 3
+     "w": 3,
+     "l": 5,
+     "n": 8,
+     "u": -2.17,
+     "fadeU": 2.17,
+     "clvN": 8,
+     "clvAvg": 0.0069,
+     "clvPos": 5
     },
     "NHL": {
      "w": 2,
@@ -250,24 +250,24 @@
    },
    "byMarket": {
     "ML": {
-     "w": 6,
+     "w": 8,
      "l": 6,
-     "n": 12,
-     "u": -2.21,
-     "fadeU": 2.21,
-     "clvN": 9,
-     "clvAvg": -0.0006,
-     "clvPos": 4
+     "n": 14,
+     "u": 3.67,
+     "fadeU": -3.67,
+     "clvN": 11,
+     "clvAvg": 0.0015,
+     "clvPos": 6
     },
     "TOTAL": {
-     "w": 2,
-     "l": 3,
-     "n": 5,
-     "u": -0.96,
-     "fadeU": 0.96,
-     "clvN": 4,
-     "clvAvg": 0.0013,
-     "clvPos": 1
+     "w": 3,
+     "l": 4,
+     "n": 7,
+     "u": -1.09,
+     "fadeU": 1.09,
+     "clvN": 6,
+     "clvAvg": -0.0008,
+     "clvPos": 2
     },
     "SPREAD": {
      "w": 1,
@@ -292,14 +292,24 @@
      "clvPos": 0
     },
     "under 1h before": {
-     "w": 5,
+     "w": 7,
      "l": 4,
-     "n": 9,
-     "u": 1.64,
-     "fadeU": -1.64,
-     "clvN": 9,
-     "clvAvg": -0.0023,
-     "clvPos": 2
+     "n": 11,
+     "u": 7.52,
+     "fadeU": -7.52,
+     "clvN": 11,
+     "clvAvg": -0.0028,
+     "clvPos": 3
+    },
+    "over 6h before": {
+     "w": 1,
+     "l": 2,
+     "n": 3,
+     "u": -1.13,
+     "fadeU": 1.13,
+     "clvN": 3,
+     "clvAvg": 0.0083,
+     "clvPos": 3
     },
     "1-6h before": {
      "w": 1,
@@ -310,16 +320,6 @@
      "clvN": 6,
      "clvAvg": 0.0067,
      "clvPos": 4
-    },
-    "over 6h before": {
-     "w": 0,
-     "l": 1,
-     "n": 1,
-     "u": -1,
-     "fadeU": 1,
-     "clvN": 1,
-     "clvAvg": 0.005,
-     "clvPos": 1
     }
    },
    "bySize": {
@@ -333,25 +333,25 @@
      "clvAvg": -0.0025,
      "clvPos": 1
     },
-    "NORMAL": {
-     "w": 0,
-     "l": 2,
-     "n": 2,
-     "u": -2,
-     "fadeU": 2,
-     "clvN": 2,
-     "clvAvg": 0.005,
-     "clvPos": 2
-    },
     "BIG (1.5x+ usual)": {
-     "w": 2,
-     "l": 4,
-     "n": 6,
-     "u": -2.04,
-     "fadeU": 2.04,
-     "clvN": 6,
-     "clvAvg": 0.0067,
-     "clvPos": 4
+     "w": 4,
+     "l": 5,
+     "n": 9,
+     "u": 2.71,
+     "fadeU": -2.71,
+     "clvN": 9,
+     "clvAvg": 0.0072,
+     "clvPos": 7
+    },
+    "NORMAL": {
+     "w": 1,
+     "l": 2,
+     "n": 3,
+     "u": -1,
+     "fadeU": 1,
+     "clvN": 3,
+     "clvAvg": -0.0017,
+     "clvPos": 2
     },
     "SMALL (0.5x or less)": {
      "w": 1,
