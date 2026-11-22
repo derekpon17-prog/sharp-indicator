@@ -65,7 +65,7 @@
    "maxVsUsual": 3.4,
    "maxDollars": 14233,
    "opposedSeen": true,
-   "snapshots": 16
+   "snapshots": 17
   },
   "Vanderbilt at Florida|TOTAL|Over 45.5": {
    "sport": "CFB",
@@ -114,7 +114,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -146,7 +146,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 16
+   "snapshots": 17
   },
   "Islanders at Red Wings|SPREAD|Red Wings +1.5": {
    "sport": "NHL",
@@ -263,7 +263,7 @@
    "maxVsUsual": 7.3,
    "maxDollars": 33394,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Titans at Cowboys|ML|Cowboys": {
    "sport": "NFL",
@@ -280,7 +280,7 @@
    "maxVsUsual": 6.7,
    "maxDollars": 30540,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Cardinals at Chiefs|ML|Chiefs": {
    "sport": "NFL",
@@ -297,7 +297,7 @@
    "maxVsUsual": 4.5,
    "maxDollars": 20658,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Dolphins at Bills|ML|Bills": {
    "sport": "NFL",
@@ -314,7 +314,7 @@
    "maxVsUsual": 3.7,
    "maxDollars": 17034,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Cardinals at Chiefs|TOTAL|Over 40.5": {
    "sport": "NFL",
@@ -331,7 +331,7 @@
    "maxVsUsual": 2.1,
    "maxDollars": 9636,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Steelers at Eagles|TOTAL|Over 38.5": {
    "sport": "NFL",
@@ -348,7 +348,7 @@
    "maxVsUsual": 2,
    "maxDollars": 9255,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Buccaneers at Lions|SPREAD|Lions -6.5": {
    "sport": "NFL",
@@ -365,7 +365,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8071,
    "opposedSeen": true,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Jets at Chargers|ML|Chargers": {
    "sport": "NFL",
@@ -382,7 +382,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 6998,
    "opposedSeen": false,
-   "snapshots": 28
+   "snapshots": 30
   },
   "Sabres at Panthers|SPREAD|Panthers -1.5": {
    "sport": "NHL",
@@ -396,10 +396,10 @@
     "STRONG_UNOPPOSED",
     "SIZED_2X"
    ],
-   "maxVsUsual": 2,
+   "maxVsUsual": 2.1,
    "maxDollars": 6457,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Ohio State at Nebraska|ML|Ohio State": {
    "sport": "CFB",
@@ -448,7 +448,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 4303,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 15
   },
   "Colorado at Cincinnati|SPREAD|Cincinnati -2.5": {
    "sport": "CFB",
@@ -529,7 +529,7 @@
    "maxVsUsual": 4.2,
    "maxDollars": 14381,
    "opposedSeen": true,
-   "snapshots": 24
+   "snapshots": 25
   },
   "Texas Tech at Baylor|TOTAL|Over 55.5": {
    "sport": "CFB",
@@ -578,7 +578,7 @@
    "maxVsUsual": 4.8,
    "maxDollars": 93184,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Blue Jackets at Maple Leafs|ML|Maple Leafs": {
    "sport": "NHL",
@@ -611,7 +611,7 @@
    "maxVsUsual": 2.8,
    "maxDollars": 3453,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Florida International at Kennesaw State|SPREAD|Florida International +2.5": {
    "sport": "CFB",
@@ -675,7 +675,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 2955,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Jaguars at Giants|ML|Jaguars": {
    "sport": "NFL",
@@ -692,7 +692,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 7940,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Grizzlies at Timberwolves|ML|Timberwolves": {
    "sport": "NBA",
@@ -708,7 +708,7 @@
    "maxVsUsual": 2.2,
    "maxDollars": 16750,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Georgia at South Carolina|SPREAD|Georgia -13.5": {
    "sport": "CFB",
@@ -724,6 +724,86 @@
    "maxVsUsual": 1.9,
    "maxDollars": 9499,
    "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Arkansas State at Louisiana Tech|SPREAD|Arkansas State": {
+   "sport": "CFB",
+   "matchup": "Arkansas State at Louisiana Tech",
+   "market": "SPREAD",
+   "pick": "Arkansas State",
+   "kickoffEt": "Sat, Nov 21, 7:05 PM",
+   "firstSeenAt": "2026-11-22T00:27:11.571Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.7,
+   "maxDollars": 14622,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Trail Blazers at Knicks|ML|Trail Blazers": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Knicks",
+   "market": "ML",
+   "pick": "Trail Blazers",
+   "kickoffEt": "Sat, Nov 21, 7:40 PM",
+   "firstSeenAt": "2026-11-22T00:27:11.571Z",
+   "firstPrice": "+133",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.7,
+   "maxDollars": 17602,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Texas Tech at Baylor|SPREAD|Baylor +4.5": {
+   "sport": "CFB",
+   "matchup": "Texas Tech at Baylor",
+   "market": "SPREAD",
+   "pick": "Baylor +4.5",
+   "kickoffEt": "Sat, Nov 21, 3:29 PM",
+   "firstSeenAt": "2026-11-22T00:27:11.571Z",
+   "firstPrice": "+106",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 6462,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "UNLV at San Jose State|SPREAD|UNLV -5.5": {
+   "sport": "CFB",
+   "matchup": "UNLV at San Jose State",
+   "market": "SPREAD",
+   "pick": "UNLV -5.5",
+   "kickoffEt": "Sat, Nov 21, 7:05 PM",
+   "firstSeenAt": "2026-11-22T00:27:11.571Z",
+   "firstPrice": "-112",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 6143,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Trail Blazers at Knicks|SPREAD|Trail Blazers": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at Knicks",
+   "market": "SPREAD",
+   "pick": "Trail Blazers",
+   "kickoffEt": "Sat, Nov 21, 7:40 PM",
+   "firstSeenAt": "2026-11-22T00:27:11.571Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 27396,
+   "opposedSeen": true,
    "snapshots": 1
   }
  }
