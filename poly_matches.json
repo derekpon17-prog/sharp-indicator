@@ -1,5 +1,5 @@
 {
- "at": "2026-11-22T21:05:56.135Z",
+ "at": "2026-11-22T21:30:48.203Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -36,14 +36,14 @@
    "sportCls": "HOT",
    "gateNote": null,
    "sameAsSF": {
-    "sfWallet": "B",
+    "sfWallet": "A",
     "sfDollars": 282783
    },
    "l10": {
-    "w": 0,
-    "l": 10,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NFL 0-10"
+    "txt": "L10 NFL 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -51,6 +51,52 @@
    "vsUsual": null,
    "vsUsualAll": null,
    "sizeTier": null
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "grp": "team",
+   "side": "Raiders",
+   "market": "SPREAD",
+   "cls": "HOT",
+   "startUtc": "2026-11-22T21:25:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0xdf07a40be3bf742a943921159e13830641190cd3d950d9199fa05abb38cffde5",
+   "outcome": "Raiders",
+   "tokenId": "23544269477745506802683453647390472174178546833833725848434544202351274271946",
+   "gradeTitle": "Spread: Broncos (-13.5)",
+   "gradePrice": 0.55,
+   "onCard": true,
+   "wallet": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
+   "name": "dinimami",
+   "usd": 1473,
+   "fills": 1,
+   "avgPrice": 0.55,
+   "lastBuyUtc": "2026-11-22T21:20:56.000Z",
+   "firstBuyUtc": "2026-11-22T21:20:56.000Z",
+   "hoursBeforeStart": 0.1,
+   "gameSource": "sharpflow",
+   "title": "Spread: Broncos (-13.5)",
+   "rec": "12-8",
+   "roi": 26.3,
+   "n": 20,
+   "recScope": "NFL SPREAD, last 45 days",
+   "twoSided": false,
+   "sportCls": "HOT",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 5,
+    "l": 5,
+    "n": 10,
+    "txt": "L10 NFL 5-5"
+   },
+   "usualMed": 857,
+   "usualN": 18,
+   "usualScope": "NFL",
+   "vsUsual": 1.72,
+   "vsUsualAll": 2.19,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NFL",
@@ -86,16 +132,16 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 7,
-    "l": 3,
+    "w": 4,
+    "l": 6,
     "n": 10,
-    "txt": "L10 NFL 7-3"
+    "txt": "L10 NFL 4-6"
    },
-   "usualMed": 587,
-   "usualN": 18,
+   "usualMed": 624,
+   "usualN": 37,
    "usualScope": "NFL",
-   "vsUsual": 0.93,
-   "vsUsualAll": 1.02,
+   "vsUsual": 0.87,
+   "vsUsualAll": 1,
    "sizeTier": "NORMAL"
   },
   {
@@ -132,16 +178,16 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 7,
-    "l": 3,
+    "w": 8,
+    "l": 2,
     "n": 10,
-    "txt": "L10 NFL 7-3"
+    "txt": "L10 NFL 8-2"
    },
-   "usualMed": 670,
-   "usualN": 28,
+   "usualMed": 650,
+   "usualN": 53,
    "usualScope": "NFL",
-   "vsUsual": 2.4,
-   "vsUsualAll": 2.4,
+   "vsUsual": 2.48,
+   "vsUsualAll": 2.39,
    "sizeTier": "BIG"
   },
   {
@@ -178,10 +224,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 0,
-    "l": 10,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NFL 0-10"
+    "txt": "L10 NFL 5-5"
    },
    "usualMed": null,
    "usualN": 0,
@@ -224,16 +270,16 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 8,
-    "l": 2,
+    "w": 6,
+    "l": 4,
     "n": 10,
-    "txt": "L10 NFL 8-2"
+    "txt": "L10 NFL 6-4"
    },
-   "usualMed": 10500,
-   "usualN": 37,
+   "usualMed": 10392,
+   "usualN": 60,
    "usualScope": "NFL",
    "vsUsual": 0.25,
-   "vsUsualAll": 0.47,
+   "vsUsualAll": 0.41,
    "sizeTier": "SMALL"
   },
   {
@@ -270,16 +316,16 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 8,
-    "l": 2,
+    "w": 7,
+    "l": 3,
     "n": 10,
-    "txt": "L10 NFL 8-2"
+    "txt": "L10 NFL 7-3"
    },
-   "usualMed": 489,
-   "usualN": 77,
+   "usualMed": 530,
+   "usualN": 84,
    "usualScope": "NFL",
-   "vsUsual": 1.47,
-   "vsUsualAll": 1.35,
+   "vsUsual": 1.35,
+   "vsUsualAll": 1.39,
    "sizeTier": "NORMAL"
   },
   {
@@ -315,14 +361,60 @@
    "sportCls": "HOT",
    "gateNote": null,
    "sameAsSF": {
-    "sfWallet": "B",
+    "sfWallet": "A",
     "sfDollars": 40277
    },
    "l10": {
-    "w": 0,
-    "l": 10,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NFL 0-10"
+    "txt": "L10 NFL 5-5"
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "grp": "team",
+   "side": "Jaguars",
+   "market": "SPREAD",
+   "cls": "COLD",
+   "startUtc": "2026-11-22T21:25:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x21ecf08c86db16c88aca8618b105308caa6840e69e8650e5498532e35be1ecd6",
+   "outcome": "Jaguars",
+   "tokenId": "6844246538829017143835962577945574364040251705780557785839755486721734484504",
+   "gradeTitle": "Spread: Jaguars (-6.5)",
+   "gradePrice": 0.5,
+   "onCard": true,
+   "wallet": "0x58e40b59c4aa9843f7de8caa58c802ee0e3273f9",
+   "name": "JoeytheReal",
+   "usd": 976,
+   "fills": 2,
+   "avgPrice": 0.5,
+   "lastBuyUtc": "2026-11-22T21:17:38.000Z",
+   "firstBuyUtc": "2026-11-22T21:17:22.000Z",
+   "hoursBeforeStart": 0.1,
+   "gameSource": "sharpflow",
+   "title": "Spread: Jaguars (-6.5)",
+   "rec": "3-0",
+   "roi": 54.2,
+   "n": 3,
+   "recScope": "NFL SPREAD, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": "COLD overall, thin in SPREAD (3 bets)",
+   "sameAsSF": null,
+   "l10": {
+    "w": 6,
+    "l": 4,
+    "n": 10,
+    "txt": "L10 NFL 6-4"
    },
    "usualMed": null,
    "usualN": 0,
@@ -365,15 +457,15 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 4,
-    "l": 6,
+    "w": 8,
+    "l": 2,
     "n": 10,
-    "txt": "L10 NFL 4-6"
+    "txt": "L10 NFL 8-2"
    },
-   "usualMed": 1918,
-   "usualN": 42,
+   "usualMed": 2880,
+   "usualN": 5,
    "usualScope": "NFL",
-   "vsUsual": 0.47,
+   "vsUsual": 0.32,
    "vsUsualAll": 0.3,
    "sizeTier": "SMALL"
   },
@@ -411,16 +503,16 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 8,
-    "l": 2,
+    "w": 6,
+    "l": 4,
     "n": 10,
-    "txt": "L10 NFL 8-2"
+    "txt": "L10 NFL 6-4"
    },
-   "usualMed": 10500,
-   "usualN": 37,
+   "usualMed": 10392,
+   "usualN": 60,
    "usualScope": "NFL",
    "vsUsual": 0.13,
-   "vsUsualAll": 0.25,
+   "vsUsualAll": 0.21,
    "sizeTier": "SMALL"
   },
   {
@@ -457,17 +549,17 @@
    "gateNote": "COLD overall, thin in SPREAD (4 bets)",
    "sameAsSF": null,
    "l10": {
-    "w": 1,
-    "l": 9,
+    "w": 0,
+    "l": 10,
     "n": 10,
-    "txt": "L10 NFL 1-9"
+    "txt": "L10 NFL 0-10"
    },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
+   "usualMed": 17425,
+   "usualN": 39,
+   "usualScope": "NFL",
+   "vsUsual": 1.49,
+   "vsUsualAll": 3.25,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NFL",
@@ -486,14 +578,14 @@
    "onCard": true,
    "wallet": "0x9aeb534c42b58b21673d5e03e9da14fbd15b2729",
    "name": "The-Joker",
-   "usd": 9800,
-   "fills": 1,
-   "avgPrice": 0.49,
-   "lastBuyUtc": "2026-11-22T19:19:16.000Z",
+   "usd": 12825,
+   "fills": 2,
+   "avgPrice": 0.585,
+   "lastBuyUtc": "2026-11-22T21:13:25.000Z",
    "firstBuyUtc": "2026-11-22T19:19:16.000Z",
    "hoursBeforeStart": 2.1,
    "gameSource": "sharpflow",
-   "title": "Spread: Jaguars (-6.5)",
+   "title": "Spread: Jaguars (-2.5)",
    "rec": "4-4",
    "roi": -16.2,
    "n": 8,
@@ -508,11 +600,11 @@
     "n": 10,
     "txt": "L10 NFL 3-7"
    },
-   "usualMed": 865,
-   "usualN": 62,
-   "usualScope": "all sports",
-   "vsUsual": 11.33,
-   "vsUsualAll": 11.33,
+   "usualMed": 3397,
+   "usualN": 11,
+   "usualScope": "NFL",
+   "vsUsual": 3.78,
+   "vsUsualAll": 9.26,
    "sizeTier": "BIG"
   },
   {
@@ -549,16 +641,16 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 4,
-    "l": 6,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NFL 4-6"
+    "txt": "L10 NFL 5-5"
    },
-   "usualMed": 10708,
-   "usualN": 42,
+   "usualMed": 10493,
+   "usualN": 73,
    "usualScope": "NFL",
-   "vsUsual": 2.97,
-   "vsUsualAll": 12.5,
+   "vsUsual": 3.04,
+   "vsUsualAll": 14.05,
    "sizeTier": "BIG"
   },
   {
@@ -595,16 +687,16 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 4,
-    "l": 6,
+    "w": 5,
+    "l": 5,
     "n": 10,
-    "txt": "L10 NFL 4-6"
+    "txt": "L10 NFL 5-5"
    },
-   "usualMed": 10708,
-   "usualN": 42,
+   "usualMed": 10493,
+   "usualN": 73,
    "usualScope": "NFL",
-   "vsUsual": 1.25,
-   "vsUsualAll": 5.25,
+   "vsUsual": 1.28,
+   "vsUsualAll": 5.9,
    "sizeTier": "NORMAL"
   },
   {
@@ -646,11 +738,11 @@
     "n": 10,
     "txt": "L10 NBA 3-7"
    },
-   "usualMed": 546,
-   "usualN": 42,
+   "usualMed": 550,
+   "usualN": 55,
    "usualScope": "NBA",
-   "vsUsual": 0.92,
-   "vsUsualAll": 0.87,
+   "vsUsual": 0.91,
+   "vsUsualAll": 0.83,
    "sizeTier": "NORMAL"
   },
   {
@@ -692,12 +784,12 @@
     "n": 10,
     "txt": "L10 NBA 9-1"
    },
-   "usualMed": 5180,
-   "usualN": 229,
-   "usualScope": "NBA",
-   "vsUsual": 0.23,
-   "vsUsualAll": 0.21,
-   "sizeTier": "SMALL"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NBA",
@@ -738,11 +830,11 @@
     "n": 10,
     "txt": "L10 NBA 5-5"
    },
-   "usualMed": 1667,
-   "usualN": 125,
+   "usualMed": 1355,
+   "usualN": 64,
    "usualScope": "NBA",
-   "vsUsual": 0.81,
-   "vsUsualAll": 0.81,
+   "vsUsual": 1,
+   "vsUsualAll": 1.05,
    "sizeTier": "NORMAL"
   },
   {
@@ -784,12 +876,12 @@
     "n": 10,
     "txt": "L10 NBA 9-1"
    },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
+   "usualMed": 555,
+   "usualN": 52,
+   "usualScope": "NBA",
+   "vsUsual": 2.46,
+   "vsUsualAll": 2.73,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NBA",
@@ -830,11 +922,11 @@
     "n": 10,
     "txt": "L10 NBA 4-6"
    },
-   "usualMed": 520,
-   "usualN": 62,
+   "usualMed": 285,
+   "usualN": 182,
    "usualScope": "NBA",
-   "vsUsual": 3.42,
-   "vsUsualAll": 3.42,
+   "vsUsual": 6.25,
+   "vsUsualAll": 6.25,
    "sizeTier": "BIG"
   },
   {
@@ -876,10 +968,10 @@
     "n": 10,
     "txt": "L10 NBA 7-3"
    },
-   "usualMed": 2788,
-   "usualN": 145,
+   "usualMed": 2874,
+   "usualN": 279,
    "usualScope": "NBA",
-   "vsUsual": 0.63,
+   "vsUsual": 0.62,
    "vsUsualAll": 0.63,
    "sizeTier": "NORMAL"
   },
@@ -922,11 +1014,11 @@
     "n": 10,
     "txt": "L10 NBA 4-6"
    },
-   "usualMed": 520,
-   "usualN": 62,
+   "usualMed": 285,
+   "usualN": 182,
    "usualScope": "NBA",
-   "vsUsual": 3.33,
-   "vsUsualAll": 3.33,
+   "vsUsual": 6.08,
+   "vsUsualAll": 6.08,
    "sizeTier": "BIG"
   },
   {
@@ -968,10 +1060,10 @@
     "n": 10,
     "txt": "L10 NBA 7-3"
    },
-   "usualMed": 2788,
-   "usualN": 145,
+   "usualMed": 2874,
+   "usualN": 279,
    "usualScope": "NBA",
-   "vsUsual": 2.18,
+   "vsUsual": 2.11,
    "vsUsualAll": 2.18,
    "sizeTier": "BIG"
   },
@@ -1014,11 +1106,11 @@
     "n": 10,
     "txt": "L10 NBA 8-2"
    },
-   "usualMed": 737,
-   "usualN": 34,
+   "usualMed": 713,
+   "usualN": 55,
    "usualScope": "NBA",
-   "vsUsual": 1.33,
-   "vsUsualAll": 1.35,
+   "vsUsual": 1.38,
+   "vsUsualAll": 1.62,
    "sizeTier": "NORMAL"
   },
   {
@@ -1060,12 +1152,12 @@
     "n": 10,
     "txt": "L10 NBA 4-6"
    },
-   "usualMed": 404,
-   "usualN": 50,
-   "usualScope": "NBA",
-   "vsUsual": 2.75,
-   "vsUsualAll": 3.47,
-   "sizeTier": "BIG"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NBA",
@@ -1106,11 +1198,11 @@
     "n": 10,
     "txt": "L10 NBA 5-5"
    },
-   "usualMed": 535,
-   "usualN": 57,
+   "usualMed": 800,
+   "usualN": 11,
    "usualScope": "NBA",
-   "vsUsual": 2.37,
-   "vsUsualAll": 2.44,
+   "vsUsual": 1.58,
+   "vsUsualAll": 1.62,
    "sizeTier": "BIG"
   },
   {
@@ -1152,10 +1244,10 @@
     "n": 10,
     "txt": "L10 NBA 7-3"
    },
-   "usualMed": 2788,
-   "usualN": 145,
+   "usualMed": 2874,
+   "usualN": 279,
    "usualScope": "NBA",
-   "vsUsual": 0.85,
+   "vsUsual": 0.83,
    "vsUsualAll": 0.85,
    "sizeTier": "NORMAL"
   },
@@ -1198,11 +1290,57 @@
     "n": 10,
     "txt": "L10 NBA 7-3"
    },
-   "usualMed": 2788,
-   "usualN": 145,
+   "usualMed": 2874,
+   "usualN": 279,
    "usualScope": "NBA",
-   "vsUsual": 1.3,
+   "vsUsual": 1.26,
    "vsUsualAll": 1.3,
+   "sizeTier": "NORMAL"
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Oilers at Blues",
+   "grp": "team",
+   "side": "Oilers",
+   "market": "ML",
+   "cls": "COLD",
+   "startUtc": "2026-11-23T00:10:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0xd7d31993540da78e5fac89018912768150d788be6c9a89c936d812e8c369159c",
+   "outcome": "Oilers",
+   "tokenId": "94005859787407519142900313014043768657270554964304602516522035611421425663847",
+   "gradeTitle": "Oilers vs. Blues",
+   "gradePrice": 0.4738,
+   "onCard": true,
+   "wallet": "0xaebf3acc7c9add4928bd218f96de5cf64987e1ca",
+   "name": "12monkeys",
+   "usd": 758,
+   "fills": 2,
+   "avgPrice": 0.475,
+   "lastBuyUtc": "2026-11-22T21:30:25.000Z",
+   "firstBuyUtc": "2026-11-22T19:47:11.000Z",
+   "hoursBeforeStart": 4.4,
+   "gameSource": "sharpflow",
+   "title": "Oilers vs. Blues",
+   "rec": "5-11",
+   "roi": -48.9,
+   "n": 16,
+   "recScope": "NHL ML, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 2,
+    "l": 8,
+    "n": 10,
+    "txt": "L10 NHL 2-8"
+   },
+   "usualMed": 633,
+   "usualN": 5,
+   "usualScope": "NHL",
+   "vsUsual": 1.2,
+   "vsUsualAll": 1.28,
    "sizeTier": "NORMAL"
   },
   {
@@ -1244,12 +1382,12 @@
     "n": 10,
     "txt": "L10 NHL 5-5"
    },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
+   "usualMed": 1056,
+   "usualN": 8,
+   "usualScope": "NHL",
+   "vsUsual": 1.41,
+   "vsUsualAll": 1.37,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "CFB",
@@ -1264,16 +1402,16 @@
    "outcome": "Texas",
    "tokenId": "52429724902997579720784424826080962043620585547083940083435803686416695281299",
    "gradeTitle": "Texas vs. Texas A&M",
-   "gradePrice": 0.772,
+   "gradePrice": 0.79,
    "onCard": true,
    "wallet": "0xa0f21e6d351baa9185716b5c00c2925ed9621848",
    "name": "0xa0f2…1848",
-   "usd": 1651,
-   "fills": 8,
-   "avgPrice": 0.768,
+   "usd": 816,
+   "fills": 3,
+   "avgPrice": 0.79,
    "lastBuyUtc": "2026-11-22T19:52:05.000Z",
-   "firstBuyUtc": "2026-11-22T15:26:59.000Z",
-   "hoursBeforeStart": 129.1,
+   "firstBuyUtc": "2026-11-22T19:36:56.000Z",
+   "hoursBeforeStart": 124.9,
    "gameSource": "sharpflow",
    "title": "Texas vs. Texas A&M",
    "rec": "39-53",
@@ -1290,12 +1428,104 @@
     "n": 10,
     "txt": "L10 NCAAF 4-6"
    },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": 12.41,
-   "sizeTier": null
+   "usualMed": 157,
+   "usualN": 17,
+   "usualScope": "all sports",
+   "vsUsual": 5.2,
+   "vsUsualAll": 5.2,
+   "sizeTier": "BIG"
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Sabres at Lightning",
+   "grp": "team",
+   "side": "Lightning",
+   "market": "ML",
+   "cls": "COLD",
+   "startUtc": "2026-11-22T22:00:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x0c132a6da3e6dd446344a25e79c967889b44d34d7a26a3330af39d37bb2ce63c",
+   "outcome": "Lightning",
+   "tokenId": "85399414976911717828864933589455964397297190786674306330379347743758972726945",
+   "gradeTitle": "Sabres vs. Lightning",
+   "gradePrice": 0.66,
+   "onCard": false,
+   "wallet": "0xf62b709646bdf9bc15bedb094ee6ac062857844a",
+   "name": "0xf62b…844a",
+   "usd": 1501,
+   "fills": 1,
+   "avgPrice": 0.66,
+   "lastBuyUtc": "2026-11-22T21:08:13.000Z",
+   "firstBuyUtc": "2026-11-22T21:08:13.000Z",
+   "hoursBeforeStart": 0.9,
+   "gameSource": "espn",
+   "title": "Sabres vs. Lightning",
+   "rec": "55-39",
+   "roi": -7.3,
+   "n": 94,
+   "recScope": "NHL ML, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 5,
+    "l": 5,
+    "n": 10,
+    "txt": "L10 NHL 5-5"
+   },
+   "usualMed": 2080,
+   "usualN": 32,
+   "usualScope": "NHL",
+   "vsUsual": 0.72,
+   "vsUsualAll": 0.72,
+   "sizeTier": "NORMAL"
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Sabres at Lightning",
+   "grp": "total",
+   "side": "Over",
+   "market": "TOTAL",
+   "cls": "COLD",
+   "startUtc": "2026-11-22T22:00:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0xbb8d200e4ccd74c4046df78c37810604ef7f9a35eb0fc36dd402613661899f95",
+   "outcome": "Over",
+   "tokenId": "73967450385115485335332736297304064804976902972181781216653056550185857906457",
+   "gradeTitle": "Sabres vs. Lightning: O/U 5.5",
+   "gradePrice": 0.6238,
+   "onCard": false,
+   "wallet": "0xf62b709646bdf9bc15bedb094ee6ac062857844a",
+   "name": "0xf62b…844a",
+   "usd": 1435,
+   "fills": 3,
+   "avgPrice": 0.623,
+   "lastBuyUtc": "2026-11-22T21:06:26.000Z",
+   "firstBuyUtc": "2026-11-22T18:15:38.000Z",
+   "hoursBeforeStart": 3.7,
+   "gameSource": "espn",
+   "title": "Sabres vs. Lightning: O/U 5.5",
+   "rec": "22-14",
+   "roi": -4.4,
+   "n": 36,
+   "recScope": "NHL TOTAL, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 5,
+    "l": 5,
+    "n": 10,
+    "txt": "L10 NHL 5-5"
+   },
+   "usualMed": 2080,
+   "usualN": 32,
+   "usualScope": "NHL",
+   "vsUsual": 0.69,
+   "vsUsualAll": 0.69,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NHL",
@@ -1336,27 +1566,27 @@
     "n": 10,
     "txt": "L10 NHL 6-4"
    },
-   "usualMed": 1543,
-   "usualN": 81,
-   "usualScope": "NHL",
-   "vsUsual": 4.23,
-   "vsUsualAll": 3.09,
-   "sizeTier": "BIG"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   }
  ],
  "errors": [],
  "rosterGeneratedAt": "2026-11-22T20:51:22.199Z",
  "hotBar": {
-  "graded": 25,
+  "graded": 26,
   "mktMin": 5,
   "roiMin": 0
  },
- "sfScannedAt": "2026-11-22T20:41:05.751Z",
+ "sfScannedAt": "2026-11-22T21:16:27.632Z",
  "espnGames": 222,
  "espnErrors": [],
  "espnAdded": 187,
  "games": 201,
  "walletsChecked": 132,
- "inGameSkipped": 5,
- "offCardMatches": 1
+ "inGameSkipped": 83,
+ "offCardMatches": 3
 }
