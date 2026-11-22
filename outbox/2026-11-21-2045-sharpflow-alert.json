@@ -1,0 +1,122 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:28pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 9:15PM CT",
+     "picks": [
+      {
+       "eyebrow": "Oklahoma State at Arizona State",
+       "time": "9:15pm CT",
+       "tag": {
+        "t": "EDGE - OKLAHOMA STATE",
+        "icon": "🎯"
+       },
+       "bet": "Oklahoma State -3.5 ++127",
+       "price": "++127",
+       "for": {
+        "team": "OKLAHOMA STATE",
+        "rows": [
+         {
+          "team": "Oklahoma State",
+          "wallet": "AD",
+          "market": "SPREAD",
+          "record": "24-15",
+          "roi": 46.6,
+          "dollars": 2331,
+          "note": "0.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "OKLAHOMA STATE",
+         "dollars": 2331,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 24-15 (+47% ROI) on OKLAHOMA STATE - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $2.3K on Oklahoma State -3.5 - kickoff in 30 min"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Celtics at Kings",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total 217.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "S",
+          "market": "TOTAL",
+          "record": "0-1",
+          "roi": -100,
+          "dollars": 4800,
+          "note": "0.4x usual, only 1 bet here",
+          "status": {
+           "t": "THIN - 1 bet here - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Under",
+          "wallet": "V",
+          "market": "TOTAL",
+          "record": "8-5",
+          "roi": 14,
+          "dollars": 3355,
+          "note": "2.2x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 8155,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "GREW $2K to $3.4K - kickoff in 25 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
