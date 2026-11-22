@@ -1,0 +1,294 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NBA - first game 5:00pm CT** - 8 sides (1 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NBA - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NBA and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 2:51pm CT, buys checked 3:05pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 5:10PM CT",
+     "picks": [
+      {
+       "bet": "Heat -4.5",
+       "sub": "Thunder at Heat - 5:10pm CT",
+       "chips": [
+        {
+         "t": "COLD 0x09f4…dac0 $1.8K",
+         "c": "red"
+        },
+        {
+         "t": "NBA SPREAD 85-108 (-12%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 4-6",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 3.42x their usual $520",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF other side $6.5K vs $6K",
+         "c": "orange"
+        }
+       ],
+       "price": 108,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Over 258.5",
+       "sub": "Thunder at Heat - 5:10pm CT",
+       "chips": [
+        {
+         "t": "COLD nehcnehc $1.8K",
+         "c": "red"
+        },
+        {
+         "t": "NBA TOTAL 114-142 (-11%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "0.63x their usual $2.8K",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 273,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "bet": "Over 225.5",
+       "sub": "Mavericks at Jazz - 6:10pm CT",
+       "chips": [
+        {
+         "t": "COLD nehcnehc $6.1K",
+         "c": "red"
+        },
+        {
+         "t": "NBA TOTAL 114-142 (-11%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.18x their usual $2.8K",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $4.2K vs $2.6K",
+         "c": "blue"
+        }
+       ],
+       "price": 313,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Under 235.5",
+       "sub": "Nuggets at Bulls - 6:10pm CT",
+       "chips": [
+        {
+         "t": "COLD nehcnehc $3.6K",
+         "c": "red"
+        },
+        {
+         "t": "NBA TOTAL 114-142 (-11%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "1.3x their usual $2.8K",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF other side $1.5K vs $0",
+         "c": "orange"
+        }
+       ],
+       "price": -100,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Wizards +5.5",
+       "sub": "Magic at Wizards - 6:10pm CT",
+       "chips": [
+        {
+         "t": "COLD hurpdurp $1.1K",
+         "c": "red"
+        },
+        {
+         "t": "NBA SPREAD 14-18 (-8%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 4-6",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.75x their usual $404",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -100,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Mavericks ML",
+       "sub": "Mavericks at Jazz - 6:10pm CT",
+       "chips": [
+        {
+         "t": "COLD ic4cream $981",
+         "c": "red"
+        },
+        {
+         "t": "NBA ML 62-35 (-10%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "1.33x their usual $737",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $3.7K",
+         "c": "blue"
+        }
+       ],
+       "price": -108,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:40PM CT",
+     "picks": [
+      {
+       "bet": "Celtics -12.5",
+       "sub": "Celtics at Warriors - 7:40pm CT",
+       "chips": [
+        {
+         "t": "HOT betdge $1.3K",
+         "c": "green"
+        },
+        {
+         "t": "NBA SPREAD 79-81 (+5%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.37x their usual $535",
+         "c": "green"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF same side $2.9K vs $1.5K",
+         "c": "blue"
+        }
+       ],
+       "price": 115,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Over 210.5",
+       "sub": "Celtics at Warriors - 7:40pm CT",
+       "chips": [
+        {
+         "t": "COLD nehcnehc $2.4K",
+         "c": "red"
+        },
+        {
+         "t": "NBA TOTAL 114-142 (-11%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "0.85x their usual $2.8K",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 104,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "1 two-sided position left out | Poly calls since Nov 20 at Polymarket prices: HOT 14-12 +4.3u, COLD sides 60-48 (fading -11.5u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
