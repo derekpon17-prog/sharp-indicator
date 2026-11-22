@@ -1,0 +1,313 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 5 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 10:31am CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Dolphins at Bills",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "bet": "Under 46.5 -127",
+       "price": "-127",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "B",
+          "market": "TOTAL",
+          "record": "11-3",
+          "roi": 58.2,
+          "dollars": 19541,
+          "note": "0.1x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 19541,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 11-3 (+58% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $7K to $20K - kickoff in 75 min"
+      },
+      {
+       "eyebrow": "Cardinals at Chiefs",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - CHIEFS",
+        "icon": "🎯"
+       },
+       "bet": "Chiefs ML -1011",
+       "price": "-1011",
+       "for": {
+        "team": "CHIEFS",
+        "rows": [
+         {
+          "team": "Chiefs",
+          "wallet": "K",
+          "market": "ML",
+          "record": "4-0",
+          "roi": 53.8,
+          "dollars": 68978,
+          "note": "4.2x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          }
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "J",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 33937,
+          "note": "7.5x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "K",
+          "market": "SPREAD",
+          "record": "3-0",
+          "roi": 126.6,
+          "dollars": 4534,
+          "note": "0.2x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CHIEFS",
+         "dollars": 107449,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on CHIEFS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $4.5K on Chiefs -13.5 - kickoff in 75 min"
+      },
+      {
+       "eyebrow": "Ravens at Panthers",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "bet": "Ravens vs Panthers",
+       "price": null,
+       "for": {
+        "team": "RAVENS",
+        "rows": [
+         {
+          "team": "Ravens",
+          "wallet": "B",
+          "market": "ML",
+          "record": "24-18",
+          "roi": 25.7,
+          "dollars": 27079,
+          "note": "0.1x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Ravens",
+          "wallet": "V",
+          "market": "SPREAD",
+          "record": "15-7",
+          "roi": 31.1,
+          "dollars": 4832,
+          "note": "1.3x usual, L10 4-6",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "PANTHERS",
+        "rows": [
+         {
+          "team": "Panthers",
+          "wallet": "J",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 4150,
+          "note": "0.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "RAVENS",
+         "dollars": 31911,
+         "pct": 88,
+         "c": "green"
+        },
+        {
+         "team": "PANTHERS",
+         "dollars": 4150,
+         "pct": 12,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "GREW $7.9K to $27K - kickoff in 75 min"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:25PM CT",
+     "picks": [
+      {
+       "eyebrow": "Jaguars at Giants",
+       "time": "3:25pm CT",
+       "tag": {
+        "t": "EDGE - JAGUARS",
+        "icon": "🎯"
+       },
+       "bet": "Jaguars ML -245",
+       "price": "-245",
+       "for": {
+        "team": "JAGUARS",
+        "rows": [
+         {
+          "team": "Jaguars",
+          "wallet": "E",
+          "market": "ML",
+          "record": "4-2",
+          "roi": 35.6,
+          "dollars": 10000,
+          "note": "1.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Jaguars",
+          "wallet": "J",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 9278,
+          "note": "2.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "JAGUARS",
+         "dollars": 19278,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on JAGUARS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $7.9K to $19K - kickoff in 4h 40m"
+      },
+      {
+       "eyebrow": "Raiders at Broncos",
+       "time": "3:25pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - BRONCOS",
+        "icon": "👀"
+       },
+       "bet": "Broncos",
+       "price": null,
+       "for": {
+        "team": "BRONCOS",
+        "rows": [
+         {
+          "team": "Broncos",
+          "wallet": "AA",
+          "market": "ML",
+          "record": "3-2",
+          "roi": 38.6,
+          "dollars": 24914,
+          "note": "4.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BRONCOS",
+         "dollars": 24914,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $25K on Broncos - kickoff in 4h 40m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
