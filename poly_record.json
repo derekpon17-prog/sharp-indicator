@@ -1,29 +1,29 @@
 {
- "updated": "2026-11-22T15:44:53.025Z",
+ "updated": "2026-11-22T16:05:11.902Z",
  "since": "2026-11-20",
- "pending": 27,
+ "pending": 30,
  "na": 0,
  "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
   "COLD": {
    "all": {
-    "w": 52,
+    "w": 53,
     "l": 47,
-    "n": 99,
-    "u": 4.55,
-    "fadeU": -4.55,
-    "clvN": 83,
-    "clvAvg": 0.0009,
+    "n": 100,
+    "u": 5.55,
+    "fadeU": -5.55,
+    "clvN": 84,
+    "clvAvg": 0.0007,
     "clvPos": 33
    },
    "onCard": {
-    "w": 18,
+    "w": 19,
     "l": 17,
-    "n": 35,
-    "u": 0.4,
-    "fadeU": -0.4,
-    "clvN": 25,
-    "clvAvg": -0.0004,
+    "n": 36,
+    "u": 1.4,
+    "fadeU": -1.4,
+    "clvN": 26,
+    "clvAvg": -0.0009,
     "clvPos": 8
    },
    "offCard": {
@@ -48,13 +48,13 @@
      "clvPos": 17
     },
     "CFB": {
-     "w": 7,
+     "w": 8,
      "l": 15,
-     "n": 22,
-     "u": -6.61,
-     "fadeU": 6.61,
-     "clvN": 21,
-     "clvAvg": 0.0104,
+     "n": 23,
+     "u": -5.61,
+     "fadeU": 5.61,
+     "clvN": 22,
+     "clvAvg": 0.0093,
      "clvPos": 8
     },
     "NHL": {
@@ -70,13 +70,13 @@
    },
    "byMarket": {
     "ML": {
-     "w": 24,
+     "w": 25,
      "l": 15,
-     "n": 39,
-     "u": 9.7,
-     "fadeU": -9.7,
-     "clvN": 30,
-     "clvAvg": 0.0015,
+     "n": 40,
+     "u": 10.7,
+     "fadeU": -10.7,
+     "clvN": 31,
+     "clvAvg": 0.001,
      "clvPos": 10
     },
     "TOTAL": {
@@ -132,13 +132,13 @@
      "clvPos": 11
     },
     "under 1h before": {
-     "w": 8,
+     "w": 9,
      "l": 15,
-     "n": 23,
-     "u": -5.23,
-     "fadeU": 5.23,
-     "clvN": 23,
-     "clvAvg": -0.0029,
+     "n": 24,
+     "u": -4.23,
+     "fadeU": 4.23,
+     "clvN": 24,
+     "clvAvg": -0.0033,
      "clvPos": 6
     }
    },
@@ -154,13 +154,13 @@
      "clvPos": 10
     },
     "BIG (1.5x+ usual)": {
-     "w": 13,
+     "w": 14,
      "l": 13,
-     "n": 26,
-     "u": 2.56,
-     "fadeU": -2.56,
-     "clvN": 26,
-     "clvAvg": 0.0129,
+     "n": 27,
+     "u": 3.56,
+     "fadeU": -3.56,
+     "clvN": 27,
+     "clvAvg": 0.0119,
      "clvPos": 14
     },
     "NORMAL": {

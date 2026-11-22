@@ -3278,7 +3278,12 @@
    "vsUsual": null,
    "sizeTier": null,
    "closePrice": 0.605,
-   "clv": 0.006
+   "clv": 0.006,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-22T16:05:11.902Z",
+   "gradedBy": "positions"
   },
   "NBA|Celtics at Kings|ML|Kings|0x9f2fe025f84839ca81dd8e0338892605702d2ca8": {
    "sport": "NBA",
@@ -3405,7 +3410,12 @@
    "vsUsual": null,
    "sizeTier": null,
    "closePrice": 0.525,
-   "clv": -0.015
+   "clv": -0.015,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-22T16:05:11.902Z",
+   "gradedBy": "positions"
   },
   "CFB|Oklahoma State at Arizona State|ML|Oklahoma State|0x4bff30af91642dc7d2b19a8664378fe55c45fc26": {
    "sport": "CFB",
@@ -3444,7 +3454,12 @@
    "vsUsual": 2.27,
    "sizeTier": "BIG",
    "closePrice": 0.605,
-   "clv": -0.0128
+   "clv": -0.0128,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-22T16:05:11.902Z",
+   "gradedBy": "positions"
   },
   "NHL|Ducks at Utah|TOTAL|Over|0xf62b709646bdf9bc15bedb094ee6ac062857844a": {
    "sport": "NHL",
