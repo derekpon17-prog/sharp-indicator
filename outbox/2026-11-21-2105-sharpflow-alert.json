@@ -1,0 +1,77 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:43pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Celtics at Kings",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - CELTICS",
+        "icon": "🎯"
+       },
+       "bet": "Celtics -12.5 -100",
+       "price": "-100",
+       "for": {
+        "team": "CELTICS",
+        "rows": [
+         {
+          "team": "Celtics",
+          "wallet": "M",
+          "market": "SPREAD",
+          "record": "95-75",
+          "roi": 25.7,
+          "dollars": 2860,
+          "note": "3.6x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Celtics",
+          "wallet": "A",
+          "market": "ML",
+          "record": "32-26",
+          "roi": 4.8,
+          "dollars": 2366,
+          "note": "7.3x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CELTICS",
+         "dollars": 5226,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 95-75 (+26% ROI) on CELTICS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $2.9K on Celtics -12.5 - LATE: kickoff in 5 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
