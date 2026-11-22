@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-22T02:43:04.976Z",
+ "scannedAt": "2026-11-22T03:11:39.965Z",
  "sides": [
   {
    "tail": false,
@@ -57,6 +57,33 @@
    }
   },
   {
+   "tail": true,
+   "sport": "NBA",
+   "matchup": "Celtics at Kings",
+   "market": "SPREAD",
+   "pick": "Celtics -12.5",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "dollars": 56186,
+   "oppDollars": 0,
+   "wallets": 5,
+   "maxVsUsual": 1.9,
+   "price": "+108",
+   "size": "1.5x and up",
+   "mktRecord": "7-7",
+   "mktRoi": 43.6,
+   "l30Roi": 35.9,
+   "contested": false,
+   "sfPoints": 40,
+   "parts": {
+    "money": 20,
+    "sizing": 7,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
    "tail": false,
    "sport": "NFL",
    "matchup": "Cardinals at Chiefs",
@@ -106,33 +133,6 @@
     "sizing": 12,
     "quality": 6,
     "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": true,
-   "sport": "NBA",
-   "matchup": "Trail Blazers at Knicks",
-   "market": "ML",
-   "pick": "Knicks",
-   "kickoffEt": "Sat, Nov 21, 7:42 PM",
-   "dollars": 10453,
-   "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 2.8,
-   "price": "-100",
-   "size": "0.5x",
-   "mktRecord": "12-4",
-   "mktRoi": 5.8,
-   "l30Roi": 16.7,
-   "contested": false,
-   "sfPoints": 37,
-   "parts": {
-    "money": 12,
-    "sizing": 12,
-    "quality": 6,
-    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -246,33 +246,6 @@
    }
   },
   {
-   "tail": true,
-   "sport": "NBA",
-   "matchup": "Celtics at Kings",
-   "market": "TOTAL",
-   "pick": "Under",
-   "kickoffEt": "Sat, Nov 21, 10:10 PM",
-   "dollars": 8155,
-   "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 2.2,
-   "price": "+108",
-   "size": "under 0.5x",
-   "mktRecord": "0-1",
-   "mktRoi": -100,
-   "l30Roi": 62.4,
-   "contested": false,
-   "sfPoints": 29,
-   "parts": {
-    "money": 12,
-    "sizing": 10,
-    "quality": 0,
-    "pooled": 4,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
    "tail": false,
    "sport": "NFL",
    "matchup": "Jaguars at Giants",
@@ -322,6 +295,33 @@
     "sizing": 7,
     "quality": 6,
     "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": true,
+   "sport": "NBA",
+   "matchup": "Celtics at Kings",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "dollars": 18355,
+   "oppDollars": 0,
+   "wallets": 3,
+   "maxVsUsual": 1,
+   "price": "-104",
+   "size": "0.5x",
+   "mktRecord": "8-4",
+   "mktRoi": 28.7,
+   "l30Roi": 35.9,
+   "contested": false,
+   "sfPoints": 27,
+   "parts": {
+    "money": 16,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -409,60 +409,6 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Celtics at Kings",
-   "market": "SPREAD",
-   "pick": "Celtics -12.5",
-   "kickoffEt": "Sat, Nov 21, 10:10 PM",
-   "dollars": 2860,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 3.6,
-   "price": "-100",
-   "size": "1.5x and up",
-   "mktRecord": "95-75",
-   "mktRoi": 25.7,
-   "l30Roi": 2.5,
-   "contested": false,
-   "sfPoints": 23,
-   "parts": {
-    "money": 8,
-    "sizing": 12,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Celtics at Kings",
-   "market": "ML",
-   "pick": "Celtics",
-   "kickoffEt": "Sat, Nov 21, 10:10 PM",
-   "dollars": 2366,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 7.3,
-   "price": "-554",
-   "size": "1.5x and up",
-   "mktRecord": "32-26",
-   "mktRoi": 4.8,
-   "l30Roi": 10.6,
-   "contested": false,
-   "sfPoints": 23,
-   "parts": {
-    "money": 8,
-    "sizing": 12,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "NFL",
    "matchup": "Buccaneers at Lions",
    "market": "TOTAL",
@@ -521,7 +467,7 @@
    "matchup": "San Diego State at Boise State",
    "market": "SPREAD",
    "pick": "Boise State -17.5",
-   "kickoffEt": "Sat, Nov 21, 9:40 PM",
+   "kickoffEt": "Sat, Nov 21, 9:41 PM",
    "dollars": 2999,
    "oppDollars": 0,
    "wallets": 1,
@@ -539,33 +485,6 @@
     "quality": 4,
     "pooled": 0,
     "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Grizzlies at Timberwolves",
-   "market": "ML",
-   "pick": "Grizzlies",
-   "kickoffEt": "Sat, Nov 21, 8:11 PM",
-   "dollars": 7000,
-   "oppDollars": 2925,
-   "wallets": 1,
-   "maxVsUsual": 0.8,
-   "price": "+203",
-   "size": "0.5x",
-   "mktRecord": "8-6",
-   "mktRoi": 32.3,
-   "l30Roi": 19.3,
-   "contested": false,
-   "sfPoints": 18,
-   "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 0,
     "contested": 0
    }
   },
@@ -787,33 +706,6 @@
   {
    "tail": false,
    "sport": "NBA",
-   "matchup": "Grizzlies at Timberwolves",
-   "market": "ML",
-   "pick": "Timberwolves",
-   "kickoffEt": "Sat, Nov 21, 8:11 PM",
-   "dollars": 2925,
-   "oppDollars": 7000,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "-294",
-   "size": "0.5x",
-   "mktRecord": "73-56",
-   "mktRoi": 38.1,
-   "l30Roi": 16.5,
-   "contested": true,
-   "sfPoints": 6,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
    "matchup": "Pelicans at Spurs",
    "market": "SPREAD",
    "pick": "Spurs -18.5",
@@ -840,6 +732,25 @@
   }
  ],
  "flags": [
+  {
+   "matchup": "Celtics at Kings",
+   "market": "SPREAD",
+   "pick": "Celtics -12.5",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 53326,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "15-11|96706|7-7",
+    "5-3|56846|5-2",
+    "5-4|24092|3-3",
+    "4-2|4254|2-0"
+   ],
+   "bestPrice": "+108",
+   "maxVsUsual": 3.6
+  },
   {
    "matchup": "Titans at Cowboys",
    "market": "ML",
@@ -903,6 +814,22 @@
    ],
    "bestPrice": "-1011",
    "maxVsUsual": 3.8
+  },
+  {
+   "matchup": "Celtics at Kings",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 10200,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "15-11|96706|8-4"
+   ],
+   "bestPrice": "-104",
+   "maxVsUsual": 2.2
   },
   {
    "matchup": "Cardinals at Chiefs",
@@ -1036,7 +963,7 @@
    "matchup": "San Diego State at Boise State",
    "market": "SPREAD",
    "pick": "Boise State -17.5",
-   "kickoffEt": "Sat, Nov 21, 9:40 PM",
+   "kickoffEt": "Sat, Nov 21, 9:41 PM",
    "sport": "CFB",
    "type": "STRONG_UNOPPOSED",
    "strongDollars": 2999,
@@ -1133,23 +1060,6 @@
    "fp": "31-10|62756|21-4"
   },
   {
-   "matchup": "Celtics at Kings",
-   "market": "ML",
-   "pick": "Celtics",
-   "kickoffEt": "Sat, Nov 21, 10:10 PM",
-   "sport": "NBA",
-   "dollars": 2366,
-   "price": "-554",
-   "vsUsual": 7.3,
-   "size": "1.5x and up",
-   "form": "L10 5-5",
-   "l30Roi": 10.6,
-   "mktRecord": "32-26",
-   "mktRoi": 4.8,
-   "opposed": "unopposed",
-   "fp": "79-66|4546|32-26"
-  },
-  {
    "matchup": "Georgia at South Carolina",
    "market": "SPREAD",
    "pick": "Georgia -13.5",
@@ -1235,23 +1145,6 @@
    "fp": "290-235|10571|95-75"
   },
   {
-   "matchup": "Trail Blazers at Knicks",
-   "market": "ML",
-   "pick": "Knicks",
-   "kickoffEt": "Sat, Nov 21, 7:42 PM",
-   "sport": "NBA",
-   "dollars": 3453,
-   "price": "-148",
-   "vsUsual": 2.8,
-   "size": "1.5x and up",
-   "form": "L10 3-7",
-   "l30Roi": 22.9,
-   "mktRecord": "12-5",
-   "mktRoi": 47.1,
-   "opposed": "unopposed",
-   "fp": "20-16|10118|12-5"
-  },
-  {
    "matchup": "Celtics at Kings",
    "market": "TOTAL",
    "pick": "Under",
@@ -1286,6 +1179,23 @@
    "fp": "31-10|62756|1-0"
   },
   {
+   "matchup": "Celtics at Kings",
+   "market": "SPREAD",
+   "pick": "Celtics -12.5",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "sport": "NBA",
+   "dollars": 2926,
+   "price": "+104",
+   "vsUsual": 2.1,
+   "size": "1.5x and up",
+   "form": "L10 4-2",
+   "l30Roi": 50.4,
+   "mktRecord": "2-0",
+   "mktRoi": 99.5,
+   "opposed": "unopposed",
+   "fp": "4-2|4254|2-0"
+  },
+  {
    "matchup": "Steelers at Eagles",
    "market": "TOTAL",
    "pick": "Over 38.5",
@@ -1303,6 +1213,40 @@
    "fp": "31-10|62756|1-0"
   },
   {
+   "matchup": "Celtics at Kings",
+   "market": "SPREAD",
+   "pick": "Celtics -12.5",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "sport": "NBA",
+   "dollars": 19200,
+   "price": "+108",
+   "vsUsual": 1.9,
+   "size": "1.5x and up",
+   "form": "L10 5-5",
+   "l30Roi": 35.9,
+   "mktRecord": "7-7",
+   "mktRoi": 43.6,
+   "opposed": "unopposed",
+   "fp": "15-11|96706|7-7"
+  },
+  {
+   "matchup": "Celtics at Kings",
+   "market": "SPREAD",
+   "pick": "Celtics -12.5",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "sport": "NBA",
+   "dollars": 12000,
+   "price": "+108",
+   "vsUsual": 1.9,
+   "size": "1.5x and up",
+   "form": "L10 5-4",
+   "l30Roi": 41.9,
+   "mktRecord": "3-3",
+   "mktRoi": 38.4,
+   "opposed": "unopposed",
+   "fp": "5-4|24092|3-3"
+  },
+  {
    "matchup": "Buccaneers at Lions",
    "market": "SPREAD",
    "pick": "Lions -6.5",
@@ -1318,6 +1262,23 @@
    "mktRoi": 21.9,
    "opposed": "unopposed",
    "fp": "31-10|62756|9-6"
+  },
+  {
+   "matchup": "Celtics at Kings",
+   "market": "SPREAD",
+   "pick": "Celtics -12.5",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "sport": "NBA",
+   "dollars": 19200,
+   "price": "+108",
+   "vsUsual": 1.7,
+   "size": "1.5x and up",
+   "form": "L10 5-3",
+   "l30Roi": 62.4,
+   "mktRecord": "5-2",
+   "mktRoi": 72.2,
+   "opposed": "unopposed",
+   "fp": "5-3|56846|5-2"
   },
   {
    "matchup": "Jaguars at Giants",
@@ -1391,7 +1352,7 @@
    "matchup": "San Diego State at Boise State",
    "market": "SPREAD",
    "pick": "Boise State -17.5",
-   "kickoffEt": "Sat, Nov 21, 9:40 PM",
+   "kickoffEt": "Sat, Nov 21, 9:41 PM",
    "sport": "CFB",
    "dollars": 2999,
    "price": "-111",
