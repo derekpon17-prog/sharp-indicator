@@ -205,7 +205,7 @@ function polyFor(poly, sp, matchup, grp, r) {
   };
   const altNote = m => { if (m.market !== 'SPREAD') return null; const l = String(m.title || '').match(/\(([+-][\d.]+)\)/); return l && Math.abs(parseFloat(l[1])) >= 8 ? 'far-off alt line, not a read on the main spread' : null; };
   const row = m => ({ src: 'POLYMARKET', team: m.side, wallet: m.name, market: polyBet(m), mk: m.market, record: m.rec, recLabel: m.recScope ? m.recScope.replace(/, last (\d+) days/, ' \u00b7 last $1d') + ' record' : null, roi: m.roi, dollars: m.usd,
-    note: ['Polymarket', altNote(m), m.gateNote && m.sportCls !== m.cls ? m.gateNote : null, m.l10 ? m.l10.txt : null, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' \u00b7 '),
+    note: ['Polymarket', m.vsUsual != null ? (+m.vsUsual).toFixed(1) + 'x usual' : null, altNote(m), m.gateNote && m.sportCls !== m.cls ? m.gateNote : null, m.l10 ? m.l10.txt : null, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' \u00b7 '),
     status: m.twoSided ? { t: 'POLY TWO-SIDED - not counted', c: 'grey' }
       : m.cls === 'HOT' ? (m.sameAsSF ? { t: 'POLY HOT - same wallet, not a 2nd source', c: 'grey' } : { t: 'POLY HOT', c: 'green' })
       : m.sportCls === 'HOT' ? { t: 'POLY COLD in this bet type - not counted', c: 'red' } : { t: 'POLY COLD - fade flag', c: 'red' } });
