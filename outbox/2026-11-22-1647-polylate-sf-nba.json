@@ -1,0 +1,199 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow + Polymarket late money - NBA** - 1 game",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW + POLYMARKET",
+   "title": "NBA - late Polymarket money on a Sharp Flow game",
+   "subtitle": "HOT Polymarket wallet bought after the NBA report posted - shown with the Sharp Flow read, games not started. Buys checked 4:47pm CT, SharpFlow snapshot 4:37pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 5:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Thunder at Heat",
+       "time": "5:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Thunder vs Heat",
+       "price": null,
+       "for": {
+        "team": "THUNDER",
+        "rows": [
+         {
+          "team": "Thunder",
+          "wallet": "A",
+          "market": "SPREAD +4.5 -100",
+          "mk": "SPREAD",
+          "record": "3-1",
+          "roi": 104.7,
+          "dollars": 2881,
+          "note": "1.4x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Thunder",
+          "wallet": "J",
+          "market": "ML +233",
+          "mk": "ML",
+          "record": "35-29",
+          "roi": 11.4,
+          "dollars": 2548,
+          "note": "1.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Thunder",
+          "wallet": "A",
+          "market": "ML -143",
+          "mk": "ML",
+          "record": "1-1",
+          "roi": 5.5,
+          "dollars": 1112,
+          "note": "0.6x usual, only 2 bets here",
+          "status": {
+           "t": "THIN - 2 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Thunder",
+          "wallet": "TheRepoMan",
+          "market": "SPREAD +4.5 @ 50c (-100)",
+          "mk": "SPREAD",
+          "record": "19-19",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": 20,
+          "dollars": 500,
+          "note": "Polymarket · 0.9x usual · L10 NBA 3-7",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "HEAT",
+        "rows": [
+         {
+          "team": "Heat",
+          "wallet": "I",
+          "market": "SPREAD -4.5 -100",
+          "mk": "SPREAD",
+          "record": "5-3",
+          "roi": 40.7,
+          "dollars": 2765,
+          "note": "0.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Heat",
+          "wallet": "M",
+          "market": "SPREAD -6.5 -118",
+          "mk": "SPREAD",
+          "record": "32-25",
+          "roi": -7.6,
+          "dollars": 1508,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Heat",
+          "wallet": "C",
+          "market": "ML -163",
+          "mk": "ML",
+          "record": "5-1",
+          "roi": 72,
+          "dollars": 1000,
+          "note": "1.0x usual, L10 6-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Heat",
+          "wallet": "M",
+          "market": "ML -178",
+          "mk": "ML",
+          "record": "57-47",
+          "roi": 7.8,
+          "dollars": 564,
+          "note": "0.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Heat",
+          "wallet": "0x09f4…dac0",
+          "market": "SPREAD -4.5 @ 48c (+108)",
+          "mk": "SPREAD",
+          "record": "85-108",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": -12.5,
+          "dollars": 1781,
+          "note": "Polymarket · L10 NBA 4-6",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "THUNDER",
+         "dollars": 6541,
+         "pct": 53,
+         "c": "green"
+        },
+        {
+         "team": "HEAT",
+         "dollars": 5837,
+         "pct": 47,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "POLY LATE: TheRepoMan HOT $500 on Thunder +4.5 - kickoff in 23 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
