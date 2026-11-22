@@ -1,0 +1,120 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NHL - first game 4:00pm CT** - 3 sides (0 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NHL - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NHL and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 10:17am CT, buys checked 2:05pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 4:00PM CT",
+     "picks": [
+      {
+       "bet": "Lightning ML",
+       "sub": "Sabres at Lightning - 4:00pm CT",
+       "chips": [
+        {
+         "t": "COLD taylorsversion $6.5K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 66-50 (-2%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 6-4",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.37x their usual $2.8K",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -199,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:00PM CT",
+     "picks": [
+      {
+       "bet": "Stars ML",
+       "sub": "Penguins at Stars - 6:00pm CT",
+       "chips": [
+        {
+         "t": "COLD joino $2K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 33-32 (-3%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 6-4",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 39.94x their usual $51",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -203,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Blues ML",
+       "sub": "Oilers at Blues - 6:00pm CT",
+       "chips": [
+        {
+         "t": "COLD Painfulvoid $1.5K",
+         "c": "red"
+        },
+        {
+         "t": "NHL ML 5-5 (-9%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 113,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 12-12 +2.0u, COLD sides 53-47 (fading -5.5u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

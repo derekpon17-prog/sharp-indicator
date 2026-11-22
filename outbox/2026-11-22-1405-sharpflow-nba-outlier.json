@@ -1,0 +1,100 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NBA one-off - first game 2:30pm CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 1:51pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 2:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Hawks",
+       "time": "2:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - PISTONS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Pistons",
+       "price": null,
+       "for": {
+        "team": "PISTONS",
+        "rows": [
+         {
+          "team": "Pistons",
+          "wallet": "AF",
+          "market": "ML",
+          "record": "57-47",
+          "roi": 7.8,
+          "dollars": 3170,
+          "note": "1.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "HAWKS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Hawks",
+          "wallet": "ztao",
+          "market": "SPREAD",
+          "record": "103-32",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": -5.9,
+          "dollars": 1365,
+          "note": "Polymarket · L10 NBA 9-1",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Hawks",
+          "wallet": "mhhsw966",
+          "market": "SPREAD",
+          "record": "50-50",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": -3.3,
+          "dollars": 1350,
+          "note": "Polymarket · L10 NBA 5-5",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PISTONS",
+         "dollars": 3170,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW + POLYMARKET READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 12-12 +2.0u, COLD sides 53-47 (fading -5.5u) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
