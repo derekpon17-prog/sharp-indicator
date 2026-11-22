@@ -1,5 +1,5 @@
 {
- "at": "2026-11-22T23:32:34.671Z",
+ "at": "2026-11-22T23:45:49.263Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -129,10 +129,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 7,
-    "l": 3,
+    "w": 9,
+    "l": 1,
     "n": 10,
-    "txt": "L10 NFL 7-3"
+    "txt": "L10 NFL 9-1"
    },
    "usualMed": 443,
    "usualN": 36,
@@ -793,12 +793,104 @@
   },
   {
    "sport": "NBA",
+   "matchup": "Nuggets at Bulls",
+   "grp": "total",
+   "side": "Under",
+   "market": "TOTAL",
+   "cls": "COLD",
+   "startUtc": "2026-11-23T00:10:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x9afc00fb07d26603bf06cc0b80d1b7453cb7033a4e231fd178931e08d84d1e8d",
+   "outcome": "Under",
+   "tokenId": "67492199460049036141681847649646425722536268246346400271379278564727215795596",
+   "gradeTitle": "Nuggets vs. Bulls: O/U 235.5",
+   "gradePrice": 0.5,
+   "onCard": true,
+   "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
+   "name": "nehcnehc",
+   "usd": 3632,
+   "fills": 1,
+   "avgPrice": 0.5,
+   "lastBuyUtc": "2026-11-22T15:54:19.000Z",
+   "firstBuyUtc": "2026-11-22T15:54:19.000Z",
+   "hoursBeforeStart": 8.3,
+   "gameSource": "sharpflow",
+   "title": "Nuggets vs. Bulls: O/U 235.5",
+   "rec": "114-142",
+   "roi": -10.7,
+   "n": 256,
+   "recScope": "NBA TOTAL, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 7,
+    "l": 3,
+    "n": 10,
+    "txt": "L10 NBA 7-3"
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "grp": "team",
+   "side": "Thunder",
+   "market": "SPREAD",
+   "cls": "HOT",
+   "startUtc": "2026-11-22T23:13:00.000Z",
+   "gameDate": "2026-11-22",
+   "conditionId": "0x92a6a9401b1ddc2a73d5467b369d19cd0050f41d8dc1cb6c2d348b4d5d019b2c",
+   "outcome": "Thunder",
+   "tokenId": "46767560214546476546625439698198206569353896712804568141735123316000496231514",
+   "gradeTitle": "Spread: Heat (-4.5)",
+   "gradePrice": 0.5,
+   "onCard": true,
+   "wallet": "0x28059b3fb7af7ed76d83dc9121bbb72ec7cf76ed",
+   "name": "TheRepoMan",
+   "usd": 500,
+   "fills": 1,
+   "avgPrice": 0.5,
+   "lastBuyUtc": "2026-11-22T22:35:19.000Z",
+   "firstBuyUtc": "2026-11-22T22:35:19.000Z",
+   "hoursBeforeStart": 0.6,
+   "gameSource": "sharpflow",
+   "title": "Spread: Heat (-4.5)",
+   "rec": "19-19",
+   "roi": 20,
+   "n": 38,
+   "recScope": "NBA SPREAD, last 45 days",
+   "twoSided": false,
+   "sportCls": "HOT",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 3,
+    "l": 7,
+    "n": 10,
+    "txt": "L10 NBA 3-7"
+   },
+   "usualMed": 468,
+   "usualN": 17,
+   "usualScope": "NBA",
+   "vsUsual": 1.07,
+   "vsUsualAll": 1.07,
+   "sizeTier": "NORMAL"
+  },
+  {
+   "sport": "NBA",
    "matchup": "Thunder at Heat",
    "grp": "team",
    "side": "Heat",
    "market": "ML",
    "cls": "COLD",
-   "startUtc": "2026-11-22T23:10:00.000Z",
+   "startUtc": "2026-11-22T23:13:00.000Z",
    "gameDate": "2026-11-22",
    "conditionId": "0x71c59551fa3035fe4e78c04a8d2a899c7f6e00b2e5847a4535a821ef42b0e825",
    "outcome": "Heat",
@@ -830,12 +922,12 @@
     "n": 10,
     "txt": "L10 NBA 10-0"
    },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
+   "usualMed": 3127,
+   "usualN": 141,
+   "usualScope": "NBA",
+   "vsUsual": 3.02,
+   "vsUsualAll": 2.96,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NBA",
@@ -844,7 +936,7 @@
    "side": "Heat",
    "market": "SPREAD",
    "cls": "COLD",
-   "startUtc": "2026-11-22T23:10:00.000Z",
+   "startUtc": "2026-11-22T23:13:00.000Z",
    "gameDate": "2026-11-22",
    "conditionId": "0x92a6a9401b1ddc2a73d5467b369d19cd0050f41d8dc1cb6c2d348b4d5d019b2c",
    "outcome": "Heat",
@@ -876,11 +968,11 @@
     "n": 10,
     "txt": "L10 NBA 4-6"
    },
-   "usualMed": 541,
-   "usualN": 61,
+   "usualMed": 285,
+   "usualN": 183,
    "usualScope": "NBA",
-   "vsUsual": 3.29,
-   "vsUsualAll": 3.29,
+   "vsUsual": 6.25,
+   "vsUsualAll": 6.25,
    "sizeTier": "BIG"
   },
   {
@@ -890,14 +982,14 @@
    "side": "Over",
    "market": "TOTAL",
    "cls": "COLD",
-   "startUtc": "2026-11-22T23:10:00.000Z",
+   "startUtc": "2026-11-22T23:13:00.000Z",
    "gameDate": "2026-11-22",
    "conditionId": "0x507160e3d8d1ae9a0d16d97398e00c80f655483fb871667be08dc138c32c1ae0",
    "outcome": "Over",
    "tokenId": "104600204208348565357417386838640054437824045157148706840255271760057155953499",
    "gradeTitle": "Thunder vs. Heat: O/U 234.5",
    "gradePrice": 0.45,
-   "onCard": true,
+   "onCard": false,
    "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
    "name": "nehcnehc",
    "usd": 1768,
@@ -905,7 +997,7 @@
    "avgPrice": 0.268,
    "lastBuyUtc": "2026-11-22T16:44:49.000Z",
    "firstBuyUtc": "2026-11-22T15:55:49.000Z",
-   "hoursBeforeStart": 7.2,
+   "hoursBeforeStart": 7.3,
    "gameSource": "sharpflow",
    "title": "Thunder vs. Heat: O/U 258.5",
    "rec": "114-142",
@@ -922,12 +1014,12 @@
     "n": 10,
     "txt": "L10 NBA 7-3"
    },
-   "usualMed": 2788,
-   "usualN": 145,
-   "usualScope": "NBA",
-   "vsUsual": 0.63,
-   "vsUsualAll": 0.63,
-   "sizeTier": "NORMAL"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NBA",
@@ -969,10 +1061,10 @@
     "txt": "L10 NBA 5-5"
    },
    "usualMed": 1523,
-   "usualN": 106,
+   "usualN": 108,
    "usualScope": "NBA",
    "vsUsual": 1.35,
-   "vsUsualAll": 1.48,
+   "vsUsualAll": 1.24,
    "sizeTier": "NORMAL"
   },
   {
@@ -1014,11 +1106,11 @@
     "n": 10,
     "txt": "L10 NBA 4-6"
    },
-   "usualMed": 541,
-   "usualN": 61,
+   "usualMed": 285,
+   "usualN": 183,
    "usualScope": "NBA",
-   "vsUsual": 3.21,
-   "vsUsualAll": 3.21,
+   "vsUsual": 6.08,
+   "vsUsualAll": 6.08,
    "sizeTier": "BIG"
   },
   {
@@ -1060,12 +1152,12 @@
     "n": 10,
     "txt": "L10 NBA 7-3"
    },
-   "usualMed": 2788,
-   "usualN": 145,
-   "usualScope": "NBA",
-   "vsUsual": 2.18,
-   "vsUsualAll": 2.18,
-   "sizeTier": "BIG"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NBA",
@@ -1106,11 +1198,11 @@
     "n": 10,
     "txt": "L10 NBA 8-2"
    },
-   "usualMed": 737,
-   "usualN": 42,
+   "usualMed": 713,
+   "usualN": 55,
    "usualScope": "NBA",
-   "vsUsual": 1.33,
-   "vsUsualAll": 1.36,
+   "vsUsual": 1.38,
+   "vsUsualAll": 1.62,
    "sizeTier": "NORMAL"
   },
   {
@@ -1152,12 +1244,12 @@
     "n": 10,
     "txt": "L10 NBA 4-6"
    },
-   "usualMed": 445,
-   "usualN": 60,
-   "usualScope": "NBA",
-   "vsUsual": 2.5,
-   "vsUsualAll": 2.79,
-   "sizeTier": "BIG"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NBA",
@@ -1198,12 +1290,12 @@
     "n": 10,
     "txt": "L10 NBA 5-5"
    },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
+   "usualMed": 1272,
+   "usualN": 9,
+   "usualScope": "NBA",
+   "vsUsual": 1,
+   "vsUsualAll": 0.99,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "NBA",
@@ -1244,58 +1336,12 @@
     "n": 10,
     "txt": "L10 NBA 7-3"
    },
-   "usualMed": 2788,
-   "usualN": 145,
-   "usualScope": "NBA",
-   "vsUsual": 0.85,
-   "vsUsualAll": 0.85,
-   "sizeTier": "NORMAL"
-  },
-  {
-   "sport": "NBA",
-   "matchup": "Nuggets at Bulls",
-   "grp": "total",
-   "side": "Under",
-   "market": "TOTAL",
-   "cls": "COLD",
-   "startUtc": "2026-11-23T00:10:00.000Z",
-   "gameDate": "2026-11-22",
-   "conditionId": "0x9afc00fb07d26603bf06cc0b80d1b7453cb7033a4e231fd178931e08d84d1e8d",
-   "outcome": "Under",
-   "tokenId": "67492199460049036141681847649646425722536268246346400271379278564727215795596",
-   "gradeTitle": "Nuggets vs. Bulls: O/U 235.5",
-   "gradePrice": 0.5,
-   "onCard": true,
-   "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
-   "name": "nehcnehc",
-   "usd": 3632,
-   "fills": 1,
-   "avgPrice": 0.5,
-   "lastBuyUtc": "2026-11-22T15:54:19.000Z",
-   "firstBuyUtc": "2026-11-22T15:54:19.000Z",
-   "hoursBeforeStart": 8.3,
-   "gameSource": "sharpflow",
-   "title": "Nuggets vs. Bulls: O/U 235.5",
-   "rec": "114-142",
-   "roi": -10.7,
-   "n": 256,
-   "recScope": "NBA TOTAL, last 45 days",
-   "twoSided": false,
-   "sportCls": "COLD",
-   "gateNote": null,
-   "sameAsSF": null,
-   "l10": {
-    "w": 7,
-    "l": 3,
-    "n": 10,
-    "txt": "L10 NBA 7-3"
-   },
-   "usualMed": 2788,
-   "usualN": 145,
-   "usualScope": "NBA",
-   "vsUsual": 1.3,
-   "vsUsualAll": 1.3,
-   "sizeTier": "NORMAL"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NHL",
@@ -1336,11 +1382,11 @@
     "n": 10,
     "txt": "L10 NHL 4-6"
    },
-   "usualMed": 212,
-   "usualN": 12,
+   "usualMed": 274,
+   "usualN": 35,
    "usualScope": "all sports",
-   "vsUsual": 7.96,
-   "vsUsualAll": 7.96,
+   "vsUsual": 6.16,
+   "vsUsualAll": 6.16,
    "sizeTier": "BIG"
   },
   {
@@ -1382,11 +1428,11 @@
     "n": 10,
     "txt": "L10 NHL 5-5"
    },
-   "usualMed": 1313,
-   "usualN": 26,
+   "usualMed": 1733,
+   "usualN": 29,
    "usualScope": "NHL",
-   "vsUsual": 1.14,
-   "vsUsualAll": 1.14,
+   "vsUsual": 0.87,
+   "vsUsualAll": 0.87,
    "sizeTier": "NORMAL"
   },
   {
@@ -1428,11 +1474,11 @@
     "n": 10,
     "txt": "L10 NHL 5-5"
    },
-   "usualMed": 1313,
-   "usualN": 26,
+   "usualMed": 1733,
+   "usualN": 29,
    "usualScope": "NHL",
-   "vsUsual": 1.09,
-   "vsUsualAll": 1.09,
+   "vsUsual": 0.83,
+   "vsUsualAll": 0.83,
    "sizeTier": "NORMAL"
   },
   {
@@ -1474,11 +1520,11 @@
     "n": 10,
     "txt": "L10 NHL 6-4"
    },
-   "usualMed": 2192,
-   "usualN": 128,
+   "usualMed": 2623,
+   "usualN": 169,
    "usualScope": "NHL",
-   "vsUsual": 2.98,
-   "vsUsualAll": 2.88,
+   "vsUsual": 2.49,
+   "vsUsualAll": 2.46,
    "sizeTier": "BIG"
   },
   {
@@ -1520,12 +1566,12 @@
     "n": 10,
     "txt": "L10 NHL 2-8"
    },
-   "usualMed": 535,
-   "usualN": 17,
+   "usualMed": 440,
+   "usualN": 18,
    "usualScope": "NHL",
-   "vsUsual": 1.42,
-   "vsUsualAll": 1.46,
-   "sizeTier": "NORMAL"
+   "vsUsual": 1.72,
+   "vsUsualAll": 1.45,
+   "sizeTier": "BIG"
   },
   {
    "sport": "NHL",
@@ -1566,12 +1612,12 @@
     "n": 10,
     "txt": "L10 NHL 8-2"
    },
-   "usualMed": 1931,
-   "usualN": 90,
-   "usualScope": "NHL",
-   "vsUsual": 6.17,
-   "vsUsualAll": 9.84,
-   "sizeTier": "BIG"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NHL",
@@ -1612,12 +1658,12 @@
     "n": 10,
     "txt": "L10 NHL 8-2"
    },
-   "usualMed": 1931,
-   "usualN": 90,
-   "usualScope": "NHL",
-   "vsUsual": 3.73,
-   "vsUsualAll": 5.95,
-   "sizeTier": "BIG"
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
   },
   {
    "sport": "NHL",
@@ -1658,12 +1704,12 @@
     "n": 10,
     "txt": "L10 NHL 5-5"
    },
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
+   "usualMed": 1899,
+   "usualN": 65,
+   "usualScope": "all sports",
+   "vsUsual": 0.79,
+   "vsUsualAll": 0.79,
+   "sizeTier": "NORMAL"
   },
   {
    "sport": "CFB",
@@ -1704,29 +1750,27 @@
     "n": 10,
     "txt": "L10 NCAAF 4-6"
    },
-   "usualMed": 925,
-   "usualN": 6,
+   "usualMed": 200,
+   "usualN": 12,
    "usualScope": "all sports",
-   "vsUsual": 0.88,
-   "vsUsualAll": 0.88,
-   "sizeTier": "NORMAL"
+   "vsUsual": 4.08,
+   "vsUsualAll": 4.08,
+   "sizeTier": "BIG"
   }
  ],
- "errors": [
-  "0x28059b3fb7af7ed76d83dc9121bbb72ec7cf76ed: HTTP 500"
- ],
+ "errors": [],
  "rosterGeneratedAt": "2026-11-22T20:51:22.199Z",
  "hotBar": {
   "graded": 35,
   "mktMin": 5,
   "roiMin": 0
  },
- "sfScannedAt": "2026-11-22T23:22:59.548Z",
+ "sfScannedAt": "2026-11-22T23:35:27.738Z",
  "espnGames": 222,
  "espnErrors": [],
  "espnAdded": 172,
  "games": 186,
  "walletsChecked": 132,
- "inGameSkipped": 886,
+ "inGameSkipped": 922,
  "offCardMatches": 0
 }
