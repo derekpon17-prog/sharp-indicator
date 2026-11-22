@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T18:56:05.481Z",
+ "scannedAt": "2026-11-22T19:08:40.935Z",
  "sides": [
   {
    "tail": false,
@@ -222,7 +222,7 @@
    "sport": "NFL",
    "matchup": "Titans at Cowboys",
    "market": "SPREAD",
-   "pick": "Cowboys +3.5",
+   "pick": "Cowboys",
    "kickoffEt": "Sun, Nov 22, 1:02 PM",
    "dollars": 17002,
    "oppDollars": 0,
@@ -251,7 +251,7 @@
    "market": "ML",
    "pick": "Bengals",
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
-   "dollars": 14744,
+   "dollars": 14755,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 3.2,
@@ -546,7 +546,7 @@
    "market": "ML",
    "pick": "Jets",
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
-   "dollars": 71147,
+   "dollars": 71282,
    "oppDollars": 7006,
    "wallets": 1,
    "maxVsUsual": 0.4,
@@ -601,7 +601,7 @@
    "pick": "Chargers",
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
    "dollars": 7006,
-   "oppDollars": 71147,
+   "oppDollars": 71282,
    "wallets": 1,
    "maxVsUsual": 1.5,
    "price": "-156",
@@ -803,7 +803,7 @@
   {
    "matchup": "Titans at Cowboys",
    "market": "SPREAD",
-   "pick": "Cowboys +3.5",
+   "pick": "Cowboys",
    "kickoffEt": "Sun, Nov 22, 1:02 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
@@ -823,7 +823,7 @@
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 14744,
+   "strongDollars": 14755,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -920,7 +920,7 @@
    "sport": "NFL",
    "type": "STRONG_VS_OTHER",
    "strongDollars": 7006,
-   "oppDollars": 71147,
+   "oppDollars": 71282,
    "oppWeakDollars": 0,
    "fp": [
     "31-10|62756|21-4"
@@ -1118,7 +1118,7 @@
   {
    "matchup": "Titans at Cowboys",
    "market": "SPREAD",
-   "pick": "Cowboys +3.5",
+   "pick": "Cowboys",
    "kickoffEt": "Sun, Nov 22, 1:02 PM",
    "sport": "NFL",
    "dollars": 17002,
@@ -1138,7 +1138,7 @@
    "pick": "Bengals",
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
    "sport": "NFL",
-   "dollars": 14744,
+   "dollars": 14755,
    "price": "-266",
    "vsUsual": 3.2,
    "size": "1.5x and up",

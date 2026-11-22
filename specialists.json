@@ -1,7 +1,51 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T18:56:05.481Z",
+ "scannedAt": "2026-11-22T19:08:40.935Z",
  "sports": {
+  "CFB": [
+   {
+    "id": "aaedcd",
+    "gap": 7.8,
+    "overall": "153-128",
+    "sport": "33-20",
+    "returnPct": 25.7,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-268",
+      "dollars": 687,
+      "vsUsual": 2.7,
+      "vsUsualAll": 1.5
+     }
+    ]
+   },
+   {
+    "id": "487b8b",
+    "gap": 3.1,
+    "overall": "522-439",
+    "sport": "77-57",
+    "returnPct": 4.2,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-238",
+      "dollars": 11663,
+      "vsUsual": 19.4,
+      "vsUsualAll": 25.5
+     }
+    ]
+   }
+  ],
   "NFL": [
    {
     "id": "bf28eb",
@@ -135,50 +179,6 @@
       "dollars": 7600,
       "vsUsual": 0.4,
       "vsUsualAll": 0.9
-     }
-    ]
-   }
-  ],
-  "CFB": [
-   {
-    "id": "aaedcd",
-    "gap": 7.8,
-    "overall": "153-128",
-    "sport": "33-20",
-    "returnPct": 25.7,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Texas at Texas A&M",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-268",
-      "dollars": 687,
-      "vsUsual": 2.7,
-      "vsUsualAll": 1.5
-     }
-    ]
-   },
-   {
-    "id": "487b8b",
-    "gap": 3.1,
-    "overall": "522-439",
-    "sport": "77-57",
-    "returnPct": 4.2,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Texas at Texas A&M",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-238",
-      "dollars": 11663,
-      "vsUsual": 19.4,
-      "vsUsualAll": 25.5
      }
     ]
    }
