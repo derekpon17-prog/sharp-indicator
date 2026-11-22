@@ -1,0 +1,49 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NHL one-off - first game 11:30am CT** - 1 side (1 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NHL - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NHL and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 12:48am CT, buys checked 9:44am CT",
+   "sections": [
+    {
+     "heading": "NHL - 11:30AM CT",
+     "picks": [
+      {
+       "bet": "Hurricanes -1.5",
+       "sub": "Hurricanes at Rangers - 11:30am CT",
+       "chips": [
+        {
+         "t": "HOT 0x4924…3782 $43K",
+         "c": "green"
+        },
+        {
+         "t": "NHL SPREAD 4-4 (+35%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "0.63x their usual $69K",
+         "c": "grey"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 122,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 12-12 +2.0u, COLD sides 52-47 (fading -4.5u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
