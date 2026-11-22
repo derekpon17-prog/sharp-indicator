@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T22:37:23.469Z",
+ "scannedAt": "2026-11-22T22:49:53.077Z",
  "sides": [
   {
    "tail": false,
@@ -252,7 +252,7 @@
    "market": "ML",
    "pick": "Bengals",
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
-   "dollars": 14878,
+   "dollars": 14880,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 1.9,
@@ -279,7 +279,7 @@
    "market": "ML",
    "pick": "Hawks",
    "kickoffEt": "Sun, Nov 22, 3:40 PM",
-   "dollars": 4275,
+   "dollars": 4170,
    "oppDollars": 0,
    "wallets": 2,
    "maxVsUsual": 1.3,
@@ -491,6 +491,60 @@
   {
    "tail": false,
    "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Thunder",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "dollars": 3843,
+   "oppDollars": 5591,
+   "wallets": 2,
+   "maxVsUsual": 1.6,
+   "price": "-100",
+   "size": "1.5x and up",
+   "mktRecord": "3-1",
+   "mktRoi": 104.7,
+   "l30Roi": 88.6,
+   "contested": true,
+   "sfPoints": 15,
+   "parts": {
+    "money": 8,
+    "sizing": 7,
+    "quality": 4,
+    "pooled": 4,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Heat",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "dollars": 5591,
+   "oppDollars": 3843,
+   "wallets": 2,
+   "maxVsUsual": 0.6,
+   "price": "-100",
+   "size": "under 0.5x",
+   "mktRecord": "5-3",
+   "mktRoi": 40.7,
+   "l30Roi": 37.2,
+   "contested": true,
+   "sfPoints": 12,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 4,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
    "matchup": "Pacers at Knicks",
    "market": "ML",
    "pick": "Pacers",
@@ -537,60 +591,6 @@
     "sizing": 0,
     "quality": 6,
     "pooled": 4,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Thunder at Heat",
-   "market": "SPREAD",
-   "pick": "Heat",
-   "kickoffEt": "Sun, Nov 22, 6:10 PM",
-   "dollars": 4273,
-   "oppDollars": 2881,
-   "wallets": 2,
-   "maxVsUsual": 0.6,
-   "price": "-100",
-   "size": "under 0.5x",
-   "mktRecord": "5-3",
-   "mktRoi": 40.7,
-   "l30Roi": 37.2,
-   "contested": true,
-   "sfPoints": 8,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 4,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Thunder at Heat",
-   "market": "SPREAD",
-   "pick": "Thunder +4.5",
-   "kickoffEt": "Sun, Nov 22, 6:10 PM",
-   "dollars": 2881,
-   "oppDollars": 4273,
-   "wallets": 1,
-   "maxVsUsual": 1.4,
-   "price": "-100",
-   "size": "1x",
-   "mktRecord": "3-1",
-   "mktRoi": 104.7,
-   "l30Roi": 88.6,
-   "contested": true,
-   "sfPoints": 8,
-   "parts": {
-    "money": 8,
-    "sizing": 4,
-    "quality": 4,
-    "pooled": 0,
     "unopposed": 0,
     "contested": -8
    }
@@ -924,7 +924,7 @@
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 14878,
+   "strongDollars": 14880,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -948,6 +948,22 @@
    ],
    "bestPrice": "+104",
    "maxVsUsual": 1
+  },
+  {
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Heat",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_VS_STRONG",
+   "strongDollars": 4083,
+   "oppDollars": 3843,
+   "oppWeakDollars": 672,
+   "fp": [
+    "6-4|42846|5-3"
+   ],
+   "bestPrice": "-100",
+   "maxVsUsual": 0.6
   },
   {
    "matchup": "Vikings at 49ers",
@@ -985,34 +1001,18 @@
   {
    "matchup": "Thunder at Heat",
    "market": "SPREAD",
-   "pick": "Thunder +4.5",
+   "pick": "Thunder",
    "kickoffEt": "Sun, Nov 22, 6:10 PM",
    "sport": "NBA",
    "type": "STRONG_VS_STRONG",
-   "strongDollars": 2881,
-   "oppDollars": 4273,
+   "strongDollars": 3171,
+   "oppDollars": 5591,
    "oppWeakDollars": 1508,
    "fp": [
     "4-2|10577|3-1"
    ],
    "bestPrice": "-100",
-   "maxVsUsual": 1.4
-  },
-  {
-   "matchup": "Thunder at Heat",
-   "market": "SPREAD",
-   "pick": "Heat",
-   "kickoffEt": "Sun, Nov 22, 6:10 PM",
-   "sport": "NBA",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 2765,
-   "oppDollars": 2881,
-   "oppWeakDollars": 0,
-   "fp": [
-    "6-4|42846|5-3"
-   ],
-   "bestPrice": "-100",
-   "maxVsUsual": 0.6
+   "maxVsUsual": 1.6
   },
   {
    "matchup": "Jets at Chargers",
@@ -1238,7 +1238,7 @@
    "pick": "Bengals",
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
    "sport": "NFL",
-   "dollars": 14878,
+   "dollars": 14880,
    "price": "-266",
    "vsUsual": 1.9,
    "size": "1.5x and up",
@@ -1265,6 +1265,23 @@
    "mktRoi": 37.4,
    "opposed": "contested",
    "fp": "11-3|18442|7-3"
+  },
+  {
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Thunder",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "sport": "NBA",
+   "dollars": 3171,
+   "price": "-100",
+   "vsUsual": 1.6,
+   "size": "1.5x and up",
+   "form": "L10 4-2",
+   "l30Roi": 88.6,
+   "mktRecord": "3-1",
+   "mktRoi": 104.7,
+   "opposed": "contested",
+   "fp": "4-2|10577|3-1"
   },
   {
    "matchup": "Mavericks at Jazz",
@@ -1350,23 +1367,6 @@
    "mktRoi": 49.1,
    "opposed": "contested",
    "fp": "16-8|10510|12-4"
-  },
-  {
-   "matchup": "Thunder at Heat",
-   "market": "SPREAD",
-   "pick": "Thunder +4.5",
-   "kickoffEt": "Sun, Nov 22, 6:10 PM",
-   "sport": "NBA",
-   "dollars": 2881,
-   "price": "-100",
-   "vsUsual": 1.4,
-   "size": "1x",
-   "form": "L10 4-2",
-   "l30Roi": 88.6,
-   "mktRecord": "3-1",
-   "mktRoi": 104.7,
-   "opposed": "contested",
-   "fp": "4-2|10577|3-1"
   },
   {
    "matchup": "Pistons at Hawks",
