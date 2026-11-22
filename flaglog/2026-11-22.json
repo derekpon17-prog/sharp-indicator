@@ -16,7 +16,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Cardinals at Chiefs|SPREAD|Cardinals +16.5": {
    "sport": "NFL",
@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -80,7 +80,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Celtics at Warriors|SPREAD|Celtics -9.5": {
    "sport": "NBA",
@@ -95,8 +95,8 @@
    ],
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
-   "opposedSeen": false,
-   "snapshots": 3
+   "opposedSeen": true,
+   "snapshots": 4
   },
   "Buccaneers at Lions|SPREAD|Lions -3.5": {
    "sport": "NFL",
@@ -128,7 +128,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Pistons at Hawks|ML|Hawks": {
    "sport": "NBA",
@@ -144,7 +144,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Saints at Bears|SPREAD|Saints +9.5": {
    "sport": "NFL",
@@ -192,7 +192,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 4832,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Cardinals at Chiefs|ML|Chiefs": {
    "sport": "NFL",
@@ -206,10 +206,10 @@
     "STRONG_UNOPPOSED",
     "SIZED_2X"
    ],
-   "maxVsUsual": 3.6,
-   "maxDollars": 58928,
+   "maxVsUsual": 7.5,
+   "maxDollars": 92976,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 5
   },
   "Cardinals at Chiefs|SPREAD|Chiefs": {
    "sport": "NFL",
@@ -224,6 +224,272 @@
    ],
    "maxVsUsual": 0.1,
    "maxDollars": 1694,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Buccaneers at Lions|ML|Lions": {
+   "sport": "NFL",
+   "matchup": "Buccaneers at Lions",
+   "market": "ML",
+   "pick": "Lions",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-222",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 9.9,
+   "maxDollars": 44980,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Titans at Cowboys|ML|Cowboys": {
+   "sport": "NFL",
+   "matchup": "Titans at Cowboys",
+   "market": "ML",
+   "pick": "Cowboys",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-352",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 7.5,
+   "maxDollars": 33998,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Dolphins at Bills|ML|Bills": {
+   "sport": "NFL",
+   "matchup": "Dolphins at Bills",
+   "market": "ML",
+   "pick": "Bills",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-1011",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 4,
+   "maxDollars": 18071,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Titans at Cowboys|SPREAD|Cowboys +3.5": {
+   "sport": "NFL",
+   "matchup": "Titans at Cowboys",
+   "market": "SPREAD",
+   "pick": "Cowboys +3.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-614",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.7,
+   "maxDollars": 17002,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Cardinals at Chiefs|TOTAL|Over 40.5": {
+   "sport": "NFL",
+   "matchup": "Cardinals at Chiefs",
+   "market": "TOTAL",
+   "pick": "Over 40.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.1,
+   "maxDollars": 9636,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Steelers at Eagles|TOTAL|Over 38.5": {
+   "sport": "NFL",
+   "matchup": "Steelers at Eagles",
+   "market": "TOTAL",
+   "pick": "Over 38.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "+113",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2,
+   "maxDollars": 9255,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Buccaneers at Lions|SPREAD|Lions": {
+   "sport": "NFL",
+   "matchup": "Buccaneers at Lions",
+   "market": "SPREAD",
+   "pick": "Lions",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-105",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 8071,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Jaguars at Giants|ML|Jaguars": {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "ML",
+   "pick": "Jaguars",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-245",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 7940,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Bengals at Commanders|SPREAD|Bengals -6.5": {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "SPREAD",
+   "pick": "Bengals -6.5",
+   "kickoffEt": "Mon, Nov 23, 8:15 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "+104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 7203,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Jets at Chargers|ML|Chargers": {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Chargers",
+   "kickoffEt": "Sun, Nov 22, 4:05 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-156",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 7006,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Bengals at Commanders|ML|Bengals": {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "ML",
+   "pick": "Bengals",
+   "kickoffEt": "Mon, Nov 23, 8:15 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-257",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 4548,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Ravens at Panthers|ML|Panthers": {
+   "sport": "NFL",
+   "matchup": "Ravens at Panthers",
+   "market": "ML",
+   "pick": "Panthers",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-135",
+   "tags": [
+    "STRONG_VS_OTHER"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 3998,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Steelers at Eagles|ML|Steelers": {
+   "sport": "NFL",
+   "matchup": "Steelers at Eagles",
+   "market": "ML",
+   "pick": "Steelers",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-192",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.7,
+   "maxDollars": 3313,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Vikings at 49ers|ML|49ers": {
+   "sport": "NFL",
+   "matchup": "Vikings at 49ers",
+   "market": "ML",
+   "pick": "49ers",
+   "kickoffEt": "Sun, Nov 22, 8:20 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "-156",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.5,
+   "maxDollars": 2380,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Saints at Bears|SPREAD|Saints": {
+   "sport": "NFL",
+   "matchup": "Saints at Bears",
+   "market": "SPREAD",
+   "pick": "Saints",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "+122",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 2534,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
+   "sport": "NFL",
+   "matchup": "Buccaneers at Lions",
+   "market": "SPREAD",
+   "pick": "Buccaneers +6.5",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "firstSeenAt": "2026-11-22T16:04:34.438Z",
+   "firstPrice": "+104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 6789,
    "opposedSeen": true,
    "snapshots": 1
   }
