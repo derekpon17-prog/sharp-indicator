@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T20:16:13.542Z",
+ "scannedAt": "2026-11-22T20:28:48.554Z",
  "sides": [
   {
    "tail": false,
@@ -17,33 +17,6 @@
    "mktRecord": "3-0",
    "mktRoi": 126.6,
    "l30Roi": 65.3,
-   "contested": false,
-   "sfPoints": 45,
-   "parts": {
-    "money": 20,
-    "sizing": 12,
-    "quality": 6,
-    "pooled": 4,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Titans at Cowboys",
-   "market": "ML",
-   "pick": "Cowboys",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "dollars": 51519,
-   "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 9.7,
-   "price": "-342",
-   "size": "1.5x and up",
-   "mktRecord": "21-4",
-   "mktRoi": 34.7,
-   "l30Roi": 33.7,
    "contested": false,
    "sfPoints": 45,
    "parts": {
@@ -132,33 +105,6 @@
     "sizing": 4,
     "quality": 6,
     "pooled": 4,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Titans at Cowboys",
-   "market": "SPREAD",
-   "pick": "Cowboys",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "dollars": 17002,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 3.7,
-   "price": "-614",
-   "size": "1.5x and up",
-   "mktRecord": "9-6",
-   "mktRoi": 21.9,
-   "l30Roi": 33.7,
-   "contested": false,
-   "sfPoints": 35,
-   "parts": {
-    "money": 16,
-    "sizing": 12,
-    "quality": 4,
-    "pooled": 0,
     "unopposed": 3,
     "contested": 0
    }
@@ -274,6 +220,33 @@
    "tail": true,
    "sport": "NFL",
    "matchup": "Steelers at Eagles",
+   "market": "ML",
+   "pick": "Steelers",
+   "kickoffEt": "Sun, Nov 22, 1:02 PM",
+   "dollars": 13313,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 1.1,
+   "price": "-186",
+   "size": "1x",
+   "mktRecord": "4-2",
+   "mktRoi": 35.6,
+   "l30Roi": 5,
+   "contested": false,
+   "sfPoints": 29,
+   "parts": {
+    "money": 12,
+    "sizing": 4,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": true,
+   "sport": "NFL",
+   "matchup": "Steelers at Eagles",
    "market": "TOTAL",
    "pick": "Over 38.5",
    "kickoffEt": "Sun, Nov 22, 1:02 PM",
@@ -293,6 +266,33 @@
     "sizing": 10,
     "quality": 4,
     "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Steelers at Eagles",
+   "market": "SPREAD",
+   "pick": "Steelers",
+   "kickoffEt": "Sun, Nov 22, 1:02 PM",
+   "dollars": 55984,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 0.3,
+   "price": "-100",
+   "size": "under 0.5x",
+   "mktRecord": "20-12",
+   "mktRoi": 21.4,
+   "l30Roi": 20.9,
+   "contested": false,
+   "sfPoints": 27,
+   "parts": {
+    "money": 20,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -407,33 +407,6 @@
   {
    "tail": false,
    "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "SPREAD",
-   "pick": "Steelers",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "dollars": 52422,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.3,
-   "price": "-100",
-   "size": "under 0.5x",
-   "mktRecord": "20-12",
-   "mktRoi": 21.4,
-   "l30Roi": 20.9,
-   "contested": false,
-   "sfPoints": 23,
-   "parts": {
-    "money": 20,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
    "matchup": "Vikings at 49ers",
    "market": "ML",
    "pick": "49ers",
@@ -519,7 +492,7 @@
    "market": "ML",
    "pick": "Jets",
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
-   "dollars": 72570,
+   "dollars": 72573,
    "oppDollars": 7006,
    "wallets": 1,
    "maxVsUsual": 0.4,
@@ -542,39 +515,12 @@
   {
    "tail": false,
    "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "ML",
-   "pick": "Steelers",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "dollars": 10000,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.1,
-   "price": "-186",
-   "size": "1x",
-   "mktRecord": "4-2",
-   "mktRoi": 35.6,
-   "l30Roi": 5,
-   "contested": false,
-   "sfPoints": 19,
-   "parts": {
-    "money": 12,
-    "sizing": 4,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
    "matchup": "Jets at Chargers",
    "market": "ML",
    "pick": "Chargers",
    "kickoffEt": "Sun, Nov 22, 4:05 PM",
    "dollars": 7006,
-   "oppDollars": 72570,
+   "oppDollars": 72573,
    "wallets": 1,
    "maxVsUsual": 1.5,
    "price": "-156",
@@ -842,22 +788,6 @@
    "maxVsUsual": 9.9
   },
   {
-   "matchup": "Titans at Cowboys",
-   "market": "ML",
-   "pick": "Cowboys",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 43919,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "31-10|62756|21-4"
-   ],
-   "bestPrice": "-342",
-   "maxVsUsual": 9.7
-  },
-  {
    "matchup": "Saints at Bears",
    "market": "ML",
    "pick": "Bears",
@@ -889,22 +819,6 @@
    ],
    "bestPrice": "-257",
    "maxVsUsual": 2
-  },
-  {
-   "matchup": "Titans at Cowboys",
-   "market": "SPREAD",
-   "pick": "Cowboys",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 17002,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "31-10|62756|9-6"
-   ],
-   "bestPrice": "-614",
-   "maxVsUsual": 3.7
   },
   {
    "matchup": "Bengals at Commanders",
@@ -994,7 +908,7 @@
    "sport": "NFL",
    "type": "STRONG_VS_OTHER",
    "strongDollars": 7006,
-   "oppDollars": 72570,
+   "oppDollars": 72573,
    "oppWeakDollars": 0,
    "fp": [
     "31-10|62756|21-4"
@@ -1017,6 +931,22 @@
    ],
    "bestPrice": "-135",
    "maxVsUsual": 0.9
+  },
+  {
+   "matchup": "Steelers at Eagles",
+   "market": "ML",
+   "pick": "Steelers",
+   "kickoffEt": "Sun, Nov 22, 1:02 PM",
+   "sport": "NFL",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 3313,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "31-10|62756|21-4"
+   ],
+   "bestPrice": "-192",
+   "maxVsUsual": 1.1
   }
  ],
  "sizedUp": [
@@ -1046,23 +976,6 @@
    "dollars": 44980,
    "price": "-222",
    "vsUsual": 9.9,
-   "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 33.7,
-   "mktRecord": "21-4",
-   "mktRoi": 34.7,
-   "opposed": "unopposed",
-   "fp": "31-10|62756|21-4"
-  },
-  {
-   "matchup": "Titans at Cowboys",
-   "market": "ML",
-   "pick": "Cowboys",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "dollars": 43919,
-   "price": "-342",
-   "vsUsual": 9.7,
    "size": "1.5x and up",
    "form": "L10 6-4",
    "l30Roi": 33.7,
@@ -1137,23 +1050,6 @@
    "mktRoi": 25.7,
    "opposed": "contested",
    "fp": "27-9|1850281|24-18"
-  },
-  {
-   "matchup": "Titans at Cowboys",
-   "market": "SPREAD",
-   "pick": "Cowboys",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "dollars": 17002,
-   "price": "-614",
-   "vsUsual": 3.7,
-   "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 33.7,
-   "mktRecord": "9-6",
-   "mktRoi": 21.9,
-   "opposed": "unopposed",
-   "fp": "31-10|62756|9-6"
   },
   {
    "matchup": "Bengals at Commanders",
