@@ -1,0 +1,142 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow + Polymarket late money - NFL** - 1 game",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW + POLYMARKET",
+   "title": "NFL - late Polymarket money on a Sharp Flow game",
+   "subtitle": "HOT Polymarket wallet bought after the NFL report posted - shown with the Sharp Flow read, games not started. Buys checked 2:44pm CT, SharpFlow snapshot 2:28pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 3:05PM CT",
+     "picks": [
+      {
+       "eyebrow": "Jets at Chargers",
+       "time": "3:05pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Jets vs Chargers",
+       "price": null,
+       "for": {
+        "team": "JETS",
+        "rows": [
+         {
+          "team": "Jets",
+          "wallet": "D",
+          "market": "ML +156",
+          "mk": "ML",
+          "record": "24-18",
+          "roi": 25.7,
+          "dollars": 72573,
+          "note": "0.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Jets",
+          "wallet": "BreakTheBank",
+          "market": "ML @ 40c (+150)",
+          "mk": "ML",
+          "record": "33-19",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": 28,
+          "dollars": 112208,
+          "note": "Polymarket · L10 NFL 0-10",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Jets",
+          "wallet": "surfandturf",
+          "market": "ML @ 39c (+156)",
+          "mk": "ML",
+          "record": "22-20",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -19.8,
+          "dollars": 2633,
+          "note": "Polymarket · L10 NFL 8-2",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "CHARGERS",
+        "rows": [
+         {
+          "team": "Chargers",
+          "wallet": "O",
+          "market": "ML -156",
+          "mk": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 7006,
+          "note": "1.5x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Chargers",
+          "wallet": "AD",
+          "market": "SPREAD",
+          "mk": "SPREAD",
+          "record": "9-3",
+          "roi": 53.9,
+          "dollars": 3667,
+          "note": "0.5x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "JETS",
+         "dollars": 72573,
+         "pct": 87,
+         "c": "green"
+        },
+        {
+         "team": "CHARGERS",
+         "dollars": 10673,
+         "pct": 13,
+         "c": "red"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "POLY LATE: BreakTheBank HOT $112k on Jets ML - kickoff in 20 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
