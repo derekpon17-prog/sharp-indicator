@@ -1,7 +1,157 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-22T03:48:56.362Z",
+ "scannedAt": "2026-11-22T04:33:59.407Z",
  "sports": {
+  "CFB": [
+   {
+    "id": "e11302",
+    "gap": 17.9,
+    "overall": "49-31",
+    "sport": "19-5",
+    "returnPct": 57.3,
+    "last10": "8-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Oklahoma State at Arizona State",
+      "market": "ML",
+      "pick": "Oklahoma State",
+      "line": null,
+      "price": "-127",
+      "dollars": 840,
+      "vsUsual": 1.3,
+      "vsUsualAll": 0.2
+     }
+    ]
+   },
+   {
+    "id": "c6c4d6",
+    "gap": 9.9,
+    "overall": "95-45",
+    "sport": "14-4",
+    "returnPct": 4.1,
+    "last10": "8-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Oklahoma State at Arizona State",
+      "market": "ML",
+      "pick": "Oklahoma State",
+      "line": null,
+      "price": "-127",
+      "dollars": 572,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.1
+     }
+    ]
+   },
+   {
+    "id": "3f8a61",
+    "gap": 8.7,
+    "overall": "115-119",
+    "sport": "22-16",
+    "returnPct": 38.8,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "San Diego State at Boise State",
+      "market": "SPREAD",
+      "pick": "San Diego State +19.5",
+      "line": 19.5,
+      "price": "+114",
+      "dollars": 700,
+      "vsUsual": 5.6,
+      "vsUsualAll": 5
+     }
+    ]
+   },
+   {
+    "id": "3102d7",
+    "gap": 1.7,
+    "overall": "67-53",
+    "sport": "23-17",
+    "returnPct": 27.5,
+    "last10": "4-6",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Hawai'i at Nevada",
+      "market": "SPREAD",
+      "pick": "Hawai'i +7.5",
+      "line": 7.5,
+      "price": "-113",
+      "dollars": 564,
+      "vsUsual": 0.8,
+      "vsUsualAll": 1.1
+     }
+    ]
+   },
+   {
+    "id": "51176e",
+    "gap": 0.9,
+    "overall": "241-203",
+    "sport": "69-56",
+    "returnPct": 11.1,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "San Diego State at Boise State",
+      "market": "SPREAD",
+      "pick": "Boise State -17.5",
+      "line": -17.5,
+      "price": "-111",
+      "dollars": 2999,
+      "vsUsual": 1.4,
+      "vsUsualAll": 2.6
+     }
+    ]
+   }
+  ],
+  "NBA": [
+   {
+    "id": "a0cff6",
+    "gap": 3.2,
+    "overall": "844-782",
+    "sport": "384-313",
+    "returnPct": 6.8,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Celtics at Kings",
+      "market": "ML",
+      "pick": "Celtics",
+      "line": null,
+      "price": "-408",
+      "dollars": 8710,
+      "vsUsual": 11.1,
+      "vsUsualAll": 2.2
+     },
+     {
+      "matchup": "Celtics at Kings",
+      "market": "ML",
+      "pick": "Kings",
+      "line": null,
+      "price": "+525",
+      "dollars": 1062,
+      "vsUsual": 1.4,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Celtics at Kings",
+      "market": "SPREAD",
+      "pick": "Celtics -12.5",
+      "line": -12.5,
+      "price": "-100",
+      "dollars": 2860,
+      "vsUsual": 3.6,
+      "vsUsualAll": 0.7
+     }
+    ]
+   }
+  ],
   "NFL": [
    {
     "id": "bf28eb",
@@ -140,7 +290,7 @@
       "pick": "49ers",
       "line": null,
       "price": "-156",
-      "dollars": 1940,
+      "dollars": 1943,
       "vsUsual": 0.4,
       "vsUsualAll": 2
      },
@@ -196,6 +346,16 @@
      },
      {
       "matchup": "Cardinals at Chiefs",
+      "market": "SPREAD",
+      "pick": "Chiefs -13.5",
+      "line": -13.5,
+      "price": "-138",
+      "dollars": 1958,
+      "vsUsual": 0.4,
+      "vsUsualAll": 2
+     },
+     {
+      "matchup": "Cardinals at Chiefs",
       "market": "TOTAL",
       "pick": "Over 40.5",
       "line": 40.5,
@@ -234,143 +394,6 @@
       "dollars": 1038,
       "vsUsual": 0,
       "vsUsualAll": 0
-     }
-    ]
-   }
-  ],
-  "NBA": [
-   {
-    "id": "a0cff6",
-    "gap": 3.2,
-    "overall": "844-782",
-    "sport": "384-313",
-    "returnPct": 6.8,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Celtics at Kings",
-      "market": "ML",
-      "pick": "Celtics",
-      "line": null,
-      "price": "-365",
-      "dollars": 1882,
-      "vsUsual": 2.4,
-      "vsUsualAll": 0.5
-     },
-     {
-      "matchup": "Celtics at Kings",
-      "market": "ML",
-      "pick": "Kings",
-      "line": null,
-      "price": "+521",
-      "dollars": 1040,
-      "vsUsual": 1.3,
-      "vsUsualAll": 0.3
-     },
-     {
-      "matchup": "Celtics at Kings",
-      "market": "SPREAD",
-      "pick": "Celtics -12.5",
-      "line": -12.5,
-      "price": "-100",
-      "dollars": 2860,
-      "vsUsual": 3.6,
-      "vsUsualAll": 0.7
-     }
-    ]
-   },
-   {
-    "id": "f9f262",
-    "gap": 1,
-    "overall": "19-11",
-    "sport": "18-10",
-    "returnPct": 31.8,
-    "last10": "4-6",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Celtics at Kings",
-      "market": "TOTAL",
-      "pick": "Under",
-      "line": 217.5,
-      "price": "-100",
-      "dollars": 3355,
-      "vsUsual": 2.2,
-      "vsUsualAll": 1.3
-     }
-    ]
-   },
-   {
-    "id": "f1a030",
-    "gap": 0,
-    "overall": "5-4",
-    "sport": "5-4",
-    "returnPct": 41.9,
-    "last10": "5-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Celtics at Kings",
-      "market": "SPREAD",
-      "pick": "Celtics -12.5",
-      "line": -12.5,
-      "price": "+108",
-      "dollars": 12000,
-      "vsUsual": 1.9,
-      "vsUsualAll": 5.5
-     }
-    ]
-   },
-   {
-    "id": "e54fcb",
-    "gap": 0,
-    "overall": "15-11",
-    "sport": "15-11",
-    "returnPct": 35.9,
-    "last10": "5-5",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Celtics at Kings",
-      "market": "SPREAD",
-      "pick": "Celtics -12.5",
-      "line": -12.5,
-      "price": "+108",
-      "dollars": 19200,
-      "vsUsual": 1.9,
-      "vsUsualAll": 4.1
-     }
-    ]
-   },
-   {
-    "id": "ee7507",
-    "gap": 0,
-    "overall": "5-3",
-    "sport": "5-3",
-    "returnPct": 62.4,
-    "last10": "5-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Celtics at Kings",
-      "market": "SPREAD",
-      "pick": "Celtics -12.5",
-      "line": -12.5,
-      "price": "+108",
-      "dollars": 19200,
-      "vsUsual": 1.7,
-      "vsUsualAll": 4
-     },
-     {
-      "matchup": "Celtics at Kings",
-      "market": "TOTAL",
-      "pick": "Under",
-      "line": 216.5,
-      "price": "+108",
-      "dollars": 4800,
-      "vsUsual": 0.4,
-      "vsUsualAll": 1
      }
     ]
    }
@@ -436,133 +459,6 @@
       "dollars": 2931,
       "vsUsual": 3.9,
       "vsUsualAll": 1.3
-     }
-    ]
-   }
-  ],
-  "CFB": [
-   {
-    "id": "e11302",
-    "gap": 17.9,
-    "overall": "49-31",
-    "sport": "19-5",
-    "returnPct": 57.3,
-    "last10": "8-2",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Oklahoma State at Arizona State",
-      "market": "ML",
-      "pick": "Oklahoma State",
-      "line": null,
-      "price": "-127",
-      "dollars": 840,
-      "vsUsual": 1.3,
-      "vsUsualAll": 0.2
-     }
-    ]
-   },
-   {
-    "id": "c6c4d6",
-    "gap": 9.9,
-    "overall": "95-45",
-    "sport": "14-4",
-    "returnPct": 4.1,
-    "last10": "8-2",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Arizona at Kansas State",
-      "market": "ML",
-      "pick": "Arizona",
-      "line": null,
-      "price": "-317",
-      "dollars": 1451,
-      "vsUsual": 1.5,
-      "vsUsualAll": 0.3
-     },
-     {
-      "matchup": "Oklahoma State at Arizona State",
-      "market": "ML",
-      "pick": "Oklahoma State",
-      "line": null,
-      "price": "-127",
-      "dollars": 572,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.1
-     }
-    ]
-   },
-   {
-    "id": "3f8a61",
-    "gap": 8.7,
-    "overall": "115-119",
-    "sport": "22-16",
-    "returnPct": 38.8,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "San Diego State at Boise State",
-      "market": "SPREAD",
-      "pick": "San Diego State",
-      "line": 19.5,
-      "price": "+114",
-      "dollars": 700,
-      "vsUsual": 5.6,
-      "vsUsualAll": 5
-     }
-    ]
-   },
-   {
-    "id": "4c8ed9",
-    "gap": 6.7,
-    "overall": "304-279",
-    "sport": "73-51",
-    "returnPct": 21.3,
-    "last10": "9-1",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Hawai'i at Nevada",
-      "market": "SPREAD",
-      "pick": "Hawai'i",
-      "line": 20.5,
-      "price": "-456",
-      "dollars": 512,
-      "vsUsual": 0.5,
-      "vsUsualAll": 1.8
-     },
-     {
-      "matchup": "San Diego State at Boise State",
-      "market": "SPREAD",
-      "pick": "San Diego State",
-      "line": 17.5,
-      "price": "+113",
-      "dollars": 1897,
-      "vsUsual": 1.9,
-      "vsUsualAll": 6.8
-     }
-    ]
-   },
-   {
-    "id": "bfe3bc",
-    "gap": 2.7,
-    "overall": "120-99",
-    "sport": "46-34",
-    "returnPct": 3.3,
-    "last10": "4-6",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Oklahoma State at Arizona State",
-      "market": "SPREAD",
-      "pick": "Oklahoma State -3.5",
-      "line": -3.5,
-      "price": "+127",
-      "dollars": 2331,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.1
      }
     ]
    }
