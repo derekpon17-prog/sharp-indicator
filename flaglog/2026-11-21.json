@@ -146,7 +146,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 19
+   "snapshots": 20
   },
   "Islanders at Red Wings|SPREAD|Red Wings +1.5": {
    "sport": "NHL",
@@ -263,7 +263,7 @@
    "maxVsUsual": 7.3,
    "maxDollars": 33394,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Titans at Cowboys|ML|Cowboys": {
    "sport": "NFL",
@@ -280,7 +280,7 @@
    "maxVsUsual": 6.7,
    "maxDollars": 30551,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Cardinals at Chiefs|ML|Chiefs": {
    "sport": "NFL",
@@ -297,7 +297,7 @@
    "maxVsUsual": 4.5,
    "maxDollars": 20658,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Dolphins at Bills|ML|Bills": {
    "sport": "NFL",
@@ -314,7 +314,7 @@
    "maxVsUsual": 3.7,
    "maxDollars": 17034,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Cardinals at Chiefs|TOTAL|Over 40.5": {
    "sport": "NFL",
@@ -331,7 +331,7 @@
    "maxVsUsual": 2.1,
    "maxDollars": 9636,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Steelers at Eagles|TOTAL|Over 38.5": {
    "sport": "NFL",
@@ -348,7 +348,7 @@
    "maxVsUsual": 2,
    "maxDollars": 9255,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Buccaneers at Lions|SPREAD|Lions -6.5": {
    "sport": "NFL",
@@ -365,7 +365,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8071,
    "opposedSeen": true,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Jets at Chargers|ML|Chargers": {
    "sport": "NFL",
@@ -382,7 +382,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 7001,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 36
   },
   "Sabres at Panthers|SPREAD|Panthers -1.5": {
    "sport": "NHL",
@@ -448,7 +448,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 4303,
    "opposedSeen": false,
-   "snapshots": 17
+   "snapshots": 18
   },
   "Colorado at Cincinnati|SPREAD|Cincinnati -2.5": {
    "sport": "CFB",
@@ -611,7 +611,7 @@
    "maxVsUsual": 2.8,
    "maxDollars": 3453,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Florida International at Kennesaw State|SPREAD|Florida International +2.5": {
    "sport": "CFB",
@@ -675,7 +675,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 2955,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Jaguars at Giants|ML|Jaguars": {
    "sport": "NFL",
@@ -692,7 +692,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 7940,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Grizzlies at Timberwolves|ML|Timberwolves": {
    "sport": "NBA",
@@ -707,8 +707,8 @@
    ],
    "maxVsUsual": 2.2,
    "maxDollars": 16750,
-   "opposedSeen": false,
-   "snapshots": 5
+   "opposedSeen": true,
+   "snapshots": 6
   },
   "Georgia at South Carolina|SPREAD|Georgia -13.5": {
    "sport": "CFB",
@@ -725,7 +725,7 @@
    "maxVsUsual": 7.1,
    "maxDollars": 37468,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Arkansas State at Louisiana Tech|SPREAD|Arkansas State": {
    "sport": "CFB",
@@ -741,7 +741,7 @@
    "maxVsUsual": 0.7,
    "maxDollars": 15407,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Trail Blazers at Knicks|ML|Trail Blazers": {
    "sport": "NBA",
@@ -789,7 +789,7 @@
    "maxVsUsual": 1.4,
    "maxDollars": 6143,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Trail Blazers at Knicks|SPREAD|Trail Blazers": {
    "sport": "NBA",
@@ -823,7 +823,7 @@
    "maxVsUsual": 2.9,
    "maxDollars": 30000,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 9
   },
   "Kentucky at Missouri|SPREAD|Kentucky": {
    "sport": "CFB",
@@ -839,7 +839,7 @@
    "maxVsUsual": 1,
    "maxDollars": 19596,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Pelicans at Spurs|SPREAD|Spurs -18.5": {
    "sport": "NBA",
@@ -855,7 +855,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Clippers at Mavericks|TOTAL|Over": {
    "sport": "NBA",
@@ -871,7 +871,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Colorado State at Fresno State|SPREAD|Fresno State -20.5": {
    "sport": "CFB",
@@ -887,7 +887,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 5155,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Wild at Canucks|ML|Wild": {
    "sport": "NHL",
