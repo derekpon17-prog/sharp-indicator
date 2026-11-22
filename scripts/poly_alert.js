@@ -46,8 +46,46 @@ else for (const m of cur.matches || []) {
 
 if (!hits.length) { console.log('poly_alert: no late HOT money'); process.exit(0); }
 fs.mkdirSync(cardDir, { recursive: true });
+/* Nov 22 2026 (Derek): when the game also has a Sharp Flow card, the late Poly buy goes on THAT card (Sharp Flow rows + every Poly
+   wallet on the game), not on a separate Polymarket card. Games with no Sharp Flow side keep the stand-alone Poly card. */
+const R = require('./sf_rules.js');
+const latest = read(sfDir + '/latest.json', { tickets: [] });
+const POLY = cur.matches || [];
+const grpOf = mk => mk === 'TOTAL' ? 'total' : 'team';
+const FLOOR = +(process.env.MIN_DOLLARS || 500);
+const startOf = t => { const m = (t.kickoffEt || '').match(/(\w+), (\w+) (\d+), (\d+):(\d+) (AM|PM)/); return m; };
+const combined = {}, solo = [];
+for (const h of hits) {
+  const g = grpOf(h.m.market), tix = (latest.tickets || []).filter(t => t.sport === h.m.sport && t.matchup === h.m.matchup && grpOf(t.market) === g);
+  const good = tix.filter(t => !R.cold(t)).reduce((a, t) => a + t.dollars, 0);
+  const r = tix.length && good >= R.floorFor(FLOOR, h.m.sport, tix[0].market) ? R.matchupRow(h.m.sport, tix, g) : null;
+  if (!r) { solo.push(h); continue; }
+  const ck = h.m.sport + '|' + h.m.matchup + '|' + g;
+  (combined[ck] ||= { sp: h.m.sport, matchup: h.m.matchup, g, r, hs: [] }).hs.push(h);
+}
+const kickTxt = st => { const m = Math.round((st - now) / 60000); return m < 1 ? 'KICKOFF NOW' : m <= 10 ? 'LATE: kickoff in ' + m + ' min' : 'kickoff in ' + (m >= 90 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + ' min'); };
+const hhmm0 = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');
+const csec = {};
+for (const c of Object.values(combined)) {
+  const st = new Date(c.hs[0].m.startUtc), pv = R.polyFor(POLY, c.sp, c.matchup, c.g, c.r);
+  const top = c.hs.slice().sort((a, b) => b.m.usd - a.m.usd)[0].m;
+  const heading = `${c.sp} - ${ctTime(st).toUpperCase()} CT`;
+  (csec[c.sp] ||= {}); (csec[c.sp][heading] ||= []).push({ eyebrow: c.matchup, time: ctTime(st) + ' CT', tag: c.r.tag, sources: pv.sources, bet: c.r.bet, price: c.r.price,
+    for: pv.for, against: pv.against, moneyBar: c.r.moneyBar, confidence: c.r.confidence, callout: c.r.callout,
+    footerLabel: `POLY LATE: ${top.name} HOT ${k(top.usd)} on ${bet(top)} - ${kickTxt(st)}` });
+}
+for (const [sp, hd] of Object.entries(csec)) {
+  const secs = Object.entries(hd).map(([heading, picks]) => ({ heading, picks: picks.sort((a, b) => b.confidence - a.confidence) }));
+  const n = secs.reduce((a, x) => a + x.picks.length, 0);
+  const card = { route: 'Sharp Signals', content: `**Sharp Flow + Polymarket late money - ${sp}** - ${n} game${n === 1 ? '' : 's'}`,
+    boards: [{ design: 'sharpflow', brand: 'SHARP FLOW + POLYMARKET', title: `${sp} - late Polymarket money on a Sharp Flow game`, subtitle: `HOT Polymarket wallet bought after the ${sp} report posted - shown with the Sharp Flow read, games not started. Buys checked ${cur.at ? ctTime(new Date(cur.at)) : 'n/a'} CT, SharpFlow snapshot ${latest.scannedAt ? ctTime(new Date(latest.scannedAt)) : 'n/a'} CT`,
+      sections: secs, legend: R.CONF_LEGEND, footer: 'Wallet money, not a pick. Leans, not guarantees' }] };
+  const f = `${cardDir}/${ctDay(now)}-${hhmm0}-polylate-sf-${sp.toLowerCase()}.json`;
+  fs.writeFileSync(f, JSON.stringify(card, null, 1));
+  console.log('poly_alert: wrote COMBINED', f, secs.flatMap(x => x.picks.map(p => p.eyebrow)).join('; '));
+}
 const bySport = {};
-for (const h of hits) (bySport[h.m.sport] ||= []).push(h);
+for (const h of solo) (bySport[h.m.sport] ||= []).push(h);
 const hhmm = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');
 for (const [sp, hs] of Object.entries(bySport)) {
   hs.sort((a, b) => new Date(a.m.startUtc) - new Date(b.m.startUtc) || b.m.usd - a.m.usd);

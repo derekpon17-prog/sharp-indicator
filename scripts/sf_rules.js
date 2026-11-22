@@ -183,4 +183,26 @@ function siteLockTxt(plays, sport, matchup, grp) {
   const hit = (plays || []).filter(p => p.sport === sport && p.matchup === matchup && (p.market === 'TOTAL' ? 'total' : 'team') === grp && p.status === 'locked');
   return hit.map(p => 'SITE LOCK: ' + p.pick + (p.market === 'ML' ? ' ML' : '') + ' ' + p.units + 'u (' + (p.alignment === 'none' || !p.alignment ? 'no wallet money' : 'wallet money ' + (p.alignment === 'with' ? 'behind it' : 'AGAINST it')) + ')').join(' | ');
 }
-module.exports = { siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };
+/* Polymarket wallet rows for a SharpFlow matchup row (moved here from sharpflow_preview.js Nov 22 2026 so the SharpFlow alert and the
+   Poly late-money alert use the same rows as the pre-game card). poly = poly_matches.json matches. Display only. */
+function polyFor(poly, sp, matchup, grp, r) {
+  const ms = (poly || []).filter(m => m.sport === sp && m.matchup === matchup && m.grp === grp);
+  if (!ms.length) return { for: r.for, against: r.against, sources: ['SHARP FLOW'], ms };
+  const label = side => grp === 'total' ? side : String(side).toUpperCase();
+  const row = m => ({ src: 'POLYMARKET', team: m.side, wallet: m.name, market: m.market, record: m.rec, recLabel: m.recScope ? m.recScope.replace(/, last (\d+) days/, ' \u00b7 last $1d') + ' record' : null, roi: m.roi, dollars: m.usd,
+    note: ['Polymarket', m.gateNote && m.sportCls !== m.cls ? m.gateNote : null, m.l10 ? m.l10.txt : null, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' \u00b7 '),
+    status: m.twoSided ? { t: 'POLY TWO-SIDED - not counted', c: 'grey' }
+      : m.cls === 'HOT' ? (m.sameAsSF ? { t: 'POLY HOT - same wallet, not a 2nd source', c: 'grey' } : { t: 'POLY HOT', c: 'green' })
+      : m.sportCls === 'HOT' ? { t: 'POLY COLD in this bet type - not counted', c: 'red' } : { t: 'POLY COLD - fade flag', c: 'red' } });
+  const f = r.for ? { ...r.for, rows: [...(r.for.rows || [])] } : null;
+  let a = r.against ? { ...r.against, rows: [...(r.against.rows || [])] } : null;
+  for (const m of ms.slice().sort((x, y) => y.usd - x.usd)) {
+    const t = label(m.side);
+    if (f && f.team === t) f.rows.push(row(m));
+    else if (a && a.team === t) a.rows.push(row(m));
+    else if (!a) a = { team: t, rows: [row(m)] };
+  }
+  return { for: f, against: a, sources: ['SHARP FLOW', 'POLYMARKET'], ms };
+}
+
+module.exports = { polyFor, siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };

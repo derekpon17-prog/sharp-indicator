@@ -36,6 +36,7 @@ const latest = readJson(OUT + '/latest.json', null);
 if (!latest) { console.log('no latest.json'); process.exit(0); }
 const age = (now - new Date(latest.scannedAt)) / 60000;
 if (!process.env.FAKE_NOW && age > 45) { console.log('snapshot too old', Math.round(age), 'min - skipping'); process.exit(0); }
+const POLY = (readJson(OUT + '/poly_matches.json', {}).matches) || [];   // Nov 22: Poly wallets on the same game ride along on the alert
 const SPEC = (readJson(OUT + '/specialists.json', {}).sports) || {};
 let st = readJson(OUT + '/alerts.json', {});
 if (st.date !== today) st = { date: today, baselined: false, sides: {}, sent: [] };
@@ -109,8 +110,9 @@ for (const s of send) {
   const tix = (latest.tickets || []).filter(t => t.sport === s.sp && t.matchup === s.matchup && grpOf(t.market) === grpOf(s.market));
   const r = R.matchupRow(s.sp, tix, grpOf(s.market)); if (!r) continue;
   const growTxt = s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)}` : `NEW ${k(s.good)} on ${s.pick}`;
-  rows.push({ st: s.st, sp: s.sp, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, bet: r.bet, price: r.price,
-    for: r.for, against: r.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: growTxt + kickTxt(s.st) + (R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) ? ' - ' + R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) : '') });
+  const pv = R.polyFor(POLY, s.sp, s.matchup, grpOf(s.market), r);
+  rows.push({ st: s.st, sp: s.sp, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, sources: pv.sources, bet: r.bet, price: r.price,
+    for: pv.for, against: pv.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: (pv.sources.length > 1 ? 'SHARP FLOW + POLYMARKET - ' : '') + growTxt + kickTxt(s.st) + (R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) ? ' - ' + R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) : '') });
 }
 rows.sort((a, b) => b.confidence - a.confidence || a.st - b.st); // Derek, Nov 18: order by confidence, not kickoff time
 const secs = [];
