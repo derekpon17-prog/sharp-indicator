@@ -1,0 +1,114 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 5:35pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Nuggets at Bulls",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - NUGGETS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Nuggets ML -383",
+       "price": "-383",
+       "for": {
+        "team": "NUGGETS",
+        "rows": [
+         {
+          "team": "Nuggets",
+          "wallet": "L",
+          "market": "ML -355",
+          "mk": "ML",
+          "record": "9-6",
+          "roi": 12.9,
+          "dollars": 32996,
+          "note": "5.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Nuggets",
+          "wallet": "Q",
+          "market": "ML -383",
+          "mk": "ML",
+          "record": "74-57",
+          "roi": 34.6,
+          "dollars": 2921,
+          "note": "0.6x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Nuggets",
+          "wallet": "K",
+          "market": "ML -335",
+          "mk": "ML",
+          "record": "12-4",
+          "roi": 31.6,
+          "dollars": 1035,
+          "note": "3.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Nuggets",
+          "wallet": "F",
+          "market": "SPREAD -8.5 -104",
+          "mk": "SPREAD",
+          "record": "39-26",
+          "roi": 22.6,
+          "dollars": 932,
+          "note": "0.5x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "NUGGETS",
+         "dollars": 38393,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 74-57 (+35% ROI) on NUGGETS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $3.4K to $37K - kickoff in 24 min - SITE LOCK: Nuggets ML 2u (wallet money behind it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
