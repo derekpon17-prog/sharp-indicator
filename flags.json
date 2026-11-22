@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-22T02:28:04.908Z",
+ "scannedAt": "2026-11-22T02:43:04.976Z",
  "sides": [
   {
    "tail": false,
@@ -179,7 +179,7 @@
    "size": "0.5x",
    "mktRecord": "11-2",
    "mktRoi": 13.7,
-   "l30Roi": 24.8,
+   "l30Roi": 15,
    "contested": false,
    "sfPoints": 31,
    "parts": {
@@ -365,10 +365,10 @@
    "wallets": 1,
    "maxVsUsual": 1,
    "price": "+104",
-   "size": "1x",
+   "size": "0.5x",
    "mktRecord": "24-15",
    "mktRoi": 46.6,
-   "l30Roi": 28.5,
+   "l30Roi": 5.2,
    "contested": false,
    "sfPoints": 25,
    "parts": {
@@ -383,24 +383,52 @@
   {
    "tail": false,
    "sport": "CFB",
-   "matchup": "Arkansas State at Louisiana Tech",
+   "matchup": "UNLV at San Jose State",
    "market": "SPREAD",
-   "pick": "Arkansas State",
-   "kickoffEt": "Sat, Nov 21, 7:02 PM",
-   "dollars": 15407,
+   "pick": "UNLV -5.5",
+   "kickoffEt": "Sat, Nov 21, 7:03 PM",
+   "dollars": 6143,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 0.7,
-   "size": "0.5x",
-   "mktRecord": "24-15",
-   "mktRoi": 46.6,
-   "l30Roi": 28.5,
+   "maxVsUsual": 1.3,
+   "price": "-112",
+   "size": "1x",
+   "mktRecord": "33-14",
+   "mktRoi": 26.6,
+   "l30Roi": 25.8,
    "contested": false,
-   "sfPoints": 25,
+   "sfPoints": 23,
    "parts": {
-    "money": 16,
-    "sizing": 0,
-    "quality": 6,
+    "money": 12,
+    "sizing": 4,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Celtics at Kings",
+   "market": "SPREAD",
+   "pick": "Celtics -12.5",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "dollars": 2860,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 3.6,
+   "price": "-100",
+   "size": "1.5x and up",
+   "mktRecord": "95-75",
+   "mktRoi": 25.7,
+   "l30Roi": 2.5,
+   "contested": false,
+   "sfPoints": 23,
+   "parts": {
+    "money": 8,
+    "sizing": 12,
+    "quality": 0,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -462,26 +490,26 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Pelicans at Spurs",
-   "market": "ML",
-   "pick": "Pelicans",
-   "kickoffEt": "Sat, Nov 21, 8:11 PM",
-   "dollars": 7000,
+   "sport": "CFB",
+   "matchup": "Arizona at Kansas State",
+   "market": "SPREAD",
+   "pick": "Arizona -7.5",
+   "kickoffEt": "Sat, Nov 21, 7:10 PM",
+   "dollars": 2999,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 0.8,
-   "price": "+1150",
-   "size": "0.5x",
-   "mktRecord": "8-6",
-   "mktRoi": 32.3,
-   "l30Roi": 19.3,
+   "maxVsUsual": 1.4,
+   "price": "-106",
+   "size": "1x",
+   "mktRecord": "40-23",
+   "mktRoi": 20.2,
+   "l30Roi": 36.4,
    "contested": false,
-   "sfPoints": 21,
+   "sfPoints": 19,
    "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 6,
+    "money": 8,
+    "sizing": 4,
+    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -490,25 +518,25 @@
   {
    "tail": false,
    "sport": "CFB",
-   "matchup": "UNLV at San Jose State",
+   "matchup": "San Diego State at Boise State",
    "market": "SPREAD",
-   "pick": "UNLV -5.5",
-   "kickoffEt": "Sat, Nov 21, 7:03 PM",
-   "dollars": 6143,
+   "pick": "Boise State -17.5",
+   "kickoffEt": "Sat, Nov 21, 9:40 PM",
+   "dollars": 2999,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 1.4,
-   "price": "-112",
+   "price": "-111",
    "size": "1x",
-   "mktRecord": "31-14",
-   "mktRoi": 22.3,
-   "l30Roi": 19.3,
+   "mktRecord": "40-23",
+   "mktRoi": 20.2,
+   "l30Roi": 36.4,
    "contested": false,
    "sfPoints": 19,
    "parts": {
-    "money": 12,
+    "money": 8,
     "sizing": 4,
-    "quality": 0,
+    "quality": 4,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -522,7 +550,7 @@
    "pick": "Grizzlies",
    "kickoffEt": "Sat, Nov 21, 8:11 PM",
    "dollars": 7000,
-   "oppDollars": 1948,
+   "oppDollars": 2925,
    "wallets": 1,
    "maxVsUsual": 0.8,
    "price": "+203",
@@ -637,7 +665,7 @@
    "size": "under 0.5x",
    "mktRecord": "24-15",
    "mktRoi": 46.6,
-   "l30Roi": 28.5,
+   "l30Roi": 5.2,
    "contested": false,
    "sfPoints": 17,
    "parts": {
@@ -672,33 +700,6 @@
     "quality": 0,
     "pooled": 0,
     "unopposed": 0,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "CFB",
-   "matchup": "SMU at Notre Dame",
-   "market": "ML",
-   "pick": "Notre Dame",
-   "kickoffEt": "Sat, Nov 21, 7:36 PM",
-   "dollars": 10238,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.5,
-   "price": "-1011",
-   "size": "under 0.5x",
-   "mktRecord": "17-0",
-   "mktRoi": 9.7,
-   "l30Roi": 15,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
     "contested": 0
    }
   },
@@ -758,33 +759,6 @@
   },
   {
    "tail": false,
-   "sport": "CFB",
-   "matchup": "San Diego State at Boise State",
-   "market": "SPREAD",
-   "pick": "San Diego State +17.5",
-   "kickoffEt": "Sat, Nov 21, 9:30 PM",
-   "dollars": 1897,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.9,
-   "price": "+113",
-   "size": "1.5x and up",
-   "mktRecord": "48-38",
-   "mktRoi": 5.4,
-   "l30Roi": 19.6,
-   "contested": false,
-   "sfPoints": 14,
-   "parts": {
-    "money": 4,
-    "sizing": 7,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "NBA",
    "matchup": "Grizzlies at Timberwolves",
    "market": "SPREAD",
@@ -813,6 +787,33 @@
   {
    "tail": false,
    "sport": "NBA",
+   "matchup": "Grizzlies at Timberwolves",
+   "market": "ML",
+   "pick": "Timberwolves",
+   "kickoffEt": "Sat, Nov 21, 8:11 PM",
+   "dollars": 2925,
+   "oppDollars": 7000,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "-294",
+   "size": "0.5x",
+   "mktRecord": "73-56",
+   "mktRoi": 38.1,
+   "l30Roi": 16.5,
+   "contested": true,
+   "sfPoints": 6,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 6,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
    "matchup": "Pelicans at Spurs",
    "market": "SPREAD",
    "pick": "Spurs -18.5",
@@ -832,33 +833,6 @@
     "money": 8,
     "sizing": 4,
     "quality": 0,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Grizzlies at Timberwolves",
-   "market": "ML",
-   "pick": "Timberwolves",
-   "kickoffEt": "Sat, Nov 21, 8:11 PM",
-   "dollars": 1948,
-   "oppDollars": 7000,
-   "wallets": 1,
-   "maxVsUsual": 0.4,
-   "price": "-212",
-   "size": "under 0.5x",
-   "mktRecord": "73-56",
-   "mktRoi": 38.1,
-   "l30Roi": 16.5,
-   "contested": true,
-   "sfPoints": 2,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 6,
     "pooled": 0,
     "unopposed": 0,
     "contested": -8
@@ -915,22 +889,6 @@
    "maxVsUsual": 4.5
   },
   {
-   "matchup": "Kentucky at Missouri",
-   "market": "SPREAD",
-   "pick": "Kentucky",
-   "kickoffEt": "Sat, Nov 21, 7:40 PM",
-   "sport": "CFB",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 19596,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "15-14|123885|24-15"
-   ],
-   "bestPrice": "+104",
-   "maxVsUsual": 1
-  },
-  {
    "matchup": "Dolphins at Bills",
    "market": "ML",
    "pick": "Bills",
@@ -945,21 +903,6 @@
    ],
    "bestPrice": "-1011",
    "maxVsUsual": 3.8
-  },
-  {
-   "matchup": "Arkansas State at Louisiana Tech",
-   "market": "SPREAD",
-   "pick": "Arkansas State",
-   "kickoffEt": "Sat, Nov 21, 7:02 PM",
-   "sport": "CFB",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 15407,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "15-14|123885|24-15"
-   ],
-   "maxVsUsual": 0.7
   },
   {
    "matchup": "Cardinals at Chiefs",
@@ -1042,6 +985,22 @@
    "maxVsUsual": 1.5
   },
   {
+   "matchup": "UNLV at San Jose State",
+   "market": "SPREAD",
+   "pick": "UNLV -5.5",
+   "kickoffEt": "Sat, Nov 21, 7:03 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 6143,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "51-25|89834|33-14"
+   ],
+   "bestPrice": "-112",
+   "maxVsUsual": 1.3
+  },
+  {
    "matchup": "Bengals at Commanders",
    "market": "ML",
    "pick": "Bengals",
@@ -1056,6 +1015,38 @@
    ],
    "bestPrice": "-257",
    "maxVsUsual": 1
+  },
+  {
+   "matchup": "Arizona at Kansas State",
+   "market": "SPREAD",
+   "pick": "Arizona -7.5",
+   "kickoffEt": "Sat, Nov 21, 7:10 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 2999,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "33-15|41880|40-23"
+   ],
+   "bestPrice": "-106",
+   "maxVsUsual": 1.4
+  },
+  {
+   "matchup": "San Diego State at Boise State",
+   "market": "SPREAD",
+   "pick": "Boise State -17.5",
+   "kickoffEt": "Sat, Nov 21, 9:40 PM",
+   "sport": "CFB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 2999,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "33-15|41880|40-23"
+   ],
+   "bestPrice": "-111",
+   "maxVsUsual": 1.4
   },
   {
    "matchup": "Steelers at Eagles",
@@ -1104,22 +1095,6 @@
    ],
    "bestPrice": "-137",
    "maxVsUsual": 0.6
-  },
-  {
-   "matchup": "Oklahoma State at Arizona State",
-   "market": "SPREAD",
-   "pick": "Oklahoma State -3.5",
-   "kickoffEt": "Sat, Nov 21, 10:15 PM",
-   "sport": "CFB",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 2331,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "15-14|123885|24-15"
-   ],
-   "bestPrice": "+127",
-   "maxVsUsual": 0.1
   }
  ],
  "sizedUp": [
@@ -1219,11 +1194,11 @@
    "vsUsual": 3.9,
    "size": "1.5x and up",
    "form": "L10 5-5",
-   "l30Roi": 10.6,
-   "mktRecord": "19-19",
-   "mktRoi": -7.1,
+   "l30Roi": 12.4,
+   "mktRecord": "20-19",
+   "mktRoi": -5,
    "opposed": "unopposed",
-   "fp": "16-13|2488|19-19"
+   "fp": "17-13|3004|20-19"
   },
   {
    "matchup": "Dolphins at Bills",
@@ -1241,6 +1216,23 @@
    "mktRoi": 34.7,
    "opposed": "unopposed",
    "fp": "31-10|62756|21-4"
+  },
+  {
+   "matchup": "Celtics at Kings",
+   "market": "SPREAD",
+   "pick": "Celtics -12.5",
+   "kickoffEt": "Sat, Nov 21, 10:10 PM",
+   "sport": "NBA",
+   "dollars": 2860,
+   "price": "-100",
+   "vsUsual": 3.6,
+   "size": "1.5x and up",
+   "form": "L10 6-4",
+   "l30Roi": 2.5,
+   "mktRecord": "95-75",
+   "mktRoi": 25.7,
+   "opposed": "unopposed",
+   "fp": "290-235|10571|95-75"
   },
   {
    "matchup": "Trail Blazers at Knicks",
@@ -1311,23 +1303,6 @@
    "fp": "31-10|62756|1-0"
   },
   {
-   "matchup": "San Diego State at Boise State",
-   "market": "SPREAD",
-   "pick": "San Diego State +17.5",
-   "kickoffEt": "Sat, Nov 21, 9:30 PM",
-   "sport": "CFB",
-   "dollars": 1897,
-   "price": "+113",
-   "vsUsual": 1.9,
-   "size": "1.5x and up",
-   "form": "L10 8-2",
-   "l30Roi": 19.6,
-   "mktRecord": "48-38",
-   "mktRoi": 5.4,
-   "opposed": "unopposed",
-   "fp": "26-18|10422|48-38"
-  },
-  {
    "matchup": "Buccaneers at Lions",
    "market": "SPREAD",
    "pick": "Lions -6.5",
@@ -1396,6 +1371,40 @@
    "fp": "31-10|62756|21-4"
   },
   {
+   "matchup": "Arizona at Kansas State",
+   "market": "SPREAD",
+   "pick": "Arizona -7.5",
+   "kickoffEt": "Sat, Nov 21, 7:10 PM",
+   "sport": "CFB",
+   "dollars": 2999,
+   "price": "-106",
+   "vsUsual": 1.4,
+   "size": "1x",
+   "form": "L10 6-4",
+   "l30Roi": 36.4,
+   "mktRecord": "40-23",
+   "mktRoi": 20.2,
+   "opposed": "unopposed",
+   "fp": "33-15|41880|40-23"
+  },
+  {
+   "matchup": "San Diego State at Boise State",
+   "market": "SPREAD",
+   "pick": "Boise State -17.5",
+   "kickoffEt": "Sat, Nov 21, 9:40 PM",
+   "sport": "CFB",
+   "dollars": 2999,
+   "price": "-111",
+   "vsUsual": 1.4,
+   "size": "1x",
+   "form": "L10 6-4",
+   "l30Roi": 36.4,
+   "mktRecord": "40-23",
+   "mktRoi": 20.2,
+   "opposed": "contested",
+   "fp": "33-15|41880|40-23"
+  },
+  {
    "matchup": "UNLV at San Jose State",
    "market": "SPREAD",
    "pick": "UNLV -5.5",
@@ -1403,14 +1412,14 @@
    "sport": "CFB",
    "dollars": 6143,
    "price": "-112",
-   "vsUsual": 1.4,
+   "vsUsual": 1.3,
    "size": "1x",
-   "form": "L10 8-2",
-   "l30Roi": 19.3,
-   "mktRecord": "31-14",
-   "mktRoi": 22.3,
+   "form": "L10 9-1",
+   "l30Roi": 25.8,
+   "mktRecord": "33-14",
+   "mktRoi": 26.6,
    "opposed": "unopposed",
-   "fp": "48-25|61234|31-14"
+   "fp": "51-25|89834|33-14"
   },
   {
    "matchup": "Pelicans at Spurs",
