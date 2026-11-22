@@ -1,0 +1,106 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 12:56pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 3:05PM CT",
+     "picks": [
+      {
+       "eyebrow": "Jets at Chargers",
+       "time": "3:05pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Jets vs Chargers",
+       "price": null,
+       "for": {
+        "team": "JETS",
+        "rows": [
+         {
+          "team": "Jets",
+          "wallet": "C",
+          "market": "ML",
+          "record": "24-18",
+          "roi": 25.7,
+          "dollars": 71147,
+          "note": "0.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Jets",
+          "wallet": "surfandturf",
+          "market": "ML",
+          "record": "22-20",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -19.8,
+          "dollars": 2633,
+          "note": "Polymarket · L10 NFL 8-2",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "CHARGERS",
+        "rows": [
+         {
+          "team": "Chargers",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 7006,
+          "note": "1.5x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "JETS",
+         "dollars": 71147,
+         "pct": 91,
+         "c": "green"
+        },
+        {
+         "team": "CHARGERS",
+         "dollars": 7006,
+         "pct": 9,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - NEW $71K on Jets - kickoff in 2h 0m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
