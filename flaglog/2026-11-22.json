@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 15
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -80,7 +80,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Celtics at Warriors|SPREAD|Celtics -9.5": {
    "sport": "NBA",
@@ -227,7 +227,7 @@
    "maxVsUsual": 7.7,
    "maxDollars": 155304,
    "opposedSeen": true,
-   "snapshots": 15
+   "snapshots": 17
   },
   "Buccaneers at Lions|ML|Lions": {
    "sport": "NFL",
@@ -244,7 +244,7 @@
    "maxVsUsual": 9.9,
    "maxDollars": 44980,
    "opposedSeen": false,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Titans at Cowboys|ML|Cowboys": {
    "sport": "NFL",
@@ -262,7 +262,7 @@
    "maxVsUsual": 9.7,
    "maxDollars": 43919,
    "opposedSeen": true,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Dolphins at Bills|ML|Bills": {
    "sport": "NFL",
@@ -332,7 +332,7 @@
    "maxVsUsual": 2,
    "maxDollars": 9255,
    "opposedSeen": false,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Buccaneers at Lions|SPREAD|Lions": {
    "sport": "NFL",
@@ -349,7 +349,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8071,
    "opposedSeen": true,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Jaguars at Giants|ML|Jaguars": {
    "sport": "NFL",
@@ -368,7 +368,7 @@
    "maxVsUsual": 2,
    "maxDollars": 10000,
    "opposedSeen": false,
-   "snapshots": 31
+   "snapshots": 34
   },
   "Bengals at Commanders|SPREAD|Bengals -6.5": {
    "sport": "NFL",
@@ -385,7 +385,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 7203,
    "opposedSeen": false,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Jets at Chargers|ML|Chargers": {
    "sport": "NFL",
@@ -403,7 +403,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 7006,
    "opposedSeen": true,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Bengals at Commanders|ML|Bengals": {
    "sport": "NFL",
@@ -420,7 +420,7 @@
    "maxVsUsual": 3.2,
    "maxDollars": 14765,
    "opposedSeen": false,
-   "snapshots": 16
+   "snapshots": 18
   },
   "Ravens at Panthers|ML|Panthers": {
    "sport": "NFL",
@@ -436,7 +436,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 4150,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Steelers at Eagles|ML|Steelers": {
    "sport": "NFL",
@@ -453,7 +453,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 10000,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Vikings at 49ers|ML|49ers": {
    "sport": "NFL",
@@ -482,12 +482,13 @@
    "tags": [
     "SIZED_UP",
     "STRONG_UNOPPOSED",
-    "SIZED_15X"
+    "SIZED_15X",
+    "STRONG_VS_OTHER"
    ],
    "maxVsUsual": 1.7,
    "maxDollars": 3240,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Buccaneers at Lions|SPREAD|Buccaneers +6.5": {
    "sport": "NFL",
@@ -534,9 +535,9 @@
     "SIZED_15X"
    ],
    "maxVsUsual": 6.1,
-   "maxDollars": 282519,
+   "maxDollars": 282773,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 12
   },
   "Titans at Cowboys|SPREAD|Cowboys": {
    "sport": "NFL",
@@ -571,7 +572,7 @@
    "maxVsUsual": 8.8,
    "maxDollars": 39804,
    "opposedSeen": true,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Pistons at Hawks|ML|Pistons": {
    "sport": "NBA",
@@ -587,7 +588,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 3170,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Ravens at Panthers|ML|Ravens": {
    "sport": "NFL",
@@ -603,7 +604,7 @@
    "maxVsUsual": 3.7,
    "maxDollars": 691891,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Buccaneers at Lions|SPREAD|Buccaneers": {
    "sport": "NFL",
@@ -619,7 +620,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Thunder at Heat|SPREAD|Heat -3.5": {
    "sport": "NBA",
@@ -635,7 +636,7 @@
    "maxVsUsual": 2.2,
    "maxDollars": 6032,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   }
  }
 }
