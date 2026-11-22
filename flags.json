@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "scannedAt": "2026-11-21T23:29:25.703Z",
+ "scannedAt": "2026-11-21T23:49:59.256Z",
  "sides": [
   {
    "tail": false,
@@ -172,7 +172,7 @@
    "pick": "LSU",
    "kickoffEt": "Sat, Nov 21, 3:45 PM",
    "dollars": 93117,
-   "oppDollars": 13757,
+   "oppDollars": 14233,
    "wallets": 1,
    "maxVsUsual": 4.8,
    "price": "-111",
@@ -374,6 +374,33 @@
    "parts": {
     "money": 12,
     "sizing": 10,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "Georgia at South Carolina",
+   "market": "SPREAD",
+   "pick": "Georgia -13.5",
+   "kickoffEt": "Sat, Nov 21, 7:30 PM",
+   "dollars": 9499,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.9,
+   "price": "-133",
+   "size": "1.5x and up",
+   "mktRecord": "0-1",
+   "mktRoi": -100,
+   "l30Roi": 97.8,
+   "contested": false,
+   "sfPoints": 22,
+   "parts": {
+    "money": 12,
+    "sizing": 7,
     "quality": 0,
     "pooled": 0,
     "unopposed": 3,
@@ -597,43 +624,16 @@
   },
   {
    "tail": false,
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "ML",
-   "pick": "Steelers",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "dollars": 2955,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "-194",
-   "size": "0.5x",
-   "mktRecord": "21-4",
-   "mktRoi": 34.7,
-   "l30Roi": 33.7,
-   "contested": false,
-   "sfPoints": 17,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "CFB",
    "matchup": "LSU at Tennessee",
    "market": "ML",
    "pick": "Tennessee",
    "kickoffEt": "Sat, Nov 21, 3:45 PM",
-   "dollars": 13757,
+   "dollars": 14233,
    "oppDollars": 93117,
    "wallets": 1,
-   "maxVsUsual": 3.3,
-   "price": "+109",
+   "maxVsUsual": 3.4,
+   "price": "+110",
    "size": "1.5x and up",
    "mktRecord": "5-2",
    "mktRoi": -9.5,
@@ -647,6 +647,33 @@
     "pooled": 0,
     "unopposed": 0,
     "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "SMU at Notre Dame",
+   "market": "ML",
+   "pick": "Notre Dame",
+   "kickoffEt": "Sat, Nov 21, 7:30 PM",
+   "dollars": 10238,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.5,
+   "price": "-1011",
+   "size": "under 0.5x",
+   "mktRecord": "16-0",
+   "mktRoi": 9.7,
+   "l30Roi": 16.6,
+   "contested": false,
+   "sfPoints": 15,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
    }
   },
   {
@@ -692,33 +719,6 @@
    "mktRecord": "6-9",
    "mktRoi": 9.6,
    "l30Roi": 36.7,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 8,
-    "sizing": 4,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Clippers at Mavericks",
-   "market": "TOTAL",
-   "pick": "Over 229.5",
-   "kickoffEt": "Sat, Nov 21, 8:10 PM",
-   "dollars": 2999,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.3,
-   "price": "-107",
-   "size": "1x",
-   "mktRecord": "26-18",
-   "mktRoi": 17.3,
-   "l30Roi": 7.6,
    "contested": false,
    "sfPoints": 15,
    "parts": {
@@ -1089,22 +1089,6 @@
    ],
    "bestPrice": "-106",
    "maxVsUsual": 1.4
-  },
-  {
-   "matchup": "Steelers at Eagles",
-   "market": "ML",
-   "pick": "Steelers",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "sport": "NFL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 2955,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "31-10|62756|21-4"
-   ],
-   "bestPrice": "-194",
-   "maxVsUsual": 0.6
   }
  ],
  "sizedUp": [
@@ -1233,9 +1217,9 @@
    "pick": "Tennessee",
    "kickoffEt": "Sat, Nov 21, 3:45 PM",
    "sport": "CFB",
-   "dollars": 13757,
-   "price": "+109",
-   "vsUsual": 3.3,
+   "dollars": 14233,
+   "price": "+110",
+   "vsUsual": 3.4,
    "size": "1.5x and up",
    "form": "L10 6-4",
    "l30Roi": 14,
@@ -1345,6 +1329,23 @@
    "mktRoi": 44.8,
    "opposed": "unopposed",
    "fp": "17-7|17163|3-2"
+  },
+  {
+   "matchup": "Georgia at South Carolina",
+   "market": "SPREAD",
+   "pick": "Georgia -13.5",
+   "kickoffEt": "Sat, Nov 21, 7:30 PM",
+   "sport": "CFB",
+   "dollars": 9499,
+   "price": "-133",
+   "vsUsual": 1.9,
+   "size": "1.5x and up",
+   "form": "L10 7-2",
+   "l30Roi": 97.8,
+   "mktRecord": "0-1",
+   "mktRoi": -100,
+   "opposed": "unopposed",
+   "fp": "3-0|12605|0-1"
   },
   {
    "matchup": "Texas Tech at Baylor",
@@ -1481,23 +1482,6 @@
    "mktRoi": 23,
    "opposed": "contested",
    "fp": "32-13|38944|40-22"
-  },
-  {
-   "matchup": "Clippers at Mavericks",
-   "market": "TOTAL",
-   "pick": "Over 229.5",
-   "kickoffEt": "Sat, Nov 21, 8:10 PM",
-   "sport": "NBA",
-   "dollars": 2999,
-   "price": "-107",
-   "vsUsual": 1.3,
-   "size": "1x",
-   "form": "L10 8-2",
-   "l30Roi": 7.6,
-   "mktRecord": "26-18",
-   "mktRoi": 17.3,
-   "opposed": "contested",
-   "fp": "49-43|16256|26-18"
   },
   {
    "matchup": "Buccaneers at Lions",
