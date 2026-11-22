@@ -1,0 +1,380 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow + Polymarket late money - NFL** - 3 games",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW + POLYMARKET",
+   "title": "NFL - late Polymarket money on a Sharp Flow game",
+   "subtitle": "HOT Polymarket wallet bought after the NFL report posted - shown with the Sharp Flow read, games not started. Buys checked 11:45am CT, SharpFlow snapshot 11:34am CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Buccaneers at Lions",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - LIONS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Lions ML -222",
+       "price": "-222",
+       "for": {
+        "team": "LIONS",
+        "rows": [
+         {
+          "team": "Lions",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 44980,
+          "note": "9.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Lions",
+          "wallet": "K",
+          "market": "SPREAD",
+          "record": "9-6",
+          "roi": 21.9,
+          "dollars": 8071,
+          "note": "1.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Lions",
+          "wallet": "AB",
+          "market": "SPREAD",
+          "record": "9-3",
+          "roi": 53.9,
+          "dollars": 3961,
+          "note": "0.7x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Lions",
+          "wallet": "aaabbb",
+          "market": "ML",
+          "record": "17-12",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -9.4,
+          "dollars": 1650,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Lions",
+          "wallet": "twotontony",
+          "market": "ML",
+          "record": "13-7",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": 20.1,
+          "dollars": 914,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY TWO-SIDED - not counted",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "BUCCANEERS",
+        "rows": [
+         {
+          "team": "Buccaneers",
+          "wallet": "AB",
+          "market": "SPREAD",
+          "record": "9-3",
+          "roi": 53.9,
+          "dollars": 6789,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Buccaneers",
+          "wallet": "0x16bb…8492",
+          "market": "ML",
+          "record": "3-3",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -34.6,
+          "dollars": 8500,
+          "note": "Polymarket · thin",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Buccaneers",
+          "wallet": "Mr.Kirk",
+          "market": "SPREAD",
+          "record": "19-23",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -21.8,
+          "dollars": 869,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Buccaneers",
+          "wallet": "Jumperhq",
+          "market": "SPREAD",
+          "record": "33-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 19.5,
+          "dollars": 600,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Buccaneers",
+          "wallet": "twotontony",
+          "market": "SPREAD",
+          "record": "10-8",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 13.4,
+          "dollars": 534,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY TWO-SIDED - not counted",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "LIONS",
+         "dollars": 57012,
+         "pct": 89,
+         "c": "green"
+        },
+        {
+         "team": "BUCCANEERS",
+         "dollars": 6789,
+         "pct": 11,
+         "c": "red"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on LIONS vs a cold wallet on BUCCANEERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "POLY LATE: Jumperhq HOT $600 on Buccaneers +3.5 - kickoff in 15 min"
+      },
+      {
+       "eyebrow": "Titans at Cowboys",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - COWBOYS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Cowboys ML -342",
+       "price": "-342",
+       "for": {
+        "team": "COWBOYS",
+        "rows": [
+         {
+          "team": "Cowboys",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 43919,
+          "note": "9.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Cowboys",
+          "wallet": "K",
+          "market": "SPREAD",
+          "record": "9-6",
+          "roi": 21.9,
+          "dollars": 17002,
+          "note": "3.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "TITANS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Titans",
+          "wallet": "Jumperhq",
+          "market": "SPREAD",
+          "record": "33-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 19.5,
+          "dollars": 520,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "COWBOYS",
+         "dollars": 60921,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on COWBOYS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "POLY LATE: Jumperhq HOT $520 on Titans +7.5 - kickoff in 15 min"
+      },
+      {
+       "eyebrow": "Steelers at Eagles",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - STEELERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Steelers ML -192",
+       "price": "-192",
+       "for": {
+        "team": "STEELERS",
+        "rows": [
+         {
+          "team": "Steelers",
+          "wallet": "E",
+          "market": "ML",
+          "record": "4-2",
+          "roi": 35.6,
+          "dollars": 10000,
+          "note": "1.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Steelers",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 3313,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "EAGLES",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Eagles",
+          "wallet": "0x16bb…8492",
+          "market": "SPREAD",
+          "record": "16-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -12.4,
+          "dollars": 23315,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Eagles",
+          "wallet": "Jumperhq",
+          "market": "SPREAD",
+          "record": "33-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 19.5,
+          "dollars": 500,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "STEELERS",
+         "dollars": 13313,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on STEELERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "POLY LATE: Jumperhq HOT $500 on Eagles +3.5 - kickoff in 15 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
