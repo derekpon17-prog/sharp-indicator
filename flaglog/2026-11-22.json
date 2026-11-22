@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -209,7 +209,7 @@
    "maxVsUsual": 7.5,
    "maxDollars": 132856,
    "opposedSeen": false,
-   "snapshots": 23
+   "snapshots": 26
   },
   "Cardinals at Chiefs|SPREAD|Chiefs": {
    "sport": "NFL",
@@ -227,7 +227,7 @@
    "maxVsUsual": 7.7,
    "maxDollars": 155278,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 9
   },
   "Buccaneers at Lions|ML|Lions": {
    "sport": "NFL",
@@ -244,7 +244,7 @@
    "maxVsUsual": 9.9,
    "maxDollars": 44980,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Titans at Cowboys|ML|Cowboys": {
    "sport": "NFL",
@@ -262,7 +262,7 @@
    "maxVsUsual": 9.7,
    "maxDollars": 43919,
    "opposedSeen": true,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Dolphins at Bills|ML|Bills": {
    "sport": "NFL",
@@ -280,7 +280,7 @@
    "maxVsUsual": 4,
    "maxDollars": 18071,
    "opposedSeen": false,
-   "snapshots": 15
+   "snapshots": 18
   },
   "Titans at Cowboys|SPREAD|Cowboys +3.5": {
    "sport": "NFL",
@@ -315,7 +315,7 @@
    "maxVsUsual": 2.1,
    "maxDollars": 9636,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Steelers at Eagles|TOTAL|Over 38.5": {
    "sport": "NFL",
@@ -332,7 +332,7 @@
    "maxVsUsual": 2,
    "maxDollars": 9255,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Buccaneers at Lions|SPREAD|Lions": {
    "sport": "NFL",
@@ -349,7 +349,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 8071,
    "opposedSeen": true,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Jaguars at Giants|ML|Jaguars": {
    "sport": "NFL",
@@ -368,7 +368,7 @@
    "maxVsUsual": 2,
    "maxDollars": 10000,
    "opposedSeen": false,
-   "snapshots": 19
+   "snapshots": 22
   },
   "Bengals at Commanders|SPREAD|Bengals -6.5": {
    "sport": "NFL",
@@ -385,7 +385,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 7203,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Jets at Chargers|ML|Chargers": {
    "sport": "NFL",
@@ -402,7 +402,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 7006,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Bengals at Commanders|ML|Bengals": {
    "sport": "NFL",
@@ -419,7 +419,7 @@
    "maxVsUsual": 3.2,
    "maxDollars": 14738,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Ravens at Panthers|ML|Panthers": {
    "sport": "NFL",
@@ -435,7 +435,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 4150,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Steelers at Eagles|ML|Steelers": {
    "sport": "NFL",
@@ -452,7 +452,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 10000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Vikings at 49ers|ML|49ers": {
    "sport": "NFL",
@@ -534,7 +534,7 @@
    "maxVsUsual": 6.1,
    "maxDollars": 37209,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Titans at Cowboys|SPREAD|Cowboys": {
    "sport": "NFL",
@@ -551,7 +551,7 @@
    "maxVsUsual": 3.7,
    "maxDollars": 17002,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Saints at Bears|ML|Bears": {
    "sport": "NFL",
@@ -569,7 +569,7 @@
    "maxVsUsual": 8.8,
    "maxDollars": 39804,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Pistons at Hawks|ML|Pistons": {
    "sport": "NBA",
@@ -601,7 +601,7 @@
    "maxVsUsual": 2.5,
    "maxDollars": 470231,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Buccaneers at Lions|SPREAD|Buccaneers": {
    "sport": "NFL",
@@ -617,7 +617,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6789,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   }
  }
 }
