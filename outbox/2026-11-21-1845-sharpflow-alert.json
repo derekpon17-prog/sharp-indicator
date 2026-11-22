@@ -1,0 +1,143 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:31pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Clippers at Mavericks",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "bet": "Over TOTAL -107",
+       "price": "-107",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "AI",
+          "market": "TOTAL",
+          "record": "26-18",
+          "roi": 17.3,
+          "dollars": 2999,
+          "note": "1.3x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 2999,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 26-18 (+17% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $3K on Over - kickoff in 24 min"
+      },
+      {
+       "eyebrow": "Pelicans at Spurs",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "bet": "Pelicans vs Spurs",
+       "price": null,
+       "for": {
+        "team": "PELICANS",
+        "rows": [
+         {
+          "team": "Pelicans",
+          "wallet": "AL",
+          "market": "ML",
+          "record": "8-6",
+          "roi": 32.3,
+          "dollars": 7000,
+          "note": "0.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Pelicans",
+          "wallet": "AL",
+          "market": "SPREAD",
+          "record": "14-11",
+          "roi": -21.3,
+          "dollars": 3500,
+          "note": "0.4x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "SPURS",
+        "rows": [
+         {
+          "team": "Spurs",
+          "wallet": "AI",
+          "market": "SPREAD",
+          "record": "24-16",
+          "roi": 16.8,
+          "dollars": 3000,
+          "note": "1.3x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PELICANS",
+         "dollars": 10500,
+         "pct": 78,
+         "c": "green"
+        },
+        {
+         "team": "SPURS",
+         "dollars": 3000,
+         "pct": 22,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "NEW $7K on Pelicans - kickoff in 24 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
