@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T17:34:24.197Z",
+ "scannedAt": "2026-11-22T17:47:56.958Z",
  "sports": {
   "NFL": [
    {
@@ -90,7 +90,7 @@
       "pick": "Cowboys",
       "line": null,
       "price": "-317",
-      "dollars": 1698,
+      "dollars": 1721,
       "vsUsual": 0.1,
       "vsUsualAll": 0.2
      }
@@ -121,9 +121,9 @@
       "pick": "Saints",
       "line": 13.5,
       "price": "-117",
-      "dollars": 723,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.9
+      "dollars": 3240,
+      "vsUsual": 1.7,
+      "vsUsualAll": 3.9
      }
     ]
    },
@@ -142,7 +142,7 @@
       "pick": "Ravens",
       "line": null,
       "price": "+134",
-      "dollars": 28842,
+      "dollars": 29161,
       "vsUsual": 0.2,
       "vsUsualAll": 0.4
      },
@@ -162,53 +162,9 @@
       "pick": "Under 46.5",
       "line": null,
       "price": null,
-      "dollars": 61541,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.7
-     }
-    ]
-   }
-  ],
-  "CFB": [
-   {
-    "id": "aaedcd",
-    "gap": 7.8,
-    "overall": "153-128",
-    "sport": "33-20",
-    "returnPct": 25.7,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Texas at Texas A&M",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-268",
-      "dollars": 687,
-      "vsUsual": 2.7,
-      "vsUsualAll": 1.5
-     }
-    ]
-   },
-   {
-    "id": "487b8b",
-    "gap": 3.1,
-    "overall": "522-439",
-    "sport": "77-57",
-    "returnPct": 4.2,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Texas at Texas A&M",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-238",
-      "dollars": 11663,
-      "vsUsual": 19.4,
-      "vsUsualAll": 25.5
+      "dollars": 87986,
+      "vsUsual": 0.4,
+      "vsUsualAll": 1.1
      }
     ]
    }
@@ -356,6 +312,60 @@
       "dollars": 3170,
       "vsUsual": 1.2,
       "vsUsualAll": 0.4
+     },
+     {
+      "matchup": "Pistons at Hawks",
+      "market": "TOTAL",
+      "pick": "Over 226.5",
+      "line": 226.5,
+      "price": "+127",
+      "dollars": 822,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.1
+     }
+    ]
+   }
+  ],
+  "CFB": [
+   {
+    "id": "aaedcd",
+    "gap": 7.8,
+    "overall": "153-128",
+    "sport": "33-20",
+    "returnPct": 25.7,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-268",
+      "dollars": 687,
+      "vsUsual": 2.7,
+      "vsUsualAll": 1.5
+     }
+    ]
+   },
+   {
+    "id": "487b8b",
+    "gap": 3.1,
+    "overall": "522-439",
+    "sport": "77-57",
+    "returnPct": 4.2,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-238",
+      "dollars": 11663,
+      "vsUsual": 19.4,
+      "vsUsualAll": 25.5
      }
     ]
    }
