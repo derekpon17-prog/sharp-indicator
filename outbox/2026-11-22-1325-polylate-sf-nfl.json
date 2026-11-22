@@ -1,0 +1,114 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow + Polymarket late money - NFL** - 1 game",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW + POLYMARKET",
+   "title": "NFL - late Polymarket money on a Sharp Flow game",
+   "subtitle": "HOT Polymarket wallet bought after the NFL report posted - shown with the Sharp Flow read, games not started. Buys checked 1:25pm CT, SharpFlow snapshot 1:08pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 3:25PM CT",
+     "picks": [
+      {
+       "eyebrow": "Raiders at Broncos",
+       "time": "3:25pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - BRONCOS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Broncos",
+       "price": null,
+       "for": {
+        "team": "BRONCOS",
+        "rows": [
+         {
+          "team": "Broncos",
+          "wallet": "AB",
+          "market": "ML",
+          "record": "3-2",
+          "roi": 38.6,
+          "dollars": 37209,
+          "note": "6.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Broncos",
+          "wallet": "BreakTheBank",
+          "market": "ML",
+          "record": "33-19",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": 28,
+          "dollars": 282368,
+          "note": "Polymarket · L10 NFL 0-10",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Broncos",
+          "wallet": "aaabbb",
+          "market": "ML",
+          "record": "17-12",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -9.4,
+          "dollars": 1611,
+          "note": "Polymarket · L10 NFL 7-3",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "RAIDERS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Raiders",
+          "wallet": "twotontony",
+          "market": "SPREAD",
+          "record": "10-8",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 13.4,
+          "dollars": 543,
+          "note": "Polymarket · L10 NFL 7-3",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BRONCOS",
+         "dollars": 37209,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "POLY LATE: BreakTheBank HOT $282k on Broncos ML - kickoff in 1h 59m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
