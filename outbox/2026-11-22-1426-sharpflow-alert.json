@@ -1,0 +1,238 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 2:16pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 2:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Hawks",
+       "time": "2:40pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Under 224.5 -104",
+       "price": "-104",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "I",
+          "market": "UNDER 224.5 -104",
+          "mk": "TOTAL",
+          "record": "11-4",
+          "roi": 45.1,
+          "dollars": 10200,
+          "note": "1.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Under",
+          "wallet": "TheRepoMan",
+          "market": "TOTAL UNDER 224.5 @ 50c (-100)",
+          "mk": "TOTAL",
+          "record": "15-7",
+          "recLabel": "NBA TOTAL · last 45d record",
+          "roi": 6.6,
+          "dollars": 500,
+          "note": "Polymarket · L10 NBA 3-7",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 10200,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 11-4 (+45% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - NEW $10K on Under 224.5 - kickoff in 13 min"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:25PM CT",
+     "picks": [
+      {
+       "eyebrow": "Jaguars at Giants",
+       "time": "3:25pm CT",
+       "tag": {
+        "t": "EDGE - JAGUARS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Jaguars ML -245",
+       "price": "-245",
+       "for": {
+        "team": "JAGUARS",
+        "rows": [
+         {
+          "team": "Jaguars",
+          "wallet": "P",
+          "market": "ML -257",
+          "mk": "ML",
+          "record": "4-0",
+          "roi": 53.8,
+          "dollars": 18121,
+          "note": "1.1x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Jaguars",
+          "wallet": "G",
+          "market": "ML -245",
+          "mk": "ML",
+          "record": "4-2",
+          "roi": 35.6,
+          "dollars": 10000,
+          "note": "1.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Jaguars",
+          "wallet": "O",
+          "market": "ML -245",
+          "mk": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 9278,
+          "note": "2.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Jaguars",
+          "wallet": "The-Joker",
+          "market": "SPREAD -6.5 @ 49c (+104)",
+          "mk": "SPREAD",
+          "record": "4-4",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -16.2,
+          "dollars": 9800,
+          "note": "Polymarket · L10 NFL 3-7 · thin",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Jaguars",
+          "wallet": "surfandturf",
+          "market": "SPREAD -6.5 @ 49c (+104)",
+          "mk": "SPREAD",
+          "record": "18-14",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -58.3,
+          "dollars": 1366,
+          "note": "Polymarket · L10 NFL 8-2",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "GIANTS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Giants",
+          "wallet": "0x16bb…8492",
+          "market": "SPREAD +5.5 @ 49c (+104)",
+          "mk": "SPREAD",
+          "record": "16-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -12.4,
+          "dollars": 31850,
+          "note": "Polymarket · L10 NFL 4-6",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Giants",
+          "wallet": "lug",
+          "market": "SPREAD -1.5 @ 28c (+257)",
+          "mk": "SPREAD",
+          "record": "12-35",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -29,
+          "dollars": 909,
+          "note": "Polymarket · L10 NFL 4-6",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "JAGUARS",
+         "dollars": 37399,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on JAGUARS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - GREW $19K to $37K - kickoff in 58 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
