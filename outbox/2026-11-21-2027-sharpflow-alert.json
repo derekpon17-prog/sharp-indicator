@@ -1,0 +1,114 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:05pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Celtics at Kings",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - CELTICS",
+        "icon": "👀"
+       },
+       "bet": "Celtics",
+       "price": null,
+       "for": {
+        "team": "CELTICS",
+        "rows": [
+         {
+          "team": "Celtics",
+          "wallet": "A",
+          "market": "ML",
+          "record": "32-26",
+          "roi": 4.8,
+          "dollars": 2366,
+          "note": "7.3x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CELTICS",
+         "dollars": 2366,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $2.4K on Celtics - kickoff in 42 min"
+      },
+      {
+       "eyebrow": "Celtics at Kings",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "bet": "Total 217.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "U",
+          "market": "TOTAL",
+          "record": "0-1",
+          "roi": -100,
+          "dollars": 4800,
+          "note": "0.4x usual, only 1 bet here",
+          "status": {
+           "t": "THIN - 1 bet here - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Under",
+          "wallet": "X",
+          "market": "TOTAL",
+          "record": "8-5",
+          "roi": 14,
+          "dollars": 1973,
+          "note": "1.3x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 6773,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $2K on Under - kickoff in 42 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
