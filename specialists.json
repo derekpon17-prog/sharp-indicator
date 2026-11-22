@@ -1,7 +1,144 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T18:02:10.383Z",
+ "scannedAt": "2026-11-22T18:56:05.481Z",
  "sports": {
+  "NFL": [
+   {
+    "id": "bf28eb",
+    "gap": 36.2,
+    "overall": "63-54",
+    "sport": "9-1",
+    "returnPct": 22.2,
+    "last10": "9-1",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Saints at Bears",
+      "market": "SPREAD",
+      "pick": "Saints",
+      "line": 9.5,
+      "price": "+122",
+      "dollars": 2534,
+      "vsUsual": 1.3,
+      "vsUsualAll": 8
+     },
+     {
+      "matchup": "Jets at Chargers",
+      "market": "SPREAD",
+      "pick": "Chargers -2.5",
+      "line": -2.5,
+      "price": "-113",
+      "dollars": 1311,
+      "vsUsual": 0.7,
+      "vsUsualAll": 4.1
+     }
+    ]
+   },
+   {
+    "id": "c911a4",
+    "gap": 34.5,
+    "overall": "310-249",
+    "sport": "9-1",
+    "returnPct": 16.1,
+    "last10": "9-1",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Dolphins at Bills",
+      "market": "SPREAD",
+      "pick": "Bills",
+      "line": -5.5,
+      "price": "-456",
+      "dollars": 972,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.1
+     }
+    ]
+   },
+   {
+    "id": "3bcb94",
+    "gap": 33.3,
+    "overall": "12-15",
+    "sport": "7-2",
+    "returnPct": 12,
+    "last10": "7-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Jets at Chargers",
+      "market": "ML",
+      "pick": "Jets",
+      "line": null,
+      "price": "+150",
+      "dollars": 1520,
+      "vsUsual": 0.5,
+      "vsUsualAll": 0.4
+     }
+    ]
+   },
+   {
+    "id": "b77626",
+    "gap": 26,
+    "overall": "83-68",
+    "sport": "17-4",
+    "returnPct": 15.8,
+    "last10": "10-0",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Steelers at Eagles",
+      "market": "SPREAD",
+      "pick": "Steelers",
+      "line": 3.5,
+      "price": "-317",
+      "dollars": 1875,
+      "vsUsual": 1.4,
+      "vsUsualAll": 0.6
+     },
+     {
+      "matchup": "Saints at Bears",
+      "market": "SPREAD",
+      "pick": "Bears -3.5",
+      "line": -3.5,
+      "price": "-317",
+      "dollars": 2000,
+      "vsUsual": 1.5,
+      "vsUsualAll": 0.6
+     },
+     {
+      "matchup": "Raiders at Broncos",
+      "market": "SPREAD",
+      "pick": "Raiders +17.5",
+      "line": 17.5,
+      "price": "-257",
+      "dollars": 1000,
+      "vsUsual": 0.8,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "5ce139",
+    "gap": 22.2,
+    "overall": "86-77",
+    "sport": "6-2",
+    "returnPct": 11.4,
+    "last10": "6-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Titans at Cowboys",
+      "market": "ML",
+      "pick": "Cowboys",
+      "line": null,
+      "price": "-317",
+      "dollars": 7600,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.9
+     }
+    ]
+   }
+  ],
   "CFB": [
    {
     "id": "aaedcd",
@@ -42,153 +179,6 @@
       "dollars": 11663,
       "vsUsual": 19.4,
       "vsUsualAll": 25.5
-     }
-    ]
-   }
-  ],
-  "NFL": [
-   {
-    "id": "bf28eb",
-    "gap": 36.2,
-    "overall": "63-54",
-    "sport": "9-1",
-    "returnPct": 22.2,
-    "last10": "9-1",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Jets at Chargers",
-      "market": "SPREAD",
-      "pick": "Chargers -2.5",
-      "line": -2.5,
-      "price": "-113",
-      "dollars": 1311,
-      "vsUsual": 0.7,
-      "vsUsualAll": 4.1
-     },
-     {
-      "matchup": "Saints at Bears",
-      "market": "SPREAD",
-      "pick": "Saints",
-      "line": 9.5,
-      "price": "+122",
-      "dollars": 2534,
-      "vsUsual": 1.3,
-      "vsUsualAll": 8
-     }
-    ]
-   },
-   {
-    "id": "c911a4",
-    "gap": 34.5,
-    "overall": "310-249",
-    "sport": "9-1",
-    "returnPct": 16.1,
-    "last10": "9-1",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Dolphins at Bills",
-      "market": "SPREAD",
-      "pick": "Bills",
-      "line": -5.5,
-      "price": "-456",
-      "dollars": 1069,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.1
-     }
-    ]
-   },
-   {
-    "id": "b77626",
-    "gap": 26,
-    "overall": "83-68",
-    "sport": "17-4",
-    "returnPct": 15.8,
-    "last10": "10-0",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "SPREAD",
-      "pick": "Raiders +17.5",
-      "line": 17.5,
-      "price": "-257",
-      "dollars": 1000,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.3
-     },
-     {
-      "matchup": "Steelers at Eagles",
-      "market": "SPREAD",
-      "pick": "Steelers",
-      "line": 3.5,
-      "price": "-317",
-      "dollars": 1875,
-      "vsUsual": 1.4,
-      "vsUsualAll": 0.6
-     },
-     {
-      "matchup": "Saints at Bears",
-      "market": "SPREAD",
-      "pick": "Bears -3.5",
-      "line": -3.5,
-      "price": "-317",
-      "dollars": 2000,
-      "vsUsual": 1.5,
-      "vsUsualAll": 0.6
-     }
-    ]
-   },
-   {
-    "id": "5ce139",
-    "gap": 22.2,
-    "overall": "86-77",
-    "sport": "6-2",
-    "returnPct": 11.4,
-    "last10": "6-2",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Titans at Cowboys",
-      "market": "ML",
-      "pick": "Cowboys",
-      "line": null,
-      "price": "-317",
-      "dollars": 7600,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.9
-     }
-    ]
-   },
-   {
-    "id": "411018",
-    "gap": 17,
-    "overall": "95-102",
-    "sport": "15-8",
-    "returnPct": 32.5,
-    "last10": "8-2",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Buccaneers at Lions",
-      "market": "TOTAL",
-      "pick": "Over",
-      "line": 46.5,
-      "price": "+104",
-      "dollars": 2940,
-      "vsUsual": 1.6,
-      "vsUsualAll": 3.5
-     },
-     {
-      "matchup": "Saints at Bears",
-      "market": "SPREAD",
-      "pick": "Saints",
-      "line": 13.5,
-      "price": "-117",
-      "dollars": 3240,
-      "vsUsual": 1.7,
-      "vsUsualAll": 3.9
      }
     ]
    }
