@@ -1,0 +1,627 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NFL - first game 12:00pm CT** - 17 sides (2 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NFL - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NFL and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 12:48am CT, buys checked 10:04am CT - board 1",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "bet": "Panthers -2.5",
+       "sub": "Ravens at Panthers - 12:00pm CT",
+       "chips": [
+        {
+         "t": "HOT twotontony $1.2K",
+         "c": "green"
+        },
+        {
+         "t": "NFL SPREAD 10-8 (+13%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 1.74x their usual $700",
+         "c": "green"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF other side $4.8K vs $0",
+         "c": "orange"
+        }
+       ],
+       "price": -115,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Cardinals +16.5",
+       "sub": "Cardinals at Chiefs - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD 0x16bb…8492 $27K",
+         "c": "red"
+        },
+        {
+         "t": "NFL SPREAD 16-21 (-12%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 4-6",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 1.85x their usual $15K",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -117,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Over 42.5",
+       "sub": "Ravens at Panthers - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD betabot $3.8K",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 10-5 (0%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 1-9",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "COLD Mr.Kirk $684",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 23-21 (-7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -128,
+       "polyHot": 0,
+       "polyCold": 2
+      },
+      {
+       "bet": "Over 44.5",
+       "sub": "Buccaneers at Lions - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD Mr.Kirk $1.7K",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 23-21 (-7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $2.9K",
+         "c": "blue"
+        }
+       ],
+       "price": -120,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Lions ML",
+       "sub": "Buccaneers at Lions - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD aaabbb $1.6K",
+         "c": "red"
+        },
+        {
+         "t": "NFL ML 17-12 (-9%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.6x their usual $635",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $45K",
+         "c": "blue"
+        }
+       ],
+       "price": -194,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Under 42.5",
+       "sub": "Cardinals at Chiefs - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD Mr.Kirk $840",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 23-21 (-7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "COLD yuyakowako $525",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 13-16 (-10%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 5.25x their usual $100",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF other side $9.6K vs $0",
+         "c": "orange"
+        }
+       ],
+       "price": -130,
+       "polyHot": 0,
+       "polyCold": 2
+      },
+      {
+       "bet": "Over 38.5",
+       "sub": "Steelers at Eagles - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD in this bet type twotontony $1K",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 4-8 (-34%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "1.43x their usual $700",
+         "c": "grey"
+        },
+        {
+         "t": "not counted",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $9.3K",
+         "c": "blue"
+        }
+       ],
+       "price": -100,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:05PM CT",
+     "picks": [
+      {
+       "bet": "Jets ML",
+       "sub": "Jets at Chargers - 3:05pm CT",
+       "chips": [
+        {
+         "t": "COLD surfandturf $2.6K",
+         "c": "red"
+        },
+        {
+         "t": "NFL ML 23-20 (-20%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "small 0.19x their usual $14K",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF other side $7K vs $0",
+         "c": "orange"
+        }
+       ],
+       "price": 156,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:25PM CT",
+     "picks": [
+      {
+       "bet": "Raiders +10.5",
+       "sub": "Raiders at Broncos - 3:25pm CT",
+       "chips": [
+        {
+         "t": "HOT twotontony $543",
+         "c": "green"
+        },
+        {
+         "t": "NFL SPREAD 10-8 (+13%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "0.78x their usual $700",
+         "c": "grey"
+        },
+        {
+         "t": "counts",
+         "c": "green"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -117,
+       "polyHot": 1,
+       "polyCold": 0
+      },
+      {
+       "bet": "Giants +5.5",
+       "sub": "Jaguars at Giants - 3:25pm CT",
+       "chips": [
+        {
+         "t": "COLD 0x16bb…8492 $32K",
+         "c": "red"
+        },
+        {
+         "t": "NFL SPREAD 16-21 (-12%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 4-6",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.19x their usual $15K",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": 104,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Broncos ML",
+       "sub": "Raiders at Broncos - 3:25pm CT",
+       "chips": [
+        {
+         "t": "COLD aaabbb $1.6K",
+         "c": "red"
+        },
+        {
+         "t": "NFL ML 17-12 (-9%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 2.54x their usual $635",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -488,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 7:15PM CT",
+     "picks": [
+      {
+       "bet": "Commanders +5.5",
+       "sub": "Bengals at Commanders - 7:15pm CT",
+       "chips": [
+        {
+         "t": "COLD 0x16bb…8492 $13K",
+         "c": "red"
+        },
+        {
+         "t": "NFL SPREAD 16-21 (-12%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 4-6",
+         "c": "grey"
+        },
+        {
+         "t": "0.92x their usual $15K",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF other side $7.2K vs $0",
+         "c": "orange"
+        }
+       ],
+       "price": 104,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 12-12 +2.0u, COLD sides 53-47 (fading -5.5u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  },
+  {
+   "brand": "POLYMARKET",
+   "title": "NFL - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NFL and this bet type (last 45 days, 5+ bets); COLD = losing. Wallet roster 12:48am CT, buys checked 10:04am CT - board 2",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "bet": "Under 44.5",
+       "sub": "Buccaneers at Lions - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD in this bet type twotontony $891",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 4-8 (-34%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "1.27x their usual $700",
+         "c": "grey"
+        },
+        {
+         "t": "not counted",
+         "c": "red"
+        },
+        {
+         "t": "SF other side $2.9K vs $0",
+         "c": "orange"
+        }
+       ],
+       "price": 106,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Buccaneers +4.5",
+       "sub": "Buccaneers at Lions - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD Mr.Kirk $869",
+         "c": "red"
+        },
+        {
+         "t": "NFL SPREAD 19-23 (-22%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF other side $12K vs $6.8K",
+         "c": "orange"
+        }
+       ],
+       "price": -133,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Over 54.5",
+       "sub": "Titans at Cowboys - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD Mr.Kirk $802",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 23-21 (-7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -115,
+       "polyHot": 0,
+       "polyCold": 1
+      },
+      {
+       "bet": "Over 46.5",
+       "sub": "Dolphins at Bills - 12:00pm CT",
+       "chips": [
+        {
+         "t": "COLD in this bet type twotontony $624",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 4-8 (-34%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 7-3",
+         "c": "grey"
+        },
+        {
+         "t": "0.89x their usual $700",
+         "c": "grey"
+        },
+        {
+         "t": "not counted",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -108,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:05PM CT",
+     "picks": [
+      {
+       "bet": "Over 42.5",
+       "sub": "Jets at Chargers - 3:05pm CT",
+       "chips": [
+        {
+         "t": "COLD Mr.Kirk $717",
+         "c": "red"
+        },
+        {
+         "t": "NFL TOTAL 23-21 (-7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NFL 8-2",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -120,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "2 two-sided positions left out | Poly calls since Nov 20 at Polymarket prices: HOT 12-12 +2.0u, COLD sides 53-47 (fading -5.5u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
