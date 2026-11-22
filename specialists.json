@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T14:18:18.174Z",
+ "scannedAt": "2026-11-22T14:56:37.025Z",
  "sports": {
   "NFL": [
    {
@@ -91,7 +91,7 @@
       "pick": "Ravens",
       "line": null,
       "price": "+138",
-      "dollars": 7690,
+      "dollars": 7742,
       "vsUsual": 0,
       "vsUsualAll": 0.1
      }
@@ -222,6 +222,27 @@
       "vsUsualAll": 0.1
      }
     ]
+   },
+   {
+    "id": "955c26",
+    "gap": 0.1,
+    "overall": "210-164",
+    "sport": "117-91",
+    "returnPct": 14.1,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Pistons at Hawks",
+      "market": "TOTAL",
+      "pick": "Over 226.5",
+      "line": 226.5,
+      "price": "+127",
+      "dollars": 822,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.1
+     }
+    ]
    }
   ],
   "CFB": [
@@ -239,10 +260,10 @@
       "market": "ML",
       "pick": "Texas",
       "line": null,
-      "price": "-247",
-      "dollars": 6164,
-      "vsUsual": 10.2,
-      "vsUsualAll": 13.5
+      "price": "-238",
+      "dollars": 10991,
+      "vsUsual": 18.3,
+      "vsUsualAll": 24.1
      }
     ]
    }
