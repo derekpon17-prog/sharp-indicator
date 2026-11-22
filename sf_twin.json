@@ -1,57 +1,69 @@
 {
- "at": "2026-11-22T21:06:25.945Z",
- "sfScannedAt": "2026-11-22T20:41:05.751Z",
- "tickets": 71,
- "onPoly": 69,
- "twins": 35,
- "twinRate": 0.51,
+ "at": "2026-11-22T23:06:47.494Z",
+ "sfScannedAt": "2026-11-22T22:49:53.077Z",
+ "tickets": 63,
+ "onPoly": 61,
+ "twins": 38,
+ "twinRate": 0.62,
  "note": "Twin = a Polymarket wallet with the same game, market and side within 3% of the SharpFlow ticket dollars (fills added up). onPoly = tickets whose game has a Polymarket event.",
  "stats": {
-  "NFL": {
-   "ML": {
-    "tickets": 17,
-    "onPoly": 17,
-    "twins": 7,
-    "twinRate": 0.41
-   },
+  "NBA": {
    "SPREAD": {
-    "tickets": 20,
-    "onPoly": 20,
-    "twins": 12,
-    "twinRate": 0.6
+    "tickets": 11,
+    "onPoly": 11,
+    "twins": 3,
+    "twinRate": 0.27
+   },
+   "ML": {
+    "tickets": 13,
+    "onPoly": 13,
+    "twins": 8,
+    "twinRate": 0.62
    },
    "TOTAL": {
-    "tickets": 3,
-    "onPoly": 3,
-    "twins": 1,
-    "twinRate": 0.33
+    "tickets": 4,
+    "onPoly": 4,
+    "twins": 4,
+    "twinRate": 1
    }
   },
-  "NBA": {
-   "TOTAL": {
-    "tickets": 6,
-    "onPoly": 6,
-    "twins": 4,
+  "NFL": {
+   "ML": {
+    "tickets": 18,
+    "onPoly": 18,
+    "twins": 12,
     "twinRate": 0.67
    },
-   "ML": {
-    "tickets": 12,
-    "onPoly": 12,
-    "twins": 7,
-    "twinRate": 0.58
-   },
    "SPREAD": {
-    "tickets": 10,
-    "onPoly": 10,
-    "twins": 3,
-    "twinRate": 0.3
+    "tickets": 9,
+    "onPoly": 9,
+    "twins": 7,
+    "twinRate": 0.78
+   },
+   "TOTAL": {
+    "tickets": 2,
+    "onPoly": 2,
+    "twins": 2,
+    "twinRate": 1
    }
   },
   "NHL": {
-   "ML": {
+   "SPREAD": {
     "tickets": 1,
     "onPoly": 1,
-    "twins": 1,
+    "twins": 0,
+    "twinRate": 0
+   },
+   "TOTAL": {
+    "tickets": 1,
+    "onPoly": 1,
+    "twins": 0,
+    "twinRate": 0
+   },
+   "ML": {
+    "tickets": 2,
+    "onPoly": 2,
+    "twins": 2,
     "twinRate": 1
    }
   },
@@ -66,319 +78,44 @@
  },
  "pairs": [
   {
-   "sport": "NFL",
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Panthers",
-   "sfTag": "H",
-   "sfUsd": 4150,
-   "polyWallet": "0x7c14bdd7d62b9a7824c220ee39a9b58773f05783",
-   "polyName": "0x7c14bDd7D62B9a7824C220EE39a9b58773F05783-1773587380195",
-   "polyUsd": 4208
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Ravens",
-   "sfTag": "S",
-   "sfUsd": 2000,
-   "polyWallet": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
-   "polyName": "abc51001",
-   "polyUsd": 2000
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Raiders at Broncos",
-   "market": "ML",
-   "pick": "Broncos",
-   "sfTag": "B",
-   "sfUsd": 282783,
-   "polyWallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-   "polyName": "BreakTheBank",
-   "polyUsd": 282368
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Raiders at Broncos",
-   "market": "ML",
-   "pick": "Broncos",
-   "sfTag": "P",
-   "sfUsd": 37209,
-   "polyWallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "polyName": "ic4cream",
-   "polyUsd": 37159
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Saints at Bears",
-   "market": "SPREAD",
-   "pick": "Bears -3.5",
-   "sfTag": "B",
-   "sfUsd": 188221,
-   "polyWallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-   "polyName": "BreakTheBank",
-   "polyUsd": 184166
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Saints at Bears",
-   "market": "SPREAD",
-   "pick": "Saints",
-   "sfTag": "N",
-   "sfUsd": 2534,
-   "polyWallet": "0x36e1b9c69326f03d8d28bd89457f1e7ec5bf28eb",
-   "polyName": "Bayupati",
-   "polyUsd": 2534
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Saints at Bears",
-   "market": "SPREAD",
-   "pick": "Bears -3.5",
-   "sfTag": "M",
-   "sfUsd": 2000,
-   "polyWallet": "0xed12480311feaf549568a9802c056c4736b77626",
-   "polyName": "EmmetBrown3rd",
-   "polyUsd": 2000
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Cardinals at Chiefs",
-   "market": "SPREAD",
-   "pick": "Chiefs",
-   "sfTag": "O",
-   "sfUsd": 17732,
-   "polyWallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
-   "polyName": "justwins",
-   "polyUsd": 17254
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Jets at Chargers",
-   "market": "SPREAD",
-   "pick": "Chargers -2.5",
-   "sfTag": "P",
-   "sfUsd": 3667,
-   "polyWallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "polyName": "ic4cream",
-   "polyUsd": 3666
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "SPREAD",
-   "pick": "Steelers",
-   "sfTag": "B",
-   "sfUsd": 52422,
-   "polyWallet": "0x6ac5bb06a9eb05641fd5e82640268b92f3ab4b6e",
-   "polyName": "robloxgamblemaster-2008-10-18",
-   "polyUsd": 53655
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "ML",
-   "pick": "Steelers",
-   "sfTag": "H",
-   "sfUsd": 3313,
-   "polyWallet": "0xaa281355e0747a4358c56c076587eda05fe3da01",
-   "polyName": "0xaa281355e0747a4358c56c076587eda05fe3da01-1792681059600",
-   "polyUsd": 3350
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "SPREAD",
-   "pick": "Eagles +3.5",
-   "sfTag": "K",
-   "sfUsd": 3000,
-   "polyWallet": "0x021c7df18153e2636e368e85f0cedb34c245232f",
-   "polyName": "0x021C7Df18153E2636e368e85F0Cedb34C245232f-1767207000808",
-   "polyUsd": 3000
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "SPREAD",
-   "pick": "Steelers",
-   "sfTag": "S",
-   "sfUsd": 1997,
-   "polyWallet": "0x496121ba250d47b62c2d84b3414a99aeeacade13",
-   "polyName": "Anon455",
-   "polyUsd": 1976
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "SPREAD",
-   "pick": "Buccaneers",
-   "sfTag": "P",
-   "sfUsd": 6789,
-   "polyWallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "polyName": "ic4cream",
-   "polyUsd": 6791
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "SPREAD",
-   "pick": "Lions",
-   "sfTag": "P",
-   "sfUsd": 3961,
-   "polyWallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "polyName": "ic4cream",
-   "polyUsd": 3889
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "SPREAD",
-   "pick": "Buccaneers",
-   "sfTag": "K",
-   "sfUsd": 3000,
-   "polyWallet": "0x021c7df18153e2636e368e85f0cedb34c245232f",
-   "polyName": "0x021C7Df18153E2636e368e85F0Cedb34C245232f-1767207000808",
-   "polyUsd": 3000
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Vikings at 49ers",
-   "market": "ML",
-   "pick": "49ers",
-   "sfTag": "B",
-   "sfUsd": 40277,
-   "polyWallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-   "polyName": "BreakTheBank",
-   "polyUsd": 40283
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Jaguars at Giants",
-   "market": "ML",
-   "pick": "Jaguars",
-   "sfTag": "I",
-   "sfUsd": 18143,
-   "polyWallet": "0x45185b026c729f2caf1b01f6230db5d22e81db24",
-   "polyName": "VirIntrepidus",
-   "polyUsd": 18124
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Jaguars at Giants",
-   "market": "TOTAL",
-   "pick": "Under 46.5",
-   "sfTag": "O",
-   "sfUsd": 7974,
-   "polyWallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
-   "polyName": "justwins",
-   "polyUsd": 7905
-  },
-  {
-   "sport": "NFL",
-   "matchup": "Titans at Cowboys",
-   "market": "SPREAD",
-   "pick": "Cowboys -14.5",
-   "sfTag": "E",
-   "sfUsd": 1896,
-   "polyWallet": "0x32bb3f0f842da76d3c3bba7d6d76376334733c1a",
-   "polyName": "Limousin",
-   "polyUsd": 1868
-  },
-  {
    "sport": "NBA",
-   "matchup": "Pistons at Hawks",
-   "market": "TOTAL",
-   "pick": "Under 224.5",
-   "sfTag": "D",
-   "sfUsd": 10200,
-   "polyWallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
-   "polyName": "HomeRunHazard",
-   "polyUsd": 9917
-  },
-  {
-   "sport": "NBA",
-   "matchup": "Pistons at Hawks",
+   "matchup": "Thunder at Heat",
    "market": "ML",
-   "pick": "Hawks",
-   "sfTag": "L",
-   "sfUsd": 4514,
-   "polyWallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
-   "polyName": "nigiri99",
-   "polyUsd": 4500
-  },
-  {
-   "sport": "NBA",
-   "matchup": "Pistons at Hawks",
-   "market": "ML",
-   "pick": "Hawks",
-   "sfTag": "G",
-   "sfUsd": 2999,
-   "polyWallet": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
-   "polyName": "MAGATheeStallion",
-   "polyUsd": 2934
-  },
-  {
-   "sport": "NBA",
-   "matchup": "Pistons at Hawks",
-   "market": "SPREAD",
-   "pick": "Hawks +1.5",
-   "sfTag": "B",
-   "sfUsd": 2128,
-   "polyWallet": "0xe9076a87c5ed90ef16e6fe6529c943baeca0cff6",
-   "polyName": "suntori",
-   "polyUsd": 2114
-  },
-  {
-   "sport": "NBA",
-   "matchup": "Pistons at Hawks",
-   "market": "TOTAL",
-   "pick": "Under 224.5",
-   "sfTag": "I",
-   "sfUsd": 1500,
-   "polyWallet": "0x02689e177c870b664b1f8327edf4156ea4bc915a",
-   "polyName": "Gongsij",
-   "polyUsd": 1500
-  },
-  {
-   "sport": "NBA",
-   "matchup": "Pistons at Hawks",
-   "market": "ML",
-   "pick": "Hawks",
-   "sfTag": "N",
-   "sfUsd": 1097,
-   "polyWallet": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
-   "polyName": "neutralwave23",
-   "polyUsd": 1098
+   "pick": "Heat",
+   "sfTag": "C",
+   "sfUsd": 1000,
+   "polyWallet": "0x300b4292912c123066a380a344b505b0f353f636",
+   "polyName": "digitalnomad85",
+   "polyUsd": 1000
   },
   {
    "sport": "NBA",
    "matchup": "Thunder at Heat",
-   "market": "SPREAD",
-   "pick": "Heat -3.5",
-   "sfTag": "K",
-   "sfUsd": 6032,
+   "market": "ML",
+   "pick": "Heat",
+   "sfTag": "M",
+   "sfUsd": 564,
    "polyWallet": "0x2117ae94a97d69b78cbc81b6680a62deb1955c26",
    "polyName": "Zzzz87",
-   "polyUsd": 6033
+   "polyUsd": 564
   },
   {
    "sport": "NBA",
    "matchup": "Mavericks at Jazz",
-   "market": "ML",
-   "pick": "Mavericks",
-   "sfTag": "L",
-   "sfUsd": 3146,
-   "polyWallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
-   "polyName": "nigiri99",
-   "polyUsd": 3147
+   "market": "SPREAD",
+   "pick": "Jazz +3.5",
+   "sfTag": "G",
+   "sfUsd": 1500,
+   "polyWallet": "0xd0e583f76a339219339d3c17f019460ab7839105",
+   "polyName": "yu6618",
+   "polyUsd": 1500
   },
   {
    "sport": "NBA",
    "matchup": "Mavericks at Jazz",
    "market": "TOTAL",
    "pick": "Under",
-   "sfTag": "C",
+   "sfTag": "D",
    "sfUsd": 1023,
    "polyWallet": "0x9cb990f1862568a63d8601efeebe0304225c32f2",
    "polyName": "jtwyslljy",
@@ -387,9 +124,20 @@
   {
    "sport": "NBA",
    "matchup": "Mavericks at Jazz",
+   "market": "TOTAL",
+   "pick": "Under",
+   "sfTag": "G",
+   "sfUsd": 900,
+   "polyWallet": "0xd0e583f76a339219339d3c17f019460ab7839105",
+   "polyName": "yu6618",
+   "polyUsd": 900
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Mavericks at Jazz",
    "market": "ML",
    "pick": "Mavericks",
-   "sfTag": "J",
+   "sfTag": "L",
    "sfUsd": 513,
    "polyWallet": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
    "polyName": "dinimami",
@@ -397,10 +145,32 @@
   },
   {
    "sport": "NBA",
+   "matchup": "Pistons at Hawks",
+   "market": "ML",
+   "pick": "Hawks",
+   "sfTag": "H",
+   "sfUsd": 2999,
+   "polyWallet": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
+   "polyName": "MAGATheeStallion",
+   "polyUsd": 2934
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Pistons at Hawks",
+   "market": "ML",
+   "pick": "Hawks",
+   "sfTag": "O",
+   "sfUsd": 1171,
+   "polyWallet": "0xe53944f24effdf0ff905b346962c7155dbb08d68",
+   "polyName": "Pcing",
+   "polyUsd": 1188
+  },
+  {
+   "sport": "NBA",
    "matchup": "Magic at Wizards",
    "market": "ML",
    "pick": "Wizards",
-   "sfTag": "G",
+   "sfTag": "H",
    "sfUsd": 2999,
    "polyWallet": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
    "polyName": "MAGATheeStallion",
@@ -411,7 +181,7 @@
    "matchup": "Celtics at Warriors",
    "market": "SPREAD",
    "pick": "Warriors +8.5",
-   "sfTag": "I",
+   "sfTag": "K",
    "sfUsd": 1500,
    "polyWallet": "0x02689e177c870b664b1f8327edf4156ea4bc915a",
    "polyName": "Gongsij",
@@ -419,11 +189,33 @@
   },
   {
    "sport": "NBA",
+   "matchup": "Celtics at Warriors",
+   "market": "TOTAL",
+   "pick": "Over 210.5",
+   "sfTag": "G",
+   "sfUsd": 1500,
+   "polyWallet": "0xd0e583f76a339219339d3c17f019460ab7839105",
+   "polyName": "yu6618",
+   "polyUsd": 1500
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Celtics at Warriors",
+   "market": "SPREAD",
+   "pick": "Warriors +8.5",
+   "sfTag": "C",
+   "sfUsd": 1007,
+   "polyWallet": "0xa2d34e40edb6915198dff67957a88038ef0e1f16",
+   "polyName": "ADA257",
+   "polyUsd": 1000
+  },
+  {
+   "sport": "NBA",
    "matchup": "Nuggets at Bulls",
    "market": "ML",
    "pick": "Nuggets",
-   "sfTag": "N",
-   "sfUsd": 2917,
+   "sfTag": "O",
+   "sfUsd": 2921,
    "polyWallet": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
    "polyName": "neutralwave23",
    "polyUsd": 2911
@@ -433,10 +225,241 @@
    "matchup": "Nuggets at Bulls",
    "market": "TOTAL",
    "pick": "Over 235.5",
-   "sfTag": "F",
+   "sfTag": "G",
    "sfUsd": 1500,
    "polyWallet": "0xd0e583f76a339219339d3c17f019460ab7839105",
    "polyName": "yu6618",
+   "polyUsd": 1500
+  },
+  {
+   "sport": "NBA",
+   "matchup": "Nuggets at Bulls",
+   "market": "ML",
+   "pick": "Nuggets",
+   "sfTag": "E",
+   "sfUsd": 509,
+   "polyWallet": "0x2792fc28811277f12a54e32bd8188be02c2dc4f6",
+   "polyName": null,
+   "polyUsd": 509
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "SPREAD",
+   "pick": "Jets",
+   "sfUsd": 7369,
+   "polyWallet": "0x26b46988d027c6c03cfa12a7c0c6d778be49b8a9",
+   "polyName": "kkookkoo",
+   "polyUsd": 7500
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "SPREAD",
+   "pick": "Chargers -2.5",
+   "sfUsd": 3667,
+   "polyWallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "polyName": "ic4cream",
+   "polyUsd": 3666
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Jets",
+   "sfUsd": 2920,
+   "polyWallet": "0xa3566f3411369de654e2c83e9fa10392b83bcb94",
+   "polyName": "ubetteruuuu",
+   "polyUsd": 2920
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Jets",
+   "sfUsd": 2000,
+   "polyWallet": "0x8bb006d1bb8b1c5735da79e81637e3dad6e3ca79",
+   "polyName": "0x8Bb006d1bB8b1C5735DA79E81637e3dad6E3ca79-1768601841360",
+   "polyUsd": 2000
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Chargers",
+   "sfUsd": 1740,
+   "polyWallet": "0x0389bcfa163fb0e07c9297a55484fe422db5847b",
+   "polyName": "LordKrishna11",
+   "polyUsd": 1723
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "SPREAD",
+   "pick": "Chargers -2.5",
+   "sfUsd": 1311,
+   "polyWallet": "0x36e1b9c69326f03d8d28bd89457f1e7ec5bf28eb",
+   "polyName": "Bayupati",
+   "polyUsd": 1311
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Chargers",
+   "sfUsd": 566,
+   "polyWallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "polyName": "ic4cream",
+   "polyUsd": 566
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "sfUsd": 282783,
+   "polyWallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+   "polyName": "BreakTheBank",
+   "polyUsd": 282368
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "sfUsd": 37209,
+   "polyWallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "polyName": "ic4cream",
+   "polyUsd": 37159
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Broncos",
+   "sfUsd": 3240,
+   "polyWallet": "0x64c4a7437742d07356774cad6d55dcd9cf411018",
+   "polyName": "rafaleaoo",
+   "polyUsd": 3240
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Broncos",
+   "sfUsd": 2037,
+   "polyWallet": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+   "polyName": "one8tyfive",
+   "polyUsd": 2032
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "sfUsd": 1160,
+   "polyWallet": "0xab9342f204ff8b9b6a4d8b448282f2b487f08b19",
+   "polyName": "dinozaure",
+   "polyUsd": 1160
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "sfUsd": 1000,
+   "polyWallet": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
+   "polyName": "abc51001",
+   "polyUsd": 1000
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Raiders +17.5",
+   "sfUsd": 1000,
+   "polyWallet": "0xed12480311feaf549568a9802c056c4736b77626",
+   "polyName": "EmmetBrown3rd",
+   "polyUsd": 1000
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "sfUsd": 923,
+   "polyWallet": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
+   "polyName": "neutralwave23",
+   "polyUsd": 908
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "SPREAD",
+   "pick": "Jaguars +3.5",
+   "sfUsd": 46961,
+   "polyWallet": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+   "polyName": "one8tyfive",
+   "polyUsd": 46961
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "ML",
+   "pick": "Jaguars",
+   "sfUsd": 9278,
+   "polyWallet": "0x241adda58ed48866f0deec7867731dd84c5ba9c8",
+   "polyName": "0x241ADda58eD48866f0dEeC7867731dD84c5BA9C8-1763470351516",
+   "polyUsd": 9063
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "TOTAL",
+   "pick": "Under 46.5",
+   "sfUsd": 7974,
+   "polyWallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
+   "polyName": "justwins",
+   "polyUsd": 7905
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Vikings at 49ers",
+   "market": "ML",
+   "pick": "49ers",
+   "sfUsd": 40277,
+   "polyWallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+   "polyName": "BreakTheBank",
+   "polyUsd": 40283
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Vikings at 49ers",
+   "market": "ML",
+   "pick": "49ers",
+   "sfUsd": 1000,
+   "polyWallet": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
+   "polyName": "abc51001",
+   "polyUsd": 1000
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "TOTAL",
+   "pick": "Under 52.5",
+   "sfUsd": 792,
+   "polyWallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "polyName": "ic4cream",
+   "polyUsd": 792
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Oilers at Blues",
+   "market": "ML",
+   "pick": "Oilers",
+   "sfUsd": 1500,
+   "polyWallet": "0xfb88f6a86b877d2704328fc9f1ed63b41f8b0e4c",
+   "polyName": "imposeidon",
    "polyUsd": 1500
   },
   {
@@ -444,7 +467,6 @@
    "matchup": "Oilers at Blues",
    "market": "ML",
    "pick": "Oilers",
-   "sfTag": "A",
    "sfUsd": 892,
    "polyWallet": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
    "polyName": "dinimami",
@@ -453,686 +475,222 @@
  ],
  "checked": [
   {
-   "sfTag": "B",
-   "sport": "NFL",
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Ravens",
-   "usd": 691891,
-   "poly": "no twin",
-   "polyTrades": 580,
-   "event": "Ravens vs. Panthers",
-   "closest": {
-    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-    "usd": 278736,
-    "outcome": "Ravens"
-   }
-  },
-  {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Panthers",
-   "usd": 4150,
-   "poly": "0x7c14bdd7d62b9a7824c220ee39a9b58773f05783",
-   "polyTrades": 580,
-   "event": "Ravens vs. Panthers",
-   "closest": {
-    "wallet": "0x7c14bdd7d62b9a7824c220ee39a9b58773f05783",
-    "usd": 4208,
-    "outcome": "Panthers"
-   }
-  },
-  {
-   "sfTag": "S",
-   "sport": "NFL",
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Ravens",
-   "usd": 2000,
-   "poly": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
-   "polyTrades": 580,
-   "event": "Ravens vs. Panthers",
-   "closest": {
-    "wallet": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
-    "usd": 2000,
-    "outcome": "Ravens"
-   }
-  },
-  {
-   "sfTag": "B",
-   "sport": "NFL",
-   "matchup": "Raiders at Broncos",
-   "market": "ML",
-   "pick": "Broncos",
-   "usd": 282783,
-   "poly": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-   "polyTrades": 186,
-   "event": "Raiders vs. Broncos",
-   "closest": {
-    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-    "usd": 282368,
-    "outcome": "Broncos"
-   }
-  },
-  {
-   "sfTag": "P",
-   "sport": "NFL",
-   "matchup": "Raiders at Broncos",
-   "market": "ML",
-   "pick": "Broncos",
-   "usd": 37209,
-   "poly": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "polyTrades": 186,
-   "event": "Raiders vs. Broncos",
-   "closest": {
-    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-    "usd": 37159,
-    "outcome": "Broncos"
-   }
-  },
-  {
-   "sfTag": "B",
-   "sport": "NFL",
-   "matchup": "Saints at Bears",
+   "sfTag": "I",
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
    "market": "SPREAD",
-   "pick": "Bears -3.5",
-   "usd": 188221,
-   "poly": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-   "polyTrades": 564,
-   "event": "Saints vs. Bears",
+   "pick": "Heat",
+   "usd": 4083,
+   "poly": "no twin",
+   "polyTrades": 972,
+   "event": "Thunder vs. Heat",
    "closest": {
-    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-    "usd": 184166,
-    "outcome": "Bears"
+    "wallet": "0x746e936f43ff75bf508cf8375b7a8e2515ef68ca",
+    "usd": 3621,
+    "outcome": "Heat"
    }
   },
   {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Saints at Bears",
+   "sfTag": "A",
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Thunder",
+   "usd": 3171,
+   "poly": "no twin",
+   "polyTrades": 972,
+   "event": "Thunder vs. Heat",
+   "closest": {
+    "wallet": "0x684baa57c338c2549aec0aa3f034f695d72a8409",
+    "usd": 3731,
+    "outcome": "Thunder"
+   }
+  },
+  {
+   "sfTag": "J",
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
    "market": "ML",
-   "pick": "Bears",
-   "usd": 39804,
+   "pick": "Thunder",
+   "usd": 2548,
    "poly": "no twin",
-   "polyTrades": 564,
-   "event": "Saints vs. Bears",
+   "polyTrades": 972,
+   "event": "Thunder vs. Heat",
    "closest": {
-    "wallet": "0x0235dc24b38772bf3339a9e5ec5db3d3a05fcee5",
-    "usd": 30000,
-    "outcome": "Bears"
-   }
-  },
-  {
-   "sfTag": "Q",
-   "sport": "NFL",
-   "matchup": "Saints at Bears",
-   "market": "SPREAD",
-   "pick": "Saints",
-   "usd": 3240,
-   "poly": "no twin",
-   "polyTrades": 564,
-   "event": "Saints vs. Bears",
-   "closest": {
-    "wallet": "0x9c76cdb43fb46454da005fbc82047a64a18ec926",
-    "usd": 2750,
-    "outcome": "Saints"
-   }
-  },
-  {
-   "sfTag": "N",
-   "sport": "NFL",
-   "matchup": "Saints at Bears",
-   "market": "SPREAD",
-   "pick": "Saints",
-   "usd": 2534,
-   "poly": "0x36e1b9c69326f03d8d28bd89457f1e7ec5bf28eb",
-   "polyTrades": 564,
-   "event": "Saints vs. Bears",
-   "closest": {
-    "wallet": "0x36e1b9c69326f03d8d28bd89457f1e7ec5bf28eb",
-    "usd": 2534,
-    "outcome": "Saints"
+    "wallet": "0x4df332e27f9ee3224f52ce30e3ce15c1075e788f",
+    "usd": 2270,
+    "outcome": "Thunder"
    }
   },
   {
    "sfTag": "M",
-   "sport": "NFL",
-   "matchup": "Saints at Bears",
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
    "market": "SPREAD",
-   "pick": "Bears -3.5",
-   "usd": 2000,
-   "poly": "0xed12480311feaf549568a9802c056c4736b77626",
-   "polyTrades": 564,
-   "event": "Saints vs. Bears",
-   "closest": {
-    "wallet": "0xed12480311feaf549568a9802c056c4736b77626",
-    "usd": 2000,
-    "outcome": "Bears"
-   }
-  },
-  {
-   "sfTag": "B",
-   "sport": "NFL",
-   "matchup": "Dolphins at Bills",
-   "market": "TOTAL",
-   "pick": "Under",
-   "usd": 144237,
+   "pick": "Heat",
+   "usd": 1508,
    "poly": "no twin",
-   "polyTrades": 458,
-   "event": "Dolphins vs. Bills",
+   "polyTrades": 972,
+   "event": "Thunder vs. Heat",
    "closest": {
-    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-    "usd": 55018,
-    "outcome": "Under"
+    "wallet": "0x86650cc2f45c4b66b86fb677746442a09340c938",
+    "usd": 1564,
+    "outcome": "Heat"
    }
   },
   {
-   "sfTag": "B",
-   "sport": "NFL",
-   "matchup": "Dolphins at Bills",
-   "market": "SPREAD",
-   "pick": "Bills",
-   "usd": 21900,
-   "poly": "no twin",
-   "polyTrades": 458,
-   "event": "Dolphins vs. Bills",
-   "closest": {
-    "wallet": "0x6ac5bb06a9eb05641fd5e82640268b92f3ab4b6e",
-    "usd": 16083,
-    "outcome": "Bills"
-   }
-  },
-  {
-   "sfTag": "D",
-   "sport": "NFL",
-   "matchup": "Dolphins at Bills",
-   "market": "SPREAD",
-   "pick": "Bills",
-   "usd": 15599,
-   "poly": "no twin",
-   "polyTrades": 458,
-   "event": "Dolphins vs. Bills",
-   "closest": {
-    "wallet": "0x6ac5bb06a9eb05641fd5e82640268b92f3ab4b6e",
-    "usd": 16083,
-    "outcome": "Bills"
-   }
-  },
-  {
-   "sfTag": "I",
-   "sport": "NFL",
-   "matchup": "Cardinals at Chiefs",
-   "market": "SPREAD",
-   "pick": "Chiefs",
-   "usd": 137572,
-   "poly": "no twin",
-   "polyTrades": 354,
-   "event": "Cardinals vs. Chiefs",
-   "closest": {
-    "wallet": "0xccd81fbd3395dc43a0531f8484b21c2462daf4de",
-    "usd": 22480,
-    "outcome": "Chiefs"
-   }
-  },
-  {
-   "sfTag": "O",
-   "sport": "NFL",
-   "matchup": "Cardinals at Chiefs",
-   "market": "SPREAD",
-   "pick": "Chiefs",
-   "usd": 17732,
-   "poly": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
-   "polyTrades": 354,
-   "event": "Cardinals vs. Chiefs",
-   "closest": {
-    "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
-    "usd": 17254,
-    "outcome": "Chiefs"
-   }
-  },
-  {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Cardinals at Chiefs",
-   "market": "SPREAD",
-   "pick": "Chiefs",
-   "usd": 1958,
-   "poly": "no twin",
-   "polyTrades": 354,
-   "event": "Cardinals vs. Chiefs",
-   "closest": {
-    "wallet": "0xbc3f946f767f02b920b35cefb38452c92b2069c4",
-    "usd": 1742,
-    "outcome": "Chiefs"
-   }
-  },
-  {
-   "sfTag": "B",
-   "sport": "NFL",
-   "matchup": "Jets at Chargers",
+   "sfTag": "A",
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
    "market": "ML",
-   "pick": "Jets",
-   "usd": 72930,
+   "pick": "Thunder",
+   "usd": 1112,
    "poly": "no twin",
-   "polyTrades": 162,
-   "event": "Jets vs. Chargers",
+   "polyTrades": 972,
+   "event": "Thunder vs. Heat",
    "closest": {
-    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-    "usd": 112208,
-    "outcome": "Jets"
+    "wallet": "0x7f0390162c80b83135e4f0053bf5d131757676e9",
+    "usd": 1190,
+    "outcome": "Thunder"
    }
   },
   {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Jets at Chargers",
+   "sfTag": "C",
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
    "market": "ML",
-   "pick": "Chargers",
-   "usd": 7006,
+   "pick": "Heat",
+   "usd": 1000,
+   "poly": "0x300b4292912c123066a380a344b505b0f353f636",
+   "polyTrades": 972,
+   "event": "Thunder vs. Heat",
+   "closest": {
+    "wallet": "0x300b4292912c123066a380a344b505b0f353f636",
+    "usd": 1000,
+    "outcome": "Heat"
+   }
+  },
+  {
+   "sfTag": "M",
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Thunder",
+   "usd": 672,
    "poly": "no twin",
-   "polyTrades": 162,
-   "event": "Jets vs. Chargers",
+   "polyTrades": 972,
+   "event": "Thunder vs. Heat",
    "closest": {
-    "wallet": "0x4df332e27f9ee3224f52ce30e3ce15c1075e788f",
-    "usd": 3554,
-    "outcome": "Chargers"
+    "wallet": "0x032eb1bc893940263ad0b01889f262fc232f2a9e",
+    "usd": 742,
+    "outcome": "Thunder"
    }
   },
   {
-   "sfTag": "P",
-   "sport": "NFL",
-   "matchup": "Jets at Chargers",
-   "market": "SPREAD",
-   "pick": "Chargers -2.5",
-   "usd": 3667,
-   "poly": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "polyTrades": 162,
-   "event": "Jets vs. Chargers",
-   "closest": {
-    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-    "usd": 3666,
-    "outcome": "Chargers"
-   }
-  },
-  {
-   "sfTag": "B",
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "SPREAD",
-   "pick": "Steelers",
-   "usd": 52422,
-   "poly": "0x6ac5bb06a9eb05641fd5e82640268b92f3ab4b6e",
-   "polyTrades": 742,
-   "event": "Steelers vs. Eagles",
-   "closest": {
-    "wallet": "0x6ac5bb06a9eb05641fd5e82640268b92f3ab4b6e",
-    "usd": 53655,
-    "outcome": "Steelers"
-   }
-  },
-  {
-   "sfTag": "D",
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
+   "sfTag": "M",
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
    "market": "ML",
-   "pick": "Steelers",
-   "usd": 10000,
-   "poly": "no twin",
-   "polyTrades": 742,
-   "event": "Steelers vs. Eagles",
+   "pick": "Heat",
+   "usd": 564,
+   "poly": "0x2117ae94a97d69b78cbc81b6680a62deb1955c26",
+   "polyTrades": 972,
+   "event": "Thunder vs. Heat",
    "closest": {
-    "wallet": "0x2c335066fe58fe9237c3d3dc7b275c2a034a0563",
-    "usd": 9200,
-    "outcome": "Steelers"
+    "wallet": "0x2117ae94a97d69b78cbc81b6680a62deb1955c26",
+    "usd": 564,
+    "outcome": "Heat"
    }
   },
   {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "TOTAL",
-   "pick": "Over 38.5",
-   "usd": 9255,
-   "poly": "no twin",
-   "polyTrades": 742,
-   "event": "Steelers vs. Eagles",
-   "closest": {
-    "wallet": "0xf68a281980f8c13828e84e147e3822381d6e5b1b",
-    "usd": 4618,
-    "outcome": "Over"
-   }
-  },
-  {
-   "sfTag": "D",
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
+   "sfTag": "F",
+   "sport": "NBA",
+   "matchup": "Mavericks at Jazz",
    "market": "SPREAD",
-   "pick": "Steelers",
-   "usd": 3562,
-   "poly": "no twin",
-   "polyTrades": 742,
-   "event": "Steelers vs. Eagles",
-   "closest": {
-    "wallet": "0x7c1b3a6db8a1d57de8ee5d7bca620dc0623185c8",
-    "usd": 3431,
-    "outcome": "Steelers"
-   }
-  },
-  {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "ML",
-   "pick": "Steelers",
-   "usd": 3313,
-   "poly": "0xaa281355e0747a4358c56c076587eda05fe3da01",
-   "polyTrades": 742,
-   "event": "Steelers vs. Eagles",
-   "closest": {
-    "wallet": "0xaa281355e0747a4358c56c076587eda05fe3da01",
-    "usd": 3350,
-    "outcome": "Steelers"
-   }
-  },
-  {
-   "sfTag": "K",
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "SPREAD",
-   "pick": "Eagles +3.5",
+   "pick": "Mavericks -1.5",
    "usd": 3000,
-   "poly": "0x021c7df18153e2636e368e85f0cedb34c245232f",
-   "polyTrades": 742,
-   "event": "Steelers vs. Eagles",
-   "closest": {
-    "wallet": "0x021c7df18153e2636e368e85f0cedb34c245232f",
-    "usd": 3000,
-    "outcome": "Eagles"
-   }
-  },
-  {
-   "sfTag": "S",
-   "sport": "NFL",
-   "matchup": "Steelers at Eagles",
-   "market": "SPREAD",
-   "pick": "Steelers",
-   "usd": 1997,
-   "poly": "0x496121ba250d47b62c2d84b3414a99aeeacade13",
-   "polyTrades": 742,
-   "event": "Steelers vs. Eagles",
-   "closest": {
-    "wallet": "0x496121ba250d47b62c2d84b3414a99aeeacade13",
-    "usd": 1976,
-    "outcome": "Steelers"
-   }
-  },
-  {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "ML",
-   "pick": "Lions",
-   "usd": 44980,
    "poly": "no twin",
-   "polyTrades": 729,
-   "event": "Buccaneers vs. Lions",
+   "polyTrades": 240,
+   "event": "Mavericks vs. Jazz",
    "closest": {
-    "wallet": "0x369f46433349a57cd6d08abf2819da737c09873e",
-    "usd": 64217,
-    "outcome": "Lions"
+    "wallet": "0xe5b70fd855af9258d9463992e4f1ed7987905ee3",
+    "usd": 3342,
+    "outcome": "Mavericks"
    }
   },
   {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
+   "sfTag": "G",
+   "sport": "NBA",
+   "matchup": "Mavericks at Jazz",
    "market": "SPREAD",
-   "pick": "Lions",
-   "usd": 8071,
-   "poly": "no twin",
-   "polyTrades": 729,
-   "event": "Buccaneers vs. Lions",
+   "pick": "Jazz +3.5",
+   "usd": 1500,
+   "poly": "0xd0e583f76a339219339d3c17f019460ab7839105",
+   "polyTrades": 240,
+   "event": "Mavericks vs. Jazz",
    "closest": {
-    "wallet": "0xdf804b17329a461425116c9e0f599e248b443259",
-    "usd": 10214,
-    "outcome": "Lions"
-   }
-  },
-  {
-   "sfTag": "P",
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "SPREAD",
-   "pick": "Buccaneers",
-   "usd": 6789,
-   "poly": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "polyTrades": 729,
-   "event": "Buccaneers vs. Lions",
-   "closest": {
-    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-    "usd": 6791,
-    "outcome": "Buccaneers"
-   }
-  },
-  {
-   "sfTag": "P",
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "SPREAD",
-   "pick": "Lions",
-   "usd": 3961,
-   "poly": "0x27f738fe203827445690339104aae35b20bc44b0",
-   "polyTrades": 729,
-   "event": "Buccaneers vs. Lions",
-   "closest": {
-    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
-    "usd": 3889,
-    "outcome": "Lions"
-   }
-  },
-  {
-   "sfTag": "K",
-   "sport": "NFL",
-   "matchup": "Buccaneers at Lions",
-   "market": "SPREAD",
-   "pick": "Buccaneers",
-   "usd": 3000,
-   "poly": "0x021c7df18153e2636e368e85f0cedb34c245232f",
-   "polyTrades": 729,
-   "event": "Buccaneers vs. Lions",
-   "closest": {
-    "wallet": "0x021c7df18153e2636e368e85f0cedb34c245232f",
-    "usd": 3000,
-    "outcome": "Buccaneers"
-   }
-  },
-  {
-   "sfTag": "B",
-   "sport": "NFL",
-   "matchup": "Vikings at 49ers",
-   "market": "ML",
-   "pick": "49ers",
-   "usd": 40277,
-   "poly": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-   "polyTrades": 161,
-   "event": "Vikings vs. 49ers",
-   "closest": {
-    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
-    "usd": 40283,
-    "outcome": "49ers"
-   }
-  },
-  {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Vikings at 49ers",
-   "market": "ML",
-   "pick": "49ers",
-   "usd": 2380,
-   "poly": "no twin",
-   "polyTrades": 161,
-   "event": "Vikings vs. 49ers",
-   "closest": {
-    "wallet": "0x4df332e27f9ee3224f52ce30e3ce15c1075e788f",
-    "usd": 1440,
-    "outcome": "49ers"
-   }
-  },
-  {
-   "sfTag": "I",
-   "sport": "NFL",
-   "matchup": "Jaguars at Giants",
-   "market": "ML",
-   "pick": "Jaguars",
-   "usd": 18143,
-   "poly": "0x45185b026c729f2caf1b01f6230db5d22e81db24",
-   "polyTrades": 244,
-   "event": "Jaguars vs. Giants",
-   "closest": {
-    "wallet": "0x45185b026c729f2caf1b01f6230db5d22e81db24",
-    "usd": 18124,
-    "outcome": "Jaguars"
-   }
-  },
-  {
-   "sfTag": "D",
-   "sport": "NFL",
-   "matchup": "Jaguars at Giants",
-   "market": "ML",
-   "pick": "Jaguars",
-   "usd": 10000,
-   "poly": "no twin",
-   "polyTrades": 244,
-   "event": "Jaguars vs. Giants",
-   "closest": {
-    "wallet": "0xa2f1fecf1cc7db65a46588f764b6691533052d22",
-    "usd": 6837,
-    "outcome": "Jaguars"
-   }
-  },
-  {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Jaguars at Giants",
-   "market": "ML",
-   "pick": "Jaguars",
-   "usd": 9278,
-   "poly": "no twin",
-   "polyTrades": 244,
-   "event": "Jaguars vs. Giants",
-   "closest": {
-    "wallet": "0xa2f1fecf1cc7db65a46588f764b6691533052d22",
-    "usd": 6837,
-    "outcome": "Jaguars"
-   }
-  },
-  {
-   "sfTag": "O",
-   "sport": "NFL",
-   "matchup": "Jaguars at Giants",
-   "market": "TOTAL",
-   "pick": "Under 46.5",
-   "usd": 7974,
-   "poly": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
-   "polyTrades": 244,
-   "event": "Jaguars vs. Giants",
-   "closest": {
-    "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
-    "usd": 7905,
-    "outcome": "Under"
-   }
-  },
-  {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Bengals at Commanders",
-   "market": "ML",
-   "pick": "Bengals",
-   "usd": 14765,
-   "poly": "no twin",
-   "polyTrades": 55,
-   "event": "Bengals vs. Commanders",
-   "closest": {
-    "wallet": "0x0235dc24b38772bf3339a9e5ec5db3d3a05fcee5",
-    "usd": 10000,
-    "outcome": "Bengals"
-   }
-  },
-  {
-   "sfTag": "H",
-   "sport": "NFL",
-   "matchup": "Bengals at Commanders",
-   "market": "SPREAD",
-   "pick": "Bengals -6.5",
-   "usd": 7203,
-   "poly": "no twin",
-   "polyTrades": 55,
-   "event": "Bengals vs. Commanders",
-   "closest": {
-    "wallet": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
-    "usd": 3000,
-    "outcome": "Bengals"
-   }
-  },
-  {
-   "sfTag": "E",
-   "sport": "NFL",
-   "matchup": "Titans at Cowboys",
-   "market": "SPREAD",
-   "pick": "Cowboys -14.5",
-   "usd": 1896,
-   "poly": "0x32bb3f0f842da76d3c3bba7d6d76376334733c1a",
-   "polyTrades": 438,
-   "event": "Titans vs. Cowboys",
-   "closest": {
-    "wallet": "0x32bb3f0f842da76d3c3bba7d6d76376334733c1a",
-    "usd": 1868,
-    "outcome": "Cowboys"
+    "wallet": "0xd0e583f76a339219339d3c17f019460ab7839105",
+    "usd": 1500,
+    "outcome": "Jazz"
    }
   },
   {
    "sfTag": "D",
    "sport": "NBA",
-   "matchup": "Pistons at Hawks",
+   "matchup": "Mavericks at Jazz",
    "market": "TOTAL",
-   "pick": "Under 224.5",
-   "usd": 10200,
-   "poly": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
-   "polyTrades": 414,
-   "event": "Pistons vs. Hawks",
+   "pick": "Under",
+   "usd": 1023,
+   "poly": "0x9cb990f1862568a63d8601efeebe0304225c32f2",
+   "polyTrades": 240,
+   "event": "Mavericks vs. Jazz",
    "closest": {
-    "wallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
-    "usd": 9917,
+    "wallet": "0x9cb990f1862568a63d8601efeebe0304225c32f2",
+    "usd": 1031,
+    "outcome": "Under"
+   }
+  },
+  {
+   "sfTag": "G",
+   "sport": "NBA",
+   "matchup": "Mavericks at Jazz",
+   "market": "TOTAL",
+   "pick": "Under",
+   "usd": 900,
+   "poly": "0xd0e583f76a339219339d3c17f019460ab7839105",
+   "polyTrades": 240,
+   "event": "Mavericks vs. Jazz",
+   "closest": {
+    "wallet": "0xd0e583f76a339219339d3c17f019460ab7839105",
+    "usd": 900,
     "outcome": "Under"
    }
   },
   {
    "sfTag": "L",
    "sport": "NBA",
-   "matchup": "Pistons at Hawks",
+   "matchup": "Mavericks at Jazz",
    "market": "ML",
-   "pick": "Hawks",
-   "usd": 4514,
-   "poly": "0xdc41c39b95453c943174f369926018f6963bdd7e",
-   "polyTrades": 414,
-   "event": "Pistons vs. Hawks",
+   "pick": "Mavericks",
+   "usd": 513,
+   "poly": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
+   "polyTrades": 240,
+   "event": "Mavericks vs. Jazz",
    "closest": {
-    "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
-    "usd": 4500,
-    "outcome": "Hawks"
+    "wallet": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
+    "usd": 513,
+    "outcome": "Mavericks"
    }
   },
   {
-   "sfTag": "G",
+   "sfTag": "H",
    "sport": "NBA",
    "matchup": "Pistons at Hawks",
    "market": "ML",
    "pick": "Hawks",
    "usd": 2999,
    "poly": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
-   "polyTrades": 414,
+   "polyTrades": 1099,
    "event": "Pistons vs. Hawks",
    "closest": {
     "wallet": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
@@ -1147,232 +705,40 @@
    "market": "SPREAD",
    "pick": "Hawks +1.5",
    "usd": 2128,
-   "poly": "0xe9076a87c5ed90ef16e6fe6529c943baeca0cff6",
-   "polyTrades": 414,
+   "poly": "no twin",
+   "polyTrades": 1099,
    "event": "Pistons vs. Hawks",
    "closest": {
     "wallet": "0xe9076a87c5ed90ef16e6fe6529c943baeca0cff6",
-    "usd": 2114,
+    "usd": 2352,
     "outcome": "Hawks"
    }
   },
   {
-   "sfTag": "I",
-   "sport": "NBA",
-   "matchup": "Pistons at Hawks",
-   "market": "TOTAL",
-   "pick": "Under 224.5",
-   "usd": 1500,
-   "poly": "0x02689e177c870b664b1f8327edf4156ea4bc915a",
-   "polyTrades": 414,
-   "event": "Pistons vs. Hawks",
-   "closest": {
-    "wallet": "0x02689e177c870b664b1f8327edf4156ea4bc915a",
-    "usd": 1500,
-    "outcome": "Under"
-   }
-  },
-  {
-   "sfTag": "N",
+   "sfTag": "O",
    "sport": "NBA",
    "matchup": "Pistons at Hawks",
    "market": "ML",
    "pick": "Hawks",
-   "usd": 1097,
-   "poly": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
-   "polyTrades": 414,
+   "usd": 1171,
+   "poly": "0xe53944f24effdf0ff905b346962c7155dbb08d68",
+   "polyTrades": 1099,
    "event": "Pistons vs. Hawks",
    "closest": {
-    "wallet": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
-    "usd": 1098,
+    "wallet": "0xe53944f24effdf0ff905b346962c7155dbb08d68",
+    "usd": 1188,
     "outcome": "Hawks"
    }
   },
   {
-   "sfTag": "L",
-   "sport": "NBA",
-   "matchup": "Pistons at Hawks",
-   "market": "SPREAD",
-   "pick": "Pistons -5.5",
-   "usd": 668,
-   "poly": "no twin",
-   "polyTrades": 414,
-   "event": "Pistons vs. Hawks",
-   "closest": {
-    "wallet": "0x051adea0d16c85df8a8a9c7e400e0655905d1db9",
-    "usd": 466,
-    "outcome": "Pistons"
-   }
-  },
-  {
-   "sfTag": "L",
-   "sport": "NBA",
-   "matchup": "Thunder at Heat",
-   "market": "SPREAD",
-   "pick": "Thunder +3.5",
-   "usd": 6542,
-   "poly": "no twin",
-   "polyTrades": 220,
-   "event": "Thunder vs. Heat",
-   "closest": {
-    "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
-    "usd": 7059,
-    "outcome": "Thunder"
-   }
-  },
-  {
-   "sfTag": "K",
-   "sport": "NBA",
-   "matchup": "Thunder at Heat",
-   "market": "SPREAD",
-   "pick": "Heat -3.5",
-   "usd": 6032,
-   "poly": "0x2117ae94a97d69b78cbc81b6680a62deb1955c26",
-   "polyTrades": 220,
-   "event": "Thunder vs. Heat",
-   "closest": {
-    "wallet": "0x2117ae94a97d69b78cbc81b6680a62deb1955c26",
-    "usd": 6033,
-    "outcome": "Heat"
-   }
-  },
-  {
-   "sfTag": "A",
-   "sport": "NBA",
-   "matchup": "Thunder at Heat",
-   "market": "ML",
-   "pick": "Thunder",
-   "usd": 1112,
-   "poly": "no twin",
-   "polyTrades": 220,
-   "event": "Thunder vs. Heat",
-   "closest": {
-    "wallet": "0xa5aa873702c0b28480246b6b474d48cb12869134",
-    "usd": 970,
-    "outcome": "Thunder"
-   }
-  },
-  {
-   "sfTag": "L",
-   "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "TOTAL",
-   "pick": "Over",
-   "usd": 4227,
-   "poly": "no twin",
-   "polyTrades": 185,
-   "event": "Mavericks vs. Jazz",
-   "closest": {
-    "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
-    "usd": 3584,
-    "outcome": "Over"
-   }
-  },
-  {
-   "sfTag": "L",
-   "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "ML",
-   "pick": "Mavericks",
-   "usd": 3146,
-   "poly": "0xdc41c39b95453c943174f369926018f6963bdd7e",
-   "polyTrades": 185,
-   "event": "Mavericks vs. Jazz",
-   "closest": {
-    "wallet": "0xdc41c39b95453c943174f369926018f6963bdd7e",
-    "usd": 3147,
-    "outcome": "Mavericks"
-   }
-  },
-  {
-   "sfTag": "E",
-   "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "SPREAD",
-   "pick": "Mavericks",
-   "usd": 3000,
-   "poly": "no twin",
-   "polyTrades": 185,
-   "event": "Mavericks vs. Jazz",
-   "closest": {
-    "wallet": "0x84cfffc3f16dcc353094de30d4a45226eccd2f63",
-    "usd": 4168,
-    "outcome": "Mavericks"
-   }
-  },
-  {
    "sfTag": "H",
-   "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "TOTAL",
-   "pick": "Under",
-   "usd": 1578,
-   "poly": "no twin",
-   "polyTrades": 185,
-   "event": "Mavericks vs. Jazz",
-   "closest": {
-    "wallet": "0x9cb990f1862568a63d8601efeebe0304225c32f2",
-    "usd": 1031,
-    "outcome": "Under"
-   }
-  },
-  {
-   "sfTag": "C",
-   "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "TOTAL",
-   "pick": "Under",
-   "usd": 1023,
-   "poly": "0x9cb990f1862568a63d8601efeebe0304225c32f2",
-   "polyTrades": 185,
-   "event": "Mavericks vs. Jazz",
-   "closest": {
-    "wallet": "0x9cb990f1862568a63d8601efeebe0304225c32f2",
-    "usd": 1031,
-    "outcome": "Under"
-   }
-  },
-  {
-   "sfTag": "L",
-   "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "SPREAD",
-   "pick": "Mavericks",
-   "usd": 568,
-   "poly": "no twin",
-   "polyTrades": 185,
-   "event": "Mavericks vs. Jazz",
-   "closest": {
-    "wallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
-    "usd": 536,
-    "outcome": "Mavericks"
-   }
-  },
-  {
-   "sfTag": "J",
-   "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "ML",
-   "pick": "Mavericks",
-   "usd": 513,
-   "poly": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
-   "polyTrades": 185,
-   "event": "Mavericks vs. Jazz",
-   "closest": {
-    "wallet": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
-    "usd": 513,
-    "outcome": "Mavericks"
-   }
-  },
-  {
-   "sfTag": "G",
    "sport": "NBA",
    "matchup": "Magic at Wizards",
    "market": "ML",
    "pick": "Wizards",
    "usd": 2999,
    "poly": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
-   "polyTrades": 114,
+   "polyTrades": 135,
    "event": "Magic vs. Wizards",
    "closest": {
     "wallet": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
@@ -1381,14 +747,14 @@
    }
   },
   {
-   "sfTag": "E",
+   "sfTag": "F",
    "sport": "NBA",
    "matchup": "Magic at Wizards",
    "market": "ML",
    "pick": "Wizards",
    "usd": 734,
    "poly": "no twin",
-   "polyTrades": 114,
+   "polyTrades": 135,
    "event": "Magic vs. Wizards",
    "closest": {
     "wallet": "0x280602b490b2153993679edb4d9d0ffee8e1a138",
@@ -1397,14 +763,14 @@
    }
   },
   {
-   "sfTag": "E",
+   "sfTag": "F",
    "sport": "NBA",
    "matchup": "Celtics at Warriors",
    "market": "SPREAD",
    "pick": "Celtics -9.5",
    "usd": 2940,
    "poly": "no twin",
-   "polyTrades": 236,
+   "polyTrades": 265,
    "event": "Celtics vs. Warriors",
    "closest": {
     "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
@@ -1413,14 +779,14 @@
    }
   },
   {
-   "sfTag": "I",
+   "sfTag": "K",
    "sport": "NBA",
    "matchup": "Celtics at Warriors",
    "market": "SPREAD",
    "pick": "Warriors +8.5",
    "usd": 1500,
    "poly": "0x02689e177c870b664b1f8327edf4156ea4bc915a",
-   "polyTrades": 236,
+   "polyTrades": 265,
    "event": "Celtics vs. Warriors",
    "closest": {
     "wallet": "0x02689e177c870b664b1f8327edf4156ea4bc915a",
@@ -1429,14 +795,46 @@
    }
   },
   {
-   "sfTag": "M",
+   "sfTag": "G",
+   "sport": "NBA",
+   "matchup": "Celtics at Warriors",
+   "market": "TOTAL",
+   "pick": "Over 210.5",
+   "usd": 1500,
+   "poly": "0xd0e583f76a339219339d3c17f019460ab7839105",
+   "polyTrades": 265,
+   "event": "Celtics vs. Warriors",
+   "closest": {
+    "wallet": "0xd0e583f76a339219339d3c17f019460ab7839105",
+    "usd": 1500,
+    "outcome": "Over"
+   }
+  },
+  {
+   "sfTag": "C",
+   "sport": "NBA",
+   "matchup": "Celtics at Warriors",
+   "market": "SPREAD",
+   "pick": "Warriors +8.5",
+   "usd": 1007,
+   "poly": "0xa2d34e40edb6915198dff67957a88038ef0e1f16",
+   "polyTrades": 265,
+   "event": "Celtics vs. Warriors",
+   "closest": {
+    "wallet": "0xa2d34e40edb6915198dff67957a88038ef0e1f16",
+    "usd": 1000,
+    "outcome": "Warriors"
+   }
+  },
+  {
+   "sfTag": "N",
    "sport": "NBA",
    "matchup": "Celtics at Warriors",
    "market": "ML",
    "pick": "Celtics",
    "usd": 600,
    "poly": "no twin",
-   "polyTrades": 236,
+   "polyTrades": 265,
    "event": "Celtics vs. Warriors",
    "closest": {
     "wallet": "0x7191782b6da0cd5defebc5a45c392bef4c9943b8",
@@ -1445,14 +843,14 @@
    }
   },
   {
-   "sfTag": "N",
+   "sfTag": "O",
    "sport": "NBA",
    "matchup": "Nuggets at Bulls",
    "market": "ML",
    "pick": "Nuggets",
-   "usd": 2917,
+   "usd": 2921,
    "poly": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
-   "polyTrades": 95,
+   "polyTrades": 196,
    "event": "Nuggets vs. Bulls",
    "closest": {
     "wallet": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
@@ -1461,14 +859,14 @@
    }
   },
   {
-   "sfTag": "F",
+   "sfTag": "G",
    "sport": "NBA",
    "matchup": "Nuggets at Bulls",
    "market": "TOTAL",
    "pick": "Over 235.5",
    "usd": 1500,
    "poly": "0xd0e583f76a339219339d3c17f019460ab7839105",
-   "polyTrades": 95,
+   "polyTrades": 196,
    "event": "Nuggets vs. Bulls",
    "closest": {
     "wallet": "0xd0e583f76a339219339d3c17f019460ab7839105",
@@ -1477,14 +875,14 @@
    }
   },
   {
-   "sfTag": "E",
+   "sfTag": "F",
    "sport": "NBA",
    "matchup": "Nuggets at Bulls",
    "market": "SPREAD",
    "pick": "Nuggets -8.5",
    "usd": 932,
    "poly": "no twin",
-   "polyTrades": 95,
+   "polyTrades": 196,
    "event": "Nuggets vs. Bulls",
    "closest": {
     "wallet": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
@@ -1493,14 +891,30 @@
    }
   },
   {
-   "sfTag": "K",
+   "sfTag": "E",
+   "sport": "NBA",
+   "matchup": "Nuggets at Bulls",
+   "market": "ML",
+   "pick": "Nuggets",
+   "usd": 509,
+   "poly": "0x2792fc28811277f12a54e32bd8188be02c2dc4f6",
+   "polyTrades": 196,
+   "event": "Nuggets vs. Bulls",
+   "closest": {
+    "wallet": "0x2792fc28811277f12a54e32bd8188be02c2dc4f6",
+    "usd": 509,
+    "outcome": "Nuggets"
+   }
+  },
+  {
+   "sfTag": "M",
    "sport": "NBA",
    "matchup": "Pacers at Knicks",
    "market": "ML",
    "pick": "Pacers",
    "usd": 2444,
    "poly": "no twin",
-   "polyTrades": 172,
+   "polyTrades": 188,
    "event": "Pacers vs. Knicks",
    "closest": {
     "wallet": "0xc3744a19f42266ce6fa2736f52eae6e178b20f3e",
@@ -1509,46 +923,493 @@
    }
   },
   {
-   "sfTag": "H",
-   "sport": "NBA",
-   "matchup": "Pacers at Knicks",
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
    "market": "ML",
-   "pick": "Knicks",
-   "usd": 850,
+   "pick": "Jets",
+   "usd": 354280,
    "poly": "no twin",
-   "polyTrades": 172,
-   "event": "Pacers vs. Knicks",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
    "closest": {
-    "wallet": "0x57b43e50ae399c3d859167abb80d9b7d7a8fda40",
-    "usd": 760,
-    "outcome": "Knicks"
+    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+    "usd": 278178,
+    "outcome": "Jets"
    }
   },
   {
-   "sfTag": "H",
-   "sport": "NBA",
-   "matchup": "Pacers at Knicks",
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Chargers",
+   "usd": 19342,
+   "poly": "no twin",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
+   "closest": {
+    "wallet": "0x7a8885c8dc075f0578b648f29fa233408a7d41cc",
+    "usd": 18000,
+    "outcome": "Chargers"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
    "market": "SPREAD",
-   "pick": "Knicks -8.5",
-   "usd": 578,
-   "poly": "no twin",
-   "polyTrades": 172,
-   "event": "Pacers vs. Knicks",
+   "pick": "Jets",
+   "usd": 7369,
+   "poly": "0x26b46988d027c6c03cfa12a7c0c6d778be49b8a9",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
    "closest": {
-    "wallet": "0x853212cd809da6acc458021c106af749b7aa738b",
-    "usd": 526,
-    "outcome": "Knicks"
+    "wallet": "0x26b46988d027c6c03cfa12a7c0c6d778be49b8a9",
+    "usd": 7500,
+    "outcome": "Jets"
    }
   },
   {
-   "sfTag": "A",
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "SPREAD",
+   "pick": "Chargers -2.5",
+   "usd": 3667,
+   "poly": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
+   "closest": {
+    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+    "usd": 3666,
+    "outcome": "Chargers"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Jets",
+   "usd": 2920,
+   "poly": "0xa3566f3411369de654e2c83e9fa10392b83bcb94",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
+   "closest": {
+    "wallet": "0xa3566f3411369de654e2c83e9fa10392b83bcb94",
+    "usd": 2920,
+    "outcome": "Jets"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Jets",
+   "usd": 2000,
+   "poly": "0x8bb006d1bb8b1c5735da79e81637e3dad6e3ca79",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
+   "closest": {
+    "wallet": "0x8bb006d1bb8b1c5735da79e81637e3dad6e3ca79",
+    "usd": 2000,
+    "outcome": "Jets"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Chargers",
+   "usd": 1740,
+   "poly": "0x0389bcfa163fb0e07c9297a55484fe422db5847b",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
+   "closest": {
+    "wallet": "0x0389bcfa163fb0e07c9297a55484fe422db5847b",
+    "usd": 1723,
+    "outcome": "Chargers"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "SPREAD",
+   "pick": "Chargers -2.5",
+   "usd": 1311,
+   "poly": "0x36e1b9c69326f03d8d28bd89457f1e7ec5bf28eb",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
+   "closest": {
+    "wallet": "0x36e1b9c69326f03d8d28bd89457f1e7ec5bf28eb",
+    "usd": 1311,
+    "outcome": "Chargers"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jets at Chargers",
+   "market": "ML",
+   "pick": "Chargers",
+   "usd": 566,
+   "poly": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "polyTrades": 447,
+   "event": "Jets vs. Chargers",
+   "closest": {
+    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+    "usd": 566,
+    "outcome": "Chargers"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "usd": 282783,
+   "poly": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+    "usd": 282368,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "usd": 37209,
+   "poly": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+    "usd": 37159,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "usd": 16174,
+   "poly": "no twin",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0x0235dc24b38772bf3339a9e5ec5db3d3a05fcee5",
+    "usd": 15000,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Broncos",
+   "usd": 3240,
+   "poly": "0x64c4a7437742d07356774cad6d55dcd9cf411018",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0x64c4a7437742d07356774cad6d55dcd9cf411018",
+    "usd": 3240,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Broncos",
+   "usd": 2037,
+   "poly": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+    "usd": 2032,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "usd": 1160,
+   "poly": "0xab9342f204ff8b9b6a4d8b448282f2b487f08b19",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0xab9342f204ff8b9b6a4d8b448282f2b487f08b19",
+    "usd": 1160,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "usd": 1000,
+   "poly": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
+    "usd": 1000,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Raiders +17.5",
+   "usd": 1000,
+   "poly": "0xed12480311feaf549568a9802c056c4736b77626",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0xed12480311feaf549568a9802c056c4736b77626",
+    "usd": 1000,
+    "outcome": "Raiders"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "ML",
+   "pick": "Broncos",
+   "usd": 923,
+   "poly": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
+    "usd": 908,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Broncos",
+   "usd": 580,
+   "poly": "no twin",
+   "polyTrades": 549,
+   "event": "Raiders vs. Broncos",
+   "closest": {
+    "wallet": "0x2559b5bae55fc693e15896e816aae2761d8eb2e3",
+    "usd": 518,
+    "outcome": "Broncos"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "ML",
+   "pick": "Jaguars",
+   "usd": 86162,
+   "poly": "no twin",
+   "polyTrades": 804,
+   "event": "Jaguars vs. Giants",
+   "closest": {
+    "wallet": "0x561e3d3da1b48d675a83f6c9637c538ae3275c0c",
+    "usd": 50000,
+    "outcome": "Jaguars"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "SPREAD",
+   "pick": "Jaguars +3.5",
+   "usd": 46961,
+   "poly": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+   "polyTrades": 804,
+   "event": "Jaguars vs. Giants",
+   "closest": {
+    "wallet": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+    "usd": 46961,
+    "outcome": "Jaguars"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "ML",
+   "pick": "Jaguars",
+   "usd": 9278,
+   "poly": "0x241adda58ed48866f0deec7867731dd84c5ba9c8",
+   "polyTrades": 804,
+   "event": "Jaguars vs. Giants",
+   "closest": {
+    "wallet": "0x241adda58ed48866f0deec7867731dd84c5ba9c8",
+    "usd": 9063,
+    "outcome": "Jaguars"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Jaguars at Giants",
+   "market": "TOTAL",
+   "pick": "Under 46.5",
+   "usd": 7974,
+   "poly": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
+   "polyTrades": 804,
+   "event": "Jaguars vs. Giants",
+   "closest": {
+    "wallet": "0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc",
+    "usd": 7905,
+    "outcome": "Under"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Vikings at 49ers",
+   "market": "ML",
+   "pick": "49ers",
+   "usd": 40277,
+   "poly": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+   "polyTrades": 230,
+   "event": "Vikings vs. 49ers",
+   "closest": {
+    "wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+    "usd": 40283,
+    "outcome": "49ers"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Vikings at 49ers",
+   "market": "ML",
+   "pick": "49ers",
+   "usd": 2380,
+   "poly": "no twin",
+   "polyTrades": 230,
+   "event": "Vikings vs. 49ers",
+   "closest": {
+    "wallet": "0xaa0e2d9e050184ae1f85667ecb3f1c0af5222a0e",
+    "usd": 2600,
+    "outcome": "49ers"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Vikings at 49ers",
+   "market": "ML",
+   "pick": "49ers",
+   "usd": 1000,
+   "poly": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
+   "polyTrades": 230,
+   "event": "Vikings vs. 49ers",
+   "closest": {
+    "wallet": "0xc16e1477bec0d3970b8bba3a6ea9faea73918f62",
+    "usd": 1000,
+    "outcome": "49ers"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "ML",
+   "pick": "Bengals",
+   "usd": 14880,
+   "poly": "no twin",
+   "polyTrades": 57,
+   "event": "Bengals vs. Commanders",
+   "closest": {
+    "wallet": "0x0235dc24b38772bf3339a9e5ec5db3d3a05fcee5",
+    "usd": 10000,
+    "outcome": "Bengals"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "SPREAD",
+   "pick": "Bengals -6.5",
+   "usd": 7782,
+   "poly": "no twin",
+   "polyTrades": 57,
+   "event": "Bengals vs. Commanders",
+   "closest": {
+    "wallet": "0x2b344112f63e69a2e411b0cb7f200cbc0051176e",
+    "usd": 3000,
+    "outcome": "Bengals"
+   }
+  },
+  {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "TOTAL",
+   "pick": "Under 52.5",
+   "usd": 792,
+   "poly": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "polyTrades": 57,
+   "event": "Bengals vs. Commanders",
+   "closest": {
+    "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+    "usd": 792,
+    "outcome": "Under"
+   }
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Sabres at Lightning",
+   "market": "SPREAD",
+   "pick": "Lightning -1.5",
+   "usd": 1747,
+   "poly": "no twin",
+   "polyTrades": 109,
+   "event": "Sabres vs. Lightning",
+   "closest": {
+    "wallet": "0x032eb1bc893940263ad0b01889f262fc232f2a9e",
+    "usd": 1687,
+    "outcome": "Lightning"
+   }
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Sabres at Lightning",
+   "market": "TOTAL",
+   "pick": "Over 5.5",
+   "usd": 998,
+   "poly": "no twin",
+   "polyTrades": 109,
+   "event": "Sabres vs. Lightning",
+   "closest": {
+    "wallet": "0xf62b709646bdf9bc15bedb094ee6ac062857844a",
+    "usd": 1435,
+    "outcome": "Over"
+   }
+  },
+  {
+   "sport": "NHL",
+   "matchup": "Oilers at Blues",
+   "market": "ML",
+   "pick": "Oilers",
+   "usd": 1500,
+   "poly": "0xfb88f6a86b877d2704328fc9f1ed63b41f8b0e4c",
+   "polyTrades": 36,
+   "event": "Oilers vs. Blues",
+   "closest": {
+    "wallet": "0xfb88f6a86b877d2704328fc9f1ed63b41f8b0e4c",
+    "usd": 1500,
+    "outcome": "Oilers"
+   }
+  },
+  {
    "sport": "NHL",
    "matchup": "Oilers at Blues",
    "market": "ML",
    "pick": "Oilers",
    "usd": 892,
    "poly": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
-   "polyTrades": 23,
+   "polyTrades": 36,
    "event": "Oilers vs. Blues",
    "closest": {
     "wallet": "0x5331121e9f2f206d8c06ae6235761b1a3f8d3672",
@@ -1557,7 +1418,6 @@
    }
   },
   {
-   "sfTag": "B",
    "sport": "CFB",
    "matchup": "Texas at Texas A&M",
    "market": "ML",
@@ -1566,7 +1426,6 @@
    "poly": "no event found"
   },
   {
-   "sfTag": "A",
    "sport": "CFB",
    "matchup": "Texas at Texas A&M",
    "market": "ML",
