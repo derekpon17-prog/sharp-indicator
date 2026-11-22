@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T16:31:01.570Z",
+ "scannedAt": "2026-11-22T16:44:16.198Z",
  "sports": {
   "NFL": [
    {
@@ -91,7 +91,7 @@
       "pick": "Ravens",
       "line": null,
       "price": "+134",
-      "dollars": 27079,
+      "dollars": 27147,
       "vsUsual": 0.1,
       "vsUsualAll": 0.4
      },
@@ -99,11 +99,11 @@
       "matchup": "Dolphins at Bills",
       "market": "TOTAL",
       "pick": "Under 46.5",
-      "line": 46.5,
-      "price": "-127",
-      "dollars": 19541,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.3
+      "line": null,
+      "price": null,
+      "dollars": 60781,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.7
      }
     ]
    },
@@ -150,16 +150,6 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Celtics at Warriors",
-      "market": "SPREAD",
-      "pick": "Celtics -9.5",
-      "line": -9.5,
-      "price": "+104",
-      "dollars": 2940,
-      "vsUsual": 1.6,
-      "vsUsualAll": 4.8
-     },
-     {
       "matchup": "Magic at Wizards",
       "market": "ML",
       "pick": "Wizards",
@@ -168,6 +158,16 @@
       "dollars": 734,
       "vsUsual": 0.4,
       "vsUsualAll": 1.2
+     },
+     {
+      "matchup": "Celtics at Warriors",
+      "market": "SPREAD",
+      "pick": "Celtics -9.5",
+      "line": -9.5,
+      "price": "+104",
+      "dollars": 2940,
+      "vsUsual": 1.6,
+      "vsUsualAll": 4.8
      },
      {
       "matchup": "Nuggets at Bulls",
