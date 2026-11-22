@@ -1,0 +1,335 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 4 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 1:33pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Mavericks at Jazz",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over TOTAL",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "AF",
+          "market": "TOTAL",
+          "record": "9-4",
+          "roi": 67,
+          "dollars": 4227,
+          "note": "0.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 4227,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 9-4 (+67% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $4.2K on Over - kickoff in 4h 24m"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:25PM CT",
+     "picks": [
+      {
+       "eyebrow": "Raiders at Broncos",
+       "time": "3:25pm CT",
+       "tag": {
+        "t": "EDGE - BRONCOS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Broncos ML -488",
+       "price": "-488",
+       "for": {
+        "team": "BRONCOS",
+        "rows": [
+         {
+          "team": "Broncos",
+          "wallet": "D",
+          "market": "ML",
+          "record": "24-18",
+          "roi": 25.7,
+          "dollars": 282519,
+          "note": "1.5x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Broncos",
+          "wallet": "AB",
+          "market": "ML",
+          "record": "3-2",
+          "roi": 38.6,
+          "dollars": 37209,
+          "note": "6.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Broncos",
+          "wallet": "BreakTheBank",
+          "market": "ML",
+          "record": "33-19",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": 28,
+          "dollars": 282368,
+          "note": "Polymarket · same wallet as Sharp Flow D above",
+          "status": {
+           "t": "POLY HOT - same wallet, not a 2nd source",
+           "c": "grey"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Broncos",
+          "wallet": "aaabbb",
+          "market": "ML",
+          "record": "17-12",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -9.4,
+          "dollars": 1611,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "RAIDERS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Raiders",
+          "wallet": "twotontony",
+          "market": "SPREAD",
+          "record": "10-8",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 13.4,
+          "dollars": 543,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BRONCOS",
+         "dollars": 319728,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 24-18 (+26% ROI) on BRONCOS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - GREW $37K to $320K - kickoff in 1h 39m"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 7:20PM CT",
+     "picks": [
+      {
+       "eyebrow": "Vikings at 49ers",
+       "time": "7:20pm CT",
+       "tag": {
+        "t": "EDGE - 49ERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "49ers -170",
+       "price": "-170",
+       "for": {
+        "team": "49ERS",
+        "rows": [
+         {
+          "team": "49ers",
+          "wallet": "D",
+          "market": "ML",
+          "record": "24-18",
+          "roi": 25.7,
+          "dollars": 40277,
+          "note": "0.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "49ers",
+          "wallet": "BreakTheBank",
+          "market": "ML",
+          "record": "33-19",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": 28,
+          "dollars": 40283,
+          "note": "Polymarket · same wallet as Sharp Flow D above",
+          "status": {
+           "t": "POLY HOT - same wallet, not a 2nd source",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "49ERS",
+         "dollars": 40277,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 24-18 (+26% ROI) on 49ERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - GREW $2.4K to $40K - kickoff in 5h 34m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 5:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Thunder at Heat",
+       "time": "5:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Thunder vs Heat",
+       "price": null,
+       "for": {
+        "team": "THUNDER",
+        "rows": [
+         {
+          "team": "Thunder",
+          "wallet": "AF",
+          "market": "SPREAD",
+          "record": "11-5",
+          "roi": 12.8,
+          "dollars": 6542,
+          "note": "1.0x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "HEAT",
+        "rows": [
+         {
+          "team": "Heat",
+          "wallet": "AD",
+          "market": "SPREAD",
+          "record": "32-25",
+          "roi": -7.6,
+          "dollars": 6032,
+          "note": "2.2x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Heat",
+          "wallet": "0x09f4…dac0",
+          "market": "SPREAD",
+          "record": "85-108",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": -12.5,
+          "dollars": 1781,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "THUNDER",
+         "dollars": 6542,
+         "pct": 52,
+         "c": "gold"
+        },
+        {
+         "team": "HEAT",
+         "dollars": 6032,
+         "pct": 48,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW + POLYMARKET - NEW $6.5K on Thunder +3.5 - kickoff in 3h 24m - SITE LOCK: Thunder ML 0.75u (wallet money behind it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
