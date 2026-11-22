@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T14:56:37.025Z",
+ "scannedAt": "2026-11-22T15:29:24.161Z",
  "sports": {
   "NFL": [
    {
@@ -91,7 +91,7 @@
       "pick": "Ravens",
       "line": null,
       "price": "+138",
-      "dollars": 7742,
+      "dollars": 7887,
       "vsUsual": 0,
       "vsUsualAll": 0.1
      }
@@ -145,19 +145,19 @@
       "pick": "Nuggets -8.5",
       "line": -8.5,
       "price": "-104",
-      "dollars": 919,
+      "dollars": 932,
       "vsUsual": 0.5,
       "vsUsualAll": 1.5
      },
      {
-      "matchup": "Mavericks at Jazz",
-      "market": "SPREAD",
-      "pick": "Mavericks -1.5",
-      "line": -1.5,
-      "price": "-108",
-      "dollars": 3000,
-      "vsUsual": 1.6,
-      "vsUsualAll": 4.9
+      "matchup": "Magic at Wizards",
+      "market": "ML",
+      "pick": "Wizards",
+      "line": null,
+      "price": "+194",
+      "dollars": 734,
+      "vsUsual": 0.4,
+      "vsUsualAll": 1.2
      },
      {
       "matchup": "Celtics at Warriors",
@@ -168,6 +168,16 @@
       "dollars": 2940,
       "vsUsual": 1.6,
       "vsUsualAll": 4.8
+     },
+     {
+      "matchup": "Mavericks at Jazz",
+      "market": "SPREAD",
+      "pick": "Mavericks -1.5",
+      "line": -1.5,
+      "price": "-108",
+      "dollars": 3000,
+      "vsUsual": 1.6,
+      "vsUsualAll": 4.9
      }
     ]
    },
@@ -222,27 +232,6 @@
       "vsUsualAll": 0.1
      }
     ]
-   },
-   {
-    "id": "955c26",
-    "gap": 0.1,
-    "overall": "210-164",
-    "sport": "117-91",
-    "returnPct": 14.1,
-    "last10": "6-4",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Pistons at Hawks",
-      "market": "TOTAL",
-      "pick": "Over 226.5",
-      "line": 226.5,
-      "price": "+127",
-      "dollars": 822,
-      "vsUsual": 0.3,
-      "vsUsualAll": 0.1
-     }
-    ]
    }
   ],
   "CFB": [
@@ -261,9 +250,9 @@
       "pick": "Texas",
       "line": null,
       "price": "-238",
-      "dollars": 10991,
-      "vsUsual": 18.3,
-      "vsUsualAll": 24.1
+      "dollars": 11663,
+      "vsUsual": 19.4,
+      "vsUsualAll": 25.5
      }
     ]
    }

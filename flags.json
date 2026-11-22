@@ -1,7 +1,34 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T14:56:37.025Z",
+ "scannedAt": "2026-11-22T15:29:24.161Z",
  "sides": [
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Cardinals at Chiefs",
+   "market": "ML",
+   "pick": "Chiefs",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "dollars": 58928,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 3.6,
+   "price": "-1011",
+   "size": "1.5x and up",
+   "mktRecord": "4-0",
+   "mktRoi": 53.8,
+   "l30Roi": 65.3,
+   "contested": false,
+   "sfPoints": 39,
+   "parts": {
+    "money": 20,
+    "sizing": 12,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
   {
    "tail": false,
    "sport": "CFB",
@@ -9,10 +36,10 @@
    "market": "ML",
    "pick": "Texas",
    "kickoffEt": "Fri, Nov 27, 7:30 PM",
-   "dollars": 10991,
+   "dollars": 11663,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 18.3,
+   "maxVsUsual": 19.4,
    "price": "-238",
    "size": "1.5x and up",
    "mktRecord": "16-10",
@@ -59,6 +86,33 @@
   {
    "tail": false,
    "sport": "NFL",
+   "matchup": "Ravens at Panthers",
+   "market": "ML",
+   "pick": "Ravens",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "dollars": 8486,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 0,
+   "price": "+138",
+   "size": "under 0.5x",
+   "mktRecord": "24-18",
+   "mktRoi": 25.7,
+   "l30Roi": 20.9,
+   "contested": false,
+   "sfPoints": 23,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
    "matchup": "Buccaneers at Lions",
    "market": "TOTAL",
    "pick": "Over 46.5",
@@ -79,6 +133,33 @@
     "sizing": 7,
     "quality": 4,
     "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Magic at Wizards",
+   "market": "ML",
+   "pick": "Wizards",
+   "kickoffEt": "Sun, Nov 22, 7:10 PM",
+   "dollars": 3733,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 1.3,
+   "price": "+190",
+   "size": "1x",
+   "mktRecord": "11-15",
+   "mktRoi": -13.8,
+   "l30Roi": 8.3,
+   "contested": false,
+   "sfPoints": 19,
+   "parts": {
+    "money": 8,
+    "sizing": 4,
+    "quality": 0,
+    "pooled": 4,
     "unopposed": 3,
     "contested": 0
    }
@@ -221,60 +302,6 @@
   {
    "tail": false,
    "sport": "NFL",
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Ravens",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "dollars": 7742,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0,
-   "price": "+138",
-   "size": "under 0.5x",
-   "mktRecord": "24-18",
-   "mktRoi": 25.7,
-   "l30Roi": 20.9,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 12,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Magic at Wizards",
-   "market": "ML",
-   "pick": "Wizards",
-   "kickoffEt": "Sun, Nov 22, 7:10 PM",
-   "dollars": 2999,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.3,
-   "price": "+190",
-   "size": "1x",
-   "mktRecord": "11-15",
-   "mktRoi": -13.8,
-   "l30Roi": 8.3,
-   "contested": false,
-   "sfPoints": 15,
-   "parts": {
-    "money": 8,
-    "sizing": 4,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
    "matchup": "Saints at Bears",
    "market": "SPREAD",
    "pick": "Saints +9.5",
@@ -346,6 +373,33 @@
    "sfPoints": 11,
    "parts": {
     "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Buccaneers at Lions",
+   "market": "ML",
+   "pick": "Lions",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "dollars": 1320,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.4,
+   "price": "-194",
+   "size": "under 0.5x",
+   "mktRecord": "6-4",
+   "mktRoi": 3.1,
+   "l30Roi": 38.1,
+   "contested": false,
+   "sfPoints": 7,
+   "parts": {
+    "money": 4,
     "sizing": 0,
     "quality": 0,
     "pooled": 0,
@@ -442,7 +496,7 @@
    "pick": "Cardinals +16.5",
    "kickoffEt": "Sun, Nov 22, 1:00 PM",
    "dollars": 1848,
-   "oppDollars": 1026,
+   "oppDollars": 1694,
    "wallets": 2,
    "maxVsUsual": 0.8,
    "price": "-104",
@@ -457,6 +511,32 @@
     "sizing": 0,
     "quality": 6,
     "pooled": 4,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Cardinals at Chiefs",
+   "market": "SPREAD",
+   "pick": "Chiefs",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "dollars": 1694,
+   "oppDollars": 1848,
+   "wallets": 1,
+   "maxVsUsual": 0.1,
+   "size": "under 0.5x",
+   "mktRecord": "3-0",
+   "mktRoi": 126.6,
+   "l30Roi": 65.3,
+   "contested": true,
+   "sfPoints": 0,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
     "unopposed": 0,
     "contested": -8
    }
@@ -487,36 +567,25 @@
     "unopposed": 0,
     "contested": -8
    }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Cardinals at Chiefs",
-   "market": "SPREAD",
-   "pick": "Chiefs -16.5",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "dollars": 1026,
-   "oppDollars": 1848,
-   "wallets": 1,
-   "maxVsUsual": 0.1,
-   "price": "+117",
-   "size": "under 0.5x",
-   "mktRecord": "3-0",
-   "mktRoi": 126.6,
-   "l30Roi": 65.3,
-   "contested": true,
-   "sfPoints": 0,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
   }
  ],
  "flags": [
+  {
+   "matchup": "Cardinals at Chiefs",
+   "market": "ML",
+   "pick": "Chiefs",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "sport": "NFL",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 58928,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "7-0|75849|4-0"
+   ],
+   "bestPrice": "-1011",
+   "maxVsUsual": 3.6
+  },
   {
    "matchup": "Buccaneers at Lions",
    "market": "TOTAL",
@@ -536,34 +605,33 @@
   {
    "matchup": "Cardinals at Chiefs",
    "market": "SPREAD",
+   "pick": "Chiefs",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "sport": "NFL",
+   "type": "STRONG_VS_STRONG",
+   "strongDollars": 1694,
+   "oppDollars": 1848,
+   "oppWeakDollars": 0,
+   "fp": [
+    "7-0|75849|3-0"
+   ],
+   "maxVsUsual": 0.1
+  },
+  {
+   "matchup": "Cardinals at Chiefs",
+   "market": "SPREAD",
    "pick": "Cardinals +16.5",
    "kickoffEt": "Sun, Nov 22, 1:00 PM",
    "sport": "NFL",
    "type": "STRONG_VS_STRONG",
    "strongDollars": 1038,
-   "oppDollars": 1026,
+   "oppDollars": 1694,
    "oppWeakDollars": 0,
    "fp": [
     "8-4|638353|8-2"
    ],
    "bestPrice": "-104",
    "maxVsUsual": 0.8
-  },
-  {
-   "matchup": "Cardinals at Chiefs",
-   "market": "SPREAD",
-   "pick": "Chiefs -16.5",
-   "kickoffEt": "Sun, Nov 22, 1:00 PM",
-   "sport": "NFL",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 1026,
-   "oppDollars": 1848,
-   "oppWeakDollars": 0,
-   "fp": [
-    "7-0|75849|3-0"
-   ],
-   "bestPrice": "+117",
-   "maxVsUsual": 0.1
   }
  ],
  "sizedUp": [
@@ -573,9 +641,9 @@
    "pick": "Texas",
    "kickoffEt": "Fri, Nov 27, 7:30 PM",
    "sport": "CFB",
-   "dollars": 10991,
+   "dollars": 11663,
    "price": "-238",
-   "vsUsual": 18.3,
+   "vsUsual": 19.4,
    "size": "1.5x and up",
    "form": "L10 6-4",
    "l30Roi": 25.7,
@@ -583,6 +651,23 @@
    "mktRoi": -2.6,
    "opposed": "unopposed",
    "fp": "29-16|5969|16-10"
+  },
+  {
+   "matchup": "Cardinals at Chiefs",
+   "market": "ML",
+   "pick": "Chiefs",
+   "kickoffEt": "Sun, Nov 22, 1:00 PM",
+   "sport": "NFL",
+   "dollars": 58928,
+   "price": "-1011",
+   "vsUsual": 3.6,
+   "size": "1.5x and up",
+   "form": "L10 7-0",
+   "l30Roi": 65.3,
+   "mktRecord": "4-0",
+   "mktRoi": 53.8,
+   "opposed": "unopposed",
+   "fp": "7-0|75849|4-0"
   },
   {
    "matchup": "Mavericks at Jazz",
