@@ -1,0 +1,49 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket late money - NBA** - 1 HOT wallet move since the NBA Polymarket report",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NBA - Polymarket late money",
+   "subtitle": "HOT wallets that bought (or doubled up) after the NBA report posted, games not started. Buys checked 8:27pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "bet": "Under 217.5",
+       "sub": "Celtics at Kings - 9:10pm CT - last buy 8:22pm CT",
+       "chips": [
+        {
+         "t": "HOT TheRepoMan $600",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "NBA TOTAL 14-6 (+7%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NBA 3-7",
+         "c": "grey"
+        },
+        {
+         "t": "1.14x their usual $528",
+         "c": "grey"
+        }
+       ],
+       "price": -100,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    }
+   ],
+   "legend": "Price = their average Polymarket price as American odds. In-game buys are not counted.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
