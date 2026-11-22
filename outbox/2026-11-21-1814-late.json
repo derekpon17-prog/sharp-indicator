@@ -1,0 +1,67 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 LATE UPDATE \u00b7 Sat Nov 21** \u00b7 3 new Strong plays on unstarted games (all 6:30pm CT) \u00b7 no posted play faded",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "SAT NOV 21 \u00b7 6:14PM",
+  "sources": "Pinnacle 6:12pm CT - Vegas 6:16pm CT (CFB, NBA) - SharpFlow 5:49pm CT - Polymarket 6:04pm CT - SuperContest not read - Novig not read",
+  "sf_current": true,
+  "footer": "Late update: only fades and new Strong/Max sides on games not yet started. No posted play faded (Utah ML, Colorado State/Fresno Over, UTSA/UAB Under still Strong and steady). No new wallet or Poly matches on these sides. Tier rules are fixed.",
+  "rows": [
+   {
+    "sport": "NCAAF",
+    "game": "UGA@SC",
+    "market": "SPREAD",
+    "side": "SC",
+    "line": 14.5,
+    "price": -110,
+    "bet": "South Carolina +14.5",
+    "matchup": "NCAAF - Georgia @ South Carolina - 6:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "first_seen": "18:12",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 72
+   },
+   {
+    "sport": "NCAAF",
+    "game": "CSU@FRES",
+    "market": "SPREAD",
+    "side": "CSU",
+    "line": 20,
+    "price": -109,
+    "bet": "Colorado State +20",
+    "matchup": "NCAAF - Colorado State @ Fresno State - 6:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "first_seen": "18:12",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "PRES@TNTC",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 163.5,
+    "price": -109,
+    "bet": "Under 163.5",
+    "matchup": "NCAAB - Presbyterian @ Tennessee Tech - 6:30pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "first_seen": "18:12",
+    "pin_tier": "Strong",
+    "pin_status": "Stable"
+   }
+  ]
+ }
+}
