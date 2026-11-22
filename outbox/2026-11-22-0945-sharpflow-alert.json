@@ -1,0 +1,166 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 9:29am CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Cardinals at Chiefs",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - CARDINALS",
+        "icon": "🎯"
+       },
+       "bet": "Cardinals +16.5 -104",
+       "price": "-104",
+       "for": {
+        "team": "CARDINALS",
+        "rows": [
+         {
+          "team": "Cardinals",
+          "wallet": "S",
+          "market": "SPREAD",
+          "record": "8-2",
+          "roi": 81.7,
+          "dollars": 1038,
+          "note": "0.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Cardinals",
+          "wallet": "F",
+          "market": "SPREAD",
+          "record": "11-9",
+          "roi": 3.4,
+          "dollars": 810,
+          "note": "0.8x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "CHIEFS",
+        "rows": [
+         {
+          "team": "Chiefs",
+          "wallet": "H",
+          "market": "ML",
+          "record": "4-0",
+          "roi": 53.8,
+          "dollars": 58928,
+          "note": "3.6x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          }
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "H",
+          "market": "SPREAD",
+          "record": "3-0",
+          "roi": 126.6,
+          "dollars": 1694,
+          "note": "0.1x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "CHIEFS",
+         "dollars": 60622,
+         "pct": 97,
+         "c": "grey"
+        },
+        {
+         "team": "CARDINALS",
+         "dollars": 1848,
+         "pct": 3,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 8-2 (+82% ROI) on CARDINALS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $59K on Chiefs - kickoff in 2h 15m"
+      },
+      {
+       "eyebrow": "Buccaneers at Lions",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - LIONS",
+        "icon": "👀"
+       },
+       "bet": "Lions",
+       "price": null,
+       "for": {
+        "team": "LIONS",
+        "rows": [
+         {
+          "team": "Lions",
+          "wallet": "F",
+          "market": "SPREAD",
+          "record": "11-9",
+          "roi": 3.4,
+          "dollars": 1632,
+          "note": "1.6x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "team": "Lions",
+          "wallet": "J",
+          "market": "ML",
+          "record": "6-4",
+          "roi": 3.1,
+          "dollars": 1320,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "LIONS",
+         "dollars": 2952,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "GREW $750 to $1.3K - kickoff in 2h 15m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
