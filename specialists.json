@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T23:22:59.548Z",
+ "scannedAt": "2026-11-22T23:35:27.738Z",
  "sports": {
   "NFL": [
    {
@@ -54,6 +54,16 @@
     "last10": "9-1",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Jaguars at Giants",
+      "market": "ML",
+      "pick": "Jaguars",
+      "line": null,
+      "price": "+241",
+      "dollars": 1204,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.1
+     },
      {
       "matchup": "Raiders at Broncos",
       "market": "ML",
@@ -234,6 +244,27 @@
     ]
    },
    {
+    "id": "a0cff6",
+    "gap": 3.2,
+    "overall": "857-797",
+    "sport": "391-320",
+    "returnPct": 6.5,
+    "last10": "5-5",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Thunder at Heat",
+      "market": "SPREAD",
+      "pick": "Heat",
+      "line": -6.5,
+      "price": "-138",
+      "dollars": 1314,
+      "vsUsual": 1.7,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
     "id": "7d395d",
     "gap": 1.8,
     "overall": "279-245",
@@ -281,27 +312,6 @@
       "dollars": 734,
       "vsUsual": 0.4,
       "vsUsualAll": 1.2
-     }
-    ]
-   },
-   {
-    "id": "51176e",
-    "gap": 1.6,
-    "overall": "242-208",
-    "sport": "62-50",
-    "returnPct": 10,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Magic at Wizards",
-      "market": "ML",
-      "pick": "Wizards",
-      "line": null,
-      "price": "+190",
-      "dollars": 2999,
-      "vsUsual": 1.3,
-      "vsUsualAll": 2.6
      }
     ]
    }
