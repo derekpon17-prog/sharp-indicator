@@ -1,0 +1,64 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:56am CT",
+   "sections": [
+    {
+     "heading": "NBA - 2:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Hawks",
+       "time": "2:40pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "bet": "Over 226.5 ++127",
+       "price": "++127",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "Z",
+          "market": "TOTAL",
+          "record": "28-19",
+          "roi": 57.2,
+          "dollars": 822,
+          "note": "0.3x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 822,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 28-19 (+57% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $822 on Over 226.5 - kickoff in 5h 35m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
