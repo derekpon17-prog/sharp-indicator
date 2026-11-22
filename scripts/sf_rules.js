@@ -106,7 +106,12 @@ const noteOf = t => {
 };
 const rowOf = t => {
   const st = status(t);
-  return { team: teamOf(t.pick) || t.pick, wallet: t.wallet, market: mkName(t.market).toUpperCase(), record: t.mktRecord,
+  const pr = t.price != null && !isNaN(+t.price) ? (+t.price > 0 ? '+' : '') + (+t.price) : '';
+  const ln = t.line != null && !isNaN(+t.line) ? (+t.line > 0 ? '+' : '') + (+t.line) : '';
+  const betTxt = t.market === 'TOTAL' ? String(t.pick).toUpperCase() + (pr ? ' ' + pr : '')            // UNDER 224.5 -113
+    : t.market === 'SPREAD' ? 'SPREAD' + (ln ? ' ' + ln : '') + (pr ? ' ' + pr : '')                   // SPREAD +1.5 -104
+    : 'ML' + (pr ? ' ' + pr : '');                                                                     // ML -113
+  return { team: teamOf(t.pick) || t.pick, wallet: t.wallet, market: betTxt, mk: mkName(t.market).toUpperCase(), record: t.mktRecord,
     roi: t.mktRoi, dollars: t.dollars, note: noteOf(t), status: cold(t) ? { t: st.t + ' - not counted', c: 'red' } : st };
 };
 function matchupRow(sp, tix, grp) {
@@ -189,8 +194,18 @@ function polyFor(poly, sp, matchup, grp, r) {
   const ms = (poly || []).filter(m => m.sport === sp && m.matchup === matchup && m.grp === grp);
   if (!ms.length) return { for: r.for, against: r.against, sources: ['SHARP FLOW'], ms };
   const label = side => grp === 'total' ? side : String(side).toUpperCase();
-  const row = m => ({ src: 'POLYMARKET', team: m.side, wallet: m.name, market: m.market, record: m.rec, recLabel: m.recScope ? m.recScope.replace(/, last (\d+) days/, ' \u00b7 last $1d') + ' record' : null, roi: m.roi, dollars: m.usd,
-    note: ['Polymarket', m.gateNote && m.sportCls !== m.cls ? m.gateNote : null, m.l10 ? m.l10.txt : null, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' \u00b7 '),
+  const amer = p => !(p > 0 && p < 1) ? null : Math.round(p >= 0.5 ? -100 * p / (1 - p) : 100 * (1 - p) / p);
+  const polyBet = m => {   // the real bet: line and price paid (Derek, Nov 22: the card must show what the wallet actually bought)
+    const px = amer(m.avgPrice), pc = m.avgPrice > 0 && m.avgPrice < 1 ? ' @ ' + Math.round(m.avgPrice * 100) + 'c (' + (px > 0 ? '+' : '') + px + ')' : '';
+    if (m.market === 'TOTAL') { const l = String(m.title || '').match(/O\/U\s+([\d.]+)/i); return 'TOTAL ' + String(m.side).toUpperCase() + (l ? ' ' + l[1] : '') + pc; }
+    if (m.market === 'SPREAD') { const l = String(m.title || '').match(/\(([+-][\d.]+)\)/); if (!l) return 'SPREAD' + pc;
+      const v = parseFloat(l[1]), fav = String(m.title || '').replace(/^spread:\s*/i, '').replace(/\(.*$/, '').trim(), mine = fav.toLowerCase() === String(m.side).toLowerCase();
+      const sv = mine ? v : -v; return 'SPREAD ' + (sv > 0 ? '+' : '') + sv + pc; }
+    return 'ML' + pc;
+  };
+  const altNote = m => { if (m.market !== 'SPREAD') return null; const l = String(m.title || '').match(/\(([+-][\d.]+)\)/); return l && Math.abs(parseFloat(l[1])) >= 8 ? 'far-off alt line, not a read on the main spread' : null; };
+  const row = m => ({ src: 'POLYMARKET', team: m.side, wallet: m.name, market: polyBet(m), mk: m.market, record: m.rec, recLabel: m.recScope ? m.recScope.replace(/, last (\d+) days/, ' \u00b7 last $1d') + ' record' : null, roi: m.roi, dollars: m.usd,
+    note: ['Polymarket', altNote(m), m.gateNote && m.sportCls !== m.cls ? m.gateNote : null, m.l10 ? m.l10.txt : null, m.n < 10 ? 'thin' : null, m.sameAsSF ? 'same wallet as Sharp Flow ' + m.sameAsSF.sfWallet + ' above' : null].filter(Boolean).join(' \u00b7 '),
     status: m.twoSided ? { t: 'POLY TWO-SIDED - not counted', c: 'grey' }
       : m.cls === 'HOT' ? (m.sameAsSF ? { t: 'POLY HOT - same wallet, not a 2nd source', c: 'grey' } : { t: 'POLY HOT', c: 'green' })
       : m.sportCls === 'HOT' ? { t: 'POLY COLD in this bet type - not counted', c: 'red' } : { t: 'POLY COLD - fade flag', c: 'red' } });
@@ -205,4 +220,6 @@ function polyFor(poly, sp, matchup, grp, r) {
   return { for: f, against: a, sources: ['SHARP FLOW', 'POLYMARKET'], ms };
 }
 
-module.exports = { polyFor, siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };
+// Record label under each row's record number (the row's market field now carries the bet line and price).
+const labRows = (sp, v) => v && v.rows ? { ...v, rows: v.rows.map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.mk || x.market} \u00b7 all-time record` })) } : v;
+module.exports = { labRows, polyFor, siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };

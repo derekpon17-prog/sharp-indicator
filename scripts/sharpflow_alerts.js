@@ -110,6 +110,7 @@ for (const s of send) {
   const tix = (latest.tickets || []).filter(t => t.sport === s.sp && t.matchup === s.matchup && grpOf(t.market) === grpOf(s.market));
   const r = R.matchupRow(s.sp, tix, grpOf(s.market)); if (!r) continue;
   const growTxt = s.prev != null ? `GREW ${k(s.prev)} to ${k(s.good)}` : `NEW ${k(s.good)} on ${s.pick}`;
+  r.for = R.labRows(s.sp, r.for); r.against = R.labRows(s.sp, r.against);
   const pv = R.polyFor(POLY, s.sp, s.matchup, grpOf(s.market), r);
   rows.push({ st: s.st, sp: s.sp, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, sources: pv.sources, bet: r.bet, price: r.price,
     for: pv.for, against: pv.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: (pv.sources.length > 1 ? 'SHARP FLOW + POLYMARKET - ' : '') + growTxt + kickTxt(s.st) + (R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) ? ' - ' + R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) : '') });

@@ -67,6 +67,7 @@ const kickTxt = st => { const m = Math.round((st - now) / 60000); return m < 1 ?
 const hhmm0 = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', hour12: false }).format(now).replace(':', '');
 const csec = {};
 for (const c of Object.values(combined)) {
+  c.r.for = R.labRows(c.sp, c.r.for); c.r.against = R.labRows(c.sp, c.r.against);
   const st = new Date(c.hs[0].m.startUtc), pv = R.polyFor(POLY, c.sp, c.matchup, c.g, c.r);
   const top = c.hs.slice().sort((a, b) => b.m.usd - a.m.usd)[0].m;
   const heading = `${c.sp} - ${ctTime(st).toUpperCase()} CT`;
