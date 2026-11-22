@@ -1,29 +1,29 @@
 {
- "updated": "2026-11-22T21:30:58.996Z",
+ "updated": "2026-11-22T21:47:59.000Z",
  "since": "2026-11-20",
- "pending": 39,
+ "pending": 35,
  "na": 0,
  "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
   "COLD": {
    "all": {
-    "w": 66,
-    "l": 55,
-    "n": 121,
+    "w": 67,
+    "l": 56,
+    "n": 123,
     "u": 10.04,
     "fadeU": -10.04,
-    "clvN": 105,
+    "clvN": 107,
     "clvAvg": 0.0002,
     "clvPos": 43
    },
    "onCard": {
-    "w": 25,
-    "l": 23,
-    "n": 48,
+    "w": 26,
+    "l": 24,
+    "n": 50,
     "u": 0.89,
     "fadeU": -0.89,
-    "clvN": 38,
-    "clvAvg": 0.0019,
+    "clvN": 40,
+    "clvAvg": 0.0015,
     "clvPos": 12
    },
    "offCard": {
@@ -68,25 +68,25 @@
      "clvPos": 10
     },
     "NFL": {
-     "w": 11,
-     "l": 8,
-     "n": 19,
+     "w": 12,
+     "l": 9,
+     "n": 21,
      "u": 2.41,
      "fadeU": -2.41,
-     "clvN": 19,
-     "clvAvg": -0.0001,
+     "clvN": 21,
+     "clvAvg": -0.0005,
      "clvPos": 8
     }
    },
    "byMarket": {
     "ML": {
      "w": 27,
-     "l": 17,
-     "n": 44,
-     "u": 10.7,
-     "fadeU": -10.7,
-     "clvN": 35,
-     "clvAvg": 0.0008,
+     "l": 18,
+     "n": 45,
+     "u": 9.7,
+     "fadeU": -9.7,
+     "clvN": 36,
+     "clvAvg": 0.0006,
      "clvPos": 12
     },
     "TOTAL": {
@@ -100,13 +100,13 @@
      "clvPos": 15
     },
     "SPREAD": {
-     "w": 15,
+     "w": 16,
      "l": 20,
-     "n": 35,
-     "u": -6.24,
-     "fadeU": 6.24,
-     "clvN": 34,
-     "clvAvg": 0.008,
+     "n": 36,
+     "u": -5.24,
+     "fadeU": 5.24,
+     "clvN": 35,
+     "clvAvg": 0.0076,
      "clvPos": 16
     }
    },
@@ -142,13 +142,13 @@
      "clvPos": 15
     },
     "under 1h before": {
-     "w": 14,
-     "l": 19,
-     "n": 33,
+     "w": 15,
+     "l": 20,
+     "n": 35,
      "u": -3.27,
      "fadeU": 3.27,
-     "clvN": 33,
-     "clvAvg": -0.0031,
+     "clvN": 35,
+     "clvAvg": -0.0033,
      "clvPos": 8
     }
    },
@@ -175,22 +175,22 @@
     },
     "NORMAL": {
      "w": 16,
-     "l": 15,
-     "n": 31,
-     "u": 0.93,
-     "fadeU": -0.93,
-     "clvN": 31,
+     "l": 16,
+     "n": 32,
+     "u": -0.07,
+     "fadeU": 0.07,
+     "clvN": 32,
      "clvAvg": -0.0044,
      "clvPos": 10
     },
     "SMALL (0.5x or less)": {
-     "w": 5,
+     "w": 6,
      "l": 5,
-     "n": 10,
-     "u": -3.35,
-     "fadeU": 3.35,
-     "clvN": 10,
-     "clvAvg": 0.0025,
+     "n": 11,
+     "u": -2.35,
+     "fadeU": 2.35,
+     "clvN": 11,
+     "clvAvg": 0.0018,
      "clvPos": 4
     }
    }
@@ -198,32 +198,32 @@
   "HOT": {
    "all": {
     "w": 17,
-    "l": 16,
-    "n": 33,
-    "u": 3.22,
-    "fadeU": -3.22,
-    "clvN": 28,
-    "clvAvg": -0.0049,
-    "clvPos": 12
+    "l": 18,
+    "n": 35,
+    "u": 1.08,
+    "fadeU": -1.08,
+    "clvN": 30,
+    "clvAvg": -0.0054,
+    "clvPos": 13
    },
    "onCard": {
     "w": 11,
-    "l": 7,
-    "n": 18,
-    "u": 5.63,
-    "fadeU": -5.63,
-    "clvN": 14,
-    "clvAvg": -0.0095,
-    "clvPos": 5
+    "l": 8,
+    "n": 19,
+    "u": 4.63,
+    "fadeU": -4.63,
+    "clvN": 15,
+    "clvAvg": -0.0084,
+    "clvPos": 6
    },
    "offCard": {
     "w": 6,
-    "l": 9,
-    "n": 15,
-    "u": -2.41,
-    "fadeU": 2.41,
-    "clvN": 14,
-    "clvAvg": -0.0006,
+    "l": 10,
+    "n": 16,
+    "u": -3.55,
+    "fadeU": 3.55,
+    "clvN": 15,
+    "clvAvg": -0.0024,
     "clvPos": 7
    },
    "bySport": {
@@ -259,25 +259,25 @@
     },
     "NFL": {
      "w": 4,
-     "l": 4,
-     "n": 8,
-     "u": -0.04,
-     "fadeU": 0.04,
-     "clvN": 8,
-     "clvAvg": -0.022,
-     "clvPos": 2
+     "l": 6,
+     "n": 10,
+     "u": -2.18,
+     "fadeU": 2.18,
+     "clvN": 10,
+     "clvAvg": -0.0199,
+     "clvPos": 3
     }
    },
    "byMarket": {
     "ML": {
      "w": 9,
-     "l": 6,
-     "n": 15,
-     "u": 4.67,
-     "fadeU": -4.67,
-     "clvN": 12,
-     "clvAvg": 0.0018,
-     "clvPos": 7
+     "l": 7,
+     "n": 16,
+     "u": 3.67,
+     "fadeU": -3.67,
+     "clvN": 13,
+     "clvAvg": 0.002,
+     "clvPos": 8
     },
     "TOTAL": {
      "w": 5,
@@ -291,12 +291,12 @@
     },
     "SPREAD": {
      "w": 3,
-     "l": 5,
-     "n": 8,
-     "u": -1.4,
-     "fadeU": 1.4,
-     "clvN": 7,
-     "clvAvg": -0.0007,
+     "l": 6,
+     "n": 9,
+     "u": -2.54,
+     "fadeU": 2.54,
+     "clvN": 8,
+     "clvAvg": -0.004,
      "clvPos": 3
     }
    },
@@ -323,23 +323,23 @@
     },
     "over 6h before": {
      "w": 3,
-     "l": 3,
-     "n": 6,
-     "u": 0.09,
-     "fadeU": -0.09,
-     "clvN": 5,
-     "clvAvg": -0.0243,
+     "l": 4,
+     "n": 7,
+     "u": -1.05,
+     "fadeU": 1.05,
+     "clvN": 6,
+     "clvAvg": -0.0248,
      "clvPos": 3
     },
     "1-6h before": {
      "w": 1,
-     "l": 5,
-     "n": 6,
-     "u": -4.04,
-     "fadeU": 4.04,
-     "clvN": 6,
-     "clvAvg": 0.0067,
-     "clvPos": 4
+     "l": 6,
+     "n": 7,
+     "u": -5.04,
+     "fadeU": 5.04,
+     "clvN": 7,
+     "clvAvg": 0.0065,
+     "clvPos": 5
     }
    },
    "bySize": {
@@ -355,12 +355,12 @@
     },
     "BIG (1.5x+ usual)": {
      "w": 5,
-     "l": 6,
-     "n": 11,
-     "u": 2.71,
-     "fadeU": -2.71,
-     "clvN": 11,
-     "clvAvg": 0.0068,
+     "l": 7,
+     "n": 12,
+     "u": 1.57,
+     "fadeU": -1.57,
+     "clvN": 12,
+     "clvAvg": 0.0039,
      "clvPos": 9
     },
     "NORMAL": {
@@ -375,13 +375,13 @@
     },
     "SMALL (0.5x or less)": {
      "w": 2,
-     "l": 1,
-     "n": 3,
-     "u": 1.72,
-     "fadeU": -1.72,
-     "clvN": 2,
-     "clvAvg": -0.005,
-     "clvPos": 0
+     "l": 2,
+     "n": 4,
+     "u": 0.72,
+     "fadeU": -0.72,
+     "clvN": 3,
+     "clvAvg": -0.0017,
+     "clvPos": 1
     }
    }
   },
