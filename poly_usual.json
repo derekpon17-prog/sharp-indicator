@@ -1,15 +1,15 @@
 {
- "updated": "2026-11-22T20:40:24.189Z",
+ "updated": "2026-11-22T20:44:53.342Z",
  "note": "Usual = median game-line position dollars per wallet (this sport needs 5+ positions, else all sports), from the last ~600 Polymarket buys; today's own markets excluded.",
  "wallets": {
   "0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade": {
    "name": "taylorsversion",
-   "buysRead": 200,
-   "at": "2026-11-22T20:40:24.189Z",
+   "buysRead": 500,
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
-    "med": 2116,
-    "avg": 7858,
-    "n": 89
+    "med": 2764,
+    "avg": 7969,
+    "n": 227
    },
    "sports": {
     "NBA": {
@@ -18,19 +18,19 @@
      "n": 1
     },
     "NFL": {
-     "med": 2125,
-     "avg": 2125,
-     "n": 2
+     "med": 10902,
+     "avg": 31574,
+     "n": 8
     },
     "NHL": {
-     "med": 1543,
-     "avg": 7653,
-     "n": 81
+     "med": 2752,
+     "avg": 7101,
+     "n": 208
     },
     "MLB": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 1373,
+     "avg": 1373,
+     "n": 2
     },
     "WNBA": {
      "med": null,
@@ -38,9 +38,9 @@
      "n": 0
     },
     "CFB": {
-     "med": 3516,
-     "avg": 3399,
-     "n": 4
+     "med": 3065,
+     "avg": 2767,
+     "n": 5
     },
     "CBB": {
      "med": null,
@@ -52,7 +52,7 @@
   "0x27f738fe203827445690339104aae35b20bc44b0": {
    "name": "ic4cream",
    "buysRead": 100,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 779,
     "avg": 2842,
@@ -146,7 +146,7 @@
   "0x0944e4da1f949b201a136d73f488d03c0c506771": {
    "name": "twotontony",
    "buysRead": 100,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 507,
     "avg": 502,
@@ -193,7 +193,7 @@
   "0x9f2fe025f84839ca81dd8e0338892605702d2ca8": {
    "name": "surfandturf",
    "buysRead": 200,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 7376,
     "avg": 21688,
@@ -240,7 +240,7 @@
   "0x09f49ea10004f323a40cc1e21f4cd8759c14dac0": {
    "name": "0x09f4…dac0",
    "buysRead": 0,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": null,
     "avg": null,
@@ -521,12 +521,12 @@
   },
   "0x6a892a6e8f874b537cf20a2e013ebbe2d0ab2f26": {
    "name": "joino",
-   "buysRead": 393,
-   "at": "2026-11-22T20:40:24.189Z",
+   "buysRead": 100,
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
-    "med": 306,
-    "avg": 829,
-    "n": 362
+    "med": 52,
+    "avg": 157,
+    "n": 88
    },
    "sports": {
     "NBA": {
@@ -535,19 +535,19 @@
      "n": 0
     },
     "NFL": {
-     "med": 73,
-     "avg": 73,
-     "n": 2
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "NHL": {
-     "med": 312,
-     "avg": 843,
-     "n": 347
+     "med": 51,
+     "avg": 126,
+     "n": 81
     },
     "MLB": {
-     "med": 54,
-     "avg": 54,
-     "n": 1
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "WNBA": {
      "med": null,
@@ -569,7 +569,7 @@
   "0xf4218246dfefc5bdce904a73b2ec4d8366f5cff4": {
    "name": "mhhsw966",
    "buysRead": 400,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 1658,
     "avg": 2410,
@@ -663,7 +663,7 @@
   "0xdc5bd11896bfb0fb335dad88d99a7e9a6bc3f102": {
    "name": "ztao",
    "buysRead": 500,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 455,
     "avg": 2040,
@@ -710,7 +710,7 @@
   "0x853212cd809da6acc458021c106af749b7aa738b": {
    "name": "Mr.Kirk",
    "buysRead": 300,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 510,
     "avg": 519,
@@ -850,43 +850,43 @@
   },
   "0x1d3a805284bc8029cd6acd06d5a2b8b2b1807b63": {
    "name": "hurpdurp",
-   "buysRead": 500,
-   "at": "2026-11-22T20:40:24.189Z",
+   "buysRead": 200,
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
-    "med": 400,
-    "avg": 538,
-    "n": 337
+    "med": 367,
+    "avg": 409,
+    "n": 136
    },
    "sports": {
     "NBA": {
-     "med": 451,
-     "avg": 499,
-     "n": 59
+     "med": 404,
+     "avg": 423,
+     "n": 50
     },
     "NFL": {
      "med": 404,
-     "avg": 517,
-     "n": 51
+     "avg": 534,
+     "n": 33
     },
     "NHL": {
-     "med": 321,
-     "avg": 324,
-     "n": 23
+     "med": 317,
+     "avg": 323,
+     "n": 22
     },
     "MLB": {
-     "med": 522,
-     "avg": 662,
-     "n": 153
+     "med": 390,
+     "avg": 349,
+     "n": 4
     },
     "WNBA": {
-     "med": 163,
-     "avg": 240,
-     "n": 13
+     "med": 207,
+     "avg": 207,
+     "n": 1
     },
     "CFB": {
-     "med": 229,
-     "avg": 302,
-     "n": 27
+     "med": 223,
+     "avg": 295,
+     "n": 21
     },
     "CBB": {
      "med": null,
@@ -944,48 +944,48 @@
   },
   "0xd6966eb1ae7b52320ba7ab1016680198c9e08a49": {
    "name": "Painfulvoid",
-   "buysRead": 300,
-   "at": "2026-11-22T20:40:24.189Z",
+   "buysRead": 0,
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
-    "med": 1087,
-    "avg": 4153,
-    "n": 169
+    "med": null,
+    "avg": null,
+    "n": 0
    },
    "sports": {
     "NBA": {
-     "med": 1062,
-     "avg": 3266,
-     "n": 54
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "NFL": {
-     "med": 2473,
-     "avg": 8642,
-     "n": 36
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "NHL": {
-     "med": 1056,
-     "avg": 3132,
-     "n": 8
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "MLB": {
-     "med": 5670,
-     "avg": 5670,
-     "n": 1
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "WNBA": {
-     "med": 7241,
-     "avg": 7241,
-     "n": 1
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "CFB": {
-     "med": 806,
-     "avg": 2349,
-     "n": 51
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "CBB": {
-     "med": 673,
-     "avg": 711,
-     "n": 6
+     "med": null,
+     "avg": null,
+     "n": 0
     }
    }
   },
@@ -1039,7 +1039,7 @@
   "0x163eff4d251df4bfc95c49f4d90cd1bf224edc5b": {
    "name": "0x163e…dc5b",
    "buysRead": 300,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 5000,
     "avg": 8671,
@@ -1274,17 +1274,17 @@
   "0x28059b3fb7af7ed76d83dc9121bbb72ec7cf76ed": {
    "name": "TheRepoMan",
    "buysRead": 200,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
-    "med": 510,
-    "avg": 524,
-    "n": 85
+    "med": 505,
+    "avg": 523,
+    "n": 84
    },
    "sports": {
     "NBA": {
-     "med": 490,
-     "avg": 463,
-     "n": 30
+     "med": 480,
+     "avg": 457,
+     "n": 29
     },
     "NFL": {
      "med": 527,
@@ -1320,23 +1320,23 @@
   },
   "0x2b46bb71681777202368d095196f266944a1684d": {
    "name": "betdge",
-   "buysRead": 100,
-   "at": "2026-11-22T20:40:24.189Z",
+   "buysRead": 400,
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
-    "med": 486,
-    "avg": 944,
-    "n": 67
+    "med": 516,
+    "avg": 1045,
+    "n": 214
    },
    "sports": {
     "NBA": {
-     "med": 800,
-     "avg": 1462,
-     "n": 11
+     "med": 510,
+     "avg": 1032,
+     "n": 49
     },
     "NFL": {
-     "med": 1050,
-     "avg": 1065,
-     "n": 20
+     "med": 1033,
+     "avg": 1231,
+     "n": 105
     },
     "NHL": {
      "med": null,
@@ -1354,9 +1354,9 @@
      "n": 0
     },
     "CFB": {
-     "med": 386,
-     "avg": 719,
-     "n": 36
+     "med": 376,
+     "avg": 730,
+     "n": 60
     },
     "CBB": {
      "med": null,
@@ -1368,7 +1368,7 @@
   "0x16bb9951a36fce71e2ef57890b786145e0ba8492": {
    "name": "0x16bb…8492",
    "buysRead": 400,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 2114,
     "avg": 9237,
@@ -1415,7 +1415,7 @@
   "0x73e83485b8e20b70c53c27bef8ba4c62575dcd6f": {
    "name": "betabot",
    "buysRead": 200,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 2673,
     "avg": 3881,
@@ -1462,7 +1462,7 @@
   "0x6b1dbe91847aa95386fc63669ff910e68469a01a": {
    "name": "yuyakowako",
    "buysRead": 100,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 100,
     "avg": 124,
@@ -1509,7 +1509,7 @@
   "0xa0f21e6d351baa9185716b5c00c2925ed9621848": {
    "name": "0xa0f2…1848",
    "buysRead": 100,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 133,
     "avg": 434,
@@ -1556,7 +1556,7 @@
   "0x2b51107e8d030397ea728a794405ffbcf1d2e165": {
    "name": "aaabbb",
    "buysRead": 0,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": null,
     "avg": null,
@@ -1603,7 +1603,7 @@
   "0xf0318c32136c2db7fec88b84869aee6a1106c80c": {
    "name": "BreakTheBank",
    "buysRead": 0,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": null,
     "avg": null,
@@ -1650,7 +1650,7 @@
   "0xd4cfe5fe9def193dbfb19fe5b755800bb42e0e95": {
    "name": "Jumperhq",
    "buysRead": 300,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 300,
     "avg": 264,
@@ -1697,7 +1697,7 @@
   "0x19ff71cc489760b54fe4b138572407325519d0d0": {
    "name": "pijmoihjouih",
    "buysRead": 500,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 775,
     "avg": 1070,
@@ -1744,7 +1744,7 @@
   "0xe0dbdb7f005f233f4510e4ef7e53a2f76a8df44e": {
    "name": "lug",
    "buysRead": 500,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 3000,
     "avg": 2796,
@@ -1790,23 +1790,23 @@
   },
   "0x2792fc28811277f12a54e32bd8188be02c2dc4f6": {
    "name": "0x2792…c4f6",
-   "buysRead": 0,
-   "at": "2026-11-22T20:40:24.189Z",
+   "buysRead": 300,
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
-    "med": null,
-    "avg": null,
-    "n": 0
+    "med": 148,
+    "avg": 187,
+    "n": 139
    },
    "sports": {
     "NBA": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 146,
+     "avg": 179,
+     "n": 108
     },
     "NFL": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 155,
+     "avg": 294,
+     "n": 11
     },
     "NHL": {
      "med": null,
@@ -1824,21 +1824,21 @@
      "n": 0
     },
     "CFB": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 158,
+     "avg": 163,
+     "n": 8
     },
     "CBB": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 183,
+     "avg": 169,
+     "n": 11
     }
    }
   },
   "0x3dfb153c197d4c19d3b31c1ecd2c7b6860eeabaf": {
    "name": "0x3dfb…abaf",
    "buysRead": 400,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": 1645,
     "avg": 4017,
@@ -1885,7 +1885,7 @@
   "0x9aeb534c42b58b21673d5e03e9da14fbd15b2729": {
    "name": "The-Joker",
    "buysRead": 0,
-   "at": "2026-11-22T20:40:24.189Z",
+   "at": "2026-11-22T20:44:53.342Z",
    "all": {
     "med": null,
     "avg": null,
