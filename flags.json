@@ -1,31 +1,31 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T21:16:27.632Z",
+ "scannedAt": "2026-11-22T21:28:59.971Z",
  "sides": [
   {
-   "tail": true,
+   "tail": false,
    "sport": "NFL",
-   "matchup": "Ravens at Panthers",
+   "matchup": "Jaguars at Giants",
    "market": "ML",
-   "pick": "Ravens",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "dollars": 695346,
-   "oppDollars": 4150,
+   "pick": "Jaguars",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "dollars": 102844,
+   "oppDollars": 0,
    "wallets": 3,
-   "maxVsUsual": 3.7,
-   "price": "+129",
+   "maxVsUsual": 5,
+   "price": "-257",
    "size": "1.5x and up",
-   "mktRecord": "24-18",
-   "mktRoi": 25.7,
-   "l30Roi": 20.9,
+   "mktRecord": "4-0",
+   "mktRoi": 53.8,
+   "l30Roi": 65.3,
    "contested": false,
-   "sfPoints": 42,
+   "sfPoints": 45,
    "parts": {
     "money": 20,
     "sizing": 12,
     "quality": 6,
     "pooled": 4,
-    "unopposed": 0,
+    "unopposed": 3,
     "contested": 0
    }
   },
@@ -50,33 +50,6 @@
    "parts": {
     "money": 20,
     "sizing": 7,
-    "quality": 6,
-    "pooled": 4,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Jaguars at Giants",
-   "market": "ML",
-   "pick": "Jaguars",
-   "kickoffEt": "Sun, Nov 22, 4:25 PM",
-   "dollars": 39970,
-   "oppDollars": 0,
-   "wallets": 3,
-   "maxVsUsual": 1.2,
-   "price": "-257",
-   "size": "1x",
-   "mktRecord": "4-0",
-   "mktRoi": 53.8,
-   "l30Roi": 65.3,
-   "contested": false,
-   "sfPoints": 37,
-   "parts": {
-    "money": 20,
-    "sizing": 4,
     "quality": 6,
     "pooled": 4,
     "unopposed": 3,
@@ -117,7 +90,7 @@
    "market": "ML",
    "pick": "Bengals",
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
-   "dollars": 14817,
+   "dollars": 14828,
    "oppDollars": 0,
    "wallets": 1,
    "maxVsUsual": 3.3,
@@ -243,6 +216,32 @@
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NFL",
+   "matchup": "Raiders at Broncos",
+   "market": "SPREAD",
+   "pick": "Broncos -10.5",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "dollars": 7110,
+   "oppDollars": 1000,
+   "wallets": 2,
+   "maxVsUsual": 1.7,
+   "size": "under 0.5x",
+   "mktRecord": "3-1",
+   "mktRoi": 18.3,
+   "l30Roi": 5,
+   "contested": false,
+   "sfPoints": 27,
+   "parts": {
+    "money": 12,
+    "sizing": 7,
+    "quality": 4,
+    "pooled": 4,
+    "unopposed": 0,
+    "contested": 0
    }
   },
   {
@@ -388,7 +387,7 @@
    "pick": "Under 224.5",
    "kickoffEt": "Sun, Nov 22, 3:40 PM",
    "dollars": 11700,
-   "oppDollars": 571,
+   "oppDollars": 1048,
    "wallets": 2,
    "maxVsUsual": 1,
    "price": "-104",
@@ -429,60 +428,6 @@
     "money": 8,
     "sizing": 4,
     "quality": 0,
-    "pooled": 4,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Raiders at Broncos",
-   "market": "SPREAD",
-   "pick": "Broncos -10.5",
-   "kickoffEt": "Sun, Nov 22, 4:25 PM",
-   "dollars": 3240,
-   "oppDollars": 1000,
-   "wallets": 1,
-   "maxVsUsual": 1.7,
-   "price": "-117",
-   "size": "1.5x and up",
-   "mktRecord": "6-3",
-   "mktRoi": 30.2,
-   "l30Roi": 46.1,
-   "contested": false,
-   "sfPoints": 19,
-   "parts": {
-    "money": 8,
-    "sizing": 7,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Ravens at Panthers",
-   "market": "SPREAD",
-   "pick": "Panthers",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "dollars": 1752,
-   "oppDollars": 0,
-   "wallets": 2,
-   "maxVsUsual": 1.1,
-   "price": "-108",
-   "size": "1x",
-   "mktRecord": "11-9",
-   "mktRoi": 3.4,
-   "l30Roi": 22.2,
-   "contested": false,
-   "sfPoints": 19,
-   "parts": {
-    "money": 4,
-    "sizing": 4,
-    "quality": 4,
     "pooled": 4,
     "unopposed": 3,
     "contested": 0
@@ -651,60 +596,6 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Thunder at Heat",
-   "market": "ML",
-   "pick": "Thunder",
-   "kickoffEt": "Sun, Nov 22, 6:10 PM",
-   "dollars": 1112,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 0.6,
-   "price": "-143",
-   "size": "0.5x",
-   "mktRecord": "1-1",
-   "mktRoi": 5.5,
-   "l30Roi": 88.6,
-   "contested": false,
-   "sfPoints": 7,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NFL",
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Panthers",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "dollars": 4150,
-   "oppDollars": 695346,
-   "wallets": 1,
-   "maxVsUsual": 0.9,
-   "price": "-135",
-   "size": "0.5x",
-   "mktRecord": "21-4",
-   "mktRoi": 34.7,
-   "l30Roi": 33.7,
-   "contested": true,
-   "sfPoints": 6,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
    "sport": "NFL",
    "matchup": "Jets at Chargers",
    "market": "SPREAD",
@@ -785,13 +676,94 @@
   },
   {
    "tail": false,
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "ML",
+   "pick": "Thunder",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "dollars": 1112,
+   "oppDollars": 1000,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "-143",
+   "size": "0.5x",
+   "mktRecord": "1-1",
+   "mktRoi": 5.5,
+   "l30Roi": 88.6,
+   "contested": true,
+   "sfPoints": 0,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Pistons at Hawks",
+   "market": "TOTAL",
+   "pick": "Over 223.5",
+   "kickoffEt": "Sun, Nov 22, 3:40 PM",
+   "dollars": 1048,
+   "oppDollars": 11700,
+   "wallets": 1,
+   "maxVsUsual": 1.3,
+   "price": "+101",
+   "size": "1x",
+   "mktRecord": "114-101",
+   "mktRoi": -23.2,
+   "l30Roi": 1.8,
+   "contested": true,
+   "sfPoints": 0,
+   "parts": {
+    "money": 4,
+    "sizing": 4,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "ML",
+   "pick": "Heat",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "dollars": 1000,
+   "oppDollars": 1112,
+   "wallets": 1,
+   "maxVsUsual": 1,
+   "price": "-163",
+   "size": "1x",
+   "mktRecord": "5-1",
+   "mktRoi": 72,
+   "l30Roi": 70,
+   "contested": true,
+   "sfPoints": 0,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Raiders at Broncos",
    "market": "SPREAD",
    "pick": "Raiders +17.5",
    "kickoffEt": "Sun, Nov 22, 4:25 PM",
    "dollars": 1000,
-   "oppDollars": 3240,
+   "oppDollars": 7110,
    "wallets": 1,
    "maxVsUsual": 0.8,
    "price": "-257",
@@ -819,7 +791,7 @@
    "kickoffEt": "Sun, Nov 22, 4:25 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 29970,
+   "strongDollars": 92844,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -827,7 +799,7 @@
     "31-10|62756|21-4"
    ],
    "bestPrice": "-257",
-   "maxVsUsual": 2
+   "maxVsUsual": 5
   },
   {
    "matchup": "Jets at Chargers",
@@ -870,7 +842,7 @@
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 14817,
+   "strongDollars": 14828,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
@@ -887,8 +859,8 @@
    "sport": "NBA",
    "type": "STRONG_VS_WEAK",
    "strongDollars": 10200,
-   "oppDollars": 571,
-   "oppWeakDollars": 571,
+   "oppDollars": 1048,
+   "oppWeakDollars": 1048,
    "fp": [
     "19-12|120982|11-4"
    ],
@@ -910,22 +882,6 @@
    ],
    "bestPrice": "+104",
    "maxVsUsual": 1.6
-  },
-  {
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Panthers",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 4150,
-   "oppDollars": 695346,
-   "oppWeakDollars": 0,
-   "fp": [
-    "31-10|62756|21-4"
-   ],
-   "bestPrice": "-135",
-   "maxVsUsual": 0.9
   },
   {
    "matchup": "Vikings at 49ers",
@@ -959,22 +915,6 @@
    ],
    "bestPrice": "-117",
    "maxVsUsual": 1.7
-  },
-  {
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Ravens",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 2000,
-   "oppDollars": 4150,
-   "oppWeakDollars": 0,
-   "fp": [
-    "14-5|13791|11-3"
-   ],
-   "bestPrice": "+127",
-   "maxVsUsual": 3.7
   },
   {
    "matchup": "Jets at Chargers",
@@ -1023,6 +963,22 @@
    ],
    "bestPrice": "+104",
    "maxVsUsual": 4.8
+  },
+  {
+   "matchup": "Thunder at Heat",
+   "market": "ML",
+   "pick": "Heat",
+   "kickoffEt": "Sun, Nov 22, 6:10 PM",
+   "sport": "NBA",
+   "type": "STRONG_VS_OTHER",
+   "strongDollars": 1000,
+   "oppDollars": 1112,
+   "oppWeakDollars": 0,
+   "fp": [
+    "4-1|3500|5-1"
+   ],
+   "bestPrice": "-163",
+   "maxVsUsual": 1
   }
  ],
  "sizedUp": [
@@ -1061,6 +1017,23 @@
    "fp": "5-5|698|3-2"
   },
   {
+   "matchup": "Jaguars at Giants",
+   "market": "ML",
+   "pick": "Jaguars",
+   "kickoffEt": "Sun, Nov 22, 4:25 PM",
+   "sport": "NFL",
+   "dollars": 83566,
+   "price": "-257",
+   "vsUsual": 5,
+   "size": "1.5x and up",
+   "form": "L10 7-0",
+   "l30Roi": 65.3,
+   "mktRecord": "4-0",
+   "mktRoi": 53.8,
+   "opposed": "unopposed",
+   "fp": "7-0|75849|4-0"
+  },
+  {
    "matchup": "Mavericks at Jazz",
    "market": "TOTAL",
    "pick": "Under",
@@ -1095,23 +1068,6 @@
    "fp": "31-10|62756|21-4"
   },
   {
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Ravens",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "dollars": 691891,
-   "price": "+129",
-   "vsUsual": 3.7,
-   "size": "1.5x and up",
-   "form": "L10 7-3",
-   "l30Roi": 20.9,
-   "mktRecord": "24-18",
-   "mktRoi": 25.7,
-   "opposed": "contested",
-   "fp": "27-9|1850281|24-18"
-  },
-  {
    "matchup": "Raiders at Broncos",
    "market": "ML",
    "pick": "Broncos",
@@ -1134,7 +1090,7 @@
    "pick": "Bengals",
    "kickoffEt": "Mon, Nov 23, 8:15 PM",
    "sport": "NFL",
-   "dollars": 14817,
+   "dollars": 14828,
    "price": "-266",
    "vsUsual": 3.3,
    "size": "1.5x and up",
@@ -1282,23 +1238,6 @@
    "fp": "27-9|1850281|24-18"
   },
   {
-   "matchup": "Ravens at Panthers",
-   "market": "ML",
-   "pick": "Ravens",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "dollars": 2000,
-   "price": "+127",
-   "vsUsual": 1.5,
-   "size": "1.5x and up",
-   "form": "L10 7-3",
-   "l30Roi": 49.8,
-   "mktRecord": "11-3",
-   "mktRoi": 61.9,
-   "opposed": "contested",
-   "fp": "14-5|13791|11-3"
-  },
-  {
    "matchup": "Jets at Chargers",
    "market": "ML",
    "pick": "Jets",
@@ -1350,21 +1289,21 @@
    "fp": "50-43|18137|11-15"
   },
   {
-   "matchup": "Jaguars at Giants",
-   "market": "ML",
-   "pick": "Jaguars",
-   "kickoffEt": "Sun, Nov 22, 4:25 PM",
-   "sport": "NFL",
-   "dollars": 20692,
-   "price": "-257",
-   "vsUsual": 1.2,
+   "matchup": "Pistons at Hawks",
+   "market": "TOTAL",
+   "pick": "Over 223.5",
+   "kickoffEt": "Sun, Nov 22, 3:40 PM",
+   "sport": "NBA",
+   "dollars": 1048,
+   "price": "+101",
+   "vsUsual": 1.3,
    "size": "1x",
-   "form": "L10 7-0",
-   "l30Roi": 65.3,
-   "mktRecord": "4-0",
-   "mktRoi": 53.8,
-   "opposed": "unopposed",
-   "fp": "7-0|75849|4-0"
+   "form": "L10 5-5",
+   "l30Roi": 1.8,
+   "mktRecord": "114-101",
+   "mktRoi": -23.2,
+   "opposed": "contested",
+   "fp": "294-240|8065|114-101"
   },
   {
    "matchup": "Jaguars at Giants",
@@ -1382,23 +1321,6 @@
    "mktRoi": 35.6,
    "opposed": "unopposed",
    "fp": "8-5|6142|4-2"
-  },
-  {
-   "matchup": "Ravens at Panthers",
-   "market": "SPREAD",
-   "pick": "Panthers",
-   "kickoffEt": "Sun, Nov 22, 1:02 PM",
-   "sport": "NFL",
-   "dollars": 1196,
-   "price": "-108",
-   "vsUsual": 1.1,
-   "size": "1x",
-   "form": "L10 7-3",
-   "l30Roi": 22.2,
-   "mktRecord": "11-9",
-   "mktRoi": 3.4,
-   "opposed": "unopposed",
-   "fp": "8-4|2788|11-9"
   }
  ]
 }

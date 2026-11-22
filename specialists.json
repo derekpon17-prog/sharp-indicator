@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T21:16:27.632Z",
+ "scannedAt": "2026-11-22T21:28:59.971Z",
  "sports": {
   "NFL": [
    {
@@ -33,16 +33,6 @@
     "last10": "9-1",
     "bettingBig": false,
     "tonight": [
-     {
-      "matchup": "Ravens at Panthers",
-      "market": "ML",
-      "pick": "Ravens",
-      "line": null,
-      "price": "+153",
-      "dollars": 1455,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.2
-     },
      {
       "matchup": "Raiders at Broncos",
       "market": "ML",
@@ -120,6 +110,27 @@
    }
   ],
   "NBA": [
+   {
+    "id": "53f636",
+    "gap": 26.7,
+    "overall": "70-75",
+    "sport": "6-2",
+    "returnPct": 57.8,
+    "last10": "6-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Thunder at Heat",
+      "market": "ML",
+      "pick": "Heat",
+      "line": null,
+      "price": "-163",
+      "dollars": 1000,
+      "vsUsual": 1,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
    {
     "id": "8d3672",
     "gap": 11,
@@ -216,10 +227,10 @@
       "market": "TOTAL",
       "pick": "Over 223.5",
       "line": 223.5,
-      "price": "-102",
-      "dollars": 571,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.1
+      "price": "+101",
+      "dollars": 1048,
+      "vsUsual": 1.3,
+      "vsUsualAll": 0.3
      }
     ]
    },
@@ -273,60 +284,6 @@
       "vsUsualAll": 4.9
      }
     ]
-   },
-   {
-    "id": "51176e",
-    "gap": 1.3,
-    "overall": "242-206",
-    "sport": "62-50",
-    "returnPct": 10,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Pistons at Hawks",
-      "market": "ML",
-      "pick": "Hawks",
-      "line": null,
-      "price": "+117",
-      "dollars": 2999,
-      "vsUsual": 1.3,
-      "vsUsualAll": 2.6
-     },
-     {
-      "matchup": "Magic at Wizards",
-      "market": "ML",
-      "pick": "Wizards",
-      "line": null,
-      "price": "+190",
-      "dollars": 2999,
-      "vsUsual": 1.3,
-      "vsUsualAll": 2.6
-     }
-    ]
-   }
-  ],
-  "NHL": [
-   {
-    "id": "8d3672",
-    "gap": 3.9,
-    "overall": "99-70",
-    "sport": "20-12",
-    "returnPct": 26.7,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Oilers at Blues",
-      "market": "ML",
-      "pick": "Oilers",
-      "line": null,
-      "price": "+113",
-      "dollars": 892,
-      "vsUsual": 1.4,
-      "vsUsualAll": 0.4
-     }
-    ]
    }
   ],
   "CFB": [
@@ -369,6 +326,29 @@
       "dollars": 11663,
       "vsUsual": 19.4,
       "vsUsualAll": 25.5
+     }
+    ]
+   }
+  ],
+  "NHL": [
+   {
+    "id": "8d3672",
+    "gap": 3.9,
+    "overall": "99-70",
+    "sport": "20-12",
+    "returnPct": 26.7,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Oilers at Blues",
+      "market": "ML",
+      "pick": "Oilers",
+      "line": null,
+      "price": "+113",
+      "dollars": 892,
+      "vsUsual": 1.4,
+      "vsUsualAll": 0.4
      }
     ]
    }
