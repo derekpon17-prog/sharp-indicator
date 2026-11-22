@@ -1,0 +1,41 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket late money - NFL** - 1 HOT wallet move since the NFL Polymarket report",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NFL - Polymarket late money",
+   "subtitle": "HOT wallets that bought (or doubled up) after the NFL report posted, games not started. Buys checked 10:26am CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "bet": "Ravens ML",
+       "sub": "Ravens at Panthers - 12:00pm CT - last buy 10:08am CT",
+       "chips": [
+        {
+         "t": "HOT BreakTheBank $19k",
+         "c": "green"
+        },
+        {
+         "t": "NEW since the report",
+         "c": "green"
+        },
+        {
+         "t": "NFL ML 33-19 (+28%) last 45d",
+         "c": "grey"
+        }
+       ],
+       "price": 133,
+       "polyHot": 1,
+       "polyCold": 0
+      }
+     ]
+    }
+   ],
+   "legend": "Price = their average Polymarket price as American odds. In-game buys are not counted.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
