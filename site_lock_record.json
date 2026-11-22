@@ -1,26 +1,26 @@
 {
- "updated": "2026-11-22T00:42:17.931Z",
+ "updated": "2026-11-22T00:45:26.805Z",
  "note": "Site locks are display-only and graded by the site itself. Rules frozen until 100 graded locks.",
  "all": {
   "w": 7,
-  "l": 7,
+  "l": 8,
   "p": 0,
-  "open": 9,
-  "units": -4.79,
-  "staked": 29.25,
-  "record": "7-7",
-  "yield": -16.4
+  "open": 8,
+  "units": -7.79,
+  "staked": 32.25,
+  "record": "7-8",
+  "yield": -24.2
  },
  "bySport": {
   "CFB": {
    "w": 6,
-   "l": 7,
+   "l": 8,
    "p": 0,
-   "open": 4,
-   "units": -6.23,
-   "staked": 26.25,
-   "record": "6-7",
-   "yield": -23.7
+   "open": 3,
+   "units": -9.23,
+   "staked": 29.25,
+   "record": "6-8",
+   "yield": -31.6
   },
   "NHL": {
    "w": 1,
@@ -56,13 +56,13 @@
   },
   "no_money": {
    "w": 6,
-   "l": 4,
+   "l": 5,
    "p": 0,
-   "open": 6,
-   "units": 2.16,
-   "staked": 19.25,
-   "record": "6-4",
-   "yield": 11.2
+   "open": 5,
+   "units": -0.84,
+   "staked": 22.25,
+   "record": "6-5",
+   "yield": -3.8
   }
  },
  "byMarket": {
@@ -78,13 +78,13 @@
   },
   "CFB SPREAD": {
    "w": 2,
-   "l": 5,
+   "l": 6,
    "p": 0,
-   "open": 1,
-   "units": -8.69,
-   "staked": 15.75,
-   "record": "2-5",
-   "yield": -55.2
+   "open": 0,
+   "units": -11.69,
+   "staked": 18.75,
+   "record": "2-6",
+   "yield": -62.3
   },
   "NHL ML": {
    "w": 1,
