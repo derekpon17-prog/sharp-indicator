@@ -1,19 +1,19 @@
 {
- "updated": "2026-11-21T23:44:48.319Z",
+ "updated": "2026-11-22T00:05:02.642Z",
  "since": "2026-11-20",
- "pending": 54,
+ "pending": 55,
  "na": 0,
  "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
   "COLD": {
    "all": {
-    "w": 30,
+    "w": 31,
     "l": 25,
-    "n": 55,
-    "u": 4.04,
-    "fadeU": -4.04,
-    "clvN": 39,
-    "clvAvg": 0.0012,
+    "n": 56,
+    "u": 5.37,
+    "fadeU": -5.37,
+    "clvN": 40,
+    "clvAvg": 0.001,
     "clvPos": 15
    },
    "onCard": {
@@ -27,13 +27,13 @@
     "clvPos": 6
    },
    "offCard": {
-    "w": 16,
+    "w": 17,
     "l": 14,
-    "n": 30,
-    "u": 1.51,
-    "fadeU": -1.51,
-    "clvN": 24,
-    "clvAvg": 0.0016,
+    "n": 31,
+    "u": 2.84,
+    "fadeU": -2.84,
+    "clvN": 25,
+    "clvAvg": 0.0014,
     "clvPos": 9
    },
    "bySport": {
@@ -58,13 +58,13 @@
      "clvPos": 3
     },
     "NHL": {
-     "w": 3,
+     "w": 4,
      "l": 0,
-     "n": 3,
-     "u": 3,
-     "fadeU": -3,
-     "clvN": 3,
-     "clvAvg": 0.0085,
+     "n": 4,
+     "u": 4.33,
+     "fadeU": -4.33,
+     "clvN": 4,
+     "clvAvg": 0.0051,
      "clvPos": 1
     }
    },
@@ -80,13 +80,13 @@
      "clvPos": 3
     },
     "TOTAL": {
-     "w": 11,
+     "w": 12,
      "l": 11,
-     "n": 22,
-     "u": 0.43,
-     "fadeU": -0.43,
-     "clvN": 16,
-     "clvAvg": -0.0118,
+     "n": 23,
+     "u": 1.76,
+     "fadeU": -1.76,
+     "clvN": 17,
+     "clvAvg": -0.0114,
      "clvPos": 4
     },
     "SPREAD": {
@@ -122,13 +122,13 @@
      "clvPos": 0
     },
     "1-6h before": {
-     "w": 8,
+     "w": 9,
      "l": 5,
-     "n": 13,
-     "u": 2.31,
-     "fadeU": -2.31,
-     "clvN": 13,
-     "clvAvg": 0.0239,
+     "n": 14,
+     "u": 3.64,
+     "fadeU": -3.64,
+     "clvN": 14,
+     "clvAvg": 0.0218,
      "clvPos": 6
     },
     "under 1h before": {
@@ -174,13 +174,13 @@
      "clvPos": 1
     },
     "NORMAL": {
-     "w": 2,
+     "w": 3,
      "l": 0,
-     "n": 2,
-     "u": 2,
-     "fadeU": -2,
-     "clvN": 2,
-     "clvAvg": 0.0253,
+     "n": 3,
+     "u": 3.33,
+     "fadeU": -3.33,
+     "clvN": 3,
+     "clvAvg": 0.0152,
      "clvPos": 1
     }
    }
