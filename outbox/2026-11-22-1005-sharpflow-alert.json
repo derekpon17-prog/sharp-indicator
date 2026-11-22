@@ -1,0 +1,169 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 9:57am CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Cardinals at Chiefs",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - CHIEFS",
+        "icon": "🎯"
+       },
+       "bet": "Chiefs ML -1011",
+       "price": "-1011",
+       "for": {
+        "team": "CHIEFS",
+        "rows": [
+         {
+          "team": "Chiefs",
+          "wallet": "I",
+          "market": "ML",
+          "record": "4-0",
+          "roi": 53.8,
+          "dollars": 59039,
+          "note": "3.6x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          }
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "H",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 33937,
+          "note": "7.5x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CHIEFS",
+         "dollars": 92976,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on CHIEFS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $59K to $93K - kickoff in 1h 54m"
+      },
+      {
+       "eyebrow": "Buccaneers at Lions",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - LIONS",
+        "icon": "🎯"
+       },
+       "bet": "Lions ML -222",
+       "price": "-222",
+       "for": {
+        "team": "LIONS",
+        "rows": [
+         {
+          "team": "Lions",
+          "wallet": "H",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 44980,
+          "note": "9.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Lions",
+          "wallet": "H",
+          "market": "SPREAD",
+          "record": "9-6",
+          "roi": 21.9,
+          "dollars": 8071,
+          "note": "1.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Lions",
+          "wallet": "X",
+          "market": "SPREAD",
+          "record": "9-3",
+          "roi": 53.9,
+          "dollars": 3961,
+          "note": "0.7x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "BUCCANEERS",
+        "rows": [
+         {
+          "team": "Buccaneers",
+          "wallet": "X",
+          "market": "SPREAD",
+          "record": "9-3",
+          "roi": 53.9,
+          "dollars": 6789,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "LIONS",
+         "dollars": 57012,
+         "pct": 89,
+         "c": "green"
+        },
+        {
+         "team": "BUCCANEERS",
+         "dollars": 6789,
+         "pct": 11,
+         "c": "red"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on LIONS vs a cold wallet on BUCCANEERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $1.3K to $45K - kickoff in 1h 54m - SITE LOCK: Lions -3.5 3u (wallet money behind it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
