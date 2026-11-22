@@ -1,0 +1,529 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 6 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 11:34am CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Cardinals at Chiefs",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - CHIEFS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Chiefs ML -1011",
+       "price": "-1011",
+       "for": {
+        "team": "CHIEFS",
+        "rows": [
+         {
+          "team": "Chiefs",
+          "wallet": "L",
+          "market": "SPREAD",
+          "record": "3-0",
+          "roi": 126.6,
+          "dollars": 137490,
+          "note": "7.7x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          }
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "L",
+          "market": "ML",
+          "record": "4-0",
+          "roi": 53.8,
+          "dollars": 97807,
+          "note": "5.9x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          }
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 33937,
+          "note": "7.5x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "CARDINALS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Cardinals",
+          "wallet": "0x16bb…8492",
+          "market": "SPREAD",
+          "record": "16-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -12.4,
+          "dollars": 27000,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "CHIEFS",
+         "dollars": 269234,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on CHIEFS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - GREW $1.7K to $137K - kickoff in 14 min"
+      },
+      {
+       "eyebrow": "Titans at Cowboys",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - COWBOYS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Cowboys ML -342",
+       "price": "-342",
+       "for": {
+        "team": "COWBOYS",
+        "rows": [
+         {
+          "team": "Cowboys",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 43919,
+          "note": "9.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Cowboys",
+          "wallet": "K",
+          "market": "SPREAD",
+          "record": "9-6",
+          "roi": 21.9,
+          "dollars": 17002,
+          "note": "3.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "TITANS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Titans",
+          "wallet": "Jumperhq",
+          "market": "SPREAD",
+          "record": "33-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 19.5,
+          "dollars": 520,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "COWBOYS",
+         "dollars": 60921,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on COWBOYS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - NEW $17K on Cowboys - kickoff in 14 min"
+      },
+      {
+       "eyebrow": "Steelers at Eagles",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - STEELERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Steelers ML -192",
+       "price": "-192",
+       "for": {
+        "team": "STEELERS",
+        "rows": [
+         {
+          "team": "Steelers",
+          "wallet": "E",
+          "market": "ML",
+          "record": "4-2",
+          "roi": 35.6,
+          "dollars": 10000,
+          "note": "1.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Steelers",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 3313,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "EAGLES",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Eagles",
+          "wallet": "0x16bb…8492",
+          "market": "SPREAD",
+          "record": "16-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -12.4,
+          "dollars": 23315,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Eagles",
+          "wallet": "Jumperhq",
+          "market": "SPREAD",
+          "record": "33-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 19.5,
+          "dollars": 500,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "STEELERS",
+         "dollars": 13313,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on STEELERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - GREW $3.3K to $13K - kickoff in 14 min - SITE LOCK: Steelers -3.5 3u (wallet money behind it)"
+      },
+      {
+       "eyebrow": "Saints at Bears",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - BEARS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Bears ML -525",
+       "price": "-525",
+       "for": {
+        "team": "BEARS",
+        "rows": [
+         {
+          "team": "Bears",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 6254,
+          "note": "1.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Bears",
+          "wallet": "0x16bb…8492",
+          "market": "SPREAD",
+          "record": "16-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -12.4,
+          "dollars": 19830,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BEARS",
+         "dollars": 6254,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 21-4 (+35% ROI) on BEARS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - NEW $6.3K on Bears - kickoff in 14 min"
+      },
+      {
+       "eyebrow": "Dolphins at Bills",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - BILLS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Bills ML -1150",
+       "price": "-1150",
+       "for": {
+        "team": "BILLS",
+        "rows": [
+         {
+          "team": "Bills",
+          "wallet": "B",
+          "market": "ML",
+          "record": "24-18",
+          "roi": 25.7,
+          "dollars": 24571,
+          "note": "0.1x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         },
+         {
+          "team": "Bills",
+          "wallet": "K",
+          "market": "ML",
+          "record": "21-4",
+          "roi": 34.7,
+          "dollars": 18071,
+          "note": "4.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "DOLPHINS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Dolphins",
+          "wallet": "0x16bb…8492",
+          "market": "SPREAD",
+          "record": "16-21",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -12.4,
+          "dollars": 10600,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BILLS",
+         "dollars": 42642,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 24-18 (+26% ROI) on BILLS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - GREW $18K to $43K - kickoff in 14 min"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 2:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Hawks",
+       "time": "2:40pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Pistons vs Hawks",
+       "price": null,
+       "for": {
+        "team": "PISTONS",
+        "rows": [
+         {
+          "team": "Pistons",
+          "wallet": "AF",
+          "market": "ML",
+          "record": "57-47",
+          "roi": 7.8,
+          "dollars": 3170,
+          "note": "1.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "HAWKS",
+        "rows": [
+         {
+          "team": "Hawks",
+          "wallet": "M",
+          "market": "ML",
+          "record": "11-15",
+          "roi": -13.8,
+          "dollars": 2999,
+          "note": "1.3x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Hawks",
+          "wallet": "ztao",
+          "market": "SPREAD",
+          "record": "103-32",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": -5.9,
+          "dollars": 1365,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Hawks",
+          "wallet": "mhhsw966",
+          "market": "SPREAD",
+          "record": "50-50",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": -3.3,
+          "dollars": 1350,
+          "note": "Polymarket",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PISTONS",
+         "dollars": 3170,
+         "pct": 51,
+         "c": "green"
+        },
+        {
+         "team": "HAWKS",
+         "dollars": 2999,
+         "pct": 49,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW + POLYMARKET - NEW $3.2K on Pistons - kickoff in 2h 54m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
