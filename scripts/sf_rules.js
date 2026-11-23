@@ -223,12 +223,14 @@ function polyFor(poly, sp, matchup, grp, r) {
 // Record label under each row's record number (the row's market field now carries the bet line and price).
 /* Wallet identity (Derek, Nov 23 2026): the A/B/C letter is reshuffled every board, so show the stable wallet id next to it and say
    when one wallet is on more than one row of the same card (ML + spread). SharpFlow does not publish names - the id is the identity. */
+let WNAMES = {};
+try { WNAMES = JSON.parse(require('fs').readFileSync(process.env.WALLET_NAMES || 'wallet_names.json', 'utf8')); } catch (e) { /* names are best effort */ }
 const tagWallets = rows => {
   const cnt = {}; rows.forEach(x => { if (x.wid) (cnt[x.wid] ||= []).push(x); });
   return rows.map(x => {
     if (!x.wid) return x;
     const mine = cnt[x.wid], others = mine.filter(y => y !== x).map(y => y.mk || y.market);
-    return { ...x, wallet: x.wallet + ' #' + x.wid, note: (x.note ? x.note + ' \u00b7 ' : '') + (others.length ? 'SAME WALLET as its ' + others.join(' + ') + ' row' : ''), };
+    return { ...x, wallet: (WNAMES[x.wid] ? WNAMES[x.wid] + ' ' : x.wallet + ' ') + '#' + x.wid, note: (x.note ? x.note + ' \u00b7 ' : '') + (others.length ? 'SAME WALLET as its ' + others.join(' + ') + ' row' : ''), };
   }).map(x => ({ ...x, note: String(x.note || '').replace(/ \u00b7 $/, '') }));
 };
 const labRows = (sp, v) => v && v.rows ? { ...v, rows: tagWallets(v.rows).map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.mk || x.market} \u00b7 all-time record` })) } : v;

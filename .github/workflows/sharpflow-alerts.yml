@@ -34,6 +34,9 @@ jobs:
         run: |
           git clone -q --depth 1 -b outbox "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ob_read || mkdir -p ob_read
           python3 scripts/posted_plays.py ob_read "$(TZ=America/Chicago date +%F)" posted_plays.json || echo '[]' > posted_plays.json
+      - name: Wallet names (public Polymarket names for the 6-character wallet ids)
+        continue-on-error: true
+        run: node scripts/fetch_wallet_names.js wallet_names.json
       - name: Build alerts
         id: alerts
         run: node scripts/sharpflow_alerts.js
