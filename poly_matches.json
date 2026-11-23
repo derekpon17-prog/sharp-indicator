@@ -1,5 +1,5 @@
 {
- "at": "2026-11-23T22:31:40.560Z",
+ "at": "2026-11-23T23:33:49.528Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -60,12 +60,12 @@
   "mktMin": 10,
   "roiMin": 15
  },
- "sfScannedAt": "2026-11-23T22:19:20.932Z",
+ "sfScannedAt": "2026-11-23T23:14:00.158Z",
  "espnGames": 250,
  "espnErrors": [],
- "espnAdded": 213,
- "games": 232,
+ "espnAdded": 211,
+ "games": 231,
  "walletsChecked": 68,
- "inGameSkipped": 1,
+ "inGameSkipped": 0,
  "offCardMatches": 0
 }
