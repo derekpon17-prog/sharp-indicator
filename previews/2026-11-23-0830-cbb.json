@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-23",
+ "posted_ct": "0830",
+ "sport": "CBB",
+ "outlier": false,
+ "first_start": "2026-11-23T16:00:00.000Z",
+ "snapshot": "2026-11-23T14:09:09.161Z",
+ "sides": [
+  {
+   "game": "Colorado State Rams at Arizona Wildcats",
+   "market": "TOTAL",
+   "pick": "Over 158.5",
+   "start_utc": "2026-11-24T04:30:00.000Z",
+   "dollars": 2043,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 2.7,
+   "all_sport_ratio": 0.86,
+   "price": "-104",
+   "line": 158.5,
+   "l30_rec": "14-7",
+   "l30_roi": 39.2,
+   "mkt_rec": "11-3",
+   "mkt_roi": 28.5,
+   "mkt_l30_rec": "11-3",
+   "tail": false
+  }
+ ]
+}
