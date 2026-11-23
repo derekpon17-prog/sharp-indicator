@@ -12,18 +12,18 @@
    "dollars": 50463,
    "oppDollars": 578,
    "wallets": 3,
-   "maxVsUsual": 2.8,
+   "maxVsUsual": 2.7,
    "price": "+101",
    "size": "1.5x and up",
-   "mktRecord": "8-8",
-   "mktRoi": 25.9,
-   "l30Roi": 36.4,
+   "mktRecord": "9-8",
+   "mktRoi": 39.1,
+   "l30Roi": 45.1,
    "contested": false,
-   "sfPoints": 40,
+   "sfPoints": 42,
    "parts": {
     "money": 20,
     "sizing": 12,
-    "quality": 4,
+    "quality": 6,
     "pooled": 4,
     "unopposed": 0,
     "contested": 0
@@ -202,17 +202,16 @@
    "oppDollars": 9669,
    "wallets": 3,
    "maxVsUsual": 0.2,
-   "price": null,
    "size": "under 0.5x",
-   "mktRecord": "8-8",
-   "mktRoi": 25.9,
-   "l30Roi": 36.4,
+   "mktRecord": "9-8",
+   "mktRoi": 39.1,
+   "l30Roi": 45.1,
    "contested": true,
-   "sfPoints": 12,
+   "sfPoints": 14,
    "parts": {
     "money": 12,
     "sizing": 0,
-    "quality": 4,
+    "quality": 6,
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
@@ -231,11 +230,11 @@
    "oppDollars": 578,
    "oppWeakDollars": 0,
    "fp": [
-    "19-12|120982|8-8",
-    "6-4|42846|5-3"
+    "22-12|171982|9-8",
+    "8-4|70607|7-3"
    ],
    "bestPrice": "+101",
-   "maxVsUsual": 2.8
+   "maxVsUsual": 2.7
   },
   {
    "matchup": "Celtics at Warriors",
@@ -248,9 +247,8 @@
    "oppDollars": 9669,
    "oppWeakDollars": 6099,
    "fp": [
-    "19-12|120982|8-8"
+    "22-12|171982|9-8"
    ],
-   "bestPrice": null,
    "maxVsUsual": 1
   },
   {
@@ -330,14 +328,14 @@
    "sport": "NBA",
    "dollars": 29796,
    "price": "+101",
-   "vsUsual": 2.8,
+   "vsUsual": 2.7,
    "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 36.4,
-   "mktRecord": "8-8",
-   "mktRoi": 25.9,
+   "form": "L10 9-1",
+   "l30Roi": 45.1,
+   "mktRecord": "9-8",
+   "mktRoi": 39.1,
    "opposed": "contested",
-   "fp": "19-12|120982|8-8"
+   "fp": "22-12|171982|9-8"
   },
   {
    "matchup": "Bengals at Commanders",
@@ -366,12 +364,12 @@
    "price": "+102",
    "vsUsual": 1.7,
    "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 37.2,
-   "mktRecord": "5-3",
-   "mktRoi": 40.7,
+   "form": "L10 8-2",
+   "l30Roi": 50,
+   "mktRecord": "7-3",
+   "mktRoi": 53.8,
    "opposed": "contested",
-   "fp": "6-4|42846|5-3"
+   "fp": "8-4|70607|7-3"
   },
   {
    "matchup": "Celtics at Warriors",
