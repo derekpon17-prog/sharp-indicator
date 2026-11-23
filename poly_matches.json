@@ -1,5 +1,5 @@
 {
- "at": "2026-11-23T21:32:24.405Z",
+ "at": "2026-11-23T22:31:40.560Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -39,7 +39,12 @@
     "sfWallet": "A",
     "sfDollars": 990
    },
-   "l10": null,
+   "l10": {
+    "w": 6,
+    "l": 4,
+    "n": 10,
+    "txt": "L10 NHL 6-4"
+   },
    "usualMed": null,
    "usualN": 0,
    "usualScope": null,
@@ -55,12 +60,12 @@
   "mktMin": 10,
   "roiMin": 15
  },
- "sfScannedAt": "2026-11-23T20:49:29.138Z",
+ "sfScannedAt": "2026-11-23T22:19:20.932Z",
  "espnGames": 250,
  "espnErrors": [],
- "espnAdded": 216,
- "games": 234,
+ "espnAdded": 213,
+ "games": 232,
  "walletsChecked": 68,
- "inGameSkipped": 7,
+ "inGameSkipped": 1,
  "offCardMatches": 0
 }
