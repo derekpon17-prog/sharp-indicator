@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 37
+   "snapshots": 38
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -425,7 +425,7 @@
    "maxVsUsual": 3.3,
    "maxDollars": 14880,
    "opposedSeen": false,
-   "snapshots": 62
+   "snapshots": 63
   },
   "Ravens at Panthers|ML|Panthers": {
    "sport": "NFL",
@@ -473,10 +473,10 @@
     "STRONG_UNOPPOSED",
     "STRONG_VS_STRONG"
    ],
-   "maxVsUsual": 1,
+   "maxVsUsual": 1.8,
    "maxDollars": 3380,
    "opposedSeen": true,
-   "snapshots": 22
+   "snapshots": 23
   },
   "Saints at Bears|SPREAD|Saints": {
    "sport": "NFL",
@@ -850,7 +850,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": true,
-   "snapshots": 15
+   "snapshots": 16
   },
   "Ravens at Panthers|SPREAD|Panthers": {
    "sport": "NFL",
@@ -1169,7 +1169,7 @@
    "maxVsUsual": 4.6,
    "maxDollars": 28884,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Mavericks at Jazz|ML|Mavericks": {
    "sport": "NBA",
@@ -1205,7 +1205,7 @@
    "maxVsUsual": 2.8,
    "maxDollars": 49596,
    "opposedSeen": true,
-   "snapshots": 24
+   "snapshots": 27
   },
   "Mavericks at Jazz|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -1256,7 +1256,7 @@
    "maxVsUsual": 1,
    "maxDollars": 3527,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Celtics at Warriors|TOTAL|Under": {
    "sport": "NBA",
@@ -1305,7 +1305,7 @@
    "maxVsUsual": 3.7,
    "maxDollars": 1220,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   }
  }
 }

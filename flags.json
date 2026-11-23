@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T03:13:01.099Z",
+ "scannedAt": "2026-11-23T03:36:30.824Z",
  "sides": [
   {
    "tail": true,
@@ -19,11 +19,11 @@
    "mktRoi": 25.9,
    "l30Roi": 36.4,
    "contested": false,
-   "sfPoints": 42,
+   "sfPoints": 40,
    "parts": {
     "money": 20,
     "sizing": 12,
-    "quality": 6,
+    "quality": 4,
     "pooled": 4,
     "unopposed": 0,
     "contested": 0
@@ -39,12 +39,12 @@
    "dollars": 29484,
    "oppDollars": 0,
    "wallets": 2,
-   "maxVsUsual": 4.6,
+   "maxVsUsual": 4.5,
    "price": "-317",
    "size": "1.5x and up",
-   "mktRecord": "9-6",
-   "mktRoi": 12.9,
-   "l30Roi": 29.6,
+   "mktRecord": "10-6",
+   "mktRoi": 14.1,
+   "l30Roi": 29.5,
    "contested": false,
    "sfPoints": 35,
    "parts": {
@@ -90,15 +90,15 @@
    "market": "ML",
    "pick": "49ers",
    "kickoffEt": "Sun, Nov 22, 8:24 PM",
-   "dollars": 187129,
+   "dollars": 188119,
    "oppDollars": 0,
-   "wallets": 3,
+   "wallets": 4,
    "maxVsUsual": 1,
    "price": "-182",
-   "size": "1x",
-   "mktRecord": "25-19",
-   "mktRoi": 19.2,
-   "l30Roi": 11.7,
+   "size": "0.5x",
+   "mktRecord": "27-19",
+   "mktRoi": 21.7,
+   "l30Roi": 15.6,
    "contested": false,
    "sfPoints": 33,
    "parts": {
@@ -120,18 +120,18 @@
    "dollars": 4488,
    "oppDollars": 0,
    "wallets": 3,
-   "maxVsUsual": 3.7,
+   "maxVsUsual": 3.6,
    "price": "-383",
    "size": "0.5x",
-   "mktRecord": "57-47",
-   "mktRoi": 7.8,
-   "l30Roi": 16.6,
+   "mktRecord": "58-48",
+   "mktRoi": 7.1,
+   "l30Roi": 16.9,
    "contested": false,
-   "sfPoints": 33,
+   "sfPoints": 27,
    "parts": {
     "money": 8,
     "sizing": 12,
-    "quality": 6,
+    "quality": 0,
     "pooled": 4,
     "unopposed": 3,
     "contested": 0
@@ -147,18 +147,18 @@
    "dollars": 14880,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 1.9,
+   "maxVsUsual": 1.8,
    "price": "-266",
    "size": "1.5x and up",
-   "mktRecord": "27-5",
-   "mktRoi": 28.4,
-   "l30Roi": 28.1,
+   "mktRecord": "28-7",
+   "mktRoi": 19,
+   "l30Roi": 20,
    "contested": false,
-   "sfPoints": 26,
+   "sfPoints": 22,
    "parts": {
     "money": 12,
     "sizing": 7,
-    "quality": 4,
+    "quality": 0,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -171,21 +171,21 @@
    "market": "SPREAD",
    "pick": "Celtics",
    "kickoffEt": "Sun, Nov 22, 8:42 PM",
-   "dollars": 3570,
+   "dollars": 9669,
    "oppDollars": 6034,
-   "wallets": 2,
+   "wallets": 3,
    "maxVsUsual": 1.6,
-   "price": "+104",
-   "size": "1.5x and up",
-   "mktRecord": "39-26",
-   "mktRoi": 22.6,
-   "l30Roi": 12.4,
+   "price": "-150",
+   "size": "0.5x",
+   "mktRecord": "15-11",
+   "mktRoi": -19.2,
+   "l30Roi": 16.5,
    "contested": true,
-   "sfPoints": 17,
+   "sfPoints": 15,
    "parts": {
-    "money": 8,
+    "money": 12,
     "sizing": 7,
-    "quality": 6,
+    "quality": 0,
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
@@ -199,9 +199,10 @@
    "pick": "Warriors +8.5",
    "kickoffEt": "Sun, Nov 22, 8:42 PM",
    "dollars": 6034,
-   "oppDollars": 3570,
+   "oppDollars": 9669,
    "wallets": 3,
    "maxVsUsual": 0.2,
+   "price": null,
    "size": "under 0.5x",
    "mktRecord": "8-8",
    "mktRoi": 25.9,
@@ -237,34 +238,19 @@
    "maxVsUsual": 2.8
   },
   {
-   "matchup": "Bengals at Commanders",
-   "market": "ML",
-   "pick": "Bengals",
-   "kickoffEt": "Mon, Nov 23, 8:15 PM",
-   "sport": "NFL",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 14880,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "43-12|121183|27-5"
-   ],
-   "bestPrice": "-266",
-   "maxVsUsual": 1.9
-  },
-  {
    "matchup": "Celtics at Warriors",
    "market": "SPREAD",
    "pick": "Warriors +8.5",
    "kickoffEt": "Sun, Nov 22, 8:42 PM",
    "sport": "NBA",
-   "type": "STRONG_VS_OTHER",
+   "type": "STRONG_VS_WEAK",
    "strongDollars": 3527,
-   "oppDollars": 3570,
-   "oppWeakDollars": 0,
+   "oppDollars": 9669,
+   "oppWeakDollars": 6099,
    "fp": [
     "19-12|120982|8-8"
    ],
+   "bestPrice": null,
    "maxVsUsual": 1
   },
   {
@@ -274,15 +260,14 @@
    "kickoffEt": "Sun, Nov 22, 8:24 PM",
    "sport": "NFL",
    "type": "STRONG_UNOPPOSED",
-   "strongDollars": 3380,
+   "strongDollars": 1000,
    "oppDollars": 0,
    "oppWeakDollars": 0,
    "fp": [
-    "43-12|121183|27-5",
-    "16-8|10510|12-4"
+    "18-8|13700|14-4"
    ],
-   "bestPrice": "-156",
-   "maxVsUsual": 1
+   "bestPrice": "-178",
+   "maxVsUsual": 1.8
   }
  ],
  "sizedUp": [
@@ -311,14 +296,14 @@
    "sport": "NBA",
    "dollars": 28884,
    "price": "-317",
-   "vsUsual": 4.6,
+   "vsUsual": 4.5,
    "size": "1.5x and up",
    "form": "L10 7-3",
-   "l30Roi": 29.6,
-   "mktRecord": "9-6",
-   "mktRoi": 12.9,
+   "l30Roi": 29.5,
+   "mktRecord": "10-6",
+   "mktRoi": 14.1,
    "opposed": "unopposed",
-   "fp": "5-1|18514|9-6"
+   "fp": "6-1|20841|10-6"
   },
   {
    "matchup": "Bucks at Raptors",
@@ -328,14 +313,14 @@
    "sport": "NBA",
    "dollars": 1220,
    "price": "-400",
-   "vsUsual": 3.7,
+   "vsUsual": 3.6,
    "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 17.5,
-   "mktRecord": "12-4",
-   "mktRoi": 31.6,
+   "form": "L10 4-6",
+   "l30Roi": 13.5,
+   "mktRecord": "14-5",
+   "mktRoi": 29.9,
    "opposed": "unopposed",
-   "fp": "42-32|4311|12-4"
+   "fp": "44-36|3662|14-5"
   },
   {
    "matchup": "Pacers at Knicks",
@@ -362,14 +347,14 @@
    "sport": "NFL",
    "dollars": 14880,
    "price": "-266",
-   "vsUsual": 1.9,
+   "vsUsual": 1.8,
    "size": "1.5x and up",
-   "form": "L10 8-2",
-   "l30Roi": 28.1,
-   "mktRecord": "27-5",
-   "mktRoi": 28.4,
+   "form": "L10 7-3",
+   "l30Roi": 20,
+   "mktRecord": "28-7",
+   "mktRoi": 19,
    "opposed": "unopposed",
-   "fp": "43-12|121183|27-5"
+   "fp": "44-14|95453|28-7"
   },
   {
    "matchup": "Pacers at Knicks",
@@ -398,12 +383,12 @@
    "price": "+104",
    "vsUsual": 1.6,
    "size": "1.5x and up",
-   "form": "L10 9-1",
-   "l30Roi": 12.4,
-   "mktRecord": "39-26",
-   "mktRoi": 22.6,
+   "form": "L10 8-2",
+   "l30Roi": 13.9,
+   "mktRecord": "40-27",
+   "mktRoi": 23.3,
    "opposed": "contested",
-   "fp": "46-39|20187|39-26"
+   "fp": "48-40|23218|40-27"
   }
  ]
 }
