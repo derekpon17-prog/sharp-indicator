@@ -1,6 +1,6 @@
 {
  "date": "2026-11-23",
- "scannedAt": "2026-11-23T16:11:21.268Z",
+ "scannedAt": "2026-11-23T18:18:23.606Z",
  "sports": {
   "NFL": [
    {
@@ -90,6 +90,27 @@
     ]
    },
    {
+    "id": "cbff8c",
+    "gap": 6.1,
+    "overall": "57-53",
+    "sport": "22-16",
+    "returnPct": 11.7,
+    "last10": "4-6",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Thunder at Pacers",
+      "market": "SPREAD",
+      "pick": "Thunder -4.5",
+      "line": -4.5,
+      "price": "-108",
+      "dollars": 600,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.2
+     }
+    ]
+   },
+   {
     "id": "51176e",
     "gap": 1.8,
     "overall": "248-208",
@@ -130,6 +151,16 @@
     "bettingBig": true,
     "tonight": [
      {
+      "matchup": "Trail Blazers at 76ers",
+      "market": "ML",
+      "pick": "76ers",
+      "line": null,
+      "price": "-123",
+      "dollars": 864,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.1
+     },
+     {
       "matchup": "Bucks at Raptors",
       "market": "ML",
       "pick": "Raptors",
@@ -145,8 +176,8 @@
       "pick": "Grizzlies",
       "line": null,
       "price": "-138",
-      "dollars": 6729,
-      "vsUsual": 2.5,
+      "dollars": 7027,
+      "vsUsual": 2.6,
       "vsUsualAll": 0.8
      }
     ]
@@ -168,27 +199,6 @@
       "price": "-426",
       "dollars": 601,
       "vsUsual": 3,
-      "vsUsualAll": 0.2
-     }
-    ]
-   },
-   {
-    "id": "f9bdb3",
-    "gap": -2.8,
-    "overall": "35-20",
-    "sport": "14-9",
-    "returnPct": 42.8,
-    "last10": "5-5",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Cavaliers at Bulls",
-      "market": "TOTAL",
-      "pick": "Under 239.5",
-      "line": 239.5,
-      "price": "-100",
-      "dollars": 500,
-      "vsUsual": 0.1,
       "vsUsualAll": 0.2
      }
     ]
@@ -302,6 +312,37 @@
   ],
   "CBB": [
    {
+    "id": "ef68ca",
+    "gap": 13.5,
+    "overall": "97-89",
+    "sport": "21-11",
+    "returnPct": 41.7,
+    "last10": "8-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Fairleigh Dickinson Knights at Iona Gaels",
+      "market": "TOTAL",
+      "pick": "Under 138.5",
+      "line": 138.5,
+      "price": "-117",
+      "dollars": 706,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.6
+     },
+     {
+      "matchup": "Long Beach State Beach at Florida International Golden Panthers",
+      "market": "TOTAL",
+      "pick": "Over 159.5",
+      "line": 159.5,
+      "price": "-113",
+      "dollars": 733,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.7
+     }
+    ]
+   },
+   {
     "id": "bc44b0",
     "gap": 12.7,
     "overall": "276-235",
@@ -319,6 +360,27 @@
       "dollars": 2043,
       "vsUsual": 2.7,
       "vsUsualAll": 0.9
+     }
+    ]
+   },
+   {
+    "id": "aaedcd",
+    "gap": 0,
+    "overall": "161-131",
+    "sport": "27-22",
+    "returnPct": 22.8,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
+      "market": "ML",
+      "pick": "Indiana Hoosiers",
+      "line": null,
+      "price": "-3746",
+      "dollars": 2568,
+      "vsUsual": 5,
+      "vsUsualAll": 5.6
      }
     ]
    }
