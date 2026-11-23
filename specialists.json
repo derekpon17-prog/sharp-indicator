@@ -1,6 +1,6 @@
 {
  "date": "2026-11-23",
- "scannedAt": "2026-11-23T20:12:59.945Z",
+ "scannedAt": "2026-11-23T20:49:29.138Z",
  "sports": {
   "NFL": [
    {
@@ -128,6 +128,16 @@
       "dollars": 600,
       "vsUsual": 0.7,
       "vsUsualAll": 0.2
+     },
+     {
+      "matchup": "Nets at Timberwolves",
+      "market": "TOTAL",
+      "pick": "Over 223.5",
+      "line": 223.5,
+      "price": "-100",
+      "dollars": 600,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.2
      }
     ]
    },
@@ -159,6 +169,27 @@
       "dollars": 3000,
       "vsUsual": 1.3,
       "vsUsualAll": 2.6
+     }
+    ]
+   },
+   {
+    "id": "c911a4",
+    "gap": 1.7,
+    "overall": "317-255",
+    "sport": "80-60",
+    "returnPct": 34.2,
+    "last10": "8-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Grizzlies at Hornets",
+      "market": "ML",
+      "pick": "Grizzlies",
+      "line": null,
+      "price": "-138",
+      "dollars": 2932,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.3
      }
     ]
    },
@@ -202,25 +233,27 @@
       "vsUsualAll": 0.8
      }
     ]
-   },
+   }
+  ],
+  "NHL": [
    {
-    "id": "2dc4f6",
-    "gap": -1.9,
-    "overall": "190-140",
-    "sport": "103-82",
-    "returnPct": 15.1,
+    "id": "e51246",
+    "gap": 3.4,
+    "overall": "48-29",
+    "sport": "23-12",
+    "returnPct": 17.7,
     "last10": "6-4",
-    "bettingBig": true,
+    "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Bucks at Raptors",
-      "market": "ML",
-      "pick": "Raptors",
-      "line": null,
-      "price": "-426",
-      "dollars": 601,
-      "vsUsual": 3,
-      "vsUsualAll": 0.2
+      "matchup": "Ducks at Kraken",
+      "market": "TOTAL",
+      "pick": "Over 5.5",
+      "line": 5.5,
+      "price": "-194",
+      "dollars": 990,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.3
      }
     ]
    }

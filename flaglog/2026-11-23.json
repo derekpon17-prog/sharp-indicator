@@ -16,7 +16,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 2043,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 12
   },
   "Grizzlies at Hornets|ML|Grizzlies": {
    "sport": "NBA",
@@ -34,7 +34,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 7027,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Suns at Pelicans|ML|Suns": {
    "sport": "NBA",
@@ -66,7 +66,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Thunder at Pacers|ML|Thunder": {
    "sport": "NBA",
@@ -99,7 +99,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 3866,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Bengals at Commanders|ML|Bengals": {
    "sport": "NFL",
@@ -116,7 +116,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 14880,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 12
   },
   "Cavaliers at Bulls|TOTAL|Over 239.5": {
    "sport": "NBA",
@@ -132,7 +132,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Jazz at Lakers|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -148,7 +148,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -164,7 +164,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -180,7 +180,7 @@
    "maxVsUsual": 5,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Fairleigh Dickinson Knights at Iona Gaels|TOTAL|Under": {
    "sport": "CBB",
@@ -197,7 +197,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 1943,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Packers at Rams|SPREAD|Rams -2.5": {
    "sport": "NFL",
@@ -214,7 +214,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Trail Blazers at 76ers|SPREAD|76ers -2.5": {
    "sport": "NBA",
@@ -230,7 +230,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 1897,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   }
  }
 }
