@@ -1,5 +1,5 @@
 {
- "at": "2026-11-23T20:32:02.164Z",
+ "at": "2026-11-23T21:32:24.405Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -10,14 +10,14 @@
    "side": "Over",
    "market": "TOTAL",
    "cls": "COLD",
-   "startUtc": "2026-11-24T02:40:00.000Z",
+   "startUtc": "2026-11-24T02:50:00.000Z",
    "gameDate": "2026-11-23",
    "conditionId": "0xb30b6beea85c38b72f4e4d10b05a787ff73d95ea9b56cdd05c064620865455c6",
    "outcome": "Over",
    "tokenId": "19497690865591985725743917117534274982003870179580363590924232591398721491226",
    "gradeTitle": "Ducks vs. Kraken: O/U 5.5",
    "gradePrice": 0.66,
-   "onCard": false,
+   "onCard": true,
    "wallet": "0xa39a38fbb98ad026c5a6b126d74d891e1be51246",
    "name": "MrBently",
    "usd": 990,
@@ -25,8 +25,8 @@
    "avgPrice": 0.66,
    "lastBuyUtc": "2026-11-23T20:27:01.000Z",
    "firstBuyUtc": "2026-11-23T20:27:01.000Z",
-   "hoursBeforeStart": 6.2,
-   "gameSource": "espn",
+   "hoursBeforeStart": 6.4,
+   "gameSource": "sharpflow",
    "title": "Ducks vs. Kraken: O/U 5.5",
    "rec": "26-17",
    "roi": -1.8,
@@ -35,13 +35,11 @@
    "twoSided": false,
    "sportCls": "COLD",
    "gateNote": null,
-   "sameAsSF": null,
-   "l10": {
-    "w": 6,
-    "l": 4,
-    "n": 10,
-    "txt": "L10 NHL 6-4"
+   "sameAsSF": {
+    "sfWallet": "A",
+    "sfDollars": 990
    },
+   "l10": null,
    "usualMed": null,
    "usualN": 0,
    "usualScope": null,
@@ -57,12 +55,12 @@
   "mktMin": 10,
   "roiMin": 15
  },
- "sfScannedAt": "2026-11-23T20:12:59.945Z",
+ "sfScannedAt": "2026-11-23T20:49:29.138Z",
  "espnGames": 250,
  "espnErrors": [],
- "espnAdded": 221,
- "games": 238,
+ "espnAdded": 216,
+ "games": 234,
  "walletsChecked": 68,
- "inGameSkipped": 19,
- "offCardMatches": 1
+ "inGameSkipped": 7,
+ "offCardMatches": 0
 }
