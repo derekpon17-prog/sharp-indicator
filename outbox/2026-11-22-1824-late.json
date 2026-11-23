@@ -1,0 +1,38 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 LATE UPDATE \u00b7 Sun Nov 22** \u00b7 1 new play",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "SUN NOV 22 \u00b7 6:11PM",
+  "sources": "Pinnacle ~6:10pm CT - Vegas ~6:11pm CT (CBB, NFL) - SharpFlow 6:05pm CT - Polymarket 6:05pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "Late update: new Pinnacle Strong side with Vegas 80+ on an unstarted game. Pinnacle flipped today, so it is tagged flipped. Tier rules are fixed.",
+  "rows": [
+   {
+    "date": "2026-11-22",
+    "sport": "NCAAB",
+    "game": "UTM@UVU",
+    "start_ct": "7:00pm",
+    "market": "ML",
+    "side": "UTM",
+    "line": null,
+    "price": 233,
+    "bet": "UT Martin ML",
+    "matchup": "NCAAB - UT Martin @ Utah Valley - 7:00pm CT",
+    "first_seen": "18:11",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 100,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS_80",
+     "LATE_FLIP"
+    ],
+    "note": "LATE UPDATE: Pinnacle moved UTM ML from Lean to Strong (flipped today) with Vegas Backed 100 on the same side (VEGAS 80 rule). No SharpFlow ticket or Polymarket wallet on this game. Pinnacle read ~6:10pm CT, Vegas CBB ~6:11pm CT."
+   }
+  ]
+ }
+}
