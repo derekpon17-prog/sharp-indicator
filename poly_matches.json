@@ -1,5 +1,5 @@
 {
- "at": "2026-11-23T04:29:01.529Z",
+ "at": "2026-11-23T04:46:00.045Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -83,62 +83,16 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 3,
-    "l": 7,
+    "w": 4,
+    "l": 6,
     "n": 10,
-    "txt": "L10 NFL 3-7"
+    "txt": "L10 NFL 4-6"
    },
    "usualMed": 3000,
    "usualN": 11,
    "usualScope": "NFL",
    "vsUsual": 1,
    "vsUsualAll": 1,
-   "sizeTier": "NORMAL"
-  },
-  {
-   "sport": "NBA",
-   "matchup": "Celtics at Warriors",
-   "grp": "total",
-   "side": "Over",
-   "market": "TOTAL",
-   "cls": "COLD",
-   "startUtc": "2026-11-23T01:30:00.000Z",
-   "gameDate": "2026-11-22",
-   "conditionId": "0x3f913753c1d61a676b85f615df38c4eaa8a4368e167099336fc9c7d14dbd1d90",
-   "outcome": "Over",
-   "tokenId": "14821680230967436186138060545403270812658878972872247065424161989523243677434",
-   "gradeTitle": "Celtics vs. Warriors: O/U 210.5",
-   "gradePrice": 0.49,
-   "onCard": false,
-   "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
-   "name": "nehcnehc",
-   "usd": 2372,
-   "fills": 1,
-   "avgPrice": 0.49,
-   "lastBuyUtc": "2026-11-22T15:53:02.000Z",
-   "firstBuyUtc": "2026-11-22T15:53:02.000Z",
-   "hoursBeforeStart": 9.6,
-   "gameSource": "espn",
-   "title": "Celtics vs. Warriors: O/U 210.5",
-   "rec": "120-169",
-   "roi": -10.8,
-   "n": 289,
-   "recScope": "NBA TOTAL, last 45 days",
-   "twoSided": false,
-   "sportCls": "COLD",
-   "gateNote": null,
-   "sameAsSF": null,
-   "l10": {
-    "w": 9,
-    "l": 1,
-    "n": 10,
-    "txt": "L10 NBA 9-1"
-   },
-   "usualMed": 2802,
-   "usualN": 147,
-   "usualScope": "NBA",
-   "vsUsual": 0.85,
-   "vsUsualAll": 0.85,
    "sizeTier": "NORMAL"
   },
   {
@@ -180,11 +134,11 @@
     "n": 10,
     "txt": "L10 NHL 5-5"
    },
-   "usualMed": 1536,
-   "usualN": 31,
+   "usualMed": 1468,
+   "usualN": 28,
    "usualScope": "NHL",
-   "vsUsual": 1.51,
-   "vsUsualAll": 1.51,
+   "vsUsual": 1.58,
+   "vsUsualAll": 1.58,
    "sizeTier": "BIG"
   }
  ],
@@ -195,12 +149,12 @@
   "mktMin": 10,
   "roiMin": 15
  },
- "sfScannedAt": "2026-11-23T04:14:10.301Z",
+ "sfScannedAt": "2026-11-23T04:35:16.121Z",
  "espnGames": 222,
  "espnErrors": [],
- "espnAdded": 152,
- "games": 157,
+ "espnAdded": 151,
+ "games": 158,
  "walletsChecked": 138,
- "inGameSkipped": 114,
- "offCardMatches": 2
+ "inGameSkipped": 0,
+ "offCardMatches": 1
 }

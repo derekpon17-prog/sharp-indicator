@@ -766,7 +766,12 @@
    "usualMed": 443,
    "usualScope": "NBA",
    "vsUsual": 2.86,
-   "sizeTier": "BIG"
+   "sizeTier": "BIG",
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NHL|Oilers at Blues|ML|Blues|0xd6966eb1ae7b52320ba7ab1016680198c9e08a49": {
    "sport": "NHL",
@@ -1333,7 +1338,12 @@
    "vsUsual": 0.67,
    "sizeTier": "NORMAL",
    "closePrice": 0.545,
-   "clv": 0.055
+   "clv": 0.055,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NBA|Nuggets at Bulls|TOTAL|Under|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -2602,7 +2612,12 @@
    "vsUsual": 0.59,
    "sizeTier": "NORMAL",
    "closePrice": 0.655,
-   "clv": 0.025
+   "clv": 0.025,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NFL|Jaguars at Giants|SPREAD|Giants|0xe0dbdb7f005f233f4510e4ef7e53a2f76a8df44e": {
    "sport": "NFL",
@@ -3213,7 +3228,12 @@
    "vsUsual": 0.54,
    "sizeTier": "NORMAL",
    "closePrice": 0.345,
-   "clv": -0.015
+   "clv": -0.015,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NHL|Sabres at Lightning|SPREAD|Lightning|0x032eb1bc893940263ad0b01889f262fc232f2a9e": {
    "sport": "NHL",
@@ -3296,7 +3316,12 @@
    "vsUsual": 3.91,
    "sizeTier": "BIG",
    "closePrice": 0.505,
-   "clv": -0.015
+   "clv": -0.015,
+   "result": "L",
+   "u": -1.083,
+   "fadeU": 1.083,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NHL|Oilers at Blues|TOTAL|Over|0xe5f0ae9cc9aef77ae3c2a64c9e69caa3f335dc1d": {
    "sport": "NHL",
@@ -3687,7 +3712,12 @@
    "vsUsual": 0.54,
    "sizeTier": "NORMAL",
    "closePrice": 0.535,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NFL|Vikings at 49ers|ML|49ers|0xcdf674ec47b181f8028f5c70ac4325bd6167d7f7": {
    "sport": "NFL",
@@ -3726,7 +3756,12 @@
    "vsUsual": 10.71,
    "sizeTier": "BIG",
    "closePrice": 0.665,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NFL|Vikings at 49ers|ML|Vikings|0x9f2fe025f84839ca81dd8e0338892605702d2ca8": {
    "sport": "NFL",
@@ -3765,7 +3800,12 @@
    "vsUsual": 12.98,
    "sizeTier": "BIG",
    "closePrice": 0.335,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NFL|Vikings at 49ers|SPREAD|Vikings|0x2b344112f63e69a2e411b0cb7f200cbc0051176e": {
    "sport": "NFL",
@@ -3804,7 +3844,12 @@
    "vsUsual": 1.5,
    "sizeTier": "BIG",
    "closePrice": 0.56,
-   "clv": -0.02
+   "clv": -0.02,
+   "result": "L",
+   "u": -1.381,
+   "fadeU": 1.381,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NHL|Penguins at Stars|ML|Penguins|0x25867077c891354137bbaf7fde12eec6949cc893": {
    "sport": "NHL",
@@ -3931,7 +3976,12 @@
    "vsUsual": 0.56,
    "sizeTier": "NORMAL",
    "closePrice": 0.23,
-   "clv": -0.02
+   "clv": -0.02,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-23T04:46:05.887Z",
+   "gradedBy": "positions"
   },
   "NBA|Pacers at Knicks|ML|Knicks|0xe558bb7b02ea489d772bd34f14cc845e391fdcd2": {
    "sport": "NBA",
