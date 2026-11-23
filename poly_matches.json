@@ -1,5 +1,5 @@
 {
- "at": "2026-11-23T03:32:12.204Z",
+ "at": "2026-11-23T03:45:34.526Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -221,10 +221,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 3,
-    "l": 7,
+    "w": 4,
+    "l": 6,
     "n": 10,
-    "txt": "L10 NFL 3-7"
+    "txt": "L10 NFL 4-6"
    },
    "usualMed": 3100,
    "usualN": 29,
@@ -450,7 +450,7 @@
    "sportCls": "HOT",
    "gateNote": null,
    "sameAsSF": {
-    "sfWallet": "F",
+    "sfWallet": "G",
     "sfDollars": 578
    },
    "l10": {
@@ -608,16 +608,16 @@
  "errors": [],
  "rosterGeneratedAt": "2026-11-23T03:11:18.104Z",
  "hotBar": {
-  "graded": 41,
+  "graded": 42,
   "mktMin": 10,
   "roiMin": 15
  },
- "sfScannedAt": "2026-11-23T03:13:01.099Z",
+ "sfScannedAt": "2026-11-23T03:36:30.824Z",
  "espnGames": 222,
  "espnErrors": [],
- "espnAdded": 155,
- "games": 163,
+ "espnAdded": 154,
+ "games": 162,
  "walletsChecked": 138,
- "inGameSkipped": 377,
+ "inGameSkipped": 404,
  "offCardMatches": 1
 }
