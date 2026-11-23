@@ -1,0 +1,387 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NBA - first game 6:00pm CT** - 6 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:19pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Grizzlies at Hornets",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - GRIZZLIES",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "★ Grizzlies ML -138",
+       "price": "-138",
+       "for": {
+        "team": "GRIZZLIES",
+        "rows": [
+         {
+          "team": "Grizzlies",
+          "wallet": "C",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "58-49",
+          "roi": 6.5,
+          "dollars": 7027,
+          "note": "2.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Grizzlies",
+          "wallet": "A",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "76-57",
+          "roi": 34.7,
+          "dollars": 2937,
+          "note": "0.6x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Grizzlies",
+          "wallet": "B",
+          "market": "SPREAD -2.5 -108",
+          "mk": "SPREAD",
+          "record": "8-8",
+          "roi": 5.3,
+          "dollars": 650,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "GRIZZLIES",
+         "dollars": 10614,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 76-57 (+35% ROI) on GRIZZLIES - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Trail Blazers at 76ers",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - 76ERS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "76ers",
+       "price": null,
+       "for": {
+        "team": "76ERS",
+        "rows": [
+         {
+          "team": "76ers",
+          "wallet": "E",
+          "market": "SPREAD -2.5 -100",
+          "mk": "SPREAD",
+          "record": "4-2",
+          "roi": 44.3,
+          "dollars": 1897,
+          "note": "0.8x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "I",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "11-5",
+          "roi": 5.5,
+          "dollars": 1200,
+          "note": "0.5x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "C",
+          "market": "ML -123",
+          "mk": "ML",
+          "record": "58-49",
+          "roi": 6.5,
+          "dollars": 864,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "76ERS",
+         "dollars": 3961,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ - SITE LOCK: 76ers ML 2u (wallet money behind it) | SITE LOCK: Trail Blazers +2.5 3u (wallet money AGAINST it)"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bucks at Raptors",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "EDGE - RAPTORS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Raptors ML -426",
+       "price": "-426",
+       "for": {
+        "team": "RAPTORS",
+        "rows": [
+         {
+          "team": "Raptors",
+          "wallet": "C",
+          "market": "ML -388",
+          "mk": "ML",
+          "record": "58-49",
+          "roi": 6.5,
+          "dollars": 3866,
+          "note": "1.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Raptors",
+          "wallet": "D",
+          "market": "ML -426",
+          "mk": "ML",
+          "record": "37-22",
+          "roi": 15,
+          "dollars": 601,
+          "note": "3.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "RAPTORS",
+         "dollars": 4467,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 37-22 (+15% ROI) on RAPTORS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Nets at Timberwolves",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 223.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "H",
+          "market": "OVER 223.5 -100",
+          "mk": "TOTAL",
+          "record": "4-4",
+          "roi": 3.1,
+          "dollars": 600,
+          "note": "0.7x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 600,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Cavaliers at Bulls",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 239.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "G",
+          "market": "OVER 239.5 -111",
+          "mk": "TOTAL",
+          "record": "26-19",
+          "roi": 14,
+          "dollars": 3000,
+          "note": "1.3x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 3000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ - SITE LOCK: Under 241.5 2u (wallet money AGAINST it)"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Jazz at Lakers",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 226.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "G",
+          "market": "UNDER 226.5 -115",
+          "mk": "TOTAL",
+          "record": "26-19",
+          "roi": 14,
+          "dollars": 3000,
+          "note": "1.3x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 3000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Nets +11.5 $1.9K (2-2 here, -21% ROI) | Poly calls since Nov 20 at Polymarket prices: HOT 22-25 -1.1u, COLD sides 89-72 (fading -16.5u) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

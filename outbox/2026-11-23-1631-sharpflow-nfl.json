@@ -1,0 +1,222 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NFL - first game 7:15pm CT** - 3 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NFL - sharp wallets",
+   "subtitle": "Wallets with positive NFL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:19pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:15PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bengals at Commanders",
+       "time": "7:15pm CT",
+       "tag": {
+        "t": "EDGE - BENGALS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bengals ML -270",
+       "price": "-270",
+       "for": {
+        "team": "BENGALS",
+        "rows": [
+         {
+          "team": "Bengals",
+          "wallet": "D",
+          "market": "ML -270",
+          "mk": "ML",
+          "record": "11-8",
+          "roi": 26.9,
+          "dollars": 240900,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "C",
+          "market": "ML -266",
+          "mk": "ML",
+          "record": "28-7",
+          "roi": 19,
+          "dollars": 14880,
+          "note": "1.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "E",
+          "market": "ML -257",
+          "mk": "ML",
+          "record": "6-6",
+          "roi": 8.6,
+          "dollars": 1800,
+          "note": "1.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BENGALS",
+         "dollars": 257580,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 11-8 (+27% ROI) on BENGALS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Bengals at Commanders",
+       "time": "7:15pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over 54.5 -100",
+       "price": "-100",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "F",
+          "market": "OVER 54.5 -100",
+          "mk": "TOTAL",
+          "record": "7-5",
+          "roi": 27.2,
+          "dollars": 29750,
+          "note": "1.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "A",
+          "market": "UNDER 52.5 +108",
+          "mk": "TOTAL",
+          "record": "8-5",
+          "roi": -18,
+          "dollars": 792,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL TOTAL · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 29750,
+         "pct": 97,
+         "c": "green"
+        },
+        {
+         "team": "Under",
+         "dollars": 792,
+         "pct": 3,
+         "c": "red"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 7-5 (+27% ROI) on Over vs a cold wallet on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 7:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Packers at Rams",
+       "time": "7:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - RAMS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "★ Rams",
+       "price": null,
+       "for": {
+        "team": "RAMS",
+        "rows": [
+         {
+          "team": "Rams",
+          "wallet": "B",
+          "market": "SPREAD -2.5 -108",
+          "mk": "SPREAD",
+          "record": "5-2",
+          "roi": 56.1,
+          "dollars": 7990,
+          "note": "1.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "RAMS",
+         "dollars": 7990,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Under 52.5 $792 (8-5 here, -18% ROI) | Poly calls since Nov 20 at Polymarket prices: HOT 22-25 -1.1u, COLD sides 89-72 (fading -16.5u) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

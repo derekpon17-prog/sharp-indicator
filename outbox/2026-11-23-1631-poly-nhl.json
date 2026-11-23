@@ -1,0 +1,49 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - NHL - first game 6:00pm CT** - 1 side (0 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "NHL - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in NHL and this bet type (last 45 days, 10+ bets, +15% ROI or better); COLD = losing. Wallet roster 8:39am CT, buys checked 4:31pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 8:50PM CT",
+     "picks": [
+      {
+       "bet": "Over 5.5",
+       "sub": "Ducks at Kraken - 8:50pm CT",
+       "chips": [
+        {
+         "t": "COLD MrBently $990",
+         "c": "red"
+        },
+        {
+         "t": "NHL TOTAL 26-17 (-2%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NHL 6-4",
+         "c": "grey"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $990",
+         "c": "blue"
+        }
+       ],
+       "price": -194,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 22-25 -1.1u, COLD sides 89-72 (fading -16.5u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
