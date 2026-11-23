@@ -1,6 +1,6 @@
 {
  "date": "2026-11-23",
- "scannedAt": "2026-11-23T18:18:23.606Z",
+ "scannedAt": "2026-11-23T19:19:14.361Z",
  "sides": [
   {
    "tail": false,
@@ -86,6 +86,33 @@
   {
    "tail": false,
    "sport": "CBB",
+   "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
+   "market": "ML",
+   "pick": "Indiana Hoosiers",
+   "kickoffEt": null,
+   "dollars": 3195,
+   "oppDollars": 0,
+   "wallets": 2,
+   "maxVsUsual": 5,
+   "price": "-3746",
+   "size": "1.5x and up",
+   "mktRecord": "12-4",
+   "mktRoi": -2.6,
+   "l30Roi": 22.8,
+   "contested": false,
+   "sfPoints": 27,
+   "parts": {
+    "money": 8,
+    "sizing": 12,
+    "quality": 0,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CBB",
    "matchup": "Colorado State Rams at Arizona Wildcats",
    "market": "TOTAL",
    "pick": "Over 158.5",
@@ -113,25 +140,24 @@
   {
    "tail": false,
    "sport": "CBB",
-   "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
-   "market": "ML",
-   "pick": "Indiana Hoosiers",
-   "kickoffEt": null,
-   "dollars": 2568,
+   "matchup": "Fairleigh Dickinson Knights at Iona Gaels",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Mon, Nov 23, 7:00 PM",
+   "dollars": 1943,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 5,
-   "price": "-3746",
+   "maxVsUsual": 1.6,
    "size": "1.5x and up",
-   "mktRecord": "12-4",
-   "mktRoi": -2.6,
-   "l30Roi": 22.8,
+   "mktRecord": "19-10",
+   "mktRoi": 39.9,
+   "l30Roi": 41.7,
    "contested": false,
-   "sfPoints": 23,
+   "sfPoints": 20,
    "parts": {
-    "money": 8,
-    "sizing": 12,
-    "quality": 0,
+    "money": 4,
+    "sizing": 7,
+    "quality": 6,
     "pooled": 0,
     "unopposed": 3,
     "contested": 0
@@ -160,6 +186,33 @@
     "sizing": 4,
     "quality": 0,
     "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "NHL",
+   "matchup": "Maple Leafs at Islanders",
+   "market": "ML",
+   "pick": "Islanders",
+   "kickoffEt": "Mon, Nov 23, 7:40 PM",
+   "dollars": 10998,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.6,
+   "price": "-150",
+   "size": "0.5x",
+   "mktRecord": "15-9",
+   "mktRoi": 20.2,
+   "l30Roi": 23,
+   "contested": false,
+   "sfPoints": 15,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
     "unopposed": 3,
     "contested": 0
    }
@@ -247,6 +300,33 @@
   },
   {
    "tail": false,
+   "sport": "NHL",
+   "matchup": "Blue Jackets at Devils",
+   "market": "ML",
+   "pick": "Blue Jackets",
+   "kickoffEt": "Mon, Nov 23, 7:10 PM",
+   "dollars": 3556,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 0.2,
+   "price": "+178",
+   "size": "under 0.5x",
+   "mktRecord": "15-9",
+   "mktRoi": 20.2,
+   "l30Roi": 23,
+   "contested": false,
+   "sfPoints": 11,
+   "parts": {
+    "money": 8,
+    "sizing": 0,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "CFB",
    "matchup": "Miami (OH) at Western Michigan",
    "market": "ML",
@@ -316,6 +396,21 @@
    ],
    "bestPrice": "-104",
    "maxVsUsual": 2.7
+  },
+  {
+   "matchup": "Fairleigh Dickinson Knights at Iona Gaels",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Mon, Nov 23, 7:00 PM",
+   "sport": "CBB",
+   "type": "STRONG_UNOPPOSED",
+   "strongDollars": 1943,
+   "oppDollars": 0,
+   "oppWeakDollars": 0,
+   "fp": [
+    "21-11|8537|19-10"
+   ],
+   "maxVsUsual": 1.6
   }
  ],
  "sizedUp": [
@@ -403,6 +498,22 @@
    "mktRoi": 19,
    "opposed": "unopposed",
    "fp": "44-14|95453|28-7"
+  },
+  {
+   "matchup": "Fairleigh Dickinson Knights at Iona Gaels",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Mon, Nov 23, 7:00 PM",
+   "sport": "CBB",
+   "dollars": 1943,
+   "vsUsual": 1.6,
+   "size": "1.5x and up",
+   "form": "L10 8-2",
+   "l30Roi": 41.7,
+   "mktRecord": "19-10",
+   "mktRoi": 39.9,
+   "opposed": "unopposed",
+   "fp": "21-11|8537|19-10"
   },
   {
    "matchup": "Bucks at Raptors",

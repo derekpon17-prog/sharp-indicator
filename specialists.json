@@ -1,6 +1,6 @@
 {
  "date": "2026-11-23",
- "scannedAt": "2026-11-23T18:18:23.606Z",
+ "scannedAt": "2026-11-23T19:19:14.361Z",
  "sports": {
   "NFL": [
    {
@@ -204,6 +204,39 @@
     ]
    }
   ],
+  "NHL": [
+   {
+    "id": "85aa98",
+    "gap": 17.5,
+    "overall": "95-95",
+    "sport": "27-13",
+    "returnPct": 23,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Blue Jackets at Devils",
+      "market": "ML",
+      "pick": "Blue Jackets",
+      "line": null,
+      "price": "+178",
+      "dollars": 3556,
+      "vsUsual": 0.2,
+      "vsUsualAll": 2.1
+     },
+     {
+      "matchup": "Maple Leafs at Islanders",
+      "market": "ML",
+      "pick": "Islanders",
+      "line": null,
+      "price": "-150",
+      "dollars": 10998,
+      "vsUsual": 0.6,
+      "vsUsualAll": 6.5
+     }
+    ]
+   }
+  ],
   "CFB": [
    {
     "id": "d3948b",
@@ -312,33 +345,44 @@
   ],
   "CBB": [
    {
+    "id": "9bc9a1",
+    "gap": 31.9,
+    "overall": "25-20",
+    "sport": "14-2",
+    "returnPct": 9.6,
+    "last10": "9-1",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
+      "market": "ML",
+      "pick": "Indiana Hoosiers",
+      "line": null,
+      "price": "-3025",
+      "dollars": 627,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.6
+     }
+    ]
+   },
+   {
     "id": "ef68ca",
     "gap": 13.5,
     "overall": "97-89",
     "sport": "21-11",
     "returnPct": 41.7,
     "last10": "8-2",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Fairleigh Dickinson Knights at Iona Gaels",
       "market": "TOTAL",
-      "pick": "Under 138.5",
-      "line": 138.5,
-      "price": "-117",
-      "dollars": 706,
-      "vsUsual": 1.1,
-      "vsUsualAll": 0.6
-     },
-     {
-      "matchup": "Long Beach State Beach at Florida International Golden Panthers",
-      "market": "TOTAL",
-      "pick": "Over 159.5",
-      "line": 159.5,
-      "price": "-113",
-      "dollars": 733,
-      "vsUsual": 1.1,
-      "vsUsualAll": 0.7
+      "pick": "Under",
+      "line": null,
+      "price": null,
+      "dollars": 1943,
+      "vsUsual": 1.6,
+      "vsUsualAll": 0.9
      }
     ]
    },
@@ -360,6 +404,16 @@
       "dollars": 2043,
       "vsUsual": 2.7,
       "vsUsualAll": 0.9
+     },
+     {
+      "matchup": "Illinois State Redbirds at Santa Clara Broncos",
+      "market": "SPREAD",
+      "pick": "Santa Clara Broncos +2.5",
+      "line": 2.5,
+      "price": "-112",
+      "dollars": 786,
+      "vsUsual": 1,
+      "vsUsualAll": 0.3
      }
     ]
    },

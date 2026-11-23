@@ -16,7 +16,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 2043,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Grizzlies at Hornets|ML|Grizzlies": {
    "sport": "NBA",
@@ -34,7 +34,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 7027,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Suns at Pelicans|ML|Suns": {
    "sport": "NBA",
@@ -66,7 +66,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Thunder at Pacers|ML|Thunder": {
    "sport": "NBA",
@@ -99,7 +99,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 3866,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Bengals at Commanders|ML|Bengals": {
    "sport": "NFL",
@@ -116,7 +116,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 14880,
    "opposedSeen": false,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Cavaliers at Bulls|TOTAL|Over 239.5": {
    "sport": "NBA",
@@ -132,7 +132,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Jazz at Lakers|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -148,7 +148,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -164,7 +164,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -180,7 +180,24 @@
    "maxVsUsual": 5,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
+  },
+  "Fairleigh Dickinson Knights at Iona Gaels|TOTAL|Under": {
+   "sport": "CBB",
+   "matchup": "Fairleigh Dickinson Knights at Iona Gaels",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Mon, Nov 23, 7:00 PM",
+   "firstSeenAt": "2026-11-23T19:33:17.869Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.6,
+   "maxDollars": 1943,
+   "opposedSeen": false,
+   "snapshots": 2
   }
  }
 }
