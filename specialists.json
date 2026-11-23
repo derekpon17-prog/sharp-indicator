@@ -2,56 +2,119 @@
  "date": "2026-11-22",
  "scannedAt": "2026-11-23T01:17:14.274Z",
  "sports": {
-  "CFB": [
+  "NFL": [
    {
-    "id": "aaedcd",
-    "gap": 7.4,
-    "overall": "157-129",
-    "sport": "33-20",
-    "returnPct": 25.7,
-    "last10": "6-4",
+    "id": "5fcee5",
+    "gap": 12.5,
+    "overall": "257-134",
+    "sport": "43-12",
+    "returnPct": 28.1,
+    "last10": "8-2",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Miami (OH) at Western Michigan",
-      "market": "SPREAD",
-      "pick": "Western Michigan +8.5",
-      "line": 8.5,
-      "price": "-127",
-      "dollars": 735,
-      "vsUsual": 2.9,
-      "vsUsualAll": 1.6
+      "matchup": "Vikings at 49ers",
+      "market": "ML",
+      "pick": "49ers",
+      "line": null,
+      "price": "-156",
+      "dollars": 2380,
+      "vsUsual": 0.3,
+      "vsUsualAll": 2.4
      },
      {
-      "matchup": "Texas at Texas A&M",
+      "matchup": "Bengals at Commanders",
       "market": "ML",
-      "pick": "Texas",
+      "pick": "Bengals",
       "line": null,
-      "price": "-268",
-      "dollars": 687,
-      "vsUsual": 2.7,
-      "vsUsualAll": 1.5
+      "price": "-266",
+      "dollars": 14880,
+      "vsUsual": 1.9,
+      "vsUsualAll": 14.9
      }
     ]
    },
    {
-    "id": "487b8b",
-    "gap": 3,
-    "overall": "528-441",
-    "sport": "77-57",
+    "id": "06c80c",
+    "gap": 12.3,
+    "overall": "158-169",
+    "sport": "57-37",
+    "returnPct": 21.9,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Vikings at 49ers",
+      "market": "ML",
+      "pick": "49ers",
+      "line": null,
+      "price": "-170",
+      "dollars": 40277,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.6
+     }
+    ]
+   },
+   {
+    "id": "bc44b0",
+    "gap": 11.9,
+    "overall": "272-234",
+    "sport": "21-11",
+    "returnPct": 19.3,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Bengals at Commanders",
+      "market": "TOTAL",
+      "pick": "Under 52.5",
+      "line": 52.5,
+      "price": "+108",
+      "dollars": 792,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "918f62",
+    "gap": 10.4,
+    "overall": "18-14",
+    "sport": "18-9",
+    "returnPct": 29.7,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Vikings at 49ers",
+      "market": "ML",
+      "pick": "49ers",
+      "line": null,
+      "price": "-178",
+      "dollars": 1000,
+      "vsUsual": 0.7,
+      "vsUsualAll": 1.3
+     }
+    ]
+   },
+   {
+    "id": "7d395d",
+    "gap": 3.2,
+    "overall": "279-245",
+    "sport": "35-27",
     "returnPct": 4.2,
-    "last10": "6-4",
+    "last10": "3-7",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Texas at Texas A&M",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-238",
-      "dollars": 11663,
-      "vsUsual": 19.4,
-      "vsUsualAll": 25.4
+      "matchup": "Vikings at 49ers",
+      "market": "TOTAL",
+      "pick": "Over 46.5",
+      "line": 46.5,
+      "price": "+122",
+      "dollars": 3015,
+      "vsUsual": 1.5,
+      "vsUsualAll": 4.9
      }
     ]
    }
@@ -213,123 +276,6 @@
     ]
    }
   ],
-  "NFL": [
-   {
-    "id": "5fcee5",
-    "gap": 12.5,
-    "overall": "257-134",
-    "sport": "43-12",
-    "returnPct": 28.1,
-    "last10": "8-2",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Vikings at 49ers",
-      "market": "ML",
-      "pick": "49ers",
-      "line": null,
-      "price": "-156",
-      "dollars": 2380,
-      "vsUsual": 0.3,
-      "vsUsualAll": 2.4
-     },
-     {
-      "matchup": "Bengals at Commanders",
-      "market": "ML",
-      "pick": "Bengals",
-      "line": null,
-      "price": "-266",
-      "dollars": 14880,
-      "vsUsual": 1.9,
-      "vsUsualAll": 14.9
-     }
-    ]
-   },
-   {
-    "id": "06c80c",
-    "gap": 12.3,
-    "overall": "158-169",
-    "sport": "57-37",
-    "returnPct": 21.9,
-    "last10": "5-5",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Vikings at 49ers",
-      "market": "ML",
-      "pick": "49ers",
-      "line": null,
-      "price": "-170",
-      "dollars": 40277,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.6
-     }
-    ]
-   },
-   {
-    "id": "bc44b0",
-    "gap": 11.9,
-    "overall": "272-234",
-    "sport": "21-11",
-    "returnPct": 19.3,
-    "last10": "5-5",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Bengals at Commanders",
-      "market": "TOTAL",
-      "pick": "Under 52.5",
-      "line": 52.5,
-      "price": "+108",
-      "dollars": 792,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.3
-     }
-    ]
-   },
-   {
-    "id": "918f62",
-    "gap": 10.4,
-    "overall": "18-14",
-    "sport": "18-9",
-    "returnPct": 29.7,
-    "last10": "5-5",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Vikings at 49ers",
-      "market": "ML",
-      "pick": "49ers",
-      "line": null,
-      "price": "-178",
-      "dollars": 1000,
-      "vsUsual": 0.7,
-      "vsUsualAll": 1.3
-     }
-    ]
-   },
-   {
-    "id": "7d395d",
-    "gap": 3.2,
-    "overall": "279-245",
-    "sport": "35-27",
-    "returnPct": 4.2,
-    "last10": "3-7",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Vikings at 49ers",
-      "market": "TOTAL",
-      "pick": "Over 46.5",
-      "line": 46.5,
-      "price": "+122",
-      "dollars": 3015,
-      "vsUsual": 1.5,
-      "vsUsualAll": 4.9
-     }
-    ]
-   }
-  ],
   "NHL": [
    {
     "id": "8b0e4c",
@@ -391,6 +337,60 @@
       "dollars": 1002,
       "vsUsual": 0.6,
       "vsUsualAll": 0.3
+     }
+    ]
+   }
+  ],
+  "CFB": [
+   {
+    "id": "aaedcd",
+    "gap": 7.4,
+    "overall": "157-129",
+    "sport": "33-20",
+    "returnPct": 25.7,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Miami (OH) at Western Michigan",
+      "market": "SPREAD",
+      "pick": "Western Michigan +8.5",
+      "line": 8.5,
+      "price": "-127",
+      "dollars": 735,
+      "vsUsual": 2.9,
+      "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-268",
+      "dollars": 687,
+      "vsUsual": 2.7,
+      "vsUsualAll": 1.5
+     }
+    ]
+   },
+   {
+    "id": "487b8b",
+    "gap": 3,
+    "overall": "528-441",
+    "sport": "77-57",
+    "returnPct": 4.2,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-238",
+      "dollars": 11663,
+      "vsUsual": 19.4,
+      "vsUsualAll": 25.4
      }
     ]
    }
