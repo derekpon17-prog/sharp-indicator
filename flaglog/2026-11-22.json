@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 34
+   "snapshots": 35
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -425,7 +425,7 @@
    "maxVsUsual": 3.3,
    "maxDollars": 14880,
    "opposedSeen": false,
-   "snapshots": 56
+   "snapshots": 58
   },
   "Ravens at Panthers|ML|Panthers": {
    "sport": "NFL",
@@ -476,7 +476,7 @@
    "maxVsUsual": 1,
    "maxDollars": 3380,
    "opposedSeen": true,
-   "snapshots": 19
+   "snapshots": 20
   },
   "Saints at Bears|SPREAD|Saints": {
    "sport": "NFL",
@@ -850,7 +850,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Ravens at Panthers|SPREAD|Panthers": {
    "sport": "NFL",
@@ -948,7 +948,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 1500,
    "opposedSeen": false,
-   "snapshots": 13
+   "snapshots": 14
   },
   "Raiders at Broncos|SPREAD|Broncos": {
    "sport": "NFL",
@@ -1097,12 +1097,13 @@
    "firstSeenAt": "2026-11-22T23:45:31.352Z",
    "firstPrice": "-355",
    "tags": [
-    "SIZED_2X"
+    "SIZED_2X",
+    "SIZED_UP"
    ],
    "maxVsUsual": 5.2,
    "maxDollars": 32996,
    "opposedSeen": false,
-   "snapshots": 18
+   "snapshots": 20
   },
   "Vikings at 49ers|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -1168,7 +1169,7 @@
    "maxVsUsual": 4.6,
    "maxDollars": 28884,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Mavericks at Jazz|ML|Mavericks": {
    "sport": "NBA",
@@ -1204,7 +1205,7 @@
    "maxVsUsual": 2.8,
    "maxDollars": 49596,
    "opposedSeen": true,
-   "snapshots": 15
+   "snapshots": 18
   },
   "Mavericks at Jazz|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -1255,7 +1256,7 @@
    "maxVsUsual": 1,
    "maxDollars": 3527,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Celtics at Warriors|TOTAL|Under": {
    "sport": "NBA",
