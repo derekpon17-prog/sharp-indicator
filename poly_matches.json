@@ -1,5 +1,5 @@
 {
- "at": "2026-11-23T03:45:34.526Z",
+ "at": "2026-11-23T04:07:17.543Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -454,10 +454,10 @@
     "sfDollars": 578
    },
    "l10": {
-    "w": 4,
-    "l": 6,
+    "w": 2,
+    "l": 8,
     "n": 10,
-    "txt": "L10 NBA 4-6"
+    "txt": "L10 NBA 2-8"
    },
    "usualMed": 146,
    "usualN": 104,
@@ -500,10 +500,10 @@
    "gateNote": "HOT overall but cold in ML (17-17, -6.1% ROI)",
    "sameAsSF": null,
    "l10": {
-    "w": 6,
-    "l": 4,
+    "w": 7,
+    "l": 3,
     "n": 10,
-    "txt": "L10 NBA 6-4"
+    "txt": "L10 NBA 7-3"
    },
    "usualMed": 1844,
    "usualN": 49,
@@ -546,10 +546,10 @@
    "gateNote": null,
    "sameAsSF": null,
    "l10": {
-    "w": 5,
-    "l": 5,
+    "w": 9,
+    "l": 1,
     "n": 10,
-    "txt": "L10 NBA 5-5"
+    "txt": "L10 NBA 9-1"
    },
    "usualMed": 2883,
    "usualN": 281,
@@ -615,9 +615,9 @@
  "sfScannedAt": "2026-11-23T03:36:30.824Z",
  "espnGames": 222,
  "espnErrors": [],
- "espnAdded": 154,
- "games": 162,
+ "espnAdded": 152,
+ "games": 160,
  "walletsChecked": 138,
- "inGameSkipped": 404,
+ "inGameSkipped": 427,
  "offCardMatches": 1
 }

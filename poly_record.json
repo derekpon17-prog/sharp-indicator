@@ -1,7 +1,7 @@
 {
- "updated": "2026-11-23T03:45:45.881Z",
+ "updated": "2026-11-23T04:07:25.533Z",
  "since": "2026-11-20",
- "pending": 18,
+ "pending": 17,
  "na": 0,
  "note": "CLV = last Polymarket price before the start minus their first-sighting price (probability points). Graded at the wallet's own Polymarket fill price (first sighting), RUNBOOK section 14 staking. COLD = the cold wallet's own side; fadeU = taking the other side at 1-p, no vig.",
  "buckets": {
@@ -198,10 +198,10 @@
   "HOT": {
    "all": {
     "w": 20,
-    "l": 22,
-    "n": 42,
-    "u": 0.19,
-    "fadeU": -0.19,
+    "l": 23,
+    "n": 43,
+    "u": -1.03,
+    "fadeU": 1.03,
     "clvN": 37,
     "clvAvg": -0.0068,
     "clvPos": 15
@@ -218,10 +218,10 @@
    },
    "offCard": {
     "w": 6,
-    "l": 12,
-    "n": 18,
-    "u": -5.72,
-    "fadeU": 5.72,
+    "l": 13,
+    "n": 19,
+    "u": -6.94,
+    "fadeU": 6.94,
     "clvN": 17,
     "clvAvg": -0.0078,
     "clvPos": 7
@@ -229,10 +229,10 @@
    "bySport": {
     "NBA": {
      "w": 8,
-     "l": 8,
-     "n": 16,
-     "u": 1.71,
-     "fadeU": -1.71,
+     "l": 9,
+     "n": 17,
+     "u": 0.49,
+     "fadeU": -0.49,
      "clvN": 12,
      "clvAvg": -0.0035,
      "clvPos": 4
@@ -291,10 +291,10 @@
     },
     "SPREAD": {
      "w": 3,
-     "l": 9,
-     "n": 12,
-     "u": -5.93,
-     "fadeU": 5.93,
+     "l": 10,
+     "n": 13,
+     "u": -7.15,
+     "fadeU": 7.15,
      "clvN": 11,
      "clvAvg": -0.0107,
      "clvPos": 3
@@ -323,10 +323,10 @@
     },
     "over 6h before": {
      "w": 3,
-     "l": 5,
-     "n": 8,
-     "u": -2.22,
-     "fadeU": 2.22,
+     "l": 6,
+     "n": 9,
+     "u": -3.44,
+     "fadeU": 3.44,
      "clvN": 7,
      "clvAvg": -0.032,
      "clvPos": 3
@@ -355,10 +355,10 @@
     },
     "BIG (1.5x+ usual)": {
      "w": 7,
-     "l": 9,
-     "n": 16,
-     "u": 1.85,
-     "fadeU": -1.85,
+     "l": 10,
+     "n": 17,
+     "u": 0.63,
+     "fadeU": -0.63,
      "clvN": 16,
      "clvAvg": 0.0025,
      "clvPos": 11
