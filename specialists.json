@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T02:49:20.761Z",
+ "scannedAt": "2026-11-23T03:13:01.099Z",
  "sports": {
   "NFL": [
    {
@@ -168,6 +168,16 @@
       "dollars": 630,
       "vsUsual": 1.9,
       "vsUsualAll": 1.3
+     },
+     {
+      "matchup": "Bucks at Raptors",
+      "market": "ML",
+      "pick": "Raptors",
+      "line": null,
+      "price": "-400",
+      "dollars": 1220,
+      "vsUsual": 3.7,
+      "vsUsualAll": 2.4
      }
     ]
    },
@@ -241,29 +251,6 @@
       "dollars": 3527,
       "vsUsual": 0.2,
       "vsUsualAll": 0.5
-     }
-    ]
-   }
-  ],
-  "NHL": [
-   {
-    "id": "8b0e4c",
-    "gap": 9.1,
-    "overall": "67-52",
-    "sport": "34-18",
-    "returnPct": 11.3,
-    "last10": "5-5",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Oilers at Blues",
-      "market": "ML",
-      "pick": "Oilers",
-      "line": null,
-      "price": "+108",
-      "dollars": 1500,
-      "vsUsual": 1.6,
-      "vsUsualAll": 0.7
      }
     ]
    }

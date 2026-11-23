@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T02:49:20.761Z",
+ "scannedAt": "2026-11-23T03:13:01.099Z",
  "sides": [
   {
    "tail": true,
@@ -112,6 +112,33 @@
   },
   {
    "tail": false,
+   "sport": "NBA",
+   "matchup": "Bucks at Raptors",
+   "market": "ML",
+   "pick": "Raptors",
+   "kickoffEt": "Mon, Nov 23, 7:40 PM",
+   "dollars": 4488,
+   "oppDollars": 0,
+   "wallets": 3,
+   "maxVsUsual": 3.7,
+   "price": "-383",
+   "size": "0.5x",
+   "mktRecord": "57-47",
+   "mktRoi": 7.8,
+   "l30Roi": 16.6,
+   "contested": false,
+   "sfPoints": 33,
+   "parts": {
+    "money": 8,
+    "sizing": 12,
+    "quality": 6,
+    "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
    "sport": "NFL",
    "matchup": "Bengals at Commanders",
    "market": "ML",
@@ -166,33 +193,6 @@
   },
   {
    "tail": false,
-   "sport": "NHL",
-   "matchup": "Oilers at Blues",
-   "market": "ML",
-   "pick": "Oilers",
-   "kickoffEt": "Sun, Nov 22, 7:08 PM",
-   "dollars": 1500,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1.6,
-   "price": "+108",
-   "size": "1.5x and up",
-   "mktRecord": "20-11",
-   "mktRoi": 13.6,
-   "l30Roi": 11.4,
-   "contested": false,
-   "sfPoints": 14,
-   "parts": {
-    "money": 4,
-    "sizing": 7,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "NBA",
    "matchup": "Celtics at Warriors",
    "market": "SPREAD",
@@ -215,33 +215,6 @@
     "pooled": 4,
     "unopposed": 0,
     "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Bucks at Raptors",
-   "market": "ML",
-   "pick": "Raptors",
-   "kickoffEt": "Mon, Nov 23, 7:40 PM",
-   "dollars": 2667,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 1,
-   "price": "-383",
-   "size": "0.5x",
-   "mktRecord": "57-47",
-   "mktRoi": 7.8,
-   "l30Roi": 16.6,
-   "contested": false,
-   "sfPoints": 11,
-   "parts": {
-    "money": 8,
-    "sizing": 0,
-    "quality": 0,
-    "pooled": 0,
-    "unopposed": 3,
-    "contested": 0
    }
   }
  ],
@@ -348,6 +321,23 @@
    "fp": "5-1|18514|9-6"
   },
   {
+   "matchup": "Bucks at Raptors",
+   "market": "ML",
+   "pick": "Raptors",
+   "kickoffEt": "Mon, Nov 23, 7:40 PM",
+   "sport": "NBA",
+   "dollars": 1220,
+   "price": "-400",
+   "vsUsual": 3.7,
+   "size": "1.5x and up",
+   "form": "L10 6-4",
+   "l30Roi": 17.5,
+   "mktRecord": "12-4",
+   "mktRoi": 31.6,
+   "opposed": "unopposed",
+   "fp": "42-32|4311|12-4"
+  },
+  {
    "matchup": "Pacers at Knicks",
    "market": "SPREAD",
    "pick": "Pacers +6.5",
@@ -414,23 +404,6 @@
    "mktRoi": 22.6,
    "opposed": "contested",
    "fp": "46-39|20187|39-26"
-  },
-  {
-   "matchup": "Oilers at Blues",
-   "market": "ML",
-   "pick": "Oilers",
-   "kickoffEt": "Sun, Nov 22, 7:08 PM",
-   "sport": "NHL",
-   "dollars": 1500,
-   "price": "+108",
-   "vsUsual": 1.6,
-   "size": "1.5x and up",
-   "form": "L10 5-5",
-   "l30Roi": 11.4,
-   "mktRecord": "20-11",
-   "mktRoi": 13.6,
-   "opposed": "unopposed",
-   "fp": "22-12|4315|20-11"
   }
  ]
 }
