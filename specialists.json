@@ -1,8 +1,29 @@
 {
  "date": "2026-11-23",
- "scannedAt": "2026-11-23T20:49:29.138Z",
+ "scannedAt": "2026-11-23T22:19:20.932Z",
  "sports": {
   "NFL": [
+   {
+    "id": "45fc26",
+    "gap": 13.7,
+    "overall": "152-198",
+    "sport": "12-9",
+    "returnPct": 24.2,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Bengals at Commanders",
+      "market": "ML",
+      "pick": "Bengals",
+      "line": null,
+      "price": "-270",
+      "dollars": 240900,
+      "vsUsual": 1.4,
+      "vsUsualAll": 3.3
+     }
+    ]
+   },
    {
     "id": "bc44b0",
     "gap": 10.7,
@@ -67,23 +88,23 @@
     ]
    },
    {
-    "id": "858392",
-    "gap": 2.8,
-    "overall": "69-39",
-    "sport": "8-4",
-    "returnPct": 40.8,
+    "id": "aa9fb4",
+    "gap": 3.9,
+    "overall": "37-31",
+    "sport": "7-5",
+    "returnPct": 27.2,
     "last10": "6-4",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Packers at Rams",
-      "market": "SPREAD",
-      "pick": "Rams -2.5",
-      "line": -2.5,
-      "price": "-108",
-      "dollars": 7990,
+      "matchup": "Bengals at Commanders",
+      "market": "TOTAL",
+      "pick": "Over 54.5",
+      "line": 54.5,
+      "price": "-100",
+      "dollars": 29750,
       "vsUsual": 1.9,
-      "vsUsualAll": 2.6
+      "vsUsualAll": 4.9
      }
     ]
    }
@@ -142,6 +163,37 @@
     ]
    },
    {
+    "id": "aa738b",
+    "gap": 2.5,
+    "overall": "174-150",
+    "sport": "27-21",
+    "returnPct": 7.3,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Spurs at Kings",
+      "market": "SPREAD",
+      "pick": "Kings +12.5",
+      "line": 12.5,
+      "price": "-104",
+      "dollars": 555,
+      "vsUsual": 1,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Grizzlies at Hornets",
+      "market": "SPREAD",
+      "pick": "Grizzlies -2.5",
+      "line": -2.5,
+      "price": "-108",
+      "dollars": 650,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
     "id": "51176e",
     "gap": 1.8,
     "overall": "248-208",
@@ -187,50 +239,9 @@
       "pick": "Grizzlies",
       "line": null,
       "price": "-138",
-      "dollars": 2932,
+      "dollars": 2937,
       "vsUsual": 0.6,
       "vsUsualAll": 0.3
-     }
-    ]
-   },
-   {
-    "id": "955c26",
-    "gap": 0.1,
-    "overall": "215-168",
-    "sport": "122-95",
-    "returnPct": 13.8,
-    "last10": "5-5",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Trail Blazers at 76ers",
-      "market": "ML",
-      "pick": "76ers",
-      "line": null,
-      "price": "-123",
-      "dollars": 864,
-      "vsUsual": 0.3,
-      "vsUsualAll": 0.1
-     },
-     {
-      "matchup": "Bucks at Raptors",
-      "market": "ML",
-      "pick": "Raptors",
-      "line": null,
-      "price": "-388",
-      "dollars": 3866,
-      "vsUsual": 1.4,
-      "vsUsualAll": 0.5
-     },
-     {
-      "matchup": "Grizzlies at Hornets",
-      "market": "ML",
-      "pick": "Grizzlies",
-      "line": null,
-      "price": "-138",
-      "dollars": 7027,
-      "vsUsual": 2.6,
-      "vsUsualAll": 0.8
      }
     ]
    }
@@ -408,12 +419,12 @@
      {
       "matchup": "Fairleigh Dickinson Knights at Iona Gaels",
       "market": "TOTAL",
-      "pick": "Under",
-      "line": null,
-      "price": null,
-      "dollars": 1943,
-      "vsUsual": 1.6,
-      "vsUsualAll": 0.9
+      "pick": "Under 137.5",
+      "line": 137.5,
+      "price": "-111",
+      "dollars": 931,
+      "vsUsual": 1.5,
+      "vsUsualAll": 0.8
      }
     ]
    },
