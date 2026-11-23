@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T00:28:17.655Z",
+ "scannedAt": "2026-11-23T00:52:37.894Z",
  "sports": {
   "NFL": [
    {
@@ -25,27 +25,6 @@
     ]
    },
    {
-    "id": "411018",
-    "gap": 19,
-    "overall": "98-102",
-    "sport": "17-8",
-    "returnPct": 40.2,
-    "last10": "9-1",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "SPREAD",
-      "pick": "Broncos",
-      "line": -10.5,
-      "price": "-117",
-      "dollars": 3240,
-      "vsUsual": 1.6,
-      "vsUsualAll": 3.9
-     }
-    ]
-   },
-   {
     "id": "e47e66",
     "gap": 16.6,
     "overall": "17-20",
@@ -63,16 +42,6 @@
       "dollars": 46961,
       "vsUsual": 3.7,
       "vsUsualAll": 6.6
-     },
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "SPREAD",
-      "pick": "Broncos",
-      "line": -8.5,
-      "price": "-138",
-      "dollars": 2037,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.3
      }
     ]
    },
@@ -135,6 +104,27 @@
       "dollars": 40277,
       "vsUsual": 0.2,
       "vsUsualAll": 0.6
+     }
+    ]
+   },
+   {
+    "id": "bc44b0",
+    "gap": 11.9,
+    "overall": "272-234",
+    "sport": "21-11",
+    "returnPct": 19.3,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Bengals at Commanders",
+      "market": "TOTAL",
+      "pick": "Under 52.5",
+      "line": 52.5,
+      "price": "+108",
+      "dollars": 792,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.3
      }
     ]
    }
@@ -223,6 +213,16 @@
     "bettingBig": true,
     "tonight": [
      {
+      "matchup": "Mavericks at Jazz",
+      "market": "TOTAL",
+      "pick": "Under 226.5",
+      "line": null,
+      "price": null,
+      "dollars": 2156,
+      "vsUsual": 4.8,
+      "vsUsualAll": 3.2
+     },
+     {
       "matchup": "Nuggets at Bulls",
       "market": "ML",
       "pick": "Nuggets",
@@ -233,22 +233,22 @@
       "vsUsualAll": 2.1
      },
      {
-      "matchup": "Mavericks at Jazz",
-      "market": "TOTAL",
-      "pick": "Under 226.5",
-      "line": 226.5,
-      "price": "+104",
-      "dollars": 578,
-      "vsUsual": 1.7,
-      "vsUsualAll": 1.2
-     },
-     {
       "matchup": "Pacers at Knicks",
       "market": "ML",
       "pick": "Knicks",
       "line": null,
       "price": "-270",
       "dollars": 850,
+      "vsUsual": 2.6,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Pacers at Knicks",
+      "market": "SPREAD",
+      "pick": "Pacers +6.5",
+      "line": 6.5,
+      "price": "+104",
+      "dollars": 867,
       "vsUsual": 2.6,
       "vsUsualAll": 1.7
      },
