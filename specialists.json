@@ -1,7 +1,134 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-22T23:47:19.516Z",
+ "scannedAt": "2026-11-23T00:11:10.752Z",
  "sports": {
+  "NFL": [
+   {
+    "id": "c911a4",
+    "gap": 29.1,
+    "overall": "314-252",
+    "sport": "11-2",
+    "returnPct": 10,
+    "last10": "9-1",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Jaguars at Giants",
+      "market": "ML",
+      "pick": "Jaguars",
+      "line": null,
+      "price": "+241",
+      "dollars": 1209,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.1
+     },
+     {
+      "matchup": "Raiders at Broncos",
+      "market": "ML",
+      "pick": "Raiders",
+      "line": null,
+      "price": "+333",
+      "dollars": 998,
+      "vsUsual": 0.5,
+      "vsUsualAll": 0.1
+     }
+    ]
+   },
+   {
+    "id": "b77626",
+    "gap": 26.8,
+    "overall": "86-68",
+    "sport": "19-4",
+    "returnPct": 17.7,
+    "last10": "10-0",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Raiders at Broncos",
+      "market": "SPREAD",
+      "pick": "Raiders +17.5",
+      "line": 17.5,
+      "price": "-257",
+      "dollars": 1000,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "411018",
+    "gap": 19,
+    "overall": "98-102",
+    "sport": "17-8",
+    "returnPct": 40.2,
+    "last10": "9-1",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Raiders at Broncos",
+      "market": "SPREAD",
+      "pick": "Broncos",
+      "line": -10.5,
+      "price": "-117",
+      "dollars": 3240,
+      "vsUsual": 1.6,
+      "vsUsualAll": 3.9
+     }
+    ]
+   },
+   {
+    "id": "e47e66",
+    "gap": 16.6,
+    "overall": "17-20",
+    "sport": "5-3",
+    "returnPct": 17.5,
+    "last10": "5-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Jaguars at Giants",
+      "market": "SPREAD",
+      "pick": "Jaguars +3.5",
+      "line": 3.5,
+      "price": "-488",
+      "dollars": 46961,
+      "vsUsual": 3.7,
+      "vsUsualAll": 6.6
+     },
+     {
+      "matchup": "Raiders at Broncos",
+      "market": "SPREAD",
+      "pick": "Broncos",
+      "line": -8.5,
+      "price": "-138",
+      "dollars": 2037,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.3
+     }
+    ]
+   },
+   {
+    "id": "2f2a9e",
+    "gap": 13.6,
+    "overall": "475-462",
+    "sport": "18-10",
+    "returnPct": 41.8,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Raiders at Broncos",
+      "market": "ML",
+      "pick": "Broncos",
+      "line": null,
+      "price": "-488",
+      "dollars": 1160,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.1
+     }
+    ]
+   }
+  ],
   "NBA": [
    {
     "id": "53f636",
@@ -49,9 +176,9 @@
       "pick": "Under",
       "line": 226.5,
       "price": "-100",
-      "dollars": 1710,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.2
+      "dollars": 3466,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.4
      }
     ]
    },
@@ -169,155 +296,7 @@
     ]
    }
   ],
-  "NFL": [
-   {
-    "id": "c911a4",
-    "gap": 29.1,
-    "overall": "314-252",
-    "sport": "11-2",
-    "returnPct": 10,
-    "last10": "9-1",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Jaguars at Giants",
-      "market": "ML",
-      "pick": "Jaguars",
-      "line": null,
-      "price": "+241",
-      "dollars": 1204,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.1
-     },
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "ML",
-      "pick": "Raiders",
-      "line": null,
-      "price": "+333",
-      "dollars": 998,
-      "vsUsual": 0.5,
-      "vsUsualAll": 0.1
-     }
-    ]
-   },
-   {
-    "id": "b77626",
-    "gap": 26.8,
-    "overall": "86-68",
-    "sport": "19-4",
-    "returnPct": 17.7,
-    "last10": "10-0",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "SPREAD",
-      "pick": "Raiders +17.5",
-      "line": 17.5,
-      "price": "-257",
-      "dollars": 1000,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.3
-     }
-    ]
-   },
-   {
-    "id": "411018",
-    "gap": 19,
-    "overall": "98-102",
-    "sport": "17-8",
-    "returnPct": 40.2,
-    "last10": "9-1",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "SPREAD",
-      "pick": "Broncos",
-      "line": -10.5,
-      "price": "-117",
-      "dollars": 3240,
-      "vsUsual": 1.6,
-      "vsUsualAll": 3.9
-     }
-    ]
-   },
-   {
-    "id": "e47e66",
-    "gap": 16.6,
-    "overall": "17-20",
-    "sport": "5-3",
-    "returnPct": 17.5,
-    "last10": "5-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Jaguars at Giants",
-      "market": "SPREAD",
-      "pick": "Jaguars +3.5",
-      "line": 3.5,
-      "price": "-488",
-      "dollars": 46961,
-      "vsUsual": 3.7,
-      "vsUsualAll": 6.6
-     },
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "SPREAD",
-      "pick": "Broncos",
-      "line": -8.5,
-      "price": "-138",
-      "dollars": 2037,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.3
-     }
-    ]
-   },
-   {
-    "id": "2f2a9e",
-    "gap": 13.6,
-    "overall": "475-462",
-    "sport": "18-10",
-    "returnPct": 41.8,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "ML",
-      "pick": "Broncos",
-      "line": null,
-      "price": "-488",
-      "dollars": 1160,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.1
-     }
-    ]
-   }
-  ],
   "NHL": [
-   {
-    "id": "2f2a9e",
-    "gap": 13.4,
-    "overall": "475-462",
-    "sport": "25-14",
-    "returnPct": 6.4,
-    "last10": "5-5",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Sabres at Lightning",
-      "market": "SPREAD",
-      "pick": "Lightning -1.5",
-      "line": -1.5,
-      "price": "+127",
-      "dollars": 1747,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.2
-     }
-    ]
-   },
    {
     "id": "8b0e4c",
     "gap": 9.1,
@@ -403,16 +382,6 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Texas at Texas A&M",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-268",
-      "dollars": 687,
-      "vsUsual": 2.7,
-      "vsUsualAll": 1.5
-     },
-     {
       "matchup": "Miami (OH) at Western Michigan",
       "market": "SPREAD",
       "pick": "Western Michigan +8.5",
@@ -421,6 +390,16 @@
       "dollars": 735,
       "vsUsual": 2.9,
       "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-268",
+      "dollars": 687,
+      "vsUsual": 2.7,
+      "vsUsualAll": 1.5
      }
     ]
    },
