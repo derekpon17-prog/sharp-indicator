@@ -1,0 +1,465 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 5 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 5:14pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bucks at Raptors",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "EDGE - RAPTORS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Raptors ML -376",
+       "price": "-376",
+       "for": {
+        "team": "RAPTORS",
+        "rows": [
+         {
+          "team": "Raptors",
+          "wallet": "F #0889ba",
+          "wid": "0889ba",
+          "market": "ML -376",
+          "mk": "ML",
+          "record": "14-1",
+          "roi": 59.1,
+          "dollars": 3950,
+          "note": "1.9x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Raptors",
+          "wallet": "C #955c26",
+          "wid": "955c26",
+          "market": "ML -388",
+          "mk": "ML",
+          "record": "58-49",
+          "roi": 6.5,
+          "dollars": 3866,
+          "note": "1.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Raptors",
+          "wallet": "D #2dc4f6",
+          "wid": "2dc4f6",
+          "market": "ML -426",
+          "mk": "ML",
+          "record": "37-22",
+          "roi": 15,
+          "dollars": 601,
+          "note": "3.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "RAPTORS",
+         "dollars": 8417,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 14-1 (+59% ROI) on RAPTORS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $4.5K to $8.4K - kickoff in 66 min"
+      },
+      {
+       "eyebrow": "Thunder at Pacers",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - THUNDER",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Thunder",
+       "price": null,
+       "for": {
+        "team": "THUNDER",
+        "rows": [
+         {
+          "team": "Thunder",
+          "wallet": "K #d3567c",
+          "wid": "d3567c",
+          "market": "SPREAD -5.5 +113",
+          "mk": "SPREAD",
+          "record": "2-2",
+          "roi": 65.1,
+          "dollars": 2962,
+          "note": "1.2x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Thunder",
+          "wallet": "M #cbff8c",
+          "wid": "cbff8c",
+          "market": "SPREAD -4.5 -108",
+          "mk": "SPREAD",
+          "record": "8-7",
+          "roi": 2.4,
+          "dollars": 600,
+          "note": "0.7x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "THUNDER",
+         "dollars": 3562,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $3.6K on Thunder - kickoff in 66 min - SITE LOCK: Pacers +4.5 3u (wallet money AGAINST it)"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Grizzlies at Hornets",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - GRIZZLIES",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Grizzlies ML -138",
+       "price": "-138",
+       "for": {
+        "team": "GRIZZLIES",
+        "rows": [
+         {
+          "team": "Grizzlies",
+          "wallet": "H #ab4b6e",
+          "wid": "ab4b6e",
+          "market": "ML -133",
+          "mk": "ML",
+          "record": "75-57",
+          "roi": 3,
+          "dollars": 9042,
+          "note": "0.1x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Grizzlies",
+          "wallet": "C #955c26",
+          "wid": "955c26",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "58-49",
+          "roi": 6.5,
+          "dollars": 7027,
+          "note": "2.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Grizzlies",
+          "wallet": "A #c911a4",
+          "wid": "c911a4",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "76-57",
+          "roi": 34.7,
+          "dollars": 2937,
+          "note": "0.6x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Grizzlies",
+          "wallet": "B #aa738b",
+          "wid": "aa738b",
+          "market": "SPREAD -2.5 -108",
+          "mk": "SPREAD",
+          "record": "8-8",
+          "roi": 5.3,
+          "dollars": 650,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "GRIZZLIES",
+         "dollars": 19656,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 76-57 (+35% ROI) on GRIZZLIES - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "AGAINST OUR POSTED PLAY: Nets +11 (3:55pm slate) - GREW $10K to $19K - kickoff in 36 min - SITE LOCK: Grizzlies ML 2u (wallet money behind it)"
+      },
+      {
+       "eyebrow": "Trail Blazers at 76ers",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - 76ERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "76ers -2.5 +113",
+       "price": "+113",
+       "for": {
+        "team": "76ERS",
+        "rows": [
+         {
+          "team": "76ers",
+          "wallet": "E #7caac5",
+          "wid": "7caac5",
+          "market": "SPREAD -2.5 +113",
+          "mk": "SPREAD",
+          "record": "15-10",
+          "roi": 23.4,
+          "dollars": 8294,
+          "note": "1.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "L #b70f9a",
+          "wid": "b70f9a",
+          "market": "ML -108",
+          "mk": "ML",
+          "record": "4-4",
+          "roi": 7.2,
+          "dollars": 2080,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "G #ee60d6",
+          "wid": "ee60d6",
+          "market": "SPREAD -2.5 -100",
+          "mk": "SPREAD",
+          "record": "4-2",
+          "roi": 44.3,
+          "dollars": 1897,
+          "note": "0.8x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "N #378b15",
+          "wid": "378b15",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "11-5",
+          "roi": 5.5,
+          "dollars": 1200,
+          "note": "0.5x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "76ERS",
+         "dollars": 14335,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 15-10 (+23% ROI) on 76ERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $1.9K to $10K - kickoff in 36 min - SITE LOCK: Trail Blazers +1 1u (wallet money AGAINST it)"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 7:15PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bengals at Commanders",
+       "time": "7:15pm CT",
+       "tag": {
+        "t": "EDGE - BENGALS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bengals ML -270",
+       "price": "-270",
+       "for": {
+        "team": "BENGALS",
+        "rows": [
+         {
+          "team": "Bengals",
+          "wallet": "D #45fc26",
+          "wid": "45fc26",
+          "market": "ML -270",
+          "mk": "ML",
+          "record": "11-8",
+          "roi": 26.9,
+          "dollars": 240900,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "C #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -266",
+          "mk": "ML",
+          "record": "28-7",
+          "roi": 19,
+          "dollars": 14880,
+          "note": "1.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "G #b77626",
+          "wid": "b77626",
+          "market": "SPREAD +3.5 -567",
+          "mk": "SPREAD",
+          "record": "15-1",
+          "roi": 21.9,
+          "dollars": 2000,
+          "note": "1.5x usual, L10 10-0",
+          "status": {
+           "t": "HOT (last 10: 10-0)",
+           "c": "gold"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "E #d780f4",
+          "wid": "d780f4",
+          "market": "ML -257",
+          "mk": "ML",
+          "record": "6-6",
+          "roi": 8.6,
+          "dollars": 1800,
+          "note": "1.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BENGALS",
+         "dollars": 259580,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 11-8 (+27% ROI) on BENGALS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $2K on Bengals +3.5 - kickoff in 1h 41m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
