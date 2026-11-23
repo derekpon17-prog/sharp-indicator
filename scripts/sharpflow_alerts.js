@@ -37,6 +37,7 @@ if (!latest) { console.log('no latest.json'); process.exit(0); }
 const age = (now - new Date(latest.scannedAt)) / 60000;
 if (!process.env.FAKE_NOW && age > 45) { console.log('snapshot too old', Math.round(age), 'min - skipping'); process.exit(0); }
 const POLY = (readJson(OUT + '/poly_matches.json', {}).matches) || [];   // Nov 22: Poly wallets on the same game ride along on the alert
+const POSTED = readJson(process.env.POSTED_PLAYS || 'posted_plays.json', []);   // Nov 22: today's posted PLAY rows (posted_plays.py)
 const SPEC = (readJson(OUT + '/specialists.json', {}).sports) || {};
 let st = readJson(OUT + '/alerts.json', {});
 if (st.date !== today) st = { date: today, baselined: false, sides: {}, sent: [] };
@@ -113,7 +114,7 @@ for (const s of send) {
   r.for = R.labRows(s.sp, r.for); r.against = R.labRows(s.sp, r.against);
   const pv = R.polyFor(POLY, s.sp, s.matchup, grpOf(s.market), r);
   rows.push({ st: s.st, sp: s.sp, eyebrow: s.matchup, time: ctTime(s.st) + ' CT', tag: r.tag, sources: pv.sources, bet: r.bet, price: r.price,
-    for: pv.for, against: pv.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: (pv.sources.length > 1 ? 'SHARP FLOW + POLYMARKET - ' : '') + growTxt + kickTxt(s.st) + (R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) ? ' - ' + R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) : '') });
+    for: pv.for, against: pv.against, moneyBar: r.moneyBar, confidence: r.confidence, callout: r.callout, footerLabel: (R.postedNote(POSTED, s.sp, s.matchup, s.pick, s.market) ? R.postedNote(POSTED, s.sp, s.matchup, s.pick, s.market) + ' - ' : '') + (pv.sources.length > 1 ? 'SHARP FLOW + POLYMARKET - ' : '') + growTxt + kickTxt(s.st) + (R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) ? ' - ' + R.siteLockTxt(latest.plays, s.sp, s.matchup, grpOf(s.market)) : '') });
 }
 rows.sort((a, b) => b.confidence - a.confidence || a.st - b.st); // Derek, Nov 18: order by confidence, not kickoff time
 const secs = [];

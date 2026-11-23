@@ -222,4 +222,21 @@ function polyFor(poly, sp, matchup, grp, r) {
 
 // Record label under each row's record number (the row's market field now carries the bet line and price).
 const labRows = (sp, v) => v && v.rows ? { ...v, rows: v.rows.map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.mk || x.market} \u00b7 all-time record` })) } : v;
-module.exports = { labRows, polyFor, siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };
+/* Posted-play cross-check (Derek, Nov 22 2026): when new wallet money lands after a card went out, say whether it is WITH or AGAINST a
+   PLAY we already posted for that game. posted = scripts/posted_plays.py output. Team sides only (ML/spread); totals are not matched.
+   Display only - it never changes a tier. */
+function postedNote(posted, sport, matchup, pick, market) {
+  if (!posted || !posted.length || !['ML', 'SPREAD'].includes(market)) return null;
+  const sp = sport === 'CBB' ? 'NCAAB' : sport, ml = String(matchup).toLowerCase();
+  const mine = String(pick).replace(/\s*[+-]\d+(\.\d+)?\s*$/, '').trim().toLowerCase();
+  for (const p of posted) {
+    if (p.sport !== sp || !['ML', 'SPREAD'].includes(p.market)) continue;
+    const pt = String(p.bet).replace(/\s+(ML|[+-]\d+(\.\d+)?)\s*$/, '').trim().toLowerCase();
+    if (!pt || !ml.includes(pt)) continue;
+    const same = pt === mine || mine.includes(pt) || pt.includes(mine);
+    return (same ? 'WITH OUR POSTED PLAY: ' : 'AGAINST OUR POSTED PLAY: ') + p.bet + (p.card ? ' (' + p.card + ' slate)' : '');
+  }
+  return null;
+}
+
+module.exports = { postedNote, labRows, polyFor, siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };
