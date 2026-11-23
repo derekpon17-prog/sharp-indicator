@@ -1,15 +1,15 @@
 {
- "updated": "2026-11-22T23:46:11.886Z",
+ "updated": "2026-11-23T00:06:16.802Z",
  "note": "Site locks are display-only and graded by the site itself. Rules frozen until 100 graded locks.",
  "all": {
-  "w": 10,
+  "w": 11,
   "l": 10,
   "p": 0,
   "open": 29,
-  "units": -7.17,
-  "staked": 43.75,
-  "record": "10-10",
-  "yield": -16.4
+  "units": -4.05,
+  "staked": 45.75,
+  "record": "11-10",
+  "yield": -8.9
  },
  "bySport": {
   "CFB": {
@@ -36,33 +36,33 @@
    "w": 0,
    "l": 0,
    "p": 0,
-   "open": 20,
+   "open": 21,
    "units": 0,
    "staked": 0,
    "record": "0-0",
    "yield": null
   },
   "NFL": {
-   "w": 1,
+   "w": 2,
    "l": 1,
    "p": 0,
-   "open": 2,
-   "units": -0.12,
-   "staked": 6,
-   "record": "1-1",
-   "yield": -2
+   "open": 1,
+   "units": 3,
+   "staked": 8,
+   "record": "2-1",
+   "yield": 37.5
   }
  },
  "byMoney": {
   "with_money": {
-   "w": 2,
+   "w": 3,
    "l": 4,
    "p": 0,
    "open": 20,
-   "units": -7.07,
-   "staked": 16,
-   "record": "2-4",
-   "yield": -44.2
+   "units": -3.95,
+   "staked": 18,
+   "record": "3-4",
+   "yield": -21.9
   },
   "no_money": {
    "w": 8,
@@ -110,7 +110,7 @@
    "w": 0,
    "l": 0,
    "p": 0,
-   "open": 11,
+   "open": 12,
    "units": 0,
    "staked": 0,
    "record": "0-0",
@@ -157,14 +157,14 @@
    "yield": null
   },
   "NFL ML": {
-   "w": 0,
+   "w": 1,
    "l": 0,
    "p": 0,
-   "open": 2,
-   "units": 0,
-   "staked": 0,
-   "record": "0-0",
-   "yield": null
+   "open": 1,
+   "units": 3.12,
+   "staked": 2,
+   "record": "1-0",
+   "yield": 156
   }
  }
 }
