@@ -1,0 +1,96 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 2:12pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Trail Blazers at 76ers",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - 76ERS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "76ers",
+       "price": null,
+       "for": {
+        "team": "76ERS",
+        "rows": [
+         {
+          "team": "76ers",
+          "wallet": "C",
+          "market": "SPREAD -2.5 -100",
+          "mk": "SPREAD",
+          "record": "4-2",
+          "roi": 44.3,
+          "dollars": 1897,
+          "note": "0.8x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "G",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "11-5",
+          "roi": 5.5,
+          "dollars": 1200,
+          "note": "0.5x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "A",
+          "market": "ML -123",
+          "mk": "ML",
+          "record": "58-49",
+          "roi": 6.5,
+          "dollars": 864,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "76ERS",
+         "dollars": 3961,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $1.9K on 76ers -2.5 - kickoff in 3h 37m - SITE LOCK: Trail Blazers +2.5 3u (wallet money AGAINST it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
