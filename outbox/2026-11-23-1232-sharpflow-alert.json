@@ -1,0 +1,134 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 12:18pm CT",
+   "sections": [
+    {
+     "heading": "CBB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Fairleigh Dickinson Knights at Iona Gaels",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Under 138.5 -117",
+       "price": "-117",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "B",
+          "market": "UNDER 138.5 -117",
+          "mk": "TOTAL",
+          "record": "19-10",
+          "roi": 39.9,
+          "dollars": 706,
+          "note": "1.1x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "CBB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 706,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 19-10 (+40% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $706 on Under 138.5 - kickoff in 5h 28m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Trail Blazers at 76ers",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - 76ERS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "76ers",
+       "price": null,
+       "for": {
+        "team": "76ERS",
+        "rows": [
+         {
+          "team": "76ers",
+          "wallet": "F",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "11-5",
+          "roi": 5.5,
+          "dollars": 1200,
+          "note": "0.5x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "A",
+          "market": "ML -123",
+          "mk": "ML",
+          "record": "58-49",
+          "roi": 6.5,
+          "dollars": 864,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "76ERS",
+         "dollars": 2064,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "GREW $1.2K to $2.1K - kickoff in 5h 38m - SITE LOCK: Trail Blazers +2.5 3u (no wallet money)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
