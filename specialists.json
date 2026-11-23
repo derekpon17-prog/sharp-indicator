@@ -1,6 +1,6 @@
 {
- "date": "2026-11-22",
- "scannedAt": "2026-11-23T04:35:16.121Z",
+ "date": "2026-11-23",
+ "scannedAt": "2026-11-23T14:09:09.161Z",
  "sports": {
   "NFL": [
    {
@@ -44,6 +44,27 @@
       "vsUsualAll": 14.2
      }
     ]
+   },
+   {
+    "id": "d780f4",
+    "gap": 7.4,
+    "overall": "95-94",
+    "sport": "15-11",
+    "returnPct": 16.4,
+    "last10": "8-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Bengals at Commanders",
+      "market": "ML",
+      "pick": "Bengals",
+      "line": null,
+      "price": "-257",
+      "dollars": 1800,
+      "vsUsual": 1.4,
+      "vsUsualAll": 1.8
+     }
+    ]
    }
   ],
   "NBA": [
@@ -69,6 +90,58 @@
     ]
    },
    {
+    "id": "7d395d",
+    "gap": 2,
+    "overall": "281-246",
+    "sport": "57-46",
+    "returnPct": 16.4,
+    "last10": "8-2",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Bucks at Raptors",
+      "market": "SPREAD",
+      "pick": "Raptors -10.5",
+      "line": -10.5,
+      "price": "-100",
+      "dollars": 546,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.9
+     },
+     {
+      "matchup": "Nets at Timberwolves",
+      "market": "SPREAD",
+      "pick": "Timberwolves -11.5",
+      "line": -11.5,
+      "price": "-104",
+      "dollars": 1962,
+      "vsUsual": 1,
+      "vsUsualAll": 3.2
+     }
+    ]
+   },
+   {
+    "id": "51176e",
+    "gap": 1.9,
+    "overall": "247-208",
+    "sport": "64-50",
+    "returnPct": 13.3,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Cavaliers at Bulls",
+      "market": "TOTAL",
+      "pick": "Over 239.5",
+      "line": 239.5,
+      "price": "-111",
+      "dollars": 3000,
+      "vsUsual": 1.3,
+      "vsUsualAll": 2.6
+     }
+    ]
+   },
+   {
     "id": "955c26",
     "gap": 0.2,
     "overall": "214-166",
@@ -82,52 +155,51 @@
       "market": "ML",
       "pick": "Raptors",
       "line": null,
-      "price": "-383",
-      "dollars": 2667,
-      "vsUsual": 1,
-      "vsUsualAll": 0.3
+      "price": "-388",
+      "dollars": 3866,
+      "vsUsual": 1.4,
+      "vsUsualAll": 0.5
      }
     ]
    },
    {
-    "id": "2dc4f6",
-    "gap": -1.6,
-    "overall": "188-138",
-    "sport": "102-80",
-    "returnPct": 15.8,
-    "last10": "5-5",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Bucks at Raptors",
-      "market": "ML",
-      "pick": "Raptors",
-      "line": null,
-      "price": "-426",
-      "dollars": 601,
-      "vsUsual": 3,
-      "vsUsualAll": 0.2
-     }
-    ]
-   },
-   {
-    "id": "f3b109",
-    "gap": -14,
-    "overall": "39-12",
-    "sport": "10-6",
-    "returnPct": 14.1,
-    "last10": "7-3",
+    "id": "d6ca9b",
+    "gap": 0,
+    "overall": "5-4",
+    "sport": "5-4",
+    "returnPct": 40,
+    "last10": "5-4",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Thunder at Pacers",
+      "matchup": "Grizzlies at Hornets",
       "market": "ML",
-      "pick": "Thunder",
+      "pick": "Grizzlies",
       "line": null,
-      "price": "-178",
-      "dollars": 7938,
+      "price": "-150",
+      "dollars": 1950,
       "vsUsual": 1.2,
-      "vsUsualAll": 1.8
+      "vsUsualAll": 0.8
+     },
+     {
+      "matchup": "Trail Blazers at 76ers",
+      "market": "ML",
+      "pick": "76ers",
+      "line": null,
+      "price": "-156",
+      "dollars": 531,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.2
+     },
+     {
+      "matchup": "Suns at Pelicans",
+      "market": "ML",
+      "pick": "Suns",
+      "line": null,
+      "price": "-144",
+      "dollars": 1010,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.4
      }
     ]
    }
@@ -204,17 +276,17 @@
     "sport": "14-7",
     "returnPct": 39.2,
     "last10": "5-5",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Colorado State Rams at Arizona Wildcats",
       "market": "TOTAL",
       "pick": "Over 158.5",
       "line": 158.5,
-      "price": "+101",
-      "dollars": 500,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.2
+      "price": "-104",
+      "dollars": 2043,
+      "vsUsual": 2.7,
+      "vsUsualAll": 0.9
      }
     ]
    }

@@ -1,0 +1,137 @@
+{
+ "date": "2026-11-23",
+ "sides": {
+  "Colorado State Rams at Arizona Wildcats|TOTAL|Over 158.5": {
+   "sport": "CBB",
+   "matchup": "Colorado State Rams at Arizona Wildcats",
+   "market": "TOTAL",
+   "pick": "Over 158.5",
+   "kickoffEt": "Mon, Nov 23, 11:30 PM",
+   "firstSeenAt": "2026-11-23T14:29:18.161Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.7,
+   "maxDollars": 2043,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Grizzlies at Hornets|ML|Grizzlies": {
+   "sport": "NBA",
+   "matchup": "Grizzlies at Hornets",
+   "market": "ML",
+   "pick": "Grizzlies",
+   "kickoffEt": "Mon, Nov 23, 7:10 PM",
+   "firstSeenAt": "2026-11-23T14:29:18.161Z",
+   "firstPrice": "-150",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 1950,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Suns at Pelicans|ML|Suns": {
+   "sport": "NBA",
+   "matchup": "Suns at Pelicans",
+   "market": "ML",
+   "pick": "Suns",
+   "kickoffEt": "Mon, Nov 23, 8:10 PM",
+   "firstSeenAt": "2026-11-23T14:29:18.161Z",
+   "firstPrice": "-144",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 1010,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Texas at Texas A&M|ML|Texas": {
+   "sport": "CFB",
+   "matchup": "Texas at Texas A&M",
+   "market": "ML",
+   "pick": "Texas",
+   "kickoffEt": "Fri, Nov 27, 7:30 PM",
+   "firstSeenAt": "2026-11-23T14:29:18.161Z",
+   "firstPrice": "-238",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 19.4,
+   "maxDollars": 11663,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Thunder at Pacers|ML|Thunder": {
+   "sport": "NBA",
+   "matchup": "Thunder at Pacers",
+   "market": "ML",
+   "pick": "Thunder",
+   "kickoffEt": "Mon, Nov 23, 7:40 PM",
+   "firstSeenAt": "2026-11-23T14:29:18.161Z",
+   "firstPrice": "-178",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 8.2,
+   "maxDollars": 52739,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Bucks at Raptors|ML|Raptors": {
+   "sport": "NBA",
+   "matchup": "Bucks at Raptors",
+   "market": "ML",
+   "pick": "Raptors",
+   "kickoffEt": "Mon, Nov 23, 7:40 PM",
+   "firstSeenAt": "2026-11-23T14:29:18.161Z",
+   "firstPrice": "-400",
+   "tags": [
+    "SIZED_2X",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 3.6,
+   "maxDollars": 3866,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Bengals at Commanders|ML|Bengals": {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "ML",
+   "pick": "Bengals",
+   "kickoffEt": "Mon, Nov 23, 8:15 PM",
+   "firstSeenAt": "2026-11-23T14:29:18.161Z",
+   "firstPrice": "-266",
+   "tags": [
+    "SIZED_15X",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 14880,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Cavaliers at Bulls|TOTAL|Over 239.5": {
+   "sport": "NBA",
+   "matchup": "Cavaliers at Bulls",
+   "market": "TOTAL",
+   "pick": "Over 239.5",
+   "kickoffEt": "Mon, Nov 23, 8:10 PM",
+   "firstSeenAt": "2026-11-23T14:29:18.162Z",
+   "firstPrice": "-111",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 3000,
+   "opposedSeen": true,
+   "snapshots": 1
+  }
+ }
+}
