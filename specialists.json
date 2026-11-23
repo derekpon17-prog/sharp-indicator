@@ -1,8 +1,29 @@
 {
  "date": "2026-11-23",
- "scannedAt": "2026-11-23T22:19:20.932Z",
+ "scannedAt": "2026-11-23T23:14:00.158Z",
  "sports": {
   "NFL": [
+   {
+    "id": "b77626",
+    "gap": 26.9,
+    "overall": "88-68",
+    "sport": "20-4",
+    "returnPct": 18.4,
+    "last10": "10-0",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Bengals at Commanders",
+      "market": "SPREAD",
+      "pick": "Bengals +3.5",
+      "line": 3.5,
+      "price": "-567",
+      "dollars": 2000,
+      "vsUsual": 1.5,
+      "vsUsualAll": 0.6
+     }
+    ]
+   },
    {
     "id": "45fc26",
     "gap": 13.7,
@@ -86,30 +107,30 @@
       "vsUsualAll": 1.8
      }
     ]
-   },
-   {
-    "id": "aa9fb4",
-    "gap": 3.9,
-    "overall": "37-31",
-    "sport": "7-5",
-    "returnPct": 27.2,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Bengals at Commanders",
-      "market": "TOTAL",
-      "pick": "Over 54.5",
-      "line": 54.5,
-      "price": "-100",
-      "dollars": 29750,
-      "vsUsual": 1.9,
-      "vsUsualAll": 4.9
-     }
-    ]
    }
   ],
   "NBA": [
+   {
+    "id": "0889ba",
+    "gap": 9.1,
+    "overall": "40-11",
+    "sport": "14-2",
+    "returnPct": 49,
+    "last10": "8-2",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Bucks at Raptors",
+      "market": "ML",
+      "pick": "Raptors",
+      "line": null,
+      "price": "-376",
+      "dollars": 3950,
+      "vsUsual": 1.9,
+      "vsUsualAll": 1.1
+     }
+    ]
+   },
    {
     "id": "378b15",
     "gap": 6.8,
@@ -143,7 +164,7 @@
      {
       "matchup": "Thunder at Pacers",
       "market": "SPREAD",
-      "pick": "Thunder -4.5",
+      "pick": "Thunder",
       "line": -4.5,
       "price": "-108",
       "dollars": 600,
@@ -223,27 +244,6 @@
       "vsUsualAll": 2.6
      }
     ]
-   },
-   {
-    "id": "c911a4",
-    "gap": 1.7,
-    "overall": "317-255",
-    "sport": "80-60",
-    "returnPct": 34.2,
-    "last10": "8-2",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Grizzlies at Hornets",
-      "market": "ML",
-      "pick": "Grizzlies",
-      "line": null,
-      "price": "-138",
-      "dollars": 2937,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.3
-     }
-    ]
    }
   ],
   "NHL": [
@@ -288,6 +288,16 @@
       "dollars": 1000,
       "vsUsual": 1.1,
       "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Minnesota at Wisconsin",
+      "market": "SPREAD",
+      "pick": "Minnesota +7.5",
+      "line": 7.5,
+      "price": "-100",
+      "dollars": 727,
+      "vsUsual": 0.8,
+      "vsUsualAll": 1.2
      }
     ]
    },
@@ -419,12 +429,12 @@
      {
       "matchup": "Fairleigh Dickinson Knights at Iona Gaels",
       "market": "TOTAL",
-      "pick": "Under 137.5",
-      "line": 137.5,
-      "price": "-111",
-      "dollars": 931,
-      "vsUsual": 1.5,
-      "vsUsualAll": 0.8
+      "pick": "Under",
+      "line": null,
+      "price": null,
+      "dollars": 1943,
+      "vsUsual": 1.6,
+      "vsUsualAll": 0.9
      }
     ]
    },
