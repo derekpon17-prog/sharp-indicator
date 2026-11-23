@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 30
+   "snapshots": 31
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -80,7 +80,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 20
+   "snapshots": 21
   },
   "Celtics at Warriors|SPREAD|Celtics -9.5": {
    "sport": "NBA",
@@ -129,7 +129,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 2999,
    "opposedSeen": true,
-   "snapshots": 23
+   "snapshots": 25
   },
   "Pistons at Hawks|ML|Hawks": {
    "sport": "NBA",
@@ -425,7 +425,7 @@
    "maxVsUsual": 3.3,
    "maxDollars": 14880,
    "opposedSeen": false,
-   "snapshots": 48
+   "snapshots": 50
   },
   "Ravens at Panthers|ML|Panthers": {
    "sport": "NFL",
@@ -476,7 +476,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 3380,
    "opposedSeen": true,
-   "snapshots": 15
+   "snapshots": 16
   },
   "Saints at Bears|SPREAD|Saints": {
    "sport": "NFL",
@@ -850,7 +850,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 2940,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Ravens at Panthers|SPREAD|Panthers": {
    "sport": "NFL",
@@ -948,7 +948,7 @@
    "maxVsUsual": 1.6,
    "maxDollars": 1500,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Raiders at Broncos|SPREAD|Broncos": {
    "sport": "NFL",
@@ -979,12 +979,13 @@
    "tags": [
     "STRONG_VS_STRONG",
     "SIZED_UP",
-    "SIZED_15X"
+    "SIZED_15X",
+    "STRONG_VS_WEAK"
    ],
    "maxVsUsual": 1.6,
    "maxDollars": 3171,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Thunder at Heat|SPREAD|Heat": {
    "sport": "NBA",
@@ -1018,7 +1019,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 1500,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Jets at Chargers|SPREAD|Chargers -2.5": {
    "sport": "NFL",
@@ -1085,7 +1086,7 @@
    "maxVsUsual": 2.3,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 12
+   "snapshots": 14
   },
   "Nuggets at Bulls|ML|Nuggets": {
    "sport": "NBA",
@@ -1101,7 +1102,7 @@
    "maxVsUsual": 5.2,
    "maxDollars": 32996,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 12
   },
   "Vikings at 49ers|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -1117,7 +1118,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 3015,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Mavericks at Jazz|TOTAL|Over 226.5": {
    "sport": "NBA",
@@ -1151,7 +1152,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 50679,
    "opposedSeen": false,
-   "snapshots": 13
+   "snapshots": 17
   },
   "Celtics at Warriors|ML|Celtics": {
    "sport": "NBA",
@@ -1167,7 +1168,7 @@
    "maxVsUsual": 4.6,
    "maxDollars": 28884,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Mavericks at Jazz|ML|Mavericks": {
    "sport": "NBA",
@@ -1185,7 +1186,7 @@
    "maxVsUsual": 7.6,
    "maxDollars": 50226,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 11
   },
   "Pacers at Knicks|SPREAD|Pacers +6.5": {
    "sport": "NBA",
@@ -1203,7 +1204,7 @@
    "maxVsUsual": 2.8,
    "maxDollars": 49596,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Mavericks at Jazz|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -1238,6 +1239,55 @@
    "maxDollars": 1665,
    "opposedSeen": true,
    "snapshots": 2
+  },
+  "Celtics at Warriors|SPREAD|Warriors +8.5": {
+   "sport": "NBA",
+   "matchup": "Celtics at Warriors",
+   "market": "SPREAD",
+   "pick": "Warriors +8.5",
+   "kickoffEt": "Sun, Nov 22, 8:40 PM",
+   "firstSeenAt": "2026-11-23T01:28:47.908Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 3527,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Celtics at Warriors|TOTAL|Under": {
+   "sport": "NBA",
+   "matchup": "Celtics at Warriors",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Sun, Nov 22, 8:40 PM",
+   "firstSeenAt": "2026-11-23T01:28:47.908Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_VS_OTHER",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 3197,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Thunder at Heat|SPREAD|Heat -6.5": {
+   "sport": "NBA",
+   "matchup": "Thunder at Heat",
+   "market": "SPREAD",
+   "pick": "Heat -6.5",
+   "kickoffEt": "Sun, Nov 22, 6:13 PM",
+   "firstSeenAt": "2026-11-23T01:28:47.909Z",
+   "firstPrice": "-138",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 1314,
+   "opposedSeen": true,
+   "snapshots": 1
   }
  }
 }
