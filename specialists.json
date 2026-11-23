@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T04:14:10.301Z",
+ "scannedAt": "2026-11-23T04:35:16.121Z",
  "sports": {
   "NFL": [
    {
@@ -109,6 +109,27 @@
       "vsUsualAll": 0.2
      }
     ]
+   },
+   {
+    "id": "f3b109",
+    "gap": -14,
+    "overall": "39-12",
+    "sport": "10-6",
+    "returnPct": 14.1,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Thunder at Pacers",
+      "market": "ML",
+      "pick": "Thunder",
+      "line": null,
+      "price": "-178",
+      "dollars": 7938,
+      "vsUsual": 1.2,
+      "vsUsualAll": 1.8
+     }
+    ]
    }
   ],
   "CFB": [
@@ -161,6 +182,16 @@
       "dollars": 11663,
       "vsUsual": 19.4,
       "vsUsualAll": 25.3
+     },
+     {
+      "matchup": "USC at UCLA",
+      "market": "SPREAD",
+      "pick": "USC -6.5",
+      "line": -6.5,
+      "price": "-113",
+      "dollars": 504,
+      "vsUsual": 0.8,
+      "vsUsualAll": 1.1
      }
     ]
    }

@@ -64,7 +64,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 40
+   "snapshots": 41
   },
   "Mavericks at Jazz|SPREAD|Mavericks -1.5": {
    "sport": "NBA",
@@ -425,7 +425,7 @@
    "maxVsUsual": 3.3,
    "maxDollars": 14880,
    "opposedSeen": false,
-   "snapshots": 65
+   "snapshots": 66
   },
   "Ravens at Panthers|ML|Panthers": {
    "sport": "NFL",
@@ -1305,7 +1305,23 @@
    "maxVsUsual": 3.7,
    "maxDollars": 1220,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
+  },
+  "Thunder at Pacers|ML|Thunder": {
+   "sport": "NBA",
+   "matchup": "Thunder at Pacers",
+   "market": "ML",
+   "pick": "Thunder",
+   "kickoffEt": "Mon, Nov 23, 7:40 PM",
+   "firstSeenAt": "2026-11-23T04:45:41.085Z",
+   "firstPrice": "-178",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 7938,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }

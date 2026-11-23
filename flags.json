@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T04:14:10.301Z",
+ "scannedAt": "2026-11-23T04:35:16.121Z",
  "sides": [
   {
    "tail": false,
@@ -82,6 +82,33 @@
     "unopposed": 3,
     "contested": 0
    }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Thunder at Pacers",
+   "market": "ML",
+   "pick": "Thunder",
+   "kickoffEt": "Mon, Nov 23, 7:40 PM",
+   "dollars": 7938,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 1.2,
+   "price": "-178",
+   "size": "1x",
+   "mktRecord": "10-6",
+   "mktRoi": 14.1,
+   "l30Roi": 29.5,
+   "contested": false,
+   "sfPoints": 19,
+   "parts": {
+    "money": 12,
+    "sizing": 4,
+    "quality": 0,
+    "pooled": 0,
+    "unopposed": 3,
+    "contested": 0
+   }
   }
  ],
  "flags": [],
@@ -136,6 +163,23 @@
    "mktRoi": 19,
    "opposed": "unopposed",
    "fp": "44-14|95453|28-7"
+  },
+  {
+   "matchup": "Thunder at Pacers",
+   "market": "ML",
+   "pick": "Thunder",
+   "kickoffEt": "Mon, Nov 23, 7:40 PM",
+   "sport": "NBA",
+   "dollars": 7938,
+   "price": "-178",
+   "vsUsual": 1.2,
+   "size": "1x",
+   "form": "L10 7-3",
+   "l30Roi": 29.5,
+   "mktRecord": "10-6",
+   "mktRoi": 14.1,
+   "opposed": "unopposed",
+   "fp": "6-1|20841|10-6"
   }
  ]
 }
