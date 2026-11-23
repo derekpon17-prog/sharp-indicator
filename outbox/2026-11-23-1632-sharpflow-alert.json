@@ -1,0 +1,152 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:19pm CT",
+   "sections": [
+    {
+     "heading": "CBB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Fairleigh Dickinson Knights at Iona Gaels",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Under 137.5 -111",
+       "price": "-111",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "B",
+          "market": "UNDER 137.5 -111",
+          "mk": "TOTAL",
+          "record": "19-10",
+          "roi": 39.9,
+          "dollars": 931,
+          "note": "1.5x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "CBB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 931,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 19-10 (+40% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $931 on Under 137.5 - kickoff in 88 min"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 7:15PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bengals at Commanders",
+       "time": "7:15pm CT",
+       "tag": {
+        "t": "EDGE - BENGALS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bengals ML -270",
+       "price": "-270",
+       "for": {
+        "team": "BENGALS",
+        "rows": [
+         {
+          "team": "Bengals",
+          "wallet": "D",
+          "market": "ML -270",
+          "mk": "ML",
+          "record": "11-8",
+          "roi": 26.9,
+          "dollars": 240900,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "C",
+          "market": "ML -266",
+          "mk": "ML",
+          "record": "28-7",
+          "roi": 19,
+          "dollars": 14880,
+          "note": "1.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "E",
+          "market": "ML -257",
+          "mk": "ML",
+          "record": "6-6",
+          "roi": 8.6,
+          "dollars": 1800,
+          "note": "1.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BENGALS",
+         "dollars": 257580,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 11-8 (+27% ROI) on BENGALS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $17K to $258K - kickoff in 2h 43m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
