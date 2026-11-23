@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T00:11:10.752Z",
+ "scannedAt": "2026-11-23T00:28:17.655Z",
  "sports": {
   "NFL": [
    {
@@ -17,41 +17,10 @@
       "market": "ML",
       "pick": "Jaguars",
       "line": null,
-      "price": "+241",
-      "dollars": 1209,
+      "price": "+242",
+      "dollars": 1205,
       "vsUsual": 0.6,
       "vsUsualAll": 0.1
-     },
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "ML",
-      "pick": "Raiders",
-      "line": null,
-      "price": "+333",
-      "dollars": 998,
-      "vsUsual": 0.5,
-      "vsUsualAll": 0.1
-     }
-    ]
-   },
-   {
-    "id": "b77626",
-    "gap": 26.8,
-    "overall": "86-68",
-    "sport": "19-4",
-    "returnPct": 17.7,
-    "last10": "10-0",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Raiders at Broncos",
-      "market": "SPREAD",
-      "pick": "Raiders +17.5",
-      "line": 17.5,
-      "price": "-257",
-      "dollars": 1000,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.3
      }
     ]
    },
@@ -108,23 +77,64 @@
     ]
    },
    {
-    "id": "2f2a9e",
-    "gap": 13.6,
-    "overall": "475-462",
-    "sport": "18-10",
-    "returnPct": 41.8,
-    "last10": "7-3",
+    "id": "5fcee5",
+    "gap": 12.5,
+    "overall": "257-134",
+    "sport": "43-12",
+    "returnPct": 28.1,
+    "last10": "8-2",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Jaguars at Giants",
+      "market": "ML",
+      "pick": "Jaguars",
+      "line": null,
+      "price": "-245",
+      "dollars": 9278,
+      "vsUsual": 1.2,
+      "vsUsualAll": 9.3
+     },
+     {
+      "matchup": "Vikings at 49ers",
+      "market": "ML",
+      "pick": "49ers",
+      "line": null,
+      "price": "-156",
+      "dollars": 2380,
+      "vsUsual": 0.3,
+      "vsUsualAll": 2.4
+     },
+     {
+      "matchup": "Bengals at Commanders",
+      "market": "ML",
+      "pick": "Bengals",
+      "line": null,
+      "price": "-266",
+      "dollars": 14880,
+      "vsUsual": 1.9,
+      "vsUsualAll": 14.9
+     }
+    ]
+   },
+   {
+    "id": "06c80c",
+    "gap": 12.3,
+    "overall": "158-169",
+    "sport": "57-37",
+    "returnPct": 21.9,
+    "last10": "5-5",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Raiders at Broncos",
+      "matchup": "Vikings at 49ers",
       "market": "ML",
-      "pick": "Broncos",
+      "pick": "49ers",
       "line": null,
-      "price": "-488",
-      "dollars": 1160,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.1
+      "price": "-170",
+      "dollars": 40277,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.6
      }
     ]
    }
@@ -173,7 +183,7 @@
      {
       "matchup": "Mavericks at Jazz",
       "market": "TOTAL",
-      "pick": "Under",
+      "pick": "Under 226.5",
       "line": 226.5,
       "price": "-100",
       "dollars": 3466,
@@ -213,16 +223,6 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Mavericks at Jazz",
-      "market": "TOTAL",
-      "pick": "Under",
-      "line": null,
-      "price": null,
-      "dollars": 2156,
-      "vsUsual": 4.8,
-      "vsUsualAll": 3.2
-     },
-     {
       "matchup": "Nuggets at Bulls",
       "market": "ML",
       "pick": "Nuggets",
@@ -233,24 +233,14 @@
       "vsUsualAll": 2.1
      },
      {
-      "matchup": "Nuggets at Bulls",
+      "matchup": "Mavericks at Jazz",
       "market": "TOTAL",
-      "pick": "Under 236.5",
-      "line": 236.5,
-      "price": "+108",
-      "dollars": 1118,
-      "vsUsual": 3.4,
-      "vsUsualAll": 2.2
-     },
-     {
-      "matchup": "Celtics at Warriors",
-      "market": "SPREAD",
-      "pick": "Celtics",
-      "line": -7.5,
-      "price": "-104",
-      "dollars": 630,
-      "vsUsual": 1.9,
-      "vsUsualAll": 1.3
+      "pick": "Under 226.5",
+      "line": 226.5,
+      "price": "+104",
+      "dollars": 578,
+      "vsUsual": 1.7,
+      "vsUsualAll": 1.2
      },
      {
       "matchup": "Pacers at Knicks",
@@ -271,6 +261,16 @@
       "dollars": 578,
       "vsUsual": 1.7,
       "vsUsualAll": 1.2
+     },
+     {
+      "matchup": "Celtics at Warriors",
+      "market": "SPREAD",
+      "pick": "Celtics",
+      "line": -7.5,
+      "price": "-104",
+      "dollars": 630,
+      "vsUsual": 1.9,
+      "vsUsualAll": 1.3
      }
     ]
    },
@@ -348,16 +348,6 @@
     "last10": "5-5",
     "bettingBig": false,
     "tonight": [
-     {
-      "matchup": "Sabres at Lightning",
-      "market": "TOTAL",
-      "pick": "Over 5.5",
-      "line": 5.5,
-      "price": "-163",
-      "dollars": 998,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.3
-     },
      {
       "matchup": "Oilers at Blues",
       "market": "TOTAL",
