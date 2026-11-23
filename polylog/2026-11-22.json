@@ -805,7 +805,12 @@
    "vsUsual": 1.41,
    "sizeTier": "NORMAL",
    "closePrice": 0.535,
-   "clv": 0.065
+   "clv": 0.065,
+   "result": "W",
+   "u": 1.128,
+   "fadeU": -1.128,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NFL|Jaguars at Giants|SPREAD|Giants|0x16bb9951a36fce71e2ef57890b786145e0ba8492": {
    "sport": "NFL",
@@ -932,7 +937,12 @@
    "vsUsual": 2.46,
    "sizeTier": "BIG",
    "closePrice": 0.525,
-   "clv": 0.025
+   "clv": 0.025,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NFL|Cardinals at Chiefs|TOTAL|Under|0x6b1dbe91847aa95386fc63669ff910e68469a01a": {
    "sport": "NFL",
@@ -1305,7 +1315,7 @@
    "firstPrice": 0.49,
    "firstUsd": 2372,
    "maxUsd": 2372,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "114-142",
    "roi": -10.7,
    "n": 256,
@@ -2356,7 +2366,7 @@
    "firstPrice": 0.55,
    "firstUsd": 576,
    "maxUsd": 576,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "63-49",
    "roi": 15.2,
    "n": 112,
@@ -2569,7 +2579,7 @@
    "firstPrice": 0.63,
    "firstUsd": 40283,
    "maxUsd": 40283,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "33-19",
    "roi": 28,
    "n": 52,
@@ -2934,7 +2944,12 @@
    "vsUsual": 2.18,
    "sizeTier": "BIG",
    "closePrice": 0.53,
-   "clv": 0.04
+   "clv": 0.04,
+   "result": "W",
+   "u": 1.041,
+   "fadeU": -1.041,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NFL|Raiders at Broncos|SPREAD|Raiders|0x5331121e9f2f206d8c06ae6235761b1a3f8d3672": {
    "sport": "NFL",
@@ -3061,7 +3076,12 @@
    "vsUsual": 1.2,
    "sizeTier": "NORMAL",
    "closePrice": 0.465,
-   "clv": -0.0088
+   "clv": -0.0088,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NHL|Sabres at Lightning|ML|Lightning|0xf62b709646bdf9bc15bedb094ee6ac062857844a": {
    "sport": "NHL",
@@ -3253,7 +3273,7 @@
    "firstPrice": 0.52,
    "firstUsd": 3348,
    "maxUsd": 3348,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "12-8",
    "roi": 26.3,
    "n": 20,
@@ -3310,7 +3330,12 @@
    "vsUsual": 2.73,
    "sizeTier": "BIG",
    "closePrice": 0.53,
-   "clv": -0.04
+   "clv": -0.04,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NHL|Oilers at Blues|ML|Oilers|0xe5f0ae9cc9aef77ae3c2a64c9e69caa3f335dc1d": {
    "sport": "NHL",
@@ -3349,7 +3374,12 @@
    "vsUsual": 3.45,
    "sizeTier": "BIG",
    "closePrice": 0.465,
-   "clv": -0.015
+   "clv": -0.015,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NBA|Thunder at Heat|SPREAD|Thunder|0x28059b3fb7af7ed76d83dc9121bbb72ec7cf76ed": {
    "sport": "NBA",
@@ -3476,7 +3506,12 @@
    "vsUsual": 1.35,
    "sizeTier": "NORMAL",
    "closePrice": 0.545,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NBA|Nuggets at Bulls|ML|Nuggets|0x2792fc28811277f12a54e32bd8188be02c2dc4f6": {
    "sport": "NBA",
@@ -3515,7 +3550,12 @@
    "vsUsual": 3.49,
    "sizeTier": "BIG",
    "closePrice": 0.775,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NBA|Nuggets at Bulls|TOTAL|Under|0x2792fc28811277f12a54e32bd8188be02c2dc4f6": {
    "sport": "NBA",
@@ -3554,7 +3594,12 @@
    "vsUsual": 3.8,
    "sizeTier": "BIG",
    "closePrice": 0.455,
-   "clv": -0.0218
+   "clv": -0.0218,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-23T03:32:23.706Z",
+   "gradedBy": "positions"
   },
   "NBA|Thunder at Heat|SPREAD|Heat|0x2792fc28811277f12a54e32bd8188be02c2dc4f6": {
    "sport": "NBA",
@@ -3658,7 +3703,7 @@
    "firstPrice": 0.67,
    "firstUsd": 5300,
    "maxUsd": 5300,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "4-12",
    "roi": -28.2,
    "n": 16,
@@ -3697,7 +3742,7 @@
    "firstPrice": 0.34,
    "firstUsd": 139829,
    "maxUsd": 152182,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "23-22",
    "roi": -20.1,
    "n": 45,
@@ -3736,7 +3781,7 @@
    "firstPrice": 0.58,
    "firstUsd": 3000,
    "maxUsd": 3000,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "4-10",
    "roi": -47.7,
    "n": 14,
@@ -3819,7 +3864,7 @@
    "firstPrice": 0.66,
    "firstUsd": 3895,
    "maxUsd": 3895,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "18-26",
    "roi": -21.3,
    "n": 44,
@@ -3858,7 +3903,7 @@
    "firstPrice": 0.25,
    "firstUsd": 1022,
    "maxUsd": 1022,
-   "lastSeenAt": "2026-11-23T03:06:43.632Z",
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
    "rec": "15-35",
    "roi": -20.6,
    "n": 50,
@@ -3877,6 +3922,45 @@
    "sizeTier": "NORMAL",
    "closePrice": 0.23,
    "clv": -0.02
+  },
+  "NBA|Pacers at Knicks|ML|Knicks|0xe558bb7b02ea489d772bd34f14cc845e391fdcd2": {
+   "sport": "NBA",
+   "matchup": "Pacers at Knicks",
+   "market": "ML",
+   "side": "Knicks",
+   "grp": "team",
+   "wallet": "0xe558bb7b02ea489d772bd34f14cc845e391fdcd2",
+   "name": "User1244322",
+   "cls": "COLD",
+   "sportCls": "HOT",
+   "gateNote": "HOT overall but cold in ML (17-17, -6.1% ROI)",
+   "startUtc": "2026-11-23T01:12:00.000Z",
+   "conditionId": "0x3b3748b734fb393de1e14f5c3fe9ef400e123faaf9a3595361378564f8e33a7d",
+   "outcome": "Knicks",
+   "title": "Pacers vs. Knicks",
+   "firstSeenAt": "2026-11-23T03:32:12.204Z",
+   "firstPrice": 0.75,
+   "firstUsd": 1447,
+   "maxUsd": 1447,
+   "lastSeenAt": "2026-11-23T03:32:12.204Z",
+   "rec": "17-17",
+   "roi": -6.1,
+   "n": 34,
+   "recScope": "NBA ML, last 45 days",
+   "l10": "L10 NBA 6-4",
+   "onCard": true,
+   "sameAsSF": false,
+   "twoSided": false,
+   "tokenId": "54764551144352130597722529822797354572441373881587377039183689438489235243741",
+   "firstBuyUtc": "2026-11-22T03:44:47.000Z",
+   "hoursBeforeStart": 21.5,
+   "gameSource": "sharpflow",
+   "usualMed": 1844,
+   "usualScope": "NBA",
+   "vsUsual": 0.78,
+   "sizeTier": "NORMAL",
+   "closePrice": 0.705,
+   "clv": -0.045
   }
  }
 }
