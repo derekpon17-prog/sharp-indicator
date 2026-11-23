@@ -1,0 +1,175 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 1:19pm CT",
+   "sections": [
+    {
+     "heading": "CBB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Fairleigh Dickinson Knights at Iona Gaels",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Under TOTAL",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "B",
+          "market": "UNDER",
+          "mk": "TOTAL",
+          "record": "19-10",
+          "roi": 39.9,
+          "dollars": 1943,
+          "note": "1.6x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "CBB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 1943,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 19-10 (+40% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $1.9K on Under - kickoff in 4h 26m"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Blue Jackets at Devils",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - BLUE JACKETS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Blue Jackets ML +178",
+       "price": "+178",
+       "for": {
+        "team": "BLUE JACKETS",
+        "rows": [
+         {
+          "team": "Blue Jackets",
+          "wallet": "A",
+          "market": "ML +178",
+          "mk": "ML",
+          "record": "15-9",
+          "roi": 20.2,
+          "dollars": 3556,
+          "note": "0.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BLUE JACKETS",
+         "dollars": 3556,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 15-9 (+20% ROI) on BLUE JACKETS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $3.6K on Blue Jackets - kickoff in 4h 36m - SITE LOCK: Blue Jackets ML 1u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Maple Leafs at Islanders",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "EDGE - ISLANDERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Islanders ML -150",
+       "price": "-150",
+       "for": {
+        "team": "ISLANDERS",
+        "rows": [
+         {
+          "team": "Islanders",
+          "wallet": "A",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "15-9",
+          "roi": 20.2,
+          "dollars": 10998,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "ISLANDERS",
+         "dollars": 10998,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 15-9 (+20% ROI) on ISLANDERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $11K on Islanders - kickoff in 5h 6m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
