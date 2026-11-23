@@ -20,7 +20,7 @@
    "firstPrice": 0.51,
    "firstUsd": 13383,
    "maxUsd": 13383,
-   "lastSeenAt": "2026-11-23T01:07:21.286Z",
+   "lastSeenAt": "2026-11-23T01:08:56.231Z",
    "rec": "16-21",
    "roi": -12.4,
    "n": 37,
@@ -57,7 +57,7 @@
    "firstPrice": 0.5139,
    "firstUsd": 3000,
    "maxUsd": 3000,
-   "lastSeenAt": "2026-11-23T01:07:21.286Z",
+   "lastSeenAt": "2026-11-23T01:08:56.231Z",
    "rec": "4-10",
    "roi": -47.7,
    "n": 14,
@@ -70,10 +70,10 @@
    "firstBuyUtc": "2026-11-17T03:31:43.000Z",
    "hoursBeforeStart": 165.7,
    "gameSource": "sharpflow",
-   "usualMed": null,
-   "usualScope": null,
-   "vsUsual": null,
-   "sizeTier": null
+   "usualMed": 2000,
+   "usualScope": "NFL",
+   "vsUsual": 1.5,
+   "sizeTier": "BIG"
   },
   "NHL|Flames at Senators|ML|Senators|0x25867077c891354137bbaf7fde12eec6949cc893": {
    "sport": "NHL",
@@ -94,7 +94,7 @@
    "firstPrice": 0.6489,
    "firstUsd": 1655,
    "maxUsd": 1655,
-   "lastSeenAt": "2026-11-23T01:07:21.286Z",
+   "lastSeenAt": "2026-11-23T01:08:56.231Z",
    "rec": "85-79",
    "roi": -6.8,
    "n": 164,
@@ -107,10 +107,10 @@
    "firstBuyUtc": "2026-11-22T12:56:58.000Z",
    "hoursBeforeStart": 35.6,
    "gameSource": "espn",
-   "usualMed": null,
-   "usualScope": null,
-   "vsUsual": null,
-   "sizeTier": null
+   "usualMed": 912,
+   "usualScope": "NHL",
+   "vsUsual": 1.81,
+   "sizeTier": "BIG"
   }
  }
 }
