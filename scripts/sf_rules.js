@@ -85,7 +85,7 @@ const recPlay = t => {
   // Spreads: show the signed line (Derek, Nov 21: "Michigan SPREAD -124" hid the spread). Ticket line is signed (+4.5 dog, -3.5 fav).
   const lineTxt = t.market === 'SPREAD' && t.line != null && !isNaN(+t.line) ? (+t.line > 0 ? '+' : '') + (+t.line) : null;
   const base = hasLine ? t.pick : lineTxt ? t.pick + ' ' + lineTxt : t.pick + ' ' + mkName(t.market).toUpperCase();
-  return base + (t.price != null ? ' ' + (t.price > 0 ? '+' : '') + t.price : '');
+  return base + (t.price != null && !isNaN(+t.price) ? ' ' + (+t.price > 0 ? '+' : '') + (+t.price) : '');   // price is a string like "+104": use the number or it prints ++104
 };
 /* Confidence (Derek, Nov 18: "I like confidence as well"): 0-9, built only from what we already know - the quality wallet's
    ROI size and sample size, and whether the signal is one-sided or contradicted. Not a win probability, just how clean the
@@ -172,7 +172,7 @@ function matchupRow(sp, tix, grp) {
   const moneyBar = sides.slice(0, 2).map(x => ({ team: nm(x), dollars: x.goodD + x.badD, pct: Math.round(((x.goodD + x.badD) / totalD) * 100),
     c: x === forSide ? (hotWins((x.top || {}).form) >= 8 ? 'gold' : 'green') : (x.badD > 0 ? 'red' : 'grey') }));
   const rq = rec ? (forSide.q[0] || forSide.top) : null;
-  const price = rq && rq.price != null ? (rq.price > 0 ? '+' : '') + rq.price : null;
+  const price = rq && rq.price != null && !isNaN(+rq.price) ? (+rq.price > 0 ? '+' : '') + (+rq.price) : null;
   let callout = null;
   if (rec) {
     const base = 'Quality wallet ' + rq.mktRecord + ' (' + (rq.mktRoi >= 0 ? '+' : '') + Math.round(rq.mktRoi) + '% ROI) on ' + nm(forSide);
