@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T02:32:36.185Z",
+ "scannedAt": "2026-11-23T02:49:20.761Z",
  "sports": {
   "NFL": [
    {
@@ -130,16 +130,6 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Nuggets at Bulls",
-      "market": "ML",
-      "pick": "Nuggets",
-      "line": null,
-      "price": "-335",
-      "dollars": 1035,
-      "vsUsual": 3.1,
-      "vsUsualAll": 2.1
-     },
-     {
       "matchup": "Pacers at Knicks",
       "market": "ML",
       "pick": "Knicks",
@@ -191,16 +181,6 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Nuggets at Bulls",
-      "market": "SPREAD",
-      "pick": "Nuggets -8.5",
-      "line": -8.5,
-      "price": "-104",
-      "dollars": 932,
-      "vsUsual": 0.5,
-      "vsUsualAll": 1.5
-     },
-     {
       "matchup": "Celtics at Warriors",
       "market": "SPREAD",
       "pick": "Celtics",
@@ -226,10 +206,10 @@
       "market": "ML",
       "pick": "Raptors",
       "line": null,
-      "price": "-369",
-      "dollars": 1501,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.2
+      "price": "-383",
+      "dollars": 2667,
+      "vsUsual": 1,
+      "vsUsualAll": 0.3
      }
     ]
    },
@@ -338,6 +318,29 @@
       "dollars": 11663,
       "vsUsual": 19.4,
       "vsUsualAll": 25.4
+     }
+    ]
+   }
+  ],
+  "CBB": [
+   {
+    "id": "bc44b0",
+    "gap": 12.9,
+    "overall": "272-234",
+    "sport": "14-7",
+    "returnPct": 39.2,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Colorado State Rams at Arizona Wildcats",
+      "market": "TOTAL",
+      "pick": "Over 158.5",
+      "line": 158.5,
+      "price": "+101",
+      "dollars": 500,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.2
      }
     ]
    }
