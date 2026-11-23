@@ -1,0 +1,157 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 AFTERNOON \u00b7 Mon Nov 23** \u00b7 games 3:00-5:59pm CT (NCAAB)",
+ "slate": {
+  "title": "Afternoon plays (3:00-5:59pm CT)",
+  "stamp": "MON NOV 23 \u00b7 1:27PM",
+  "sources": "Pinnacle ~1:24pm CT - Vegas ~1:26pm CT (CBB) - SharpFlow 12:30pm CT - Polymarket 12:31pm CT (no matches) - Novig not read",
+  "sf_current": true,
+  "footer": "Window: every game starting 3:00-5:59pm CT (NCAAB only, no NBA/NHL in window; RIT@BUF 5:30pm not on Betting Insider). Vegas counts Vegas Backed and Pressure Move only. No SharpFlow money or Polymarket wallets on window games. Tier rules are fixed.",
+  "rows": [
+   {
+    "date": "2026-11-23",
+    "sport": "NCAAB",
+    "game": "YALE@BEL",
+    "start_ct": "3:00pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 146.5,
+    "price": -112,
+    "bet": "Over 146.5",
+    "matchup": "NCAAB - Yale @ Belmont - 3:00pm CT",
+    "first_seen": "13:27",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable (+EV 1 book); no Vegas signal; no SharpFlow ticket."
+   },
+   {
+    "date": "2026-11-23",
+    "sport": "NCAAB",
+    "game": "YALE@BEL",
+    "start_ct": "3:00pm",
+    "market": "ML",
+    "side": "YALE",
+    "line": null,
+    "price": 110,
+    "bet": "Yale ML",
+    "matchup": "NCAAB - Yale @ Belmont - 3:00pm CT",
+    "first_seen": "13:27",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 74,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "note": "Pinnacle Strong stable; Vegas Backed 74 (Pinnacle column Strong). No SharpFlow ticket."
+   },
+   {
+    "date": "2026-11-23",
+    "sport": "NCAAB",
+    "game": "YALE@BEL",
+    "start_ct": "3:00pm",
+    "market": "SPREAD",
+    "side": "YALE",
+    "line": 2.5,
+    "price": -123,
+    "bet": "Yale +2.5",
+    "matchup": "NCAAB - Yale @ Belmont - 3:00pm CT",
+    "first_seen": "13:27",
+    "pin_tier": "Lean",
+    "pin_status": "Stable",
+    "vegas_strength": 100,
+    "buckets": [
+     "PIN_LEAN",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "note": "Pinnacle Lean (not Strong); Vegas Backed 100. Logged only."
+   },
+   {
+    "date": "2026-11-23",
+    "sport": "NCAAB",
+    "game": "NEV@SF",
+    "start_ct": "3:30pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 142.5,
+    "price": -111,
+    "bet": "Over 142.5",
+    "matchup": "NCAAB - Nevada @ San Francisco - 3:30pm CT",
+    "first_seen": "13:27",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable; no Vegas signal. Pinnacle Slight on SF +7.5 while Vegas Backed 43 is on Nevada -7.5 (not 70+)."
+   },
+   {
+    "date": "2026-11-23",
+    "sport": "NCAAB",
+    "game": "TEM@UTM",
+    "start_ct": "4:30pm",
+    "market": "SPREAD",
+    "side": "UTM",
+    "line": 2.5,
+    "price": -111,
+    "bet": "UT Martin +2.5",
+    "matchup": "NCAAB - Temple @ UT Martin - 4:30pm CT",
+    "first_seen": "13:27",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable; no Vegas signal."
+   },
+   {
+    "date": "2026-11-23",
+    "sport": "NCAAB",
+    "game": "TEM@UTM",
+    "start_ct": "4:30pm",
+    "market": "ML",
+    "side": "UTM",
+    "line": null,
+    "price": 119,
+    "bet": "UT Martin ML",
+    "matchup": "NCAAB - Temple @ UT Martin - 4:30pm CT",
+    "first_seen": "13:27",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable; no Vegas signal."
+   },
+   {
+    "date": "2026-11-23",
+    "sport": "NCAAB",
+    "game": "UMES@YSU",
+    "start_ct": "5:30pm",
+    "market": "SPREAD",
+    "side": "UMES",
+    "line": 13.5,
+    "price": -117,
+    "bet": "UMES +13.5",
+    "matchup": "NCAAB - UMES @ Youngstown State - 5:30pm CT",
+    "first_seen": "13:27",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable; no Vegas signal."
+   }
+  ]
+ }
+}
