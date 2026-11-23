@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "scannedAt": "2026-11-23T01:56:41.667Z",
+ "scannedAt": "2026-11-23T02:08:39.367Z",
  "sides": [
   {
    "tail": false,
@@ -32,33 +32,6 @@
   {
    "tail": true,
    "sport": "NBA",
-   "matchup": "Magic at Wizards",
-   "market": "SPREAD",
-   "pick": "Wizards +4.5",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "dollars": 50679,
-   "oppDollars": 0,
-   "wallets": 3,
-   "maxVsUsual": 2.7,
-   "price": "+108",
-   "size": "1.5x and up",
-   "mktRecord": "8-8",
-   "mktRoi": 25.9,
-   "l30Roi": 36.4,
-   "contested": false,
-   "sfPoints": 43,
-   "parts": {
-    "money": 20,
-    "sizing": 12,
-    "quality": 4,
-    "pooled": 4,
-    "unopposed": 3,
-    "contested": 0
-   }
-  },
-  {
-   "tail": true,
-   "sport": "NBA",
    "matchup": "Pacers at Knicks",
    "market": "SPREAD",
    "pick": "Pacers +6.5",
@@ -80,33 +53,6 @@
     "quality": 6,
     "pooled": 4,
     "unopposed": 0,
-    "contested": 0
-   }
-  },
-  {
-   "tail": true,
-   "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "ML",
-   "pick": "Mavericks",
-   "kickoffEt": "Sun, Nov 22, 7:11 PM",
-   "dollars": 50226,
-   "oppDollars": 0,
-   "wallets": 1,
-   "maxVsUsual": 7.6,
-   "price": "-129",
-   "size": "1.5x and up",
-   "mktRecord": "5-2",
-   "mktRoi": 30.7,
-   "l30Roi": 30.7,
-   "contested": false,
-   "sfPoints": 39,
-   "parts": {
-    "money": 20,
-    "sizing": 12,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 3,
     "contested": 0
    }
   },
@@ -300,60 +246,6 @@
   },
   {
    "tail": false,
-   "sport": "NBA",
-   "matchup": "Magic at Wizards",
-   "market": "ML",
-   "pick": "Magic",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "dollars": 3000,
-   "oppDollars": 4119,
-   "wallets": 1,
-   "maxVsUsual": 2.3,
-   "price": "-186",
-   "size": "1.5x and up",
-   "mktRecord": "13-5",
-   "mktRoi": 49.7,
-   "l30Roi": 26.8,
-   "contested": true,
-   "sfPoints": 16,
-   "parts": {
-    "money": 8,
-    "sizing": 10,
-    "quality": 6,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
-   "matchup": "Magic at Wizards",
-   "market": "ML",
-   "pick": "Wizards",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "dollars": 4119,
-   "oppDollars": 3000,
-   "wallets": 2,
-   "maxVsUsual": 1.3,
-   "price": "+190",
-   "size": "1x",
-   "mktRecord": "11-15",
-   "mktRoi": -13.8,
-   "l30Roi": 8.3,
-   "contested": true,
-   "sfPoints": 14,
-   "parts": {
-    "money": 8,
-    "sizing": 4,
-    "quality": 6,
-    "pooled": 4,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
    "sport": "NHL",
    "matchup": "Oilers at Blues",
    "market": "ML",
@@ -439,10 +331,10 @@
    "market": "ML",
    "pick": "Raptors",
    "kickoffEt": "Mon, Nov 23, 7:40 PM",
-   "dollars": 1467,
+   "dollars": 1501,
    "oppDollars": 0,
    "wallets": 1,
-   "maxVsUsual": 0.5,
+   "maxVsUsual": 0.6,
    "price": "-369",
    "size": "0.5x",
    "mktRecord": "57-47",
@@ -489,33 +381,6 @@
   {
    "tail": false,
    "sport": "NBA",
-   "matchup": "Mavericks at Jazz",
-   "market": "SPREAD",
-   "pick": "Jazz +3.5",
-   "kickoffEt": "Sun, Nov 22, 7:11 PM",
-   "dollars": 1500,
-   "oppDollars": 3000,
-   "wallets": 1,
-   "maxVsUsual": 0.8,
-   "price": "-117",
-   "size": "0.5x",
-   "mktRecord": "3-2",
-   "mktRoi": 48,
-   "l30Roi": 34.7,
-   "contested": true,
-   "sfPoints": 0,
-   "parts": {
-    "money": 4,
-    "sizing": 0,
-    "quality": 4,
-    "pooled": 0,
-    "unopposed": 0,
-    "contested": -8
-   }
-  },
-  {
-   "tail": false,
-   "sport": "NBA",
    "matchup": "Celtics at Warriors",
    "market": "TOTAL",
    "pick": "Over 210.5",
@@ -539,43 +404,36 @@
     "unopposed": 0,
     "contested": -8
    }
+  },
+  {
+   "tail": false,
+   "sport": "NBA",
+   "matchup": "Mavericks at Jazz",
+   "market": "SPREAD",
+   "pick": "Jazz +3.5",
+   "kickoffEt": "Sun, Nov 22, 7:11 PM",
+   "dollars": 1500,
+   "oppDollars": 3000,
+   "wallets": 1,
+   "maxVsUsual": 0.8,
+   "price": "-117",
+   "size": "0.5x",
+   "mktRecord": "3-2",
+   "mktRoi": 48,
+   "l30Roi": 34.7,
+   "contested": true,
+   "sfPoints": 0,
+   "parts": {
+    "money": 4,
+    "sizing": 0,
+    "quality": 4,
+    "pooled": 0,
+    "unopposed": 0,
+    "contested": -8
+   }
   }
  ],
  "flags": [
-  {
-   "matchup": "Magic at Wizards",
-   "market": "SPREAD",
-   "pick": "Wizards +4.5",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "sport": "NBA",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 50679,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "19-12|120982|8-8",
-    "6-4|42846|5-3",
-    "6-4|6413|3-2"
-   ],
-   "bestPrice": "+108",
-   "maxVsUsual": 2.7
-  },
-  {
-   "matchup": "Mavericks at Jazz",
-   "market": "ML",
-   "pick": "Mavericks",
-   "kickoffEt": "Sun, Nov 22, 7:11 PM",
-   "sport": "NBA",
-   "type": "STRONG_UNOPPOSED",
-   "strongDollars": 50226,
-   "oppDollars": 0,
-   "oppWeakDollars": 0,
-   "fp": [
-    "13-9|44488|5-2"
-   ],
-   "bestPrice": "-129",
-   "maxVsUsual": 7.6
-  },
   {
    "matchup": "Pacers at Knicks",
    "market": "SPREAD",
@@ -657,22 +515,6 @@
    "maxVsUsual": 1.1
   },
   {
-   "matchup": "Magic at Wizards",
-   "market": "ML",
-   "pick": "Magic",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "sport": "NBA",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 3000,
-   "oppDollars": 4119,
-   "oppWeakDollars": 2999,
-   "fp": [
-    "21-15|12709|13-5"
-   ],
-   "bestPrice": "-186",
-   "maxVsUsual": 2.3
-  },
-  {
    "matchup": "Mavericks at Jazz",
    "market": "SPREAD",
    "pick": "Jazz +3.5",
@@ -687,22 +529,6 @@
    ],
    "bestPrice": "-117",
    "maxVsUsual": 0.8
-  },
-  {
-   "matchup": "Magic at Wizards",
-   "market": "ML",
-   "pick": "Wizards",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "sport": "NBA",
-   "type": "STRONG_VS_STRONG",
-   "strongDollars": 1120,
-   "oppDollars": 3000,
-   "oppWeakDollars": 0,
-   "fp": [
-    "12-2|13776|13-1"
-   ],
-   "bestPrice": "+186",
-   "maxVsUsual": 1.3
   }
  ],
  "sizedUp": [
@@ -722,23 +548,6 @@
    "mktRoi": -2.6,
    "opposed": "unopposed",
    "fp": "29-16|5969|16-10"
-  },
-  {
-   "matchup": "Mavericks at Jazz",
-   "market": "ML",
-   "pick": "Mavericks",
-   "kickoffEt": "Sun, Nov 22, 7:11 PM",
-   "sport": "NBA",
-   "dollars": 50226,
-   "price": "-129",
-   "vsUsual": 7.6,
-   "size": "1.5x and up",
-   "form": "L10 4-6",
-   "l30Roi": 30.7,
-   "mktRecord": "5-2",
-   "mktRoi": 30.7,
-   "opposed": "unopposed",
-   "fp": "13-9|44488|5-2"
   },
   {
    "matchup": "Nuggets at Bulls",
@@ -809,40 +618,6 @@
    "fp": "19-12|120982|8-8"
   },
   {
-   "matchup": "Magic at Wizards",
-   "market": "SPREAD",
-   "pick": "Wizards +4.5",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "sport": "NBA",
-   "dollars": 28800,
-   "price": "+108",
-   "vsUsual": 2.7,
-   "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 36.4,
-   "mktRecord": "8-8",
-   "mktRoi": 25.9,
-   "opposed": "unopposed",
-   "fp": "19-12|120982|8-8"
-  },
-  {
-   "matchup": "Magic at Wizards",
-   "market": "ML",
-   "pick": "Magic",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "sport": "NBA",
-   "dollars": 3000,
-   "price": "-186",
-   "vsUsual": 2.3,
-   "size": "1.5x and up",
-   "form": "L10 4-6",
-   "l30Roi": 26.8,
-   "mktRecord": "13-5",
-   "mktRoi": 49.7,
-   "opposed": "contested",
-   "fp": "21-15|12709|13-5"
-  },
-  {
    "matchup": "Bengals at Commanders",
    "market": "ML",
    "pick": "Bengals",
@@ -874,23 +649,6 @@
    "mktRecord": "5-3",
    "mktRoi": 40.7,
    "opposed": "contested",
-   "fp": "6-4|42846|5-3"
-  },
-  {
-   "matchup": "Magic at Wizards",
-   "market": "SPREAD",
-   "pick": "Wizards +4.5",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "sport": "NBA",
-   "dollars": 19200,
-   "price": "+108",
-   "vsUsual": 1.7,
-   "size": "1.5x and up",
-   "form": "L10 6-4",
-   "l30Roi": 37.2,
-   "mktRecord": "5-3",
-   "mktRoi": 40.7,
-   "opposed": "unopposed",
    "fp": "6-4|42846|5-3"
   },
   {
@@ -960,40 +718,6 @@
    "mktRoi": -0.8,
    "opposed": "unopposed",
    "fp": "5-8|-7885|15-14"
-  },
-  {
-   "matchup": "Magic at Wizards",
-   "market": "SPREAD",
-   "pick": "Wizards +4.5",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "sport": "NBA",
-   "dollars": 2679,
-   "price": "+108",
-   "vsUsual": 1.5,
-   "size": "1x",
-   "form": "L10 6-4",
-   "l30Roi": 34.7,
-   "mktRecord": "3-2",
-   "mktRoi": 48,
-   "opposed": "unopposed",
-   "fp": "6-4|6413|3-2"
-  },
-  {
-   "matchup": "Magic at Wizards",
-   "market": "ML",
-   "pick": "Wizards",
-   "kickoffEt": "Sun, Nov 22, 7:12 PM",
-   "sport": "NBA",
-   "dollars": 2999,
-   "price": "+190",
-   "vsUsual": 1.3,
-   "size": "1x",
-   "form": "L10 7-3",
-   "l30Roi": 8.3,
-   "mktRecord": "11-15",
-   "mktRoi": -13.8,
-   "opposed": "contested",
-   "fp": "50-43|18137|11-15"
   },
   {
    "matchup": "Celtics at Warriors",
