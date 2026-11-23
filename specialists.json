@@ -1,6 +1,6 @@
 {
  "date": "2026-11-23",
- "scannedAt": "2026-11-23T19:19:14.361Z",
+ "scannedAt": "2026-11-23T20:12:59.945Z",
  "sports": {
   "NFL": [
    {
@@ -65,6 +65,27 @@
       "vsUsualAll": 1.8
      }
     ]
+   },
+   {
+    "id": "858392",
+    "gap": 2.8,
+    "overall": "69-39",
+    "sport": "8-4",
+    "returnPct": 40.8,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Packers at Rams",
+      "market": "SPREAD",
+      "pick": "Rams -2.5",
+      "line": -2.5,
+      "price": "-108",
+      "dollars": 7990,
+      "vsUsual": 1.9,
+      "vsUsualAll": 2.6
+     }
+    ]
    }
   ],
   "NBA": [
@@ -120,21 +141,21 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Jazz at Lakers",
-      "market": "TOTAL",
-      "pick": "Under 226.5",
-      "line": 226.5,
-      "price": "-115",
-      "dollars": 3000,
-      "vsUsual": 1.3,
-      "vsUsualAll": 2.6
-     },
-     {
       "matchup": "Cavaliers at Bulls",
       "market": "TOTAL",
       "pick": "Over 239.5",
       "line": 239.5,
       "price": "-111",
+      "dollars": 3000,
+      "vsUsual": 1.3,
+      "vsUsualAll": 2.6
+     },
+     {
+      "matchup": "Jazz at Lakers",
+      "market": "TOTAL",
+      "pick": "Under 226.5",
+      "line": 226.5,
+      "price": "-115",
       "dollars": 3000,
       "vsUsual": 1.3,
       "vsUsualAll": 2.6
@@ -200,39 +221,6 @@
       "dollars": 601,
       "vsUsual": 3,
       "vsUsualAll": 0.2
-     }
-    ]
-   }
-  ],
-  "NHL": [
-   {
-    "id": "85aa98",
-    "gap": 17.5,
-    "overall": "95-95",
-    "sport": "27-13",
-    "returnPct": 23,
-    "last10": "6-4",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Blue Jackets at Devils",
-      "market": "ML",
-      "pick": "Blue Jackets",
-      "line": null,
-      "price": "+178",
-      "dollars": 3556,
-      "vsUsual": 0.2,
-      "vsUsualAll": 2.1
-     },
-     {
-      "matchup": "Maple Leafs at Islanders",
-      "market": "ML",
-      "pick": "Islanders",
-      "line": null,
-      "price": "-150",
-      "dollars": 10998,
-      "vsUsual": 0.6,
-      "vsUsualAll": 6.5
      }
     ]
    }
@@ -308,6 +296,16 @@
       "dollars": 640,
       "vsUsual": 0.1,
       "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "San Diego State at Washington State",
+      "market": "TOTAL",
+      "pick": "Over 45.5",
+      "line": 45.5,
+      "price": "-108",
+      "dollars": 513,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.2
      }
     ]
    },

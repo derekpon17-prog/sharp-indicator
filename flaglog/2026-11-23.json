@@ -16,7 +16,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 2043,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Grizzlies at Hornets|ML|Grizzlies": {
    "sport": "NBA",
@@ -34,7 +34,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 7027,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Suns at Pelicans|ML|Suns": {
    "sport": "NBA",
@@ -66,7 +66,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Thunder at Pacers|ML|Thunder": {
    "sport": "NBA",
@@ -99,7 +99,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 3866,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Bengals at Commanders|ML|Bengals": {
    "sport": "NFL",
@@ -116,7 +116,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 14880,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Cavaliers at Bulls|TOTAL|Over 239.5": {
    "sport": "NBA",
@@ -132,7 +132,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Jazz at Lakers|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -148,7 +148,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -164,7 +164,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -180,7 +180,7 @@
    "maxVsUsual": 5,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Fairleigh Dickinson Knights at Iona Gaels|TOTAL|Under": {
    "sport": "CBB",
@@ -197,7 +197,40 @@
    "maxVsUsual": 1.6,
    "maxDollars": 1943,
    "opposedSeen": false,
+   "snapshots": 4
+  },
+  "Packers at Rams|SPREAD|Rams -2.5": {
+   "sport": "NFL",
+   "matchup": "Packers at Rams",
+   "market": "SPREAD",
+   "pick": "Rams -2.5",
+   "kickoffEt": "Wed, Nov 25, 8:00 PM",
+   "firstSeenAt": "2026-11-23T20:31:18.382Z",
+   "firstPrice": "-108",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.9,
+   "maxDollars": 7990,
+   "opposedSeen": false,
    "snapshots": 2
+  },
+  "Trail Blazers at 76ers|SPREAD|76ers -2.5": {
+   "sport": "NBA",
+   "matchup": "Trail Blazers at 76ers",
+   "market": "SPREAD",
+   "pick": "76ers -2.5",
+   "kickoffEt": "Mon, Nov 23, 7:10 PM",
+   "firstSeenAt": "2026-11-23T20:31:18.382Z",
+   "firstPrice": "-100",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.8,
+   "maxDollars": 1897,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }
