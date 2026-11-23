@@ -1,0 +1,200 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow + Polymarket late money - NFL** - 1 game",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW + POLYMARKET",
+   "title": "NFL - late Polymarket money on a Sharp Flow game",
+   "subtitle": "HOT Polymarket wallet bought after the NFL report posted - shown with the Sharp Flow read, games not started. Buys checked 7:07pm CT, SharpFlow snapshot 6:52pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:25PM CT",
+     "picks": [
+      {
+       "eyebrow": "Vikings at 49ers",
+       "time": "7:25pm CT",
+       "tag": {
+        "t": "EDGE - 49ERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "49ers -170",
+       "price": "-170",
+       "for": {
+        "team": "49ERS",
+        "rows": [
+         {
+          "team": "49ers",
+          "wallet": "A",
+          "market": "ML -170",
+          "mk": "ML",
+          "record": "25-19",
+          "roi": 19.2,
+          "dollars": 40277,
+          "note": "0.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "49ers",
+          "wallet": "D",
+          "market": "ML -156",
+          "mk": "ML",
+          "record": "27-5",
+          "roi": 28.4,
+          "dollars": 2380,
+          "note": "0.3x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "49ers",
+          "wallet": "H",
+          "market": "ML -178",
+          "mk": "ML",
+          "record": "12-4",
+          "roi": 49.1,
+          "dollars": 1000,
+          "note": "0.7x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "49ers",
+          "wallet": "BreakTheBank",
+          "market": "ML @ 63c (-170)",
+          "mk": "ML",
+          "record": "36-21",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": 23.9,
+          "dollars": 40283,
+          "note": "Polymarket · 0.6x usual · L10 NFL 10-0 · same wallet as Sharp Flow A above",
+          "status": {
+           "t": "POLY HOT - same wallet, not a 2nd source",
+           "c": "grey"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "49ers",
+          "wallet": "BreakTheBank",
+          "market": "SPREAD -3.5 @ 53c (-113)",
+          "mk": "SPREAD",
+          "record": "82-85",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 7.6,
+          "dollars": 36993,
+          "note": "Polymarket · 0.5x usual · L10 NFL 10-0",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "49ers",
+          "wallet": "playerI",
+          "market": "ML @ 67c (-203)",
+          "mk": "ML",
+          "record": "4-12",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -28.2,
+          "dollars": 5300,
+          "note": "Polymarket · 10.7x usual · L10 NFL 4-6",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "VIKINGS",
+        "rows": [
+         {
+          "src": "POLYMARKET",
+          "team": "Vikings",
+          "wallet": "surfandturf",
+          "market": "ML @ 34c (+194)",
+          "mk": "ML",
+          "record": "23-22",
+          "recLabel": "NFL ML · last 45d record",
+          "roi": -20.1,
+          "dollars": 139829,
+          "note": "Polymarket · 13.0x usual · L10 NFL 6-4",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Vikings",
+          "wallet": "dinimami",
+          "market": "SPREAD +4.5 @ 52c (-108)",
+          "mk": "SPREAD",
+          "record": "11-8",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": 24.3,
+          "dollars": 3348,
+          "note": "Polymarket · 3.8x usual · L10 NFL 5-5",
+          "status": {
+           "t": "POLY HOT",
+           "c": "green"
+          }
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Vikings",
+          "wallet": "MAGATheeStallion",
+          "market": "SPREAD +6.5 @ 58c (-138)",
+          "mk": "SPREAD",
+          "record": "4-10",
+          "recLabel": "NFL SPREAD · last 45d record",
+          "roi": -47.7,
+          "dollars": 3000,
+          "note": "Polymarket · L10 NFL 2-8",
+          "status": {
+           "t": "POLY COLD - fade flag",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "49ERS",
+         "dollars": 43657,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 25-19 (+19% ROI) on 49ERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "POLY LATE: BreakTheBank HOT $37k on 49ers -3.5 - kickoff in 17 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
