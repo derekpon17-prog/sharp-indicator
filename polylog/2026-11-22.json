@@ -1315,7 +1315,7 @@
    "firstPrice": 0.49,
    "firstUsd": 2372,
    "maxUsd": 2372,
-   "lastSeenAt": "2026-11-23T04:07:17.543Z",
+   "lastSeenAt": "2026-11-23T04:29:01.529Z",
    "rec": "114-142",
    "roi": -10.7,
    "n": 256,
@@ -3887,7 +3887,12 @@
    "vsUsual": 1.26,
    "sizeTier": "NORMAL",
    "closePrice": 0.665,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T04:29:09.013Z",
+   "gradedBy": "positions"
   },
   "NFL|Vikings at 49ers|SPREAD|Vikings|0xe0dbdb7f005f233f4510e4ef7e53a2f76a8df44e": {
    "sport": "NFL",
@@ -3965,7 +3970,12 @@
    "vsUsual": 0.78,
    "sizeTier": "NORMAL",
    "closePrice": 0.705,
-   "clv": -0.045
+   "clv": -0.045,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-23T04:29:09.013Z",
+   "gradedBy": "positions"
   }
  }
 }

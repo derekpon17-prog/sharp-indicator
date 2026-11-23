@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T04:07:25.476Z",
+ "updated": "2026-11-23T04:29:08.981Z",
  "note": "Usual = median game-line position dollars per wallet (this sport needs 5+ positions, else all sports), from the last ~600 Polymarket buys; today's own markets excluded.",
  "wallets": {
   "0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade": {
@@ -286,18 +286,18 @@
   },
   "0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "name": "nehcnehc",
-   "buysRead": 400,
-   "at": "2026-11-23T04:07:25.476Z",
+   "buysRead": 200,
+   "at": "2026-11-23T04:29:08.981Z",
    "all": {
-    "med": 2795,
-    "avg": 2710,
-    "n": 308
+    "med": 2802,
+    "avg": 2807,
+    "n": 153
    },
    "sports": {
     "NBA": {
-     "med": 2883,
-     "avg": 2730,
-     "n": 281
+     "med": 2802,
+     "avg": 2790,
+     "n": 147
     },
     "NFL": {
      "med": 3474,
@@ -305,9 +305,9 @@
      "n": 2
     },
     "NHL": {
-     "med": 1500,
-     "avg": 1137,
-     "n": 4
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "MLB": {
      "med": null,
@@ -320,9 +320,9 @@
      "n": 0
     },
     "CFB": {
-     "med": 4127,
-     "avg": 4127,
-     "n": 2
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "CBB": {
      "med": null,
@@ -427,12 +427,12 @@
   },
   "0xf62b709646bdf9bc15bedb094ee6ac062857844a": {
    "name": "0xf62b…844a",
-   "buysRead": 500,
-   "at": "2026-11-23T04:07:25.476Z",
+   "buysRead": 300,
+   "at": "2026-11-23T04:29:08.981Z",
    "all": {
-    "med": 1820,
-    "avg": 4987,
-    "n": 34
+    "med": 1536,
+    "avg": 3860,
+    "n": 31
    },
    "sports": {
     "NBA": {
@@ -446,9 +446,9 @@
      "n": 0
     },
     "NHL": {
-     "med": 1820,
-     "avg": 4987,
-     "n": 34
+     "med": 1536,
+     "avg": 3860,
+     "n": 31
     },
     "MLB": {
      "med": null,
@@ -1367,12 +1367,12 @@
   },
   "0x16bb9951a36fce71e2ef57890b786145e0ba8492": {
    "name": "0x16bb…8492",
-   "buysRead": 100,
-   "at": "2026-11-23T04:07:25.476Z",
+   "buysRead": 0,
+   "at": "2026-11-23T04:29:08.981Z",
    "all": {
-    "med": 5135,
-    "avg": 9427,
-    "n": 77
+    "med": null,
+    "avg": null,
+    "n": 0
    },
    "sports": {
     "NBA": {
@@ -1381,9 +1381,9 @@
      "n": 0
     },
     "NFL": {
-     "med": 10708,
-     "avg": 16299,
-     "n": 28
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "NHL": {
      "med": null,
@@ -1401,14 +1401,14 @@
      "n": 0
     },
     "CFB": {
-     "med": 1052,
-     "avg": 5511,
-     "n": 47
+     "med": null,
+     "avg": null,
+     "n": 0
     },
     "CBB": {
-     "med": 1319,
-     "avg": 1319,
-     "n": 1
+     "med": null,
+     "avg": null,
+     "n": 0
     }
    }
   },
@@ -2166,28 +2166,28 @@
   },
   "0x2b344112f63e69a2e411b0cb7f200cbc0051176e": {
    "name": "MAGATheeStallion",
-   "buysRead": 0,
-   "at": "2026-11-23T04:07:25.476Z",
+   "buysRead": 100,
+   "at": "2026-11-23T04:29:08.981Z",
    "all": {
-    "med": null,
-    "avg": null,
-    "n": 0
+    "med": 3000,
+    "avg": 3000,
+    "n": 98
    },
    "sports": {
     "NBA": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 3000,
+     "avg": 3000,
+     "n": 41
     },
     "NFL": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 3000,
+     "avg": 3000,
+     "n": 11
     },
     "NHL": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 3000,
+     "avg": 3000,
+     "n": 10
     },
     "MLB": {
      "med": null,
@@ -2200,14 +2200,14 @@
      "n": 0
     },
     "CFB": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 3000,
+     "avg": 3000,
+     "n": 24
     },
     "CBB": {
-     "med": null,
-     "avg": null,
-     "n": 0
+     "med": 3000,
+     "avg": 3000,
+     "n": 12
     }
    }
   },
