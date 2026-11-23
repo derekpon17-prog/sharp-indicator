@@ -172,7 +172,7 @@ function buildCards(sp, latest, flags, before) { // before: optional Date - only
     const star = sides.some(x => x.matchup === s.matchup && grpOf(x.market) === grpOf(s.market) && x.tail);
     // Record label (Derek, Nov 20 2026): the number on the right of each row is that wallet's record in THIS sport and
     // bet type - all-time for SharpFlow rows (mktRecord), last 45 days for Poly rows. Say so under the number.
-    const lab = v => v && v.rows ? { ...v, rows: v.rows.map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.mk || x.market} · all-time record` })) } : v;
+    const lab = v => v && v.rows ? { ...v, rows: R.tagWallets(v.rows).map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.mk || x.market} · all-time record` })) } : v;
     r.for = lab(r.for); r.against = lab(r.against);
     const siteLock = (a, b, c) => siteLockOf(latest, a, b, c);
     const pv = polyFor(sp, s.matchup, grpOf(s.market), r);

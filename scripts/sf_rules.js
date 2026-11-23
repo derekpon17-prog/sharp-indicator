@@ -111,7 +111,7 @@ const rowOf = t => {
   const betTxt = t.market === 'TOTAL' ? String(t.pick).toUpperCase() + (pr ? ' ' + pr : '')            // UNDER 224.5 -113
     : t.market === 'SPREAD' ? 'SPREAD' + (ln ? ' ' + ln : '') + (pr ? ' ' + pr : '')                   // SPREAD +1.5 -104
     : 'ML' + (pr ? ' ' + pr : '');                                                                     // ML -113
-  return { team: teamOf(t.pick) || t.pick, wallet: t.wallet, market: betTxt, mk: mkName(t.market).toUpperCase(), record: t.mktRecord,
+  return { team: teamOf(t.pick) || t.pick, wallet: t.wallet, wid: t.wid, market: betTxt, mk: mkName(t.market).toUpperCase(), record: t.mktRecord,
     roi: t.mktRoi, dollars: t.dollars, note: noteOf(t), status: cold(t) ? { t: st.t + ' - not counted', c: 'red' } : st };
 };
 function matchupRow(sp, tix, grp) {
@@ -221,7 +221,17 @@ function polyFor(poly, sp, matchup, grp, r) {
 }
 
 // Record label under each row's record number (the row's market field now carries the bet line and price).
-const labRows = (sp, v) => v && v.rows ? { ...v, rows: v.rows.map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.mk || x.market} \u00b7 all-time record` })) } : v;
+/* Wallet identity (Derek, Nov 23 2026): the A/B/C letter is reshuffled every board, so show the stable wallet id next to it and say
+   when one wallet is on more than one row of the same card (ML + spread). SharpFlow does not publish names - the id is the identity. */
+const tagWallets = rows => {
+  const cnt = {}; rows.forEach(x => { if (x.wid) (cnt[x.wid] ||= []).push(x); });
+  return rows.map(x => {
+    if (!x.wid) return x;
+    const mine = cnt[x.wid], others = mine.filter(y => y !== x).map(y => y.mk || y.market);
+    return { ...x, wallet: x.wallet + ' #' + x.wid, note: (x.note ? x.note + ' \u00b7 ' : '') + (others.length ? 'SAME WALLET as its ' + others.join(' + ') + ' row' : ''), };
+  }).map(x => ({ ...x, note: String(x.note || '').replace(/ \u00b7 $/, '') }));
+};
+const labRows = (sp, v) => v && v.rows ? { ...v, rows: tagWallets(v.rows).map(x => ({ ...x, recLabel: x.recLabel || `${sp} ${x.mk || x.market} \u00b7 all-time record` })) } : v;
 /* Posted-play cross-check (Derek, Nov 22 2026): when new wallet money lands after a card went out, say whether it is WITH or AGAINST a
    PLAY we already posted for that game. posted = scripts/posted_plays.py output. Team sides only (ML/spread); totals are not matched.
    Display only - it never changes a tier. */
@@ -239,4 +249,4 @@ function postedNote(posted, sport, matchup, pick, market) {
   return null;
 }
 
-module.exports = { postedNote, labRows, polyFor, siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };
+module.exports = { tagWallets, postedNote, labRows, polyFor, siteLockTxt, formRoi, matchupRow, isOpposed, againstChips, status, simpleChips, cold, coldMkt, coldForm, coldWhy, hotWins, floorFor, sizeChip, segmentChips, recPlay, confFor, CONF_LEGEND };
