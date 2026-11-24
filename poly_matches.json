@@ -1,5 +1,5 @@
 {
- "at": "2026-11-24T11:39:09.625Z",
+ "at": "2026-11-24T14:31:37.633Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
@@ -36,12 +36,7 @@
    "sportCls": "HOT",
    "gateNote": "HOT overall but cold in SPREAD (65-67, -19.3% ROI)",
    "sameAsSF": null,
-   "l10": {
-    "w": 6,
-    "l": 4,
-    "n": 10,
-    "txt": "L10 NCAAF 6-4"
-   },
+   "l10": null,
    "usualMed": null,
    "usualN": 0,
    "usualScope": null,
@@ -82,15 +77,10 @@
    "sportCls": "HOT",
    "gateNote": null,
    "sameAsSF": {
-    "sfWallet": "A",
+    "sfWallet": "B",
     "sfDollars": 513
    },
-   "l10": {
-    "w": 6,
-    "l": 4,
-    "n": 10,
-    "txt": "L10 NCAAF 6-4"
-   },
+   "l10": null,
    "usualMed": null,
    "usualN": 0,
    "usualScope": null,
@@ -102,15 +92,15 @@
  "errors": [],
  "rosterGeneratedAt": "2026-11-24T02:55:44.660Z",
  "hotBar": {
-  "graded": 47,
+  "graded": 48,
   "mktMin": 10,
   "roiMin": 15
  },
- "sfScannedAt": "2026-11-24T04:23:32.246Z",
+ "sfScannedAt": "2026-11-24T14:17:42.579Z",
  "espnGames": 211,
  "espnErrors": [],
- "espnAdded": 189,
- "games": 200,
+ "espnAdded": 184,
+ "games": 209,
  "walletsChecked": 145,
  "inGameSkipped": 0,
  "offCardMatches": 0
