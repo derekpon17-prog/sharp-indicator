@@ -36,7 +36,9 @@
    "usualMed": 14566,
    "usualScope": "NFL",
    "vsUsual": 0.92,
-   "sizeTier": "NORMAL"
+   "sizeTier": "NORMAL",
+   "closePrice": 0.505,
+   "clv": -0.005
   },
   "NFL|Bengals at Commanders|SPREAD|Bengals|0x2b344112f63e69a2e411b0cb7f200cbc0051176e": {
    "sport": "NFL",
@@ -73,7 +75,9 @@
    "usualMed": 2000,
    "usualScope": "NFL",
    "vsUsual": 1.5,
-   "sizeTier": "BIG"
+   "sizeTier": "BIG",
+   "closePrice": 0.495,
+   "clv": -0.0189
   },
   "NHL|Flames at Senators|ML|Senators|0x25867077c891354137bbaf7fde12eec6949cc893": {
    "sport": "NHL",
@@ -110,7 +114,9 @@
    "usualMed": 912,
    "usualScope": "NHL",
    "vsUsual": 1.81,
-   "sizeTier": "BIG"
+   "sizeTier": "BIG",
+   "closePrice": 0.715,
+   "clv": 0.0661
   },
   "NHL|Flames at Senators|ML|Senators|0xf62b709646bdf9bc15bedb094ee6ac062857844a": {
    "sport": "NHL",
@@ -147,7 +153,9 @@
    "usualMed": 1468,
    "usualScope": "NHL",
    "vsUsual": 1.58,
-   "sizeTier": "BIG"
+   "sizeTier": "BIG",
+   "closePrice": 0.715,
+   "clv": 0.0356
   },
   "NHL|Ducks at Kraken|ML|Kraken|0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade": {
    "sport": "NHL",
@@ -258,7 +266,9 @@
    "usualMed": 776,
    "usualScope": "NBA",
    "vsUsual": 1.57,
-   "sizeTier": "BIG"
+   "sizeTier": "BIG",
+   "closePrice": 0.525,
+   "clv": 0.015
   },
   "NBA|Cavaliers at Bulls|TOTAL|Under|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -295,7 +305,9 @@
    "usualMed": 776,
    "usualScope": "NBA",
    "vsUsual": 1.04,
-   "sizeTier": "NORMAL"
+   "sizeTier": "NORMAL",
+   "closePrice": 0.525,
+   "clv": -0.0336
   },
   "NBA|Grizzlies at Hornets|TOTAL|Under|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -429,7 +441,7 @@
    "firstPrice": 0.66,
    "firstUsd": 990,
    "maxUsd": 990,
-   "lastSeenAt": "2026-11-24T00:36:44.411Z",
+   "lastSeenAt": "2026-11-24T01:35:01.469Z",
    "rec": "26-17",
    "roi": -1.8,
    "n": 43,
@@ -442,10 +454,49 @@
    "firstBuyUtc": "2026-11-23T20:27:01.000Z",
    "hoursBeforeStart": 6.2,
    "gameSource": "espn",
+   "usualMed": 926,
+   "usualScope": "NHL",
+   "vsUsual": 1.07,
+   "sizeTier": "NORMAL"
+  },
+  "NFL|Bengals at Commanders|SPREAD|Commanders|0x126266f57f9812c42daaf69767f622ad36ce056f": {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "SPREAD",
+   "side": "Commanders",
+   "grp": "team",
+   "wallet": "0x126266f57f9812c42daaf69767f622ad36ce056f",
+   "name": "0x8g68hBa8tyH1946Bhjb674g3fuyUIGYUi4uhflks",
+   "cls": "COLD",
+   "sportCls": "COLD",
+   "gateNote": null,
+   "startUtc": "2026-11-24T01:18:00.000Z",
+   "conditionId": "0xda43dd854e0cc3112395637026eea4a388be4d9904f6d3ee4b9299ab728e72b8",
+   "outcome": "Commanders",
+   "title": "Spread: Bengals (-5.5)",
+   "firstSeenAt": "2026-11-24T01:35:01.469Z",
+   "firstPrice": 0.46,
+   "firstUsd": 668,
+   "maxUsd": 668,
+   "lastSeenAt": "2026-11-24T01:35:01.469Z",
+   "rec": "96-89",
+   "roi": -24.1,
+   "n": 185,
+   "recScope": "NFL SPREAD, last 45 days",
+   "l10": "L10 NFL 6-4",
+   "onCard": true,
+   "sameAsSF": false,
+   "twoSided": false,
+   "tokenId": "88990491025972386940642697347058200396134680042820424768748695510294115329371",
+   "firstBuyUtc": "2026-11-24T01:12:17.000Z",
+   "hoursBeforeStart": 0.1,
+   "gameSource": "sharpflow",
    "usualMed": null,
    "usualScope": null,
    "vsUsual": null,
-   "sizeTier": null
+   "sizeTier": null,
+   "closePrice": 0.455,
+   "clv": -0.005
   }
  }
 }

@@ -1,8 +1,54 @@
 {
- "at": "2026-11-24T00:36:44.411Z",
+ "at": "2026-11-24T01:35:01.469Z",
  "ok": true,
  "minUsd": 500,
  "matches": [
+  {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "grp": "team",
+   "side": "Commanders",
+   "market": "SPREAD",
+   "cls": "COLD",
+   "startUtc": "2026-11-24T01:18:00.000Z",
+   "gameDate": "2026-11-23",
+   "conditionId": "0xda43dd854e0cc3112395637026eea4a388be4d9904f6d3ee4b9299ab728e72b8",
+   "outcome": "Commanders",
+   "tokenId": "88990491025972386940642697347058200396134680042820424768748695510294115329371",
+   "gradeTitle": "Spread: Bengals (-5.5)",
+   "gradePrice": 0.46,
+   "onCard": true,
+   "wallet": "0x126266f57f9812c42daaf69767f622ad36ce056f",
+   "name": "0x8g68hBa8tyH1946Bhjb674g3fuyUIGYUi4uhflks",
+   "usd": 668,
+   "fills": 8,
+   "avgPrice": 0.46,
+   "lastBuyUtc": "2026-11-24T01:12:41.000Z",
+   "firstBuyUtc": "2026-11-24T01:12:17.000Z",
+   "hoursBeforeStart": 0.1,
+   "gameSource": "sharpflow",
+   "title": "Spread: Bengals (-5.5)",
+   "rec": "96-89",
+   "roi": -24.1,
+   "n": 185,
+   "recScope": "NFL SPREAD, last 45 days",
+   "twoSided": false,
+   "sportCls": "COLD",
+   "gateNote": null,
+   "sameAsSF": null,
+   "l10": {
+    "w": 6,
+    "l": 4,
+    "n": 10,
+    "txt": "L10 NFL 6-4"
+   },
+   "usualMed": null,
+   "usualN": 0,
+   "usualScope": null,
+   "vsUsual": null,
+   "vsUsualAll": null,
+   "sizeTier": null
+  },
   {
    "sport": "NHL",
    "matchup": "Ducks at Kraken",
@@ -39,13 +85,18 @@
     "sfWallet": "A",
     "sfDollars": 990
    },
-   "l10": null,
-   "usualMed": null,
-   "usualN": 0,
-   "usualScope": null,
-   "vsUsual": null,
-   "vsUsualAll": null,
-   "sizeTier": null
+   "l10": {
+    "w": 6,
+    "l": 4,
+    "n": 10,
+    "txt": "L10 NHL 6-4"
+   },
+   "usualMed": 926,
+   "usualN": 12,
+   "usualScope": "NHL",
+   "vsUsual": 1.07,
+   "vsUsualAll": 1.42,
+   "sizeTier": "NORMAL"
   }
  ],
  "errors": [],
@@ -55,12 +106,12 @@
   "mktMin": 10,
   "roiMin": 15
  },
- "sfScannedAt": "2026-11-24T00:14:08.718Z",
+ "sfScannedAt": "2026-11-24T01:13:34.397Z",
  "espnGames": 250,
  "espnErrors": [],
- "espnAdded": 205,
+ "espnAdded": 203,
  "games": 227,
  "walletsChecked": 68,
- "inGameSkipped": 7,
+ "inGameSkipped": 229,
  "offCardMatches": 0
 }

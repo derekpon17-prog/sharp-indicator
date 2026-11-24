@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T00:36:47.513Z",
+ "updated": "2026-11-24T01:35:05.352Z",
  "note": "Usual = median game-line position dollars per wallet (this sport needs 5+ positions, else all sports), from the last ~600 Polymarket buys; today's own markets excluded.",
  "wallets": {
   "0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade": {
@@ -2401,8 +2401,55 @@
   },
   "0xa39a38fbb98ad026c5a6b126d74d891e1be51246": {
    "name": "MrBently",
+   "buysRead": 100,
+   "at": "2026-11-24T01:35:05.352Z",
+   "all": {
+    "med": 696,
+    "avg": 716,
+    "n": 20
+   },
+   "sports": {
+    "NBA": {
+     "med": 102,
+     "avg": 102,
+     "n": 1
+    },
+    "NFL": {
+     "med": 1080,
+     "avg": 1080,
+     "n": 1
+    },
+    "NHL": {
+     "med": 926,
+     "avg": 714,
+     "n": 12
+    },
+    "MLB": {
+     "med": null,
+     "avg": null,
+     "n": 0
+    },
+    "WNBA": {
+     "med": null,
+     "avg": null,
+     "n": 0
+    },
+    "CFB": {
+     "med": null,
+     "avg": null,
+     "n": 0
+    },
+    "CBB": {
+     "med": null,
+     "avg": null,
+     "n": 0
+    }
+   }
+  },
+  "0x126266f57f9812c42daaf69767f622ad36ce056f": {
+   "name": "0x8g68hBa8tyH1946Bhjb674g3fuyUIGYUi4uhflks",
    "buysRead": 0,
-   "at": "2026-11-24T00:36:47.513Z",
+   "at": "2026-11-24T01:35:05.352Z",
    "all": {
     "med": null,
     "avg": null,
