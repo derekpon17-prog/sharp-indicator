@@ -108,7 +108,7 @@ def strip_poly(card):
         blk = card.get(key)
         if isinstance(blk, dict):
             if isinstance(blk.get("sources"), str):
-                blk["sources"] = " - ".join(x for x in blk["sources"].split(" - ") if "polymarket" not in x.lower())
+                blk["sources"] = " - ".join(x for x in blk["sources"].split(" - ") if "polymarket" not in x.lower() and not x.strip().lower().startswith("poly "))
             for fld in ("footer", "note"):
                 if isinstance(blk.get(fld), str):
                     blk[fld] = scrub(blk[fld])
