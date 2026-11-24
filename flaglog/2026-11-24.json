@@ -17,7 +17,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Packers at Rams|ML|Rams": {
    "sport": "NFL",
@@ -28,12 +28,13 @@
    "firstSeenAt": "2026-11-24T14:31:05.988Z",
    "firstPrice": "-127",
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "SIZED_UP"
    ],
-   "maxVsUsual": 0.7,
-   "maxDollars": 2800,
-   "opposedSeen": false,
-   "snapshots": 1
+   "maxVsUsual": 1.2,
+   "maxDollars": 8582,
+   "opposedSeen": true,
+   "snapshots": 2
   },
   "Pistons at Magic|ML|Pistons": {
    "sport": "NBA",
@@ -46,12 +47,13 @@
    "tags": [
     "STRONG_VS_WEAK",
     "SIZED_UP",
-    "SIZED_2X"
+    "SIZED_2X",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 2.3,
    "maxDollars": 3564,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -67,7 +69,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -83,7 +85,7 @@
    "maxVsUsual": 5.3,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Tennessee Volunteers at Maryland Terrapins|ML|Tennessee Volunteers": {
    "sport": "CBB",
@@ -99,7 +101,7 @@
    "maxVsUsual": 2,
    "maxDollars": 3015,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Miami Hurricanes at TCU Horned Frogs|ML|TCU Horned Frogs": {
    "sport": "CBB",
@@ -115,7 +117,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1240,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "USC at UCLA|ML|USC": {
    "sport": "CFB",
@@ -131,7 +133,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -147,7 +149,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "West Virginia at Utah|SPREAD|West Virginia +20.5": {
    "sport": "CFB",
@@ -179,7 +181,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
    "sport": "CFB",
@@ -195,7 +197,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
    "sport": "CFB",
@@ -211,7 +213,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
    "sport": "CFB",
@@ -227,7 +229,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "South Carolina at Clemson|SPREAD|Clemson +5.5": {
    "sport": "CFB",
@@ -243,7 +245,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "UCF at Colorado|TOTAL|Over 49.5": {
    "sport": "CFB",
@@ -259,7 +261,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Mavericks at Nuggets|ML|Mavericks": {
    "sport": "NBA",
@@ -270,12 +272,13 @@
    "firstSeenAt": "2026-11-24T16:31:57.602Z",
    "firstPrice": "+258",
    "tags": [
-    "STRONG_VS_WEAK"
+    "STRONG_VS_WEAK",
+    "STRONG_UNOPPOSED"
    ],
    "maxVsUsual": 0.9,
    "maxDollars": 1417,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -291,7 +294,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Appalachian State at South Alabama|TOTAL|Under 57.5": {
    "sport": "CFB",
@@ -307,7 +310,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   }
  }
 }
