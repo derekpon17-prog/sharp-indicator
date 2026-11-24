@@ -1,6 +1,6 @@
 {
  "date": "2026-11-24",
- "scannedAt": "2026-11-24T20:16:01.514Z",
+ "scannedAt": "2026-11-24T21:15:35.768Z",
  "sports": {
   "NFL": [
    {
@@ -141,6 +141,27 @@
     ]
    },
    {
+    "id": "94aadd",
+    "gap": 3.3,
+    "overall": "29-26",
+    "sport": "14-11",
+    "returnPct": 37.2,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Pistons at Magic",
+      "market": "SPREAD",
+      "pick": "Pistons -4.5",
+      "line": -4.5,
+      "price": "+138",
+      "dollars": 630,
+      "vsUsual": 1.8,
+      "vsUsualAll": 0.2
+     }
+    ]
+   },
+   {
     "id": "d6ca9b",
     "gap": 0,
     "overall": "10-7",
@@ -249,9 +270,9 @@
       "pick": "Over 37.5",
       "line": 37.5,
       "price": "-104",
-      "dollars": 866,
-      "vsUsual": 0.9,
-      "vsUsualAll": 1.4
+      "dollars": 966,
+      "vsUsual": 1,
+      "vsUsualAll": 1.5
      },
      {
       "matchup": "Arizona State at Arizona",
