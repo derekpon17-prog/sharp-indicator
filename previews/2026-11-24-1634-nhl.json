@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-24",
+ "posted_ct": "1634",
+ "sport": "NHL",
+ "outlier": false,
+ "first_start": "2026-11-25T01:00:00.000Z",
+ "snapshot": "2026-11-24T22:16:13.201Z",
+ "sides": [
+  {
+   "game": "Golden Knights at Oilers",
+   "market": "TOTAL",
+   "pick": "Over",
+   "start_utc": "2026-11-25T01:10:00.000Z",
+   "dollars": 15531,
+   "opp_dollars": 0,
+   "wallets": 2,
+   "max_vs_usual": 1,
+   "all_sport_ratio": 2.32,
+   "price": "+108",
+   "line": 6.5,
+   "l30_rec": "8-5",
+   "l30_roi": 19.8,
+   "mkt_rec": "9-5",
+   "mkt_roi": 21.8,
+   "mkt_l30_rec": "8-5",
+   "tail": false
+  }
+ ]
+}
