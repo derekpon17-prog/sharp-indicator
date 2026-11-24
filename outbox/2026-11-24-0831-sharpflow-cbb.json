@@ -1,0 +1,83 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CBB - first game 9:00am CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CBB - sharp wallets",
+   "subtitle": "Wallets with positive CBB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:17am CT",
+   "sections": [
+    {
+     "heading": "CBB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Jacksonville Dolphins at Indiana Hoosiers",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - INDIANA HOOSIERS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Indiana Hoosiers",
+       "price": null,
+       "for": {
+        "team": "INDIANA HOOSIERS",
+        "rows": [
+         {
+          "team": "Indiana Hoosiers",
+          "wallet": "RollAwayTheDew #aaedcd",
+          "wid": "aaedcd",
+          "market": "ML -3746",
+          "mk": "ML",
+          "record": "13-4",
+          "roi": -2.4,
+          "dollars": 2568,
+          "note": "5.3x usual, L10 8-2",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "CBB ML · all-time record"
+         },
+         {
+          "team": "Indiana Hoosiers",
+          "wallet": "D #9bc9a1",
+          "wid": "9bc9a1",
+          "market": "ML -3025",
+          "mk": "ML",
+          "record": "14-2",
+          "roi": 9.6,
+          "dollars": 627,
+          "note": "0.6x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          },
+          "recLabel": "CBB ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "INDIANA HOOSIERS",
+         "dollars": 3195,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Tennessee Volunteers ML $3K (1-2 here, -67% ROI); TCU Horned Frogs ML $1.2K (0-1 here, -100% ROI) | Poly calls since Nov 20 at Polymarket prices: HOT 23-25 -0.1u, COLD sides 107-98 (fading -4.9u) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
