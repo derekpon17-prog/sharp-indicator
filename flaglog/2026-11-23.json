@@ -16,7 +16,7 @@
    "maxVsUsual": 2.8,
    "maxDollars": 2043,
    "opposedSeen": false,
-   "snapshots": 24
+   "snapshots": 26
   },
   "Grizzlies at Hornets|ML|Grizzlies": {
    "sport": "NBA",
@@ -68,7 +68,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Thunder at Pacers|ML|Thunder": {
    "sport": "NBA",
@@ -122,7 +122,7 @@
    "maxVsUsual": 17.4,
    "maxDollars": 299959,
    "opposedSeen": false,
-   "snapshots": 35
+   "snapshots": 38
   },
   "Cavaliers at Bulls|TOTAL|Over 239.5": {
    "sport": "NBA",
@@ -171,7 +171,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -187,7 +187,7 @@
    "maxVsUsual": 5.2,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Fairleigh Dickinson Knights at Iona Gaels|TOTAL|Under": {
    "sport": "CBB",
@@ -221,7 +221,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 16
+   "snapshots": 18
   },
   "Trail Blazers at 76ers|SPREAD|76ers -2.5": {
    "sport": "NBA",
@@ -286,7 +286,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Trail Blazers at 76ers|TOTAL|Over": {
    "sport": "NBA",
@@ -479,9 +479,9 @@
     "SIZED_2X"
    ],
    "maxVsUsual": 3.5,
-   "maxDollars": 11813,
+   "maxDollars": 13185,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 8
   },
   "Clippers at Rockets|TOTAL|Over 224.5": {
    "sport": "NBA",
@@ -579,8 +579,41 @@
    ],
    "maxVsUsual": 15.6,
    "maxDollars": 93241,
-   "opposedSeen": false,
+   "opposedSeen": true,
+   "snapshots": 3
+  },
+  "Spurs at Kings|SPREAD|Spurs": {
+   "sport": "NBA",
+   "matchup": "Spurs at Kings",
+   "market": "SPREAD",
+   "pick": "Spurs",
+   "kickoffEt": "Mon, Nov 23, 10:11 PM",
+   "firstSeenAt": "2026-11-24T04:33:21.768Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.7,
+   "maxDollars": 5013,
+   "opposedSeen": true,
    "snapshots": 2
+  },
+  "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
+   "sport": "CFB",
+   "matchup": "Liberty at Missouri State",
+   "market": "SPREAD",
+   "pick": "Missouri State +17.5",
+   "kickoffEt": "Sat, Nov 28, 2:00 PM",
+   "firstSeenAt": "2026-11-24T04:33:21.768Z",
+   "firstPrice": "-113",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
   }
  }
 }
