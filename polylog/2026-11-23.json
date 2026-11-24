@@ -38,7 +38,12 @@
    "vsUsual": 0.92,
    "sizeTier": "NORMAL",
    "closePrice": 0.505,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|SPREAD|Bengals|0x2b344112f63e69a2e411b0cb7f200cbc0051176e": {
    "sport": "NFL",
@@ -77,7 +82,12 @@
    "vsUsual": 1.5,
    "sizeTier": "BIG",
    "closePrice": 0.495,
-   "clv": -0.0189
+   "clv": -0.0189,
+   "result": "L",
+   "u": -1.057,
+   "fadeU": 1.057,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NHL|Flames at Senators|ML|Senators|0x25867077c891354137bbaf7fde12eec6949cc893": {
    "sport": "NHL",
@@ -116,7 +126,12 @@
    "vsUsual": 1.81,
    "sizeTier": "BIG",
    "closePrice": 0.715,
-   "clv": 0.0661
+   "clv": 0.0661,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NHL|Flames at Senators|ML|Senators|0xf62b709646bdf9bc15bedb094ee6ac062857844a": {
    "sport": "NHL",
@@ -155,7 +170,12 @@
    "vsUsual": 1.58,
    "sizeTier": "BIG",
    "closePrice": 0.715,
-   "clv": 0.0356
+   "clv": 0.0356,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NHL|Ducks at Kraken|ML|Kraken|0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade": {
    "sport": "NHL",
@@ -194,7 +214,12 @@
    "vsUsual": 2.06,
    "sizeTier": "BIG",
    "closePrice": 0.505,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NHL|Wild at Sharks|ML|Sharks|0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade": {
    "sport": "NHL",
@@ -233,7 +258,12 @@
    "vsUsual": 0.38,
    "sizeTier": "SMALL",
    "closePrice": 0.375,
-   "clv": 0.0337
+   "clv": 0.0337,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Bucks at Raptors|TOTAL|Under|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -272,7 +302,12 @@
    "vsUsual": 1.57,
    "sizeTier": "BIG",
    "closePrice": 0.525,
-   "clv": 0.015
+   "clv": 0.015,
+   "result": "L",
+   "u": -1.041,
+   "fadeU": 1.041,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Cavaliers at Bulls|TOTAL|Under|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -311,7 +346,12 @@
    "vsUsual": 1.04,
    "sizeTier": "NORMAL",
    "closePrice": 0.525,
-   "clv": -0.0336
+   "clv": -0.0336,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Grizzlies at Hornets|TOTAL|Under|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -394,7 +434,12 @@
    "vsUsual": 0.33,
    "sizeTier": "SMALL",
    "closePrice": 0.535,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1.174,
+   "fadeU": 1.174,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Clippers at Rockets|TOTAL|Under|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -433,7 +478,12 @@
    "vsUsual": 0.8,
    "sizeTier": "NORMAL",
    "closePrice": 0.595,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NHL|Ducks at Kraken|TOTAL|Over|0xa39a38fbb98ad026c5a6b126d74d891e1be51246": {
    "sport": "NHL",
@@ -472,7 +522,12 @@
    "vsUsual": 1.07,
    "sizeTier": "NORMAL",
    "closePrice": 0.655,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1.941,
+   "fadeU": 1.941,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|SPREAD|Commanders|0x126266f57f9812c42daaf69767f622ad36ce056f": {
    "sport": "NFL",
@@ -511,7 +566,12 @@
    "vsUsual": 8.56,
    "sizeTier": "BIG",
    "closePrice": 0.455,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1.174,
+   "fadeU": -1.174,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|TOTAL|Under|0xf0318c32136c2db7fec88b84869aee6a1106c80c": {
    "sport": "NFL",
@@ -550,7 +610,12 @@
    "vsUsual": null,
    "sizeTier": null,
    "closePrice": 0.515,
-   "clv": 0.005
+   "clv": 0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|ML|Bengals|0x5f0718ff03268ac06ab4623f755ea4d4d77f9d0f": {
    "sport": "NFL",
@@ -589,7 +654,12 @@
    "vsUsual": 1.58,
    "sizeTier": "BIG",
    "closePrice": 0.735,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -2.846,
+   "fadeU": 2.846,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|SPREAD|Bengals|0x5f0718ff03268ac06ab4623f755ea4d4d77f9d0f": {
    "sport": "NFL",
@@ -628,7 +698,12 @@
    "vsUsual": 0.76,
    "sizeTier": "NORMAL",
    "closePrice": 0.495,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|SPREAD|Commanders|0xcdf674ec47b181f8028f5c70ac4325bd6167d7f7": {
    "sport": "NFL",
@@ -667,7 +742,12 @@
    "vsUsual": 2.94,
    "sizeTier": "BIG",
    "closePrice": 0.65,
-   "clv": 0
+   "clv": 0,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|TOTAL|Under|0x760907c8840491c8c86fddb843d3f1d801786c4e": {
    "sport": "NFL",
@@ -706,7 +786,12 @@
    "vsUsual": 1.16,
    "sizeTier": "NORMAL",
    "closePrice": 0.515,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|ML|Bengals|0x760907c8840491c8c86fddb843d3f1d801786c4e": {
    "sport": "NFL",
@@ -745,7 +830,12 @@
    "vsUsual": 1.64,
    "sizeTier": "BIG",
    "closePrice": 0.735,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -2.846,
+   "fadeU": 2.846,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|SPREAD|Bengals|0x853212cd809da6acc458021c106af749b7aa738b": {
    "sport": "NFL",
@@ -784,7 +874,12 @@
    "vsUsual": 1.65,
    "sizeTier": "BIG",
    "closePrice": 0.545,
-   "clv": 0.015
+   "clv": 0.015,
+   "result": "L",
+   "u": -1.128,
+   "fadeU": 1.128,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|SPREAD|Commanders|0xa82b0e89cf734e2fa70cbd52ca65c77d64595220": {
    "sport": "NFL",
@@ -823,7 +918,12 @@
    "vsUsual": 22.86,
    "sizeTier": "BIG",
    "closePrice": 0.565,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|ML|Commanders|0xa82b0e89cf734e2fa70cbd52ca65c77d64595220": {
    "sport": "NFL",
@@ -862,7 +962,12 @@
    "vsUsual": 5.36,
    "sizeTier": "BIG",
    "closePrice": 0.265,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 2.704,
+   "fadeU": -2.704,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|TOTAL|Under|0xa82b0e89cf734e2fa70cbd52ca65c77d64595220": {
    "sport": "NFL",
@@ -901,7 +1006,12 @@
    "vsUsual": 10.61,
    "sizeTier": "BIG",
    "closePrice": 0.515,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NFL|Bengals at Commanders|TOTAL|Over|0xd38b71f3e8ed1af71983e5c309eac3dfa9b35029": {
    "sport": "NFL",
@@ -940,7 +1050,12 @@
    "vsUsual": 0.99,
    "sizeTier": "NORMAL",
    "closePrice": 0.485,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Grizzlies at Hornets|TOTAL|Under|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1023,7 +1138,12 @@
    "vsUsual": 0.42,
    "sizeTier": "SMALL",
    "closePrice": 0.535,
-   "clv": 0.035
+   "clv": 0.035,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Suns at Pelicans|SPREAD|Pelicans|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1062,7 +1182,12 @@
    "vsUsual": 0.24,
    "sizeTier": "SMALL",
    "closePrice": 0.505,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1.041,
+   "fadeU": 1.041,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Suns at Pelicans|TOTAL|Over|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1101,7 +1226,12 @@
    "vsUsual": 0.93,
    "sizeTier": "NORMAL",
    "closePrice": 0.465,
-   "clv": -0.035
+   "clv": -0.035,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Suns at Pelicans|TOTAL|Over|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -1140,7 +1270,12 @@
    "vsUsual": 2.15,
    "sizeTier": "BIG",
    "closePrice": 0.465,
-   "clv": -0.015
+   "clv": -0.015,
+   "result": "W",
+   "u": 1.083,
+   "fadeU": -1.083,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Cavaliers at Bulls|TOTAL|Over|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1179,7 +1314,12 @@
    "vsUsual": 0.32,
    "sizeTier": "SMALL",
    "closePrice": 0.475,
-   "clv": -0.015
+   "clv": -0.015,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Cavaliers at Bulls|TOTAL|Under|0x27f738fe203827445690339104aae35b20bc44b0": {
    "sport": "NBA",
@@ -1218,7 +1358,12 @@
    "vsUsual": 5.4,
    "sizeTier": "BIG",
    "closePrice": 0.465,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "W",
+   "u": 1.128,
+   "fadeU": -1.128,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Trail Blazers at 76ers|SPREAD|76ers|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -1345,7 +1490,12 @@
    "vsUsual": 4.84,
    "sizeTier": "BIG",
    "closePrice": 0.395,
-   "clv": -0.0049
+   "clv": -0.0049,
+   "result": "W",
+   "u": 1.501,
+   "fadeU": -1.501,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Spurs at Kings|SPREAD|Kings|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -1384,7 +1534,12 @@
    "vsUsual": 15.69,
    "sizeTier": "BIG",
    "closePrice": 0.635,
-   "clv": 0.0179
+   "clv": 0.0179,
+   "result": "L",
+   "u": -1.612,
+   "fadeU": 1.612,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Bucks at Raptors|TOTAL|Under|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1423,7 +1578,12 @@
    "vsUsual": 1.74,
    "sizeTier": "BIG",
    "closePrice": 0.455,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Thunder at Pacers|TOTAL|Over|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1462,7 +1622,12 @@
    "vsUsual": 0.26,
    "sizeTier": "SMALL",
    "closePrice": 0.61,
-   "clv": 0.11
+   "clv": 0.11,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Thunder at Pacers|TOTAL|Under|0x27f738fe203827445690339104aae35b20bc44b0": {
    "sport": "NBA",
@@ -1501,7 +1666,12 @@
    "vsUsual": 29.78,
    "sizeTier": "BIG",
    "closePrice": 0.39,
-   "clv": -0.11
+   "clv": -0.11,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Thunder at Pacers|SPREAD|Pacers|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -1540,7 +1710,12 @@
    "vsUsual": 2.87,
    "sizeTier": "BIG",
    "closePrice": 0.485,
-   "clv": 0.0553
+   "clv": 0.0553,
+   "result": "W",
+   "u": 1.327,
+   "fadeU": -1.327,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Thunder at Pacers|SPREAD|Thunder|0x4df332e27f9ee3224f52ce30e3ce15c1075e788f": {
    "sport": "NBA",
@@ -1579,7 +1754,12 @@
    "vsUsual": 3.69,
    "sizeTier": "BIG",
    "closePrice": 0.555,
-   "clv": -0.0251
+   "clv": -0.0251,
+   "result": "L",
+   "u": -1.382,
+   "fadeU": 1.382,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Nets at Timberwolves|TOTAL|Under|0xa2cced8bfae7d645f7f437fb76becf2fcbb70cbc": {
    "sport": "NBA",
@@ -1618,7 +1798,12 @@
    "vsUsual": null,
    "sizeTier": null,
    "closePrice": 0.525,
-   "clv": 0.035
+   "clv": 0.035,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Nets at Timberwolves|TOTAL|Over|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -1657,7 +1842,12 @@
    "vsUsual": 2.05,
    "sizeTier": "BIG",
    "closePrice": 0.455,
-   "clv": -0.025
+   "clv": -0.025,
+   "result": "W",
+   "u": 1.083,
+   "fadeU": -1.083,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Nets at Timberwolves|TOTAL|Over|0x27f738fe203827445690339104aae35b20bc44b0": {
    "sport": "NBA",
@@ -1696,7 +1886,12 @@
    "vsUsual": 65.77,
    "sizeTier": "BIG",
    "closePrice": 0.475,
-   "clv": -0.025
+   "clv": -0.025,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NHL|Wild at Sharks|TOTAL|Over|0xe5f0ae9cc9aef77ae3c2a64c9e69caa3f335dc1d": {
    "sport": "NHL",
@@ -1735,7 +1930,12 @@
    "vsUsual": 2.17,
    "sizeTier": "BIG",
    "closePrice": 0.6,
-   "clv": 0.01
+   "clv": 0.01,
+   "result": "W",
+   "u": 1,
+   "fadeU": -1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NHL|Blue Jackets at Devils|TOTAL|Over|0xe5f0ae9cc9aef77ae3c2a64c9e69caa3f335dc1d": {
    "sport": "NHL",
@@ -1818,7 +2018,12 @@
    "vsUsual": 2.92,
    "sizeTier": "BIG",
    "closePrice": 0.465,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NHL|Flames at Senators|TOTAL|Over|0xe5f0ae9cc9aef77ae3c2a64c9e69caa3f335dc1d": {
    "sport": "NHL",
@@ -1857,7 +2062,12 @@
    "vsUsual": 7.44,
    "sizeTier": "BIG",
    "closePrice": 0.515,
-   "clv": -0.011
+   "clv": -0.011,
+   "result": "L",
+   "u": -1.11,
+   "fadeU": 1.11,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Suns at Pelicans|SPREAD|Suns|0x09f49ea10004f323a40cc1e21f4cd8759c14dac0": {
    "sport": "NBA",
@@ -1896,7 +2106,12 @@
    "vsUsual": null,
    "sizeTier": null,
    "closePrice": 0.455,
-   "clv": -0.0032
+   "clv": -0.0032,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Spurs at Kings|SPREAD|Kings|0xb8c4482802bbc9256926cde54b3daa03ee8e7385": {
    "sport": "NBA",
@@ -1935,7 +2150,12 @@
    "vsUsual": 0.83,
    "sizeTier": "NORMAL",
    "closePrice": 0.475,
-   "clv": -0.005
+   "clv": -0.005,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Jazz at Lakers|SPREAD|Jazz|0xb8c4482802bbc9256926cde54b3daa03ee8e7385": {
    "sport": "NBA",
@@ -1974,7 +2194,12 @@
    "vsUsual": 1.31,
    "sizeTier": "NORMAL",
    "closePrice": 0.475,
-   "clv": -0.0114
+   "clv": -0.0114,
+   "result": "L",
+   "u": -1,
+   "fadeU": 1,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Jazz at Lakers|TOTAL|Over|0xd48a81db62f742c4e42d86dfc23a7ee345366e90": {
    "sport": "NBA",
@@ -2013,7 +2238,12 @@
    "vsUsual": 1.88,
    "sizeTier": "BIG",
    "closePrice": 0.515,
-   "clv": -0.0045
+   "clv": -0.0045,
+   "result": "L",
+   "u": -1.081,
+   "fadeU": 1.081,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   },
   "NBA|Clippers at Rockets|SPREAD|Rockets|0x09f49ea10004f323a40cc1e21f4cd8759c14dac0": {
    "sport": "NBA",
@@ -2052,7 +2282,12 @@
    "vsUsual": null,
    "sizeTier": null,
    "closePrice": 0.535,
-   "clv": 0.0166
+   "clv": 0.0166,
+   "result": "L",
+   "u": -1.076,
+   "fadeU": 1.076,
+   "gradedAt": "2026-11-24T11:39:16.364Z",
+   "gradedBy": "positions"
   }
  }
 }
