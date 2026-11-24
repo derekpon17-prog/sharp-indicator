@@ -11,12 +11,13 @@
    "firstPrice": "-108",
    "tags": [
     "STRONG_UNOPPOSED",
-    "SIZED_15X"
+    "SIZED_15X",
+    "SIZED_UP"
    ],
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Packers at Rams|ML|Rams": {
    "sport": "NFL",
@@ -44,12 +45,13 @@
    "firstPrice": "-127",
    "tags": [
     "STRONG_VS_WEAK",
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.3,
-   "maxDollars": 1933,
+   "maxVsUsual": 2.3,
+   "maxDollars": 3564,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -65,7 +67,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -81,7 +83,7 @@
    "maxVsUsual": 5.3,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Tennessee Volunteers at Maryland Terrapins|ML|Tennessee Volunteers": {
    "sport": "CBB",
@@ -97,7 +99,7 @@
    "maxVsUsual": 2,
    "maxDollars": 3015,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Miami Hurricanes at TCU Horned Frogs|ML|TCU Horned Frogs": {
    "sport": "CBB",
@@ -113,7 +115,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1240,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "USC at UCLA|ML|USC": {
    "sport": "CFB",
@@ -129,7 +131,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -145,7 +147,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "West Virginia at Utah|SPREAD|West Virginia +20.5": {
    "sport": "CFB",
@@ -161,7 +163,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Boston College at Miami (FL)|TOTAL|Under 53.5": {
    "sport": "CFB",
@@ -177,7 +179,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
    "sport": "CFB",
@@ -193,7 +195,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
    "sport": "CFB",
@@ -209,7 +211,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
    "sport": "CFB",
@@ -225,7 +227,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "South Carolina at Clemson|SPREAD|Clemson +5.5": {
    "sport": "CFB",
@@ -241,7 +243,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "UCF at Colorado|TOTAL|Over 49.5": {
    "sport": "CFB",
@@ -251,6 +253,54 @@
    "kickoffEt": "Sat, Nov 28, 2:00 PM",
    "firstSeenAt": "2026-11-24T14:31:05.988Z",
    "firstPrice": "-104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Mavericks at Nuggets|ML|Mavericks": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Nuggets",
+   "market": "ML",
+   "pick": "Mavericks",
+   "kickoffEt": "Tue, Nov 24, 10:10 PM",
+   "firstSeenAt": "2026-11-24T16:31:57.602Z",
+   "firstPrice": "+258",
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 1417,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
+   "sport": "CFB",
+   "matchup": "Tennessee at Vanderbilt",
+   "market": "TOTAL",
+   "pick": "Over 41.5",
+   "kickoffEt": "Sat, Nov 28, 7:00 PM",
+   "firstSeenAt": "2026-11-24T16:31:57.602Z",
+   "firstPrice": "-117",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Appalachian State at South Alabama|TOTAL|Under 57.5": {
+   "sport": "CFB",
+   "matchup": "Appalachian State at South Alabama",
+   "market": "TOTAL",
+   "pick": "Under 57.5",
+   "kickoffEt": "Fri, Nov 27, 3:00 PM",
+   "firstSeenAt": "2026-11-24T16:31:57.602Z",
+   "firstPrice": "-108",
    "tags": [
     "SIZED_UP"
    ],
