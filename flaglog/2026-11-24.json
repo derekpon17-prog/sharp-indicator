@@ -1,0 +1,263 @@
+{
+ "date": "2026-11-24",
+ "sides": {
+  "Packers at Rams|SPREAD|Rams -2.5": {
+   "sport": "NFL",
+   "matchup": "Packers at Rams",
+   "market": "SPREAD",
+   "pick": "Rams -2.5",
+   "kickoffEt": "Wed, Nov 25, 8:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-108",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.9,
+   "maxDollars": 7990,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Packers at Rams|ML|Rams": {
+   "sport": "NFL",
+   "matchup": "Packers at Rams",
+   "market": "ML",
+   "pick": "Rams",
+   "kickoffEt": "Wed, Nov 25, 8:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-127",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.7,
+   "maxDollars": 2800,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Pistons at Magic|ML|Pistons": {
+   "sport": "NBA",
+   "matchup": "Pistons at Magic",
+   "market": "ML",
+   "pick": "Pistons",
+   "kickoffEt": "Tue, Nov 24, 7:11 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-127",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 1933,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Texas at Texas A&M|ML|Texas": {
+   "sport": "CFB",
+   "matchup": "Texas at Texas A&M",
+   "market": "ML",
+   "pick": "Texas",
+   "kickoffEt": "Fri, Nov 27, 7:30 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-238",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 19.4,
+   "maxDollars": 11663,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
+   "sport": "CBB",
+   "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
+   "market": "ML",
+   "pick": "Indiana Hoosiers",
+   "kickoffEt": "Tue, Nov 24, 7:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-3746",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 5.3,
+   "maxDollars": 2568,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Tennessee Volunteers at Maryland Terrapins|ML|Tennessee Volunteers": {
+   "sport": "CBB",
+   "matchup": "Tennessee Volunteers at Maryland Terrapins",
+   "market": "ML",
+   "pick": "Tennessee Volunteers",
+   "kickoffEt": "Tue, Nov 24, 3:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-203",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2,
+   "maxDollars": 3015,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Miami Hurricanes at TCU Horned Frogs|ML|TCU Horned Frogs": {
+   "sport": "CBB",
+   "matchup": "Miami Hurricanes at TCU Horned Frogs",
+   "market": "ML",
+   "pick": "TCU Horned Frogs",
+   "kickoffEt": "Tue, Nov 24, 3:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "+264",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1240,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "USC at UCLA|ML|USC": {
+   "sport": "CFB",
+   "matchup": "USC at UCLA",
+   "market": "ML",
+   "pick": "USC",
+   "kickoffEt": "Sat, Nov 28, 3:30 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-223",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Miami (OH) at Western Michigan|ML|Western Michigan": {
+   "sport": "CFB",
+   "matchup": "Miami (OH) at Western Michigan",
+   "market": "ML",
+   "pick": "Western Michigan",
+   "kickoffEt": "Tue, Nov 24, 7:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-270",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "West Virginia at Utah|SPREAD|West Virginia +20.5": {
+   "sport": "CFB",
+   "matchup": "West Virginia at Utah",
+   "market": "SPREAD",
+   "pick": "West Virginia +20.5",
+   "kickoffEt": "Fri, Nov 27, 9:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "+133",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Boston College at Miami (FL)|TOTAL|Under 53.5": {
+   "sport": "CFB",
+   "matchup": "Boston College at Miami (FL)",
+   "market": "TOTAL",
+   "pick": "Under 53.5",
+   "kickoffEt": "Sat, Nov 28, 12:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "+113",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
+   "sport": "CFB",
+   "matchup": "Liberty at Missouri State",
+   "market": "SPREAD",
+   "pick": "Missouri State +17.5",
+   "kickoffEt": "Sat, Nov 28, 2:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-113",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
+   "sport": "CFB",
+   "matchup": "Arizona State at Arizona",
+   "market": "SPREAD",
+   "pick": "Arizona State +7.5",
+   "kickoffEt": "Sat, Nov 28, 9:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
+   "sport": "CFB",
+   "matchup": "Coastal Carolina at James Madison",
+   "market": "SPREAD",
+   "pick": "Coastal Carolina +17.5",
+   "kickoffEt": "Sat, Nov 28, 2:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "South Carolina at Clemson|SPREAD|Clemson +5.5": {
+   "sport": "CFB",
+   "matchup": "South Carolina at Clemson",
+   "market": "SPREAD",
+   "pick": "Clemson +5.5",
+   "kickoffEt": "Sat, Nov 28, 3:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "+113",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "UCF at Colorado|TOTAL|Over 49.5": {
+   "sport": "CFB",
+   "matchup": "UCF at Colorado",
+   "market": "TOTAL",
+   "pick": "Over 49.5",
+   "kickoffEt": "Sat, Nov 28, 2:00 PM",
+   "firstSeenAt": "2026-11-24T14:31:05.988Z",
+   "firstPrice": "-104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  }
+ }
+}
