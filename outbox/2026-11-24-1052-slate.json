@@ -1,0 +1,289 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 MIDDAY \u00b7 Tue Nov 24** \u00b7 games 12:00-2:59pm CT (NCAAB)",
+ "slate": {
+  "title": "Midday plays (12:00-2:59pm CT)",
+  "stamp": "TUE NOV 24 \u00b7 10:52AM",
+  "sources": "Pinnacle ~10:50am CT - Vegas ~10:52am CT (CBB) - SharpFlow 10:31am CT - Polymarket 10:32am CT - Novig not read",
+  "sf_current": true,
+  "footer": "Window: every game starting 12:00-2:59pm CT. Vegas counts Vegas Backed and Pressure Move only. Wallet money counts only from wallets with positive ROI in this sport and market; market records under 5 bets are thin. Polymarket HOT/COLD wallets are display only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "OU@PITT",
+    "start_ct": "12:30pm",
+    "market": "ML",
+    "side": "OU",
+    "line": null,
+    "price": 102,
+    "bet": "Oklahoma ML",
+    "matchup": "NCAAB - Oklahoma @ Pittsburgh - 12:30pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 99,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS80_FLIPPED"
+    ],
+    "note": "Pinnacle Strong (flipped today); Vegas Backed 99 (+124 to +102). No SharpFlow or Polymarket money on the game."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "OU@PITT",
+    "start_ct": "12:30pm",
+    "market": "SPREAD",
+    "side": "OU",
+    "line": 1.5,
+    "price": -112,
+    "bet": "Oklahoma +1.5",
+    "matchup": "NCAAB - Oklahoma @ Pittsburgh - 12:30pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 51,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL"
+    ],
+    "note": "Pinnacle Strong (flipped today); Vegas Backed 51 (under 70)"
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "OU@PITT",
+    "start_ct": "12:30pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 148.5,
+    "price": -116,
+    "bet": "Over 148.5",
+    "matchup": "NCAAB - Oklahoma @ Pittsburgh - 12:30pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 72,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "note": "Pinnacle Strong stable; Pressure Move 72"
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "ORST@SF",
+    "start_ct": "1:00pm",
+    "market": "SPREAD",
+    "side": "SF",
+    "line": 8.5,
+    "price": -112,
+    "bet": "San Francisco +8.5",
+    "matchup": "NCAAB - Oregon St @ San Francisco - 1:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Max",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_MAX"
+    ],
+    "note": "Pinnacle Max stable; no Vegas row, no SharpFlow money"
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "MISS@BYU",
+    "start_ct": "1:30pm",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 158.5,
+    "price": -114,
+    "bet": "Under 158.5",
+    "matchup": "NCAAB - Ole Miss @ BYU - 1:30pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "MIA@TCU",
+    "start_ct": "2:00pm",
+    "market": "SPREAD",
+    "side": "TCU",
+    "line": 4.5,
+    "price": -104,
+    "bet": "TCU +4.5",
+    "matchup": "NCAAB - Miami @ TCU - 2:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 60,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "note": "Pinnacle Strong stable; Vegas Backed 60 (under 70). SharpFlow wallet D $1.2K on TCU ML is cold/thin (CBB ML 0-1, -100% ROI), under the $2K bar, not counted."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "MIA@TCU",
+    "start_ct": "2:00pm",
+    "market": "ML",
+    "side": "TCU",
+    "line": null,
+    "price": 184,
+    "bet": "TCU ML",
+    "matchup": "NCAAB - Miami @ TCU - 2:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "SF_COLD"
+    ],
+    "note": "Pinnacle Strong stable. SharpFlow wallet D $1.2K on TCU ML is COLD/thin (market record 0-1, -100% ROI): not counted."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "TENN@MD",
+    "start_ct": "2:00pm",
+    "market": "SPREAD",
+    "side": "MD",
+    "line": 2.5,
+    "price": -115,
+    "bet": "Maryland +2.5",
+    "matchup": "NCAAB - Tennessee @ Maryland - 2:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 78,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED",
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "note": "Pinnacle Strong (flipped today); Vegas Backed 78. SharpFlow Tennessee ML $3.0K is a cold wallet (1-2, -67% ROI), not counted."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "TENN@MD",
+    "start_ct": "2:00pm",
+    "market": "ML",
+    "side": "MD",
+    "line": null,
+    "price": 115,
+    "bet": "Maryland ML",
+    "matchup": "NCAAB - Tennessee @ Maryland - 2:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable. SharpFlow Tennessee ML $3.0K (wallet C, CBB 1-2, -67% ROI, 2.0x usual) is a cold wallet: not counted, not a conflict."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "TENN@MD",
+    "start_ct": "2:00pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 147.5,
+    "price": -114,
+    "bet": "Over 147.5",
+    "matchup": "NCAAB - Tennessee @ Maryland - 2:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ]
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "APP@YALE",
+    "start_ct": "2:00pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 135.5,
+    "price": -115,
+    "bet": "Over 135.5",
+    "matchup": "NCAAB - Appalachian St @ Yale - 2:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 92,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS80_STABLE"
+    ],
+    "note": "Pinnacle Strong stable; Pressure Move 92"
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "LBSU@ARST",
+    "start_ct": "2:30pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 158.5,
+    "price": -113,
+    "bet": "Over 158.5",
+    "matchup": "NCAAB - Long Beach St @ Arkansas St - 2:30pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FLIPPED"
+    ],
+    "note": "Pinnacle Strong (flipped today); no Vegas row on the total"
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "LBSU@ARST",
+    "start_ct": "2:30pm",
+    "market": "ML",
+    "side": "ARST",
+    "line": null,
+    "price": -218,
+    "bet": "Arkansas St ML",
+    "matchup": "NCAAB - Long Beach St @ Arkansas St - 2:30pm CT",
+    "first_seen": "10:52",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 82,
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "note": "Pressure Move 82; Pinnacle Slight on the ML (not Strong)"
+   }
+  ]
+ }
+}
