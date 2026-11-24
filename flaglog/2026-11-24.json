@@ -17,7 +17,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Packers at Rams|ML|Rams": {
    "sport": "NFL",
@@ -34,7 +34,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 8582,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Pistons at Magic|ML|Pistons": {
    "sport": "NBA",
@@ -53,7 +53,7 @@
    "maxVsUsual": 2.3,
    "maxDollars": 3564,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -69,7 +69,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -85,7 +85,7 @@
    "maxVsUsual": 5.3,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Tennessee Volunteers at Maryland Terrapins|ML|Tennessee Volunteers": {
    "sport": "CBB",
@@ -100,8 +100,8 @@
    ],
    "maxVsUsual": 2,
    "maxDollars": 3015,
-   "opposedSeen": false,
-   "snapshots": 4
+   "opposedSeen": true,
+   "snapshots": 5
   },
   "Miami Hurricanes at TCU Horned Frogs|ML|TCU Horned Frogs": {
    "sport": "CBB",
@@ -117,7 +117,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1240,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "USC at UCLA|ML|USC": {
    "sport": "CFB",
@@ -133,7 +133,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -149,7 +149,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "West Virginia at Utah|SPREAD|West Virginia +20.5": {
    "sport": "CFB",
@@ -181,7 +181,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
    "sport": "CFB",
@@ -197,7 +197,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
    "sport": "CFB",
@@ -213,7 +213,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
    "sport": "CFB",
@@ -229,7 +229,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "South Carolina at Clemson|SPREAD|Clemson +5.5": {
    "sport": "CFB",
@@ -245,7 +245,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "UCF at Colorado|TOTAL|Over 49.5": {
    "sport": "CFB",
@@ -261,7 +261,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Mavericks at Nuggets|ML|Mavericks": {
    "sport": "NBA",
@@ -278,7 +278,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1417,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -294,7 +294,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Appalachian State at South Alabama|TOTAL|Under 57.5": {
    "sport": "CFB",
@@ -310,7 +310,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Miami (OH) at Western Michigan|SPREAD|Western Michigan": {
    "sport": "CFB",
@@ -326,7 +326,7 @@
    "maxVsUsual": 2.9,
    "maxDollars": 4590,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Miami Hurricanes at TCU Horned Frogs|TOTAL|Under 153.5": {
    "sport": "CBB",
@@ -342,6 +342,22 @@
    "maxVsUsual": 6.2,
    "maxDollars": 3025,
    "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Miami (OH) at Western Michigan|SPREAD|Miami (OH)": {
+   "sport": "CFB",
+   "matchup": "Miami (OH) at Western Michigan",
+   "market": "SPREAD",
+   "pick": "Miami (OH)",
+   "kickoffEt": "Tue, Nov 24, 7:00 PM",
+   "firstSeenAt": "2026-11-24T20:35:01.881Z",
+   "firstPrice": "-117",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3,
+   "maxDollars": 27000,
+   "opposedSeen": true,
    "snapshots": 1
   }
  }

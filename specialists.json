@@ -1,6 +1,6 @@
 {
  "date": "2026-11-24",
- "scannedAt": "2026-11-24T18:53:32.706Z",
+ "scannedAt": "2026-11-24T20:16:01.514Z",
  "sports": {
   "NFL": [
    {
@@ -12,6 +12,16 @@
     "last10": "5-5",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Broncos at Steelers",
+      "market": "ML",
+      "pick": "Broncos",
+      "line": null,
+      "price": "-138",
+      "dollars": 655,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.6
+     },
      {
       "matchup": "Chiefs at Bills",
       "market": "ML",
@@ -224,6 +234,16 @@
       "vsUsualAll": 1.6
      },
      {
+      "matchup": "Tennessee at Vanderbilt",
+      "market": "TOTAL",
+      "pick": "Over 41.5",
+      "line": 41.5,
+      "price": "-117",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.6
+     },
+     {
       "matchup": "Michigan at Ohio State",
       "market": "TOTAL",
       "pick": "Over 37.5",
@@ -358,7 +378,7 @@
      {
       "matchup": "Miami (OH) at Western Michigan",
       "market": "SPREAD",
-      "pick": "Miami (OH) +7.5",
+      "pick": "Miami (OH)",
       "line": 7.5,
       "price": "-113",
       "dollars": 640,
@@ -461,6 +481,16 @@
     "last10": "6-4",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Tennessee Volunteers at Maryland Terrapins",
+      "market": "ML",
+      "pick": "Maryland Terrapins",
+      "line": null,
+      "price": "+122",
+      "dollars": 556,
+      "vsUsual": 0.7,
+      "vsUsualAll": 0.2
+     },
      {
       "matchup": "Central Michigan Chippewas at Notre Dame Fighting Irish",
       "market": "TOTAL",
