@@ -13,10 +13,10 @@
     "STRONG_UNOPPOSED",
     "SIZED_2X"
    ],
-   "maxVsUsual": 2.7,
+   "maxVsUsual": 2.8,
    "maxDollars": 2043,
    "opposedSeen": false,
-   "snapshots": 22
+   "snapshots": 24
   },
   "Grizzlies at Hornets|ML|Grizzlies": {
    "sport": "NBA",
@@ -52,7 +52,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 108362,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 4
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -68,7 +68,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Thunder at Pacers|ML|Thunder": {
    "sport": "NBA",
@@ -122,7 +122,7 @@
    "maxVsUsual": 17.4,
    "maxDollars": 299959,
    "opposedSeen": false,
-   "snapshots": 32
+   "snapshots": 35
   },
   "Cavaliers at Bulls|TOTAL|Over 239.5": {
    "sport": "NBA",
@@ -138,7 +138,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Jazz at Lakers|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -149,12 +149,13 @@
    "firstSeenAt": "2026-11-23T16:28:28.284Z",
    "firstPrice": "-115",
    "tags": [
-    "SIZED_UP"
+    "SIZED_UP",
+    "STRONG_VS_WEAK"
    ],
    "maxVsUsual": 1.3,
-   "maxDollars": 3000,
-   "opposedSeen": false,
-   "snapshots": 10
+   "maxDollars": 7884,
+   "opposedSeen": true,
+   "snapshots": 12
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -170,7 +171,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -183,10 +184,10 @@
    "tags": [
     "SIZED_2X"
    ],
-   "maxVsUsual": 5,
+   "maxVsUsual": 5.2,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Fairleigh Dickinson Knights at Iona Gaels|TOTAL|Under": {
    "sport": "CBB",
@@ -220,7 +221,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Trail Blazers at 76ers|SPREAD|76ers -2.5": {
    "sport": "NBA",
@@ -285,7 +286,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 5
   },
   "Trail Blazers at 76ers|TOTAL|Over": {
    "sport": "NBA",
@@ -431,7 +432,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 7462,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Suns at Pelicans|TOTAL|Under 233.5": {
    "sport": "NBA",
@@ -463,7 +464,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 97541,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Spurs at Kings|ML|Spurs": {
    "sport": "NBA",
@@ -480,7 +481,7 @@
    "maxVsUsual": 3.5,
    "maxDollars": 11813,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Clippers at Rockets|TOTAL|Over 224.5": {
    "sport": "NBA",
@@ -513,7 +514,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 7522,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Cavaliers at Bulls|TOTAL|Under 240.5": {
    "sport": "NBA",
@@ -529,7 +530,7 @@
    "maxVsUsual": 0.6,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Spurs at Kings|TOTAL|Over": {
    "sport": "NBA",
@@ -541,12 +542,13 @@
    "firstPrice": "-114",
    "tags": [
     "STRONG_VS_STRONG",
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_15X"
    ],
-   "maxVsUsual": 1.4,
-   "maxDollars": 10943,
+   "maxVsUsual": 1.5,
+   "maxDollars": 11498,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Spurs at Kings|TOTAL|Under 224.5": {
    "sport": "NBA",
@@ -559,10 +561,10 @@
    "tags": [
     "STRONG_VS_STRONG"
    ],
-   "maxVsUsual": 0.6,
-   "maxDollars": 1000,
+   "maxVsUsual": 0.9,
+   "maxDollars": 11400,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Jazz at Lakers|ML|Lakers": {
    "sport": "NBA",
@@ -575,10 +577,10 @@
    "tags": [
     "SIZED_2X"
    ],
-   "maxVsUsual": 15.1,
-   "maxDollars": 90268,
+   "maxVsUsual": 15.6,
+   "maxDollars": 93241,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   }
  }
 }
