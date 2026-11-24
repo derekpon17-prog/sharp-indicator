@@ -1,0 +1,37 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals \u00b7 LATE UPDATE \u00b7 Mon Nov 23** \u00b7 1 faded play",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "MON NOV 23 \u00b7 6:20PM",
+  "sources": "Pinnacle 6:18pm CT - Vegas 6:22pm CT (NBA, NHL) - SharpFlow not needed (no new side) - Novig not read",
+  "sf_current": true,
+  "footer": "Late update: only a faded play or a new Strong/Max side is posted. Tier rules are fixed.",
+  "rows": [
+   {
+    "sport": "NHL",
+    "game": "MIN@SJ",
+    "market": "ML",
+    "side": "SJ",
+    "line": null,
+    "price": 148,
+    "bet": "San Jose ML",
+    "matchup": "NHL - Minnesota @ San Jose - 9:00pm CT",
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS80_STABLE",
+     "PIN_FADED"
+    ],
+    "first_seen": "15:54",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 99,
+    "late_pin": "Lean",
+    "tier_override": "PASS",
+    "reason": "Pinnacle ML lean dropped from Strong to Lean at 6:20pm CT (Sharks ML +151, Stable). Vegas still backs San Jose (99) but the Pinnacle Strong that made it a best play is gone. Pass."
+   }
+  ]
+ }
+}
