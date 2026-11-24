@@ -1,0 +1,215 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 12:08pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:11PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Magic",
+       "time": "6:11pm CT",
+       "tag": {
+        "t": "EDGE - PISTONS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Pistons ML -127",
+       "price": "-127",
+       "for": {
+        "team": "PISTONS",
+        "rows": [
+         {
+          "team": "Pistons",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML -127",
+          "mk": "ML",
+          "record": "10-6",
+          "roi": 75,
+          "dollars": 3564,
+          "note": "2.3x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Pistons",
+          "wallet": "B #955c26",
+          "wid": "955c26",
+          "market": "SPREAD -4.5 +133",
+          "mk": "SPREAD",
+          "record": "36-29",
+          "roi": 2.6,
+          "dollars": 2397,
+          "note": "0.9x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "PISTONS",
+         "dollars": 5961,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 10-6 (+75% ROI) on PISTONS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $2.4K on Pistons -4.5 - kickoff in 5h 36m - SITE LOCK: Pistons -2.5 3u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Miami (OH) at Western Michigan",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - WESTERN MICHIGAN",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Western Michigan -5.5 -104",
+       "price": "-104",
+       "for": {
+        "team": "WESTERN MICHIGAN",
+        "rows": [
+         {
+          "team": "Western Michigan",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "ML -270",
+          "mk": "ML",
+          "record": "2-1",
+          "roi": 15.9,
+          "dollars": 1000,
+          "note": "1.1x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          },
+          "recLabel": "CFB ML · all-time record"
+         },
+         {
+          "team": "Western Michigan",
+          "wallet": "lightotunnel35 #858392",
+          "wid": "858392",
+          "market": "SPREAD -5.5 -104",
+          "mk": "SPREAD",
+          "record": "33-15",
+          "roi": 23.2,
+          "dollars": 803,
+          "note": "0.2x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "team": "Western Michigan",
+          "wallet": "RollAwayTheDew #aaedcd",
+          "wid": "aaedcd",
+          "market": "SPREAD +8.5 -127",
+          "mk": "SPREAD",
+          "record": "12-9",
+          "roi": 24.4,
+          "dollars": 735,
+          "note": "2.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "MIAMI (OH)",
+        "rows": [
+         {
+          "team": "Miami (OH)",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +7.5 -113",
+          "mk": "SPREAD",
+          "record": "23-18",
+          "roi": 0.3,
+          "dollars": 640,
+          "note": "0.1x usual, L10 4-6",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Miami (OH)",
+          "wallet": "ic4cream",
+          "market": "SPREAD +7.5 @ 50c (-100)",
+          "mk": "SPREAD",
+          "record": "65-67",
+          "recLabel": "NCAAF SPREAD · last 45d record",
+          "roi": -19.3,
+          "dollars": 770,
+          "note": "Polymarket · HOT overall but cold in SPREAD (65-67, -19.3% ROI) · L10 NCAAF 6-4",
+          "status": {
+           "t": "POLY COLD in this bet type - not counted",
+           "c": "red"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "WESTERN MICHIGAN",
+         "dollars": 2538,
+         "pct": 80,
+         "c": "gold"
+        },
+        {
+         "team": "MIAMI (OH)",
+         "dollars": 640,
+         "pct": 20,
+         "c": "red"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 33-15 (+23% ROI) on WESTERN MICHIGAN vs a cold wallet on MIAMI (OH) - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - NEW $1.5K on Western Michigan - kickoff in 5h 25m - SITE LOCK: Western Michigan -6 1u (wallet money behind it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
