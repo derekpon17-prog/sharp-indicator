@@ -1,0 +1,91 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Polymarket sharp wallets - CBB - first game 1:00pm CT** - 2 sides (0 with a HOT wallet)",
+ "boards": [
+  {
+   "brand": "POLYMARKET",
+   "title": "CBB - Polymarket sharp wallets",
+   "subtitle": "Classified wallets with $500+ on a side. HOT = profitable in CBB and this bet type (last 45 days, 10+ bets, +15% ROI or better); COLD = losing. Wallet roster 8:52am CT, buys checked 12:34pm CT",
+   "sections": [
+    {
+     "heading": "CBB - 2:00PM CT",
+     "picks": [
+      {
+       "bet": "Tennessee Volunteers ML",
+       "sub": "Tennessee Volunteers at Maryland Terrapins - 2:00pm CT",
+       "chips": [
+        {
+         "t": "COLD 0xcb14…bd17 $573",
+         "c": "red"
+        },
+        {
+         "t": "CBB ML 5-6 (-12%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAB 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 5.51x their usual $104",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF same side $3K",
+         "c": "blue"
+        }
+       ],
+       "price": -122,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    },
+    {
+     "heading": "CBB - 7:00PM CT",
+     "picks": [
+      {
+       "bet": "Texas Tech ML",
+       "sub": "Texas Tech at Louisville - 7:00pm CT",
+       "chips": [
+        {
+         "t": "COLD 0xcb14…bd17 $570",
+         "c": "red"
+        },
+        {
+         "t": "CBB ML 5-6 (-12%) last 45d",
+         "c": "grey"
+        },
+        {
+         "t": "L10 NCAAB 5-5",
+         "c": "grey"
+        },
+        {
+         "t": "BIG 5.48x their usual $104",
+         "c": "red"
+        },
+        {
+         "t": "fade flag",
+         "c": "red"
+        },
+        {
+         "t": "SF no money here",
+         "c": "grey"
+        }
+       ],
+       "price": -133,
+       "polyHot": 0,
+       "polyCold": 1
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 23-25 -0.1u, COLD sides 107-98 (fading -4.9u) | Price = their average Polymarket price as American odds. Usual = the wallet's median game-line bet (1.5x+ = BIG). COLD = fade flag. Same wallet as SF = not a second source.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
