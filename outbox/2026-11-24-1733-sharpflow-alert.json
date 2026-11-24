@@ -1,0 +1,137 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 5:20pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Golden Knights at Oilers",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over TOTAL +105",
+       "price": "+105",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "B #aa9fb4",
+          "wid": "aa9fb4",
+          "market": "OVER +105",
+          "mk": "TOTAL",
+          "record": "9-5",
+          "roi": 21.8,
+          "dollars": 46138,
+          "note": "2.7x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         },
+         {
+          "team": "Over",
+          "wallet": "A #e51246",
+          "wid": "e51246",
+          "market": "OVER -138",
+          "mk": "TOTAL",
+          "record": "23-13",
+          "roi": 11,
+          "dollars": 1435,
+          "note": "1.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 47573,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 9-5 (+22% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $16K to $48K - kickoff in 1h 37m"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Kent State at Eastern Michigan",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 45.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "FaroeseNationalist #cc63b8",
+          "wid": "cc63b8",
+          "market": "OVER 45.5 -113",
+          "mk": "TOTAL",
+          "record": "6-1",
+          "roi": 81.7,
+          "dollars": 920,
+          "note": "0.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 920,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $920 on Over 45.5 - kickoff in 27 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
