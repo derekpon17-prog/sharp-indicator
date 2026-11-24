@@ -1,6 +1,6 @@
 {
  "date": "2026-11-24",
- "scannedAt": "2026-11-24T21:15:35.768Z",
+ "scannedAt": "2026-11-24T22:16:13.201Z",
  "sports": {
   "NFL": [
    {
@@ -152,7 +152,7 @@
      {
       "matchup": "Pistons at Magic",
       "market": "SPREAD",
-      "pick": "Pistons -4.5",
+      "pick": "Pistons",
       "line": -4.5,
       "price": "+138",
       "dollars": 630,
@@ -204,12 +204,66 @@
      {
       "matchup": "Pistons at Magic",
       "market": "SPREAD",
-      "pick": "Pistons -4.5",
+      "pick": "Pistons",
       "line": -4.5,
       "price": "+133",
       "dollars": 2397,
       "vsUsual": 0.9,
       "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Pistons at Magic",
+      "market": "TOTAL",
+      "pick": "Over 212.5",
+      "line": 212.5,
+      "price": "+101",
+      "dollars": 1513,
+      "vsUsual": 0.6,
+      "vsUsualAll": 0.2
+     }
+    ]
+   }
+  ],
+  "NHL": [
+   {
+    "id": "aa9fb4",
+    "gap": 10.7,
+    "overall": "37-32",
+    "sport": "9-5",
+    "returnPct": 21.8,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Golden Knights at Oilers",
+      "market": "TOTAL",
+      "pick": "Over",
+      "line": 6.5,
+      "price": "+108",
+      "dollars": 14096,
+      "vsUsual": 0.8,
+      "vsUsualAll": 2.3
+     }
+    ]
+   },
+   {
+    "id": "e51246",
+    "gap": 4.4,
+    "overall": "49-32",
+    "sport": "24-13",
+    "returnPct": 16,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Golden Knights at Oilers",
+      "market": "TOTAL",
+      "pick": "Over",
+      "line": 5.5,
+      "price": "-138",
+      "dollars": 1435,
+      "vsUsual": 1,
+      "vsUsualAll": 0.5
      }
     ]
    }
@@ -275,6 +329,16 @@
       "vsUsualAll": 1.5
      },
      {
+      "matchup": "Liberty at Missouri State",
+      "market": "SPREAD",
+      "pick": "Missouri State +17.5",
+      "line": 17.5,
+      "price": "-113",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.6
+     },
+     {
       "matchup": "Arizona State at Arizona",
       "market": "SPREAD",
       "pick": "Arizona State +7.5",
@@ -293,16 +357,6 @@
       "dollars": 727,
       "vsUsual": 0.8,
       "vsUsualAll": 1.2
-     },
-     {
-      "matchup": "Liberty at Missouri State",
-      "market": "SPREAD",
-      "pick": "Missouri State +17.5",
-      "line": 17.5,
-      "price": "-113",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.6
      },
      {
       "matchup": "Coastal Carolina at James Madison",
@@ -403,6 +457,16 @@
       "line": 7.5,
       "price": "-113",
       "dollars": 640,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Liberty at Missouri State",
+      "market": "SPREAD",
+      "pick": "Missouri State +17.5",
+      "line": 17.5,
+      "price": "-107",
+      "dollars": 641,
       "vsUsual": 0.1,
       "vsUsualAll": 0.3
      },
@@ -554,16 +618,6 @@
       "vsUsualAll": 6.7
      },
      {
-      "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
-      "market": "ML",
-      "pick": "Indiana Hoosiers",
-      "line": null,
-      "price": "-3746",
-      "dollars": 2568,
-      "vsUsual": 5.3,
-      "vsUsualAll": 5.7
-     },
-     {
       "matchup": "Bryant Bulldogs at Marist Red Foxes",
       "market": "SPREAD",
       "pick": "Bryant Bulldogs +4.5",
@@ -572,6 +626,16 @@
       "dollars": 531,
       "vsUsual": 1.1,
       "vsUsualAll": 1.2
+     },
+     {
+      "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
+      "market": "ML",
+      "pick": "Indiana Hoosiers",
+      "line": null,
+      "price": "-3746",
+      "dollars": 2568,
+      "vsUsual": 5.3,
+      "vsUsualAll": 5.7
      }
     ]
    }
