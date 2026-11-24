@@ -1,0 +1,118 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 7:13pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 7:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Clippers at Rockets",
+       "time": "7:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 225.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "0x9f15613ebf1f36d4bc679e1211d1fc567cf9bdb3 #f9bdb3",
+          "wid": "f9bdb3",
+          "market": "OVER 225.5 +111",
+          "mk": "TOTAL",
+          "record": "5-4",
+          "roi": 40.6,
+          "dollars": 500,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 500,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $500 on Over 225.5 - LATE: kickoff in 5 min"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Spurs at Kings",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 225.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "K #bc915a",
+          "wid": "bc915a",
+          "market": "OVER 225.5 -114",
+          "mk": "TOTAL",
+          "record": "5-2",
+          "roi": 30.8,
+          "dollars": 1500,
+          "note": "0.9x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 1500,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $1.5K on Over 225.5 - kickoff in 1h 35m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
