@@ -16,7 +16,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 2043,
    "opposedSeen": false,
-   "snapshots": 18
+   "snapshots": 20
   },
   "Grizzlies at Hornets|ML|Grizzlies": {
    "sport": "NBA",
@@ -35,7 +35,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 112885,
    "opposedSeen": true,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Suns at Pelicans|ML|Suns": {
    "sport": "NBA",
@@ -46,12 +46,13 @@
    "firstSeenAt": "2026-11-23T14:29:18.161Z",
    "firstPrice": "-144",
    "tags": [
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
    ],
-   "maxVsUsual": 0.6,
-   "maxDollars": 1010,
+   "maxVsUsual": 1.5,
+   "maxDollars": 108362,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -67,7 +68,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Thunder at Pacers|ML|Thunder": {
    "sport": "NBA",
@@ -102,7 +103,7 @@
    "maxVsUsual": 3.6,
    "maxDollars": 3950,
    "opposedSeen": false,
-   "snapshots": 14
+   "snapshots": 16
   },
   "Bengals at Commanders|ML|Bengals": {
    "sport": "NFL",
@@ -115,12 +116,13 @@
    "tags": [
     "SIZED_15X",
     "SIZED_UP",
-    "STRONG_UNOPPOSED"
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.8,
-   "maxDollars": 240900,
+   "maxVsUsual": 17.4,
+   "maxDollars": 299959,
    "opposedSeen": false,
-   "snapshots": 24
+   "snapshots": 29
   },
   "Cavaliers at Bulls|TOTAL|Over 239.5": {
    "sport": "NBA",
@@ -136,7 +138,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": true,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Jazz at Lakers|TOTAL|Under 226.5": {
    "sport": "NBA",
@@ -152,7 +154,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 3000,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -168,7 +170,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -184,7 +186,7 @@
    "maxVsUsual": 5,
    "maxDollars": 2568,
    "opposedSeen": false,
-   "snapshots": 7
+   "snapshots": 8
   },
   "Fairleigh Dickinson Knights at Iona Gaels|TOTAL|Under": {
    "sport": "CBB",
@@ -218,7 +220,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 12
   },
   "Trail Blazers at 76ers|SPREAD|76ers -2.5": {
    "sport": "NBA",
@@ -234,7 +236,7 @@
    "maxVsUsual": 1,
    "maxDollars": 1897,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Bengals at Commanders|TOTAL|Over 54.5": {
    "sport": "NFL",
@@ -267,7 +269,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 4842,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Bengals at Commanders|SPREAD|Bengals +3.5": {
    "sport": "NFL",
@@ -283,7 +285,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 2000,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Trail Blazers at 76ers|TOTAL|Over": {
    "sport": "NBA",
@@ -316,7 +318,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 6750,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Bengals at Commanders|SPREAD|Commanders -3.5": {
    "sport": "NFL",
@@ -332,7 +334,7 @@
    "maxVsUsual": 0.2,
    "maxDollars": 2559,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Grizzlies at Hornets|SPREAD|Hornets +3.5": {
    "sport": "NBA",
@@ -348,7 +350,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1500,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Thunder at Pacers|TOTAL|Under 225.5": {
    "sport": "NBA",
@@ -363,6 +365,103 @@
    ],
    "maxVsUsual": 1.1,
    "maxDollars": 4164,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Cavaliers at Bulls|TOTAL|Under": {
+   "sport": "NBA",
+   "matchup": "Cavaliers at Bulls",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Mon, Nov 23, 8:10 PM",
+   "firstSeenAt": "2026-11-24T01:34:31.784Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 7342,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Spurs at Kings|TOTAL|Over 225.5": {
+   "sport": "NBA",
+   "matchup": "Spurs at Kings",
+   "market": "TOTAL",
+   "pick": "Over 225.5",
+   "kickoffEt": "Mon, Nov 23, 10:10 PM",
+   "firstSeenAt": "2026-11-24T01:34:31.784Z",
+   "firstPrice": "-114",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.9,
+   "maxDollars": 1500,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Bengals at Commanders|TOTAL|Over": {
+   "sport": "NFL",
+   "matchup": "Bengals at Commanders",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Mon, Nov 23, 8:18 PM",
+   "firstSeenAt": "2026-11-24T01:34:31.784Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.9,
+   "maxDollars": 29750,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Suns at Pelicans|SPREAD|Pelicans +4.5": {
+   "sport": "NBA",
+   "matchup": "Suns at Pelicans",
+   "market": "SPREAD",
+   "pick": "Pelicans +4.5",
+   "kickoffEt": "Mon, Nov 23, 8:10 PM",
+   "firstSeenAt": "2026-11-24T01:34:31.784Z",
+   "firstPrice": "-127",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 7462,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Suns at Pelicans|TOTAL|Under 233.5": {
+   "sport": "NBA",
+   "matchup": "Suns at Pelicans",
+   "market": "TOTAL",
+   "pick": "Under 233.5",
+   "kickoffEt": "Mon, Nov 23, 8:10 PM",
+   "firstSeenAt": "2026-11-24T01:34:31.784Z",
+   "firstPrice": "-114",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 7222,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Cavaliers at Bulls|ML|Bulls": {
+   "sport": "NBA",
+   "matchup": "Cavaliers at Bulls",
+   "market": "ML",
+   "pick": "Bulls",
+   "kickoffEt": "Mon, Nov 23, 8:10 PM",
+   "firstSeenAt": "2026-11-24T01:34:31.784Z",
+   "firstPrice": "+276",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 97541,
    "opposedSeen": false,
    "snapshots": 1
   }
