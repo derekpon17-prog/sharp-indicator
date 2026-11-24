@@ -1,0 +1,42 @@
+{
+ "date": "2026-11-25",
+ "entries": {
+  "NHL|Canadiens at Avalanche|ML|Avalanche|0xcf6c5492124794394dd9eac46498a8babbe47e66": {
+   "sport": "NHL",
+   "matchup": "Canadiens at Avalanche",
+   "market": "ML",
+   "side": "Avalanche",
+   "grp": "team",
+   "wallet": "0xcf6c5492124794394dd9eac46498a8babbe47e66",
+   "name": "one8tyfive",
+   "cls": "COLD",
+   "sportCls": "COLD",
+   "gateNote": null,
+   "startUtc": "2026-11-26T02:30:00.000Z",
+   "conditionId": "0x85db269d3bc64b6d290e202c275fcece97c86f37e5e8239fb567735fb2b3a9a2",
+   "outcome": "Avalanche",
+   "title": "Canadiens vs. Avalanche",
+   "firstSeenAt": "2026-11-24T18:34:20.921Z",
+   "firstPrice": 0.53,
+   "firstUsd": 1148,
+   "maxUsd": 1148,
+   "lastSeenAt": "2026-11-24T18:34:20.921Z",
+   "rec": "7-8",
+   "roi": -2.7,
+   "n": 15,
+   "recScope": "NHL ML, last 45 days",
+   "l10": "L10 NHL 3-7",
+   "onCard": false,
+   "sameAsSF": false,
+   "twoSided": false,
+   "tokenId": "10547182895900182397584799579561269100403859771037045213770104712373531387257",
+   "firstBuyUtc": "2026-11-24T17:43:11.000Z",
+   "hoursBeforeStart": 32.8,
+   "gameSource": "espn",
+   "usualMed": 771,
+   "usualScope": "NHL",
+   "vsUsual": 1.49,
+   "sizeTier": "NORMAL"
+  }
+ }
+}
