@@ -332,7 +332,9 @@
    "usualMed": 776,
    "usualScope": "NBA",
    "vsUsual": 1.37,
-   "sizeTier": "NORMAL"
+   "sizeTier": "NORMAL",
+   "closePrice": 0.565,
+   "clv": 0.0454
   },
   "NHL|Wild at Sharks|TOTAL|Under|0xb9c7d35d1f04d08624fabcfd3b6cee2d3c9baade": {
    "sport": "NHL",
@@ -427,7 +429,7 @@
    "firstPrice": 0.66,
    "firstUsd": 990,
    "maxUsd": 990,
-   "lastSeenAt": "2026-11-23T23:33:49.528Z",
+   "lastSeenAt": "2026-11-24T00:36:44.411Z",
    "rec": "26-17",
    "roi": -1.8,
    "n": 43,
