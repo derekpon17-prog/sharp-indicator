@@ -86,12 +86,77 @@ def embed_size(e):
     n = len(e.get("title", "")) + len(e.get("description", "")) + len((e.get("footer") or {}).get("text", ""))
     return n + sum(len(f["name"]) + len(f["value"]) for f in e["fields"])
 
+
+def strip_poly(card):
+    """Polymarket is OFF (Derek, Nov 24 2026: rely on Sharp Flow only). Remove every Polymarket trace from a card before it is
+    rendered or posted: poly_* fields on slate rows, POLYMARKET rows/tags/legend text on Sharp Flow boards, and whole Polymarket
+    wallet-report cards (returns None for those). Set env POLY_ON=1 to disable this filter."""
+    if os.environ.get("POLY_ON") == "1" or not isinstance(card, dict):
+        return card
+    boards = card.get("boards") or []
+    if any("POLYMARKET" in str(b.get("brand", "")).upper() for b in boards):
+        return None   # Polymarket wallet-report and Poly late-money cards
+    if "polymarket" in str(card.get("content", "")).lower():
+        return None
+    import re
+    def scrub(t):
+        """Drop Polymarket wording from free text: 'X or Polymarket money' -> 'X'; sentences that are only about Polymarket are removed."""
+        t = re.sub(r"\s*(?:and|or|\+|,)\s*Polymarket(?: HOT/COLD)?(?: wallets?| money)?", "", str(t), flags=re.I)
+        parts = re.split(r"(?<=[.;])\s+", t)
+        return " ".join(x for x in parts if not re.search(r"polymarket|\bpoly\b", x, re.I)).strip()
+    for key in ("slate", "returns"):
+        blk = card.get(key)
+        if isinstance(blk, dict):
+            if isinstance(blk.get("sources"), str):
+                blk["sources"] = " - ".join(x for x in blk["sources"].split(" - ") if "polymarket" not in x.lower())
+            for fld in ("footer", "note"):
+                if isinstance(blk.get(fld), str):
+                    blk[fld] = scrub(blk[fld])
+            for r in blk.get("rows") or []:
+                for k in [k for k in r if k.startswith("poly") or k.startswith("kalshi")]:
+                    r.pop(k, None)
+                for fld in ("note", "notes"):
+                    if isinstance(r.get(fld), str):
+                        r[fld] = scrub(r[fld])
+    def clean(t):
+        t = str(t)
+        t = t.replace("SHARP FLOW + POLYMARKET READ", "SHARP FLOW READ").replace("SHARP FLOW + POLYMARKET - ", "").replace("SHARP FLOW + POLYMARKET", "SHARP FLOW")
+        return t
+    for b in boards:
+        if isinstance(b.get("legend"), str):
+            b["legend"] = " | ".join(x for x in b["legend"].split(" | ") if "poly" not in x.lower())
+        if isinstance(b.get("subtitle"), str):
+            b["subtitle"] = clean(b["subtitle"])
+        for sec in b.get("sections") or []:
+            keep = []
+            for pk in sec.get("picks") or []:
+                if isinstance(pk.get("sources"), list):
+                    pk["sources"] = [x for x in pk["sources"] if str(x).upper() != "POLYMARKET"] or ["SHARP FLOW"]
+                for side in ("for", "against"):
+                    v = pk.get(side)
+                    if isinstance(v, dict) and isinstance(v.get("rows"), list):
+                        v["rows"] = [x for x in v["rows"] if str(x.get("src", "")).upper() != "POLYMARKET"]
+                        if not v["rows"]:
+                            pk[side] = None
+                if isinstance(pk.get("footerLabel"), str):
+                    pk["footerLabel"] = clean(pk["footerLabel"])
+                if pk.get("for") is None and pk.get("against") is None and pk.get("moneyBar") is None:
+                    continue
+                keep.append(pk)
+            sec["picks"] = keep
+        b["sections"] = [sec for sec in (b.get("sections") or []) if sec.get("picks")]
+    return card
+
 failed = 0
 os.makedirs("sent", exist_ok=True)
 for path in sorted(glob.glob("outbox/*.json")):
     name = os.path.basename(path)
     try:
-        card = json.load(open(path))
+        card = strip_poly(json.load(open(path)))
+        if card is None:   # Polymarket-only card: do not post it
+            shutil.move(path, os.path.join("sent", name.replace(".json", "-skipped-poly.json")))
+            print(f"skipped (Polymarket off): {name}")
+            continue
         embeds = card.get("embeds")
         parts = card.get("parts")
         scorecards = card.get("scorecards")
