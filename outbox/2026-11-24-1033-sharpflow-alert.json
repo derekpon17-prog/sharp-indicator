@@ -1,0 +1,439 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 6 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 10:03am CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:11PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Magic",
+       "time": "6:11pm CT",
+       "tag": {
+        "t": "EDGE - PISTONS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Pistons ML -127",
+       "price": "-127",
+       "for": {
+        "team": "PISTONS",
+        "rows": [
+         {
+          "team": "Pistons",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML -127",
+          "mk": "ML",
+          "record": "10-6",
+          "roi": 75,
+          "dollars": 3564,
+          "note": "2.3x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "MAGIC",
+        "rows": [
+         {
+          "team": "Magic",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "ML +133",
+          "mk": "ML",
+          "record": "11-8",
+          "roi": -2,
+          "dollars": 4568,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PISTONS",
+         "dollars": 3564,
+         "pct": 44,
+         "c": "green"
+        },
+        {
+         "team": "MAGIC",
+         "dollars": 4568,
+         "pct": 56,
+         "c": "red"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 10-6 (+75% ROI) on PISTONS vs a cold wallet on MAGIC - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $1.9K to $3.6K - kickoff in 7h 37m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Mavericks at Nuggets",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over TOTAL",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "OVER",
+          "mk": "TOTAL",
+          "record": "10-5",
+          "roi": 56.2,
+          "dollars": 2369,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 2369,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 10-5 (+56% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $2.4K on Over - kickoff in 10h 36m"
+      },
+      {
+       "eyebrow": "Mavericks at Nuggets",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - MAVERICKS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Mavericks ML +270",
+       "price": "+270",
+       "for": {
+        "team": "MAVERICKS",
+        "rows": [
+         {
+          "team": "Mavericks",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML +270",
+          "mk": "ML",
+          "record": "66-56",
+          "roi": 24.1,
+          "dollars": 1727,
+          "note": "0.3x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Mavericks",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML +258",
+          "mk": "ML",
+          "record": "10-6",
+          "roi": 75,
+          "dollars": 1417,
+          "note": "0.9x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "NUGGETS",
+        "rows": [
+         {
+          "team": "Nuggets",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "ML -257",
+          "mk": "ML",
+          "record": "11-8",
+          "roi": -2,
+          "dollars": 1214,
+          "note": "0.2x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "MAVERICKS",
+         "dollars": 3144,
+         "pct": 72,
+         "c": "green"
+        },
+        {
+         "team": "NUGGETS",
+         "dollars": 1214,
+         "pct": 28,
+         "c": "red"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 66-56 (+24% ROI) on MAVERICKS vs a cold wallet on NUGGETS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $1.7K to $3.1K - kickoff in 10h 36m"
+      }
+     ]
+    },
+    {
+     "heading": "CBB - 7:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Central Michigan Chippewas at Notre Dame Fighting Irish",
+       "time": "7:00pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over 152.5 -104",
+       "price": "-104",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "OVER 152.5 -104",
+          "mk": "TOTAL",
+          "record": "14-3",
+          "roi": 43.3,
+          "dollars": 822,
+          "note": "1.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CBB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 822,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 14-3 (+43% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $822 on Over 152.5 - kickoff in 8h 26m"
+      }
+     ]
+    },
+    {
+     "heading": "CBB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Delaware State Hornets at Chattanooga Mocs",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - DELAWARE STATE HORNETS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Delaware State Hornets",
+       "price": null,
+       "for": {
+        "team": "DELAWARE STATE HORNETS",
+        "rows": [
+         {
+          "team": "Delaware State Hornets",
+          "wallet": "keeptheblueflagflyinghigh #85aa98",
+          "wid": "85aa98",
+          "market": "SPREAD +16.5 -100",
+          "mk": "SPREAD",
+          "record": "2-0",
+          "roi": 103.5,
+          "dollars": 750,
+          "note": "0.7x usual, only 2 bets here",
+          "status": {
+           "t": "THIN - 2 bets here",
+           "c": "grey"
+          },
+          "recLabel": "CBB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "DELAWARE STATE HORNETS",
+         "dollars": 750,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $750 on Delaware State Hornets +16.5 - kickoff in 7h 26m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Celtics at Wizards",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Celtics vs Wizards",
+       "price": null,
+       "for": {
+        "team": "CELTICS",
+        "rows": [
+         {
+          "team": "Celtics",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML -400",
+          "mk": "ML",
+          "record": "66-56",
+          "roi": 24.1,
+          "dollars": 1054,
+          "note": "0.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Celtics",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "ML -376",
+          "mk": "ML",
+          "record": "11-8",
+          "roi": -2,
+          "dollars": 772,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "WIZARDS",
+        "rows": [
+         {
+          "team": "Wizards",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML +376",
+          "mk": "ML",
+          "record": "66-56",
+          "roi": 24.1,
+          "dollars": 512,
+          "note": "0.1x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "CELTICS",
+         "dollars": 1826,
+         "pct": 78,
+         "c": "green"
+        },
+        {
+         "team": "WIZARDS",
+         "dollars": 512,
+         "pct": 22,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $512 on Wizards - kickoff in 8h 36m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
