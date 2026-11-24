@@ -43,6 +43,7 @@ jobs:
           git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           if git fetch -q --depth 20 origin sharpflow; then git checkout -q -B sharpflow FETCH_HEAD; else git checkout -q --orphan sharpflow; fi
       - name: Polymarket wallet matches (Derek, Nov 20 2026)
+        if: ${{ false }}   # Polymarket paused (Derek, Nov 24 2026): Sharp Flow only
         # Classified Polymarket wallets (wallets branch, wallets.json HOT/COLD per sport) that bought a side of a game
         # on today's SharpFlow snapshot -> sf_branch/poly_matches.json. Read by the card build below and by the
         # Sharp Signals window tasks for the slate card. Never fails the run: on any error the file records it.
@@ -57,6 +58,7 @@ jobs:
           # Site locks (council Nov 21): log the Sharp Flow site's own staked locks and keep a display-only running record.
           node scripts/site_lock_record.js sf_branch || true
       - name: SharpFlow-vs-Polymarket twin test (every 2h, analysis only)
+        if: ${{ false }}   # Polymarket paused (Derek, Nov 24 2026): Sharp Flow only
         continue-on-error: true
         env:
           TWIN_DEBUG: ${{ github.event.inputs.dry_run == 'yes' && '1' || '' }}
@@ -86,6 +88,7 @@ jobs:
           node scripts/sharpflow_preview.js
           for f in cards/*.json; do [ -f "$f" ] && { echo "== $f"; head -c 3000 "$f"; echo; }; done; true
       - name: Polymarket late money (HOT wallet new or doubled after the sport's report posted)
+        if: ${{ false }}   # Polymarket paused (Derek, Nov 24 2026): Sharp Flow only
         continue-on-error: true
         env:
           NO_MARK: ${{ github.event.inputs.dry_run == 'yes' && '1' || '' }}

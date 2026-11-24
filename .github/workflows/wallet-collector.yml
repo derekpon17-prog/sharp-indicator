@@ -3,10 +3,8 @@
 name: Wallet collector
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '17 */4 * * *'
-    # ~1 hour before each card window (8:50, 9:50, 12:50, 2:50, 4:50 CT) - replaces the Claude collector dispatcher (Nov 20)
-    - cron: '50 14,15,18,20,22 * * *'
+  # PAUSED (Derek, Nov 24 2026: rely on Sharp Flow only). Schedules removed; manual dispatch still works.
+  # Was: cron '17 */4 * * *' and '50 14,15,18,20,22 * * *'.
 permissions:
   contents: write
 concurrency:

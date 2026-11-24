@@ -36,7 +36,7 @@ const latest = readJson(OUT + '/latest.json', null);
 if (!latest) { console.log('no latest.json'); process.exit(0); }
 const age = (now - new Date(latest.scannedAt)) / 60000;
 if (!process.env.FAKE_NOW && age > 45) { console.log('snapshot too old', Math.round(age), 'min - skipping'); process.exit(0); }
-const POLY = (readJson(OUT + '/poly_matches.json', {}).matches) || [];   // Nov 22: Poly wallets on the same game ride along on the alert
+const POLY = process.env.POLY_ON === '1' ? ((readJson(OUT + '/poly_matches.json', {}).matches) || []) : [];   // Polymarket off (Nov 24 2026)   // Nov 22: Poly wallets on the same game ride along on the alert
 const POSTED = readJson(process.env.POSTED_PLAYS || 'posted_plays.json', []);   // Nov 22: today's posted PLAY rows (posted_plays.py)
 const SPEC = (readJson(OUT + '/specialists.json', {}).sports) || {};
 let st = readJson(OUT + '/alerts.json', {});

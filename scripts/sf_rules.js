@@ -190,8 +190,10 @@ function siteLockTxt(plays, sport, matchup, grp) {
 }
 /* Polymarket wallet rows for a SharpFlow matchup row (moved here from sharpflow_preview.js Nov 22 2026 so the SharpFlow alert and the
    Poly late-money alert use the same rows as the pre-game card). poly = poly_matches.json matches. Display only. */
+// Polymarket is OFF (Derek, Nov 24 2026: rely on Sharp Flow only). Set POLY_ON=1 to bring Poly rows back.
+const POLY_OFF = process.env.POLY_ON !== '1';
 function polyFor(poly, sp, matchup, grp, r) {
-  const ms = (poly || []).filter(m => m.sport === sp && m.matchup === matchup && m.grp === grp);
+  const ms = POLY_OFF ? [] : (poly || []).filter(m => m.sport === sp && m.matchup === matchup && m.grp === grp);
   if (!ms.length) return { for: r.for, against: r.against, sources: ['SHARP FLOW'], ms };
   const label = side => grp === 'total' ? side : String(side).toUpperCase();
   const amer = p => !(p > 0 && p < 1) ? null : Math.round(p >= 0.5 ? -100 * p / (1 - p) : 100 * (1 - p) / p);

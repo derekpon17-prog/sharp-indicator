@@ -115,10 +115,11 @@ const cold = R.cold; // Nov 16 ROI rule plus Nov 17 form gate (see sf_rules.js)
    workflow run: classified Polymarket wallets (wallets.json HOT/COLD, judged only in the sport they are classified in)
    that bought one side of a game on this card. Shown ONLY when a match exists - no match, no Poly row and no
    POLYMARKET tag. Display only: never changes the verdict, confidence or money bar, which stay Sharp Flow's. */
-let POLY = [], POLYMETA = {}; try { POLYMETA = JSON.parse(fs.readFileSync(OUT + '/poly_matches.json', 'utf8')); POLY = POLYMETA.matches || []; } catch {}
+const POLY_OFF = process.env.POLY_ON !== '1';   // Derek, Nov 24 2026: Polymarket off, Sharp Flow only
+let POLY = [], POLYMETA = {}; if (!POLY_OFF) try { POLYMETA = JSON.parse(fs.readFileSync(OUT + '/poly_matches.json', 'utf8')); POLY = POLYMETA.matches || []; } catch {}
 const MIN_POLY = +(process.env.POLY_MIN_USD || 500);
 // Running Poly record (scripts/poly_grade.js -> poly_record.json): one legend line on every Sharp Flow card.
-let POLYREC = null; try { POLYREC = JSON.parse(fs.readFileSync(OUT + '/poly_record.json', 'utf8')); } catch {}
+let POLYREC = null; if (!POLY_OFF) try { POLYREC = JSON.parse(fs.readFileSync(OUT + '/poly_record.json', 'utf8')); } catch {}
 function polyRecordLine() {
   if (!POLYREC || !POLYREC.buckets) return '';
   const b = POLYREC.buckets, n = Object.values(b).reduce((a, x) => a + x.all.n, 0);
@@ -284,7 +285,7 @@ function buildPolyCard(sp, latest, before, firstStart, outlier) {
   // Polymarket sharp-wallet report (Derek, Nov 20 2026): its own card per sport, an hour before that sport's games
   // (no 5pm cap - it follows the games), tracked with its own POLY_<sport> posted flag. Runs alongside, not instead of,
   // the Sharp Flow card.
-  const due = [...dueList(startsAll), ...dueList(startsAll, 'POLY_', false)];
+  const due = POLY_OFF ? [...dueList(startsAll)] : [...dueList(startsAll), ...dueList(startsAll, 'POLY_', false)];
   const summary = Object.entries(startsAll).map(([s, ts]) => {
     const c = clusterStarts(ts);
     return s + ' main ' + ctTime(c.mainStart) + (c.outliers.length ? ` (+${c.outliers.length} outlier ${ctTime(c.outliers[0])})` : '');
