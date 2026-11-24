@@ -1,0 +1,147 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 8:40pm CT** - 2 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Wallets with positive NHL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:14pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Maple Leafs at Islanders",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "EDGE - ISLANDERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Islanders ML -150",
+       "price": "-150",
+       "for": {
+        "team": "ISLANDERS",
+        "rows": [
+         {
+          "team": "Islanders",
+          "wallet": "keeptheblueflagflyinghigh #85aa98",
+          "wid": "85aa98",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "15-9",
+          "roi": 20.2,
+          "dollars": 10998,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "ISLANDERS",
+         "dollars": 10998,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 15-9 (+20% ROI) on ISLANDERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Wild at Sharks",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Wild vs Sharks",
+       "price": null,
+       "for": {
+        "team": "WILD",
+        "rows": [
+         {
+          "team": "Wild",
+          "wallet": "keeptheblueflagflyinghigh #85aa98",
+          "wid": "85aa98",
+          "market": "SPREAD -1.5 +150",
+          "mk": "SPREAD",
+          "record": "11-4",
+          "roi": 27.7,
+          "dollars": 7295,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "SHARKS",
+        "rows": [
+         {
+          "team": "Sharks",
+          "wallet": "keeptheblueflagflyinghigh #85aa98",
+          "wid": "85aa98",
+          "market": "ML +163",
+          "mk": "ML",
+          "record": "15-9",
+          "roi": 20.2,
+          "dollars": 5394,
+          "note": "0.3x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "WILD",
+         "dollars": 7295,
+         "pct": 57,
+         "c": "green"
+        },
+        {
+         "team": "SHARKS",
+         "dollars": 5394,
+         "pct": 43,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Poly calls since Nov 20 at Polymarket prices: HOT 22-25 -1.1u, COLD sides 89-72 (fading -16.5u) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
