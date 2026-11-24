@@ -1,0 +1,348 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:13pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Spurs at Kings",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Under 224.5 -108",
+       "price": "-108",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "UNDER 224.5 -108",
+          "mk": "TOTAL",
+          "record": "10-4",
+          "roi": 67.4,
+          "dollars": 3640,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "team": "Under",
+          "wallet": "0x9f15613ebf1f36d4bc679e1211d1fc567cf9bdb3 #f9bdb3",
+          "wid": "f9bdb3",
+          "market": "UNDER 224.5",
+          "mk": "TOTAL",
+          "record": "5-4",
+          "roi": 40.6,
+          "dollars": 1000,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "J #7caac5",
+          "wid": "7caac5",
+          "market": "OVER +108",
+          "mk": "TOTAL",
+          "record": "7-7",
+          "roi": 2.1,
+          "dollars": 10943,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "team": "Over",
+          "wallet": "P #fe6a11",
+          "wid": "fe6a11",
+          "market": "OVER +108",
+          "mk": "TOTAL",
+          "record": "2-1",
+          "roi": 77.5,
+          "dollars": 1789,
+          "note": "0.9x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "team": "Over",
+          "wallet": "O #bc915a",
+          "wid": "bc915a",
+          "market": "OVER -114",
+          "mk": "TOTAL",
+          "record": "5-2",
+          "roi": 30.8,
+          "dollars": 1500,
+          "note": "0.9x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 14232,
+         "pct": 75,
+         "c": "grey"
+        },
+        {
+         "team": "Under",
+         "dollars": 4640,
+         "pct": 25,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 10-4 (+67% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $14K on Over - kickoff in 36 min"
+      },
+      {
+       "eyebrow": "Spurs at Kings",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - SPURS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW",
+        "POLYMARKET"
+       ],
+       "bet": "Spurs ML -400",
+       "price": "-400",
+       "for": {
+        "team": "SPURS",
+        "rows": [
+         {
+          "team": "Spurs",
+          "wallet": "jodar #f9a112",
+          "wid": "f9a112",
+          "market": "ML -310",
+          "mk": "ML",
+          "record": "4-2",
+          "roi": 65.9,
+          "dollars": 10212,
+          "note": "2.0x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Spurs",
+          "wallet": "ckw #b70f9a",
+          "wid": "b70f9a",
+          "market": "ML -270",
+          "mk": "ML",
+          "record": "4-4",
+          "roi": 7.2,
+          "dollars": 5840,
+          "note": "2.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Spurs",
+          "wallet": "K #360851",
+          "wid": "360851",
+          "market": "SPREAD",
+          "mk": "SPREAD",
+          "record": "4-5",
+          "roi": 71.5,
+          "dollars": 5013,
+          "note": "2.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Spurs",
+          "wallet": "R #d3567c",
+          "wid": "d3567c",
+          "market": "SPREAD -10.5 +128",
+          "mk": "SPREAD",
+          "record": "2-2",
+          "roi": 65.1,
+          "dollars": 2509,
+          "note": "1.0x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Spurs",
+          "wallet": "SunlineTicker",
+          "market": "SPREAD -11.5 @ 41c (+144)",
+          "mk": "SPREAD",
+          "record": "579-529",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": -2.4,
+          "dollars": 2573,
+          "note": "Polymarket · 4.8x usual · far-off alt line, not a read on the main spread · L10 NBA 7-3 · same wallet as Sharp Flow R above",
+          "status": {
+           "t": "POLY TWO-SIDED - not counted",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "against": {
+        "team": "KINGS",
+        "rows": [
+         {
+          "team": "Kings",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "ML +257",
+          "mk": "ML",
+          "record": "10-7",
+          "roi": -10.5,
+          "dollars": 1400,
+          "note": "0.2x usual, L10 6-4 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Kings",
+          "wallet": "G #955c26",
+          "wid": "955c26",
+          "market": "SPREAD +11.5 -133",
+          "mk": "SPREAD",
+          "record": "35-27",
+          "roi": 4.1,
+          "dollars": 952,
+          "note": "0.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Kings",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "SPREAD +13.5 -186",
+          "mk": "SPREAD",
+          "record": "11-7",
+          "roi": -1,
+          "dollars": 640,
+          "note": "0.1x usual, L10 6-4 · SAME WALLET as its ML row",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Kings",
+          "wallet": "D #aa738b",
+          "wid": "aa738b",
+          "market": "SPREAD +12.5 -104",
+          "mk": "SPREAD",
+          "record": "8-8",
+          "roi": 5.3,
+          "dollars": 555,
+          "note": "1.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "src": "POLYMARKET",
+          "team": "Kings",
+          "wallet": "SunlineTicker",
+          "market": "SPREAD +12.5 @ 54c (-119)",
+          "mk": "SPREAD",
+          "record": "579-529",
+          "recLabel": "NBA SPREAD · last 45d record",
+          "roi": -2.4,
+          "dollars": 8349,
+          "note": "Polymarket · 15.7x usual · far-off alt line, not a read on the main spread · L10 NBA 7-3",
+          "status": {
+           "t": "POLY TWO-SIDED - not counted",
+           "c": "grey"
+          }
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "SPURS",
+         "dollars": 25868,
+         "pct": 88,
+         "c": "green"
+        },
+        {
+         "team": "KINGS",
+         "dollars": 3547,
+         "pct": 12,
+         "c": "red"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 37-22 (+15% ROI) on SPURS vs a cold wallet on KINGS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW + POLYMARKET - NEW $18K on Spurs - kickoff in 36 min - SITE LOCK: Spurs -8.5 3u (wallet money behind it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
