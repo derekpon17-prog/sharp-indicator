@@ -1,0 +1,275 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NBA - first game 6:00pm CT** - 4 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NBA - sharp wallets",
+   "subtitle": "Wallets with positive NBA market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:16pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:11PM CT",
+     "picks": [
+      {
+       "eyebrow": "Pistons at Magic",
+       "time": "6:11pm CT",
+       "tag": {
+        "t": "EDGE - PISTONS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "★ Pistons ML -127",
+       "price": "-127",
+       "for": {
+        "team": "PISTONS",
+        "rows": [
+         {
+          "team": "Pistons",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML -127",
+          "mk": "ML",
+          "record": "10-6",
+          "roi": 75,
+          "dollars": 3564,
+          "note": "2.3x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Pistons",
+          "wallet": "C #ee60d6",
+          "wid": "ee60d6",
+          "market": "SPREAD -1.5 -113",
+          "mk": "SPREAD",
+          "record": "4-3",
+          "roi": 26.5,
+          "dollars": 2507,
+          "note": "1.1x usual, L10 4-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Pistons",
+          "wallet": "B #955c26",
+          "wid": "955c26",
+          "market": "SPREAD -4.5 +133",
+          "mk": "SPREAD",
+          "record": "36-29",
+          "roi": 2.6,
+          "dollars": 2397,
+          "note": "0.9x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Pistons",
+          "wallet": "D #94aadd",
+          "wid": "94aadd",
+          "market": "SPREAD -4.5 +138",
+          "mk": "SPREAD",
+          "record": "12-11",
+          "roi": 33.2,
+          "dollars": 630,
+          "note": "1.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "PISTONS",
+         "dollars": 9098,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 10-6 (+75% ROI) on PISTONS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ - SITE LOCK: Pistons -2.5 1u (wallet money behind it)"
+      },
+      {
+       "eyebrow": "Pistons at Magic",
+       "time": "6:11pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over 212.5 +101",
+       "price": "+101",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "B #955c26",
+          "wid": "955c26",
+          "market": "OVER 212.5 +101",
+          "mk": "TOTAL",
+          "record": "29-19",
+          "roi": 57.3,
+          "dollars": 1513,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 1513,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 29-19 (+57% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Mavericks at Nuggets",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - MAVERICKS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Mavericks ML +258",
+       "price": "+258",
+       "for": {
+        "team": "MAVERICKS",
+        "rows": [
+         {
+          "team": "Mavericks",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML +258",
+          "mk": "ML",
+          "record": "10-6",
+          "roi": 75,
+          "dollars": 1417,
+          "note": "0.9x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MAVERICKS",
+         "dollars": 1417,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 10-6 (+75% ROI) on MAVERICKS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 4:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Heat at 76ers",
+       "time": "4:10pm CT",
+       "tag": {
+        "t": "EDGE - 76ERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "76ers -146",
+       "price": "-146",
+       "for": {
+        "team": "76ERS",
+        "rows": [
+         {
+          "team": "76ers",
+          "wallet": "0x3814198398E2d02c0e8fBa652345995cF84417bC-1782140092998 #4417bc",
+          "wid": "4417bc",
+          "market": "ML -146",
+          "mk": "ML",
+          "record": "15-4",
+          "roi": 69.4,
+          "dollars": 522,
+          "note": "6.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "76ERS",
+         "dollars": 522,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 15-4 (+69% ROI) on 76ERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

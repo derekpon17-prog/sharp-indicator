@@ -1,0 +1,86 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 7:00pm CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Wallets with positive NHL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:16pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Golden Knights at Oilers",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over TOTAL +108",
+       "price": "+108",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "B #aa9fb4",
+          "wid": "aa9fb4",
+          "market": "OVER +108",
+          "mk": "TOTAL",
+          "record": "9-5",
+          "roi": 21.8,
+          "dollars": 14096,
+          "note": "0.8x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         },
+         {
+          "team": "Over",
+          "wallet": "A #e51246",
+          "wid": "e51246",
+          "market": "OVER -138",
+          "mk": "TOTAL",
+          "record": "23-13",
+          "roi": 11,
+          "dollars": 1435,
+          "note": "1.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 15531,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 9-5 (+22% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

@@ -1,0 +1,613 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CFB - first game 6:00pm CT** - 9 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CFB - sharp wallets",
+   "subtitle": "Wallets with positive CFB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:16pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 11:00AM CT",
+     "picks": [
+      {
+       "eyebrow": "Tulsa at UTSA",
+       "time": "11:00am CT",
+       "tag": {
+        "t": "EDGE - UTSA",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "UTSA +1.5 -113",
+       "price": "-113",
+       "for": {
+        "team": "UTSA",
+        "rows": [
+         {
+          "team": "UTSA",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "SPREAD +1.5 -113",
+          "mk": "SPREAD",
+          "record": "8-4",
+          "roi": 35.1,
+          "dollars": 966,
+          "note": "1.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "UTSA",
+         "dollars": 966,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 8-4 (+35% ROI) on UTSA - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 6:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Texas at Texas A&M",
+       "time": "6:30pm CT",
+       "tag": {
+        "t": "EDGE - TEXAS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Texas ML -268",
+       "price": "-268",
+       "for": {
+        "team": "TEXAS",
+        "rows": [
+         {
+          "team": "Texas",
+          "wallet": "E #487b8b",
+          "wid": "487b8b",
+          "market": "ML -238",
+          "mk": "ML",
+          "record": "16-10",
+          "roi": -2.6,
+          "dollars": 11663,
+          "note": "19.4x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "CFB ML · all-time record"
+         },
+         {
+          "team": "Texas",
+          "wallet": "RollAwayTheDew #aaedcd",
+          "wid": "aaedcd",
+          "market": "ML -268",
+          "mk": "ML",
+          "record": "15-6",
+          "roi": 25.3,
+          "dollars": 687,
+          "note": "2.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TEXAS",
+         "dollars": 12350,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 15-6 (+25% ROI) on TEXAS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 1:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Liberty at Missouri State",
+       "time": "1:00pm CT",
+       "tag": {
+        "t": "EDGE - MISSOURI STATE",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Missouri State +17.5 -113",
+       "price": "-113",
+       "for": {
+        "team": "MISSOURI STATE",
+        "rows": [
+         {
+          "team": "Missouri State",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "SPREAD +17.5 -113",
+          "mk": "SPREAD",
+          "record": "8-4",
+          "roi": 35.1,
+          "dollars": 1000,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "team": "Missouri State",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +17.5 -107",
+          "mk": "SPREAD",
+          "record": "23-18",
+          "roi": 0.3,
+          "dollars": 641,
+          "note": "0.1x usual, L10 4-6",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MISSOURI STATE",
+         "dollars": 1641,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 8-4 (+35% ROI) on MISSOURI STATE - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Coastal Carolina at James Madison",
+       "time": "1:00pm CT",
+       "tag": {
+        "t": "EDGE - COASTAL CAROLINA",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Coastal Carolina +17.5 -104",
+       "price": "-104",
+       "for": {
+        "team": "COASTAL CAROLINA",
+        "rows": [
+         {
+          "team": "Coastal Carolina",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "SPREAD +17.5 -104",
+          "mk": "SPREAD",
+          "record": "8-4",
+          "roi": 35.1,
+          "dollars": 1000,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "COASTAL CAROLINA",
+         "dollars": 1000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 8-4 (+35% ROI) on COASTAL CAROLINA - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 2:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "South Carolina at Clemson",
+       "time": "2:00pm CT",
+       "tag": {
+        "t": "EDGE - CLEMSON",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Clemson +5.5 +113",
+       "price": "+113",
+       "for": {
+        "team": "CLEMSON",
+        "rows": [
+         {
+          "team": "Clemson",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "SPREAD +5.5 +113",
+          "mk": "SPREAD",
+          "record": "8-4",
+          "roi": 35.1,
+          "dollars": 1000,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CLEMSON",
+         "dollars": 1000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 8-4 (+35% ROI) on CLEMSON - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 8:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Arizona State at Arizona",
+       "time": "8:00pm CT",
+       "tag": {
+        "t": "EDGE - ARIZONA STATE",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Arizona State +7.5 -100",
+       "price": "-100",
+       "for": {
+        "team": "ARIZONA STATE",
+        "rows": [
+         {
+          "team": "Arizona State",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "SPREAD +7.5 -100",
+          "mk": "SPREAD",
+          "record": "8-4",
+          "roi": 35.1,
+          "dollars": 1000,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "ARIZONA STATE",
+         "dollars": 1000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 8-4 (+35% ROI) on ARIZONA STATE - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Miami (OH) at Western Michigan",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "★ Miami (OH) vs Western Michigan",
+       "price": null,
+       "for": {
+        "team": "MIAMI (OH)",
+        "rows": [
+         {
+          "team": "Miami (OH)",
+          "wallet": "F #ba8492",
+          "wid": "ba8492",
+          "market": "SPREAD +6.5 -117",
+          "mk": "SPREAD",
+          "record": "45-29",
+          "roi": 15,
+          "dollars": 27000,
+          "note": "3.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "team": "Miami (OH)",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +7.5 -113",
+          "mk": "SPREAD",
+          "record": "23-18",
+          "roi": 0.3,
+          "dollars": 640,
+          "note": "0.1x usual, L10 4-6",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "WESTERN MICHIGAN",
+        "rows": [
+         {
+          "team": "Western Michigan",
+          "wallet": "lightotunnel35 #858392",
+          "wid": "858392",
+          "market": "SPREAD -5.5 -104",
+          "mk": "SPREAD",
+          "record": "33-15",
+          "roi": 23.2,
+          "dollars": 4590,
+          "note": "1.0x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "team": "Western Michigan",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "ML -270",
+          "mk": "ML",
+          "record": "2-1",
+          "roi": 15.9,
+          "dollars": 1000,
+          "note": "1.1x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          },
+          "recLabel": "CFB ML · all-time record"
+         },
+         {
+          "team": "Western Michigan",
+          "wallet": "RollAwayTheDew #aaedcd",
+          "wid": "aaedcd",
+          "market": "SPREAD +8.5 -127",
+          "mk": "SPREAD",
+          "record": "12-9",
+          "roi": 24.4,
+          "dollars": 735,
+          "note": "2.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "MIAMI (OH)",
+         "dollars": 27640,
+         "pct": 81,
+         "c": "green"
+        },
+        {
+         "team": "WESTERN MICHIGAN",
+         "dollars": 6325,
+         "pct": 19,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "USC at UCLA",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - USC",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "USC",
+       "price": null,
+       "for": {
+        "team": "USC",
+        "rows": [
+         {
+          "team": "USC",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "ML -223",
+          "mk": "ML",
+          "record": "2-1",
+          "roi": 15.9,
+          "dollars": 1000,
+          "note": "1.1x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          },
+          "recLabel": "CFB ML · all-time record"
+         },
+         {
+          "team": "USC",
+          "wallet": "E #487b8b",
+          "wid": "487b8b",
+          "market": "SPREAD -6.5 -113",
+          "mk": "SPREAD",
+          "record": "53-39",
+          "roi": 11.9,
+          "dollars": 504,
+          "note": "0.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "USC",
+         "dollars": 1504,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 5:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "San Diego State at Washington State",
+       "time": "5:30pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 45.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "OVER 45.5 -108",
+          "mk": "TOTAL",
+          "record": "10-7",
+          "roi": 9.1,
+          "dollars": 513,
+          "note": "0.1x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 513,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Under 53.5 $1K (8-8 here, -15% ROI); Over 41.5 $1K (8-8 here, -15% ROI); Over 49.5 $1K (8-8 here, -15% ROI) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
