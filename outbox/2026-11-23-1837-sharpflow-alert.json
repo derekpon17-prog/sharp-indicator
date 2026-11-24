@@ -1,0 +1,380 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 4 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:14pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:15PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bengals at Commanders",
+       "time": "7:15pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 54.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "H #aa9fb4",
+          "wid": "aa9fb4",
+          "market": "OVER 54.5 -100",
+          "mk": "TOTAL",
+          "record": "7-5",
+          "roi": 27.2,
+          "dollars": 29750,
+          "note": "1.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "BreakTheBank #06c80c",
+          "wid": "06c80c",
+          "market": "UNDER -104",
+          "mk": "TOTAL",
+          "record": "12-3",
+          "roi": 60.9,
+          "dollars": 15480,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL TOTAL · all-time record"
+         },
+         {
+          "team": "Under",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "UNDER +108",
+          "mk": "TOTAL",
+          "record": "8-5",
+          "roi": -18,
+          "dollars": 792,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL TOTAL · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 29750,
+         "pct": 65,
+         "c": "green"
+        },
+        {
+         "team": "Under",
+         "dollars": 16272,
+         "pct": 35,
+         "c": "red"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "NEW $15K on Under - kickoff in 38 min"
+      },
+      {
+       "eyebrow": "Bengals at Commanders",
+       "time": "7:15pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bengals vs Commanders",
+       "price": null,
+       "for": {
+        "team": "BENGALS",
+        "rows": [
+         {
+          "team": "Bengals",
+          "wallet": "E #45fc26",
+          "wid": "45fc26",
+          "market": "ML -270",
+          "mk": "ML",
+          "record": "11-8",
+          "roi": 26.9,
+          "dollars": 240900,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -266",
+          "mk": "ML",
+          "record": "28-7",
+          "roi": 19,
+          "dollars": 14880,
+          "note": "1.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "I #b77626",
+          "wid": "b77626",
+          "market": "SPREAD +3.5 -567",
+          "mk": "SPREAD",
+          "record": "15-1",
+          "roi": 21.9,
+          "dollars": 2000,
+          "note": "1.5x usual, L10 10-0",
+          "status": {
+           "t": "HOT (last 10: 10-0)",
+           "c": "gold"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Bengals",
+          "wallet": "DolphinBaller #d780f4",
+          "wid": "d780f4",
+          "market": "ML -257",
+          "mk": "ML",
+          "record": "6-6",
+          "roi": 8.6,
+          "dollars": 1800,
+          "note": "1.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "COMMANDERS",
+        "rows": [
+         {
+          "team": "Commanders",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "SPREAD -3.5 +525",
+          "mk": "SPREAD",
+          "record": "8-4",
+          "roi": 42.6,
+          "dollars": 2559,
+          "note": "0.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BENGALS",
+         "dollars": 259580,
+         "pct": 99,
+         "c": "green"
+        },
+        {
+         "team": "COMMANDERS",
+         "dollars": 2559,
+         "pct": 1,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "NEW $2.6K on Commanders -3.5 - kickoff in 38 min"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Thunder at Pacers",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - THUNDER",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Thunder",
+       "price": null,
+       "for": {
+        "team": "THUNDER",
+        "rows": [
+         {
+          "team": "Thunder",
+          "wallet": "N #d3567c",
+          "wid": "d3567c",
+          "market": "SPREAD -5.5 +113",
+          "mk": "SPREAD",
+          "record": "2-2",
+          "roi": 65.1,
+          "dollars": 2962,
+          "note": "1.2x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Thunder",
+          "wallet": "ckw #b70f9a",
+          "wid": "b70f9a",
+          "market": "SPREAD -5.5 +113",
+          "mk": "SPREAD",
+          "record": "4-1",
+          "roi": 89.2,
+          "dollars": 1880,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Thunder",
+          "wallet": "PIPIZIN #cbff8c",
+          "wid": "cbff8c",
+          "market": "SPREAD -4.5 -108",
+          "mk": "SPREAD",
+          "record": "8-7",
+          "roi": 2.4,
+          "dollars": 600,
+          "note": "0.7x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "THUNDER",
+         "dollars": 5442,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "GREW $3.6K to $5.4K - LATE: kickoff in 3 min - SITE LOCK: Pacers +4.5 3u (wallet money AGAINST it) | SITE LOCK: Pacers ML 1.5u (no wallet money)"
+      },
+      {
+       "eyebrow": "Thunder at Pacers",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 225.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "D #caca29",
+          "wid": "caca29",
+          "market": "UNDER 225.5 +108",
+          "mk": "TOTAL",
+          "record": "8-8",
+          "roi": 2.3,
+          "dollars": 4164,
+          "note": "1.1x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "team": "Under",
+          "wallet": "L #fe6a11",
+          "wid": "fe6a11",
+          "market": "UNDER 225.5 +108",
+          "mk": "TOTAL",
+          "record": "2-1",
+          "roi": 77.5,
+          "dollars": 540,
+          "note": "0.3x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 4704,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $4.7K on Under 225.5 - LATE: kickoff in 3 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
