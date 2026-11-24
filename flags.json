@@ -1,6 +1,6 @@
 {
  "date": "2026-11-24",
- "scannedAt": "2026-11-24T18:08:03.262Z",
+ "scannedAt": "2026-11-24T18:53:32.706Z",
  "sides": [
   {
    "tail": false,
@@ -25,6 +25,33 @@
     "sizing": 12,
     "quality": 4,
     "pooled": 4,
+    "unopposed": 3,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CBB",
+   "matchup": "Miami Hurricanes at TCU Horned Frogs",
+   "market": "TOTAL",
+   "pick": "Under 153.5",
+   "kickoffEt": "Tue, Nov 24, 3:00 PM",
+   "dollars": 3025,
+   "oppDollars": 0,
+   "wallets": 1,
+   "maxVsUsual": 6.2,
+   "price": "-112",
+   "size": "1.5x and up",
+   "mktRecord": "14-16",
+   "mktRoi": 39.7,
+   "l30Roi": 24.7,
+   "contested": false,
+   "sfPoints": 29,
+   "parts": {
+    "money": 8,
+    "sizing": 12,
+    "quality": 6,
+    "pooled": 0,
     "unopposed": 3,
     "contested": 0
    }
@@ -85,33 +112,6 @@
   },
   {
    "tail": false,
-   "sport": "CFB",
-   "matchup": "Miami (OH) at Western Michigan",
-   "market": "SPREAD",
-   "pick": "Western Michigan",
-   "kickoffEt": "Tue, Nov 24, 7:00 PM",
-   "dollars": 1538,
-   "oppDollars": 640,
-   "wallets": 2,
-   "maxVsUsual": 2.9,
-   "price": "-104",
-   "size": "under 0.5x",
-   "mktRecord": "33-15",
-   "mktRoi": 23.2,
-   "l30Roi": 25.7,
-   "contested": false,
-   "sfPoints": 24,
-   "parts": {
-    "money": 4,
-    "sizing": 12,
-    "quality": 4,
-    "pooled": 4,
-    "unopposed": 0,
-    "contested": 0
-   }
-  },
-  {
-   "tail": false,
    "sport": "CBB",
    "matchup": "Tennessee Volunteers at Maryland Terrapins",
    "market": "ML",
@@ -159,6 +159,33 @@
     "money": 12,
     "sizing": 4,
     "quality": 0,
+    "pooled": 4,
+    "unopposed": 0,
+    "contested": 0
+   }
+  },
+  {
+   "tail": false,
+   "sport": "CFB",
+   "matchup": "Miami (OH) at Western Michigan",
+   "market": "SPREAD",
+   "pick": "Western Michigan",
+   "kickoffEt": "Tue, Nov 24, 7:00 PM",
+   "dollars": 5325,
+   "oppDollars": 640,
+   "wallets": 2,
+   "maxVsUsual": 1,
+   "price": "-104",
+   "size": "0.5x",
+   "mktRecord": "33-15",
+   "mktRoi": 23.2,
+   "l30Roi": 25.7,
+   "contested": false,
+   "sfPoints": 20,
+   "parts": {
+    "money": 12,
+    "sizing": 0,
+    "quality": 4,
     "pooled": 4,
     "unopposed": 0,
     "contested": 0
@@ -572,6 +599,22 @@
  ],
  "flags": [
   {
+   "matchup": "Miami (OH) at Western Michigan",
+   "market": "SPREAD",
+   "pick": "Western Michigan",
+   "kickoffEt": "Tue, Nov 24, 7:00 PM",
+   "sport": "CFB",
+   "type": "STRONG_VS_OTHER",
+   "strongDollars": 4590,
+   "oppDollars": 640,
+   "oppWeakDollars": 0,
+   "fp": [
+    "46-21|84069|33-15"
+   ],
+   "bestPrice": "-104",
+   "maxVsUsual": 2.9
+  },
+  {
    "matchup": "Pistons at Magic",
    "market": "ML",
    "pick": "Pistons",
@@ -621,6 +664,23 @@
    "mktRoi": -2.6,
    "opposed": "unopposed",
    "fp": "26-16|3844|16-10"
+  },
+  {
+   "matchup": "Miami Hurricanes at TCU Horned Frogs",
+   "market": "TOTAL",
+   "pick": "Under 153.5",
+   "kickoffEt": "Tue, Nov 24, 3:00 PM",
+   "sport": "CBB",
+   "dollars": 3025,
+   "price": "-112",
+   "vsUsual": 6.2,
+   "size": "1.5x and up",
+   "form": "L10 8-2",
+   "l30Roi": 24.7,
+   "mktRecord": "14-16",
+   "mktRoi": 39.7,
+   "opposed": "unopposed",
+   "fp": "31-22|6358|14-16"
   },
   {
    "matchup": "Jacksonville Dolphins at Indiana Hoosiers",

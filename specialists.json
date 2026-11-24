@@ -1,6 +1,6 @@
 {
  "date": "2026-11-24",
- "scannedAt": "2026-11-24T18:08:03.262Z",
+ "scannedAt": "2026-11-24T18:53:32.706Z",
  "sports": {
   "NFL": [
    {
@@ -224,16 +224,6 @@
       "vsUsualAll": 1.6
      },
      {
-      "matchup": "Tennessee at Vanderbilt",
-      "market": "TOTAL",
-      "pick": "Over 41.5",
-      "line": 41.5,
-      "price": "-117",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.6
-     },
-     {
       "matchup": "Michigan at Ohio State",
       "market": "TOTAL",
       "pick": "Over 37.5",
@@ -433,9 +423,9 @@
       "pick": "Western Michigan",
       "line": -5.5,
       "price": "-104",
-      "dollars": 803,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.3
+      "dollars": 4590,
+      "vsUsual": 1,
+      "vsUsualAll": 1.5
      }
     ]
    }
@@ -502,6 +492,16 @@
     "last10": "8-2",
     "bettingBig": true,
     "tonight": [
+     {
+      "matchup": "Miami Hurricanes at TCU Horned Frogs",
+      "market": "TOTAL",
+      "pick": "Under 153.5",
+      "line": 153.5,
+      "price": "-112",
+      "dollars": 3025,
+      "vsUsual": 6.2,
+      "vsUsualAll": 6.7
+     },
      {
       "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
       "market": "ML",
