@@ -1,0 +1,42 @@
+{
+ "date": "2026-11-28",
+ "entries": {
+  "CFB|San Diego State at Washington State|TOTAL|Over|0x27f738fe203827445690339104aae35b20bc44b0": {
+   "sport": "CFB",
+   "matchup": "San Diego State at Washington State",
+   "market": "TOTAL",
+   "side": "Over",
+   "grp": "total",
+   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "name": "ic4cream",
+   "cls": "HOT",
+   "sportCls": "HOT",
+   "gateNote": null,
+   "startUtc": "2026-11-28T23:30:00.000Z",
+   "conditionId": "0xf42ed676aa1b92dd58673d0d8ddcd0e6d0ccdd570ab32fa0885c5aaf785d8160",
+   "outcome": "Over",
+   "title": "San Diego State vs. Washington State: O/U 45.5",
+   "firstSeenAt": "2026-11-24T02:33:25.922Z",
+   "firstPrice": 0.52,
+   "firstUsd": 514,
+   "maxUsd": 514,
+   "lastSeenAt": "2026-11-24T02:33:25.922Z",
+   "rec": "46-31",
+   "roi": 35.3,
+   "n": 77,
+   "recScope": "NCAAF TOTAL, last 45 days",
+   "l10": "L10 NCAAF 6-4",
+   "onCard": true,
+   "sameAsSF": true,
+   "twoSided": false,
+   "tokenId": "75737745400238391195258500280330655461302512380431007519147518017741145039955",
+   "firstBuyUtc": "2026-11-23T19:59:08.000Z",
+   "hoursBeforeStart": 123.5,
+   "gameSource": "sharpflow",
+   "usualMed": 1063,
+   "usualScope": "CFB",
+   "vsUsual": 0.48,
+   "sizeTier": "SMALL"
+  }
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "date": "2026-11-24",
+ "entries": {
+  "CFB|Miami (OH) at Western Michigan|SPREAD|Miami (OH)|0x27f738fe203827445690339104aae35b20bc44b0": {
+   "sport": "CFB",
+   "matchup": "Miami (OH) at Western Michigan",
+   "market": "SPREAD",
+   "side": "Miami (OH)",
+   "grp": "team",
+   "wallet": "0x27f738fe203827445690339104aae35b20bc44b0",
+   "name": "ic4cream",
+   "cls": "COLD",
+   "sportCls": "HOT",
+   "gateNote": "HOT overall but cold in SPREAD (65-67, -19.3% ROI)",
+   "startUtc": "2026-11-25T00:00:00.000Z",
+   "conditionId": "0x3213b2f592ce37780d6734d2130565e814e9049854172dfd9b5d6cead8e65174",
+   "outcome": "Miami (OH)",
+   "title": "Spread: Western Michigan (-7.5)",
+   "firstSeenAt": "2026-11-24T02:33:25.922Z",
+   "firstPrice": 0.53,
+   "firstUsd": 770,
+   "maxUsd": 770,
+   "lastSeenAt": "2026-11-24T02:33:25.922Z",
+   "rec": "65-67",
+   "roi": -19.3,
+   "n": 132,
+   "recScope": "NCAAF SPREAD, last 45 days",
+   "l10": "L10 NCAAF 6-4",
+   "onCard": true,
+   "sameAsSF": false,
+   "twoSided": false,
+   "tokenId": "25035631793468111561238277867721581045805005713747922491643939004357576460934",
+   "firstBuyUtc": "2026-11-22T23:52:47.000Z",
+   "hoursBeforeStart": 48.1,
+   "gameSource": "sharpflow",
+   "usualMed": 1063,
+   "usualScope": "CFB",
+   "vsUsual": 0.72,
+   "sizeTier": "NORMAL"
+  }
+ }
+}
