@@ -1,12 +1,33 @@
 {
  "date": "2026-11-24",
- "scannedAt": "2026-11-24T22:16:13.201Z",
+ "scannedAt": "2026-11-24T23:20:07.277Z",
  "sports": {
   "NFL": [
    {
+    "id": "8fda40",
+    "gap": 11.4,
+    "overall": "133-76",
+    "sport": "9-3",
+    "returnPct": 7.8,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Packers at Rams",
+      "market": "ML",
+      "pick": "Rams",
+      "line": null,
+      "price": "-127",
+      "dollars": 504,
+      "vsUsual": 0.9,
+      "vsUsualAll": 7.2
+     }
+    ]
+   },
+   {
     "id": "5fcee5",
-    "gap": 9.5,
-    "overall": "281-150",
+    "gap": 9.4,
+    "overall": "283-151",
     "sport": "53-18",
     "returnPct": 14.2,
     "last10": "5-5",
@@ -36,8 +57,8 @@
    },
    {
     "id": "bc44b0",
-    "gap": 6.7,
-    "overall": "284-239",
+    "gap": 6.9,
+    "overall": "284-241",
     "sport": "25-16",
     "returnPct": 6.3,
     "last10": "6-4",
@@ -189,6 +210,16 @@
       "dollars": 1417,
       "vsUsual": 0.9,
       "vsUsualAll": 0.6
+     },
+     {
+      "matchup": "Bulls at Hornets",
+      "market": "ML",
+      "pick": "Bulls",
+      "line": null,
+      "price": "+144",
+      "dollars": 1230,
+      "vsUsual": 0.8,
+      "vsUsualAll": 0.5
      }
     ]
    },
@@ -226,23 +257,44 @@
   ],
   "NHL": [
    {
+    "id": "3102d7",
+    "gap": 16.5,
+    "overall": "96-86",
+    "sport": "18-8",
+    "returnPct": 36.8,
+    "last10": "6-4",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Golden Knights at Oilers",
+      "market": "TOTAL",
+      "pick": "Under 6.5",
+      "line": 6.5,
+      "price": "-102",
+      "dollars": 808,
+      "vsUsual": 1.4,
+      "vsUsualAll": 1.5
+     }
+    ]
+   },
+   {
     "id": "aa9fb4",
     "gap": 10.7,
     "overall": "37-32",
     "sport": "9-5",
     "returnPct": 21.8,
     "last10": "5-5",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Golden Knights at Oilers",
       "market": "TOTAL",
       "pick": "Over",
       "line": 6.5,
-      "price": "+108",
-      "dollars": 14096,
-      "vsUsual": 0.8,
-      "vsUsualAll": 2.3
+      "price": "+105",
+      "dollars": 46138,
+      "vsUsual": 2.7,
+      "vsUsualAll": 7.6
      }
     ]
    },
@@ -326,7 +378,7 @@
       "price": "-104",
       "dollars": 966,
       "vsUsual": 1,
-      "vsUsualAll": 1.5
+      "vsUsualAll": 1.6
      },
      {
       "matchup": "Liberty at Missouri State",
@@ -386,7 +438,7 @@
       "price": "-113",
       "dollars": 966,
       "vsUsual": 1,
-      "vsUsualAll": 1.5
+      "vsUsualAll": 1.6
      },
      {
       "matchup": "UCF at Colorado",
@@ -412,8 +464,8 @@
    },
    {
     "id": "aaedcd",
-    "gap": 6.7,
-    "overall": "174-139",
+    "gap": 6.9,
+    "overall": "174-140",
     "sport": "33-20",
     "returnPct": 25.7,
     "last10": "6-4",
@@ -443,8 +495,8 @@
    },
    {
     "id": "bc44b0",
-    "gap": 3.4,
-    "overall": "284-239",
+    "gap": 3.6,
+    "overall": "284-241",
     "sport": "45-33",
     "returnPct": 17.9,
     "last10": "4-6",
@@ -466,9 +518,9 @@
       "pick": "Missouri State +17.5",
       "line": 17.5,
       "price": "-107",
-      "dollars": 641,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.3
+      "dollars": 990,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.4
      },
      {
       "matchup": "San Diego State at Washington State",
@@ -485,7 +537,7 @@
    {
     "id": "487b8b",
     "gap": 3.2,
-    "overall": "551-465",
+    "overall": "552-465",
     "sport": "77-57",
     "returnPct": 4.2,
     "last10": "6-4",
@@ -559,20 +611,20 @@
    },
    {
     "id": "bc44b0",
-    "gap": 17.7,
-    "overall": "284-239",
-    "sport": "18-7",
-    "returnPct": 48.5,
+    "gap": 12.6,
+    "overall": "284-241",
+    "sport": "18-9",
+    "returnPct": 43.8,
     "last10": "6-4",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Tennessee Volunteers at Maryland Terrapins",
-      "market": "ML",
-      "pick": "Maryland Terrapins",
-      "line": null,
-      "price": "+122",
-      "dollars": 556,
+      "matchup": "Oregon Ducks at St. John's Red Storm",
+      "market": "SPREAD",
+      "pick": "St. John's Red Storm +10.5",
+      "line": 10.5,
+      "price": "-103",
+      "dollars": 547,
       "vsUsual": 0.7,
       "vsUsualAll": 0.2
      },
@@ -585,38 +637,18 @@
       "dollars": 822,
       "vsUsual": 1.1,
       "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Oregon Ducks at St. John's Red Storm",
-      "market": "SPREAD",
-      "pick": "St. John's Red Storm +10.5",
-      "line": 10.5,
-      "price": "-103",
-      "dollars": 547,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.2
      }
     ]
    },
    {
     "id": "aaedcd",
-    "gap": 2.9,
-    "overall": "174-139",
-    "sport": "31-22",
-    "returnPct": 24.7,
-    "last10": "8-2",
-    "bettingBig": true,
+    "gap": 2,
+    "overall": "174-140",
+    "sport": "31-23",
+    "returnPct": 11.6,
+    "last10": "7-3",
+    "bettingBig": false,
     "tonight": [
-     {
-      "matchup": "Miami Hurricanes at TCU Horned Frogs",
-      "market": "TOTAL",
-      "pick": "Under 153.5",
-      "line": 153.5,
-      "price": "-112",
-      "dollars": 3025,
-      "vsUsual": 6.2,
-      "vsUsualAll": 6.7
-     },
      {
       "matchup": "Bryant Bulldogs at Marist Red Foxes",
       "market": "SPREAD",
@@ -624,18 +656,8 @@
       "line": 4.5,
       "price": "-127",
       "dollars": 531,
-      "vsUsual": 1.1,
+      "vsUsual": 1,
       "vsUsualAll": 1.2
-     },
-     {
-      "matchup": "Jacksonville Dolphins at Indiana Hoosiers",
-      "market": "ML",
-      "pick": "Indiana Hoosiers",
-      "line": null,
-      "price": "-3746",
-      "dollars": 2568,
-      "vsUsual": 5.3,
-      "vsUsualAll": 5.7
      }
     ]
    }
