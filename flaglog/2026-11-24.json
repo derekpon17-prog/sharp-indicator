@@ -17,7 +17,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 13
+   "snapshots": 14
   },
   "Packers at Rams|ML|Rams": {
    "sport": "NFL",
@@ -34,7 +34,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 8582,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Pistons at Magic|ML|Pistons": {
    "sport": "NBA",
@@ -71,7 +71,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -135,7 +135,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -183,7 +183,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
    "sport": "CFB",
@@ -199,7 +199,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
    "sport": "CFB",
@@ -215,7 +215,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
    "sport": "CFB",
@@ -231,7 +231,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "South Carolina at Clemson|SPREAD|Clemson +5.5": {
    "sport": "CFB",
@@ -247,7 +247,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "UCF at Colorado|TOTAL|Over 49.5": {
    "sport": "CFB",
@@ -263,7 +263,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 12
+   "snapshots": 13
   },
   "Mavericks at Nuggets|ML|Mavericks": {
    "sport": "NBA",
@@ -276,12 +276,13 @@
    "tags": [
     "STRONG_VS_WEAK",
     "STRONG_UNOPPOSED",
-    "STRONG_VS_STRONG"
+    "STRONG_VS_STRONG",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 0.9,
-   "maxDollars": 2602,
+   "maxVsUsual": 3.7,
+   "maxDollars": 2891,
    "opposedSeen": true,
-   "snapshots": 11
+   "snapshots": 13
   },
   "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -297,7 +298,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Appalachian State at South Alabama|TOTAL|Under 57.5": {
    "sport": "CFB",
@@ -313,7 +314,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 11
+   "snapshots": 12
   },
   "Miami (OH) at Western Michigan|SPREAD|Western Michigan": {
    "sport": "CFB",
@@ -396,7 +397,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 1230,
    "opposedSeen": false,
-   "snapshots": 5
+   "snapshots": 6
   },
   "Golden Knights at Oilers|TOTAL|Over": {
    "sport": "NHL",
@@ -447,7 +448,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 7658,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 11
   },
   "Cavaliers at Knicks|ML|Knicks": {
    "sport": "NBA",
@@ -464,7 +465,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 5239,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 10
   },
   "Kent State at Eastern Michigan|TOTAL|Over 45.5": {
    "sport": "CFB",
@@ -673,12 +674,13 @@
    "firstPrice": "-104",
    "tags": [
     "STRONG_UNOPPOSED",
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.2,
-   "maxDollars": 1142,
+   "maxVsUsual": 2.2,
+   "maxDollars": 2142,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Mavericks at Nuggets|SPREAD|Nuggets": {
    "sport": "NBA",
@@ -693,7 +695,56 @@
    ],
    "maxVsUsual": 2,
    "maxDollars": 28209,
-   "opposedSeen": false,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Timberwolves at Thunder|ML|Timberwolves": {
+   "sport": "NBA",
+   "matchup": "Timberwolves at Thunder",
+   "market": "ML",
+   "pick": "Timberwolves",
+   "kickoffEt": "Wed, Nov 25, 7:40 PM",
+   "firstSeenAt": "2026-11-25T04:31:16.231Z",
+   "firstPrice": "+113",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 1880,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Mavericks at Nuggets|SPREAD|Mavericks +7.5": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Nuggets",
+   "market": "SPREAD",
+   "pick": "Mavericks +7.5",
+   "kickoffEt": "Tue, Nov 24, 10:13 PM",
+   "firstSeenAt": "2026-11-25T04:31:16.231Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 1433,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Timberwolves at Thunder|ML|Thunder": {
+   "sport": "NBA",
+   "matchup": "Timberwolves at Thunder",
+   "market": "ML",
+   "pick": "Thunder",
+   "kickoffEt": "Wed, Nov 25, 7:40 PM",
+   "firstSeenAt": "2026-11-25T04:31:16.232Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 10379,
+   "opposedSeen": true,
    "snapshots": 1
   }
  }
