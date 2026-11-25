@@ -1,0 +1,48 @@
+{
+ "date": "2026-11-25",
+ "posted_ct": "0834",
+ "sport": "CBB",
+ "outlier": false,
+ "first_start": "2026-11-25T15:00:00.000Z",
+ "snapshot": "2026-11-25T14:19:59.874Z",
+ "sides": [
+  {
+   "game": "Saint Peter's Peacocks at Columbia Lions",
+   "market": "TOTAL",
+   "pick": "Under 125.5",
+   "start_utc": "2026-11-25T19:00:00.000Z",
+   "dollars": 1326,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.8,
+   "all_sport_ratio": 0.91,
+   "price": "-107",
+   "line": 125.5,
+   "l30_rec": "21-9",
+   "l30_roi": 48.2,
+   "mkt_rec": "15-4",
+   "mkt_roi": 45.9,
+   "mkt_l30_rec": "15-4",
+   "tail": false
+  },
+  {
+   "game": "Wake Forest Demon Deacons at Mississippi State Bulldogs",
+   "market": "TOTAL",
+   "pick": "Under 150.5",
+   "start_utc": "2026-11-26T00:30:00.000Z",
+   "dollars": 1620,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 3,
+   "all_sport_ratio": 8.27,
+   "price": "-108",
+   "line": 150.5,
+   "l30_rec": "34-25",
+   "l30_roi": 11.1,
+   "mkt_rec": "14-18",
+   "mkt_roi": 16.7,
+   "mkt_l30_rec": "14-18",
+   "tail": false
+  }
+ ]
+}
