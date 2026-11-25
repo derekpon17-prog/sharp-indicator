@@ -1,0 +1,150 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Tue Nov 24** · 5 new plays (first tips 6:30pm CT) · FADED, now PASS: Under 142.5, Florida A&M @ South Alabama 7:00pm CT (was Pinnacle MAX, now no lean)",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "TUE NOV 24 · 6:10PM",
+  "sources": "Pinnacle 6:10pm CT - Vegas 6:11pm CT (CBB, NBA, NHL) - SharpFlow 5:32pm CT - Novig not read",
+  "sf_current": true,
+  "footer": "FADED, NOW PASS: Under 142.5, Florida A&M @ South Alabama, 7:00pm CT. Posted 3:53pm CT as Pinnacle MAX stable; at 6:10pm CT Pinnacle shows no lean on this total. Pass. Late update shows only faded plays and new Strong/Max sides. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "TTU@LOU",
+    "start_ct": "7:00pm",
+    "market": "SPREAD",
+    "side": "LOU",
+    "line": 2.5,
+    "price": -112,
+    "bet": "Louisville +2.5",
+    "matchup": "NCAAB - Texas Tech @ Louisville - 7:00pm CT",
+    "first_seen": "15:53",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 89,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "ALIGNED",
+     "VEGAS80_STABLE",
+     "PIN_LEAN"
+    ],
+    "note": "Late update 6:10pm CT: Pinnacle moved from Lean to Strong stable; Vegas Backed 89 (87 at 3:53pm). Side first logged 15:53.",
+    "vegas_type": "Vegas Backed",
+    "pin_strong_seen": "18:10"
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "TTU@LOU",
+    "start_ct": "7:00pm",
+    "market": "ML",
+    "side": "LOU",
+    "line": null,
+    "price": 120,
+    "bet": "Louisville ML",
+    "matchup": "NCAAB - Texas Tech @ Louisville - 7:00pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "note": "Late update: Pinnacle Strong stable; no Vegas row on the moneyline."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "HPU@DUQ",
+    "start_ct": "6:30pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 141.5,
+    "price": -109,
+    "bet": "Over 141.5",
+    "matchup": "NCAAB - High Point @ Duquesne - 6:30pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "note": "Late update: Pinnacle Strong stable; no Vegas row on the total."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "HCU@ULM",
+    "start_ct": "6:30pm",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 150.5,
+    "price": -112,
+    "bet": "Under 150.5",
+    "matchup": "NCAAB - Houston Christian @ UL Monroe - 6:30pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "note": "Late update: Pinnacle Strong stable; no Vegas row on the total."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "AAMU@UNA",
+    "start_ct": "7:00pm",
+    "market": "SPREAD",
+    "side": "UNA",
+    "line": -3.5,
+    "price": -116,
+    "bet": "North Alabama -3.5",
+    "matchup": "NCAAB - Alabama A&M @ North Alabama - 7:00pm CT",
+    "first_seen": "18:10",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "note": "Late update: Pinnacle Strong stable on the spread (the moneyline is Strong flipped); no Vegas row on the spread."
+   },
+   {
+    "date": "2026-11-24",
+    "sport": "NCAAB",
+    "game": "FAMU@USA",
+    "start_ct": "7:00pm",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 142.5,
+    "price": -112,
+    "bet": "Under 142.5",
+    "matchup": "NCAAB - Florida A&M @ South Alabama - 7:00pm CT",
+    "first_seen": "15:53",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_MAX",
+     "PIN_FADED"
+    ],
+    "late_pin": "No lean",
+    "note": "Pinnacle Max stable at 15:53; no lean at 18:10 CT.",
+    "tier_override": "PASS",
+    "reason": "Posted 3:53pm CT as Pinnacle MAX stable; at 6:10pm CT Pinnacle shows no lean on this total. Pass."
+   }
+  ]
+ }
+}
