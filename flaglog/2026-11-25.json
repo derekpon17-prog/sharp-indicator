@@ -16,7 +16,7 @@
    "maxVsUsual": 3.3,
    "maxDollars": 5331,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Cavaliers at Knicks|ML|Cavaliers": {
    "sport": "NBA",
@@ -27,12 +27,13 @@
    "firstSeenAt": "2026-11-25T14:33:05.233Z",
    "firstPrice": "+138",
    "tags": [
-    "STRONG_VS_OTHER"
+    "STRONG_VS_OTHER",
+    "STRONG_VS_WEAK"
    ],
    "maxVsUsual": 1,
    "maxDollars": 1655,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Saint Peter's Peacocks at Columbia Lions|TOTAL|Under 125.5": {
    "sport": "CBB",
@@ -49,7 +50,7 @@
    "maxVsUsual": 1.8,
    "maxDollars": 1326,
    "opposedSeen": false,
-   "snapshots": 4
+   "snapshots": 6
   },
   "Bulls at Hornets|ML|Bulls": {
    "sport": "NBA",
@@ -66,7 +67,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 2696,
    "opposedSeen": false,
-   "snapshots": 3
+   "snapshots": 5
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -82,7 +83,7 @@
    "maxVsUsual": 19.5,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Wake Forest Demon Deacons at Mississippi State Bulldogs|TOTAL|Under 150.5": {
    "sport": "CBB",
@@ -98,7 +99,7 @@
    "maxVsUsual": 3,
    "maxDollars": 1620,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Cavaliers at Knicks|ML|Knicks": {
    "sport": "NBA",
@@ -109,12 +110,13 @@
    "firstSeenAt": "2026-11-25T14:33:05.233Z",
    "firstPrice": "-163",
    "tags": [
-    "SIZED_15X"
+    "SIZED_15X",
+    "SIZED_2X"
    ],
-   "maxVsUsual": 1.7,
-   "maxDollars": 5239,
+   "maxVsUsual": 2.2,
+   "maxDollars": 6743,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Packers at Rams|SPREAD|Rams -2.5": {
    "sport": "NFL",
@@ -130,7 +132,7 @@
    "maxVsUsual": 1.3,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Packers at Rams|ML|Rams": {
    "sport": "NFL",
@@ -146,7 +148,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 8582,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 3
   },
   "USC at UCLA|ML|USC": {
    "sport": "CFB",
@@ -162,7 +164,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
    "sport": "CFB",
@@ -178,7 +180,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Boston College at Miami (FL)|TOTAL|Under 53.5": {
    "sport": "CFB",
@@ -194,7 +196,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "South Carolina at Clemson|SPREAD|Clemson +5.5": {
    "sport": "CFB",
@@ -210,7 +212,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
    "sport": "CFB",
@@ -226,7 +228,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
    "sport": "CFB",
@@ -242,7 +244,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -258,7 +260,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Sacramento State at Hawai'i|SPREAD|Hawai'i -13.5": {
    "sport": "CFB",
@@ -274,7 +276,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "UConn at Wyoming|SPREAD|Wyoming +4.5": {
    "sport": "CFB",
@@ -290,7 +292,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Clippers at Grizzlies|ML|Clippers": {
    "sport": "NBA",
@@ -307,7 +309,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1855,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Packers at Rams|TOTAL|Over 44.5": {
    "sport": "NFL",
@@ -339,7 +341,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 1159,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Michigan at Ohio State|TOTAL|Over 37.5": {
    "sport": "CFB",
@@ -355,7 +357,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "UCF at Colorado|TOTAL|Over 49.5": {
    "sport": "CFB",
@@ -371,7 +373,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Appalachian State at South Alabama|TOTAL|Under 57.5": {
    "sport": "CFB",
@@ -386,6 +388,87 @@
    ],
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Packers at Rams|TOTAL|Under": {
+   "sport": "NFL",
+   "matchup": "Packers at Rams",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Wed, Nov 25, 8:00 PM",
+   "firstSeenAt": "2026-11-25T18:29:39.083Z",
+   "firstPrice": "-138",
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 6957,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Flyers at Capitals|ML|Capitals": {
+   "sport": "NHL",
+   "matchup": "Flyers at Capitals",
+   "market": "ML",
+   "pick": "Capitals",
+   "kickoffEt": "Wed, Nov 25, 7:00 PM",
+   "firstSeenAt": "2026-11-25T18:29:39.083Z",
+   "firstPrice": "-150",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.8,
+   "maxDollars": 1875,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Bulls at Hornets|TOTAL|Over 221.5": {
+   "sport": "NBA",
+   "matchup": "Bulls at Hornets",
+   "market": "TOTAL",
+   "pick": "Over 221.5",
+   "kickoffEt": "Wed, Nov 25, 7:10 PM",
+   "firstSeenAt": "2026-11-25T18:29:39.083Z",
+   "firstPrice": "+113",
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 0.7,
+   "maxDollars": 1641,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Packers at Rams|TOTAL|Over": {
+   "sport": "NFL",
+   "matchup": "Packers at Rams",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Wed, Nov 25, 8:00 PM",
+   "firstSeenAt": "2026-11-25T18:29:39.083Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 3.1,
+   "maxDollars": 48462,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Suns at Rockets|ML|Rockets": {
+   "sport": "NBA",
+   "matchup": "Suns at Rockets",
+   "market": "ML",
+   "pick": "Rockets",
+   "kickoffEt": "Wed, Nov 25, 8:40 PM",
+   "firstSeenAt": "2026-11-25T18:29:39.083Z",
+   "firstPrice": "-335",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 4576,
    "opposedSeen": false,
    "snapshots": 1
   }
