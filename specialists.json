@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "scannedAt": "2026-11-25T21:02:05.735Z",
+ "scannedAt": "2026-11-25T22:22:15.369Z",
  "sports": {
   "NFL": [
    {
@@ -151,6 +151,27 @@
   ],
   "NBA": [
    {
+    "id": "d5876f",
+    "gap": 17.1,
+    "overall": "18-16",
+    "sport": "7-3",
+    "returnPct": 53.9,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Cavaliers at Knicks",
+      "market": "ML",
+      "pick": "Cavaliers",
+      "line": null,
+      "price": "+138",
+      "dollars": 1596,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.6
+     }
+    ]
+   },
+   {
     "id": "4417bc",
     "gap": 10.2,
     "overall": "100-57",
@@ -186,19 +207,9 @@
       "pick": "Knicks",
       "line": null,
       "price": "-124",
-      "dollars": 4003,
-      "vsUsual": 1.9,
-      "vsUsualAll": 1.8
-     },
-     {
-      "matchup": "Heat at 76ers",
-      "market": "ML",
-      "pick": "76ers",
-      "line": null,
-      "price": "+113",
-      "dollars": 3896,
-      "vsUsual": 1.8,
-      "vsUsualAll": 1.7
+      "dollars": 3400,
+      "vsUsual": 1.6,
+      "vsUsualAll": 1.5
      }
     ]
    },
@@ -212,44 +223,14 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Cavaliers at Knicks",
+      "matchup": "Heat at 76ers",
       "market": "ML",
-      "pick": "Knicks",
+      "pick": "Heat",
       "line": null,
-      "price": "-154",
-      "dollars": 6743,
-      "vsUsual": 2.2,
-      "vsUsualAll": 5.8
-     },
-     {
-      "matchup": "Cavaliers at Knicks",
-      "market": "SPREAD",
-      "pick": "Knicks -3.5",
-      "line": -3.5,
-      "price": "+111",
-      "dollars": 2650,
-      "vsUsual": 0.9,
-      "vsUsualAll": 2.3
-     },
-     {
-      "matchup": "Cavaliers at Knicks",
-      "market": "TOTAL",
-      "pick": "Over 218.5",
-      "line": 218.5,
-      "price": "+102",
-      "dollars": 1935,
-      "vsUsual": 0.6,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Suns at Rockets",
-      "market": "ML",
-      "pick": "Rockets",
-      "line": null,
-      "price": "-335",
-      "dollars": 4576,
-      "vsUsual": 1.5,
-      "vsUsualAll": 3.9
+      "price": "+108",
+      "dollars": 500,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.4
      },
      {
       "matchup": "Heat at 76ers",
@@ -264,7 +245,7 @@
      {
       "matchup": "Heat at 76ers",
       "market": "SPREAD",
-      "pick": "76ers -1.5",
+      "pick": "76ers",
       "line": -1.5,
       "price": "+113",
       "dollars": 1015,
@@ -276,30 +257,80 @@
       "market": "TOTAL",
       "pick": "Over 237.5",
       "line": 237.5,
-      "price": "-100",
-      "dollars": 1280,
-      "vsUsual": 0.4,
-      "vsUsualAll": 1.1
+      "price": "+103",
+      "dollars": 3729,
+      "vsUsual": 1.2,
+      "vsUsualAll": 3.2
      },
      {
-      "matchup": "Kings at Warriors",
+      "matchup": "Cavaliers at Knicks",
       "market": "ML",
-      "pick": "Kings",
+      "pick": "Knicks",
       "line": null,
-      "price": "+223",
-      "dollars": 656,
+      "price": "-154",
+      "dollars": 6743,
+      "vsUsual": 2.2,
+      "vsUsualAll": 5.8
+     },
+     {
+      "matchup": "Cavaliers at Knicks",
+      "market": "ML",
+      "pick": "Cavaliers",
+      "line": null,
+      "price": "+132",
+      "dollars": 3410,
+      "vsUsual": 1.1,
+      "vsUsualAll": 2.9
+     },
+     {
+      "matchup": "Cavaliers at Knicks",
+      "market": "SPREAD",
+      "pick": "Knicks",
+      "line": -3.5,
+      "price": "+111",
+      "dollars": 2650,
+      "vsUsual": 0.9,
+      "vsUsualAll": 2.3
+     },
+     {
+      "matchup": "Cavaliers at Knicks",
+      "market": "SPREAD",
+      "pick": "Cavaliers",
+      "line": 1.5,
+      "price": "+117",
+      "dollars": 642,
       "vsUsual": 0.2,
       "vsUsualAll": 0.6
      },
      {
-      "matchup": "Kings at Warriors",
+      "matchup": "Cavaliers at Knicks",
       "market": "TOTAL",
       "pick": "Over 218.5",
+      "line": 218.5,
+      "price": "+102",
+      "dollars": 1935,
+      "vsUsual": 0.6,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Cavaliers at Knicks",
+      "market": "TOTAL",
+      "pick": "Under 219.5",
+      "line": 219.5,
+      "price": "-144",
+      "dollars": 787,
+      "vsUsual": 0.3,
+      "vsUsualAll": 0.7
+     },
+     {
+      "matchup": "Suns at Rockets",
+      "market": "ML",
+      "pick": "Rockets",
       "line": null,
-      "price": null,
-      "dollars": 3727,
-      "vsUsual": 0.8,
-      "vsUsualAll": 2.2
+      "price": "-335",
+      "dollars": 4576,
+      "vsUsual": 1.5,
+      "vsUsualAll": 3.9
      },
      {
       "matchup": "Nets at Bucks",
@@ -332,9 +363,29 @@
       "vsUsualAll": 0.9
      },
      {
+      "matchup": "Kings at Warriors",
+      "market": "ML",
+      "pick": "Kings",
+      "line": null,
+      "price": "+223",
+      "dollars": 656,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.6
+     },
+     {
+      "matchup": "Kings at Warriors",
+      "market": "TOTAL",
+      "pick": "Over 218.5",
+      "line": null,
+      "price": null,
+      "dollars": 3727,
+      "vsUsual": 0.8,
+      "vsUsualAll": 2.2
+     },
+     {
       "matchup": "Bulls at Hornets",
       "market": "SPREAD",
-      "pick": "Bulls +2.5",
+      "pick": "Bulls",
       "line": 2.5,
       "price": "+122",
       "dollars": 755,
@@ -365,21 +416,21 @@
      {
       "matchup": "Heat at 76ers",
       "market": "TOTAL",
-      "pick": "Over 237.5",
-      "line": null,
-      "price": null,
-      "dollars": 1159,
-      "vsUsual": 1.7,
+      "pick": "Under 236.5",
+      "line": 236.5,
+      "price": "+108",
+      "dollars": 566,
+      "vsUsual": 1.6,
       "vsUsualAll": 1.3
      },
      {
       "matchup": "Heat at 76ers",
       "market": "TOTAL",
-      "pick": "Under",
-      "line": 236.5,
-      "price": "+108",
-      "dollars": 566,
-      "vsUsual": 1.6,
+      "pick": "Over 237.5",
+      "line": null,
+      "price": null,
+      "dollars": 1159,
+      "vsUsual": 1.7,
       "vsUsualAll": 1.3
      },
      {
@@ -391,87 +442,6 @@
       "dollars": 550,
       "vsUsual": 1.5,
       "vsUsualAll": 1.2
-     }
-    ]
-   },
-   {
-    "id": "2f2a9e",
-    "gap": 4.8,
-    "overall": "498-479",
-    "sport": "107-85",
-    "returnPct": 14.9,
-    "last10": "8-2",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Suns at Rockets",
-      "market": "TOTAL",
-      "pick": "Under 223.5",
-      "line": 223.5,
-      "price": "+104",
-      "dollars": 1420,
-      "vsUsual": 0.3,
-      "vsUsualAll": 0.1
-     },
-     {
-      "matchup": "Heat at 76ers",
-      "market": "ML",
-      "pick": "Heat",
-      "line": null,
-      "price": "-108",
-      "dollars": 13264,
-      "vsUsual": 2.4,
-      "vsUsualAll": 1.3
-     },
-     {
-      "matchup": "Clippers at Grizzlies",
-      "market": "ML",
-      "pick": "Grizzlies",
-      "line": null,
-      "price": "-217",
-      "dollars": 1835,
-      "vsUsual": 0.3,
-      "vsUsualAll": 0.2
-     },
-     {
-      "matchup": "Nets at Bucks",
-      "market": "TOTAL",
-      "pick": "Over",
-      "line": 233.5,
-      "price": "-121",
-      "dollars": 1388,
-      "vsUsual": 0.3,
-      "vsUsualAll": 0.1
-     },
-     {
-      "matchup": "Bulls at Hornets",
-      "market": "ML",
-      "pick": "Bulls",
-      "line": null,
-      "price": "+139",
-      "dollars": 2023,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.2
-     },
-     {
-      "matchup": "Timberwolves at Thunder",
-      "market": "ML",
-      "pick": "Thunder",
-      "line": null,
-      "price": "-108",
-      "dollars": 615,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.1
-     },
-     {
-      "matchup": "Timberwolves at Thunder",
-      "market": "TOTAL",
-      "pick": "Over 224.5",
-      "line": 224.5,
-      "price": "-116",
-      "dollars": 2084,
-      "vsUsual": 0.4,
-      "vsUsualAll": 0.2
      }
     ]
    }
@@ -513,7 +483,7 @@
       "pick": "Utah",
       "line": null,
       "price": "+133",
-      "dollars": 4057,
+      "dollars": 4065,
       "vsUsual": 1.4,
       "vsUsualAll": 0.4
      },
@@ -677,10 +647,10 @@
       "market": "SPREAD",
       "pick": "Minnesota +7.5",
       "line": 7.5,
-      "price": "-100",
-      "dollars": 753,
-      "vsUsual": 0.8,
-      "vsUsualAll": 1.3
+      "price": "+101",
+      "dollars": 851,
+      "vsUsual": 0.9,
+      "vsUsualAll": 1.4
      },
      {
       "matchup": "Coastal Carolina at James Madison",
