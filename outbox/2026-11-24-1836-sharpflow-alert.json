@@ -1,0 +1,331 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:13pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Golden Knights at Oilers",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over TOTAL +105",
+       "price": "+105",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "B #aa9fb4",
+          "wid": "aa9fb4",
+          "market": "OVER +105",
+          "mk": "TOTAL",
+          "record": "9-5",
+          "roi": 21.8,
+          "dollars": 46138,
+          "note": "2.7x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         },
+         {
+          "team": "Over",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "OVER -105",
+          "mk": "TOTAL",
+          "record": "10-7",
+          "roi": 16.2,
+          "dollars": 6249,
+          "note": "2.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         },
+         {
+          "team": "Over",
+          "wallet": "A #e51246",
+          "wid": "e51246",
+          "market": "OVER -138",
+          "mk": "TOTAL",
+          "record": "23-13",
+          "roi": 11,
+          "dollars": 1435,
+          "note": "1.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "UNDER 6.5 -113",
+          "mk": "TOTAL",
+          "record": "10-7",
+          "roi": 16.2,
+          "dollars": 2544,
+          "note": "0.9x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         },
+         {
+          "team": "Under",
+          "wallet": "toottoot #3102d7",
+          "wid": "3102d7",
+          "market": "UNDER 6.5 -102",
+          "mk": "TOTAL",
+          "record": "3-2",
+          "roi": 18.8,
+          "dollars": 808,
+          "note": "1.4x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 53822,
+         "pct": 94,
+         "c": "green"
+        },
+        {
+         "team": "Under",
+         "dollars": 3352,
+         "pct": 6,
+         "c": "grey"
+        }
+       ],
+       "confidence": 6,
+       "callout": {
+        "plain": "Quality wallet 9-5 (+22% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $3.4K on Under 6.5 - kickoff in 34 min - SITE LOCK: Over 6.5 2u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Mavericks at Nuggets",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Nuggets vs Mavericks",
+       "price": null,
+       "for": {
+        "team": "NUGGETS",
+        "rows": [
+         {
+          "team": "Nuggets",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -261",
+          "mk": "ML",
+          "record": "35-25",
+          "roi": 21.8,
+          "dollars": 7658,
+          "note": "2.6x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Nuggets",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "ML -257",
+          "mk": "ML",
+          "record": "11-8",
+          "roi": -2,
+          "dollars": 1214,
+          "note": "0.2x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "MAVERICKS",
+        "rows": [
+         {
+          "team": "Mavericks",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML +270",
+          "mk": "ML",
+          "record": "66-56",
+          "roi": 24.1,
+          "dollars": 1735,
+          "note": "0.3x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Mavericks",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML +258",
+          "mk": "ML",
+          "record": "10-6",
+          "roi": 75,
+          "dollars": 1417,
+          "note": "0.9x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "NUGGETS",
+         "dollars": 8872,
+         "pct": 74,
+         "c": "green"
+        },
+        {
+         "team": "MAVERICKS",
+         "dollars": 3152,
+         "pct": 26,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "NEW $7.7K on Nuggets - kickoff in 2h 34m"
+      },
+      {
+       "eyebrow": "Mavericks at Nuggets",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total ",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "nigiri99 #3bdd7e",
+          "wid": "3bdd7e",
+          "market": "OVER",
+          "mk": "TOTAL",
+          "record": "10-5",
+          "roi": 56.2,
+          "dollars": 2369,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "UNDER 232.5 -100",
+          "mk": "TOTAL",
+          "record": "32-22",
+          "roi": 27.3,
+          "dollars": 594,
+          "note": "0.2x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 2369,
+         "pct": 80,
+         "c": "green"
+        },
+        {
+         "team": "Under",
+         "dollars": 594,
+         "pct": 20,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "NEW $594 on Under 232.5 - kickoff in 2h 34m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
