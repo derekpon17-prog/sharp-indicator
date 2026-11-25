@@ -1,0 +1,124 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CBB - first game 9:00am CT** - 2 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CBB - sharp wallets",
+   "subtitle": "Wallets with positive CBB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:19am CT",
+   "sections": [
+    {
+     "heading": "CBB - 1:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Saint Peter's Peacocks at Columbia Lions",
+       "time": "1:00pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Under 125.5 -107",
+       "price": "-107",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "UNDER 125.5 -107",
+          "mk": "TOTAL",
+          "record": "15-4",
+          "roi": 45.9,
+          "dollars": 1326,
+          "note": "1.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CBB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 1326,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 15-4 (+46% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "CBB - 6:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Wake Forest Demon Deacons at Mississippi State Bulldogs",
+       "time": "6:30pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Under 150.5 -108",
+       "price": "-108",
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "RollAwayTheDew #aaedcd",
+          "wid": "aaedcd",
+          "market": "UNDER 150.5 -108",
+          "mk": "TOTAL",
+          "record": "14-18",
+          "roi": 16.7,
+          "dollars": 1620,
+          "note": "3.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CBB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 1620,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 14-18 (+17% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
