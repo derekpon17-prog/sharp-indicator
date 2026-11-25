@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "scannedAt": "2026-11-25T19:12:22.196Z",
+ "scannedAt": "2026-11-25T20:07:53.624Z",
  "sports": {
   "NFL": [
    {
@@ -189,6 +189,16 @@
       "dollars": 4003,
       "vsUsual": 1.9,
       "vsUsualAll": 1.8
+     },
+     {
+      "matchup": "Heat at 76ers",
+      "market": "ML",
+      "pick": "76ers",
+      "line": null,
+      "price": "+113",
+      "dollars": 3891,
+      "vsUsual": 1.8,
+      "vsUsualAll": 1.7
      }
     ]
    },
@@ -371,7 +381,7 @@
     "sport": "107-85",
     "returnPct": 14.9,
     "last10": "8-2",
-    "bettingBig": false,
+    "bettingBig": true,
     "tonight": [
      {
       "matchup": "Suns at Rockets",
@@ -422,6 +432,16 @@
       "dollars": 2167,
       "vsUsual": 0.4,
       "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Heat at 76ers",
+      "market": "ML",
+      "pick": "Heat",
+      "line": null,
+      "price": "-108",
+      "dollars": 8727,
+      "vsUsual": 1.6,
+      "vsUsualAll": 6.7
      },
      {
       "matchup": "Timberwolves at Thunder",
@@ -558,9 +578,9 @@
       "pick": "Ohio State",
       "line": null,
       "price": "-335",
-      "dollars": 938,
+      "dollars": 977,
       "vsUsual": 1,
-      "vsUsualAll": 1.5
+      "vsUsualAll": 1.6
      },
      {
       "matchup": "Michigan at Ohio State",
@@ -796,7 +816,7 @@
     "sport": "21-9",
     "returnPct": 48.2,
     "last10": "7-3",
-    "bettingBig": true,
+    "bettingBig": false,
     "tonight": [
      {
       "matchup": "Portland State Vikings at UC Riverside Highlanders",
@@ -807,37 +827,6 @@
       "dollars": 614,
       "vsUsual": 0.8,
       "vsUsualAll": 0.4
-     },
-     {
-      "matchup": "Saint Peter's Peacocks at Columbia Lions",
-      "market": "TOTAL",
-      "pick": "Under 125.5",
-      "line": 125.5,
-      "price": "-107",
-      "dollars": 1326,
-      "vsUsual": 1.8,
-      "vsUsualAll": 0.9
-     }
-    ]
-   },
-   {
-    "id": "11f1d2",
-    "gap": 9.7,
-    "overall": "519-489",
-    "sport": "82-52",
-    "returnPct": 44.1,
-    "last10": "6-4",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Yale Bulldogs at Wright State Raiders",
-      "market": "ML",
-      "pick": "Yale Bulldogs",
-      "line": null,
-      "price": "-100",
-      "dollars": 614,
-      "vsUsual": 6.8,
-      "vsUsualAll": 9.6
      }
     ]
    },
