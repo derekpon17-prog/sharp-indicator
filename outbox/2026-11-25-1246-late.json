@@ -1,0 +1,135 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Wed Nov 25** · 3 new plays (first: Saint Peter's +13.5, 1:00pm CT) · FADED, now PASS: Under 153.5, Ole Miss @ Arizona 1:30pm CT and App State +4.5, Akron @ App State 2:00pm CT (both were Pinnacle STRONG, now Lean)",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "WED NOV 25 · 12:45PM",
+  "sources": "Pinnacle ~12:45pm CT - Vegas ~12:45pm CT (CBB) - SharpFlow 12:29pm CT (scan 12:09pm) - Poly not current - Novig not read",
+  "sf_current": true,
+  "footer": "FADED, NOW PASS: Under 153.5 (Ole Miss @ Arizona, 1:30pm CT) and App State +4.5 (Akron @ App State, 2:00pm CT). Both posted 10:52am CT as Pinnacle STRONG stable; at 12:45pm CT both are only Lean. Late update shows only faded plays and new Strong/Max sides. No SharpFlow wallet money on any new side. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "date": "2026-11-25",
+    "sport": "NCAAB",
+    "game": "SPU@COLU",
+    "start_ct": "1:00pm",
+    "market": "SPREAD",
+    "side": "SPU",
+    "line": 13.5,
+    "price": -109,
+    "bet": "Saint Peter's +13.5",
+    "matchup": "NCAAB - Saint Peter's @ Columbia - 1:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": "Strong",
+    "pin_status": "Flipped",
+    "vegas_strength": 96,
+    "vegas_type": "Vegas Backed",
+    "bets_pct": 32,
+    "money_pct": 13,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP",
+     "PIN_FLIPPED",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "VEGAS80_FLIPPED",
+     "PIN_LEAN"
+    ],
+    "pin_strong_seen": "12:45",
+    "note": "Late update 12:45pm CT: Pinnacle moved from Lean flipped to Strong flipped; Vegas Backed 96. Side first logged 10:52."
+   },
+   {
+    "date": "2026-11-25",
+    "sport": "NCAAB",
+    "game": "TA&M@XAV",
+    "start_ct": "1:30pm",
+    "market": "ML",
+    "side": "XAV",
+    "line": null,
+    "price": 145,
+    "bet": "Xavier ML",
+    "matchup": "NCAAB - Texas A&M @ Xavier - 1:30pm CT",
+    "first_seen": "12:45",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "pin_ev_books": 5,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "note": "Late update: Pinnacle Strong stable (+158 to +140, +EV at 5 books); no Vegas row on the moneyline (Vegas 61 is on Xavier +3.5)."
+   },
+   {
+    "date": "2026-11-25",
+    "sport": "NCAAB",
+    "game": "SELA@UND",
+    "start_ct": "2:00pm",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 142.5,
+    "price": -109,
+    "bet": "Under 142.5",
+    "matchup": "NCAAB - SE Louisiana @ North Dakota - 2:00pm CT",
+    "first_seen": "12:45",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "LATE_FLIP"
+    ],
+    "note": "Late update: Pinnacle Strong stable (144 to 142); no Vegas row on the total."
+   },
+   {
+    "date": "2026-11-25",
+    "sport": "NCAAB",
+    "game": "MISS@ARIZ",
+    "start_ct": "1:30pm",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 153.5,
+    "price": -112,
+    "bet": "Under 153.5",
+    "matchup": "NCAAB - Ole Miss @ Arizona - 1:30pm CT",
+    "first_seen": "10:52",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": null,
+    "pin_ev_books": 5,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FADED"
+    ],
+    "late_pin": "Lean Under 153.5 stable",
+    "note": "Pinnacle Strong stable at 10:52; Lean stable at 12:45 CT.",
+    "tier_override": "PASS",
+    "reason": "Posted 10:52am CT as Pinnacle STRONG stable; at 12:45pm CT Pinnacle shows only Lean on Under 153.5. Pass."
+   },
+   {
+    "date": "2026-11-25",
+    "sport": "NCAAB",
+    "game": "AKR@APP",
+    "start_ct": "2:00pm",
+    "market": "SPREAD",
+    "side": "APP",
+    "line": 4.5,
+    "price": -108,
+    "bet": "App State +4.5",
+    "matchup": "NCAAB - Akron @ App State - 2:00pm CT",
+    "first_seen": "10:52",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FADED"
+    ],
+    "late_pin": "Lean App State +5.5 stable",
+    "note": "Pinnacle Strong stable at +4.5 at 10:52; Lean stable at +5.5 at 12:45 CT.",
+    "tier_override": "PASS",
+    "reason": "Posted 10:52am CT as Pinnacle STRONG stable at +4.5; at 12:45pm CT Pinnacle shows only Lean on App State (now +5.5). Pass."
+   }
+  ]
+ }
+}
