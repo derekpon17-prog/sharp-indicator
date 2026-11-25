@@ -1,0 +1,237 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 3:02pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 4:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Heat at 76ers",
+       "time": "4:10pm CT",
+       "tag": {
+        "t": "EDGE - 76ERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "76ers -100",
+       "price": "-100",
+       "for": {
+        "team": "76ERS",
+        "rows": [
+         {
+          "team": "76ers",
+          "wallet": "J #40d814",
+          "wid": "40d814",
+          "market": "ML +113",
+          "mk": "ML",
+          "record": "38-31",
+          "roi": 11,
+          "dollars": 3896,
+          "note": "1.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -100",
+          "mk": "ML",
+          "record": "37-27",
+          "roi": 17.2,
+          "dollars": 2083,
+          "note": "0.7x usual, L10 4-6 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD -1.5 +113",
+          "mk": "SPREAD",
+          "record": "28-24",
+          "roi": 16.6,
+          "dollars": 1015,
+          "note": "0.3x usual, L10 4-6 · SAME WALLET as its ML row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "0x3814198398E2d02c0e8fBa652345995cF84417bC-1782140092998 #4417bc",
+          "wid": "4417bc",
+          "market": "ML -137",
+          "mk": "ML",
+          "record": "16-5",
+          "roi": 68.3,
+          "dollars": 624,
+          "note": "7.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "HEAT",
+        "rows": [
+         {
+          "team": "Heat",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML -108",
+          "mk": "ML",
+          "record": "69-57",
+          "roi": 23.3,
+          "dollars": 13264,
+          "note": "2.4x usual, L10 8-2",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Heat",
+          "wallet": "D #955c26",
+          "wid": "955c26",
+          "market": "SPREAD +1.5 -122",
+          "mk": "SPREAD",
+          "record": "38-30",
+          "roi": 3.5,
+          "dollars": 1364,
+          "note": "0.5x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "76ERS",
+         "dollars": 7618,
+         "pct": 34,
+         "c": "green"
+        },
+        {
+         "team": "HEAT",
+         "dollars": 14628,
+         "pct": 66,
+         "c": "red"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 37-27 (+17% ROI) on 76ERS vs a cold wallet on HEAT - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $624 to $6.6K - kickoff in 34 min - SITE LOCK: Heat ML 3u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Utah at Wild",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Utah vs Wild",
+       "price": null,
+       "for": {
+        "team": "UTAH",
+        "rows": [
+         {
+          "team": "Utah",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML +133",
+          "mk": "ML",
+          "record": "12-3",
+          "roi": 5.7,
+          "dollars": 4057,
+          "note": "1.4x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "WILD",
+        "rows": [
+         {
+          "team": "Wild",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "12-3",
+          "roi": 5.7,
+          "dollars": 754,
+          "note": "0.3x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "UTAH",
+         "dollars": 4057,
+         "pct": 84,
+         "c": "green"
+        },
+        {
+         "team": "WILD",
+         "dollars": 754,
+         "pct": 16,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $4.1K on Utah - kickoff in 3h 34m - SITE LOCK: Utah ML 2.5u (wallet money behind it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
