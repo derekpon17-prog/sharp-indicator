@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "scannedAt": "2026-11-25T18:09:44.271Z",
+ "scannedAt": "2026-11-25T19:12:22.196Z",
  "sports": {
   "NFL": [
    {
@@ -125,16 +125,6 @@
       "dollars": 6713,
       "vsUsual": 1,
       "vsUsualAll": 4.6
-     },
-     {
-      "matchup": "Chiefs at Bills",
-      "market": "TOTAL",
-      "pick": "Under 50.5",
-      "line": 50.5,
-      "price": "-113",
-      "dollars": 896,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.6
      },
      {
       "matchup": "Broncos at Steelers",
@@ -568,9 +558,9 @@
       "pick": "Ohio State",
       "line": null,
       "price": "-335",
-      "dollars": 604,
-      "vsUsual": 0.6,
-      "vsUsualAll": 1
+      "dollars": 938,
+      "vsUsual": 1,
+      "vsUsualAll": 1.5
      },
      {
       "matchup": "Michigan at Ohio State",
@@ -648,7 +638,7 @@
       "pick": "Minnesota +7.5",
       "line": 7.5,
       "price": "-100",
-      "dollars": 748,
+      "dollars": 753,
       "vsUsual": 0.8,
       "vsUsualAll": 1.2
      },
@@ -658,6 +648,16 @@
       "pick": "Coastal Carolina +17.5",
       "line": 17.5,
       "price": "-104",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "UConn at Wyoming",
+      "market": "SPREAD",
+      "pick": "Wyoming +4.5",
+      "line": 4.5,
+      "price": "-117",
       "dollars": 1000,
       "vsUsual": 1.1,
       "vsUsualAll": 1.7
@@ -681,16 +681,6 @@
       "dollars": 966,
       "vsUsual": 1,
       "vsUsualAll": 1.6
-     },
-     {
-      "matchup": "UConn at Wyoming",
-      "market": "SPREAD",
-      "pick": "Wyoming +4.5",
-      "line": 4.5,
-      "price": "-117",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
      },
      {
       "matchup": "UCF at Colorado",
@@ -827,6 +817,27 @@
       "dollars": 1326,
       "vsUsual": 1.8,
       "vsUsualAll": 0.9
+     }
+    ]
+   },
+   {
+    "id": "11f1d2",
+    "gap": 9.7,
+    "overall": "519-489",
+    "sport": "82-52",
+    "returnPct": 44.1,
+    "last10": "6-4",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Yale Bulldogs at Wright State Raiders",
+      "market": "ML",
+      "pick": "Yale Bulldogs",
+      "line": null,
+      "price": "-100",
+      "dollars": 614,
+      "vsUsual": 6.8,
+      "vsUsualAll": 9.6
      }
     ]
    },
