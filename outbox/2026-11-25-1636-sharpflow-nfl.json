@@ -1,0 +1,317 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NFL - first game 7:00pm CT** - 3 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NFL - sharp wallets",
+   "subtitle": "Wallets with positive NFL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:22pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:20PM CT",
+     "picks": [
+      {
+       "eyebrow": "Chiefs at Bills",
+       "time": "7:20pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - BILLS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bills",
+       "price": null,
+       "for": {
+        "team": "BILLS",
+        "rows": [
+         {
+          "team": "Bills",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 538,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BILLS",
+         "dollars": 538,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 7:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Packers at Rams",
+       "time": "7:00pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Packers vs Rams",
+       "price": null,
+       "for": {
+        "team": "PACKERS",
+        "rows": [
+         {
+          "team": "Packers",
+          "wallet": "A #ce63a2",
+          "wid": "ce63a2",
+          "market": "SPREAD +2.5 +104",
+          "mk": "SPREAD",
+          "record": "1-1",
+          "roi": -28.5,
+          "dollars": 10589,
+          "note": "3.3x usual, only 2 bets here",
+          "status": {
+           "t": "THIN - 2 bets here - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Packers",
+          "wallet": "Wldntulike2know #b7f4da",
+          "wid": "b7f4da",
+          "market": "ML +122",
+          "mk": "ML",
+          "record": "12-7",
+          "roi": 4.2,
+          "dollars": 2700,
+          "note": "0.8x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Packers",
+          "wallet": "0x9674de4A6Cf9988c629CafaC79C6803984E11302-1764965311959 #e11302",
+          "wid": "e11302",
+          "market": "SPREAD +3.5 -138",
+          "mk": "SPREAD",
+          "record": "4-1",
+          "roi": 56.4,
+          "dollars": 730,
+          "note": "1.1x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "RAMS",
+        "rows": [
+         {
+          "team": "Rams",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "ML -122",
+          "mk": "ML",
+          "record": "4-4",
+          "roi": -1.6,
+          "dollars": 8582,
+          "note": "1.2x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Rams",
+          "wallet": "lightotunnel35 #858392",
+          "wid": "858392",
+          "market": "SPREAD -2.5 -108",
+          "mk": "SPREAD",
+          "record": "7-4",
+          "roi": -5.5,
+          "dollars": 7990,
+          "note": "1.3x usual, L10 6-4 · SAME WALLET as its ML row",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Rams",
+          "wallet": "lightotunnel35 #858392",
+          "wid": "858392",
+          "market": "ML -127",
+          "mk": "ML",
+          "record": "2-2",
+          "roi": 20.2,
+          "dollars": 2800,
+          "note": "0.5x usual, only 4 bets here · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Rams",
+          "wallet": "fvckjumpjanestreet #8fda40",
+          "wid": "8fda40",
+          "market": "ML -127",
+          "mk": "ML",
+          "record": "9-3",
+          "roi": 7.8,
+          "dollars": 504,
+          "note": "0.9x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PACKERS",
+         "dollars": 14019,
+         "pct": 41,
+         "c": "gold"
+        },
+        {
+         "team": "RAMS",
+         "dollars": 19876,
+         "pct": 59,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ - SITE LOCK: Rams ML 2u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 2:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Broncos at Steelers",
+       "time": "2:00pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Broncos vs Steelers",
+       "price": null,
+       "for": {
+        "team": "BRONCOS",
+        "rows": [
+         {
+          "team": "Broncos",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "ML -144",
+          "mk": "ML",
+          "record": "4-4",
+          "roi": -1.6,
+          "dollars": 4198,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Broncos",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -139",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 676,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "STEELERS",
+        "rows": [
+         {
+          "team": "Steelers",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +3.5 -110",
+          "mk": "SPREAD",
+          "record": "12-7",
+          "roi": 27.5,
+          "dollars": 3098,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BRONCOS",
+         "dollars": 4874,
+         "pct": 61,
+         "c": "green"
+        },
+        {
+         "team": "STEELERS",
+         "dollars": 3098,
+         "pct": 39,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Over $48K (2-2 here, -45% ROI); Under $14K (cold form 2-2 L30 here, -46% ROI); Packers $11K (1-1 here, -28% ROI) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

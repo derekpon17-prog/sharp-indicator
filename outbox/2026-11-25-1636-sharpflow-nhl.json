@@ -1,0 +1,147 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NHL - first game 6:00pm CT** - 2 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NHL - sharp wallets",
+   "subtitle": "Wallets with positive NHL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:22pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Flyers at Capitals",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - CAPITALS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Capitals ML -150",
+       "price": "-150",
+       "for": {
+        "team": "CAPITALS",
+        "rows": [
+         {
+          "team": "Capitals",
+          "wallet": "dinimami #8d3672",
+          "wid": "8d3672",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "18-10",
+          "roi": 26.9,
+          "dollars": 1875,
+          "note": "2.8x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CAPITALS",
+         "dollars": 1875,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 18-10 (+27% ROI) on CAPITALS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ - SITE LOCK: Capitals ML 1u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Utah at Wild",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Utah vs Wild",
+       "price": null,
+       "for": {
+        "team": "UTAH",
+        "rows": [
+         {
+          "team": "Utah",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML +133",
+          "mk": "ML",
+          "record": "12-3",
+          "roi": 5.7,
+          "dollars": 4065,
+          "note": "1.4x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "WILD",
+        "rows": [
+         {
+          "team": "Wild",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "12-3",
+          "roi": 5.7,
+          "dollars": 754,
+          "note": "0.3x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "UTAH",
+         "dollars": 4065,
+         "pct": 84,
+         "c": "green"
+        },
+        {
+         "team": "WILD",
+         "dollars": 754,
+         "pct": 16,
+         "c": "grey"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ - SITE LOCK: Utah ML 2.5u (wallet money behind it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
