@@ -1,0 +1,129 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · MORNING · Wed Nov 25** · games before 12:00pm CT (NCAAB)",
+ "slate": {
+  "title": "Morning plays (before 12:00pm CT)",
+  "stamp": "WED NOV 25 · 9:14AM",
+  "sources": "Pinnacle ~9:13am CT - Vegas ~9:13am CT (CBB) - SharpFlow 8:33am CT - Novig not read",
+  "sf_current": true,
+  "footer": "Window: games starting before 12:00pm CT. St. Bonaventure at Belmont (9:00am) had already started and is left off. No SharpFlow wallet money on any game in this window. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "sport": "NCAAB",
+    "game": "RICE@OHIO",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 155.5,
+    "price": -116,
+    "bet": "Under 155.5",
+    "matchup": "NCAAB - Rice @ Ohio - 10:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable; no Vegas signal on this side."
+   },
+   {
+    "sport": "NCAAB",
+    "game": "RICE@OHIO",
+    "market": "ML",
+    "side": "RICE",
+    "line": null,
+    "price": 150,
+    "bet": "Rice ML",
+    "matchup": "NCAAB - Rice @ Ohio - 10:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": "Lean",
+    "pin_status": "Stable",
+    "vegas_strength": 88,
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "PIN_LEAN"
+    ],
+    "note": "Pinnacle Lean stable; Vegas Backed 88.",
+    "vegas_type": "Vegas Backed"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UNI@CLT",
+    "market": "ML",
+    "side": "CLT",
+    "line": null,
+    "price": -416,
+    "bet": "Charlotte ML",
+    "matchup": "NCAAB - Northern Iowa @ Charlotte - 10:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 61,
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "note": "Pinnacle no lean.",
+    "vegas_type": "Pressure Move"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "UVA@MARQ",
+    "market": "ML",
+    "side": "UVA",
+    "line": null,
+    "price": -260,
+    "bet": "Virginia ML",
+    "matchup": "NCAAB - Virginia @ Marquette - 11:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 57,
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "note": "Pinnacle Slight is on Marquette: against.",
+    "vegas_type": "Pressure Move"
+   },
+   {
+    "sport": "NCAAB",
+    "game": "YALE@WRST",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 138.5,
+    "price": -110,
+    "bet": "Over 138.5",
+    "matchup": "NCAAB - Yale @ Wright State - 11:30am CT",
+    "first_seen": "09:13",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable; no Vegas signal on this side."
+   },
+   {
+    "sport": "NCAAB",
+    "game": "YALE@WRST",
+    "market": "SPREAD",
+    "side": "YALE",
+    "line": 5.5,
+    "price": -113,
+    "bet": "Yale +5.5",
+    "matchup": "NCAAB - Yale @ Wright State - 11:30am CT",
+    "first_seen": "09:13",
+    "pin_tier": "Lean",
+    "pin_status": "Flipped",
+    "vegas_strength": 33,
+    "buckets": [
+     "VEGAS_ALL",
+     "PIN_LEAN",
+     "PIN_FLIPPED"
+    ],
+    "note": "Pinnacle Lean flipped; Vegas Backed 33.",
+    "vegas_type": "Vegas Backed"
+   }
+  ]
+ }
+}
