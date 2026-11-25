@@ -17,7 +17,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 7990,
    "opposedSeen": false,
-   "snapshots": 10
+   "snapshots": 11
   },
   "Packers at Rams|ML|Rams": {
    "sport": "NFL",
@@ -34,7 +34,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 8582,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Pistons at Magic|ML|Pistons": {
    "sport": "NBA",
@@ -55,7 +55,7 @@
    "maxVsUsual": 2.3,
    "maxDollars": 9405,
    "opposedSeen": true,
-   "snapshots": 19
+   "snapshots": 22
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -71,7 +71,7 @@
    "maxVsUsual": 19.4,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Jacksonville Dolphins at Indiana Hoosiers|ML|Indiana Hoosiers": {
    "sport": "CBB",
@@ -135,7 +135,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Miami (OH) at Western Michigan|ML|Western Michigan": {
    "sport": "CFB",
@@ -151,7 +151,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "West Virginia at Utah|SPREAD|West Virginia +20.5": {
    "sport": "CFB",
@@ -183,7 +183,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
    "sport": "CFB",
@@ -199,7 +199,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
    "sport": "CFB",
@@ -215,7 +215,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
    "sport": "CFB",
@@ -231,7 +231,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "South Carolina at Clemson|SPREAD|Clemson +5.5": {
    "sport": "CFB",
@@ -247,7 +247,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "UCF at Colorado|TOTAL|Over 49.5": {
    "sport": "CFB",
@@ -263,7 +263,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 9
+   "snapshots": 10
   },
   "Mavericks at Nuggets|ML|Mavericks": {
    "sport": "NBA",
@@ -281,7 +281,7 @@
    "maxVsUsual": 0.9,
    "maxDollars": 1417,
    "opposedSeen": true,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -297,7 +297,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Appalachian State at South Alabama|TOTAL|Under 57.5": {
    "sport": "CFB",
@@ -313,7 +313,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 8
+   "snapshots": 9
   },
   "Miami (OH) at Western Michigan|SPREAD|Western Michigan": {
    "sport": "CFB",
@@ -329,7 +329,7 @@
    "maxVsUsual": 2.9,
    "maxDollars": 4590,
    "opposedSeen": true,
-   "snapshots": 6
+   "snapshots": 7
   },
   "Miami Hurricanes at TCU Horned Frogs|TOTAL|Under 153.5": {
    "sport": "CBB",
@@ -380,7 +380,7 @@
    "maxVsUsual": 4.1,
    "maxDollars": 9407,
    "opposedSeen": true,
-   "snapshots": 7
+   "snapshots": 10
   },
   "Bulls at Hornets|ML|Bulls": {
    "sport": "NBA",
@@ -396,7 +396,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 1230,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 3
   },
   "Golden Knights at Oilers|TOTAL|Over": {
    "sport": "NHL",
@@ -412,7 +412,7 @@
    "maxVsUsual": 2.7,
    "maxDollars": 46138,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 5
   },
   "Pistons at Magic|ML|Magic": {
    "sport": "NBA",
@@ -430,7 +430,7 @@
    "maxVsUsual": 3.2,
    "maxDollars": 15146,
    "opposedSeen": true,
-   "snapshots": 4
+   "snapshots": 8
   },
   "Mavericks at Nuggets|ML|Nuggets": {
    "sport": "NBA",
@@ -447,7 +447,7 @@
    "maxVsUsual": 2.6,
    "maxDollars": 7658,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Cavaliers at Knicks|ML|Knicks": {
    "sport": "NBA",
@@ -464,7 +464,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 5239,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Kent State at Eastern Michigan|TOTAL|Over 45.5": {
    "sport": "CFB",
@@ -478,10 +478,10 @@
     "STRONG_VS_WEAK",
     "SIZED_15X"
    ],
-   "maxVsUsual": 1.7,
+   "maxVsUsual": 1.8,
    "maxDollars": 5100,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 5
   },
   "Pistons at Magic|TOTAL|Under": {
    "sport": "NBA",
@@ -529,7 +529,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 2652,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Kent State at Eastern Michigan|TOTAL|Under 45.5": {
    "sport": "CFB",
@@ -544,6 +544,89 @@
    ],
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Celtics at Wizards|TOTAL|Under": {
+   "sport": "NBA",
+   "matchup": "Celtics at Wizards",
+   "market": "TOTAL",
+   "pick": "Under",
+   "kickoffEt": "Tue, Nov 24, 8:11 PM",
+   "firstSeenAt": "2026-11-25T01:33:12.106Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_VS_OTHER",
+    "SIZED_15X",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 38900,
+   "opposedSeen": true,
+   "snapshots": 3
+  },
+  "Celtics at Wizards|SPREAD|Celtics -10.5": {
+   "sport": "NBA",
+   "matchup": "Celtics at Wizards",
+   "market": "SPREAD",
+   "pick": "Celtics -10.5",
+   "kickoffEt": "Tue, Nov 24, 8:11 PM",
+   "firstSeenAt": "2026-11-25T01:33:12.106Z",
+   "firstPrice": null,
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 9443,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Celtics at Wizards|ML|Wizards": {
+   "sport": "NBA",
+   "matchup": "Celtics at Wizards",
+   "market": "ML",
+   "pick": "Wizards",
+   "kickoffEt": "Tue, Nov 24, 8:11 PM",
+   "firstSeenAt": "2026-11-25T01:33:12.106Z",
+   "firstPrice": "+376",
+   "tags": [
+    "STRONG_VS_WEAK"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 1385,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Celtics at Wizards|TOTAL|Over": {
+   "sport": "NBA",
+   "matchup": "Celtics at Wizards",
+   "market": "TOTAL",
+   "pick": "Over",
+   "kickoffEt": "Tue, Nov 24, 8:11 PM",
+   "firstSeenAt": "2026-11-25T01:33:12.106Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.2,
+   "maxDollars": 204873,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Celtics at Wizards|ML|Celtics": {
+   "sport": "NBA",
+   "matchup": "Celtics at Wizards",
+   "market": "ML",
+   "pick": "Celtics",
+   "kickoffEt": "Tue, Nov 24, 8:11 PM",
+   "firstSeenAt": "2026-11-25T01:33:12.106Z",
+   "firstPrice": "-376",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 2616,
    "opposedSeen": true,
    "snapshots": 1
   }
