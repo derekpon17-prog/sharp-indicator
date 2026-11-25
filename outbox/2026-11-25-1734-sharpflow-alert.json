@@ -1,0 +1,328 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 4 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:58pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bulls at Hornets",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - BULLS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bulls ML +148",
+       "price": "+148",
+       "for": {
+        "team": "BULLS",
+        "rows": [
+         {
+          "team": "Bulls",
+          "wallet": "B #415b58",
+          "wid": "415b58",
+          "market": "SPREAD +3.5 +108",
+          "mk": "SPREAD",
+          "record": "3-2",
+          "roi": 57.2,
+          "dollars": 3840,
+          "note": "0.2x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Bulls",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML +148",
+          "mk": "ML",
+          "record": "12-6",
+          "roi": 84.2,
+          "dollars": 2696,
+          "note": "1.7x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Bulls",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML +139",
+          "mk": "ML",
+          "record": "69-57",
+          "roi": 23.3,
+          "dollars": 2023,
+          "note": "0.4x usual, L10 8-2",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Bulls",
+          "wallet": "E #90617d",
+          "wid": "90617d",
+          "market": "SPREAD +3.5 +108",
+          "mk": "SPREAD",
+          "record": "19-13",
+          "roi": 17.6,
+          "dollars": 1920,
+          "note": "1.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BULLS",
+         "dollars": 12005,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 12-6 (+84% ROI) on BULLS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $2.3K to $7.3K - kickoff in 35 min - SITE LOCK: Bulls +4.5 3u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "NHL - 6:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Hurricanes at Lightning",
+       "time": "6:00pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over 6.5 +104",
+       "price": "+104",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "A #aa9fb4",
+          "wid": "aa9fb4",
+          "market": "OVER 6.5 +104",
+          "mk": "TOTAL",
+          "record": "10-5",
+          "roi": 35.2,
+          "dollars": 48689,
+          "note": "2.5x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NHL TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 48689,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 10-5 (+35% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $49K on Over 6.5 - kickoff in 25 min"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Nets at Bucks",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - BUCKS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bucks ML -108",
+       "price": "-108",
+       "for": {
+        "team": "BUCKS",
+        "rows": [
+         {
+          "team": "Bucks",
+          "wallet": "999999666544332578855667788 #0889ba",
+          "wid": "0889ba",
+          "market": "ML -108",
+          "mk": "ML",
+          "record": "14-3",
+          "roi": 35.2,
+          "dollars": 2080,
+          "note": "0.9x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Bucks",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML -108",
+          "mk": "ML",
+          "record": "12-6",
+          "roi": 84.2,
+          "dollars": 2000,
+          "note": "1.2x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Bucks",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -100",
+          "mk": "ML",
+          "record": "37-27",
+          "roi": 17.2,
+          "dollars": 979,
+          "note": "0.3x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BUCKS",
+         "dollars": 5059,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 14-3 (+35% ROI) on BUCKS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $3K to $5.1K - kickoff in 1h 35m - SITE LOCK: Nets ML 1u (wallet money AGAINST it)"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Suns at Rockets",
+       "time": "7:40pm CT",
+       "tag": {
+        "t": "EDGE - ROCKETS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Rockets ML -335",
+       "price": "-335",
+       "for": {
+        "team": "ROCKETS",
+        "rows": [
+         {
+          "team": "Rockets",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -335",
+          "mk": "ML",
+          "record": "37-27",
+          "roi": 17.2,
+          "dollars": 4576,
+          "note": "1.5x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Rockets",
+          "wallet": "CVCM #4ab0f8",
+          "wid": "4ab0f8",
+          "market": "ML -335",
+          "mk": "ML",
+          "record": "11-1",
+          "roi": 22.5,
+          "dollars": 2300,
+          "note": "1.5x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "ROCKETS",
+         "dollars": 6876,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 37-27 (+17% ROI) on ROCKETS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $4.6K to $6.9K - kickoff in 2h 5m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
