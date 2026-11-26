@@ -1,0 +1,60 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Thu Nov 26** · 1 new play: Michigan ML, 2:30pm CT · FADED, now PASS: Over 158.5, Miami vs Michigan 2:30pm CT (was Pinnacle STRONG, now no lean)",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "THU NOV 26 · 12:45PM",
+  "sources": "Pinnacle ~12:45pm CT - Vegas ~12:45pm CT (CBB) - SharpFlow 12:38pm CT (scan 12:16pm) - Poly not current - Novig not read",
+  "sf_current": true,
+  "footer": "FADED, NOW PASS: Over 158.5 (Miami vs Michigan, 2:30pm CT). Posted 10:54am CT as Pinnacle STRONG stable; at 12:45pm CT Pinnacle shows no lean on the total (160 back to 158). Michigan ML: no Vegas row and no wallet money seen. Iowa State -3.5 (2:30pm CT) is not faded (still Pinnacle Strong), but its Vegas Backed 83 row is no longer listed; the page now shows Whale Respect 52 at -4.5, which cards do not count. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "MIA@MICH",
+    "start_ct": "2:30pm",
+    "market": "ML",
+    "side": "MICH",
+    "line": null,
+    "price": -103,
+    "bet": "Michigan ML",
+    "matchup": "NCAAB - Miami vs Michigan - 2:30pm CT",
+    "first_seen": "12:45",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update 12:45pm CT: Pinnacle Strong stable (+116 to +100); no Vegas row on the moneyline; no SharpFlow ticket on the game."
+   },
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "MIA@MICH",
+    "start_ct": "2:30pm",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 158.5,
+    "price": -116,
+    "bet": "Over 158.5",
+    "matchup": "NCAAB - Miami vs Michigan - 2:30pm CT",
+    "first_seen": "10:53",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": null,
+    "pin_ev_books": 4,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_FADED"
+    ],
+    "late_pin": "No lean on the total at 12:45 CT (Pinnacle 158, was 160)",
+    "note": "Pinnacle Strong stable at 10:52 (159 to 160); no lean at 12:45 CT (Pinnacle 158).",
+    "tier_override": "PASS",
+    "reason": "Posted 10:54am CT as Pinnacle STRONG stable; at 12:45pm CT Pinnacle shows no lean on this total (its number went from 160 back to 158). Pass."
+   }
+  ]
+ }
+}
