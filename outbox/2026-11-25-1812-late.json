@@ -1,0 +1,37 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Wed Nov 25** · 1 new play: Incarnate Word +16.5, 10:59pm CT · no posted play faded",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "WED NOV 25 · 6:11PM",
+  "sources": "Pinnacle 6:11pm CT - Vegas 6:11pm CT (NBA, NHL, NFL, CBB) - SharpFlow 5:33pm CT (scan 4:58pm) - Poly not current - Novig not read",
+  "sf_current": true,
+  "footer": "No posted play faded: Under 215.5 Kings @ Warriors (9:00pm CT) is still Pinnacle Strong, Vegas 87. Incarnate Word: no Vegas row and no wallet money seen; the line shown is the +16.5 -109 consensus (Pinnacle is +17, -118). Not on this card: Pinnacle is now Strong on Thunder ML (6:30pm CT), against the earlier Timberwolves lean. $5.3K of counted wallet money is on Timberwolves ML, so Thunder ML is not a play. Late update shows only faded plays and new Strong/Max sides that qualify. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "date": "2026-11-25",
+    "sport": "NCAAB",
+    "game": "UIW@HAW",
+    "start_ct": "10:59pm",
+    "market": "SPREAD",
+    "side": "UIW",
+    "line": 16.5,
+    "price": -109,
+    "bet": "Incarnate Word +16.5",
+    "matchup": "NCAAB - Incarnate Word @ Hawai'i - 10:59pm CT",
+    "first_seen": "18:11",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "pin_ev_books": 3,
+    "pin_strong_seen": "18:11",
+    "note": "Late update 6:11pm CT: new Pinnacle Strong stable (no rows on this game at 3:51pm). Consensus +16.5 -109; Pinnacle +17 (-118). No Vegas row, no SharpFlow ticket."
+   }
+  ]
+ }
+}
