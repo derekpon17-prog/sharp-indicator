@@ -1,293 +1,160 @@
 {
  "date": "2026-11-25",
- "scannedAt": "2026-11-25T22:58:37.408Z",
+ "scannedAt": "2026-11-26T00:15:04.088Z",
  "sports": {
-  "CBB": [
+  "NFL": [
    {
-    "id": "bc44b0",
-    "gap": 15.7,
-    "overall": "289-243",
-    "sport": "21-9",
-    "returnPct": 48.2,
+    "id": "8fda40",
+    "gap": 11.3,
+    "overall": "144-82",
+    "sport": "9-3",
+    "returnPct": 7.8,
     "last10": "7-3",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Portland State Vikings at UC Riverside Highlanders",
-      "market": "SPREAD",
-      "pick": "Portland State Vikings +3.5",
-      "line": 3.5,
-      "price": "-108",
-      "dollars": 614,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.4
-     }
-    ]
-   },
-   {
-    "id": "aaedcd",
-    "gap": 1.9,
-    "overall": "180-143",
-    "sport": "34-25",
-    "returnPct": 11.1,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Wake Forest Demon Deacons at Mississippi State Bulldogs",
-      "market": "TOTAL",
-      "pick": "Under 150.5",
-      "line": 150.5,
-      "price": "-108",
-      "dollars": 1620,
-      "vsUsual": 3,
+      "matchup": "Packers at Rams",
+      "market": "ML",
+      "pick": "Rams",
+      "line": null,
+      "price": "-127",
+      "dollars": 504,
+      "vsUsual": 0.9,
       "vsUsualAll": 3.5
      }
     ]
-   }
-  ],
-  "CFB": [
+   },
    {
-    "id": "d3948b",
+    "id": "5fcee5",
     "gap": 9.6,
-    "overall": "70-76",
-    "sport": "19-14",
-    "returnPct": 8,
-    "last10": "4-6",
+    "overall": "286-154",
+    "sport": "53-18",
+    "returnPct": 14.2,
+    "last10": "5-5",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Michigan at Ohio State",
+      "matchup": "Chiefs at Bills",
       "market": "ML",
-      "pick": "Ohio State",
+      "pick": "Bills",
       "line": null,
-      "price": "-335",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
+      "price": "-138",
+      "dollars": 538,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.5
      },
      {
-      "matchup": "Michigan at Ohio State",
-      "market": "TOTAL",
-      "pick": "Over 37.5",
-      "line": 37.5,
-      "price": "-104",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "USC at UCLA",
+      "matchup": "Broncos at Steelers",
       "market": "ML",
-      "pick": "USC",
+      "pick": "Broncos",
       "line": null,
-      "price": "-223",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Liberty at Missouri State",
-      "market": "SPREAD",
-      "pick": "Missouri State +17.5",
-      "line": 17.5,
-      "price": "-113",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Arizona State at Arizona",
-      "market": "SPREAD",
-      "pick": "Arizona State +7.5",
-      "line": 7.5,
-      "price": "-100",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Minnesota at Wisconsin",
-      "market": "SPREAD",
-      "pick": "Minnesota +7.5",
-      "line": 7.5,
-      "price": "+101",
-      "dollars": 851,
-      "vsUsual": 0.9,
-      "vsUsualAll": 1.4
-     },
-     {
-      "matchup": "Boston College at Miami (FL)",
-      "market": "TOTAL",
-      "pick": "Under 53.5",
-      "line": 53.5,
-      "price": "+113",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "South Carolina at Clemson",
-      "market": "SPREAD",
-      "pick": "Clemson +5.5",
-      "line": 5.5,
-      "price": "+113",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Coastal Carolina at James Madison",
-      "market": "SPREAD",
-      "pick": "Coastal Carolina +17.5",
-      "line": 17.5,
-      "price": "-104",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Tennessee at Vanderbilt",
-      "market": "TOTAL",
-      "pick": "Over 41.5",
-      "line": 41.5,
-      "price": "-117",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "UConn at Wyoming",
-      "market": "SPREAD",
-      "pick": "Wyoming +4.5",
-      "line": 4.5,
-      "price": "-117",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Sacramento State at Hawai'i",
-      "market": "SPREAD",
-      "pick": "Hawai'i -13.5",
-      "line": -13.5,
-      "price": "-100",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Tulsa at UTSA",
-      "market": "SPREAD",
-      "pick": "UTSA +1.5",
-      "line": 1.5,
-      "price": "-113",
-      "dollars": 966,
-      "vsUsual": 1,
-      "vsUsualAll": 1.6
-     },
-     {
-      "matchup": "UCF at Colorado",
-      "market": "TOTAL",
-      "pick": "Over 49.5",
-      "line": 49.5,
-      "price": "-104",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Appalachian State at South Alabama",
-      "market": "TOTAL",
-      "pick": "Under 57.5",
-      "line": 57.5,
-      "price": "-108",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
+      "price": "-139",
+      "dollars": 676,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.6
      }
     ]
    },
    {
-    "id": "aaedcd",
-    "gap": 8.6,
-    "overall": "180-143",
-    "sport": "36-20",
-    "returnPct": 30.3,
-    "last10": "6-4",
+    "id": "921288",
+    "gap": 8.1,
+    "overall": "41-38",
+    "sport": "15-10",
+    "returnPct": 34.8,
+    "last10": "2-8",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Texas at Texas A&M",
-      "market": "ML",
-      "pick": "Texas",
-      "line": null,
-      "price": "-268",
-      "dollars": 687,
-      "vsUsual": 2.7,
-      "vsUsualAll": 1.5
+      "matchup": "Packers at Rams",
+      "market": "TOTAL",
+      "pick": "Over 44.5",
+      "line": 44.5,
+      "price": "+111",
+      "dollars": 32596,
+      "vsUsual": 3.1,
+      "vsUsualAll": 4.3
      }
     ]
    },
    {
     "id": "bc44b0",
-    "gap": 3.9,
+    "gap": 6.7,
     "overall": "289-243",
-    "sport": "46-33",
-    "returnPct": 18,
-    "last10": "5-5",
+    "sport": "25-16",
+    "returnPct": 6.3,
+    "last10": "6-4",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Liberty at Missouri State",
-      "market": "SPREAD",
-      "pick": "Missouri State +17.5",
-      "line": 17.5,
-      "price": "-107",
-      "dollars": 990,
-      "vsUsual": 0.2,
-      "vsUsualAll": 0.7
+      "matchup": "Packers at Rams",
+      "market": "ML",
+      "pick": "Rams",
+      "line": null,
+      "price": "-122",
+      "dollars": 8582,
+      "vsUsual": 1.2,
+      "vsUsualAll": 5.9
      },
      {
-      "matchup": "San Diego State at Washington State",
+      "matchup": "Packers at Rams",
       "market": "TOTAL",
-      "pick": "Over 45.5",
-      "line": 45.5,
+      "pick": "Under 44.5",
+      "line": 44.5,
+      "price": "-113",
+      "dollars": 6713,
+      "vsUsual": 1,
+      "vsUsualAll": 4.6
+     },
+     {
+      "matchup": "Eagles at Cowboys",
+      "market": "SPREAD",
+      "pick": "Eagles +9.5",
+      "line": 9.5,
       "price": "-108",
-      "dollars": 513,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.4
+      "dollars": 4416,
+      "vsUsual": 0.6,
+      "vsUsualAll": 3
+     },
+     {
+      "matchup": "Broncos at Steelers",
+      "market": "ML",
+      "pick": "Broncos",
+      "line": null,
+      "price": "-144",
+      "dollars": 4198,
+      "vsUsual": 0.6,
+      "vsUsualAll": 2.9
+     },
+     {
+      "matchup": "Broncos at Steelers",
+      "market": "SPREAD",
+      "pick": "Steelers +3.5",
+      "line": 3.5,
+      "price": "-110",
+      "dollars": 3098,
+      "vsUsual": 0.4,
+      "vsUsualAll": 2.1
      }
     ]
    },
    {
-    "id": "487b8b",
-    "gap": 3,
-    "overall": "558-469",
-    "sport": "78-58",
-    "returnPct": 3.8,
-    "last10": "5-5",
-    "bettingBig": true,
+    "id": "b7f4da",
+    "gap": 2.7,
+    "overall": "52-34",
+    "sport": "12-7",
+    "returnPct": 4.2,
+    "last10": "9-1",
+    "bettingBig": false,
     "tonight": [
      {
-      "matchup": "USC at UCLA",
-      "market": "SPREAD",
-      "pick": "USC -6.5",
-      "line": -6.5,
-      "price": "-113",
-      "dollars": 504,
-      "vsUsual": 0.8,
-      "vsUsualAll": 1.1
-     },
-     {
-      "matchup": "Texas at Texas A&M",
+      "matchup": "Packers at Rams",
       "market": "ML",
-      "pick": "Texas",
+      "pick": "Packers",
       "line": null,
-      "price": "-238",
-      "dollars": 11663,
-      "vsUsual": 19.5,
-      "vsUsualAll": 24.7
+      "price": "+122",
+      "dollars": 2700,
+      "vsUsual": 0.8,
+      "vsUsualAll": 2.3
      }
     ]
    }
@@ -558,6 +425,16 @@
      },
      {
       "matchup": "Timberwolves at Thunder",
+      "market": "ML",
+      "pick": "Thunder",
+      "line": null,
+      "price": "-122",
+      "dollars": 625,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.5
+     },
+     {
+      "matchup": "Timberwolves at Thunder",
       "market": "TOTAL",
       "pick": "Under 223.5",
       "line": 223.5,
@@ -569,154 +446,28 @@
     ]
    }
   ],
-  "NFL": [
+  "NHL": [
    {
-    "id": "8fda40",
-    "gap": 11.3,
-    "overall": "144-82",
-    "sport": "9-3",
-    "returnPct": 7.8,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Packers at Rams",
-      "market": "ML",
-      "pick": "Rams",
-      "line": null,
-      "price": "-127",
-      "dollars": 504,
-      "vsUsual": 0.9,
-      "vsUsualAll": 3.5
-     }
-    ]
-   },
-   {
-    "id": "5fcee5",
-    "gap": 9.6,
-    "overall": "286-154",
-    "sport": "53-18",
-    "returnPct": 14.2,
+    "id": "3102d7",
+    "gap": 14.3,
+    "overall": "101-92",
+    "sport": "18-9",
+    "returnPct": 29.8,
     "last10": "5-5",
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Chiefs at Bills",
+      "matchup": "Sharks at Ducks",
       "market": "ML",
-      "pick": "Bills",
-      "line": null,
-      "price": "-138",
-      "dollars": 538,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.5
-     },
-     {
-      "matchup": "Broncos at Steelers",
-      "market": "ML",
-      "pick": "Broncos",
-      "line": null,
-      "price": "-139",
-      "dollars": 676,
-      "vsUsual": 0.1,
-      "vsUsualAll": 0.6
-     }
-    ]
-   },
-   {
-    "id": "921288",
-    "gap": 8.1,
-    "overall": "41-38",
-    "sport": "15-10",
-    "returnPct": 34.8,
-    "last10": "2-8",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Packers at Rams",
-      "market": "TOTAL",
-      "pick": "Over",
-      "line": null,
-      "price": null,
-      "dollars": 48462,
-      "vsUsual": 3.1,
-      "vsUsualAll": 4.3
-     }
-    ]
-   },
-   {
-    "id": "2f2a9e",
-    "gap": 7.7,
-    "overall": "498-479",
-    "sport": "27-19",
-    "returnPct": 26.8,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Packers at Rams",
-      "market": "TOTAL",
-      "pick": "Under",
-      "line": 46.5,
-      "price": "-138",
-      "dollars": 6957,
-      "vsUsual": 0.6,
-      "vsUsualAll": 0.7
-     }
-    ]
-   },
-   {
-    "id": "bc44b0",
-    "gap": 6.7,
-    "overall": "289-243",
-    "sport": "25-16",
-    "returnPct": 6.3,
-    "last10": "6-4",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Packers at Rams",
-      "market": "ML",
-      "pick": "Rams",
+      "pick": "Ducks",
       "line": null,
       "price": "-122",
-      "dollars": 8582,
-      "vsUsual": 1.2,
-      "vsUsualAll": 5.9
-     },
-     {
-      "matchup": "Packers at Rams",
-      "market": "TOTAL",
-      "pick": "Under",
-      "line": 44.5,
-      "price": "-113",
-      "dollars": 6713,
+      "dollars": 611,
       "vsUsual": 1,
-      "vsUsualAll": 4.6
-     },
-     {
-      "matchup": "Broncos at Steelers",
-      "market": "ML",
-      "pick": "Broncos",
-      "line": null,
-      "price": "-144",
-      "dollars": 4198,
-      "vsUsual": 0.6,
-      "vsUsualAll": 2.9
-     },
-     {
-      "matchup": "Broncos at Steelers",
-      "market": "SPREAD",
-      "pick": "Steelers +3.5",
-      "line": 3.5,
-      "price": "-110",
-      "dollars": 3098,
-      "vsUsual": 0.4,
-      "vsUsualAll": 2.1
+      "vsUsualAll": 1.1
      }
     ]
-   }
-  ],
-  "NHL": [
+   },
    {
     "id": "aa9fb4",
     "gap": 11.7,
@@ -770,6 +521,37 @@
     ]
    },
    {
+    "id": "8b0e4c",
+    "gap": 9,
+    "overall": "70-57",
+    "sport": "34-19",
+    "returnPct": 8,
+    "last10": "4-6",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Senators at Panthers",
+      "market": "ML",
+      "pick": "Panthers",
+      "line": null,
+      "price": "-113",
+      "dollars": 990,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.5
+     },
+     {
+      "matchup": "Hurricanes at Lightning",
+      "market": "ML",
+      "pick": "Hurricanes",
+      "line": null,
+      "price": "-113",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.5
+     }
+    ]
+   },
+   {
     "id": "5c2194",
     "gap": 6.4,
     "overall": "83-69",
@@ -779,16 +561,6 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Hurricanes at Lightning",
-      "market": "ML",
-      "pick": "Hurricanes",
-      "line": null,
-      "price": "-117",
-      "dollars": 810,
-      "vsUsual": 1.1,
-      "vsUsualAll": 0.5
-     },
-     {
       "matchup": "Senators at Panthers",
       "market": "ML",
       "pick": "Panthers",
@@ -797,6 +569,16 @@
       "dollars": 832,
       "vsUsual": 1.1,
       "vsUsualAll": 0.6
+     },
+     {
+      "matchup": "Hurricanes at Lightning",
+      "market": "ML",
+      "pick": "Hurricanes",
+      "line": null,
+      "price": "-117",
+      "dollars": 810,
+      "vsUsual": 1.1,
+      "vsUsualAll": 0.5
      },
      {
       "matchup": "Blues at Islanders",
@@ -809,25 +591,294 @@
       "vsUsualAll": 0.6
      }
     ]
+   }
+  ],
+  "CFB": [
+   {
+    "id": "d3948b",
+    "gap": 9.6,
+    "overall": "70-76",
+    "sport": "19-14",
+    "returnPct": 8,
+    "last10": "4-6",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Michigan at Ohio State",
+      "market": "ML",
+      "pick": "Ohio State",
+      "line": null,
+      "price": "-335",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Michigan at Ohio State",
+      "market": "TOTAL",
+      "pick": "Over 37.5",
+      "line": 37.5,
+      "price": "-104",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "USC at UCLA",
+      "market": "ML",
+      "pick": "USC",
+      "line": null,
+      "price": "-223",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Liberty at Missouri State",
+      "market": "SPREAD",
+      "pick": "Missouri State +17.5",
+      "line": 17.5,
+      "price": "-113",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Arizona State at Arizona",
+      "market": "SPREAD",
+      "pick": "Arizona State +7.5",
+      "line": 7.5,
+      "price": "-100",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Minnesota at Wisconsin",
+      "market": "SPREAD",
+      "pick": "Minnesota +7.5",
+      "line": 7.5,
+      "price": "+101",
+      "dollars": 851,
+      "vsUsual": 0.9,
+      "vsUsualAll": 1.4
+     },
+     {
+      "matchup": "Boston College at Miami (FL)",
+      "market": "TOTAL",
+      "pick": "Under 53.5",
+      "line": 53.5,
+      "price": "+113",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "South Carolina at Clemson",
+      "market": "SPREAD",
+      "pick": "Clemson +5.5",
+      "line": 5.5,
+      "price": "+113",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Coastal Carolina at James Madison",
+      "market": "SPREAD",
+      "pick": "Coastal Carolina +17.5",
+      "line": 17.5,
+      "price": "-104",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Tennessee at Vanderbilt",
+      "market": "TOTAL",
+      "pick": "Over 41.5",
+      "line": 41.5,
+      "price": "-117",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "UConn at Wyoming",
+      "market": "SPREAD",
+      "pick": "Wyoming +4.5",
+      "line": 4.5,
+      "price": "-117",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Sacramento State at Hawai'i",
+      "market": "SPREAD",
+      "pick": "Hawai'i -13.5",
+      "line": -13.5,
+      "price": "-100",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Tulsa at UTSA",
+      "market": "SPREAD",
+      "pick": "UTSA +1.5",
+      "line": 1.5,
+      "price": "-113",
+      "dollars": 966,
+      "vsUsual": 1,
+      "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "UCF at Colorado",
+      "market": "TOTAL",
+      "pick": "Over 49.5",
+      "line": 49.5,
+      "price": "-104",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Appalachian State at South Alabama",
+      "market": "TOTAL",
+      "pick": "Under 57.5",
+      "line": 57.5,
+      "price": "-108",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     }
+    ]
    },
    {
-    "id": "8d3672",
-    "gap": 1.6,
-    "overall": "111-77",
-    "sport": "20-13",
-    "returnPct": 21.6,
+    "id": "aaedcd",
+    "gap": 8.6,
+    "overall": "180-143",
+    "sport": "36-20",
+    "returnPct": 30.3,
     "last10": "6-4",
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Flyers at Capitals",
+      "matchup": "Texas at Texas A&M",
       "market": "ML",
-      "pick": "Capitals",
+      "pick": "Texas",
       "line": null,
-      "price": "-150",
-      "dollars": 1875,
-      "vsUsual": 2.8,
-      "vsUsualAll": 0.9
+      "price": "-268",
+      "dollars": 687,
+      "vsUsual": 2.7,
+      "vsUsualAll": 1.5
+     }
+    ]
+   },
+   {
+    "id": "bc44b0",
+    "gap": 3.9,
+    "overall": "289-243",
+    "sport": "46-33",
+    "returnPct": 18,
+    "last10": "5-5",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Liberty at Missouri State",
+      "market": "SPREAD",
+      "pick": "Missouri State +17.5",
+      "line": 17.5,
+      "price": "-107",
+      "dollars": 990,
+      "vsUsual": 0.2,
+      "vsUsualAll": 0.7
+     },
+     {
+      "matchup": "San Diego State at Washington State",
+      "market": "TOTAL",
+      "pick": "Over 45.5",
+      "line": 45.5,
+      "price": "-108",
+      "dollars": 513,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.4
+     }
+    ]
+   },
+   {
+    "id": "487b8b",
+    "gap": 3,
+    "overall": "558-469",
+    "sport": "78-58",
+    "returnPct": 3.8,
+    "last10": "5-5",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "USC at UCLA",
+      "market": "SPREAD",
+      "pick": "USC -6.5",
+      "line": -6.5,
+      "price": "-113",
+      "dollars": 504,
+      "vsUsual": 0.8,
+      "vsUsualAll": 1.1
+     },
+     {
+      "matchup": "Texas at Texas A&M",
+      "market": "ML",
+      "pick": "Texas",
+      "line": null,
+      "price": "-238",
+      "dollars": 11663,
+      "vsUsual": 19.5,
+      "vsUsualAll": 24.7
+     }
+    ]
+   }
+  ],
+  "CBB": [
+   {
+    "id": "04c524",
+    "gap": 11.1,
+    "overall": "99-69",
+    "sport": "7-3",
+    "returnPct": 17.3,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "USC Upstate Spartans at The Citadel Bulldogs",
+      "market": "ML",
+      "pick": "The Citadel Bulldogs",
+      "line": null,
+      "price": "-157",
+      "dollars": 764,
+      "vsUsual": 2.2,
+      "vsUsualAll": 0.4
+     }
+    ]
+   },
+   {
+    "id": "aaedcd",
+    "gap": 1.9,
+    "overall": "180-143",
+    "sport": "34-25",
+    "returnPct": 11.1,
+    "last10": "7-3",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Wake Forest Demon Deacons at Mississippi State Bulldogs",
+      "market": "TOTAL",
+      "pick": "Under 150.5",
+      "line": 150.5,
+      "price": "-108",
+      "dollars": 1620,
+      "vsUsual": 3,
+      "vsUsualAll": 3.5
      }
     ]
    }
