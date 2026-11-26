@@ -1,29 +1,8 @@
 {
  "date": "2026-11-26",
- "scannedAt": "2026-11-26T18:16:07.607Z",
+ "scannedAt": "2026-11-26T19:08:26.433Z",
  "sports": {
   "NFL": [
-   {
-    "id": "411018",
-    "gap": 14.4,
-    "overall": "104-112",
-    "sport": "20-12",
-    "returnPct": 17.7,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Bears at Lions",
-      "market": "TOTAL",
-      "pick": "Under 56.5",
-      "line": 56.5,
-      "price": "-104",
-      "dollars": 4080,
-      "vsUsual": 1.9,
-      "vsUsualAll": 4.9
-     }
-    ]
-   },
    {
     "id": "5fcee5",
     "gap": 10.4,
@@ -99,9 +78,9 @@
       "pick": "Texans",
       "line": null,
       "price": "-270",
-      "dollars": 1762,
+      "dollars": 1768,
       "vsUsual": 0.2,
-      "vsUsualAll": 1.5
+      "vsUsualAll": 1.6
      }
     ]
    },
@@ -123,6 +102,16 @@
       "dollars": 565,
       "vsUsual": 0,
       "vsUsualAll": 0.1
+     },
+     {
+      "matchup": "Chiefs at Bills",
+      "market": "TOTAL",
+      "pick": "Under 50.5",
+      "line": 50.5,
+      "price": "-207",
+      "dollars": 1322,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.1
      }
     ]
    },
@@ -135,6 +124,26 @@
     "last10": "6-4",
     "bettingBig": false,
     "tonight": [
+     {
+      "matchup": "Chiefs at Bills",
+      "market": "SPREAD",
+      "pick": "Chiefs",
+      "line": 3.5,
+      "price": "-127",
+      "dollars": 2015,
+      "vsUsual": 0.3,
+      "vsUsualAll": 1.4
+     },
+     {
+      "matchup": "Chiefs at Bills",
+      "market": "TOTAL",
+      "pick": "Under 50.5",
+      "line": 50.5,
+      "price": "-113",
+      "dollars": 896,
+      "vsUsual": 0.1,
+      "vsUsualAll": 0.6
+     },
      {
       "matchup": "Eagles at Cowboys",
       "market": "SPREAD",
@@ -187,6 +196,57 @@
       "vsUsualAll": 0.6
      }
     ]
+   },
+   {
+    "id": "579e12",
+    "gap": 5,
+    "overall": "294-261",
+    "sport": "40-29",
+    "returnPct": 3.1,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "Chiefs at Bills",
+      "market": "SPREAD",
+      "pick": "Chiefs",
+      "line": 2.5,
+      "price": "+113",
+      "dollars": 1000,
+      "vsUsual": 1,
+      "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Eagles at Cowboys",
+      "market": "ML",
+      "pick": "Cowboys",
+      "line": null,
+      "price": "-376",
+      "dollars": 1000,
+      "vsUsual": 1,
+      "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Broncos at Steelers",
+      "market": "SPREAD",
+      "pick": "Steelers +3.5",
+      "line": 3.5,
+      "price": "-127",
+      "dollars": 1000,
+      "vsUsual": 1,
+      "vsUsualAll": 1.6
+     },
+     {
+      "matchup": "Ravens at Texans",
+      "market": "TOTAL",
+      "pick": "Under 46.5",
+      "line": 46.5,
+      "price": "+117",
+      "dollars": 1000,
+      "vsUsual": 1,
+      "vsUsualAll": 1.6
+     }
+    ]
    }
   ],
   "NBA": [
@@ -234,10 +294,10 @@
       "market": "ML",
       "pick": "76ers",
       "line": null,
-      "price": "-178",
-      "dollars": 1989,
-      "vsUsual": 1.2,
-      "vsUsualAll": 13.5
+      "price": "-174",
+      "dollars": 2298,
+      "vsUsual": 1.4,
+      "vsUsualAll": 15.6
      },
      {
       "matchup": "Warriors at Trail Blazers",
@@ -250,16 +310,6 @@
       "vsUsualAll": 6.7
      },
      {
-      "matchup": "Bucks at Pistons",
-      "market": "ML",
-      "pick": "Pistons",
-      "line": null,
-      "price": "-502",
-      "dollars": 1268,
-      "vsUsual": 0.8,
-      "vsUsualAll": 8.6
-     },
-     {
       "matchup": "Grizzlies at Timberwolves",
       "market": "ML",
       "pick": "Timberwolves",
@@ -268,6 +318,47 @@
       "dollars": 600,
       "vsUsual": 0.4,
       "vsUsualAll": 4.1
+     },
+     {
+      "matchup": "Bucks at Pistons",
+      "market": "ML",
+      "pick": "Pistons",
+      "line": null,
+      "price": "-502",
+      "dollars": 1276,
+      "vsUsual": 0.8,
+      "vsUsualAll": 8.7
+     },
+     {
+      "matchup": "Nuggets at Jazz",
+      "market": "ML",
+      "pick": "Nuggets",
+      "line": null,
+      "price": "-355",
+      "dollars": 1159,
+      "vsUsual": 0.7,
+      "vsUsualAll": 7.9
+     }
+    ]
+   },
+   {
+    "id": "bc35e3",
+    "gap": 6.3,
+    "overall": "478-479",
+    "sport": "112-87",
+    "returnPct": 18.9,
+    "last10": "7-3",
+    "bettingBig": false,
+    "tonight": [
+     {
+      "matchup": "76ers at Pacers",
+      "market": "ML",
+      "pick": "Pacers",
+      "line": null,
+      "price": "+159",
+      "dollars": 2397,
+      "vsUsual": 0.8,
+      "vsUsualAll": 2.1
      }
     ]
    },
@@ -315,10 +406,10 @@
       "market": "ML",
       "pick": "Nets",
       "line": null,
-      "price": "+265",
-      "dollars": 2910,
-      "vsUsual": 1.5,
-      "vsUsualAll": 2.1
+      "price": "+268",
+      "dollars": 3301,
+      "vsUsual": 1.7,
+      "vsUsualAll": 2.3
      }
     ]
    }
@@ -611,27 +702,6 @@
    }
   ],
   "CBB": [
-   {
-    "id": "11f1d2",
-    "gap": 9.4,
-    "overall": "553-526",
-    "sport": "97-63",
-    "returnPct": 44,
-    "last10": "7-3",
-    "bettingBig": true,
-    "tonight": [
-     {
-      "matchup": "Georgia Bulldogs at Cincinnati Bearcats",
-      "market": "ML",
-      "pick": "Cincinnati Bearcats",
-      "line": null,
-      "price": "-100",
-      "dollars": 795,
-      "vsUsual": 8.6,
-      "vsUsualAll": 12.4
-     }
-    ]
-   },
    {
     "id": "aaedcd",
     "gap": -0.5,
