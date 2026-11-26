@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-26",
+ "posted_ct": "1035",
+ "sport": "NFL",
+ "outlier": true,
+ "first_start": "2026-11-26T18:00:00.000Z",
+ "snapshot": "2026-11-26T16:15:12.892Z",
+ "sides": [
+  {
+   "game": "Bears at Lions",
+   "market": "ML",
+   "pick": "Bears",
+   "start_utc": "2026-11-26T18:00:00.000Z",
+   "dollars": 5447,
+   "opp_dollars": 565,
+   "wallets": 2,
+   "max_vs_usual": 1.4,
+   "all_sport_ratio": 1.51,
+   "price": "-104",
+   "line": null,
+   "l30_rec": "7-5",
+   "l30_roi": -11.4,
+   "mkt_rec": "2-2",
+   "mkt_roi": 20.2,
+   "mkt_l30_rec": "2-2",
+   "tail": false
+  }
+ ]
+}
