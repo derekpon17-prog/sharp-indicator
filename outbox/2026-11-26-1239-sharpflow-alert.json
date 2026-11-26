@@ -1,0 +1,109 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 12:16pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 3:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Eagles at Cowboys",
+       "time": "3:30pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Eagles vs Cowboys",
+       "price": null,
+       "for": {
+        "team": "EAGLES",
+        "rows": [
+         {
+          "team": "Eagles",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +9.5 -108",
+          "mk": "SPREAD",
+          "record": "12-7",
+          "roi": 27.5,
+          "dollars": 4416,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Eagles",
+          "wallet": "H #b839b3",
+          "wid": "b839b3",
+          "market": "SPREAD +9.5 -104",
+          "mk": "SPREAD",
+          "record": "23-18",
+          "roi": 3.7,
+          "dollars": 816,
+          "note": "1.0x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "COWBOYS",
+        "rows": [
+         {
+          "team": "Cowboys",
+          "wallet": "pltrkr111 #579e12",
+          "wid": "579e12",
+          "market": "ML -376",
+          "mk": "ML",
+          "record": "5-3",
+          "roi": -2.5,
+          "dollars": 1000,
+          "note": "1.0x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "EAGLES",
+         "dollars": 5232,
+         "pct": 84,
+         "c": "green"
+        },
+        {
+         "team": "COWBOYS",
+         "dollars": 1000,
+         "pct": 16,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $816 on Eagles +9.5 - kickoff in 2h 51m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
