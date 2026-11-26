@@ -1,0 +1,124 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · MORNING · Thu Nov 26** · games before 12:00pm CT (NCAAB)",
+ "slate": {
+  "title": "Morning plays (before 12:00pm CT)",
+  "stamp": "THU NOV 26 · 9:14AM",
+  "sources": "Pinnacle ~9:13am CT - Vegas ~9:13am CT (CBB) - SharpFlow 8:33am CT - Novig not read",
+  "sf_current": true,
+  "footer": "Window: games starting before 12:00pm CT. No SharpFlow wallet money or site lock on any game in this window. Vegas counts Vegas Backed and Pressure Move only. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "ARMY@UTSA",
+    "market": "SPREAD",
+    "side": "ARMY",
+    "line": 11.5,
+    "price": -116,
+    "bet": "Army +11.5",
+    "matchup": "NCAAB - Army @ UTSA - 11:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 66,
+    "buckets": [
+     "PIN_STRONG",
+     "VEGAS_ALL"
+    ],
+    "note": "Pinnacle Strong stable (+12.5 to +11.5, +EV at 1 book); Vegas Backed 66, under the 70 bar.",
+    "vegas_type": "Vegas Backed",
+    "bets_pct": 48,
+    "money_pct": 33,
+    "pin_ev_books": 1
+   },
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "OU@PUR",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 140.5,
+    "price": -113,
+    "bet": "Under 140.5",
+    "matchup": "NCAAB - Oklahoma vs Purdue - 11:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG"
+    ],
+    "note": "Pinnacle Strong stable (142.5 to 140.5, +EV at 1 book); no Vegas row.",
+    "pin_ev_books": 1
+   },
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "ARMY@UTSA",
+    "market": "ML",
+    "side": "ARMY",
+    "line": null,
+    "price": 514,
+    "bet": "Army ML",
+    "matchup": "NCAAB - Army @ UTSA - 11:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 94,
+    "buckets": [
+     "VEGAS_ALL",
+     "VEGAS_70"
+    ],
+    "note": "Vegas Backed 94 (+682 to +514); Pinnacle no lean on the ML.",
+    "vegas_type": "Vegas Backed",
+    "bets_pct": 5,
+    "money_pct": 34
+   },
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "UGA@CIN",
+    "market": "SPREAD",
+    "side": "CIN",
+    "line": -2.5,
+    "price": -113,
+    "bet": "Cincinnati -2.5",
+    "matchup": "NCAAB - Georgia vs Cincinnati - 10:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 38,
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "note": "Vegas Backed 38; Pinnacle no lean.",
+    "vegas_type": "Vegas Backed",
+    "bets_pct": 36,
+    "money_pct": 48
+   },
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "UGA@CIN",
+    "market": "ML",
+    "side": "CIN",
+    "line": null,
+    "price": -148,
+    "bet": "Cincinnati ML",
+    "matchup": "NCAAB - Georgia vs Cincinnati - 10:00am CT",
+    "first_seen": "09:13",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": 30,
+    "buckets": [
+     "VEGAS_ALL"
+    ],
+    "note": "Pressure Move 30; Pinnacle no lean.",
+    "vegas_type": "Pressure Move",
+    "bets_pct": 75,
+    "money_pct": 14
+   }
+  ]
+ }
+}
