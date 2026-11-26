@@ -1,0 +1,144 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NFL one-off - first game 12:00pm CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NFL - sharp wallets",
+   "subtitle": "Wallets with positive NFL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 10:15am CT",
+   "sections": [
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Bears at Lions",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "EDGE - BEARS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bears ML -108",
+       "price": "-108",
+       "for": {
+        "team": "BEARS",
+        "rows": [
+         {
+          "team": "Bears",
+          "wallet": "lightotunnel35 #858392",
+          "wid": "858392",
+          "market": "ML -104",
+          "mk": "ML",
+          "record": "2-2",
+          "roi": 20.2,
+          "dollars": 4590,
+          "note": "0.8x usual, only 4 bets here · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bears",
+          "wallet": "lightotunnel35 #858392",
+          "wid": "858392",
+          "market": "SPREAD",
+          "mk": "SPREAD",
+          "record": "7-4",
+          "roi": -5.5,
+          "dollars": 3468,
+          "note": "0.5x usual, L10 6-4 · SAME WALLET as its ML row",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Bears",
+          "wallet": "0x9674de4A6Cf9988c629CafaC79C6803984E11302-1764965311959 #e11302",
+          "wid": "e11302",
+          "market": "ML -108",
+          "mk": "ML",
+          "record": "0-1",
+          "roi": -100,
+          "dollars": 1145,
+          "note": "1.8x usual, only 1 bet here",
+          "status": {
+           "t": "THIN - 1 bet here - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bears",
+          "wallet": "suntori #a0cff6",
+          "wid": "a0cff6",
+          "market": "ML -108",
+          "mk": "ML",
+          "record": "18-13",
+          "roi": 34,
+          "dollars": 857,
+          "note": "1.4x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "LIONS",
+        "rows": [
+         {
+          "team": "Lions",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "SPREAD +7.5 -285",
+          "mk": "SPREAD",
+          "record": "13-9",
+          "roi": 9,
+          "dollars": 565,
+          "note": "0.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BEARS",
+         "dollars": 10060,
+         "pct": 95,
+         "c": "green"
+        },
+        {
+         "team": "LIONS",
+         "dollars": 565,
+         "pct": 5,
+         "c": "grey"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 18-13 (+34% ROI) on BEARS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ - SITE LOCK: Lions ML 2.5u (wallet money AGAINST it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Eagles +9.5 $4.4K (cold form 3-4 L30 here, -29% ROI); Bears $3.5K (7-4 here, -5% ROI); Cowboys ML $1K (5-3 here, -2% ROI) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}

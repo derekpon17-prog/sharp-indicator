@@ -1,0 +1,70 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CBB - first game 11:00am CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CBB - sharp wallets",
+   "subtitle": "Wallets with positive CBB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 10:15am CT",
+   "sections": [
+    {
+     "heading": "CBB - 3:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Utah State Aggies at USC Trojans",
+       "time": "3:30pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over 160.5 +104",
+       "price": "+104",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "OVER 160.5 +104",
+          "mk": "TOTAL",
+          "record": "16-4",
+          "roi": 50.6,
+          "dollars": 758,
+          "note": "1.0x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "CBB TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 758,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 16-4 (+51% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
