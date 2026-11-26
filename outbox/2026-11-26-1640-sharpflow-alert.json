@@ -1,0 +1,157 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:25pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:20PM CT",
+     "picks": [
+      {
+       "eyebrow": "Chiefs at Bills",
+       "time": "7:20pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bills vs Chiefs",
+       "price": null,
+       "for": {
+        "team": "BILLS",
+        "rows": [
+         {
+          "team": "Bills",
+          "wallet": "fvckjumpjanestreet #8fda40",
+          "wid": "8fda40",
+          "market": "ML -152",
+          "mk": "ML",
+          "record": "9-3",
+          "roi": 7.8,
+          "dollars": 784,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bills",
+          "wallet": "I #e11302",
+          "wid": "e11302",
+          "market": "SPREAD -2.5 -122",
+          "mk": "SPREAD",
+          "record": "4-1",
+          "roi": 56.4,
+          "dollars": 550,
+          "note": "0.8x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Bills",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 538,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "CHIEFS",
+        "rows": [
+         {
+          "team": "Chiefs",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +3.5 -127",
+          "mk": "SPREAD",
+          "record": "12-7",
+          "roi": 27.5,
+          "dollars": 2015,
+          "note": "0.3x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "pleasent242 #b74426",
+          "wid": "b74426",
+          "market": "ML +150",
+          "mk": "ML",
+          "record": "0-1",
+          "roi": -100,
+          "dollars": 1400,
+          "note": "0.5x usual, only 1 bet here",
+          "status": {
+           "t": "THIN - 1 bet here - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "pltrkr111 #579e12",
+          "wid": "579e12",
+          "market": "SPREAD +2.5 +113",
+          "mk": "SPREAD",
+          "record": "18-12",
+          "roi": -6.2,
+          "dollars": 1000,
+          "note": "1.0x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BILLS",
+         "dollars": 1872,
+         "pct": 30,
+         "c": "green"
+        },
+        {
+         "team": "CHIEFS",
+         "dollars": 4415,
+         "pct": 70,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "WITH OUR POSTED PLAY: Bills -3 (3:55pm slate) - GREW $538 to $1.3K - kickoff in 2h 40m - SITE LOCK: Bills ML 4u (wallet money AGAINST it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
