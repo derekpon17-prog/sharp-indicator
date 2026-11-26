@@ -1,0 +1,163 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 7:21pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Spurs at Trail Blazers",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - TRAIL BLAZERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Trail Blazers ML +156",
+       "price": "+156",
+       "for": {
+        "team": "TRAIL BLAZERS",
+        "rows": [
+         {
+          "team": "Trail Blazers",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML +156",
+          "mk": "ML",
+          "record": "38-28",
+          "roi": 17.6,
+          "dollars": 1419,
+          "note": "0.5x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TRAIL BLAZERS",
+         "dollars": 1419,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 38-28 (+18% ROI) on TRAIL BLAZERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $1.4K on Trail Blazers - kickoff in 1h 36m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Suns at Rockets",
+       "time": "7:40pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total ",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "robloxgamblemaster-2008-10-18 #ab4b6e",
+          "wid": "ab4b6e",
+          "market": "OVER",
+          "mk": "TOTAL",
+          "record": "5-2",
+          "roi": 76.3,
+          "dollars": 15624,
+          "note": "0.1x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "E #90617d",
+          "wid": "90617d",
+          "market": "UNDER -100",
+          "mk": "TOTAL",
+          "record": "20-18",
+          "roi": 6.9,
+          "dollars": 1997,
+          "note": "1.3x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "team": "Under",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "UNDER +104",
+          "mk": "TOTAL",
+          "record": "11-8",
+          "roi": -10.8,
+          "dollars": 1420,
+          "note": "0.3x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 15624,
+         "pct": 82,
+         "c": "green"
+        },
+        {
+         "team": "Under",
+         "dollars": 3417,
+         "pct": 18,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "NEW $16K on Over - LATE: kickoff in 6 min - SITE LOCK: Under 223 2u (wallet money AGAINST it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
