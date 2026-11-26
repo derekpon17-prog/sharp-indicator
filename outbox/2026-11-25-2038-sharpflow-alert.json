@@ -1,0 +1,188 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 2 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:15pm CT",
+   "sections": [
+    {
+     "heading": "NHL - 8:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Canadiens at Avalanche",
+       "time": "8:40pm CT",
+       "tag": {
+        "t": "EDGE - CANADIENS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Canadiens +1.5 -223",
+       "price": "-223",
+       "for": {
+        "team": "CANADIENS",
+        "rows": [
+         {
+          "team": "Canadiens",
+          "wallet": "keeptheblueflagflyinghigh #85aa98",
+          "wid": "85aa98",
+          "market": "ML +108",
+          "mk": "ML",
+          "record": "15-13",
+          "roi": 13.6,
+          "dollars": 26999,
+          "note": "1.6x usual, L10 3-7 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "COLD",
+           "c": "red"
+          },
+          "recLabel": "NHL ML · all-time record"
+         },
+         {
+          "team": "Canadiens",
+          "wallet": "keeptheblueflagflyinghigh #85aa98",
+          "wid": "85aa98",
+          "market": "SPREAD +1.5 -223",
+          "mk": "SPREAD",
+          "record": "12-4",
+          "roi": 31.2,
+          "dollars": 17442,
+          "note": "1.1x usual, L10 3-7 · SAME WALLET as its ML row",
+          "status": {
+           "t": "COLD",
+           "c": "red"
+          },
+          "recLabel": "NHL SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "CANADIENS",
+         "dollars": 44441,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 12-4 (+31% ROI) on CANADIENS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $27K on Canadiens - LATE: kickoff in 1 min - SITE LOCK: Canadiens ML 2u (wallet money behind it) | SITE LOCK: Canadiens +1.5 4u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 9:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Spurs at Trail Blazers",
+       "time": "9:10pm CT",
+       "tag": {
+        "t": "EDGE - TRAIL BLAZERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Trail Blazers +2.5 +106",
+       "price": "+106",
+       "for": {
+        "team": "TRAIL BLAZERS",
+        "rows": [
+         {
+          "team": "Trail Blazers",
+          "wallet": "hewhodoesit #3da1a1",
+          "wid": "3da1a1",
+          "market": "ML +150",
+          "mk": "ML",
+          "record": "10-8",
+          "roi": -5,
+          "dollars": 5997,
+          "note": "0.5x usual, L10 5-5 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Trail Blazers",
+          "wallet": "M #46eedb",
+          "wid": "46eedb",
+          "market": "SPREAD +3.5 +104",
+          "mk": "SPREAD",
+          "record": "4-2",
+          "roi": 52,
+          "dollars": 4650,
+          "note": "0.7x usual, L10 5-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Trail Blazers",
+          "wallet": "hewhodoesit #3da1a1",
+          "wid": "3da1a1",
+          "market": "SPREAD +2.5 +106",
+          "mk": "SPREAD",
+          "record": "6-4",
+          "roi": 56.3,
+          "dollars": 3405,
+          "note": "0.3x usual, L10 5-5 · SAME WALLET as its ML row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Trail Blazers",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML +157",
+          "mk": "ML",
+          "record": "38-28",
+          "roi": 17.6,
+          "dollars": 3337,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TRAIL BLAZERS",
+         "dollars": 19247,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 6-4 (+56% ROI) on TRAIL BLAZERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $9.9K on Trail Blazers - kickoff in 31 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
