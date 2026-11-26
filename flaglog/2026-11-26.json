@@ -16,7 +16,7 @@
    "maxVsUsual": 2.4,
    "maxDollars": 4800,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Nets at Raptors|ML|Nets": {
    "sport": "NBA",
@@ -31,9 +31,9 @@
     "SIZED_UP"
    ],
    "maxVsUsual": 1.4,
-   "maxDollars": 2685,
+   "maxDollars": 2726,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -49,7 +49,7 @@
    "maxVsUsual": 19.5,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Chiefs at Bills|TOTAL|Over 46.5": {
    "sport": "NFL",
@@ -65,7 +65,7 @@
    "maxVsUsual": 1.5,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Michigan at Ohio State|ML|Ohio State": {
    "sport": "CFB",
@@ -81,7 +81,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Michigan at Ohio State|TOTAL|Over 37.5": {
    "sport": "CFB",
@@ -97,7 +97,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "USC at UCLA|ML|USC": {
    "sport": "CFB",
@@ -113,7 +113,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "South Carolina at Clemson|SPREAD|Clemson +5.5": {
    "sport": "CFB",
@@ -145,7 +145,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
    "sport": "CFB",
@@ -161,7 +161,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Minnesota at Wisconsin|SPREAD|Minnesota +7.5": {
    "sport": "CFB",
@@ -177,7 +177,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Boston College at Miami (FL)|TOTAL|Under 53.5": {
    "sport": "CFB",
@@ -193,7 +193,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
    "sport": "CFB",
@@ -209,7 +209,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -225,7 +225,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "UConn at Wyoming|SPREAD|Wyoming +4.5": {
    "sport": "CFB",
@@ -241,7 +241,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Sacramento State at Hawai'i|SPREAD|Hawai'i -13.5": {
    "sport": "CFB",
@@ -257,7 +257,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "UCF at Colorado|TOTAL|Over 49.5": {
    "sport": "CFB",
@@ -273,7 +273,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Appalachian State at South Alabama|TOTAL|Under 57.5": {
    "sport": "CFB",
@@ -283,6 +283,54 @@
    "kickoffEt": "Fri, Nov 27, 3:00 PM",
    "firstSeenAt": "2026-11-26T14:33:07.896Z",
    "firstPrice": "-108",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Bears at Lions|ML|Bears": {
+   "sport": "NFL",
+   "matchup": "Bears at Lions",
+   "market": "ML",
+   "pick": "Bears",
+   "kickoffEt": "Thu, Nov 26, 1:00 PM",
+   "firstSeenAt": "2026-11-26T16:34:41.564Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 1145,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Heat at Knicks|ML|Knicks": {
+   "sport": "NBA",
+   "matchup": "Heat at Knicks",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Fri, Nov 27, 7:10 PM",
+   "firstSeenAt": "2026-11-26T16:34:41.564Z",
+   "firstPrice": "-153",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 1973,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "South Carolina at Clemson|SPREAD|Clemson": {
+   "sport": "CFB",
+   "matchup": "South Carolina at Clemson",
+   "market": "SPREAD",
+   "pick": "Clemson",
+   "kickoffEt": "Sat, Nov 28, 3:00 PM",
+   "firstSeenAt": "2026-11-26T16:34:41.564Z",
+   "firstPrice": "+113",
    "tags": [
     "SIZED_UP"
    ],
