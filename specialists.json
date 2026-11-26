@@ -1,6 +1,6 @@
 {
  "date": "2026-11-26",
- "scannedAt": "2026-11-26T22:25:47.905Z",
+ "scannedAt": "2026-11-26T23:09:29.792Z",
  "sports": {
   "NFL": [
    {
@@ -346,30 +346,9 @@
       "pick": "Pacers",
       "line": null,
       "price": "+159",
-      "dollars": 2397,
+      "dollars": 2407,
       "vsUsual": 0.8,
       "vsUsualAll": 2.1
-     }
-    ]
-   },
-   {
-    "id": "a0cff6",
-    "gap": 3.5,
-    "overall": "926-830",
-    "sport": "439-341",
-    "returnPct": 7.6,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Hawks at Celtics",
-      "market": "TOTAL",
-      "pick": "Over 226.5",
-      "line": 226.5,
-      "price": "+123",
-      "dollars": 570,
-      "vsUsual": 0.7,
-      "vsUsualAll": 0.2
      }
     ]
    },
@@ -398,7 +377,7 @@
       "pick": "Nets",
       "line": null,
       "price": "+268",
-      "dollars": 3357,
+      "dollars": 3374,
       "vsUsual": 1.7,
       "vsUsualAll": 2.4
      },
@@ -576,21 +555,21 @@
       "vsUsualAll": 1.7
      },
      {
-      "matchup": "Coastal Carolina at James Madison",
-      "market": "SPREAD",
-      "pick": "Coastal Carolina +17.5",
-      "line": 17.5,
-      "price": "-104",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
       "matchup": "Sacramento State at Hawai'i",
       "market": "SPREAD",
       "pick": "Hawai'i -13.5",
       "line": -13.5,
       "price": "-100",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Coastal Carolina at James Madison",
+      "market": "SPREAD",
+      "pick": "Coastal Carolina +17.5",
+      "line": 17.5,
+      "price": "-104",
       "dollars": 1000,
       "vsUsual": 1.1,
       "vsUsualAll": 1.7
@@ -743,16 +722,6 @@
     "bettingBig": true,
     "tonight": [
      {
-      "matchup": "Prairie View A&M Panthers at Iowa Hawkeyes",
-      "market": "ML",
-      "pick": "Iowa Hawkeyes",
-      "line": null,
-      "price": "-3233",
-      "dollars": 787,
-      "vsUsual": 1.5,
-      "vsUsualAll": 1.7
-     },
-     {
       "matchup": "The Citadel Bulldogs at High Point Panthers",
       "market": "ML",
       "pick": "High Point Panthers",
@@ -761,6 +730,16 @@
       "dollars": 506,
       "vsUsual": 0.9,
       "vsUsualAll": 1.1
+     },
+     {
+      "matchup": "Prairie View A&M Panthers at Iowa Hawkeyes",
+      "market": "ML",
+      "pick": "Iowa Hawkeyes",
+      "line": null,
+      "price": "-3233",
+      "dollars": 787,
+      "vsUsual": 1.5,
+      "vsUsualAll": 1.7
      }
     ]
    }
