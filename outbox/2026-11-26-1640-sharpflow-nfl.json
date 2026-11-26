@@ -1,0 +1,642 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - NFL - first game 7:20pm CT** - 10 sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "NFL - sharp wallets",
+   "subtitle": "Wallets with positive NFL market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 4:25pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:20PM CT",
+     "picks": [
+      {
+       "eyebrow": "Chiefs at Bills",
+       "time": "7:20pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 46.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "I #e11302",
+          "wid": "e11302",
+          "market": "OVER 46.5 +108",
+          "mk": "TOTAL",
+          "dollars": 1000,
+          "note": "1.5x usual, only 0 bets here",
+          "status": {
+           "t": "THIN - 0 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NFL TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 1000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Chiefs at Bills",
+       "time": "7:20pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bills vs Chiefs",
+       "price": null,
+       "for": {
+        "team": "BILLS",
+        "rows": [
+         {
+          "team": "Bills",
+          "wallet": "fvckjumpjanestreet #8fda40",
+          "wid": "8fda40",
+          "market": "ML -152",
+          "mk": "ML",
+          "record": "9-3",
+          "roi": 7.8,
+          "dollars": 784,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bills",
+          "wallet": "I #e11302",
+          "wid": "e11302",
+          "market": "SPREAD -2.5 -122",
+          "mk": "SPREAD",
+          "record": "4-1",
+          "roi": 56.4,
+          "dollars": 550,
+          "note": "0.8x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Bills",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 538,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "CHIEFS",
+        "rows": [
+         {
+          "team": "Chiefs",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +3.5 -127",
+          "mk": "SPREAD",
+          "record": "12-7",
+          "roi": 27.5,
+          "dollars": 2015,
+          "note": "0.3x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "pleasent242 #b74426",
+          "wid": "b74426",
+          "market": "ML +150",
+          "mk": "ML",
+          "record": "0-1",
+          "roi": -100,
+          "dollars": 1400,
+          "note": "0.5x usual, only 1 bet here",
+          "status": {
+           "t": "THIN - 1 bet here - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "pltrkr111 #579e12",
+          "wid": "579e12",
+          "market": "SPREAD +2.5 +113",
+          "mk": "SPREAD",
+          "record": "18-12",
+          "roi": -6.2,
+          "dollars": 1000,
+          "note": "1.0x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BILLS",
+         "dollars": 1872,
+         "pct": 30,
+         "c": "green"
+        },
+        {
+         "team": "CHIEFS",
+         "dollars": 4415,
+         "pct": 70,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ - SITE LOCK: Bills ML 4u (wallet money AGAINST it)"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 12:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Giants at Colts",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - GIANTS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Giants",
+       "price": null,
+       "for": {
+        "team": "GIANTS",
+        "rows": [
+         {
+          "team": "Giants",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -285",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 22157,
+          "note": "3.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "GIANTS",
+         "dollars": 22157,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Saints at Bengals",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - BENGALS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bengals",
+       "price": null,
+       "for": {
+        "team": "BENGALS",
+        "rows": [
+         {
+          "team": "Bengals",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -525",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 3017,
+          "note": "0.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "BENGALS",
+         "dollars": 3017,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Ravens at Texans",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - TEXANS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Texans",
+       "price": null,
+       "for": {
+        "team": "TEXANS",
+        "rows": [
+         {
+          "team": "Texans",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -270",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 1768,
+          "note": "0.2x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TEXANS",
+         "dollars": 1768,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Ravens at Texans",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Under",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 46.5",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "pltrkr111 #579e12",
+          "wid": "579e12",
+          "market": "UNDER 46.5 +117",
+          "mk": "TOTAL",
+          "record": "17-14",
+          "roi": 13.6,
+          "dollars": 1000,
+          "note": "1.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 1000,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Titans at Jaguars",
+       "time": "12:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - JAGUARS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Jaguars",
+       "price": null,
+       "for": {
+        "team": "JAGUARS",
+        "rows": [
+         {
+          "team": "Jaguars",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -801",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 849,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "JAGUARS",
+         "dollars": 849,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 3:25PM CT",
+     "picks": [
+      {
+       "eyebrow": "Commanders at Cardinals",
+       "time": "3:25pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - COMMANDERS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Commanders",
+       "price": null,
+       "for": {
+        "team": "COMMANDERS",
+        "rows": [
+         {
+          "team": "Commanders",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -317",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 864,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "COMMANDERS",
+         "dollars": 864,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      },
+      {
+       "eyebrow": "Seahawks at 49ers",
+       "time": "3:25pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - 49ERS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "49ers",
+       "price": null,
+       "for": {
+        "team": "49ERS",
+        "rows": [
+         {
+          "team": "49ers",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -149",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 581,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "49ERS",
+         "dollars": 581,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    },
+    {
+     "heading": "NFL - 2:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Broncos at Steelers",
+       "time": "2:00pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Broncos vs Steelers",
+       "price": null,
+       "for": {
+        "team": "BRONCOS",
+        "rows": [
+         {
+          "team": "Broncos",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "ML -144",
+          "mk": "ML",
+          "record": "4-4",
+          "roi": -1.6,
+          "dollars": 4198,
+          "note": "0.6x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Broncos",
+          "wallet": "darkumbreon88 #5fcee5",
+          "wid": "5fcee5",
+          "market": "ML -139",
+          "mk": "ML",
+          "record": "36-10",
+          "roi": 14.3,
+          "dollars": 676,
+          "note": "0.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "STEELERS",
+        "rows": [
+         {
+          "team": "Steelers",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +3.5 -110",
+          "mk": "SPREAD",
+          "record": "12-7",
+          "roi": 27.5,
+          "dollars": 3098,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Steelers",
+          "wallet": "pltrkr111 #579e12",
+          "wid": "579e12",
+          "market": "SPREAD +3.5 -127",
+          "mk": "SPREAD",
+          "record": "18-12",
+          "roi": -6.2,
+          "dollars": 1000,
+          "note": "1.0x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BRONCOS",
+         "dollars": 4874,
+         "pct": 54,
+         "c": "green"
+        },
+        {
+         "team": "STEELERS",
+         "dollars": 4098,
+         "pct": 46,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Not counted (negative market ROI or cold last 30 days): Steelers +3.5 $4.1K (cold form 3-4 L30 here, -29% ROI); Chiefs $3K (cold form 3-4 L30 here, -29% ROI); Chiefs ML $1.4K (0-1 here, -100% ROI) | Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
