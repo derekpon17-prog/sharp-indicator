@@ -15,7 +15,7 @@
    "maxVsUsual": 0.8,
    "maxDollars": 25418,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "76ers at Pacers|ML|76ers": {
    "sport": "NBA",
@@ -33,7 +33,7 @@
    "maxVsUsual": 2.9,
    "maxDollars": 5670,
    "opposedSeen": true,
-   "snapshots": 3
+   "snapshots": 6
   },
   "Heat at Knicks|ML|Heat": {
    "sport": "NBA",
@@ -50,7 +50,7 @@
    "maxVsUsual": 2.4,
    "maxDollars": 4800,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Mavericks at Suns|ML|Mavericks": {
    "sport": "NBA",
@@ -67,7 +67,7 @@
    "maxVsUsual": 2,
    "maxDollars": 4038,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Nets at Raptors|ML|Nets": {
    "sport": "NBA",
@@ -84,7 +84,7 @@
    "maxVsUsual": 2,
    "maxDollars": 3973,
    "opposedSeen": true,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Heat at Knicks|SPREAD|Knicks -3.5": {
    "sport": "NBA",
@@ -100,7 +100,7 @@
    "maxVsUsual": 1,
    "maxDollars": 1840,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Princeton Tigers at UNCW Seahawks|TOTAL|Over 151.5": {
    "sport": "CBB",
@@ -117,7 +117,7 @@
    "maxVsUsual": 1.9,
    "maxDollars": 1353,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Texas at Texas A&M|ML|Texas": {
    "sport": "CFB",
@@ -133,7 +133,7 @@
    "maxVsUsual": 19.5,
    "maxDollars": 11663,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Giants at Colts|ML|Giants": {
    "sport": "NFL",
@@ -149,7 +149,7 @@
    "maxVsUsual": 2.9,
    "maxDollars": 22157,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Broncos at Steelers|SPREAD|Broncos -6.5": {
    "sport": "NFL",
@@ -163,9 +163,9 @@
     "SIZED_2X"
    ],
    "maxVsUsual": 2.3,
-   "maxDollars": 9798,
+   "maxDollars": 11433,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Minnesota at Wisconsin|SPREAD|Minnesota": {
    "sport": "CFB",
@@ -182,7 +182,7 @@
    "maxVsUsual": 2.1,
    "maxDollars": 67661,
    "opposedSeen": false,
-   "snapshots": 2
+   "snapshots": 4
   },
   "Mississippi State at Ole Miss|SPREAD|Ole Miss -16.5": {
    "sport": "CFB",
@@ -196,9 +196,9 @@
     "SIZED_15X"
    ],
    "maxVsUsual": 1.8,
-   "maxDollars": 8425,
+   "maxDollars": 8503,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Broncos at Steelers|ML|Broncos": {
    "sport": "NFL",
@@ -214,7 +214,7 @@
    "maxVsUsual": 1.7,
    "maxDollars": 4759,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Bucks at Pistons|ML|Pistons": {
    "sport": "NBA",
@@ -227,10 +227,10 @@
    "tags": [
     "SIZED_15X"
    ],
-   "maxVsUsual": 1.5,
-   "maxDollars": 2488,
+   "maxVsUsual": 1.7,
+   "maxDollars": 2675,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Nebraska at Iowa|SPREAD|Nebraska +4.5": {
    "sport": "CFB",
@@ -241,12 +241,13 @@
    "firstSeenAt": "2026-11-27T14:32:28.986Z",
    "firstPrice": "-117",
    "tags": [
-    "SIZED_UP"
+    "SIZED_UP",
+    "SIZED_15X"
    ],
-   "maxVsUsual": 1.4,
-   "maxDollars": 6631,
+   "maxVsUsual": 1.6,
+   "maxDollars": 7185,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Heat at Knicks|ML|Knicks": {
    "sport": "NBA",
@@ -262,7 +263,7 @@
    "maxVsUsual": 1.2,
    "maxDollars": 1973,
    "opposedSeen": true,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Michigan at Ohio State|ML|Ohio State": {
    "sport": "CFB",
@@ -278,7 +279,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Michigan at Ohio State|TOTAL|Over 37.5": {
    "sport": "CFB",
@@ -294,7 +295,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Buffalo at Akron|TOTAL|Under 47.5": {
    "sport": "CFB",
@@ -310,7 +311,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Auburn at Alabama|ML|Auburn": {
    "sport": "CFB",
@@ -326,7 +327,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "USC at UCLA|ML|USC": {
    "sport": "CFB",
@@ -342,7 +343,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "South Carolina at Clemson|SPREAD|Clemson": {
    "sport": "CFB",
@@ -358,7 +359,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
    "sport": "CFB",
@@ -374,7 +375,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Appalachian State at South Alabama|TOTAL|Under 57.5": {
    "sport": "CFB",
@@ -390,7 +391,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Pittsburgh at California|TOTAL|Over 45.5": {
    "sport": "CFB",
@@ -406,7 +407,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
    "sport": "CFB",
@@ -422,7 +423,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Boston College at Miami (FL)|TOTAL|Under 53.5": {
    "sport": "CFB",
@@ -438,7 +439,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Boise State at Colorado State|SPREAD|Colorado State +23.5": {
    "sport": "CFB",
@@ -454,7 +455,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
    "sport": "CFB",
@@ -470,7 +471,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
    "sport": "CFB",
@@ -486,7 +487,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "UConn at Wyoming|SPREAD|Wyoming +4.5": {
    "sport": "CFB",
@@ -502,7 +503,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Michigan State at Rutgers|SPREAD|Michigan State -2.5": {
    "sport": "CFB",
@@ -518,7 +519,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "Sacramento State at Hawai'i|SPREAD|Hawai'i -13.5": {
    "sport": "CFB",
@@ -534,7 +535,7 @@
    "maxVsUsual": 1.1,
    "maxDollars": 1000,
    "opposedSeen": false,
-   "snapshots": 1
+   "snapshots": 2
   },
   "UCF at Colorado|TOTAL|Over 49.5": {
    "sport": "CFB",
@@ -544,6 +545,70 @@
    "kickoffEt": "Sat, Nov 28, 2:00 PM",
    "firstSeenAt": "2026-11-27T14:32:28.987Z",
    "firstPrice": "-104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "76ers at Pacers|SPREAD|76ers -3.5": {
+   "sport": "NBA",
+   "matchup": "76ers at Pacers",
+   "market": "SPREAD",
+   "pick": "76ers -3.5",
+   "kickoffEt": "Fri, Nov 27, 7:40 PM",
+   "firstSeenAt": "2026-11-27T16:33:07.221Z",
+   "firstPrice": "+113",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.5,
+   "maxDollars": 1064,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Hawks at Celtics|SPREAD|Celtics -9.5": {
+   "sport": "NBA",
+   "matchup": "Hawks at Celtics",
+   "market": "SPREAD",
+   "pick": "Celtics -9.5",
+   "kickoffEt": "Fri, Nov 27, 8:10 PM",
+   "firstSeenAt": "2026-11-27T16:33:07.221Z",
+   "firstPrice": "+117",
+   "tags": [
+    "STRONG_VS_OTHER"
+   ],
+   "maxVsUsual": 0.6,
+   "maxDollars": 1000,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Appalachian State at South Alabama|SPREAD|Appalachian State +3.5": {
+   "sport": "CFB",
+   "matchup": "Appalachian State at South Alabama",
+   "market": "SPREAD",
+   "pick": "Appalachian State +3.5",
+   "kickoffEt": "Fri, Nov 27, 3:00 PM",
+   "firstSeenAt": "2026-11-27T16:33:07.221Z",
+   "firstPrice": "-114",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.3,
+   "maxDollars": 6158,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Nebraska at Iowa|ML|Nebraska": {
+   "sport": "CFB",
+   "matchup": "Nebraska at Iowa",
+   "market": "ML",
+   "pick": "Nebraska",
+   "kickoffEt": "Fri, Nov 27, 12:00 PM",
+   "firstSeenAt": "2026-11-27T16:33:07.221Z",
+   "firstPrice": "+186",
    "tags": [
     "SIZED_UP"
    ],
