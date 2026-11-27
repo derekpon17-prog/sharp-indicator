@@ -1,0 +1,189 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 6:13pm CT",
+   "sections": [
+    {
+     "heading": "NFL - 7:20PM CT",
+     "picks": [
+      {
+       "eyebrow": "Chiefs at Bills",
+       "time": "7:20pm CT",
+       "tag": {
+        "t": "NO READ",
+        "icon": "⚠️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Bills vs Chiefs",
+       "price": null,
+       "for": {
+        "team": "BILLS",
+        "rows": [
+         {
+          "team": "Bills",
+          "wallet": "Wldntulike2know #b7f4da",
+          "wid": "b7f4da",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "12-7",
+          "roi": 4.2,
+          "dollars": 15000,
+          "note": "4.2x usual, L10 9-1",
+          "status": {
+           "t": "HOT (last 10: 9-1)",
+           "c": "gold"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bills",
+          "wallet": "suntori #a0cff6",
+          "wid": "a0cff6",
+          "market": "SPREAD -2.5 -122",
+          "mk": "SPREAD",
+          "record": "8-7",
+          "roi": -11.1,
+          "dollars": 916,
+          "note": "1.5x usual, L10 4-6",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Bills",
+          "wallet": "fvckjumpjanestreet #8fda40",
+          "wid": "8fda40",
+          "market": "ML -152",
+          "mk": "ML",
+          "record": "9-3",
+          "roi": 7.8,
+          "dollars": 784,
+          "note": "1.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Bills",
+          "wallet": "L #e11302",
+          "wid": "e11302",
+          "market": "SPREAD -2.5 -122",
+          "mk": "SPREAD",
+          "record": "4-1",
+          "roi": 56.4,
+          "dollars": 550,
+          "note": "0.8x usual, L10 4-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "CHIEFS",
+        "rows": [
+         {
+          "team": "Chiefs",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "SPREAD +3.5 -127",
+          "mk": "SPREAD",
+          "record": "12-7",
+          "roi": 27.5,
+          "dollars": 2015,
+          "note": "0.3x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "pleasent242 #b74426",
+          "wid": "b74426",
+          "market": "ML +150",
+          "mk": "ML",
+          "record": "0-1",
+          "roi": -100,
+          "dollars": 1400,
+          "note": "0.5x usual, only 1 bet here",
+          "status": {
+           "t": "THIN - 1 bet here - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL ML · all-time record"
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "J #b77626",
+          "wid": "b77626",
+          "market": "SPREAD +7.5 -233",
+          "mk": "SPREAD",
+          "record": "20-4",
+          "roi": 4.1,
+          "dollars": 1125,
+          "note": "0.8x usual, L10 10-0",
+          "status": {
+           "t": "HOT (last 10: 10-0)",
+           "c": "gold"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         },
+         {
+          "team": "Chiefs",
+          "wallet": "pltrkr111 #579e12",
+          "wid": "579e12",
+          "market": "SPREAD +2.5 +113",
+          "mk": "SPREAD",
+          "record": "18-12",
+          "roi": -6.2,
+          "dollars": 1000,
+          "note": "1.0x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NFL SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "BILLS",
+         "dollars": 17788,
+         "pct": 76,
+         "c": "gold"
+        },
+        {
+         "team": "CHIEFS",
+         "dollars": 5540,
+         "pct": 24,
+         "c": "red"
+        }
+       ],
+       "confidence": 2,
+       "callout": null,
+       "footerLabel": "AGAINST OUR POSTED PLAY: Bills -3 (3:55pm slate) - NEW $1.1K on Chiefs - kickoff in 43 min - SITE LOCK: Bills ML 4u (wallet money behind it) | SITE LOCK: Bills -3 4u (wallet money AGAINST it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
