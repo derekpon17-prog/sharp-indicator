@@ -1,0 +1,29 @@
+{
+ "date": "2026-11-27",
+ "posted_ct": "0833",
+ "sport": "CBB",
+ "outlier": false,
+ "first_start": "2026-11-27T16:00:00.000Z",
+ "snapshot": "2026-11-27T14:17:24.884Z",
+ "sides": [
+  {
+   "game": "Fresno State Bulldogs at South Alabama Jaguars",
+   "market": "ML",
+   "pick": "South Alabama Jaguars",
+   "start_utc": "2026-11-27T19:00:00.000Z",
+   "dollars": 863,
+   "opp_dollars": 0,
+   "wallets": 1,
+   "max_vs_usual": 1.2,
+   "all_sport_ratio": 0.39,
+   "price": "-106",
+   "line": null,
+   "l30_rec": "24-9",
+   "l30_roi": 52,
+   "mkt_rec": "2-2",
+   "mkt_roi": 56.5,
+   "mkt_l30_rec": "2-2",
+   "tail": false
+  }
+ ]
+}
