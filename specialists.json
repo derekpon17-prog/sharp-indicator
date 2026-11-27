@@ -1,6 +1,6 @@
 {
  "date": "2026-11-27",
- "scannedAt": "2026-11-27T19:55:47.920Z",
+ "scannedAt": "2026-11-27T21:07:26.136Z",
  "sports": {
   "NFL": [
    {
@@ -151,9 +151,9 @@
       "pick": "Jaguars",
       "line": null,
       "price": "-801",
-      "dollars": 849,
+      "dollars": 1077,
       "vsUsual": 0.1,
-      "vsUsualAll": 0.7
+      "vsUsualAll": 0.9
      },
      {
       "matchup": "Ravens at Texans",
@@ -445,7 +445,7 @@
      {
       "matchup": "Warriors at Trail Blazers",
       "market": "TOTAL",
-      "pick": "Over 219.5",
+      "pick": "Over",
       "line": 219.5,
       "price": "+105",
       "dollars": 2104,
@@ -529,7 +529,7 @@
       "pick": "Warriors",
       "line": null,
       "price": "+285",
-      "dollars": 4019,
+      "dollars": 4096,
       "vsUsual": 0.4,
       "vsUsualAll": 0.4
      }
@@ -601,6 +601,27 @@
     ]
    },
    {
+    "id": "aa9fb4",
+    "gap": 7.1,
+    "overall": "41-33",
+    "sport": "10-6",
+    "returnPct": 15.6,
+    "last10": "5-5",
+    "bettingBig": true,
+    "tonight": [
+     {
+      "matchup": "Golden Knights at Sharks",
+      "market": "TOTAL",
+      "pick": "Over",
+      "line": 6.5,
+      "price": "-116",
+      "dollars": 69222,
+      "vsUsual": 3.3,
+      "vsUsualAll": 9.5
+     }
+    ]
+   },
+   {
     "id": "e51246",
     "gap": 6.7,
     "overall": "51-34",
@@ -618,37 +639,26 @@
       "dollars": 2000,
       "vsUsual": 1.3,
       "vsUsualAll": 0.7
-     }
-    ]
-   },
-   {
-    "id": "e11302",
-    "gap": -4.4,
-    "overall": "60-36",
-    "sport": "18-13",
-    "returnPct": 15.9,
-    "last10": "7-3",
-    "bettingBig": false,
-    "tonight": [
-     {
-      "matchup": "Panthers at Capitals",
-      "market": "TOTAL",
-      "pick": "Over",
-      "line": 6.5,
-      "price": "-113",
-      "dollars": 594,
-      "vsUsual": 1,
-      "vsUsualAll": 0.2
      },
      {
-      "matchup": "Kraken at Oilers",
-      "market": "SPREAD",
-      "pick": "Oilers -1.5",
-      "line": -1.5,
-      "price": "+133",
-      "dollars": 500,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.1
+      "matchup": "Kings at Ducks",
+      "market": "TOTAL",
+      "pick": "Over 5.5",
+      "line": 5.5,
+      "price": "-156",
+      "dollars": 764,
+      "vsUsual": 0.5,
+      "vsUsualAll": 0.3
+     },
+     {
+      "matchup": "Golden Knights at Sharks",
+      "market": "TOTAL",
+      "pick": "Over",
+      "line": 5.5,
+      "price": "-178",
+      "dollars": 661,
+      "vsUsual": 0.4,
+      "vsUsualAll": 0.2
      }
     ]
    }
@@ -706,16 +716,6 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "North Dakota State at San Jose State",
-      "market": "TOTAL",
-      "pick": "Under 39.5",
-      "line": 39.5,
-      "price": "+108",
-      "dollars": 500,
-      "vsUsual": 0.8,
-      "vsUsualAll": 0.1
-     },
-     {
       "matchup": "Temple at Memphis",
       "market": "TOTAL",
       "pick": "Over 65.5",
@@ -724,6 +724,16 @@
       "dollars": 570,
       "vsUsual": 0.9,
       "vsUsualAll": 0.2
+     },
+     {
+      "matchup": "North Dakota State at San Jose State",
+      "market": "TOTAL",
+      "pick": "Under 39.5",
+      "line": 39.5,
+      "price": "+108",
+      "dollars": 500,
+      "vsUsual": 0.8,
+      "vsUsualAll": 0.1
      }
     ]
    },
@@ -737,21 +747,21 @@
     "bettingBig": false,
     "tonight": [
      {
-      "matchup": "Tulsa at UTSA",
-      "market": "SPREAD",
-      "pick": "UTSA +1.5",
-      "line": 1.5,
-      "price": "-113",
-      "dollars": 966,
-      "vsUsual": 1,
-      "vsUsualAll": 1.7
-     },
-     {
       "matchup": "Appalachian State at South Alabama",
       "market": "TOTAL",
       "pick": "Under 57.5",
       "line": 57.5,
       "price": "-108",
+      "dollars": 1000,
+      "vsUsual": 1.1,
+      "vsUsualAll": 1.7
+     },
+     {
+      "matchup": "Temple at Memphis",
+      "market": "SPREAD",
+      "pick": "Memphis",
+      "line": -19.5,
+      "price": "+104",
       "dollars": 1000,
       "vsUsual": 1.1,
       "vsUsualAll": 1.7
@@ -822,16 +832,6 @@
       "pick": "Minnesota",
       "line": 7.5,
       "price": "+101",
-      "dollars": 1000,
-      "vsUsual": 1.1,
-      "vsUsualAll": 1.7
-     },
-     {
-      "matchup": "Temple at Memphis",
-      "market": "SPREAD",
-      "pick": "Memphis",
-      "line": -19.5,
-      "price": "+104",
       "dollars": 1000,
       "vsUsual": 1.1,
       "vsUsualAll": 1.7
@@ -1001,16 +1001,6 @@
     "last10": "8-2",
     "bettingBig": true,
     "tonight": [
-     {
-      "matchup": "Fresno State Bulldogs at South Alabama Jaguars",
-      "market": "ML",
-      "pick": "South Alabama Jaguars",
-      "line": null,
-      "price": "-106",
-      "dollars": 863,
-      "vsUsual": 1.2,
-      "vsUsualAll": 0.4
-     },
      {
       "matchup": "Princeton Tigers at UNCW Seahawks",
       "market": "TOTAL",
