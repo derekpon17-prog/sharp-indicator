@@ -1,0 +1,67 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow - CBB - first game 10:00am CT** - 1 sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW",
+   "title": "CBB - sharp wallets",
+   "subtitle": "Wallets with positive CBB market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:17am CT",
+   "sections": [
+    {
+     "heading": "CBB - 1:00PM CT",
+     "picks": [
+      {
+       "eyebrow": "Fresno State Bulldogs at South Alabama Jaguars",
+       "time": "1:00pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - SOUTH ALABAMA JAGUARS",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "South Alabama Jaguars",
+       "price": null,
+       "for": {
+        "team": "SOUTH ALABAMA JAGUARS",
+        "rows": [
+         {
+          "team": "South Alabama Jaguars",
+          "wallet": "ic4cream #bc44b0",
+          "wid": "bc44b0",
+          "market": "ML -106",
+          "mk": "ML",
+          "record": "2-2",
+          "roi": 56.5,
+          "dollars": 863,
+          "note": "1.2x usual, only 4 bets here",
+          "status": {
+           "t": "THIN - 4 bets here",
+           "c": "grey"
+          },
+          "recLabel": "CBB ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "SOUTH ALABAMA JAGUARS",
+         "dollars": 863,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "SHARP FLOW READ"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability. Quality wallet = 10+ bets here at +15% ROI. ★ = good tail",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
