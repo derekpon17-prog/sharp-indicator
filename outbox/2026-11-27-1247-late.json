@@ -1,0 +1,221 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Fri Nov 27** · new plays, first two start 1:00pm CT · FADED, now PASS: Over 148.5, La Salle @ Bucknell 2:30pm CT (was Pinnacle MAX, now Lean)",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "FRI NOV 27 · 12:47PM",
+  "sources": "Pinnacle ~12:45pm CT - Vegas ~12:46pm CT (CBB, CFB, NHL) - SharpFlow 12:36pm CT (scan 12:12pm) - Poly not current - Novig not read",
+  "sf_current": true,
+  "footer": "FADED, NOW PASS: Over 148.5 (La Salle @ Bucknell, 2:30pm CT), posted 10:55am CT as Pinnacle MAX; now only Lean. Also new Pinnacle Strong, over the 5-play cap: Under 5.5 -100 (Detroit @ Columbus, 2:00pm CT), Colgate +1.5 -110 (Colgate @ Hofstra, 2:30pm CT), Florida ML -239 (Florida @ Florida State, 2:30pm CT). No new play has Vegas 70+ or wallet money behind it. Under 37 and Broncos ML are still Pinnacle Strong. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "date": "2026-11-27",
+    "sport": "NCAAB",
+    "game": "SOU@VAN",
+    "market": "SPREAD",
+    "side": "VAN",
+    "line": -37.5,
+    "price": -111,
+    "bet": "Vanderbilt -37.5",
+    "matchup": "NCAAB - Southern @ Vanderbilt - 1:00pm CT",
+    "start_ct": "13:00",
+    "first_seen": "12:46",
+    "pin_tier": "Max",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update ~12:45pm CT: Pinnacle Max stable (-37 to -37.5, +EV at 2 books); no Vegas row, no SharpFlow ticket.",
+    "pin_ev_books": 2
+   },
+   {
+    "date": "2026-11-27",
+    "sport": "NCAAB",
+    "game": "TCU@BAY",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 149.5,
+    "price": -116,
+    "bet": "Under 149.5",
+    "matchup": "NCAAB - TCU vs Baylor - 2:00pm CT",
+    "start_ct": "14:00",
+    "first_seen": "12:46",
+    "pin_tier": "Max",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update ~12:45pm CT: Pinnacle Max stable (151 to 148.5, +EV at 1 book); no Vegas row on the total, no SharpFlow ticket.",
+    "pin_ev_books": 1
+   },
+   {
+    "date": "2026-11-27",
+    "sport": "NCAAB",
+    "game": "ME@LEM",
+    "market": "SPREAD",
+    "side": "LEM",
+    "line": -1.5,
+    "price": -116,
+    "bet": "Le Moyne -1.5",
+    "matchup": "NCAAB - Maine @ Le Moyne - 1:00pm CT",
+    "start_ct": "13:00",
+    "first_seen": "12:46",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update ~12:45pm CT: Pinnacle Strong stable (+1 to -1.5); no Vegas row, no SharpFlow ticket."
+   },
+   {
+    "date": "2026-11-27",
+    "sport": "NCAAB",
+    "game": "ME@LEM",
+    "market": "ML",
+    "side": "LEM",
+    "line": null,
+    "price": -130,
+    "bet": "Le Moyne ML",
+    "matchup": "NCAAB - Maine @ Le Moyne - 1:00pm CT",
+    "start_ct": "13:00",
+    "first_seen": "12:46",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update ~12:45pm CT: Pinnacle Strong stable (-104 to -127); no Vegas row, no SharpFlow ticket."
+   },
+   {
+    "date": "2026-11-27",
+    "sport": "NHL",
+    "game": "FLA@WSH",
+    "market": "ML",
+    "side": "FLA",
+    "line": null,
+    "price": -118,
+    "bet": "Panthers ML",
+    "matchup": "NHL - Florida @ Washington - 2:00pm CT",
+    "start_ct": "14:00",
+    "first_seen": "12:46",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update ~12:45pm CT: Pinnacle Strong stable (-102 to -116, +EV at 1 book); no Vegas row; only wallet ticket on the game is a $594 total (under floor).",
+    "pin_ev_books": 1
+   },
+   {
+    "date": "2026-11-27",
+    "sport": "NHL",
+    "game": "DET@CBJ",
+    "market": "TOTAL",
+    "side": "Under",
+    "line": 5.5,
+    "price": -100,
+    "bet": "Under 5.5",
+    "matchup": "NHL - Detroit @ Columbus - 2:00pm CT",
+    "start_ct": "14:00",
+    "first_seen": "12:46",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update ~12:45pm CT: Pinnacle Strong stable (6 to 5.5); no Vegas row, no SharpFlow ticket."
+   },
+   {
+    "date": "2026-11-27",
+    "sport": "NCAAB",
+    "game": "COLG@HOF",
+    "market": "SPREAD",
+    "side": "COLG",
+    "line": 1.5,
+    "price": -110,
+    "bet": "Colgate +1.5",
+    "matchup": "NCAAB - Colgate @ Hofstra - 2:30pm CT",
+    "start_ct": "14:30",
+    "first_seen": "12:46",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update ~12:45pm CT: Pinnacle Strong stable (+3.5 to +1.5); no Vegas row on the spread (ML shows Whale Respect 100, not counted)."
+   },
+   {
+    "date": "2026-11-27",
+    "sport": "CFB",
+    "game": "FLA@FSU",
+    "market": "ML",
+    "side": "FLA",
+    "line": null,
+    "price": -239,
+    "bet": "Florida ML",
+    "matchup": "CFB - Florida @ Florida State - 2:30pm CT",
+    "start_ct": "14:30",
+    "first_seen": "12:46",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 62,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP"
+    ],
+    "note": "Late update ~12:45pm CT: Pinnacle now Strong stable (-215 to -243), was Lean at 10:52; Pressure Move 62, under the 70 bar; no SharpFlow ticket on the game.",
+    "vegas_type": "Pressure Move",
+    "bets_pct": 92,
+    "money_pct": 92,
+    "site_lock": "Florida ML 1u - no wallet money"
+   },
+   {
+    "date": "2026-11-27",
+    "sport": "NCAAB",
+    "game": "LAS@BUCK",
+    "market": "TOTAL",
+    "side": "Over",
+    "line": 148.5,
+    "price": -112,
+    "bet": "Over 148.5",
+    "matchup": "NCAAB - La Salle @ Bucknell - 2:30pm CT",
+    "start_ct": "14:30",
+    "first_seen": "10:52",
+    "pin_tier": null,
+    "pin_status": null,
+    "vegas_strength": null,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "PIN_FADED"
+    ],
+    "late_pin": "Lean stable on the Over at ~12:45 CT (was Max; Pinnacle 149.5)",
+    "note": "Pinnacle Max stable at 10:52 (148 to 149.5); Lean at ~12:45 CT.",
+    "tier_override": "PASS",
+    "reason": "Posted 10:55am CT as Pinnacle MAX stable; at ~12:45pm CT Pinnacle shows only Lean on this Over (148 to 149.5). Pass."
+   }
+  ]
+ }
+}
