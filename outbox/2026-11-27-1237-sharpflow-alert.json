@@ -1,0 +1,697 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 7 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 12:12pm CT",
+   "sections": [
+    {
+     "heading": "CFB - 6:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Minnesota at Wisconsin",
+       "time": "6:30pm CT",
+       "tag": {
+        "t": "EDGE - MINNESOTA",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Minnesota ML +300",
+       "price": "+300",
+       "for": {
+        "team": "MINNESOTA",
+        "rows": [
+         {
+          "team": "Minnesota",
+          "wallet": "Kch-Temp #28658e",
+          "wid": "28658e",
+          "market": "SPREAD +8.5 +106",
+          "mk": "SPREAD",
+          "record": "17-14",
+          "roi": -8.5,
+          "dollars": 67661,
+          "note": "2.1x usual, L10 8-2 · SAME WALLET as its ML row",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "team": "Minnesota",
+          "wallet": "Kch-Temp #28658e",
+          "wid": "28658e",
+          "market": "ML +300",
+          "mk": "ML",
+          "record": "14-8",
+          "roi": 46.1,
+          "dollars": 25418,
+          "note": "0.8x usual, L10 8-2 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "CFB ML · all-time record"
+         },
+         {
+          "team": "Minnesota",
+          "wallet": "D #cc63b8",
+          "wid": "cc63b8",
+          "market": "SPREAD +7.5 +113",
+          "mk": "SPREAD",
+          "record": "29-25",
+          "roi": 16.1,
+          "dollars": 2350,
+          "note": "1.0x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "team": "Minnesota",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "SPREAD +7.5 +101",
+          "mk": "SPREAD",
+          "record": "8-4",
+          "roi": 35.1,
+          "dollars": 1000,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MINNESOTA",
+         "dollars": 96429,
+         "pct": 100,
+         "c": "gold"
+        }
+       ],
+       "confidence": 8,
+       "callout": {
+        "plain": "Quality wallet 14-8 (+46% ROI) on MINNESOTA - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $1K to $3.4K - kickoff in 5h 53m - SITE LOCK: Minnesota +9 3u (wallet money behind it)"
+      },
+      {
+       "eyebrow": "Texas at Texas A&M",
+       "time": "6:30pm CT",
+       "tag": {
+        "t": "EDGE - TEXAS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Texas -10.5 +108",
+       "price": "+108",
+       "for": {
+        "team": "TEXAS",
+        "rows": [
+         {
+          "team": "Texas",
+          "wallet": "H #ba8492",
+          "wid": "ba8492",
+          "market": "SPREAD -10.5 +108",
+          "mk": "SPREAD",
+          "record": "46-29",
+          "roi": 17.7,
+          "dollars": 46261,
+          "note": "5.1x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "team": "Texas",
+          "wallet": "A #487b8b",
+          "wid": "487b8b",
+          "market": "ML -238",
+          "mk": "ML",
+          "record": "16-11",
+          "roi": -4.3,
+          "dollars": 11663,
+          "note": "19.5x usual, L10 5-5",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "CFB ML · all-time record"
+         },
+         {
+          "team": "Texas",
+          "wallet": "RollAwayTheDew #aaedcd",
+          "wid": "aaedcd",
+          "market": "ML -268",
+          "mk": "ML",
+          "record": "16-6",
+          "roi": 28.9,
+          "dollars": 687,
+          "note": "2.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "TEXAS",
+         "dollars": 58611,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 46-29 (+18% ROI) on TEXAS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $46K on Texas -10.5 - kickoff in 5h 53m"
+      }
+     ]
+    },
+    {
+     "heading": "CFB - 2:30PM CT",
+     "picks": [
+      {
+       "eyebrow": "Temple at Memphis",
+       "time": "2:30pm CT",
+       "tag": {
+        "t": "EDGE - MEMPHIS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Memphis -18.5 -108",
+       "price": "-108",
+       "for": {
+        "team": "MEMPHIS",
+        "rows": [
+         {
+          "team": "Memphis",
+          "wallet": "D #cc63b8",
+          "wid": "cc63b8",
+          "market": "SPREAD -18.5 -108",
+          "mk": "SPREAD",
+          "record": "29-25",
+          "roi": 16.1,
+          "dollars": 3899,
+          "note": "1.7x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         },
+         {
+          "team": "Memphis",
+          "wallet": "pm13333 #d3948b",
+          "wid": "d3948b",
+          "market": "SPREAD -19.5 +104",
+          "mk": "SPREAD",
+          "record": "8-4",
+          "roi": 35.1,
+          "dollars": 1000,
+          "note": "1.1x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "CFB SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "MEMPHIS",
+         "dollars": 4899,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 29-25 (+16% ROI) on MEMPHIS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $4.9K on Memphis - kickoff in 1h 53m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Heat at Knicks",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over 223.5 +113",
+       "price": "+113",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "suntori #a0cff6",
+          "wid": "a0cff6",
+          "market": "OVER 223.5 -105",
+          "mk": "TOTAL",
+          "record": "128-108",
+          "roi": -19,
+          "dollars": 989,
+          "note": "1.3x usual, L10 7-3",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "team": "Over",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "OVER 223.5 +113",
+          "mk": "TOTAL",
+          "record": "38-27",
+          "roi": 21.2,
+          "dollars": 551,
+          "note": "0.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 1540,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 38-27 (+21% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $551 on Over 223.5 - kickoff in 5h 33m"
+      },
+      {
+       "eyebrow": "Heat at Knicks",
+       "time": "6:10pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Knicks vs Heat",
+       "price": null,
+       "for": {
+        "team": "KNICKS",
+        "rows": [
+         {
+          "team": "Knicks",
+          "wallet": "D #40d814",
+          "wid": "40d814",
+          "market": "ML -138",
+          "mk": "ML",
+          "record": "40-31",
+          "roi": 14.6,
+          "dollars": 3064,
+          "note": "1.4x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Knicks",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD -4.5 +117",
+          "mk": "SPREAD",
+          "record": "33-26",
+          "roi": 20.7,
+          "dollars": 2300,
+          "note": "0.8x usual, L10 7-3 · SAME WALLET as its ML row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Knicks",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -151",
+          "mk": "ML",
+          "record": "41-34",
+          "roi": 17.5,
+          "dollars": 2223,
+          "note": "0.8x usual, L10 7-3 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Knicks",
+          "wallet": "fvckjumpjanestreet #8fda40",
+          "wid": "8fda40",
+          "market": "ML -153",
+          "mk": "ML",
+          "record": "64-26",
+          "roi": 3.3,
+          "dollars": 2156,
+          "note": "1.3x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "HEAT",
+        "rows": [
+         {
+          "team": "Heat",
+          "wallet": "hewhodoesit #3da1a1",
+          "wid": "3da1a1",
+          "market": "ML +139",
+          "mk": "ML",
+          "record": "13-9",
+          "roi": -2.8,
+          "dollars": 4923,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Heat",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML +150",
+          "mk": "ML",
+          "record": "14-9",
+          "roi": 58,
+          "dollars": 4800,
+          "note": "2.4x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "KNICKS",
+         "dollars": 12413,
+         "pct": 56,
+         "c": "green"
+        },
+        {
+         "team": "HEAT",
+         "dollars": 9723,
+         "pct": 44,
+         "c": "red"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "GREW $3.4K to $7.4K - kickoff in 5h 33m - SITE LOCK: Heat +2.5 1u (wallet money AGAINST it)"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 6:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "76ers at Pacers",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Pacers vs 76ers",
+       "price": null,
+       "for": {
+        "team": "PACERS",
+        "rows": [
+         {
+          "team": "Pacers",
+          "wallet": "J #c19b3c",
+          "wid": "c19b3c",
+          "market": "ML +156",
+          "mk": "ML",
+          "record": "2-1",
+          "roi": 62.9,
+          "dollars": 13597,
+          "note": "5.0x usual, only 3 bets here",
+          "status": {
+           "t": "THIN - 3 bets here",
+           "c": "grey"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Pacers",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML +160",
+          "mk": "ML",
+          "record": "41-34",
+          "roi": 17.5,
+          "dollars": 3435,
+          "note": "1.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "76ERS",
+        "rows": [
+         {
+          "team": "76ers",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML -170",
+          "mk": "ML",
+          "record": "14-9",
+          "roi": 58,
+          "dollars": 5670,
+          "note": "2.9x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "fvckjumpjanestreet #8fda40",
+          "wid": "8fda40",
+          "market": "ML -168",
+          "mk": "ML",
+          "record": "64-26",
+          "roi": 3.3,
+          "dollars": 2791,
+          "note": "1.7x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "F #955c26",
+          "wid": "955c26",
+          "market": "SPREAD -2.5 -117",
+          "mk": "SPREAD",
+          "record": "40-34",
+          "roi": 4,
+          "dollars": 2196,
+          "note": "0.8x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "76ers",
+          "wallet": "H #c10f2b",
+          "wid": "c10f2b",
+          "market": "SPREAD -3.5 +113",
+          "mk": "SPREAD",
+          "record": "5-3",
+          "roi": 58.5,
+          "dollars": 1064,
+          "note": "0.5x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "PACERS",
+         "dollars": 17032,
+         "pct": 58,
+         "c": "green"
+        },
+        {
+         "team": "76ERS",
+         "dollars": 12239,
+         "pct": 42,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "GREW $2.4K to $17K - kickoff in 6h 3m - SITE LOCK: 76ers -3.5 4u (wallet money behind it)"
+      },
+      {
+       "eyebrow": "Nets at Raptors",
+       "time": "6:40pm CT",
+       "tag": {
+        "t": "SPLIT - BOTH SIDES",
+        "icon": "⚖️"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Raptors vs Nets",
+       "price": null,
+       "for": {
+        "team": "RAPTORS",
+        "rows": [
+         {
+          "team": "Raptors",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -297",
+          "mk": "ML",
+          "record": "41-34",
+          "roi": 17.5,
+          "dollars": 6390,
+          "note": "2.2x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "NETS",
+        "rows": [
+         {
+          "team": "Nets",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML +270",
+          "mk": "ML",
+          "record": "14-9",
+          "roi": 58,
+          "dollars": 3973,
+          "note": "2.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "RAPTORS",
+         "dollars": 6390,
+         "pct": 62,
+         "c": "green"
+        },
+        {
+         "team": "NETS",
+         "dollars": 3973,
+         "pct": 38,
+         "c": "grey"
+        }
+       ],
+       "confidence": 4,
+       "callout": {
+        "plain": "Quality wallets on both sides - ",
+        "highlight": "no clean lean here."
+       },
+       "footerLabel": "GREW $1.8K to $6.4K - kickoff in 6h 3m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
