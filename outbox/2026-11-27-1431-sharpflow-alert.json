@@ -1,0 +1,640 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 7 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 1:55pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 8:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Mavericks at Suns",
+       "time": "8:10pm CT",
+       "tag": {
+        "t": "EDGE - MAVERICKS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Mavericks ML +108",
+       "price": "+108",
+       "for": {
+        "team": "MAVERICKS",
+        "rows": [
+         {
+          "team": "Mavericks",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML +108",
+          "mk": "ML",
+          "record": "14-9",
+          "roi": 58,
+          "dollars": 4038,
+          "note": "2.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Mavericks",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD",
+          "mk": "SPREAD",
+          "record": "33-26",
+          "roi": 20.7,
+          "dollars": 2963,
+          "note": "0.8x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "SUNS",
+        "rows": [
+         {
+          "team": "Suns",
+          "wallet": "hewhodoesit #3da1a1",
+          "wid": "3da1a1",
+          "market": "ML -127",
+          "mk": "ML",
+          "record": "13-9",
+          "roi": -2.8,
+          "dollars": 2608,
+          "note": "0.2x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "MAVERICKS",
+         "dollars": 7001,
+         "pct": 73,
+         "c": "green"
+        },
+        {
+         "team": "SUNS",
+         "dollars": 2608,
+         "pct": 27,
+         "c": "red"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 14-9 (+58% ROI) on MAVERICKS vs a cold wallet on SUNS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $3K on Mavericks - kickoff in 5h 39m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Hawks at Celtics",
+       "time": "7:10pm CT",
+       "tag": {
+        "t": "EDGE - HAWKS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Hawks +9.5 +104",
+       "price": "+104",
+       "for": {
+        "team": "HAWKS",
+        "rows": [
+         {
+          "team": "Hawks",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD +9.5 +104",
+          "mk": "SPREAD",
+          "record": "33-26",
+          "roi": 20.7,
+          "dollars": 1275,
+          "note": "0.4x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "CELTICS",
+        "rows": [
+         {
+          "team": "Celtics",
+          "wallet": "E #839105",
+          "wid": "839105",
+          "market": "SPREAD -9.5 +115",
+          "mk": "SPREAD",
+          "record": "5-2",
+          "roi": 63.4,
+          "dollars": 2680,
+          "note": "1.5x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Celtics",
+          "wallet": "fvckjumpjanestreet #8fda40",
+          "wid": "8fda40",
+          "market": "ML -308",
+          "mk": "ML",
+          "record": "64-26",
+          "roi": 3.3,
+          "dollars": 1510,
+          "note": "0.9x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "CELTICS",
+         "dollars": 4190,
+         "pct": 77,
+         "c": "grey"
+        },
+        {
+         "team": "HAWKS",
+         "dollars": 1275,
+         "pct": 23,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 33-26 (+21% ROI) on HAWKS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $1K to $2.7K - kickoff in 4h 39m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Grizzlies at Timberwolves",
+       "time": "7:40pm CT",
+       "tag": {
+        "t": "EDGE - TIMBERWOLVES",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Timberwolves ML -150",
+       "price": "-150",
+       "for": {
+        "team": "TIMBERWOLVES",
+        "rows": [
+         {
+          "team": "Timberwolves",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -150",
+          "mk": "ML",
+          "record": "41-34",
+          "roi": 17.5,
+          "dollars": 2247,
+          "note": "0.8x usual, L10 7-3 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Timberwolves",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD -3.5 +104",
+          "mk": "SPREAD",
+          "record": "33-26",
+          "roi": 20.7,
+          "dollars": 2108,
+          "note": "0.7x usual, L10 7-3 · SAME WALLET as its ML row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "GRIZZLIES",
+        "rows": [
+         {
+          "team": "Grizzlies",
+          "wallet": "H #955c26",
+          "wid": "955c26",
+          "market": "SPREAD +5.5 -150",
+          "mk": "SPREAD",
+          "record": "40-34",
+          "roi": 4,
+          "dollars": 1135,
+          "note": "0.4x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "TIMBERWOLVES",
+         "dollars": 4355,
+         "pct": 79,
+         "c": "green"
+        },
+        {
+         "team": "GRIZZLIES",
+         "dollars": 1135,
+         "pct": 21,
+         "c": "grey"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 41-34 (+18% ROI) on TIMBERWOLVES - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $1.1K on Grizzlies +5.5 - kickoff in 5h 9m - SITE LOCK: Timberwolves -3 4u (wallet money behind it)"
+      },
+      {
+       "eyebrow": "Grizzlies at Timberwolves",
+       "time": "7:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - Over",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Total 219.5",
+       "price": null,
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "A #ee60d6",
+          "wid": "ee60d6",
+          "market": "OVER +108",
+          "mk": "TOTAL",
+          "record": "0-1",
+          "roi": -100.1,
+          "dollars": 2563,
+          "note": "1.2x usual, only 1 bet here",
+          "status": {
+           "t": "THIN - 1 bet here - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         },
+         {
+          "team": "Over",
+          "wallet": "E #839105",
+          "wid": "839105",
+          "market": "OVER -100",
+          "mk": "TOTAL",
+          "record": "5-4",
+          "roi": 18.1,
+          "dollars": 1100,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 3663,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $1.1K on Over - kickoff in 5h 9m"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 8:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Warriors at Trail Blazers",
+       "time": "8:40pm CT",
+       "tag": {
+        "t": "EDGE - TRAIL BLAZERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Trail Blazers ML -298",
+       "price": "-298",
+       "for": {
+        "team": "TRAIL BLAZERS",
+        "rows": [
+         {
+          "team": "Trail Blazers",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -298",
+          "mk": "ML",
+          "record": "41-34",
+          "roi": 17.5,
+          "dollars": 12601,
+          "note": "4.4x usual, L10 7-3 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Trail Blazers",
+          "wallet": "jodar #f9a112",
+          "wid": "f9a112",
+          "market": "ML -269",
+          "mk": "ML",
+          "record": "5-2",
+          "roi": 57.6,
+          "dollars": 5164,
+          "note": "0.9x usual, L10 5-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Trail Blazers",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML -233",
+          "mk": "ML",
+          "record": "72-59",
+          "roi": 22.9,
+          "dollars": 3054,
+          "note": "0.6x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Trail Blazers",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD -9.5 +104",
+          "mk": "SPREAD",
+          "record": "33-26",
+          "roi": 20.7,
+          "dollars": 2450,
+          "note": "0.9x usual, L10 7-3 · SAME WALLET as its ML row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "WARRIORS",
+        "rows": [
+         {
+          "team": "Warriors",
+          "wallet": "hewhodoesit #3da1a1",
+          "wid": "3da1a1",
+          "market": "ML +285",
+          "mk": "ML",
+          "record": "13-9",
+          "roi": -2.8,
+          "dollars": 4019,
+          "note": "0.4x usual, L10 6-4",
+          "status": {
+           "t": "COLD - not counted",
+           "c": "red"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Warriors",
+          "wallet": "purplegatto #2f2a9e",
+          "wid": "2f2a9e",
+          "market": "ML +223",
+          "mk": "ML",
+          "record": "72-59",
+          "roi": 22.9,
+          "dollars": 1769,
+          "note": "0.3x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Warriors",
+          "wallet": "H #955c26",
+          "wid": "955c26",
+          "market": "SPREAD +8.5 -113",
+          "mk": "SPREAD",
+          "record": "40-34",
+          "roi": 4,
+          "dollars": 1349,
+          "note": "0.5x usual, L10 4-6",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "TRAIL BLAZERS",
+         "dollars": 25802,
+         "pct": 78,
+         "c": "green"
+        },
+        {
+         "team": "WARRIORS",
+         "dollars": 7137,
+         "pct": 22,
+         "c": "red"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 41-34 (+18% ROI) on TRAIL BLAZERS vs a cold wallet on WARRIORS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $2.3K to $23K - kickoff in 6h 9m"
+      },
+      {
+       "eyebrow": "Lakers at Spurs",
+       "time": "8:40pm CT",
+       "tag": {
+        "t": "EDGE - SPURS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Spurs SPREAD -100",
+       "price": "-100",
+       "for": {
+        "team": "SPURS",
+        "rows": [
+         {
+          "team": "Spurs",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD -100",
+          "mk": "SPREAD",
+          "record": "33-26",
+          "roi": 20.7,
+          "dollars": 2111,
+          "note": "0.5x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Spurs",
+          "wallet": "fvckjumpjanestreet #8fda40",
+          "wid": "8fda40",
+          "market": "ML -182",
+          "mk": "ML",
+          "record": "64-26",
+          "roi": 3.3,
+          "dollars": 1290,
+          "note": "0.8x usual, L10 8-2",
+          "status": {
+           "t": "HOT (last 10: 8-2)",
+           "c": "gold"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "SPURS",
+         "dollars": 3401,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 33-26 (+21% ROI) on SPURS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $2.1K on Spurs - kickoff in 6h 9m - SITE LOCK: Spurs -5.5 4u (wallet money behind it)"
+      },
+      {
+       "eyebrow": "Warriors at Trail Blazers",
+       "time": "8:40pm CT",
+       "tag": {
+        "t": "EDGE - Over",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Over 219.5 +105",
+       "price": "+105",
+       "for": {
+        "team": "Over",
+        "rows": [
+         {
+          "team": "Over",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "OVER 219.5 +105",
+          "mk": "TOTAL",
+          "record": "38-27",
+          "roi": 21.2,
+          "dollars": 2104,
+          "note": "0.7x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Over",
+         "dollars": 2104,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 38-27 (+21% ROI) on Over - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $2.1K on Over 219.5 - kickoff in 6h 9m"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
