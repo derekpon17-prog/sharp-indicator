@@ -1,0 +1,73 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Signals · LATE UPDATE · Thu Nov 26** · 2 new plays: Jacksonville State ML (7:00pm CT), Louisville +1.5 (8:00pm CT) · no fades",
+ "slate": {
+  "title": "LATE UPDATE",
+  "stamp": "THU NOV 26 · 6:14PM",
+  "sources": "Pinnacle ~6:11pm CT - Vegas ~6:12pm CT (CBB, NFL, CFB) - SharpFlow 5:33pm CT (scan 5:09pm) - Poly not current - Novig not read",
+  "sf_current": true,
+  "footer": "NEW since the 3:55pm CT card: Pinnacle moved both sides from Slight to Strong. Jacksonville State's Vegas 60 is under 70. Louisville ML is Pinnacle Max but flipped today with no Vegas row, so not a play. No wallet money seen on either game. No fades: Bills -3, Chiefs-Bills Under 46 and Texas Tech -10.5 are still Pinnacle Strong. SMU-LSU had started and was not rechecked. Tier rules are fixed. Star is a rule-based screen, not a prediction.",
+  "rows": [
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "LOU@SJU",
+    "start_ct": "8:00pm",
+    "market": "SPREAD",
+    "side": "LOU",
+    "line": 1.5,
+    "price": -113,
+    "bet": "Louisville +1.5",
+    "matchup": "NCAAB - Louisville vs St. John's - 8:00pm CT",
+    "first_seen": "15:51",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 92,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP",
+     "VEGAS_ALL",
+     "VEGAS_70",
+     "ALIGNED",
+     "VEGAS80_STABLE"
+    ],
+    "pin_ev_books": 1,
+    "pin_strong_seen": "18:11",
+    "price_first": -111,
+    "vegas_type": "Vegas Backed",
+    "bets_pct": 19,
+    "money_pct": 31,
+    "note": "Late update 6:11pm CT: Pinnacle Slight to Strong stable (+2 to +1.5); Vegas Backed 92 (was 100 at 3:51pm; +4.5 to +1.5). No SharpFlow ticket, no site lock. Louisville ML is Pinnacle Max flipped today with no Vegas row: not a play."
+   },
+   {
+    "date": "2026-11-26",
+    "sport": "NCAAB",
+    "game": "JXST@UCD",
+    "start_ct": "7:00pm",
+    "market": "ML",
+    "side": "JXST",
+    "line": null,
+    "price": -160,
+    "bet": "Jacksonville State ML",
+    "matchup": "NCAAB - Jacksonville State vs UC Davis - 7:00pm CT",
+    "first_seen": "15:51",
+    "pin_tier": "Strong",
+    "pin_status": "Stable",
+    "vegas_strength": 60,
+    "buckets": [
+     "PIN_STRONG",
+     "PIN_STABLE",
+     "LATE_FLIP",
+     "VEGAS_ALL"
+    ],
+    "pin_strong_seen": "18:11",
+    "price_first": -161,
+    "vegas_type": "Pressure Move",
+    "bets_pct": 80,
+    "money_pct": 79,
+    "note": "Late update 6:11pm CT: Pinnacle Slight to Strong stable (-129 to -150, market -160); Pressure Move 60 (-133 to -159), under 70. No SharpFlow ticket, no site lock."
+   }
+  ]
+ }
+}
