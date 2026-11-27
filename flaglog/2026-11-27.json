@@ -1,0 +1,556 @@
+{
+ "date": "2026-11-27",
+ "sides": {
+  "Minnesota at Wisconsin|ML|Minnesota": {
+   "sport": "CFB",
+   "matchup": "Minnesota at Wisconsin",
+   "market": "ML",
+   "pick": "Minnesota",
+   "kickoffEt": "Fri, Nov 27, 7:30 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "+300",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 0.8,
+   "maxDollars": 25418,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "76ers at Pacers|ML|76ers": {
+   "sport": "NBA",
+   "matchup": "76ers at Pacers",
+   "market": "ML",
+   "pick": "76ers",
+   "kickoffEt": "Fri, Nov 27, 7:40 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-170",
+   "tags": [
+    "STRONG_VS_OTHER",
+    "SIZED_2X",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 2.9,
+   "maxDollars": 5670,
+   "opposedSeen": true,
+   "snapshots": 3
+  },
+  "Heat at Knicks|ML|Heat": {
+   "sport": "NBA",
+   "matchup": "Heat at Knicks",
+   "market": "ML",
+   "pick": "Heat",
+   "kickoffEt": "Fri, Nov 27, 7:10 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "+150",
+   "tags": [
+    "STRONG_VS_WEAK",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.4,
+   "maxDollars": 4800,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Mavericks at Suns|ML|Mavericks": {
+   "sport": "NBA",
+   "matchup": "Mavericks at Suns",
+   "market": "ML",
+   "pick": "Mavericks",
+   "kickoffEt": "Fri, Nov 27, 9:10 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "+108",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2,
+   "maxDollars": 4038,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Nets at Raptors|ML|Nets": {
+   "sport": "NBA",
+   "matchup": "Nets at Raptors",
+   "market": "ML",
+   "pick": "Nets",
+   "kickoffEt": "Fri, Nov 27, 7:40 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "+270",
+   "tags": [
+    "STRONG_VS_OTHER",
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2,
+   "maxDollars": 3973,
+   "opposedSeen": true,
+   "snapshots": 2
+  },
+  "Heat at Knicks|SPREAD|Knicks -3.5": {
+   "sport": "NBA",
+   "matchup": "Heat at Knicks",
+   "market": "SPREAD",
+   "pick": "Knicks -3.5",
+   "kickoffEt": "Fri, Nov 27, 7:10 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-113",
+   "tags": [
+    "STRONG_UNOPPOSED"
+   ],
+   "maxVsUsual": 1,
+   "maxDollars": 1840,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Princeton Tigers at UNCW Seahawks|TOTAL|Over 151.5": {
+   "sport": "CBB",
+   "matchup": "Princeton Tigers at UNCW Seahawks",
+   "market": "TOTAL",
+   "pick": "Over 151.5",
+   "kickoffEt": null,
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-104",
+   "tags": [
+    "STRONG_UNOPPOSED",
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.9,
+   "maxDollars": 1353,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Texas at Texas A&M|ML|Texas": {
+   "sport": "CFB",
+   "matchup": "Texas at Texas A&M",
+   "market": "ML",
+   "pick": "Texas",
+   "kickoffEt": "Fri, Nov 27, 7:30 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-238",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 19.5,
+   "maxDollars": 11663,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Giants at Colts|ML|Giants": {
+   "sport": "NFL",
+   "matchup": "Giants at Colts",
+   "market": "ML",
+   "pick": "Giants",
+   "kickoffEt": "Sun, Nov 29, 1:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-285",
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.9,
+   "maxDollars": 22157,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Broncos at Steelers|SPREAD|Broncos -6.5": {
+   "sport": "NFL",
+   "matchup": "Broncos at Steelers",
+   "market": "SPREAD",
+   "pick": "Broncos -6.5",
+   "kickoffEt": "Fri, Nov 27, 3:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": null,
+   "tags": [
+    "SIZED_2X"
+   ],
+   "maxVsUsual": 2.3,
+   "maxDollars": 9798,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Minnesota at Wisconsin|SPREAD|Minnesota": {
+   "sport": "CFB",
+   "matchup": "Minnesota at Wisconsin",
+   "market": "SPREAD",
+   "pick": "Minnesota",
+   "kickoffEt": "Fri, Nov 27, 7:30 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "+106",
+   "tags": [
+    "SIZED_2X",
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 2.1,
+   "maxDollars": 67661,
+   "opposedSeen": false,
+   "snapshots": 2
+  },
+  "Mississippi State at Ole Miss|SPREAD|Ole Miss -16.5": {
+   "sport": "CFB",
+   "matchup": "Mississippi State at Ole Miss",
+   "market": "SPREAD",
+   "pick": "Ole Miss -16.5",
+   "kickoffEt": "Fri, Nov 27, 12:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.8,
+   "maxDollars": 8425,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Broncos at Steelers|ML|Broncos": {
+   "sport": "NFL",
+   "matchup": "Broncos at Steelers",
+   "market": "ML",
+   "pick": "Broncos",
+   "kickoffEt": "Fri, Nov 27, 3:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-213",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.7,
+   "maxDollars": 4759,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Bucks at Pistons|ML|Pistons": {
+   "sport": "NBA",
+   "matchup": "Bucks at Pistons",
+   "market": "ML",
+   "pick": "Pistons",
+   "kickoffEt": "Fri, Nov 27, 7:40 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-468",
+   "tags": [
+    "SIZED_15X"
+   ],
+   "maxVsUsual": 1.5,
+   "maxDollars": 2488,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Nebraska at Iowa|SPREAD|Nebraska +4.5": {
+   "sport": "CFB",
+   "matchup": "Nebraska at Iowa",
+   "market": "SPREAD",
+   "pick": "Nebraska +4.5",
+   "kickoffEt": "Fri, Nov 27, 12:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.986Z",
+   "firstPrice": "-117",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.4,
+   "maxDollars": 6631,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Heat at Knicks|ML|Knicks": {
+   "sport": "NBA",
+   "matchup": "Heat at Knicks",
+   "market": "ML",
+   "pick": "Knicks",
+   "kickoffEt": "Fri, Nov 27, 7:10 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-153",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.2,
+   "maxDollars": 1973,
+   "opposedSeen": true,
+   "snapshots": 1
+  },
+  "Michigan at Ohio State|ML|Ohio State": {
+   "sport": "CFB",
+   "matchup": "Michigan at Ohio State",
+   "market": "ML",
+   "pick": "Ohio State",
+   "kickoffEt": "Sat, Nov 28, 12:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-335",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Michigan at Ohio State|TOTAL|Over 37.5": {
+   "sport": "CFB",
+   "matchup": "Michigan at Ohio State",
+   "market": "TOTAL",
+   "pick": "Over 37.5",
+   "kickoffEt": "Sat, Nov 28, 12:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Buffalo at Akron|TOTAL|Under 47.5": {
+   "sport": "CFB",
+   "matchup": "Buffalo at Akron",
+   "market": "TOTAL",
+   "pick": "Under 47.5",
+   "kickoffEt": "Fri, Nov 27, 12:01 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "+117",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Auburn at Alabama|ML|Auburn": {
+   "sport": "CFB",
+   "matchup": "Auburn at Alabama",
+   "market": "ML",
+   "pick": "Auburn",
+   "kickoffEt": "Sat, Nov 28, 7:30 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "+567",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "USC at UCLA|ML|USC": {
+   "sport": "CFB",
+   "matchup": "USC at UCLA",
+   "market": "ML",
+   "pick": "USC",
+   "kickoffEt": "Sat, Nov 28, 3:30 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-223",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "South Carolina at Clemson|SPREAD|Clemson": {
+   "sport": "CFB",
+   "matchup": "South Carolina at Clemson",
+   "market": "SPREAD",
+   "pick": "Clemson",
+   "kickoffEt": "Sat, Nov 28, 3:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "+113",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Liberty at Missouri State|SPREAD|Missouri State +17.5": {
+   "sport": "CFB",
+   "matchup": "Liberty at Missouri State",
+   "market": "SPREAD",
+   "pick": "Missouri State +17.5",
+   "kickoffEt": "Sat, Nov 28, 2:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-113",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Appalachian State at South Alabama|TOTAL|Under 57.5": {
+   "sport": "CFB",
+   "matchup": "Appalachian State at South Alabama",
+   "market": "TOTAL",
+   "pick": "Under 57.5",
+   "kickoffEt": "Fri, Nov 27, 3:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-108",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Pittsburgh at California|TOTAL|Over 45.5": {
+   "sport": "CFB",
+   "matchup": "Pittsburgh at California",
+   "market": "TOTAL",
+   "pick": "Over 45.5",
+   "kickoffEt": "Sat, Nov 28, 7:30 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-122",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Arizona State at Arizona|SPREAD|Arizona State +7.5": {
+   "sport": "CFB",
+   "matchup": "Arizona State at Arizona",
+   "market": "SPREAD",
+   "pick": "Arizona State +7.5",
+   "kickoffEt": "Sat, Nov 28, 9:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Boston College at Miami (FL)|TOTAL|Under 53.5": {
+   "sport": "CFB",
+   "matchup": "Boston College at Miami (FL)",
+   "market": "TOTAL",
+   "pick": "Under 53.5",
+   "kickoffEt": "Sat, Nov 28, 12:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "+113",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Boise State at Colorado State|SPREAD|Colorado State +23.5": {
+   "sport": "CFB",
+   "matchup": "Boise State at Colorado State",
+   "market": "SPREAD",
+   "pick": "Colorado State +23.5",
+   "kickoffEt": "Sat, Nov 28, 6:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-117",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Coastal Carolina at James Madison|SPREAD|Coastal Carolina +17.5": {
+   "sport": "CFB",
+   "matchup": "Coastal Carolina at James Madison",
+   "market": "SPREAD",
+   "pick": "Coastal Carolina +17.5",
+   "kickoffEt": "Sat, Nov 28, 2:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Tennessee at Vanderbilt|TOTAL|Over 41.5": {
+   "sport": "CFB",
+   "matchup": "Tennessee at Vanderbilt",
+   "market": "TOTAL",
+   "pick": "Over 41.5",
+   "kickoffEt": "Sat, Nov 28, 7:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-117",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "UConn at Wyoming|SPREAD|Wyoming +4.5": {
+   "sport": "CFB",
+   "matchup": "UConn at Wyoming",
+   "market": "SPREAD",
+   "pick": "Wyoming +4.5",
+   "kickoffEt": "Sat, Nov 28, 12:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-117",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Michigan State at Rutgers|SPREAD|Michigan State -2.5": {
+   "sport": "CFB",
+   "matchup": "Michigan State at Rutgers",
+   "market": "SPREAD",
+   "pick": "Michigan State -2.5",
+   "kickoffEt": "Sat, Nov 28, 4:15 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-117",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "Sacramento State at Hawai'i|SPREAD|Hawai'i -13.5": {
+   "sport": "CFB",
+   "matchup": "Sacramento State at Hawai'i",
+   "market": "SPREAD",
+   "pick": "Hawai'i -13.5",
+   "kickoffEt": "Sat, Nov 28, 11:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-100",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  },
+  "UCF at Colorado|TOTAL|Over 49.5": {
+   "sport": "CFB",
+   "matchup": "UCF at Colorado",
+   "market": "TOTAL",
+   "pick": "Over 49.5",
+   "kickoffEt": "Sat, Nov 28, 2:00 PM",
+   "firstSeenAt": "2026-11-27T14:32:28.987Z",
+   "firstPrice": "-104",
+   "tags": [
+    "SIZED_UP"
+   ],
+   "maxVsUsual": 1.1,
+   "maxDollars": 1000,
+   "opposedSeen": false,
+   "snapshots": 1
+  }
+ }
+}
