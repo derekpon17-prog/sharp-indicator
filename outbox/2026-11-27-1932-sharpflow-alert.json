@@ -1,0 +1,228 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 3 new sharp-money sides",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 7:15pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 8:10PM CT",
+     "picks": [
+      {
+       "eyebrow": "Mavericks at Suns",
+       "time": "8:10pm CT",
+       "tag": {
+        "t": "EDGE - MAVERICKS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Mavericks ML +108",
+       "price": "+108",
+       "for": {
+        "team": "MAVERICKS",
+        "rows": [
+         {
+          "team": "Mavericks",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD",
+          "mk": "SPREAD",
+          "record": "33-26",
+          "roi": 20.7,
+          "dollars": 7654,
+          "note": "1.0x usual, L10 7-3 · SAME WALLET as its ML row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Mavericks",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML +144",
+          "mk": "ML",
+          "record": "41-34",
+          "roi": 17.5,
+          "dollars": 4490,
+          "note": "1.6x usual, L10 7-3 · SAME WALLET as its SPREAD row",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         },
+         {
+          "team": "Mavericks",
+          "wallet": "CFOTL #d6ca9b",
+          "wid": "d6ca9b",
+          "market": "ML +108",
+          "mk": "ML",
+          "record": "14-9",
+          "roi": 58,
+          "dollars": 4038,
+          "note": "2.0x usual, L10 5-5",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": {
+        "team": "SUNS",
+        "rows": [
+         {
+          "team": "Suns",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "ML -148",
+          "mk": "ML",
+          "record": "41-34",
+          "roi": 17.5,
+          "dollars": 5742,
+          "note": "2.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "moneyBar": [
+        {
+         "team": "MAVERICKS",
+         "dollars": 16182,
+         "pct": 74,
+         "c": "green"
+        },
+        {
+         "team": "SUNS",
+         "dollars": 5742,
+         "pct": 26,
+         "c": "grey"
+        }
+       ],
+       "confidence": 9,
+       "callout": {
+        "plain": "Quality wallet 14-9 (+58% ROI) on MAVERICKS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "GREW $4K to $8.5K - kickoff in 38 min - SITE LOCK: Suns ML 4u (wallet money behind it)"
+      }
+     ]
+    },
+    {
+     "heading": "NBA - 7:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Grizzlies at Timberwolves",
+       "time": "7:40pm CT",
+       "tag": {
+        "t": "EDGE - Under",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Under TOTAL",
+       "price": null,
+       "for": {
+        "team": "Under",
+        "rows": [
+         {
+          "team": "Under",
+          "wallet": "robloxgamblemaster-2008-10-18 #ab4b6e",
+          "wid": "ab4b6e",
+          "market": "UNDER",
+          "mk": "TOTAL",
+          "record": "7-5",
+          "roi": 43.6,
+          "dollars": 15690,
+          "note": "0.1x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA TOTAL · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "Under",
+         "dollars": 15690,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 7-5 (+44% ROI) on Under - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "NEW $16K on Under - LATE: kickoff in 8 min"
+      },
+      {
+       "eyebrow": "Grizzlies at Timberwolves",
+       "time": "7:40pm CT",
+       "tag": {
+        "t": "LIGHT SIGNAL - GRIZZLIES",
+        "icon": "👀"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Grizzlies",
+       "price": null,
+       "for": {
+        "team": "GRIZZLIES",
+        "rows": [
+         {
+          "team": "Grizzlies",
+          "wallet": "robloxgamblemaster-2008-10-18 #ab4b6e",
+          "wid": "ab4b6e",
+          "market": "ML +138",
+          "mk": "ML",
+          "record": "83-62",
+          "roi": 7.6,
+          "dollars": 48155,
+          "note": "0.7x usual, L10 6-4",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA ML · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "GRIZZLIES",
+         "dollars": 48155,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 3,
+       "callout": null,
+       "footerLabel": "NEW $48K on Grizzlies - LATE: kickoff in 8 min"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
