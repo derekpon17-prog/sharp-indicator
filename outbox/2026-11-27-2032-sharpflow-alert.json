@@ -1,0 +1,86 @@
+{
+ "route": "Sharp Signals",
+ "content": "**Sharp Flow alert** - 1 new sharp-money side",
+ "boards": [
+  {
+   "design": "sharpflow",
+   "brand": "SHARP FLOW ALERT",
+   "title": "New sharp money",
+   "subtitle": "Positive market ROI and last-30 ROI, $500+ per side (more for NHL and spreads) - SharpFlow snapshot 8:10pm CT",
+   "sections": [
+    {
+     "heading": "NBA - 8:40PM CT",
+     "picks": [
+      {
+       "eyebrow": "Lakers at Spurs",
+       "time": "8:40pm CT",
+       "tag": {
+        "t": "EDGE - LAKERS",
+        "icon": "🎯"
+       },
+       "sources": [
+        "SHARP FLOW"
+       ],
+       "bet": "Lakers +6.5 -100",
+       "price": "-100",
+       "for": {
+        "team": "LAKERS",
+        "rows": [
+         {
+          "team": "Lakers",
+          "wallet": "hi774c #bc35e3",
+          "wid": "bc35e3",
+          "market": "SPREAD +6.5 -100",
+          "mk": "SPREAD",
+          "record": "33-26",
+          "roi": 20.7,
+          "dollars": 5684,
+          "note": "2.0x usual, L10 7-3",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         },
+         {
+          "team": "Lakers",
+          "wallet": "X #415b58",
+          "wid": "415b58",
+          "market": "SPREAD +5.5 +122",
+          "mk": "SPREAD",
+          "record": "4-2",
+          "roi": 59,
+          "dollars": 3600,
+          "note": "0.2x usual, L10 5-2",
+          "status": {
+           "t": "GOOD",
+           "c": "green"
+          },
+          "recLabel": "NBA SPREAD · all-time record"
+         }
+        ]
+       },
+       "against": null,
+       "moneyBar": [
+        {
+         "team": "LAKERS",
+         "dollars": 9284,
+         "pct": 100,
+         "c": "green"
+        }
+       ],
+       "confidence": 7,
+       "callout": {
+        "plain": "Quality wallet 33-26 (+21% ROI) on LAKERS - ",
+        "highlight": "nothing quality against it."
+       },
+       "footerLabel": "AGAINST OUR POSTED PLAY: Spurs -5.5 (4:00pm slate) - NEW $9.3K on Lakers - LATE: kickoff in 7 min - SITE LOCK: Spurs ML 1u (wallet money behind it)"
+      }
+     ]
+    }
+   ],
+   "legend": "Confidence (0-9): how clean the read is - a bigger ROI edge and a deeper sample push it up, a contradicted or thin signal pulls it down. Not a win probability.",
+   "footer": "Wallet money, not a pick. Leans, not guarantees"
+  }
+ ]
+}
